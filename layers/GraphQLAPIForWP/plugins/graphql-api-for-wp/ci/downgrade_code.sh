@@ -1,0 +1,90 @@
+#!/bin/bash
+########################################################################
+#
+# This bash script downgrades the code for the project
+# and all its dependencies to PHP 7.1
+#
+########################################################################
+# Helper functions
+# ----------------------------------------------------------------------
+# Failure helper function (https://stackoverflow.com/a/24597941)
+function fail {
+    set -e
+    printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
+    exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
+}
+
+# Print array helpers (https://stackoverflow.com/a/17841619)
+function join_by { local d=$1; shift; local f=$1; shift; printf %s "$f" "${@/#/$d}"; }
+
+# Print a message in the output
+function note {
+    MESSAGE=$1;
+
+    printf "\n";
+    echo "[NOTE] $MESSAGE";
+    printf "\n";
+}
+########################################################################
+# Inputs
+# ----------------------------------------------------------------------
+target_php_version="$1"
+rector_config="$2"
+########################################################################
+# Validate inputs
+if [ -z "$target_php_version" ]; then
+    fail "Please provide to which PHP version to downgrade to"
+fi
+if [ -z "$rector_config" ]; then
+    fail "Please provide to path to the Rector config file"
+fi
+
+packages_to_downgrade=()
+package_paths=()
+
+# Switch to production
+composer install --no-dev --no-progress --ansi
+
+rootPackage=$(composer info -s -N)
+whynot="${target_php_version}.*"
+
+# Obtain the list of packages for production that need a higher version that the input one.
+# Those must be downgraded
+PACKAGES=$(composer why-not php $whynot --no-interaction | grep -o "\S*\/\S*")
+if [ -n "$PACKAGES" ]; then
+    for package in $PACKAGES
+    do
+        # Composer also analyzes the root project but its path is directly the root folder
+        if [ $package = "$rootPackage" ]
+        then
+            # downgrade the src/ folder only (i.e. make sure to avoid vendors/)
+            path=$(pwd)/src
+        else
+            # Obtain the package's path from Composer
+            # Format is "package path", so extract everything
+            # after the 1st word with cut to obtain the path
+            path=$(composer info $package --path | cut -d' ' -f2-)
+        fi
+        packages_to_downgrade+=($package)
+        package_paths+=($path)
+    done
+else
+    note "No packages to downgrade"
+    exit 0
+fi
+
+# Switch to dev again
+composer install --no-progress --ansi
+
+# Execute the downgrade
+# Downgrade the project first
+path_to_downgrade=${package_paths[$rootPackage]}
+note "Downgrading main package ${rootPackage} on path ${path_to_downgrade}"
+vendor/bin/rector process $path_to_downgrade --config=$rector_config --ansi
+
+#Downgrade all the dependencies then
+packages_to_downgrade=$(join_by " " ${dependency_packages[@]})
+paths_to_downgrade=$(join_by " " ${package_paths[@]})
+note "Downgrading packages '${packages_to_downgrade}' on paths '${paths_to_downgrade}'"
+vendor/bin/rector process $paths_to_downgrade --config=$rector_config --ansi
+
