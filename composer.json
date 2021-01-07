@@ -620,6 +620,11 @@
         }
     ],
     "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -n src $(monorepo-builder package-code-paths)",
+        "fix-style": "phpcbf -n src $(monorepo-builder package-code-paths)",
+        "phpstan": "ci/phpstan.sh \". $(monorepo-builder source-packages)\"",
+        "phpstan-all": "ci/phpstan.sh \". $(monorepo-builder source-packages --include-all)\"",
         "init-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"
@@ -629,12 +634,10 @@
             "lando start"
         ],
         "rebuild-server": "lando rebuild -y",
-        "merge-monorepo": "vendor/bin/monorepo-builder merge --ansi",
-        "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
-        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
-        "release": "vendor/bin/monorepo-builder release patch --ansi",
-        "phpstan": "ci/phpstan.sh \". $(vendor/bin/monorepo-builder source-packages)\"",
-        "phpstan-all": "ci/phpstan.sh \". $(vendor/bin/monorepo-builder source-packages --include-all)\""
+        "merge-monorepo": "monorepo-builder merge --ansi",
+        "propagate-monorepo": "monorepo-builder propagate --ansi",
+        "validate-monorepo": "monorepo-builder validate --ansi",
+        "release": "monorepo-builder release patch --ansi"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

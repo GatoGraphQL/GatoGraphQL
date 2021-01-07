@@ -49,5 +49,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHP Code Sniffer
-                run: vendor/bin/phpcs -n ${{ needs.provide_data.outputs.package_code_paths }}
+                run: vendor/bin/phpcs -n src ${{ needs.provide_data.outputs.package_code_paths }}
 
