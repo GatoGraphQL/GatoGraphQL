@@ -625,7 +625,7 @@
         "fix-style": "phpcbf -n src $(monorepo-builder package-code-paths)",
         "analyse": "ci/phpstan.sh \". $(monorepo-builder source-packages)\"",
         "analyse-with-wip-packages": "ci/phpstan.sh \". $(monorepo-builder source-packages --include-all)\"",
-        "init-server": [
+        "build-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"
         ],
