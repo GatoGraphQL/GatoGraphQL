@@ -41,7 +41,8 @@ final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $packageComposerJson = (string) $input->getArgument(Option::PACKAGE_COMPOSER_JSON);
+        /** @var string */
+        $packageComposerJson = $input->getArgument(Option::PACKAGE_COMPOSER_JSON);
         $this->fileSystemGuard->ensureFileExists($packageComposerJson, __METHOD__);
 
         $packageComposerJsonFileInfo = new SmartFileInfo($packageComposerJson);
