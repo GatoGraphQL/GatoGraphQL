@@ -211,6 +211,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
+To execute [PHPUnit](https://phpunit.de/), run:
+
 ``` bash
 composer test
 ```

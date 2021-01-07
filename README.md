@@ -61,6 +61,8 @@ composer fix-style
 
 ## Testing
 
+To execute [PHPUnit](https://phpunit.de/), run:
+
 ``` bash
 composer test
 ```
