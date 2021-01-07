@@ -47,7 +47,7 @@ All packages in this monorepo require PHP 7.4 for development, but contain only 
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
 
-To check the coding standards, run:
+To check the coding standards via [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), run:
 
 ``` bash
 composer check-style
@@ -68,6 +68,8 @@ composer test
 ```
 
 ## Static analysis
+
+To execute [phpstan](https://github.com/phpstan/phpstan), run:
 
 ``` bash
 composer analyse
