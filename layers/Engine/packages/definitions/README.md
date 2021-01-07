@@ -89,6 +89,10 @@ To execute [phpstan](https://github.com/phpstan/phpstan), run:
 composer analyse
 ```
 
+## Report issues
+
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
