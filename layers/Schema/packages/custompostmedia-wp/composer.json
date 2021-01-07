@@ -43,7 +43,7 @@
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",
         "analyse": "phpstan analyse -c phpstan.neon.dist",
-        "preview-code-downgrade": "rector process --dry-run --ansi"
+        "preview-code-downgrade": "rector process --config=rector-downgrade-code.php --dry-run --ansi"
     },
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
