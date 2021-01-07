@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageCodePathsJsonCommand;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageCodePathsCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageCodePathsJsonProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageCodePathsProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackagesProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
@@ -79,8 +79,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services
         ->set(PackageEntriesJsonProvider::class)
         ->set(PackageEntriesJsonCommand::class)
-        ->set(PackageCodePathsJsonProvider::class)
-        ->set(PackageCodePathsJsonCommand::class)
+        ->set(PackageCodePathsProvider::class)
+        ->set(PackageCodePathsCommand::class)
         ->set(SourcePackagesProvider::class)
         ->set(SourcePackagesCommand::class)
         ->set(SymlinkLocalPackageCommand::class);
