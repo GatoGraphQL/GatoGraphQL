@@ -52,9 +52,6 @@ why_not_version="${target_php_version}.*"
 # Those must be downgraded
 PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
 
-# Ignore all the "migrate" packages
-PACKAGES=$(echo "$PACKAGES" | awk '!/\/migrate-/')
-
 if [ -n "$PACKAGES" ]; then
     for package in $PACKAGES
     do
@@ -68,12 +65,6 @@ if [ -n "$PACKAGES" ]; then
             # Format is "package path", so extract everything
             # after the 1st word with cut to obtain the path
             path=$(composer info $package --path | cut -d' ' -f2-)
-        fi
-
-        # For local dependencies, only analyze src/ (i.e. skip tests/)
-        if  [[ $package == getpop/* ]] || [[ $package == pop-schema/* ]] || [[ $package == graphql-by-pop/* ]] ;
-        then
-            path="$path/src"
         fi
 
         packages_to_downgrade+=($package)
@@ -91,4 +82,4 @@ composer install --no-progress --ansi
 # Execute the downgrade
 packages=$(join_by " " ${packages_to_downgrade[@]})
 paths=$(join_by " " ${package_paths[@]})
-vendor/bin/rector process $paths --config=$rector_config --ansi
+vendor/bin/rector process $paths --config=$rector_config --ansi --dry-run
