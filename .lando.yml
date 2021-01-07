@@ -274,3 +274,7 @@ services:
         --admin_user=admin --admin_password=admin
         --admin_email=admin@example.com --path=wordpress
       - wp plugin activate graphql-api --path=wordpress
+      - >-
+        wp import
+        layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/assets/graphql-api-dev-sample-data.xml
+        --authors=create --path=wordpress
