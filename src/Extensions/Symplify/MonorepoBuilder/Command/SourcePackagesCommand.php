@@ -15,10 +15,7 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class SourcePackagesCommand extends AbstractSymplifyCommand
 {
-    /**
-     * @var SourcePackagesProvider
-     */
-    private $sourcePackagesProvider;
+    private SourcePackagesProvider $sourcePackagesProvider;
 
     public function __construct(SourcePackagesProvider $sourcePackagesProvider)
     {
@@ -36,13 +33,20 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             InputOption::VALUE_NONE,
             'Print with encoded JSON format.'
         );
+        $this->addOption(
+            Option::INCLUDE_ALL,
+            null,
+            InputOption::VALUE_NONE,
+            'Include all packages, including several not-yet-migrated to PSR-4 ones.'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages();
-
         $asJSON = (bool) $input->getOption(Option::JSON);
+        $includeAll = (bool) $input->getOption(Option::INCLUDE_ALL);
+
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($includeAll);
 
         // JSON: must be without spaces, otherwise it breaks GitHub Actions json
         $response = $asJSON ? Json::encode($sourcePackages) : implode(' ', $sourcePackages);

@@ -4,7 +4,10 @@
 # Script to execute PHPStan on a series of packages
 # Provide the packages as the first argument to the script,
 # separated by a space:
-# scripts/phpstan.sh "package1 package2 package3"
+#
+# $ phpstan.sh "package1 package2 package3"
+#
+# Every package needs to contain file "phpstan.neon.dist"
 #
 ########################################################################
 # Helper functions
@@ -42,7 +45,7 @@ packages=($PACKAGES)
 for package in "${packages[@]}"
 do
     note "Executing PHPStan on package '${package}'"
-    vendor/bin/phpstan analyse $package/src $package/tests -c $package/phpstan.neon.dist --ansi
+    vendor/bin/phpstan analyse -c $package/phpstan.neon.dist --ansi
     if [ "$?" -gt 0 ]; then
         failed_packages+=($package)
     fi

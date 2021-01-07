@@ -17,7 +17,7 @@ final class PackageEntriesJsonProvider
     private $packageProvider;
 
     /**
-     * @var array<string, mixed[]>
+     * @var array<string, string>
      */
     private $packageOrganizations = [];
 

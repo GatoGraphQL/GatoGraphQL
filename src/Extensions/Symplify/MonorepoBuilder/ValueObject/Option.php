@@ -14,4 +14,8 @@ final class Option
      * @var string
      */
     public const JSON = 'json';
+    /**
+     * @var string
+     */
+    public const INCLUDE_ALL = 'include-all';
 }

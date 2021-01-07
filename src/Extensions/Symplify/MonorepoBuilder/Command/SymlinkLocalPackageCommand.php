@@ -16,19 +16,12 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
 {
-    /**
-     * @var ComposerJsonProvider
-     */
-    private $composerJsonProvider;
-
-    /**
-     * @var ComposerJsonRepositoriesUpdater
-     */
-    private $composerJsonRepositoriesUpdater;
+    private ComposerJsonProvider $composerJsonProvider;
+    private ComposerJsonRepositoriesUpdater $composerJsonRepositoriesUpdater;
 
     public function __construct(
-        ?ComposerJsonProvider $composerJsonProvider,
-        ?ComposerJsonRepositoriesUpdater $composerJsonRepositoriesUpdater
+        ComposerJsonProvider $composerJsonProvider,
+        ComposerJsonRepositoriesUpdater $composerJsonRepositoriesUpdater
     ) {
         $this->composerJsonProvider = $composerJsonProvider;
         $this->composerJsonRepositoriesUpdater = $composerJsonRepositoriesUpdater;
@@ -48,7 +41,8 @@ final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $packageComposerJson = (string) $input->getArgument(Option::PACKAGE_COMPOSER_JSON);
+        /** @var string */
+        $packageComposerJson = $input->getArgument(Option::PACKAGE_COMPOSER_JSON);
         $this->fileSystemGuard->ensureFileExists($packageComposerJson, __METHOD__);
 
         $packageComposerJsonFileInfo = new SmartFileInfo($packageComposerJson);

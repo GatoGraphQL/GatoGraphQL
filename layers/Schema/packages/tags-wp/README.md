@@ -57,17 +57,37 @@ composer preview-code-downgrade
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
 
+To check the coding standards, run:
+
+``` bash
+composer check-style
+```
+
+To automatically fix issues, run:
+
+``` bash
+composer fix-style
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Testing
 
+To execute [PHPUnit](https://phpunit.de/), run:
+
 ``` bash
 composer test
 ```
 
+## Report issues
+
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+
 ## Contributing
+
+We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 

@@ -339,6 +339,18 @@ Ongoing development for this project is funded via [Leonardo Losoviz](https://le
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
 
+To check the coding standards, run:
+
+``` bash
+composer check-style
+```
+
+To automatically fix issues, run:
+
+``` bash
+composer fix-style
+```
+
 ## Release notes
 
 - [0.8](docs/en/release-notes/0.8.md) (upcoming)
@@ -351,22 +363,18 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
+To execute [PHPUnit](https://phpunit.de/), run:
+
 ``` bash
 composer test
 ```
 
 ## Static Analysis
 
-Execute [phpstan](https://github.com/phpstan/phpstan) with level 8:
+To execute [phpstan](https://github.com/phpstan/phpstan), run:
 
 ``` bash
 composer analyse
-```
-
-To run checks for level 0 (or any level from 0 to 8):
-
-``` bash
-./vendor/bin/phpstan analyse -l 0 src tests
 ```
 
 ## Downgrading code
@@ -377,7 +385,13 @@ To visualize how [Rector](https://github.com/rectorphp/rector) will downgrade th
 composer preview-code-downgrade
 ```
 
+## Report issues
+
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+
 ## Contributing
+
+We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
