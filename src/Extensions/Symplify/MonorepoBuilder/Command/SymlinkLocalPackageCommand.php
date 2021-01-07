@@ -16,19 +16,12 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class SymlinkLocalPackageCommand extends AbstractSymplifyCommand
 {
-    /**
-     * @var ComposerJsonProvider
-     */
-    private $composerJsonProvider;
-
-    /**
-     * @var ComposerJsonRepositoriesUpdater
-     */
-    private $composerJsonRepositoriesUpdater;
+    private ComposerJsonProvider $composerJsonProvider;
+    private ComposerJsonRepositoriesUpdater $composerJsonRepositoriesUpdater;
 
     public function __construct(
-        ?ComposerJsonProvider $composerJsonProvider,
-        ?ComposerJsonRepositoriesUpdater $composerJsonRepositoriesUpdater
+        ComposerJsonProvider $composerJsonProvider,
+        ComposerJsonRepositoriesUpdater $composerJsonRepositoriesUpdater
     ) {
         $this->composerJsonProvider = $composerJsonProvider;
         $this->composerJsonRepositoriesUpdater = $composerJsonRepositoriesUpdater;

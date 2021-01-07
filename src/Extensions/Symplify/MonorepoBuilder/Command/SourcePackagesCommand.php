@@ -15,10 +15,7 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class SourcePackagesCommand extends AbstractSymplifyCommand
 {
-    /**
-     * @var SourcePackagesProvider
-     */
-    private $sourcePackagesProvider;
+    private SourcePackagesProvider $sourcePackagesProvider;
 
     public function __construct(SourcePackagesProvider $sourcePackagesProvider)
     {

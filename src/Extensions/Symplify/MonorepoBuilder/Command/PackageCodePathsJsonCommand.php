@@ -13,10 +13,7 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class PackageCodePathsJsonCommand extends AbstractSymplifyCommand
 {
-    /**
-     * @var PackageCodePathsJsonProvider
-     */
-    private $packageCodePathsJsonProvider;
+    private PackageCodePathsJsonProvider $packageCodePathsJsonProvider;
 
     public function __construct(PackageCodePathsJsonProvider $packageCodePathsJsonProvider)
     {
