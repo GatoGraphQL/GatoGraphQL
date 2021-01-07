@@ -76,7 +76,7 @@
         }
     },
     "scripts": {
-        "init-server": [
+        "build-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"
         ],

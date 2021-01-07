@@ -25,3 +25,5 @@ services:
         --admin_user=admin --admin_password=admin
         --admin_email=admin@example.com --path=wordpress
       - wp plugin activate graphql-api --path=wordpress
+      - wp plugin install wordpress-importer --activate --path=wordpress
+      - wp import lando/assets/graphql-api-dev-sample-data.xml --authors=create --path=wordpress

@@ -7,7 +7,7 @@ config:
   database: mariadb
   xdebug: false
   config:
-    php: lando/config/php.ini
+    php: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/config/php.ini
 services:
   database:
     portforward: true
@@ -274,3 +274,8 @@ services:
         --admin_user=admin --admin_password=admin
         --admin_email=admin@example.com --path=wordpress
       - wp plugin activate graphql-api --path=wordpress
+      - wp plugin install wordpress-importer --activate --path=wordpress
+      - >-
+        wp import
+        layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/assets/graphql-api-dev-sample-data.xml
+        --authors=create --path=wordpress

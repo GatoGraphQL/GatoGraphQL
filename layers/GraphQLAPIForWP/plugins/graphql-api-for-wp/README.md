@@ -128,12 +128,12 @@ cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install
 
 ### Using Lando
 
-Launch a server, with WordPress installed and the GraphQL API plugin activated, through [Lando](https://lando.dev/).
+Launch a development server, with WordPress installed and the GraphQL API plugin activated, through [Lando](https://lando.dev/).
 
 The first time, to install the server, execute:
 
 ```bash
-composer init-server
+composer build-server
 ```
 
 From then on, to start the server, execute:
