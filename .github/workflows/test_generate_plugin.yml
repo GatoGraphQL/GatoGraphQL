@@ -51,7 +51,8 @@ jobs:
         working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
 
       - name: Replace PHP version in plugin main file
-        run: sed -i 's/Requires PHP: 7.4/Requires PHP: 7.1/' graphql-api.php
+        run: sed -i "s/Requires PHP: 7.4/Requires PHP: 7.1/" graphql-api.php
+        working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
 
       - name: Build project for production
         run: composer install --no-dev --optimize-autoloader
