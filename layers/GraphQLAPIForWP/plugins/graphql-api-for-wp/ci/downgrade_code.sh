@@ -67,7 +67,7 @@ if [ -n "$PACKAGES" ]; then
         fi
         packages_to_downgrade+=($package)
         package_paths+=($path)
-        note "Package '$package' on path '$path' will be downgraded"
+        note "[Package to downgrade] $package (under '$path')"
     done
 else
     note "No packages to downgrade"
