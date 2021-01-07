@@ -339,6 +339,18 @@ Ongoing development for this project is funded via [Leonardo Losoviz](https://le
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
 
+To check the coding standards, run:
+
+``` bash
+composer check-style
+```
+
+To automatically fix issues, run:
+
+``` bash
+composer fix-style
+```
+
 ## Release notes
 
 - [0.8](docs/en/release-notes/0.8.md) (upcoming)
