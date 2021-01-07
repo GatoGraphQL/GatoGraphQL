@@ -51,6 +51,10 @@ why_not_version="${target_php_version}.*"
 # Obtain the list of packages for production that need a higher version that the input one.
 # Those must be downgraded
 PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
+
+# Ignore all the "migrate" packages
+PACKAGES=$(echo "$PACKAGES" | awk '!/\/migrate-/')
+
 if [ -n "$PACKAGES" ]; then
     for package in $PACKAGES
     do
