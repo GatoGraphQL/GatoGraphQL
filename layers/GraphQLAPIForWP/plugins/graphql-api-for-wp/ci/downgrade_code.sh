@@ -69,6 +69,13 @@ if [ -n "$PACKAGES" ]; then
             # after the 1st word with cut to obtain the path
             path=$(composer info $package --path | cut -d' ' -f2-)
         fi
+
+        # For local dependencies, only analyze src/ (i.e. skip tests/)
+        if  [[ $package == getpop/* ]] || [[ $package == pop-schema/* ]] || [[ $package == graphql-by-pop/* ]] ;
+        then
+            path="$path/src"
+        fi
+
         packages_to_downgrade+=($package)
         package_paths+=($path)
         note "[Package to downgrade] $package (under '$path')"
