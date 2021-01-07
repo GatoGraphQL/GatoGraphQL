@@ -2059,7 +2059,7 @@ composer test
 
 ## Static Analysis
 
-To execute [phpstan](https://github.com/phpstan/phpstan), run:
+To execute [PHPStan](https://github.com/phpstan/phpstan), run:
 
 ``` bash
 composer analyse
