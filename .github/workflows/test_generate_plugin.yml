@@ -1,0 +1,72 @@
+####################################################################################
+# GitHub Action:
+# Whenever creating a new release of the source code,
+# also create a release of the installable plugin,
+# and downgrading it from PHP 7.4 to 7.1 to support more users.
+####################################################################################
+# Steps to execute:
+# - Checkout the source code
+# - Run "composer install" for development, to install dependencies for Rector
+# - Run Rector to downgrade code from PHP 7.4 to 7.1
+# - Run "composer install" for production (required dependencies are already under vendor/)
+# - Create a .zip file, excluding:
+#   - All hidden files (.git, .gitignore, etc)
+#   - Rector file
+#   - All development files, ending in .dist
+#   - All composer files <= after installing dependencies, no need for them anymore
+#   - Markdown files concerning development
+#   - Folder build/ <= created only to store the .zip file
+#   - Folder dev-helpers/ <= not needed for the plugin
+# - Upload the .zip file as an artifact to the action (this step is possibly optional)
+# - Upload the .zip file as a release, for download
+####################################################################################
+name: Test - Generate Installable Plugin and Upload as Release Asset
+on:
+  pull_request: null
+jobs:
+  build:
+    name: Build, Downgrade and Upload Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+        # see https://github.com/shivammathur/setup-php
+      - name: Use PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer, avoiding v2 platform check
+        run: |
+          composer config platform-check false
+          composer install
+        working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+
+      - name: Downgrade code for production (to PHP 7.1)
+        run: ci/downgrade_code.sh "7.1" "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci/rector-downgrade-code.php"
+        working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+
+      - name: Replace PHP version in plugin main file
+        run: sed -i 's/Requires PHP: 7.4/Requires PHP: 7.1/' graphql-api.php
+
+      - name: Build project for production
+        run: composer install --no-dev --optimize-autoloader
+        working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+
+      - name: Create folder
+        run: mkdir build
+
+      - name: Create artifact
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -X -r build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md ISSUE_TEMPLATE.md LICENSE.md PULL_REQUEST_TEMPLATE.md README.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" build** ci** dev-helpers** docs/images** tests** "**/tests**"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: generated-plugin
+            path: build/graphql-api.zip
