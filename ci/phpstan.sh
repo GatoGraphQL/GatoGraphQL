@@ -42,7 +42,7 @@ packages=($PACKAGES)
 for package in "${packages[@]}"
 do
     note "Executing PHPStan on package '${package}'"
-    vendor/bin/phpstan analyse $package/src $package/tests -c $package/phpstan.neon.dist --ansi
+    vendor/bin/phpstan analyse -c $package/phpstan.neon.dist --ansi
     if [ "$?" -gt 0 ]; then
         failed_packages+=($package)
     fi
