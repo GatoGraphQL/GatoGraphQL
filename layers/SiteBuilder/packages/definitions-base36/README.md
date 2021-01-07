@@ -93,6 +93,8 @@ To report a bug or request a new feature please do it on the [PoP monorepo issue
 
 ## Contributing
 
+We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
+
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
 ## Security
