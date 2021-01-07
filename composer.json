@@ -623,8 +623,8 @@
         "test": "phpunit",
         "check-style": "phpcs -n src $(monorepo-builder package-code-paths)",
         "fix-style": "phpcbf -n src $(monorepo-builder package-code-paths)",
-        "phpstan": "ci/phpstan.sh \". $(monorepo-builder source-packages)\"",
-        "phpstan-all": "ci/phpstan.sh \". $(monorepo-builder source-packages --include-all)\"",
+        "analyse": "ci/phpstan.sh \". $(monorepo-builder source-packages)\"",
+        "analyse-all": "ci/phpstan.sh \". $(monorepo-builder source-packages --include-all)\"",
         "init-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"
