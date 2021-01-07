@@ -46,11 +46,11 @@ package_paths=()
 composer install --no-dev --no-progress --ansi
 
 rootPackage=$(composer info -s -N)
-whynot="${target_php_version}.*"
+why_not_version="${target_php_version}.*"
 
 # Obtain the list of packages for production that need a higher version that the input one.
 # Those must be downgraded
-PACKAGES=$(composer why-not php $whynot --no-interaction | grep -o "\S*\/\S*")
+PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
 if [ -n "$PACKAGES" ]; then
     for package in $PACKAGES
     do
@@ -67,6 +67,7 @@ if [ -n "$PACKAGES" ]; then
         fi
         packages_to_downgrade+=($package)
         package_paths+=($path)
+        note "Package '$package' on path '$path' will be downgraded"
     done
 else
     note "No packages to downgrade"
@@ -77,14 +78,7 @@ fi
 composer install --no-progress --ansi
 
 # Execute the downgrade
-# Downgrade the project first
-path_to_downgrade=${package_paths[$rootPackage]}
-note "Downgrading main package ${rootPackage} on path ${path_to_downgrade}"
-vendor/bin/rector process $path_to_downgrade --config=$rector_config --ansi
-
-#Downgrade all the dependencies then
-packages_to_downgrade=$(join_by " " ${dependency_packages[@]})
-paths_to_downgrade=$(join_by " " ${package_paths[@]})
-note "Downgrading packages '${packages_to_downgrade}' on paths '${paths_to_downgrade}'"
-vendor/bin/rector process $paths_to_downgrade --config=$rector_config --ansi
-
+packages=$(join_by " " ${packages_to_downgrade[@]})
+paths=$(join_by " " ${package_paths[@]})
+note "Downgrading packages '${packages}' on paths '${paths}'"
+vendor/bin/rector process $paths --config=$rector_config --ansi
