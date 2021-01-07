@@ -375,12 +375,6 @@ Execute [phpstan](https://github.com/phpstan/phpstan) with level 8:
 composer analyse
 ```
 
-To run checks for level 0 (or any level from 0 to 8):
-
-``` bash
-./vendor/bin/phpstan analyse -l 0 src tests
-```
-
 ## Downgrading code
 
 To visualize how [Rector](https://github.com/rectorphp/rector) will downgrade the code to PHP 7.1:
