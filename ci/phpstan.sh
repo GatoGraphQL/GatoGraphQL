@@ -4,7 +4,10 @@
 # Script to execute PHPStan on a series of packages
 # Provide the packages as the first argument to the script,
 # separated by a space:
+#
 # $ phpstan.sh "package1 package2 package3"
+#
+# Every package needs to contain file "phpstan.neon.dist"
 #
 ########################################################################
 # Helper functions
