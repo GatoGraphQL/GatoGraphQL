@@ -2,7 +2,7 @@ name: graphql-api-dev
 recipe: wordpress
 config:
   webroot: wordpress
-  php: '8.0'
+  php: '7.4'
   ssl: true
   database: mariadb
   xdebug: false
