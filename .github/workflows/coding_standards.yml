@@ -7,7 +7,7 @@ on:
 
 jobs:
     provide_data:
-        name: Provide data
+        name: Obtain list of package paths
         runs-on: ubuntu-latest
         steps:
             -
@@ -24,10 +24,10 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=code_paths::$(vendor/bin/monorepo-builder package-code-paths-json)"
+                    echo "::set-output name=package_code_paths::$(vendor/bin/monorepo-builder package-code-paths-json)"
 
         outputs:
-            code_paths: ${{ steps.output_data.outputs.code_paths }}
+            package_code_paths: ${{ steps.output_data.outputs.package_code_paths }}
 
     main:
         needs: provide_data
@@ -49,5 +49,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHP Code Sniffer
-                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.code_paths), ' ') }}
+                run: vendor/bin/phpcs -n ${{ join(fromJson(needs.provide_data.outputs.package_code_paths), ' ') }}
 

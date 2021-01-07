@@ -7,7 +7,7 @@ on:
 
 jobs:
     provide_data:
-        name: Provide data
+        name: Obtain list of source packages
         runs-on: ubuntu-latest
         steps:
             -
