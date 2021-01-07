@@ -633,7 +633,7 @@
         "propagate-monorepo": "vendor/bin/monorepo-builder propagate --ansi",
         "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
         "release": "vendor/bin/monorepo-builder release patch --ansi",
-        "phpstan": "./.github/workflows/scripts/phpstan.sh \"$(vendor/bin/monorepo-builder source-packages)\""
+        "phpstan": "ci/phpstan.sh \"$(vendor/bin/monorepo-builder source-packages)\""
     },
     "minimum-stability": "dev",
     "prefer-stable": true

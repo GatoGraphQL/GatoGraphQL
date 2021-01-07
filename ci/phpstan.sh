@@ -4,7 +4,7 @@
 # Script to execute PHPStan on a series of packages
 # Provide the packages as the first argument to the script,
 # separated by a space:
-# scripts/phpstan.sh "package1 package2 package3"
+# $ phpstan.sh "package1 package2 package3"
 #
 ########################################################################
 # Helper functions
