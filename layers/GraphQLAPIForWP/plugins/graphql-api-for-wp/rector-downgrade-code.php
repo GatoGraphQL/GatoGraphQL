@@ -31,14 +31,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
-        // All the "migrate" folders
-        __DIR__ . '/vendor/getpop/migrate-*/*',
-        __DIR__ . '/vendor/pop-schema/migrate-*/*',
-        __DIR__ . '/vendor/graphql-by-pop/migrate-*/*',
-        // For local dependencies, skip the tests
-        __DIR__ . '/vendor/getpop/*/tests/*',
-        __DIR__ . '/vendor/pop-schema/*/tests/*',
-        __DIR__ . '/vendor/graphql-by-pop/*/tests/*',
+        // These are skipped in the .sh since it's faster
+        // // All the "migrate" folders
+        // __DIR__ . '/vendor/getpop/migrate-*/*',
+        // __DIR__ . '/vendor/pop-schema/migrate-*/*',
+        // __DIR__ . '/vendor/graphql-by-pop/migrate-*/*',
+        // // For local dependencies, skip the tests
+        // __DIR__ . '/vendor/getpop/*/tests/*',
+        // __DIR__ . '/vendor/pop-schema/*/tests/*',
+        // __DIR__ . '/vendor/graphql-by-pop/*/tests/*',
+
         // Individual classes that can be excluded because
         // they are not used by us, and they use classes
         // loaded with "require-dev" so it'd throw an error
