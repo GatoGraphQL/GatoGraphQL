@@ -43,6 +43,39 @@ All packages in this monorepo require PHP 7.4 for development, but contain only 
 | 8.0 | [Union types](https://php.watch/versions/8.0/union-types)<br/><br/>[`mixed` pseudo type](https://php.watch/versions/8.0#mixed-type)<br/><br/>[`static` return type](https://wiki.php.net/rfc/static_return_type)<br/><br/>Interfaces:<ul><li>`Stringable`</li></ul>Classes:<ul><li>`ValueError`</li><li>`UnhandledMatchError`</li></ul>Constants:<ul><li>`FILTER_VALIDATE_BOOL`</li></ul>Functions:<ul><li>[`fdiv`](https://php.net/fdiv)</li><li>[`get_debug_type`](https://php.net/get_debug_type)</li><li>[`preg_last_error_msg`](https://php.net/preg_last_error_msg)</li><li>[`str_contains`](https://php.net/str_contains)</li><li>[`str_starts_with`](https://php.net/str_starts_with)</li><li>[`str_ends_with`](https://php.net/str_ends_with)</li><li>[`get_resource_id`](https://php.net/get_resource_id)</li></ul> |
 -->
 
+## Standards
+
+[PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
+
+To check the coding standards, run:
+
+``` bash
+composer check-style
+```
+
+To automatically fix issues, run:
+
+``` bash
+composer fix-style
+```
+
+## Testing
+
+``` bash
+composer test
+```
+
+## Static analysis
+
+``` bash
+composer analyse
+```
+
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
+
 ## Security
 
 If you discover any security related issues, please email leo@getpop.org instead of using the issue tracker.
@@ -54,7 +87,7 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 ## License
 
-- WordPress plugin: GPLv2 or later
+- GraphQL API for WordPress plugin and extensions: GPLv2 or later
 - Everything else: MIT
 
 [link-author]: https://github.com/leoloso
