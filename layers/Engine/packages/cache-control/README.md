@@ -154,7 +154,7 @@ composer test
 
 ## Static Analysis
 
-Execute [phpstan](https://github.com/phpstan/phpstan) with level 8:
+To execute [phpstan](https://github.com/phpstan/phpstan), run:
 
 ``` bash
 composer analyse
