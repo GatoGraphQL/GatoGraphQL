@@ -49,7 +49,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install Composer dependencies
-                run: composer install --no-progress --ansi
+                uses: "ramsey/composer-install@v1"
 
             -   name: Local packages - Downgrade PHP code via Rector
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi
