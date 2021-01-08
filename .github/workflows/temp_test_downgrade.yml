@@ -111,6 +111,9 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Avoid Composer v2 platform checks
+        run: composer config platform-check false
+
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v1"
 
