@@ -34,7 +34,7 @@ jobs:
         name: Execute PHPStan
         runs-on: ubuntu-latest
         env:
-            PHPSTAN_PACKAGES: ${{ needs.provide_data.outputs.packages }}
+            LOCAL_PACKAGES: ${{ needs.provide_data.outputs.packages }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -51,6 +51,6 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run PHPStan
-                run: ci/phpstan.sh ". $PHPSTAN_PACKAGES"
-                    
+                run: ci/phpstan.sh ". $LOCAL_PACKAGES"
+
 
