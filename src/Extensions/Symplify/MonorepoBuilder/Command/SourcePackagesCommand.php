@@ -34,6 +34,12 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Print with encoded JSON format.'
         );
         $this->addOption(
+            Option::PSR4_ONLY,
+            null,
+            InputOption::VALUE_NONE,
+            'Skip the non-PSR-4 packages.'
+        );
+        $this->addOption(
             Option::SKIP_UNMIGRATED,
             null,
             InputOption::VALUE_NONE,
@@ -46,16 +52,26 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Add paths to a subfolder from the package.',
             []
         );
+        $this->addOption(
+            Option::FILTER,
+            null,
+            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+            'Filter the packages to those from the list of files. Useful to split monorepo on modified packages only',
+            []
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
+        $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);
+        /** @var string[] $fileFilter */
+        $fileFilter = $input->getOption(Option::FILTER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($skipUnmigrated);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($psr4Only, $skipUnmigrated, $fileFilter);
 
         // Point to some subfolder?
         if ($subfolders !== []) {

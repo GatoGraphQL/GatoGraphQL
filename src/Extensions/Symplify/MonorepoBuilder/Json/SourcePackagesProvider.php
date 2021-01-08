@@ -4,41 +4,48 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\MonorepoBuilder\ValueObject\Package;
 
 final class SourcePackagesProvider
 {
     private PackageProvider $packageProvider;
-    private bool $includeAll;
+    private PackageUtils $packageUtils;
 
     public function __construct(
-        PackageProvider $packageProvider
+        PackageProvider $packageProvider,
+        PackageUtils $packageUtils
     ) {
         $this->packageProvider = $packageProvider;
+        $this->packageUtils = $packageUtils;
     }
 
     /**
-     * Code paths are src/ and tests/ folders.
-     * But not all packages have them, so check if these folders exist.
-     * Since a Package already has function `hasTests`, and since every
-     * package that has tests/ also has src/, then using this function
-     * already does the job.
+     * To find out if it's PSR-4, check if the package has tests.
+     * @param string[] $fileListFilter
      * @return string[]
      */
-    public function provideSourcePackages(bool $skipUnmigrated = false): array
-    {
-        $packagesWithCode = array_values(array_filter(
-            $this->packageProvider->provide(),
-            function (Package $package): bool {
-                return $package->hasTests();
-            }
-        ));
-        $packagesWithCode = array_map(
+    public function provideSourcePackages(
+        bool $psr4Only = false,
+        bool $skipUnmigrated = false,
+        array $fileListFilter = []
+    ): array {
+        $packages = $this->packageProvider->provide();
+        if ($psr4Only) {
+            $packages = array_values(array_filter(
+                $packages,
+                function (Package $package): bool {
+                    return $package->hasTests();
+                }
+            ));
+        }
+        // Operate with package paths from now on
+        $packages = array_map(
             function (Package $package): string {
                 return $package->getRelativePath();
             },
-            $packagesWithCode
+            $packages
         );
         // Temporary hack! PHPStan is currently failing for these packages,
         // because they have not been fully converted to PSR-4 (WIP),
@@ -123,11 +130,19 @@ final class SourcePackagesProvider
                 'layers/Wassup/packages/volunteer-mutations',
                 'layers/Wassup/packages/wassup',
             ];
-            $packagesWithCode = array_values(array_diff(
-                $packagesWithCode,
+            $packages = array_values(array_diff(
+                $packages,
                 $failingPackages
             ));
         }
-        return $packagesWithCode;
+        // If provided, filter the packages to the ones containing
+        // the list of files. Useful to launch GitHub runners to split modified packages only
+        if ($fileListFilter !== []) {
+            $packages = array_values(array_filter(
+                $packages,
+                fn (string $package) => $this->packageUtils->isPackageInFileList($package, $fileListFilter)
+            ));
+        }
+        return $packages;
     }
 }

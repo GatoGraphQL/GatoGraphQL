@@ -7,6 +7,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackagesProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
@@ -74,6 +75,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     /** Commands */
     $services
+        ->set(PackageUtils::class)
         ->set(PackageEntriesJsonProvider::class)
         ->set(PackageEntriesJsonCommand::class)
         ->set(SourcePackagesProvider::class)

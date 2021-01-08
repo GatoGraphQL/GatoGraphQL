@@ -36,11 +36,22 @@ jobs:
 
             -   uses: "ramsey/composer-install@v1"
 
-            # get package json list
-            -
-                id: output_data
+            # git diff to generate matrix with modified packages only
+            -   uses: technote-space/get-diff-action@v4
+                with:
+                    PATTERNS: layers/**
+
+            # replace spaces in between files, with "--filter="
+            -   id: set_filter
                 run: |
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json)"
+                    echo "::set-output name=filter::--filter=$(quote=\' && echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g | sed -e 's/ / \-\-filter=/g')"
+                if: env.GIT_DIFF
+
+            # get package json list - if filter is empty, don't launch any split
+            -   id: output_data
+                run: |
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json ${{ steps.set_filter.outputs.filter }})"
+                if: env.GIT_DIFF
 
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
@@ -76,4 +87,4 @@ jobs:
                 name: PHPUnit
                 working-directory: ${{ matrix.package.path }}
                 run: vendor/bin/phpunit
-                
+

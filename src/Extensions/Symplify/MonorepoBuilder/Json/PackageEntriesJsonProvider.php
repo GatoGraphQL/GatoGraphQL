@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -11,32 +12,39 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class PackageEntriesJsonProvider
 {
-    /**
-     * @var PackageProvider
-     */
-    private $packageProvider;
+    private PackageProvider $packageProvider;
+    private PackageUtils $packageUtils;
 
     /**
      * @var array<string, string>
      */
-    private $packageOrganizations = [];
+    private array $packageOrganizations = [];
 
     public function __construct(
         PackageProvider $packageProvider,
-        ParameterProvider $parameterProvider
+        ParameterProvider $parameterProvider,
+        PackageUtils $packageUtils
     ) {
         $this->packageProvider = $packageProvider;
         $this->packageOrganizations = $parameterProvider->provideArrayParameter(Option::PACKAGE_ORGANIZATIONS);
+        $this->packageUtils = $packageUtils;
     }
 
     /**
+     * @param string[] $fileListFilter
      * @return array<array<string,string>>
      */
-    public function providePackageEntries(): array
+    public function providePackageEntries(array $fileListFilter = []): array
     {
         $packageEntries = [];
-        foreach ($this->packageProvider->provide() as $package) {
+        $packages = $this->packageProvider->provide();
+        foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
+            // If provided, filter the packages to the ones containing the list of files.
+            // Useful to launch GitHub runners to split modified packages only
+            if ($fileListFilter !== [] && !$this->packageUtils->isPackageInFileList($packageRelativePath, $fileListFilter)) {
+                continue;
+            }
             $packageDirectory = dirname($packageRelativePath);
             $organization = $this->packageOrganizations[$packageDirectory] ?? null;
             if ($organization === null) {
