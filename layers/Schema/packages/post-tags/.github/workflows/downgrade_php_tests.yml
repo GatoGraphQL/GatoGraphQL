@@ -26,7 +26,7 @@ jobs:
         run: composer install --no-progress --ansi
 
       - name: Downgrade PHP code via Rector
-        run: vendor/bin/rector process --config=rector-downgrade-code.php
+        run: vendor/getpop/root/ci/downgrade_code.sh "7.1" "rector-downgrade-code.php"
 
       # dumpautoload will remove vendor/composer/platform_check.php, otherwise executing phpstan on 7.1 fails
       - name: Avoid Composer v2 platform checks
@@ -42,6 +42,9 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run static analysis via PHPStan on PHP 7.1
-        run: vendor/bin/phpstan analyse src/ --level 0
+      # @todo Fix this code
+      # @see https://github.com/leoloso/PoP/issues/299
+      - name: Run Rector on PHP 7.1
+        run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
+      #   run: vendor/bin/rector-php71 process src vendor --ansi --dry-run
 

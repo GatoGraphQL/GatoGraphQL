@@ -42,6 +42,9 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run static analysis via PHPStan on PHP 7.1
-        run: vendor/bin/phpstan analyse src/ --level 0
+      # @todo Fix this code
+      # @see https://github.com/leoloso/PoP/issues/299
+      - name: Run Rector on PHP 7.1
+        run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
+      #   run: vendor/bin/rector-php71 process src vendor --ansi --dry-run
 

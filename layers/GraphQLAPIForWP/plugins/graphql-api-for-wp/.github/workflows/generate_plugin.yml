@@ -110,15 +110,10 @@ jobs:
         with:
           composer-options: "--ignore-platform-reqs"
 
-      # Running PHPStan doesn't work, because dependencies do not pass it!
-      # - name: Run PHPStan on PHP 7.1
-      #   run: vendor/bin/phpstan analyse build/downgraded-code --level 0
-      # Can run Rector on the downgraded code instead.
-      # However, Rector for PHP 7.1 is not ready yet
-      # @see: https://github.com/rectorphp/rector/pull/4447
-      # Uncomment these lines when available
+      # @todo Fix this code
+      # @see https://github.com/leoloso/PoP/issues/299
       - name: Run Rector on PHP 7.1
-        run: echo "Running Rector on PHP 7.1 must be enabled, once available. Check https://github.com/rectorphp/rector/pull/4447"
+        run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
       #   run: vendor/bin/rector-php71 process build/downgraded-code --ansi --dry-run
 
   upload_and_deploy:
