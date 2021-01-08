@@ -430,7 +430,7 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 ## Composer merge plugin
 
-Add into `composer.json`:
+To add it back to the plugin, add into `composer.json`:
 
 ```json
 {
