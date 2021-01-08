@@ -5,8 +5,11 @@
 # and all its dependencies to PHP 7.1
 #
 ########################################################################
+
+########################################################################
 # Helper functions
 # ----------------------------------------------------------------------
+
 # Failure helper function (https://stackoverflow.com/a/24597941)
 function fail {
     printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
@@ -24,19 +27,25 @@ function note {
     echo "[NOTE] $MESSAGE";
     printf "\n";
 }
-########################################################################
-# Inputs
-# ----------------------------------------------------------------------
-target_php_version="$1"
-rector_config="$2"
-local_owners="$3"
-default_local_owners="getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
+
 ########################################################################
 
 # Fail fast
 set -e
 
+########################################################################
+# Inputs
+# ----------------------------------------------------------------------
+
+target_php_version="$1"
+rector_config="$2"
+local_owners="$3"
+default_local_owners="getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
+
+########################################################################
 # Validate inputs
+# ----------------------------------------------------------------------
+
 if [ -z "$target_php_version" ]; then
     fail "Please provide to which PHP version to downgrade to"
 fi
@@ -44,8 +53,15 @@ if [ -z "$rector_config" ]; then
     fail "Please provide to path to the Rector config file"
 fi
 
+########################################################################
 # Initialize defaults
+# ----------------------------------------------------------------------
+
 local_package_owners=(${local_owners:=$default_local_owners})
+
+########################################################################
+# Logic
+# ----------------------------------------------------------------------
 
 packages_to_downgrade=()
 package_paths=()
