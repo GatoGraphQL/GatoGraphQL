@@ -10,11 +10,30 @@ jobs:
         name: Git diff files
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v2
+            -
+                uses: actions/checkout@v2
+
+            # required for matrix of packages set
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: "ramsey/composer-install@v1"
+
+            # git diff to generate matrix with modified packages only
             -   uses: technote-space/get-diff-action@v4
                 with:
                     PATTERNS: layers/**
-            -   run: echo ${{ env.GIT_DIFF }}
-            -   run: echo ${{ env.GIT_DIFF_FILTERED }}
 
+            # get package json list
+            -
+                id: output_data
+                run: |
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json --filter-list=\"${{ env.GIT_DIFF }}\")"
 
+        # this step is needed, so the output gets to the next defined job
+        outputs:
+            matrix: ${{ steps.output_data.outputs.matrix }}
