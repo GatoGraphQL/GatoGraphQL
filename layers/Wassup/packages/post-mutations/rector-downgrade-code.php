@@ -11,21 +11,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
-    // paths to refactor; solid alternative to CLI arguments
-    $parameters->set(Option::PATHS, [
-        __DIR__ . '/src',
-        __DIR__ . '/vendor/getpop/*/src',
-        __DIR__ . '/vendor/pop-schema/*/src',
-        __DIR__ . '/vendor/pop-sites-wassup/*/src',
-    ]);
-
-    // is there a file you need to skip?
-    $parameters->set(Option::SKIP, [
-        __DIR__ . '/vendor/getpop/migrate-*/*',
-        __DIR__ . '/vendor/pop-schema/migrate-*/*',
-        __DIR__ . '/vendor/pop-sites-wassup/migrate-*/*',
-    ]);
-
     // here we can define, what sets of rules will be applied
     $parameters->set(Option::SETS, [
         // @todo Uncomment when PHP 8.0 released
