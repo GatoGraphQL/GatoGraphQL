@@ -84,7 +84,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
             name: generated-plugin
-            path: build/graphql-api.zip
+            path: build
 
       ## Copy the downgraded code to the DIST repo
       ## 1. Unzip the plugin into a temp folder
@@ -123,7 +123,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
             name: generated-plugin
-            path: build/graphql-api.zip
+            path: build
 
       - name: Upload to release
         uses: JasonEtco/upload-to-release@master
