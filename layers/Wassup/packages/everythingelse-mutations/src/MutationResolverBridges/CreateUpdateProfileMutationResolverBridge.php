@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\MutationResolvers\CreateUpdateProfileMutationResolver;
 
-class CreateUpdateProfileMutationResolverBridge extends AbstractCreateUpdateUserMutationResolverBridge
+class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {

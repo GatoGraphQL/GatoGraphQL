@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 
 class RedirectQueryInputOutputHandler extends ActionExecutionQueryInputOutputHandler
 {

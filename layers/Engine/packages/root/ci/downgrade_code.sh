@@ -39,8 +39,10 @@ set -e
 
 target_php_version="$1"
 rector_config="$2"
-local_owners="$3"
-default_local_owners="getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
+rector_options="$3"
+local_owners="$4"
+
+default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
 ########################################################################
 # Validate inputs
@@ -122,4 +124,4 @@ composer install --no-progress --ansi
 # Execute the downgrade
 packages=$(join_by " " ${packages_to_downgrade[@]})
 paths=$(join_by " " ${package_paths[@]})
-vendor/bin/rector process $paths --config=$rector_config --ansi
+vendor/bin/rector process $paths --config=$rector_config --ansi $rector_options

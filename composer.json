@@ -624,6 +624,12 @@
         "check-style": "phpcs -n src $(monorepo-builder source-packages --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --subfolder=src --subfolder=tests)",
         "analyse": "ci/phpstan.sh \". $(monorepo-builder source-packages --skip-unmigrated)\"",
+        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --subfolder=src) --config=rector-downgrade-code.php --ansi --dry-run || true",
+        "preview-vendor-downgrade": "layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php --dry-run || true",
+        "preview-code-downgrade": [
+            "@preview-src-downgrade",
+            "@preview-vendor-downgrade"
+        ],
         "build-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"

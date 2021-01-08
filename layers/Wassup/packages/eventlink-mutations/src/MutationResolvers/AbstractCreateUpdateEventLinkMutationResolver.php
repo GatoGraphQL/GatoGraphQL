@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EventLinkMutations\MutationResolvers;
 
+use EM_Event;
 use PoPSitesWassup\EventMutations\MutationResolvers\AbstractCreateUpdateEventMutationResolver;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
 
