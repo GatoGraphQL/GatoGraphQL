@@ -18,4 +18,8 @@ final class Option
      * @var string
      */
     public const INCLUDE_ALL = 'include-all';
+    /**
+     * @var string
+     */
+    public const SUBFOLDER = 'subfolder';
 }
