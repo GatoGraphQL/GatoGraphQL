@@ -23,17 +23,17 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-packages)"
+                    echo "::set-output name=package_srcs::$(vendor/bin/monorepo-builder source-packages --subfolder=src)"
 
         outputs:
-            packages: ${{ steps.output_data.outputs.packages }}
+            package_srcs: ${{ steps.output_data.outputs.package_srcs }}
 
     main:
         needs: provide_data
         name: Downgrade code to PHP 7.1 via Rector, and execute tests
         runs-on: ubuntu-latest
         env:
-            LOCAL_PACKAGES: ${{ needs.provide_data.outputs.packages }}
+            LOCAL_PACKAGE_SRCS: ${{ needs.provide_data.outputs.package_srcs }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -51,7 +51,7 @@ jobs:
                 run: composer install --no-progress --ansi
 
             -   name: Local packages - Downgrade PHP code via Rector
-                run: vendor/bin/rector process $LOCAL_PACKAGES --config=rector-downgrade-code.php --ansi
+                run: vendor/bin/rector process $LOCAL_PACKAGE_SRCS --config=rector-downgrade-code.php --ansi
 
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: layers/Engine/packages/root/ci/downgrade_code.sh "7.1" "rector-downgrade-code.php"
@@ -74,5 +74,5 @@ jobs:
             # @see https://github.com/leoloso/PoP/issues/299
             -   name: Run Rector on PHP 7.1
                 run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
-            #   run: vendor/bin/rector-php71 process $LOCAL_PACKAGES vendor --ansi --dry-run
+            #   run: vendor/bin/rector-php71 process $LOCAL_PACKAGE_SRCS vendor --ansi --dry-run
 
