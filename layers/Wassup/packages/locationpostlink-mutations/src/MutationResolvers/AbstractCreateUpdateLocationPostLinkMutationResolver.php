@@ -9,9 +9,9 @@ use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUti
 
 abstract class AbstractCreateUpdateLocationPostLinkMutationResolver extends AbstractCreateUpdateLocationPostMutationResolver
 {
-    protected function getCategories()
+    protected function getCategories(array $form_data): ?array
     {
-        $ret = parent::getCategories();
+        $ret = parent::getCategories($form_data);
         if (defined('POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS') && POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS) {
             $ret[] = POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS;
         }
