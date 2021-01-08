@@ -11,15 +11,12 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class PackageEntriesJsonProvider
 {
-    /**
-     * @var PackageProvider
-     */
-    private $packageProvider;
+    private PackageProvider $packageProvider;
 
     /**
      * @var array<string, string>
      */
-    private $packageOrganizations = [];
+    private array $packageOrganizations = [];
 
     public function __construct(
         PackageProvider $packageProvider,
