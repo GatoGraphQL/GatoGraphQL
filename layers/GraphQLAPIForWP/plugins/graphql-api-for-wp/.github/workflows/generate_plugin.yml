@@ -26,7 +26,7 @@ on:
     types: [published]
 jobs:
   build:
-    name: Build, Downgrade and Upload Release
+    name: Downgrade code, Build plugin, and Upload as artifact
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -69,12 +69,22 @@ jobs:
             name: generated-plugin
             path: build/graphql-api.zip
 
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
+  test:
+    name: Test downgraded code
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create build folder
+        run: mkdir build
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
         with:
-          args: build/graphql-api.zip application/zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            name: generated-plugin
+            path: build
 
       ## Copy the downgraded code to the DIST repo
       ## 1. Unzip the plugin into a temp folder
@@ -83,15 +93,71 @@ jobs:
         with:
           args: unzip -qq build/graphql-api.zip -d build/downgraded-code
 
-      # 2. Publish it to the remote repository
-      -
-          uses: symplify/github-action-monorepo-split@master
-          env:
-              GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          with:
-              package-directory: 'build/downgraded-code'
-              split-repository-organization: 'GraphQLAPI'
-              split-repository-name: 'graphql-api-for-wp-dist'
-              user-name: "leoloso"
-              user-email: "leo@getpop.org"
+        # see https://github.com/shivammathur/setup-php
+      - name: Use PHP 7.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.1
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Avoid Composer v2 platform checks
+        run: composer config platform-check false
+
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v1"
+        with:
+          composer-options: "--ignore-platform-reqs"
+
+      # Running PHPStan doesn't work, because dependencies do not pass it!
+      # - name: Run PHPStan on PHP 7.1
+      #   run: vendor/bin/phpstan analyse build/downgraded-code --level 0
+      # Can run Rector on the downgraded code instead.
+      # However, Rector for PHP 7.1 is not ready yet
+      # @see: https://github.com/rectorphp/rector/pull/4447
+      # Uncomment these lines when available
+      - name: Run Rector on PHP 7.1
+        run: echo "Running Rector on PHP 7.1 must be enabled, once available. Check https://github.com/rectorphp/rector/pull/4447"
+      #   run: vendor/bin/rector-php71 process build/downgraded-code --ansi --dry-run
+
+  upload_and_deploy:
+    name: Upload release, and deploy to DIST repo
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create build folder
+        run: mkdir build
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+            name: generated-plugin
+            path: build
+
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: build/graphql-api.zip application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Uncompress artifact
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+
+      - name: Publish to DIST repo
+        uses: symplify/github-action-monorepo-split@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          package-directory: 'build/downgraded-code'
+          split-repository-organization: 'GraphQLAPI'
+          split-repository-name: 'graphql-api-for-wp-dist'
+          user-name: "leoloso"
+          user-email: "leo@getpop.org"
 
