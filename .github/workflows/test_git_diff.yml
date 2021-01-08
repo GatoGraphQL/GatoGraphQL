@@ -38,6 +38,7 @@ jobs:
             -   id: output_data
                 run: |
                     echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json ${{ steps.set_filter.outputs.filter }})"
+                if: env.GIT_DIFF
 
         # this step is needed, so the output gets to the next defined job
         outputs:
@@ -48,9 +49,9 @@ jobs:
 
         runs-on: ubuntu-latest
 
-        name: Split Tests of ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+        name: Split Tests of ${{fromJson(needs.provide_packages_json.outputs.matrix.*.path)}}
 
         steps:
             -
-                run: echo "${{fromJson(needs.provide_packages_json.outputs.matrix)}}"
+                run: echo "${{fromJson(needs.provide_packages_json.outputs.matrix.*.path)}}"
 
