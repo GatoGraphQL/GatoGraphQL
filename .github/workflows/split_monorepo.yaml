@@ -30,11 +30,16 @@ jobs:
 
             -   uses: "ramsey/composer-install@v1"
 
+            # git diff to generate matrix with modified packages only
+            -   uses: technote-space/get-diff-action@v4
+                with:
+                    PATTERNS: layers/**
+
             # get package json list
             -
                 id: output_data
                 run: |
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json)"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json --filter-list=\"${{ env.GIT_DIFF }}\")"
 
         # this step is needed, so the output gets to the next defined job
         outputs:
