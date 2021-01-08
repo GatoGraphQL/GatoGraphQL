@@ -42,7 +42,7 @@ rector_config="$2"
 local_owners="$3"
 rector_options="$4"
 
-default_local_owners="getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
+default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
 ########################################################################
 # Validate inputs
