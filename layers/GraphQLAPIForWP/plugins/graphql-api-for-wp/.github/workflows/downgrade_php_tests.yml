@@ -26,7 +26,7 @@ jobs:
         run: composer install --no-progress --ansi
 
       - name: Downgrade PHP code via Rector
-        run: vendor/bin/rector process --config=rector-downgrade-code.php
+        run: vendor/bin/rector process src --config=rector-downgrade-code.php
 
       # dumpautoload will remove vendor/composer/platform_check.php, otherwise executing phpstan on 7.1 fails
       - name: Avoid Composer v2 platform checks

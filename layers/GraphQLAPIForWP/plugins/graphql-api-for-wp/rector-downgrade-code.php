@@ -11,21 +11,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
-    // paths to refactor; solid alternative to CLI arguments
-    $parameters->set(Option::PATHS, [
-        __DIR__ . '/src',
-        __DIR__ . '/vendor/getpop/*/src',
-        __DIR__ . '/vendor/pop-schema/*/src',
-        __DIR__ . '/vendor/graphql-by-pop/*/src',
-    ]);
-
-    // is there a file you need to skip?
-    $parameters->set(Option::SKIP, [
-        __DIR__ . '/vendor/getpop/migrate-*/*',
-        __DIR__ . '/vendor/pop-schema/migrate-*/*',
-        __DIR__ . '/vendor/graphql-by-pop/graphql-parser/*',
-    ]);
-
     // here we can define, what sets of rules will be applied
     $parameters->set(Option::SETS, [
         // @todo Uncomment when PHP 8.0 released
@@ -42,6 +27,26 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::AUTOLOAD_PATHS, [
         // full directory
         __DIR__ . '/vendor/wordpress/wordpress',
+    ]);
+
+    // files to skip downgrading
+    $parameters->set(Option::SKIP, [
+        // These are skipped in the .sh since it's faster
+        // // All the "migrate" folders
+        // __DIR__ . '/vendor/getpop/migrate-*/*',
+        // __DIR__ . '/vendor/pop-schema/migrate-*/*',
+        // __DIR__ . '/vendor/graphql-by-pop/migrate-*/*',
+        // // For local dependencies, skip the tests
+        // __DIR__ . '/vendor/getpop/*/tests/*',
+        // __DIR__ . '/vendor/pop-schema/*/tests/*',
+        // __DIR__ . '/vendor/graphql-by-pop/*/tests/*',
+
+        // Individual classes that can be excluded because
+        // they are not used by us, and they use classes
+        // loaded with "require-dev" so it'd throw an error
+        __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
+        __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+        __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
     ]);
 
     /**
