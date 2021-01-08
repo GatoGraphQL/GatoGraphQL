@@ -30,8 +30,4 @@ final class Option
      * @var string
      */
     public const FILTER = 'filter';
-    /**
-     * @var string
-     */
-    public const FILTER_LIST = 'filter-list';
 }
