@@ -47,7 +47,7 @@ jobs:
         working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
 
       - name: Downgrade code for production (to PHP 7.1)
-        run: ci/downgrade_code.sh "7.1" "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php"
+        run: ci/downgrade_code.sh "7.1" "rector-downgrade-code.php"
         working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
 
       - name: Replace PHP version in plugin main file
