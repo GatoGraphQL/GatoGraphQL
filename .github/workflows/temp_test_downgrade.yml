@@ -58,13 +58,15 @@ jobs:
       - name: Build project for production
         run: |
           composer install --no-dev --optimize-autoloader
-          mkdir build
         working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+
+      - name: Create build folder
+        run: mkdir build
 
       - name: Create artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -X -r build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/CHANGELOG.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/CODE_OF_CONDUCT.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/CONTRIBUTING.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ISSUE_TEMPLATE.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/LICENSE.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/PULL_REQUEST_TEMPLATE.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/README.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** tests** "**/tests**"
+          args: zip -X -r build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/CHANGELOG.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/CODE_OF_CONDUCT.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/CONTRIBUTING.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ISSUE_TEMPLATE.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/LICENSE.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/PULL_REQUEST_TEMPLATE.md layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/README.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests** "**/tests**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -79,6 +81,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Create build folder
+        run: mkdir build
 
       - name: Download artifact
         uses: actions/download-artifact@v2
