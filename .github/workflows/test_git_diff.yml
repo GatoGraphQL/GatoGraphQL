@@ -6,7 +6,7 @@ on:
     pull_request: null
 
 jobs:
-    main:
+    provide_packages_json:
         name: Git diff files
         runs-on: ubuntu-latest
         steps:
@@ -37,3 +37,15 @@ jobs:
         # this step is needed, so the output gets to the next defined job
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
+
+    split_monorepo:
+        needs: provide_packages_json
+
+        runs-on: ubuntu-latest
+
+        name: Split Tests of ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+
+        steps:
+            -
+                run: echo "${{fromJson(needs.provide_packages_json.outputs.matrix)}}"
+

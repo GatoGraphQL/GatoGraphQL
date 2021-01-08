@@ -576,6 +576,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 
 <!--
+
 > **Note:** The usage below belong to [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
 For the **REST-compatible API**, add parameter `datastructure=rest` to the endpoint URL. 
@@ -728,4 +729,5 @@ _Page:_
 **Examples:**
 
 _Page:_<br/>[/?query=id|title|content|url](https://nextapi.getpop.org/about/api/?datastructure=graphql&query=id|title|content|url)
+
 -->
