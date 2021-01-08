@@ -31,6 +31,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
+        // Ignore downgrading the monorepo source
+        __DIR__ . '/src/*',
         // Individual classes that can be excluded because
         // they are not used by us, and they use classes
         // loaded with "require-dev" so it'd throw an error
