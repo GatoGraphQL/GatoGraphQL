@@ -53,7 +53,7 @@ why_not_version="${target_php_version}.*"
 PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
 
 # Ignore all the "migrate" packages
-PACKAGES=$(echo "$PACKAGES" | awk '!/[getpop|pop-schema|graphql-by-pop]\/migrate-/')
+PACKAGES=$(echo "$PACKAGES" | awk '!/[getpop|pop\-schema|graphql\-by\-pop]\/migrate-/')
 
 if [ -n "$PACKAGES" ]; then
     for package in $PACKAGES
