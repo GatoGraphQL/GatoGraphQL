@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\MonorepoBuilder\ValueObject\Package;
 
 final class SourcePackagesProvider
 {
     private PackageProvider $packageProvider;
-    private bool $includeAll;
+    private PackageUtils $packageUtils;
 
     public function __construct(
-        PackageProvider $packageProvider
+        PackageProvider $packageProvider,
+        PackageUtils $packageUtils
     ) {
         $this->packageProvider = $packageProvider;
+        $this->packageUtils = $packageUtils;
     }
 
     /**
@@ -137,22 +140,9 @@ final class SourcePackagesProvider
         if ($fileListFilter !== []) {
             $packages = array_values(array_filter(
                 $packages,
-                fn (string $package) => $this->isPackageInFileList($package, $fileListFilter)
+                fn (string $package) => $this->packageUtils->isPackageInFileList($package, $fileListFilter)
             ));
         }
         return $packages;
-    }
-
-    /**
-     * @var string[] $fileListFilter
-     * @return array<array<string,string>>
-     */
-    private function isPackageInFileList(string $package, array $fileListFilter): bool
-    {
-        $matchingPackages = array_filter(
-            $fileListFilter,
-            fn (string $file) => str_starts_with($file, $package)
-        );
-        return count($matchingPackages) > 0;
     }
 }

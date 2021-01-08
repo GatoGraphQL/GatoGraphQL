@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\MonorepoBuilder\Package\PackageProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -12,6 +13,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class PackageEntriesJsonProvider
 {
     private PackageProvider $packageProvider;
+    private PackageUtils $packageUtils;
 
     /**
      * @var array<string, string>
@@ -20,10 +22,12 @@ final class PackageEntriesJsonProvider
 
     public function __construct(
         PackageProvider $packageProvider,
-        ParameterProvider $parameterProvider
+        ParameterProvider $parameterProvider,
+        PackageUtils $packageUtils
     ) {
         $this->packageProvider = $packageProvider;
         $this->packageOrganizations = $parameterProvider->provideArrayParameter(Option::PACKAGE_ORGANIZATIONS);
+        $this->packageUtils = $packageUtils;
     }
 
     /**
@@ -38,7 +42,7 @@ final class PackageEntriesJsonProvider
             $packageRelativePath = $package->getRelativePath();
             // If provided, filter the packages to the ones containing the list of files.
             // Useful to launch GitHub runners to split modified packages only
-            if ($fileListFilter !== [] && !$this->isPackageInFileList($packageRelativePath, $fileListFilter)) {
+            if ($fileListFilter !== [] && !$this->packageUtils->isPackageInFileList($packageRelativePath, $fileListFilter)) {
                 continue;
             }
             $packageDirectory = dirname($packageRelativePath);
@@ -58,18 +62,5 @@ final class PackageEntriesJsonProvider
         }
 
         return $packageEntries;
-    }
-
-    /**
-     * @var string[] $fileListFilter
-     * @return array<array<string,string>>
-     */
-    private function isPackageInFileList(string $package, array $fileListFilter): bool
-    {
-        $matchingPackages = array_filter(
-            $fileListFilter,
-            fn (string $file) => str_starts_with($file, $package)
-        );
-        return count($matchingPackages) > 0;
     }
 }
