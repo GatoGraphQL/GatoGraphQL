@@ -46,7 +46,13 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Add paths to a subfolder from the package.',
             []
         );
-        // Here must add an option
+        $this->addOption(
+            Option::FILTER,
+            null,
+            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+            'Filter the packages to those from the list of files. Useful to split monorepo on modified packages only',
+            []
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -55,8 +61,10 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);
+        /** @var string[] $fileListFilter */
+        $fileListFilter = $input->getOption(Option::FILTER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($skipUnmigrated);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($skipUnmigrated, $fileListFilter);
 
         // Point to some subfolder?
         if ($subfolders !== []) {

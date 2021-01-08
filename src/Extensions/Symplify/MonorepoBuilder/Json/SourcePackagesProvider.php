@@ -24,21 +24,22 @@ final class SourcePackagesProvider
      * Since a Package already has function `hasTests`, and since every
      * package that has tests/ also has src/, then using this function
      * already does the job.
+     * @var string[] $fileListFilter
      * @return string[]
      */
-    public function provideSourcePackages(bool $skipUnmigrated = false): array
+    public function provideSourcePackages(bool $skipUnmigrated = false, array $fileListFilter = []): array
     {
-        $packagesWithCode = array_values(array_filter(
+        $packages = array_values(array_filter(
             $this->packageProvider->provide(),
             function (Package $package): bool {
                 return $package->hasTests();
             }
         ));
-        $packagesWithCode = array_map(
+        $packages = array_map(
             function (Package $package): string {
                 return $package->getRelativePath();
             },
-            $packagesWithCode
+            $packages
         );
         // Temporary hack! PHPStan is currently failing for these packages,
         // because they have not been fully converted to PSR-4 (WIP),
@@ -123,11 +124,32 @@ final class SourcePackagesProvider
                 'layers/Wassup/packages/volunteer-mutations',
                 'layers/Wassup/packages/wassup',
             ];
-            $packagesWithCode = array_values(array_diff(
-                $packagesWithCode,
+            $packages = array_values(array_diff(
+                $packages,
                 $failingPackages
             ));
         }
-        return $packagesWithCode;
+        // If provided, filter the packages to the ones containing
+        // the list of files. Useful to launch GitHub runners to split modified packages only
+        if ($fileListFilter !== []) {
+            $packages = array_values(array_filter(
+                $packages,
+                fn (string $package) => $this->isPackageInFileList($package, $fileListFilter)
+            ));
+        }
+        return $packages;
+    }
+
+    /**
+     * @var string[] $fileListFilter
+     * @return array<array<string,string>>
+     */
+    private function isPackageInFileList(string $package, array $fileListFilter): bool
+    {
+        $matchingPackages = array_filter(
+            $fileListFilter,
+            fn (string $file) => str_starts_with($file, $package)
+        );
+        return count($matchingPackages) > 0;
     }
 }

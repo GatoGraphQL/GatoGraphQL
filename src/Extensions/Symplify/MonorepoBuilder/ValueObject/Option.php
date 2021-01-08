@@ -22,4 +22,8 @@ final class Option
      * @var string
      */
     public const SUBFOLDER = 'subfolder';
+    /**
+     * @var string
+     */
+    public const FILTER = 'filter';
 }
