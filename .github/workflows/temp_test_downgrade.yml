@@ -93,6 +93,7 @@ jobs:
 
       - name: Display structure of downloaded files
         run: ls -R
+        working-directory: build
 
       ## Copy the downgraded code to the DIST repo
       ## 1. Unzip the plugin into a temp folder
