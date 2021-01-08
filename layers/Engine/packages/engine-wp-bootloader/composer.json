@@ -29,7 +29,7 @@
         "php": "^7.4|^8.0",
         "composer/installers": "~1.0",
         "getpop/routing-wp": "dev-master",
-        "lkwdwrd/wp-muplugin-loader": "dev-master"
+        "lkwdwrd/wp-muplugin-loader": "dev-feature-composer-v2"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0"
