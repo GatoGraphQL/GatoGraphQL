@@ -52,17 +52,12 @@
         "squizlabs/php_codesniffer": "^3.0",
         "szepeviktor/phpstan-wordpress": "^0.6.2",
         "symfony/var-dumper": "^5.1",
-        "johnpbloch/wordpress": ">=5.5",
-        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2"
+        "johnpbloch/wordpress": ">=5.5"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://wpackagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcaskill/composer-merge-plugin.git"
         }
     ],
     "autoload": {
@@ -95,18 +90,6 @@
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
             "dev-master": "1.0-dev"
-        },
-        "merge-plugin": {
-            "include": [
-                "composer.local.json"
-            ],
-            "recurse": true,
-            "replace": false,
-            "ignore-duplicates": false,
-            "merge-dev": true,
-            "merge-extra": false,
-            "merge-extra-deep": false,
-            "merge-scripts": false
         }
     },
     "config": {

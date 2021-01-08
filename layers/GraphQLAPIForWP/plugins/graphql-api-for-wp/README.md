@@ -424,3 +424,40 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [link-author]: https://github.com/leoloso
 
 [latest-release-url]: https://github.com/GraphQLAPI/graphql-api-for-wp/releases/latest/download/graphql-api.zip
+
+
+<!--
+
+## Composer merge plugin
+
+Add into `composer.json`:
+
+```json
+{
+    "require-dev": {
+        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mcaskill/composer-merge-plugin.git"
+        }
+    ],
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "composer.local.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra": false,
+            "merge-extra-deep": false,
+            "merge-scripts": false
+        }
+    }
+}
+```
+
+-->
