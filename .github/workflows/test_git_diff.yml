@@ -1,0 +1,17 @@
+name: Temp - Show list of modified packages in PR
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+
+jobs:
+    main:
+        name: Git diff files
+        runs-on: ubuntu-latest
+        steps:
+            - uses: technote-space/get-diff-action@v4
+            - run: echo Git diff files:
+            - run: echo ${{ env.GIT_DIFF }}
+
+
