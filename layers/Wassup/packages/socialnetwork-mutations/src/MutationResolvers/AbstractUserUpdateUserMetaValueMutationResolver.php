@@ -7,7 +7,7 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueAbstractMutationResolver
+class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
     public function validateErrors(array $form_data): ?array
     {

@@ -23,11 +23,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
 
-    // // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    // $parameters->set(Option::AUTOLOAD_PATHS, [
-    //     // full directory
-    //     __DIR__ . '/vendor/wordpress/wordpress',
-    // ]);
+    // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
+    $parameters->set(Option::AUTOLOAD_PATHS, [
+        // full directory
+        __DIR__ . '/vendor/wordpress/wordpress',
+    ]);
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
