@@ -23,10 +23,10 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --ansi
+        uses: "ramsey/composer-install@v1"
 
       - name: Downgrade PHP code via Rector
-        run: vendor/getpop/root/ci/downgrade_code.sh "7.1" "rector-downgrade-code.php"
+        run: vendor/getpop/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
       # dumpautoload will remove vendor/composer/platform_check.php, otherwise executing phpstan on 7.1 fails
       - name: Avoid Composer v2 platform checks

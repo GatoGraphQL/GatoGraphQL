@@ -25,8 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::AUTOLOAD_PATHS, [
-        // full directory
-        __DIR__ . '/vendor/wordpress/wordpress',
+        __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
     ]);
 
     // files to skip downgrading
