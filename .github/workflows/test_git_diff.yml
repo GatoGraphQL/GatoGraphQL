@@ -48,10 +48,13 @@ jobs:
         needs: provide_packages_json
 
         runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
 
-        name: Split Tests of ${{fromJson(needs.provide_packages_json.outputs.matrix.*.path)}}
+        name: Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
         steps:
-            -
-                run: echo "${{fromJson(needs.provide_packages_json.outputs.matrix.*.path)}}"
+            -   run: echo "data - ${{ matrix.package.name }} (${{ matrix.package.path }})"
 
