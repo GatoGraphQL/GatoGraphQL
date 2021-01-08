@@ -52,7 +52,7 @@ jobs:
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi
 
             -   name: Dependencies - Downgrade PHP code via Rector
-                run: layers/Engine/packages/root/ci/downgrade_code.sh "7.1" "rector-downgrade-code.php"
+                run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
