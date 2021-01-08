@@ -49,6 +49,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'require-dev' => [
             'wikimedia/composer-merge-plugin' => '*',
             // 'phpunit/phpunit' => '*',
+            'wpackagist-plugin/block-metadata' => '*',
+            'wpackagist-plugin/events-manager' => '*',
         ],
         // 'minimum-stability' => 'dev',
         // 'prefer-stable' => true,
