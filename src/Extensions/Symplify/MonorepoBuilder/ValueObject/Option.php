@@ -17,7 +17,7 @@ final class Option
     /**
      * @var string
      */
-    public const INCLUDE_ALL = 'include-all';
+    public const SKIP_UNMIGRATED = 'skip-unmigrated';
     /**
      * @var string
      */

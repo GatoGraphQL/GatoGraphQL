@@ -24,7 +24,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=package_code_paths::$(vendor/bin/monorepo-builder package-code-paths)"
+                    echo "::set-output name=package_code_paths::$(vendor/bin/monorepo-builder source-packages --subfolder=src --subfolder=tests)"
 
         outputs:
             package_code_paths: ${{ steps.output_data.outputs.package_code_paths }}
