@@ -25,8 +25,6 @@ final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
     protected function configure(): void
     {
         $this->setDescription('Provides package entries in json format. Useful for GitHub Actions Workflow');
-
-        // Another change to test
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
