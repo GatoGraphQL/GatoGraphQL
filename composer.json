@@ -623,7 +623,7 @@
         "test": "phpunit",
         "check-style": "phpcs -n src $(monorepo-builder source-packages --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --subfolder=src --subfolder=tests)",
-        "analyse": "ci/phpstan.sh \". $(monorepo-builder source-packages)\"",
+        "analyse": "ci/phpstan.sh \". $(monorepo-builder source-packages --skip-unmigrated)\"",
         "build-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"
