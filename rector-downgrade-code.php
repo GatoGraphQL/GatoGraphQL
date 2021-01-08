@@ -28,8 +28,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // full directory
         __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
         // Avoid error: "Class EM_Event not found"
-        __DIR__ . '/wp-content/plugins/events-manager/classes/em-object.php',
-        __DIR__ . '/wp-content/plugins/events-manager/classes/em-event.php',
+        __DIR__ . '/stubs/wpackagist-plugin/events-manager/em-stubs.php',
     ]);
 
     // files to skip downgrading
