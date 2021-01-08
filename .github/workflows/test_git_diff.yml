@@ -15,5 +15,6 @@ jobs:
                 with:
                     PATTERNS: layers/**
             -   run: echo ${{ env.GIT_DIFF }}
+            -   run: echo ${{ env.GIT_DIFF_FILTERED }}
 
 
