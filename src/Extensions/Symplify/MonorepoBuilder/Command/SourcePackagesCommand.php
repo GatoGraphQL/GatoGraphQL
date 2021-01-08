@@ -52,6 +52,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
         $includeAll = (bool) $input->getOption(Option::INCLUDE_ALL);
+        /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);
 
         $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($includeAll);
