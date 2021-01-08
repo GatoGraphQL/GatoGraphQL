@@ -28,17 +28,15 @@ jobs:
                 with:
                     PATTERNS: layers/**
 
-            # add --filter before each file
-            -
-                id: set_filter
+            # replace spaces in between files, with "--filter="
+            -   id: set_filter
                 run: |
-                    echo "::set-output name=filter_arg::--filter=$(echo "${{ env.GIT_DIFF }}" | sed -e 's/ /\-\-filter=/g')"
+                    echo "::set-output name=filter::--filter=$(echo "${{ env.GIT_DIFF }}" | sed -e 's/\'//g' | sed -e 's/ / \-\-filter=/g')"
 
             # get package json list
-            -
-                id: output_data
+            -   id: output_data
                 run: |
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json ${{ steps.set_filter.outputs.filter_arg }})"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json ${{ steps.set_filter.outputs.filter }})"
 
         # this step is needed, so the output gets to the next defined job
         outputs:
