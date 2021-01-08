@@ -46,6 +46,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Add paths to a subfolder from the package.',
             []
         );
+        // Here must add an option
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
