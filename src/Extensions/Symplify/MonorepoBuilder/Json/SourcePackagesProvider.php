@@ -26,7 +26,7 @@ final class SourcePackagesProvider
      * already does the job.
      * @return string[]
      */
-    public function provideSourcePackages(bool $includeAll = false): array
+    public function provideSourcePackages(bool $skipUnmigrated = false): array
     {
         $packagesWithCode = array_values(array_filter(
             $this->packageProvider->provide(),
@@ -44,7 +44,7 @@ final class SourcePackagesProvider
         // because they have not been fully converted to PSR-4 (WIP),
         // and converting them will take some time. Hence, for the time being,
         // skip them from executing PHPStan, to avoid the CI from failing
-        if (!$includeAll) {
+        if ($skipUnmigrated) {
             $failingPackages = [
                 'layers/Engine/packages/access-control',
                 'layers/API/packages/api',

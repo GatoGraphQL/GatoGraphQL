@@ -34,22 +34,43 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Print with encoded JSON format.'
         );
         $this->addOption(
-            Option::INCLUDE_ALL,
+            Option::SKIP_UNMIGRATED,
             null,
             InputOption::VALUE_NONE,
-            'Include all packages, including several not-yet-migrated to PSR-4 ones.'
+            'Skip the not-yet-migrated to PSR-4 packages.'
+        );
+        $this->addOption(
+            Option::SUBFOLDER,
+            null,
+            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+            'Add paths to a subfolder from the package.',
+            []
         );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
-        $includeAll = (bool) $input->getOption(Option::INCLUDE_ALL);
+        $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
+        /** @var string[] $subfolders */
+        $subfolders = $input->getOption(Option::SUBFOLDER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($includeAll);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($skipUnmigrated);
+
+        // Point to some subfolder?
+        if ($subfolders !== []) {
+            $sourcePackagePaths = [];
+            foreach ($sourcePackages as $sourcePackage) {
+                foreach ($subfolders as $subfolder) {
+                    $sourcePackagePaths[] = $sourcePackage . DIRECTORY_SEPARATOR . $subfolder;
+                }
+            }
+        } else {
+            $sourcePackagePaths = $sourcePackages;
+        }
 
         // JSON: must be without spaces, otherwise it breaks GitHub Actions json
-        $response = $asJSON ? Json::encode($sourcePackages) : implode(' ', $sourcePackages);
+        $response = $asJSON ? Json::encode($sourcePackagePaths) : implode(' ', $sourcePackagePaths);
         $this->symfonyStyle->writeln($response);
 
         return ShellCode::SUCCESS;
