@@ -23,7 +23,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --ansi
+        uses: "ramsey/composer-install@v1"
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse -c phpstan.neon.dist
