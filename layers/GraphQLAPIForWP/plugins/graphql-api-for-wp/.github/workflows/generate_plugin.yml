@@ -77,6 +77,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create build folder
+        run: mkdir build
+
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
@@ -112,6 +115,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Create build folder
+        run: mkdir build
 
       - name: Download artifact
         uses: actions/download-artifact@v2
