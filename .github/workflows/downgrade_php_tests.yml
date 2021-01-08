@@ -33,6 +33,9 @@ jobs:
         name: Downgrade code to PHP 7.1 via Rector, and execute tests
         runs-on: ubuntu-latest
         steps:
+            -   name: Avoid Composer v2 platform checks
+                run: composer config platform-check false
+
             -   name: Checkout code
                 uses: actions/checkout@v2
 
@@ -44,9 +47,6 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            -   name: Avoid Composer v2 platform checks
-                run: composer config platform-check false
 
             -   name: Install Composer dependencies
                 run: composer install --no-progress --ansi
