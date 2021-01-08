@@ -9,7 +9,6 @@
 # ----------------------------------------------------------------------
 # Failure helper function (https://stackoverflow.com/a/24597941)
 function fail {
-    set -e
     printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
     exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
 }
@@ -31,6 +30,10 @@ function note {
 target_php_version="$1"
 rector_config="$2"
 ########################################################################
+
+# Fail fast
+set -e
+
 # Validate inputs
 if [ -z "$target_php_version" ]; then
     fail "Please provide to which PHP version to downgrade to"
@@ -53,7 +56,7 @@ why_not_version="${target_php_version}.*"
 PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
 
 # Ignore all the "migrate" packages
-PACKAGES=$(echo "$PACKAGES" | awk '!/[getpop|pop-schema|graphql-by-pop]\/migrate-/')
+PACKAGES=$(echo "$PACKAGES" | awk '!/[getpop|pop\-schema|graphql\-by\-pop]\/migrate-/')
 
 if [ -n "$PACKAGES" ]; then
     for package in $PACKAGES
