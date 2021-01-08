@@ -35,11 +35,17 @@ jobs:
                 with:
                     PATTERNS: layers/**
 
-            # get package json list
-            -
-                id: output_data
+            # replace spaces in between files, with "--filter="
+            -   id: set_filter
                 run: |
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json --filter-list=\"${{ env.GIT_DIFF }}\")"
+                    echo "::set-output name=filter::--filter=$(quote=\' && echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g | sed -e 's/ / \-\-filter=/g')"
+                if: env.GIT_DIFF
+
+            # get package json list - if filter is empty, don't launch any split
+            -   id: output_data
+                run: |
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json ${{ steps.set_filter.outputs.filter }})"
+                if: env.GIT_DIFF
 
         # this step is needed, so the output gets to the next defined job
         outputs:
