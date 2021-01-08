@@ -10,6 +10,7 @@ jobs:
         name: Git diff files
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v2
             - uses: technote-space/get-diff-action@v4
             - run: echo ${{ env.GIT_DIFF }}
             - run: git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD master)
