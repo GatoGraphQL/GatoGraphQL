@@ -30,13 +30,20 @@ final class PackageEntriesJsonProvider
     }
 
     /**
+     * @var string[] $fileListFilter
      * @return array<array<string,string>>
      */
-    public function providePackageEntries(): array
+    public function providePackageEntries(array $fileListFilter = []): array
     {
         $packageEntries = [];
-        foreach ($this->packageProvider->provide() as $package) {
+        $packages = $this->packageProvider->provide();
+        foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
+            // If provided, filter the packages to the ones containing the list of files.
+            // Useful to launch GitHub runners to split modified packages only
+            if ($fileListFilter !== [] && !$this->isPackageInFileList($packageRelativePath, $fileListFilter)) {
+                continue;
+            }
             $packageDirectory = dirname($packageRelativePath);
             $organization = $this->packageOrganizations[$packageDirectory] ?? null;
             if ($organization === null) {
@@ -54,5 +61,18 @@ final class PackageEntriesJsonProvider
         }
 
         return $packageEntries;
+    }
+
+    /**
+     * @var string[] $fileListFilter
+     * @return array<array<string,string>>
+     */
+    private function isPackageInFileList(string $package, array $fileListFilter): bool
+    {
+        $matchingPackages = array_filter(
+            $fileListFilter,
+            fn (string $file) => str_starts_with($file, $package)
+        );
+        return count($matchingPackages) > 0;
     }
 }
