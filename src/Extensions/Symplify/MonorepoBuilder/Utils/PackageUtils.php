@@ -7,8 +7,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils;
 final class PackageUtils
 {
     /**
-     * @var string[] $fileListFilter
-     * @return array<array<string,string>>
+     * @param string[] $fileListFilter
      */
     public function isPackageInFileList(string $package, array $fileListFilter): bool
     {

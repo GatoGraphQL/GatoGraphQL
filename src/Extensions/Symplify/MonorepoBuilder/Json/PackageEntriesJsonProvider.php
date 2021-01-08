@@ -31,7 +31,7 @@ final class PackageEntriesJsonProvider
     }
 
     /**
-     * @var string[] $fileListFilter
+     * @param string[] $fileListFilter
      * @return array<array<string,string>>
      */
     public function providePackageEntries(array $fileListFilter = []): array
