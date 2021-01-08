@@ -116,6 +116,8 @@ jobs:
 
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v1"
+        with:
+          composer-options: "--ignore-platform-reqs"
 
       - name: Run PHPStan on PHP 7.1
         run: vendor/bin/phpstan analyse build/downgraded-code --level 0
