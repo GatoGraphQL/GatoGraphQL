@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
-use PoPSitesWassup\PostLinkMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
+use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
 
 abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCreateUpdatePostMutationResolver
 {
-    protected function getCategories()
+    protected function getCategories(array $form_data): ?array
     {
-        $ret = parent::getCategories();
+        $ret = parent::getCategories($form_data);
         $ret[] = \POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
         return $ret;
     }
