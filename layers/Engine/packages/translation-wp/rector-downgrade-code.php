@@ -16,7 +16,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
     ]);
 
-
     // here we can define, what sets of rules will be applied
     $parameters->set(Option::SETS, [
         // @todo Uncomment when PHP 8.0 released
