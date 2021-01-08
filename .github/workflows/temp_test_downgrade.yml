@@ -89,7 +89,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
             name: generated-plugin
-            path: build/graphql-api.zip
+            path: build
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       ## Copy the downgraded code to the DIST repo
       ## 1. Unzip the plugin into a temp folder
