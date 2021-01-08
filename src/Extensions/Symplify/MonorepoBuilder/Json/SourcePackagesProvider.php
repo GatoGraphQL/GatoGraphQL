@@ -19,22 +19,25 @@ final class SourcePackagesProvider
     }
 
     /**
-     * Code paths are src/ and tests/ folders.
-     * But not all packages have them, so check if these folders exist.
-     * Since a Package already has function `hasTests`, and since every
-     * package that has tests/ also has src/, then using this function
-     * already does the job.
+     * To find out if it's PSR-4, check if the package has tests.
      * @var string[] $fileListFilter
      * @return string[]
      */
-    public function provideSourcePackages(bool $skipUnmigrated = false, array $fileListFilter = []): array
-    {
-        $packages = array_values(array_filter(
-            $this->packageProvider->provide(),
-            function (Package $package): bool {
-                return $package->hasTests();
-            }
-        ));
+    public function provideSourcePackages(
+        bool $psr4Only = false,
+        bool $skipUnmigrated = false,
+        array $fileListFilter = []
+    ): array {
+        $packages = $this->packageProvider->provide();
+        if ($psr4Only) {
+            $packages = array_values(array_filter(
+                $packages,
+                function (Package $package): bool {
+                    return $package->hasTests();
+                }
+            ));
+        }
+        // Operate with package paths from now on
         $packages = array_map(
             function (Package $package): string {
                 return $package->getRelativePath();

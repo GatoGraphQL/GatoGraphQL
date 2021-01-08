@@ -23,7 +23,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=package_srcs::$(vendor/bin/monorepo-builder source-packages --subfolder=src)"
+                    echo "::set-output name=package_srcs::$(vendor/bin/monorepo-builder source-packages --psr4-only --subfolder=src)"
 
         outputs:
             package_srcs: ${{ steps.output_data.outputs.package_srcs }}

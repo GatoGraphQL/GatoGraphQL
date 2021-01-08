@@ -17,6 +17,10 @@ final class Option
     /**
      * @var string
      */
+    public const PSR4_ONLY = 'psr4-only';
+    /**
+     * @var string
+     */
     public const SKIP_UNMIGRATED = 'skip-unmigrated';
     /**
      * @var string

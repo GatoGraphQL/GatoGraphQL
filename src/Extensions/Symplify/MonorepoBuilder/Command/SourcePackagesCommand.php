@@ -34,6 +34,12 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Print with encoded JSON format.'
         );
         $this->addOption(
+            Option::PSR4_ONLY,
+            null,
+            InputOption::VALUE_NONE,
+            'Skip the non-PSR-4 packages.'
+        );
+        $this->addOption(
             Option::SKIP_UNMIGRATED,
             null,
             InputOption::VALUE_NONE,
@@ -58,13 +64,14 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
+        $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);
         /** @var string[] $fileListFilter */
         $fileListFilter = $input->getOption(Option::FILTER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($skipUnmigrated, $fileListFilter);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($psr4Only, $skipUnmigrated, $fileListFilter);
 
         // Point to some subfolder?
         if ($subfolders !== []) {
