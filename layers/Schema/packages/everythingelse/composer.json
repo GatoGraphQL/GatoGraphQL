@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/tags": "dev-master",
-        "pop-schema/migrate-everythingelse": "dev-master"
+        "pop-schema/tags": "^0.7.5",
+        "pop-schema/migrate-everythingelse": "^0.7.5"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

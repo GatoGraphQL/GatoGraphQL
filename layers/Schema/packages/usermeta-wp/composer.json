@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/usermeta": "dev-master",
-        "pop-schema/users-wp": "dev-master",
-        "pop-schema/migrate-usermeta-wp": "dev-master"
+        "pop-schema/usermeta": "^0.7.5",
+        "pop-schema/users-wp": "^0.7.5",
+        "pop-schema/migrate-usermeta-wp": "^0.7.5"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/engine": "dev-master",
-        "getpop/routing-wp": "dev-master",
-        "getpop/hooks-wp": "dev-master",
-        "getpop/migrate-engine-wp": "dev-master"
+        "getpop/engine": "^0.7.5",
+        "getpop/routing-wp": "^0.7.5",
+        "getpop/hooks-wp": "^0.7.5",
+        "getpop/migrate-engine-wp": "^0.7.5"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
