@@ -460,5 +460,4 @@ Add into `composer.json`:
 }
 ```
 
-Cahior tumbadumba
 -->

@@ -13,7 +13,6 @@ use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
- * Comment for testing
  */
 class Component extends AbstractComponent
 {
