@@ -22,10 +22,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/events": "^0.7.5",
-        "pop-schema/customposts-wp": "^0.7.5",
-        "pop-schema/locations-wp-em": "^0.7.5",
-        "pop-schema/migrate-events-wp-em": "^0.7.5"
+        "pop-schema/events": "^0.7.6",
+        "pop-schema/customposts-wp": "^0.7.6",
+        "pop-schema/locations-wp-em": "^0.7.6",
+        "pop-schema/migrate-events-wp-em": "^0.7.6"
     },
     "require-dev": {
         "wpackagist-plugin/events-manager": "^5.9",
@@ -53,7 +53,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.8-dev"
         }
     },
     "config": {

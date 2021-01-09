@@ -16,11 +16,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/migrate-locations": "^0.7.5"
+        "pop-schema/migrate-locations": "^0.7.6"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.8-dev"
         }
     },
     "config": {

@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/routing": "^0.7.5",
-        "getpop/hooks-wp": "^0.7.5",
+        "getpop/routing": "^0.7.6",
+        "getpop/hooks-wp": "^0.7.6",
         "brain/cortex": "~1.0.0"
     },
     "require-dev": {
@@ -47,7 +47,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.8-dev"
         }
     },
     "config": {

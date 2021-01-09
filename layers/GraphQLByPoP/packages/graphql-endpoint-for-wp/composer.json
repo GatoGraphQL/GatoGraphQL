@@ -22,8 +22,8 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/api-endpoints-for-wp": "^0.7.5",
-        "getpop/api-graphql": "^0.7.5"
+        "getpop/api-endpoints-for-wp": "^0.7.6",
+        "getpop/api-graphql": "^0.7.6"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
@@ -52,7 +52,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.8-dev"
         }
     },
     "config": {

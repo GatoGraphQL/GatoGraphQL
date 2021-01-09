@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/posts-wp": "^0.7.5"
+        "pop-schema/posts-wp": "^0.7.6"
     },
     "require-dev": {
         "wpackagist-plugin/block-metadata": "^1.0",
@@ -55,7 +55,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.8-dev"
         }
     },
     "config": {

@@ -17,9 +17,9 @@
     "require": {
         "php": "^7.4|^8.0",
         "composer/semver": "^1.5",
-        "getpop/definitions": "^0.7.5",
-        "getpop/field-query": "^0.7.5",
-        "getpop/migrate-component-model": "^0.7.5",
+        "getpop/definitions": "^0.7.6",
+        "getpop/field-query": "^0.7.6",
+        "getpop/migrate-component-model": "^0.7.6",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
         "symfony/cache": "^5.1"
@@ -49,7 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.8-dev"
         }
     },
     "config": {
