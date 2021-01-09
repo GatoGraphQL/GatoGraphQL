@@ -10,6 +10,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Composable directives
 
+## 0.7.5 to 0.7.6 - 2021-01-09
+
+### Fixed
+
+- Compatibility with PHP 8.0
+
 ## 0.7.1 to 0.7.4 - 2020-12-17
 
 ### Fixed
