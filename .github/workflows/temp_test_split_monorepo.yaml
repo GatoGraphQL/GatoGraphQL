@@ -37,7 +37,7 @@ jobs:
                 run: |
                     quote=\'
                     filter_arg="--filter=$(echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g | sed -e 's/ / \-\-filter=/g')"
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $filter_arg)"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $(echo $filter_arg))"
                 if: env.GIT_DIFF
 
         # this step is needed, so the output gets to the next defined job
