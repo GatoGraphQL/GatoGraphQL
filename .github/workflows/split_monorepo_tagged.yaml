@@ -55,7 +55,7 @@ jobs:
 
     split_monorepo_tagged:
         needs: provide_packages_json_tagged
-        if: fromJson(needs.provide_packages_json_tagged.outputs.matrix)
+        if: needs.provide_packages_json_tagged.outputs.matrix != '[]'
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
