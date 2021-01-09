@@ -588,8 +588,8 @@ class PluginConfiguration
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLQuery\Component::class] = [
             // Enable Composable Directives?
-            GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
-
+            // Temporarily commented
+            // GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
         ];
     }
 
