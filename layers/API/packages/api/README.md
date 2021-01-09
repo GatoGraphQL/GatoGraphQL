@@ -728,4 +728,6 @@ _Page:_
 **Examples:**
 
 _Page:_<br/>[/?query=id|title|content|url](https://nextapi.getpop.org/about/api/?datastructure=graphql&query=id|title|content|url)
+
+Hola sarola
 -->
