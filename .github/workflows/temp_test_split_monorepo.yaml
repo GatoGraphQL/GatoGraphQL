@@ -57,4 +57,4 @@ jobs:
 
         steps:
             -
-                run: echo Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
+                run: echo "Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})"
