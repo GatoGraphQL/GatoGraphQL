@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-pages",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/pages. Target package description: Adds support for pages",
-    "keywords": [
-        "PoP",
-        "pages"
-    ],
+    "keywords": ["PoP", "pages"],
     "homepage": "https://github.com/PoPSchema/migrate-pages",
     "license": "MIT",
     "authors": [

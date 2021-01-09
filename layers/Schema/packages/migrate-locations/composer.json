@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-locations",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/locations. Target package description: Adds support for locations",
-    "keywords": [
-        "PoP",
-        "locations"
-    ],
+    "keywords": ["PoP", "locations"],
     "homepage": "https://github.com/PoPSchema/migrate-locations",
     "license": "MIT",
     "authors": [

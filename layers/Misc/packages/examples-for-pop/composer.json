@@ -2,10 +2,7 @@
     "name": "leoloso/examples-for-pop",
     "type": "library",
     "description": "Example implementations to demonstrate PoP",
-    "keywords": [
-        "PoP",
-        "examples-for-pop"
-    ],
+    "keywords": ["PoP", "examples-for-pop"],
     "homepage": "https://github.com/leoloso/examples-for-pop",
     "license": "MIT",
     "authors": [
@@ -24,7 +21,7 @@
         }
     ],
     "require": {
-        "php" : "^7.4|^8.0",
+        "php": "^7.4|^8.0",
         "graphql-by-pop/graphql-server": "dev-master",
         "pop-schema/translate-directive": "dev-master",
         "pop-schema/media": "dev-master",

@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-metaquery",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/metaquery. Target package description: Adds support for meta queries",
-    "keywords": [
-        "PoP",
-        "metaquery"
-    ],
+    "keywords": ["PoP", "metaquery"],
     "homepage": "https://github.com/pop-schema/migrate-metaquery",
     "license": "MIT",
     "authors": [

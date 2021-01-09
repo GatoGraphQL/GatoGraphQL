@@ -2,10 +2,7 @@
     "name": "getpop/root",
     "type": "library",
     "description": "Declaration of dependencies shared by all PoP components",
-    "keywords": [
-        "PoP",
-        "root"
-    ],
+    "keywords": ["PoP", "root"],
     "homepage": "https://github.com/getpop/root",
     "license": "MIT",
     "authors": [

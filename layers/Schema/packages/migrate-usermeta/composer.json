@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-usermeta",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/usermeta. Target package description: Adds support for user meta",
-    "keywords": [
-        "PoP",
-        "usermeta"
-    ],
+    "keywords": ["PoP", "usermeta"],
     "homepage": "https://github.com/PoPSchema/migrate-usermeta",
     "license": "MIT",
     "authors": [

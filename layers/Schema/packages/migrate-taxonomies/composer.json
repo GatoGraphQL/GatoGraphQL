@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-taxonomies",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/taxonomies. Target package description: Adds support for taxonomies",
-    "keywords": [
-        "PoP",
-        "taxonomies"
-    ],
+    "keywords": ["PoP", "taxonomies"],
     "homepage": "https://github.com/pop-schema/migrate-taxonomies",
     "license": "MIT",
     "authors": [

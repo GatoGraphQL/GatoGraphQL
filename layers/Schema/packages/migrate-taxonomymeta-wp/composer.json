@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-taxonomymeta-wp",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/taxonomymeta-wp. Target package description: Implementation for WordPress of contracts from package \"Taxonomy Meta\"",
-    "keywords": [
-        "PoP",
-        "taxonomymeta-wp"
-    ],
+    "keywords": ["PoP", "taxonomymeta-wp"],
     "homepage": "https://github.com/pop-schema/migrate-taxonomymeta-wp",
     "license": "MIT",
     "authors": [

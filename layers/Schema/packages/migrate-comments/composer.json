@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-comments",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/comments. Target package description: Adds support for comments",
-    "keywords": [
-        "PoP",
-        "comments"
-    ],
+    "keywords": ["PoP", "comments"],
     "homepage": "https://github.com/PoPSchema/migrate-comments",
     "license": "MIT",
     "authors": [

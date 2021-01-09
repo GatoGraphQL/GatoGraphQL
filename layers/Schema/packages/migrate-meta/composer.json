@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-meta",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/meta. Target package description: Adds support for meta",
-    "keywords": [
-        "PoP",
-        "meta"
-    ],
+    "keywords": ["PoP", "meta"],
     "homepage": "https://github.com/pop-schema/migrate-meta",
     "license": "MIT",
     "authors": [
