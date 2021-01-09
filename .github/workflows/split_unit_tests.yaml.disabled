@@ -39,7 +39,7 @@ jobs:
             # git diff to generate matrix with modified packages only
             -   uses: technote-space/get-diff-action@v4
                 with:
-                    PATTERNS: layers/**
+                    PATTERNS: layers/*/*/*/**
 
             # get package json list - if filter is empty, don't launch any split
             -   id: output_data
