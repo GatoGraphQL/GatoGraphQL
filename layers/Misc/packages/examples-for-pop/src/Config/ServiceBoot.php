@@ -13,7 +13,7 @@ class ServiceBoot
 {
     public static function beforeBoot()
     {
-        // 'contentMesh' persisted fragments
+        // 'contentMesh' persisted fragments. Comment for testing
         // Initialization of parameters
         $githubRepo = $_REQUEST['githubRepo'] ?? 'leoloso/PoP';
         $weatherZone = $_REQUEST['weatherZone'] ?? 'MOZ028';
