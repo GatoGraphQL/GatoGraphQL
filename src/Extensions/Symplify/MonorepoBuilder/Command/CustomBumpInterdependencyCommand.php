@@ -68,6 +68,9 @@ final class CustomBumpInterdependencyCommand extends AbstractSymplifyCommand
         $rootComposerJson = $this->composerJsonProvider->getRootComposerJson();
 
         $packageReplacements = array_keys($rootComposerJson->getReplace());
+        if ($packageReplacements === []) {
+            throw new ShouldNotHappenException();
+        }
 
         $this->customDependencyUpdater->updateFileInfosWithVendorAndVersion(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
