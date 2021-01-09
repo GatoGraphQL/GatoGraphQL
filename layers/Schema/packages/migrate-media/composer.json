@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-media",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/media. Target package description: Adds support for media",
-    "keywords": [
-        "PoP",
-        "media"
-    ],
+    "keywords": ["PoP", "media"],
     "homepage": "https://github.com/PoPSchema/migrate-media",
     "license": "MIT",
     "authors": [

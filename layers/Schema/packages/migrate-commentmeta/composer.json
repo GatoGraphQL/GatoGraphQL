@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-commentmeta",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/commentmeta. Target package description: Adds support for comment meta",
-    "keywords": [
-        "PoP",
-        "commentmeta"
-    ],
+    "keywords": ["PoP", "commentmeta"],
     "homepage": "https://github.com/PoPSchema/migrate-commentmeta",
     "license": "MIT",
     "authors": [

@@ -2,10 +2,7 @@
     "name": "getpop/migrate-api-graphql",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/api-graphql",
-    "keywords": [
-        "PoP",
-        "api-graphql"
-    ],
+    "keywords": ["PoP", "api-graphql"],
     "homepage": "https://github.com/getpop/migrate-api-graphql",
     "license": "MIT",
     "authors": [
