@@ -58,7 +58,7 @@ jobs:
 
     split_monorepo:
         needs: provide_packages_json
-        if: needs.provide_packages_json.outputs.matrix
+        if: fromJson(needs.provide_packages_json.outputs.matrix)
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
