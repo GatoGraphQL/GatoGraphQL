@@ -33,18 +33,23 @@ jobs:
             # git diff to generate matrix with modified packages only
             -   uses: technote-space/get-diff-action@v4
                 with:
-                    PATTERNS: layers/**
-
-            # replace spaces in between files, with "--filter="
-            -   id: set_filter
-                run: |
-                    echo "::set-output name=filter::--filter=$(quote=\' && echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g | sed -e 's/ / \-\-filter=/g')"
-                if: env.GIT_DIFF
+                    PATTERNS: layers/*/*/*/**
 
             # get package json list - if filter is empty, don't launch any split
+            # Enhancement: produce the packages already, avoid potentially sending thousands of CLI args
+            # Steps to process string:
+            # 1. remove single quotes
+            # 2. Extract 4 first layers only (for package path) and get unique entries
+            # 3. Add --filter= in between entries
             -   id: output_data
+                name: Calculate matrix
                 run: |
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json ${{ steps.set_filter.outputs.filter }})"
+                    quote=\'
+                    clean_diff="$(echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g)"
+                    packages_in_diff="$(echo $clean_diff | grep -E -o 'layers/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/' | sort -u)"
+                    echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
+                    filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / \-\-filter=/g')"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $(echo $filter_arg))"
                 if: env.GIT_DIFF
 
         # this step is needed, so the output gets to the next defined job

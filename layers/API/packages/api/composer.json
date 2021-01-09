@@ -1,7 +1,7 @@
 {
     "name": "getpop/api",
     "type": "library",
-    "description": "Component-based API",
+    "description": "Component-based API (comment for testing)",
     "keywords": ["PoP", "api"],
     "homepage": "https://github.com/getpop/api",
     "license": "MIT",
