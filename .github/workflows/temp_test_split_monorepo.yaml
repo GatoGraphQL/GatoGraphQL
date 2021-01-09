@@ -36,7 +36,7 @@ jobs:
             -   id: output_data
                 run: |
                     clean_diff="$(echo "${{ env.GIT_DIFF }}" | sed -e s/'//g)"
-                    filter_arg="--filter=$(echo "${{ clean_diff }}" | sed -e 's/ / \-\-filter=/g')"
+                    filter_arg="--filter=$(echo "$clean_diff" | sed -e 's/ / \-\-filter=/g')"
                     echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $(echo $filter_arg))"
                 if: env.GIT_DIFF
 
