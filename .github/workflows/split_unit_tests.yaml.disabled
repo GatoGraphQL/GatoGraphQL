@@ -63,9 +63,8 @@ jobs:
 
     split_tests:
         needs: provide_packages_json
-
+        if: needs.provide_packages_json.outputs.matrix
         runs-on: ubuntu-latest
-
         strategy:
             fail-fast: false
             matrix:
