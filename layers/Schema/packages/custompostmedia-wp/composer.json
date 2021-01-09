@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/custompostmedia": "dev-master",
-        "pop-schema/customposts-wp": "dev-master",
-        "pop-schema/media-wp": "dev-master",
-        "pop-schema/migrate-custompostmedia-wp": "dev-master"
+        "pop-schema/custompostmedia": "^0.7.5",
+        "pop-schema/customposts-wp": "^0.7.5",
+        "pop-schema/media-wp": "^0.7.5",
+        "pop-schema/migrate-custompostmedia-wp": "^0.7.5"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

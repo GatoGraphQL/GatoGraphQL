@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-post-tags-wp",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/post-tags-wp. Target package description: Implementation for WordPress of contracts from package \"Post Tags\"",
-    "keywords": [
-        "PoP",
-        "post-tags-wp"
-    ],
+    "keywords": ["PoP", "post-tags-wp"],
     "homepage": "https://github.com/pop-schema/migrate-post-tags-wp",
     "license": "MIT",
     "authors": [

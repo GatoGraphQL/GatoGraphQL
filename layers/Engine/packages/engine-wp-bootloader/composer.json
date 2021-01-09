@@ -2,12 +2,7 @@
     "name": "getpop/engine-wp-bootloader",
     "type": "wordpress-muplugin",
     "description": "PoP Engine Bootloader for WordPress",
-    "keywords": [
-        "pop",
-        "engine",
-        "WordPress",
-        "bootloader"
-    ],
+    "keywords": ["pop", "engine", "WordPress", "bootloader"],
     "homepage": "https://github.com/getpop/engine-wp-bootloader",
     "license": "MIT",
     "authors": [
@@ -28,7 +23,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "composer/installers": "~1.0",
-        "getpop/routing-wp": "dev-master",
+        "getpop/routing-wp": "^0.7.5",
         "lkwdwrd/wp-muplugin-loader": "dev-feature-composer-v2"
     },
     "require-dev": {

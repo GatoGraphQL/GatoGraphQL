@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-queriedobject",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/queriedobject. Target package description: Adds support to query single objects (users, posts, etc) in the request",
-    "keywords": [
-        "PoP",
-        "queriedobject"
-    ],
+    "keywords": ["PoP", "queriedobject"],
     "homepage": "https://github.com/pop-schema/migrate-queriedobject",
     "license": "MIT",
     "authors": [

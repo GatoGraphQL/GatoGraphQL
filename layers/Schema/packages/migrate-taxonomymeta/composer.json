@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-taxonomymeta",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/taxonomymeta. Target package description: Adds support for taxonomy (category and tag) meta",
-    "keywords": [
-        "PoP",
-        "taxonomymeta"
-    ],
+    "keywords": ["PoP", "taxonomymeta"],
     "homepage": "https://github.com/pop-schema/migrate-taxonomymeta",
     "license": "MIT",
     "authors": [

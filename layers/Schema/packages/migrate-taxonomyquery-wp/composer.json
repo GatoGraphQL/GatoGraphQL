@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-taxonomyquery-wp",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/taxonomyquery-wp. Target package description: Implementation for WordPress of contracts from package \"Taxonomy Query\"",
-    "keywords": [
-        "PoP",
-        "taxonomyquery-wp"
-    ],
+    "keywords": ["PoP", "taxonomyquery-wp"],
     "homepage": "https://github.com/pop-schema/migrate-taxonomyquery-wp",
     "license": "MIT",
     "authors": [

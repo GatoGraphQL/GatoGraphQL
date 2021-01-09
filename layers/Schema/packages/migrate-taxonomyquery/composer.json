@@ -2,10 +2,7 @@
     "name": "pop-schema/migrate-taxonomyquery",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/taxonomyquery. Target package description: Adds support for taxonomy (category and tag) queries",
-    "keywords": [
-        "PoP",
-        "taxonomyquery"
-    ],
+    "keywords": ["PoP", "taxonomyquery"],
     "homepage": "https://github.com/pop-schema/migrate-taxonomyquery",
     "license": "MIT",
     "authors": [

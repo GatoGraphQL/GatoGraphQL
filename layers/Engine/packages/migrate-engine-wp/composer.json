@@ -2,10 +2,7 @@
     "name": "getpop/migrate-engine-wp",
     "type": "library",
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/engine-wp. Target package description: Implementation for WordPress of contracts from package \"Engine\"",
-    "keywords": [
-        "PoP",
-        "engine-wp"
-    ],
+    "keywords": ["PoP", "engine-wp"],
     "homepage": "https://github.com/getpop/migrate-engine-wp",
     "license": "MIT",
     "authors": [
