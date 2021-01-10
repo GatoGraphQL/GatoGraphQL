@@ -1,7 +1,7 @@
 # Flag - Mutations
 
 <!-- [![Build Status][ico-travis]][link-travis] -->
-[![Quality Score][ico-code-quality]][link-code-quality]
+<!-- [![Quality Score][ico-code-quality]][link-code-quality]
 [![Software License][ico-license]](LICENSE.md)
 
 <!--
