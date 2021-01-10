@@ -44,9 +44,8 @@ jobs:
                     clean_diff="$(echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g)"
                     packages_in_diff="$(echo $clean_diff | grep -E -o 'layers/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/' | sort -u)"
                     echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
-                    [ -n "$GIT_DIFF" ] && filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / \-\-filter=/g')" || true
-                    [ -n "$GIT_DIFF" ] && echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $(echo $filter_arg))" || true
-                    [ -z "$GIT_DIFF" ] && echo "::set-output name=matrix::[]" || true
+                    filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / \-\-filter=/g')"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $(echo $filter_arg))"
 
         # this step is needed, so the output gets to the next defined job
         outputs:
