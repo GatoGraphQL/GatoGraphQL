@@ -6,13 +6,13 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
-use Symplify\MonorepoBuilder\Package\PackageProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class PackageEntriesJsonProvider
 {
-    private PackageProvider $packageProvider;
+    private CustomPackageProvider $customPackageProvider;
     private PackageUtils $packageUtils;
 
     /**
@@ -21,11 +21,11 @@ final class PackageEntriesJsonProvider
     private array $packageOrganizations = [];
 
     public function __construct(
-        PackageProvider $packageProvider,
+        CustomPackageProvider $customPackageProvider,
         ParameterProvider $parameterProvider,
         PackageUtils $packageUtils
     ) {
-        $this->packageProvider = $packageProvider;
+        $this->customPackageProvider = $customPackageProvider;
         $this->packageOrganizations = $parameterProvider->provideArrayParameter(Option::PACKAGE_ORGANIZATIONS);
         $this->packageUtils = $packageUtils;
     }
@@ -37,7 +37,7 @@ final class PackageEntriesJsonProvider
     public function providePackageEntries(array $fileListFilter = []): array
     {
         $packageEntries = [];
-        $packages = $this->packageProvider->provide();
+        $packages = $this->customPackageProvider->provide();
         foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
             // If provided, filter the packages to the ones containing the list of files.
