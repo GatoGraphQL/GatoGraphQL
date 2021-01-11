@@ -48,9 +48,14 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: "ramsey/composer-install@v1"
+      - name: Install root dependencies
+        uses: "ramsey/composer-install@v1"
 
-      - run: ../../../../vendor/bin/monorepo-builder localize-composer-paths composer.json --ansi
+      # This command must be invoked from within the monorepo root
+      - name: Localize package paths
+        run: cd ../../../../ && vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
+
+      - name: Install plugin dependencies, avoiding v2 platform check
 
       - name: Install Composer, avoiding v2 platform check
         run: |
