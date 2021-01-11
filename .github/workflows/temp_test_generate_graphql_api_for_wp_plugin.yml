@@ -23,6 +23,11 @@
 name: Temp test - Generate Installable Plugin and Upload as Release Asset
 on:
   pull_request: null
+
+env:
+  # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+  COMPOSER_ROOT_VERSION: "dev-master"
+
 jobs:
   build:
     defaults:
@@ -42,6 +47,8 @@ jobs:
           coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: ../../../../vendor/bin/monorepo-builder localize-composer-paths composer.json --ansi
 
       - name: Install Composer, avoiding v2 platform check
         run: |
