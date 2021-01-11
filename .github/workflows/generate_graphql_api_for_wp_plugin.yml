@@ -40,12 +40,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-        # see https://github.com/shivammathur/setup-php
+        # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
       - name: Use PHP 7.4
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
           coverage: none
+          ini-values: pcre.jit=0
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -109,12 +110,13 @@ jobs:
         with:
           args: unzip -qq build/graphql-api.zip -d build/downgraded-code
 
-        # see https://github.com/shivammathur/setup-php
+        # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
       - name: Use PHP 7.1
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.1
           coverage: none
+          ini-values: pcre.jit=0
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
