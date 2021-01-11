@@ -80,7 +80,7 @@ jobs:
       - name: Create artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -X -r layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests** "**/tests**"
+          args: zip -X -r layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests** "**/tests**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -136,36 +136,36 @@ jobs:
         run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
       #   run: vendor/bin/rector-php71 process build/downgraded-code --ansi --dry-run
 
-  upload_and_deploy:
-    name: Upload release, and deploy to DIST repo
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#   upload_and_deploy:
+#     name: Upload release, and deploy to DIST repo
+#     needs: test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Create build folder
-        run: mkdir build
+#       - name: Create build folder
+#         run: mkdir build
 
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-            name: generated-plugin
-            path: build
+#       - name: Download artifact
+#         uses: actions/download-artifact@v2
+#         with:
+#             name: generated-plugin
+#             path: build
 
-      - name: Uncompress artifact
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+#       - name: Uncompress artifact
+#         uses: montudor/action-zip@v0.1.0
+#         with:
+#           args: unzip -qq build/graphql-api.zip -d build/downgraded-code
 
-      - name: Publish to DIST repo
-        uses: symplify/github-action-monorepo-split@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        with:
-          package-directory: 'build/downgraded-code'
-          split-repository-organization: 'GraphQLAPI'
-          split-repository-name: 'graphql-api-for-wp-dist'
-          user-name: "leoloso"
-          user-email: "leo@getpop.org"
+#       - name: Publish to DIST repo
+#         uses: symplify/github-action-monorepo-split@master
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#         with:
+#           package-directory: 'build/downgraded-code'
+#           split-repository-organization: 'GraphQLAPI'
+#           split-repository-name: 'graphql-api-for-wp-dist'
+#           user-name: "leoloso"
+#           user-email: "leo@getpop.org"
 
