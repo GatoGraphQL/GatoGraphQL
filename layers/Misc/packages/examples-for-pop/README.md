@@ -39,7 +39,7 @@ Requirements:
 
 Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/#supported-php-features)
 
-### Downgrading code to PHP 7.1
+### Preview downgrade to PHP 7.1
 
 Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
