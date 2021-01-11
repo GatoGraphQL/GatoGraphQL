@@ -114,7 +114,7 @@ jobs:
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+                    args: unzip -qq build/graphql-api.zip -d build/downgraded-graphql-api-for-wp
 
                 # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
             -   name: Use PHP 7.1
@@ -138,7 +138,7 @@ jobs:
             # @see https://github.com/leoloso/PoP/issues/299
             -   name: Run Rector on PHP 7.1
                 run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
-            #     run: vendor/bin/rector-php71 process build/downgraded-code --ansi --dry-run
+            #     run: vendor/bin/rector-php71 process build/downgraded-graphql-api-for-wp --ansi --dry-run
 
     # upload_and_deploy:
     #     name: Upload release, and deploy to DIST repo
@@ -167,14 +167,14 @@ jobs:
     #         -   name: Uncompress artifact
     #             uses: montudor/action-zip@v0.1.0
     #             with:
-    #                 args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+    #                 args: unzip -qq build/graphql-api.zip -d build/downgraded-graphql-api-for-wp
 
     #         -   name: Publish to DIST repo
     #             uses: symplify/github-action-monorepo-split@master
     #             env:
     #                 GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     #             with:
-    #                 package-directory: 'build/downgraded-code'
+    #                 package-directory: 'build/downgraded-graphql-api-for-wp'
     #                 split-repository-organization: 'GraphQLAPI'
     #                 split-repository-name: 'graphql-api-for-wp-dist'
     #                 user-name: "leoloso"
