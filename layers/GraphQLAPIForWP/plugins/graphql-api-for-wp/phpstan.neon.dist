@@ -19,7 +19,7 @@ parameters:
             path: src/PostTypes/AbstractPostType.php
     bootstrapFiles:
         - graphql-api.php
-    level: 0
+    level: 8
     paths:
         - src/
         - tests/
