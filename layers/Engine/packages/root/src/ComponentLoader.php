@@ -70,6 +70,7 @@ class ComponentLoader
      * following the Composer dependencies tree
      *
      * @param string[] $componentClasses List of `Component` class to initialize
+     * @return string[]
      */
     protected static function getComponentsOrderedForInitialization(
         array $componentClasses
@@ -87,6 +88,7 @@ class ComponentLoader
      * following the Composer dependencies tree
      *
      * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $orderedComponentClasses List of `Component` class in order of initialization
      */
     protected static function addComponentsOrderedForInitialization(
         array $componentClasses,
