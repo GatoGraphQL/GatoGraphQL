@@ -49,6 +49,8 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: "ramsey/composer-install@v1"
+
       - run: ../../../../vendor/bin/monorepo-builder localize-composer-paths composer.json --ansi
 
       - name: Install Composer, avoiding v2 platform check
