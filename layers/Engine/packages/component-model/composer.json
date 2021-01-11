@@ -16,7 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "composer/semver": "^1.5",
+        "composer/semver": "^3.2",
         "getpop/definitions": "^0.7.6",
         "getpop/field-query": "^0.7.6",
         "getpop/migrate-component-model": "^0.7.6",
