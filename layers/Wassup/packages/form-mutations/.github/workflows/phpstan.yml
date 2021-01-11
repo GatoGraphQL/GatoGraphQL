@@ -26,5 +26,5 @@ jobs:
         uses: "ramsey/composer-install@v1"
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyse -c phpstan.neon.dist
+        run: vendor/bin/phpstan analyse
 
