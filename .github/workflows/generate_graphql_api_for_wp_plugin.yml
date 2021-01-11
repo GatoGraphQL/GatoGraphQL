@@ -110,8 +110,6 @@ jobs:
                     name: generated-plugin
                     path: build
 
-            ## Copy the downgraded code to the DIST repo
-            ## 1. Unzip the plugin into a temp folder
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
