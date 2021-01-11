@@ -53,7 +53,9 @@ jobs:
 
       # This command must be invoked from within the monorepo root
       - name: Localize package paths
-        run: cd ../../../../ && vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
+        run: |
+          cd ../../../../
+          vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
 
       - name: Install plugin dependencies, avoiding v2 platform check
         run: |
