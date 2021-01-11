@@ -9,7 +9,9 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageComma
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\CustomDependencyUpdater;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackagesProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
@@ -77,6 +79,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     /** Commands */
     $services
+        ->set(CustomPackageProvider::class)
+        ->set(CustomPackage::class)
         ->set(CustomDependencyUpdater::class)
         ->set(CustomBumpInterdependencyCommand::class)
         ->set(PackageUtils::class)

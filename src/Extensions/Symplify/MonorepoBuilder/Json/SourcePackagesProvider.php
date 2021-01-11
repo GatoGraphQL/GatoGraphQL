@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
-use Symplify\MonorepoBuilder\Package\PackageProvider;
-use Symplify\MonorepoBuilder\ValueObject\Package;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 
 final class SourcePackagesProvider
 {
-    private PackageProvider $packageProvider;
+    private CustomPackageProvider $customPackageProvider;
     private PackageUtils $packageUtils;
 
     public function __construct(
-        PackageProvider $packageProvider,
+        CustomPackageProvider $customPackageProvider,
         PackageUtils $packageUtils
     ) {
-        $this->packageProvider = $packageProvider;
+        $this->customPackageProvider = $customPackageProvider;
         $this->packageUtils = $packageUtils;
     }
 
@@ -31,18 +31,18 @@ final class SourcePackagesProvider
         bool $skipUnmigrated = false,
         array $fileListFilter = []
     ): array {
-        $packages = $this->packageProvider->provide();
+        $packages = $this->customPackageProvider->provide();
         if ($psr4Only) {
             $packages = array_values(array_filter(
                 $packages,
-                function (Package $package): bool {
+                function (CustomPackage $package): bool {
                     return $package->hasTests();
                 }
             ));
         }
         // Operate with package paths from now on
         $packages = array_map(
-            function (Package $package): string {
+            function (CustomPackage $package): string {
                 return $package->getRelativePath();
             },
             $packages
