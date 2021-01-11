@@ -80,10 +80,12 @@ jobs:
                 run: mkdir build
                 working-directory: .
 
+            # Zipping a folder from a different work dir
+            -   name: Install zip
+                uses: montudor/action-zip@v0.1.1
+
             -   name: Create artifact
-                uses: montudor/action-zip@v0.1.0
-                with:
-                    args: zip -X -r build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md "**/rector-downgrade-code.php" "**/*.dist" "**/composer.*" "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** "**/tests**"
+                run: zip -X -r build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md ISSUE_TEMPLATE.md LICENSE.md PULL_REQUEST_TEMPLATE.md README.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" build** ci** dev-helpers** docs/images** tests** "**/tests**"
 
             -   name: Upload artifact
                 uses: actions/upload-artifact@v2
