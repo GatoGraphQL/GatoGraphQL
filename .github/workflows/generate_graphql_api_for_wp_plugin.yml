@@ -167,6 +167,9 @@ jobs:
                 uses: montudor/action-zip@v0.1.0
                 with:
                     args: unzip -qq build/graphql-api.zip -d build/downgraded-graphql-api-for-wp
+            -
+                id: previous_tag
+                uses: "WyriHaximus/github-action-get-previous-tag@master"
 
             -   name: Publish to DIST repo
                 uses: symplify/github-action-monorepo-split@master
@@ -176,6 +179,7 @@ jobs:
                     package-directory: 'build/downgraded-graphql-api-for-wp'
                     split-repository-organization: 'GraphQLAPI'
                     split-repository-name: 'graphql-api-for-wp-dist'
+                    tag: ${{ steps.previous_tag.outputs.tag }}
                     user-name: "leoloso"
                     user-email: "leo@getpop.org"
 
