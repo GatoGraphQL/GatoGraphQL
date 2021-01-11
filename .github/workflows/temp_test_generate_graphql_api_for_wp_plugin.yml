@@ -52,9 +52,12 @@ jobs:
       - name: Install root dependencies
         uses: "ramsey/composer-install@v1"
 
-      # This command must be invoked from within the monorepo root
+      # "custom-bump-interdependency" temporarily needed because of bug:
+      # https://github.com/symplify/symplify/issues/2773
       - name: Localize package paths
-        run: vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
+        run: |
+          vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
+          vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
         working-directory: .
 
       - name: Install plugin dependencies, avoiding v2 platform check
