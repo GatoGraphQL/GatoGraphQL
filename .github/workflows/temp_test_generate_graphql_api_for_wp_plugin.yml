@@ -5,176 +5,178 @@
 # and downgrading it from PHP 7.4 to 7.1 to support more users.
 ####################################################################################
 # Steps to execute:
-# - Checkout the source code
-# - Run "composer install" for development, to install dependencies for Rector
-# - Run Rector to downgrade code from PHP 7.4 to 7.1
-# - Run "composer install" for production (required dependencies are already under vendor/)
-# - Create a .zip file, excluding:
-#   - All hidden files (.git, .gitignore, etc)
-#   - Rector file
-#   - All development files, ending in .dist
-#   - All composer files <= after installing dependencies, no need for them anymore
-#   - Markdown files concerning development
-#   - Folder build/ <= created only to store the .zip file
-#   - Folder dev-helpers/ <= not needed for the plugin
-# - Upload the .zip file as an artifact to the action (this step is possibly optional)
-# - Upload the .zip file as a release, for download
+# -   Checkout the source code
+# -   Run "composer install" for development, to install dependencies for Rector
+# -   Run Rector to downgrade code from PHP 7.4 to 7.1
+# -   Run "composer install" for production (required dependencies are already under vendor/)
+# -   Create a .zip file, excluding:
+#     - All hidden files (.git, .gitignore, etc)
+#     - Rector file
+#     - All development files, ending in .dist
+#     - All composer files <= after installing dependencies, no need for them anymore
+#     - Markdown files concerning development
+#     - Folder build/ <= created only to store the .zip file
+#     - Folder dev-helpers/ <= not needed for the plugin
+# -   Upload the .zip file as an artifact to the action (this step is possibly optional)
+# -   Upload the .zip file as a release, for download
 ####################################################################################
-name: Temp test - Generate Installable Plugin and Upload as Release Asset
+name: Temp test -   Generate Installable Plugin and Upload as Release Asset
 on:
-  pull_request: null
+    pull_request: null
 
 env:
-  # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
-  COMPOSER_ROOT_VERSION: "dev-master"
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-master"
 
 jobs:
-  build:
-    defaults:
-      run:
-        working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
-    name: Downgrade code, Build plugin, and Upload as artifact
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    build:
+        defaults:
+            run:
+                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+        name: Downgrade code, Build plugin, and Upload as artifact
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
 
-        # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
-      - name: Use PHP 7.4
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.4
-          coverage: none
-          ini-values: pcre.jit=0
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
+            -   name: Use PHP 7.4
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                    ini-values: pcre.jit=0
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install root dependencies
-        uses: "ramsey/composer-install@v1"
+            -   name: Install root dependencies
+                uses: "ramsey/composer-install@v1"
 
-      # "custom-bump-interdependency" temporarily needed because of bug:
-      # https://github.com/symplify/symplify/issues/2773
-      - name: Localize package paths
-        run: |
-          vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
-          vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
-        working-directory: .
+            # "custom-bump-interdependency" temporarily needed because of bug:
+            # https://github.com/symplify/symplify/issues/2773
+            -   name: Localize package paths
+                run: |
+                    vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
+                    vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
+                working-directory: .
 
-      - name: Install plugin dependencies, avoiding v2 platform check
-        run: |
-          composer config platform-check false --no-interaction --ansi
-          composer install --no-progress --no-interaction --ansi
+            -   name: Install plugin dependencies, avoiding v2 platform check
+                run: |
+                    composer config platform-check false --no-interaction --ansi
+                    composer install --no-progress --no-interaction --ansi
 
-      - name: Downgrade code for production (to PHP 7.1)
-        run: ../../../Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
+            -   name: Downgrade code for production (to PHP 7.1)
+                run: ../../../Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
-      - name: Replace PHP version in plugin main file
-        run: |
-          sed -i 's/Requires PHP: 7.4/Requires PHP: 7.1/' graphql-api.php
+            -   name: Replace PHP version in plugin main file
+                run: |
+                    sed -i 's/Requires PHP: 7.4/Requires PHP: 7.1/' graphql-api.php
 
-      - name: Build project for production
-        run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
+            -   name: Build project for production
+                run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
 
-      - name: Create build folder
-        run: mkdir build
-        working-directory: .
+            -   name: Create build folder
+                run: mkdir build
+                working-directory: .
 
-      - name: Create artifact
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -X -r build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md "**/rector-downgrade-code.php" "**/*.dist" "**/composer.*" "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** "**/tests**"
+            # Zipping a folder from a different work dir
+            -   name: Install zip
+                uses: montudor/action-zip@v0.1.1
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-            name: generated-plugin
-            path: build/graphql-api.zip
+            -   name: Create artifact
+                run: zip -X -r build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" build** ci** dev-helpers** docs/images** tests** "**/tests**"
 
-  test:
-    name: Test downgraded code
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+            -   name: Upload artifact
+                uses: actions/upload-artifact@v2
+                with:
+                    name: generated-plugin
+                    path: build/graphql-api.zip
 
-      - name: Create build folder
-        run: mkdir build
+    test:
+        name: Test downgraded code
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
 
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-            name: generated-plugin
-            path: build
+            -   name: Create build folder
+                run: mkdir build
 
-      ## Copy the downgraded code to the DIST repo
-      ## 1. Unzip the plugin into a temp folder
-      - name: Uncompress artifact
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+            -   name: Download artifact
+                uses: actions/download-artifact@v2
+                with:
+                    name: generated-plugin
+                    path: build
 
-        # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
-      - name: Use PHP 7.1
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.1
-          coverage: none
-          ini-values: pcre.jit=0
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            ## Copy the downgraded code to the DIST repo
+            ## 1. Unzip the plugin into a temp folder
+            -   name: Uncompress artifact
+                uses: montudor/action-zip@v0.1.0
+                with:
+                    args: unzip -qq build/graphql-api.zip -d build/downgraded-code
 
-      - name: Avoid Composer v2 platform checks
-        run: composer config platform-check false --no-interaction --ansi
+                # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
+            -   name: Use PHP 7.1
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.1
+                    coverage: none
+                    ini-values: pcre.jit=0
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v1"
-        with:
-          composer-options: "--ignore-platform-reqs"
+            -   name: Avoid Composer v2 platform checks
+                run: composer config platform-check false --no-interaction --ansi
 
-      # @todo Fix this code
-      # @see https://github.com/leoloso/PoP/issues/299
-      - name: Run Rector on PHP 7.1
-        run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
-      #   run: vendor/bin/rector-php71 process build/downgraded-code --ansi --dry-run
+            -   name: Install Composer dependencies
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--ignore-platform-reqs"
 
-#   upload_and_deploy:
-#     name: Upload release, and deploy to DIST repo
-#     needs: test
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+            # @todo Fix this code
+            # @see https://github.com/leoloso/PoP/issues/299
+            -   name: Run Rector on PHP 7.1
+                run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
+            #     run: vendor/bin/rector-php71 process build/downgraded-code --ansi --dry-run
 
-#       - name: Create build folder
-#         run: mkdir build
+    # upload_and_deploy:
+    #     name: Upload release, and deploy to DIST repo
+    #     needs: test
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         -   name: Checkout code
+    #             uses: actions/checkout@v2
 
-#       - name: Download artifact
-#         uses: actions/download-artifact@v2
-#         with:
-#             name: generated-plugin
-#             path: build
+    #         -   name: Create build folder
+    #             run: mkdir build
 
-#       - name: Upload to release
-#         uses: JasonEtco/upload-to-release@master
-#         with:
-#           args: build/graphql-api.zip application/zip
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #         -   name: Download artifact
+    #             uses: actions/download-artifact@v2
+    #             with:
+    #                 name: generated-plugin
+    #                 path: build
 
-#       - name: Uncompress artifact
-#         uses: montudor/action-zip@v0.1.0
-#         with:
-#           args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+    #         -   name: Upload to release
+    #             uses: JasonEtco/upload-to-release@master
+    #             with:
+    #                 args: build/graphql-api.zip application/zip
+    #             env:
+    #                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#       - name: Publish to DIST repo
-#         uses: symplify/github-action-monorepo-split@master
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#         with:
-#           package-directory: 'build/downgraded-code'
-#           split-repository-organization: 'GraphQLAPI'
-#           split-repository-name: 'graphql-api-for-wp-dist'
-#           user-name: "leoloso"
-#           user-email: "leo@getpop.org"
+    #         -   name: Uncompress artifact
+    #             uses: montudor/action-zip@v0.1.0
+    #             with:
+    #                 args: unzip -qq build/graphql-api.zip -d build/downgraded-code
+
+    #         -   name: Publish to DIST repo
+    #             uses: symplify/github-action-monorepo-split@master
+    #             env:
+    #                 GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    #             with:
+    #                 package-directory: 'build/downgraded-code'
+    #                 split-repository-organization: 'GraphQLAPI'
+    #                 split-repository-name: 'graphql-api-for-wp-dist'
+    #                 user-name: "leoloso"
+    #                 user-email: "leo@getpop.org"
 
