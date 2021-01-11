@@ -153,13 +153,6 @@ jobs:
             name: generated-plugin
             path: build
 
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
-        with:
-          args: build/graphql-api.zip application/zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Uncompress artifact
         uses: montudor/action-zip@v0.1.0
         with:
