@@ -58,8 +58,8 @@ jobs:
 
       - name: Install plugin dependencies, avoiding v2 platform check
         run: |
-          composer config platform-check false
-          composer install
+          composer config platform-check false --no-interaction --ansi
+          composer install --no-progress --no-interaction --ansi
 
       - name: Downgrade code for production (to PHP 7.1)
         run: ../../../Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
@@ -70,7 +70,7 @@ jobs:
 
       - name: Build project for production
         run: |
-          composer install --no-dev --optimize-autoloader
+          composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
           mkdir build
 
       - name: Create artifact
@@ -118,7 +118,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Avoid Composer v2 platform checks
-        run: composer config platform-check false
+        run: composer config platform-check false --no-interaction --ansi
 
       - name: Install Composer dependencies
         uses: "ramsey/composer-install@v1"
