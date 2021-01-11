@@ -26,6 +26,9 @@ on:
     types: [published]
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
     name: Downgrade code, Build plugin, and Upload as artifact
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +50,7 @@ jobs:
           composer install
 
       - name: Downgrade code for production (to PHP 7.1)
-        run: vendor/getpop/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
+        run: ../../../Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
       - name: Replace PHP version in plugin main file
         run: |
@@ -61,13 +64,13 @@ jobs:
       - name: Create artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -X -r build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md ISSUE_TEMPLATE.md LICENSE.md PULL_REQUEST_TEMPLATE.md README.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" build** ci** dev-helpers** docs/images** tests** "**/tests**"
+          args: zip -X -r layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests** "**/tests**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
             name: generated-plugin
-            path: build/graphql-api.zip
+            path: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build/graphql-api.zip
 
   test:
     name: Test downgraded code
