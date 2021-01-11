@@ -613,10 +613,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/leoloso/wp-muplugin-loader.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcaskill/composer-merge-plugin.git"
         }
     ],
     "scripts": {
