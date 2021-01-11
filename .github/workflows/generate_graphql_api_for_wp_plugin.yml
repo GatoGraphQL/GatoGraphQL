@@ -74,20 +74,22 @@ jobs:
           sed -i 's/Requires PHP: 7.4/Requires PHP: 7.1/' graphql-api.php
 
       - name: Build project for production
-        run: |
-          composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
-          mkdir build
+        run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
+
+      - name: Create build folder
+        run: mkdir build
+        working-directory: .
 
       - name: Create artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -X -r layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md rector-downgrade-code.php *.dist composer.* "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests** "**/tests**"
+          args: zip -X -r build/graphql-api.zip layers/GraphQLAPIForWP/plugins/graphql-api-for-wp -x *.git* node_modules/\* .* "*/\.*" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/*.md "**/rector-downgrade-code.php" "**/*.dist" "**/composer.*" "**/package-lock.json" layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ci** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/dev-helpers** layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/images** "**/tests**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
             name: generated-plugin
-            path: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/build/graphql-api.zip
+            path: build/graphql-api.zip
 
   test:
     name: Test downgraded code
@@ -166,14 +168,14 @@ jobs:
         with:
           args: unzip -qq build/graphql-api.zip -d build/downgraded-code
 
-    #   - name: Publish to DIST repo
-    #     uses: symplify/github-action-monorepo-split@master
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    #     with:
-    #       package-directory: 'build/downgraded-code'
-    #       split-repository-organization: 'GraphQLAPI'
-    #       split-repository-name: 'graphql-api-for-wp-dist'
-    #       user-name: "leoloso"
-    #       user-email: "leo@getpop.org"
+      - name: Publish to DIST repo
+        uses: symplify/github-action-monorepo-split@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          package-directory: 'build/downgraded-code'
+          split-repository-organization: 'GraphQLAPI'
+          split-repository-name: 'graphql-api-for-wp-dist'
+          user-name: "leoloso"
+          user-email: "leo@getpop.org"
 
