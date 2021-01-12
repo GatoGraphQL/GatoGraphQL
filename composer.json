@@ -641,6 +641,23 @@
         "release": "monorepo-builder release patch --ansi",
         "merge-phpstan": "monorepo-builder merge-phpstan --skip-unmigrated --ansi"
     },
+    "scripts-descriptions": {
+        "test": "Execute PHPUnit tests",
+        "check-style": "Validate PSR-12 coding standards (via phpcs)",
+        "fix-style": "Fix PSR-12 coding standards (via phpcbf)",
+        "analyse": "Run PHPStan static analysis of the code",
+        "preview-src-downgrade": "Run Rector in 'dry-run' mode to preview how the src/ folder will be downgraded to PHP 7.1",
+        "preview-vendor-downgrade": "Run Rector in 'dry-run' mode to preview how the vendor/ folder will be downgraded to PHP 7.1",
+        "preview-code-downgrade": "Run Rector in 'dry-run' mode to preview how the all code (i.e. src/ + vendor/ folders) will be downgraded to PHP 7.1",
+        "build-server": "Initialize the Lando webserver with the 'GraphQL API for WordPress' demo site, for development. To be executed only the first time",
+        "start-server": "Start the Lando webserver with the 'GraphQL API for WordPress' demo site, for development",
+        "rebuild-server": "Rebuild the Lando webserver",
+        "validate-monorepo": "Validate that version constraints for dependencies are the same for all packages",
+        "merge-monorepo": "Create the monorepo's composer.json file, containing all dependencies from all packages",
+        "propagate-monorepo": "Propagate versions from the monorepo's composer.json file to all packages",
+        "release": "Release a new version (bump version, commit, push, tag, revert to 'dev-master', commit, push)",
+        "merge-phpstan": "Generate a single PHPStan config for the monorepo, invoking the config for the PHPStan config for all packages"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
