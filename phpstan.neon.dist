@@ -1,4 +1,5 @@
 includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
     - layers/API/packages/api-clients/phpstan.neon.dist
     - layers/API/packages/api-endpoints-for-wp/phpstan.neon.dist
     - layers/API/packages/api-endpoints/phpstan.neon.dist
@@ -75,11 +76,3 @@ includes:
     - layers/Schema/packages/usermeta-wp/phpstan.neon.dist
     - layers/Schema/packages/usermeta/phpstan.neon.dist
     - layers/Schema/packages/users-wp/phpstan.neon.dist
-    - layers/SiteBuilder/packages/application-wp/phpstan.neon.dist
-    - layers/SiteBuilder/packages/definitionpersistence/phpstan.neon.dist
-    - layers/SiteBuilder/packages/definitions-base36/phpstan.neon.dist
-    - layers/SiteBuilder/packages/definitions-emoji/phpstan.neon.dist
-    - layers/SiteBuilder/packages/resourceloader/phpstan.neon.dist
-    - layers/SiteBuilder/packages/resources/phpstan.neon.dist
-    - layers/SiteBuilder/packages/spa/phpstan.neon.dist
-    - layers/SiteBuilder/packages/static-site-generator/phpstan.neon.dist
