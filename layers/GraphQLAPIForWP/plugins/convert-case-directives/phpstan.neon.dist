@@ -1,0 +1,8 @@
+includes:
+    - %currentWorkingDirectory%/vendor/szepeviktor/phpstan-wordpress/extension.neon
+    bootstrapFiles:
+        - graphql-api-convert-case-directives.php
+    level: 0
+    paths:
+        - src/
+        - tests/
