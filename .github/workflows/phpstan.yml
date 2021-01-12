@@ -24,5 +24,8 @@ jobs:
             -   name: Install Composer dependencies
                 uses: "ramsey/composer-install@v1"
 
+            -   name: Regenerate Monorepo PHPStan config
+                run: vendor/bin/monorepo-builder merge-phpstan --ansi
+
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse --ansi
