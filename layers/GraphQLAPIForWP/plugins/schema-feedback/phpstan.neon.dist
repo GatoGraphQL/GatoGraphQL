@@ -1,5 +1,6 @@
 includes:
     - %currentWorkingDirectory%/vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
     bootstrapFiles:
         - graphql-api-schema-feedback.php
     level: 0
