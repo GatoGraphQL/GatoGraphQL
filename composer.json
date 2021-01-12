@@ -619,7 +619,7 @@
         "test": "phpunit",
         "check-style": "phpcs -n src $(monorepo-builder source-packages --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --psr4-only --subfolder=src --subfolder=tests)",
-        "analyse": "phpstan analyse",
+        "analyse": "phpstan analyse --ansi",
         "preview-src-downgrade": "rector process $(monorepo-builder source-packages --psr4-only --subfolder=src) --config=rector-downgrade-code.php --ansi --dry-run || true",
         "preview-vendor-downgrade": "layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php --dry-run || true",
         "preview-code-downgrade": [
