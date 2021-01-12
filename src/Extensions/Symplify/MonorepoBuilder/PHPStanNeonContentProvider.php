@@ -39,8 +39,6 @@ final class PHPStanNeonContentProvider
         }
         // Sort entries
         sort($phpstanConfigIncludes);
-        // Add entry at the beginning
-        array_unshift($phpstanConfigIncludes, 'vendor/szepeviktor/phpstan-wordpress/extension.neon');
         $phpStanNeon = [
             'includes' => $phpstanConfigIncludes,
         ];
