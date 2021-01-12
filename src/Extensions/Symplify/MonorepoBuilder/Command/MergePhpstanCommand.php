@@ -30,13 +30,13 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
 
     protected function configure(): void
     {
-        $this->setDescription('Create the phpstan.neon.dist config for the monorepo, including all phpstan.neon.dist files from all packages');
+        $this->setDescription('Create the PHPStan config for the monorepo, including all PHPStan config files from all packages');
         $this->addOption(
             Option::OUTPUT_FILE,
             null,
             InputOption::VALUE_REQUIRED,
-            'Path to dump root phpstan.neon.dist to',
-            getcwd() . DIRECTORY_SEPARATOR . 'phpstan.neon.dist'
+            'Path to dump monorepo PHPStan config file',
+            getcwd() . DIRECTORY_SEPARATOR . 'phpstan.neon'
         );
         $this->addOption(
             Option::SKIP_UNMIGRATED,
