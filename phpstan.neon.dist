@@ -1,5 +1,4 @@
 includes:
-    - vendor/szepeviktor/phpstan-wordpress/extension.neon
     - layers/API/packages/api-clients/phpstan.neon.dist
     - layers/API/packages/api-endpoints-for-wp/phpstan.neon.dist
     - layers/API/packages/api-endpoints/phpstan.neon.dist
