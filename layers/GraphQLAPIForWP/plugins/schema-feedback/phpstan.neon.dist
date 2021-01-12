@@ -1,0 +1,7 @@
+parameters:
+    bootstrapFiles:
+        - graphql-api-schema-feedback.php
+    level: 0
+    paths:
+        - src/
+        - tests/

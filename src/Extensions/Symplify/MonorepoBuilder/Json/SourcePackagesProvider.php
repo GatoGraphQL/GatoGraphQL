@@ -129,6 +129,14 @@ final class SourcePackagesProvider
                 'layers/Schema/packages/users',
                 'layers/Wassup/packages/volunteer-mutations',
                 'layers/Wassup/packages/wassup',
+                'layers/SiteBuilder/packages/application-wp',
+                'layers/SiteBuilder/packages/definitionpersistence',
+                'layers/SiteBuilder/packages/definitions-base36',
+                'layers/SiteBuilder/packages/definitions-emoji',
+                'layers/SiteBuilder/packages/resourceloader',
+                'layers/SiteBuilder/packages/resources',
+                'layers/SiteBuilder/packages/spa',
+                'layers/SiteBuilder/packages/static-site-generator',
             ];
             $packages = array_values(array_diff(
                 $packages,

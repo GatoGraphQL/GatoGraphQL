@@ -6,31 +6,7 @@ on:
     pull_request: null
 
 jobs:
-    provide_data:
-        name: Provide list of source packages
-        runs-on: ubuntu-latest
-        steps:
-            -
-                uses: actions/checkout@v2
-
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    php-version: 7.4
-                    coverage: none
-                env:
-                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            -   uses: "ramsey/composer-install@v1"
-
-            -   id: output_data
-                run: |
-                    echo "::set-output name=packages::$(vendor/bin/monorepo-builder source-packages --psr4-only --skip-unmigrated)"
-
-        outputs:
-            packages: ${{ steps.output_data.outputs.packages }}
-
     main:
-        needs: provide_data
         name: Execute PHPStan
         runs-on: ubuntu-latest
         steps:
@@ -48,7 +24,8 @@ jobs:
             -   name: Install Composer dependencies
                 uses: "ramsey/composer-install@v1"
 
+            -   name: Regenerate Monorepo PHPStan config
+                run: vendor/bin/monorepo-builder merge-phpstan --skip-unmigrated --ansi
+
             -   name: Run PHPStan
-                run: ci/phpstan.sh ". ${{ needs.provide_data.outputs.packages }}"
-
-
+                run: vendor/bin/phpstan analyse --ansi
