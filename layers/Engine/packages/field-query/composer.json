@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/translation": "^0.7.6",
-        "getpop/query-parsing": "^0.7.6"
+        "getpop/translation": "dev-master",
+        "getpop/query-parsing": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

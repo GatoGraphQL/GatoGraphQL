@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/application": "^0.7.6",
-        "getpop/definitions-base36": "^0.7.6",
-        "getpop/resourceloader": "^0.7.6"
+        "getpop/application": "dev-master",
+        "getpop/definitions-base36": "dev-master",
+        "getpop/resourceloader": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

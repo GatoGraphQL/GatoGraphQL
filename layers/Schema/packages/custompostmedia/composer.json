@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/customposts": "^0.7.6",
-        "pop-schema/media": "^0.7.6",
-        "pop-schema/basic-directives": "^0.7.6",
-        "pop-schema/migrate-custompostmedia": "^0.7.6"
+        "pop-schema/customposts": "dev-master",
+        "pop-schema/media": "dev-master",
+        "pop-schema/basic-directives": "dev-master",
+        "pop-schema/migrate-custompostmedia": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

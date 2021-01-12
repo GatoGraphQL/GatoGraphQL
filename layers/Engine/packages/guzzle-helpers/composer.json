@@ -16,7 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/component-model": "^0.7.6",
+        "getpop/component-model": "dev-master",
         "guzzlehttp/guzzle": "~6.3"
     },
     "require-dev": {
