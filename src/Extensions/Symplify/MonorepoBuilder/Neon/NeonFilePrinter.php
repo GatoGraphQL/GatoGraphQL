@@ -10,15 +10,8 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class NeonFilePrinter
 {
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
+    private SmartFileSystem $smartFileSystem;
+    private SymfonyStyle $symfonyStyle;
 
     public function __construct(SmartFileSystem $smartFileSystem, SymfonyStyle $symfonyStyle)
     {

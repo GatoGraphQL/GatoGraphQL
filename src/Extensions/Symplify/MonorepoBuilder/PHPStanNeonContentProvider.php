@@ -11,11 +11,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class PHPStanNeonContentProvider
 {
     private SourcePackagesProvider $sourcePackagesProvider;
-
-    /**
-     * @var NeonPrinter
-     */
-    private $neonPrinter;
+    private NeonPrinter $neonPrinter;
 
     public function __construct(
         SourcePackagesProvider $sourcePackagesProvider,
