@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/locations": "^0.7.6",
-        "getpop/engine-wp": "^0.7.6",
-        "pop-schema/migrate-locations-wp-em": "^0.7.6"
+        "pop-schema/locations": "dev-master",
+        "getpop/engine-wp": "dev-master",
+        "pop-schema/migrate-locations-wp-em": "dev-master"
     },
     "require-dev": {
         "wpackagist-plugin/events-manager": "^5.9",

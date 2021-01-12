@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/meta": "^0.7.6",
-        "pop-schema/comments": "^0.7.6",
-        "pop-schema/migrate-commentmeta": "^0.7.6"
+        "pop-schema/meta": "dev-master",
+        "pop-schema/comments": "dev-master",
+        "pop-schema/migrate-commentmeta": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

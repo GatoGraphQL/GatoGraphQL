@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/site": "^0.7.6",
-        "getpop/migrate-static-site-generator": "^0.7.6"
+        "getpop/site": "dev-master",
+        "getpop/migrate-static-site-generator": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

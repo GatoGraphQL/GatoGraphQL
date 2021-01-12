@@ -16,12 +16,12 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/taxonomies": "^0.7.6",
-        "pop-schema/migrate-categories": "^0.7.6"
+        "pop-schema/taxonomies": "dev-master",
+        "pop-schema/migrate-categories": "dev-master"
     },
     "require-dev": {
-        "getpop/api": "^0.7.6",
-        "getpop/api-rest": "^0.7.6",
+        "getpop/api": "dev-master",
+        "getpop/api-rest": "dev-master",
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.9",

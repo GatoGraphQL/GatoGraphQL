@@ -16,7 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/migrate-locations-wp-em": "^0.7.6"
+        "pop-schema/migrate-locations-wp-em": "dev-master"
     },
     "extra": {
         "branch-alias": {
