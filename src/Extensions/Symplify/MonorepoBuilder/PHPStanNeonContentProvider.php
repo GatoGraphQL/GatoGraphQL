@@ -41,6 +41,8 @@ final class PHPStanNeonContentProvider
 
             $phpstanConfigIncludes[] = $packagePHPStanConfigFilePath;
         }
+        // Sort entries
+        sort($phpstanConfigIncludes);
         $phpStanNeon = [
             'includes' => $phpstanConfigIncludes,
         ];
