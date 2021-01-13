@@ -9,7 +9,7 @@
 <!-- [![GitHub release][ico-release]][link-release] -->
 <!-- [![Github all releases][ico-downloads]][link-downloads] -->
 
-Transform your WordPress site into a modern GraphQL server.
+Transform your WordPress site into a modern GraphQL server: [graphql-api.com](https://graphql-api.com).
 
 ![The interactive schema visualizer](docs/images/interactive-schema.png)
 
