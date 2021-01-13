@@ -28,6 +28,9 @@ jobs:
             -   name: Install plugin dependencies
                 run: composer install --no-progress --no-interaction --ansi
 
+            -   name: Display Composer from source version
+                run: vendor/bin/composer --version
+
             -   name: Update dependencies with Composer from source
                 run: vendor/bin/composer update
 
