@@ -11,7 +11,7 @@ jobs:
         defaults:
             run:
                 working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
-        name: Downgrade code, Build plugin, and Upload as artifact
+        name: Test Composer from branch
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
