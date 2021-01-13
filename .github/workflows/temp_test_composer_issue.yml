@@ -1,0 +1,44 @@
+name: Test - Composer Issue 9464
+on:
+    pull_request: null
+
+env:
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-master"
+
+jobs:
+    build:
+        defaults:
+            run:
+                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+        name: Downgrade code, Build plugin, and Upload as artifact
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Use PHP 7.4
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Install plugin dependencies
+                run: composer install --no-progress --no-interaction --ansi
+
+            -   name: Update dependencies with Composer from source
+                run: vendor/bin/composer update
+
+            -   name: Output source package files
+                run: ls -l ../../../GraphQLByPoP/packages/graphql-clients-for-wp/clients/graphiql-with-explorer
+
+            -   name: Output mirrored package files
+                run: ls -l vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-with-explorer
+
+            -   name: Output build/ in source package files
+                run: ls -l ../../../GraphQLByPoP/packages/graphql-clients-for-wp/clients/graphiql-with-explorer/build
+
+            -   name: Output build/ in mirrored package files
+                run: ls -l vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-with-explorer/build
