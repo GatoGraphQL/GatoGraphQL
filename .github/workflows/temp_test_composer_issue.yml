@@ -42,3 +42,10 @@ jobs:
 
             -   name: Output build/ in mirrored package files
                 run: ls -l vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-with-explorer/build
+
+            # -   name: Assert source build/index.html exists
+            #     run: [[ -f ../../../GraphQLByPoP/packages/graphql-clients-for-wp/clients/graphiql-with-explorer/build/index.html ]] && echo "Source build/ exists."
+
+            # -   name: Assert mirrored build/index.html exists
+            #     run: [[ -f vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-with-explorer/build/index.html ]] && echo "Mirrored build/ exists."
+
