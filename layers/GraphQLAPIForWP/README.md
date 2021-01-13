@@ -2,7 +2,7 @@
 
 # GraphQL API for WordPress
 
-Transform your WordPress site into a modern GraphQL server.
+Transform your WordPress site into a modern GraphQL server: [graphql-api.com](https://graphql-api.com).
 
 ![The interactive schema visualizer](plugins/graphql-api-for-wp/docs/images/interactive-schema.png)
 
