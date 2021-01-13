@@ -52,9 +52,14 @@
         "squizlabs/php_codesniffer": "^3.0",
         "szepeviktor/phpstan-wordpress": "^0.6.2",
         "symfony/var-dumper": "^5.1",
-        "johnpbloch/wordpress": ">=5.5"
+        "johnpbloch/wordpress": ">=5.5",
+        "composer/composer": "dev-issues/9464"
     },
     "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/BR0kEN-/composer.git"
+        },
         {
             "type": "composer",
             "url": "https://wpackagist.org"
