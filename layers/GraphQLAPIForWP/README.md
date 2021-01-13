@@ -1,4 +1,4 @@
-<p align="center"><img src="plugins/graphql-api-for-wp/assets/img/graphql-api-logo.png" width="150" /></p>
+<p align="center"><img src="plugins/graphql-api-for-wp/assets/img/graphql-api-logo-with-name.png" width="400" /></p>
 
 # GraphQL API for WordPress
 
