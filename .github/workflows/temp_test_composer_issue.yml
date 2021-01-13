@@ -31,6 +31,9 @@ jobs:
             -   name: Display Composer from source version
                 run: vendor/bin/composer --version
 
+            -   name: Remove package with issue
+                run: mv vendor/graphql-by-pop/graphql-clients-for-wp mv vendor/graphql-by-pop/graphql-clients-for-wp-bak
+
             -   name: Update dependencies with Composer from source
                 run: vendor/bin/composer update
 
