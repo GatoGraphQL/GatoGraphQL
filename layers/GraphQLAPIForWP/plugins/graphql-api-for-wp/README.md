@@ -88,9 +88,6 @@ Add the following configuration to your `composer.json`:
         "installer-paths": {
             "wp-content/plugins/{$name}/": [
                 "type:wordpress-plugin"
-            ],
-            "wp-content/themes/{$name}/": [
-                "type:wordpress-theme"
             ]
         }
     }
