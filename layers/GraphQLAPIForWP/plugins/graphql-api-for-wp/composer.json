@@ -48,7 +48,7 @@
     "require-dev": {
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": ">=9.3",
-        "rector/rector": "^0.9",
+        "rector/rector": "0.9.6",
         "squizlabs/php_codesniffer": "^3.0",
         "szepeviktor/phpstan-wordpress": "^0.6.2",
         "symfony/var-dumper": "^5.1",
