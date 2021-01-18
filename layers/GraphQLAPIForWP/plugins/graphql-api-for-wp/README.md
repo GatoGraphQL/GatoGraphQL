@@ -281,6 +281,12 @@ The following videos demonstrate several features:
 - [Field deprecation](https://vimeo.com/413503110)
 - [Query inheritance](https://vimeo.com/413503010)
 
+### WordPress Philosophy
+
+Detailed explanation of the plugin goals, and how it renders the WordPress philosophy:
+
+1. [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
+
 ### PHP Architecture
 
 Articles explaining how the plugin is coded using PHP 7.4 but can run on PHP 7.1:
