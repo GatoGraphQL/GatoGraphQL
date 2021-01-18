@@ -8,6 +8,7 @@ class Environment
 {
     public const CACHE_CONTAINER_CONFIGURATION = 'CACHE_CONTAINER_CONFIGURATION';
     public const CONTAINER_CONFIGURATION_CACHE_NAMESPACE = 'CONTAINER_CONFIGURATION_CACHE_NAMESPACE';
+    public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
 
     /**
      * Indicate if to cache the container configuration.
@@ -45,6 +46,21 @@ class Environment
             return $sitename . '_' . $applicationVersion;
         }
         return $sitename;
+    }
+
+    /**
+     * Define behavior when the server can't create set-up the cache,
+     * (for instance if creating the directory fails):
+     *
+     * 1. `true` => throw an exception
+     * 2. `false` => ignore, and simply use no cache
+     *
+     * @see https://github.com/leoloso/PoP/issues/350
+     */
+    public static function throwExceptionIfCacheSetupError(): bool
+    {
+        $throwException = getenv(self::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR);
+        return $throwException !== false ? strtolower($throwException) == "true" : false;
     }
 
     /**
