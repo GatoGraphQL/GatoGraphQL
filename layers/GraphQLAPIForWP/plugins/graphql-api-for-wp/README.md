@@ -15,13 +15,13 @@ Transform your WordPress site into a modern GraphQL server: [graphql-api.com](ht
 
 This plugin is the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/), a CMS-agnostic GraphQL server in PHP.
 
-## Why
+<!-- ## Why
 
 Please read the author's [introduction to the GraphQL API for WordPress](https://leoloso.com/posts/introducing-the-graphql-api-for-wordpress/), which describes:
 
 - How does it compare with the existing solutions: WP REST API and WPGraphQL
 - An overview of all its features
-- Q&A
+- Q&A -->
 
 ## Requirements
 
@@ -306,6 +306,7 @@ These articles explain the concepts, design and implementation of GraphQL by PoP
 8. [Creating an @export GraphQL directive](https://blog.logrocket.com/creating-an-export-graphql-directive/)
 9. [Adding directives to the schema in code-first GraphQL servers](https://blog.logrocket.com/adding-directives-schema-code-first-graphql-servers/)
 10. [Coding a GraphQL server in JavaScript vs. WordPress](https://blog.logrocket.com/coding-a-graphql-server-in-javascript-vs-wordpress/)
+11. [Supporting opt-in nested mutations in GraphQL](https://blog.logrocket.com/supporting-opt-in-nested-mutations-in-graphql/)
 
 ### Gutenberg
 
