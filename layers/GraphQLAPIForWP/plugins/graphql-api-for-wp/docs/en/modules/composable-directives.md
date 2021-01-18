@@ -1,6 +1,6 @@
 # Composable Directives
 
-Have a directive modify the behavior of another directive. It introduces a directive argument `nestedUnder` on each directive, to indicate which is its parent directive. This number is a negative integer, defining the the parent directive's relative position.
+Have a directive modify the behavior of another directive. It introduces a directive argument `nestedUnder` on each directive, to indicate which is its parent directive. This number is a negative integer, defining the parent directive's relative position.
 
 In this example below, we have:
 
