@@ -54,4 +54,14 @@ class PluginEnvironment
         // Default value
         return self::PLUGIN_ENVIRONMENT_PROD;
     }
+
+    public static function isPluginEnvironmentProd(): bool
+    {
+        return self::getPluginEnvironment() == self::PLUGIN_ENVIRONMENT_PROD;
+    }
+
+    public static function isPluginEnvironmentDev(): bool
+    {
+        return self::getPluginEnvironment() == self::PLUGIN_ENVIRONMENT_DEV;
+    }
 }
