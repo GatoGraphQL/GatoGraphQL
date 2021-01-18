@@ -285,7 +285,7 @@ The following videos demonstrate several features:
 
 Detailed explanation of the plugin goals, and how it renders the WordPress philosophy:
 
-1. [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/).
+1. [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
 
 ### PHP Architecture
 
