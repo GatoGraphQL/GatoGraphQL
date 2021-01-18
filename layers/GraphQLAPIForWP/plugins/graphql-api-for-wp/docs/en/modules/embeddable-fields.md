@@ -52,7 +52,7 @@ query {
 }
 ```
 
-Send a a newsletter defining the `to`, `subject` and `content` data through fields `newsletterTo`, `newsletterSubject` and `newsletterContent` from the `Root` type:
+Send a newsletter defining the `to`, `subject` and `content` data through fields `newsletterTo`, `newsletterSubject` and `newsletterContent` from the `Root` type:
 
 ```graphql
 mutation {
@@ -90,7 +90,7 @@ mutation {
 }
 ```
 
-Send a single email to many users, adding them all in the to field:
+Send a single email to many users, adding them all in the `to` field:
 
 ```graphql
 mutation {
