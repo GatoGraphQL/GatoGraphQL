@@ -46,7 +46,7 @@ For instance, directive `@forEach` can iterate over an array of elements, and ap
   users {
     capabilities
       @forEach
-      @upperCase(nestedUnder: -1)
+        @upperCase(nestedUnder: -1)
   }
 }
 ```
@@ -71,12 +71,12 @@ query {
       blockName: "core/paragraph"
     )
       @advancePointerInArray(path: "meta.content")
-      @forEach(nestedUnder: -1)
-      @translate(
-        from: "en",
-        to: "fr",
-        nestedUnder: -1
-      )
+        @forEach(nestedUnder: -1)
+          @translate(
+            from: "en",
+            to: "fr",
+            nestedUnder: -1
+          )
   }
 }
 ```
