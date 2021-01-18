@@ -15,13 +15,13 @@ Transform your WordPress site into a modern GraphQL server: [graphql-api.com](ht
 
 This plugin is the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/), a CMS-agnostic GraphQL server in PHP.
 
-## Why
+<!-- ## Why
 
 Please read the author's [introduction to the GraphQL API for WordPress](https://leoloso.com/posts/introducing-the-graphql-api-for-wordpress/), which describes:
 
 - How does it compare with the existing solutions: WP REST API and WPGraphQL
 - An overview of all its features
-- Q&A
+- Q&A -->
 
 ## Requirements
 
