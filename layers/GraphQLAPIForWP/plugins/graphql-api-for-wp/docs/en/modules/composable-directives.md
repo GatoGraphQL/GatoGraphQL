@@ -20,7 +20,7 @@ In this example below, we have:
 
 Then, directives modify each other's behavior:
 
-- `@directive1` influences  `@directive11` and `@directive12`
+- `@directive1` influences `@directive11` and `@directive12`
 - `@directive12` influences `@directive 121`
 
 ## When to use
