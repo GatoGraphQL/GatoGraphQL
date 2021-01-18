@@ -12,11 +12,16 @@ In this example below, we have:
 {
   someField
     @directive1
-    @directive11(nestedUnder:-1)
-    @directive12(nestedUnder:-2)
-    @directive121(nestedUnder:-1)
+      @directive11(nestedUnder:-1)
+      @directive12(nestedUnder:-2)
+        @directive121(nestedUnder:-1)
 }
 ```
+
+Then, directives modify each other's behavior:
+
+- `@directive1` influences  `@directive11` and `@directive12`
+- `@directive12` influences `@directive 121`
 
 ## When to use
 
