@@ -40,6 +40,6 @@ class EnvironmentValueHelpers
      */
     public static function commaSeparatedStringToArray(string $value): array
     {
-        return explode(',', $value);
+        return array_map('trim', explode(',', $value));
     }
 }
