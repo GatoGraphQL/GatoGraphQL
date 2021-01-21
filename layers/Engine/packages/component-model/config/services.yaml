@@ -16,7 +16,7 @@ services:
     persistent_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\FilesystemAdapter
         arguments:
-            $namespace: '@=service("PoP\ComponentModel\Cache\CacheConfigurationManagerInterface").getNamespace()'
+            $namespace: '@=service("PoP\\ComponentModel\\Cache\\CacheConfigurationManagerInterface").getNamespace()'
 
     PoP\ComponentModel\Container\ObjectDictionaryInterface:
         class: \PoP\ComponentModel\Container\ObjectDictionary
