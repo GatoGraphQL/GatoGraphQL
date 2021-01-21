@@ -42,8 +42,7 @@
         "pop-schema/custompostmedia-mutations-wp": "dev-master",
         "pop-schema/post-mutations": "dev-master",
         "pop-schema/comment-mutations-wp": "dev-master",
-        "pop-schema/user-state-mutations-wp": "dev-master",
-        "symfony/expression-language": "^5.1"
+        "pop-schema/user-state-mutations-wp": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

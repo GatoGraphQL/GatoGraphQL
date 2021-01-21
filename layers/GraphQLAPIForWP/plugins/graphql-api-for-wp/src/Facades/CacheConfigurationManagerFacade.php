@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Facades;
 
 use GraphQLAPI\GraphQLAPI\Cache\CacheConfigurationManager;
-use GraphQLAPI\GraphQLAPI\Cache\CacheConfigurationManagerInterface;
+use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**
  * Obtain an instance of the CacheConfigurationManager.
