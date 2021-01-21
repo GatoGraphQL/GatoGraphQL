@@ -31,4 +31,15 @@ class EnvironmentValueHelpers
     {
         return (int) $value;
     }
+
+    /**
+     * Convert the environment value from a comma separated string to array
+     *
+     * @param string $value environment value
+     * @return array
+     */
+    public static function commaSeparatedStringToArray(string $value): array
+    {
+        return explode(',', $value);
+    }
 }
