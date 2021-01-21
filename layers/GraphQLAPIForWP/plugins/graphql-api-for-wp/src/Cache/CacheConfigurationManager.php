@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Cache;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Cache\CacheConfigurationManagerInterface;
+use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**
  * Inject configuration to the cache

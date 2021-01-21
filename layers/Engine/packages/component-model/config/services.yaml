@@ -9,8 +9,14 @@ services:
     memory_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\ArrayAdapter
 
+    PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
+        class: \PoP\ComponentModel\Cache\CacheConfigurationManager
+
+    # Set a directory where to store the cache
     persistent_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\FilesystemAdapter
+        arguments:
+            $namespace: '@=service("PoP\ComponentModel\Cache\CacheConfigurationManagerInterface").getNamespace()'
 
     PoP\ComponentModel\Container\ObjectDictionaryInterface:
         class: \PoP\ComponentModel\Container\ObjectDictionary
