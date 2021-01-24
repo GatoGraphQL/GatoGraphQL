@@ -8,11 +8,9 @@
 # testing
 /coverage
 
-# Allow build because those are the actually loaded files
-!build
-# But we don't need the generated media folder
+# We need build/index.html
+# But we don't need the generated media folder or the maps
 /build/static/media
-# No need for all the maps
 /build/static/js/*.map
 /build/static/css/*.map
 /build/asset-manifest.json
