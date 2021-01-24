@@ -8,11 +8,9 @@
 # testing
 /coverage
 
-# Add build because those are the actually loaded files
-# production
-# /build
+# Allow build because those are the actually loaded files
 !build
-# We don't need the generated media folder
+# But we don't need the generated media folder
 /build/static/media
 # No need for all the maps
 /build/static/js/*.map
