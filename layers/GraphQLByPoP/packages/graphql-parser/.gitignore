@@ -2,7 +2,7 @@ composer.phar
 phpunit.xml
 .phpunit.result.cache
 /build/
-vendor/
+/vendor/
 data/schema.graphql
 composer.lock
 .idea
