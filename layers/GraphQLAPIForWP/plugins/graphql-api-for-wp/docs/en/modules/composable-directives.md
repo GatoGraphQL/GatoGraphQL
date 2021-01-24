@@ -1,6 +1,6 @@
 # Composable Directives
 
-Have a directive modify the behavior of another directives. It introduces a directive argument `nestedUnder` on each directive, to indicate which is its parent directive. This number is a negative integer, defining the the parent directive's relative position.
+Have a directive modify the behavior of another directive. It introduces a directive argument `nestedUnder` on each directive, to indicate which is its parent directive. This number is a negative integer, defining the parent directive's relative position.
 
 In this example below, we have:
 
@@ -12,11 +12,16 @@ In this example below, we have:
 {
   someField
     @directive1
-    @directive11(nestedUnder:-1)
-    @directive12(nestedUnder:-2)
-    @directive121(nestedUnder:-1)
+      @directive11(nestedUnder:-1)
+      @directive12(nestedUnder:-2)
+        @directive121(nestedUnder:-1)
 }
 ```
+
+Then, directives modify each other's behavior:
+
+- `@directive1` influences `@directive11` and `@directive12`
+- `@directive12` influences `@directive 121`
 
 ## When to use
 
@@ -41,7 +46,7 @@ For instance, directive `@forEach` can iterate over an array of elements, and ap
   users {
     capabilities
       @forEach
-      @upperCase(nestedUnder: -1)
+        @upperCase(nestedUnder: -1)
   }
 }
 ```
@@ -66,12 +71,12 @@ query {
       blockName: "core/paragraph"
     )
       @advancePointerInArray(path: "meta.content")
-      @forEach(nestedUnder: -1)
-      @translate(
-        from: "en",
-        to: "fr",
-        nestedUnder: -1
-      )
+        @forEach(nestedUnder: -1)
+          @translate(
+            from: "en",
+            to: "fr",
+            nestedUnder: -1
+          )
   }
 }
 ```

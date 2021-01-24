@@ -1,4 +1,4 @@
-build
+/build/
 composer.lock
 vendor
 phpcs.xml

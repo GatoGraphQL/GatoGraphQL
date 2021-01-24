@@ -1,3 +1,2 @@
 includes:
-    - vendor/szepeviktor/phpstan-wordpress/extension.neon
     - phpstan.neon.dist

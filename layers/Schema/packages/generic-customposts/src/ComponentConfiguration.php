@@ -57,7 +57,7 @@ class ComponentConfiguration
         $envVariable = Environment::GENERIC_CUSTOMPOST_TYPES;
         $selfProperty = &self::$getGenericCustomPostTypes;
         $defaultValue = ['post'];
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(

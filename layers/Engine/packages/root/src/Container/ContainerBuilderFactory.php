@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Container;
 
 use InvalidArgumentException;
+use PoP\Root\Environment;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -32,6 +33,8 @@ class ContainerBuilderFactory
         ?string $directory = null
     ): void {
         self::$cacheContainerConfiguration = $cacheContainerConfiguration;
+        $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
+        $cacheSetupSuccess = true;
         /**
          * Code copied from Symfony FilesystemAdapter
          * @see https://github.com/symfony/cache/blob/master/Traits/FilesystemCommonTrait.php
@@ -41,41 +44,55 @@ class ContainerBuilderFactory
         }
         if ($namespace) {
             if (preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.',
-                        $match[0]
-                    )
-                );
+                if ($throwExceptionIfCacheSetupError) {
+                    throw new InvalidArgumentException(
+                        sprintf(
+                            'Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.',
+                            $match[0]
+                        )
+                    );
+                }
+                $cacheSetupSuccess = false;
             }
             $directory .= \DIRECTORY_SEPARATOR . $namespace;
         }
-        if (!is_dir($directory)) {
+        if ($cacheSetupSuccess && !is_dir($directory)) {
             if (@mkdir($directory, 0777, true) === false) {
-                throw new \RuntimeException(sprintf(
-                    'The directory %s could not be created.',
-                    $directory
-                ));
+                if ($throwExceptionIfCacheSetupError) {
+                    throw new \RuntimeException(sprintf(
+                        'The directory %s could not be created.',
+                        $directory
+                    ));
+                }
+                $cacheSetupSuccess = false;
             }
         }
         $directory .= \DIRECTORY_SEPARATOR;
         // On Windows the whole path is limited to 258 chars
-        if ('\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Cache directory too long (%s).',
-                    $directory
-                )
-            );
+        if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
+            if ($throwExceptionIfCacheSetupError) {
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Cache directory too long (%s).',
+                        $directory
+                    )
+                );
+            }
+            $cacheSetupSuccess = false;
         }
 
-        // Store the cache under this file
-        self::$cacheFile = $directory . 'container.php';
+        if ($cacheSetupSuccess) {
+            // Store the cache under this file
+            self::$cacheFile = $directory . 'container.php';
 
-        // If not caching the container, then it's for development
-        $isDebug = !self::$cacheContainerConfiguration;
-        $containerConfigCache = new ConfigCache(self::$cacheFile, $isDebug);
-        self::$cached = $containerConfigCache->isFresh();
+            // If not caching the container, then it's for development
+            $isDebug = !self::$cacheContainerConfiguration;
+            $containerConfigCache = new ConfigCache(self::$cacheFile, $isDebug);
+            self::$cached = $containerConfigCache->isFresh();
+        } else {
+            self::$cached = false;
+            self::$cacheContainerConfiguration = false;
+        }
 
         // If not cached, then create the new instance
         if (!self::$cached) {

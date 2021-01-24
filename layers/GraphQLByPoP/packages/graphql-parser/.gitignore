@@ -1,7 +1,7 @@
 composer.phar
 phpunit.xml
 .phpunit.result.cache
-build/
+/build/
 vendor/
 data/schema.graphql
 composer.lock
