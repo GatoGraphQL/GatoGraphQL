@@ -4,7 +4,6 @@
 phpcs.xml
 phpunit.xml
 .phpunit.result.cache
-composer.lock
-composer.local.json
+#composer.lock
 /wordpress/
 .lando.local.yml
