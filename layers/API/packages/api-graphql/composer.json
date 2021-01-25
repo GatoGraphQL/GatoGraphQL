@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/api-mirrorquery": "dev-master",
-        "getpop/migrate-api-graphql": "dev-master"
+        "getpop/api-mirrorquery": "^0.7.6",
+        "getpop/migrate-api-graphql": "^0.7.6"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

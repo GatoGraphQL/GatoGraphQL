@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/posts": "dev-master",
-        "pop-schema/customposts-wp": "dev-master",
-        "pop-schema/migrate-posts-wp": "dev-master"
+        "pop-schema/posts": "^0.7.6",
+        "pop-schema/customposts-wp": "^0.7.6",
+        "pop-schema/migrate-posts-wp": "^0.7.6"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

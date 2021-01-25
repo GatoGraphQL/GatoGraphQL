@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/metaquery": "dev-master",
-        "getpop/engine-wp": "dev-master",
-        "pop-schema/migrate-metaquery-wp": "dev-master"
+        "pop-schema/metaquery": "^0.7.6",
+        "getpop/engine-wp": "^0.7.6",
+        "pop-schema/migrate-metaquery-wp": "^0.7.6"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
