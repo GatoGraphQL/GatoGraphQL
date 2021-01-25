@@ -4,8 +4,19 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\DowngradePhp74\Rector\Array_\DowngradeArraySpreadRector;
+use Rector\DowngradePhp74\Rector\ArrowFunction\ArrowFunctionToAnonymousFunctionRector;
+use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeContravariantArgumentTypeRector;
+use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector;
+use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeReturnSelfTypeDeclarationRector;
+use Rector\DowngradePhp74\Rector\Coalesce\DowngradeNullCoalescingOperatorRector;
+use Rector\DowngradePhp74\Rector\FuncCall\DowngradeArrayMergeCallWithoutArgumentsRector;
+use Rector\DowngradePhp74\Rector\FuncCall\DowngradeStripTagsCallWithArrayRector;
+use Rector\DowngradePhp74\Rector\Identical\DowngradeFreadFwriteFalsyToNegationRector;
+use Rector\DowngradePhp74\Rector\LNumber\DowngradeNumericLiteralSeparatorRector;
+use Rector\DowngradePhp74\Rector\Property\DowngradeTypedPropertyRector;
 use Rector\Set\ValueObject\DowngradeSetList;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
@@ -15,10 +26,32 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::SETS, [
         // @todo Uncomment when PHP 8.0 released
         // DowngradeSetList::PHP_80,
-        DowngradeSetList::PHP_74,
+
+        // Temporarily commented to fix Rector bug
+        // @see https://github.com/rectorphp/rector/issues/5252#issuecomment-766335969
+        // DowngradeSetList::PHP_74,
+
         DowngradeSetList::PHP_73,
         DowngradeSetList::PHP_72,
     ]);
+
+    // Services from PHP_74: Temporarily added to fix Rector bug
+    // @see https://github.com/rectorphp/rector/issues/5252#issuecomment-766335969
+    $services = $containerConfigurator->services();
+    // The order of these 2 is different in the set, and that throws an error
+    // Adding them in this order avoids the bug
+    $services->set(DowngradeReturnSelfTypeDeclarationRector::class);
+    $services->set(DowngradeCovariantReturnTypeRector::class);
+    // All other services are OK
+    $services->set(DowngradeTypedPropertyRector::class);
+    $services->set(ArrowFunctionToAnonymousFunctionRector::class);
+    $services->set(DowngradeContravariantArgumentTypeRector::class);
+    $services->set(DowngradeNullCoalescingOperatorRector::class);
+    $services->set(DowngradeNumericLiteralSeparatorRector::class);
+    $services->set(DowngradeStripTagsCallWithArrayRector::class);
+    $services->set(DowngradeArraySpreadRector::class);
+    $services->set(DowngradeArrayMergeCallWithoutArgumentsRector::class);
+    $services->set(DowngradeFreadFwriteFalsyToNegationRector::class);
 
     // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
