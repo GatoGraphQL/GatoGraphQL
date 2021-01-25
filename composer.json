@@ -365,19 +365,7 @@
         }
     },
     "extra": {
-        "wordpress-install-dir": "vendor/wordpress/wordpress",
-        "merge-plugin": {
-            "include": [
-                "composer.local.json"
-            ],
-            "recurse": true,
-            "replace": false,
-            "ignore-duplicates": false,
-            "merge-dev": true,
-            "merge-extra": false,
-            "merge-extra-deep": false,
-            "merge-scripts": false
-        }
+        "wordpress-install-dir": "vendor/wordpress/wordpress"
     },
     "replace": {
         "getpop/access-control": "0.7.6",
