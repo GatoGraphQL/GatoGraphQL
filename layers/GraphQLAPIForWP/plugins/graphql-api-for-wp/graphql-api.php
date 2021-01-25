@@ -12,8 +12,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Text Domain: graphql-api
 Domain Path: /languages
-GitHub Plugin URI: https://github.com/GraphQLAPI/graphql-api-for-wp
-Release Asset: true
+GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
 // Exit if accessed directly
