@@ -465,4 +465,10 @@ Add into `composer.json`:
 }
 ```
 
+Add into .gitignore:
+
+```
+composer.local.json
+```
+
 -->
