@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/site": "dev-master",
-        "getpop/application-wp": "dev-master"
+        "getpop/site": "^0.7.6",
+        "getpop/application-wp": "^0.7.6"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/taxonomymeta": "dev-master",
-        "pop-schema/migrate-taxonomyquery": "dev-master"
+        "pop-schema/taxonomymeta": "^0.7.6",
+        "pop-schema/migrate-taxonomyquery": "^0.7.6"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

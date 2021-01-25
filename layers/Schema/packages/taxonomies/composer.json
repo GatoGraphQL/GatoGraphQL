@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/customposts": "dev-master",
-        "pop-schema/migrate-taxonomies": "dev-master"
+        "pop-schema/customposts": "^0.7.6",
+        "pop-schema/migrate-taxonomies": "^0.7.6"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

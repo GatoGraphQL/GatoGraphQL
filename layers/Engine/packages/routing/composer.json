@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/hooks": "dev-master",
-        "getpop/definitions": "dev-master"
+        "getpop/hooks": "^0.7.6",
+        "getpop/definitions": "^0.7.6"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
