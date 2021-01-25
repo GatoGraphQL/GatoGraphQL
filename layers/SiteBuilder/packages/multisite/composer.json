@@ -16,7 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/engine": "^0.8"
+        "getpop/engine": "^0.7.7"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
