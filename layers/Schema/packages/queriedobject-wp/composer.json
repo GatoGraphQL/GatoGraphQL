@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/queriedobject": "^0.7.6",
-        "getpop/engine-wp": "^0.7.6",
-        "pop-schema/migrate-queriedobject-wp": "^0.7.6"
+        "pop-schema/queriedobject": "^0.8",
+        "getpop/engine-wp": "^0.8",
+        "pop-schema/migrate-queriedobject-wp": "^0.8"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
