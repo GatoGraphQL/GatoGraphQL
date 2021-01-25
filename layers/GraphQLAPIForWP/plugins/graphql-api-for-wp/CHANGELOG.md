@@ -10,6 +10,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Composable directives
 
+## 0.7.7 - 2021-01-25
+
+### Fixed
+
+- Point GitHub Updater to GraphQLAPI/graphql-api-for-wp-dist
+
 ## 0.7.5 to 0.7.6 - 2021-01-09
 
 ### Fixed
