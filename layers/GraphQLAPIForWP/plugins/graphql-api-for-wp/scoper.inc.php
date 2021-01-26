@@ -8,17 +8,24 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Must only scope the packages in vendor/, because:
  *
  * - config/ references only local configuration
- * - src/ references only local classes, which need not be scoped
- * - vendor/ references external classes, which need be scoped
+ * - src/ references only local classes (with one exception), which need not be scoped
+ * - vendor/ references external classes (excluding local -wp packages), which need be scoped
  *
  * In addition, we must exclude all the local WordPress packages,
  * because scoping WordPress functions does NOT work.
  * @see https://github.com/humbug/php-scoper/issues/303
  *
+ * The only exception to referencing external packages in src/
+ * is file src/ContentProcessors/MarkdownContentParser.php,
+ * which references Parsedown.
+ * Then, this file is manually added for processing.
+ * Since it contains no calls to WordPress functions,
+ * it doesn't produce any side effect.
+ *
  * Excluding the WordPress packages is feasible, because they do
  * not reference any external library.
  *
- * The only exception getpop/routing-wp, which uses Brain\Cortex:
+ * The only exception is getpop/routing-wp, which uses Brain\Cortex:
  *
  * in getpop/routing-wp/src/Component.php:
  *   use Brain\Cortex;
@@ -28,9 +35,8 @@ use Isolated\Symfony\Component\Finder\Finder;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
  *
- * Then, Brain\Cortex is NOT being scoped. That is just fine, since Cortex
- * is not under development anymore
- * @see https://github.com/Brain-WP/Cortex
+ * Then, manually add these 2 files to scope Brain\Cortex.
+ * This works without side effects, because there are no WordPress stubs in them.
  */
 return [
     'finders' => [
@@ -43,7 +49,12 @@ return [
                 'getpop/*-wp',
                 'pop-schema/*-wp',
             ])
-            ->in('vendor')
+            ->in('vendor'),
+        Finder::create()->append([
+            'src/ContentProcessors/MarkdownContentParser.php',
+            'vendor/getpop/routing-wp/src/Component.php',
+            'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
+        ])
     ],
     'files-whitelist' => [
         // do not prefix "trigger_deprecation" from symfony - https://github.com/symfony/symfony/commit/0032b2a2893d3be592d4312b7b098fb9d71aca03
@@ -62,4 +73,20 @@ return [
         // 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator',
         // 'Composer\*',
     ],
+    // 'patchers' => [
+    //     function (string $filePath, string $prefix, string $content): string {
+    //         $brainCortexFiles = [
+    //             'vendor/getpop/routing-wp/src/Component.php',
+    //             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
+    //         ];
+    //         if (in_array($filePath, $brainCortexFiles)) {
+    //             return preg_replace(
+    //                 'use Brain\\',
+    //                 'use ' . $prefix . '\\Brain\\',
+    //                 $content
+    //             );
+    //         }
+    //         return $content;
+    //     },
+    // ],
 ];
