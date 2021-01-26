@@ -40,9 +40,9 @@ return [
             ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.json|composer\\.lock/')
             // Exclude libraries ending in "-wp"
             ->notPath([
-                '#getpop/.*-wp#',
-                '#pop-schema/.*-wp#',
-                '#graphql-by-pop/.*-wp#',
+                '#getpop/[a-zA-Z0-9_-]*-wp/#',
+                '#pop-schema/[a-zA-Z0-9_-]*-wp/#',
+                '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
             ])
             ->in('vendor'),
         Finder::create()->append([
