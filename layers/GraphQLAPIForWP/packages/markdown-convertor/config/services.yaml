@@ -1,0 +1,4 @@
+services:
+    GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface:
+        class: \GraphQLAPI\MarkdownConvertor\MarkdownConvertor
+        public: true
