@@ -73,20 +73,4 @@ return [
         // 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator',
         // 'Composer\*',
     ],
-    // 'patchers' => [
-    //     function (string $filePath, string $prefix, string $content): string {
-    //         $brainCortexFiles = [
-    //             'vendor/getpop/routing-wp/src/Component.php',
-    //             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
-    //         ];
-    //         if (in_array($filePath, $brainCortexFiles)) {
-    //             return preg_replace(
-    //                 'use Brain\\',
-    //                 'use ' . $prefix . '\\Brain\\',
-    //                 $content
-    //             );
-    //         }
-    //         return $content;
-    //     },
-    // ],
 ];
