@@ -31,22 +31,6 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
-// $finder = Finder::create()
-//     ->files()
-//     ->ignoreVCS(true)
-//     ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.json|composer\\.lock/')
-//     // Exclude libraries ending in "-wp"
-//     ->notPath([
-//         '#getpop/.*-wp#',
-//         '#pop-schema/.*-wp#',
-//         '#graphql-by-pop/.*-wp#',
-//     ])
-//     ->in('vendor');
-
-// foreach ($finder as $file) {
-//     var_dump($file->getRelativePath());
-// }
-// die;
 return [
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
