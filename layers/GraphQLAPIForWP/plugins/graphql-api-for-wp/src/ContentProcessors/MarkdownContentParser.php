@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 
-class MarkdownContentParser extends AbstractContentParser
+class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
     protected MarkdownConvertorInterface $markdownConvertorInterface;
 
@@ -20,6 +20,14 @@ class MarkdownContentParser extends AbstractContentParser
      */
     protected function getHTMLContent(string $fileContent): string
     {
-        return $this->markdownConvertorInterface->convertMarkdownToHTML($fileContent);
+        return $this->convertMarkdownToHTML($fileContent);
+    }
+
+    /**
+     * Parse the file's Markdown into HTML Content
+     */
+    public function convertMarkdownToHTML(string $markdownContent): string
+    {
+        return $this->markdownConvertorInterface->convertMarkdownToHTML($markdownContent);
     }
 }
