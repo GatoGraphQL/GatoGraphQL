@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\MarkdownConvertor\\": "src"
+            "GraphQLAPI\\MarkdownConvertor\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\MarkdownConvertor\\": "tests"
+            "GraphQLAPI\\MarkdownConvertor\\": "tests"
         }
     },
     "scripts": {
