@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use Parsedown;
+use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
+    protected MarkdownConvertorInterface $markdownConvertorInterface;
+
+    function __construct(MarkdownConvertorInterface $markdownConvertorInterface)
+    {
+        $this->markdownConvertorInterface = $markdownConvertorInterface;
+    }
+
     /**
      * Parse the file's Markdown into HTML Content
      */
@@ -21,6 +28,6 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
      */
     public function convertMarkdownToHTML(string $markdownContent): string
     {
-        return (new Parsedown())->text($markdownContent);
+        return $this->markdownConvertorInterface->convertMarkdownToHTML($markdownContent);
     }
 }
