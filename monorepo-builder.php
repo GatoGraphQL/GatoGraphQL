@@ -75,6 +75,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'PoP\\PoP\\'=> 'src',
             ],
         ],
+        'extra' => [
+            'installer-paths' => [
+                'wordpress/wp-content/plugins/{$name}/' => [
+                    'type:wordpress-plugin',
+                ]
+            ]
+        ],
     ]);
 
     $services = $containerConfigurator->services();
