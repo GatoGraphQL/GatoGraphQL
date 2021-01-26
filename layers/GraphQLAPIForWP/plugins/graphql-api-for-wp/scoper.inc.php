@@ -15,13 +15,6 @@ use Isolated\Symfony\Component\Finder\Finder;
  * because scoping WordPress functions does NOT work.
  * @see https://github.com/humbug/php-scoper/issues/303
  *
- * The only exception to referencing external packages in src/
- * is file src/ContentProcessors/MarkdownContentParser.php,
- * which references Parsedown.
- * Then, this file is manually added for processing.
- * Since it contains no calls to WordPress functions,
- * it doesn't produce any side effect.
- *
  * Excluding the WordPress packages is feasible, because they do
  * not reference any external library.
  *
@@ -51,7 +44,6 @@ return [
             ])
             ->in('vendor'),
         Finder::create()->append([
-            'src/ContentProcessors/MarkdownContentParser.php',
             'vendor/getpop/routing-wp/src/Component.php',
             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
         ])
