@@ -28,7 +28,9 @@ use Isolated\Symfony\Component\Finder\Finder;
  *   use Brain\Cortex\Route\RouteInterface;
  *   use Brain\Cortex\Route\QueryRoute;
  *
- * Then, Brain\Cortex is NOT being scoped.
+ * Then, Brain\Cortex is NOT being scoped. That is just fine, since Cortex
+ * is not under development anymore
+ * @see https://github.com/Brain-WP/Cortex
  */
 return [
     'finders' => [
