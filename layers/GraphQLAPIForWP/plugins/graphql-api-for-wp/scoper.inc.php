@@ -57,8 +57,10 @@ return [
     ],
     'whitelist' => [
         // own namespaces
-        'PoP\*',
+        // Watch out! Do NOT alter the order of PoPSchema and PoP!
+        // If PoP comes first, then PoPSchema is still scoped!
         'PoPSchema\*',
+        'PoP\*',
         'GraphQLByPoP\*',
         'GraphQLAPI\*',
         // for config.php  Symfony PHP Configs
