@@ -59,6 +59,7 @@ class Component extends AbstractComponent
             \PoPSchema\BasicDirectives\Component::class,
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
+            \GraphQLAPI\MarkdownConvertor\Component::class,
         ];
     }
 
