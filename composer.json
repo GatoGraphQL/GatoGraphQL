@@ -39,6 +39,7 @@
         "psr-4": {
             "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/plugins/convert-case-directives/src",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src",
+            "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/src",
             "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/plugins/schema-feedback/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/src",
@@ -204,6 +205,7 @@
         "psr-4": {
             "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/plugins/convert-case-directives/tests",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests",
+            "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/tests",
             "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/plugins/schema-feedback/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/tests",
@@ -365,6 +367,11 @@
         }
     },
     "extra": {
+        "installer-paths": {
+            "wordpress/wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ]
+        },
         "wordpress-install-dir": "vendor/wordpress/wordpress"
     },
     "replace": {
@@ -421,6 +428,7 @@
         "getpop/translation-wp": "0.7.7",
         "graphql-api/convert-case-directives": "0.7.7",
         "graphql-api/graphql-api-for-wp": "0.7.7",
+        "graphql-api/markdown-convertor": "0.7.7",
         "graphql-api/schema-feedback": "0.7.7",
         "graphql-by-pop/graphql-clients-for-wp": "0.7.7",
         "graphql-by-pop/graphql-endpoint-for-wp": "0.7.7",

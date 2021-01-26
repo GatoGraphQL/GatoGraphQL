@@ -36,6 +36,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'layers/API/packages' => 'getpop',
         'layers/Schema/packages' => 'PoPSchema',
         'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
+        'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
         'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
         // 'layers/GraphQLAPIForWP/subplugins' => 'GraphQLAPI',
         'layers/SiteBuilder/packages' => 'getpop',
@@ -73,6 +74,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'psr-4' => [
                 'PoP\\PoP\\'=> 'src',
             ],
+        ],
+        'extra' => [
+            'installer-paths' => [
+                'wordpress/wp-content/plugins/{$name}/' => [
+                    'type:wordpress-plugin',
+                ]
+            ]
         ],
     ]);
 

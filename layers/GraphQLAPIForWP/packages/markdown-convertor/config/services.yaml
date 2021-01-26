@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface:
+        class: \GraphQLAPI\MarkdownConvertor\MarkdownConvertor
+
