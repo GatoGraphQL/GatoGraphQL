@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df0664596f7c8de1809c1000a88fda33",
+    "content-hash": "43a4027de8da2c3620ccb7f92e3e24e3",
     "packages": [
         {
             "name": "brain/cortex",

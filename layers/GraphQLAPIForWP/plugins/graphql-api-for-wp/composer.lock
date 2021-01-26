@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a70feb4d5564b5c47727f22243ca7a17",
+    "content-hash": "fdc76dc4e4930f154ca31cb278593664",
     "packages": [
         {
             "name": "brain/cortex",
@@ -1929,6 +1929,66 @@
                 "source": "https://github.com/getpop/translation-wp/tree/master"
             },
             "time": "2021-01-25T11:28:33+00:00"
+        },
+        {
+            "name": "graphql-api/markdown-convertor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GraphQLAPI/markdown-convertor.git",
+                "reference": "787ef6b892f90b0b21648cb4a500faa7a6049535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GraphQLAPI/markdown-convertor/zipball/787ef6b892f90b0b21648cb4a500faa7a6049535",
+                "reference": "787ef6b892f90b0b21648cb4a500faa7a6049535",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown": "^1.7",
+                "getpop/engine": "^0.8",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": ">=9.3",
+                "rector/rector": "^0.9",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GraphQLAPI\\MarkdownConvertor\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leonardo Losoviz",
+                    "email": "leo@getpop.org",
+                    "homepage": "https://getpop.org"
+                }
+            ],
+            "description": "Convert Markdown to HTML",
+            "homepage": "https://github.com/GraphQLAPI/markdown-convertor",
+            "keywords": [
+                "markdown-convertor",
+                "pop"
+            ],
+            "support": {
+                "issues": "https://github.com/GraphQLAPI/markdown-convertor/issues",
+                "source": "https://github.com/GraphQLAPI/markdown-convertor/tree/master"
+            },
+            "time": "2021-01-26T11:02:29+00:00"
         },
         {
             "name": "graphql-by-pop/graphql-clients-for-wp",
