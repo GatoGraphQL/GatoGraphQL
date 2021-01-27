@@ -7,7 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('em_events_build_sql_conditions', 'popEmRssEventsBuildSqlConditions', 1, 2);
 function popEmRssEventsBuildSqlConditions($conditions, $args)
 {
-    
+
        // Somehow the scope could be an array, so `preg_match` below would fail, so make sure it is not an array
     if (!empty($args['scope']) && !is_array($args['scope'])) {
         // Check if it suits the regex, and if so, get how many days
@@ -16,8 +16,8 @@ function popEmRssEventsBuildSqlConditions($conditions, $args)
             $days = $matches[1];
 
             // $end_date: if doing 2 days, then must produce +1 day, etc
-            $start_date = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);
-            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/));
+            $start_date = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP);
+            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), POP_CONSTANT_CURRENTTIMESTAMP));
             $conditions['scope'] = " ((event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)))";
         }
     }
