@@ -39,11 +39,13 @@ return [
             ->files()
             ->ignoreVCS(true)
             ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.json|composer\\.lock/')
-            // Exclude libraries ending in "-wp"
             ->notPath([
+                // Exclude libraries ending in "-wp"
                 '#getpop/[a-zA-Z0-9_-]*-wp/#',
                 '#pop-schema/[a-zA-Z0-9_-]*-wp/#',
                 '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
+                // Exclude Symfony Polyfill bootstrap files
+                '#symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#',
             ])
             ->in('vendor'),
         Finder::create()->append([
