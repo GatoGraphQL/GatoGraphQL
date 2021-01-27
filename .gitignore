@@ -4,6 +4,9 @@
 phpcs.xml
 phpunit.xml
 .phpunit.result.cache
-#composer.lock
+# Ignore all composer.lock files, except the one in the root,
+# as to make sure the CI always works
+composer.lock
+!/composer.lock
 /wordpress/
 .lando.local.yml
