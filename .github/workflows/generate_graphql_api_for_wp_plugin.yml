@@ -91,7 +91,7 @@ jobs:
                 working-directory: .
 
             -   name: Regenerate autoloader
-                run: composer dumpautoload --optimize --no-interaction --ansi
+                run: composer dumpautoload --optimize --classmap-authoritative --ansi
 
             -   name: Create build folder
                 run: mkdir build
