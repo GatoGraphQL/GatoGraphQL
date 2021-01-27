@@ -99,7 +99,7 @@ class ContainerBuilderFactory
             self::$instance = new ContainerBuilder();
         } else {
             require_once self::$cacheFile;
-            self::$instance = new \ProjectServiceContainer();
+            self::$instance = new \PoPProjectServiceContainer();
         }
     }
     public static function getInstance(): Container
@@ -135,7 +135,7 @@ class ContainerBuilderFactory
                 if ($folderExists) {
                     // Save the container to disk
                     $dumper = new PhpDumper($containerBuilder);
-                    file_put_contents(self::$cacheFile, $dumper->dump());
+                    file_put_contents(self::$cacheFile, $dumper->dump(array('class' => 'PoPProjectServiceContainer')));
 
                     // Change the permissions so it can be modified by external processes (eg: deployment)
                     chmod(self::$cacheFile, 0777);
