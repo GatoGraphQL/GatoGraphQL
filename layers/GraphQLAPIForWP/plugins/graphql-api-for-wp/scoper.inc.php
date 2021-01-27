@@ -46,19 +46,15 @@ return [
                 '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
                 // Exclude Symfony Polyfill bootstrap files
                 '#symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#',
+                // Exclude libraries
+                '#symfony/deprecation-contracts#',
+                '#ralouphie/getallheaders#',
             ])
             ->in('vendor'),
         Finder::create()->append([
             'vendor/getpop/routing-wp/src/Component.php',
             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
         ])
-    ],
-    'files-whitelist' => [
-        // do not prefix "trigger_deprecation" from symfony - https://github.com/symfony/symfony/commit/0032b2a2893d3be592d4312b7b098fb9d71aca03
-        // these paths are relative to this file location, so it should be in the root directory
-        'vendor/symfony/deprecation-contracts/function.php',
-        // avoid pre-slashing everything
-        'composer.json',
     ],
     'whitelist' => [
         // own namespaces
