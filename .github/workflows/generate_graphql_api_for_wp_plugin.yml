@@ -93,6 +93,10 @@ jobs:
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
 
+            -   name: Use Scoper autoload in plugin main file
+                run: |
+                    sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
+
             -   name: Create build folder
                 run: mkdir build
                 working-directory: .
