@@ -90,6 +90,9 @@ jobs:
                 run: rsync --recursive build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/
                 working-directory: .
 
+            -   name: Regenerate autoloader
+                run: composer dumpautoload --optimize --no-interaction --ansi
+
             -   name: Create build folder
                 run: mkdir build
                 working-directory: .
