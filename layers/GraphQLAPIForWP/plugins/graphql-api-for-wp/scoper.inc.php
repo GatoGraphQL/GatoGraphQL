@@ -46,6 +46,8 @@ return [
                 '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
                 // Exclude Symfony Polyfill bootstrap files
                 '#symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#',
+                // Exclude libraries
+                '#ralouphie/getallheaders#',
             ])
             ->in('vendor'),
         Finder::create()->append([
