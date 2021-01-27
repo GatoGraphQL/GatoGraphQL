@@ -55,16 +55,15 @@ return [
         ])
     ],
     'whitelist' => [
-        // own namespaces
+        // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
         'PoPSchema\*',
         'PoP\*',
         'GraphQLByPoP\*',
         'GraphQLAPI\*',
-        // for config.php  Symfony PHP Configs
-        // 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator',
-        // 'Composer\*',
+        // Own container cache
+        'PoPContainer\*',
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
