@@ -44,11 +44,9 @@ return [
                 '#getpop/[a-zA-Z0-9_-]*-wp/#',
                 '#pop-schema/[a-zA-Z0-9_-]*-wp/#',
                 '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
-                // Exclude Symfony Polyfill bootstrap files
-                '#symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#',
                 // Exclude libraries
-                '#symfony/deprecation-contracts#',
-                '#ralouphie/getallheaders#',
+                '#symfony/deprecation-contracts/#',
+                '#ralouphie/getallheaders/#',
             ])
             ->in('vendor'),
         Finder::create()->append([
@@ -67,5 +65,29 @@ return [
         // for config.php  Symfony PHP Configs
         // 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator',
         // 'Composer\*',
+    ],
+    'patchers' => [
+        function (string $filePath, string $prefix, string $content): string {
+            /**
+             * Symfony Polyfill packages.
+             * These files must register functions under the global namespace,
+             * so remove the namespaced after it's added.
+             * These files can't be whitelisted, because they may reference a prefixed class
+             */
+            // Pattern to identify Symfony Polyfill bootstrap files
+            // - vendor/symfony/polyfill-mbstring/bootstrap80.php
+            // - vendor/symfony/polyfill-php72/bootstrap.php
+            // - etc
+            $pattern = '#' . __DIR__ . '/vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
+            if (preg_match($pattern, $filePath)) {
+                // Remove the namespace
+                return str_replace(
+                    "namespace ${prefix};",
+                    '',
+                    $content
+                );
+            }
+            return $content;
+        },
     ],
 ];
