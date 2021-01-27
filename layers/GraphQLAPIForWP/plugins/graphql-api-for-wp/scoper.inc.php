@@ -69,6 +69,21 @@ return [
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
             /**
+             * File vendor/nikic/fast-route/src/bootstrap.php has this code:
+             *
+             * if (\strpos($class, 'FastRoute\\') === 0) {
+             *   $name = \substr($class, \strlen('FastRoute'));
+             *
+             * Fix it
+             */
+            if ($filePath === __DIR__ . DIRECTORY_SEPARATOR . 'vendor/nikic/fast-route/src/bootstrap.php') {
+                return str_replace(
+                    ["'FastRoute\\\\'", "'FastRoute'"],
+                    ["'${prefix}\\\\FastRoute\\\\'", "'${prefix}\\\\FastRoute'"],
+                    $content
+                );
+            }
+            /**
              * Symfony Polyfill packages.
              * These files must register functions under the global namespace,
              * so remove the namespaced after it's added.
