@@ -6,7 +6,7 @@ parameters:
 	reportUnmatchedIgnoredErrors: false
 	ignoreErrors:
 		-
-			message: '#Instantiated class ProjectServiceContainer not found\.#'
+			message: '#Instantiated class PoPContainer\\ProjectServiceContainer not found\.#'
 			path: src/Container/ContainerBuilderFactory.php
 			count: 1
 		-
