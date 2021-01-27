@@ -32,6 +32,7 @@ use Isolated\Symfony\Component\Finder\Finder;
  * This works without side effects, because there are no WordPress stubs in them.
  */
 return [
+    'prefix' => 'PrefixedByPoP',
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()
