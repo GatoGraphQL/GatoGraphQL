@@ -94,7 +94,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Return the notifications from within the last 24 hs
-                $yesterday = strtotime("-1 day", POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);
+                $yesterday = strtotime("-1 day", POP_CONSTANT_CURRENTTIMESTAMP);
                 $ret['hist_time'] = $yesterday;
                 break;
         }

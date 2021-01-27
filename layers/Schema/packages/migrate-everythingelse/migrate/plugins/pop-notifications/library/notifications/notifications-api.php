@@ -55,7 +55,7 @@ class PoP_Notifications_API
 
         // // Normalize the args
         // $args = self::convertArgs($args);
-        
+
         // Delete a previous entry
         global $wpdb;
         $wpdb->query(
@@ -91,7 +91,7 @@ class PoP_Notifications_API
                 'array' => false,
                 'fields' => '*',
                 'user_id' => '',
-                'hist_time' => POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/,
+                'hist_time' => POP_CONSTANT_CURRENTTIMESTAMP,
                 'hist_time_compare' => '<',
                 'order' => 'ASC',
                 'orderby' => '',
@@ -194,7 +194,7 @@ class PoP_Notifications_API
             //----------------------------------
             if ($user_id) {
                 // Below, create an array of AND statements for the given user
-                
+
                 //----------------------------------
                 // Helper WHERE statements
                 //----------------------------------
@@ -224,7 +224,7 @@ class PoP_Notifications_API
                     foreach ($usernetwork_metakeys as $metakey) {
                         $usernetwork_keys[] = \PoPSchema\UserMeta\Utils::getMetaKey($metakey);
                     }
-                    
+
                     // $user_network_conditions: allow to hook more conditions into it
                     // Needed for User Role Editor to add Community Members from this user's communities
                     // ------------------------------
@@ -239,9 +239,9 @@ class PoP_Notifications_API
                     $user_network_conditions[] = sprintf(
                         '
 							%4$s.user_id in (
-								SELECT 
-									meta_value 
-								FROM 
+								SELECT
+									meta_value
+								FROM
 									%2$s
 								WHERE
 									(
@@ -315,9 +315,9 @@ class PoP_Notifications_API
                 $useractivityposts_object_id_unions = array(
                     sprintf(
                         '
-							SELECT 
-								ID 
-							FROM 
+							SELECT
+								ID
+							FROM
 								%1$s
 							WHERE
 									post_status = "publish"
@@ -357,9 +357,9 @@ class PoP_Notifications_API
 							%3$s.user_id != %1$s
 						AND
 							%3$s.object_id in (
-									SELECT 
-										ID 
-									FROM 
+									SELECT
+										ID
+									FROM
 										%2$s
 									WHERE
 										post_author = %1$s
@@ -508,7 +508,7 @@ class PoP_Notifications_API
                         $wpdb->pop_notifications
                     );
                 }
-                
+
                 // User Activity + Network Notifications:
                 $useractivityplusnetwork_notification_actions = HooksAPIFacade::getInstance()->applyFilters(
                     'AAL_PoP_API:notifications:useractivityplusnetwork:actions',
@@ -549,7 +549,7 @@ class PoP_Notifications_API
                         $wpdb->posts
                     );
                 }
-            
+
 
                 // Allow plug-ins to keep adding WHERE statements
                 $sql_where_user_ors = HooksAPIFacade::getInstance()->applyFilters('PoP_Notifications_API:sql:wheres', $sql_where_user_ors, $args, $actions, $user_id, $userposts_where, $useractivityposts_where, $user_plus_network_where);
@@ -667,9 +667,9 @@ class PoP_Notifications_API
             // }
             $joinstatusclause = sprintf(
                 '
-					LEFT OUTER JOIN 
+					LEFT OUTER JOIN
 						`%2$s`
-					ON 
+					ON
 						(
 							%2$s.status_histid = %1$s.histid
 						AND
@@ -684,12 +684,12 @@ class PoP_Notifications_API
 
         $sql = sprintf(//$wpdb->prepare(
             '
-				SELECT 
+				SELECT
 					%s
 				FROM
 					`%s`
 				%s
-				WHERE 
+				WHERE
 					%s
 				%s
 				%s
@@ -747,7 +747,7 @@ class PoP_Notifications_API
 				histid
 			FROM
 				`%1$s`
-			WHERE 
+			WHERE
 				(
 					`user_id` = %2$d
 				AND
@@ -797,7 +797,7 @@ class PoP_Notifications_API
 				histid
 			FROM
 				`%1$s`
-			WHERE 
+			WHERE
 				(
 					`user_id` = %2$d
 				OR
@@ -823,7 +823,7 @@ class PoP_Notifications_API
                     '
 					DELETE FROM
 						`%1$s`
-					WHERE 
+					WHERE
 						`histid` in (%2$s)
 					',
                     $wpdb->pop_notifications,
@@ -846,7 +846,7 @@ class PoP_Notifications_API
                 '
 				DELETE FROM
 					`%1$s`
-				WHERE 
+				WHERE
 					%2$s
 				',
                 $wpdb->pop_notifications_status,
@@ -860,14 +860,14 @@ class PoP_Notifications_API
         global $wpdb;
 
         $joined_histids = implode(',', $histids);
-        
+
         // Delete all records from the activity log
         $wpdb->query(
             sprintf(
                 '
 				DELETE FROM
 					`%1$s`
-				WHERE 
+				WHERE
 					`histid` in (%2$s)
 				',
                 $wpdb->pop_notifications,
@@ -881,7 +881,7 @@ class PoP_Notifications_API
                 '
 				DELETE FROM
 					`%1$s`
-				WHERE 
+				WHERE
 					`status_histid` in (%2$s)
 				',
                 $wpdb->pop_notifications_status,
@@ -902,7 +902,7 @@ class PoP_Notifications_API
                 '
 				DELETE FROM
 					`%1$s`
-				WHERE 
+				WHERE
 					(
 						`status_histid` = %2$d
 					AND

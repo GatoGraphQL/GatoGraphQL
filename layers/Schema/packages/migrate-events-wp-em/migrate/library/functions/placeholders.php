@@ -11,7 +11,7 @@ function gdEmEventOutputShowCondition($show_condition = false, $condition, $cond
     } elseif ($condition == 'no_attendees') {
         return !gdEventHasAttendees($event);
     }
-    
+
     return $show_condition;
 }
 
@@ -26,16 +26,16 @@ function gdEmEventOutputShowConditionAddAttCondition($show_condition = false, $c
         //event has this attribute
         $att = $tag_match[1];
         $attributes = $event->event_attributes;
-       
+
         $show_condition = is_array($event->event_attributes) && array_key_exists($att, $attributes) && $attributes[$att];
     } elseif (preg_match('/^no_att_([a-zA-Z0-9_\-]+)$/', $condition, $tag_match)) {
         //event doesn't have this attribute
         $att = $tag_match[1];
         $attributes = $event->event_attributes;
-       
+
         $show_condition = !(is_array($event->event_attributes) && array_key_exists($att, $attributes) && $attributes[$att]);
     }
-    
+
     return $show_condition;
 }
 
@@ -46,13 +46,13 @@ HooksAPIFacade::getInstance()->addFilter('em_event_output_show_condition', 'gdEm
 function gdEmEventOutputShowConditionAddDateCondition($show_condition = false, $condition, $conditional_value, $event)
 {
     if ($condition == 'is_today') {
-        $today = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);
+        $today = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP);
         $show_condition = gdEmEventEventOnGivenDay($today, $event);
     } elseif ($condition == 'is_tomorrow') {
-        $tomorrow = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/+86400);    // add a day
+        $tomorrow = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP+86400);    // add a day
         $show_condition = gdEmEventEventOnGivenDay($tomorrow, $event);
     }
-    
+
     return $show_condition;
 }
 

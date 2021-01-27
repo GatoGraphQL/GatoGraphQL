@@ -30,7 +30,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $pagesection_settings_id = $this->getPagesectionSettingsid();
             $block_module = $this->getBlockModule();
             $block_settings_id = ModuleUtils::getModuleOutputName($block_module);
-            
+
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;
             // First, save the old values, to restore them later
@@ -45,8 +45,8 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             }
             // Then, can start to modify the global state
             $vars['global-userstate']['is-user-logged-in'] = true;
-            
-            $yesterday = strtotime("-1 day", POP_CONSTANT_CURRENTTIMESTAMP/*current_time('timestamp')*/);
+
+            $yesterday = strtotime("-1 day", POP_CONSTANT_CURRENTTIMESTAMP);
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
                 $vars['global-userstate']['current-user'] = $cmsusersapi->getUserById($user_id)/*new WP_User($user_id, '')*/;
@@ -75,7 +75,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
 
                 // Initialize the popManager once again, so that it merges the new data into the context
                 $serverside_rendering->initPopmanager();
-                
+
                 // Now we can call again function getContent(), which will have the right context for that user
                 $emails[] = array(
                     'users' => array($user_id),
