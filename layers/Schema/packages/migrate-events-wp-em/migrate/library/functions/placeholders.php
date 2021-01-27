@@ -49,7 +49,7 @@ function gdEmEventOutputShowConditionAddDateCondition($show_condition = false, $
         $today = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP);
         $show_condition = gdEmEventEventOnGivenDay($today, $event);
     } elseif ($condition == 'is_tomorrow') {
-        $tomorrow = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP+86400);    // add a day
+        $tomorrow = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP + 86400);    // add a day
         $show_condition = gdEmEventEventOnGivenDay($tomorrow, $event);
     }
 
