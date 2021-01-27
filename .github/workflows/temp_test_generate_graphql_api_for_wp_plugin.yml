@@ -84,9 +84,13 @@ jobs:
             -   name: Scope plugin into separate folder
                 run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi --no-interaction
 
+            # Notice that the scoped results correspond to vendor/, so must copy them back there
             -   name: Copy scoped code back into plugin
-                run: rsync --recursive build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/
+                run: rsync --recursive build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/
                 working-directory: .
+
+            -   name: Regenerate autoloader
+                run: composer dumpautoload --optimize --no-interaction --ansi
 
             -   name: Create build folder
                 run: mkdir build
@@ -97,7 +101,7 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                run: zip -X -r ../../../../build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
