@@ -261,12 +261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/api.git",
-                "reference": "4eabb850ae2cfe0d5d55a37463076bc5516885ad"
+                "reference": "58792ee736512cd0644ce89743738dd83850f69b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/api/zipball/4eabb850ae2cfe0d5d55a37463076bc5516885ad",
-                "reference": "4eabb850ae2cfe0d5d55a37463076bc5516885ad",
+                "url": "https://api.github.com/repos/getpop/api/zipball/58792ee736512cd0644ce89743738dd83850f69b",
+                "reference": "58792ee736512cd0644ce89743738dd83850f69b",
                 "shasum": ""
             },
             "require": {
@@ -316,7 +316,7 @@
             "support": {
                 "source": "https://github.com/getpop/api/tree/master"
             },
-            "time": "2021-01-25T11:19:51+00:00"
+            "time": "2021-01-28T03:20:01+00:00"
         },
         {
             "name": "getpop/api-clients",
@@ -673,12 +673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/component-model.git",
-                "reference": "4a2cbc7c06b3a536423772bd8aeda27d217ba25d"
+                "reference": "31f636a30fcb256a25f1abd556e6fb57d4186631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/component-model/zipball/4a2cbc7c06b3a536423772bd8aeda27d217ba25d",
-                "reference": "4a2cbc7c06b3a536423772bd8aeda27d217ba25d",
+                "url": "https://api.github.com/repos/getpop/component-model/zipball/31f636a30fcb256a25f1abd556e6fb57d4186631",
+                "reference": "31f636a30fcb256a25f1abd556e6fb57d4186631",
                 "shasum": ""
             },
             "require": {
@@ -706,6 +706,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "library/constants.php"
+                ],
                 "psr-4": {
                     "PoP\\ComponentModel\\": "src"
                 }
@@ -730,7 +733,7 @@
             "support": {
                 "source": "https://github.com/getpop/component-model/tree/master"
             },
-            "time": "2021-01-25T11:20:26+00:00"
+            "time": "2021-01-28T03:19:59+00:00"
         },
         {
             "name": "getpop/definitions",
@@ -796,12 +799,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/engine.git",
-                "reference": "c928c254f81b5abe573efb8c466009488adca4e1"
+                "reference": "0a434ddaeb732b194deac59320e20f0387d8ed10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/engine/zipball/c928c254f81b5abe573efb8c466009488adca4e1",
-                "reference": "c928c254f81b5abe573efb8c466009488adca4e1",
+                "url": "https://api.github.com/repos/getpop/engine/zipball/0a434ddaeb732b194deac59320e20f0387d8ed10",
+                "reference": "0a434ddaeb732b194deac59320e20f0387d8ed10",
                 "shasum": ""
             },
             "require": {
@@ -853,7 +856,7 @@
             "support": {
                 "source": "https://github.com/getpop/engine/tree/master"
             },
-            "time": "2021-01-25T11:23:22+00:00"
+            "time": "2021-01-28T03:20:03+00:00"
         },
         {
             "name": "getpop/engine-wp",
@@ -1279,12 +1282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/migrate-api.git",
-                "reference": "641b0cf445835682fae309210ffbafa3a216e4dc"
+                "reference": "a0246071b04fb414ff8f7524fa6ae48a29c41f53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/migrate-api/zipball/641b0cf445835682fae309210ffbafa3a216e4dc",
-                "reference": "641b0cf445835682fae309210ffbafa3a216e4dc",
+                "url": "https://api.github.com/repos/getpop/migrate-api/zipball/a0246071b04fb414ff8f7524fa6ae48a29c41f53",
+                "reference": "a0246071b04fb414ff8f7524fa6ae48a29c41f53",
                 "shasum": ""
             },
             "require": {
@@ -1318,7 +1321,7 @@
             "support": {
                 "source": "https://github.com/getpop/migrate-api/tree/master"
             },
-            "time": "2021-01-25T11:24:27+00:00"
+            "time": "2021-01-28T03:20:00+00:00"
         },
         {
             "name": "getpop/migrate-api-graphql",
@@ -1372,12 +1375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/migrate-component-model.git",
-                "reference": "0586a8539fe1d4f32767b14a18c9f304a41e4cf9"
+                "reference": "59716090d21b5d26e9116ab1bbd8a77dd75b8b8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/migrate-component-model/zipball/0586a8539fe1d4f32767b14a18c9f304a41e4cf9",
-                "reference": "0586a8539fe1d4f32767b14a18c9f304a41e4cf9",
+                "url": "https://api.github.com/repos/getpop/migrate-component-model/zipball/59716090d21b5d26e9116ab1bbd8a77dd75b8b8c",
+                "reference": "59716090d21b5d26e9116ab1bbd8a77dd75b8b8c",
                 "shasum": ""
             },
             "require": {
@@ -1408,9 +1411,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/getpop/migrate-component-model/tree/0.7.7"
+                "source": "https://github.com/getpop/migrate-component-model/tree/master"
             },
-            "time": "2021-01-25T10:06:28+00:00"
+            "time": "2021-01-28T03:20:01+00:00"
         },
         {
             "name": "getpop/migrate-engine",
@@ -1418,12 +1421,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/migrate-engine.git",
-                "reference": "4fac53561ecf29d733f59b510f703dba12b115b1"
+                "reference": "75d3e5923d1ff1cbd0c21d9044fa289c89dd5c77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/migrate-engine/zipball/4fac53561ecf29d733f59b510f703dba12b115b1",
-                "reference": "4fac53561ecf29d733f59b510f703dba12b115b1",
+                "url": "https://api.github.com/repos/getpop/migrate-engine/zipball/75d3e5923d1ff1cbd0c21d9044fa289c89dd5c77",
+                "reference": "75d3e5923d1ff1cbd0c21d9044fa289c89dd5c77",
                 "shasum": ""
             },
             "require": {
@@ -1461,7 +1464,7 @@
             "support": {
                 "source": "https://github.com/getpop/migrate-engine/tree/master"
             },
-            "time": "2021-01-25T11:24:24+00:00"
+            "time": "2021-01-28T03:19:59+00:00"
         },
         {
             "name": "getpop/migrate-engine-wp",
