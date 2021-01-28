@@ -21,8 +21,6 @@
 
 
 
-const GD_URLPARAM_TITLE = 'title';
-const GD_URLPARAM_TITLELINK = 'title-link';
 const GD_URLPARAM_URL = 'url';
 const GD_URLPARAM_ERROR = 'error';
 

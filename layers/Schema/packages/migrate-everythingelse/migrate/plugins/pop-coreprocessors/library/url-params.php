@@ -3,6 +3,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
 
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
+const GD_URLPARAM_TITLE = 'title';
+const GD_URLPARAM_TITLELINK = 'title-link';
 
 define('GD_URLPARAM_ACTION_PRINT', 'print');
 
