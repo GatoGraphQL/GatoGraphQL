@@ -2,8 +2,6 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-define('POP_MSG_STARTUPERROR', TranslationAPIFacade::getInstance()->__('PoP cannot load, please check on the dashboard for error messages, or notify the admin of this site.', 'pop-engine'));
-
 // This Constant is needed to be able to retrieve the timestamp and replace it for nothing when generating the ETag,
 // so that this random value does not modify the hash of the overall html output
 define('POP_CONSTANT_UNIQUE_ID', GeneralUtils::generateRandomString());
