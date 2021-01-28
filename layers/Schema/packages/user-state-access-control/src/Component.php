@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl;
 
+use PoPSchema\UserStateAccessControl\Conditional\CacheControl\ConditionalComponent;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
@@ -68,7 +69,7 @@ class Component extends AbstractComponent
                 class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                \PoPSchema\UserStateAccessControl\Conditional\CacheControl\ConditionalComponent::initialize(
+                ConditionalComponent::initialize(
                     $configuration,
                     $skipSchema
                 );
@@ -109,7 +110,7 @@ class Component extends AbstractComponent
 
         // Boot conditional on API package being installed
         if (class_exists('\PoP\CacheControl\Component')) {
-            \PoPSchema\UserStateAccessControl\Conditional\CacheControl\ConditionalComponent::afterBoot();
+            ConditionalComponent::afterBoot();
         }
     }
 }

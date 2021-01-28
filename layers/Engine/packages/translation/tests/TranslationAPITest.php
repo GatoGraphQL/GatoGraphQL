@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Translation;
 
+use PHPUnit\Framework\TestCase;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\ContractImplementations\TranslationAPI;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class TranslationAPITest extends \PHPUnit\Framework\TestCase
+class TranslationAPITest extends TestCase
 {
     public function __construct()
     {

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 
+use PoP\GraphQLAPI\Component;
+use PoP\ComponentModel\Constants\Params;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
@@ -41,7 +44,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     {
         return
             class_exists('\PoP\GraphQLAPI\Component')
-            && \PoP\GraphQLAPI\Component::isEnabled()
+            && Component::isEnabled()
             && !ComponentConfiguration::isGraphQLAPIEndpointDisabled();
     }
 
@@ -53,9 +56,9 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     protected function executeEndpoint(): void
     {
         // Set the params on the request, to emulate that they were added by the user
-        $_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] = APISchemes::API;
+        $_REQUEST[Params::SCHEME] = APISchemes::API;
         // Include qualified namespace here (instead of `use`) since we do didn't know if component is installed
-        $_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] = \PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter::getName();
+        $_REQUEST[Params::DATASTRUCTURE] = GraphQLDataStructureFormatter::getName();
         // Enable hooks
         \do_action('EndpointHandler:setDoingGraphQL');
     }

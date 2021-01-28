@@ -1,4 +1,5 @@
 <?php
+use GraphQLAPI\GraphQLAPI\Plugin;
 /*
 Plugin Name: GraphQL API for WordPress
 Plugin URI: https://graphql-api.com
@@ -66,4 +67,4 @@ if (!file_exists($autoloadFile)) {
 require_once($autoloadFile);
 
 // Create and set-up the plugin instance
-(new \GraphQLAPI\GraphQLAPI\Plugin())->setup();
+(new Plugin())->setup();

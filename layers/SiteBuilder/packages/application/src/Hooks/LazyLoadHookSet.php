@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\Targets;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -59,15 +62,15 @@ class LazyLoadHookSet extends AbstractHookSet
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {
             $url = GeneralUtils::addQueryArgs([
-                \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
-                    \PoP\ComponentModel\Constants\DataOutputItems::META,
-                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
-                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                Params::DATA_OUTPUT_ITEMS => [
+                    DataOutputItems::META,
+                    DataOutputItems::MODULE_DATA,
+                    DataOutputItems::DATABASES,
                 ],
                 ModuleFilterManager::URLPARAM_MODULEFILTER => Lazy::NAME,
-                \PoP\ComponentModel\Constants\Params::ACTIONS . '[]' => Actions::LOADLAZY,
+                Params::ACTIONS . '[]' => Actions::LOADLAZY,
             ], RequestUtils::getCurrentUrl());
-            $engine->addBackgroundUrl($url, array(\PoP\ComponentModel\Constants\Targets::MAIN));
+            $engine->addBackgroundUrl($url, array(Targets::MAIN));
         }
     }
 }

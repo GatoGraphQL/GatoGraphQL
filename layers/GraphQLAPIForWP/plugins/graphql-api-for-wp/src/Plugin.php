@@ -308,7 +308,7 @@ class Plugin
         // all its dependencies from PoP
         ComponentLoader::initializeComponents(
             [
-                \GraphQLAPI\GraphQLAPI\Component::class,
+                Component::class,
             ],
             $componentClassConfiguration,
             $skipSchemaComponentClasses

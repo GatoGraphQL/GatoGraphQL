@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories;
 
+use PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Categories\Config\ServiceConfiguration;
@@ -73,7 +74,7 @@ class Component extends AbstractComponent
         ServiceConfiguration::initialize();
 
         if (!in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
-            \PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent::initialize(
+            ConditionalComponent::initialize(
                 $configuration,
                 $skipSchema
             );
@@ -95,7 +96,7 @@ class Component extends AbstractComponent
 
         // If $skipSchema for `Condition` is `true`, then services are not registered
         if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\RESTAPI\\Hooks'))) {
-            \PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent::beforeBoot();
+            ConditionalComponent::beforeBoot();
         }
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\StancesWP\Config;
 
+use PoPSchema\Stances\TypeResolverPickers\Optional\StanceCustomPostTypeResolverPicker;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -17,7 +18,7 @@ class ServiceConfiguration
         ContainerBuilderUtils::injectValuesIntoService(
             InstanceManagerInterface::class,
             'overrideClass',
-            \PoPSchema\Stances\TypeResolverPickers\Optional\StanceCustomPostTypeResolverPicker::class,
+            StanceCustomPostTypeResolverPicker::class,
             \PoPSchema\StancesWP\TypeResolverPickers\Overrides\StanceCustomPostTypeResolverPicker::class
         );
     }

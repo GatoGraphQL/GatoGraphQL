@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Config;
 
+use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
+use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLWithExplorerClient;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
@@ -87,13 +89,13 @@ class ServiceConfiguration
         ContainerBuilderUtils::injectValuesIntoService(
             InstanceManagerInterface::class,
             'overrideClass',
-            \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient::class,
+            GraphiQLClient::class,
             \GraphQLAPI\GraphQLAPI\Clients\Overrides\GraphiQLClient::class
         );
         ContainerBuilderUtils::injectValuesIntoService(
             InstanceManagerInterface::class,
             'overrideClass',
-            \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLWithExplorerClient::class,
+            GraphiQLWithExplorerClient::class,
             \GraphQLAPI\GraphQLAPI\Clients\Overrides\GraphiQLWithExplorerClient::class
         );
     }

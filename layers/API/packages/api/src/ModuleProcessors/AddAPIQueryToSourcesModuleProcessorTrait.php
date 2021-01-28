@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
+use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\API\Schema\QueryInputs;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -59,9 +60,9 @@ trait AddAPIQueryToSourcesModuleProcessorTrait
                             APIUtils::getEndpoint(
                                 $source,
                                 [
-                                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
-                                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
-                                    \PoP\ComponentModel\Constants\DataOutputItems::META,
+                                    DataOutputItems::MODULE_DATA,
+                                    DataOutputItems::DATABASES,
+                                    DataOutputItems::META,
                                 ]
                             )
                         );

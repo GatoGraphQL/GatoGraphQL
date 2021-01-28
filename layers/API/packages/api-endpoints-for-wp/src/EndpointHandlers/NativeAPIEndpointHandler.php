@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\APIEndpointsForWP\EndpointHandlers;
 
+use PoP\API\Component;
+use PoP\ComponentModel\Constants\Params;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\APIEndpointsForWP\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
@@ -40,7 +42,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     protected function isNativeAPIEnabled(): bool
     {
         return
-            \PoP\API\Component::isEnabled()
+            Component::isEnabled()
             && !ComponentConfiguration::isNativeAPIEndpointDisabled();
     }
 
@@ -52,7 +54,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     protected function executeEndpoint(): void
     {
         // Set the params on the request, to emulate that they were added by the user
-        $_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] = APISchemes::API;
+        $_REQUEST[Params::SCHEME] = APISchemes::API;
         // Enable hooks
         \do_action('EndpointHandler:setDoingAPI');
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeDataLoaders;
 
+use PoPSchema\Comments\Constants\Status;
+use PoPSchema\Comments\Constants\Params;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\Comments\ModuleProcessors\CommentRelationalFieldDataloadModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -28,9 +30,9 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         $query = parent::getQuery($query_args);
 
-        $query['status'] = \PoPSchema\Comments\Constants\Status::APPROVED;
+        $query['status'] = Status::APPROVED;
         // $query['type'] = 'comment'; // Only comments, no trackbacks or pingbacks
-        $query['customPostID'] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
+        $query['customPostID'] = $query_args[Params::COMMENT_POST_ID];
 
         return $query;
     }

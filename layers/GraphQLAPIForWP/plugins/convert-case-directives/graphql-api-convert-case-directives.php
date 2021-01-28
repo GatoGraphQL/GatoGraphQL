@@ -1,4 +1,5 @@
 <?php
+use GraphQLAPI\ConvertCaseDirectives\Plugin;
 /*
 Plugin Name: GraphQL API - Convert Case Directives
 Plugin URI: https://github.com/GraphQLAPI/convert-case-directives
@@ -26,4 +27,4 @@ define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.1.0');
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create and set-up the plugin instance
-(new \GraphQLAPI\ConvertCaseDirectives\Plugin())->setup();
+(new Plugin())->setup();

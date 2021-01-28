@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Hooks;
 
+use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -36,10 +37,10 @@ class VarsHooks extends AbstractHookSet
                 $component_types = (array)HooksAPIFacade::getInstance()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
-                        \PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
+                        ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
                     )
                 );
-                if (in_array(\PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
+                if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
                     $components[] =
                         TranslationAPIFacade::getInstance()->__('post type:', 'pop-engine')

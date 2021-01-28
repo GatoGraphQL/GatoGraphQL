@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EventsWPEM\Config;
 
+use PoPSchema\Events\TypeResolverPickers\Optional\EventCustomPostTypeResolverPicker;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -17,7 +18,7 @@ class ServiceConfiguration
         ContainerBuilderUtils::injectValuesIntoService(
             InstanceManagerInterface::class,
             'overrideClass',
-            \PoPSchema\Events\TypeResolverPickers\Optional\EventCustomPostTypeResolverPicker::class,
+            EventCustomPostTypeResolverPicker::class,
             \PoPSchema\EventsWPEM\TypeResolverPickers\Overrides\EventCustomPostTypeResolverPicker::class
         );
     }
