@@ -1570,7 +1570,7 @@ class Engine implements EngineInterface
 
         // Show logs only if both enabled, and passing the action in the URL
         if (ServerUtils::enableShowLogs()) {
-            if (in_array(POP_ACTION_SHOW_LOGS, $vars['actions'])) {
+            if (in_array(\PoP\ComponentModel\Constants\Actions::SHOW_LOGS, $vars['actions'])) {
                 $ret['logEntries'] = $feedbackMessageStore->getLogEntries();
             }
         }
