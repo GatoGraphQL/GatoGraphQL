@@ -10,7 +10,7 @@ define('GD_URLPARAM_TARGET_SOCIALMEDIA', 'socialmedia');
 HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsUrlparams');
 function gdJqueryConstantsUrlparams($jqueryConstants)
 {
-    $jqueryConstants['UNIQUEID'] = POP_UNIQUEID;
+    $jqueryConstants['UNIQUEID'] = \PoP\ComponentModel\Constants\Response::UNIQUE_ID;
 
     $jqueryConstants['URLPARAM_TIMESTAMP'] = GD_URLPARAM_TIMESTAMP;
     $jqueryConstants['URLPARAM_ACTIONS'] = GD_URLPARAM_ACTIONS;

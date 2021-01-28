@@ -1,10 +1,8 @@
 <?php
 
-const POP_UNIQUEID = 'unique-id';
-const POP_CONSTANT_ENTRYMODULE = 'entrymodule';
 
-const GD_URLPARAM_VERSION = 'version';
-const GD_URLPARAM_DATASTRUCTURE = 'datastructure';
+
+
 
 const GD_URLPARAM_FORMAT = 'format';
 const GD_URLPARAM_SETTINGSFORMAT = 'settingsformat';

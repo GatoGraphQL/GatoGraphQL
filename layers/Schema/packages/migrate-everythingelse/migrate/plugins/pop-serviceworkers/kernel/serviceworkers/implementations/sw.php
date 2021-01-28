@@ -41,7 +41,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         );
         $configuration['${localesByURL}'] = $this->getLocalesByurl();
         $configuration['${defaultLocale}'] = $this->getDefaultLocale();
-        $configuration['${versionParam}'] = GD_URLPARAM_VERSION;
+        $configuration['${versionParam}'] = \PoP\ComponentModel\Constants\Params::VERSION;
         $configuration['${outputJSON}'] = GD_URLPARAM_OUTPUT.'='.GD_URLPARAM_OUTPUT_JSON;
         $configuration['${origins}'] = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
         $configuration['${multidomains}'] = array(); // $this->getMultidomains();

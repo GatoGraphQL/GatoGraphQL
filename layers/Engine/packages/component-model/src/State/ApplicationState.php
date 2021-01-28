@@ -40,7 +40,7 @@ class ApplicationState
         $output = strtolower($_REQUEST[\GD_URLPARAM_OUTPUT] ?? '');
         $dataoutputitems = $_REQUEST[\GD_URLPARAM_DATAOUTPUTITEMS] ?? [];
         $datasources = strtolower($_REQUEST[\GD_URLPARAM_DATASOURCES] ?? '');
-        $datastructure = strtolower($_REQUEST[\GD_URLPARAM_DATASTRUCTURE] ?? '');
+        $datastructure = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] ?? '');
         $dataoutputmode = strtolower($_REQUEST[\GD_URLPARAM_DATAOUTPUTMODE] ?? '');
         $dboutputmode = strtolower($_REQUEST[\GD_URLPARAM_DATABASESOUTPUTMODE] ?? '');
         $target = strtolower($_REQUEST[\GD_URLPARAM_TARGET] ?? '');
@@ -50,7 +50,7 @@ class ApplicationState
         $scheme = strtolower($_REQUEST[\GD_URLPARAM_SCHEME] ?? '');
         // The version could possibly be set from outside
         $version = ServerUtils::enableVersionByParams() ?
-            $_REQUEST[\GD_URLPARAM_VERSION] ?? ApplicationInfoFacade::getInstance()->getVersion()
+            $_REQUEST[\PoP\ComponentModel\Constants\Params::VERSION] ?? ApplicationInfoFacade::getInstance()->getVersion()
             : ApplicationInfoFacade::getInstance()->getVersion();
 
         $outputs = (array) HooksAPIFacade::getInstance()->applyFilters(

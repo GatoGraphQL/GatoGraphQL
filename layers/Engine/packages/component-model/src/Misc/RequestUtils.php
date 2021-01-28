@@ -70,7 +70,7 @@ class RequestUtils
             'RequestUtils:current_url:remove_params',
             array(
                 \GD_URLPARAM_SETTINGSFORMAT,
-                \GD_URLPARAM_VERSION,
+                \PoP\ComponentModel\Constants\Params::VERSION,
                 \GD_URLPARAM_TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
                 ModulePaths::URLPARAM_MODULEPATHS,
@@ -80,7 +80,7 @@ class RequestUtils
                 \GD_URLPARAM_DATAOUTPUTMODE,
                 \GD_URLPARAM_DATABASESOUTPUTMODE,
                 \GD_URLPARAM_OUTPUT,
-                \GD_URLPARAM_DATASTRUCTURE,
+                \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,
                 \GD_URLPARAM_EXTRAROUTES,
                 \GD_URLPARAM_ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy

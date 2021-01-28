@@ -471,8 +471,8 @@ class Engine implements EngineInterface
     public function getRequestMeta()
     {
         $meta = array(
-            POP_CONSTANT_ENTRYMODULE => $this->getEntryModule()[1],
-            POP_UNIQUEID => POP_CONSTANT_UNIQUE_ID,
+            \PoP\ComponentModel\Constants\Response::ENTRY_MODULE => $this->getEntryModule()[1],
+            \PoP\ComponentModel\Constants\Response::UNIQUE_ID => POP_CONSTANT_UNIQUE_ID,
             GD_URLPARAM_URL => RequestUtils::getCurrentUrl(),
             'modelinstanceid' => ModelInstanceFacade::getInstance()->getModelInstanceId(),
         );
@@ -525,7 +525,7 @@ class Engine implements EngineInterface
         $meta = array();
         if (RequestUtils::fetchingSite()) {
             $vars = ApplicationState::getVars();
-            $meta[GD_URLPARAM_VERSION] = $vars['version'];
+            $meta[\PoP\ComponentModel\Constants\Params::VERSION] = $vars['version'];
             $meta[GD_URLPARAM_DATAOUTPUTMODE] = $vars['dataoutputmode'];
             $meta[GD_URLPARAM_DATABASESOUTPUTMODE] = $vars['dboutputmode'];
 

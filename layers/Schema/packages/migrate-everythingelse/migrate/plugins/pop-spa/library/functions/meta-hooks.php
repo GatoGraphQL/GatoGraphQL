@@ -24,7 +24,7 @@ class PoP_SPA_RequestMeta_Hooks
             // Send params back to the server
             $meta[ParamConstants::PARAMS] = array();
             $elemKeys = [
-                GD_URLPARAM_VERSION,
+                \PoP\ComponentModel\Constants\Params::VERSION,
                 GD_URLPARAM_DATAOUTPUTMODE,
                 GD_URLPARAM_DATABASESOUTPUTMODE,
                 GD_URLPARAM_SETTINGSFORMAT,

@@ -301,7 +301,7 @@ class PoP_ServerSideManager
     public function getUniqueId($domain)
     {
         $tlFeedback = $this->getTopLevelFeedback($domain);
-        return $tlFeedback[POP_UNIQUEID];
+        return $tlFeedback[\PoP\ComponentModel\Constants\Response::UNIQUE_ID];
     }
 
     public function getPageSectionConfiguration($domain, $pageSection)
