@@ -19,8 +19,7 @@
 
 
 
-// Used for the Comments to know what post to fetch comments from when filtering
-const GD_URLPARAM_COMMENTPOSTID = 'commentpid';
+
 
 // Used to print "active" in the menu navigation
 // const GD_URLPARAM_PARENTPAGEID = 'parentpage_id';

@@ -139,8 +139,6 @@ trait QueryDataModuleProcessorTrait
                     GD_URLPARAM_REDIRECTTO,
                     GD_URLPARAM_PAGENUMBER,
                     GD_URLPARAM_LIMIT,
-                    // Used for the Comments to know what post to fetch comments from when filtering
-                    GD_URLPARAM_COMMENTPOSTID,
                 )
             );
             $params_from_request = array_filter(
