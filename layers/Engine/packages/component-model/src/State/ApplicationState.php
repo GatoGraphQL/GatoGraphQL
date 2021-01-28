@@ -147,7 +147,7 @@ class ApplicationState
         // If there is not format, then set it to 'default'
         // This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $vars)
         // can match the same $model_instance_id when visiting that page
-        $format = isset($_REQUEST[\GD_URLPARAM_FORMAT]) ? strtolower($_REQUEST[\GD_URLPARAM_FORMAT]) : \POP_VALUES_DEFAULT;
+        $format = isset($_REQUEST[\GD_URLPARAM_FORMAT]) ? strtolower($_REQUEST[\GD_URLPARAM_FORMAT]) : \PoP\ComponentModel\Constants\Values::DEFAULT;
 
         // By default, get the variables from the request
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

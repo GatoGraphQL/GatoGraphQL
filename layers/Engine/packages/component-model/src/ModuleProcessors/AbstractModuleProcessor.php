@@ -683,7 +683,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             );
 
             if ($properties) {
-                $ret[POP_CONSTANT_DATAPROPERTIES] = $properties;
+                $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_PROPERTIES] = $properties;
             }
         }
 
@@ -816,7 +816,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($this->moduleLoadsData($module)) {
             $properties = $this->getMutableonmodelHeaddatasetmoduleDataProperties($module, $props);
             if ($properties) {
-                $ret[POP_CONSTANT_DATAPROPERTIES] = $properties;
+                $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_PROPERTIES] = $properties;
             }
         }
 
@@ -862,7 +862,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $properties = $this->getMutableonrequestHeaddatasetmoduleDataProperties($module, $props);
 
             if ($properties) {
-                $ret[POP_CONSTANT_DATAPROPERTIES] = $properties;
+                $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_PROPERTIES] = $properties;
             }
         }
 
@@ -924,7 +924,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $ret = array();
 
         if ($feedback = $this->getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
-            $ret[POP_CONSTANT_FEEDBACK] = $feedback;
+            $ret[\PoP\ComponentModel\Constants\DataLoading::FEEDBACK] = $feedback;
         }
 
         return $ret;

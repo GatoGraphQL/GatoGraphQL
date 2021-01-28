@@ -887,7 +887,7 @@ class Engine implements EngineInterface
                 $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
                 $data_properties = &$data_properties[$submoduleFullName][GD_JS_SUBMODULES];
             }
-            $data_properties = &$data_properties[$moduleFullName][POP_CONSTANT_DATAPROPERTIES];
+            $data_properties = &$data_properties[$moduleFullName][\PoP\ComponentModel\Constants\DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it
@@ -1060,14 +1060,14 @@ class Engine implements EngineInterface
             // Integrate the dbobjectids into $datasetmoduledata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
             if (!is_null($datasetmoduledata)) {
-                $this->assignValueForModule($datasetmoduledata, $module_path, $module, POP_CONSTANT_DBOBJECTIDS, $typeDBObjectIDOrIDs);
+                $this->assignValueForModule($datasetmoduledata, $module_path, $module, \PoP\ComponentModel\Constants\DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
             // Save the meta into $datasetmodulemeta
             if ($add_meta) {
                 if (!is_null($datasetmodulemeta)) {
                     if ($dataset_meta = $processor->getDatasetmeta($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
-                        $this->assignValueForModule($datasetmodulemeta, $module_path, $module, POP_CONSTANT_META, $dataset_meta);
+                        $this->assignValueForModule($datasetmodulemeta, $module_path, $module, \PoP\ComponentModel\Constants\DataLoading::META, $dataset_meta);
                     }
                 }
             }

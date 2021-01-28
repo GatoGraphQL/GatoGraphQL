@@ -214,7 +214,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = array();
 
         if ($feedback = $this->getJsdataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
-            $ret[POP_CONSTANT_FEEDBACK] = $feedback;
+            $ret[\PoP\ComponentModel\Constants\DataLoading::FEEDBACK] = $feedback;
         }
 
         return $ret;
