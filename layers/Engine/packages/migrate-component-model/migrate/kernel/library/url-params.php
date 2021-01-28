@@ -4,17 +4,13 @@
 
 
 
-const GD_URLPARAM_FORMAT = 'format';
-const GD_URLPARAM_SETTINGSFORMAT = 'settingsformat';
 
 
-const GD_URLPARAM_DATAOUTPUTMODE = 'dataoutputmode';
-const GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES = 'splitbysources';
-const GD_URLPARAM_DATAOUTPUTMODE_COMBINED = 'combined';
 
-const GD_URLPARAM_DATABASESOUTPUTMODE = 'dboutputmode';
-const GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES = 'splitbydbs';
-const GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED = 'combined';
+
+
+
+
 
 const GD_URLPARAM_ACTIONS = 'actions';
 const GD_URLPARAM_SCHEME = 'scheme';

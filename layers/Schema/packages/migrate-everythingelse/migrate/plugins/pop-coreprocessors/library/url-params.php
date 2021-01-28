@@ -39,7 +39,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_OPERATION_REPLACE'] = GD_URLPARAM_OPERATION_REPLACE;
     $jqueryConstants['URLPARAM_OPERATION_REPLACEINLINE'] = GD_URLPARAM_OPERATION_REPLACEINLINE;
 
-    $jqueryConstants['URLPARAM_FORMAT'] = GD_URLPARAM_FORMAT;
+    $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ComponentModel\Constants\Params::FORMAT;
     $jqueryConstants['URLPARAM_ROUTE'] = URLParams::ROUTE;
 
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = GD_URLPARAM_DATAOUTPUTITEMS;

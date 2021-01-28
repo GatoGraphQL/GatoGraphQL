@@ -69,7 +69,7 @@ class RequestUtils
         $remove_params = (array) HooksAPIFacade::getInstance()->applyFilters(
             'RequestUtils:current_url:remove_params',
             array(
-                \GD_URLPARAM_SETTINGSFORMAT,
+                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
                 \PoP\ComponentModel\Constants\Params::VERSION,
                 \GD_URLPARAM_TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
@@ -77,8 +77,8 @@ class RequestUtils
                 \GD_URLPARAM_ACTIONPATH,
                 \GD_URLPARAM_DATAOUTPUTITEMS,
                 \GD_URLPARAM_DATASOURCES,
-                \GD_URLPARAM_DATAOUTPUTMODE,
-                \GD_URLPARAM_DATABASESOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
                 \GD_URLPARAM_OUTPUT,
                 \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,

@@ -34,9 +34,9 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $configuration['${appshellPages}'] = $this->getAppshellPages();
         $configuration['${appshellPrecachedParams}'] = array();
         $configuration['${appshellFromServerParams}'] = array(
-            GD_URLPARAM_DATAOUTPUTMODE,
-            GD_URLPARAM_DATABASESOUTPUTMODE,
-            GD_URLPARAM_FORMAT, // Initially, this is a proxy for GD_URLPARAM_SETTINGSFORMAT
+            \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
+            \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
+            \PoP\ComponentModel\Constants\Params::FORMAT, // Initially, this is a proxy for \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT
             Request::URLPARAM_MANGLED,
         );
         $configuration['${localesByURL}'] = $this->getLocalesByurl();

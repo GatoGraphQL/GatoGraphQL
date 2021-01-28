@@ -88,7 +88,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+        if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
             // Save the model settings
             if ($immutable_settings) {
                 $ret['modulesettings']['immutable'] = $immutable_settings;
@@ -99,7 +99,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
             if ($mutableonrequest_settings) {
                 $ret['modulesettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
             }
-        } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+        } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if (
                 $combined_settings = array_merge_recursive(

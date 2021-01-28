@@ -454,11 +454,11 @@ class Engine implements EngineInterface
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+        if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
             if ($immutable_datasetsettings) {
                 $ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
             }
-        } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+        } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if ($combined_datasetsettings = $immutable_datasetsettings) {
                 $ret['datasetmodulesettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
@@ -526,11 +526,11 @@ class Engine implements EngineInterface
         if (RequestUtils::fetchingSite()) {
             $vars = ApplicationState::getVars();
             $meta[\PoP\ComponentModel\Constants\Params::VERSION] = $vars['version'];
-            $meta[GD_URLPARAM_DATAOUTPUTMODE] = $vars['dataoutputmode'];
-            $meta[GD_URLPARAM_DATABASESOUTPUTMODE] = $vars['dboutputmode'];
+            $meta[\PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
+            $meta[\PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE] = $vars['dboutputmode'];
 
             if ($vars['format'] ?? null) {
-                $meta[GD_URLPARAM_SETTINGSFORMAT] = $vars['format'];
+                $meta[\PoP\ComponentModel\Constants\Params::SETTINGSFORMAT] = $vars['format'];
             }
             if ($vars['mangled'] ?? null) {
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
@@ -1136,7 +1136,7 @@ class Engine implements EngineInterface
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-            if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+            if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
                 if ($immutable_moduledata) {
                     $ret['moduledata']['immutable'] = $immutable_moduledata;
                 }
@@ -1167,7 +1167,7 @@ class Engine implements EngineInterface
                         $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
                     }
                 }
-            } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+            } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
                     $combined_moduledata = array_merge_recursive(
@@ -1724,9 +1724,9 @@ class Engine implements EngineInterface
             $dboutputmode = $vars['dboutputmode'];
 
             // Combine all the databases or send them separate
-            if ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES) {
+            if ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES) {
                 $ret[$name] = $entries;
-            } elseif ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED) {
+            } elseif ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED) {
                 // Filter to make sure there are entries
                 if ($entries = array_filter($entries)) {
                     $combined_databases = array();
@@ -1755,9 +1755,9 @@ class Engine implements EngineInterface
             $dboutputmode = $vars['dboutputmode'];
 
             // Combine all the databases or send them separate
-            if ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES) {
+            if ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES) {
                 $ret[$name] = $entries;
-            } elseif ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED) {
+            } elseif ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED) {
                 // Filter to make sure there are entries
                 if ($entries = array_filter($entries)) {
                     $combined_databases = array();

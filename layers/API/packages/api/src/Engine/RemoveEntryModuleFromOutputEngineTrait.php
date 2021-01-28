@@ -21,7 +21,7 @@ trait RemoveEntryModuleFromOutputEngineTrait
             APIComponent::isEnabled() &&
             $vars['scheme'] == APISchemes::API &&
             in_array(\PoP\API\Constants\Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, $vars['actions']) &&
-            $vars['dataoutputmode'] == GD_URLPARAM_DATAOUTPUTMODE_COMBINED
+            $vars['dataoutputmode'] == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED
         ) {
             if ($data['datasetmodulesettings'] ?? null) {
                 $data['datasetmodulesettings'] = $this->removeEntryModuleFromOutput($data['datasetmodulesettings']);

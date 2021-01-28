@@ -18,8 +18,8 @@ class APIUtils
         $endpoint = GeneralUtils::addQueryArgs([
             GD_URLPARAM_SCHEME => APISchemes::API,
             GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
-            GD_URLPARAM_DATAOUTPUTMODE => GD_URLPARAM_DATAOUTPUTMODE_COMBINED,
-            // GD_URLPARAM_DATABASESOUTPUTMODE => GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED,
+            \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE => \PoP\ComponentModel\Constants\DataOutputModes::COMBINED,
+            // \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE => \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED,
             GD_URLPARAM_DATAOUTPUTITEMS => implode(
                 \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR,
                 $dataoutputitems

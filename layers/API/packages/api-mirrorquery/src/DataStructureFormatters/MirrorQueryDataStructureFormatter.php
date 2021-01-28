@@ -59,7 +59,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     //         $databases = $data['dbData'] ?? [];
     //         $datasetModuleData = $data['datasetmoduledata'] ?? [];
     //         $datasetModuleSettings = $data['datasetmodulesettings'] ?? [];
-    //         if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+    //         if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
     //             if ($has_extra_routes) {
     //                 $datasetModuleData = array_merge_recursive(
     //                     $datasetModuleData['immutable'] ?? [],
@@ -72,7 +72,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     //                     ($has_extra_routes ? array_values($datasetModuleSettings['mutableonrequest'])[0] : $datasetModuleSettings['mutableonrequest']) ?? []
     //                 );
     //             }
-    //         } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+    //         } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
     //             if ($has_extra_routes) {
     //                 $datasetModuleData = array_values($datasetModuleData)[0];
     //                 $datasetModuleSettings = array_values($datasetModuleSettings)[0];

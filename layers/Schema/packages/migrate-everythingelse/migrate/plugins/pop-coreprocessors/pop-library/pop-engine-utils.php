@@ -22,7 +22,7 @@ class PoPCore_ModuleManager_Utils
             \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => DBItemListDataStructureFormatter::getName(),
         ];
         if ($format) {
-            $args[GD_URLPARAM_FORMAT] = $format;
+            $args[\PoP\ComponentModel\Constants\Params::FORMAT] = $format;
         }
         return GeneralUtils::addQueryArgs($args, $url);
     }

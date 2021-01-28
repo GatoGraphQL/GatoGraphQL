@@ -41,8 +41,8 @@ class ApplicationState
         $dataoutputitems = $_REQUEST[\GD_URLPARAM_DATAOUTPUTITEMS] ?? [];
         $datasources = strtolower($_REQUEST[\GD_URLPARAM_DATASOURCES] ?? '');
         $datastructure = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] ?? '');
-        $dataoutputmode = strtolower($_REQUEST[\GD_URLPARAM_DATAOUTPUTMODE] ?? '');
-        $dboutputmode = strtolower($_REQUEST[\GD_URLPARAM_DATABASESOUTPUTMODE] ?? '');
+        $dataoutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE] ?? '');
+        $dboutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE] ?? '');
         $target = strtolower($_REQUEST[\GD_URLPARAM_TARGET] ?? '');
         $mangled = Request::isMangled() ? '' : Request::URLPARAMVALUE_MANGLED_NONE;
         $actions = isset($_REQUEST[\GD_URLPARAM_ACTIONS]) ?
@@ -74,19 +74,19 @@ class ApplicationState
         }
 
         $dataoutputmodes = array(
-            \GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES,
-            \GD_URLPARAM_DATAOUTPUTMODE_COMBINED,
+            \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES,
+            \PoP\ComponentModel\Constants\DataOutputModes::COMBINED,
         );
         if (!in_array($dataoutputmode, $dataoutputmodes)) {
-            $dataoutputmode = \GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES;
+            $dataoutputmode = \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES;
         }
 
         $dboutputmodes = array(
-            \GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES,
-            \GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED,
+            \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES,
+            \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED,
         );
         if (!in_array($dboutputmode, $dboutputmodes)) {
-            $dboutputmode = \GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES;
+            $dboutputmode = \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES;
         }
 
         if ($dataoutputitems) {
@@ -147,7 +147,7 @@ class ApplicationState
         // If there is not format, then set it to 'default'
         // This is needed so that the /generate/ generated configurations under a $model_instance_id (based on the value of $vars)
         // can match the same $model_instance_id when visiting that page
-        $format = isset($_REQUEST[\GD_URLPARAM_FORMAT]) ? strtolower($_REQUEST[\GD_URLPARAM_FORMAT]) : \PoP\ComponentModel\Constants\Values::DEFAULT;
+        $format = isset($_REQUEST[\PoP\ComponentModel\Constants\Params::FORMAT]) ? strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::FORMAT]) : \PoP\ComponentModel\Constants\Values::DEFAULT;
 
         // By default, get the variables from the request
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

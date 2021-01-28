@@ -56,7 +56,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                 foreach ($headers_data['formats'] as $format => $subformats) {
                     $header = array(
                         'url' => GeneralUtils::addQueryArgs([
-                            GD_URLPARAM_FORMAT => $format,
+                            \PoP\ComponentModel\Constants\Params::FORMAT => $format,
                         ], $url),
                         'title' => $headers_data['titles'][$format],
                         'fontawesome' => $headers_data['icons'][$format],
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                         foreach ($subformats as $subformat) {
                             $subheader = array(
                                 'url' => GeneralUtils::addQueryArgs([
-                                    GD_URLPARAM_FORMAT => $subformat,
+                                    \PoP\ComponentModel\Constants\Params::FORMAT => $subformat,
                                 ], $url),
                                 'title' => $headers_data['titles'][$subformat],
                                 'fontawesome' => $headers_data['icons'][$subformat],

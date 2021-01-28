@@ -60,11 +60,11 @@ class VarsHooks extends AbstractHookSet
             ];
 
             // dataoutputmode => Combined: there is no need to split the sources, then already combined them
-            $vars['dataoutputmode'] = \GD_URLPARAM_DATAOUTPUTMODE_COMBINED;
+            $vars['dataoutputmode'] = \PoP\ComponentModel\Constants\DataOutputModes::COMBINED;
 
             // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
             // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
-            $vars['dboutputmode'] = \GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED;
+            $vars['dboutputmode'] = \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED;
 
             // Only the data stratum is needed
             $platformmanager = StratumManagerFactory::getInstance();

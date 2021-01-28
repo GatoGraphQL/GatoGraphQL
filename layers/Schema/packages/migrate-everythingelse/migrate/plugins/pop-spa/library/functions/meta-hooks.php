@@ -25,9 +25,9 @@ class PoP_SPA_RequestMeta_Hooks
             $meta[ParamConstants::PARAMS] = array();
             $elemKeys = [
                 \PoP\ComponentModel\Constants\Params::VERSION,
-                GD_URLPARAM_DATAOUTPUTMODE,
-                GD_URLPARAM_DATABASESOUTPUTMODE,
-                GD_URLPARAM_SETTINGSFORMAT,
+                \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
                 Request::URLPARAM_MANGLED,
                 POP_URLPARAM_CONFIG,
                 GD_URLPARAM_STRATUM,

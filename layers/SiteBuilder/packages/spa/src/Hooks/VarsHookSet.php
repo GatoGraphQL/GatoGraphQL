@@ -29,13 +29,13 @@ class VarsHookSet extends AbstractHookSet
 
         // Settings format: the format set by the application when first visiting it, configurable by the user
         if ($vars['loading-site'] ?? null) {
-            $vars['settingsformat'] = strtolower($_REQUEST[GD_URLPARAM_FORMAT] ?? '');
+            $vars['settingsformat'] = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::FORMAT] ?? '');
         } else {
-            $vars['settingsformat'] = strtolower($_REQUEST[GD_URLPARAM_SETTINGSFORMAT] ?? '');
+            $vars['settingsformat'] = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::SETTINGSFORMAT] ?? '');
         }
 
         // Format: if not set, then use the 'settingsFormat' value if it has been set.
-        if (!isset($_REQUEST[GD_URLPARAM_FORMAT]) && isset($_REQUEST[GD_URLPARAM_SETTINGSFORMAT])) {
+        if (!isset($_REQUEST[\PoP\ComponentModel\Constants\Params::FORMAT]) && isset($_REQUEST[\PoP\ComponentModel\Constants\Params::SETTINGSFORMAT])) {
             $vars['format'] = $vars['settingsformat'];
         }
     }

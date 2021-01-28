@@ -1064,7 +1064,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($this instanceof FormattableModuleInterface) {
             if ($format = $this->getFormat($module)) {
                 $ret = GeneralUtils::addQueryArgs([
-                    GD_URLPARAM_FORMAT => $format,
+                    \PoP\ComponentModel\Constants\Params::FORMAT => $format,
                 ], $ret);
             }
         }
