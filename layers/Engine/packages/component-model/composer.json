@@ -32,9 +32,6 @@
         "squizlabs/php_codesniffer": "^3.0"
     },
     "autoload": {
-        "files": [
-            "library/constants.php"
-        ],
         "psr-4": {
             "PoP\\ComponentModel\\": "src"
         }

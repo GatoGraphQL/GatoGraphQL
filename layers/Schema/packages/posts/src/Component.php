@@ -10,6 +10,8 @@ use PoPSchema\Posts\Config\ServiceConfiguration;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoPSchema\Posts\TypeResolverPickers\Optional\PostCustomPostTypeResolverPicker;
+use PoP\Routing\DefinitionGroups;
+use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 /**
  * Initialize component
@@ -120,6 +122,20 @@ class Component extends AbstractComponent
             && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
         ) {
             PostCustomPostTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
+        }
+    }
+
+    /**
+     * Define runtime constants
+     */
+    protected static function defineRuntimeConstants(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
+        if (!defined('POP_POSTS_ROUTE_POSTS')) {
+            $definitionManager = DefinitionManagerFacade::getInstance();
+            define('POP_POSTS_ROUTE_POSTS', $definitionManager->getUniqueDefinition('posts', DefinitionGroups::ROUTES));
         }
     }
 }
