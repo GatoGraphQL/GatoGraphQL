@@ -33,6 +33,9 @@
         "getpop/api-rest": "Integrates well with REST API"
     },
     "autoload": {
+        "files": [
+            "library/constants.php"
+        ],
         "psr-4": {
             "PoPSchema\\PostTags\\": "src"
         }
