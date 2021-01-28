@@ -23,8 +23,8 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
 
     $jqueryConstants['URLPARAM_TITLE'] = GD_URLPARAM_TITLE;
     $jqueryConstants['URLPARAM_TITLELINK'] = GD_URLPARAM_TITLELINK;
-    $jqueryConstants['URLPARAM_URL'] = GD_URLPARAM_URL;
-    $jqueryConstants['URLPARAM_ERROR'] = GD_URLPARAM_ERROR;
+    $jqueryConstants['URLPARAM_URL'] = \PoP\ComponentModel\Constants\Response::URL;
+    $jqueryConstants['URLPARAM_ERROR'] = \PoP\ComponentModel\Constants\Response::ERROR;
     $jqueryConstants['URLPARAM_SILENTDOCUMENT'] = GD_URLPARAM_SILENTDOCUMENT;
     $jqueryConstants['URLPARAM_STORELOCAL'] = GD_URLPARAM_STORELOCAL;
     $jqueryConstants['URLPARAM_NONCES'] = GD_URLPARAM_NONCES;

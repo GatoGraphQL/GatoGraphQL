@@ -50,7 +50,7 @@ class PoP_ServerSide_KernelHelpers
         // Print also the block URL. Needed to know under what URL to save the session-ids.
         // Set the URL before calling addModule, where it will be needed
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();
-        $url = $options['hash']['addURL'] ? $context['tls']['feedback'][GD_URLPARAM_URL] : '';
+        $url = $options['hash']['addURL'] ? $context['tls']['feedback'][\PoP\ComponentModel\Constants\Response::URL] : '';
         if ($url) {
             $popJSRuntimeManager->setBlockURL($domain, $url);
         }

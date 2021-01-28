@@ -473,7 +473,7 @@ class Engine implements EngineInterface
         $meta = array(
             \PoP\ComponentModel\Constants\Response::ENTRY_MODULE => $this->getEntryModule()[1],
             \PoP\ComponentModel\Constants\Response::UNIQUE_ID => POP_CONSTANT_UNIQUE_ID,
-            GD_URLPARAM_URL => RequestUtils::getCurrentUrl(),
+            \PoP\ComponentModel\Constants\Response::URL => RequestUtils::getCurrentUrl(),
             'modelinstanceid' => ModelInstanceFacade::getInstance()->getModelInstanceId(),
         );
 
@@ -499,11 +499,9 @@ class Engine implements EngineInterface
 
         // Any errors? Send them back
         if (RequestUtils::$errors) {
-            if (count(RequestUtils::$errors) > 1) {
-                $meta[GD_URLPARAM_ERROR] = TranslationAPIFacade::getInstance()->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors);
-            } else {
-                $meta[GD_URLPARAM_ERROR] = TranslationAPIFacade::getInstance()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
-            }
+            $meta[\PoP\ComponentModel\Constants\Response::ERROR] = count(RequestUtils::$errors) > 1 ?
+                TranslationAPIFacade::getInstance()->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
+                : TranslationAPIFacade::getInstance()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
         return HooksAPIFacade::getInstance()->applyFilters(

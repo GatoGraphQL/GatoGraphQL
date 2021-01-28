@@ -21,8 +21,7 @@
 
 
 
-const GD_URLPARAM_URL = 'url';
-const GD_URLPARAM_ERROR = 'error';
+
 
 const GD_URLPARAM_REDIRECTTO = 'redirect_to';
 
