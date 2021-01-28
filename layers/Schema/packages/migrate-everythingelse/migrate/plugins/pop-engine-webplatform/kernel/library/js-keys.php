@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_MODULE', $compact ? 'm' : 'module');
+define('GD_JS_MODULEOUTPUTNAME', $compact ? 's' : 'moduleoutputname');
 define('GD_JS_INTERCEPTURLS', $compact ? 'xu' : 'intercept-urls');
 define('GD_JS_EXTRAINTERCEPTURLS', $compact ? 'exu' : 'extra-intercept-urls');
 
