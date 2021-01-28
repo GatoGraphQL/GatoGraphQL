@@ -158,7 +158,7 @@ class ApplicationState
             'route' => $route,
             'output' => $output,
             'modulefilter' => $modulefilter,
-            'actionpath' => $_REQUEST[\GD_URLPARAM_ACTIONPATH] ?? '',
+            'actionpath' => $_REQUEST[\PoP\ComponentModel\Constants\Params::ACTION_PATH] ?? '',
             'target' => $target,
             'dataoutputitems' => $dataoutputitems,
             'datasources' => $datasources,

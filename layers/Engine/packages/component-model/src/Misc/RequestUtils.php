@@ -74,7 +74,7 @@ class RequestUtils
                 \GD_URLPARAM_TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
                 ModulePaths::URLPARAM_MODULEPATHS,
-                \GD_URLPARAM_ACTIONPATH,
+                \PoP\ComponentModel\Constants\Params::ACTION_PATH,
                 \GD_URLPARAM_DATAOUTPUTITEMS,
                 \GD_URLPARAM_DATASOURCES,
                 \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,

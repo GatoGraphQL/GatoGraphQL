@@ -19,4 +19,5 @@ class Params
     // From https://www.mesym.com/action?paged=2 it redirects to https://www.mesym.com/action/paged/2/
     public const PAGE_NUMBER = 'pagenum';
     public const LIMIT = 'limit';
+    public const ACTION_PATH = 'actionpath';
 }

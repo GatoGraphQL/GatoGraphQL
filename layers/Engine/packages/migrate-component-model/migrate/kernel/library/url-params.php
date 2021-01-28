@@ -27,8 +27,6 @@
 
 
 
-const GD_URLPARAM_ACTIONPATH = 'actionpath';
-
 const GD_URLPARAM_DATAOUTPUTITEMS = 'dataoutputitems';
 const GD_URLPARAM_DATAOUTPUTITEMS_META = 'meta';
 const GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS = 'datasetmodulesettings';
