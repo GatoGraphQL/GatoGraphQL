@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         if ($latestcount = $this->getLatestcountSubmodule($module)) {
             $ret[] = $latestcount;
         }
-                
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         if ($this->addClearfixdiv($module)) {
             $ret['add-clearfixdiv'] = true;
         }
-        
+
         if ($description_bottom = $this->getProp($module, $props, 'description-bottom')) {
             $ret['description-bottom'] = $description_bottom;
         }
@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         if ($description_abovetitle = $this->getProp($module, $props, 'description-abovetitle')) {
             $ret['description-abovetitle'] = $description_abovetitle;
         }
-        
+
         return $ret;
     }
 
@@ -99,7 +99,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup-bottom'] = ModuleUtils::getModuleOutputName($controlgroup_bottom);
             }
         }
-        
+
         return $ret;
     }
 
@@ -141,7 +141,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
 
         if ($submenu = $this->getSubmenuSubmodule($module)) {
             $moduleFullName = ModuleUtils::getModuleFullName($module);
-            $submenu_id = $moduleprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+            $submenu_id = $moduleprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
             $submenu_target = '#'.$submenu_id.'-xs';
             $this->setProp([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS], $props, 'submenu-target', $submenu_target);
         }
@@ -156,7 +156,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         // // Only add the submenu if this is the main block! That way, both blockgroups and blocks can define the submenu, but only the main of them will show it
         // $this->setProp($module, $props, 'is-mainblock', false);
         // if ($this->getProp($module, $props, 'is-mainblock')) {
-            
+
         //     $this->setProp($module, $props, 'show-submenu', true);
         // }
         $this->setProp($module, $props, 'show-submenu', true);
@@ -247,7 +247,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     protected function getBlocksectionsClasses(array $module)
     {
         $ret = parent::getBlocksectionsClasses($module);
-    
+
         $ret['controlgroup-top'] = 'right pull-right';
         $ret['controlgroup-bottom'] = 'bottom pull-right';
 
@@ -264,7 +264,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         if (GeneralUtils::isError($dataaccess_checkpoint_validation) || GeneralUtils::isError($actionexecution_checkpoint_validation)) {
             $ret['checkpoint-failed'] = true;
         }
-        
+
         return $ret;
     }
 }

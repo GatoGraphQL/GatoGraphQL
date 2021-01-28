@@ -690,7 +690,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
-            $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+            $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
@@ -737,7 +737,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
@@ -914,8 +914,8 @@ class Engine implements EngineInterface
             $model_props = &$root_model_props;
             foreach ($module_path as $submodule) {
                 $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                $props = &$props[$submoduleFullName][POP_PROPS_SUBMODULES];
-                $model_props = &$model_props[$submoduleFullName][POP_PROPS_SUBMODULES];
+                $props = &$props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
+                $model_props = &$model_props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
             }
 
             if (
@@ -1084,8 +1084,8 @@ class Engine implements EngineInterface
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_modulepath as $submodule) {
                         $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                        $referencer_props = &$referencer_props[$submoduleFullName][POP_PROPS_SUBMODULES];
-                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][POP_PROPS_SUBMODULES];
+                        $referencer_props = &$referencer_props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
+                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
                     }
 
                     if (
