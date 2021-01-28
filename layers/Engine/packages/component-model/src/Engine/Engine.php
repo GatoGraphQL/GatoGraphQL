@@ -539,7 +539,7 @@ class Engine implements EngineInterface
                 $meta[POP_URLPARAM_CONFIG] = $vars['config'];
             }
             if ($vars['stratum'] ?? null) {
-                $meta[GD_URLPARAM_STRATUM] = $vars['stratum'];
+                $meta[\PoP\ComponentModel\Constants\Params::STRATUM] = $vars['stratum'];
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code

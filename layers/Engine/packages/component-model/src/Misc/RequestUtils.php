@@ -83,8 +83,8 @@ class RequestUtils
                 \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,
                 \GD_URLPARAM_EXTRAROUTES,
-                \GD_URLPARAM_ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
-                \GD_URLPARAM_STRATUM,
+                \PoP\ComponentModel\Constants\Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
+                \PoP\ComponentModel\Constants\Params::STRATUM,
             )
         );
         $url = GeneralUtils::removeQueryArgs($remove_params, self::getRequestedFullURL());

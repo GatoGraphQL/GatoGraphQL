@@ -13,7 +13,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['UNIQUEID'] = \PoP\ComponentModel\Constants\Response::UNIQUE_ID;
 
     $jqueryConstants['URLPARAM_TIMESTAMP'] = GD_URLPARAM_TIMESTAMP;
-    $jqueryConstants['URLPARAM_ACTIONS'] = GD_URLPARAM_ACTIONS;
+    $jqueryConstants['URLPARAM_ACTIONS'] = \PoP\ComponentModel\Constants\Params::ACTIONS;
     $jqueryConstants['URLPARAM_ACTION_LATEST'] = GD_URLPARAM_ACTION_LOADLATEST;
     $jqueryConstants['URLPARAM_ACTION_PRINT'] = GD_URLPARAM_ACTION_PRINT;
     // $jqueryConstants['URLPARAM_ACTION_LOADLAZY'] = GD_URLPARAM_ACTION_LOADLAZY;

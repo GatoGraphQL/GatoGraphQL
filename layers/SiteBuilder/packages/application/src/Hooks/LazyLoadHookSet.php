@@ -65,7 +65,7 @@ class LazyLoadHookSet extends AbstractHookSet
                     GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
                 ],
                 ModuleFilterManager::URLPARAM_MODULEFILTER => Lazy::NAME,
-                GD_URLPARAM_ACTIONS . '[]' => Actions::LOADLAZY,
+                \PoP\ComponentModel\Constants\Params::ACTIONS . '[]' => Actions::LOADLAZY,
             ], RequestUtils::getCurrentUrl());
             $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));
         }

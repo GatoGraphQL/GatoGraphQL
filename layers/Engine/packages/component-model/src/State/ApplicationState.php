@@ -45,9 +45,9 @@ class ApplicationState
         $dboutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE] ?? '');
         $target = strtolower($_REQUEST[\GD_URLPARAM_TARGET] ?? '');
         $mangled = Request::isMangled() ? '' : Request::URLPARAMVALUE_MANGLED_NONE;
-        $actions = isset($_REQUEST[\GD_URLPARAM_ACTIONS]) ?
-            array_map('strtolower', $_REQUEST[\GD_URLPARAM_ACTIONS]) : [];
-        $scheme = strtolower($_REQUEST[\GD_URLPARAM_SCHEME] ?? '');
+        $actions = isset($_REQUEST[\PoP\ComponentModel\Constants\Params::ACTIONS]) ?
+            array_map('strtolower', $_REQUEST[\PoP\ComponentModel\Constants\Params::ACTIONS]) : [];
+        $scheme = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] ?? '');
         // The version could possibly be set from outside
         $version = ServerUtils::enableVersionByParams() ?
             $_REQUEST[\PoP\ComponentModel\Constants\Params::VERSION] ?? ApplicationInfoFacade::getInstance()->getVersion()

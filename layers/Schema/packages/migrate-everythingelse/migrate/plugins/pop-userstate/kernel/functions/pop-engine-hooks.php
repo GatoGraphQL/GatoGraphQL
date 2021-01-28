@@ -56,7 +56,7 @@ class PoP_UserState_EngineHooks
                     GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
                 ],
                 \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
-                GD_URLPARAM_ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
+                \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
             ], RequestUtils::getCurrentUrl());
             $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));
         }

@@ -52,7 +52,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     protected function executeEndpoint(): void
     {
         // Set the params on the request, to emulate that they were added by the user
-        $_REQUEST[\GD_URLPARAM_SCHEME] = APISchemes::API;
+        $_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] = APISchemes::API;
         // Enable hooks
         \do_action('EndpointHandler:setDoingAPI');
     }

@@ -1040,7 +1040,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $vars = ApplicationState::getVars();
         if ($scheme = $vars['scheme']) {
             $ret = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_SCHEME => $scheme,
+                \PoP\ComponentModel\Constants\Params::SCHEME => $scheme,
             ], $ret);
         }
 

@@ -16,7 +16,7 @@ class APIUtils
             GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
         ];
         $endpoint = GeneralUtils::addQueryArgs([
-            GD_URLPARAM_SCHEME => APISchemes::API,
+            \PoP\ComponentModel\Constants\Params::SCHEME => APISchemes::API,
             GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
             \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE => \PoP\ComponentModel\Constants\DataOutputModes::COMBINED,
             // \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE => \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED,

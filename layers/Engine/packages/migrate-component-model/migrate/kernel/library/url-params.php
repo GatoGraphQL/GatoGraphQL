@@ -12,10 +12,10 @@
 
 
 
-const GD_URLPARAM_ACTIONS = 'actions';
-const GD_URLPARAM_SCHEME = 'scheme';
 
-const GD_URLPARAM_STRATUM = 'stratum';
+
+
+
 
 const GD_URLPARAM_BACKGROUNDLOADURLS = 'backgroundloadurls';
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';

@@ -12,4 +12,7 @@ class Params
     public const SETTINGSFORMAT = 'settingsformat';
     public const DATAOUTPUTMODE = 'dataoutputmode';
     public const DATABASESOUTPUTMODE = 'dboutputmode';
+    public const ACTIONS = 'actions';
+    public const SCHEME = 'scheme';
+    public const STRATUM = 'stratum';
 }
