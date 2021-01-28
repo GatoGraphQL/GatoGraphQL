@@ -58,7 +58,7 @@ class PoP_UserState_EngineHooks
                 \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
                 \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
             ], RequestUtils::getCurrentUrl());
-            $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));
+            $engine->addBackgroundUrl($url, array(\PoP\ComponentModel\Constants\Targets::MAIN));
         }
     }
 }

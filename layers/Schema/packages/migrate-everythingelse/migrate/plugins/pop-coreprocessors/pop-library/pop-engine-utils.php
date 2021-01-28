@@ -18,7 +18,7 @@ class PoPCore_ModuleManager_Utils
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ],
-            GD_URLPARAM_TARGET => POP_TARGET_MAIN,
+            GD_URLPARAM_TARGET => \PoP\ComponentModel\Constants\Targets::MAIN,
             \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => DBItemListDataStructureFormatter::getName(),
         ];
         if ($format) {

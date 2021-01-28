@@ -18,7 +18,7 @@ class PoPTheme_Wassup_MultiDomain_Module_ContentPageSectionTopLevelRouteModulePr
             $ret[RouteNatures::STANDARD][$route][] = [
                 'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
-                    'target' => POP_TARGET_MAIN,
+                    'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
                 ],
             ];
         }

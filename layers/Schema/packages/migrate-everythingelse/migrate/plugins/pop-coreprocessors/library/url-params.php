@@ -53,7 +53,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = \PoP\ComponentModel\Constants\DataOutputItems::SESSION;
 
     $jqueryConstants['URLPARAM_TARGET'] = GD_URLPARAM_TARGET;
-    $jqueryConstants['URLPARAM_TARGET_MAIN'] = POP_TARGET_MAIN;
+    $jqueryConstants['URLPARAM_TARGET_MAIN'] = \PoP\ComponentModel\Constants\Targets::MAIN;
     $jqueryConstants['URLPARAM_TARGET_FULL'] = GD_URLPARAM_TARGET_FULL;
     $jqueryConstants['URLPARAM_TARGET_PRINT'] = GD_URLPARAM_TARGET_PRINT;
     $jqueryConstants['URLPARAM_TARGET_SOCIALMEDIA'] = GD_URLPARAM_TARGET_SOCIALMEDIA;

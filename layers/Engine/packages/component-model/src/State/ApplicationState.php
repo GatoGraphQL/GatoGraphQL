@@ -129,11 +129,11 @@ class ApplicationState
         $targets = (array) HooksAPIFacade::getInstance()->applyFilters(
             'ApplicationState:targets',
             array(
-                \POP_TARGET_MAIN,
+                \PoP\ComponentModel\Constants\Targets::MAIN,
             )
         );
         if (!in_array($target, $targets)) {
-            $target = \POP_TARGET_MAIN;
+            $target = \PoP\ComponentModel\Constants\Targets::MAIN;
         }
 
         $platformmanager = StratumManagerFactory::getInstance();

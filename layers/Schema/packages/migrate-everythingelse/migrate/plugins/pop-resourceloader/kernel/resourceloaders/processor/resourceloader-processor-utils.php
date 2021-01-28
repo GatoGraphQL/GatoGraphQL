@@ -343,7 +343,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $duplicate_as_default_format = true;
                 // $format = \PoP\ComponentModel\Constants\Values::DEFAULT;
             } else {
-                $target = POP_TARGET_MAIN;
+                $target = \PoP\ComponentModel\Constants\Targets::MAIN;
             }
         }
 
