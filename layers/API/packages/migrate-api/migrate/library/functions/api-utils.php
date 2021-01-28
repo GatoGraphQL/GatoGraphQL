@@ -21,7 +21,7 @@ class APIUtils
             GD_URLPARAM_DATAOUTPUTMODE => GD_URLPARAM_DATAOUTPUTMODE_COMBINED,
             // GD_URLPARAM_DATABASESOUTPUTMODE => GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED,
             GD_URLPARAM_DATAOUTPUTITEMS => implode(
-                POP_CONSTANT_PARAMVALUE_SEPARATOR,
+                \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR,
                 $dataoutputitems
             ),
         ], $url);

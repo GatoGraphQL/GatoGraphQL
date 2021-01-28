@@ -91,7 +91,7 @@ class ApplicationState
 
         if ($dataoutputitems) {
             if (!is_array($dataoutputitems)) {
-                $dataoutputitems = explode(\POP_CONSTANT_PARAMVALUE_SEPARATOR, strtolower($dataoutputitems));
+                $dataoutputitems = explode(\PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR, strtolower($dataoutputitems));
             } else {
                 $dataoutputitems = array_map('strtolower', $dataoutputitems);
             }

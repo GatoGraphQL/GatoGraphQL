@@ -7,5 +7,3 @@ const POP_CONSTANT_META = 'meta';
 
 const POP_VALUES_DEFAULT = 'default';
 
-const POP_CONSTANT_PARAMVALUE_SEPARATOR = ',';
-
