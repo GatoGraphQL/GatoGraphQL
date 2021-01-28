@@ -82,7 +82,7 @@ class RequestUtils
                 \GD_URLPARAM_OUTPUT,
                 \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,
-                \GD_URLPARAM_EXTRAROUTES,
+                \PoP\ComponentModel\Constants\Params::EXTRA_ROUTES,
                 \PoP\ComponentModel\Constants\Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
                 \PoP\ComponentModel\Constants\Params::STRATUM,
             )

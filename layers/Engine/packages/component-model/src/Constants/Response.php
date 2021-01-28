@@ -11,4 +11,5 @@ class Response
     public const BACKGROUND_LOAD_URLS = 'backgroundloadurls';
     public const URL = 'url';
     public const ERROR = 'error';
+    public const MULTIPLE_ROUTES = 'multiple-routes';
 }

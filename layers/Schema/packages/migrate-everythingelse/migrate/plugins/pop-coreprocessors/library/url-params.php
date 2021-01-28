@@ -5,6 +5,7 @@ use PoP\Routing\URLParams;
 const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
 const GD_URLPARAM_TITLE = 'title';
 const GD_URLPARAM_TITLELINK = 'title-link';
+const GD_URLPARAM_STOPFETCHING = 'stop-fetching';
 
 define('GD_URLPARAM_ACTION_PRINT', 'print');
 

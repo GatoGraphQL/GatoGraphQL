@@ -149,7 +149,7 @@ class Engine implements EngineInterface
         $this->extra_routes = array();
 
         if (ServerUtils::enableExtraRoutesByParams()) {
-            $this->extra_routes = $_REQUEST[GD_URLPARAM_EXTRAROUTES] ?? array();
+            $this->extra_routes = $_REQUEST[\PoP\ComponentModel\Constants\Params::EXTRA_ROUTES] ?? array();
             $this->extra_routes = is_array($this->extra_routes) ? $this->extra_routes : array($this->extra_routes);
         }
 
@@ -403,7 +403,7 @@ class Engine implements EngineInterface
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
             if ($this->getExtraRoutes()) {
-                $this->data['requestmeta'][POP_JS_MULTIPLEROUTES] = true;
+                $this->data['requestmeta'][\PoP\ComponentModel\Constants\Response::MULTIPLE_ROUTES] = true;
             }
             if ($sitemeta = $this->getSiteMeta()) {
                 $this->data['sitemeta'] = $sitemeta;

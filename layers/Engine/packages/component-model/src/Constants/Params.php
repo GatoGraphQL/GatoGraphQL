@@ -22,4 +22,5 @@ class Params
     public const ACTION_PATH = 'actionpath';
     public const DATA_OUTPUT_ITEMS = 'dataoutputitems';
     public const DATA_SOURCE = 'datasource';
+    public const EXTRA_ROUTES = 'extraroutes';
 }
