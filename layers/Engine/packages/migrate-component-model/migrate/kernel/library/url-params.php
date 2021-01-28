@@ -25,7 +25,7 @@
 
 
 
-const GD_URLPARAM_LIMIT = 'limit';
+
 
 const GD_URLPARAM_ACTIONPATH = 'actionpath';
 

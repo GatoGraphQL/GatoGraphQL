@@ -138,7 +138,7 @@ trait QueryDataModuleProcessorTrait
                 array(
                     GD_URLPARAM_REDIRECTTO,
                     \PoP\ComponentModel\Constants\Params::PAGE_NUMBER,
-                    GD_URLPARAM_LIMIT,
+                    \PoP\ComponentModel\Constants\Params::LIMIT,
                 )
             );
             $params_from_request = array_filter(

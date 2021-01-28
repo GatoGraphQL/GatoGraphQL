@@ -54,8 +54,8 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-        if ($limit = $query_args[GD_URLPARAM_LIMIT]) {
-            $ret[GD_URLPARAM_LIMIT] = $limit;
+        if ($limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT]) {
+            $ret[\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
         }
 
         $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
@@ -120,8 +120,8 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
     //     $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-    //     $limit = $query_args[GD_URLPARAM_LIMIT];
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_LIMIT] = $limit;
+    //     $limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT];
+    //     $ret[ParamConstants::PARAMS][\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
 
     //     return $ret;
     // }
@@ -132,8 +132,8 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
     //     $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-    //     $limit = $query_args[GD_URLPARAM_LIMIT];
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_LIMIT] = $limit;
+    //     $limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT];
+    //     $ret[ParamConstants::PARAMS][\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
 
     //     // If it is lazy load, no need to calculate show-msg / pagenumber / stop-fetching / etc
     //     if ($data_properties[DataloadingConstants::LAZYLOAD]) {
