@@ -37,6 +37,8 @@ abstract class AbstractComponent implements ComponentInterface
     ): void {
         // Initialize the self component
         static::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
+
+        static::defineRuntimeConstants();
     }
 
     /**
@@ -79,6 +81,16 @@ abstract class AbstractComponent implements ComponentInterface
     ): void {
         // Register itself in the Manager
         ComponentManager::register(get_called_class());
+    }
+
+    /**
+     * Define runtime constants
+     */
+    protected static function defineRuntimeConstants(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
     }
 
     /**

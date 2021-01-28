@@ -8,6 +8,8 @@ use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Users\Config\ServiceConfiguration;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Routing\DefinitionGroups;
+use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 /**
  * Initialize component
@@ -101,6 +103,20 @@ class Component extends AbstractComponent
         // Initialize all conditional components
         if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\CustomPosts\\FieldResolvers'))) {
             \PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent::beforeBoot();
+        }
+    }
+
+    /**
+     * Define runtime constants
+     */
+    protected static function defineRuntimeConstants(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
+        if (!defined('POP_USERS_ROUTE_USERS')) {
+            $definitionManager = DefinitionManagerFacade::getInstance();
+            define('POP_USERS_ROUTE_USERS', $definitionManager->getUniqueDefinition('users', DefinitionGroups::ROUTES));
         }
     }
 }
