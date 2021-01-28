@@ -11,7 +11,7 @@ class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutatio
         $post_data = parent::getCreatepostData($form_data);
 
         // Property 'menu-order' only works for WordPress
-        if (\PoP\ComponentModel\Server\Utils::disableCustomCMSCode()) {
+        if (\PoP\ComponentModel\Environment::disableCustomCMSCode()) {
             return $post_data;
         }
 

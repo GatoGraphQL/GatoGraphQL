@@ -130,17 +130,15 @@ trait QueryDataModuleProcessorTrait
 
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
-        if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST && !$data_properties[DataloadingConstants::IGNOREREQUESTPARAMS]) {
+        if ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST && !$data_properties[DataloadingConstants::IGNOREREQUESTPARAMS]) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)HooksAPIFacade::getInstance()->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     GD_URLPARAM_REDIRECTTO,
-                    GD_URLPARAM_PAGENUMBER,
-                    GD_URLPARAM_LIMIT,
-                    // Used for the Comments to know what post to fetch comments from when filtering
-                    GD_URLPARAM_COMMENTPOSTID,
+                    \PoP\ComponentModel\Constants\Params::PAGE_NUMBER,
+                    \PoP\ComponentModel\Constants\Params::LIMIT,
                 )
             );
             $params_from_request = array_filter(

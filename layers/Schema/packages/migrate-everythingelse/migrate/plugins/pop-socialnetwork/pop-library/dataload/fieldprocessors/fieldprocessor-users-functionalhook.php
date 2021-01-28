@@ -61,12 +61,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
         switch ($fieldName) {
             case 'followUserURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_USERID => $typeResolver->getID($user),
+                    \PoPSchema\Users\Constants\InputNames::USER_ID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_FOLLOWUSER));
 
             case 'unfollowUserURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_USERID => $typeResolver->getID($user),
+                    \PoPSchema\Users\Constants\InputNames::USER_ID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER));
         }
 

@@ -1,8 +1,13 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\Pages\Hooks\:
+        resource: '../src/Hooks/*'
+
     PoPSchema\Pages\Conditional\API\RouteModuleProcessors\:
         resource: '../src/Conditional/API/RouteModuleProcessors/*'
-        public: true
 
     PoPSchema\Pages\Conditional\RESTAPI\RouteModuleProcessors\:
         resource: '../src/Conditional/RESTAPI/RouteModuleProcessors/*'
-        public: true

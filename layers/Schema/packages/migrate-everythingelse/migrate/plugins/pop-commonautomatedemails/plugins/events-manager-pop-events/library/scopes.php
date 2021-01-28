@@ -11,8 +11,8 @@ function popEmAeEventsBuildSqlConditions($conditions, $args)
        // Somehow the scope could be an array, so `preg_match` below would fail, so make sure it is not an array
     if (!empty($args['scope']) && $args['scope'] == 'week') {
         // $end_date: if doing 7 days, then must produce +6 day, etc
-        $start_date = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP);
-        $end_date = date('Y-m-d', strtotime("+6 day", POP_CONSTANT_CURRENTTIMESTAMP));
+        $start_date = date('Y-m-d', POP_CONSTANT_TIME);
+        $end_date = date('Y-m-d', strtotime("+6 day", POP_CONSTANT_TIME));
         $conditions['scope'] = " ((event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)))";
     }
     return $conditions;

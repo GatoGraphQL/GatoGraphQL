@@ -9,7 +9,7 @@ class GD_FormInput_MultiValueFromString extends GD_FormInput
     public function __construct($params = array())
     {
         parent::__construct($params);
-        $this->separator = $params['separator'] ?? POP_CONSTANT_PARAMVALUE_SEPARATOR;
+        $this->separator = $params['separator'] ?? \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR;
     }
 
     public function getValue(?array $source = null)

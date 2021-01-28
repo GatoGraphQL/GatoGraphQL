@@ -20,7 +20,7 @@ class PoPTheme_Wassup_CommonUserRoles_Module_ContentPageSectionTopLevelRouteModu
             $ret[RouteNatures::STANDARD][$route][] = [
                 'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
-                    'target' => POP_TARGET_MAIN,
+                    'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
                 ],
             ];
         }

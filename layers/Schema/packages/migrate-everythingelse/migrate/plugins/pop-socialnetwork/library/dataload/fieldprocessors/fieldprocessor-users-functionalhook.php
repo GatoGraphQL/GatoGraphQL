@@ -58,7 +58,7 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         switch ($fieldName) {
             case 'contactURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_USERID => $typeResolver->getID($user),
+                    \PoPSchema\Users\Constants\InputNames::USER_ID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_CONTACTUSER));
         }
 

@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         $vars = ApplicationState::getVars();
-        
+
         // Using runtimeconfiguration, because the URL can vary for Single, it must not be cached in the configuration
         if ($header_type = $this->getHeaderType($module, $props)) {
             if ($headers_data = $this->getHeadersData($module, $props)) {
@@ -56,12 +56,12 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                 foreach ($headers_data['formats'] as $format => $subformats) {
                     $header = array(
                         'url' => GeneralUtils::addQueryArgs([
-                            GD_URLPARAM_FORMAT => $format, 
+                            \PoP\ComponentModel\Constants\Params::FORMAT => $format,
                         ], $url),
                         'title' => $headers_data['titles'][$format],
                         'fontawesome' => $headers_data['icons'][$format],
                     );
-                    if (($vars['format'] == $format) || ((!$vars['format'] || $vars['format'] == POP_VALUES_DEFAULT) && ($format == $default_active_format))) {
+                    if (($vars['format'] == $format) || ((!$vars['format'] || $vars['format'] == \PoP\ComponentModel\Constants\Values::DEFAULT) && ($format == $default_active_format))) {
                         $header['active'] = true;
                     }
                     if ($subformats) {
@@ -69,12 +69,12 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                         foreach ($subformats as $subformat) {
                             $subheader = array(
                                 'url' => GeneralUtils::addQueryArgs([
-                                    GD_URLPARAM_FORMAT => $subformat, 
+                                    \PoP\ComponentModel\Constants\Params::FORMAT => $subformat,
                                 ], $url),
                                 'title' => $headers_data['titles'][$subformat],
                                 'fontawesome' => $headers_data['icons'][$subformat],
                             );
-                            if (($vars['format'] == $subformat) || ((!$vars['format'] || $vars['format'] == POP_VALUES_DEFAULT) && ($subformat == $default_active_format))) {
+                            if (($vars['format'] == $subformat) || ((!$vars['format'] || $vars['format'] == \PoP\ComponentModel\Constants\Values::DEFAULT) && ($subformat == $default_active_format))) {
                                 $subheader['active'] = true;
                                 $header['active'] = true;
                             }
@@ -89,7 +89,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                 $ret['headers'] = $headers;
             }
         }
-        
+
         return $ret;
     }
 
@@ -116,7 +116,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
                 }
             }
         }
-        
+
         return $ret;
     }
 
@@ -126,7 +126,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
             // header type 'btn-group' needs that same class
             $this->appendProp($module, $props, 'class', $header_type);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

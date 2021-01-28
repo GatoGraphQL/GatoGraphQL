@@ -22,9 +22,9 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
             case self::MODULE_FORMINPUT_URLPARAMTEXT_USERID:
             case self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID:
                 $names = array(
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID => POP_INPUTNAME_POSTID,
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_USERID => POP_INPUTNAME_USERID,
-                    self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID => POP_INPUTNAME_COMMENTID,
+                    self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID => \PoPSchema\Posts\Constants\InputNames::POST_ID,
+                    self::MODULE_FORMINPUT_URLPARAMTEXT_USERID => \PoPSchema\Users\Constants\InputNames::USER_ID,
+                    self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPSchema\Comments\Constants\InputNames::COMMENT_ID,
                 );
 
                 return $names[$module[1]];

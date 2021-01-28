@@ -2,6 +2,11 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
 
+const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
+const GD_URLPARAM_TITLE = 'title';
+const GD_URLPARAM_TITLELINK = 'title-link';
+const GD_URLPARAM_STOPFETCHING = 'stop-fetching';
+
 define('GD_URLPARAM_ACTION_PRINT', 'print');
 
 define('GD_URLPARAM_TARGET_PRINT', 'print');
@@ -10,47 +15,45 @@ define('GD_URLPARAM_TARGET_SOCIALMEDIA', 'socialmedia');
 HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsUrlparams');
 function gdJqueryConstantsUrlparams($jqueryConstants)
 {
-    $jqueryConstants['UNIQUEID'] = POP_UNIQUEID;
+    $jqueryConstants['UNIQUEID'] = \PoP\ComponentModel\Constants\Response::UNIQUE_ID;
 
     $jqueryConstants['URLPARAM_TIMESTAMP'] = GD_URLPARAM_TIMESTAMP;
-    $jqueryConstants['URLPARAM_ACTIONS'] = GD_URLPARAM_ACTIONS;
+    $jqueryConstants['URLPARAM_ACTIONS'] = \PoP\ComponentModel\Constants\Params::ACTIONS;
     $jqueryConstants['URLPARAM_ACTION_LATEST'] = GD_URLPARAM_ACTION_LOADLATEST;
     $jqueryConstants['URLPARAM_ACTION_PRINT'] = GD_URLPARAM_ACTION_PRINT;
-    // $jqueryConstants['URLPARAM_ACTION_LOADLAZY'] = GD_URLPARAM_ACTION_LOADLAZY;
 
-    // $jqueryConstants['URLPARAM_PARENTPAGEID'] = GD_URLPARAM_PARENTPAGEID;
     $jqueryConstants['URLPARAM_TITLE'] = GD_URLPARAM_TITLE;
     $jqueryConstants['URLPARAM_TITLELINK'] = GD_URLPARAM_TITLELINK;
-    $jqueryConstants['URLPARAM_URL'] = GD_URLPARAM_URL;
-    $jqueryConstants['URLPARAM_ERROR'] = GD_URLPARAM_ERROR;
+    $jqueryConstants['URLPARAM_URL'] = \PoP\ComponentModel\Constants\Response::URL;
+    $jqueryConstants['URLPARAM_ERROR'] = \PoP\ComponentModel\Constants\Response::ERROR;
     $jqueryConstants['URLPARAM_SILENTDOCUMENT'] = GD_URLPARAM_SILENTDOCUMENT;
     $jqueryConstants['URLPARAM_STORELOCAL'] = GD_URLPARAM_STORELOCAL;
     $jqueryConstants['URLPARAM_NONCES'] = GD_URLPARAM_NONCES;
 
-    $jqueryConstants['URLPARAM_BACKGROUNDLOADURLS'] = GD_URLPARAM_BACKGROUNDLOADURLS;
+    $jqueryConstants['URLPARAM_BACKGROUNDLOADURLS'] = \PoP\ComponentModel\Constants\Response::BACKGROUND_LOAD_URLS;
     $jqueryConstants['URLPARAM_INTERCEPTURLS'] = GD_URLPARAM_INTERCEPTURLS;
 
-    $jqueryConstants['URLPARAM_OUTPUT'] = GD_URLPARAM_OUTPUT;
-    $jqueryConstants['URLPARAM_OUTPUT_JSON'] = GD_URLPARAM_OUTPUT_JSON;
+    $jqueryConstants['URLPARAM_OUTPUT'] = \PoP\ComponentModel\Constants\Params::OUTPUT;
+    $jqueryConstants['URLPARAM_OUTPUT_JSON'] = \PoP\ComponentModel\Constants\Outputs::JSON;
 
-    $jqueryConstants['URLPARAM_PAGED'] = GD_URLPARAM_PAGENUMBER;
+    $jqueryConstants['URLPARAM_PAGED'] = \PoP\ComponentModel\Constants\Params::PAGE_NUMBER;
     $jqueryConstants['URLPARAM_OPERATION_APPEND'] = GD_URLPARAM_OPERATION_APPEND;
     $jqueryConstants['URLPARAM_OPERATION_PREPEND'] = GD_URLPARAM_OPERATION_PREPEND;
     $jqueryConstants['URLPARAM_OPERATION_REPLACE'] = GD_URLPARAM_OPERATION_REPLACE;
     $jqueryConstants['URLPARAM_OPERATION_REPLACEINLINE'] = GD_URLPARAM_OPERATION_REPLACEINLINE;
 
-    $jqueryConstants['URLPARAM_FORMAT'] = GD_URLPARAM_FORMAT;
+    $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ComponentModel\Constants\Params::FORMAT;
     $jqueryConstants['URLPARAM_ROUTE'] = URLParams::ROUTE;
 
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = GD_URLPARAM_DATAOUTPUTITEMS;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_META'] = GD_URLPARAM_DATAOUTPUTITEMS_META;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS'] = GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULEDATA'] = GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_DATABASES'] = GD_URLPARAM_DATAOUTPUTITEMS_DATABASES;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = GD_URLPARAM_DATAOUTPUTITEMS_SESSION;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_META'] = \PoP\ComponentModel\Constants\DataOutputItems::META;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS'] = \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULEDATA'] = \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_DATABASES'] = \PoP\ComponentModel\Constants\DataOutputItems::DATABASES;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = \PoP\ComponentModel\Constants\DataOutputItems::SESSION;
 
-    $jqueryConstants['URLPARAM_TARGET'] = GD_URLPARAM_TARGET;
-    $jqueryConstants['URLPARAM_TARGET_MAIN'] = POP_TARGET_MAIN;
+    $jqueryConstants['URLPARAM_TARGET'] = \PoP\ComponentModel\Constants\Params::TARGET;
+    $jqueryConstants['URLPARAM_TARGET_MAIN'] = \PoP\ComponentModel\Constants\Targets::MAIN;
     $jqueryConstants['URLPARAM_TARGET_FULL'] = GD_URLPARAM_TARGET_FULL;
     $jqueryConstants['URLPARAM_TARGET_PRINT'] = GD_URLPARAM_TARGET_PRINT;
     $jqueryConstants['URLPARAM_TARGET_SOCIALMEDIA'] = GD_URLPARAM_TARGET_SOCIALMEDIA;

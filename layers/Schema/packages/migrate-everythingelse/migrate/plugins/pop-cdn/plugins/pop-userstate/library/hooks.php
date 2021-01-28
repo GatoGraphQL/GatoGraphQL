@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
- 
+
 class PoP_CDN_UserState_Hooks
 {
     public function __construct()
@@ -14,13 +14,13 @@ class PoP_CDN_UserState_Hooks
 
     public function getRejectedParamvalues($paramvalues)
     {
-        
+
         // Reject the CDN if loading the user state
         $paramvalues[] = array(
-            GD_URLPARAM_ACTIONS,
+            \PoP\ComponentModel\Constants\Params::ACTIONS,
             POP_ACTION_LOADUSERSTATE
         );
-        
+
         return $paramvalues;
     }
 }

@@ -31,7 +31,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NEWSLETTER:
             case self::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION:
-                return GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS;
+                return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);

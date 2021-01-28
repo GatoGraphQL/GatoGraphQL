@@ -40,7 +40,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
             case self::MODULE_DATALOAD_LOSTPWD:
             case self::MODULE_DATALOAD_LOSTPWDRESET:
             case self::MODULE_DATALOAD_LOGIN:
-                return GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS;
+                return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);

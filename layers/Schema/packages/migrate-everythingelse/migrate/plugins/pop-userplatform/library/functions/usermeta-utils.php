@@ -20,7 +20,7 @@ class PoP_ModuleManager_UserMetaUtils
         if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
             $vars = ApplicationState::getVars();
             if ($vars['global-userstate']['is-user-logged-in']) {
-                PoP_UserPlatform_UserUtils::saveUserLastAccess($vars['global-userstate']['current-user-id'], POP_CONSTANT_CURRENTTIMESTAMP);
+                PoP_UserPlatform_UserUtils::saveUserLastAccess($vars['global-userstate']['current-user-id'], POP_CONSTANT_TIME);
             }
         }
     }

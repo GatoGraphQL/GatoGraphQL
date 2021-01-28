@@ -57,7 +57,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLLMAP:
-                return POP_DATALOAD_DATASOURCE_IMMUTABLE;
+                return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
         }
 
         return parent::getDatasource($module, $props);

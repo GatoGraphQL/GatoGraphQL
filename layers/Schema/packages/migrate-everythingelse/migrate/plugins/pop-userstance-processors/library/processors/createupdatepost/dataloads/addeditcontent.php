@@ -43,7 +43,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_STANCE_CREATE:
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
-                return GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS;
+                return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);

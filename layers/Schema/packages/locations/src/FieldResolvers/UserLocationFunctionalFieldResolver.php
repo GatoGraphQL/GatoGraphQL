@@ -17,6 +17,6 @@ class UserLocationFunctionalFieldResolver extends AbstractLocationFunctionalFiel
 
     protected function getDbobjectIdField()
     {
-        return POP_INPUTNAME_USERID;
+        return \PoPSchema\Users\Constants\InputNames::USER_ID;
     }
 }

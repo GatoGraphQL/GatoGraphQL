@@ -8,6 +8,8 @@ use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\PostTags\Config\ServiceConfiguration;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Routing\DefinitionGroups;
+use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 /**
  * Initialize component
@@ -97,6 +99,20 @@ class Component extends AbstractComponent
         // If $skipSchema for `Condition` is `true`, then services are not registered
         if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\RESTAPI\\Hooks'))) {
             \PoPSchema\PostTags\Conditional\RESTAPI\ConditionalComponent::beforeBoot();
+        }
+    }
+
+    /**
+     * Define runtime constants
+     */
+    protected static function defineRuntimeConstants(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
+        if (!defined('POP_POSTTAGS_ROUTE_POSTTAGS')) {
+            $definitionManager = DefinitionManagerFacade::getInstance();
+            define('POP_POSTTAGS_ROUTE_POSTTAGS', $definitionManager->getUniqueDefinition('post-tags', DefinitionGroups::ROUTES));
         }
     }
 }

@@ -59,15 +59,15 @@ class LazyLoadHookSet extends AbstractHookSet
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {
             $url = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_DATAOUTPUTITEMS => [
-                    GD_URLPARAM_DATAOUTPUTITEMS_META,
-                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                    GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
+                    \PoP\ComponentModel\Constants\DataOutputItems::META,
+                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
                 ],
                 ModuleFilterManager::URLPARAM_MODULEFILTER => Lazy::NAME,
-                GD_URLPARAM_ACTIONS . '[]' => Actions::LOADLAZY,
+                \PoP\ComponentModel\Constants\Params::ACTIONS . '[]' => Actions::LOADLAZY,
             ], RequestUtils::getCurrentUrl());
-            $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));
+            $engine->addBackgroundUrl($url, array(\PoP\ComponentModel\Constants\Targets::MAIN));
         }
     }
 }

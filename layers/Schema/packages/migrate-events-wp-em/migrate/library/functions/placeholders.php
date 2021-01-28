@@ -46,10 +46,10 @@ HooksAPIFacade::getInstance()->addFilter('em_event_output_show_condition', 'gdEm
 function gdEmEventOutputShowConditionAddDateCondition($show_condition = false, $condition, $conditional_value, $event)
 {
     if ($condition == 'is_today') {
-        $today = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP);
+        $today = date('Y-m-d', POP_CONSTANT_TIME);
         $show_condition = gdEmEventEventOnGivenDay($today, $event);
     } elseif ($condition == 'is_tomorrow') {
-        $tomorrow = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP + 86400);    // add a day
+        $tomorrow = date('Y-m-d', POP_CONSTANT_TIME + 86400);    // add a day
         $show_condition = gdEmEventEventOnGivenDay($tomorrow, $event);
     }
 

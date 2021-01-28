@@ -12,10 +12,10 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        
+
         // Feedback comes from the Action Execution response
         // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
-        if ($data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] && GeneralUtils::isError($actionexecution_checkpoint_validation)) {
+        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] && GeneralUtils::isError($actionexecution_checkpoint_validation)) {
             $msg = array(
                 'codes' => array(
                     $actionexecution_checkpoint_validation->getErrorCode()
@@ -98,13 +98,13 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
             //     );
             // }
         }
-        
+
         return $ret;
     }
 
     // // By default, assume that $executed will already be the response needed as in function get_feedback above
     // function getFormExecutedResponse($executed) {
-    
+
     //     return $executed;
     // }
 }

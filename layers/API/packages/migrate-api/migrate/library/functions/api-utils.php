@@ -11,17 +11,17 @@ class APIUtils
     public static function getEndpoint($url, $dataoutputitems = null): string
     {
         $dataoutputitems = $dataoutputitems ?? [
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
+            \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+            \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+            \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
         ];
         $endpoint = GeneralUtils::addQueryArgs([
-            GD_URLPARAM_SCHEME => APISchemes::API,
-            GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
-            GD_URLPARAM_DATAOUTPUTMODE => GD_URLPARAM_DATAOUTPUTMODE_COMBINED,
-            // GD_URLPARAM_DATABASESOUTPUTMODE => GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED,
-            GD_URLPARAM_DATAOUTPUTITEMS => implode(
-                POP_CONSTANT_PARAMVALUE_SEPARATOR,
+            \PoP\ComponentModel\Constants\Params::SCHEME => APISchemes::API,
+            \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
+            \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE => \PoP\ComponentModel\Constants\DataOutputModes::COMBINED,
+            // \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE => \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED,
+            \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => implode(
+                \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR,
                 $dataoutputitems
             ),
         ], $url);

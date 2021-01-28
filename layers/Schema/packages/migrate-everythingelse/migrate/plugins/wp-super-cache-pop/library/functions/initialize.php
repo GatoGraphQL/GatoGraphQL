@@ -5,8 +5,8 @@ use PoP\API\Response\Schemes as APISchemes;
 // IMPORTANT: We can't call doingJson yet, since it would generate $vars before $wp_query is available
 // Then, as a hack, simply re-construct the logic of this function
 // if (doingJson()) {
-if (($_REQUEST[GD_URLPARAM_OUTPUT] ?? null) == GD_URLPARAM_OUTPUT_JSON
-    || ($_REQUEST[GD_URLPARAM_SCHEME] ?? null) == APISchemes::API
+if (($_REQUEST[\PoP\ComponentModel\Constants\Params::OUTPUT] ?? null) == \PoP\ComponentModel\Constants\Outputs::JSON
+    || ($_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] ?? null) == APISchemes::API
 ) {
     define('JSON_REQUEST', true);
 }

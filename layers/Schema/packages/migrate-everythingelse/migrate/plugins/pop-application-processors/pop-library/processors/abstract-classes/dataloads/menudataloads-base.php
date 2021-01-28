@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
 
     public function getDatasource(array $module, array &$props): string
     {
-        return POP_DATALOAD_DATASOURCE_IMMUTABLE;
+        return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)

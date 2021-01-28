@@ -11,7 +11,7 @@ class PoP_ServerSide_MultiLayoutHelpers
 
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $dbObject = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
-        
+
         // Fetch the layout for that particular configuration
         $layout = '';
         foreach ($conditionDataFieldModules as $conditionField => $moduleOutputName) {
@@ -31,7 +31,7 @@ class PoP_ServerSide_MultiLayoutHelpers
         }
 
         // Render the content from this layout
-        $layoutContext = $context[GD_JS_SUBMODULES][$layout];
+        $layoutContext = $context[POP_RESPONSE_PROP_SUBMODULES][$layout];
 
         // Add dbKey and dbObjectID back into the context
         $layoutContext = array_merge(

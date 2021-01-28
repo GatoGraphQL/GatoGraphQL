@@ -107,7 +107,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
 
         // Add the output=json params, typeahead datastructure
         $url = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($url, POP_FORMAT_TYPEAHEAD);
-        
+
         if ($filter_params = $this->getSourceFilterParams($module, $props)) {
             $url = \PoP\ComponentModel\DataloadUtils::addFilterParams($url, $filter_params);
         }
@@ -117,19 +117,19 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
     protected function getPrefetchUrl(array $module, array &$props)
     {
         $url = $this->getSourceUrl($module, $props);
-        
+
         // Bring 10 times the pre-defined result set
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $limit = $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10;
         return GeneralUtils::addQueryArgs([
-            GD_URLPARAM_LIMIT => $limit, 
+            \PoP\ComponentModel\Constants\Params::LIMIT => $limit,
         ], $url);
     }
     protected function getRemoteUrl(array $module, array &$props)
     {
         $url = $this->getSourceUrl($module, $props);
         return GeneralUtils::addQueryArgs([
-            GD_URLPARAM_LIMIT => 12, 
+            \PoP\ComponentModel\Constants\Params::LIMIT => 12,
         ], $url);
     }
     protected function getStaticSuggestions(array $module, array &$props)

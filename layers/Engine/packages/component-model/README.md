@@ -1200,14 +1200,14 @@ Those modules indicating what DB objects must be loaded are called "dataloading"
 
 ##### Defining the DataSource
 
-Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
+Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `\PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
 
 ```php
 function getDatasource($module, &$props) 
 {
   switch ($module[1]) {
     case self::MODULE_WHOWEARE:
-      return POP_DATALOAD_DATASOURCE_IMMUTABLE;
+      return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
   }
 
   return parent::getDatasource($module, $props);
@@ -1572,7 +1572,7 @@ function executeQueryIds($query) {
 
 The FieldResolver is the object resolving "data-fields" to their corresponding value. It must inherit from class `AbstractFieldResolver`, and implement function `getValue`, which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
 
-> Note: the names of fields cannot include the following special characters: "," (`POP_CONSTANT_PARAMVALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
+> Note: the names of fields cannot include the following special characters: "," (`\PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
 
 For instance, a FieldResolver for posts looks like this:
 

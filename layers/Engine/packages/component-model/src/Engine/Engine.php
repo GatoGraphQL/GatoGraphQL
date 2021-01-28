@@ -13,7 +13,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Server\Utils as ServerUtils;
+use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\CheckpointProcessorManagerFactory;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -115,7 +115,6 @@ class Engine implements EngineInterface
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
                 POP_CONSTANT_UNIQUE_ID,
-                POP_CONSTANT_CURRENTTIMESTAMP,
                 POP_CONSTANT_RAND,
                 POP_CONSTANT_TIME,
             );
@@ -149,8 +148,8 @@ class Engine implements EngineInterface
 
         $this->extra_routes = array();
 
-        if (ServerUtils::enableExtraRoutesByParams()) {
-            $this->extra_routes = $_REQUEST[GD_URLPARAM_EXTRAROUTES] ?? array();
+        if (Environment::enableExtraRoutesByParams()) {
+            $this->extra_routes = $_REQUEST[\PoP\ComponentModel\Constants\Params::EXTRA_ROUTES] ?? array();
             $this->extra_routes = is_array($this->extra_routes) ? $this->extra_routes : array($this->extra_routes);
         }
 
@@ -300,7 +299,7 @@ class Engine implements EngineInterface
         $this->model_props = $this->getModelPropsModuletree($module);
 
         // If only getting static content, then no need to add the mutableonrequest props
-        if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL) {
+        if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL) {
             $this->props = $this->model_props;
         } else {
             $this->props = $this->addRequestPropsModuletree($module, $this->model_props);
@@ -315,7 +314,7 @@ class Engine implements EngineInterface
         );
 
         $data = [];
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
                 $this->getModuleDatasetSettings($module, $this->model_props, $this->props)
@@ -328,15 +327,15 @@ class Engine implements EngineInterface
         // which is done through an action, called through getData()
         // Data = dbobjectids (data-ids) + feedback + database
         if (
-            in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
-            || in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)
+            in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA, $dataoutputitems)
+            || in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)
         ) {
             $data = array_merge(
                 $data,
                 $this->getModuleData($module, $this->model_props, $this->props)
             );
 
-            if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)) {
+            if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)) {
                 $data = array_merge(
                     $data,
                     $this->getDatabases()
@@ -347,7 +346,7 @@ class Engine implements EngineInterface
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
         if (
-            in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
+            in_array(\PoP\ComponentModel\Constants\DataOutputItems::META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
@@ -398,19 +397,19 @@ class Engine implements EngineInterface
         $dataoutputitems = $vars['dataoutputitems'];
 
         if (
-            in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
+            in_array(\PoP\ComponentModel\Constants\DataOutputItems::META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
             if ($this->getExtraRoutes()) {
-                $this->data['requestmeta'][POP_JS_MULTIPLEROUTES] = true;
+                $this->data['requestmeta'][\PoP\ComponentModel\Constants\Response::MULTIPLE_ROUTES] = true;
             }
             if ($sitemeta = $this->getSiteMeta()) {
                 $this->data['sitemeta'] = $sitemeta;
             }
 
-            if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_SESSION, $dataoutputitems)) {
+            if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::SESSION, $dataoutputitems)) {
                 if ($sessionmeta = $this->getSessionMeta()) {
                     $this->data['sessionmeta'] = $sessionmeta;
                 }
@@ -455,11 +454,11 @@ class Engine implements EngineInterface
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+        if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
             if ($immutable_datasetsettings) {
                 $ret['datasetmodulesettings']['immutable'] = $immutable_datasetsettings;
             }
-        } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+        } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if ($combined_datasetsettings = $immutable_datasetsettings) {
                 $ret['datasetmodulesettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
@@ -472,14 +471,14 @@ class Engine implements EngineInterface
     public function getRequestMeta()
     {
         $meta = array(
-            POP_CONSTANT_ENTRYMODULE => $this->getEntryModule()[1],
-            POP_UNIQUEID => POP_CONSTANT_UNIQUE_ID,
-            GD_URLPARAM_URL => RequestUtils::getCurrentUrl(),
+            \PoP\ComponentModel\Constants\Response::ENTRY_MODULE => $this->getEntryModule()[1],
+            \PoP\ComponentModel\Constants\Response::UNIQUE_ID => POP_CONSTANT_UNIQUE_ID,
+            \PoP\ComponentModel\Constants\Response::URL => RequestUtils::getCurrentUrl(),
             'modelinstanceid' => ModelInstanceFacade::getInstance()->getModelInstanceId(),
         );
 
         if ($this->backgroundload_urls) {
-            $meta[GD_URLPARAM_BACKGROUNDLOADURLS] = $this->backgroundload_urls;
+            $meta[\PoP\ComponentModel\Constants\Response::BACKGROUND_LOAD_URLS] = $this->backgroundload_urls;
         };
 
         // Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
@@ -500,11 +499,9 @@ class Engine implements EngineInterface
 
         // Any errors? Send them back
         if (RequestUtils::$errors) {
-            if (count(RequestUtils::$errors) > 1) {
-                $meta[GD_URLPARAM_ERROR] = TranslationAPIFacade::getInstance()->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors);
-            } else {
-                $meta[GD_URLPARAM_ERROR] = TranslationAPIFacade::getInstance()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
-            }
+            $meta[\PoP\ComponentModel\Constants\Response::ERROR] = count(RequestUtils::$errors) > 1 ?
+                TranslationAPIFacade::getInstance()->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
+                : TranslationAPIFacade::getInstance()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
         return HooksAPIFacade::getInstance()->applyFilters(
@@ -526,21 +523,21 @@ class Engine implements EngineInterface
         $meta = array();
         if (RequestUtils::fetchingSite()) {
             $vars = ApplicationState::getVars();
-            $meta[GD_URLPARAM_VERSION] = $vars['version'];
-            $meta[GD_URLPARAM_DATAOUTPUTMODE] = $vars['dataoutputmode'];
-            $meta[GD_URLPARAM_DATABASESOUTPUTMODE] = $vars['dboutputmode'];
+            $meta[\PoP\ComponentModel\Constants\Params::VERSION] = $vars['version'];
+            $meta[\PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
+            $meta[\PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE] = $vars['dboutputmode'];
 
             if ($vars['format'] ?? null) {
-                $meta[GD_URLPARAM_SETTINGSFORMAT] = $vars['format'];
+                $meta[\PoP\ComponentModel\Constants\Params::SETTINGSFORMAT] = $vars['format'];
             }
             if ($vars['mangled'] ?? null) {
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
             }
             if (ComponentConfiguration::enableConfigByParams() && $vars['config']) {
-                $meta[POP_URLPARAM_CONFIG] = $vars['config'];
+                $meta[\PoP\ComponentModel\Constants\Params::CONFIG] = $vars['config'];
             }
             if ($vars['stratum'] ?? null) {
-                $meta[GD_URLPARAM_STRATUM] = $vars['stratum'];
+                $meta[\PoP\ComponentModel\Constants\Params::STRATUM] = $vars['stratum'];
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
@@ -691,7 +688,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
-            $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+            $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
@@ -738,7 +735,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
@@ -751,12 +748,12 @@ class Engine implements EngineInterface
             $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
 
             // If the path doesn't exist, create it
-            if (!isset($array_pointer[$submoduleOutputName][GD_JS_SUBMODULES])) {
-                $array_pointer[$submoduleOutputName][GD_JS_SUBMODULES] = array();
+            if (!isset($array_pointer[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES])) {
+                $array_pointer[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] = array();
             }
 
             // The pointer is the location in the array where the value will be set
-            $array_pointer = &$array_pointer[$submoduleOutputName][GD_JS_SUBMODULES];
+            $array_pointer = &$array_pointer[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES];
         }
 
         $moduleOutputName = ModuleUtils::getModuleOutputName($module);
@@ -801,7 +798,7 @@ class Engine implements EngineInterface
         $datasources = $vars['datasources'];
         $dataoutputmode = $vars['dataoutputmode'];
         $dataoutputitems = $vars['dataoutputitems'];
-        $add_meta = in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems);
+        $add_meta = in_array(\PoP\ComponentModel\Constants\DataOutputItems::META, $dataoutputitems);
 
         $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = array();
         $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = array();
@@ -852,7 +849,7 @@ class Engine implements EngineInterface
             $mutableonmodel_data_properties
         );
 
-        if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL) {
+        if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
             $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_module, $root_props);
@@ -886,13 +883,13 @@ class Engine implements EngineInterface
             $data_properties = &$root_data_properties;
             foreach ($module_path as $submodule) {
                 $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                $data_properties = &$data_properties[$submoduleFullName][GD_JS_SUBMODULES];
+                $data_properties = &$data_properties[$submoduleFullName][POP_RESPONSE_PROP_SUBMODULES];
             }
-            $data_properties = &$data_properties[$moduleFullName][POP_CONSTANT_DATAPROPERTIES];
+            $data_properties = &$data_properties[$moduleFullName][\PoP\ComponentModel\Constants\DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it
-            if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL && $datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+            if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL && $datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 continue;
             }
 
@@ -904,7 +901,7 @@ class Engine implements EngineInterface
             // ------------------------------------------
             // Load data if the checkpoint did not fail
             $dataaccess_checkpoint_validation = null;
-            if ($load_data && $checkpoints = ($data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS] ?? null)) {
+            if ($load_data && $checkpoints = ($data_properties[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] ?? null)) {
                 // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                 $dataaccess_checkpoint_validation = $this->validateCheckpoints($checkpoints);
                 $load_data = !GeneralUtils::isError($dataaccess_checkpoint_validation);
@@ -915,21 +912,21 @@ class Engine implements EngineInterface
             $model_props = &$root_model_props;
             foreach ($module_path as $submodule) {
                 $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                $props = &$props[$submoduleFullName][POP_PROPS_SUBMODULES];
-                $model_props = &$model_props[$submoduleFullName][POP_PROPS_SUBMODULES];
+                $props = &$props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
+                $model_props = &$model_props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
             }
 
             if (
                 in_array(
                     $datasource,
                     array(
-                    POP_DATALOAD_DATASOURCE_IMMUTABLE,
-                    POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                    \PoP\ComponentModel\Constants\DataSources::IMMUTABLE,
+                    \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL,
                     )
                 )
             ) {
                 $module_props = &$model_props;
-            } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+            } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 $module_props = &$props;
             }
 
@@ -954,7 +951,7 @@ class Engine implements EngineInterface
                         // Validate that the actionexecution must be triggered through its own checkpoints
                         $execute = true;
                         $mutation_checkpoint_validation = null;
-                        if ($mutation_checkpoints = $data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] ?? null) {
+                        if ($mutation_checkpoints = $data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] ?? null) {
                             // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                             $mutation_checkpoint_validation = $this->validateCheckpoints($mutation_checkpoints);
                             $execute = !GeneralUtils::isError($mutation_checkpoint_validation);
@@ -1014,7 +1011,7 @@ class Engine implements EngineInterface
                     // these ones must be fetched even if the block has a static typeResolver
                     // If it has extend, add those ids under its typeResolver_class
                     $dataload_extend_settings = $processor->getModelSupplementaryDbobjectdataModuletree($module, $model_props);
-                    if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+                    if ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
                             $processor->getMutableonrequestSupplementaryDbobjectdataModuletree($module, $props)
@@ -1038,19 +1035,19 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
-            if ($datasource == POP_DATALOAD_DATASOURCE_IMMUTABLE) {
+            if ($datasource == \PoP\ComponentModel\Constants\DataSources::IMMUTABLE) {
                 $datasetmoduledata = &$immutable_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$immutable_datasetmodulemeta;
                 }
                 $this->moduledata = &$immutable_moduledata;
-            } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL) {
+            } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL) {
                 $datasetmoduledata = &$mutableonmodel_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
                 }
                 $this->moduledata = &$mutableonmodel_moduledata;
-            } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+            } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 $datasetmoduledata = &$mutableonrequest_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
@@ -1061,14 +1058,14 @@ class Engine implements EngineInterface
             // Integrate the dbobjectids into $datasetmoduledata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
             if (!is_null($datasetmoduledata)) {
-                $this->assignValueForModule($datasetmoduledata, $module_path, $module, POP_CONSTANT_DBOBJECTIDS, $typeDBObjectIDOrIDs);
+                $this->assignValueForModule($datasetmoduledata, $module_path, $module, \PoP\ComponentModel\Constants\DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
             // Save the meta into $datasetmodulemeta
             if ($add_meta) {
                 if (!is_null($datasetmodulemeta)) {
                     if ($dataset_meta = $processor->getDatasetmeta($module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
-                        $this->assignValueForModule($datasetmodulemeta, $module_path, $module, POP_CONSTANT_META, $dataset_meta);
+                        $this->assignValueForModule($datasetmodulemeta, $module_path, $module, \PoP\ComponentModel\Constants\DataLoading::META, $dataset_meta);
                     }
                 }
             }
@@ -1085,21 +1082,21 @@ class Engine implements EngineInterface
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_modulepath as $submodule) {
                         $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                        $referencer_props = &$referencer_props[$submoduleFullName][POP_PROPS_SUBMODULES];
-                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][POP_PROPS_SUBMODULES];
+                        $referencer_props = &$referencer_props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
+                        $referencer_model_props = &$referencer_model_props[$submoduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
                     }
 
                     if (
                         in_array(
                             $datasource,
                             array(
-                            POP_DATALOAD_DATASOURCE_IMMUTABLE,
-                            POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                            \PoP\ComponentModel\Constants\DataSources::IMMUTABLE,
+                            \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL,
                             )
                         )
                     ) {
                         $referencer_module_props = &$referencer_model_props;
-                    } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+                    } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                         $referencer_module_props = &$referencer_props;
                     }
                     $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
@@ -1133,11 +1130,11 @@ class Engine implements EngineInterface
 
         $ret = array();
 
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA, $dataoutputitems)) {
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-            if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+            if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
                 if ($immutable_moduledata) {
                     $ret['moduledata']['immutable'] = $immutable_moduledata;
                 }
@@ -1168,7 +1165,7 @@ class Engine implements EngineInterface
                         $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
                     }
                 }
-            } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+            } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
                     $combined_moduledata = array_merge_recursive(
@@ -1563,14 +1560,14 @@ class Engine implements EngineInterface
             '\PoP\ComponentModel\Engine:traces:db',
             $dbTraces
         );
-        if (ServerUtils::showTracesInResponse()) {
+        if (Environment::showTracesInResponse()) {
             $this->maybeCombineAndAddDatabaseEntries($ret, 'dbTraces', $dbTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
 
         // Show logs only if both enabled, and passing the action in the URL
-        if (ServerUtils::enableShowLogs()) {
-            if (in_array(POP_ACTION_SHOW_LOGS, $vars['actions'])) {
+        if (Environment::enableShowLogs()) {
+            if (in_array(\PoP\ComponentModel\Constants\Actions::SHOW_LOGS, $vars['actions'])) {
                 $ret['logEntries'] = $feedbackMessageStore->getLogEntries();
             }
         }
@@ -1725,9 +1722,9 @@ class Engine implements EngineInterface
             $dboutputmode = $vars['dboutputmode'];
 
             // Combine all the databases or send them separate
-            if ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES) {
+            if ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES) {
                 $ret[$name] = $entries;
-            } elseif ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED) {
+            } elseif ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED) {
                 // Filter to make sure there are entries
                 if ($entries = array_filter($entries)) {
                     $combined_databases = array();
@@ -1756,9 +1753,9 @@ class Engine implements EngineInterface
             $dboutputmode = $vars['dboutputmode'];
 
             // Combine all the databases or send them separate
-            if ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES) {
+            if ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES) {
                 $ret[$name] = $entries;
-            } elseif ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED) {
+            } elseif ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED) {
                 // Filter to make sure there are entries
                 if ($entries = array_filter($entries)) {
                     $combined_databases = array();
@@ -1788,8 +1785,8 @@ class Engine implements EngineInterface
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
-                    $moduledata[$submoduleOutputName][GD_JS_SUBMODULES] = $moduledata[$submoduleOutputName][GD_JS_SUBMODULES] ?? array();
-                    $moduledata = &$moduledata[$submoduleOutputName][GD_JS_SUBMODULES];
+                    $moduledata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] = $moduledata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] ?? array();
+                    $moduledata = &$moduledata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES];
                 }
                 // Merge the feedback in
                 $moduledata = array_merge_recursive(

@@ -6,7 +6,7 @@ class PoPTheme_Wassup_ContactUs_WebPlatform_PreloadHooks
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'wassup:extra-routes:initialframes:'.POP_TARGET_MAIN,
+            'wassup:extra-routes:initialframes:'.\PoP\ComponentModel\Constants\Targets::MAIN,
             array($this, 'getRoutesForMain')
         );
     }

@@ -128,7 +128,7 @@ class PoP_ResourceLoaderProcessorUtils {
                     foreach ($vars_properties as $vars_properties_set) {
                         $conditions = $vars_properties_set['conditions'];
                         // Add the format under the return variable
-                        $format = $conditions['format'] ?? POP_VALUES_DEFAULT;
+                        $format = $conditions['format'] ?? \PoP\ComponentModel\Constants\Values::DEFAULT;
                         if (!in_array($format, $route_formats[$nature][$route])) {
                             $route_formats[$nature][$route][] = $format;
                         }
@@ -176,7 +176,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                         // If this tab is the default one, an entry with no tab must also be created
                         // if ($route == RequestUtils::getNatureDefaultPage($nature)) {
-                        if ($format == POP_VALUES_DEFAULT) {
+                        if ($format == \PoP\ComponentModel\Constants\Values::DEFAULT) {
                             $item_options['is-default-route'] = true;
                         }
                     }
@@ -318,7 +318,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Obtain the key under which to add the resources, which is a combination of components 'format', 'route' and 'target'
         // This code is replicated in function `loadResources` in resourceloader.js
         $params = array();
-        $format = $components['format'] ?? ($loadingSite ? '' : POP_VALUES_DEFAULT);
+        $format = $components['format'] ?? ($loadingSite ? '' : \PoP\ComponentModel\Constants\Values::DEFAULT);
         $route = $components['route'];
 
         // Targets special cases: certain formats (eg: Navigator) are used only from a corresponding target
@@ -341,9 +341,9 @@ class PoP_ResourceLoaderProcessorUtils {
                 // instead of "{}", which may make the JS produce an error
                 $target = $format_targets[$format];
                 $duplicate_as_default_format = true;
-                // $format = POP_VALUES_DEFAULT;
+                // $format = \PoP\ComponentModel\Constants\Values::DEFAULT;
             } else {
-                $target = POP_TARGET_MAIN;
+                $target = \PoP\ComponentModel\Constants\Targets::MAIN;
             }
         }
 
@@ -366,25 +366,25 @@ class PoP_ResourceLoaderProcessorUtils {
         // the latter one is needed for enqueuing bundles/bundlegroups instead of
         // resources when first loading the website
         if ($loadingSite) {
-            $vars['output'] = GD_URLPARAM_OUTPUT_HTML;
+            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::HTML;
             $vars['modulefilter'] = null;
             $vars['loading-site'] = true;
             $vars['fetching-site'] = true;
         } else {
-            $vars['output'] = GD_URLPARAM_OUTPUT_JSON;
+            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::JSON;
             $vars['modulefilter'] = $modulefilter;
             $vars['loading-site'] = false;
             $vars['fetching-site'] = false;
         }
         $vars['nature'] = $nature;
         $vars['dataoutputitems'] = array(
-            GD_URLPARAM_DATAOUTPUTITEMS_META,
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-            GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
+            \PoP\ComponentModel\Constants\DataOutputItems::META,
+            \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+            \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+            \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+            \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );
-        $vars['datasources'] = GD_URLPARAM_DATASOURCES_MODELANDREQUEST;
+        $vars['datasources'] = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
         $vars['format'] = $format;
         $vars['route'] = $route;
         $vars['target'] = $target;
@@ -632,7 +632,7 @@ class PoP_ResourceLoaderProcessorUtils {
             if ($duplicate_as_default_format) {
 
                 $defaultformat_params = $params;
-                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.POP_VALUES_DEFAULT;
+                $defaultformat_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ComponentModel\Constants\Values::DEFAULT;
                 $defaultformat_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_params);
 
                 if (in_array($nature, $flat_natures)) {
@@ -651,7 +651,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                     // If also duplicate, add the same entry without the tab
                     $defaultformat_noroute_params = $noroute_params;
-                    $defaultformat_noroute_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.POP_VALUES_DEFAULT;
+                    $defaultformat_noroute_params[0] = POP_RESOURCELOADERIDENTIFIER_FORMAT.\PoP\ComponentModel\Constants\Values::DEFAULT;
                     $defaultformat_noroute_key = implode(GD_SEPARATOR_RESOURCELOADER, $defaultformat_noroute_params);
 
                     if (in_array($nature, $flat_natures)) {
