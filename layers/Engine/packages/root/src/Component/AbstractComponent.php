@@ -38,7 +38,8 @@ abstract class AbstractComponent implements ComponentInterface
         // Initialize the self component
         static::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
 
-        static::defineRuntimeConstants();
+        // Allow the component to define runtime constants
+        static::defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
     }
 
     /**
