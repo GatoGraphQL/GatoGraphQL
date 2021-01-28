@@ -27,7 +27,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
     {
         return HooksAPIFacade::getInstance()->applyFilters(
             'GD_Dataloader_List:query:pagenumber',
-            $query_args[GD_URLPARAM_PAGENUMBER]
+            $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER]
         );
     }
     protected function getLimitParam($query_args)

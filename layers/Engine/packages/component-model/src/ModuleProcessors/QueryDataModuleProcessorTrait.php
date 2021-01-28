@@ -137,7 +137,7 @@ trait QueryDataModuleProcessorTrait
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     GD_URLPARAM_REDIRECTTO,
-                    GD_URLPARAM_PAGENUMBER,
+                    \PoP\ComponentModel\Constants\Params::PAGE_NUMBER,
                     GD_URLPARAM_LIMIT,
                 )
             );

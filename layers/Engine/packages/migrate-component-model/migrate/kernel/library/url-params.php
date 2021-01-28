@@ -24,9 +24,7 @@
 
 
 
-// Paged param: It is 'pagenum' and not 'paged', because if so WP does a redirect to re-adjust the URL
-// From https://www.mesym.com/action?paged=2 it redirects to https://www.mesym.com/action/paged/2/
-const GD_URLPARAM_PAGENUMBER = 'pagenum';
+
 const GD_URLPARAM_LIMIT = 'limit';
 
 const GD_URLPARAM_ACTIONPATH = 'actionpath';

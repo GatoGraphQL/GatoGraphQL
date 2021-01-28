@@ -35,7 +35,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_OUTPUT'] = GD_URLPARAM_OUTPUT;
     $jqueryConstants['URLPARAM_OUTPUT_JSON'] = GD_URLPARAM_OUTPUT_JSON;
 
-    $jqueryConstants['URLPARAM_PAGED'] = GD_URLPARAM_PAGENUMBER;
+    $jqueryConstants['URLPARAM_PAGED'] = \PoP\ComponentModel\Constants\Params::PAGE_NUMBER;
     $jqueryConstants['URLPARAM_OPERATION_APPEND'] = GD_URLPARAM_OPERATION_APPEND;
     $jqueryConstants['URLPARAM_OPERATION_PREPEND'] = GD_URLPARAM_OPERATION_PREPEND;
     $jqueryConstants['URLPARAM_OPERATION_REPLACE'] = GD_URLPARAM_OPERATION_REPLACE;

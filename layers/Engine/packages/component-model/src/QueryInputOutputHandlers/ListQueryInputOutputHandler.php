@@ -23,7 +23,7 @@ class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
             $limit = $configuredLimit;
         }
         $query_args[GD_URLPARAM_LIMIT] = intval($limit);
-        $query_args[GD_URLPARAM_PAGENUMBER] = $query_args[GD_URLPARAM_PAGENUMBER] ? intval($query_args[GD_URLPARAM_PAGENUMBER]) : 1;
+        $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER] = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER] ? intval($query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER]) : 1;
     }
 
     protected function getLimit()
