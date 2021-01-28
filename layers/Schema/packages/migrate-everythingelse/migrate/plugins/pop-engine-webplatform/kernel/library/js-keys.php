@@ -20,7 +20,7 @@ function gdJqueryConstantsJsparams($jqueryConstants)
 
     // From PoP Engine
     $jqueryConstants['JS_MODULE'] = GD_JS_MODULE;
-    $jqueryConstants['JS_SUBMODULES'] = GD_JS_SUBMODULES;
+    $jqueryConstants['JS_SUBMODULES'] = POP_CONSTANT_RESPONSE_SUBMODULES;
     $jqueryConstants['JS_MODULEOUTPUTNAME'] = GD_JS_MODULEOUTPUTNAME;
 
     // From Web Platform PoP Engine
