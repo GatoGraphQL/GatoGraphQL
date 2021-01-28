@@ -27,7 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // files to skip downgrading
     $parameters->set(Option::PATHS, [
         __DIR__ . '/src/*',
-        // __DIR__ . '/layers/*',
+        __DIR__ . '/layers/*',
     ]);
 
     // files to skip downgrading
