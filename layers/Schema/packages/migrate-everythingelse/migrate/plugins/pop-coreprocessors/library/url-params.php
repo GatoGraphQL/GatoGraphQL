@@ -18,9 +18,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_ACTIONS'] = \PoP\ComponentModel\Constants\Params::ACTIONS;
     $jqueryConstants['URLPARAM_ACTION_LATEST'] = GD_URLPARAM_ACTION_LOADLATEST;
     $jqueryConstants['URLPARAM_ACTION_PRINT'] = GD_URLPARAM_ACTION_PRINT;
-    // $jqueryConstants['URLPARAM_ACTION_LOADLAZY'] = GD_URLPARAM_ACTION_LOADLAZY;
 
-    // $jqueryConstants['URLPARAM_PARENTPAGEID'] = GD_URLPARAM_PARENTPAGEID;
     $jqueryConstants['URLPARAM_TITLE'] = GD_URLPARAM_TITLE;
     $jqueryConstants['URLPARAM_TITLELINK'] = GD_URLPARAM_TITLELINK;
     $jqueryConstants['URLPARAM_URL'] = GD_URLPARAM_URL;

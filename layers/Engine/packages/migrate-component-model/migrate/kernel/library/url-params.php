@@ -21,8 +21,6 @@
 
 
 
-// Used to print "active" in the menu navigation
-// const GD_URLPARAM_PARENTPAGEID = 'parentpage_id';
 const GD_URLPARAM_TITLE = 'title';
 const GD_URLPARAM_TITLELINK = 'title-link';
 const GD_URLPARAM_URL = 'url';
