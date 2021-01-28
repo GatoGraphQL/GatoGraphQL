@@ -18,6 +18,6 @@ abstract class AbstractRelationalFieldDataloadModuleProcessor extends AbstractDa
 
     public function getFormat(array $module): ?string
     {
-        return POP_FORMAT_FIELDS;
+        return \PoP\API\Constants\Formats::FIELDS;
     }
 }
