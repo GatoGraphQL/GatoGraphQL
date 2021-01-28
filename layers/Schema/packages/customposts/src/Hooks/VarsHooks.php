@@ -1,12 +1,28 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\CustomPosts\Hooks;
+
+use PoP\Hooks\AbstractHookSet;
+use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
 
-HooksAPIFacade::getInstance()->addFilter(
-    \PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT,
-    function ($components) {
+class VarsHooks extends AbstractHookSet
+{
+    protected function init()
+    {
+        $this->hooksAPI->addFilter(
+            ModelInstance::HOOK_COMPONENTS_RESULT,
+            array($this, 'getModelInstanceComponentsFromVars')
+        );
+    }
+
+    public function getModelInstanceComponentsFromVars($components)
+    {
         $vars = ApplicationState::getVars();
         $nature = $vars['nature'];
 
@@ -20,10 +36,10 @@ HooksAPIFacade::getInstance()->addFilter(
                 $component_types = (array)HooksAPIFacade::getInstance()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
-                        POP_MODELINSTANCECOMPONENTTYPE_SINGLE_POSTTYPE,
+                        \PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST_TYPE,
                     )
                 );
-                if (in_array(POP_MODELINSTANCECOMPONENTTYPE_SINGLE_POSTTYPE, $component_types)) {
+                if (in_array(\PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST_TYPE, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
                     $components[] =
                         TranslationAPIFacade::getInstance()->__('post type:', 'pop-engine')
@@ -31,7 +47,6 @@ HooksAPIFacade::getInstance()->addFilter(
                 }
                 break;
         }
-
         return $components;
     }
-);
+}
