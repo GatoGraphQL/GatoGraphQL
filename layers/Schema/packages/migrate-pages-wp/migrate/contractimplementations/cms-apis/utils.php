@@ -4,10 +4,10 @@ namespace PoPSchema\Pages\WP;
 class Utils
 {
     protected static $cmsToPoPPageStatusConversion = [
-        'publish' => POP_PAGESTATUS_PUBLISHED,
-        'pending' => POP_PAGESTATUS_PENDING,
-        'draft' => POP_PAGESTATUS_DRAFT,
-        'trash' => POP_PAGESTATUS_TRASH,
+        'publish' => \PoPSchema\CustomPosts\Types\Status::PUBLISHED,
+        'pending' => \PoPSchema\CustomPosts\Types\Status::PENDING,
+        'draft' => \PoPSchema\CustomPosts\Types\Status::DRAFT,
+        'trash' => \PoPSchema\CustomPosts\Types\Status::TRASH,
     ];
     protected static $popToCMSPageStatusConversion;
 
