@@ -76,7 +76,7 @@ class RequestUtils
                 ModulePaths::URLPARAM_MODULEPATHS,
                 \PoP\ComponentModel\Constants\Params::ACTION_PATH,
                 \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS,
-                \GD_URLPARAM_DATASOURCES,
+                \PoP\ComponentModel\Constants\Params::DATA_SOURCE,
                 \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
                 \GD_URLPARAM_OUTPUT,

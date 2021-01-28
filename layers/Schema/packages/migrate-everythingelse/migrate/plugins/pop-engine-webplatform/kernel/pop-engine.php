@@ -80,7 +80,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 }
             }
 
-            if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
+            if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
                 $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($module, $props);
             }
 

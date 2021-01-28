@@ -81,7 +81,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
                 $cachemanager->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
-        if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
+        if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
             $mutableonrequest_settings = $processor->getMutableonrequestSettingsModuletree($module, $props);
         }
 

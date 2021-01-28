@@ -39,7 +39,7 @@ class ApplicationState
         // Convert them to lower to make it insensitive to upper/lower case values
         $output = strtolower($_REQUEST[\GD_URLPARAM_OUTPUT] ?? '');
         $dataoutputitems = $_REQUEST[\PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS] ?? [];
-        $datasources = strtolower($_REQUEST[\GD_URLPARAM_DATASOURCES] ?? '');
+        $datasources = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATA_SOURCE] ?? '');
         $datastructure = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] ?? '');
         $dataoutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE] ?? '');
         $dboutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE] ?? '');
@@ -66,11 +66,11 @@ class ApplicationState
 
         // Target/Module default values (for either empty, or if the user is playing around with the url)
         $alldatasources = array(
-            \GD_URLPARAM_DATASOURCES_ONLYMODEL,
-            \GD_URLPARAM_DATASOURCES_MODELANDREQUEST,
+            \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL,
+            \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST,
         );
         if (!in_array($datasources, $alldatasources)) {
-            $datasources = \GD_URLPARAM_DATASOURCES_MODELANDREQUEST;
+            $datasources = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
         }
 
         $dataoutputmodes = array(

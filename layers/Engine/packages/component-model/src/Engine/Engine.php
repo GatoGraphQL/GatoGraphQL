@@ -299,7 +299,7 @@ class Engine implements EngineInterface
         $this->model_props = $this->getModelPropsModuletree($module);
 
         // If only getting static content, then no need to add the mutableonrequest props
-        if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL) {
+        if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL) {
             $this->props = $this->model_props;
         } else {
             $this->props = $this->addRequestPropsModuletree($module, $this->model_props);
@@ -849,7 +849,7 @@ class Engine implements EngineInterface
             $mutableonmodel_data_properties
         );
 
-        if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL) {
+        if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
             $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_module, $root_props);
@@ -889,7 +889,7 @@ class Engine implements EngineInterface
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it
-            if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL && $datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
+            if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::ONLYMODEL && $datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 continue;
             }
 

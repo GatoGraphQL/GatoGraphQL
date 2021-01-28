@@ -384,7 +384,7 @@ class PoP_ResourceLoaderProcessorUtils {
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );
-        $vars['datasources'] = GD_URLPARAM_DATASOURCES_MODELANDREQUEST;
+        $vars['datasources'] = \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST;
         $vars['format'] = $format;
         $vars['route'] = $route;
         $vars['target'] = $target;
