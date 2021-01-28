@@ -28,7 +28,7 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
                 return POP_INPUTNAME_USERID;
 
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT:
-                return POP_INPUTNAME_COMMENTID;
+                return \PoPSchema\Comments\Constants\InputNames::COMMENT_ID;
         }
 
         return parent::getName($module);
