@@ -1,7 +1,5 @@
 <?php
 
-const POP_CONSTANT_MODULESTARTPATH_SEPARATOR = '.';
-
 const POP_PROPS_DESCENDANTATTRIBUTES = 'descendantattributes';
 const POP_PROPS_ATTRIBUTES = 'attributes';
 const POP_PROPS_SUBMODULES = 'submodules';
