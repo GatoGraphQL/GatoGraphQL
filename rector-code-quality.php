@@ -6,6 +6,12 @@ use Rector\CodeQuality\Rector\LogicalAnd\AndAssignsToSeparateLinesRector;
 use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+/**
+ * This Rector configuration imports the fully qualified classnames
+ * using `use`, and removing it from the body.
+ * Rule `AndAssignsToSeparateLinesRector` is not needed, but we need
+ * to run at least 1 rule.
+ */
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
@@ -32,6 +38,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
+        '*/migrate-*',
         '*/vendor/*',
     ]);
 
