@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\API\Engine;
 
+use PoP\API\Constants\Actions;
+use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\API\Component as APIComponent;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\API\Response\Schemes as APISchemes;
@@ -20,8 +22,8 @@ trait RemoveEntryModuleFromOutputEngineTrait
         if (
             APIComponent::isEnabled() &&
             $vars['scheme'] == APISchemes::API &&
-            in_array(\PoP\API\Constants\Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, $vars['actions']) &&
-            $vars['dataoutputmode'] == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED
+            in_array(Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, $vars['actions']) &&
+            $vars['dataoutputmode'] == DataOutputModes::COMBINED
         ) {
             if ($data['datasetmodulesettings'] ?? null) {
                 $data['datasetmodulesettings'] = $this->removeEntryModuleFromOutput($data['datasetmodulesettings']);

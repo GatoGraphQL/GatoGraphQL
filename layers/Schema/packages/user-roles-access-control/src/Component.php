@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl;
 
+use PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
@@ -67,7 +68,7 @@ class Component extends AbstractComponent
                 class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                \PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::initialize(
+                ConditionalComponent::initialize(
                     $configuration,
                     $skipSchema
                 );
@@ -107,7 +108,7 @@ class Component extends AbstractComponent
         ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
 
         if (class_exists('\PoP\CacheControl\Component')) {
-            \PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent::afterBoot();
+            ConditionalComponent::afterBoot();
         }
     }
 }

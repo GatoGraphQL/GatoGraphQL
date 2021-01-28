@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
+use PoP\API\Conditional\AccessControl\ConditionalComponent;
 use PoP\API\Configuration\Request;
 use PoP\API\Config\ServiceConfiguration;
 use PoP\Root\Component\AbstractComponent;
@@ -95,7 +96,7 @@ class Component extends AbstractComponent
                 class_exists('\PoP\AccessControl\Component')
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                \PoP\API\Conditional\AccessControl\ConditionalComponent::initialize(
+                ConditionalComponent::initialize(
                     $configuration,
                     $skipSchema
                 );
@@ -124,7 +125,7 @@ class Component extends AbstractComponent
 
         // Boot conditional on API package being installed
         if (class_exists('\PoP\AccessControl\Component')) {
-            \PoP\API\Conditional\AccessControl\ConditionalComponent::beforeBoot();
+            ConditionalComponent::beforeBoot();
         }
     }
 }

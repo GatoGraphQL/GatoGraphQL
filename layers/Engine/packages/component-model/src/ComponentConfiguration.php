@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 
@@ -36,7 +38,7 @@ class ComponentConfiguration
         // Whatever fields are not there, will be considered "false"
         self::$overrideConfiguration = array();
         if (self::enableConfigByParams()) {
-            self::$overrideConfiguration = isset($_REQUEST[\PoP\ComponentModel\Constants\Params::CONFIG]) ? explode(\PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR, $_REQUEST[\PoP\ComponentModel\Constants\Params::CONFIG]) : array();
+            self::$overrideConfiguration = isset($_REQUEST[Params::CONFIG]) ? explode(Param::VALUE_SEPARATOR, $_REQUEST[Params::CONFIG]) : array();
         }
     }
 

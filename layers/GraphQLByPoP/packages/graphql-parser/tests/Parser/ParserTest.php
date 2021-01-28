@@ -8,6 +8,7 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser;
 
+use GraphQLByPoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
@@ -46,7 +47,7 @@ class ParserTest extends TestCase
 
     public function testInvalidSelection()
     {
-        $this->expectException(\GraphQLByPoP\GraphQLParser\Exception\Parser\SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $parser = new Parser();
         $data   = $parser->parse('
         {
@@ -151,7 +152,7 @@ GRAPHQL;
      */
     public function testWrongQueries($query)
     {
-        $this->expectException(\GraphQLByPoP\GraphQLParser\Exception\Parser\SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorException::class);
         $parser = new Parser();
 
         $parser->parse($query);

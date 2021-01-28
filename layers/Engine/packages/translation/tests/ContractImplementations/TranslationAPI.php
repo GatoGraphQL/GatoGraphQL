@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Translation\ContractImplementations;
 
-class TranslationAPI implements \PoP\Translation\TranslationAPIInterface
+use PoP\Translation\TranslationAPIInterface;
+class TranslationAPI implements TranslationAPIInterface
 {
     public function __(string $text, string $domain = 'default'): string
     {

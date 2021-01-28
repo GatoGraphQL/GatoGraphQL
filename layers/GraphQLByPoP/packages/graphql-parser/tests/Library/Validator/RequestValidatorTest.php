@@ -8,6 +8,7 @@
 
 namespace GraphQLByPoP\GraphQLParser\Library\Validator;
 
+use GraphQLByPoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use GraphQLByPoP\GraphQLParser\Execution\Request;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
@@ -29,7 +30,7 @@ class RequestValidatorTest extends TestCase
      */
     public function testInvalidRequests(Request $request)
     {
-        $this->expectException(\GraphQLByPoP\GraphQLParser\Exception\Parser\InvalidRequestException::class);
+        $this->expectException(InvalidRequestException::class);
         (new RequestValidator())->validate($request);
     }
 

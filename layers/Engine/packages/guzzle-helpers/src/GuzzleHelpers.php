@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GuzzleHelpers;
 
+use function GuzzleHttp\Promise\unwrap;
+use function GuzzleHttp\Promise\settle;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -132,10 +134,10 @@ class GuzzleHelpers
 
             // Wait on all of the requests to complete. Throws a ConnectException
             // if any of the requests fail
-            $results = Promise\unwrap($promises);
+            $results = unwrap($promises);
 
             // Wait for the requests to complete, even if some of them fail
-            $results = Promise\settle($promises)->wait();
+            $results = settle($promises)->wait();
 
             // You can access each result using the key provided to the unwrap function.
             return array_map(

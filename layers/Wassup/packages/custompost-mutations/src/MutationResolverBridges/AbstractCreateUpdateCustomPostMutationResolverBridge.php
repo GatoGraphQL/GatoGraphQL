@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
+use PoPSchema\Posts\Constants\InputNames;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -39,7 +40,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
      */
     protected function getUpdateCustomPostID()
     {
-        return $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID] ?? null;
+        return $_REQUEST[InputNames::POST_ID] ?? null;
     }
 
     abstract protected function isUpdate(): bool;

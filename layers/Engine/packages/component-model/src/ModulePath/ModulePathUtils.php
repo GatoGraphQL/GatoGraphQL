@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
+use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 
@@ -24,7 +25,7 @@ class ModulePathUtils
                 $paths,
                 function ($item) use ($paths) {
                     foreach ($paths as $path) {
-                        if (strlen($item) > strlen($path) && strpos($item, $path) === 0 && $item[strlen($path)] == \PoP\ComponentModel\Tokens\ModulePath::MODULE_SEPARATOR) {
+                        if (strlen($item) > strlen($path) && strpos($item, $path) === 0 && $item[strlen($path)] == ModulePath::MODULE_SEPARATOR) {
                             return false;
                         }
                     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\Config;
 
+use PoP\API\Component;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
@@ -16,7 +17,7 @@ class ServiceConfiguration
     {
         // Add RouteModuleProcessors to the Manager
         // Load API and RESTAPI conditional classes
-        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+        if (class_exists('\PoP\API\Component') && Component::isEnabled()) {
             ContainerBuilderUtils::injectServicesIntoService(
                 RouteModuleProcessorManagerInterface::class,
                 'PoPSchema\\PostTags\\Conditional\\API\\RouteModuleProcessors',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeDataLoaders;
 
+use PoP\ComponentModel\Constants\Params;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -27,14 +28,14 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
     {
         return HooksAPIFacade::getInstance()->applyFilters(
             'GD_Dataloader_List:query:pagenumber',
-            $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER]
+            $query_args[Params::PAGE_NUMBER]
         );
     }
     protected function getLimitParam($query_args)
     {
         return HooksAPIFacade::getInstance()->applyFilters(
             'GD_Dataloader_List:query:limit',
-            $query_args[\PoP\ComponentModel\Constants\Params::LIMIT]
+            $query_args[Params::LIMIT]
         );
     }
 

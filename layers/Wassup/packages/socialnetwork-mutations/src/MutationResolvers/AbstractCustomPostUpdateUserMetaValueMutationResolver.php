@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoPSchema\Posts\Constants\InputNames;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -39,7 +40,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
 
     protected function getRequestKey()
     {
-        return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+        return InputNames::POST_ID;
     }
 
     protected function additionals($target_id, $form_data)

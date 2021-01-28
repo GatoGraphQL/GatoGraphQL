@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers;
 
+use PoPSchema\Comments\Constants\Status;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -79,7 +80,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
                 $query = array(
-                    'status' => \PoPSchema\Comments\Constants\Status::APPROVED,
+                    'status' => Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments

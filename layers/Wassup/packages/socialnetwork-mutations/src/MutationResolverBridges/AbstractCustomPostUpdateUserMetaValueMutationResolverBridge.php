@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
+use PoPSchema\Posts\Constants\InputNames;
 abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
     protected function getRequestKey()
     {
-        return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+        return InputNames::POST_ID;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\MutationResolverBridges;
 
+use PoPSchema\Users\Constants\InputNames;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
@@ -26,7 +27,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
         $tags = $moduleprocessor_manager->getProcessor([\GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, \GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERTAGS])->getValue([\GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, \GD_URE_Module_Processor_ProfileMultiSelectFormInputs::MODULE_URE_FORMINPUT_MEMBERTAGS]);
         $form_data = array(
             'community' => $community,
-            'user_id' => $_REQUEST[\PoPSchema\Users\Constants\InputNames::USER_ID] ?? null,
+            'user_id' => $_REQUEST[InputNames::USER_ID] ?? null,
             // 'nonce' => $_REQUEST[POP_INPUTNAME_NONCE],
             'status' => trim($moduleprocessor_manager->getProcessor([\GD_URE_Module_Processor_SelectFormInputs::class, \GD_URE_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_MEMBERSTATUS])->getValue([\GD_URE_Module_Processor_SelectFormInputs::class, \GD_URE_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_MEMBERSTATUS])),
             'privileges' => $privileges ?? array(),

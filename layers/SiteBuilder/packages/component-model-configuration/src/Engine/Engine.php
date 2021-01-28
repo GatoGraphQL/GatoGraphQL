@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\DataSourceSelectors;
+use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
@@ -31,7 +34,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
         $dataoutputitems = $vars['dataoutputitems'];
 
         $data = [];
-        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
+        if (in_array(DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
                 $this->getModuleSettings($module, $this->model_props, $this->props)
@@ -81,14 +84,14 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
                 $cachemanager->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
-        if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
+        if ($datasources == DataSourceSelectors::MODELANDREQUEST) {
             $mutableonrequest_settings = $processor->getMutableonrequestSettingsModuletree($module, $props);
         }
 
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
+        if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
             // Save the model settings
             if ($immutable_settings) {
                 $ret['modulesettings']['immutable'] = $immutable_settings;
@@ -99,7 +102,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
             if ($mutableonrequest_settings) {
                 $ret['modulesettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
             }
-        } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
+        } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if (
                 $combined_settings = array_merge_recursive(

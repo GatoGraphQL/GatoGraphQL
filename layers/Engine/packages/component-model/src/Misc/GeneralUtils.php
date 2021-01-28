@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Misc;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 class GeneralUtils
 {
     // Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
@@ -27,7 +28,7 @@ class GeneralUtils
      */
     public static function isError($thing): bool
     {
-        return $thing !== null && $thing instanceof \PoP\ComponentModel\ErrorHandling\Error;
+        return $thing !== null && $thing instanceof Error;
     }
 
     // Taken from https://gist.github.com/SeanCannon/6585889

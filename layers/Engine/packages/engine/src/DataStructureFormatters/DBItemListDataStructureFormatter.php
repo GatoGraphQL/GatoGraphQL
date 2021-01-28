@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DataStructureFormatters;
 
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -38,7 +40,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         // If we are requesting only the databases, then return these as a list of items
         $vars = ApplicationState::getVars();
         $dataoutputitems = $vars['dataoutputitems'];
-        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)) {
+        if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
             $ret = array();
 
             // If there are no "databases" entry, then there are no results, so return an empty array
@@ -47,11 +49,11 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
                 // Eg: notifications can appear under "database" and "userstatedatabase", showing different fields on each
                 $merged_databases = array();
                 $dboutputmode = $vars['dboutputmode'];
-                if ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES) {
+                if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
                     foreach ($databases as $database_name => $database) {
                         $this->addDBEntries($database, $merged_databases);
                     }
-                } elseif ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED) {
+                } elseif ($dboutputmode == DatabasesOutputModes::COMBINED) {
                     $this->addDBEntries($databases, $merged_databases);
                 }
 

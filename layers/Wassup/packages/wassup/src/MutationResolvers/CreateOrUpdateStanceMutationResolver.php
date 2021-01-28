@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
+use PoP\ComponentModel\Environment;
 class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver
 {
     protected function getCreatepostData($form_data)
@@ -11,7 +12,7 @@ class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutatio
         $post_data = parent::getCreatepostData($form_data);
 
         // Property 'menu-order' only works for WordPress
-        if (\PoP\ComponentModel\Environment::disableCustomCMSCode()) {
+        if (Environment::disableCustomCMSCode()) {
             return $post_data;
         }
 

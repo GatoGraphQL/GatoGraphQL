@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElseWP;
 
+use PoPSchema\EverythingElseWP\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 
@@ -61,7 +62,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\EverythingElseWP\Conditional\CustomPosts\ConditionalComponent::initialize(
+            ConditionalComponent::initialize(
                 $configuration,
                 $skipSchema
             );

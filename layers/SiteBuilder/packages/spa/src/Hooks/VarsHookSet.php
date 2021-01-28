@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\SPA\Hooks;
 
+use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Constants\Params;
 use PoP\Hooks\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
@@ -25,17 +27,17 @@ class VarsHookSet extends AbstractHookSet
     {
         [&$vars] = $vars_in_array;
         $vars['fetching-site'] = is_null($vars['modulefilter']);
-        $vars['loading-site'] = $vars['fetching-site'] && $vars['output'] == \PoP\ComponentModel\Constants\Outputs::HTML;
+        $vars['loading-site'] = $vars['fetching-site'] && $vars['output'] == Outputs::HTML;
 
         // Settings format: the format set by the application when first visiting it, configurable by the user
         if ($vars['loading-site'] ?? null) {
-            $vars['settingsformat'] = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::FORMAT] ?? '');
+            $vars['settingsformat'] = strtolower($_REQUEST[Params::FORMAT] ?? '');
         } else {
-            $vars['settingsformat'] = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::SETTINGSFORMAT] ?? '');
+            $vars['settingsformat'] = strtolower($_REQUEST[Params::SETTINGSFORMAT] ?? '');
         }
 
         // Format: if not set, then use the 'settingsFormat' value if it has been set.
-        if (!isset($_REQUEST[\PoP\ComponentModel\Constants\Params::FORMAT]) && isset($_REQUEST[\PoP\ComponentModel\Constants\Params::SETTINGSFORMAT])) {
+        if (!isset($_REQUEST[Params::FORMAT]) && isset($_REQUEST[Params::SETTINGSFORMAT])) {
             $vars['format'] = $vars['settingsformat'];
         }
     }
