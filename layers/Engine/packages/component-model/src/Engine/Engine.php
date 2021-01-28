@@ -478,7 +478,7 @@ class Engine implements EngineInterface
         );
 
         if ($this->backgroundload_urls) {
-            $meta[GD_URLPARAM_BACKGROUNDLOADURLS] = $this->backgroundload_urls;
+            $meta[\PoP\ComponentModel\Constants\Response::BACKGROUND_LOAD_URLS] = $this->backgroundload_urls;
         };
 
         // Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)

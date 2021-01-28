@@ -2,6 +2,8 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
 
+const GD_URLPARAM_INTERCEPTURLS = 'intercept-urls';
+
 define('GD_URLPARAM_ACTION_PRINT', 'print');
 
 define('GD_URLPARAM_TARGET_PRINT', 'print');
@@ -27,7 +29,7 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_STORELOCAL'] = GD_URLPARAM_STORELOCAL;
     $jqueryConstants['URLPARAM_NONCES'] = GD_URLPARAM_NONCES;
 
-    $jqueryConstants['URLPARAM_BACKGROUNDLOADURLS'] = GD_URLPARAM_BACKGROUNDLOADURLS;
+    $jqueryConstants['URLPARAM_BACKGROUNDLOADURLS'] = \PoP\ComponentModel\Constants\Response::BACKGROUND_LOAD_URLS;
     $jqueryConstants['URLPARAM_INTERCEPTURLS'] = GD_URLPARAM_INTERCEPTURLS;
 
     $jqueryConstants['URLPARAM_OUTPUT'] = GD_URLPARAM_OUTPUT;
