@@ -34,9 +34,6 @@
         "pop-schema/users": "Integrates well with Users"
     },
     "autoload": {
-        "files": [
-            "library/constants.php"
-        ],
         "psr-4": {
             "PoPSchema\\Posts\\": "src"
         }
