@@ -1,5 +1,5 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 // This Constant is needed to be able to retrieve the timestamp and replace it for nothing when generating the ETag,
