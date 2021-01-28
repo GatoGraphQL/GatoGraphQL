@@ -1200,14 +1200,14 @@ Those modules indicating what DB objects must be loaded are called "dataloading"
 
 ##### Defining the DataSource
 
-Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
+Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `\PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
 
 ```php
 function getDatasource($module, &$props) 
 {
   switch ($module[1]) {
     case self::MODULE_WHOWEARE:
-      return POP_DATALOAD_DATASOURCE_IMMUTABLE;
+      return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
   }
 
   return parent::getDatasource($module, $props);

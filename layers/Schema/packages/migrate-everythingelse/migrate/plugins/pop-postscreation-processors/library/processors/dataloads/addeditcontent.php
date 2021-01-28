@@ -29,7 +29,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_POST_CREATE:
-                return GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS;
+                return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);

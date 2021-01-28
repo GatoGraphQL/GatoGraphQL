@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Modu
 {
 
     // function getTemplate(array $module, array &$props) {
-    
+
     //     // return POP_TEMPLATE_CHECKPOINTMESSAGE_INNER;
     //     return POP_TEMPLATE_FEEDBACKMESSAGE_INNER;
     // }
@@ -18,9 +18,9 @@ abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Modu
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        
+
         // Checkpoint validation required?
-        if ($data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS] && GeneralUtils::isError($dataaccess_checkpoint_validation)) {
+        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] && GeneralUtils::isError($dataaccess_checkpoint_validation)) {
             $msg = array(
                 'codes' => array(
                     $dataaccess_checkpoint_validation->getErrorCode()
@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Modu
                 $msg,
             );
         }
-        
+
         return $ret;
     }
 }
