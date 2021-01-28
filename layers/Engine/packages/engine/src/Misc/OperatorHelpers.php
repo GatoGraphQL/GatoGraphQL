@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Misc;
 
+use PoP\Engine\Constants\OperationSymbols;
 use Exception;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
@@ -23,7 +24,7 @@ class OperatorHelpers
         $dataPointer = &$data;
 
         // Iterate the data array to the provided path.
-        foreach (explode(\PoP\Engine\Constants\OperationSymbols::ARRAY_PATH_DELIMITER, $path) as $pathLevel) {
+        foreach (explode(OperationSymbols::ARRAY_PATH_DELIMITER, $path) as $pathLevel) {
             if (!$dataPointer) {
                 // If we reached the end of the array and can't keep going down any level more, then it's an error
                 return self::throwNoArrayItemUnderPathException($data, $path);
@@ -49,7 +50,7 @@ class OperatorHelpers
         $dataPointer = &$data;
 
         // Iterate the data array to the provided path.
-        foreach (explode(\PoP\Engine\Constants\OperationSymbols::ARRAY_PATH_DELIMITER, $path) as $pathLevel) {
+        foreach (explode(OperationSymbols::ARRAY_PATH_DELIMITER, $path) as $pathLevel) {
             if (!isset($dataPointer[$pathLevel])) {
                 // If we reached the end of the array and can't keep going down any level more, then it's an error
                 self::throwNoArrayItemUnderPathException($data, $path);

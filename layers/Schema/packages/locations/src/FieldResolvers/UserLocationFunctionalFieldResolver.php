@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers;
 
+use PoPSchema\Users\Constants\InputNames;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
@@ -17,6 +18,6 @@ class UserLocationFunctionalFieldResolver extends AbstractLocationFunctionalFiel
 
     protected function getDbobjectIdField()
     {
-        return \PoPSchema\Users\Constants\InputNames::USER_ID;
+        return InputNames::USER_ID;
     }
 }

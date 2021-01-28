@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
+use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\Engine\Constants\Stratum;
+use PoP\API\Constants\Actions;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\QueryInputs;
-use PoP\API\Configuration\Request;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ComponentModel\State\ApplicationState;
@@ -50,30 +55,30 @@ class VarsHooks extends AbstractHookSet
         [&$vars] = $vars_in_array;
         if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
             // For the API, the response is always JSON
-            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::JSON;
+            $vars['output'] = Outputs::JSON;
 
             // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
             $vars['dataoutputitems'] = [
-                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
-                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
-                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                DataOutputItems::DATASET_MODULE_SETTINGS,
+                DataOutputItems::MODULE_DATA,
+                DataOutputItems::DATABASES,
             ];
 
             // dataoutputmode => Combined: there is no need to split the sources, then already combined them
-            $vars['dataoutputmode'] = \PoP\ComponentModel\Constants\DataOutputModes::COMBINED;
+            $vars['dataoutputmode'] = DataOutputModes::COMBINED;
 
             // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
             // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
-            $vars['dboutputmode'] = \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED;
+            $vars['dboutputmode'] = DatabasesOutputModes::COMBINED;
 
             // Only the data stratum is needed
             $platformmanager = StratumManagerFactory::getInstance();
-            $vars['stratum'] = \PoP\Engine\Constants\Stratum::DATA;
+            $vars['stratum'] = Stratum::DATA;
             $vars['strata'] = $platformmanager->getStrata($vars['stratum']);
             $vars['stratum-isdefault'] = $vars['stratum'] == $platformmanager->getDefaultStratum();
 
             // Do not print the entry module
-            $vars['actions'][] = \PoP\API\Constants\Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
+            $vars['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
 
             // Enable mutations?
             $vars['are-mutations-enabled'] = ComponentConfiguration::enableMutations();

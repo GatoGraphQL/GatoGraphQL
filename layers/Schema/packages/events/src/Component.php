@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events;
 
+use PoPSchema\Events\Conditional\Tags\ComponentBoot;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
@@ -87,7 +88,7 @@ class Component extends AbstractComponent
 
         // Boot conditionals
         if (class_exists('\PoPSchema\Tags\Component')) {
-            \PoPSchema\Events\Conditional\Tags\ComponentBoot::beforeBoot();
+            ComponentBoot::beforeBoot();
         }
         if (class_exists('\PoPSchema\Users\Component')) {
             \PoPSchema\Events\Conditional\Users\ComponentBoot::beforeBoot();

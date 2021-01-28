@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Hooks;
 
+use PHPUnit\Framework\TestCase;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Hooks\ContractImplementations\HooksAPI;
 use PoP\Root\Container\ContainerBuilderFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class HooksAPITest extends \PHPUnit\Framework\TestCase
+class HooksAPITest extends TestCase
 {
     public function __construct()
     {

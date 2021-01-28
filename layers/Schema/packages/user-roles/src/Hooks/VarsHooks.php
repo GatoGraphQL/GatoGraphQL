@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\Hooks;
 
+use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -33,10 +34,10 @@ class VarsHooks extends AbstractHookSet
                 $component_types = HooksAPIFacade::getInstance()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',
                     array(
-                        \PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes::USER_ROLE,
+                        ModelInstanceComponentTypes::USER_ROLE,
                     )
                 );
-                if (in_array(\PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
+                if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
                     $components[] = TranslationAPIFacade::getInstance()->__('user role:', 'pop-engine') . $userRoleTypeDataResolver->getTheUserRole($user_id);
                 }

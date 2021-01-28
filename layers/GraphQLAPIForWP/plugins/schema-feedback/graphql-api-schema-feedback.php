@@ -1,4 +1,5 @@
 <?php
+use GraphQLAPI\SchemaFeedback\Plugin;
 /*
 Plugin Name: GraphQL API - Schema Feedback
 Plugin URI: https://github.com/GraphQLAPI/schema-feedback
@@ -25,7 +26,7 @@ use PoP\Engine\ComponentLoader;
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Plugin instance
-$plugin = new \GraphQLAPI\SchemaFeedback\Plugin();
+$plugin = new Plugin();
 
 // Functions to execute when activating/deactivating the plugin
 \register_activation_hook(__FILE__, [$plugin, 'activate']);

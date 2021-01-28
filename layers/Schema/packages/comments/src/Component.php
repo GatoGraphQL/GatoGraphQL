@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments;
 
+use PoPSchema\Comments\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
@@ -72,7 +73,7 @@ class Component extends AbstractComponent
             class_exists('\PoP\RESTAPI\Component')
             && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\Comments\Conditional\RESTAPI\ConditionalComponent::initialize(
+            ConditionalComponent::initialize(
                 $configuration,
                 $skipSchema
             );
@@ -105,7 +106,7 @@ class Component extends AbstractComponent
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
 
         if (class_exists('\PoP\RESTAPI\Component')) {
-            \PoPSchema\Comments\Conditional\RESTAPI\ConditionalComponent::beforeBoot();
+            ConditionalComponent::beforeBoot();
         }
         if (class_exists('\PoPSchema\Users\Component')) {
             \PoPSchema\Comments\Conditional\Users\ConditionalComponent::beforeBoot();

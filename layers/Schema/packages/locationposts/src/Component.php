@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\LocationPosts;
 
+use PoPSchema\LocationPosts\Conditional\Tags\ComponentBoot;
 use PoPSchema\LocationPosts\Environment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
@@ -77,7 +78,7 @@ class Component extends AbstractComponent
 
         // Boot conditionals
         if (class_exists('\PoPSchema\Tags\Component')) {
-            \PoPSchema\LocationPosts\Conditional\Tags\ComponentBoot::beforeBoot();
+            ComponentBoot::beforeBoot();
         }
         if (class_exists('\PoPSchema\Users\Component')) {
             \PoPSchema\LocationPosts\Conditional\Users\ComponentBoot::beforeBoot();

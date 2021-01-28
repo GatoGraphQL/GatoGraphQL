@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts;
 
+use PoPSchema\Posts\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Posts\Config\ServiceConfiguration;
@@ -80,7 +81,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\Posts\Conditional\Users\ConditionalComponent::initialize(
+            ConditionalComponent::initialize(
                 $configuration,
                 $skipSchema
             );
@@ -105,7 +106,7 @@ class Component extends AbstractComponent
         self::attachTypeResolverPickers();
 
         if (class_exists('\PoPSchema\Users\Component')) {
-            \PoPSchema\Posts\Conditional\Users\ConditionalComponent::beforeBoot();
+            ConditionalComponent::beforeBoot();
         }
     }
 

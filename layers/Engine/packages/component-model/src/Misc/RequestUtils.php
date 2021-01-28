@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Misc;
 
+use PoP\ComponentModel\Constants\Params;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
@@ -69,22 +70,22 @@ class RequestUtils
         $remove_params = (array) HooksAPIFacade::getInstance()->applyFilters(
             'RequestUtils:current_url:remove_params',
             array(
-                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
-                \PoP\ComponentModel\Constants\Params::VERSION,
-                \PoP\ComponentModel\Constants\Params::TARGET,
+                Params::SETTINGSFORMAT,
+                Params::VERSION,
+                Params::TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
                 ModulePaths::URLPARAM_MODULEPATHS,
-                \PoP\ComponentModel\Constants\Params::ACTION_PATH,
-                \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS,
-                \PoP\ComponentModel\Constants\Params::DATA_SOURCE,
-                \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
-                \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
-                \PoP\ComponentModel\Constants\Params::OUTPUT,
-                \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
+                Params::ACTION_PATH,
+                Params::DATA_OUTPUT_ITEMS,
+                Params::DATA_SOURCE,
+                Params::DATAOUTPUTMODE,
+                Params::DATABASESOUTPUTMODE,
+                Params::OUTPUT,
+                Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,
-                \PoP\ComponentModel\Constants\Params::EXTRA_ROUTES,
-                \PoP\ComponentModel\Constants\Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
-                \PoP\ComponentModel\Constants\Params::STRATUM,
+                Params::EXTRA_ROUTES,
+                Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
+                Params::STRATUM,
             )
         );
         $url = GeneralUtils::removeQueryArgs($remove_params, self::getRequestedFullURL());
