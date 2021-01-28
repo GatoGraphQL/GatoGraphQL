@@ -19,7 +19,7 @@ class WhitelistParamHooks extends AbstractHookSet
 
     public function getWhitelistedParams(array $params): array
     {
-        $params[] = \PoP\Application\Constants\Response::REDIRECTTO;
+        $params[] = \PoP\Application\Constants\Response::REDIRECT_TO;
         return $params;
     }
 }

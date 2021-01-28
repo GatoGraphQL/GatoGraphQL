@@ -6,5 +6,5 @@ namespace PoP\Application\Constants;
 
 class Response
 {
-    public const REDIRECTTO = 'redirect_to';
+    public const REDIRECT_TO = 'redirect_to';
 }
