@@ -12,7 +12,6 @@ use PoP\Engine\Constants\Stratum;
 use PoP\API\Constants\Actions;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\QueryInputs;
-use PoP\API\Configuration\Request;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ComponentModel\State\ApplicationState;
