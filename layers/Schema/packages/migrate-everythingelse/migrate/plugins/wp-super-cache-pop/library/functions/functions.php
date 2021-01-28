@@ -63,14 +63,14 @@ function popWpscRemoveforcomments($post_id)
 }
 function popWpscDeletecommentscache($post_id)
 {
-    
+
     // Code copied from function wp_cache_phase2_clean_cache($file_prefix)
     global $cache_path, $blog_cache_dir, $file_prefix, $blog_id;
-    
+
     if (!wp_cache_writers_entry()) {
         return false;
     }
-    
+
     // Comment Leo 11/01/2017: do not check the path, only the parameters, so that any page that has pid=$post_id gets deleted
     // For sure there are 2 such pages: POP_POSTS_ROUTE_LOADERS_POSTS_LAYOUTS and POP_POSTS_ROUTE_LOADERS_POSTS_FIELDS
     // Check that the path is in the cache URI
@@ -89,7 +89,7 @@ function popWpscDeletecommentscache($post_id)
     // - after 'pid' can have =, []=, or [number]=
     // - then must have $post_id
     // - then, it must either have & or be the end
-    $regex = '/[\?|&]'.POP_INPUTNAME_POSTID.'(\[[0-9]+\])?='.$post_id.'(&|")/';
+    $regex = '/[\?|&]'.\PoPSchema\Posts\Constants\InputNames::POST_ID.'(\[[0-9]+\])?='.$post_id.'(&|")/';
 
     // wp_cache_debug( "wp_cache_phase2_clean_cache: Cleaning cache in $blog_cache_dir" );
     if ($handle = @opendir($blog_cache_dir)) {
@@ -138,7 +138,7 @@ function gdWpCacheUserEdit()
     if (!$cache_enabled) {
         return;
     }
-    
+
     global $blog_cache_dir, $wp_cache_object_cache;
     if ($wp_cache_object_cache) {
         reset_oc_version();

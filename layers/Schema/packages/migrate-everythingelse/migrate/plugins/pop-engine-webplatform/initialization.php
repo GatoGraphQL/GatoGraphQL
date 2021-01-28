@@ -176,11 +176,11 @@ class PoPWebPlatform_Initialization
         $domcontainer_id = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
         $addanchorspinner = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:add_anchor_spinner', true);
         $api_urlparams = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:api_urlparams', array(
-            GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
-            GD_URLPARAM_DATAOUTPUTITEMS => array(
-                GD_URLPARAM_DATAOUTPUTITEMS_META,
-                GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+            \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
+            \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => array(
+                \PoP\ComponentModel\Constants\DataOutputItems::META,
+                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ),
             Request::URLPARAM_MANGLED => Request::URLPARAMVALUE_MANGLED_NONE,
         ));
@@ -193,7 +193,7 @@ class PoPWebPlatform_Initialization
             'LOCALE' => $locale,
             'API_URLPARAMS' => $api_urlparams,
             'USE_PROGRESSIVEBOOTING' => (PoP_WebPlatform_ServerUtils::useProgressiveBooting() ? true : ''),
-            'COMPACT_RESPONSE_JSON_KEYS' => (\PoP\ComponentModel\Server\Utils::compactResponseJsonKeys() ? true : ''),
+            'COMPACT_RESPONSE_JSON_KEYS' => (\PoP\ComponentModel\Environment::compactResponseJsonKeys() ? true : ''),
             'USELOCALSTORAGE' => (PoP_WebPlatform_ServerUtils::useLocalStorage() ? true : ''),
             // This URL is needed to retrieve the user data, if the user is logged in
             // 'BACKGROUND_LOAD' => $backgroundLoad,

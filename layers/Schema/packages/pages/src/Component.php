@@ -82,6 +82,7 @@ class Component extends AbstractComponent
         parent::beforeBoot();
 
         // Initialize classes
+        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
         ContainerBuilderUtils::registerTypeResolversFromNamespace(__NAMESPACE__ . '\\TypeResolvers');
         ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
         self::attachTypeResolverPickers();

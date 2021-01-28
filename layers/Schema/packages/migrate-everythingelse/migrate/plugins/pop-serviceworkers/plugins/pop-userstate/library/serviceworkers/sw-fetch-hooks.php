@@ -15,7 +15,7 @@ class PoP_ServiceWorkers_UserState_Job_Fetch_Hooks
     public function getExcludedParamvalues($excluded)
     {
         $excluded[] = array(
-            GD_URLPARAM_ACTIONS,
+            \PoP\ComponentModel\Constants\Params::ACTIONS,
             POP_ACTION_LOADUSERSTATE
         );
         return $excluded;

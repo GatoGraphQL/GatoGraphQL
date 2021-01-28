@@ -79,7 +79,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
             case 'comments':
                 $query = array(
-                    'status' => POP_COMMENTSTATUS_APPROVED,
+                    'status' => \PoPSchema\Comments\Constants\Status::APPROVED,
                     // 'type' => 'comment', // Only comments, no trackbacks or pingbacks
                     'customPostID' => $typeResolver->getID($post),
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments

@@ -17,6 +17,6 @@ class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunction
 
     protected function getDbobjectIdField()
     {
-        return POP_INPUTNAME_POSTID;
+        return \PoPSchema\Posts\Constants\InputNames::POST_ID;
     }
 }

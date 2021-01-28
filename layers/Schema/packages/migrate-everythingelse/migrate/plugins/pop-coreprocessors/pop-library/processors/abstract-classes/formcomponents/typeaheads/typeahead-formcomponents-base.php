@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
     {
         return $this->getInputSubmodule($module);
     }
-    
+
     public function getComponentSubmodules(array $module)
     {
         return array();
@@ -29,8 +29,8 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
         $submodule_props = [];
-        if ($props[$moduleFullName][POP_PROPS_SUBMODULES]) {
-            $submodule_props = &$props[$moduleFullName][POP_PROPS_SUBMODULES];
+        if ($props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]) {
+            $submodule_props = &$props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
         }
         return $moduleprocessor_manager->getProcessor($input)->getLabel($input, $submodule_props);
     }

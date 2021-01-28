@@ -22,13 +22,13 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTPOST:
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST:
-                return POP_INPUTNAME_POSTID;
+                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
 
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTUSER:
-                return POP_INPUTNAME_USERID;
+                return \PoPSchema\Users\Constants\InputNames::USER_ID;
 
             case self::MODULE_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT:
-                return POP_INPUTNAME_COMMENTID;
+                return \PoPSchema\Comments\Constants\InputNames::COMMENT_ID;
         }
 
         return parent::getName($module);

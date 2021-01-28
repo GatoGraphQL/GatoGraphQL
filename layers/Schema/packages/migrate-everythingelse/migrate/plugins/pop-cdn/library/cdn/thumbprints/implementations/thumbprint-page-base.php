@@ -11,7 +11,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
             'limit' => 1,
             'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:modified'),
             'order' => 'DESC',
-            'page-status' => POP_PAGESTATUS_PUBLISHED,
+            'page-status' => \PoPSchema\CustomPosts\Types\Status::PUBLISHED,
         );
     }
 

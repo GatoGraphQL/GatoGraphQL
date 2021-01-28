@@ -242,13 +242,13 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                return POP_INPUTNAME_POSTID;
+                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
-                return POP_INPUTNAME_TAGID;
+                return \PoPSchema\Tags\Constants\InputNames::TAG_ID;
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return POP_INPUTNAME_USERID;
+                return \PoPSchema\Users\Constants\InputNames::USER_ID;
         }
         return null;
     }

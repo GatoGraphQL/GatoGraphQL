@@ -29,7 +29,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOSTLINK_CREATE:
-                return GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS;
+                return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);

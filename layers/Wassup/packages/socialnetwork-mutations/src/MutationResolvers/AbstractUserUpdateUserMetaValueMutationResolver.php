@@ -27,7 +27,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
 
     protected function getRequestKey()
     {
-        return \POP_INPUTNAME_USERID;
+        return \PoPSchema\Users\Constants\InputNames::USER_ID;
     }
 
     protected function additionals($target_id, $form_data)

@@ -10,12 +10,12 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter('\PoP\Theme\Themes\ThemeManagerUtils:getThemeDir:'.$this->getName(), array($this, 'themeDir'));
-        
+
         // Hooks to allow the thememodes to do some functionality
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getName(), array($this, 'backgroundLoad'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getName(), array($this, 'filteringbyShowfilter'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getName(), array($this, 'getSidebarOrientation'));
-        
+
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL.':'.$this->getName(), array($this, 'getEmbedUrl'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL.':'.$this->getName(), array($this, 'getPrintUrl'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getName(), array($this, 'isMainScrollable'));
@@ -24,7 +24,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE.':'.$this->getName(), array($this, 'getPagesectionsideLogosize'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getName(), array($this, 'getCarouselUsersGridclass'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
-        
+
         HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
             $vars = ApplicationState::getVars();
             if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
@@ -96,7 +96,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         );
         return HooksAPIFacade::getInstance()->applyFilters($filtername, $bool);
     }
-    
+
     public function getScrollinnerThumbnailGrid($grid)
     {
         $filtername = sprintf(
@@ -182,7 +182,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     {
         return $this->addUrlParams(
             GeneralUtils::addQueryArgs([
-                GD_URLPARAM_THEMEMODE => GD_THEMEMODE_WASSUP_EMBED, 
+                GD_URLPARAM_THEMEMODE => GD_THEMEMODE_WASSUP_EMBED,
             ], $url)
         );
     }
@@ -192,8 +192,8 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         // Also add param to print automatically
         return $this->addUrlParams(
             GeneralUtils::addQueryArgs([
-                GD_URLPARAM_ACTIONS.'[]' => GD_URLPARAM_ACTION_PRINT, 
-                GD_URLPARAM_THEMEMODE => GD_THEMEMODE_WASSUP_PRINT, 
+                \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => GD_URLPARAM_ACTION_PRINT,
+                GD_URLPARAM_THEMEMODE => GD_THEMEMODE_WASSUP_PRINT,
             ], $url)
         );
     }
@@ -212,15 +212,15 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
     }
 
 
-    
+
     protected function addUrlParams($url)
     {
         $vars = ApplicationState::getVars();
-        
+
         // Add the themestyle, if it is not the default one
         if (!$vars['themestyle-isdefault']) {
             $url = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_THEMESTYLE => $vars['themestyle'], 
+                GD_URLPARAM_THEMESTYLE => $vars['themestyle'],
             ], $url);
         }
 

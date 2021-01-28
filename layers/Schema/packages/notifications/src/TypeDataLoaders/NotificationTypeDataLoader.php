@@ -31,10 +31,10 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
             $query['pagenumber'] = 1;
             $query['limit'] = -1; // Limit=-1 => Bring all results
         } else {
-            if ($pagenumber = $query_args[GD_URLPARAM_PAGENUMBER]) {
+            if ($pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER]) {
                 $query['pagenumber'] = $pagenumber;
             }
-            if ($limit = $query_args[GD_URLPARAM_LIMIT]) {
+            if ($limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT]) {
                 $query['limit'] = $limit;
             }
         }

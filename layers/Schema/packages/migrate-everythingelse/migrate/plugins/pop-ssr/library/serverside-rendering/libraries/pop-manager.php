@@ -172,10 +172,10 @@ class PoP_ServerSideManager
 
         // In order to save file size, context keys can be compressed, eg: 'modules' => 'ms', 'module' => 'm'. However they might be referenced with their full name
         // in .tmpl files, so reconstruct the full name in the context duplicating these entries
-        if ($context && \PoP\ComponentModel\Server\Utils::compactResponseJsonKeys()) {
+        if ($context && \PoP\ComponentModel\Environment::compactResponseJsonKeys()) {
             // Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
-            if ($context[GD_JS_SUBMODULES] ?? null) {
-                $context['modules'] = $context[GD_JS_SUBMODULES];
+            if ($context[POP_RESPONSE_PROP_SUBMODULES] ?? null) {
+                $context['modules'] = $context[POP_RESPONSE_PROP_SUBMODULES];
             }
             if ($context['bs']['dbkeys'] ?? null) {
                 $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
@@ -301,7 +301,7 @@ class PoP_ServerSideManager
     public function getUniqueId($domain)
     {
         $tlFeedback = $this->getTopLevelFeedback($domain);
-        return $tlFeedback[POP_UNIQUEID];
+        return $tlFeedback[\PoP\ComponentModel\Constants\Response::UNIQUE_ID];
     }
 
     public function getPageSectionConfiguration($domain, $pageSection)
@@ -358,16 +358,16 @@ class PoP_ServerSideManager
         $this->expandJSKeys($psConfiguration);
 
         // Fill each block configuration with its pssId/bsId/settings
-        if ($psConfiguration[GD_JS_SUBMODULES]) {
-            foreach ($psConfiguration[GD_JS_SUBMODULES] as $bsId => &$bConfiguration) {
+        if ($psConfiguration[POP_RESPONSE_PROP_SUBMODULES]) {
+            foreach ($psConfiguration[POP_RESPONSE_PROP_SUBMODULES] as $bsId => &$bConfiguration) {
                 $bId = $bConfiguration[GD_JS_FRONTENDID];
                 $bs = $this->getBlockSettings($domain, $domain, $pssId, $bsId, $psId, $bId);
-                $bConfiguration/*$psConfiguration[GD_JS_SUBMODULES][$bsId]*/['tls'] = $tls;
-                $bConfiguration/*$psConfiguration[GD_JS_SUBMODULES][$bsId]*/['pss'] = $pss;
-                $bConfiguration/*$psConfiguration[GD_JS_SUBMODULES][$bsId]*/['bs'] = $bs;
+                $bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/['tls'] = $tls;
+                $bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/['pss'] = $pss;
+                $bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/['bs'] = $bs;
 
                 // Expand the JS Keys for the configuration
-                $this->expandJSKeys($bConfiguration/*$psConfiguration[GD_JS_SUBMODULES][$bsId]*/);
+                $this->expandJSKeys($bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/);
             }
         }
     }

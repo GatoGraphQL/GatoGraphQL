@@ -179,7 +179,7 @@ function gdUreEditMembershipUrl($user_id, $inline = false)
     $nonce = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $user_id);
     $url = GeneralUtils::addQueryArgs([
         POP_INPUTNAME_NONCE => $nonce,
-        POP_INPUTNAME_USERID => $user_id,
+        \PoPSchema\Users\Constants\InputNames::USER_ID => $user_id,
     ], RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP));
 
     return $url;

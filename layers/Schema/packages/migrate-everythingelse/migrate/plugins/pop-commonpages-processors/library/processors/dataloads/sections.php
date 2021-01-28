@@ -61,7 +61,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_LIST:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW:
-                return POP_DATALOAD_DATASOURCE_IMMUTABLE;
+                return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
         }
 
         return parent::getDatasource($module, $props);

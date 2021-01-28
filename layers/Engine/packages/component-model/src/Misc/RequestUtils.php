@@ -69,22 +69,22 @@ class RequestUtils
         $remove_params = (array) HooksAPIFacade::getInstance()->applyFilters(
             'RequestUtils:current_url:remove_params',
             array(
-                \GD_URLPARAM_SETTINGSFORMAT,
-                \GD_URLPARAM_VERSION,
-                \GD_URLPARAM_TARGET,
+                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
+                \PoP\ComponentModel\Constants\Params::VERSION,
+                \PoP\ComponentModel\Constants\Params::TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
                 ModulePaths::URLPARAM_MODULEPATHS,
-                \GD_URLPARAM_ACTIONPATH,
-                \GD_URLPARAM_DATAOUTPUTITEMS,
-                \GD_URLPARAM_DATASOURCES,
-                \GD_URLPARAM_DATAOUTPUTMODE,
-                \GD_URLPARAM_DATABASESOUTPUTMODE,
-                \GD_URLPARAM_OUTPUT,
-                \GD_URLPARAM_DATASTRUCTURE,
+                \PoP\ComponentModel\Constants\Params::ACTION_PATH,
+                \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS,
+                \PoP\ComponentModel\Constants\Params::DATA_SOURCE,
+                \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::OUTPUT,
+                \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,
-                \GD_URLPARAM_EXTRAROUTES,
-                \GD_URLPARAM_ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
-                \GD_URLPARAM_STRATUM,
+                \PoP\ComponentModel\Constants\Params::EXTRA_ROUTES,
+                \PoP\ComponentModel\Constants\Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
+                \PoP\ComponentModel\Constants\Params::STRATUM,
             )
         );
         $url = GeneralUtils::removeQueryArgs($remove_params, self::getRequestedFullURL());

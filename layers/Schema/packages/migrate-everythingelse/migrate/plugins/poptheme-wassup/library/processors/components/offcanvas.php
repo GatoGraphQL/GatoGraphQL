@@ -57,7 +57,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     // Tell the pageSections to have no pages inside
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
-                        $submodule[0], 
+                        $submodule[0],
                         $submodule[1],
                         $moduleAtts
                     ];
@@ -88,7 +88,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
                         $submodule[0],
-                        $submodule[1], 
+                        $submodule[1],
                         $moduleAtts
                     ];
                 }
@@ -132,7 +132,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
             case self::MODULE_OFFCANVAS_BACKGROUND:
                 $this->addJsmethod($ret, 'scrollbarVertical');
                 break;
-        
+
             case self::MODULE_OFFCANVAS_BODYTABS:
                 $this->addJsmethod($ret, 'scrollbarHorizontal');
                 break;
@@ -273,7 +273,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => POP_TARGET_MAIN,
+                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
                     )
                 );
                 break;
@@ -285,7 +285,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     'params',
                     array(
                         'data-frametarget' => POP_TARGET_NAVIGATOR,
-                        'data-clickframetarget' => POP_TARGET_MAIN,
+                        'data-clickframetarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
                         'data-pagesection-openmode' => 'automatic',
                     )
                 );
@@ -297,7 +297,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => POP_TARGET_MAIN,
+                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
                         'data-pagesection-openmode' => 'manual',
                     )
                 );
@@ -310,7 +310,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => POP_TARGET_MAIN,
+                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
                         'data-pagesection-openmode' => $openmode,
                     )
                 );
@@ -322,7 +322,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $props,
                     'params',
                     array(
-                        'data-frametarget' => POP_TARGET_MAIN,
+                        'data-frametarget' => \PoP\ComponentModel\Constants\Targets::MAIN,
                     )
                 );
                 break;

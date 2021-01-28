@@ -143,7 +143,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'
                     $moduleFullName = ModuleUtils::getModuleFullName($module);
-                    $data_properties = $moduleprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+                    $data_properties = $moduleprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
                     $suggestions_typeResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeResolverClass($trigger_layout);
 
                     // Extend the dataload ids

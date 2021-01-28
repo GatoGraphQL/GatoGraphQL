@@ -19,7 +19,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
         }
 
         // Baseline: return now
-        return POP_CONSTANT_CURRENTTIMESTAMP;
+        return POP_CONSTANT_TIME;
     }
 
     public function getHistTimeCompare(&$query_args)

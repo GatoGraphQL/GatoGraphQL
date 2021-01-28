@@ -141,8 +141,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
 
                 // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
-                if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES])) {
-                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($submodule))->$propagate_fn($submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES])) {
+                if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($submodule))->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -176,7 +176,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 'subcomponents' => array()
             );
             foreach ($subcomponent_modules as $subcomponent_module) {
-                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][POP_PROPS_SUBMODULES])) {
+                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                     $subcomponent_modules_data_properties = array_merge_recursive(
                         $subcomponent_modules_data_properties,
                         $subcomponent_module_data_properties

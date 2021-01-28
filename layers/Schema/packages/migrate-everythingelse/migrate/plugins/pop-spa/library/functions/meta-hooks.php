@@ -24,13 +24,13 @@ class PoP_SPA_RequestMeta_Hooks
             // Send params back to the server
             $meta[ParamConstants::PARAMS] = array();
             $elemKeys = [
-                GD_URLPARAM_VERSION,
-                GD_URLPARAM_DATAOUTPUTMODE,
-                GD_URLPARAM_DATABASESOUTPUTMODE,
-                GD_URLPARAM_SETTINGSFORMAT,
+                \PoP\ComponentModel\Constants\Params::VERSION,
+                \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
+                \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
                 Request::URLPARAM_MANGLED,
-                POP_URLPARAM_CONFIG,
-                GD_URLPARAM_STRATUM,
+                \PoP\ComponentModel\Constants\Params::CONFIG,
+                \PoP\ComponentModel\Constants\Params::STRATUM,
             ];
             foreach ($elemKeys as $elemKey) {
                 if ($elemValue = $meta[$elemKey] ?? null) {
@@ -44,7 +44,7 @@ class PoP_SPA_RequestMeta_Hooks
             // Platform: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
             $vars = ApplicationState::getVars();
             if ($vars['stratum'] && !$vars['stratum-isdefault']) {
-                $pushurlprops[GD_URLPARAM_STRATUM] = $vars['stratum'];
+                $pushurlprops[\PoP\ComponentModel\Constants\Params::STRATUM] = $vars['stratum'];
             }
 
             if ($pushurlprops) {

@@ -53,9 +53,9 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     protected function executeEndpoint(): void
     {
         // Set the params on the request, to emulate that they were added by the user
-        $_REQUEST[\GD_URLPARAM_SCHEME] = APISchemes::API;
+        $_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] = APISchemes::API;
         // Include qualified namespace here (instead of `use`) since we do didn't know if component is installed
-        $_REQUEST[\GD_URLPARAM_DATASTRUCTURE] = \PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter::getName();
+        $_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] = \PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter::getName();
         // Enable hooks
         \do_action('EndpointHandler:setDoingGraphQL');
     }

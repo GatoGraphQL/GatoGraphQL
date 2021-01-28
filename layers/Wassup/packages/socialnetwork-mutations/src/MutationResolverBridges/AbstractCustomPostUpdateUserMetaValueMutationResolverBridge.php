@@ -8,6 +8,6 @@ abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge exten
 {
     protected function getRequestKey()
     {
-        return \POP_INPUTNAME_POSTID;
+        return \PoPSchema\Posts\Constants\InputNames::POST_ID;
     }
 }

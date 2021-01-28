@@ -84,7 +84,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 		$modulefilter_manager->prepareForPropagation($module, $props);
 		foreach ($submodules as $submodule) {
 
-			if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][GD_JS_SUBMODULES])) {
+			if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][POP_RESPONSE_PROP_SUBMODULES])) {
 
 				$ret = array_unique(
 					array_merge(
@@ -117,7 +117,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
 	// 	foreach ($this->getDecoratedmoduleProcessor($module)->get_descendant_modules_to_propagate($module) as $submodule) {
 
-	// 		if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][GD_JS_SUBMODULES])) {
+	// 		if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][POP_RESPONSE_PROP_SUBMODULES])) {
 
 	// 			$ret = array_merge(
 	// 				$ret,
@@ -160,7 +160,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 		$modulefilter_manager->prepareForPropagation($module, $props);
 		foreach ($submodules as $submodule) {
 
-			if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][GD_JS_SUBMODULES])) {
+			if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][POP_RESPONSE_PROP_SUBMODULES])) {
 
 				$ret = array_unique(
 					array_merge(

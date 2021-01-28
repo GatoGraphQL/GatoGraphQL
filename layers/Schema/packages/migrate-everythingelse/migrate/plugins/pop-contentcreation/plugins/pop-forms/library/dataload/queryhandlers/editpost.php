@@ -7,7 +7,7 @@ class GD_DataLoad_QueryInputOutputHandler_EditPost extends ActionExecutionQueryI
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
-        $ret[POP_INPUTNAME_POSTID] = $_REQUEST[POP_INPUTNAME_POSTID] ?? null;
+        $ret[\PoPSchema\Posts\Constants\InputNames::POST_ID] = $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID] ?? null;
 
         // If the user is sending the '_wpnonce', because has sent a POST editing a post, then use that one, and make the nonce validation with it
         // The nonce must be passed already in the link, otherwise it will not work
@@ -20,8 +20,8 @@ class GD_DataLoad_QueryInputOutputHandler_EditPost extends ActionExecutionQueryI
 
     //     $ret = parent::getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-    //     $pid = $_REQUEST[POP_INPUTNAME_POSTID];
-    //     $ret[ParamConstants::PARAMS][POP_INPUTNAME_POSTID] = $pid;
+    //     $pid = $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID];
+    //     $ret[ParamConstants::PARAMS][\PoPSchema\Posts\Constants\InputNames::POST_ID] = $pid;
 
     //     // If the user is sending the '_wpnonce', because has sent a POST editing a post, then use that one, and make the nonce validation with it
     //     // The nonce must be passed already in the link, otherwise it will not work

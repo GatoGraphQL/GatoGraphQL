@@ -627,7 +627,7 @@
             "@start-server"
         ],
         "start-server": [
-            "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install",
+            "cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer update",
             "lando start"
         ],
         "rebuild-server": "lando rebuild -y",

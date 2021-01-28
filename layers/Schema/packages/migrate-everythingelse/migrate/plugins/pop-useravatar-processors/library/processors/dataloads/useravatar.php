@@ -102,7 +102,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
                 // We also must add ?action=execute to tell the routemoduleprocessor to fetch the module with the "execute" moduleAtts
                 return GeneralUtils::addQueryArgs([
-                    GD_URLPARAM_ACTIONS.'[]' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
+                    \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
                 ], parent::getDataloadSource($module, $props));
         }
 

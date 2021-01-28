@@ -28,9 +28,9 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
     {
         $query = parent::getQuery($query_args);
 
-        $query['status'] = POP_COMMENTSTATUS_APPROVED;
+        $query['status'] = \PoPSchema\Comments\Constants\Status::APPROVED;
         // $query['type'] = 'comment'; // Only comments, no trackbacks or pingbacks
-        $query['customPostID'] = $query_args[GD_URLPARAM_COMMENTPOSTID];
+        $query['customPostID'] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
         return $query;
     }

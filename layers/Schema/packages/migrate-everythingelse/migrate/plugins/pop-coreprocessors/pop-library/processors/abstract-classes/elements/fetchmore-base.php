@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it
         // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
             return $ret;
         }
 
@@ -84,9 +84,9 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
 
         if (!$stopFetching && ($data_properties[DataloadingConstants::SOURCE] ?? null)) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-            $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];
+            $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
             $ret['query-next-url'] = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_PAGENUMBER => $pagenumber+1,
+                \PoP\ComponentModel\Constants\Params::PAGE_NUMBER => $pagenumber+1,
             ], $data_properties[DataloadingConstants::SOURCE]);
         }
 

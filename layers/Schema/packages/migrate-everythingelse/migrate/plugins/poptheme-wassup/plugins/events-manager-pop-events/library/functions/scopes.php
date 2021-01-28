@@ -16,8 +16,8 @@ function popEmRssEventsBuildSqlConditions($conditions, $args)
             $days = $matches[1];
 
             // $end_date: if doing 2 days, then must produce +1 day, etc
-            $start_date = date('Y-m-d', POP_CONSTANT_CURRENTTIMESTAMP);
-            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), POP_CONSTANT_CURRENTTIMESTAMP));
+            $start_date = date('Y-m-d', POP_CONSTANT_TIME);
+            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), POP_CONSTANT_TIME));
             $conditions['scope'] = " ((event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)))";
         }
     }
