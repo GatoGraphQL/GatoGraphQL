@@ -36,10 +36,10 @@ class VarsHooks extends AbstractHookSet
                 $component_types = (array)HooksAPIFacade::getInstance()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
-                        \PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST_TYPE,
+                        \PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
                     )
                 );
-                if (in_array(\PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST_TYPE, $component_types)) {
+                if (in_array(\PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
                     $components[] =
                         TranslationAPIFacade::getInstance()->__('post type:', 'pop-engine')

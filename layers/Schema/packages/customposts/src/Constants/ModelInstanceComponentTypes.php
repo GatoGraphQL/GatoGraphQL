@@ -6,5 +6,5 @@ namespace PoPSchema\CustomPosts\Constants;
 
 class ModelInstanceComponentTypes
 {
-    public const SINGLE_CUSTOMPOST_TYPE = 'single-custompost-type';
+    public const SINGLE_CUSTOMPOST = 'single-custompost';
 }
