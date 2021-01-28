@@ -176,7 +176,7 @@ class PoPWebPlatform_Initialization
         $domcontainer_id = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:domcontainer_id', POP_MODULEID_PAGESECTIONCONTAINERID_CONTAINER);
         $addanchorspinner = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:add_anchor_spinner', true);
         $api_urlparams = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:api_urlparams', array(
-            GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
+            \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => array(
                 \PoP\ComponentModel\Constants\DataOutputItems::META,
                 \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,

@@ -71,7 +71,7 @@ class RequestUtils
             array(
                 \PoP\ComponentModel\Constants\Params::SETTINGSFORMAT,
                 \PoP\ComponentModel\Constants\Params::VERSION,
-                \GD_URLPARAM_TARGET,
+                \PoP\ComponentModel\Constants\Params::TARGET,
                 ModuleFilterManager::URLPARAM_MODULEFILTER,
                 ModulePaths::URLPARAM_MODULEPATHS,
                 \PoP\ComponentModel\Constants\Params::ACTION_PATH,
@@ -79,7 +79,7 @@ class RequestUtils
                 \PoP\ComponentModel\Constants\Params::DATA_SOURCE,
                 \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE,
                 \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE,
-                \GD_URLPARAM_OUTPUT,
+                \PoP\ComponentModel\Constants\Params::OUTPUT,
                 \PoP\ComponentModel\Constants\Params::DATASTRUCTURE,
                 Request::URLPARAM_MANGLED,
                 \PoP\ComponentModel\Constants\Params::EXTRA_ROUTES,

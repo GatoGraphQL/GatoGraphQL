@@ -37,13 +37,13 @@ class ApplicationState
         $route = $routingManager->getCurrentRoute();
 
         // Convert them to lower to make it insensitive to upper/lower case values
-        $output = strtolower($_REQUEST[\GD_URLPARAM_OUTPUT] ?? '');
+        $output = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::OUTPUT] ?? '');
         $dataoutputitems = $_REQUEST[\PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS] ?? [];
         $datasources = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATA_SOURCE] ?? '');
         $datastructure = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] ?? '');
         $dataoutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE] ?? '');
         $dboutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE] ?? '');
-        $target = strtolower($_REQUEST[\GD_URLPARAM_TARGET] ?? '');
+        $target = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::TARGET] ?? '');
         $mangled = Request::isMangled() ? '' : Request::URLPARAMVALUE_MANGLED_NONE;
         $actions = isset($_REQUEST[\PoP\ComponentModel\Constants\Params::ACTIONS]) ?
             array_map('strtolower', $_REQUEST[\PoP\ComponentModel\Constants\Params::ACTIONS]) : [];
@@ -56,12 +56,12 @@ class ApplicationState
         $outputs = (array) HooksAPIFacade::getInstance()->applyFilters(
             'ApplicationState:outputs',
             array(
-                \GD_URLPARAM_OUTPUT_HTML,
-                \GD_URLPARAM_OUTPUT_JSON,
+                \PoP\ComponentModel\Constants\Outputs::HTML,
+                \PoP\ComponentModel\Constants\Outputs::JSON,
             )
         );
         if (!in_array($output, $outputs)) {
-            $output = \GD_URLPARAM_OUTPUT_HTML;
+            $output = \PoP\ComponentModel\Constants\Outputs::HTML;
         }
 
         // Target/Module default values (for either empty, or if the user is playing around with the url)
@@ -184,7 +184,7 @@ class ApplicationState
         );
 
         if (ComponentConfiguration::enableConfigByParams()) {
-            self::$vars['config'] = $_REQUEST[\POP_URLPARAM_CONFIG] ?? null;
+            self::$vars['config'] = $_REQUEST[\PoP\ComponentModel\Constants\Params::CONFIG] ?? null;
         }
 
         // Set the routing state (eg: PoP Queried Object can add its information)

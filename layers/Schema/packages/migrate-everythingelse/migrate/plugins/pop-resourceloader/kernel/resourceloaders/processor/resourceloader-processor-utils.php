@@ -366,12 +366,12 @@ class PoP_ResourceLoaderProcessorUtils {
         // the latter one is needed for enqueuing bundles/bundlegroups instead of
         // resources when first loading the website
         if ($loadingSite) {
-            $vars['output'] = GD_URLPARAM_OUTPUT_HTML;
+            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::HTML;
             $vars['modulefilter'] = null;
             $vars['loading-site'] = true;
             $vars['fetching-site'] = true;
         } else {
-            $vars['output'] = GD_URLPARAM_OUTPUT_JSON;
+            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::JSON;
             $vars['modulefilter'] = $modulefilter;
             $vars['loading-site'] = false;
             $vars['fetching-site'] = false;

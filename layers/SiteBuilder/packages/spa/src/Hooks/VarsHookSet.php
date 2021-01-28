@@ -25,7 +25,7 @@ class VarsHookSet extends AbstractHookSet
     {
         [&$vars] = $vars_in_array;
         $vars['fetching-site'] = is_null($vars['modulefilter']);
-        $vars['loading-site'] = $vars['fetching-site'] && $vars['output'] == GD_URLPARAM_OUTPUT_HTML;
+        $vars['loading-site'] = $vars['fetching-site'] && $vars['output'] == \PoP\ComponentModel\Constants\Outputs::HTML;
 
         // Settings format: the format set by the application when first visiting it, configurable by the user
         if ($vars['loading-site'] ?? null) {

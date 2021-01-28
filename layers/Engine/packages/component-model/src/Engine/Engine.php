@@ -534,7 +534,7 @@ class Engine implements EngineInterface
                 $meta[Request::URLPARAM_MANGLED] = $vars['mangled'];
             }
             if (ComponentConfiguration::enableConfigByParams() && $vars['config']) {
-                $meta[POP_URLPARAM_CONFIG] = $vars['config'];
+                $meta[\PoP\ComponentModel\Constants\Params::CONFIG] = $vars['config'];
             }
             if ($vars['stratum'] ?? null) {
                 $meta[\PoP\ComponentModel\Constants\Params::STRATUM] = $vars['stratum'];

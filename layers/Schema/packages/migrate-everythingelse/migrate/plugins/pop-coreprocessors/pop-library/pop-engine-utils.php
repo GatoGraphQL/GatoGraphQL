@@ -13,12 +13,12 @@ class PoPCore_ModuleManager_Utils
         $vars = ApplicationState::getVars();
         $args = [
             \PoP\ComponentModel\Constants\Params::VERSION => $vars['version'],
-            GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
+            \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
             ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\Engine\ModuleFilters\MainContentModule::NAME,
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ],
-            GD_URLPARAM_TARGET => \PoP\ComponentModel\Constants\Targets::MAIN,
+            \PoP\ComponentModel\Constants\Params::TARGET => \PoP\ComponentModel\Constants\Targets::MAIN,
             \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => DBItemListDataStructureFormatter::getName(),
         ];
         if ($format) {

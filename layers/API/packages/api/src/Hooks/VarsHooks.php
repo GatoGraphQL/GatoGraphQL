@@ -50,7 +50,7 @@ class VarsHooks extends AbstractHookSet
         [&$vars] = $vars_in_array;
         if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
             // For the API, the response is always JSON
-            $vars['output'] = \GD_URLPARAM_OUTPUT_JSON;
+            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::JSON;
 
             // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
             $vars['dataoutputitems'] = [
