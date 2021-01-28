@@ -8,6 +8,6 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
 {
     protected function getRequestKey()
     {
-        return \POP_INPUTNAME_USERID;
+        return \PoPSchema\Users\Constants\InputNames::USER_ID;
     }
 }

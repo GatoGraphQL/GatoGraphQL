@@ -106,7 +106,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTACTUSER:
-                return POP_INPUTNAME_USERID;
+                return \PoPSchema\Users\Constants\InputNames::USER_ID;
         }
         return null;
     }

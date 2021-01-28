@@ -105,7 +105,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_VOLUNTEER:
-                return POP_INPUTNAME_POSTID;
+                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

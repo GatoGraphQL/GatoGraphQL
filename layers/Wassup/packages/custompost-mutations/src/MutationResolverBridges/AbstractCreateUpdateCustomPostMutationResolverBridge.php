@@ -39,7 +39,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
      */
     protected function getUpdateCustomPostID()
     {
-        return $_REQUEST[POP_INPUTNAME_POSTID] ?? null;
+        return $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID] ?? null;
     }
 
     abstract protected function isUpdate(): bool;

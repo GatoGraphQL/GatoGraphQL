@@ -32,7 +32,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Add the Sidebar on the top
-                $pid = $_REQUEST[POP_INPUTNAME_POSTID];
+                $pid = $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID];
                 if ($layout = HooksAPIFacade::getInstance()->applyFilters(
                     'PoPTheme_Wassup_AE_Module_Processor_ContentDataloads:singlepost:sidebar',
                     [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
@@ -62,7 +62,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
-                return POP_INPUTNAME_POSTID;
+                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

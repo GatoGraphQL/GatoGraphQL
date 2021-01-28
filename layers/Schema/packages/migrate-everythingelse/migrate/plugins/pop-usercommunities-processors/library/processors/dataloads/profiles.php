@@ -155,7 +155,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return POP_INPUTNAME_USERID;
+                return \PoPSchema\Users\Constants\InputNames::USER_ID;
         }
         return null;
     }
