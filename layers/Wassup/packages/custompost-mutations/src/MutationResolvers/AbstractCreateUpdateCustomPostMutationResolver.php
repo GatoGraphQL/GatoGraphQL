@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-define('POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_ATLEASTONE', 1);
-define('POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_EXACTLYONE', 2);
-
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -15,6 +12,9 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver
 {
+    public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
+    public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
+
     protected function supportsTitle()
     {
         // Not all post types support a title
@@ -39,10 +39,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
     {
         if (isset($form_data[MutationInputProperties::CATEGORIES])) {
             if (is_array($form_data[MutationInputProperties::CATEGORIES])) {
-                return POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_ATLEASTONE;
+                return self::VALIDATECATEGORIESTYPE_ATLEASTONE;
             }
 
-            return POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_EXACTLYONE;
+            return self::VALIDATECATEGORIESTYPE_EXACTLYONE;
         }
 
         return null;
@@ -85,12 +85,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         if ($validateCategories = $this->validateCategories($form_data)) {
             $category_error_msgs = $this->getCategoriesErrorMessages();
             if (empty($form_data[MutationInputProperties::CATEGORIES])) {
-                if ($validateCategories == POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_ATLEASTONE) {
+                if ($validateCategories == self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
                     $errors[] = $category_error_msgs['empty-categories'];
-                } elseif ($validateCategories == POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_EXACTLYONE) {
+                } elseif ($validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                     $errors[] = $category_error_msgs['empty-category'];
                 }
-            } elseif (count($form_data[MutationInputProperties::CATEGORIES]) > 1 && $validateCategories == POP_POSTSCREATION_CONSTANT_VALIDATECATEGORIESTYPE_EXACTLYONE) {
+            } elseif (count($form_data[MutationInputProperties::CATEGORIES]) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                 $errors[] = $category_error_msgs['only-one'];
             }
         }
