@@ -31,7 +31,7 @@ class PoP_ServerSide_MultiLayoutHelpers
         }
 
         // Render the content from this layout
-        $layoutContext = $context[POP_CONSTANT_RESPONSE_SUBMODULES][$layout];
+        $layoutContext = $context[POP_RESPONSE_PROP_SUBMODULES][$layout];
 
         // Add dbKey and dbObjectID back into the context
         $layoutContext = array_merge(

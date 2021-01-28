@@ -203,8 +203,8 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
-                    $modulejsdata[$submoduleOutputName][POP_CONSTANT_RESPONSE_SUBMODULES] = $modulejsdata[$submoduleOutputName][POP_CONSTANT_RESPONSE_SUBMODULES] ?? array();
-                    $modulejsdata = &$modulejsdata[$submoduleOutputName][POP_CONSTANT_RESPONSE_SUBMODULES];
+                    $modulejsdata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] = $modulejsdata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] ?? array();
+                    $modulejsdata = &$modulejsdata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES];
                 }
                 // Merge the JS feedback in
                 $modulejsdata = array_merge_recursive(

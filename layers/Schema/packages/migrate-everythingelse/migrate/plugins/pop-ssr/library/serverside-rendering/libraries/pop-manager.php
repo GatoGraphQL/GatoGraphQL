@@ -174,8 +174,8 @@ class PoP_ServerSideManager
         // in .tmpl files, so reconstruct the full name in the context duplicating these entries
         if ($context && \PoP\ComponentModel\Environment::compactResponseJsonKeys()) {
             // Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
-            if ($context[POP_CONSTANT_RESPONSE_SUBMODULES] ?? null) {
-                $context['modules'] = $context[POP_CONSTANT_RESPONSE_SUBMODULES];
+            if ($context[POP_RESPONSE_PROP_SUBMODULES] ?? null) {
+                $context['modules'] = $context[POP_RESPONSE_PROP_SUBMODULES];
             }
             if ($context['bs']['dbkeys'] ?? null) {
                 $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
@@ -358,16 +358,16 @@ class PoP_ServerSideManager
         $this->expandJSKeys($psConfiguration);
 
         // Fill each block configuration with its pssId/bsId/settings
-        if ($psConfiguration[POP_CONSTANT_RESPONSE_SUBMODULES]) {
-            foreach ($psConfiguration[POP_CONSTANT_RESPONSE_SUBMODULES] as $bsId => &$bConfiguration) {
+        if ($psConfiguration[POP_RESPONSE_PROP_SUBMODULES]) {
+            foreach ($psConfiguration[POP_RESPONSE_PROP_SUBMODULES] as $bsId => &$bConfiguration) {
                 $bId = $bConfiguration[GD_JS_FRONTENDID];
                 $bs = $this->getBlockSettings($domain, $domain, $pssId, $bsId, $psId, $bId);
-                $bConfiguration/*$psConfiguration[POP_CONSTANT_RESPONSE_SUBMODULES][$bsId]*/['tls'] = $tls;
-                $bConfiguration/*$psConfiguration[POP_CONSTANT_RESPONSE_SUBMODULES][$bsId]*/['pss'] = $pss;
-                $bConfiguration/*$psConfiguration[POP_CONSTANT_RESPONSE_SUBMODULES][$bsId]*/['bs'] = $bs;
+                $bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/['tls'] = $tls;
+                $bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/['pss'] = $pss;
+                $bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/['bs'] = $bs;
 
                 // Expand the JS Keys for the configuration
-                $this->expandJSKeys($bConfiguration/*$psConfiguration[POP_CONSTANT_RESPONSE_SUBMODULES][$bsId]*/);
+                $this->expandJSKeys($bConfiguration/*$psConfiguration[POP_RESPONSE_PROP_SUBMODULES][$bsId]*/);
             }
         }
     }

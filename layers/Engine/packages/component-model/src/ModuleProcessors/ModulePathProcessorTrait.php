@@ -46,7 +46,7 @@ trait ModulePathProcessorTrait
             );
         }
         if ($submodules_ret) {
-            $ret[$key][POP_CONSTANT_RESPONSE_SUBMODULES] = $submodules_ret;
+            $ret[$key][POP_RESPONSE_PROP_SUBMODULES] = $submodules_ret;
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
 
@@ -116,7 +116,7 @@ trait ModulePathProcessorTrait
             );
         }
         if ($submodules_ret) {
-            $ret[$key][POP_CONSTANT_RESPONSE_SUBMODULES] = $submodules_ret;
+            $ret[$key][POP_RESPONSE_PROP_SUBMODULES] = $submodules_ret;
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
 

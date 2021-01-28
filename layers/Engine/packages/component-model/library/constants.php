@@ -12,4 +12,4 @@ define('POP_CONSTANT_RAND', rand());
 define('POP_CONSTANT_TIME', time());
 
 // This value will be used in the response. If compact, make sure each JS Key is unique
-define('POP_CONSTANT_RESPONSE_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
+define('POP_RESPONSE_PROP_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
