@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
+use PoP\API\Constants\Formats;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 
 abstract class AbstractRelationalFieldDataloadModuleProcessor extends AbstractDataloadModuleProcessor
@@ -18,6 +19,6 @@ abstract class AbstractRelationalFieldDataloadModuleProcessor extends AbstractDa
 
     public function getFormat(array $module): ?string
     {
-        return \PoP\API\Constants\Formats::FIELDS;
+        return Formats::FIELDS;
     }
 }

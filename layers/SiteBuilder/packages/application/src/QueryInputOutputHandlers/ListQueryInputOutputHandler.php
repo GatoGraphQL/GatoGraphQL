@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
+use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\Params;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
@@ -22,12 +24,12 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
         $vars = ApplicationState::getVars();
 
         // Needed to loadLatest, to know from what time to get results
-        if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
+        if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
             $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_TIME;
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
             return $ret;
         }
 
@@ -48,22 +50,22 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
         $vars = ApplicationState::getVars();
 
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
-        if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST)) {
+        if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST)) {
             return $ret;
         }
 
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-        if ($limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT]) {
-            $ret[\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
+        if ($limit = $query_args[Params::LIMIT]) {
+            $ret[Params::LIMIT] = $limit;
         }
 
-        $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
+        $pagenumber = $query_args[Params::PAGE_NUMBER];
         if (!Utils::stopFetching($dbObjectIDOrIDs, $data_properties)) {
             // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
             $nextpagenumber = (isset($vars['loading-latest']) && $vars['loading-latest']) ? $pagenumber : $pagenumber + 1;
         }
-        $ret[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER] = $nextpagenumber;
+        $ret[Params::PAGE_NUMBER] = $nextpagenumber;
 
         return $ret;
     }

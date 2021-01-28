@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\HooksWP;
 
+use PHPUnit\Framework\TestCase;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class HooksAPITest extends \PHPUnit\Framework\TestCase
+class HooksAPITest extends TestCase
 {
     /**
      * Test that applyFilter returns $value

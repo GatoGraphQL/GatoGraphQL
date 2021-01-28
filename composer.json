@@ -635,7 +635,8 @@
         "propagate-monorepo": "monorepo-builder propagate --ansi",
         "validate-monorepo": "monorepo-builder validate --ansi",
         "release": "monorepo-builder release patch --ansi",
-        "merge-phpstan": "monorepo-builder merge-phpstan --skip-unmigrated --ansi"
+        "merge-phpstan": "monorepo-builder merge-phpstan --skip-unmigrated --ansi",
+        "improve-code-quality": "rector process --config=rector-code-quality.php --ansi"
     },
     "scripts-descriptions": {
         "test": "Execute PHPUnit tests",
@@ -652,7 +653,8 @@
         "merge-monorepo": "Create the monorepo's composer.json file, containing all dependencies from all packages",
         "propagate-monorepo": "Propagate versions from the monorepo's composer.json file to all packages",
         "release": "Release a new version (bump version, commit, push, tag, revert to 'dev-master', commit, push)",
-        "merge-phpstan": "Generate a single PHPStan config for the monorepo, invoking the config for the PHPStan config for all packages"
+        "merge-phpstan": "Generate a single PHPStan config for the monorepo, invoking the config for the PHPStan config for all packages",
+        "improve-code-quality": "Improve code quality (via Rector)"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

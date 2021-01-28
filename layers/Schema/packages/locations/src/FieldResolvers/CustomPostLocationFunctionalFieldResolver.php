@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers;
 
+use PoPSchema\Posts\Constants\InputNames;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 
 class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
@@ -17,6 +18,6 @@ class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunction
 
     protected function getDbobjectIdField()
     {
-        return \PoPSchema\Posts\Constants\InputNames::POST_ID;
+        return InputNames::POST_ID;
     }
 }

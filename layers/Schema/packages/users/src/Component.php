@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users;
 
+use PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Users\Config\ServiceConfiguration;
@@ -79,7 +80,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent::initialize(
+            ConditionalComponent::initialize(
                 $configuration,
                 $skipSchema
             );
@@ -102,7 +103,7 @@ class Component extends AbstractComponent
 
         // Initialize all conditional components
         if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\CustomPosts\\FieldResolvers'))) {
-            \PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent::beforeBoot();
+            ConditionalComponent::beforeBoot();
         }
     }
 

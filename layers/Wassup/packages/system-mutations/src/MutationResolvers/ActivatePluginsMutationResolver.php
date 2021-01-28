@@ -15,6 +15,10 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $current = $cmsengineapi->getOption('active_plugins');
+        // @todo Rename package!
+        // `plugin_basename` is a WordPress function,
+        // so this package must be called "system-mutations-wp",
+        // or have this code extracted to some WP-specific package
         $plugin = plugin_basename(trim($plugin));
 
         if (!in_array($plugin, $current)) {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\Params;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -110,7 +112,7 @@ trait QueryDataModuleProcessorTrait
         return array_values(array_filter(
             $this->getDatasetmoduletreeSectionFlattenedModules($module),
             function ($module) use ($moduleprocessor_manager) {
-                return $moduleprocessor_manager->getProcessor($module) instanceof \PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+                return $moduleprocessor_manager->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
             }
         ));
     }
@@ -130,15 +132,15 @@ trait QueryDataModuleProcessorTrait
 
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
-        if ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST && !$data_properties[DataloadingConstants::IGNOREREQUESTPARAMS]) {
+        if ($datasource == DataSources::MUTABLEONREQUEST && !$data_properties[DataloadingConstants::IGNOREREQUESTPARAMS]) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)HooksAPIFacade::getInstance()->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     GD_URLPARAM_REDIRECTTO,
-                    \PoP\ComponentModel\Constants\Params::PAGE_NUMBER,
-                    \PoP\ComponentModel\Constants\Params::LIMIT,
+                    Params::PAGE_NUMBER,
+                    Params::LIMIT,
                 )
             );
             $params_from_request = array_filter(

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
+use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\ComponentModel\Modules\ModuleUtils;
 
 class ModulePathHelpers implements ModulePathHelpersInterface
@@ -25,7 +26,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     public function stringifyModulePath(array $modulepath)
     {
         return implode(
-            \PoP\ComponentModel\Tokens\ModulePath::MODULE_SEPARATOR,
+            ModulePath::MODULE_SEPARATOR,
             array_map(
                 [ModuleUtils::class, 'getModuleOutputName'],
                 $modulepath
@@ -38,7 +39,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
         return array_map(
             [ModuleUtils::class, 'getModuleFromOutputName'],
             explode(
-                \PoP\ComponentModel\Tokens\ModulePath::MODULE_SEPARATOR,
+                ModulePath::MODULE_SEPARATOR,
                 $modulepath_as_string
             )
         );
