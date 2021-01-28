@@ -30,7 +30,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                return GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS;
+                return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);

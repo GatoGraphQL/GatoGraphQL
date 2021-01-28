@@ -22,12 +22,12 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
         $vars = ApplicationState::getVars();
 
         // Needed to loadLatest, to know from what time to get results
-        if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
-            $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_CURRENTTIMESTAMP;
+        if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
+            $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_TIME;
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) || ($vars['loading-latest'] ?? null)) {
             return $ret;
         }
 
@@ -48,7 +48,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
         $vars = ApplicationState::getVars();
 
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
-        if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST)) {
+        if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST)) {
             return $ret;
         }
 
@@ -73,7 +73,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     // Needed to loadLatest, to know from what time to get results
-    //     $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_CURRENTTIMESTAMP;
+    //     $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_TIME;
 
     //     // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
     //     if ($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) {
@@ -89,7 +89,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     //     }
 
     //     // If loading static data, then that's it
-    //     if ($data_properties[DataloadingConstants::DATASOURCE] != POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+    //     if ($data_properties[DataloadingConstants::DATASOURCE] != \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
 
     //         return $ret;
     //     }

@@ -115,7 +115,6 @@ class Engine implements EngineInterface
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
                 POP_CONSTANT_UNIQUE_ID,
-                POP_CONSTANT_CURRENTTIMESTAMP,
                 POP_CONSTANT_RAND,
                 POP_CONSTANT_TIME,
             );
@@ -892,7 +891,7 @@ class Engine implements EngineInterface
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it
-            if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL && $datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+            if ($datasources == GD_URLPARAM_DATASOURCES_ONLYMODEL && $datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 continue;
             }
 
@@ -904,7 +903,7 @@ class Engine implements EngineInterface
             // ------------------------------------------
             // Load data if the checkpoint did not fail
             $dataaccess_checkpoint_validation = null;
-            if ($load_data && $checkpoints = ($data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS] ?? null)) {
+            if ($load_data && $checkpoints = ($data_properties[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] ?? null)) {
                 // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                 $dataaccess_checkpoint_validation = $this->validateCheckpoints($checkpoints);
                 $load_data = !GeneralUtils::isError($dataaccess_checkpoint_validation);
@@ -923,13 +922,13 @@ class Engine implements EngineInterface
                 in_array(
                     $datasource,
                     array(
-                    POP_DATALOAD_DATASOURCE_IMMUTABLE,
-                    POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                    \PoP\ComponentModel\Constants\DataSources::IMMUTABLE,
+                    \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL,
                     )
                 )
             ) {
                 $module_props = &$model_props;
-            } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+            } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 $module_props = &$props;
             }
 
@@ -954,7 +953,7 @@ class Engine implements EngineInterface
                         // Validate that the actionexecution must be triggered through its own checkpoints
                         $execute = true;
                         $mutation_checkpoint_validation = null;
-                        if ($mutation_checkpoints = $data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] ?? null) {
+                        if ($mutation_checkpoints = $data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] ?? null) {
                             // Check if the module fails checkpoint validation. If so, it must not load its data or execute the componentMutationResolverBridge
                             $mutation_checkpoint_validation = $this->validateCheckpoints($mutation_checkpoints);
                             $execute = !GeneralUtils::isError($mutation_checkpoint_validation);
@@ -1014,7 +1013,7 @@ class Engine implements EngineInterface
                     // these ones must be fetched even if the block has a static typeResolver
                     // If it has extend, add those ids under its typeResolver_class
                     $dataload_extend_settings = $processor->getModelSupplementaryDbobjectdataModuletree($module, $model_props);
-                    if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+                    if ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
                             $processor->getMutableonrequestSupplementaryDbobjectdataModuletree($module, $props)
@@ -1038,19 +1037,19 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
-            if ($datasource == POP_DATALOAD_DATASOURCE_IMMUTABLE) {
+            if ($datasource == \PoP\ComponentModel\Constants\DataSources::IMMUTABLE) {
                 $datasetmoduledata = &$immutable_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$immutable_datasetmodulemeta;
                 }
                 $this->moduledata = &$immutable_moduledata;
-            } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL) {
+            } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL) {
                 $datasetmoduledata = &$mutableonmodel_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
                 }
                 $this->moduledata = &$mutableonmodel_moduledata;
-            } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+            } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                 $datasetmoduledata = &$mutableonrequest_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
@@ -1093,13 +1092,13 @@ class Engine implements EngineInterface
                         in_array(
                             $datasource,
                             array(
-                            POP_DATALOAD_DATASOURCE_IMMUTABLE,
-                            POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+                            \PoP\ComponentModel\Constants\DataSources::IMMUTABLE,
+                            \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL,
                             )
                         )
                     ) {
                         $referencer_module_props = &$referencer_model_props;
-                    } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+                    } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
                         $referencer_module_props = &$referencer_props;
                     }
                     $this->processAndAddModuleData($referencer_modulepath, $referencer_module, $referencer_module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
@@ -1570,7 +1569,7 @@ class Engine implements EngineInterface
 
         // Show logs only if both enabled, and passing the action in the URL
         if (ServerUtils::enableShowLogs()) {
-            if (in_array(POP_ACTION_SHOW_LOGS, $vars['actions'])) {
+            if (in_array(\PoP\ComponentModel\Constants\Actions::SHOW_LOGS, $vars['actions'])) {
                 $ret['logEntries'] = $feedbackMessageStore->getLogEntries();
             }
         }

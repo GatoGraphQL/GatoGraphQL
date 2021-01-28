@@ -605,7 +605,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         // Each module can only return one piece of data, and it must be indicated if it static or mutableonrequest
         // Retrieving only 1 piece is needed so that its children do not get confused what data their getDataFields applies to
-        return POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST;
+        return \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST;
     }
 
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
@@ -782,7 +782,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $ret[DataloadingConstants::DATASOURCE] = $datasource;
 
         // Add the properties below either as static or mutableonrequest
-        if ($datasource == POP_DATALOAD_DATASOURCE_IMMUTABLE) {
+        if ($datasource == \PoP\ComponentModel\Constants\DataSources::IMMUTABLE) {
             $this->addHeaddatasetmoduleDataProperties($ret, $module, $props);
         }
 
@@ -829,7 +829,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // Add the properties below either as static or mutableonrequest
         $datasource = $this->getDatasource($module, $props);
-        if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL) {
+        if ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL) {
             $this->addHeaddatasetmoduleDataProperties($ret, $module, $props);
         }
 
@@ -875,7 +875,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // Add the properties below either as static or mutableonrequest
         $datasource = $this->getDatasource($module, $props);
-        if ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+        if ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
             $this->addHeaddatasetmoduleDataProperties($ret, $module, $props);
         }
 
@@ -891,8 +891,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
 
             // Pass info for PoP Engine
-            // $ret[GD_DATALOAD_DATAACCESSCHECKPOINTS] = $checkpoint_configuration['checkpoints'];
-            $ret[GD_DATALOAD_DATAACCESSCHECKPOINTS] = $checkpoints;
+            // $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
+            $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoints;
             // }
         }
 
@@ -902,8 +902,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
 
             // Pass info for PoP Engine
-            // $ret[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] = $checkpoint_configuration['checkpoints'];
-            $ret[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] = $checkpoints;
+            // $ret[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
+            $ret[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoints;
             // }
         }
 
@@ -980,7 +980,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
     {
-        return GD_DATALOAD_DATAACCESSCHECKPOINTS;
+        return \PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS;
     }
 
     protected function maybeOverrideCheckpoints($checkpoints)
@@ -997,7 +997,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function getDataaccessCheckpoints(array $module, array &$props): array
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == GD_DATALOAD_DATAACCESSCHECKPOINTS) {
+            if ($this->getRelevantRouteCheckpointTarget($module, $props) == \PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS) {
                 return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
             }
         }
@@ -1010,7 +1010,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function getActionexecutionCheckpoints(array $module, array &$props): array
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS) {
+            if ($this->getRelevantRouteCheckpointTarget($module, $props) == \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
                 return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
             }
         }

@@ -73,7 +73,7 @@ class VarsHooks extends AbstractHookSet
             $vars['stratum-isdefault'] = $vars['stratum'] == $platformmanager->getDefaultStratum();
 
             // Do not print the entry module
-            $vars['actions'][] = \POP_ACTION_REMOVE_ENTRYMODULE_FROM_OUTPUT;
+            $vars['actions'][] = \PoP\API\Constants\Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
 
             // Enable mutations?
             $vars['are-mutations-enabled'] = ComponentConfiguration::enableMutations();

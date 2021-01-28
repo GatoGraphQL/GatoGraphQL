@@ -186,11 +186,11 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $datasource = $data_properties[DataloadingConstants::DATASOURCE];
 
         // Save the results on either the static or mutableonrequest branches
-        if ($datasource == POP_DATALOAD_DATASOURCE_IMMUTABLE) {
+        if ($datasource == \PoP\ComponentModel\Constants\DataSources::IMMUTABLE) {
             $modulejsdata = &$this->immutable_modulejsdata;
-        } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONMODEL) {
+        } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL) {
             $modulejsdata = &$this->mutableonmodel_modulejsdata;
-        } elseif ($datasource == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+        } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
             $modulejsdata = &$this->mutableonrequest_modulejsdata;
         }
 

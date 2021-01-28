@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_
 
     public function getDatasource(array $module, array &$props): string
     {
-        return POP_DATALOAD_DATASOURCE_IMMUTABLE;
+        return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
     protected function getContentSubmodule(array $module)

@@ -353,8 +353,8 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
         // // Add the properties below either as static or mutableonrequest
         // if (in_array($this->getDatasource($module, $props), array(
-        // 	POP_DATALOAD_DATASOURCE_IMMUTABLE,
-        // 	POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+        // 	\PoP\ComponentModel\Constants\DataSources::IMMUTABLE,
+        // 	\PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL,
         // ))) {
 
         // 	$this->setModuleHTMLCSSPlatformProps($module, $props);
@@ -381,7 +381,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     {
 
         // // Add the properties below either as static or mutableonrequest
-        // if ($this->getDatasource($module, $props) == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+        // if ($this->getDatasource($module, $props) == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
 
         // 	$this->setModuleHTMLCSSPlatformProps($module, $props);
         // }

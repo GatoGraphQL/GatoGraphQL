@@ -9,7 +9,7 @@ define('POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD', 'processorbase-blockjsmethod');
 
 abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPlatformQueryDataModuleProcessorBase
 {
-    
+
     //-------------------------------------------------
     // New PUBLIC Functions
     //-------------------------------------------------
@@ -40,7 +40,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($pagesection_jsmethods = $this->getModulePagesectionJsmethods($module, $props)) {
             $ret['pagesection-jsmethods'] = $pagesection_jsmethods;
         }
-        
+
         // Allow PoP Resource Loader to inject this value
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
@@ -116,7 +116,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function getImmutableJssettings(array $module, array &$props): array
     {
         $ret = array();
-        
+
         if ($configuration = $this->getImmutableJsconfiguration($module, $props)) {
             $ret['configuration'] = $configuration;
         }
@@ -124,7 +124,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($initialization_fn = $this->getInitializationjsmethod($module, $props)) {
             $ret['initializationfn'] = $initialization_fn;
         }
-        
+
         return $ret;
     }
 
@@ -133,7 +133,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($jsconfiguration = $this->getProp($module, $props, 'immutable-jsconfiguration')) {
             return $jsconfiguration;
         }
-    
+
         return array();
     }
 
@@ -154,11 +154,11 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function getMutableonmodelJssettings(array $module, array &$props): array
     {
         $ret = array();
-        
+
         if ($configuration = $this->getMutableonmodelJsconfiguration($module, $props)) {
             $ret['configuration'] = $configuration;
         }
-        
+
         return $ret;
     }
 
@@ -167,7 +167,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($jsconfiguration = $this->getProp($module, $props, 'mutableonmodel-jsconfiguration')) {
             return $jsconfiguration;
         }
-    
+
         return array();
     }
 
@@ -183,11 +183,11 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function getMutableonrequestJssettings(array $module, array &$props): array
     {
         $ret = array();
-        
+
         if ($configuration = $this->getMutableonrequestJsconfiguration($module, $props)) {
             $ret['configuration'] = $configuration;
         }
-        
+
         return $ret;
     }
 
@@ -196,7 +196,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($jsconfiguration = $this->getProp($module, $props, 'mutableonrequest-jsconfiguration')) {
             return $jsconfiguration;
         }
-    
+
         return array();
     }
 
@@ -216,7 +216,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($feedback = $this->getJsdataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
             $ret[POP_CONSTANT_FEEDBACK] = $feedback;
         }
-    
+
         return $ret;
     }
 
@@ -326,7 +326,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         if ($module_intercept_urls = $this->getModuleInterceptUrls($module, $props)) {
             return array_unique(array_values($module_intercept_urls));
         }
-    
+
         return array();
     }
     public function getModuleInterceptUrls(array $module, array &$props)
@@ -353,7 +353,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     {
         return false;
     }
-    
+
     // protected function setModuleWebPlatformProps(array $module, array &$props) {
 
     // 	if ($this->getProp($module, $props, 'lazy-load')) {
@@ -366,8 +366,8 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     {
         // // Add the properties below either as static or mutableonrequest
         // if (in_array($this->getDatasource($module, $props), array(
-        // 	POP_DATALOAD_DATASOURCE_IMMUTABLE,
-        // 	POP_DATALOAD_DATASOURCE_MUTABLEONMODEL,
+        // 	\PoP\ComponentModel\Constants\DataSources::IMMUTABLE,
+        // 	\PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL,
         // ))) {
 
         // 	$this->setModuleWebPlatformProps($module, $props);
@@ -379,7 +379,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         // Validate that the platform level includes this one
         $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
-            
+
             $this->initWebPlatformModelProps($module, $props);
         }
 
@@ -388,9 +388,9 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
     public function initWebPlatformRequestProps(array $module, array &$props)
     {
-    
+
         // // Add the properties below either as static or mutableonrequest
-        // if ($this->getDatasource($module, $props) == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
+        // if ($this->getDatasource($module, $props) == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
 
         // 	$this->setModuleWebPlatformProps($module, $props);
         // }
@@ -401,17 +401,17 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         // Validate that the platform level includes this one
         $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
-        
+
             $this->initWebPlatformRequestProps($module, $props);
         }
-        
+
         parent::initRequestProps($module, $props);
     }
 
     //-------------------------------------------------
     // PROTECTED Functions
     //-------------------------------------------------
-    
+
     protected function getPagesectionJsmethod(array $module, array &$props)
     {
         $ret = array();
@@ -443,7 +443,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
                 }
             }
         }
-        
+
         return $ret;
     }
     protected function getModuleFilteredPagesectionJsmethods(array $module, array &$props)
@@ -480,11 +480,11 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     {
         $this->mergeIterateKeyProp($module, $props, 'mutableonrequest-jsconfiguration', $jsconfiguration);
     }
-    
+
     //-------------------------------------------------
     // PRIVATE Functions
     //-------------------------------------------------
-    
+
     private function mergeTargetJsmethodProp(array $module, array &$props, $target_key, $methods, $group)
     {
         $group = $group ? $group : GD_JSMETHOD_GROUP_MAIN;
