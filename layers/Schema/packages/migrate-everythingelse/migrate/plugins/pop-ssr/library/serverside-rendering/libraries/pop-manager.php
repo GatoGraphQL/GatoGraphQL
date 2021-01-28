@@ -172,7 +172,7 @@ class PoP_ServerSideManager
 
         // In order to save file size, context keys can be compressed, eg: 'modules' => 'ms', 'module' => 'm'. However they might be referenced with their full name
         // in .tmpl files, so reconstruct the full name in the context duplicating these entries
-        if ($context && \PoP\ComponentModel\Server\Utils::compactResponseJsonKeys()) {
+        if ($context && \PoP\ComponentModel\Environment::compactResponseJsonKeys()) {
             // Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
             if ($context[GD_JS_SUBMODULES] ?? null) {
                 $context['modules'] = $context[GD_JS_SUBMODULES];

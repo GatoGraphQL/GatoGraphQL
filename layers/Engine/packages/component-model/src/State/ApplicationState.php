@@ -13,7 +13,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\StratumManagerFactory;
-use PoP\ComponentModel\Server\Utils as ServerUtils;
+use PoP\ComponentModel\Environment as Environment;
 
 class ApplicationState
 {
@@ -49,7 +49,7 @@ class ApplicationState
             array_map('strtolower', $_REQUEST[\PoP\ComponentModel\Constants\Params::ACTIONS]) : [];
         $scheme = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::SCHEME] ?? '');
         // The version could possibly be set from outside
-        $version = ServerUtils::enableVersionByParams() ?
+        $version = Environment::enableVersionByParams() ?
             $_REQUEST[\PoP\ComponentModel\Constants\Params::VERSION] ?? ApplicationInfoFacade::getInstance()->getVersion()
             : ApplicationInfoFacade::getInstance()->getVersion();
 

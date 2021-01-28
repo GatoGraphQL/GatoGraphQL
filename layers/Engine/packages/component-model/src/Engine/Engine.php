@@ -13,7 +13,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Server\Utils as ServerUtils;
+use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\CheckpointProcessorManagerFactory;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -148,7 +148,7 @@ class Engine implements EngineInterface
 
         $this->extra_routes = array();
 
-        if (ServerUtils::enableExtraRoutesByParams()) {
+        if (Environment::enableExtraRoutesByParams()) {
             $this->extra_routes = $_REQUEST[\PoP\ComponentModel\Constants\Params::EXTRA_ROUTES] ?? array();
             $this->extra_routes = is_array($this->extra_routes) ? $this->extra_routes : array($this->extra_routes);
         }
@@ -1560,13 +1560,13 @@ class Engine implements EngineInterface
             '\PoP\ComponentModel\Engine:traces:db',
             $dbTraces
         );
-        if (ServerUtils::showTracesInResponse()) {
+        if (Environment::showTracesInResponse()) {
             $this->maybeCombineAndAddDatabaseEntries($ret, 'dbTraces', $dbTraces);
             $this->maybeCombineAndAddSchemaEntries($ret, 'schemaTraces', $schemaTraces);
         }
 
         // Show logs only if both enabled, and passing the action in the URL
-        if (ServerUtils::enableShowLogs()) {
+        if (Environment::enableShowLogs()) {
             if (in_array(\PoP\ComponentModel\Constants\Actions::SHOW_LOGS, $vars['actions'])) {
                 $ret['logEntries'] = $feedbackMessageStore->getLogEntries();
             }

@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-$compact = \PoP\ComponentModel\Server\Utils::compactResponseJsonKeys();
+$compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_INTERCEPTURLS', $compact ? 'xu' : 'intercept-urls');
 define('GD_JS_EXTRAINTERCEPTURLS', $compact ? 'exu' : 'extra-intercept-urls');
 

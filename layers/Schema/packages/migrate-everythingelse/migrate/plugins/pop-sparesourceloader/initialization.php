@@ -42,12 +42,12 @@ class PoP_SPAResourceLoader_Initialization
     //         $bundles_js_folder = $dist_js_folder.'/bundles';
 
     //         if (PoP_WebPlatform_ServerUtils::useBundledResources()) {
-                
+
     //             $cmswebplatformapi->registerScript('pop-sparesourceloader', $bundles_js_folder . '/pop-sparesourceloader.bundle.min.js', array(), POP_SPARESOURCELOADER_VERSION, true);
     //             $cmswebplatformapi->enqueueScript('pop-sparesourceloader');
     //         }
     //         else {
-                
+
     //         }
     //     }
 
@@ -55,8 +55,8 @@ class PoP_SPAResourceLoader_Initialization
 
     //     // No need to declare this file here, since it's already defined in the sparesourceloader-processor
     //     // Also, if not doing code splitting, then no need for the resourceLoader config file
-    //     // if (\PoP\ComponentModel\Server\Utils::enableConfigByParams() || PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
-            
+    //     // if (\PoP\ComponentModel\Environment::enableConfigByParams() || PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+
     //     //     $cmswebplatformapi->registerScript('pop-codesplit-jslibrary-manager', $libraries_js_folder.'/codesplit-jslibrary-manager'.$suffix.'.js', array('jquery'), POP_SPARESOURCELOADER_VERSION, true);
     //     //     $cmswebplatformapi->enqueueScript('pop-codesplit-jslibrary-manager');
     //     // }

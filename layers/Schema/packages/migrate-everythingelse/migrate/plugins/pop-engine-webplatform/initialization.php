@@ -193,7 +193,7 @@ class PoPWebPlatform_Initialization
             'LOCALE' => $locale,
             'API_URLPARAMS' => $api_urlparams,
             'USE_PROGRESSIVEBOOTING' => (PoP_WebPlatform_ServerUtils::useProgressiveBooting() ? true : ''),
-            'COMPACT_RESPONSE_JSON_KEYS' => (\PoP\ComponentModel\Server\Utils::compactResponseJsonKeys() ? true : ''),
+            'COMPACT_RESPONSE_JSON_KEYS' => (\PoP\ComponentModel\Environment::compactResponseJsonKeys() ? true : ''),
             'USELOCALSTORAGE' => (PoP_WebPlatform_ServerUtils::useLocalStorage() ? true : ''),
             // This URL is needed to retrieve the user data, if the user is logged in
             // 'BACKGROUND_LOAD' => $backgroundLoad,

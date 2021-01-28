@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 // Override ModuleProcessorClass
-if (!\PoP\ComponentModel\Server\Utils::disableCustomCMSCode()) {
+if (!\PoP\ComponentModel\Environment::disableCustomCMSCode()) {
     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
     $moduleprocessor_manager->overrideProcessorClass(
         UserStance_Module_Processor_CustomSectionDataloads::class,

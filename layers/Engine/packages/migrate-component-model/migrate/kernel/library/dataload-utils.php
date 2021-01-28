@@ -13,7 +13,7 @@ class DataloadUtils
     public static function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, $subcomponent_data_field)
     {
         $subcomponent_typeResolver_class = $typeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
-        // if (!$subcomponent_typeResolver_class && \PoP\ComponentModel\Server\Utils::failIfSubcomponentTypeDataLoaderUndefined()) {
+        // if (!$subcomponent_typeResolver_class && \PoP\ComponentModel\Environment::failIfSubcomponentTypeDataLoaderUndefined()) {
         //     throw new \Exception(sprintf('There is no default typeResolver set for field  "%s" from typeResolver "%s" and typeResolver "%s" (%s)', $subcomponent_data_field, $typeResolver_class, $typeResolverClass, RequestUtils::getRequestedFullURL()));
         // }
         // If this field doesn't have a typeResolver, show a schema error
