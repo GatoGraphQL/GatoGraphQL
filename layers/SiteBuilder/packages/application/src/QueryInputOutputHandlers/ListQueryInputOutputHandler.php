@@ -54,16 +54,16 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-        if ($limit = $query_args[GD_URLPARAM_LIMIT]) {
-            $ret[GD_URLPARAM_LIMIT] = $limit;
+        if ($limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT]) {
+            $ret[\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
         }
 
-        $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];
+        $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
         if (!Utils::stopFetching($dbObjectIDOrIDs, $data_properties)) {
             // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
             $nextpagenumber = (isset($vars['loading-latest']) && $vars['loading-latest']) ? $pagenumber : $pagenumber + 1;
         }
-        $ret[GD_URLPARAM_PAGENUMBER] = $nextpagenumber;
+        $ret[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER] = $nextpagenumber;
 
         return $ret;
     }
@@ -95,14 +95,14 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     //     }
 
     //     $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-    //     $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];
+    //     $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
     //     $stop_loading = Utils::stopFetching($dbobjectids, $data_properties);
 
     //     $ret[GD_URLPARAM_STOPFETCHING] = $stop_loading;
 
     //     // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
     //     $nextpaged = $vars['loading-latest'] ? $pagenumber : $pagenumber + 1;
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_PAGENUMBER] = $stop_loading ? '' : $nextpaged;
+    //     $ret[ParamConstants::PARAMS][\PoP\ComponentModel\Constants\Params::PAGE_NUMBER] = $stop_loading ? '' : $nextpaged;
 
     //     // Do not send this value back when doing loadLatest, or it will mess up the original structure loading
     //     // Doing 'unset' as to also take it out if an ancestor class (eg: GD_DataLoad_BlockQueryInputOutputHandler) has set it
@@ -120,8 +120,8 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
     //     $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-    //     $limit = $query_args[GD_URLPARAM_LIMIT];
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_LIMIT] = $limit;
+    //     $limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT];
+    //     $ret[ParamConstants::PARAMS][\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
 
     //     return $ret;
     // }
@@ -132,8 +132,8 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
     //     $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
-    //     $limit = $query_args[GD_URLPARAM_LIMIT];
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_LIMIT] = $limit;
+    //     $limit = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT];
+    //     $ret[ParamConstants::PARAMS][\PoP\ComponentModel\Constants\Params::LIMIT] = $limit;
 
     //     // If it is lazy load, no need to calculate show-msg / pagenumber / stop-fetching / etc
     //     if ($data_properties[DataloadingConstants::LAZYLOAD]) {
@@ -141,7 +141,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     //         return $ret;
     //     }
 
-    //     $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];
+    //     $pagenumber = $query_args[\PoP\ComponentModel\Constants\Params::PAGE_NUMBER];
 
     //     // Print feedback messages always, if none then an empty array
     //     $msgs = array();
@@ -176,7 +176,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     //     // Add the Fetch more link for the Search Engine
     //     if (!$stop_loading && $data_properties[DataloadingConstants::SOURCE] ?? null) {
 
-    //         $ret[POP_IOCONSTANT_QUERYNEXTURL] = add_query_arg(GD_URLPARAM_PAGENUMBER, $pagenumber+1, $data_properties[DataloadingConstants::SOURCE]);
+    //         $ret[POP_IOCONSTANT_QUERYNEXTURL] = add_query_arg(\PoP\ComponentModel\Constants\Params::PAGE_NUMBER, $pagenumber+1, $data_properties[DataloadingConstants::SOURCE]);
     //     }
 
     //     // Do not send this value back when doing loadLatest, or it will mess up the original structure loading

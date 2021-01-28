@@ -114,7 +114,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_UPDATE:
-                return POP_INPUTNAME_POSTID;
+                return \PoPSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

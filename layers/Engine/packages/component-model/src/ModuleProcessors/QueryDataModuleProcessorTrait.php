@@ -137,10 +137,8 @@ trait QueryDataModuleProcessorTrait
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     GD_URLPARAM_REDIRECTTO,
-                    GD_URLPARAM_PAGENUMBER,
-                    GD_URLPARAM_LIMIT,
-                    // Used for the Comments to know what post to fetch comments from when filtering
-                    GD_URLPARAM_COMMENTPOSTID,
+                    \PoP\ComponentModel\Constants\Params::PAGE_NUMBER,
+                    \PoP\ComponentModel\Constants\Params::LIMIT,
                 )
             );
             $params_from_request = array_filter(

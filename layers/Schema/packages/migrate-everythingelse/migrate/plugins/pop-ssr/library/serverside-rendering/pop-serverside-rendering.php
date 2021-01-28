@@ -240,7 +240,7 @@ class PoP_ServerSideRendering
         $renderModule = $pagesection_module;
         $render_context = $pagesection_configuration;
         if ($block) {
-            $render_context = $render_context[GD_JS_SUBMODULES][$block];
+            $render_context = $render_context[POP_RESPONSE_PROP_SUBMODULES][$block];
             $renderModule = $render_context[GD_JS_MODULE];
         }
 

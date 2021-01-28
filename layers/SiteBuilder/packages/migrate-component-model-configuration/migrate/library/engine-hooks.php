@@ -21,7 +21,7 @@ class VarsHooks
 
     public function getDataOutputItems($dataoutputitems)
     {
-        $dataoutputitems[] = GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS;
+        $dataoutputitems[] = \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS;
         return $dataoutputitems;
     }
 
@@ -31,12 +31,12 @@ class VarsHooks
         array_splice(
             $dataoutputitems,
             array_search(
-                GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
                 $dataoutputitems
             ),
             1,
             [
-                GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS,
             ]
         );
         return $dataoutputitems;

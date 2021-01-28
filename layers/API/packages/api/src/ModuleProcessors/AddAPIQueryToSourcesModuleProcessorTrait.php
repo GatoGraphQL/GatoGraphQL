@@ -59,9 +59,9 @@ trait AddAPIQueryToSourcesModuleProcessorTrait
                             APIUtils::getEndpoint(
                                 $source,
                                 [
-                                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                                    GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-                                    GD_URLPARAM_DATAOUTPUTITEMS_META,
+                                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                                    \PoP\ComponentModel\Constants\DataOutputItems::META,
                                 ]
                             )
                         );

@@ -6,7 +6,7 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureRe
 {
     public function addStandardNatureResources(&$resources, $modulefilter, $options)
     {
-                
+
         // When processing POP_ADDLOCATIONS_ROUTE_ADDLOCATION, we need a configuration for both target=main and target=modals
         // Because giving no target (the default behaviour) will then choose target=modals, below explicitly create the configuration for target=main
         $nature = RouteNatures::STANDARD;
@@ -16,12 +16,12 @@ class PoPThemeWassup_EM_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureRe
         $merge = false;
         $components = array(
             'format' => POP_FORMAT_MODALS,
-            'target' => POP_TARGET_MAIN,
+            'target' => \PoP\ComponentModel\Constants\Targets::MAIN,
         );
         PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, $ids, $merge, $components, $options);
     }
 }
-    
+
 /**
  * Initialize
  */

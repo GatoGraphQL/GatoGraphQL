@@ -8,6 +8,6 @@ abstract class AbstractTagUpdateUserMetaValueMutationResolverBridge extends Abst
 {
     protected function getRequestKey()
     {
-        return \POP_INPUTNAME_TAGID;
+        return \PoPSchema\Tags\Constants\InputNames::TAG_ID;
     }
 }

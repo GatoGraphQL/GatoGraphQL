@@ -1,2 +1,0 @@
-<?php
-define('GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING', 'stop-fetching');

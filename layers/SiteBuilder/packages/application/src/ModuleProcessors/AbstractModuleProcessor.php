@@ -6,7 +6,7 @@ namespace PoP\Application\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Server\Utils as ServerUtils;
+use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Application\Constants\Actions;
 
@@ -83,7 +83,7 @@ abstract class AbstractModuleProcessor extends \PoP\ConfigurationComponentModel\
         $sources = $this->getDataloadMultidomainSources($module, $props);
         // If this website and the external one have the same software installed, then the external application can already retrieve the needed data
         // Otherwise, this website needs to explicitly request what data is needed to the external one
-        if (ServerUtils::externalSitesRunSameSoftware()) {
+        if (Environment::externalSitesRunSameSoftware()) {
             return $sources;
         }
         return $this->addAPIQueryToSources($sources, $module, $props);

@@ -61,12 +61,12 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'subscribeToTagURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_TAGID => $typeResolver->getID($tag),
+                    \PoPSchema\Tags\Constants\InputNames::TAG_ID => $typeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_SUBSCRIBETOTAG));
 
             case 'unsubscribeFromTagURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_TAGID => $typeResolver->getID($tag),
+                    \PoPSchema\Tags\Constants\InputNames::TAG_ID => $typeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG));
         }
 

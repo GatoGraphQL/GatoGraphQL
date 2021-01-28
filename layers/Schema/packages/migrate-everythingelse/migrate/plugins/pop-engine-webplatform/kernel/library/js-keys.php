@@ -1,7 +1,9 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-$compact = \PoP\ComponentModel\Server\Utils::compactResponseJsonKeys();
+$compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
+define('GD_JS_MODULE', $compact ? 'm' : 'module');
+define('GD_JS_MODULEOUTPUTNAME', $compact ? 's' : 'moduleoutputname');
 define('GD_JS_INTERCEPTURLS', $compact ? 'xu' : 'intercept-urls');
 define('GD_JS_EXTRAINTERCEPTURLS', $compact ? 'exu' : 'extra-intercept-urls');
 
@@ -18,7 +20,7 @@ function gdJqueryConstantsJsparams($jqueryConstants)
 
     // From PoP Engine
     $jqueryConstants['JS_MODULE'] = GD_JS_MODULE;
-    $jqueryConstants['JS_SUBMODULES'] = GD_JS_SUBMODULES;
+    $jqueryConstants['JS_SUBMODULES'] = POP_RESPONSE_PROP_SUBMODULES;
     $jqueryConstants['JS_MODULEOUTPUTNAME'] = GD_JS_MODULEOUTPUTNAME;
 
     // From Web Platform PoP Engine

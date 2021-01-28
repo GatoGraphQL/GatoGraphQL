@@ -15,7 +15,7 @@ class PoP_SPAWebPlatform_ConfigurationUtils
             if ($configuration['preload'] ?? null) {
                 $url = GeneralUtils::addQueryArgs([
                     \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\SPA\ModuleFilters\Page::NAME,
-                    GD_URLPARAM_ACTIONS.'[]' => GD_URLPARAM_ACTION_PRELOAD,
+                    \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => GD_URLPARAM_ACTION_PRELOAD,
                 ], $url);
             }
             $url_targets[$url] = $configuration['targets'];

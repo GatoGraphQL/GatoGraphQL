@@ -9,7 +9,6 @@ use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 
 class ModulePathUtils
 {
-
     public static function getModulePaths()
     {
         $ret = array();
@@ -25,7 +24,7 @@ class ModulePathUtils
                 $paths,
                 function ($item) use ($paths) {
                     foreach ($paths as $path) {
-                        if (strlen($item) > strlen($path) && strpos($item, $path) === 0 && $item[strlen($path)] == POP_CONSTANT_MODULESTARTPATH_SEPARATOR) {
+                        if (strlen($item) > strlen($path) && strpos($item, $path) === 0 && $item[strlen($path)] == \PoP\ComponentModel\Tokens\ModulePath::MODULE_SEPARATOR) {
                             return false;
                         }
                     }

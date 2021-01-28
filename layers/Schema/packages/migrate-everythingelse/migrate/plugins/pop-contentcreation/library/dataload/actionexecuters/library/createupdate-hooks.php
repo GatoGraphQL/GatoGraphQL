@@ -20,15 +20,15 @@ class GD_CreateUpdate_Hooks
         if (!$cmsapplicationapi->isAdminPanel()) {
             // Hook to set the URL for other post types
             $url = HooksAPIFacade::getInstance()->applyFilters(
-                'gd-createupdateutils:edit-url', 
-                '', 
+                'gd-createupdateutils:edit-url',
+                '',
                 $post_id
             );
 
             if ($url) {
                         $link = gdGetNonceUrl(GD_NONCE_EDITURL, $url, $post_id);
                 $link = GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $post_id, 
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $post_id,
                 ], $link);
             }
         }

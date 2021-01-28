@@ -1572,7 +1572,7 @@ function executeQueryIds($query) {
 
 The FieldResolver is the object resolving "data-fields" to their corresponding value. It must inherit from class `AbstractFieldResolver`, and implement function `getValue`, which receives two parameters, `$resultitem` which is the database object, and `$field` which is the data-field to resolve, and must return the value for that property applied to the database object. 
 
-> Note: the names of fields cannot include the following special characters: "," (`POP_CONSTANT_PARAMVALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
+> Note: the names of fields cannot include the following special characters: "," (`\PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR`), "." (`POP_CONSTANT_DOTSYNTAX_DOT`) or "|" (`POP_CONSTANT_PARAMFIELD_SEPARATOR`)
 
 For instance, a FieldResolver for posts looks like this:
 

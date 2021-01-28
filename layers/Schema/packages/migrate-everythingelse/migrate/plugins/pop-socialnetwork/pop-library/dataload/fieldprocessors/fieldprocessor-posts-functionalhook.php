@@ -84,12 +84,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         switch ($fieldName) {
             case 'recommendPostURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST));
 
             case 'unrecommendPostURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
             case 'recommendPostCountPlus1':
@@ -100,12 +100,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 
             case 'upvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UPVOTEPOST));
 
             case 'undoUpvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
             case 'upvotePostCountPlus1':
@@ -116,12 +116,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 
             case 'downvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST));
 
             case 'undoDownvotePostURL':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
+                    \PoPSchema\Posts\Constants\InputNames::POST_ID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
             case 'downvotePostCountPlus1':

@@ -6,6 +6,6 @@ use PoP\ComponentModel\State\ApplicationState;
 function doingJson()
 {
 	$vars = ApplicationState::getVars();
-	return $vars['output'] == GD_URLPARAM_OUTPUT_JSON;
-    // return isset($_REQUEST[GD_URLPARAM_OUTPUT]) && $_REQUEST[GD_URLPARAM_OUTPUT] == GD_URLPARAM_OUTPUT_JSON;
+	return $vars['output'] == \PoP\ComponentModel\Constants\Outputs::JSON;
+    // return isset($_REQUEST[\PoP\ComponentModel\Constants\Params::OUTPUT]) && $_REQUEST[\PoP\ComponentModel\Constants\Params::OUTPUT] == \PoP\ComponentModel\Constants\Outputs::JSON;
 }

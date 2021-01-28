@@ -50,25 +50,25 @@ class VarsHooks extends AbstractHookSet
         [&$vars] = $vars_in_array;
         if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
             // For the API, the response is always JSON
-            $vars['output'] = \GD_URLPARAM_OUTPUT_JSON;
+            $vars['output'] = \PoP\ComponentModel\Constants\Outputs::JSON;
 
             // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
             $vars['dataoutputitems'] = [
-                \GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
-                \GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                \GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ];
 
             // dataoutputmode => Combined: there is no need to split the sources, then already combined them
-            $vars['dataoutputmode'] = \GD_URLPARAM_DATAOUTPUTMODE_COMBINED;
+            $vars['dataoutputmode'] = \PoP\ComponentModel\Constants\DataOutputModes::COMBINED;
 
             // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
             // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
-            $vars['dboutputmode'] = \GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED;
+            $vars['dboutputmode'] = \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED;
 
             // Only the data stratum is needed
             $platformmanager = StratumManagerFactory::getInstance();
-            $vars['stratum'] = \POP_STRATUM_DATA;
+            $vars['stratum'] = \PoP\Engine\Constants\Stratum::DATA;
             $vars['strata'] = $platformmanager->getStrata($vars['stratum']);
             $vars['stratum-isdefault'] = $vars['stratum'] == $platformmanager->getDefaultStratum();
 

@@ -188,11 +188,11 @@ class PoP_Module_Processor_FilterInputs extends \PoP\ComponentModel\AbstractForm
             self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('Search for elements containing the given string', 'pop-engine'),
             self::MODULE_FILTERINPUT_IDS => sprintf(
                 $translationAPI->__('Limit results to elements with the given IDs', 'pop-engine'),
-                POP_CONSTANT_PARAMVALUE_SEPARATOR
+                \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR
             ),
             self::MODULE_FILTERINPUT_ID => sprintf(
                 $translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'pop-engine'),
-                POP_CONSTANT_PARAMVALUE_SEPARATOR
+                \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR
             ),
         ];
         return $descriptions[$module[1]] ?? parent::getSchemaFilterInputDescription($module);

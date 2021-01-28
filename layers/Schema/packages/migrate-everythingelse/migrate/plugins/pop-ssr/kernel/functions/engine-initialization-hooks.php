@@ -159,8 +159,8 @@ class PoP_SSR_EngineInitialization_Hooks
         // By now, in object $dynamic_data_properties, we have the configuration of what data-fields are dynamic,
         // on a block by block basis, and also including the subcomponents.
         // Then, simply iterate this information, and build the dynamic database by copying the corresponding data from the database
-        foreach ($dynamic_data_properties[$entryModuleOutputName][GD_JS_SUBMODULES] as $pagesection_settings_id => $pagesection_data_properties) {
-            foreach ($pagesection_data_properties[GD_JS_SUBMODULES] as $block_settings_id => $block_settings_id_data_properties) {
+        foreach ($dynamic_data_properties[$entryModuleOutputName][POP_RESPONSE_PROP_SUBMODULES] as $pagesection_settings_id => $pagesection_data_properties) {
+            foreach ($pagesection_data_properties[POP_RESPONSE_PROP_SUBMODULES] as $block_settings_id => $block_settings_id_data_properties) {
                 // If the block has no typeResolver, it will be empty
                 if ($block_typeResolver_data_properties = $block_settings_id_data_properties[POP_CONSTANT_DYNAMICDATAPROPERTIES]) {
                     $block_dataset = $dbobjectids[$entryModuleOutputName][$pagesection_settings_id][$block_settings_id];

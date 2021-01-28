@@ -42,11 +42,11 @@ trait ModulePathProcessorTrait
         foreach ($submodules as $submodule) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         if ($submodules_ret) {
-            $ret[$key][GD_JS_SUBMODULES] = $submodules_ret;
+            $ret[$key][POP_RESPONSE_PROP_SUBMODULES] = $submodules_ret;
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
 
@@ -76,7 +76,7 @@ trait ModulePathProcessorTrait
         foreach ($submodules as $submodule) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
@@ -112,11 +112,11 @@ trait ModulePathProcessorTrait
         foreach ($submodules as $submodule) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES])
+                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])
             );
         }
         if ($submodules_ret) {
-            $ret[$key][GD_JS_SUBMODULES] = $submodules_ret;
+            $ret[$key][POP_RESPONSE_PROP_SUBMODULES] = $submodules_ret;
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
 
@@ -141,7 +141,7 @@ trait ModulePathProcessorTrait
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
-            $submodule_ret = $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][POP_PROPS_SUBMODULES], $recursive);
+            $submodule_ret = $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,

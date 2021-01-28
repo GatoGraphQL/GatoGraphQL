@@ -11,11 +11,10 @@ class FunctionAPI extends \PoPSchema\Comments\FunctionAPI_Base
     use APITypeDataResolverTrait;
 
     protected $cmsToPoPCommentStatusConversion = [
-        // 'all' => POP_COMMENTSTATUS_ALL,
-        'approve' => POP_COMMENTSTATUS_APPROVED,
-        'hold' => POP_COMMENTSTATUS_ONHOLD,
-        'spam' => POP_COMMENTSTATUS_SPAM,
-        'trash' => POP_COMMENTSTATUS_TRASH,
+        'approve' => \PoPSchema\Comments\Constants\Status::APPROVED,
+        'hold' => \PoPSchema\Comments\Constants\Status::ONHOLD,
+        'spam' => \PoPSchema\Comments\Constants\Status::SPAM,
+        'trash' => \PoPSchema\Comments\Constants\Status::TRASH,
     ];
     protected $popToCMSCommentStatusConversion;
 

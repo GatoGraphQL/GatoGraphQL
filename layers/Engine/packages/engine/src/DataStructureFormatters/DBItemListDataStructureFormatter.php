@@ -38,7 +38,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         // If we are requesting only the databases, then return these as a list of items
         $vars = ApplicationState::getVars();
         $dataoutputitems = $vars['dataoutputitems'];
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)) {
             $ret = array();
 
             // If there are no "databases" entry, then there are no results, so return an empty array
@@ -47,11 +47,11 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
                 // Eg: notifications can appear under "database" and "userstatedatabase", showing different fields on each
                 $merged_databases = array();
                 $dboutputmode = $vars['dboutputmode'];
-                if ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_SPLITBYDATABASES) {
+                if ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::SPLITBYDATABASES) {
                     foreach ($databases as $database_name => $database) {
                         $this->addDBEntries($database, $merged_databases);
                     }
-                } elseif ($dboutputmode == GD_URLPARAM_DATABASESOUTPUTMODE_COMBINED) {
+                } elseif ($dboutputmode == \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED) {
                     $this->addDBEntries($databases, $merged_databases);
                 }
 

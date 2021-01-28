@@ -36,7 +36,7 @@ class ComponentConfiguration
         // Whatever fields are not there, will be considered "false"
         self::$overrideConfiguration = array();
         if (self::enableConfigByParams()) {
-            self::$overrideConfiguration = isset($_REQUEST[\POP_URLPARAM_CONFIG]) ? explode(\POP_CONSTANT_PARAMVALUE_SEPARATOR, $_REQUEST[\POP_URLPARAM_CONFIG]) : array();
+            self::$overrideConfiguration = isset($_REQUEST[\PoP\ComponentModel\Constants\Params::CONFIG]) ? explode(\PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR, $_REQUEST[\PoP\ComponentModel\Constants\Params::CONFIG]) : array();
         }
     }
 

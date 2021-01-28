@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
     protected function getDBObjectIDParamName(array $module, array &$props, &$data_properties)
     {
         if ($this->isUpdate($module)) {
-            return POP_INPUTNAME_POSTID;
+            return \PoPSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }

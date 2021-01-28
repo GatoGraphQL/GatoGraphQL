@@ -10,15 +10,15 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     {
         parent::prepareQueryArgs($query_args);
 
-        if (!isset($query_args[GD_URLPARAM_COMMENTPOSTID])) {
+        if (!isset($query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID])) {
             $vars = ApplicationState::getVars();
 
             // By default, select the global $post ID;
-            $query_args[GD_URLPARAM_COMMENTPOSTID] = $vars['routing-state']['queried-object-id'];
+            $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $vars['routing-state']['queried-object-id'];
         }
 
         // // Limit: by default, show all comments
-        // $query_args[GD_URLPARAM_LIMIT] = $query_args[GD_URLPARAM_LIMIT] ?? '';
+        // $query_args[\PoP\ComponentModel\Constants\Params::LIMIT] = $query_args[\PoP\ComponentModel\Constants\Params::LIMIT] ?? '';
 
         // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
         $query_args['order'] =  'ASC';
@@ -32,7 +32,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
 
     //     // Add the post_id, so we know what post to fetch comments from when filtering
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_COMMENTPOSTID] = $query_args[GD_URLPARAM_COMMENTPOSTID];
+    //     $ret[ParamConstants::PARAMS][\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
     //     return $ret;
     // }
@@ -44,7 +44,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
         // Add the post_id, so we know what post to fetch comments from when filtering
-        $ret[GD_URLPARAM_COMMENTPOSTID] = $query_args[GD_URLPARAM_COMMENTPOSTID];
+        $ret[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
         return $ret;
     }
@@ -56,7 +56,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
 
     //     // Add the post_id, so we know what post to fetch comments from when filtering
-    //     $ret[ParamConstants::PARAMS][GD_URLPARAM_COMMENTPOSTID] = $query_args[GD_URLPARAM_COMMENTPOSTID];
+    //     $ret[ParamConstants::PARAMS][\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
     //     return $ret;
     // }

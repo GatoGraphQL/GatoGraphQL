@@ -59,7 +59,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $dataoutputmode = $vars['dataoutputmode'];
         $dataoutputitems = $vars['dataoutputitems'];
 
-        $add_settings = in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems);
+        $add_settings = in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems);
 
         if ($add_settings) {
             $immutable_jssettings = $mutableonmodel_jssettings = null;
@@ -80,14 +80,14 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 }
             }
 
-            if ($datasources == GD_URLPARAM_DATASOURCES_MODELANDREQUEST) {
+            if ($datasources == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
                 $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($module, $props);
             }
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-            if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+            if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
 
                 // Save the model settings
                 if ($immutable_jssettings) {
@@ -99,7 +99,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 if ($mutableonrequest_jssettings) {
                     $ret['modulejssettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_jssettings) : $mutableonrequest_jssettings;
                 }
-            } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+            } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
 
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if ($combined_jssettings = array_merge_recursive(
@@ -141,7 +141,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-            if ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_SPLITBYSOURCES) {
+            if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
                 if ($this->immutable_modulejsdata) {
                     $ret['modulejsdata']['immutable'] = $this->immutable_modulejsdata;
                 }
@@ -151,7 +151,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 if ($this->mutableonrequest_modulejsdata) {
                     $ret['modulejsdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $this->mutableonrequest_modulejsdata) : $this->mutableonrequest_modulejsdata;
                 }
-            } elseif ($dataoutputmode == GD_URLPARAM_DATAOUTPUTMODE_COMBINED) {
+            } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
 
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if ($combined_modulejsdata = array_merge_recursive(
@@ -203,8 +203,8 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
-                    $modulejsdata[$submoduleOutputName][GD_JS_SUBMODULES] = $modulejsdata[$submoduleOutputName][GD_JS_SUBMODULES] ?? array();
-                    $modulejsdata = &$modulejsdata[$submoduleOutputName][GD_JS_SUBMODULES];
+                    $modulejsdata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] = $modulejsdata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] ?? array();
+                    $modulejsdata = &$modulejsdata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES];
                 }
                 // Merge the JS feedback in
                 $modulejsdata = array_merge_recursive(

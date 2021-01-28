@@ -19,7 +19,7 @@ trait FormComponentModuleDelegatorTrait
         $moduleFullName = ModuleUtils::getModuleFullName($module);
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $formcomponent_module = $this->getFormcomponentModule($module);
-        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
+        return $moduleprocessor_manager->getProcessor($formcomponent_module)->getDefaultValue($formcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]);
     }
     public function getName(array $module)
     {
@@ -48,8 +48,8 @@ trait FormComponentModuleDelegatorTrait
         // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
         $submodule_props = [];
-        if ($props[$moduleFullName][POP_PROPS_SUBMODULES]) {
-            $submodule_props = &$props[$moduleFullName][POP_PROPS_SUBMODULES];
+        if ($props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES]) {
+            $submodule_props = &$props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES];
         }
         return $moduleprocessor_manager->getProcessor($formcomponent_module)->getLabel($formcomponent_module, $submodule_props);
     }

@@ -8,7 +8,7 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
     public function prepareQueryArgs(&$query_args)
     {
         parent::prepareQueryArgs($query_args);
-        
+
         $today = POP_CONSTANT_TIME;
         $year = $query_args[GD_URLPARAM_YEAR] ? intval($query_args[GD_URLPARAM_YEAR]) : date('Y', $today);
         // Format 'n': do not include leading zeros
@@ -25,28 +25,28 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
         $query_args[GD_URLPARAM_MONTH] = $month;
 
         // Always bring all results
-        $query_args[GD_URLPARAM_LIMIT] = 0;
+        $query_args[\PoP\ComponentModel\Constants\Params::LIMIT] = 0;
     }
-    
+
     public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-        
+
         // Send back the year / month
         $ret[GD_URLPARAM_YEAR] = $query_args[GD_URLPARAM_YEAR];
         $ret[GD_URLPARAM_MONTH] = $query_args[GD_URLPARAM_MONTH];
 
         return $ret;
     }
-    
+
     // function getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-    
+
     //     $ret = parent::getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
-        
+
     //     // Send back the year / month
     //     $ret[ParamConstants::VISIBLEPARAMS][GD_URLPARAM_YEAR] = $query_args[GD_URLPARAM_YEAR];
     //     $ret[ParamConstants::VISIBLEPARAMS][GD_URLPARAM_MONTH] = $query_args[GD_URLPARAM_MONTH];
@@ -54,7 +54,7 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
     //     return $ret;
     // }
     // function getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-    
+
     //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     // Never stop fetching! (Or otherwise it doesn't allow to go prev/next with Calendar buttons)
@@ -63,7 +63,7 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
     //     return $ret;
     // }
 }
-    
+
 /**
  * Initialize
  */
