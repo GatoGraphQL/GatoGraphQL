@@ -1,3 +1,0 @@
-<?php
-
-const POP_MODELINSTANCECOMPONENTTYPE_AUTHOR_ROLE = 'author-role';
