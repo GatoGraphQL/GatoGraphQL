@@ -261,12 +261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/api.git",
-                "reference": "58792ee736512cd0644ce89743738dd83850f69b"
+                "reference": "9aa419980e31234d36ec292fa5be2e54812e8594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/api/zipball/58792ee736512cd0644ce89743738dd83850f69b",
-                "reference": "58792ee736512cd0644ce89743738dd83850f69b",
+                "url": "https://api.github.com/repos/getpop/api/zipball/9aa419980e31234d36ec292fa5be2e54812e8594",
+                "reference": "9aa419980e31234d36ec292fa5be2e54812e8594",
                 "shasum": ""
             },
             "require": {
@@ -316,7 +316,7 @@
             "support": {
                 "source": "https://github.com/getpop/api/tree/master"
             },
-            "time": "2021-01-28T03:20:01+00:00"
+            "time": "2021-01-28T08:56:19+00:00"
         },
         {
             "name": "getpop/api-clients",
@@ -438,12 +438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/api-endpoints-for-wp.git",
-                "reference": "85482a93afae6f342a69acdb5b804cde3390ca60"
+                "reference": "34bd6d7f8ed1712e8511382240ba1e0176d9d6a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/api-endpoints-for-wp/zipball/85482a93afae6f342a69acdb5b804cde3390ca60",
-                "reference": "85482a93afae6f342a69acdb5b804cde3390ca60",
+                "url": "https://api.github.com/repos/getpop/api-endpoints-for-wp/zipball/34bd6d7f8ed1712e8511382240ba1e0176d9d6a7",
+                "reference": "34bd6d7f8ed1712e8511382240ba1e0176d9d6a7",
                 "shasum": ""
             },
             "require": {
@@ -490,7 +490,7 @@
             "support": {
                 "source": "https://github.com/getpop/api-endpoints-for-wp/tree/master"
             },
-            "time": "2021-01-25T11:19:56+00:00"
+            "time": "2021-01-28T08:56:21+00:00"
         },
         {
             "name": "getpop/api-graphql",
@@ -557,12 +557,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/api-mirrorquery.git",
-                "reference": "c3e9ef8e86f5c9aae8b8cea49638bf0eb9fd3d49"
+                "reference": "56349c3ac3d591c124b02e49293d7a987a70ba1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/api-mirrorquery/zipball/c3e9ef8e86f5c9aae8b8cea49638bf0eb9fd3d49",
-                "reference": "c3e9ef8e86f5c9aae8b8cea49638bf0eb9fd3d49",
+                "url": "https://api.github.com/repos/getpop/api-mirrorquery/zipball/56349c3ac3d591c124b02e49293d7a987a70ba1d",
+                "reference": "56349c3ac3d591c124b02e49293d7a987a70ba1d",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
             "support": {
                 "source": "https://github.com/getpop/api-mirrorquery/tree/master"
             },
-            "time": "2021-01-25T11:19:55+00:00"
+            "time": "2021-01-28T08:56:20+00:00"
         },
         {
             "name": "getpop/cache-control",
@@ -673,12 +673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/component-model.git",
-                "reference": "31f636a30fcb256a25f1abd556e6fb57d4186631"
+                "reference": "3c7bd5f79e8959ae949eacdf274ec2cad68cf499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/component-model/zipball/31f636a30fcb256a25f1abd556e6fb57d4186631",
-                "reference": "31f636a30fcb256a25f1abd556e6fb57d4186631",
+                "url": "https://api.github.com/repos/getpop/component-model/zipball/3c7bd5f79e8959ae949eacdf274ec2cad68cf499",
+                "reference": "3c7bd5f79e8959ae949eacdf274ec2cad68cf499",
                 "shasum": ""
             },
             "require": {
@@ -733,7 +733,7 @@
             "support": {
                 "source": "https://github.com/getpop/component-model/tree/master"
             },
-            "time": "2021-01-28T03:19:59+00:00"
+            "time": "2021-01-28T08:56:18+00:00"
         },
         {
             "name": "getpop/definitions",
@@ -799,12 +799,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/engine.git",
-                "reference": "0a434ddaeb732b194deac59320e20f0387d8ed10"
+                "reference": "7a61007243f1989fbe00e010a1e03a2e27520962"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/engine/zipball/0a434ddaeb732b194deac59320e20f0387d8ed10",
-                "reference": "0a434ddaeb732b194deac59320e20f0387d8ed10",
+                "url": "https://api.github.com/repos/getpop/engine/zipball/7a61007243f1989fbe00e010a1e03a2e27520962",
+                "reference": "7a61007243f1989fbe00e010a1e03a2e27520962",
                 "shasum": ""
             },
             "require": {
@@ -856,7 +856,7 @@
             "support": {
                 "source": "https://github.com/getpop/engine/tree/master"
             },
-            "time": "2021-01-28T03:20:03+00:00"
+            "time": "2021-01-28T08:52:35+00:00"
         },
         {
             "name": "getpop/engine-wp",
@@ -1282,12 +1282,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/migrate-api.git",
-                "reference": "a0246071b04fb414ff8f7524fa6ae48a29c41f53"
+                "reference": "df04b0e4126bf3ffbd9cae94bcc1688241ed3d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/migrate-api/zipball/a0246071b04fb414ff8f7524fa6ae48a29c41f53",
-                "reference": "a0246071b04fb414ff8f7524fa6ae48a29c41f53",
+                "url": "https://api.github.com/repos/getpop/migrate-api/zipball/df04b0e4126bf3ffbd9cae94bcc1688241ed3d50",
+                "reference": "df04b0e4126bf3ffbd9cae94bcc1688241ed3d50",
                 "shasum": ""
             },
             "require": {
@@ -1321,7 +1321,7 @@
             "support": {
                 "source": "https://github.com/getpop/migrate-api/tree/master"
             },
-            "time": "2021-01-28T03:20:00+00:00"
+            "time": "2021-01-28T08:56:21+00:00"
         },
         {
             "name": "getpop/migrate-api-graphql",
@@ -1375,12 +1375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/migrate-component-model.git",
-                "reference": "59716090d21b5d26e9116ab1bbd8a77dd75b8b8c"
+                "reference": "2b3bdce3cffac76806d50884cf80597d133b8ff5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/migrate-component-model/zipball/59716090d21b5d26e9116ab1bbd8a77dd75b8b8c",
-                "reference": "59716090d21b5d26e9116ab1bbd8a77dd75b8b8c",
+                "url": "https://api.github.com/repos/getpop/migrate-component-model/zipball/2b3bdce3cffac76806d50884cf80597d133b8ff5",
+                "reference": "2b3bdce3cffac76806d50884cf80597d133b8ff5",
                 "shasum": ""
             },
             "require": {
@@ -1413,7 +1413,7 @@
             "support": {
                 "source": "https://github.com/getpop/migrate-component-model/tree/master"
             },
-            "time": "2021-01-28T03:20:01+00:00"
+            "time": "2021-01-28T08:56:22+00:00"
         },
         {
             "name": "getpop/migrate-engine",
@@ -1421,12 +1421,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/migrate-engine.git",
-                "reference": "75d3e5923d1ff1cbd0c21d9044fa289c89dd5c77"
+                "reference": "6bf34166c2dd72ebd71927d18ead1774e5890e11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/migrate-engine/zipball/75d3e5923d1ff1cbd0c21d9044fa289c89dd5c77",
-                "reference": "75d3e5923d1ff1cbd0c21d9044fa289c89dd5c77",
+                "url": "https://api.github.com/repos/getpop/migrate-engine/zipball/6bf34166c2dd72ebd71927d18ead1774e5890e11",
+                "reference": "6bf34166c2dd72ebd71927d18ead1774e5890e11",
                 "shasum": ""
             },
             "require": {
@@ -1464,7 +1464,7 @@
             "support": {
                 "source": "https://github.com/getpop/migrate-engine/tree/master"
             },
-            "time": "2021-01-28T03:19:59+00:00"
+            "time": "2021-01-28T08:54:38+00:00"
         },
         {
             "name": "getpop/migrate-engine-wp",
@@ -1634,12 +1634,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/getpop/root.git",
-                "reference": "6c60e995aea194e3f429a964359b1c853ca1ddbb"
+                "reference": "bb7f118133e2161e8e0b5fd0cda02b2e24d5e467"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getpop/root/zipball/6c60e995aea194e3f429a964359b1c853ca1ddbb",
-                "reference": "6c60e995aea194e3f429a964359b1c853ca1ddbb",
+                "url": "https://api.github.com/repos/getpop/root/zipball/bb7f118133e2161e8e0b5fd0cda02b2e24d5e467",
+                "reference": "bb7f118133e2161e8e0b5fd0cda02b2e24d5e467",
                 "shasum": ""
             },
             "require": {
@@ -1689,9 +1689,9 @@
                 "root"
             ],
             "support": {
-                "source": "https://github.com/getpop/root/tree/0.7.7"
+                "source": "https://github.com/getpop/root/tree/master"
             },
-            "time": "2021-01-25T07:48:57+00:00"
+            "time": "2021-01-27T06:09:32+00:00"
         },
         {
             "name": "getpop/routing",
@@ -1939,12 +1939,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GraphQLAPI/markdown-convertor.git",
-                "reference": "79579d9854047ed5aa3cc7c7cee4aa3378946a68"
+                "reference": "787ef6b892f90b0b21648cb4a500faa7a6049535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GraphQLAPI/markdown-convertor/zipball/79579d9854047ed5aa3cc7c7cee4aa3378946a68",
-                "reference": "79579d9854047ed5aa3cc7c7cee4aa3378946a68",
+                "url": "https://api.github.com/repos/GraphQLAPI/markdown-convertor/zipball/787ef6b892f90b0b21648cb4a500faa7a6049535",
+                "reference": "787ef6b892f90b0b21648cb4a500faa7a6049535",
                 "shasum": ""
             },
             "require": {
@@ -1991,7 +1991,7 @@
                 "issues": "https://github.com/GraphQLAPI/markdown-convertor/issues",
                 "source": "https://github.com/GraphQLAPI/markdown-convertor/tree/master"
             },
-            "time": "2021-01-26T10:02:28+00:00"
+            "time": "2021-01-26T11:02:29+00:00"
         },
         {
             "name": "graphql-by-pop/graphql-clients-for-wp",
@@ -2062,12 +2062,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GraphQLByPoP/graphql-endpoint-for-wp.git",
-                "reference": "fc07dfc5e68b500e046ea2a9e47656038c146918"
+                "reference": "3374752a60d28f42e3aa741429437339258eac05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GraphQLByPoP/graphql-endpoint-for-wp/zipball/fc07dfc5e68b500e046ea2a9e47656038c146918",
-                "reference": "fc07dfc5e68b500e046ea2a9e47656038c146918",
+                "url": "https://api.github.com/repos/GraphQLByPoP/graphql-endpoint-for-wp/zipball/3374752a60d28f42e3aa741429437339258eac05",
+                "reference": "3374752a60d28f42e3aa741429437339258eac05",
                 "shasum": ""
             },
             "require": {
@@ -2115,7 +2115,7 @@
             "support": {
                 "source": "https://github.com/GraphQLByPoP/graphql-endpoint-for-wp/tree/master"
             },
-            "time": "2021-01-25T11:23:47+00:00"
+            "time": "2021-01-28T08:56:23+00:00"
         },
         {
             "name": "graphql-by-pop/graphql-parser",
@@ -3023,12 +3023,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/comments.git",
-                "reference": "dd0fad86f2c617c8fbf568032efc7a78385fc2fd"
+                "reference": "d5cec0ee8b62a48d8c1887330eb73b435d7e46da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/comments/zipball/dd0fad86f2c617c8fbf568032efc7a78385fc2fd",
-                "reference": "dd0fad86f2c617c8fbf568032efc7a78385fc2fd",
+                "url": "https://api.github.com/repos/PoPSchema/comments/zipball/d5cec0ee8b62a48d8c1887330eb73b435d7e46da",
+                "reference": "d5cec0ee8b62a48d8c1887330eb73b435d7e46da",
                 "shasum": ""
             },
             "require": {
@@ -3074,7 +3074,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/comments/tree/master"
             },
-            "time": "2021-01-25T11:20:27+00:00"
+            "time": "2021-01-28T08:56:18+00:00"
         },
         {
             "name": "pop-schema/comments-wp",
@@ -3267,12 +3267,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/custompostmedia.git",
-                "reference": "b56cd93d8d2e97316c4d7bc665f85c7c60e22a69"
+                "reference": "0d97eefca15aef4e353b2366de2ea36f420058e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/custompostmedia/zipball/b56cd93d8d2e97316c4d7bc665f85c7c60e22a69",
-                "reference": "b56cd93d8d2e97316c4d7bc665f85c7c60e22a69",
+                "url": "https://api.github.com/repos/PoPSchema/custompostmedia/zipball/0d97eefca15aef4e353b2366de2ea36f420058e9",
+                "reference": "0d97eefca15aef4e353b2366de2ea36f420058e9",
                 "shasum": ""
             },
             "require": {
@@ -3320,7 +3320,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/custompostmedia/tree/master"
             },
-            "time": "2021-01-25T11:20:45+00:00"
+            "time": "2021-01-28T08:56:21+00:00"
         },
         {
             "name": "pop-schema/custompostmedia-mutations",
@@ -3635,12 +3635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/customposts.git",
-                "reference": "b280c132604bb64a10b5fff3ceb90e39bcf4c3d8"
+                "reference": "e32f46ca62fc0e008b14c521383accb2a68a9946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/customposts/zipball/b280c132604bb64a10b5fff3ceb90e39bcf4c3d8",
-                "reference": "b280c132604bb64a10b5fff3ceb90e39bcf4c3d8",
+                "url": "https://api.github.com/repos/PoPSchema/customposts/zipball/e32f46ca62fc0e008b14c521383accb2a68a9946",
+                "reference": "e32f46ca62fc0e008b14c521383accb2a68a9946",
                 "shasum": ""
             },
             "require": {
@@ -3686,7 +3686,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/customposts/tree/master"
             },
-            "time": "2021-01-25T11:22:58+00:00"
+            "time": "2021-01-28T08:56:23+00:00"
         },
         {
             "name": "pop-schema/customposts-wp",
@@ -4213,12 +4213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-comments.git",
-                "reference": "f48fcb2b59e44a211a5b4e02a04072528f524626"
+                "reference": "4c6328152f32276a76fd7aa4c7ec954af4d233b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-comments/zipball/f48fcb2b59e44a211a5b4e02a04072528f524626",
-                "reference": "f48fcb2b59e44a211a5b4e02a04072528f524626",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-comments/zipball/4c6328152f32276a76fd7aa4c7ec954af4d233b5",
+                "reference": "4c6328152f32276a76fd7aa4c7ec954af4d233b5",
                 "shasum": ""
             },
             "require": {
@@ -4249,9 +4249,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-comments/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-comments/tree/master"
             },
-            "time": "2021-01-25T10:06:18+00:00"
+            "time": "2021-01-28T08:53:36+00:00"
         },
         {
             "name": "pop-schema/migrate-comments-wp",
@@ -4259,12 +4259,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-comments-wp.git",
-                "reference": "7ad31c7ccedbd2ceab09a0a70b2ad2b5ff2b894b"
+                "reference": "1feb474dcc9a967efca7bfae8bd36aaf472f51e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-comments-wp/zipball/7ad31c7ccedbd2ceab09a0a70b2ad2b5ff2b894b",
-                "reference": "7ad31c7ccedbd2ceab09a0a70b2ad2b5ff2b894b",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-comments-wp/zipball/1feb474dcc9a967efca7bfae8bd36aaf472f51e0",
+                "reference": "1feb474dcc9a967efca7bfae8bd36aaf472f51e0",
                 "shasum": ""
             },
             "require": {
@@ -4295,9 +4295,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-comments-wp/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-comments-wp/tree/master"
             },
-            "time": "2021-01-25T10:06:21+00:00"
+            "time": "2021-01-28T08:53:33+00:00"
         },
         {
             "name": "pop-schema/migrate-custompostmedia",
@@ -4305,12 +4305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-custompostmedia.git",
-                "reference": "f093740913f94e286c0cd9d5de288fcb1ae24ce9"
+                "reference": "87975c8764a1818d265fe09eb5a118f5253505d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-custompostmedia/zipball/f093740913f94e286c0cd9d5de288fcb1ae24ce9",
-                "reference": "f093740913f94e286c0cd9d5de288fcb1ae24ce9",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-custompostmedia/zipball/87975c8764a1818d265fe09eb5a118f5253505d2",
+                "reference": "87975c8764a1818d265fe09eb5a118f5253505d2",
                 "shasum": ""
             },
             "require": {
@@ -4341,9 +4341,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-custompostmedia/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-custompostmedia/tree/master"
             },
-            "time": "2021-01-25T10:06:27+00:00"
+            "time": "2021-01-28T08:53:40+00:00"
         },
         {
             "name": "pop-schema/migrate-custompostmedia-wp",
@@ -4489,12 +4489,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-customposts.git",
-                "reference": "9ac0fdd1e564edb6451e5b348df64e993978e3f9"
+                "reference": "35c09a290f6712511f098267457c27197a382f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-customposts/zipball/9ac0fdd1e564edb6451e5b348df64e993978e3f9",
-                "reference": "9ac0fdd1e564edb6451e5b348df64e993978e3f9",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-customposts/zipball/35c09a290f6712511f098267457c27197a382f7a",
+                "reference": "35c09a290f6712511f098267457c27197a382f7a",
                 "shasum": ""
             },
             "require": {
@@ -4525,9 +4525,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-customposts/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-customposts/tree/master"
             },
-            "time": "2021-01-25T10:06:45+00:00"
+            "time": "2021-01-28T08:53:38+00:00"
         },
         {
             "name": "pop-schema/migrate-customposts-wp",
@@ -4811,12 +4811,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-pages.git",
-                "reference": "afe78fa2b2e3eba71033fadc3f3dd44b7c685785"
+                "reference": "588b526e7604397118e0a56cbae2a0d1826e4b30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-pages/zipball/afe78fa2b2e3eba71033fadc3f3dd44b7c685785",
-                "reference": "afe78fa2b2e3eba71033fadc3f3dd44b7c685785",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-pages/zipball/588b526e7604397118e0a56cbae2a0d1826e4b30",
+                "reference": "588b526e7604397118e0a56cbae2a0d1826e4b30",
                 "shasum": ""
             },
             "require": {
@@ -4847,9 +4847,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-pages/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-pages/tree/master"
             },
-            "time": "2021-01-25T10:07:14+00:00"
+            "time": "2021-01-28T08:54:46+00:00"
         },
         {
             "name": "pop-schema/migrate-pages-wp",
@@ -4857,12 +4857,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-pages-wp.git",
-                "reference": "401df745ec398f151a1c698b48c7bf96701ff16b"
+                "reference": "89fb663793723999e39c486ea15ce3f345ba41da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-pages-wp/zipball/401df745ec398f151a1c698b48c7bf96701ff16b",
-                "reference": "401df745ec398f151a1c698b48c7bf96701ff16b",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-pages-wp/zipball/89fb663793723999e39c486ea15ce3f345ba41da",
+                "reference": "89fb663793723999e39c486ea15ce3f345ba41da",
                 "shasum": ""
             },
             "require": {
@@ -4893,9 +4893,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-pages-wp/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-pages-wp/tree/master"
             },
-            "time": "2021-01-25T10:07:11+00:00"
+            "time": "2021-01-28T08:54:45+00:00"
         },
         {
             "name": "pop-schema/migrate-post-tags",
@@ -4903,12 +4903,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-post-tags.git",
-                "reference": "9e566f2e7572b2942113fc3beecb51518d544111"
+                "reference": "a97880ca47eaaba738786241024a182e9cc389ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-post-tags/zipball/9e566f2e7572b2942113fc3beecb51518d544111",
-                "reference": "9e566f2e7572b2942113fc3beecb51518d544111",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-post-tags/zipball/a97880ca47eaaba738786241024a182e9cc389ac",
+                "reference": "a97880ca47eaaba738786241024a182e9cc389ac",
                 "shasum": ""
             },
             "require": {
@@ -4939,9 +4939,9 @@
                 "post-tags"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-post-tags/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-post-tags/tree/master"
             },
-            "time": "2021-01-25T10:07:22+00:00"
+            "time": "2021-01-28T08:55:08+00:00"
         },
         {
             "name": "pop-schema/migrate-post-tags-wp",
@@ -4995,12 +4995,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-posts.git",
-                "reference": "faf6a0f6b5bd2f7078807d8b5d071110a77ebc04"
+                "reference": "21e7210e0592e8b87627dc06c264fa968ff0db65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-posts/zipball/faf6a0f6b5bd2f7078807d8b5d071110a77ebc04",
-                "reference": "faf6a0f6b5bd2f7078807d8b5d071110a77ebc04",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-posts/zipball/21e7210e0592e8b87627dc06c264fa968ff0db65",
+                "reference": "21e7210e0592e8b87627dc06c264fa968ff0db65",
                 "shasum": ""
             },
             "require": {
@@ -5031,9 +5031,9 @@
                 "posts"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-posts/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-posts/tree/master"
             },
-            "time": "2021-01-25T10:07:10+00:00"
+            "time": "2021-01-28T08:54:55+00:00"
         },
         {
             "name": "pop-schema/migrate-posts-wp",
@@ -5179,12 +5179,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-tags.git",
-                "reference": "0aa0f3efa93c9451b900fccd0e70aa553385747e"
+                "reference": "efda575ef7429043806bd21516ae93704d30eede"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-tags/zipball/0aa0f3efa93c9451b900fccd0e70aa553385747e",
-                "reference": "0aa0f3efa93c9451b900fccd0e70aa553385747e",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-tags/zipball/efda575ef7429043806bd21516ae93704d30eede",
+                "reference": "efda575ef7429043806bd21516ae93704d30eede",
                 "shasum": ""
             },
             "require": {
@@ -5215,9 +5215,9 @@
                 "tags"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-tags/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-tags/tree/master"
             },
-            "time": "2021-01-25T10:07:44+00:00"
+            "time": "2021-01-28T08:55:52+00:00"
         },
         {
             "name": "pop-schema/migrate-tags-wp",
@@ -5639,12 +5639,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/migrate-users.git",
-                "reference": "a20e71847d1f751f2736e0265c5d5040e6a2dd27"
+                "reference": "cd62f62e74c2088a7cf11d4f9f23aaa2027c2431"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/migrate-users/zipball/a20e71847d1f751f2736e0265c5d5040e6a2dd27",
-                "reference": "a20e71847d1f751f2736e0265c5d5040e6a2dd27",
+                "url": "https://api.github.com/repos/PoPSchema/migrate-users/zipball/cd62f62e74c2088a7cf11d4f9f23aaa2027c2431",
+                "reference": "cd62f62e74c2088a7cf11d4f9f23aaa2027c2431",
                 "shasum": ""
             },
             "require": {
@@ -5675,9 +5675,9 @@
                 "pop"
             ],
             "support": {
-                "source": "https://github.com/PoPSchema/migrate-users/tree/0.7.7"
+                "source": "https://github.com/PoPSchema/migrate-users/tree/master"
             },
-            "time": "2021-01-25T10:07:54+00:00"
+            "time": "2021-01-28T08:56:04+00:00"
         },
         {
             "name": "pop-schema/migrate-users-wp",
@@ -5731,12 +5731,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/pages.git",
-                "reference": "54d3da60ae07634f198c58925c9d676f37b36f2f"
+                "reference": "8707ab1d2f2bb39dfe15e02f899596a660dddc16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/pages/zipball/54d3da60ae07634f198c58925c9d676f37b36f2f",
-                "reference": "54d3da60ae07634f198c58925c9d676f37b36f2f",
+                "url": "https://api.github.com/repos/PoPSchema/pages/zipball/8707ab1d2f2bb39dfe15e02f899596a660dddc16",
+                "reference": "8707ab1d2f2bb39dfe15e02f899596a660dddc16",
                 "shasum": ""
             },
             "require": {
@@ -5788,7 +5788,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/pages/tree/master"
             },
-            "time": "2021-01-25T11:24:42+00:00"
+            "time": "2021-01-28T08:56:19+00:00"
         },
         {
             "name": "pop-schema/pages-wp",
@@ -5917,12 +5917,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/post-tags.git",
-                "reference": "0a67d31293a3817d7a04d1dcb7bfebf4cddeedf2"
+                "reference": "ce0a262435f7d1bb8fe41573137ebae97cb59086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/post-tags/zipball/0a67d31293a3817d7a04d1dcb7bfebf4cddeedf2",
-                "reference": "0a67d31293a3817d7a04d1dcb7bfebf4cddeedf2",
+                "url": "https://api.github.com/repos/PoPSchema/post-tags/zipball/ce0a262435f7d1bb8fe41573137ebae97cb59086",
+                "reference": "ce0a262435f7d1bb8fe41573137ebae97cb59086",
                 "shasum": ""
             },
             "require": {
@@ -5951,6 +5951,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "library/constants.php"
+                ],
                 "psr-4": {
                     "PoPSchema\\PostTags\\": "src"
                 }
@@ -5975,7 +5978,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/post-tags/tree/master"
             },
-            "time": "2021-01-25T11:24:55+00:00"
+            "time": "2021-01-28T08:56:13+00:00"
         },
         {
             "name": "pop-schema/post-tags-wp",
@@ -6046,12 +6049,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/posts.git",
-                "reference": "7ba57aec7ea6c84b344c696fcae5f7a15ffc5920"
+                "reference": "a29bf88bd287bad0675cabc9fcea3fb8536f1733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/posts/zipball/7ba57aec7ea6c84b344c696fcae5f7a15ffc5920",
-                "reference": "7ba57aec7ea6c84b344c696fcae5f7a15ffc5920",
+                "url": "https://api.github.com/repos/PoPSchema/posts/zipball/a29bf88bd287bad0675cabc9fcea3fb8536f1733",
+                "reference": "a29bf88bd287bad0675cabc9fcea3fb8536f1733",
                 "shasum": ""
             },
             "require": {
@@ -6081,6 +6084,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "library/constants.php"
+                ],
                 "psr-4": {
                     "PoPSchema\\Posts\\": "src"
                 }
@@ -6105,7 +6111,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/posts/tree/master"
             },
-            "time": "2021-01-25T11:24:52+00:00"
+            "time": "2021-01-28T08:56:09+00:00"
         },
         {
             "name": "pop-schema/posts-wp",
@@ -6355,12 +6361,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/tags.git",
-                "reference": "f930a2c0c60941a2850378bd30daa8aa325acf11"
+                "reference": "dc5332776a673745f185334d5b9368cf507dc053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/tags/zipball/f930a2c0c60941a2850378bd30daa8aa325acf11",
-                "reference": "f930a2c0c60941a2850378bd30daa8aa325acf11",
+                "url": "https://api.github.com/repos/PoPSchema/tags/zipball/dc5332776a673745f185334d5b9368cf507dc053",
+                "reference": "dc5332776a673745f185334d5b9368cf507dc053",
                 "shasum": ""
             },
             "require": {
@@ -6406,7 +6412,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/tags/tree/master"
             },
-            "time": "2021-01-25T11:27:29+00:00"
+            "time": "2021-01-28T08:57:16+00:00"
         },
         {
             "name": "pop-schema/tags-wp",
@@ -6841,12 +6847,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/user-roles.git",
-                "reference": "157c2452aad0c3fbd4937f1a9ca6d44e864019d0"
+                "reference": "56be6e86b62e6e3f46ce0903581e9470ff59c5f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/user-roles/zipball/157c2452aad0c3fbd4937f1a9ca6d44e864019d0",
-                "reference": "157c2452aad0c3fbd4937f1a9ca6d44e864019d0",
+                "url": "https://api.github.com/repos/PoPSchema/user-roles/zipball/56be6e86b62e6e3f46ce0903581e9470ff59c5f2",
+                "reference": "56be6e86b62e6e3f46ce0903581e9470ff59c5f2",
                 "shasum": ""
             },
             "require": {
@@ -6891,7 +6897,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/user-roles/tree/master"
             },
-            "time": "2021-01-25T11:28:38+00:00"
+            "time": "2021-01-28T08:57:17+00:00"
         },
         {
             "name": "pop-schema/user-roles-access-control",
@@ -7450,12 +7456,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PoPSchema/users.git",
-                "reference": "09c0a64d019c77e82893eb3d9c891a940508043c"
+                "reference": "1894b4c7a9085e11198c89cb7716ca36852f52e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PoPSchema/users/zipball/09c0a64d019c77e82893eb3d9c891a940508043c",
-                "reference": "09c0a64d019c77e82893eb3d9c891a940508043c",
+                "url": "https://api.github.com/repos/PoPSchema/users/zipball/1894b4c7a9085e11198c89cb7716ca36852f52e5",
+                "reference": "1894b4c7a9085e11198c89cb7716ca36852f52e5",
                 "shasum": ""
             },
             "require": {
@@ -7485,6 +7491,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "library/constants.php"
+                ],
                 "psr-4": {
                     "PoPSchema\\Users\\": "src"
                 }
@@ -7509,7 +7518,7 @@
             "support": {
                 "source": "https://github.com/PoPSchema/users/tree/master"
             },
-            "time": "2021-01-25T11:30:11+00:00"
+            "time": "2021-01-28T08:57:15+00:00"
         },
         {
             "name": "pop-schema/users-wp",
