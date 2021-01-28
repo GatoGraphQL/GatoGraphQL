@@ -38,7 +38,7 @@ class ApplicationState
 
         // Convert them to lower to make it insensitive to upper/lower case values
         $output = strtolower($_REQUEST[\GD_URLPARAM_OUTPUT] ?? '');
-        $dataoutputitems = $_REQUEST[\GD_URLPARAM_DATAOUTPUTITEMS] ?? [];
+        $dataoutputitems = $_REQUEST[\PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS] ?? [];
         $datasources = strtolower($_REQUEST[\GD_URLPARAM_DATASOURCES] ?? '');
         $datastructure = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATASTRUCTURE] ?? '');
         $dataoutputmode = strtolower($_REQUEST[\PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE] ?? '');
@@ -99,11 +99,11 @@ class ApplicationState
         $alldataoutputitems = (array) HooksAPIFacade::getInstance()->applyFilters(
             'ApplicationState:dataoutputitems',
             array(
-                \GD_URLPARAM_DATAOUTPUTITEMS_META,
-                \GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
-                \GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                \GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-                \GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
+                \PoP\ComponentModel\Constants\DataOutputItems::META,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
             )
         );
         $dataoutputitems = array_intersect(
@@ -114,11 +114,11 @@ class ApplicationState
             $dataoutputitems = HooksAPIFacade::getInstance()->applyFilters(
                 'ApplicationState:default-dataoutputitems',
                 array(
-                    \GD_URLPARAM_DATAOUTPUTITEMS_META,
-                    \GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
-                    \GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                    \GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-                    \GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
+                    \PoP\ComponentModel\Constants\DataOutputItems::META,
+                    \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
+                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                    \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
                 )
             );
         }

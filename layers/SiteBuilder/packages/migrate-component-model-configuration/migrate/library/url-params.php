@@ -1,3 +1,3 @@
 <?php
 
-const GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS = 'modulesettings';
+const \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS = 'modulesettings';

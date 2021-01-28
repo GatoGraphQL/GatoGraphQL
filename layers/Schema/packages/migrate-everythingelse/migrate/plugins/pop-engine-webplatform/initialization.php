@@ -177,10 +177,10 @@ class PoPWebPlatform_Initialization
         $addanchorspinner = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:add_anchor_spinner', true);
         $api_urlparams = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:api_urlparams', array(
             GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
-            GD_URLPARAM_DATAOUTPUTITEMS => array(
-                GD_URLPARAM_DATAOUTPUTITEMS_META,
-                GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+            \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => array(
+                \PoP\ComponentModel\Constants\DataOutputItems::META,
+                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ),
             Request::URLPARAM_MANGLED => Request::URLPARAMVALUE_MANGLED_NONE,
         ));

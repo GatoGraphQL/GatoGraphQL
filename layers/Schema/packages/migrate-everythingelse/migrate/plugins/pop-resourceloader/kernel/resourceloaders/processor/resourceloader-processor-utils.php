@@ -378,11 +378,11 @@ class PoP_ResourceLoaderProcessorUtils {
         }
         $vars['nature'] = $nature;
         $vars['dataoutputitems'] = array(
-            GD_URLPARAM_DATAOUTPUTITEMS_META,
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS,
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-            GD_URLPARAM_DATAOUTPUTITEMS_SESSION,
+            \PoP\ComponentModel\Constants\DataOutputItems::META,
+            \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+            \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+            \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+            \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
         );
         $vars['datasources'] = GD_URLPARAM_DATASOURCES_MODELANDREQUEST;
         $vars['format'] = $format;

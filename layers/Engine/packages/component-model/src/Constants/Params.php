@@ -20,4 +20,5 @@ class Params
     public const PAGE_NUMBER = 'pagenum';
     public const LIMIT = 'limit';
     public const ACTION_PATH = 'actionpath';
+    public const DATA_OUTPUT_ITEMS = 'dataoutputitems';
 }

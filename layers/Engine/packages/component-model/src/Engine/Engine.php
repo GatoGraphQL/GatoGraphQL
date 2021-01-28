@@ -314,7 +314,7 @@ class Engine implements EngineInterface
         );
 
         $data = [];
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
                 $this->getModuleDatasetSettings($module, $this->model_props, $this->props)
@@ -327,15 +327,15 @@ class Engine implements EngineInterface
         // which is done through an action, called through getData()
         // Data = dbobjectids (data-ids) + feedback + database
         if (
-            in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)
-            || in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)
+            in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA, $dataoutputitems)
+            || in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)
         ) {
             $data = array_merge(
                 $data,
                 $this->getModuleData($module, $this->model_props, $this->props)
             );
 
-            if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)) {
+            if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)) {
                 $data = array_merge(
                     $data,
                     $this->getDatabases()
@@ -346,7 +346,7 @@ class Engine implements EngineInterface
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
         if (
-            in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
+            in_array(\PoP\ComponentModel\Constants\DataOutputItems::META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
@@ -397,7 +397,7 @@ class Engine implements EngineInterface
         $dataoutputitems = $vars['dataoutputitems'];
 
         if (
-            in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems)
+            in_array(\PoP\ComponentModel\Constants\DataOutputItems::META, $dataoutputitems)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getModuleData, since the background_urls and other info is calculated there and printed here
@@ -409,7 +409,7 @@ class Engine implements EngineInterface
                 $this->data['sitemeta'] = $sitemeta;
             }
 
-            if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_SESSION, $dataoutputitems)) {
+            if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::SESSION, $dataoutputitems)) {
                 if ($sessionmeta = $this->getSessionMeta()) {
                     $this->data['sessionmeta'] = $sessionmeta;
                 }
@@ -798,7 +798,7 @@ class Engine implements EngineInterface
         $datasources = $vars['datasources'];
         $dataoutputmode = $vars['dataoutputmode'];
         $dataoutputitems = $vars['dataoutputitems'];
-        $add_meta = in_array(GD_URLPARAM_DATAOUTPUTITEMS_META, $dataoutputitems);
+        $add_meta = in_array(\PoP\ComponentModel\Constants\DataOutputItems::META, $dataoutputitems);
 
         $immutable_moduledata = $mutableonmodel_moduledata = $mutableonrequest_moduledata = array();
         $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = array();
@@ -1130,7 +1130,7 @@ class Engine implements EngineInterface
 
         $ret = array();
 
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA, $dataoutputitems)) {
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 

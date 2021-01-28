@@ -54,9 +54,9 @@ class VarsHooks extends AbstractHookSet
 
             // Fetch datasetmodulesettings: needed to obtain the dbKeyPath to know where to find the database entries
             $vars['dataoutputitems'] = [
-                \GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
-                \GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                \GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ];
 
             // dataoutputmode => Combined: there is no need to split the sources, then already combined them

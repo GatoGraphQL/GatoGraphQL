@@ -11,16 +11,16 @@ class APIUtils
     public static function getEndpoint($url, $dataoutputitems = null): string
     {
         $dataoutputitems = $dataoutputitems ?? [
-            GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
-            GD_URLPARAM_DATAOUTPUTITEMS_DATASETMODULESETTINGS,
+            \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+            \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+            \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
         ];
         $endpoint = GeneralUtils::addQueryArgs([
             \PoP\ComponentModel\Constants\Params::SCHEME => APISchemes::API,
             GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
             \PoP\ComponentModel\Constants\Params::DATAOUTPUTMODE => \PoP\ComponentModel\Constants\DataOutputModes::COMBINED,
             // \PoP\ComponentModel\Constants\Params::DATABASESOUTPUTMODE => \PoP\ComponentModel\Constants\DatabasesOutputModes::COMBINED,
-            GD_URLPARAM_DATAOUTPUTITEMS => implode(
+            \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => implode(
                 \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR,
                 $dataoutputitems
             ),

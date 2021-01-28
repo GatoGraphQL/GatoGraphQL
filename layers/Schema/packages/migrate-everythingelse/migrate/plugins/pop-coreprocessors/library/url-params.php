@@ -44,12 +44,12 @@ function gdJqueryConstantsUrlparams($jqueryConstants)
     $jqueryConstants['URLPARAM_FORMAT'] = \PoP\ComponentModel\Constants\Params::FORMAT;
     $jqueryConstants['URLPARAM_ROUTE'] = URLParams::ROUTE;
 
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = GD_URLPARAM_DATAOUTPUTITEMS;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_META'] = GD_URLPARAM_DATAOUTPUTITEMS_META;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS'] = GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULEDATA'] = GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_DATABASES'] = GD_URLPARAM_DATAOUTPUTITEMS_DATABASES;
-    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = GD_URLPARAM_DATAOUTPUTITEMS_SESSION;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS'] = \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_META'] = \PoP\ComponentModel\Constants\DataOutputItems::META;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS'] = \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_MODULEDATA'] = \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_DATABASES'] = \PoP\ComponentModel\Constants\DataOutputItems::DATABASES;
+    $jqueryConstants['URLPARAM_DATAOUTPUTITEMS_SESSION'] = \PoP\ComponentModel\Constants\DataOutputItems::SESSION;
 
     $jqueryConstants['URLPARAM_TARGET'] = GD_URLPARAM_TARGET;
     $jqueryConstants['URLPARAM_TARGET_MAIN'] = POP_TARGET_MAIN;

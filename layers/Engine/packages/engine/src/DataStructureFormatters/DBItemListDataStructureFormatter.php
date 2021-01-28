@@ -38,7 +38,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         // If we are requesting only the databases, then return these as a list of items
         $vars = ApplicationState::getVars();
         $dataoutputitems = $vars['dataoutputitems'];
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_DATABASES, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::DATABASES, $dataoutputitems)) {
             $ret = array();
 
             // If there are no "databases" entry, then there are no results, so return an empty array

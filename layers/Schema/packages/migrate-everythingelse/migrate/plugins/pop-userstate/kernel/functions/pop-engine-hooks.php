@@ -50,10 +50,10 @@ class PoP_UserState_EngineHooks
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-userstatedata-load'] ?? null) {
                 $url = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_DATAOUTPUTITEMS => [
-                    GD_URLPARAM_DATAOUTPUTITEMS_META,
-                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
-                    GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+                \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
+                    \PoP\ComponentModel\Constants\DataOutputItems::META,
+                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
                 ],
                 \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
                 \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,

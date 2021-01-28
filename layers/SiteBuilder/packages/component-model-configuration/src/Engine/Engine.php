@@ -31,7 +31,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
         $dataoutputitems = $vars['dataoutputitems'];
 
         $data = [];
-        if (in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems)) {
+        if (in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
                 $this->getModuleSettings($module, $this->model_props, $this->props)

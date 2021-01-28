@@ -15,8 +15,8 @@ class PoPCore_ModuleManager_Utils
             \PoP\ComponentModel\Constants\Params::VERSION => $vars['version'],
             GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON,
             ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\Engine\ModuleFilters\MainContentModule::NAME,
-            GD_URLPARAM_DATAOUTPUTITEMS => [
-                GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
+            \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
+                \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ],
             GD_URLPARAM_TARGET => POP_TARGET_MAIN,
             \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => DBItemListDataStructureFormatter::getName(),
