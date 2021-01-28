@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Comments\Constants;
+namespace PoPSchema\Comments\Constants;
 
 class Params
 {

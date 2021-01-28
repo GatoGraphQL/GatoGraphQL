@@ -10,11 +10,11 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     {
         parent::prepareQueryArgs($query_args);
 
-        if (!isset($query_args[\PoP\Comments\Constants\Params::COMMENT_POST_ID])) {
+        if (!isset($query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID])) {
             $vars = ApplicationState::getVars();
 
             // By default, select the global $post ID;
-            $query_args[\PoP\Comments\Constants\Params::COMMENT_POST_ID] = $vars['routing-state']['queried-object-id'];
+            $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $vars['routing-state']['queried-object-id'];
         }
 
         // // Limit: by default, show all comments
@@ -32,7 +32,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
 
     //     // Add the post_id, so we know what post to fetch comments from when filtering
-    //     $ret[ParamConstants::PARAMS][\PoP\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoP\Comments\Constants\Params::COMMENT_POST_ID];
+    //     $ret[ParamConstants::PARAMS][\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
     //     return $ret;
     // }
@@ -44,7 +44,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
         // Add the post_id, so we know what post to fetch comments from when filtering
-        $ret[\PoP\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoP\Comments\Constants\Params::COMMENT_POST_ID];
+        $ret[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
         return $ret;
     }
@@ -56,7 +56,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
 
     //     // Add the post_id, so we know what post to fetch comments from when filtering
-    //     $ret[ParamConstants::PARAMS][\PoP\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoP\Comments\Constants\Params::COMMENT_POST_ID];
+    //     $ret[ParamConstants::PARAMS][\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID] = $query_args[\PoPSchema\Comments\Constants\Params::COMMENT_POST_ID];
 
     //     return $ret;
     // }

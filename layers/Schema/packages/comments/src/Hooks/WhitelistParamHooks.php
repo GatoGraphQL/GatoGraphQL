@@ -20,7 +20,7 @@ class WhitelistParamHooks extends AbstractHookSet
     public function getWhitelistedParams(array $params): array
     {
         // Used for the Comments to know what post to fetch comments from when filtering
-        $params[] = \PoP\Comments\Constants\Params::COMMENT_POST_ID;
+        $params[] = \PoPSchema\Comments\Constants\Params::COMMENT_POST_ID;
         return $params;
     }
 }
