@@ -11,7 +11,6 @@ class FunctionAPI extends \PoPSchema\Comments\FunctionAPI_Base
     use APITypeDataResolverTrait;
 
     protected $cmsToPoPCommentStatusConversion = [
-        // 'all' => POP_COMMENTSTATUS_ALL,
         'approve' => POP_COMMENTSTATUS_APPROVED,
         'hold' => POP_COMMENTSTATUS_ONHOLD,
         'spam' => POP_COMMENTSTATUS_SPAM,
