@@ -91,7 +91,7 @@ class PoP_Notifications_API
                 'array' => false,
                 'fields' => '*',
                 'user_id' => '',
-                'hist_time' => POP_CONSTANT_CURRENTTIMESTAMP,
+                'hist_time' => POP_CONSTANT_TIME,
                 'hist_time_compare' => '<',
                 'order' => 'ASC',
                 'orderby' => '',

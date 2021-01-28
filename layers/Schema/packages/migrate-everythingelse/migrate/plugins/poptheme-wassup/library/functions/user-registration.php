@@ -62,7 +62,7 @@ function extraUserProfileFields($user)
     <td><input type="text" name="short_description" id="short_description" value="<?php echo \PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_METAKEY_PROFILE_SHORTDESCRIPTION, true) ?>" class="regular-text code" /></td>
     </tr>
     </table>
-    <h3><?php _e('Display email in the Profile page?', 'pop-coreprocessors') ?></h3>        
+    <h3><?php _e('Display email in the Profile page?', 'pop-coreprocessors') ?></h3>
     <table class="form-table">
     <tr>
     <th><label for="display_email"><?php _e('Display email in the Profile page?', 'pop-coreprocessors') ?></label></th>
@@ -71,18 +71,18 @@ function extraUserProfileFields($user)
     </td>
     </tr>
     </table>
-    <h3><?php _e('User preferences', 'pop-coreprocessors') ?></h3>      
-    <h4><?php _e('Email notifications', 'pop-coreprocessors') ?></h4>       
-    <h5><?php _e('General:', 'pop-coreprocessors') ?></h5>      
+    <h3><?php _e('User preferences', 'pop-coreprocessors') ?></h3>
+    <h4><?php _e('Email notifications', 'pop-coreprocessors') ?></h4>
+    <h5><?php _e('General:', 'pop-coreprocessors') ?></h5>
     <table class="form-table">
     <tr>
     <th><label><?php _e('New content is posted on the website', 'pop-coreprocessors') ?></label></th>
     <td>
     <?php printUserPreferencesField($user->ID, POP_USERPREFERENCES_EMAILNOTIFICATIONS_GENERAL_NEWPOST); ?>
     </td>
-    </tr>   
+    </tr>
     </table>
-    <h5><?php _e('A user on my network:', 'pop-coreprocessors') ?></h5>     
+    <h5><?php _e('A user on my network:', 'pop-coreprocessors') ?></h5>
     <table class="form-table">
     <tr>
     <th><label><?php _e('Created content', 'pop-coreprocessors') ?></label></th>
@@ -129,36 +129,36 @@ function extraUserProfileFields($user)
         </td>
         </tr>
     <?php endif; ?>
-    </table>    
-    <h5><?php _e('A topic I am subscribed to:', 'pop-coreprocessors') ?></h5>       
+    </table>
+    <h5><?php _e('A topic I am subscribed to:', 'pop-coreprocessors') ?></h5>
     <table class="form-table">
     <tr>
     <th><label><?php _e('Has new content', 'pop-coreprocessors') ?></label></th>
     <td>
     <?php printUserPreferencesField($user->ID, POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT); ?>
     </td>
-    </tr>   
+    </tr>
     <tr>
     <th><label><?php _e('Has a comment added', 'pop-coreprocessors') ?></label></th>
     <td>
     <?php printUserPreferencesField($user->ID, POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT); ?>
     </td>
-    </tr>   
+    </tr>
     </table>
-    <h4><?php _e('Email digests', 'pop-coreprocessors') ?></h4>     
+    <h4><?php _e('Email digests', 'pop-coreprocessors') ?></h4>
     <table class="form-table">
     <tr>
     <th><label><?php _e('New content by the community (weekly)', 'pop-coreprocessors') ?></label></th>
     <td>
     <?php printUserPreferencesField($user->ID, POP_USERPREFERENCES_EMAILDIGESTS_WEEKLYLATESTPOSTS); ?>
     </td>
-    </tr>   
+    </tr>
     <tr>
     <th><label><?php _e('Upcoming events (weekly)', 'pop-coreprocessors') ?></label></th>
     <td>
     <?php printUserPreferencesField($user->ID, POP_USERPREFERENCES_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS); ?>
     </td>
-    </tr>       
+    </tr>
     <tr>
     <th><label><?php _e('My notifications (daily)', 'pop-coreprocessors') ?></label></th>
     <td>
@@ -170,7 +170,7 @@ function extraUserProfileFields($user)
     <td>
     <?php printUserPreferencesField($user->ID, POP_USERPREFERENCES_EMAILDIGESTS_SPECIALPOSTS); ?>
     </td>
-    </tr>   
+    </tr>
     </table>
     <?php
 }
@@ -183,7 +183,7 @@ function saveExtraUserInfo($user_id)
 
     if (defined('POP_USERPLATFORM_INITIALIZED')) {
         // Last Edited: needed for the user thumbprint
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, POP_CONSTANT_CURRENTTIMESTAMP);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, POP_CONSTANT_TIME);
     }
 }
 
@@ -194,11 +194,11 @@ function saveExtraUserProfileFields($user_id)
     }
 
     saveExtraUserInfo($user_id);
-    
+
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TITLE, $_POST['title'], true);
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $_POST['short_description'], true);
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, (isset($_POST['display_email']) && $_POST['display_email'] == "yes"), true, true);
-    
+
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $_POST['user_preferences']);
 }
 
@@ -219,7 +219,7 @@ function gdUserContactmethods()
         \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_YOUTUBE) => TranslationAPIFacade::getInstance()->__('Youtube'),
         \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_INSTAGRAM) => TranslationAPIFacade::getInstance()->__('Instagram'),
     );
-    
+
     return $contact;
 }
 
@@ -233,13 +233,13 @@ function customExtraUserProfileFields($user)
 {
     if (!is_admin()) {
         return;
-    } 
+    }
     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
     ?>
-    
-    <h3><?php _e('Organization info', 'poptheme-wassup') ?></h3>        
+
+    <h3><?php _e('Organization info', 'poptheme-wassup') ?></h3>
     <table class="form-table">
-    <tbody>             
+    <tbody>
         <tr>
             <th><label for="contact_person"><?php _e('Contact person', 'poptheme-wassup'); ?></label></th>
             <td><input class="text-input" name="contact_person" type="text" id="contact_person" value="<?php if (isset($_POST['contact_person'])) {
@@ -255,12 +255,12 @@ function customExtraUserProfileFields($user)
                                                                                                         } else {
                                                                                                             echo \PoPSchema\UserMeta\Utils::getUserMeta($user->ID, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
                                                                                                         } ?>" /></td>
-        </tr>                                                                           
+        </tr>
     </tbody>
     </table>
     <?php
 }
- 
+
 function customSaveExtraUserProfileFields($user_id)
 {
     if (!is_admin()) {
@@ -270,7 +270,7 @@ function customSaveExtraUserProfileFields($user_id)
     // Is community?
     $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     $user = $cmsusersapi->getUserById($user_id);
-    
+
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, esc_attr($_POST['contact_person']), true);
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, esc_attr($_POST['contact_number']), true);
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, esc_attr($_POST['facebook']), true);

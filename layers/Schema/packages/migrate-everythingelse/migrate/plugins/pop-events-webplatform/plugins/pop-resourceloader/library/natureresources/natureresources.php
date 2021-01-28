@@ -108,14 +108,14 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         if (in_array($eventTypeAPI->getID($event), $this->future_events)) {
             // Modify start and end dates
-            $event->start = POP_CONSTANT_CURRENTTIMESTAMP + 1000;
-            $event->end = POP_CONSTANT_CURRENTTIMESTAMP + 2000;
+            $event->start = POP_CONSTANT_TIME + 1000;
+            $event->end = POP_CONSTANT_TIME + 2000;
         }
         // Force it to be past
         else {
             // Modify start and end dates
-            $event->start = POP_CONSTANT_CURRENTTIMESTAMP - 2000;
-            $event->end = POP_CONSTANT_CURRENTTIMESTAMP - 1000;
+            $event->start = POP_CONSTANT_TIME - 2000;
+            $event->end = POP_CONSTANT_TIME - 1000;
         }
 
         // Modify the categories, needed to get a different configuration for future/past events

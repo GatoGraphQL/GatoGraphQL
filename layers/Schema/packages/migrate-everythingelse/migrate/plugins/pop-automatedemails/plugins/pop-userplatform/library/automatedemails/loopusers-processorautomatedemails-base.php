@@ -46,7 +46,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             // Then, can start to modify the global state
             $vars['global-userstate']['is-user-logged-in'] = true;
 
-            $yesterday = strtotime("-1 day", POP_CONSTANT_CURRENTTIMESTAMP);
+            $yesterday = strtotime("-1 day", POP_CONSTANT_TIME);
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
                 $vars['global-userstate']['current-user'] = $cmsusersapi->getUserById($user_id)/*new WP_User($user_id, '')*/;

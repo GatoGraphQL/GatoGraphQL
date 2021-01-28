@@ -115,7 +115,6 @@ class Engine implements EngineInterface
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
                 POP_CONSTANT_UNIQUE_ID,
-                POP_CONSTANT_CURRENTTIMESTAMP,
                 POP_CONSTANT_RAND,
                 POP_CONSTANT_TIME,
             );

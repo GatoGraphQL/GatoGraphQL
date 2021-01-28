@@ -45,7 +45,7 @@ class PoP_ContentPostLinks_Utils
             // If not $show, add a button to Load the frame (eg: feed). If not, show the frame directly (eg: single link)
             if (!$show) {
                 $post_id = $customPostTypeAPI->getID($post);
-                $collapse_id = $customPostTypeAPI->getCustomPostType($post_id) . $post_id . '-' . POP_CONSTANT_CURRENTTIMESTAMP;
+                $collapse_id = $customPostTypeAPI->getCustomPostType($post_id) . $post_id . '-' . POP_CONSTANT_TIME;
                 $messages[] = sprintf(
                     '<a href="%s" class="btn btn-primary" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>%s</a>',
                     '#'.$collapse_id,
