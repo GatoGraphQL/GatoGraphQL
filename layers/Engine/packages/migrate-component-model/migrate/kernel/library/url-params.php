@@ -23,7 +23,6 @@
 
 
 
-const GD_URLPARAM_REDIRECTTO = 'redirect_to';
 
 // Paged param: It is 'pagenum' and not 'paged', because if so WP does a redirect to re-adjust the URL
 // From https://www.mesym.com/action?paged=2 it redirects to https://www.mesym.com/action/paged/2/
