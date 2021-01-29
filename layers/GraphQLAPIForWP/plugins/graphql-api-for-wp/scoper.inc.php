@@ -67,6 +67,9 @@ return [
         'GraphQLAPI\*',
         // Own container cache
         'PoPContainer\*',
+        // This class will be regenerated without scope when
+        // doing `composer dumpautoload`, so skip it
+        'Composer\InstalledVersions'
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
@@ -158,6 +161,18 @@ return [
                 return str_replace(
                     "\\${prefix}\\parent",
                     'parent',
+                    $content
+                );
+            }
+
+            /**
+             * It changes the path to Parsedown source files in its composer.json
+             * Undo it!
+             */
+            if ($filePath = convertRelativeToFullPath('erusev/parsedown/composer.json')) {
+                return str_replace(
+                    '"${prefix}\\\\Parsedown\\\\": "\\/Parsedown\\/"',
+                    '"${prefix}\\\\Parsedown\\\\": ""',
                     $content
                 );
             }
