@@ -76,6 +76,27 @@ jobs:
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
 
+            -   name: Install PHP-Scoper
+                run: |
+                    composer global config minimum-stability dev
+                    composer global config prefer-stable true
+                    composer global require humbug/php-scoper
+
+            # Notice that the scoped results correspond to vendor/, so must manually generate them in such folder
+            -   name: Scope plugin into separate folder
+                run: php-scoper add-prefix --output-dir ../../../../build-prefixed/vendor --ansi --no-interaction
+
+            -   name: Copy scoped code back into plugin
+                run: rsync -av build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ --quiet
+                working-directory: .
+
+            -   name: Regenerate autoloader
+                run: composer dumpautoload --optimize --classmap-authoritative --ansi
+
+            -   name: Use Scoper autoload in plugin main file
+                run: |
+                    sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
+
             -   name: Create build folder
                 run: mkdir build
                 working-directory: .
@@ -85,7 +106,7 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                run: zip -X -r ../../../../build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
