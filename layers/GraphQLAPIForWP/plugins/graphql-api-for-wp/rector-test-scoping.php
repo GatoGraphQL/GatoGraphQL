@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // __DIR__ . '/stubs/wpackagist-plugin/events-manager/em-stubs.php',
     ]);
 
-    // files to skip downgrading
+    // files to rector
     $parameters->set(Option::PATHS, [
         __DIR__ . '/vendor/*',
     ]);
