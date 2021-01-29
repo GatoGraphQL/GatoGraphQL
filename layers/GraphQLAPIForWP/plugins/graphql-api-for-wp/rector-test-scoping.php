@@ -39,6 +39,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // files to skip
     $parameters->set(Option::SKIP, [
         '*/tests/*',
+        __DIR__ . '/vendor/getpop/migrate-*',
+        __DIR__ . '/vendor/pop-schema/migrate-*',
     ]);
 
     // /**
