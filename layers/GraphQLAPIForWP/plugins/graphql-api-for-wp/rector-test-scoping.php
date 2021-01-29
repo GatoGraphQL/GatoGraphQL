@@ -26,6 +26,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::AUTOLOAD_PATHS, [
         __DIR__ . '/vendor/scoper-autoload.php',
         __DIR__ . '/vendor/erusev/parsedown/Parsedown.php',
+        __DIR__ . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
+        __DIR__ . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
 
     // files to rector
