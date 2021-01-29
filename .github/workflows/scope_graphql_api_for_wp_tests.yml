@@ -1,0 +1,55 @@
+name: Scope GraphQL API for WP tests
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+
+jobs:
+    main:
+        defaults:
+            run:
+                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+        name: Scope the plugin code via PHP-Scoper, and execute tests
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+                # see https://github.com/shivammathur/setup-php
+            -   name: Set-up PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Install Composer dependencies for PROD
+                uses: "ramsey/composer-install@v1"
+                    with:
+                        composer-options: "--no-dev"
+
+            -   name: Install PHP-Scoper
+                run: |
+                    composer global config minimum-stability dev
+                    composer global config prefer-stable true
+                    composer global require humbug/php-scoper
+
+            # Notice that the scoped results correspond to vendor/, so must manually generate them in such folder
+            -   name: Scope plugin into separate folder
+                run: php-scoper add-prefix --output-dir ../../../../build-prefixed/vendor --ansi --no-interaction
+
+            -   name: Copy scoped code back into plugin
+                run: rsync --recursive build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/
+                working-directory: .
+
+            -   name: Regenerate autoloader
+                run: composer dumpautoload --optimize --classmap-authoritative --ansi
+
+            -   name: Install Rector (globally)
+                run: composer global require rector/rector
+
+            -   name: Run Rector on the scoped code
+                run: rector process --config=rector-test-scoping.php --ansi
+
