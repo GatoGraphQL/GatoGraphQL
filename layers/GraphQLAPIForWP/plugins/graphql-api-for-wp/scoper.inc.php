@@ -5,11 +5,11 @@ declare(strict_types=1);
 use Isolated\Symfony\Component\Finder\Finder;
 
 /**
- * Must only scope the packages in _vendor/, because:
+ * Must only scope the packages in vendor/, because:
  *
  * - config/ references only local configuration
  * - src/ references only local classes (with one exception), which need not be scoped
- * - _vendor/ references external classes (excluding local -wp packages), which need be scoped
+ * - vendor/ references external classes (excluding local -wp packages), which need be scoped
  *
  * In addition, we must exclude all the local WordPress packages,
  * because scoping WordPress functions does NOT work.
@@ -34,7 +34,7 @@ use Isolated\Symfony\Component\Finder\Finder;
 return [
     'prefix' => 'PrefixedByPoP',
     'finders' => [
-        // Scope packages under _vendor/, excluding local WordPress packages
+        // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()
             ->files()
             ->ignoreVCS(true)
@@ -48,10 +48,10 @@ return [
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
             ])
-            ->in('_vendor'),
+            ->in('vendor'),
         Finder::create()->append([
-            '_vendor/getpop/routing-wp/src/Component.php',
-            '_vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
+            'vendor/getpop/routing-wp/src/Component.php',
+            'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
         ])
     ],
     'whitelist' => [
@@ -68,14 +68,14 @@ return [
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
             /**
-             * File _vendor/nikic/fast-route/src/bootstrap.php has this code:
+             * File vendor/nikic/fast-route/src/bootstrap.php has this code:
              *
              * if (\strpos($class, 'FastRoute\\') === 0) {
              *   $name = \substr($class, \strlen('FastRoute'));
              *
              * Fix it
              */
-            if ($filePath === __DIR__ . DIRECTORY_SEPARATOR . '_vendor/nikic/fast-route/src/bootstrap.php') {
+            if ($filePath === __DIR__ . DIRECTORY_SEPARATOR . 'vendor/nikic/fast-route/src/bootstrap.php') {
                 return str_replace(
                     ["'FastRoute\\\\'", "'FastRoute'"],
                     ["'${prefix}\\\\FastRoute\\\\'", "'${prefix}\\\\FastRoute'"],
@@ -86,7 +86,7 @@ return [
              * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
              * Avoid it!
              */
-            if (str_starts_with($filePath, __DIR__ . DIRECTORY_SEPARATOR . '_vendor/brain/cortex/')) {
+            if (str_starts_with($filePath, __DIR__ . DIRECTORY_SEPARATOR . 'vendor/brain/cortex/')) {
                 return str_replace(
                     "\\${prefix}\\WP",
                     "\\WP",
@@ -101,13 +101,13 @@ return [
              * These files can't be whitelisted, because they may reference a prefixed class
              */
             // Pattern to identify Symfony Polyfill bootstrap files
-            // - _vendor/symfony/polyfill-mbstring/bootstrap80.php
-            // - _vendor/symfony/polyfill-php72/bootstrap.php
+            // - vendor/symfony/polyfill-mbstring/bootstrap80.php
+            // - vendor/symfony/polyfill-php72/bootstrap.php
             // - etc
-            $pattern = '#' . __DIR__ . '/_vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
+            $pattern = '#' . __DIR__ . '/vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
             $symfonyPolyfillFilesWithGlobalClass = array_map(
                 function (string $relativePath): string {
-                    return __DIR__ . '/_vendor/' . $relativePath;
+                    return __DIR__ . '/vendor/' . $relativePath;
                 },
                 [
                     'symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
