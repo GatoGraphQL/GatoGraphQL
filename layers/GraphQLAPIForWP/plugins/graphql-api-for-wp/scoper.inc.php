@@ -57,6 +57,11 @@ return [
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
+                '#jrfnl/php-cast-to-type/#',
+                // Exclude tests from libraries
+                '#nikic/fast-route/test/#',
+                '#psr/log/Psr/Log/Test/#',
+                '#symfony/service-contracts/Test/#',
             ])
             ->in('vendor'),
         Finder::create()->append([

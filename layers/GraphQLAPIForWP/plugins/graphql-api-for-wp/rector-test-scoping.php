@@ -39,8 +39,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // files to skip
     $parameters->set(Option::SKIP, [
         '*/tests/*',
+        // Exclude migrate libraries
         __DIR__ . '/vendor/getpop/migrate-*',
         __DIR__ . '/vendor/pop-schema/migrate-*',
+        // Exclude tests from libraries
+        __DIR__ . '/vendor/nikic/fast-route/test/*',
+        __DIR__ . '/vendor/psr/log/Psr/Log/Test/*',
+        __DIR__ . '/vendor/symfony/service-contracts/Test/*',
+        // Ignore errors from classes we don't have in our environment,
+        // or that come from referencing a class present in DEV, not PROD
+        __DIR__ . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+        __DIR__ . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
+        __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
+        __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+        __DIR__ . '/vendor/symfony/cache/Psr16Cache.php',
+        __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
+        __DIR__ . '/vendor/symfony/yaml/Command/LintCommand.php',
     ]);
 
     // /**
