@@ -70,9 +70,11 @@ return [
         'GraphQLAPI\*',
         // Own container cache
         'PoPContainer\*',
-        // This class will be regenerated without scope when
+    ],
+    'files-whitelist' => [
+        // Class Composer\InstalledVersions will be regenerated without scope when
         // doing `composer dumpautoload`, so skip it
-        'Composer\InstalledVersions'
+        'vendor/composer/InstalledVersions.php',
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
@@ -174,8 +176,8 @@ return [
              */
             if ($filePath = convertRelativeToFullPath('erusev/parsedown/composer.json')) {
                 return str_replace(
-                    '"${prefix}\\\\Parsedown\\\\": "\\/Parsedown\\/"',
-                    '"${prefix}\\\\Parsedown\\\\": ""',
+                    '"\\/Parsedown\\/"',
+                    '""',
                     $content
                 );
             }
