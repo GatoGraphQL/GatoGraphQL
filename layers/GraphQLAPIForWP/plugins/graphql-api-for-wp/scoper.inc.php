@@ -42,6 +42,9 @@ return [
             ->files()
             ->ignoreVCS(true)
             ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.lock/')
+            ->exclude([
+                'tests',
+            ])
             ->notPath([
                 // Exclude libraries ending in "-wp"
                 '#getpop/[a-zA-Z0-9_-]*-wp/#',
