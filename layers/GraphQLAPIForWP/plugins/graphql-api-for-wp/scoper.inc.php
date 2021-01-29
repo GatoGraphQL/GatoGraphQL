@@ -178,7 +178,7 @@ return [
              * It changes the path to Parsedown source files in its composer.json
              * Undo it!
              */
-            if ($filePath = convertRelativeToFullPath('erusev/parsedown/composer.json')) {
+            if ($filePath == convertRelativeToFullPath('erusev/parsedown/composer.json')) {
                 return str_replace(
                     ['"\\/Parsedown\\/"', '"psr-4"'],
                     ['""', '"psr-0"'],
