@@ -60,9 +60,7 @@ jobs:
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
 
-            -   name: Install Rector (globally)
-                run: composer global require rector/rector
-
             -   name: Run Rector on the scoped code
-                run: rector process --config=rector-test-scoping.php --ansi
+                run: vendor/bin/rector process --config=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-test-scoping.php --ansi
+                working-directory: .
 
