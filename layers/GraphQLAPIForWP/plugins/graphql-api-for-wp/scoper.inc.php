@@ -31,6 +31,9 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
+function convertRelativeToFullPath(string $relativePath): string {
+    return __DIR__ . '/vendor/' . $relativePath;
+}
 return [
     'prefix' => 'PrefixedByPoP',
     'finders' => [
@@ -38,15 +41,27 @@ return [
         Finder::create()
             ->files()
             ->ignoreVCS(true)
-            ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.json|composer\\.lock/')
+            ->notName('/.*\\.md|.*\\.dist|composer\\.lock/')
+            ->exclude([
+                'tests',
+            ])
             ->notPath([
                 // Exclude libraries ending in "-wp"
                 '#getpop/[a-zA-Z0-9_-]*-wp/#',
                 '#pop-schema/[a-zA-Z0-9_-]*-wp/#',
                 '#graphql-by-pop/[a-zA-Z0-9_-]*-wp/#',
+                // Exclude all composer.json from own libraries (they get broken!)
+                '#[getpop|pop\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
+                // // Exclude Composer autoloading
+                // '#composer/#',
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
+                '#jrfnl/php-cast-to-type/#',
+                // Exclude tests from libraries
+                '#nikic/fast-route/test/#',
+                '#psr/log/Psr/Log/Test/#',
+                '#symfony/service-contracts/Test/#',
             ])
             ->in('vendor'),
         Finder::create()->append([
@@ -64,6 +79,11 @@ return [
         'GraphQLAPI\*',
         // Own container cache
         'PoPContainer\*',
+    ],
+    'files-whitelist' => [
+        // Class Composer\InstalledVersions will be regenerated without scope when
+        // doing `composer dumpautoload`, so skip it
+        'vendor/composer/InstalledVersions.php',
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
@@ -95,7 +115,8 @@ return [
             }
             /**
              * Symfony Polyfill packages.
-             * These files must register functions under the global namespace,
+             * The bootstrap*.php files must register functions under the global namespace,
+             * and the other ones must register constants on the global namespace,
              * so remove the namespaced after it's added.
              * These files can't be whitelisted, because they may reference a prefixed class
              */
@@ -104,14 +125,72 @@ return [
             // - vendor/symfony/polyfill-php72/bootstrap.php
             // - etc
             $pattern = '#' . __DIR__ . '/vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
-            if (preg_match($pattern, $filePath)) {
+            $symfonyPolyfillFilesWithGlobalClass = array_map(
+                'convertRelativeToFullPath',
+                [
+                    'symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+                    'symfony/polyfill-php73/Resources/stubs/JsonException.php',
+                    'symfony/polyfill-php80/Resources/stubs/Attribute.php',
+                    'symfony/polyfill-php80/Resources/stubs/Stringable.php',
+                    'symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+                    'symfony/polyfill-php80/Resources/stubs/ValueError.php',
+                ]
+            );
+            $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass);
+            if (
+                $isSymfonyPolyfillFileWithGlobalClass
+                || preg_match($pattern, $filePath)
+            ) {
                 // Remove the namespace
-                return str_replace(
+                $content = str_replace(
                     "namespace ${prefix};",
                     '',
                     $content
                 );
+
+                // Comment out the class_alias too
+                if ($isSymfonyPolyfillFileWithGlobalClass) {
+                    $content = str_replace(
+                        "\class_alias('${prefix}\\\\",
+                        "//\class_alias('${prefix}\\\\",
+                        $content
+                    );
+                }
+
+                return $content;
             }
+            /**
+             * In these files, it prefixes the return type `parent`.
+             * Undo it!
+             */
+            $symfonyPolyfillFilesWithParentReturnType = array_map(
+                'convertRelativeToFullPath',
+                [
+                    'symfony/string/AbstractUnicodeString.php',
+                    'symfony/string/ByteString.php',
+                    'symfony/string/UnicodeString.php',
+                ]
+            );
+            if (in_array($filePath, $symfonyPolyfillFilesWithParentReturnType)) {
+                return str_replace(
+                    "\\${prefix}\\parent",
+                    'parent',
+                    $content
+                );
+            }
+
+            /**
+             * It changes the path to Parsedown source files in its composer.json
+             * Undo it!
+             */
+            if ($filePath == convertRelativeToFullPath('erusev/parsedown/composer.json')) {
+                return str_replace(
+                    ['"\\/Parsedown\\/"', '"psr-4"'],
+                    ['""', '"psr-0"'],
+                    $content
+                );
+            }
+
             return $content;
         },
     ],
