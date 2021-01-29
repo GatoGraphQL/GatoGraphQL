@@ -36,6 +36,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor',
     ]);
 
+    // files to skip
+    $parameters->set(Option::SKIP, [
+        '*/tests/*',
+    ]);
+
     // /**
     //  * This constant is defined in wp-load.php, but never loaded.
     //  * It is read when resolving class WP_Upgrader in Plugin.php.
