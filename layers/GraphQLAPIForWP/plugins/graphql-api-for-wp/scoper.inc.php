@@ -38,7 +38,7 @@ return [
         Finder::create()
             ->files()
             ->ignoreVCS(true)
-            ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.json|composer\\.lock/')
+            ->notName('/LICENSE|.*\\.md|.*\\.dist|composer\\.lock/')
             ->notPath([
                 // Exclude libraries ending in "-wp"
                 '#getpop/[a-zA-Z0-9_-]*-wp/#',
