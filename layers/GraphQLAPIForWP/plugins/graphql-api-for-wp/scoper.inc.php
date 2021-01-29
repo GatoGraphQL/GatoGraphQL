@@ -176,8 +176,8 @@ return [
              */
             if ($filePath = convertRelativeToFullPath('erusev/parsedown/composer.json')) {
                 return str_replace(
-                    '"\\/Parsedown\\/"',
-                    '""',
+                    ['"\\/Parsedown\\/"', '"psr-4"'],
+                    ['""', '"psr-0"'],
                     $content
                 );
             }
