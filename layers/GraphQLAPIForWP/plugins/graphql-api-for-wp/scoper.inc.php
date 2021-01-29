@@ -31,6 +31,9 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
+function convertRelativeToFullPath(string $relativePath): string {
+    return __DIR__ . '/vendor/' . $relativePath;
+}
 return [
     'prefix' => 'PrefixedByPoP',
     'finders' => [
@@ -106,9 +109,7 @@ return [
             // - etc
             $pattern = '#' . __DIR__ . '/vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
             $symfonyPolyfillFilesWithGlobalClass = array_map(
-                function (string $relativePath): string {
-                    return __DIR__ . '/vendor/' . $relativePath;
-                },
+                'convertRelativeToFullPath',
                 [
                     'symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
                     'symfony/polyfill-php73/Resources/stubs/JsonException.php',
@@ -141,6 +142,26 @@ return [
 
                 return $content;
             }
+            /**
+             * In these files, it prefixes the return type `parent`.
+             * Undo it!
+             */
+            $symfonyPolyfillFilesWithParentReturnType = array_map(
+                'convertRelativeToFullPath',
+                [
+                    'symfony/string/AbstractUnicodeString.php',
+                    'symfony/string/ByteString.php',
+                    'symfony/string/UnicodeString.php',
+                ]
+            );
+            if (in_array($filePath, $symfonyPolyfillFilesWithParentReturnType)) {
+                return str_replace(
+                    "\\${prefix}\\parent",
+                    'parent',
+                    $content
+                );
+            }
+
             return $content;
         },
     ],
