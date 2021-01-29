@@ -33,7 +33,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to rector
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/vendor/*',
+        __DIR__ . '/vendor',
     ]);
 
     // /**
