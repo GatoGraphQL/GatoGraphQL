@@ -83,6 +83,17 @@ return [
                 );
             }
             /**
+             * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
+             * Avoid it!
+             */
+            if (str_starts_with($filePath, __DIR__ . DIRECTORY_SEPARATOR . 'vendor/brain/cortex/')) {
+                return str_replace(
+                    "\\${prefix}\\WP",
+                    "\\WP",
+                    $content
+                );
+            }
+            /**
              * Symfony Polyfill packages.
              * These files must register functions under the global namespace,
              * so remove the namespaced after it's added.
