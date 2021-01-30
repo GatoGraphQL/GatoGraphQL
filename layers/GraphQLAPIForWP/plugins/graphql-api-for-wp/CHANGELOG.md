@@ -10,6 +10,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Composable directives
 
+## 0.7.8 - 2021-01-30
+
+### Fixed
+
+- Scoped external dependencies (#246)
+
 ## 0.7.7 - 2021-01-25
 
 ### Fixed
