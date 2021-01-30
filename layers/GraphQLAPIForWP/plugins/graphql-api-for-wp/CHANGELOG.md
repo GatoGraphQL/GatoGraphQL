@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Composable directives
 
-## 0.7.8 - 2021-01-30
+## 0.7.8/9 - 2021-01-30
 
 ### Fixed
 
