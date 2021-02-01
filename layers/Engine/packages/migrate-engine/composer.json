@@ -16,11 +16,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/hooks": "^0.7.10",
-        "getpop/translation": "^0.7.10",
-        "getpop/routing": "^0.7.10",
-        "getpop/modulerouting": "^0.7.10",
-        "getpop/definitions": "^0.7.10"
+        "getpop/hooks": "^0.8",
+        "getpop/translation": "^0.8",
+        "getpop/routing": "^0.8",
+        "getpop/modulerouting": "^0.8",
+        "getpop/definitions": "^0.8"
     },
     "extra": {
         "branch-alias": {

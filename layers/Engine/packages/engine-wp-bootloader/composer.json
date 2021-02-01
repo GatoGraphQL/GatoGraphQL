@@ -23,7 +23,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "composer/installers": "~1.0",
-        "getpop/routing-wp": "^0.7.10",
+        "getpop/routing-wp": "^0.8",
         "lkwdwrd/wp-muplugin-loader": "dev-feature-composer-v2"
     },
     "require-dev": {
