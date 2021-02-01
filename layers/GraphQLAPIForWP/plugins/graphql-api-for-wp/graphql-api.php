@@ -1,5 +1,4 @@
 <?php
-use GraphQLAPI\GraphQLAPI\Plugin;
 /*
 Plugin Name: GraphQL API for WordPress
 Plugin URI: https://graphql-api.com
@@ -20,6 +19,8 @@ GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 if (!defined('ABSPATH')) {
     exit;
 }
+
+use GraphQLAPI\GraphQLAPI\Plugin;
 
 /**
  * Make sure this plugin is not duplicated.
