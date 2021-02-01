@@ -16,7 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-sites-wassup/custompost-mutations": "^0.8"
+        "pop-sites-wassup/custompost-mutations": "^0.7.10"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12, <0.12.70",
