@@ -4,7 +4,7 @@
     "description": "Adds support for user meta",
     "keywords": ["PoP", "usermeta"],
     "homepage": "https://github.com/PoPSchema/usermeta",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

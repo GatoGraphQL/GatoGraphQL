@@ -4,7 +4,7 @@
     "description": "Adds support for stance mutations",
     "keywords": ["PoP", "stance-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/stance-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

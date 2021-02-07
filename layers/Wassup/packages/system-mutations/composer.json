@@ -4,7 +4,7 @@
     "description": "Adds support for system mutations",
     "keywords": ["PoP", "system-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/system-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

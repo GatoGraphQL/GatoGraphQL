@@ -4,7 +4,7 @@
     "description": "Create REST endpoints in the PoP API",
     "keywords": ["PoP", "api-rest"],
     "homepage": "https://github.com/getpop/api-rest",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

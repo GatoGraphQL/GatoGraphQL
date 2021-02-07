@@ -4,7 +4,7 @@
     "description": "Adds support for post tags",
     "keywords": ["PoP", "post-tags"],
     "homepage": "https://github.com/PoPSchema/post-tags",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

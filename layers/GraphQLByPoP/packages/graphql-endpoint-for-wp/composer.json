@@ -4,7 +4,7 @@
     "description": "Add pretty permalinks for the single GraphQL endpoint, for WordPress",
     "keywords": ["PoP", "graphql-endpoint-for-wp"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-endpoint-for-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

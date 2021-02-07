@@ -4,7 +4,7 @@
     "description": "Utilities for implementing API clients",
     "keywords": ["PoP", "api-clients"],
     "homepage": "https://github.com/getpop/api-clients",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

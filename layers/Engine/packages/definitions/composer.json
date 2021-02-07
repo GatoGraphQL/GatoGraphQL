@@ -4,7 +4,7 @@
     "description": "Enables to define a name for an element (such as modules, resources, etc) through different strategies",
     "keywords": ["PoP", "definitions"],
     "homepage": "https://github.com/getpop/definitions",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

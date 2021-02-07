@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/categories. Target package description: Adds support for categories",
     "keywords": ["PoP", "categories"],
     "homepage": "https://github.com/pop-schema/migrate-categories",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

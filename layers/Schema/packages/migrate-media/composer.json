@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/media. Target package description: Adds support for media",
     "keywords": ["PoP", "media"],
     "homepage": "https://github.com/PoPSchema/migrate-media",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

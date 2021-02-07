@@ -2,7 +2,7 @@
     "name": "graphql-by-pop/graphql-parser",
     "description": "GraphQL syntax parser",
     "homepage": "https://github.com/GraphQLByPoP/graphql-parser",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

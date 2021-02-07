@@ -4,7 +4,7 @@
     "description": "Adds mutations for newsletter functionality",
     "keywords": ["PoP", "newsletter-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/newsletter-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

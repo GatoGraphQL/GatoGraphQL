@@ -4,7 +4,7 @@
     "description": "Adds support for form mutations",
     "keywords": ["PoP", "form-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/form-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

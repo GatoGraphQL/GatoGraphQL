@@ -4,7 +4,7 @@
     "description": "Set of basic directives",
     "keywords": ["PoP", "basic-directives"],
     "homepage": "https://github.com/pop-schema/basic-directives",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

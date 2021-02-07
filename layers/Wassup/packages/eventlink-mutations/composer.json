@@ -4,7 +4,7 @@
     "description": "Adds support for event link mutations",
     "keywords": ["PoP", "eventlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/eventlink-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

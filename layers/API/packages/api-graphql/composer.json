@@ -4,7 +4,7 @@
     "description": "Extended/Upgraded implementation of GraphQL, implemented on PHP, based on the PoP API",
     "keywords": ["PoP", "api-graphql"],
     "homepage": "https://github.com/getpop/api-graphql",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

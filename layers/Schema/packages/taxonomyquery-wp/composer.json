@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Taxonomy Query\"",
     "keywords": ["PoP", "taxonomyquery-wp"],
     "homepage": "https://github.com/PoPSchema/taxonomyquery-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

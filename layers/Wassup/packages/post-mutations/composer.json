@@ -4,7 +4,7 @@
     "description": "Adds support for post mutations",
     "keywords": ["PoP", "post-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/post-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

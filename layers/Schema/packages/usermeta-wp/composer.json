@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"User Meta\"",
     "keywords": ["PoP", "usermeta-wp"],
     "homepage": "https://github.com/PoPSchema/usermeta-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

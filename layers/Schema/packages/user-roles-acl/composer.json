@@ -4,7 +4,7 @@
     "description": "Access Control List for User Roles",
     "keywords": ["PoP", "user-roles-acl"],
     "homepage": "https://github.com/pop-schema/user-roles-acl",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

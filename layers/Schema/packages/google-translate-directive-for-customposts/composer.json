@@ -4,7 +4,7 @@
     "description": "Use the <translate(provider:google)> directive with custom posts",
     "keywords": ["PoP", "google-translate-directive-for-customposts"],
     "homepage": "https://github.com/PoPSchema/google-translate-directive-for-customposts",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

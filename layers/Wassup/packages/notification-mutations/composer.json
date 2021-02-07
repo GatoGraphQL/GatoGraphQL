@@ -4,7 +4,7 @@
     "description": "Adds mutations for notifications",
     "keywords": ["PoP", "notification-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/notification-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

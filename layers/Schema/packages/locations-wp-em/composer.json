@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Locations\"",
     "keywords": ["PoP", "locations-wp-em"],
     "homepage": "https://github.com/PoPSchema/locations-wp-em",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

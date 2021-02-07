@@ -4,7 +4,7 @@
     "description": "Access Control for fields and directives",
     "keywords": ["PoP", "AccessControl"],
     "homepage": "https://github.com/getpop/access-control",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

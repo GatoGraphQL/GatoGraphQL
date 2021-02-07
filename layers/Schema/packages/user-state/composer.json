@@ -4,7 +4,7 @@
     "description": "Enables users to log in and have user state",
     "keywords": ["PoP", "user-state"],
     "homepage": "https://github.com/pop-schema/user-state",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",
