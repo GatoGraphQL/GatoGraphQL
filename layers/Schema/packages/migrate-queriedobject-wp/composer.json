@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/queriedobject-wp. Target package description: Implementation for WordPress of contracts from package \"Queried Object\"",
     "keywords": ["PoP", "queriedobject-wp"],
     "homepage": "https://github.com/pop-schema/migrate-queriedobject-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

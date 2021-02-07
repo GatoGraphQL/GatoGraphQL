@@ -4,7 +4,7 @@
     "description": "Component model for PoP, over which the component-based architecture is based",
     "keywords": ["PoP", "field-query"],
     "homepage": "https://github.com/getpop/field-query",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

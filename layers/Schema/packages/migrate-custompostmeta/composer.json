@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/custompostmeta. Target package description: Adds support for post meta",
     "keywords": ["PoP", "custompostmeta"],
     "homepage": "https://github.com/PoPSchema/migrate-custompostmeta",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

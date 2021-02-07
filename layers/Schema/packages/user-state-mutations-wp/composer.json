@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"User State Mutations\"",
     "keywords": ["PoP", "user-state-mutations-wp"],
     "homepage": "https://github.com/PoPSchema/user-state-mutations-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

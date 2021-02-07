@@ -4,7 +4,7 @@
     "description": "PoP Engine Bootloader for WordPress",
     "keywords": ["pop", "engine", "WordPress", "bootloader"],
     "homepage": "https://github.com/getpop/engine-wp-bootloader",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

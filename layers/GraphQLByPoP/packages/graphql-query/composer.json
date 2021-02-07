@@ -4,7 +4,7 @@
     "description": "Utilities to transform the query from the GraphQL syntax to the Field query syntax",
     "keywords": ["PoP", "graphql-query"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-query",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

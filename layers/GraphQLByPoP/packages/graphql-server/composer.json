@@ -4,7 +4,7 @@
     "description": "GraphQL server in PHP, implemented through the PoP API",
     "keywords": ["PoP", "graphql", "server"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-server",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

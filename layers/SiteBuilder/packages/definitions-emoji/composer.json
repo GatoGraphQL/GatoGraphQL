@@ -4,7 +4,7 @@
     "description": "Provides definitions using emojis",
     "keywords": ["PoP", "definitions-emoji"],
     "homepage": "https://github.com/getpop/definitions-emoji",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Comment Meta\"",
     "keywords": ["PoP", "commentmeta-wp"],
     "homepage": "https://github.com/PoPSchema/commentmeta-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

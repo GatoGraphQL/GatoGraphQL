@@ -4,7 +4,7 @@
     "description": "Adds support for comments",
     "keywords": ["PoP", "comments"],
     "homepage": "https://github.com/PoPSchema/comments",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

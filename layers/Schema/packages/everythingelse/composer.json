@@ -4,7 +4,7 @@
     "description": "All code from a PoP application that has been migrated but not to its rightful and final destination",
     "keywords": ["PoP", "everythingelse"],
     "homepage": "https://github.com/PoPSchema/everythingelse",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Use Google Translate as a provider for the <translate> directive",
     "keywords": ["PoP", "google-translate-directive"],
     "homepage": "https://github.com/PoPSchema/google-translate-directive",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

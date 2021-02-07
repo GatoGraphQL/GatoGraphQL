@@ -4,7 +4,7 @@
     "description": "Adds support for user roles",
     "keywords": ["PoP", "user-roles"],
     "homepage": "https://github.com/pop-schema/user-roles",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

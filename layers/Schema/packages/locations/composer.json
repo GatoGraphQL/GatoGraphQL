@@ -4,7 +4,7 @@
     "description": "Adds support for locations",
     "keywords": ["PoP", "locations"],
     "homepage": "https://github.com/PoPSchema/locations",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "GraphiQL and Voyager GraphQL Clients for WordPress",
     "keywords": ["GraphQLByPoP", "graphql-clients-for-wp"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-clients-for-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

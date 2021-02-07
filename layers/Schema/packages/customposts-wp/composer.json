@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Custom Posts\"",
     "keywords": ["PoP", "customposts-wp"],
     "homepage": "https://github.com/PoPSchema/customposts-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

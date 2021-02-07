@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Posts\"",
     "keywords": ["PoP", "posts-wp"],
     "homepage": "https://github.com/PoPSchema/posts-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

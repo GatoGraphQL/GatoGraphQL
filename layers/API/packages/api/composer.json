@@ -4,7 +4,7 @@
     "description": "Component-based API",
     "keywords": ["PoP", "api"],
     "homepage": "https://github.com/getpop/api",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

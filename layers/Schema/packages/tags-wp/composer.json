@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Tags\"",
     "keywords": ["PoP", "tags-wp"],
     "homepage": "https://github.com/PoPSchema/tags-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

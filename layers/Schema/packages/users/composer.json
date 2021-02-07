@@ -4,7 +4,7 @@
     "description": "Adds support for users",
     "keywords": ["PoP", "users"],
     "homepage": "https://github.com/PoPSchema/users",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Provides definitions using a base 36 counter",
     "keywords": ["PoP", "definitions-base36"],
     "homepage": "https://github.com/getpop/definitions-base36",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

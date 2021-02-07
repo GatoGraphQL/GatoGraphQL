@@ -4,7 +4,7 @@
     "description": "Integration with WordPress plugin \"Block Metadata\"",
     "keywords": ["PoP", "block-metadata-for-wp"],
     "homepage": "https://github.com/PoPSchema/block-metadata-for-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Multisite",
     "keywords": ["PoP", "multisite"],
     "homepage": "https://github.com/getpop/multisite",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

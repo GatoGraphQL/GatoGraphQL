@@ -4,7 +4,7 @@
     "description": "Store definitions across sessions",
     "keywords": ["PoP", "definitionpersistence"],
     "homepage": "https://github.com/getpop/definitionpersistence",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

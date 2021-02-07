@@ -4,7 +4,7 @@
     "description": "Add pretty permalinks for the PoP API endpoints, for WordPress",
     "keywords": ["PoP", "api-endpoints-for-wp"],
     "homepage": "https://github.com/getpop/api-endpoints-for-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",
