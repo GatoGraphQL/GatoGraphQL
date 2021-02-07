@@ -131,10 +131,10 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/getpop/access-control.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/getpop/access-control/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/access-control.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/access-control.svg?style=flat-square

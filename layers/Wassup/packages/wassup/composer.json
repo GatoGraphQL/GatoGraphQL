@@ -4,7 +4,7 @@
     "description": "PoP site => Wassup",
     "keywords": ["PoP", "wassup"],
     "homepage": "https://github.com/PoPSites-Wassup/wassup",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

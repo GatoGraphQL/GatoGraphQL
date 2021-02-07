@@ -4,7 +4,7 @@
     "description": "Deals with media elements added to custom posts",
     "keywords": ["PoP", "custompostmedia"],
     "homepage": "https://github.com/PoPSchema/custompostmedia",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

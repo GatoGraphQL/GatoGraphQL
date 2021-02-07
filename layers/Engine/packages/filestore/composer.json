@@ -4,7 +4,7 @@
     "description": "Base classes to save files to disk, read them and reference them through an URL",
     "keywords": ["PoP", "file", "store"],
     "homepage": "https://github.com/getpop/filestore",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Single-Page Application for PoP",
     "keywords": ["PoP", "single-page application", "spa"],
     "homepage": "https://github.com/getpop/spa",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

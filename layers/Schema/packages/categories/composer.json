@@ -4,7 +4,7 @@
     "description": "Adds support for categories",
     "keywords": ["PoP", "categories"],
     "homepage": "https://github.com/PoPSchema/categories",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

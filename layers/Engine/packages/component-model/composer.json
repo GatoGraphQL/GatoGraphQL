@@ -4,7 +4,7 @@
     "description": "Component model for PoP, over which the component-based architecture is based",
     "keywords": ["PoP", "component-model"],
     "homepage": "https://github.com/getpop/component-model",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

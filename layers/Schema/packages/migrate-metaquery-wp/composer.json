@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/metaquery-wp. Target package description: Implementation for WordPress of contracts from package \"Meta Query\"",
     "keywords": ["PoP", "metaquery-wp"],
     "homepage": "https://github.com/pop-schema/migrate-metaquery-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Menus\"",
     "keywords": ["PoP", "menus-wp"],
     "homepage": "https://github.com/PoPSchema/menus-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

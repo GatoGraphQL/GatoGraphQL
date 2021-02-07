@@ -4,7 +4,7 @@
     "description": "Adds support for event mutations",
     "keywords": ["PoP", "event-mutations"],
     "homepage": "https://github.com/PoPSchema/event-mutations",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

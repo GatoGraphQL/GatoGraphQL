@@ -4,7 +4,7 @@
     "description": "Helper functions for Guzzle",
     "keywords": ["PoP", "guzzle-helpers"],
     "homepage": "https://github.com/getpop/guzzle-helpers",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

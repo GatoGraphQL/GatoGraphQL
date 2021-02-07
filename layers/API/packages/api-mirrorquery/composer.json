@@ -4,7 +4,7 @@
     "description": "Mirror the query in the API response",
     "keywords": ["PoP", "api-mirrorquery"],
     "homepage": "https://github.com/getpop/api-mirrorquery",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

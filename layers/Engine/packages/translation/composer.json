@@ -4,7 +4,7 @@
     "description": "Translation API for PoP components",
     "keywords": ["PoP", "translation"],
     "homepage": "https://github.com/getpop/translation",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

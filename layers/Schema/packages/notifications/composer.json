@@ -4,7 +4,7 @@
     "description": "Adds support for notifications",
     "keywords": ["PoP", "notifications"],
     "homepage": "https://github.com/PoPSchema/notifications",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

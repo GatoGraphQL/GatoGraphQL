@@ -4,7 +4,7 @@
     "description": "Adds mutations for the \"contact user\" functionality",
     "keywords": ["PoP", "contactuser-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/contactuser-mutations",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

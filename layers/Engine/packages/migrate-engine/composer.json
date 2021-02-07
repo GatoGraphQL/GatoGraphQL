@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/engine. Target package description: Engine implementing the PoP core code",
     "keywords": ["PoP", "engine"],
     "homepage": "https://github.com/getpop/migrate-engine",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

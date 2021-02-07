@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/getpop/static-site-generator",
     "keywords": ["PoP", "static-site-generator"],
     "homepage": "https://github.com/getpop/migrate-static-site-generator",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

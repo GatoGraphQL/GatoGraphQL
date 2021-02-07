@@ -4,7 +4,7 @@
     "description": "Query for any custom post, with or without having a type associated to the schema",
     "keywords": ["PoP", "generic-customposts"],
     "homepage": "https://github.com/PoPSchema/generic-customposts",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

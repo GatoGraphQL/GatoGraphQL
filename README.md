@@ -128,8 +128,7 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 ## License
 
-- GraphQL API for WordPress plugin and extensions: GPLv2 or later
-- Everything else: MIT
+GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../contributors

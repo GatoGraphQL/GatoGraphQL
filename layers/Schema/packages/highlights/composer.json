@@ -4,7 +4,7 @@
     "description": "Adds support for highlights",
     "keywords": ["PoP", "highlights"],
     "homepage": "https://github.com/PoPSchema/highlights",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

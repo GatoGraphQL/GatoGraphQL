@@ -4,7 +4,7 @@
     "description": "Integrates media with custom post mutations",
     "keywords": ["PoP", "custompostmedia-mutations"],
     "homepage": "https://github.com/PoPSchema/custompostmedia-mutations",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

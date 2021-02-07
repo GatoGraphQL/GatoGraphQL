@@ -4,7 +4,7 @@
     "description": "Adds support for mutations with plugin Gravity Forms",
     "keywords": ["PoP", "gravityforms-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/gravityforms-mutations",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

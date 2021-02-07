@@ -4,7 +4,7 @@
     "description": "Adds support for stances",
     "keywords": ["PoP", "stances"],
     "homepage": "https://github.com/PoPSchema/stances",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

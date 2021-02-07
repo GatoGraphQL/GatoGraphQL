@@ -4,7 +4,7 @@
     "description": "Set of directives for the GraphQL API, to convert lower/title/upper case",
     "keywords": ["PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GraphQLAPI/convert-case-directives",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

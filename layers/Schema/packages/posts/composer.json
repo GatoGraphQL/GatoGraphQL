@@ -4,7 +4,7 @@
     "description": "Adds support for posts",
     "keywords": ["PoP", "posts"],
     "homepage": "https://github.com/PoPSchema/posts",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

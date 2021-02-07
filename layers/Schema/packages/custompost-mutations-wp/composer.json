@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Custom Post Mutations\"",
     "keywords": ["PoP", "custompost-mutations-wp"],
     "homepage": "https://github.com/PoPSchema/custompost-mutations-wp",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Events\", through plugin \"Events Manager\"",
     "keywords": ["PoP", "events-wp-em"],
     "homepage": "https://github.com/PoPSchema/events-wp-em",
-    "license": "MIT",
+    "license": "GPLv2",
     "authors": [
         {
             "name": "Leonardo Losoviz",
