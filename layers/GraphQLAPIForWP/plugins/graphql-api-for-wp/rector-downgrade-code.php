@@ -40,9 +40,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // __DIR__ . '/vendor/pop-schema/*/tests/*',
         // __DIR__ . '/vendor/graphql-by-pop/*/tests/*',
 
-        // Individual classes that can be excluded because
-        // they are not used by us, and they use classes
-        // loaded with "require-dev" so it'd throw an error
+        // Ignore errors from classes we don't have in our environment,
+        // or that come from referencing a class present in DEV, not PROD
+        __DIR__ . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
         __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
         __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
         __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
