@@ -4,7 +4,7 @@
     "description": "Utilities for implementing API endpoints",
     "keywords": ["PoP", "api-endpoints"],
     "homepage": "https://github.com/getpop/api-endpoints",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Add HTTP caching to the response",
     "keywords": ["PoP", "cache-control"],
     "homepage": "https://github.com/getpop/cache-control",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

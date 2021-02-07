@@ -4,7 +4,7 @@
     "description": "Directives for capturing operational data, to improve performance, do analytics, and others",
     "keywords": ["PoP", "trace-tools"],
     "homepage": "https://github.com/getpop/trace-tools",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

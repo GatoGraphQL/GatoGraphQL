@@ -4,7 +4,7 @@
     "description": "Adds support for highlight mutations",
     "keywords": ["PoP", "highlight-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/highlight-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

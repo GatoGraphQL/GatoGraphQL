@@ -4,7 +4,7 @@
     "description": "Access Control based on the user being logged-in or not",
     "keywords": ["PoP", "UserStateAccessControl"],
     "homepage": "https://github.com/pop-schema/user-state-access-control",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

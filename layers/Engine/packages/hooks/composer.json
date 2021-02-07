@@ -4,7 +4,7 @@
     "description": "Contracts to implement hooks (filters and actions) for PoP",
     "keywords": ["PoP", "hooks"],
     "homepage": "https://github.com/getpop/hooks",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Interfaces and helpers for custom posts (eg: posts, articles, etc)",
     "keywords": ["PoP", "customposts"],
     "homepage": "https://github.com/PoPSchema/customposts",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

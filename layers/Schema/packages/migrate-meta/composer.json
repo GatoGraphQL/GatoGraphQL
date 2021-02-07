@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/meta. Target package description: Adds support for meta",
     "keywords": ["PoP", "meta"],
     "homepage": "https://github.com/pop-schema/migrate-meta",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

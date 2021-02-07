@@ -4,7 +4,7 @@
     "description": "Set configurable mandatory directives for fields and directives",
     "keywords": ["PoP", "MandatoryDirectivesByConfiguration"],
     "homepage": "https://github.com/getpop/mandatory-directives-by-configuration",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

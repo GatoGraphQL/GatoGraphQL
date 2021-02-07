@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/metaquery. Target package description: Adds support for meta queries",
     "keywords": ["PoP", "metaquery"],
     "homepage": "https://github.com/pop-schema/migrate-metaquery",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

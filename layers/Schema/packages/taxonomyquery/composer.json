@@ -4,7 +4,7 @@
     "description": "Adds support for taxonomy (category and tag) queries",
     "keywords": ["PoP", "taxonomyquery"],
     "homepage": "https://github.com/PoPSchema/taxonomyquery",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

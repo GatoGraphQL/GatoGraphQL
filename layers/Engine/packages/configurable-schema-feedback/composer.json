@@ -4,7 +4,7 @@
     "description": "Define schema feedback by configuration",
     "keywords": ["PoP", "configurable-schema-feedback"],
     "homepage": "https://github.com/getpop/configurable-schema-feedback",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

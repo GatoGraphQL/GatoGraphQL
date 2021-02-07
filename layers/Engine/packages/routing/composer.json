@@ -4,7 +4,7 @@
     "description": "Routing system",
     "keywords": ["PoP", "routing"],
     "homepage": "https://github.com/getpop/routing",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

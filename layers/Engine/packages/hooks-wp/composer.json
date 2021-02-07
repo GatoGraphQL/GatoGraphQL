@@ -4,7 +4,7 @@
     "description": "WordPress implementation of the contracts to implement hooks (filters and actions) for PoP",
     "keywords": ["PoP", "hooks", "WordPress"],
     "homepage": "https://github.com/getpop/hooks-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

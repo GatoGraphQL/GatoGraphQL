@@ -4,7 +4,7 @@
     "description": "Adds support for locationposts",
     "keywords": ["PoP", "locationposts"],
     "homepage": "https://github.com/PoPSchema/locationposts",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

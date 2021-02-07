@@ -4,7 +4,7 @@
     "description": "CDN directive",
     "keywords": ["PoP", "cdn-directive"],
     "homepage": "https://github.com/PoPSchema/cdn-directive",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

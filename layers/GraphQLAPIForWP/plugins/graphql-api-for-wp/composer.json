@@ -4,7 +4,7 @@
     "description": "GraphQL API for WordPress",
     "keywords": ["PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GraphQLAPI/graphql-api-for-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

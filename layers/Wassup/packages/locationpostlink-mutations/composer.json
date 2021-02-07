@@ -4,7 +4,7 @@
     "description": "Adds support for location post link mutations",
     "keywords": ["PoP", "locationpostlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/locationpostlink-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

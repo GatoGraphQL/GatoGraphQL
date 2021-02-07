@@ -4,7 +4,7 @@
     "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/custompostmeta-wp. Target package description: Implementation for WordPress of contracts from package \"Post Meta\"",
     "keywords": ["PoP", "custompostmeta-wp"],
     "homepage": "https://github.com/PoPSchema/migrate-custompostmeta-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

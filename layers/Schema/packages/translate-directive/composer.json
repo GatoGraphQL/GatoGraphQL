@@ -4,7 +4,7 @@
     "description": "Directive <translate> to translate content using different provider APIs",
     "keywords": ["PoP", "translate-directive"],
     "homepage": "https://github.com/PoPSchema/translate-directive",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

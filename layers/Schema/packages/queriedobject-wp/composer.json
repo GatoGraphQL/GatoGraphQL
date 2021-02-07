@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"Queried Object\"",
     "keywords": ["PoP", "queriedobject-wp"],
     "homepage": "https://github.com/pop-schema/queriedobject-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

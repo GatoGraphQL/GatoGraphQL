@@ -4,7 +4,7 @@
     "description": "Directives to convert lower/title/upper case",
     "keywords": ["PoP", "convert-case-directives"],
     "homepage": "https://github.com/PoPSchema/convert-case-directives",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

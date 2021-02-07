@@ -4,7 +4,7 @@
     "description": "Implementation for WordPress of contracts from package \"User Roles\"",
     "keywords": ["PoP", "user-roles-wp"],
     "homepage": "https://github.com/pop-schema/user-roles-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

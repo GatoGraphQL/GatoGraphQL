@@ -4,7 +4,7 @@
     "description": "Adds support for post meta",
     "keywords": ["PoP", "custompostmeta"],
     "homepage": "https://github.com/PoPSchema/custompostmeta",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

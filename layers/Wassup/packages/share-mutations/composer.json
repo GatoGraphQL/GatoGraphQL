@@ -4,7 +4,7 @@
     "description": "Adds mutations for sharing functionality",
     "keywords": ["PoP", "share-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/share-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

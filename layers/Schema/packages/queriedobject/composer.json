@@ -4,7 +4,7 @@
     "description": "Adds support to query single objects (users, posts, etc) in the request",
     "keywords": ["PoP", "queriedobject"],
     "homepage": "https://github.com/pop-schema/queriedobject",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

@@ -4,7 +4,7 @@
     "description": "Implementation of PoP Engine for WordPress",
     "keywords": ["PoP", "engine", "WordPress"],
     "homepage": "https://github.com/getpop/engine-wp",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

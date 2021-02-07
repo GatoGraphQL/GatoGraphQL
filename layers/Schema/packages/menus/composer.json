@@ -4,7 +4,7 @@
     "description": "Adds support for menus",
     "keywords": ["PoP", "menus"],
     "homepage": "https://github.com/PoPSchema/menus",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",

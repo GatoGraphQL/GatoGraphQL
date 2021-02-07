@@ -4,7 +4,7 @@
     "description": "Adds mutations for social network functionality",
     "keywords": ["PoP", "socialnetwork-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/socialnetwork-mutations",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Leonardo Losoviz",
