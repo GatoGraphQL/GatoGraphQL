@@ -16,6 +16,6 @@ The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP),
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://github.com/leoloso
