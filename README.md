@@ -128,7 +128,7 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 ## License
 
-GPLv2 or later. Please see [License File](LICENSE.md) for more information.
+GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../contributors
