@@ -10,3 +10,4 @@ composer.lock
 !/composer.lock
 /wordpress/
 .lando.local.yml
+layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp
