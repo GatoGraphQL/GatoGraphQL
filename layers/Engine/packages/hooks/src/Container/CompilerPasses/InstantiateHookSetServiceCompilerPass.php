@@ -7,7 +7,7 @@ namespace PoP\Hooks\Container\CompilerPasses;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Root\Container\CompilerPasses\AbstractInstantiateServiceCompilerPass;
 
-class InstantiateHookServiceCompilerPass extends AbstractInstantiateServiceCompilerPass
+class InstantiateHookSetServiceCompilerPass extends AbstractInstantiateServiceCompilerPass
 {
     protected function getServiceClass(): string
     {

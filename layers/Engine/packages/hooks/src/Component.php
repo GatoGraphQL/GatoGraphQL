@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Hooks;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Hooks\Container\CompilerPasses\InstantiateHookServiceCompilerPass;
+use PoP\Hooks\Container\CompilerPasses\InstantiateHookSetServiceCompilerPass;
 
 /**
  * Initialize component
@@ -32,7 +32,7 @@ class Component extends AbstractComponent
     public static function getContainerCompilerPassClasses(): array
     {
         return [
-            InstantiateHookServiceCompilerPass::class,
+            InstantiateHookSetServiceCompilerPass::class,
         ];
     }
 }
