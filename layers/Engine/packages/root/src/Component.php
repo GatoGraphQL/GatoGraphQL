@@ -8,14 +8,17 @@ use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerBuilderUtils;
-use PoP\Root\Container\ContainerServiceStore;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\Component\YAMLServicesTrait;
+use PoP\Root\Container\ServiceInstantiatorInterface;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
+    use YAMLServicesTrait;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -62,6 +65,9 @@ class Component extends AbstractComponent
             $namespace,
             $directory
         );
+
+        // Only after initializing the containerBuilder, can inject a service
+        self::initYAMLServices(dirname(__DIR__));
     }
 
     /**
@@ -91,9 +97,13 @@ class Component extends AbstractComponent
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
 
         // Initialize services defined in the container:
+        // - through CompilerPass
+        /**
+         * @var ServiceInstantiatorInterface
+         */
+        $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator->instantiateServices();
         // - by each Component
         ContainerBuilderUtils::instantiateServices($servicesToInitialize);
-        // - through CompilerPass
-        ContainerBuilderUtils::instantiateServices(ContainerServiceStore::getServicesToInstantiate());
     }
 }
