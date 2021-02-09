@@ -6,7 +6,6 @@ namespace PoPSchema\EverythingElse;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -54,18 +53,5 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize all hooks
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
     }
 }

@@ -101,6 +101,15 @@ class Component extends AbstractComponent
             ComponentConfiguration::setConfiguration($configuration);
             self::initYAMLServices(dirname(__DIR__));
             self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+
+            // Boot conditional on having variables treated as expressions for @export directive
+            if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'variables-as-expressions-schema-cache.yaml');
+            }
+            // Boot conditional on having embeddable fields
+            if (APIComponentConfiguration::enableEmbeddableFields()) {
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'embeddable-fields-schema-cache.yaml');
+            }
             ServiceConfiguration::initialize();
         }
     }
@@ -121,9 +130,6 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers', false);
-        // Attach the Extensions with a higher priority, so it executes first
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers\\Extensions', false, 100);
 
         // Conditional on Environment
         // The @export directive depends on the Multiple Query Execution being enabled
@@ -138,15 +144,6 @@ class Component extends AbstractComponent
         // Boot conditional on API package being installed
         if (class_exists('\PoP\AccessControl\Component')) {
             ComponentBoot::beforeBoot();
-        }
-
-        // Boot conditional on having variables treated as expressions for @export directive
-        if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-            ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers\\ConditionalOnEnvironment\\VariablesAsExpressions');
-        }
-        // Boot conditional on having embeddable fields
-        if (APIComponentConfiguration::enableEmbeddableFields()) {
-            ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers\\ConditionalOnEnvironment\\EmbeddableFields');
         }
     }
 }

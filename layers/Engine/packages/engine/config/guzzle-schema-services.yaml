@@ -5,3 +5,6 @@ services:
 
     PoP\Engine\Conditional\Guzzle\DirectiveResolvers\:
         resource: '../src/Conditional/Guzzle/DirectiveResolvers/*'
+
+    PoP\Engine\Conditional\Guzzle\FieldResolvers\:
+        resource: '../src/Conditional/Guzzle/FieldResolvers/*'

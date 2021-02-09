@@ -1,0 +1,4 @@
+services:
+    PoPSchema\Events\Conditional\Users\FieldResolvers\:
+        resource: '../../../src/Conditional/Users/FieldResolvers/*'
+        public: true

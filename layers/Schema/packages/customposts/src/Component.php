@@ -66,7 +66,6 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
     }
 }

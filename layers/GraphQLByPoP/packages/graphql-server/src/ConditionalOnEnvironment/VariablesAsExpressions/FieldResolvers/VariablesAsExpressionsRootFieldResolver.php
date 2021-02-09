@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ConditionalOnEnvironment\VariablesAsExpressions;
+namespace GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\VariablesAsExpressions\FieldResolvers;
 
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;

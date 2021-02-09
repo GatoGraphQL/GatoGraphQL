@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Media\Conditional\Users;
+namespace PoPSchema\Events\Conditional\Tags;
 
-use PoPSchema\Media\Component;
+use PoPSchema\Events\Component;
 use PoP\Root\Component\YAMLServicesTrait;
 
 /**
@@ -19,6 +19,6 @@ class ConditionalComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+        self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Tags');
     }
 }

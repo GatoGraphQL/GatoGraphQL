@@ -7,7 +7,6 @@ namespace PoPSchema\Media;
 use PoPSchema\Media\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -77,23 +76,6 @@ class Component extends AbstractComponent
                 $configuration,
                 $skipSchema
             );
-        }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-
-        if (class_exists('\PoPSchema\Users\Component')) {
-            ConditionalComponent::beforeBoot();
         }
     }
 }

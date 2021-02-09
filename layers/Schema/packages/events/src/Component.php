@@ -18,6 +18,8 @@ class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
 
+    public static $COMPONENT_DIR;
+
     // const VERSION = '0.1.0';
 
     /**
@@ -68,8 +70,28 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::$COMPONENT_DIR = dirname(__DIR__);
+        self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
+
+        if (
+            class_exists('\PoPSchema\Tags\Component')
+            && !in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses)
+        ) {
+            \PoPSchema\Events\Conditional\Tags\ConditionalComponent::initialize(
+                $configuration,
+                $skipSchema
+            );
+        }
+
+        if (
+            class_exists('\PoPSchema\Users\Component')
+            && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
+        ) {
+            \PoPSchema\Events\Conditional\Users\ConditionalComponent::initialize(
+                $configuration,
+                $skipSchema
+            );
+        }
     }
 
     /**
@@ -82,16 +104,7 @@ class Component extends AbstractComponent
         parent::beforeBoot();
 
         // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
         self::attachTypeResolverPickers();
-
-        // Boot conditionals
-        if (class_exists('\PoPSchema\Tags\Component')) {
-            ComponentBoot::beforeBoot();
-        }
-        if (class_exists('\PoPSchema\Users\Component')) {
-            \PoPSchema\Events\Conditional\Users\ComponentBoot::beforeBoot();
-        }
     }
 
     /**

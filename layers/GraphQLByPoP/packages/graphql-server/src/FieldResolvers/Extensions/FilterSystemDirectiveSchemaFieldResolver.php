@@ -31,6 +31,12 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
         ];
     }
 
+    public static function getPriorityToAttachClasses(): ?int
+    {
+        // Higher priority => Process first
+        return 100;
+    }
+
     // /**
     //  * Only use this fieldResolver when parameter `ofTypes` is provided.
     //  * Otherwise, use the default implementation

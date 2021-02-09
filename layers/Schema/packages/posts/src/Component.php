@@ -101,7 +101,6 @@ class Component extends AbstractComponent
         parent::beforeBoot();
 
         // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
         self::attachTypeResolverPickers();
 
         if (class_exists('\PoPSchema\Users\Component')) {

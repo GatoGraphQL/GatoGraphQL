@@ -82,11 +82,7 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers', false);
 
-        if (!Environment::disableGuzzleOperators()) {
-            ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers\\Guzzle', false);
-        }
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
             ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators\\Cache');
         }

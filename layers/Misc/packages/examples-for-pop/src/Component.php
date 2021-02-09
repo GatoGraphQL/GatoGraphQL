@@ -54,22 +54,6 @@ class Component extends AbstractComponent
      *
      * @return void
      */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize services
-        // ServiceBoot::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function afterBoot(): void
     {
         parent::afterBoot();

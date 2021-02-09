@@ -40,8 +40,6 @@ class ConditionalComponent
      */
     public static function beforeBoot(): void
     {
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-
         // Initialize all conditional components
         if (class_exists('\PoP\RESTAPI\Component')) {
             \PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\ConditionalComponent::beforeBoot();

@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\Conditional\Users;
+namespace PoPSchema\LocationPosts\Conditional\Users;
 
-use PoPSchema\Posts\Component;
+use PoPSchema\LocationPosts\Component;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -20,17 +19,6 @@ class ConditionalComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
         self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
     }
 }

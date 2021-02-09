@@ -7,7 +7,6 @@ namespace PoPSchema\UserRolesWP;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\UserRolesWP\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -58,18 +57,5 @@ class Component extends AbstractComponent
         self::initYAMLServices(dirname(__DIR__));
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         ServiceConfiguration::initialize();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize all classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers', false);
     }
 }

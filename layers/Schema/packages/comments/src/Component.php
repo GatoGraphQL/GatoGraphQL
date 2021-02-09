@@ -101,14 +101,10 @@ class Component extends AbstractComponent
 
         // Initialize all hooks
         ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
 
         if (class_exists('\PoP\RESTAPI\Component')) {
             ConditionalComponent::beforeBoot();
-        }
-        if (class_exists('\PoPSchema\Users\Component')) {
-            \PoPSchema\Comments\Conditional\Users\ConditionalComponent::beforeBoot();
         }
     }
 }

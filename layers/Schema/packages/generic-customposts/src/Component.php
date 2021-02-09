@@ -44,17 +44,4 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
     }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-    }
 }

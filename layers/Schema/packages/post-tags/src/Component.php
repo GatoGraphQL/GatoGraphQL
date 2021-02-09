@@ -93,9 +93,6 @@ class Component extends AbstractComponent
     {
         parent::beforeBoot();
 
-        // Initialize all hooks
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-
         // If $skipSchema for `Condition` is `true`, then services are not registered
         if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\RESTAPI\\Hooks'))) {
             ConditionalComponent::beforeBoot();
