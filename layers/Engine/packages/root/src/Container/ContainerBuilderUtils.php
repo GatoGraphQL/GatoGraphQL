@@ -75,20 +75,6 @@ class ContainerBuilderUtils
     }
 
     /**
-     * Initialize all services located under the specified namespace
-     *
-     * @param string $namespace
-     * @return void
-     */
-    public static function instantiateNamespaceServices(string $namespace, bool $includeSubfolders = true): void
-    {
-        $containerBuilder = ContainerBuilderFactory::getInstance();
-        foreach (self::getServiceClassesUnderNamespace($namespace, $includeSubfolders) as $serviceClass) {
-            $containerBuilder->get($serviceClass);
-        }
-    }
-
-    /**
      * Inject all services located under a given namespace into another service
      *
      * @param string $injectableServiceId

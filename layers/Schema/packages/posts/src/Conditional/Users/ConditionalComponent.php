@@ -23,14 +23,4 @@ class ConditionalComponent
         self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
         self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
     }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-    }
 }

@@ -128,9 +128,6 @@ class Component extends AbstractComponent
     {
         parent::beforeBoot();
 
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-
         // Conditional on Environment
         // The @export directive depends on the Multiple Query Execution being enabled
         if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {

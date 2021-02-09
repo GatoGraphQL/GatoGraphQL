@@ -98,11 +98,6 @@ class Component extends AbstractComponent
 
         // Initialize all classes
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
-
-        // Initialize all conditional components
-        if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\CustomPosts\\FieldResolvers'))) {
-            ConditionalComponent::beforeBoot();
-        }
     }
 
     /**

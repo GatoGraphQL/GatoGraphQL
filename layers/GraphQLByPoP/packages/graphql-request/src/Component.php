@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLRequest;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 
 /**
@@ -53,18 +52,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return GraphQLQueryComponent::isEnabled();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
     }
 }

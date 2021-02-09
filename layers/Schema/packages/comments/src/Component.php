@@ -99,12 +99,6 @@ class Component extends AbstractComponent
     {
         parent::beforeBoot();
 
-        // Initialize all hooks
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
-
-        if (class_exists('\PoP\RESTAPI\Component')) {
-            ConditionalComponent::beforeBoot();
-        }
     }
 }

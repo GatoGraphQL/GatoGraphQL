@@ -118,9 +118,6 @@ class Component extends AbstractComponent
     {
         parent::beforeBoot();
 
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-
         // Boot conditional on API package being installed
         if (class_exists('\PoP\AccessControl\Component')) {
             ConditionalComponent::beforeBoot();

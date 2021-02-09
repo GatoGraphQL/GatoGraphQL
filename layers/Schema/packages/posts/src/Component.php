@@ -102,10 +102,6 @@ class Component extends AbstractComponent
 
         // Initialize classes
         self::attachTypeResolverPickers();
-
-        if (class_exists('\PoPSchema\Users\Component')) {
-            ConditionalComponent::beforeBoot();
-        }
     }
 
     /**

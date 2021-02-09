@@ -76,26 +76,11 @@ class Component extends AbstractComponent
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
         ServiceConfiguration::initialize();
 
-        if (!in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
+        if (class_exists('\PoP\RESTAPI\Component::class') && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
             ConditionalComponent::initialize(
                 $configuration,
                 $skipSchema
             );
-        }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // If $skipSchema for `Condition` is `true`, then services are not registered
-        if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\RESTAPI\\Hooks'))) {
-            ConditionalComponent::beforeBoot();
         }
     }
 

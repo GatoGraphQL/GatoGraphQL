@@ -6,7 +6,6 @@ namespace PoPSchema\CustomPostMediaMutations;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -47,18 +46,5 @@ class Component extends AbstractComponent
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
     }
 }

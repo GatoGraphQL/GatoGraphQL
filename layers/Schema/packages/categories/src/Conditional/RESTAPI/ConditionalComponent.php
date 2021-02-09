@@ -6,7 +6,6 @@ namespace PoPSchema\Categories\Conditional\RESTAPI;
 
 use PoPSchema\Categories\Component;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -21,15 +20,5 @@ class ConditionalComponent
         array $skipSchemaComponentClasses = []
     ): void {
         self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
     }
 }

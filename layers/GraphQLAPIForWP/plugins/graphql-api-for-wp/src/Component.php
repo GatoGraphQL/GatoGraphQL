@@ -114,19 +114,6 @@ class Component extends AbstractComponent
      *
      * @return void
      */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function boot(): void
     {
         parent::boot();

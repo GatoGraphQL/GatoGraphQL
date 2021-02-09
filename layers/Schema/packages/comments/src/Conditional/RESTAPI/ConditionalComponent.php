@@ -22,14 +22,4 @@ class ConditionalComponent
     ): void {
         self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
     }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-    }
 }

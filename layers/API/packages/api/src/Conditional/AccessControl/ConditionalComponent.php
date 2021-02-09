@@ -34,7 +34,6 @@ class ConditionalComponent
     public static function beforeBoot(): void
     {
         // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
         self::attachDynamicDirectiveResolvers();
     }
 

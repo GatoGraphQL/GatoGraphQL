@@ -56,8 +56,5 @@ class Component extends AbstractComponent
 
         // Boot Cortex
         Cortex::boot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
     }
 }
