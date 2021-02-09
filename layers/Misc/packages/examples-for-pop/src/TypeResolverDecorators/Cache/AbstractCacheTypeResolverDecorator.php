@@ -6,7 +6,7 @@ namespace Leoloso\ExamplesForPoP\TypeResolverDecorators\Cache;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Engine\DirectiveResolvers\Cache\SaveCacheDirectiveResolver;
+use PoP\Engine\Conditional\ComponentModelCache\DirectiveResolvers\SaveCacheDirectiveResolver;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 
 /**

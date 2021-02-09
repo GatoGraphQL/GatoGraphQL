@@ -41,21 +41,8 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
         if (Environment::enableGlobalGoogleTranslateDirective()) {
-            ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers');
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         }
     }
 }

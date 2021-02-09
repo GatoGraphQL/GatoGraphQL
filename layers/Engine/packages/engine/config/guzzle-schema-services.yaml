@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\Engine\Conditional\Guzzle\DirectiveResolvers\:
+        resource: '../src/Conditional/Guzzle/DirectiveResolvers/*'

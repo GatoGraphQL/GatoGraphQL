@@ -6,8 +6,8 @@ namespace PoP\Engine\TypeResolverDecorators\Cache;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Engine\DirectiveResolvers\Cache\LoadCacheDirectiveResolver;
-use PoP\Engine\DirectiveResolvers\Cache\SaveCacheDirectiveResolver;
+use PoP\Engine\Conditional\ComponentModelCache\DirectiveResolvers\LoadCacheDirectiveResolver;
+use PoP\Engine\Conditional\ComponentModelCache\DirectiveResolvers\SaveCacheDirectiveResolver;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 

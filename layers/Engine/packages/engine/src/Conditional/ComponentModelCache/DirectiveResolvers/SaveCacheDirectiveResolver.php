@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\DirectiveResolvers\Cache;
+namespace PoP\Engine\Conditional\ComponentModelCache\DirectiveResolvers;
 
 use PoP\Engine\Cache\CacheTypes;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -11,7 +11,6 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Engine\DirectiveResolvers\Cache\CacheDirectiveResolverTrait;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 /**

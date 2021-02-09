@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\Engine\Conditional\ComponentModelCache\DirectiveResolvers\:
+        resource: '../src/Conditional/ComponentModelCache/DirectiveResolvers/*'

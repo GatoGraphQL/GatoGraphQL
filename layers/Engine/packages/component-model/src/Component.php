@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Config\ServiceConfiguration;
+use PoP\ComponentModel\Container\CompilerPasses\AttachAndRegisterDirectiveResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Environment;
@@ -75,7 +76,6 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers');
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
     }
 
@@ -106,6 +106,7 @@ class Component extends AbstractComponent
     {
         return [
             InjectTypeResolverClassIntoTypeRegistryCompilerPass::class,
+            AttachAndRegisterDirectiveResolverCompilerPass::class,
         ];
     }
 }

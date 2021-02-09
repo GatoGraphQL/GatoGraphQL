@@ -62,6 +62,12 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::initYAMLServices(dirname(__DIR__));
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        if (!Environment::disableGuzzleOperators()) {
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'guzzle-schema-services.yaml');
+        }
+        if (ComponentModelComponentConfiguration::useComponentModelCache()) {
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'component-model-cache-schema-services.yaml');
+        }
         ServiceConfiguration::initialize();
     }
 
@@ -77,14 +83,11 @@ class Component extends AbstractComponent
         // Initialize classes
         ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
         ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers', false);
-        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers', false);
 
         if (!Environment::disableGuzzleOperators()) {
             ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers\\Guzzle', false);
-            ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers\\Guzzle');
         }
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers\\Cache');
             ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators\\Cache');
         }
     }

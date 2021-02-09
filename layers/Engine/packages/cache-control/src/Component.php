@@ -67,7 +67,6 @@ class Component extends AbstractComponent
         parent::beforeBoot();
 
         // Initialize directive resolvers, attaching each of them using the right priorities
-        // ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__.'\\DirectiveResolvers');
         self::setDirectiveResolverPriorities();
     }
 
