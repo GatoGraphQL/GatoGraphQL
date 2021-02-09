@@ -91,7 +91,6 @@ class Component extends AbstractComponent
         parent::beforeBoot();
 
         // Initialize all hooks
-        ContainerBuilderUtils::registerTypeResolversFromNamespace(__NAMESPACE__ . '\\TypeResolvers');
         ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
 
         // If $skipSchema for `Condition` is `true`, then services are not registered

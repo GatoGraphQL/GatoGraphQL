@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Container;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
@@ -13,33 +12,6 @@ use PoP\Root\Container\ContainerBuilderUtils as RootContainerBuilderUtils;
 
 class ContainerBuilderUtils extends RootContainerBuilderUtils
 {
-    /**
-     * Register all typeResolvers located under the specified namespace
-     *
-     * @param string $namespace
-     * @return void
-     */
-    public static function registerTypeResolversFromNamespace(string $namespace, bool $includeSubfolders = true): void
-    {
-        /**
-         * Check the registries are enabled
-         */
-        if (!ComponentConfiguration::enableSchemaEntityRegistries()) {
-            return;
-        }
-        /**
-         * We can't save this output into the cached container through `injectValuesIntoService`,
-         * because the container must be compiled to call `getServiceClassesUnderNamespace`, and once
-         * compiled can't add more data.
-         * And once compiled it is cached, and it will not contain any new data added after it is cached,
-         * which is executed in `beforeBoot` at the vey beginning (through `maybeCompileAndCacheContainer`)
-         * Hence, the values are injected into the service directly, and not through its proxy
-         */
-        $typeRegistry = TypeRegistryFacade::getInstance();
-        foreach (self::getServiceClassesUnderNamespace($namespace, $includeSubfolders) as $serviceClass) {
-            $typeRegistry->addTypeResolverClass($serviceClass);
-        }
-    }
     /**
      * Register all fieldInterfaceResolvers located under the specified namespace
      *

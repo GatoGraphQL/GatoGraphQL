@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
+use PoP\ComponentModel\Config\ServiceConfiguration;
+use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
+use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Environment;
 
 /**
  * Initialize component
@@ -94,5 +95,17 @@ class Component extends AbstractComponent
 
         // This value will be used in the response. If compact, make sure each JS Key is unique
         define('POP_RESPONSE_PROP_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            InjectTypeResolverClassIntoTypeRegistryCompilerPass::class,
+        ];
     }
 }
