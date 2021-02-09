@@ -7,7 +7,6 @@ namespace PoP\API\Conditional\AccessControl;
 use PoP\API\Component;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\API\DirectiveResolvers\ConditionalOnEnvironment\SchemaNoCacheCacheControlDirectiveResolver;
 

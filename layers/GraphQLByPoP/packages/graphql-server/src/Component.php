@@ -13,7 +13,6 @@ use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Component\CanDisableComponentTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use GraphQLByPoP\GraphQLServer\Config\ServiceConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
