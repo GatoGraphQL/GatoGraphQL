@@ -120,4 +120,14 @@ abstract class AbstractComponent implements ComponentInterface
     public static function afterBoot(): void
     {
     }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getCompilerPassClasses(): array
+    {
+        return [];
+    }
 }

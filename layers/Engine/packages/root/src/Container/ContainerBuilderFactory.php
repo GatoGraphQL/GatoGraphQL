@@ -22,12 +22,14 @@ class ContainerBuilderFactory
      * Initialize the Container Builder.
      * If the directory is not provided, store the cache in a system temp dir
      *
+     * @param string[] $compilerPassClasses Compiler Pass classes to register on the container
      * @param bool $cacheContainerConfiguration Indicate if to cache the container configuration
      * @param string|null $directory directory where to store the cache
      * @param string|null $namespace subdirectory under which to store the cache
      * @return void
      */
     public static function init(
+        array $compilerPassClasses = [],
         bool $cacheContainerConfiguration = false,
         ?string $namespace = null,
         ?string $directory = null
@@ -96,7 +98,11 @@ class ContainerBuilderFactory
 
         // If not cached, then create the new instance
         if (!self::$cached) {
-            self::$instance = new ContainerBuilder();
+            $containerBuilder = new ContainerBuilder();
+            foreach ($compilerPassClasses as $compilerPassClass) {
+                $containerBuilder->addCompilerPass(new $compilerPassClass());
+            }
+            self::$instance = $containerBuilder;
         } else {
             require_once self::$cacheFile;
             self::$instance = new \PoPContainer\ProjectServiceContainer();

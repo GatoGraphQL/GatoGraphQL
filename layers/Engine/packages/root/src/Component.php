@@ -7,6 +7,7 @@ namespace PoP\Root;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Managers\ComponentManager;
 
 /**
  * Initialize component
@@ -40,6 +41,16 @@ class Component extends AbstractComponent
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
         DotenvBuilderFactory::init();
 
+        // Collect the compiler pass classes from all components
+        $compilerPassClasses = [];
+        foreach (ComponentManager::getComponentClasses() as $componentClass) {
+            $compilerPassClasses = [
+                ...$compilerPassClasses,
+                ...$componentClass::getCompilerPassClasses()
+            ];
+        }
+        $compilerPassClasses = array_values(array_unique($compilerPassClasses));
+
         // Initialize the ContainerBuilder
         // Indicate if to cache the container configuration, from configuration if defined, or from the environment
         $cacheContainerConfiguration =
@@ -54,7 +65,12 @@ class Component extends AbstractComponent
         // No need to provide a directory => then it will use a system temp folder
         $directory = null;
         // $directory = dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'build' . \DIRECTORY_SEPARATOR . 'cache';
-        ContainerBuilderFactory::init($cacheContainerConfiguration, $namespace, $directory);
+        ContainerBuilderFactory::init(
+            $compilerPassClasses,
+            $cacheContainerConfiguration,
+            $namespace,
+            $directory
+        );
     }
 
     /**
