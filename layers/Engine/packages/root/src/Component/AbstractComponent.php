@@ -126,7 +126,7 @@ abstract class AbstractComponent implements ComponentInterface
      *
      * @return string[]
      */
-    public static function getCompilerPassClasses(): array
+    public static function getContainerCompilerPassClasses(): array
     {
         return [];
     }

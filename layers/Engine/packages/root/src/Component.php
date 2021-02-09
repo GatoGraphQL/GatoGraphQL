@@ -75,7 +75,7 @@ class Component extends AbstractComponent
         foreach (ComponentManager::getComponentClasses() as $componentClass) {
             $compilerPassClasses = [
                 ...$compilerPassClasses,
-                ...$componentClass::getCompilerPassClasses()
+                ...$componentClass::getContainerCompilerPassClasses()
             ];
             $servicesToInitialize = [
                 ...$servicesToInitialize,
