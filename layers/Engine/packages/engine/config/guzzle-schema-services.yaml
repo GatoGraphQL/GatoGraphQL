@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoP\Engine\Conditional\Guzzle\DirectiveResolvers\:
-        resource: '../src/Conditional/Guzzle/DirectiveResolvers/*'
+    PoP\Engine\ConditionalOnEnvironment\Guzzle\DirectiveResolvers\:
+        resource: '../src/ConditionalOnEnvironment/Guzzle/DirectiveResolvers/*'
 
-    PoP\Engine\Conditional\Guzzle\FieldResolvers\:
-        resource: '../src/Conditional/Guzzle/FieldResolvers/*'
+    PoP\Engine\ConditionalOnEnvironment\Guzzle\FieldResolvers\:
+        resource: '../src/ConditionalOnEnvironment/Guzzle/FieldResolvers/*'

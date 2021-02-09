@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoP\Engine\Conditional\ComponentModelCache\DirectiveResolvers\:
-        resource: '../src/Conditional/ComponentModelCache/DirectiveResolvers/*'
+    PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\DirectiveResolvers\:
+        resource: '../src/ConditionalOnEnvironment/ComponentModelCache/DirectiveResolvers/*'

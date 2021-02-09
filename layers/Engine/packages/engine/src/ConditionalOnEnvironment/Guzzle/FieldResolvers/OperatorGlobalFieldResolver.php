@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Conditional\Guzzle\FieldResolvers;
+namespace PoP\Engine\ConditionalOnEnvironment\Guzzle\FieldResolvers;
 
 use PoP\GuzzleHelpers\GuzzleHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Conditional\Guzzle\DirectiveResolvers;
+namespace PoP\Engine\ConditionalOnEnvironment\Guzzle\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 
