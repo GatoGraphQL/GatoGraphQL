@@ -22,14 +22,12 @@ class ContainerBuilderFactory
      * Initialize the Container Builder.
      * If the directory is not provided, store the cache in a system temp dir
      *
-     * @param string[] $compilerPassClasses Compiler Pass classes to register on the container
      * @param bool $cacheContainerConfiguration Indicate if to cache the container configuration
      * @param string|null $directory directory where to store the cache
      * @param string|null $namespace subdirectory under which to store the cache
      * @return void
      */
     public static function init(
-        array $compilerPassClasses = [],
         bool $cacheContainerConfiguration = false,
         ?string $namespace = null,
         ?string $directory = null
@@ -98,11 +96,7 @@ class ContainerBuilderFactory
 
         // If not cached, then create the new instance
         if (!self::$cached) {
-            $containerBuilder = new ContainerBuilder();
-            foreach ($compilerPassClasses as $compilerPassClass) {
-                $containerBuilder->addCompilerPass(new $compilerPassClass());
-            }
-            self::$instance = $containerBuilder;
+            self::$instance = new ContainerBuilder();
         } else {
             require_once self::$cacheFile;
             self::$instance = new \PoPContainer\ProjectServiceContainer();
@@ -117,17 +111,25 @@ class ContainerBuilderFactory
         return self::$cached;
     }
 
-    public static function maybeCompileAndCacheContainer(): void
-    {
+    /**
+     * If the container is not cached, then compile it and cache it
+     *
+     * @param string[] $compilerPassClasses Compiler Pass classes to register on the container
+     */
+    public static function maybeCompileAndCacheContainer(
+        array $compilerPassClasses = []
+    ): void {
         // Compile Symfony's DependencyInjection Container Builder
         // After compiling, cache it in disk for performance.
         // This happens only the first time the site is accessed on the current server
         if (!self::$cached) {
-            // Compile the container
-            /**
-             * @var ContainerBuilder
-             */
+            /** @var ContainerBuilder */
             $containerBuilder = self::getInstance();
+            // Inject all the compiler passes
+            foreach ($compilerPassClasses as $compilerPassClass) {
+                $containerBuilder->addCompilerPass(new $compilerPassClass());
+            }
+            // Compile the container
             $containerBuilder->compile();
 
             // Cache the container
