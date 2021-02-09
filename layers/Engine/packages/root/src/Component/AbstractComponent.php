@@ -130,4 +130,15 @@ abstract class AbstractComponent implements ComponentInterface
     {
         return [];
     }
+
+    /**
+     * Get all the service definitions that must be initialized
+     * after compiling the container
+     *
+     * @return string[]
+     */
+    public static function getContainerServicesToInitialize(): array
+    {
+        return [];
+    }
 }
