@@ -7,6 +7,8 @@ namespace PoP\Root;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerServiceStore;
 use PoP\Root\Managers\ComponentManager;
 
 /**
@@ -88,10 +90,10 @@ class Component extends AbstractComponent
         // Compile and Cache Symfony's DependencyInjection Container Builder
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
 
-        // Initialize services
-        $containerBuilder = ContainerBuilderFactory::getInstance();
-        foreach ($servicesToInitialize as $service) {
-            $containerBuilder->get($service);
-        }
+        // Initialize services defined in the container:
+        // - by each Component
+        ContainerBuilderUtils::instantiateServices($servicesToInitialize);
+        // - through CompilerPass
+        ContainerBuilderUtils::instantiateServices(ContainerServiceStore::getServicesToInstantiate());
     }
 }

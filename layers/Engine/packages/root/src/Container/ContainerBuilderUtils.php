@@ -62,6 +62,19 @@ class ContainerBuilderUtils
     }
 
     /**
+     * Initialize service classes
+     *
+     * @param string[] $serviceClasses
+     */
+    public static function instantiateServices(array $serviceClasses): void
+    {
+        $containerBuilder = ContainerBuilderFactory::getInstance();
+        foreach ($serviceClasses as $serviceClass) {
+            $containerBuilder->get($serviceClass);
+        }
+    }
+
+    /**
      * Initialize all services located under the specified namespace
      *
      * @param string $namespace
