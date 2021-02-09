@@ -51,7 +51,7 @@ class Component extends AbstractComponent
             $configuration[Environment::CONTAINER_CONFIGURATION_CACHE_NAMESPACE] ??
             Environment::getCacheContainerConfigurationNamespace();
 
-            // No need to provide a directory => then it will use a system temp folder
+        // No need to provide a directory => then it will use a system temp folder
         $directory = null;
         // $directory = dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'build' . \DIRECTORY_SEPARATOR . 'cache';
         ContainerBuilderFactory::init($cacheContainerConfiguration, $namespace, $directory);
