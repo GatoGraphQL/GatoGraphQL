@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\EventsWPEM\TypeResolverPickers\Overrides;
+namespace PoPSchema\EventsWPEM\ConditionalOnEnvironment\AddEventTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers;
 
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\CustomPostsWP\TypeResolverPickers\CustomPostTypeResolverPickerInterface;
+use PoPSchema\Events\ConditionalOnEnvironment\AddEventTypeToCustomPostUnionTypes\TypeResolverPickers\EventCustomPostTypeResolverPicker as UpstreamEventCustomPostTypeResolverPicker;
 
-class EventCustomPostTypeResolverPicker extends \PoPSchema\Events\TypeResolverPickers\Optional\EventCustomPostTypeResolverPicker implements CustomPostTypeResolverPickerInterface
+class EventCustomPostTypeResolverPicker extends UpstreamEventCustomPostTypeResolverPicker implements CustomPostTypeResolverPickerInterface
 {
     /**
      * Transform from WP_Post to EM_Event classes

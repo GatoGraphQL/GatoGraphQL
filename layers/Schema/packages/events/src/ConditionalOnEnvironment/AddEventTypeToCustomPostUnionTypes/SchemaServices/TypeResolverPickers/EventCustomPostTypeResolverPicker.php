@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Events\ConditionalOnEnvironment\AddEventTypeToCustomPostUnionTypes\TypeResolverPickers;
+namespace PoPSchema\Events\ConditionalOnEnvironment\AddEventTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers;
 
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\Events\TypeResolverPickers\AbstractEventTypeResolverPicker;

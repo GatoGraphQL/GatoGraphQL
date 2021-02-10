@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\EventsWPEM;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
-use PoPSchema\EventsWPEM\Config\ServiceConfiguration;
 use PoP\Root\Component\CanDisableComponentTrait;
+use PoP\Root\Component\YAMLServicesTrait;
+use PoPSchema\Events\Environment;
 
 /**
  * Initialize component
@@ -68,7 +68,9 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
             self::initYAMLServices(dirname(__DIR__));
-            ServiceConfiguration::initialize();
+            if (Environment::addEventTypeToCustomPostUnionTypes()) {
+                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddEventTypeToCustomPostUnionTypes/Overrides');
+            }
         }
     }
 }
