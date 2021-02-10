@@ -15,10 +15,7 @@ class AttachExtensionCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $containerBuilder): void
     {
-        $classGroups = [
-            FieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
-            DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
-        ];
+        $attachableClassGroups = $this->getAttachableClassGroups();
         $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definition) {
@@ -27,7 +24,7 @@ class AttachExtensionCompilerPass implements CompilerPassInterface
                 continue;
             }
             // Check if the service is of any attachable type
-            foreach ($classGroups as $attachableClass => $attachableGroup) {
+            foreach ($attachableClassGroups as $attachableClass => $attachableGroup) {
                 if (!is_a($definitionClass, $attachableClass, true)) {
                     continue;
                 }
@@ -40,5 +37,16 @@ class AttachExtensionCompilerPass implements CompilerPassInterface
                 continue(2);
             }
         }
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected function getAttachableClassGroups(): array
+    {
+        return [
+            FieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
+            DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
+        ];
     }
 }
