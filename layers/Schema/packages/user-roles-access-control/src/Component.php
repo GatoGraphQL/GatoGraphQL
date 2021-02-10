@@ -9,7 +9,6 @@ use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -79,22 +78,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return AccessControlComponent::isEnabled();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function afterBoot(): void
-    {
-        parent::afterBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
-
-        if (class_exists('\PoP\CacheControl\Component')) {
-            ConditionalComponent::afterBoot();
-        }
     }
 }

@@ -81,22 +81,4 @@ class Component extends AbstractComponent
     {
         return AccessControlComponent::isEnabled();
     }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function afterBoot(): void
-    {
-        parent::afterBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
-
-        // Boot conditional on API package being installed
-        if (class_exists('\PoP\CacheControl\Component')) {
-            ConditionalComponent::afterBoot();
-        }
-    }
 }
