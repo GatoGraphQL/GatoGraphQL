@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostsWP\TypeDataLoaders\Overrides;
+namespace PoPSchema\CustomPostsWP\Overrides\TypeDataLoaders;
 
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeDataLoaders\CustomPostTypeDataLoader;

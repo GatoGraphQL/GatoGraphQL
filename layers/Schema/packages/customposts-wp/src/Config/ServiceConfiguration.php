@@ -19,7 +19,7 @@ class ServiceConfiguration
             InstanceManagerInterface::class,
             'overrideClass',
             CustomPostUnionTypeDataLoader::class,
-            \PoPSchema\CustomPostsWP\TypeDataLoaders\Overrides\CustomPostUnionTypeDataLoader::class
+            \PoPSchema\CustomPostsWP\Overrides\TypeDataLoaders\CustomPostUnionTypeDataLoader::class
         );
     }
 }
