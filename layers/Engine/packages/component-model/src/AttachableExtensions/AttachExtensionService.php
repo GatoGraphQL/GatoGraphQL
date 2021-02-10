@@ -10,21 +10,13 @@ class AttachExtensionService implements AttachExtensionServiceInterface
      * @var array<string,string>
      */
     protected array $classGroups = [];
-    // /**
-    //  * @var array<string,int|null>
-    //  */
-    // protected array $classPriorities = [];
 
-    public function enqueueExtension(string $class, string $group/*, ?int $priority = null*/): void
+    public function enqueueExtension(string $class, string $group): void
     {
         $this->classGroups[$class] = $group;
-        // $this->classPriorities[$class] = $priority;
     }
     public function attachExtensions(): void
     {
-        // foreach (array_keys($this->classGroups) as $class) {
-        //     $class::attach($this->classGroups[$class], $this->classPriorities[$class]);
-        // }
         foreach ($this->classGroups as $class => $group) {
             $class::attach($group);
         }
