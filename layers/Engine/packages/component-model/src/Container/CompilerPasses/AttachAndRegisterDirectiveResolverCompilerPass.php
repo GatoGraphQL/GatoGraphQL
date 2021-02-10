@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
@@ -19,11 +17,10 @@ class AttachAndRegisterDirectiveResolverCompilerPass implements CompilerPassInte
         /**
          * Check the registries are enabled
          */
-        $enableSchemaEntityRegistries = ComponentConfiguration::enableSchemaEntityRegistries();
-        $directiveRegistryDefinition = $enableSchemaEntityRegistries ?
-            $containerBuilder->getDefinition(DirectiveRegistryInterface::class)
-            : null;
-        $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
+        if (!ComponentConfiguration::enableSchemaEntityRegistries()) {
+            return;
+        }
+        $directiveRegistryDefinition = $containerBuilder->getDefinition(DirectiveRegistryInterface::class);
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definition) {
             $definitionClass = $definition->getClass();
@@ -31,12 +28,11 @@ class AttachAndRegisterDirectiveResolverCompilerPass implements CompilerPassInte
                 continue;
             }
 
-            $attachExtensionServiceDefinition->addMethodCall('enqueueExtension', [$definitionClass, AttachableExtensionGroups::DIRECTIVERESOLVERS]);
-
             // Register the directive in the registry
-            if ($enableSchemaEntityRegistries) {
-                $directiveRegistryDefinition->addMethodCall('addDirectiveResolverClass', [$definitionClass]);
-            }
+            $directiveRegistryDefinition->addMethodCall(
+                'addDirectiveResolverClass',
+                [$definitionClass]
+            );
         }
     }
 }
