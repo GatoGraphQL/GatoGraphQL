@@ -62,10 +62,10 @@ class Component extends AbstractComponent
         self::initYAMLServices(dirname(__DIR__));
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         if (!Environment::disableGuzzleOperators()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'guzzle-schema-services.yaml');
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/Guzzle');
         }
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'component-model-cache-schema-services.yaml');
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
         }
         ServiceConfiguration::initialize();
     }

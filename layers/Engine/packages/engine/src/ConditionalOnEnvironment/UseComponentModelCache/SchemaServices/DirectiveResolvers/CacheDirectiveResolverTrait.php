@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\DirectiveResolvers;
+namespace PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\DirectiveResolvers;
 
 use PoP\API\Cache\CacheUtils;
 use PoP\FieldQuery\FieldQueryInterpreter;
