@@ -6,7 +6,6 @@ namespace PoPSchema\UserRolesWP;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoPSchema\UserRolesWP\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -56,6 +55,5 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-        ServiceConfiguration::initialize();
     }
 }
