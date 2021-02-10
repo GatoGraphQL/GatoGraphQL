@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostsWP\TypeResolverPickers\Overrides;
+namespace PoPSchema\PostsWP\ConditionalOnEnvironment\AddPostTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers;
 
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\CustomPostsWP\TypeResolverPickers\CustomPostTypeResolverPickerInterface;
 use PoPSchema\CustomPostsWP\TypeResolverPickers\NoCastCustomPostTypeResolverPickerTrait;
+use PoPSchema\Posts\ConditionalOnEnvironment\AddPostTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\PostCustomPostTypeResolverPicker as UpstreamPostCustomPostTypeResolverPicker;
 
-class PostCustomPostTypeResolverPicker extends \PoPSchema\Posts\TypeResolverPickers\Optional\PostCustomPostTypeResolverPicker implements CustomPostTypeResolverPickerInterface
+class PostCustomPostTypeResolverPicker extends UpstreamPostCustomPostTypeResolverPicker implements CustomPostTypeResolverPickerInterface
 {
     use NoCastCustomPostTypeResolverPickerTrait;
 
