@@ -10,6 +10,7 @@ use PoP\ComponentModel\Container\CompilerPasses\AttachFieldResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
@@ -77,6 +78,9 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
+
+        // Attach all extensions
+        AttachExtensionServiceFacade::getInstance()->attachExtensions();
     }
 
     /**

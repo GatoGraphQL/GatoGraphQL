@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
@@ -22,6 +23,7 @@ class AttachAndRegisterDirectiveResolverCompilerPass implements CompilerPassInte
         $directiveRegistryDefinition = $enableSchemaEntityRegistries ?
             $containerBuilder->getDefinition(DirectiveRegistryInterface::class)
             : null;
+        $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definition) {
             $definitionClass = $definition->getClass();
@@ -29,7 +31,7 @@ class AttachAndRegisterDirectiveResolverCompilerPass implements CompilerPassInte
                 continue;
             }
 
-            $definitionClass::attach(AttachableExtensionGroups::DIRECTIVERESOLVERS);
+            $attachExtensionServiceDefinition->addMethodCall('enqueueExtension', [$definitionClass, AttachableExtensionGroups::DIRECTIVERESOLVERS]);
 
             // Register the directive in the registry
             if ($enableSchemaEntityRegistries) {
