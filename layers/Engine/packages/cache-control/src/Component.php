@@ -7,7 +7,6 @@ namespace PoP\CacheControl;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\CacheControl\DirectiveResolvers\NestedFieldCacheControlDirectiveResolver;
@@ -68,19 +67,6 @@ class Component extends AbstractComponent
 
         // Initialize directive resolvers, attaching each of them using the right priorities
         self::setDirectiveResolverPriorities();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function afterBoot(): void
-    {
-        parent::afterBoot();
-
-        // Initialize services
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
     }
 
     /**

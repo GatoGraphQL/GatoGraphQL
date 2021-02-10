@@ -9,8 +9,5 @@ services:
     PoP\Engine\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PoP\Engine\TypeResolverDecorators\:
-        resource: '../src/TypeResolverDecorators/*'
-
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

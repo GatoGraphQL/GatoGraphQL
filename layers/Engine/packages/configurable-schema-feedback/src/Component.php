@@ -6,7 +6,6 @@ namespace PoP\ConfigurableSchemaFeedback;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -43,18 +42,5 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function afterBoot(): void
-    {
-        parent::afterBoot();
-
-        // Initialize services
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
     }
 }

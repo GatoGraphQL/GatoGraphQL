@@ -5,3 +5,6 @@ services:
 
     PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\DirectiveResolvers\:
         resource: '../src/ConditionalOnEnvironment/ComponentModelCache/DirectiveResolvers/*'
+
+    PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\TypeResolverDecorators\:
+        resource: '../src/ConditionalOnEnvironment/ComponentModelCache/TypeResolverDecorators/*'

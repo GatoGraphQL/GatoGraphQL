@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolverDecorators\Cache;
+namespace PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;

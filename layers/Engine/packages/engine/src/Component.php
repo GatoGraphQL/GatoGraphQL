@@ -7,7 +7,6 @@ namespace PoP\Engine;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Engine\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 /**
@@ -69,19 +68,5 @@ class Component extends AbstractComponent
             self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'component-model-cache-schema-services.yaml');
         }
         ServiceConfiguration::initialize();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators\\Cache');
-        }
     }
 }
