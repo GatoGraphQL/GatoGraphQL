@@ -30,17 +30,4 @@ class ContainerBuilderUtils extends RootContainerBuilderUtils
             $fieldInterfaceRegistry->addFieldInterfaceResolverClass($serviceClass);
         }
     }
-
-    /**
-     * Attach all typeResolverDecorators located under the specified namespace
-     *
-     * @param string $namespace
-     * @return void
-     */
-    public static function attachTypeResolverDecoratorsFromNamespace(string $namespace, bool $includeSubfolders = true, int $priority = 10): void
-    {
-        foreach (self::getServiceClassesUnderNamespace($namespace, $includeSubfolders) as $serviceClass) {
-            $serviceClass::attach(AttachableExtensionGroups::TYPERESOLVERDECORATORS, $priority);
-        }
-    }
 }
