@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class AttachExtensionCompilerPass implements CompilerPassInterface
+abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $containerBuilder): void
     {
+        $event = $this->getAttachExtensionEvent();
         $attachableClassGroups = $this->getAttachableClassGroups();
         $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
         $definitions = $containerBuilder->getDefinitions();
@@ -32,7 +29,7 @@ class AttachExtensionCompilerPass implements CompilerPassInterface
 
                 $attachExtensionServiceDefinition->addMethodCall(
                     'enqueueExtension',
-                    [$definitionClass, $attachableGroup]
+                    [$event, $definitionClass, $attachableGroup]
                 );
                 // A service won't be of 2 attachable classes, so can skip checking
                 continue(2);
@@ -40,15 +37,10 @@ class AttachExtensionCompilerPass implements CompilerPassInterface
         }
     }
 
+    abstract protected function getAttachExtensionEvent(): string;
+
     /**
      * @return array<string,string>
      */
-    protected function getAttachableClassGroups(): array
-    {
-        return [
-            FieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
-            DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
-            TypeResolverPickerInterface::class => AttachableExtensionGroups::TYPERESOLVERPICKERS,
-        ];
-    }
+    abstract protected function getAttachableClassGroups(): array;
 }

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
+use PoP\ComponentModel\Component\ApplicationEvents;
 use PoP\ComponentModel\Config\ServiceConfiguration;
+use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\AttachAndRegisterDirectiveResolverCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\AttachExtensionCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Environment;
@@ -79,8 +81,21 @@ class Component extends AbstractComponent
         // Initialize classes
         ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
 
-        // Attach all extensions
-        AttachExtensionServiceFacade::getInstance()->attachExtensions();
+        // Attach class extensions
+        AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::BEFORE_BOOT);
+    }
+
+    /**
+     * Boot component
+     *
+     * @return void
+     */
+    public static function afterBoot(): void
+    {
+        parent::afterBoot();
+
+        // Attach class extensions
+        AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::AFTER_BOOT);
     }
 
     /**
@@ -111,7 +126,8 @@ class Component extends AbstractComponent
         return [
             InjectTypeResolverClassIntoTypeRegistryCompilerPass::class,
             AttachAndRegisterDirectiveResolverCompilerPass::class,
-            AttachExtensionCompilerPass::class,
+            BeforeBootAttachExtensionCompilerPass::class,
+            AfterBootAttachExtensionCompilerPass::class,
         ];
     }
 }

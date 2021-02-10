@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\AttachableExtensions;
 
 interface AttachExtensionServiceInterface
 {
-    public function enqueueExtension(string $class, string $group): void;
-    public function attachExtensions(): void;
+    public function enqueueExtension(string $event, string $class, string $group): void;
+    public function attachExtensions(string $event): void;
 }

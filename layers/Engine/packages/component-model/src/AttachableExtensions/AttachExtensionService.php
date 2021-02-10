@@ -7,17 +7,17 @@ namespace PoP\ComponentModel\AttachableExtensions;
 class AttachExtensionService implements AttachExtensionServiceInterface
 {
     /**
-     * @var array<string,string>
+     * @var array<string,array<string,string>>
      */
     protected array $classGroups = [];
 
-    public function enqueueExtension(string $class, string $group): void
+    public function enqueueExtension(string $event, string $class, string $group): void
     {
-        $this->classGroups[$class] = $group;
+        $this->classGroups[$event][$class] = $group;
     }
-    public function attachExtensions(): void
+    public function attachExtensions(string $event): void
     {
-        foreach ($this->classGroups as $class => $group) {
+        foreach ($this->classGroups[$event] as $class => $group) {
             $class::attach($group);
         }
     }
