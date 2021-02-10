@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events;
 
-use PoPSchema\Events\Conditional\Tags\ComponentBoot;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoPSchema\Events\TypeResolverPickers\Optional\EventCustomPostTypeResolverPicker;
 
 /**
  * Initialize component
@@ -92,34 +88,9 @@ class Component extends AbstractComponent
                 $skipSchema
             );
         }
-    }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        self::attachTypeResolverPickers();
-    }
-
-    /**
-     * If enabled, load the TypeResolverPickers
-     *
-     * @return void
-     */
-    protected static function attachTypeResolverPickers()
-    {
-        if (
-            Environment::addEventTypeToCustomPostUnionTypes()
-            // If $skipSchema is `true`, then services are not registered
-            && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
-        ) {
-            EventCustomPostTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
+        if (Environment::addEventTypeToCustomPostUnionTypes()) {
+            self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/AddEventTypeToCustomPostUnionTypes');
         }
     }
 }
