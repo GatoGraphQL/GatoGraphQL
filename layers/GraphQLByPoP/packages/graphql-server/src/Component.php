@@ -103,11 +103,11 @@ class Component extends AbstractComponent
 
             // Boot conditional on having variables treated as expressions for @export directive
             if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'variables-as-expressions-schema-cache.yaml');
+                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
             }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'embeddable-fields-schema-cache.yaml');
+                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
             }
             ServiceConfiguration::initialize();
         }

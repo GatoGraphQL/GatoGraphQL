@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\EmbeddableFields\FieldResolvers;
+namespace GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\EmbeddableFields\SchemaServices\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
