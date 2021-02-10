@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\TypeResolverDecorators;
+namespace PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\DirectiveResolvers\LoadCacheDirectiveResolver;
-use PoP\Engine\ConditionalOnEnvironment\ComponentModelCache\DirectiveResolvers\SaveCacheDirectiveResolver;
+use PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\DirectiveResolvers\LoadCacheDirectiveResolver;
+use PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\DirectiveResolvers\SaveCacheDirectiveResolver;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 
