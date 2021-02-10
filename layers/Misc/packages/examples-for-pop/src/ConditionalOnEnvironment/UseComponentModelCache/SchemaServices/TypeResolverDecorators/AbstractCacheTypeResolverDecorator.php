@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Leoloso\ExamplesForPoP\TypeResolverDecorators\Cache;
+namespace Leoloso\ExamplesForPoP\TypeResolverDecorators\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\TypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;

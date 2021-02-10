@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Leoloso\ExamplesForPoP\TypeResolverDecorators\Cache;
+namespace Leoloso\ExamplesForPoP\TypeResolverDecorators\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\TypeResolverDecorators;
 
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use Leoloso\ExamplesForPoP\TypeResolverDecorators\Cache\AbstractCacheTypeResolverDecorator;
 
 /**
  * Add directive @cache to fields expensive to calculate
