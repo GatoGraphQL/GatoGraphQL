@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Component;
 
-use PoP\Root\Managers\ComponentManager;
 use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Managers\ComponentManager;
 
 /**
  * Initialize component
@@ -30,11 +30,14 @@ abstract class AbstractComponent implements ComponentInterface
      * @param boolean $skipSchema Indicate if to skip initializing the schema
      * @param string[] $skipSchemaComponentClasses
      */
-    public static function initialize(
+    final public static function initialize(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
+        // Register itself in the Manager
+        ComponentManager::register(get_called_class());
+
         // Initialize the self component
         static::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
 
@@ -80,8 +83,6 @@ abstract class AbstractComponent implements ComponentInterface
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        // Register itself in the Manager
-        ComponentManager::register(get_called_class());
     }
 
     /**
