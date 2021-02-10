@@ -8,6 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -47,6 +48,7 @@ class AttachExtensionCompilerPass implements CompilerPassInterface
         return [
             FieldResolverInterface::class => AttachableExtensionGroups::FIELDRESOLVERS,
             DirectiveResolverInterface::class => AttachableExtensionGroups::DIRECTIVERESOLVERS,
+            TypeResolverPickerInterface::class => AttachableExtensionGroups::TYPERESOLVERPICKERS,
         ];
     }
 }
