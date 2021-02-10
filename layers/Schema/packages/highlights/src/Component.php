@@ -7,9 +7,6 @@ namespace PoPSchema\Highlights;
 use PoPSchema\Highlights\Environment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoPSchema\Highlights\TypeResolverPickers\Optional\HighlightCustomPostTypeResolverPicker;
 
 /**
  * Initialize component
@@ -45,34 +42,8 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        self::attachTypeResolverPickers();
-    }
-
-    /**
-     * If enabled, load the TypeResolverPickers
-     *
-     * @return void
-     */
-    protected static function attachTypeResolverPickers()
-    {
-        if (
-            Environment::addHighlightTypeToCustomPostUnionTypes()
-            // If $skipSchema is `true`, then services are not registered
-            && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
-        ) {
-            HighlightCustomPostTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
+        if (Environment::addHighlightTypeToCustomPostUnionTypes()) {
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddHighlightTypeToCustomPostUnionTypes');
         }
     }
 }

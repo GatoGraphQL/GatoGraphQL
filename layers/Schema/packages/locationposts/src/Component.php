@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\LocationPosts;
 
-use PoPSchema\LocationPosts\Conditional\Tags\ComponentBoot;
 use PoPSchema\LocationPosts\Environment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoPSchema\LocationPosts\TypeResolverPickers\Optional\LocationPostCustomPostTypeResolverPicker;
 
 /**
  * Initialize component
@@ -63,6 +59,10 @@ class Component extends AbstractComponent
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
+        if (Environment::addLocationPostTypeToCustomPostUnionTypes()) {
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes');
+        }
+
         if (
             class_exists('\PoPSchema\Tags\Component')
             && !in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses)
@@ -81,35 +81,6 @@ class Component extends AbstractComponent
                 $configuration,
                 $skipSchema
             );
-        }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        self::attachTypeResolverPickers();
-    }
-
-    /**
-     * If enabled, load the TypeResolverPickers
-     *
-     * @return void
-     */
-    protected static function attachTypeResolverPickers()
-    {
-        if (
-            Environment::addLocationPostTypeToCustomPostUnionTypes()
-            // If $skipSchema is `true`, then services are not registered
-            && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
-        ) {
-            LocationPostCustomPostTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace PoPSchema\StancesWP;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoPSchema\StancesWP\Config\ServiceConfiguration;
+use PoPSchema\Stances\Environment;
 
 /**
  * Initialize component
@@ -43,6 +43,8 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-        ServiceConfiguration::initialize();
+        if (Environment::addStanceTypeToCustomPostUnionTypes()) {
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes/Overrides');
+        }
     }
 }
