@@ -8,9 +8,6 @@ use PoPSchema\Posts\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Posts\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoPSchema\Posts\TypeResolverPickers\Optional\PostCustomPostTypeResolverPicker;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -87,37 +84,12 @@ class Component extends AbstractComponent
             );
         }
 
+        if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
+            self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
+        }
+
         // Initialize at the end
         ServiceConfiguration::initialize();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        self::attachTypeResolverPickers();
-    }
-
-    /**
-     * If enabled, load the TypeResolverPickers
-     *
-     * @return void
-     */
-    protected static function attachTypeResolverPickers()
-    {
-        if (
-            ComponentConfiguration::addPostTypeToCustomPostUnionTypes()
-            // If $skipSchema is `true`, then services are not registered
-            && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
-        ) {
-            PostCustomPostTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
-        }
     }
 
     /**
