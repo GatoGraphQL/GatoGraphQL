@@ -8,7 +8,7 @@ use PoP\Engine\ComponentLoader;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use GraphQLAPI\GraphQLAPI\Admin\Menus\AbstractMenu;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\AbstractMenu;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;

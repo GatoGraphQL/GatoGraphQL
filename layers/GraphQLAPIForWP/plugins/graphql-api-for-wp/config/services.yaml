@@ -3,12 +3,6 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\Admin\Menus\:
-        resource: '../src/Admin/Menus/*'
-
-    GraphQLAPI\GraphQLAPI\Admin\EndpointResolvers\:
-        resource: '../src/Admin/EndpointResolvers/*'
-
     GraphQLAPI\GraphQLAPI\Taxonomies\:
         resource: '../src/Taxonomies/*'
 

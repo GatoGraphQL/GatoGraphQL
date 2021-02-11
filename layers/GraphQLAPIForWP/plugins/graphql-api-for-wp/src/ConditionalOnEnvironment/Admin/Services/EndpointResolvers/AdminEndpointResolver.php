@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\EndpointResolvers;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\EndpointResolvers;
 
 use PoP\EngineWP\Templates\TemplateHelpers;
 use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;

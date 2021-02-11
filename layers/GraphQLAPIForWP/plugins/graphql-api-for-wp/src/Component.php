@@ -83,6 +83,7 @@ class Component extends AbstractComponent
          * FieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
             self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.php');
         }
         // Register the Cache services, if the module is not disabled

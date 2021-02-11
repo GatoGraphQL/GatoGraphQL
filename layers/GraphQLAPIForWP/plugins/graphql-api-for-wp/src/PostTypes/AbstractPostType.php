@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
 use WP_Post;
-use GraphQLAPI\GraphQLAPI\Admin\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\General\CPTUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;

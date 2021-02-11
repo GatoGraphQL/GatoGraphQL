@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\Menus;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus;
 
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AbstractMenuPage;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
