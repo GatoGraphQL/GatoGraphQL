@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades;
 
-use GraphQLAPI\GraphQLAPI\Cache\CacheConfigurationManager;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\ConfigurationCache\Overrides\CacheConfigurationManager;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**

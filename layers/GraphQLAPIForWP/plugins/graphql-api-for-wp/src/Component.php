@@ -89,7 +89,7 @@ class Component extends AbstractComponent
         // Register the Cache services, if the module is not disabled
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            self::initYAMLServices(dirname(__DIR__), '', 'cache-services.yaml');
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
         self::initComponentConfiguration();
         // Override DI services
