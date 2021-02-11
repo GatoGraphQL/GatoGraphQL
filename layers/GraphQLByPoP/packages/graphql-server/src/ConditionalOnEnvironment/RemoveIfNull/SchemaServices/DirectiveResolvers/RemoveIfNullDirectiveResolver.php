@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\DirectiveResolvers\ConditionalOnEnvironment;
+namespace GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\RemoveIfNull\SchemaServices\DirectiveResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -181,7 +181,8 @@ class RemoveIfNullDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'removeIfNull';
+    public const DIRECTIVE_NAME = 'removeIfNull';
+
     public static function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;

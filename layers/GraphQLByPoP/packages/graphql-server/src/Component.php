@@ -17,11 +17,8 @@ use GraphQLByPoP\GraphQLServer\Config\ServiceConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\DirectiveResolvers\ConditionalOnEnvironment\ExportDirectiveResolver;
-use GraphQLByPoP\GraphQLServer\DirectiveResolvers\ConditionalOnEnvironment\RemoveIfNullDirectiveResolver;
 
 /**
  * Initialize component
@@ -109,6 +106,14 @@ class Component extends AbstractComponent
             if (APIComponentConfiguration::enableEmbeddableFields()) {
                 self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
             }
+            // The @export directive depends on the Multiple Query Execution being enabled
+            if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
+                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
+            }
+            // Attach @removeIfNull?
+            if (ComponentConfiguration::enableRemoveIfNullDirective()) {
+                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
+            }
             ServiceConfiguration::initialize();
         }
     }
@@ -126,16 +131,6 @@ class Component extends AbstractComponent
     public static function beforeBoot(): void
     {
         parent::beforeBoot();
-
-        // Conditional on Environment
-        // The @export directive depends on the Multiple Query Execution being enabled
-        if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-            ExportDirectiveResolver::attach(AttachableExtensionGroups::DIRECTIVERESOLVERS);
-        }
-        // Attach @removeIfNull?
-        if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-            RemoveIfNullDirectiveResolver::attach(AttachableExtensionGroups::DIRECTIVERESOLVERS);
-        }
 
         // Boot conditional on API package being installed
         if (class_exists('\PoP\AccessControl\Component')) {

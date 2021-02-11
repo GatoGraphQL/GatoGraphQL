@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\DirectiveResolvers\ConditionalOnEnvironment;
+namespace GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\MultipleQueryExecution\SchemaServices\DirectiveResolvers;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -63,7 +63,8 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
  */
 class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    const DIRECTIVE_NAME = 'export';
+    public const DIRECTIVE_NAME = 'export';
+
     public static function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
