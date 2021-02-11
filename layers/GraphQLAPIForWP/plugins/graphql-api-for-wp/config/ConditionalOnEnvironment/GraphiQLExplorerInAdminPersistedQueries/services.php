@@ -8,8 +8,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
     $services->load(
         'GraphQLAPI\\GraphQLAPI\\ConditionalOnEnvironment\\GraphiQLExplorerInAdminPersistedQueries\\Services\\',
         '../../../src/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Services/*'

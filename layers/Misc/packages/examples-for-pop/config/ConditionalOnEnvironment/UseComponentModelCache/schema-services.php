@@ -8,8 +8,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
     $services->load(
         'Leoloso\\ExamplesForPoP\\ConditionalOnEnvironment\\UseComponentModelCache\\SchemaServices\\',
         '../../../src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/*'

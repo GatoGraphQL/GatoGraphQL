@@ -8,8 +8,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
     $services->load(
         'PoPSchema\\LocationPosts\\ConditionalOnEnvironment\\AddLocationPostTypeToCustomPostUnionTypes\\SchemaServices\\',
         '../../../src/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes/SchemaServices/*'

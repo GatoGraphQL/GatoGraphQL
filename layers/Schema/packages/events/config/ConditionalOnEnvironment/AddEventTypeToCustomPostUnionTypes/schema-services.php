@@ -8,8 +8,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
     $services->load(
         'PoPSchema\\Events\\ConditionalOnEnvironment\\AddEventTypeToCustomPostUnionTypes\\SchemaServices\\',
         '../../../src/ConditionalOnEnvironment/AddEventTypeToCustomPostUnionTypes/SchemaServices/*'

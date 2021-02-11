@@ -10,8 +10,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
 
     $services->set(
         UpstreamStanceCustomPostTypeResolverPicker::class,

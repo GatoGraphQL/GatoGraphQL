@@ -8,8 +8,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
     $services->load(
         'PoP\\Engine\\ConditionalOnEnvironment\\Guzzle\\SchemaServices\\',
         '../../../src/ConditionalOnEnvironment/Guzzle/SchemaServices/*'

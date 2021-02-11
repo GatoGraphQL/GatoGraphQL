@@ -8,8 +8,7 @@ return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->public()
-            ->autowire()
-            ->autoconfigure();
+            ->autowire();
     $services->load(
         'GraphQLByPoP\\GraphQLServer\\ConditionalOnEnvironment\\EmbeddableFields\\SchemaServices\\',
         '../../../src/ConditionalOnEnvironment/EmbeddableFields/SchemaServices/*'
