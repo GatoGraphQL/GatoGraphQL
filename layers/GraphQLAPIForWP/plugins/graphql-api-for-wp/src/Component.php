@@ -100,7 +100,7 @@ class Component extends AbstractComponent
                 ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
             )
         ) {
-            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Services');
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries');
         }
         ServiceConfiguration::initialize();
     }
