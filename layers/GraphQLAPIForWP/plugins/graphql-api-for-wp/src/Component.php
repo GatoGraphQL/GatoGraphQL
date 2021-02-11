@@ -78,6 +78,9 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
+        self::initComponentConfiguration();
+        // Override DI services
+        self::initPHPServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         /**
          * FieldResolvers used to configure the services can also be accessed in the admin area
@@ -91,9 +94,6 @@ class Component extends AbstractComponent
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
             self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
-        self::initComponentConfiguration();
-        // Override DI services
-        self::initPHPServices(dirname(__DIR__), '/Overrides');
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
