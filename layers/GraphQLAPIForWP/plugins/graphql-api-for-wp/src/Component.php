@@ -78,11 +78,12 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
+        // Conditional DI settings
         /**
          * FieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'admin-schema-services.yaml');
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.php');
         }
         // Register the Cache services, if the module is not disabled
         $moduleRegistry = ModuleRegistryFacade::getInstance();
@@ -92,7 +93,6 @@ class Component extends AbstractComponent
         self::initComponentConfiguration();
         // Override DI services
         self::initPHPServices(dirname(__DIR__), '/Overrides');
-        // Conditional DI settings
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
