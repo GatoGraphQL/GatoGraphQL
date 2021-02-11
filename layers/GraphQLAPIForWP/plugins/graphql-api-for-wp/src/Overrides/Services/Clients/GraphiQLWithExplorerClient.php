@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Clients\Overrides;
+namespace GraphQLAPI\GraphQLAPI\Overrides\Services\Clients;
 
-class GraphiQLClient extends \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
+use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLWithExplorerClient as UpstreamGraphiQLWithExplorerClient;
+
+class GraphiQLWithExplorerClient extends UpstreamGraphiQLWithExplorerClient
 {
     use SingleEndpointGraphiQLClientTrait;
 

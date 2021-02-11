@@ -90,6 +90,8 @@ class Component extends AbstractComponent
             self::initYAMLServices(dirname(__DIR__), '', 'cache-services.yaml');
         }
         self::initComponentConfiguration();
+        // Override DI services
+        self::initPHPServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -100,7 +102,7 @@ class Component extends AbstractComponent
                 ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
             )
         ) {
-            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries');
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries');
         }
         ServiceConfiguration::initialize();
     }

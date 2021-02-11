@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Config;
 
-use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
-use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLWithExplorerClient;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
 
@@ -26,7 +23,6 @@ class ServiceConfiguration
     protected static function configure()
     {
         self::configureAccessControl();
-        self::overrideServiceClasses();
     }
 
     /**
@@ -47,25 +43,6 @@ class ServiceConfiguration
                 [RootTypeResolver::class, 'cacheControlLists', $capabilities],
                 [RootTypeResolver::class, 'fieldDeprecationLists', $capabilities],
             ]
-        );
-    }
-
-    /**
-     * Override service classes
-     */
-    protected static function overrideServiceClasses(): void
-    {
-        ContainerBuilderUtils::injectValuesIntoService(
-            InstanceManagerInterface::class,
-            'overrideClass',
-            GraphiQLClient::class,
-            \GraphQLAPI\GraphQLAPI\Clients\Overrides\GraphiQLClient::class
-        );
-        ContainerBuilderUtils::injectValuesIntoService(
-            InstanceManagerInterface::class,
-            'overrideClass',
-            GraphiQLWithExplorerClient::class,
-            \GraphQLAPI\GraphQLAPI\Clients\Overrides\GraphiQLWithExplorerClient::class
         );
     }
 }
