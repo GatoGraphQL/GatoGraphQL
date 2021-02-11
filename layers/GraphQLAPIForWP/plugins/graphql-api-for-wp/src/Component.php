@@ -4,21 +4,23 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use GraphQLAPI\GraphQLAPI\Config\ServiceConfiguration;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EditingPersistedQuerySchemaConfiguratorExecuter;
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EndpointSchemaConfiguratorExecuter;
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\PersistedQuerySchemaConfiguratorExecuter;
-use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EditingPersistedQuerySchemaConfiguratorExecuter;
+use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
+use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
@@ -88,6 +90,18 @@ class Component extends AbstractComponent
             self::initYAMLServices(dirname(__DIR__), '', 'cache-services.yaml');
         }
         self::initComponentConfiguration();
+        // Conditional DI settings
+        // Maybe use GraphiQL with Explorer
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        if (
+            $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)
+            && $userSettingsManager->getSetting(
+                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
+            )
+        ) {
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Services');
+        }
         ServiceConfiguration::initialize();
     }
 
