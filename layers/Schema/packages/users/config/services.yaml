@@ -1,16 +1,7 @@
-parameters:
-    version: '0.1.0'
-
 services:
     _defaults:
         public: true
         autowire: true
-
-    PoPSchema\Users\Conditional\API\RouteModuleProcessors\:
-        resource: '../src/Conditional/API/RouteModuleProcessors/*'
-
-    PoPSchema\Users\Conditional\RESTAPI\RouteModuleProcessors\:
-        resource: '../src/Conditional/RESTAPI/RouteModuleProcessors/*'
 
     PoPSchema\Users\LooseContracts\:
         resource: '../src/LooseContracts/*'

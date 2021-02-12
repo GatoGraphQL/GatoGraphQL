@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\Users\Conditional\API\RouteModuleProcessors\:
+        resource: '../../../src/Conditional/API/RouteModuleProcessors/*'
+
