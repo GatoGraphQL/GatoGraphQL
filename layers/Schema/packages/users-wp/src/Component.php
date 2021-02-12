@@ -58,5 +58,8 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
+        if (class_exists('\PoPSchema\CustomPosts\Component')) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');
+        }
     }
 }

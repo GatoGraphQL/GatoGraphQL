@@ -4,3 +4,6 @@ services:
 
     PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
         class: \PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI
+
+    PoPSchema\CommentsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'

@@ -5,3 +5,6 @@ services:
     PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
         class: \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
 
+    PoPSchema\CustomPostsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+

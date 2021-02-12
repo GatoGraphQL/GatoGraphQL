@@ -1,0 +1,6 @@
+services:
+    _defaults:
+        public: true
+
+    PoPSchema\UsersWP\Conditional\CustomPosts\LooseContracts\:
+        resource: '../../../src/Conditional/CustomPosts/LooseContracts/*'

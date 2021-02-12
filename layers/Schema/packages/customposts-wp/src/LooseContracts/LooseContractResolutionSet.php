@@ -1,12 +1,12 @@
 <?php
-namespace PoPSchema\CustomPosts\WP;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\LooseContracts\Facades\LooseContractManagerFacade;
+declare(strict_types=1);
+
+namespace PoPSchema\CustomPostsWP\LooseContracts;
+
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
-class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
+class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
     protected function resolveContracts()
     {
@@ -30,13 +30,3 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
         ]);
     }
 }
-
-/**
- * Initialize
- */
-new CMSLooseContractImplementations(
-    LooseContractManagerFacade::getInstance(),
-    NameResolverFacade::getInstance(),
-    HooksAPIFacade::getInstance()
-);
-

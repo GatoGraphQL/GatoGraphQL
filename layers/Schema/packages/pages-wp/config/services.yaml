@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        public: true
+
     PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface:
         class: \PoPSchema\PagesWP\TypeAPIs\PageTypeAPI
-        public: true
+
+    PoPSchema\PagesWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
