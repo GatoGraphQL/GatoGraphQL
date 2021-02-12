@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container;
 
-use PoP\Root\Container\ContainerBuilderUtils;
+use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 
 /**
  * Collect the services that must be automatically instantiated,
@@ -26,8 +26,13 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     // {
     //     return $this->serviceClasses;
     // }
-    public function instantiateServices(): void
+    public function initializeServices(): void
     {
-        ContainerBuilderUtils::instantiateServices($this->serviceClasses);
+        $containerBuilder = ContainerBuilderFactory::getInstance();
+        foreach ($this->serviceClasses as $serviceClass) {
+            /** @var AutomaticallyInstantiatedServiceInterface */
+            $service = $containerBuilder->get($serviceClass);
+            $service->initialize();
+        }
     }
 }

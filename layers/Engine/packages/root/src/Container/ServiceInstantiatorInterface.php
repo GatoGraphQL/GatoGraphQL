@@ -13,5 +13,5 @@ interface ServiceInstantiatorInterface
 {
     public function addServiceClass(string $sertiveClass): void;
     // public function getServiceClasses(): array;
-    public function instantiateServices(): void;
+    public function initializeServices(): void;
 }

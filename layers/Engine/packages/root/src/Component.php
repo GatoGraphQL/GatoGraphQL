@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Dotenv\DotenvBuilderFactory;
+use PoP\Root\Container\CompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerBuilderUtils;
-use PoP\Root\Managers\ComponentManager;
 use PoP\Root\Container\ServiceInstantiatorInterface;
+use PoP\Root\Dotenv\DotenvBuilderFactory;
+use PoP\Root\Managers\ComponentManager;
 
 /**
  * Initialize component
@@ -97,8 +98,20 @@ class Component extends AbstractComponent
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
-        $serviceInstantiator->instantiateServices();
+        $serviceInstantiator->initializeServices();
         // - by each Component
         ContainerBuilderUtils::instantiateServices($servicesToInitialize);
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            AutomaticallyInstantiatedServiceCompilerPass::class,
+        ];
     }
 }

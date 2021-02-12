@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
-use PoP\LooseContracts\Container\CompilerPasses\InstantiateLooseContractResolutionSetServiceCompilerPass;
-use PoP\LooseContracts\Container\CompilerPasses\InstantiateLooseContractSetServiceCompilerPass;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -38,18 +36,5 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-    }
-
-    /**
-     * Get all the compiler pass classes required to register on the container
-     *
-     * @return string[]
-     */
-    public static function getContainerCompilerPassClasses(): array
-    {
-        return [
-            InstantiateLooseContractSetServiceCompilerPass::class,
-            InstantiateLooseContractResolutionSetServiceCompilerPass::class,
-        ];
     }
 }
