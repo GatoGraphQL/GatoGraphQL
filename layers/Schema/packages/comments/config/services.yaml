@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Comments\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPSchema\Comments\LooseContracts\:
+        resource: '../src/LooseContracts/*'

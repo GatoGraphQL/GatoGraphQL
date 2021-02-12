@@ -3,15 +3,16 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class PoP_Notifications_LooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Filters
-			'popcomponent:notifications:init',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Filters
+            'popcomponent:notifications:init',
+        ];
+    }
 }
 
 /**

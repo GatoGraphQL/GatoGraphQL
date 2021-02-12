@@ -47,5 +47,6 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
+        self::initYAMLServices(dirname(__DIR__));
     }
 }

@@ -3,15 +3,16 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class PoP_UserPlatform_LooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredNames(): array {
-		return [
-			// DB Columns
-			'popcomponent:userplatform:dbcolumn:orderby:users:lastediteddate',
-		];
-	}
+    public function getRequiredNames(): array
+    {
+        return [
+            // DB Columns
+            'popcomponent:userplatform:dbcolumn:orderby:users:lastediteddate',
+        ];
+    }
 }
 
 /**

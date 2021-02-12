@@ -71,17 +71,17 @@ class Component extends AbstractComponent
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
         ServiceConfiguration::initialize();
 
-        if (
-            class_exists('\PoPSchema\CustomPosts\Component')
-            && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CustomPosts');
+        if (class_exists('\PoPSchema\CustomPosts\Component')) {
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts');
+            if (!in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)) {
+                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CustomPosts');
 
-            if (
-                class_exists('\PoP\RESTAPI\Component')
-                && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
-            ) {
-                self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts/Conditional/RESTAPI');
+                if (
+                    class_exists('\PoP\RESTAPI\Component')
+                    && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
+                ) {
+                    self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts/Conditional/RESTAPI');
+                }
             }
         }
     }

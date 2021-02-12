@@ -3,11 +3,14 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Pages\Hooks\:
-        resource: '../src/Hooks/*'
-
     PoPSchema\Pages\Conditional\API\RouteModuleProcessors\:
         resource: '../src/Conditional/API/RouteModuleProcessors/*'
 
     PoPSchema\Pages\Conditional\RESTAPI\RouteModuleProcessors\:
         resource: '../src/Conditional/RESTAPI/RouteModuleProcessors/*'
+
+    PoPSchema\Pages\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPSchema\Pages\LooseContracts\:
+        resource: '../src/LooseContracts/*'

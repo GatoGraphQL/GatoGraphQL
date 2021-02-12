@@ -11,11 +11,6 @@ class PoP_Events_Initialization
         include_once 'config/load.php';
 
         /**
-         * Load the Contracts
-         */
-        include_once 'contracts/load.php';
-
-        /**
          * Load the Library
          */
         include_once 'library/load.php';

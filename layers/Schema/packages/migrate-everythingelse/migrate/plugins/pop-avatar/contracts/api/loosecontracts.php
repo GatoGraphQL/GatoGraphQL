@@ -3,17 +3,18 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class PoP_Avatar_LooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Filters
-			'popcomponent:avatar:avatarexists',
-			// Actions
-			'popcomponent:avatar:avataruploaded',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Filters
+            'popcomponent:avatar:avatarexists',
+            // Actions
+            'popcomponent:avatar:avataruploaded',
+        ];
+    }
 }
 
 /**

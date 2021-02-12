@@ -3,8 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPosts\Hooks\:
-        resource: '../src/Hooks/*'
-
-    PoPSchema\CustomPosts\LooseContracts\:
+    PoPSchema\Tags\LooseContracts\:
         resource: '../src/LooseContracts/*'

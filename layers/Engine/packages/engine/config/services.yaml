@@ -22,6 +22,9 @@ services:
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
 
+    PoP\Engine\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
     PoP\Engine\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
         public: false
