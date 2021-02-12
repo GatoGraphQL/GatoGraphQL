@@ -19,6 +19,7 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 
 /**
  * Initialize component
@@ -117,11 +118,12 @@ class Component extends AbstractComponent
             if (ComponentConfiguration::enableRemoveIfNullDirective()) {
                 self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
             }
-            if (class_exists('\PoP\AccessControl\Component')) {
-                ConditionalComponent::initialize(
-                    $configuration,
-                    $skipSchema
-                );
+            if (
+                class_exists('\PoP\CacheControl\Component')
+                && class_exists('\PoP\AccessControl\Component')
+                && AccessControlComponentConfiguration::canSchemaBePrivate()
+            ) {
+                self::maybeInitPHPSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
             ServiceConfiguration::initialize();
         }

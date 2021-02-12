@@ -10,7 +10,7 @@ return function (ContainerConfigurator $configurator) {
             ->public()
             ->autowire();
     $services->load(
-        'GraphQLByPoP\\GraphQLServer\\Conditional\\AccessControl\\ConditionalOnEnvironment\\PrivateSchema\\SchemaServices\\',
-        '../../../../../src/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema/SchemaServices/*'
+        'GraphQLByPoP\\GraphQLServer\\Conditional\\CacheControl\\Conditional\\AccessControl\\ConditionalOnEnvironment\\PrivateSchema\\SchemaServices\\',
+        '../../../../../../../src/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema/SchemaServices/*'
     );
 };
