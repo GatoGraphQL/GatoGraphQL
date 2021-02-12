@@ -43,6 +43,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\AccessControl\Component::class,
+            \PoP\CacheControl\Component::class,
         ];
     }
 
