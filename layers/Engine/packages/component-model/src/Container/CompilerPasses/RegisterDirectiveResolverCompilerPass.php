@@ -10,7 +10,7 @@ use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class AttachAndRegisterDirectiveResolverCompilerPass implements CompilerPassInterface
+class RegisterDirectiveResolverCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $containerBuilder): void
     {

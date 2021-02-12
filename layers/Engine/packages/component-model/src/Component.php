@@ -7,7 +7,7 @@ namespace PoP\ComponentModel;
 use PoP\ComponentModel\Component\ApplicationEvents;
 use PoP\ComponentModel\Config\ServiceConfiguration;
 use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\AttachAndRegisterDirectiveResolverCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\RegisterDirectiveResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
@@ -122,7 +122,7 @@ class Component extends AbstractComponent
     {
         return [
             InjectTypeResolverClassIntoTypeRegistryCompilerPass::class,
-            AttachAndRegisterDirectiveResolverCompilerPass::class,
+            RegisterDirectiveResolverCompilerPass::class,
             BeforeBootAttachExtensionCompilerPass::class,
             AfterBootAttachExtensionCompilerPass::class,
             RegisterFieldInterfaceResolverCompilerPass::class,
