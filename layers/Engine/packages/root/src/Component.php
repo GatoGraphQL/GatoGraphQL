@@ -75,32 +75,23 @@ class Component extends AbstractComponent
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
-        $servicesToInitialize = [];
         foreach (ComponentManager::getComponentClasses() as $componentClass) {
             $compilerPassClasses = [
                 ...$compilerPassClasses,
                 ...$componentClass::getContainerCompilerPassClasses()
             ];
-            $servicesToInitialize = [
-                ...$servicesToInitialize,
-                ...$componentClass::getContainerServicesToInitialize()
-            ];
         }
         $compilerPassClasses = array_values(array_unique($compilerPassClasses));
-        $servicesToInitialize = array_values(array_unique($servicesToInitialize));
 
         // Compile and Cache Symfony's DependencyInjection Container Builder
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
 
-        // Initialize services defined in the container:
-        // - through CompilerPass
+        // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices();
-        // - by each Component
-        ContainerBuilderUtils::instantiateServices($servicesToInitialize);
     }
 
     /**
