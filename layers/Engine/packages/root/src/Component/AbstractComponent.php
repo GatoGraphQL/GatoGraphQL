@@ -12,6 +12,8 @@ use PoP\Root\Managers\ComponentManager;
  */
 abstract class AbstractComponent implements ComponentInterface
 {
+    use YAMLServicesTrait;
+
     /**
      * Enable each component to set default configuration for
      * itself and its depended components

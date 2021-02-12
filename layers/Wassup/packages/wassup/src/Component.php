@@ -6,15 +6,12 @@ namespace PoPSitesWassup\Wassup;
 
 use PoP\Root\Component\AbstractComponent;
 use PoPSitesWassup\Wassup\Config\ServiceConfiguration;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     /**

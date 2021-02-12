@@ -6,7 +6,6 @@ namespace PoPSchema\Categories;
 
 use PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Categories\Config\ServiceConfiguration;
 
 /**
@@ -14,8 +13,6 @@ use PoPSchema\Categories\Config\ServiceConfiguration;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';

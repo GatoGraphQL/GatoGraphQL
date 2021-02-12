@@ -9,7 +9,6 @@ use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\Root\Managers\ComponentManager;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 
 /**
@@ -17,10 +16,6 @@ use PoP\Root\Container\ServiceInstantiatorInterface;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *

@@ -7,17 +7,12 @@ namespace PoP\LooseContracts;
 use PoP\LooseContracts\Container\CompilerPasses\InstantiateLooseContractResolutionSetServiceCompilerPass;
 use PoP\LooseContracts\Container\CompilerPasses\InstantiateLooseContractSetServiceCompilerPass;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
@@ -25,7 +24,6 @@ use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfigurat
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;

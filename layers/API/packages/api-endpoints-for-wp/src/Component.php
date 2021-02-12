@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\APIEndpointsForWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
@@ -14,10 +13,6 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *

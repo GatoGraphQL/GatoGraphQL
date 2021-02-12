@@ -8,14 +8,12 @@ use PoP\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\GraphQLAPI\Config\ServiceConfiguration;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';

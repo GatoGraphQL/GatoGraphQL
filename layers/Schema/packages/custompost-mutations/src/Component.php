@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     /**
      * Classes from PoP components that must be initialized before this component
      *

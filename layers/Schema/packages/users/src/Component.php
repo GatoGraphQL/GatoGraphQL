@@ -6,7 +6,6 @@ namespace PoPSchema\Users;
 
 use PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Users\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
@@ -16,8 +15,6 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';

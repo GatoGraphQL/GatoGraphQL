@@ -7,7 +7,6 @@ namespace PoP\RESTAPI;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoP\RESTAPI\Config\ServiceConfiguration;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\API\Component as APIComponent;
 
 /**
@@ -15,7 +14,6 @@ use PoP\API\Component as APIComponent;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';

@@ -6,15 +6,12 @@ namespace PoPSchema\Media;
 
 use PoPSchema\Media\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';

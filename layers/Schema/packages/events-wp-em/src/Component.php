@@ -6,7 +6,6 @@ namespace PoPSchema\EventsWPEM;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Events\Environment;
 
 /**
@@ -14,7 +13,6 @@ use PoPSchema\Events\Environment;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';

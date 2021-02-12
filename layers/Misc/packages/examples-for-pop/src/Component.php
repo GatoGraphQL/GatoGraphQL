@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Leoloso\ExamplesForPoP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 /**
@@ -13,8 +12,6 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public const VERSION = '0.2.0';
 
     /**

@@ -7,7 +7,6 @@ namespace PoPSchema\UserStateAccessControl;
 use PoPSchema\UserStateAccessControl\Conditional\CacheControl\ConditionalComponent;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -15,7 +14,6 @@ use PoP\Root\Component\CanDisableComponentTrait;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;

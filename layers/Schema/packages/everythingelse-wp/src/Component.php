@@ -6,15 +6,12 @@ namespace PoPSchema\EverythingElseWP;
 
 use PoPSchema\EverythingElseWP\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';

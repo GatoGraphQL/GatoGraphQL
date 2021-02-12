@@ -7,7 +7,6 @@ namespace PoP\API;
 use PoP\API\Configuration\Request;
 use PoP\API\Config\ServiceConfiguration;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 
@@ -16,7 +15,6 @@ use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfigurat
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;

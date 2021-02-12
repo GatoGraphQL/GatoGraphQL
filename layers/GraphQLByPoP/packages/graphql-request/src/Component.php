@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 
@@ -14,7 +13,6 @@ use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';

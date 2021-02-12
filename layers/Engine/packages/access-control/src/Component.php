@@ -6,7 +6,6 @@ namespace PoP\AccessControl;
 
 use PoP\AccessControl\Environment;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -14,7 +13,6 @@ use PoP\Root\Component\CanDisableComponentTrait;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;
