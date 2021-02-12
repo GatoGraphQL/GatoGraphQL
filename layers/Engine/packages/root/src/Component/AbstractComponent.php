@@ -12,7 +12,7 @@ use PoP\Root\Managers\ComponentManager;
  */
 abstract class AbstractComponent implements ComponentInterface
 {
-    use YAMLServicesTrait;
+    use InitializeContainerServicesInComponentTrait;
 
     /**
      * Enable each component to set default configuration for

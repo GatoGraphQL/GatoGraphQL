@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\Conditional\RESTAPI;
 
 use PoPSchema\PostTags\Component;
-use PoP\Root\Component\YAMLServicesTrait;
+use PoP\Root\Component\InitializeContainerServicesInComponentTrait;
 
 /**
  * Initialize component
  */
 class ConditionalComponent
 {
-    use YAMLServicesTrait;
+    use InitializeContainerServicesInComponentTrait;
 
     public static function initialize(
         array $configuration = [],

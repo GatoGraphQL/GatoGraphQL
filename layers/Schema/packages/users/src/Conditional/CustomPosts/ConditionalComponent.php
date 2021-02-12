@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\Users\Conditional\CustomPosts;
 
 use PoPSchema\Users\Component;
-use PoP\Root\Component\YAMLServicesTrait;
+use PoP\Root\Component\InitializeContainerServicesInComponentTrait;
 
 /**
  * Initialize component
  */
 class ConditionalComponent
 {
-    use YAMLServicesTrait;
+    use InitializeContainerServicesInComponentTrait;
 
     public static function initialize(
         array $configuration = [],

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\Conditional\CacheControl;
 
-use PoP\Root\Component\YAMLServicesTrait;
+use PoP\Root\Component\InitializeContainerServicesInComponentTrait;
 use PoPSchema\UserRolesAccessControl\Component;
 
 /**
@@ -12,7 +12,7 @@ use PoPSchema\UserRolesAccessControl\Component;
  */
 class ConditionalComponent
 {
-    use YAMLServicesTrait;
+    use InitializeContainerServicesInComponentTrait;
 
     public static function initialize(
         array $configuration = [],

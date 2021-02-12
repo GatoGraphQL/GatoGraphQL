@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-trait YAMLServicesTrait
+trait InitializeContainerServicesInComponentTrait
 {
     /**
      * Initialize the services defiend in the YAML configuration file.
