@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media;
 
-use PoPSchema\Media\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -69,10 +68,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
         }
     }
 }

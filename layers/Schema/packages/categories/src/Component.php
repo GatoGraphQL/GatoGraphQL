@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories;
 
-use PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoPSchema\Categories\Config\ServiceConfiguration;
 
@@ -70,10 +69,7 @@ class Component extends AbstractComponent
         ServiceConfiguration::initialize();
 
         if (!in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
         }
     }
 }

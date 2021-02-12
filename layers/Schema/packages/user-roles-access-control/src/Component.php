@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl;
 
-use PoPSchema\UserRolesAccessControl\Conditional\CacheControl\ConditionalComponent;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
@@ -65,10 +64,7 @@ class Component extends AbstractComponent
                 class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                ConditionalComponent::initialize(
-                    $configuration,
-                    $skipSchema
-                );
+                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl');
             }
         }
     }

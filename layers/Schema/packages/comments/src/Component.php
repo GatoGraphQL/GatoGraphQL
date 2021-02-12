@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments;
 
-use PoPSchema\Comments\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -69,20 +68,14 @@ class Component extends AbstractComponent
             class_exists('\PoP\RESTAPI\Component')
             && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
         }
 
         if (
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\Comments\Conditional\Users\ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
         }
     }
 }

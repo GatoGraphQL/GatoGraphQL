@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users;
 
-use PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoPSchema\Users\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
@@ -76,10 +75,14 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CustomPosts');
+
+            if (
+                class_exists('\PoP\RESTAPI\Component')
+                && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
+            ) {
+                self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts/Conditional/RESTAPI');
+            }
         }
     }
 

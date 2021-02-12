@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts;
 
-use PoPSchema\Posts\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoPSchema\Posts\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
@@ -75,10 +74,8 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
         }
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {

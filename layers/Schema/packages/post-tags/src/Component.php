@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags;
 
-use PoPSchema\PostTags\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoPSchema\PostTags\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
@@ -73,10 +72,7 @@ class Component extends AbstractComponent
         ServiceConfiguration::initialize();
 
         if (class_exists('\PoP\RESTAPI\Component::class') && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
         }
     }
 

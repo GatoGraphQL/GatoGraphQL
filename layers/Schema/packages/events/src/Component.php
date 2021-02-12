@@ -70,20 +70,14 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Tags\Component')
             && !in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\Events\Conditional\Tags\ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Tags');
         }
 
         if (
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            \PoPSchema\Events\Conditional\Users\ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
         }
 
         if (Environment::addEventTypeToCustomPostUnionTypes()) {
