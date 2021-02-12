@@ -1,13 +1,14 @@
 <?php
-namespace PoP\Engine\WP;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\LooseContracts\Facades\LooseContractManagerFacade;
+
+declare(strict_types=1);
+
+namespace PoP\EngineWP\LooseContracts;
+
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
-class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
+class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
-	protected function resolveContracts()
+    protected function resolveContracts()
     {
         // Actions
         // 1. Init comes before boot. We don't have the requested post/user/etc
@@ -49,15 +50,5 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 			'popcms:option:gmtOffset' => 'gmt_offset',
 			'popcms:option:timezone' => 'timezone_string',
 		]);
-	}
+    }
 }
-
-/**
- * Initialize
- */
-new CMSLooseContractImplementations(
-	LooseContractManagerFacade::getInstance(),
-	NameResolverFacade::getInstance(),
-	HooksAPIFacade::getInstance()
-);
-

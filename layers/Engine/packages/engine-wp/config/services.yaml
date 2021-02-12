@@ -3,8 +3,11 @@ services:
         public: true
         autowire: true
 
+    PoP\Engine\ErrorHandling\ErrorManagerInterface:
+        class: \PoP\EngineWP\ErrorHandling\ErrorManager
+
     PoP\EngineWP\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoP\Engine\ErrorHandling\ErrorManagerInterface:
-        class: \PoP\EngineWP\ErrorHandling\ErrorManager
+    PoP\EngineWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
