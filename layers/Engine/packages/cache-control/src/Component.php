@@ -7,9 +7,6 @@ namespace PoP\CacheControl;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\CacheControl\DirectiveResolvers\NestedFieldCacheControlDirectiveResolver;
 
 /**
  * Initialize component
@@ -54,31 +51,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return !Environment::disableCacheControl();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize directive resolvers, attaching each of them using the right priorities
-        self::setDirectiveResolverPriorities();
-    }
-
-    /**
-     * Sets the right priority for the directive resolvers
-     *
-     * @return void
-     */
-    protected static function setDirectiveResolverPriorities()
-    {
-        // It must execute before anyone else!
-        NestedFieldCacheControlDirectiveResolver::attach(AttachableExtensionGroups::DIRECTIVERESOLVERS, PHP_INT_MAX);
-        // It must execute last!
-        CacheControlDirectiveResolver::attach(AttachableExtensionGroups::DIRECTIVERESOLVERS, 0);
     }
 }
