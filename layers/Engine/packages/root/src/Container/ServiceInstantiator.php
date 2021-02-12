@@ -30,9 +30,14 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     {
         $containerBuilder = ContainerBuilderFactory::getInstance();
         foreach ($this->serviceClasses as $serviceClass) {
-            /** @var AutomaticallyInstantiatedServiceInterface */
-            $service = $containerBuilder->get($serviceClass);
-            $service->initialize();
+            // Watch out! Not all services are instantiated under their own class!
+            // Eg: GraphQLAPI\GraphQLAPI\Overrides\Services\Clients\GraphiQLClient
+            // overrides another services, yet it implements this interface
+            if ($containerBuilder->has($serviceClass)) {
+                /** @var AutomaticallyInstantiatedServiceInterface */
+                $service = $containerBuilder->get($serviceClass);
+                $service->initialize();
+            }
         }
     }
 }
