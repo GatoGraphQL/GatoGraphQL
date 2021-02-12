@@ -6,7 +6,7 @@ namespace PoPSchema\Comments\Conditional\RESTAPI;
 
 use PoPSchema\Comments\Component;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component

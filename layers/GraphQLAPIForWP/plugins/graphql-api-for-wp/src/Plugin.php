@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\Abstract
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\SettingsMenuPage;

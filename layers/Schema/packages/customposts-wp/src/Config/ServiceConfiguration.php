@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostsWP\Config;
 
 use PoPSchema\CustomPosts\TypeDataLoaders\CustomPostUnionTypeDataLoader;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class ServiceConfiguration

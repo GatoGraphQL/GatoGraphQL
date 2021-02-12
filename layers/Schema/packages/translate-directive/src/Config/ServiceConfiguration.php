@@ -6,7 +6,7 @@ namespace PoPSchema\TranslateDirective\Config;
 
 use PoPSchema\TranslateDirective\Environment;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoPSchema\TranslateDirective\Translation\TranslationServiceInterface;
 
 class ServiceConfiguration

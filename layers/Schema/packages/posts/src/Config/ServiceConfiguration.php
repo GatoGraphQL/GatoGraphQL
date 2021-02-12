@@ -6,7 +6,7 @@ namespace PoPSchema\Posts\Config;
 
 use PoP\API\Component;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 
 class ServiceConfiguration

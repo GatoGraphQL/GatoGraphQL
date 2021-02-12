@@ -6,7 +6,7 @@ namespace PoPSchema\TranslateDirectiveACL\Config;
 
 use PoPSchema\TranslateDirectiveACL\Environment;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPSchema\TranslateDirective\DirectiveResolvers\AbstractTranslateDirectiveResolver;

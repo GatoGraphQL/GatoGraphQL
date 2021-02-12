@@ -7,7 +7,7 @@ namespace PoP\Application\Config;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\ComponentModel\Modules\DefinitionGroups;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 
 class ServiceConfiguration

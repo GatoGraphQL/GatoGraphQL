@@ -6,7 +6,7 @@ namespace PoPSchema\Users\Conditional\CustomPosts;
 
 use PoPSchema\Users\Component;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component

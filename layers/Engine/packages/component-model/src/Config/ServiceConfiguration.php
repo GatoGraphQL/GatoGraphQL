@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Config;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\ValidateDirectiveResolver;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
