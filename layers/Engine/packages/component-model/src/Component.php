@@ -11,7 +11,6 @@ use PoP\ComponentModel\Container\CompilerPasses\AttachAndRegisterDirectiveResolv
 use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -78,9 +77,6 @@ class Component extends AbstractComponent
 
         // Initialize the Component Configuration
         ComponentConfiguration::init();
-
-        // Initialize classes
-        ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
 
         // Attach class extensions
         AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::BEFORE_BOOT);

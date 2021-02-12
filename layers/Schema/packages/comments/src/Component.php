@@ -7,7 +7,6 @@ namespace PoPSchema\Comments;
 use PoPSchema\Comments\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -88,17 +87,5 @@ class Component extends AbstractComponent
                 $skipSchema
             );
         }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
     }
 }

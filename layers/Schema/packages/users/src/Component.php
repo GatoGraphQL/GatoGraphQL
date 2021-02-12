@@ -8,7 +8,6 @@ use PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Users\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -85,19 +84,6 @@ class Component extends AbstractComponent
                 $skipSchema
             );
         }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize all classes
-        ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
     }
 
     /**
