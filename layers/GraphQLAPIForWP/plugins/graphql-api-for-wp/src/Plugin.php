@@ -333,7 +333,7 @@ class Plugin
             /**
              * Initialize all the services
              */
-            $menuServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Admin\\Menus');
+            $menuServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\ConditionalOnEnvironment\\Admin\\Services\\Menus');
             foreach ($menuServiceClasses as $serviceClass) {
                 /**
                  * @var AbstractMenu
@@ -341,7 +341,7 @@ class Plugin
                 $service = $instanceManager->getInstance($serviceClass);
                 $service->initialize();
             }
-            $endpointResolverServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Admin\\EndpointResolvers');
+            $endpointResolverServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\ConditionalOnEnvironment\\Admin\\Services\\EndpointResolvers');
             foreach ($endpointResolverServiceClasses as $serviceClass) {
                 /**
                  * @var AbstractEndpointResolver
