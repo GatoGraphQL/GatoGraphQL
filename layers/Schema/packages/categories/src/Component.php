@@ -8,7 +8,6 @@ use PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Categories\Config\ServiceConfiguration;
-use PoP\Root\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
@@ -78,21 +77,6 @@ class Component extends AbstractComponent
                 $configuration,
                 $skipSchema
             );
-        }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // If $skipSchema for `Condition` is `true`, then services are not registered
-        if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\RESTAPI\\Hooks'))) {
-            ConditionalComponent::beforeBoot();
         }
     }
 }
