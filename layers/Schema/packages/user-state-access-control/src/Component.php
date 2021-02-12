@@ -9,7 +9,6 @@ use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\Root\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component

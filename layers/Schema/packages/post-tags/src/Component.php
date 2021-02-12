@@ -8,7 +8,6 @@ use PoPSchema\PostTags\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\PostTags\Config\ServiceConfiguration;
-use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 

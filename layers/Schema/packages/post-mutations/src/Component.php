@@ -6,7 +6,6 @@ namespace PoPSchema\PostMutations;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
-use PoP\Root\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
