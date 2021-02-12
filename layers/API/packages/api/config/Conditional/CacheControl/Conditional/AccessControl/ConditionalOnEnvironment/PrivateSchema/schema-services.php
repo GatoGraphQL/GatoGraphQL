@@ -10,7 +10,7 @@ return function (ContainerConfigurator $configurator) {
             ->public()
             ->autowire();
     $services->load(
-        'PoP\\API\\Conditional\\AccessControl\\ConditionalOnEnvironment\\PrivateSchema\\SchemaServices\\',
-        '../../../../../src/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema/SchemaServices/*'
+        'PoP\\API\\Conditional\\CacheControl\\Conditional\\AccessControl\\ConditionalOnEnvironment\\PrivateSchema\\SchemaServices\\',
+        '../../../../../../../src/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema/SchemaServices/*'
     );
 };

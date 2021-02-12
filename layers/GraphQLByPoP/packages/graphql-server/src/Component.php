@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use GraphQLByPoP\GraphQLServer\Conditional\AccessControl\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use GraphQLByPoP\GraphQLServer\Environment;
@@ -120,7 +119,9 @@ class Component extends AbstractComponent
             }
             if (
                 class_exists('\PoP\CacheControl\Component')
+                && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
                 && class_exists('\PoP\AccessControl\Component')
+                && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
                 self::maybeInitPHPSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');

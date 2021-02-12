@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
-use PoP\API\Conditional\AccessControl\ConditionalComponent;
 use PoP\API\Configuration\Request;
 use PoP\API\Config\ServiceConfiguration;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 
 /**
  * Initialize component
@@ -91,14 +91,18 @@ class Component extends AbstractComponent
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
             ServiceConfiguration::initialize();
 
+            // Conditional packages
+            if (class_exists('\PoP\AccessControl\Component')) {
+                self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/AccessControl');
+            }
             if (
-                class_exists('\PoP\AccessControl\Component')
+                class_exists('\PoP\CacheControl\Component')
+                && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
+                && class_exists('\PoP\AccessControl\Component')
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
+                && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                ConditionalComponent::initialize(
-                    $configuration,
-                    $skipSchema
-                );
+                self::maybeInitPHPSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
         }
     }
@@ -106,20 +110,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return !Environment::disableAPI();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Boot conditional on API package being installed
-        if (class_exists('\PoP\AccessControl\Component')) {
-            ConditionalComponent::beforeBoot();
-        }
     }
 }
