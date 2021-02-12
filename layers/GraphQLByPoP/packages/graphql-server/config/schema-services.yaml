@@ -6,8 +6,5 @@ services:
     GraphQLByPoP\GraphQLServer\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    GraphQLByPoP\GraphQLServer\DirectiveResolvers\:
-        resource: '../src/DirectiveResolvers/*'
-
     GraphQLByPoP\GraphQLServer\TypeResolvers\:
         resource: '../src/TypeResolvers/*'

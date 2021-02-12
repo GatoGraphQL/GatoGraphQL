@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use GraphQLByPoP\GraphQLServer\Conditional\AccessControl\ComponentBoot;
+use GraphQLByPoP\GraphQLServer\Conditional\AccessControl\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use GraphQLByPoP\GraphQLServer\Environment;
@@ -27,6 +27,8 @@ class Component extends AbstractComponent
 {
     use YAMLServicesTrait;
     use CanDisableComponentTrait;
+
+    public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';
 
@@ -95,24 +97,31 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
-            self::initYAMLServices(dirname(__DIR__));
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+            self::$COMPONENT_DIR = dirname(__DIR__);
+            self::initYAMLServices(self::$COMPONENT_DIR);
+            self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
             // Boot conditional on having variables treated as expressions for @export directive
             if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
+                self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
             }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
+                self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
             }
             // The @export directive depends on the Multiple Query Execution being enabled
             if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
+                self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
             }
             // Attach @removeIfNull?
             if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
+                self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
+            }
+            if (class_exists('\PoP\AccessControl\Component')) {
+                ConditionalComponent::initialize(
+                    $configuration,
+                    $skipSchema
+                );
             }
             ServiceConfiguration::initialize();
         }
@@ -121,20 +130,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return GraphQLRequestComponent::isEnabled();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Boot conditional on API package being installed
-        if (class_exists('\PoP\AccessControl\Component')) {
-            ComponentBoot::beforeBoot();
-        }
     }
 }
