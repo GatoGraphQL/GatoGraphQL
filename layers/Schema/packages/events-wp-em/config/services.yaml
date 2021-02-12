@@ -1,6 +1,7 @@
 services:
     _defaults:
         public: true
+        autowire: true
 
     PoPSchema\Events\TypeAPIs\EventTypeAPIInterface:
         class: \PoPSchema\EventsWPEM\TypeAPIs\EventTypeAPI
