@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoP\APIEndpoints;
 
 use PoP\APIEndpoints\EndpointUtils;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractEndpointHandler
+abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiatedService
 {
     protected ?string $endpoint = null;
 
