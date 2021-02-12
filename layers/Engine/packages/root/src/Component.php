@@ -7,7 +7,6 @@ namespace PoP\Root;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\CompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
-use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Managers\ComponentManager;
