@@ -3,6 +3,9 @@ services:
         public: true
         autowire: true
 
+    GraphQLAPI\GraphQLAPI\Services\:
+        resource: '../src/Services/*'
+
     GraphQLAPI\GraphQLAPI\Taxonomies\:
         resource: '../src/Taxonomies/*'
 

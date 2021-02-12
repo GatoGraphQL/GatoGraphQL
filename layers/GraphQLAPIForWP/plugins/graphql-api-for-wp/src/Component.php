@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\Config\ServiceConfiguration;
+use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterAccessControlRuleBlockCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
@@ -145,5 +146,17 @@ class Component extends AbstractComponent
         (new PersistedQuerySchemaConfiguratorExecuter())->init();
         (new EndpointSchemaConfiguratorExecuter())->init();
         (new EditingPersistedQuerySchemaConfiguratorExecuter())->init();
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterAccessControlRuleBlockCompilerPass::class,
+        ];
     }
 }
