@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Container;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
 use PoP\Root\Container\ContainerBuilderUtils as RootContainerBuilderUtils;
 
