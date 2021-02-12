@@ -6,26 +6,20 @@ namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
 use GraphQLAPI\GraphQLAPI\Services\Registries\AccessControlRuleBlockRegistryInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PoP\Root\Container\CompilerPasses\AbstractInjectServiceClassIntoRegistryCompilerPass;
 
-class RegisterAccessControlRuleBlockCompilerPass implements CompilerPassInterface
+class RegisterAccessControlRuleBlockCompilerPass extends AbstractInjectServiceClassIntoRegistryCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function getRegistryServiceDefinition(): string
     {
-        $accessControlRuleBlockRegistryDefinition = $containerBuilder->getDefinition(AccessControlRuleBlockRegistryInterface::class);
-        $definitions = $containerBuilder->getDefinitions();
-        foreach ($definitions as $definition) {
-            $definitionClass = $definition->getClass();
-            if ($definitionClass === null || !is_a($definitionClass, AbstractAccessControlRuleBlock::class, true)) {
-                continue;
-            }
-
-            // Register the accessControlRuleBlock in the registry
-            $accessControlRuleBlockRegistryDefinition->addMethodCall(
-                'addServiceClass',
-                [$definitionClass]
-            );
-        }
+        return AccessControlRuleBlockRegistryInterface::class;
+    }
+    protected function getServiceClass(): string
+    {
+        return AbstractAccessControlRuleBlock::class;
+    }
+    protected function getRegistryMethodCallName(): string
+    {
+        return 'addServiceClass';
     }
 }

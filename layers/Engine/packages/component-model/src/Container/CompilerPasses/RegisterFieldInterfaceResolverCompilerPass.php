@@ -7,32 +7,24 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\Registries\FieldInterfaceRegistryInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PoP\Root\Container\CompilerPasses\AbstractInjectServiceClassIntoRegistryCompilerPass;
 
-class RegisterFieldInterfaceResolverCompilerPass implements CompilerPassInterface
+class RegisterFieldInterfaceResolverCompilerPass extends AbstractInjectServiceClassIntoRegistryCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function getRegistryServiceDefinition(): string
     {
-        /**
-         * Check the registries are enabled
-         */
-        if (!ComponentConfiguration::enableSchemaEntityRegistries()) {
-            return;
-        }
-        $fieldInterfaceRegistryDefinition = $containerBuilder->getDefinition(FieldInterfaceRegistryInterface::class);
-        $definitions = $containerBuilder->getDefinitions();
-        foreach ($definitions as $definition) {
-            $definitionClass = $definition->getClass();
-            if ($definitionClass === null || !is_a($definitionClass, FieldInterfaceResolverInterface::class, true)) {
-                continue;
-            }
-
-            // Register the directive in the registry
-            $fieldInterfaceRegistryDefinition->addMethodCall(
-                'addFieldInterfaceResolverClass',
-                [$definitionClass]
-            );
-        }
+        return FieldInterfaceRegistryInterface::class;
+    }
+    protected function getServiceClass(): string
+    {
+        return FieldInterfaceResolverInterface::class;
+    }
+    protected function getRegistryMethodCallName(): string
+    {
+        return 'addFieldInterfaceResolverClass';
+    }
+    protected function enabled(): bool
+    {
+        return ComponentConfiguration::enableSchemaEntityRegistries();
     }
 }
