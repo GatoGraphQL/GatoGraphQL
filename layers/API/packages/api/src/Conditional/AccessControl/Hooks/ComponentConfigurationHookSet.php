@@ -17,10 +17,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
         /**
          * Do not enable caching when doing a private schema mode
          */
-        if (
-            AccessControlComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode()
-            || AccessControlComponentConfiguration::usePrivateSchemaMode()
-        ) {
+        if (AccessControlComponentConfiguration::canSchemaBePrivate()) {
             $hookName = ComponentConfigurationHelpers::getHookName(
                 ComponentConfiguration::class,
                 Environment::USE_SCHEMA_DEFINITION_CACHE

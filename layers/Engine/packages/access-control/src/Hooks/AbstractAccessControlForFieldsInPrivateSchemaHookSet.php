@@ -17,9 +17,7 @@ abstract class AbstractAccessControlForFieldsInPrivateSchemaHookSet extends Abst
      */
     protected function enabled(): bool
     {
-        return
-            ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||
-            ComponentConfiguration::usePrivateSchemaMode();
+        return ComponentConfiguration::canSchemaBePrivate();
     }
 
     protected function getSchemaMode(): string
