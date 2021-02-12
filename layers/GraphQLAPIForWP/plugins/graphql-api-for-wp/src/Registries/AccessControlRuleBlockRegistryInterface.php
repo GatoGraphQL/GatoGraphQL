@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Registries;
+namespace GraphQLAPI\GraphQLAPI\Registries;
 
 interface AccessControlRuleBlockRegistryInterface
 {

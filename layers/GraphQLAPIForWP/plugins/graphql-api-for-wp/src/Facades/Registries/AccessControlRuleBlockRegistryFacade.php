@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
 use PoP\Root\Container\ContainerBuilderFactory;
-use GraphQLAPI\GraphQLAPI\Services\Registries\AccessControlRuleBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
 
 class AccessControlRuleBlockRegistryFacade
 {
