@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\DirectiveResolvers\ConditionalOnEnvironment;
+namespace PoP\API\Conditional\AccessControl\ConditionalOnEnvironment\PrivateSchema\SchemaServices\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 
