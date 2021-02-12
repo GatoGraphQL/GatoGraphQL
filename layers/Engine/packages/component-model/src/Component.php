@@ -10,6 +10,7 @@ use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompiler
 use PoP\ComponentModel\Container\CompilerPasses\AttachAndRegisterDirectiveResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
@@ -128,6 +129,7 @@ class Component extends AbstractComponent
             AttachAndRegisterDirectiveResolverCompilerPass::class,
             BeforeBootAttachExtensionCompilerPass::class,
             AfterBootAttachExtensionCompilerPass::class,
+            RegisterFieldInterfaceResolverCompilerPass::class,
         ];
     }
 }
