@@ -92,14 +92,39 @@ class Component extends AbstractComponent
         }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if (
-            $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)
-            && $userSettingsManager->getSetting(
-                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
-            )
-        ) {
-            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
+        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)) {
+            if (
+                $userSettingsManager->getSetting(
+                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
+                )
+            ) {
+                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
+            }
+            if (
+                $userSettingsManager->getSetting(
+                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
+                )
+            ) {
+                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
+            }
+            if (
+                $userSettingsManager->getSetting(
+                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT
+                )
+            ) {
+                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
+            }
+            if (
+                $userSettingsManager->getSetting(
+                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
+                )
+            ) {
+                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
+            }
         }
         ServiceConfiguration::initialize();
     }
