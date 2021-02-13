@@ -148,7 +148,7 @@ class RequestUtils
         /**
          * The default ports (80 for HTTP and 443 for HTTPS) must be ignored
          */
-        $isDefaultPort = $s ? $_SERVER["SERVER_PORT"] == "443" : $_SERVER["SERVER_PORT"] == "80";
+        $isDefaultPort = $s ? in_array($_SERVER["SERVER_PORT"], ["443", "80"]) : $_SERVER["SERVER_PORT"] == "80";
         $port = $isDefaultPort ? "" : (":" . $_SERVER["SERVER_PORT"]);
         /**
          * If accessing from Nginx, the server_name might point to localhost
