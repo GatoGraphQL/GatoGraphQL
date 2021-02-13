@@ -284,6 +284,9 @@ services:
         layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/assets/graphql-api-dev-sample-data.xml
         --authors=create --path=wordpress
       - sed 's/__DIR__/dirname(__DIR__)/' wordpress/index.php > wordpress/Schema/index.php
+      - sed 's/__DIR__/dirname(__DIR__)/' wordpress/index.php > wordpress/API/index.php
+      - sed 's/__DIR__/dirname(__DIR__)/' wordpress/index.php > wordpress/Engine/index.php
+      - sed 's/__DIR__/dirname(__DIR__)/' wordpress/index.php > wordpress/GraphQLByPoP/index.php
 
 env_file:
   - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/defaults.env
