@@ -7,14 +7,12 @@ namespace GraphQLByPoP\GraphQLQuery;
 use PoP\GraphQLAPI\Component as GraphQLAPIComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';

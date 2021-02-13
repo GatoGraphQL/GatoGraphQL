@@ -4,19 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories;
 
-use PoPSchema\Categories\Conditional\RESTAPI\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Categories\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';
@@ -74,29 +69,7 @@ class Component extends AbstractComponent
         ServiceConfiguration::initialize();
 
         if (!in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
-        }
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize all hooks
-        ContainerBuilderUtils::registerTypeResolversFromNamespace(__NAMESPACE__ . '\\TypeResolvers');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-
-        // If $skipSchema for `Condition` is `true`, then services are not registered
-        if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\RESTAPI\\Hooks'))) {
-            ConditionalComponent::beforeBoot();
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
         }
     }
 }

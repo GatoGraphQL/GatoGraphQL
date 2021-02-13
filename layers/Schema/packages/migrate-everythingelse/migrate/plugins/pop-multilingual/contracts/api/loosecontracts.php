@@ -3,15 +3,16 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class PoP_Multilingual_LooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Filters
-			'popcomponent:multilingual:notavailablecontenttranslation',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Filters
+            'popcomponent:multilingual:notavailablecontenttranslation',
+        ];
+    }
 }
 
 /**

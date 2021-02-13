@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 
 class GraphQLAccessControlListPostType extends AbstractPostType
 {
@@ -91,9 +90,7 @@ class GraphQLAccessControlListPostType extends AbstractPostType
          */
         $aclNestedBlocks = array_map(
             fn ($serviceClass) => $instanceManager->getInstance($serviceClass),
-            ContainerBuilderUtils::getServiceClassesUnderNamespace(
-                Plugin::NAMESPACE . '\\Blocks\\AccessControlRuleBlocks'
-            )
+            AccessControlRuleBlockRegistryFacade::getInstance()->getServiceClasses()
         );
         return array_merge(
             [

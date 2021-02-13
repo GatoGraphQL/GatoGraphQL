@@ -1,4 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\Locations\TypeAPIs\LocationTypeAPIInterface:
         class: \PoPSchema\LocationsWPEM\TypeAPIs\LocationTypeAPI
-        public: true
+
+    PoPSchema\LocationsWPEM\LooseContracts\:
+        resource: '../src/LooseContracts/*'

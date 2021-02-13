@@ -4,31 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use GraphQLAPI\GraphQLAPI\Config\ServiceConfiguration;
+use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterAccessControlRuleBlockCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EditingPersistedQuerySchemaConfiguratorExecuter;
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EndpointSchemaConfiguratorExecuter;
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\PersistedQuerySchemaConfiguratorExecuter;
-use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EditingPersistedQuerySchemaConfiguratorExecuter;
+use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -76,18 +73,34 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
+        self::initComponentConfiguration();
+        self::initPHPServices(dirname(__DIR__));
+        // Override DI services
+        self::initPHPServices(dirname(__DIR__), '/Overrides');
+        // Conditional DI settings
         /**
          * FieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '', 'admin-schema-services.yaml');
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.php');
         }
         // Register the Cache services, if the module is not disabled
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            self::initYAMLServices(dirname(__DIR__), '', 'cache-services.yaml');
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
-        self::initComponentConfiguration();
+        // Maybe use GraphiQL with Explorer
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        if (
+            $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)
+            && $userSettingsManager->getSetting(
+                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
+            )
+        ) {
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
+        }
         ServiceConfiguration::initialize();
     }
 
@@ -107,20 +120,6 @@ class Component extends AbstractComponent
             PHP_INT_MAX,
             1
         );
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\Admin\\FieldResolvers', false);
     }
 
     /**
@@ -148,5 +147,17 @@ class Component extends AbstractComponent
         (new PersistedQuerySchemaConfiguratorExecuter())->init();
         (new EndpointSchemaConfiguratorExecuter())->init();
         (new EditingPersistedQuerySchemaConfiguratorExecuter())->init();
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterAccessControlRuleBlockCompilerPass::class,
+        ];
     }
 }

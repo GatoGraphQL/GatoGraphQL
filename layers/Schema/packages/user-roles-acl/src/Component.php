@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesACL;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoPSchema\UserRolesACL\Config\ServiceConfiguration;
 use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponent;
@@ -15,7 +14,6 @@ use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponen
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';

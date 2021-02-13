@@ -4,20 +4,21 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class CMSLooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Actions
-			'popcms:publishToDraft',
-			'popcms:savePost',
-			'popcms:pendingToPublish',
-			'popcms:transitionPostStatus',
-			// Filters
-			'popcms:editPostLink',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Actions
+            'popcms:publishToDraft',
+            'popcms:savePost',
+            'popcms:pendingToPublish',
+            'popcms:transitionPostStatus',
+            // Filters
+            'popcms:editPostLink',
+        ];
+    }
 }
 
 /**

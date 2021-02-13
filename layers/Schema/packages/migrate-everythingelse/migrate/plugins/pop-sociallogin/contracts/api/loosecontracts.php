@@ -3,15 +3,16 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class PoP_SocialLogin_LooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Actions
-			'popcomponent:sociallogin:usercreated',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Actions
+            'popcomponent:sociallogin:usercreated',
+        ];
+    }
 }
 
 /**

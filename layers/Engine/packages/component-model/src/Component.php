@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
+use PoP\ComponentModel\Component\ApplicationEvents;
 use PoP\ComponentModel\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\RegisterDirectiveResolverCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -72,10 +73,21 @@ class Component extends AbstractComponent
         // Initialize the Component Configuration
         ComponentConfiguration::init();
 
-        // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers');
-        ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
+        // Attach class extensions
+        AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::BEFORE_BOOT);
+    }
+
+    /**
+     * Boot component
+     *
+     * @return void
+     */
+    public static function afterBoot(): void
+    {
+        parent::afterBoot();
+
+        // Attach class extensions
+        AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::AFTER_BOOT);
     }
 
     /**
@@ -94,5 +106,21 @@ class Component extends AbstractComponent
 
         // This value will be used in the response. If compact, make sure each JS Key is unique
         define('POP_RESPONSE_PROP_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            InjectTypeResolverClassIntoTypeRegistryCompilerPass::class,
+            RegisterDirectiveResolverCompilerPass::class,
+            BeforeBootAttachExtensionCompilerPass::class,
+            AfterBootAttachExtensionCompilerPass::class,
+            RegisterFieldInterfaceResolverCompilerPass::class,
+        ];
     }
 }

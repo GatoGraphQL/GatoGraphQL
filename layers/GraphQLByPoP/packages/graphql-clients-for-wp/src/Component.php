@@ -5,18 +5,14 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLClientsForWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     // const VERSION = '0.1.0';
@@ -56,22 +52,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return GraphQLServerComponent::isEnabled();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize services
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $clientServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Clients');
-        foreach ($clientServiceClasses as $serviceClass) {
-            $instanceManager->getInstance($serviceClass)->initialize();
-        }
     }
 }

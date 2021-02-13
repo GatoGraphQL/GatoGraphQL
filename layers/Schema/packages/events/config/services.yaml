@@ -1,8 +1,7 @@
 services:
-    PoPSchema\Events\Conditional\Users\FieldResolvers\:
-        resource: '../src/Conditional/Users/FieldResolvers/*'
+    _defaults:
         public: true
+        autowire: true
 
-    PoPSchema\Events\Conditional\Tags\FieldResolvers\:
-        resource: '../src/Conditional/Tags/FieldResolvers/*'
-        public: true
+    PoPSchema\Events\LooseContracts\:
+        resource: '../src/LooseContracts/*'

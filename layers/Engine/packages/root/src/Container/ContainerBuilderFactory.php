@@ -111,17 +111,25 @@ class ContainerBuilderFactory
         return self::$cached;
     }
 
-    public static function maybeCompileAndCacheContainer(): void
-    {
+    /**
+     * If the container is not cached, then compile it and cache it
+     *
+     * @param string[] $compilerPassClasses Compiler Pass classes to register on the container
+     */
+    public static function maybeCompileAndCacheContainer(
+        array $compilerPassClasses = []
+    ): void {
         // Compile Symfony's DependencyInjection Container Builder
         // After compiling, cache it in disk for performance.
         // This happens only the first time the site is accessed on the current server
         if (!self::$cached) {
-            // Compile the container
-            /**
-             * @var ContainerBuilder
-             */
+            /** @var ContainerBuilder */
             $containerBuilder = self::getInstance();
+            // Inject all the compiler passes
+            foreach ($compilerPassClasses as $compilerPassClass) {
+                $containerBuilder->addCompilerPass(new $compilerPassClass());
+            }
+            // Compile the container
             $containerBuilder->compile();
 
             // Cache the container

@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts;
 
-use PoPSchema\Posts\Conditional\Users\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Posts\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoPSchema\Posts\TypeResolverPickers\Optional\PostCustomPostTypeResolverPicker;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -19,8 +14,6 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';
@@ -81,49 +74,16 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
+            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+        }
+
+        if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
+            self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
         }
 
         // Initialize at the end
         ServiceConfiguration::initialize();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::registerTypeResolversFromNamespace(__NAMESPACE__ . '\\TypeResolvers');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-        self::attachTypeResolverPickers();
-
-        if (class_exists('\PoPSchema\Users\Component')) {
-            ConditionalComponent::beforeBoot();
-        }
-    }
-
-    /**
-     * If enabled, load the TypeResolverPickers
-     *
-     * @return void
-     */
-    protected static function attachTypeResolverPickers()
-    {
-        if (
-            ComponentConfiguration::addPostTypeToCustomPostUnionTypes()
-            // If $skipSchema is `true`, then services are not registered
-            && !empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\TypeResolverPickers'))
-        ) {
-            PostCustomPostTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
-        }
     }
 
     /**

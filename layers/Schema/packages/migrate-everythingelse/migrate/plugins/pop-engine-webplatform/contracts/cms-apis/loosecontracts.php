@@ -4,20 +4,21 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class WebPlatformCMSLooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Actions
-			'popcms:enqueueScripts',
-			'popcms:printFooterScripts',
-			'popcms:printScripts',
-			// Filters
-			'popcms:scriptSrc',
-			'popcms:scriptTag',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Actions
+            'popcms:enqueueScripts',
+            'popcms:printFooterScripts',
+            'popcms:printScripts',
+            // Filters
+            'popcms:scriptSrc',
+            'popcms:scriptTag',
+        ];
+    }
 }
 
 /**

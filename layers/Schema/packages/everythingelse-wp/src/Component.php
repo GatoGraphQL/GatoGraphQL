@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElseWP;
 
-use PoPSchema\EverythingElseWP\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';
@@ -62,10 +58,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts');
         }
     }
 }

@@ -6,18 +6,12 @@ namespace PoP\RoutingWP;
 
 use Brain\Cortex;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
-use PoP\Root\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -56,8 +50,5 @@ class Component extends AbstractComponent
 
         // Boot Cortex
         Cortex::boot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
     }
 }

@@ -4,20 +4,21 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class HTMLCSSPlatformCMSLooseContracts extends AbstractLooseContractSet
 {
-	/**
+    /**
      * @return string[]
      */
-    public function getRequiredHooks(): array {
-		return [
-			// Actions
-			'popcms:footer',
-			'popcms:head',
-			'popcms:printStyles',
-			// Filters
-			'popcms:styleSrc',
-			'popcms:styleTag',
-		];
-	}
+    public function getRequiredHooks(): array
+    {
+        return [
+            // Actions
+            'popcms:footer',
+            'popcms:head',
+            'popcms:printStyles',
+            // Filters
+            'popcms:styleSrc',
+            'popcms:styleTag',
+        ];
+    }
 }
 
 /**

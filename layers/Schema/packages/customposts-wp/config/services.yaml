@@ -1,7 +1,11 @@
 services:
     _defaults:
         public: true
+        autowire: true
 
     PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
         class: \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
+
+    PoPSchema\CustomPostsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
 

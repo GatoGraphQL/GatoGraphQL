@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\DefinitionPersistence;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\DefinitionPersistence\Config\ServiceConfiguration;
 
 /**
@@ -13,10 +12,6 @@ use PoP\DefinitionPersistence\Config\ServiceConfiguration;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *

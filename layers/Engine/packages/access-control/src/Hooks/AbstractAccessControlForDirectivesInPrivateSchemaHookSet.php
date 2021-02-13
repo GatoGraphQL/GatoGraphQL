@@ -12,9 +12,7 @@ abstract class AbstractAccessControlForDirectivesInPrivateSchemaHookSet extends 
 {
     protected function enabled(): bool
     {
-        return
-            ComponentConfiguration::enableIndividualControlForPublicPrivateSchemaMode() ||
-            ComponentConfiguration::usePrivateSchemaMode();
+        return ComponentConfiguration::canSchemaBePrivate();
     }
 
     protected function getSchemaMode(): string

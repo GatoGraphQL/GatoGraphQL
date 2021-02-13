@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\General;
 
-use GraphQLAPI\GraphQLAPI\Admin\Menus\Menu;
-use PoP\API\Configuration\Request as APIRequest;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class EndpointHelpers
 {

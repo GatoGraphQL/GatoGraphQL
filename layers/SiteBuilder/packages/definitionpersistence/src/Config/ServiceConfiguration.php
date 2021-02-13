@@ -6,7 +6,7 @@ namespace PoP\DefinitionPersistence\Config;
 
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 
 class ServiceConfiguration
 {

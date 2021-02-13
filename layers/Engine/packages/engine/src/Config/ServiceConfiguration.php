@@ -6,7 +6,7 @@ namespace PoP\Engine\Config;
 
 use PoP\Engine\ComponentConfiguration;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;

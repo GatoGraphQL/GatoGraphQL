@@ -91,5 +91,8 @@ services:
     PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface:
         class: \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManager
 
+    PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface:
+        class: \PoP\ComponentModel\AttachableExtensions\AttachExtensionService
+
     PoP\ModuleRouting\RouteModuleProcessorManagerInterface:
         class: \PoP\ComponentModel\ModuleRouting\RouteModuleProcessorManager

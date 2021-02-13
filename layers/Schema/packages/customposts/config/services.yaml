@@ -5,3 +5,6 @@ services:
 
     PoPSchema\CustomPosts\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPSchema\CustomPosts\LooseContracts\:
+        resource: '../src/LooseContracts/*'

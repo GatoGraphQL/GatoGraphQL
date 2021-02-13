@@ -1,6 +1,7 @@
 services:
     _defaults:
         public: true
+        autowire: true
 
     PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
         class: \PoPSchema\EverythingElseWP\Conditional\CustomPosts\TypeAPIs\CustomPostTypeAPI

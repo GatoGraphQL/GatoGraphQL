@@ -8,11 +8,11 @@ use PoP\Engine\ComponentLoader;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use GraphQLAPI\GraphQLAPI\Admin\Menus\AbstractMenu;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\AbstractMenu;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\SettingsMenuPage;
@@ -333,7 +333,7 @@ class Plugin
             /**
              * Initialize all the services
              */
-            $menuServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Admin\\Menus');
+            $menuServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\ConditionalOnEnvironment\\Admin\\Services\\Menus');
             foreach ($menuServiceClasses as $serviceClass) {
                 /**
                  * @var AbstractMenu
@@ -341,7 +341,7 @@ class Plugin
                 $service = $instanceManager->getInstance($serviceClass);
                 $service->initialize();
             }
-            $endpointResolverServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Admin\\EndpointResolvers');
+            $endpointResolverServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\ConditionalOnEnvironment\\Admin\\Services\\EndpointResolvers');
             foreach ($endpointResolverServiceClasses as $serviceClass) {
                 /**
                  * @var AbstractEndpointResolver

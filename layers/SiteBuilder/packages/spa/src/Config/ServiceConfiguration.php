@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\SPA\Config;
 
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 
 class ServiceConfiguration

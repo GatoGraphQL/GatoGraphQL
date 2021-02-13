@@ -1,0 +1,4 @@
+services:
+    PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver:
+        class: \PoPSchema\CustomPostsWP\Overrides\TypeResolvers\CustomPostUnionTypeResolver
+        public: true

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\Wassup\Config;
 
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoPSitesWassup\ShareMutations\MutationResolverBridges\ShareComponentMutationResolverBridge;
 use PoPSitesWassup\ContactUsMutations\MutationResolverBridges\ContactUsComponentMutationResolverBridge;

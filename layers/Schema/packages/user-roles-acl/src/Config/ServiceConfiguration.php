@@ -8,7 +8,7 @@ use PoPSchema\UserRolesACL\Environment;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoP\AccessControl\Services\AccessControlGroups as AccessControlGroups;

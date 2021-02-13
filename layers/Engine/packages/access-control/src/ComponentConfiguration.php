@@ -49,4 +49,17 @@ class ComponentConfiguration
         );
         return $selfProperty;
     }
+
+    /**
+     * If either constant `USE_PRIVATE_SCHEMA_MODE` or `ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE`
+     * (which enables to define the private schema mode for a specific entry) is true,
+     * then the schema (as obtained by querying the "__schema" field) is dynamic:
+     * Fields will be available or not depending on the user being logged in or not
+     */
+    public static function canSchemaBePrivate(): bool
+    {
+        return
+            self::enableIndividualControlForPublicPrivateSchemaMode()
+            || self::usePrivateSchemaMode();
+    }
 }

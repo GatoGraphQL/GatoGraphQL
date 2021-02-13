@@ -9,6 +9,14 @@ use PoP\CacheControl\ComponentConfiguration;
 class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
     /**
+     * It must execute after everyone else!
+     */
+    public static function getPriorityToAttachClasses(): ?int
+    {
+        return 0;
+    }
+
+    /**
      * Do add this directive to the schema
      *
      * @return void

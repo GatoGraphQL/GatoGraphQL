@@ -1,12 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     GraphQLByPoP\GraphQLServer\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true
-
-    GraphQLByPoP\GraphQLServer\DirectiveResolvers\:
-        resource: '../src/DirectiveResolvers/*'
-        public: true
 
     GraphQLByPoP\GraphQLServer\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
-        public: true

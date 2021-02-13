@@ -1,0 +1,4 @@
+services:
+    PoPSchema\LocationPosts\Conditional\Tags\FieldResolvers\:
+        resource: '../../../src/Conditional/Tags/FieldResolvers/*'
+        public: true

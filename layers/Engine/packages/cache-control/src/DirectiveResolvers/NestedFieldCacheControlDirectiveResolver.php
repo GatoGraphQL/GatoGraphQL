@@ -30,6 +30,14 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     // }
 
     /**
+     * It must execute before anyone else!
+     */
+    public static function getPriorityToAttachClasses(): ?int
+    {
+        return PHP_INT_MAX;
+    }
+
+    /**
      * If any argument is a field, then this directive will involve them to calculate the minimum max-age
      *
      * @param TypeResolverInterface $typeResolver

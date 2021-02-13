@@ -1,7 +1,11 @@
 services:
     _defaults:
         public: true
+        autowire: true
 
     PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface:
         class: \PoPSchema\CategoriesWP\TypeAPIs\CategoryTypeAPI
+
+    PoPSchema\CategoriesWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'
 

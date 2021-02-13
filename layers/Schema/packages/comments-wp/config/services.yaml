@@ -1,6 +1,10 @@
 services:
     _defaults:
         public: true
+        autowire: true
 
     PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
         class: \PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI
+
+    PoPSchema\CommentsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'

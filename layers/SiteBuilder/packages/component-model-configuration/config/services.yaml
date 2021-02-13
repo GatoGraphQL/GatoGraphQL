@@ -4,6 +4,7 @@ parameters:
 services:
     _defaults:
         public: true
+        autowire: true
 
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ConfigurationComponentModel\Engine\Engine

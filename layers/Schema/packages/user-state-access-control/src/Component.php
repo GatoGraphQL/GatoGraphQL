@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl;
 
-use PoPSchema\UserStateAccessControl\Conditional\CacheControl\ConditionalComponent;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 
 /**
  * Initialize component
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
     use CanDisableComponentTrait;
 
     public static $COMPONENT_DIR;
@@ -69,10 +65,7 @@ class Component extends AbstractComponent
                 class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                ConditionalComponent::initialize(
-                    $configuration,
-                    $skipSchema
-                );
+                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl');
             }
         }
     }
@@ -80,37 +73,5 @@ class Component extends AbstractComponent
     protected static function resolveEnabled()
     {
         return AccessControlComponent::isEnabled();
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::instantiateNamespaceServices(__NAMESPACE__ . '\\Hooks');
-        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers');
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function afterBoot(): void
-    {
-        parent::afterBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators');
-
-        // Boot conditional on API package being installed
-        if (class_exists('\PoP\CacheControl\Component')) {
-            ConditionalComponent::afterBoot();
-        }
     }
 }

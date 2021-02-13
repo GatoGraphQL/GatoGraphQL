@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users;
 
-use PoPSchema\Users\Conditional\CustomPosts\ConditionalComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
 use PoPSchema\Users\Config\ServiceConfiguration;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -17,8 +14,6 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public static $COMPONENT_DIR;
 
     // const VERSION = '0.1.0';
@@ -77,33 +72,30 @@ class Component extends AbstractComponent
         ServiceConfiguration::initialize();
 
         if (
-            class_exists('\PoPSchema\CustomPosts\Component')
-            && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
+            class_exists('\PoP\API\Component')
+            && !in_array(\PoP\API\Component::class, $skipSchemaComponentClasses)
         ) {
-            ConditionalComponent::initialize(
-                $configuration,
-                $skipSchema
-            );
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/API');
         }
-    }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
+        if (
+            class_exists('\PoP\RESTAPI\Component')
+            && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
+        ) {
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
+        }
 
-        // Initialize all classes
-        ContainerBuilderUtils::registerTypeResolversFromNamespace(__NAMESPACE__ . '\\TypeResolvers');
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-        ContainerBuilderUtils::registerFieldInterfaceResolversFromNamespace(__NAMESPACE__ . '\\FieldInterfaceResolvers');
-
-        // Initialize all conditional components
-        if (!empty(ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Conditional\\CustomPosts\\FieldResolvers'))) {
-            ConditionalComponent::beforeBoot();
+        if (class_exists('\PoPSchema\CustomPosts\Component')) {
+            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts');
+            if (!in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)) {
+                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CustomPosts');
+                if (
+                    class_exists('\PoP\RESTAPI\Component')
+                    && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
+                ) {
+                    self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts/Conditional/RESTAPI');
+                }
+            }
         }
     }
 

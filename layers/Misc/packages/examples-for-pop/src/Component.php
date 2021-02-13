@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP;
 
-use Leoloso\ExamplesForPoP\Config\ServiceBoot;
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\YAMLServicesTrait;
-use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 /**
@@ -15,8 +12,6 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
  */
 class Component extends AbstractComponent
 {
-    use YAMLServicesTrait;
-
     public const VERSION = '0.2.0';
 
     /**
@@ -47,38 +42,21 @@ class Component extends AbstractComponent
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function beforeBoot(): void
-    {
-        parent::beforeBoot();
-
-        // Initialize services
-        // ServiceBoot::beforeBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__ . '\\FieldResolvers');
-        ContainerBuilderUtils::attachAndRegisterDirectiveResolversFromNamespace(__NAMESPACE__ . '\\DirectiveResolvers');
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function afterBoot(): void
-    {
-        parent::afterBoot();
-
-        // Initialize classes
-        ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators', false);
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            ContainerBuilderUtils::attachTypeResolverDecoratorsFromNamespace(__NAMESPACE__ . '\\TypeResolverDecorators\\Cache');
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
         }
     }
+
+    // /**
+    //  * Boot component
+    //  *
+    //  * @return void
+    //  */
+    // public static function beforeBoot(): void
+    // {
+    //     parent::beforeBoot();
+
+    //     // Initialize services
+    //     ServiceBoot::beforeBoot();
+    // }
 }

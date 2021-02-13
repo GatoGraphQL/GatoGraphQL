@@ -1,4 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\Events\TypeAPIs\EventTypeAPIInterface:
         class: \PoPSchema\EventsWPEM\TypeAPIs\EventTypeAPI
-        public: true
+
+    PoPSchema\EventsWPEM\LooseContracts\:
+        resource: '../src/LooseContracts/*'
