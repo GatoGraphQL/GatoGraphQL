@@ -15,13 +15,16 @@ abstract class AbstractInstantiateServiceCompilerPass implements CompilerPassInt
         $serviceInstantiatorDefinition = $containerBuilder->getDefinition(ServiceInstantiatorInterface::class);
         $serviceClass = $this->getServiceClass();
         $definitions = $containerBuilder->getDefinitions();
-        foreach ($definitions as $definition) {
+        foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null || !is_a($definitionClass, $serviceClass, true)) {
                 continue;
             }
 
-            $serviceInstantiatorDefinition->addMethodCall('addServiceClass', [$definitionClass]);
+            $serviceInstantiatorDefinition->addMethodCall(
+                'addServiceDefinition',
+                [$definitionID]
+            );
         }
     }
 

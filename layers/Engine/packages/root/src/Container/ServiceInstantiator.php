@@ -16,28 +16,19 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     /**
      * @var string[]
      */
-    protected array $serviceClasses = [];
+    protected array $serviceDefinitions = [];
 
-    public function addServiceClass(string $serviceClass): void
+    public function addServiceDefinition(string $serviceDefinition): void
     {
-        $this->serviceClasses[] = $serviceClass;
+        $this->serviceDefinitions[] = $serviceDefinition;
     }
-    // public function getServiceClasses(): array
-    // {
-    //     return $this->serviceClasses;
-    // }
     public function initializeServices(): void
     {
         $containerBuilder = ContainerBuilderFactory::getInstance();
-        foreach ($this->serviceClasses as $serviceClass) {
-            // Watch out! Not all services are instantiated under their own class!
-            // Eg: GraphQLAPI\GraphQLAPI\Overrides\Services\Clients\GraphiQLClient
-            // overrides another services, yet it implements this interface
-            if ($containerBuilder->has($serviceClass)) {
-                /** @var AutomaticallyInstantiatedServiceInterface */
-                $service = $containerBuilder->get($serviceClass);
-                $service->initialize();
-            }
+        foreach ($this->serviceDefinitions as $serviceDefinition) {
+            /** @var AutomaticallyInstantiatedServiceInterface */
+            $service = $containerBuilder->get($serviceDefinition);
+            $service->initialize();
         }
     }
 }

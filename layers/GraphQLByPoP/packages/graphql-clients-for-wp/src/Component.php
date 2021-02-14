@@ -46,6 +46,9 @@ class Component extends AbstractComponent
             parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
             self::initYAMLServices(dirname(__DIR__));
+            if (ComponentConfiguration::useGraphiQLExplorer()) {
+                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/UseGraphiQLExplorer/Overrides');
+            }
         }
     }
 

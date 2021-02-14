@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Clients;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\GraphiQLExplorerInCustomEndpointPublicClient\Overrides\Services\Clients;
 
-use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLWithExplorerClient;
+use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointClientTrait;
+use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClientTrait;
+use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnEnvironment\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
 
 class CustomEndpointGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {

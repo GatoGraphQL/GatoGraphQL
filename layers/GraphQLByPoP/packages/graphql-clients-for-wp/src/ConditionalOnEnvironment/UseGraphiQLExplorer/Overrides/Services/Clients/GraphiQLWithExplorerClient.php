@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
+namespace GraphQLByPoP\GraphQLClientsForWP\ConditionalOnEnvironment\UseGraphiQLExplorer\Overrides\Services\Clients;
+
+use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractGraphiQLClient;
 
 class GraphiQLWithExplorerClient extends AbstractGraphiQLClient
 {

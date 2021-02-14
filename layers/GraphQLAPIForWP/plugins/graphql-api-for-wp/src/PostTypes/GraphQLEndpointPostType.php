@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient;
@@ -19,7 +18,6 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractGraphQLQueryExecutionPostType;
-use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLWithExplorerClient;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 
 class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
@@ -235,18 +233,9 @@ class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
                 && $this->isVoyagerEnabled($customPost)
             )
         ) {
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $useGraphiQLExplorer = $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER) && $userSettingsManager->getSetting(
-                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
-            );
             // Print the HTML directly from the client
-            $graphiQLClientClass = $useGraphiQLExplorer ?
-                CustomEndpointGraphiQLWithExplorerClient::class :
-                CustomEndpointGraphiQLClient::class;
             $clientClasses = [
-                RequestParams::VIEW_GRAPHIQL => $graphiQLClientClass,
+                RequestParams::VIEW_GRAPHIQL => CustomEndpointGraphiQLClient::class,
                 RequestParams::VIEW_SCHEMA => CustomEndpointVoyagerClient::class,
             ];
             $instanceManager = InstanceManagerFacade::getInstance();
