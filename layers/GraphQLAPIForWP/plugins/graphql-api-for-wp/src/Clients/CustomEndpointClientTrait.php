@@ -11,14 +11,14 @@ use PoP\ComponentModel\Misc\RequestUtils;
 trait CustomEndpointClientTrait
 {
     /**
-     * Check if we are executing a single CPT
+     * Enable only when executing a single CPT
      */
-    protected function isEndpointRequested(): bool
+    protected function isClientDisabled(): bool
     {
         if (!\is_singular(GraphQLEndpointPostType::POST_TYPE)) {
-            return false;
+            return true;
         }
-        return parent::isEndpointRequested();
+        return parent::isClientDisabled();
     }
 
     /**
