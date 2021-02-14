@@ -16,7 +16,7 @@ use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\Users\Environment as UsersEnvironment;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\CacheControl\Environment as CacheControlEnvironment;

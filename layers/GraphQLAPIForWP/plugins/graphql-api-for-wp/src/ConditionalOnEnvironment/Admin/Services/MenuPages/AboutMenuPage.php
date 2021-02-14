@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
-use InvalidArgumentException;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
 use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
+use InvalidArgumentException;
 
 /**
  * About menu page
@@ -14,6 +15,13 @@ use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
 class AboutMenuPage extends AbstractDocsMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
+
+    protected MenuPageHelper $menuPageHelper;
+
+    function __construct(MenuPageHelper $menuPageHelper)
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -23,6 +31,14 @@ class AboutMenuPage extends AbstractDocsMenuPage
     protected function useTabpanelForContent(): bool
     {
         return true;
+    }
+
+    /**
+     * Validate the param also
+     */
+    protected function isCurrentScreen(): bool
+    {
+        return !$this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getContentToPrint(): string

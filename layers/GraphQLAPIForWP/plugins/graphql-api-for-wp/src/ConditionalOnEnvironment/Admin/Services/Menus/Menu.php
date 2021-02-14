@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus;
 
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AboutMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\GraphiQLMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\GraphQLVoyagerMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\ModuleDocumentationMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\ModulesMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\ReleaseNotesAboutMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\SupportMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\SupportMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AbstractMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\GraphiQLMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\SettingsMenuPage;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\GraphQLVoyagerMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\ReleaseNotesAboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Admin menu class
@@ -27,24 +27,16 @@ class Menu extends AbstractMenu
 {
     public const NAME = 'graphql_api';
 
+    protected MenuPageHelper $menuPageHelper;
+
+    function __construct(MenuPageHelper $menuPageHelper)
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
+
     public static function getName(): string
     {
         return static::NAME;
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getMenuPageClasses(): array
-    {
-        return [
-            GraphiQLMenuPage::class,
-            GraphQLVoyagerMenuPage::class,
-            SettingsMenuPage::class,
-            $this->getModuleMenuPageClass(),
-            $this->getAboutMenuPageClass(),
-            SupportMenuPage::class,
-        ];
     }
 
     public function addMenuPagesTop(): void
@@ -106,7 +98,7 @@ class Menu extends AbstractMenu
     protected function getModuleMenuPageClass(): string
     {
         return
-            (isset($_GET[RequestParams::TAB]) && $_GET[RequestParams::TAB] == RequestParams::TAB_DOCS) ?
+            $this->menuPageHelper->isDocumentationScreen() ?
             ModuleDocumentationMenuPage::class :
             ModulesMenuPage::class;
     }
@@ -118,7 +110,7 @@ class Menu extends AbstractMenu
     protected function getAboutMenuPageClass(): string
     {
         return
-            (isset($_GET[RequestParams::TAB]) && $_GET[RequestParams::TAB] == RequestParams::TAB_DOCS) ?
+            $this->menuPageHelper->isDocumentationScreen() ?
             ReleaseNotesAboutMenuPage::class :
             AboutMenuPage::class;
     }

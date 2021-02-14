@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
 
 /**
  * Docs menu page

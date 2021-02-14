@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
 use InvalidArgumentException;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;

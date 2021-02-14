@@ -4,41 +4,40 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Engine\ComponentLoader;
-use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\AbstractMenu;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
-use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use PoP\Root\Container\ContainerBuilderUtils;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
-use GraphQLAPI\GraphQLAPI\EditorScripts\AbstractEditorScript;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\Admin\TableActions\ModuleListTableAction;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
-use GraphQLAPI\GraphQLAPI\EndpointResolvers\AbstractEndpointResolver;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
+use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlDisableAccessBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserCapabilitiesBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserRolesBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserStateBlock;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AboutMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\ModulesMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\EditorScripts\AbstractEditorScript;
+use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlDisableAccessBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserCapabilitiesBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginConfiguration;
+use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Engine\ComponentLoader;
+use PoP\Root\Container\ContainerBuilderUtils;
 
 class Plugin
 {
@@ -282,10 +281,15 @@ class Plugin
         if (\is_admin()) {
             // We can't use the InstanceManager, since at this stage it hasn't
             // been initialized yet
-            // We can create a new instances of ModulesMenuPage because
-            // its instantiation produces no side-effects
-            $modulesMenuPage = new ModulesMenuPage();
-            if (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID()) {
+            // We can create a new instance of MenuPageHelper and ModulesMenuPage
+            // because their instantiation produces no side-effects
+            // (maybe that happens under `initialize`)
+            $menuPageHelper = new MenuPageHelper();
+            $modulesMenuPage = new ModulesMenuPage($menuPageHelper);
+            if (
+                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
+                && !$menuPageHelper->isDocumentationScreen()
+            ) {
                 // Instantiating ModuleListTableAction DOES have side-effects,
                 // but they are needed, and won't be repeated when instantiating
                 // the class through the Container Builder
