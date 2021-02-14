@@ -6,11 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus;
 
 use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AbstractMenuPage;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
  * Admin menu class
  */
-abstract class AbstractMenu
+abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 {
     /**
      * @var array<AbstractMenuPage>

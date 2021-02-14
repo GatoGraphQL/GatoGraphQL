@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\EndpointResolvers;
 
-abstract class AbstractEndpointResolver
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+
+abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {
     /**
      * Initialize the resolver
