@@ -6,9 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\ConditionalOnEnvi
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -16,18 +13,6 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
-    protected function useGraphiQLExplorer(): bool
-    {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return
-            $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)
-            && $userSettingsManager->getSetting(
-                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
-            );
-    }
-
     protected function getGraphiQLWithExplorerClientHTML(): string
     {
         $instanceManager = InstanceManagerFacade::getInstance();

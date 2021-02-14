@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 
 /**
  * GraphiQL page
@@ -16,18 +13,6 @@ class GraphiQLMenuPage extends AbstractMenuPage
 {
     use EnqueueReactMenuPageTrait;
     use GraphQLAPIMenuPageTrait;
-
-    protected function useGraphiQLExplorer(): bool
-    {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        return
-            $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)
-            && $userSettingsManager->getSetting(
-                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
-            );
-    }
 
     public function print(): void
     {

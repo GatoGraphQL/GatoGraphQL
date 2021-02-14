@@ -22,13 +22,4 @@ abstract class AbstractGraphiQLClient extends AbstractClient
     {
         return ComponentConfiguration::getGraphiQLClientEndpoint();
     }
-
-    /**
-     * Use GraphiQL Explorer?
-     * Overridable by GraphQL API for WP, to decided based on each screen
-     */
-    protected function useGraphiQLExplorer(): bool
-    {
-        return ComponentConfiguration::useGraphiQLExplorer();
-    }
 }

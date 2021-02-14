@@ -9,14 +9,4 @@ use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient as UpstreamGraphiQLC
 class GraphiQLClient extends UpstreamGraphiQLClient
 {
     use SingleEndpointGraphiQLClientTrait;
-
-    /**
-     * Use GraphiQL Explorer for this screen?
-     */
-    protected function useGraphiQLExplorer(): bool
-    {
-        return
-            parent::useGraphiQLExplorer()
-            && $this->isGraphiQLExplorerOptionEnabled();
-    }
 }

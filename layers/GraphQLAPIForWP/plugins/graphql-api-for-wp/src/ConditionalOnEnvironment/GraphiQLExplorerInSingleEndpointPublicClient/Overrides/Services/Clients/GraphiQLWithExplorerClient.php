@@ -10,14 +10,4 @@ use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnEnvironment\UseGraphiQLExplore
 class GraphiQLWithExplorerClient extends UpstreamGraphiQLWithExplorerClient
 {
     use SingleEndpointGraphiQLClientTrait;
-
-    /**
-     * Use GraphiQL Explorer for this screen?
-     */
-    protected function useGraphiQLExplorer(): bool
-    {
-        return
-            parent::useGraphiQLExplorer()
-            && $this->isGraphiQLExplorerOptionEnabled();
-    }
 }
