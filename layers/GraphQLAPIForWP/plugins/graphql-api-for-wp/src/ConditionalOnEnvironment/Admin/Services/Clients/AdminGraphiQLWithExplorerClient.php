@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Clients;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Clients;
 
 use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnEnvironment\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
