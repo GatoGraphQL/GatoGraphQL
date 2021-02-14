@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractTableMenuPage;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
 
@@ -17,6 +18,13 @@ class ModulesMenuPage extends AbstractTableMenuPage
     use OpenInModalTriggerMenuPageTrait;
 
     public const SCREEN_OPTION_NAME = 'graphql_api_modules_per_page';
+
+    protected MenuPageHelper $menuPageHelper;
+
+    function __construct(MenuPageHelper $menuPageHelper)
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -43,7 +51,7 @@ class ModulesMenuPage extends AbstractTableMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return !(isset($_GET[RequestParams::TAB]) && $_GET[RequestParams::TAB] == RequestParams::TAB_DOCS) && parent::isCurrentScreen();
+        return !$this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getScreenOptionName(): string

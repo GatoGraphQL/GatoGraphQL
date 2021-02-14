@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
 use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
 use InvalidArgumentException;
 
 /**
@@ -15,6 +15,13 @@ use InvalidArgumentException;
 class AboutMenuPage extends AbstractDocsMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
+
+    protected MenuPageHelper $menuPageHelper;
+
+    function __construct(MenuPageHelper $menuPageHelper)
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -31,7 +38,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return !(isset($_GET[RequestParams::TAB]) && $_GET[RequestParams::TAB] == RequestParams::TAB_DOCS) && parent::isCurrentScreen();
+        return !$this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getContentToPrint(): string
