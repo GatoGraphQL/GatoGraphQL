@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\MenuPageInterface;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\MenuPageInterface;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
  * Menu page
  */
-abstract class AbstractMenuPage implements MenuPageInterface
+abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
 

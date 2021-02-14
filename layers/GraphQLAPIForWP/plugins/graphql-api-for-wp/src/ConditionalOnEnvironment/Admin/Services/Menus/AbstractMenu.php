@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus;
 
-use GraphQLAPI\GraphQLAPI\Admin\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
@@ -13,35 +13,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 {
-    /**
-     * @var array<AbstractMenuPage>
-     */
-    protected array $menuPageObjects;
-
-    public function __construct()
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $this->menuPageObjects = array_map(
-            function ($menuPageClass) use ($instanceManager): AbstractMenuPage {
-                /**
-                 * @var AbstractMenuPage
-                 */
-                $menuPageObject = $instanceManager->getInstance($menuPageClass);
-                return $menuPageObject;
-            },
-            $this->getMenuPageClasses()
-        );
-    }
-
     abstract public static function getName(): string;
-
-    /**
-     * @return string[]
-     */
-    protected function getMenuPageClasses(): array
-    {
-        return [];
-    }
 
     /**
      * Initialize the endpoints
@@ -66,15 +38,6 @@ abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
             [$this, 'addMenuPagesBottom'],
             20
         );
-
-        /**
-         * Initialize my menu pages
-         *
-         * @return void
-         */
-        foreach ($this->menuPageObjects as $menuPageObject) {
-            $menuPageObject->initialize();
-        }
     }
     public function addMenuPagesTop(): void
     {
