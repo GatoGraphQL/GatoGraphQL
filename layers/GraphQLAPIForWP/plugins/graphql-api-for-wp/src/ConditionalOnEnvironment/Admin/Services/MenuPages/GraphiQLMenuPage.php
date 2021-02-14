@@ -6,11 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPage
 
 use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\EnqueueReactMenuPageTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 
 /**
@@ -33,44 +29,16 @@ class GraphiQLMenuPage extends AbstractMenuPage
             );
     }
 
-    protected function getGraphiQLWithExplorerClientHTML(): string
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var AdminGraphiQLWithExplorerClient
-         */
-        $client = $instanceManager->getInstance(AdminGraphiQLWithExplorerClient::class);
-        return $client->getClientHTML();
-    }
-
     public function print(): void
     {
-        if (!$this->useGraphiQLExplorer()) {
-            ?>
-            <div id="graphiql" class="graphiql-client">
-                <p>
-                    <?php echo __('Loading...', 'graphql-api') ?>
-                    <!--span class="spinner is-active" style="float: none;"></span-->
-                </p>
-            </div>
-            <?php
-        } else {
-            $htmlContent = $this->getGraphiQLWithExplorerClientHTML();
-            // Extract the HTML inside <body>
-            $matches = [];
-            preg_match('/<body([^>]+)?>(.*?)<\/body>/s', $htmlContent, $matches);
-            $bodyHTMLContent = $matches[2];
-            // Remove all JS/CSS assets, since they are enqueued
-            $bodyHTMLContent = preg_replace(
-                [
-                    '/<link[^>]*>(.*)<\/link>"/s',
-                    '/<script[^>]*>(.*)<\/script>/s',
-                ],
-                '',
-                $bodyHTMLContent
-            );
-            echo $bodyHTMLContent;
-        }
+        ?>
+        <div id="graphiql" class="graphiql-client">
+            <p>
+                <?php echo __('Loading...', 'graphql-api') ?>
+                <!--span class="spinner is-active" style="float: none;"></span-->
+            </p>
+        </div>
+        <?php
     }
 
     /**
@@ -95,107 +63,79 @@ class GraphiQLMenuPage extends AbstractMenuPage
      *
      * @return void
      */
-    protected function enqueueAssets(): void
+    protected function enqueueGraphiQLClientAssets(): void
     {
-        parent::enqueueAssets();
-
-        $useGraphiQLExplorer = $this->useGraphiQLExplorer();
-
-        // CSS
         \wp_enqueue_style(
             'graphql-api-graphiql-client',
             \GRAPHQL_API_URL . 'assets/css/graphiql-client.css',
             array(),
             \GRAPHQL_API_VERSION
         );
+    }
 
-        // Common settings to both clients
+    /**
+     * Enqueue the required assets and initialize the localized scripts
+     *
+     * @return void
+     */
+    protected function enqueueGraphiQLCustomAssets(): void
+    {
+        // Common settings to both clients (with/out Explorer)
         $scriptSettings = array(
             'nonce' => \wp_create_nonce('wp_rest'),
             'response' => $this->getResponse(),
         );
 
-        if (!$useGraphiQLExplorer) {
-            \wp_enqueue_style(
-                'graphql-api-graphiql',
-                \GRAPHQL_API_URL . 'assets/css/vendors/graphiql.min.css',
-                array(),
-                \GRAPHQL_API_VERSION
-            );
+        \wp_enqueue_style(
+            'graphql-api-graphiql',
+            \GRAPHQL_API_URL . 'assets/css/vendors/graphiql.min.css',
+            array(),
+            \GRAPHQL_API_VERSION
+        );
 
-            // JS: execute them all in the footer
-            $this->enqueueReactAssets(true);
+        // JS: execute them all in the footer
+        $this->enqueueReactAssets(true);
 
-            \wp_enqueue_script(
-                'graphql-api-graphiql',
-                \GRAPHQL_API_URL . 'assets/js/vendors/graphiql.min.js',
-                array('graphql-api-react-dom'),
-                \GRAPHQL_API_VERSION,
-                true
-            );
-            \wp_enqueue_script(
-                'graphql-api-graphiql-client',
-                \GRAPHQL_API_URL . 'assets/js/graphiql-client.js',
-                array('graphql-api-graphiql'),
-                \GRAPHQL_API_VERSION,
-                true
-            );
+        \wp_enqueue_script(
+            'graphql-api-graphiql',
+            \GRAPHQL_API_URL . 'assets/js/vendors/graphiql.min.js',
+            array('graphql-api-react-dom'),
+            \GRAPHQL_API_VERSION,
+            true
+        );
+        \wp_enqueue_script(
+            'graphql-api-graphiql-client',
+            \GRAPHQL_API_URL . 'assets/js/graphiql-client.js',
+            array('graphql-api-graphiql'),
+            \GRAPHQL_API_VERSION,
+            true
+        );
 
-            // Load data into the script
-            \wp_localize_script(
-                'graphql-api-graphiql-client',
-                'graphQLByPoPGraphiQLSettings',
-                array_merge(
-                    [
-                        'defaultQuery' => $this->getDefaultQuery(),
-                        'endpoint' => EndpointHelpers::getAdminGraphQLEndpoint(),
-                    ],
-                    $scriptSettings
-                )
-            );
-        } else {
-            // Print the HTML from the Client
-            $htmlContent = $this->getGraphiQLWithExplorerClientHTML();
-            // Extract the JS/CSS assets, from either the <head> or the <head>
-            $matches = [];
-            preg_match_all('/<link[^>]+href="([^">]+)"/s', $htmlContent, $matches);
-            $cssFileURLs = $matches[1];
-            foreach ($cssFileURLs as $index => $cssFileURL) {
-                \wp_enqueue_style(
-                    'graphql-api-graphiql-with-explorer-' . $index,
-                    $cssFileURL,
-                    array(),
-                    \GRAPHQL_API_VERSION
-                );
-            }
-            preg_match_all('/<script[^>]+src="([^">]+)"/s', $htmlContent, $matches);
-            $jsFileURLs = $matches[1];
-            foreach ($jsFileURLs as $index => $jsFileURL) {
-                \wp_enqueue_script(
-                    'graphql-api-graphiql-with-explorer-' . $index,
-                    $jsFileURL,
-                    array(),
-                    \GRAPHQL_API_VERSION,
-                    true
-                );
-            }
-
-            // Override styles for the admin, so load last
-            \wp_enqueue_style(
-                'graphql-api-graphiql-with-explorer-client',
-                \GRAPHQL_API_URL . 'assets/css/graphiql-with-explorer-client.css',
-                array(),
-                \GRAPHQL_API_VERSION
-            );
-
-            // Load data into the script. Because no script is enqueued since it is
-            // in the body, then localize it to React
-            \wp_localize_script(
-                'graphql-api-graphiql-with-explorer-0',
-                'graphiQLWithExplorerClientForWP',
+        // Load data into the script
+        \wp_localize_script(
+            'graphql-api-graphiql-client',
+            'graphQLByPoPGraphiQLSettings',
+            array_merge(
+                [
+                    'defaultQuery' => $this->getDefaultQuery(),
+                    'endpoint' => EndpointHelpers::getAdminGraphQLEndpoint(),
+                ],
                 $scriptSettings
-            );
-        }
+            )
+        );
+    }
+
+    /**
+     * Enqueue the required assets and initialize the localized scripts
+     *
+     * @return void
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $this->enqueueGraphiQLClientAssets();
+        $this->enqueueGraphiQLCustomAssets();
     }
 
     protected function getResponse(): string
