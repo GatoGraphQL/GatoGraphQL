@@ -18,8 +18,4 @@ class RegisterAccessControlRuleBlockCompilerPass extends AbstractInjectServiceDe
     {
         return AbstractAccessControlRuleBlock::class;
     }
-    protected function getRegistryMethodCallName(): string
-    {
-        return 'addServiceDefinitionID';
-    }
 }

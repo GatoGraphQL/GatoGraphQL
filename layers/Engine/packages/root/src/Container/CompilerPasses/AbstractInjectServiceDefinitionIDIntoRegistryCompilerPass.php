@@ -18,7 +18,14 @@ abstract class AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass impleme
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
-            if ($definitionClass === null || !is_a($definitionClass, $this->getServiceClass(), true)) {
+            if (
+                $definitionClass === null
+                || !is_a(
+                    $definitionClass,
+                    $this->getServiceClass(),
+                    true
+                )
+            ) {
                 continue;
             }
 
@@ -32,7 +39,11 @@ abstract class AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass impleme
 
     abstract protected function getRegistryServiceDefinition(): string;
     abstract protected function getServiceClass(): string;
-    abstract protected function getRegistryMethodCallName(): string;
+
+    protected function getRegistryMethodCallName(): string
+    {
+        return 'addServiceDefinitionID';
+    }
 
     protected function enabled(): bool
     {
