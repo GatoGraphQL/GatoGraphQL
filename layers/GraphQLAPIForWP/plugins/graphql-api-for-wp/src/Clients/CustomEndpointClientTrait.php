@@ -4,13 +4,23 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Clients;
 
-use PoP\ComponentModel\Misc\RequestUtils;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use PoP\API\Configuration\Request as APIRequest;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 trait CustomEndpointClientTrait
 {
+    /**
+     * Check if we are executing a single CPT
+     */
+    protected function isEndpointRequested(): bool
+    {
+        if (!\is_singular(GraphQLEndpointPostType::POST_TYPE)) {
+            return false;
+        }
+        return parent::isEndpointRequested();
+    }
+
     /**
      * Endpoint URL
      *
