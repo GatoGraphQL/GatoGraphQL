@@ -26,12 +26,4 @@ class GraphiQLWithExplorerClient extends AbstractGraphiQLClient
         // that's why the dirname starts with "/"
         return '/static';
     }
-
-    /**
-     * Check if GraphiQL Explorer must be enabled or not
-     */
-    protected function matchesGraphiQLExplorerRequiredState(bool $useGraphiQLExplorer): bool
-    {
-        return $useGraphiQLExplorer;
-    }
 }

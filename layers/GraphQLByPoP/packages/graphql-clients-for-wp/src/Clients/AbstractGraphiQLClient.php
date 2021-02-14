@@ -31,20 +31,4 @@ abstract class AbstractGraphiQLClient extends AbstractClient
     {
         return ComponentConfiguration::useGraphiQLExplorer();
     }
-
-    /**
-     * Indicate if the endpoint has been requested.
-     * Check if GraphiQL Explorer is enabled or not
-     */
-    protected function isEndpointRequested(): bool
-    {
-        return
-            $this->matchesGraphiQLExplorerRequiredState($this->useGraphiQLExplorer())
-            && parent::isEndpointRequested();
-    }
-
-    /**
-     * Check if GraphiQL Explorer must be enabled or not
-     */
-    abstract protected function matchesGraphiQLExplorerRequiredState(bool $useGraphiQLExplorer): bool;
 }
