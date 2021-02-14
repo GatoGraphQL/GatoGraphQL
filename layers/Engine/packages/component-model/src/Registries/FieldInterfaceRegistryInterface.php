@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-interface FieldInterfaceRegistryInterface
+use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+
+interface FieldInterfaceRegistryInterface extends ServiceDefinitionIDRegistryInterface
 {
-    public function addFieldInterfaceResolverClass(string $fieldInterfaceResolverClass): void;
-    public function getFieldInterfaceResolverClasses(): array;
 }

@@ -7,9 +7,9 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\Registries\FieldInterfaceRegistryInterface;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceClassIntoRegistryCompilerPass;
+use PoP\Root\Container\CompilerPasses\AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass;
 
-class RegisterFieldInterfaceResolverCompilerPass extends AbstractInjectServiceClassIntoRegistryCompilerPass
+class RegisterFieldInterfaceResolverCompilerPass extends AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -18,10 +18,6 @@ class RegisterFieldInterfaceResolverCompilerPass extends AbstractInjectServiceCl
     protected function getServiceClass(): string
     {
         return FieldInterfaceResolverInterface::class;
-    }
-    protected function getRegistryMethodCallName(): string
-    {
-        return 'addFieldInterfaceResolverClass';
     }
     protected function enabled(): bool
     {

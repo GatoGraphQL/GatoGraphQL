@@ -4,19 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-class DirectiveRegistry implements DirectiveRegistryInterface
-{
-    /**
-     * @var string[]
-     */
-    protected array $directiveResolverClasses = [];
+use PoP\Root\Registries\AbstractServiceDefinitionIDRegistry;
 
-    public function addDirectiveResolverClass(string $directiveResolverClass): void
-    {
-        $this->directiveResolverClasses[] = $directiveResolverClass;
-    }
-    public function getDirectiveResolverClasses(): array
-    {
-        return $this->directiveResolverClasses;
-    }
+class DirectiveRegistry extends AbstractServiceDefinitionIDRegistry implements DirectiveRegistryInterface
+{
 }
