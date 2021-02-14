@@ -9,5 +9,4 @@ use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
 class CustomEndpointGraphiQLClient extends GraphiQLClient
 {
     use CustomEndpointClientTrait;
-    use CustomEndpointGraphiQLClientTrait;
 }
