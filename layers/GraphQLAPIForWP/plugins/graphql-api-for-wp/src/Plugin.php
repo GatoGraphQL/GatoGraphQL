@@ -326,30 +326,6 @@ class Plugin
 
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
-        /**
-         * Initialize classes for the admin panel
-         */
-        if (\is_admin()) {
-            /**
-             * Initialize all the services
-             */
-            $menuServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\ConditionalOnEnvironment\\Admin\\Services\\Menus');
-            foreach ($menuServiceClasses as $serviceClass) {
-                /**
-                 * @var AbstractMenu
-                 */
-                $service = $instanceManager->getInstance($serviceClass);
-                $service->initialize();
-            }
-            $endpointResolverServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\ConditionalOnEnvironment\\Admin\\Services\\EndpointResolvers');
-            foreach ($endpointResolverServiceClasses as $serviceClass) {
-                /**
-                 * @var AbstractEndpointResolver
-                 */
-                $service = $instanceManager->getInstance($serviceClass);
-                $service->initialize();
-            }
-        }
 
         /**
          * Taxonomies must be initialized before Post Types
