@@ -92,15 +92,18 @@ class Component extends AbstractComponent
         }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER)) {
-            if (
-                $userSettingsManager->getSetting(
-                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                    ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
-                )
-            ) {
-                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
-            }
+        $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
+        if (
+            \is_admin()
+            && $isGraphiQLExplorerEnabled
+            && $userSettingsManager->getSetting(
+                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
+            )
+        ) {
+            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
+        }
+        if ($isGraphiQLExplorerEnabled) {
             if (
                 $userSettingsManager->getSetting(
                     ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
