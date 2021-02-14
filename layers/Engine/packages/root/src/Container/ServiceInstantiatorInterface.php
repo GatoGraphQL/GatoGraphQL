@@ -11,7 +11,6 @@ namespace PoP\Root\Container;
  */
 interface ServiceInstantiatorInterface
 {
-    public function addServiceClass(string $sertiveClass): void;
-    // public function getServiceClasses(): array;
+    public function addServiceDefinition(string $serviceDefinition): void;
     public function initializeServices(): void;
 }
