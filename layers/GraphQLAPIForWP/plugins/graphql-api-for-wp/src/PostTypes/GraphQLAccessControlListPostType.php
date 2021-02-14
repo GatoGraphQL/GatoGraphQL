@@ -90,7 +90,7 @@ class GraphQLAccessControlListPostType extends AbstractPostType
          */
         $aclNestedBlocks = array_map(
             fn ($serviceClass) => $instanceManager->getInstance($serviceClass),
-            AccessControlRuleBlockRegistryFacade::getInstance()->getServiceClasses()
+            AccessControlRuleBlockRegistryFacade::getInstance()->getServiceDefinitionIDs()
         );
         return array_merge(
             [

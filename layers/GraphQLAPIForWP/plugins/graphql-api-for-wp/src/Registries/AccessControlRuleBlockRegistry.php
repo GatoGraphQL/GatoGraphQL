@@ -9,17 +9,17 @@ class AccessControlRuleBlockRegistry implements AccessControlRuleBlockRegistryIn
     /**
      * @var string[]
      */
-    protected array $serviceClasses = [];
+    protected array $serviceDefinitionIDs = [];
 
-    public function addServiceClass(string $serviceClass): void
+    public function addServiceDefinitionID(string $serviceDefinitionID): void
     {
-        $this->serviceClasses[] = $serviceClass;
+        $this->serviceDefinitionIDs[] = $serviceDefinitionID;
     }
     /**
      * @return string[]
      */
-    public function getServiceClasses(): array
+    public function getServiceDefinitionIDs(): array
     {
-        return $this->serviceClasses;
+        return $this->serviceDefinitionIDs;
     }
 }

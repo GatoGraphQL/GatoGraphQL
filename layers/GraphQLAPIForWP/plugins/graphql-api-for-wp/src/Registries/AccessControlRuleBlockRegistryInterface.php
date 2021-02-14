@@ -6,9 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Registries;
 
 interface AccessControlRuleBlockRegistryInterface
 {
-    public function addServiceClass(string $serviceClass): void;
+    public function addServiceDefinitionID(string $serviceClass): void;
     /**
      * @return string[]
      */
-    public function getServiceClasses(): array;
+    public function getServiceDefinitionIDs(): array;
 }
