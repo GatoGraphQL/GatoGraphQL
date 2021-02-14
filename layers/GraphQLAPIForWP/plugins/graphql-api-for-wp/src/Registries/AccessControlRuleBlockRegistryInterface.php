@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-interface AccessControlRuleBlockRegistryInterface
+use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+
+interface AccessControlRuleBlockRegistryInterface extends ServiceDefinitionIDRegistryInterface
 {
-    public function addServiceClass(string $serviceClass): void;
-    /**
-     * @return string[]
-     */
-    public function getServiceClasses(): array;
 }

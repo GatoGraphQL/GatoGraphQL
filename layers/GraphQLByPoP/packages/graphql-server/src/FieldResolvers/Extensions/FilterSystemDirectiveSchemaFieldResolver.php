@@ -127,7 +127,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                     );
                     $directiveRegistry = DirectiveRegistryFacade::getInstance();
                     $ofTypeDirectiveResolverClasses = array_filter(
-                        $directiveRegistry->getDirectiveResolverClasses(),
+                        $directiveRegistry->getServiceDefinitionIDs(),
                         function ($directiveResolverClass) use ($instanceManager, $ofTypes) {
                             /**
                              * @var DirectiveResolverInterface

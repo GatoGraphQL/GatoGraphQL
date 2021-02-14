@@ -88,7 +88,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $instanceManager = InstanceManagerFacade::getInstance();
         $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each interface, obtain its namespacedInterfaceName
-        $fieldInterfaceResolverClasses = $fieldInterfaceRegistry->getFieldInterfaceResolverClasses();
+        $fieldInterfaceResolverClasses = $fieldInterfaceRegistry->getServiceDefinitionIDs();
         $this->namespacedFieldInterfaceNameClasses = [];
         foreach ($fieldInterfaceResolverClasses as $fieldInterfaceResolverClass) {
             /**
@@ -119,7 +119,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $directiveRegistry = DirectiveRegistryFacade::getInstance();
-        $directiveResolverClasses = $directiveRegistry->getDirectiveResolverClasses();
+        $directiveResolverClasses = $directiveRegistry->getServiceDefinitionIDs();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
