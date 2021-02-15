@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
+use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnEnvironment\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient as UpstreamGraphiQLClient;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\GraphiQLExplorerInSingleEndpointPublicClient\Overrides\Services\Clients\GraphiQLWithExplorerClient;
 
 return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
@@ -13,7 +13,7 @@ return function (ContainerConfigurator $configurator) {
             ->autowire();
     // Override the GraphiQL clients
     $services->set(
-        UpstreamGraphiQLClient::class,
+        GraphiQLClient::class,
         GraphiQLWithExplorerClient::class
     );
 };

@@ -14,12 +14,4 @@ class GraphiQLClient extends AbstractGraphiQLClient
     {
         return 'graphiql.js';
     }
-
-    /**
-     * Check if GraphiQL Explorer must be enabled or not
-     */
-    protected function matchesGraphiQLExplorerRequiredState(bool $useGraphiQLExplorer): bool
-    {
-        return !$useGraphiQLExplorer;
-    }
 }
