@@ -75,7 +75,7 @@ class Component extends AbstractComponent
         self::initYAMLServices(dirname(__DIR__));
         self::initComponentConfiguration();
         // Override DI services
-        self::initPHPServices(dirname(__DIR__), '/Overrides');
+        self::initYAMLServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         /**
          * FieldResolvers used to configure the services can also be accessed in the admin area
