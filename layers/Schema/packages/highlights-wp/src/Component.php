@@ -39,7 +39,7 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         if (Environment::addHighlightTypeToCustomPostUnionTypes()) {
-            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddHighlightTypeToCustomPostUnionTypes/Overrides');
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddHighlightTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

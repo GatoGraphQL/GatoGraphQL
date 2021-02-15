@@ -26,3 +26,6 @@ services:
 
     GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface:
         class: '\GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParser'
+
+    GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistry'

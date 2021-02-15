@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    # Override the GraphiQL clients
+    GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient:
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\GraphiQLExplorerInCustomEndpointPublicClient\Overrides\Services\Clients\CustomEndpointGraphiQLWithExplorerClient'

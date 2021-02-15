@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    # Make sure the GraphiQL client is used, without the Explorer
+    # Because if isGraphiQLExplorerEnabled might be true, the explorer is enabled
+    # but if disabled for the single endpoint, then it must not
+    # (for that case, it will be overriden once again by another ConditionalOnEnvironment)
+    GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
+        class: '\GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient'

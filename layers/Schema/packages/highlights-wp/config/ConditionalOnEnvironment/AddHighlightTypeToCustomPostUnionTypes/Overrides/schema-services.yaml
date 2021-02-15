@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\Highlights\ConditionalOnEnvironment\AddHighlightTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\HighlightCustomPostTypeResolverPicker:
+        class: '\PoPSchema\HighlightsWP\ConditionalOnEnvironment\AddHighlightTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\HighlightCustomPostTypeResolverPicker'

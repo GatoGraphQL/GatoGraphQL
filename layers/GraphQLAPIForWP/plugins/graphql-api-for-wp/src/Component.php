@@ -74,21 +74,20 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         self::initComponentConfiguration();
-        self::initPHPServices(dirname(__DIR__));
         // Override DI services
-        self::initPHPServices(dirname(__DIR__), '/Overrides');
+        self::initYAMLServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         /**
          * FieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
-            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
-            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.php');
+            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
+            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
         }
         // Register the Cache services, if the module is not disabled
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
+            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -101,7 +100,7 @@ class Component extends AbstractComponent
                 ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
             )
         ) {
-            self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
+            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
         }
         if ($isGraphiQLExplorerEnabled) {
             if (
@@ -110,7 +109,7 @@ class Component extends AbstractComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
                 )
             ) {
-                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
+                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
@@ -118,7 +117,7 @@ class Component extends AbstractComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT
                 )
             ) {
-                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
+                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
@@ -126,7 +125,7 @@ class Component extends AbstractComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
                 )
             ) {
-                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
+                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
         ServiceConfiguration::initialize();

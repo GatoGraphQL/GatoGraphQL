@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\Events\ConditionalOnEnvironment\AddEventTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\EventCustomPostTypeResolverPicker:
+        class: '\PoPSchema\EventsWPEM\ConditionalOnEnvironment\AddEventTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\EventCustomPostTypeResolverPicker'
