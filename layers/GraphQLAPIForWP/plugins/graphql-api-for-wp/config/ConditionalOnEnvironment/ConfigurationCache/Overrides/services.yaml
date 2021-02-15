@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    # Override to configure the cache with dynamic values
+    PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\ConfigurationCache\Overrides\CacheConfigurationManager'
