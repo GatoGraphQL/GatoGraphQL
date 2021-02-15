@@ -74,7 +74,6 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         self::initComponentConfiguration();
-        self::initPHPServices(dirname(__DIR__));
         // Override DI services
         self::initPHPServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
