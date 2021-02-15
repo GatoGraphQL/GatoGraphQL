@@ -47,7 +47,7 @@ class Component extends AbstractComponent
             ComponentConfiguration::setConfiguration($configuration);
             self::initYAMLServices(dirname(__DIR__));
             if (ComponentConfiguration::useGraphiQLExplorer()) {
-                self::initPHPServices(dirname(__DIR__), '/ConditionalOnEnvironment/UseGraphiQLExplorer/Overrides');
+                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/UseGraphiQLExplorer/Overrides');
             }
         }
     }
