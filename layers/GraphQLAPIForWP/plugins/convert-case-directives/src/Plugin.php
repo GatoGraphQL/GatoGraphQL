@@ -59,7 +59,7 @@ class Plugin extends AbstractPlugin
         $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
 
         // Initialize the plugin's Component and, with it, all its dependencies from PoP
-        AppLoader::initializeComponents(
+        AppLoader::addComponentClassesToInitialize(
             [
                 \PoP\ConvertCaseDirectives\Component::class,
             ],

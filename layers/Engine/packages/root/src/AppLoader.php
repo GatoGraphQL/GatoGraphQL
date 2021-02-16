@@ -20,6 +20,57 @@ class AppLoader
      * @var string[]
      */
     protected static $initializedClasses = [];
+    /**
+     * Component classes to be initialized
+     *
+     * @var string[]
+     */
+    protected static $componentClassesToInitialize = [];
+    /**
+     * Calculare in what order the Component classes must be initialized,
+     * based on their dependencies on other Components
+     *
+     * @var string[]
+     */
+    protected static $orderedComponentClasses = [];
+    /**
+     * [key]: Component class, [value]: Configuration
+     *
+     * @var string[]
+     */
+    protected static $componentClassConfiguration = [];
+    /**
+     * List of `Component` class which must not initialize their Schema services
+     *
+     * @var string[]
+     */
+    protected static $skipSchemaComponentClasses = [];
+
+    /**
+     * Add Component classes to be initialized
+     *
+     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param array<string, mixed> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
+     */
+    public static function addComponentClassesToInitialize(
+        array $componentClasses,
+        array $componentClassConfiguration = [],
+        array $skipSchemaComponentClasses = []
+    ): void {
+        self::$componentClassesToInitialize = array_merge(
+            self::$componentClassesToInitialize,
+            $componentClasses
+        );
+        self::$componentClassConfiguration = array_merge_recursive(
+            self::$componentClassConfiguration,
+            $componentClassConfiguration
+        );
+        self::$skipSchemaComponentClasses = array_merge(
+            self::$skipSchemaComponentClasses,
+            $skipSchemaComponentClasses
+        );
+    }
 
     /**
      * Initialize the dependency injection containers
@@ -43,14 +94,28 @@ class AppLoader
         // Provide a namespace, from configuration if defined, or from the environment
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
 
-        // System container
+        /**
+         * System container: initialize it and compile it already,
+         * since it will be used to initialize the Application container
+         */
         SystemContainerBuilderFactory::init(
             $cacheContainerConfiguration,
             $namespace,
             $directory
         );
 
-        // Application container
+        // Get the list of components, in the order in which they must be initialized
+        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
+            self::$componentClassesToInitialize
+        );
+
+        // Initialize and compile the System container
+        self::initializeAndBootSystemContainer();
+
+        /**
+         * Application container: initialize it only.
+         * It will be compiled later on
+         */
         ContainerBuilderFactory::init(
             $cacheContainerConfiguration,
             $namespace,
@@ -60,41 +125,22 @@ class AppLoader
 
     /**
      * Initialize the PoP components
-     *
-     * @param string[] $componentClasses List of `Component` class to initialize
-     * @param array<string, mixed> $componentClassConfiguration [key]: Component class, [value]: Configuration
-     * @param string[] $skipSchemaComponentClasses List of `Component` class to not initialize
      */
-    public static function initializeComponents(
-        array $componentClasses,
-        array $componentClassConfiguration = [],
-        array $skipSchemaComponentClasses = []
-    ): void {
-        /**
-         * Get the list of components, in the order in which they must be initialized
-         */
-        $orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            $componentClasses
-        );
-
+    public static function initializeComponents(): void
+    {
         /**
          * Allow each component to customize the configuration for itself,
          * and for its depended-upon components.
          * Hence this is executed from bottom to top
          */
-        foreach (array_reverse($orderedComponentClasses) as $componentClass) {
-            $componentClass::customizeComponentClassConfiguration($componentClassConfiguration);
+        foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
+            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
         }
-
-        /**
-         * Initialize and compile the System container
-         */
-        self::initializeAndBootSystemContainer($orderedComponentClasses);
 
         /**
          * Initialize the components
          */
-        foreach ($orderedComponentClasses as $componentClass) {
+        foreach (self::$orderedComponentClasses as $componentClass) {
             // Temporary solution until migrated:
             // Initialize all depended-upon migration plugins
             foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
@@ -102,12 +148,12 @@ class AppLoader
             }
 
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $componentConfiguration = $componentClassConfiguration[$componentClass] ?? [];
-            $skipSchemaForComponent = in_array($componentClass, $skipSchemaComponentClasses);
+            $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
+            $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
             $componentClass::initialize(
                 $componentConfiguration,
                 $skipSchemaForComponent,
-                $skipSchemaComponentClasses
+                self::$skipSchemaComponentClasses
             );
         }
     }
@@ -183,13 +229,11 @@ class AppLoader
      * and already compile the container.
      * This way, these services become available for initializing
      * Application Container services.
-     *
-     * @param string[] $componentClasses
      */
-    protected static function initializeAndBootSystemContainer(array $componentClasses): void
+    protected static function initializeAndBootSystemContainer(): void
     {
-        foreach ($componentClasses as $componentClass) {
-            $componentConfiguration = $componentClassConfiguration[$componentClass] ?? [];
+        foreach (self::$orderedComponentClasses as $componentClass) {
+            $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $componentClass::initializeSystemContainerServices(
                 $componentConfiguration
             );

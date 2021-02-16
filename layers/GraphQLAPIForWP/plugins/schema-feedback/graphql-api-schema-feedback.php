@@ -33,7 +33,7 @@ $plugin = new Plugin();
 \register_deactivation_hook(__FILE__, [$plugin, 'deactivate']);
 
 // Initialize the plugin's Component and, with it, all its dependencies from PoP
-AppLoader::initializeComponents(
+AppLoader::addComponentClassesToInitialize(
     [
         \PoP\SchemaFeedback\Component::class,
     ]
