@@ -111,6 +111,11 @@ abstract class AbstractContainerBuilderFactory
         return static::$cached;
     }
 
+    protected static function getContainerNamespace(): string
+    {
+        return 'PoPContainer';
+    }
+
     /**
      * If the container is not cached, then compile it and cache it
      *
@@ -147,7 +152,9 @@ abstract class AbstractContainerBuilderFactory
                         static::$cacheFile,
                         $dumper->dump(
                             // Save under own namespace to avoid conflicts
-                            array('namespace' => 'PoPContainer')
+                            [
+                                'namespace' => static::getContainerNamespace(),
+                            ]
                         )
                     );
 
