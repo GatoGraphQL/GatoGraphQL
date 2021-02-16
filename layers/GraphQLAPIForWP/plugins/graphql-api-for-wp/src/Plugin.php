@@ -309,14 +309,6 @@ class Plugin
         $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
 
         // Initialize the containers
-        // [
-        //     $cacheContainerConfiguration,
-        //     $containerConfigurationCacheNamespace
-        // ] = PluginConfiguration::getContainerCacheConfiguration();
-        // ComponentLoader::initializeContainers(
-        //     $cacheContainerConfiguration,
-        //     $containerConfigurationCacheNamespace
-        // );
         ComponentLoader::initializeContainers(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
