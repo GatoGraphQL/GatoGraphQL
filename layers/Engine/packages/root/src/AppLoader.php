@@ -77,12 +77,10 @@ class AppLoader
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param boolean|null $directory If null, it will use a system temp folder
      */
     protected static function initializeContainers(
         ?bool $cacheContainerConfiguration = null,
-        ?string $namespace = null,
-        ?string $directory = null
+        ?string $namespace = null
     ): void {
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
         DotenvBuilderFactory::init();
@@ -93,8 +91,7 @@ class AppLoader
          */
         SystemContainerBuilderFactory::init(
             $cacheContainerConfiguration,
-            $namespace,
-            $directory
+            $namespace
         );
 
         // Produce the order in which the Components must be initialized
@@ -109,8 +106,7 @@ class AppLoader
          */
         ContainerBuilderFactory::init(
             $cacheContainerConfiguration,
-            $namespace,
-            $directory
+            $namespace
         );
     }
 
@@ -224,14 +220,12 @@ class AppLoader
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param boolean|null $directory If null, it will use a system temp folder
      */
     public static function bootApplication(
         ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $directory = null
+        ?string $containerNamespace = null
     ): void {
-        self::initializeContainers($cacheContainerConfiguration, $containerNamespace, $directory);
+        self::initializeContainers($cacheContainerConfiguration, $containerNamespace);
         self::initializeComponents();
         self::bootApplicationContainer();
         self::bootComponents();
