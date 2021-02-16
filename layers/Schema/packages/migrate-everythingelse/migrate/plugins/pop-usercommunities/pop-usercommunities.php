@@ -18,9 +18,9 @@ class PoP_UserCommunities
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Social Network
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 370);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function init()
     {

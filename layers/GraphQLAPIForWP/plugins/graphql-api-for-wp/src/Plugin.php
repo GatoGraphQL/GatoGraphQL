@@ -36,7 +36,7 @@ use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
 use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\Engine\ComponentLoader;
+use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
 
 class Plugin
@@ -75,10 +75,11 @@ class Plugin
      *
      * 1. GraphQL API => setup(): immediately
      * 2. GraphQL API extensions => setup(): priority 0
-     * 3. GraphQL API => initialize(): priority 5
-     * 4. GraphQL API extensions => initialize(): priority 10
-     * 5. GraphQL API => boot(): priority 15
-     * 6. GraphQL API extensions => boot(): priority 20
+     * 3. GraphQL API => initialize(): priority 10
+     * 4. GraphQL API extensions => initialize(): priority 20
+     * 5. GraphQL API => bootApplication(): priority 30
+     * 6. GraphQL API => boot(): priority 40
+     * 7. GraphQL API extensions => boot(): priority 50
      *
      * @return void
      */
@@ -169,18 +170,15 @@ class Plugin
          * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
          * - Allow other plugins to inject their own functionality
          */
-        \add_action('plugins_loaded', [$this, 'initialize'], 5);
-        \add_action('plugins_loaded', [$this, 'boot'], 15);
-        /**
-         * Hooks to initialize/boot extension plugins, triggered
-         * after this main plugin is initialized/booted
-         */
+        \add_action('plugins_loaded', [$this, 'initialize'], 10);
         \add_action('plugins_loaded', function () {
             \do_action(self::HOOK_INITIALIZE_EXTENSION_PLUGIN);
-        }, 10);
+        }, 20);
+        \add_action('plugins_loaded', [$this, 'bootApplication'], 30);
+        \add_action('plugins_loaded', [$this, 'boot'], 40);
         \add_action('plugins_loaded', function () {
             \do_action(self::HOOK_BOOT_EXTENSION_PLUGIN);
-        }, 20);
+        }, 50);
     }
 
     /**
@@ -308,9 +306,8 @@ class Plugin
         $componentClassConfiguration = PluginConfiguration::getComponentClassConfiguration();
         $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
 
-        // Initialize the plugin's Component and, with it,
-        // all its dependencies from PoP
-        ComponentLoader::initializeComponents(
+        // Initialize the containers
+        AppLoader::addComponentClassesToInitialize(
             [
                 Component::class,
             ],
@@ -320,14 +317,20 @@ class Plugin
     }
 
     /**
+     * Boot the application
+     */
+    public function bootApplication(): void
+    {
+        // Boot all PoP components, from this plugin and all extensions
+        AppLoader::bootApplication(...PluginConfiguration::getContainerCacheConfiguration());
+    }
+
+    /**
      * Plugin initialization, executed on hook "plugins_loaded"
      * to wait for all extensions to be loaded
      */
     public function boot(): void
     {
-        // Boot all PoP components, from this plugin and all extensions
-        ComponentLoader::bootComponents();
-
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
 

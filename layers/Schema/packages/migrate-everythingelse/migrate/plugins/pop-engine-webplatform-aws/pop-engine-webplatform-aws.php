@@ -20,7 +20,7 @@ class PoP_WebPlatformEngine_AWS
     {
 
         // Priority: after PoP CDN
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 420);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
     }
 
     public function init()

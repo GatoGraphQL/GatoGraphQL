@@ -20,9 +20,9 @@ class EM_PoPLocations
             'PoP_Locations_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Locations
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function getProviderValidationClass($class)
     {

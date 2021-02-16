@@ -8,8 +8,6 @@ use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\CompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
-use PoP\Root\Dotenv\DotenvBuilderFactory;
-use PoP\Root\Managers\ComponentManager;
 
 /**
  * Initialize component
@@ -31,35 +29,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function doInitialize(
+    protected static function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
-
-        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
-        DotenvBuilderFactory::init();
-
-        // Initialize the ContainerBuilder
-        // Indicate if to cache the container configuration, from configuration if defined, or from the environment
-        $cacheContainerConfiguration =
-            $configuration[Environment::CACHE_CONTAINER_CONFIGURATION] ??
-            Environment::cacheContainerConfiguration();
-
-        // Provide a namespace, from configuration if defined, or from the environment
-        $namespace =
-            $configuration[Environment::CONTAINER_CONFIGURATION_CACHE_NAMESPACE] ??
-            Environment::getCacheContainerConfigurationNamespace();
-
-        // No need to provide a directory => then it will use a system temp folder
-        $directory = null;
-        // $directory = dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'build' . \DIRECTORY_SEPARATOR . 'cache';
-        ContainerBuilderFactory::init(
-            $cacheContainerConfiguration,
-            $namespace,
-            $directory
-        );
+        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
 
         // Only after initializing the containerBuilder, can inject a service
         self::initYAMLServices(dirname(__DIR__));
@@ -72,19 +47,6 @@ class Component extends AbstractComponent
      */
     public static function beforeBoot(): void
     {
-        // Collect the compiler pass classes from all components
-        $compilerPassClasses = [];
-        foreach (ComponentManager::getComponentClasses() as $componentClass) {
-            $compilerPassClasses = [
-                ...$compilerPassClasses,
-                ...$componentClass::getContainerCompilerPassClasses()
-            ];
-        }
-        $compilerPassClasses = array_values(array_unique($compilerPassClasses));
-
-        // Compile and Cache Symfony's DependencyInjection Container Builder
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
-
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
          * @var ServiceInstantiatorInterface

@@ -20,9 +20,9 @@ class PoP_Events
     {
 
         // // Priority: after PoP Locations
-        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
         // Priority: after PoP Add Highlights (needed by PoP Events Processors)
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 370);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function init()
     {

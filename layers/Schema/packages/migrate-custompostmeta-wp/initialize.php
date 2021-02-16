@@ -24,4 +24,5 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
         require_once 'migrate/pop-custompostmeta-wp.php';
     }
 });
+\PoP\Root\Managers\ComponentManager::register(get_class($class));
 $class::initialize();

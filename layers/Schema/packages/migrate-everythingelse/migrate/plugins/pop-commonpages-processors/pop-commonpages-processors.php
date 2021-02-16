@@ -18,15 +18,15 @@ class PoP_CommonPagesProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after ...
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 891);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888891);
     }
 
     public function init()
     {
         define('POP_COMMONPAGESPROCESSORS_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_COMMONPAGESPROCESSORS_INITIALIZED', true);

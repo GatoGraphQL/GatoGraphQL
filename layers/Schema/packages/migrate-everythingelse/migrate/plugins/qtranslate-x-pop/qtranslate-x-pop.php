@@ -22,7 +22,7 @@ class QTX_PoP
         );
 
         // Priority: after PoP WordPress Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 360);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function getProviderValidationClass($class)
     {

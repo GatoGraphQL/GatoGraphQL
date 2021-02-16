@@ -19,7 +19,7 @@ class PoP_UserLoginWP
     public function __construct()
     {
         // Priority: after PoP Email Sender
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 322);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888322);
     }
     public function init()
     {

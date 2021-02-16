@@ -3,13 +3,3 @@ parameters:
 	paths:
 		- src
 		- tests
-	reportUnmatchedIgnoredErrors: false
-	ignoreErrors:
-		-
-			message: '#Instantiated class PoPContainer\\ProjectServiceContainer not found\.#'
-			path: src/Container/ContainerBuilderFactory.php
-			count: 1
-		-
-			message: '#Static property PoP\\Root\\Container\\ContainerBuilderFactory\:\:\$instance \(Symfony\\Component\\DependencyInjection\\Container\) does not accept ProjectServiceContainer\.#'
-			path: src/Container/ContainerBuilderFactory.php
-			count: 1

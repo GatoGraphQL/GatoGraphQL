@@ -21,7 +21,7 @@ class PoP_FormsWebPlatform
     {
 
         // Priority: after PoP Captcha
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 520);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888520);
     }
     public function init()
     {

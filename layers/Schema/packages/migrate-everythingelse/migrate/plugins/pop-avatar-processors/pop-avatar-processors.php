@@ -19,9 +19,9 @@ class PoP_AvatarProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Base Collection Processors (even though it doesn't depend on it)
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 620);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888620);
     }
     public function init()
     {

@@ -20,7 +20,7 @@ class PoP_Domain
     {
 
         // Priority: after PoP CDN
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 419);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888419);
         // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()

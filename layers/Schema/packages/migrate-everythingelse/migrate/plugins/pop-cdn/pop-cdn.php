@@ -21,7 +21,7 @@ class PoP_CDN
     {
 
         // Priority: after PoP Engine Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 410);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888410);
         // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()

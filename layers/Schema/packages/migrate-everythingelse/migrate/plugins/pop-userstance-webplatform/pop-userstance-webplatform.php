@@ -21,7 +21,7 @@ class PoP_UserStanceWebPlatform
     {
 
         // Priority: after PoP User Platform Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 540);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888540);
     }
     public function init()
     {

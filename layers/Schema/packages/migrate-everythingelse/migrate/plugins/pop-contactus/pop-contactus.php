@@ -20,7 +20,7 @@ class PoP_ContactUs
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 310);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888310);
     }
     public function init()
     {

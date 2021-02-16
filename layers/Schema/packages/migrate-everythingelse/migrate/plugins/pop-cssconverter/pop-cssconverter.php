@@ -21,7 +21,7 @@ class PoP_CSSConverter
     {
 
         // Priority: after PoP System
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 130);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888130);
     }
     public function init()
     {

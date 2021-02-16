@@ -18,15 +18,15 @@ class PoPTheme_Wassup_GetPoPDemo
 {
     public function __construct()
     {
-        
+
         // Priority: mid-section, after PoP Theme Wassup section, and after PoPTheme Wassup Category Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 1050);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 8881050);
     }
 
     public function init()
     {
         define('POPTHEME_WASSUP_GETPOPDEMO_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POPTHEME_WASSUP_GETPOPDEMO_INITIALIZED', true);

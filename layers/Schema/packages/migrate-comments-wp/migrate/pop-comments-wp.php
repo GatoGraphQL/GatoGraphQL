@@ -26,7 +26,7 @@ class Plugin
         );
 
         // Priority: mid section, after PoP Posts WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 260);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888260);
     }
     public function getProviderValidationClass($class)
     {

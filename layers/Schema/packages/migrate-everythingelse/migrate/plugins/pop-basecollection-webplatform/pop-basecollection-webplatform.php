@@ -20,9 +20,9 @@ class PoP_BaseCollectionWebPlatform
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Server-Side Rendering
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 420);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
     }
     public function init()
     {

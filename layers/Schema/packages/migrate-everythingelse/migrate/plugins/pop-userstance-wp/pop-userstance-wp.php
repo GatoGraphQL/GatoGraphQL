@@ -23,7 +23,7 @@ class PoP_UserStanceWP
     {
 
         // Priority: after PoP Add Related Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 372);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888372);
     }
     public function init()
     {

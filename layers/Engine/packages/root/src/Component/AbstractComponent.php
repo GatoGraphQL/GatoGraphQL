@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\Component;
 
 use PoP\Root\Component\ComponentInterface;
-use PoP\Root\Managers\ComponentManager;
 
 /**
  * Initialize component
@@ -37,14 +36,33 @@ abstract class AbstractComponent implements ComponentInterface
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        // Register itself in the Manager
-        ComponentManager::register(get_called_class());
-
         // Initialize the self component
-        static::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
+        static::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
 
         // Allow the component to define runtime constants
         static::defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
+    }
+
+    /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    final public static function initializeSystem(
+        array $configuration = []
+    ): void {
+        static::initializeSystemContainerServices($configuration);
+    }
+
+    /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        // Override
     }
 
     /**
@@ -80,7 +98,7 @@ abstract class AbstractComponent implements ComponentInterface
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function doInitialize(
+    protected static function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []

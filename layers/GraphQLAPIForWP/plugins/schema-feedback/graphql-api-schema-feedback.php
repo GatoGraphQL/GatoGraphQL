@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use PoP\Engine\ComponentLoader;
+use PoP\Engine\AppLoader;
 
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -33,7 +33,7 @@ $plugin = new Plugin();
 \register_deactivation_hook(__FILE__, [$plugin, 'deactivate']);
 
 // Initialize the plugin's Component and, with it, all its dependencies from PoP
-ComponentLoader::initializeComponents(
+AppLoader::addComponentClassesToInitialize(
     [
         \PoP\SchemaFeedback\Component::class,
     ]

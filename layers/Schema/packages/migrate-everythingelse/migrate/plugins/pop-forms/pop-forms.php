@@ -20,13 +20,13 @@ class PoP_Forms
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 305);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888305);
     }
 
     public function init()
     {
         define('POP_FORMS_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_FORMS_INITIALIZED', true);

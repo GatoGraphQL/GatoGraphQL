@@ -20,9 +20,9 @@ class EM_PoPEvents
             'PoP_Events_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Events
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 380);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888380);
     }
     public function getProviderValidationClass($class)
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives;
 
-use PoP\Engine\ComponentLoader;
+use PoP\Engine\AppLoader;
 use GraphQLAPI\ConvertCaseDirectives\PluginConfiguration;
 use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPlugin;
 use GraphQLAPI\ConvertCaseDirectives\ModuleResolvers\SchemaModuleResolver;
@@ -59,7 +59,7 @@ class Plugin extends AbstractPlugin
         $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
 
         // Initialize the plugin's Component and, with it, all its dependencies from PoP
-        ComponentLoader::initializeComponents(
+        AppLoader::addComponentClassesToInitialize(
             [
                 \PoP\ConvertCaseDirectives\Component::class,
             ],

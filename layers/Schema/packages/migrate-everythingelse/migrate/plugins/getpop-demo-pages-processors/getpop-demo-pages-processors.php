@@ -20,7 +20,7 @@ class GetPoPDemo_PagesProcessors
     {
 
         // Priority: after PoP GetPoP Demo Pages
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 830);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888830);
     }
 
     public function init()

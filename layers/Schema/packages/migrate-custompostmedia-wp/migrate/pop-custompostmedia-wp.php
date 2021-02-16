@@ -26,7 +26,7 @@ class Plugin
         );
 
         // Priority: mid section, after PoP CMS Model WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 255);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888255);
     }
     public function getProviderValidationClass($class)
     {

@@ -24,9 +24,9 @@ class Plugins
             'PoP_Theme_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Theme, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 401);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888401);
     }
     public function getProviderValidationClass($class)
     {

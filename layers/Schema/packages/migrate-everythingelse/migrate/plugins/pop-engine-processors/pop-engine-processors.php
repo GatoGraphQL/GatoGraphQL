@@ -18,9 +18,9 @@ class PoP_EngineProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: new section, after PoP Application Web Platform section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 600);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888600);
     }
     public function init()
     {

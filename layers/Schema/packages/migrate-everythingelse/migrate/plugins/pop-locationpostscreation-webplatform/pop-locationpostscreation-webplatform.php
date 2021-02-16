@@ -21,7 +21,7 @@ class PoP_LocationPostsCreationWebPlatform
     {
 
         // Priority: after PoP Location Posts Web Platform and PoP Posts Creation Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 560);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888560);
     }
     public function init()
     {

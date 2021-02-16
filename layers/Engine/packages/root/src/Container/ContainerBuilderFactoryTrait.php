@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
-abstract class AbstractContainerBuilderFactory
+trait ContainerBuilderFactoryTrait
 {
     private static Container $instance;
     private static bool $cacheContainerConfiguration;
@@ -22,71 +22,75 @@ abstract class AbstractContainerBuilderFactory
      * Initialize the Container Builder.
      * If the directory is not provided, store the cache in a system temp dir
      *
-     * @param bool $cacheContainerConfiguration Indicate if to cache the container configuration
-     * @param string|null $directory directory where to store the cache
-     * @param string|null $namespace subdirectory under which to store the cache
+     * @param bool|null $cacheContainerConfiguration Indicate if to cache the container configuration. If null, the default value is used
+     * @param string|null $namespace subdirectory under which to store the cache. If null, it will use a system temp folder
+     * @param string|null $directory directory where to store the cache. If null, the default value is used
      * @return void
      */
     public static function init(
-        bool $cacheContainerConfiguration = false,
+        ?bool $cacheContainerConfiguration = null,
         ?string $namespace = null,
         ?string $directory = null
     ): void {
-        static::$cacheContainerConfiguration = $cacheContainerConfiguration;
+        static::$cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
+        $namespace ??= Environment::getCacheContainerConfigurationNamespace();
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
-        /**
-         * Code copied from Symfony FilesystemAdapter
-         * @see https://github.com/symfony/cache/blob/master/Traits/FilesystemCommonTrait.php
-         */
-        if (!$directory) {
-            $directory = sys_get_temp_dir() . \DIRECTORY_SEPARATOR . 'pop' . \DIRECTORY_SEPARATOR . 'container-cache';
-        }
-        if ($namespace) {
-            if (preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
+
+        if (static::$cacheContainerConfiguration) {
+            /**
+             * Code copied from Symfony FilesystemAdapter
+             * @see https://github.com/symfony/cache/blob/master/Traits/FilesystemCommonTrait.php
+             */
+            if (!$directory) {
+                $directory = sys_get_temp_dir() . \DIRECTORY_SEPARATOR . 'pop' . \DIRECTORY_SEPARATOR . 'container-cache';
+            }
+            if ($namespace) {
+                if (preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
+                    if ($throwExceptionIfCacheSetupError) {
+                        throw new InvalidArgumentException(
+                            sprintf(
+                                'Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.',
+                                $match[0]
+                            )
+                        );
+                    }
+                    $cacheSetupSuccess = false;
+                }
+                $directory .= \DIRECTORY_SEPARATOR . $namespace;
+            }
+            if ($cacheSetupSuccess && !is_dir($directory)) {
+                if (@mkdir($directory, 0777, true) === false) {
+                    if ($throwExceptionIfCacheSetupError) {
+                        throw new \RuntimeException(sprintf(
+                            'The directory %s could not be created.',
+                            $directory
+                        ));
+                    }
+                    $cacheSetupSuccess = false;
+                }
+            }
+            $directory .= \DIRECTORY_SEPARATOR;
+            // Since we have 2 containers, store each under its namespace and classname
+            $containerNamespace = static::getContainerNamespace();
+            $containerClass = static::getContainerClass();
+            $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
+            $directory .= $containerClass . \DIRECTORY_SEPARATOR;
+            // On Windows the whole path is limited to 258 chars
+            if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
                 if ($throwExceptionIfCacheSetupError) {
                     throw new InvalidArgumentException(
                         sprintf(
-                            'Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.',
-                            $match[0]
+                            'Cache directory too long (%s).',
+                            $directory
                         )
                     );
                 }
                 $cacheSetupSuccess = false;
             }
-            $directory .= \DIRECTORY_SEPARATOR . $namespace;
-        }
-        if ($cacheSetupSuccess && !is_dir($directory)) {
-            if (@mkdir($directory, 0777, true) === false) {
-                if ($throwExceptionIfCacheSetupError) {
-                    throw new \RuntimeException(sprintf(
-                        'The directory %s could not be created.',
-                        $directory
-                    ));
-                }
-                $cacheSetupSuccess = false;
-            }
-        }
-        $directory .= \DIRECTORY_SEPARATOR;
-        // Since we have 2 containers, store each under its namespace and classname
-        $containerNamespace = static::getContainerNamespace();
-        $containerClass = static::getContainerClass();
-        $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
-        $directory .= $containerClass . \DIRECTORY_SEPARATOR;
-        // On Windows the whole path is limited to 258 chars
-        if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
-            if ($throwExceptionIfCacheSetupError) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Cache directory too long (%s).',
-                        $directory
-                    )
-                );
-            }
-            $cacheSetupSuccess = false;
         }
 
-        if ($cacheSetupSuccess) {
+        if (static::$cacheContainerConfiguration && $cacheSetupSuccess) {
             // Store the cache under this file
             static::$cacheFile = $directory . 'container.php';
 
@@ -117,12 +121,12 @@ abstract class AbstractContainerBuilderFactory
         return static::$cached;
     }
 
-    protected static function getContainerNamespace(): string
+    public static function getContainerNamespace(): string
     {
         return 'PoPContainer';
     }
 
-    abstract protected static function getContainerClass(): string;
+    abstract public static function getContainerClass(): string;
 
     /**
      * If the container is not cached, then compile it and cache it

@@ -19,9 +19,9 @@ class Plugins
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Email Sender
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 320);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

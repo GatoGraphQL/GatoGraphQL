@@ -528,6 +528,25 @@ class PluginConfiguration
     }
 
     /**
+     * Provide the configuration to cache the container
+     *
+     * @return array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
+     */
+    public static function getContainerCacheConfiguration(): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $containerConfigurationCacheNamespace = null;
+        if ($cacheContainerConfiguration = $moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
+            $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
+            $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
+        }
+        return [
+            $cacheContainerConfiguration,
+            $containerConfigurationCacheNamespace
+        ];
+    }
+
+    /**
      * Provide the configuration for all components required in the plugin
      *
      * @return array<string, array> [key]: Component class, [value]: Configuration
@@ -568,10 +587,7 @@ class PluginConfiguration
         ];
         // Cache the container
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
             $componentClassConfiguration[\PoP\Root\Component::class] = [
-                \PoP\Root\Environment::CACHE_CONTAINER_CONFIGURATION => true,
-                \PoP\Root\Environment::CONTAINER_CONFIGURATION_CACHE_NAMESPACE => $cacheConfigurationManager->getNamespace(),
                 \PoP\Root\Environment::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR => $isDev,
             ];
         }

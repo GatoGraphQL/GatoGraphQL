@@ -18,9 +18,9 @@ class PoP_CommonAutomatedEmails
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Automated Emails
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 420);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
     }
 
     public function init()

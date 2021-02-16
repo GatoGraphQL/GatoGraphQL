@@ -20,7 +20,7 @@ class PoP_AddRelatedPosts
     {
 
         // Priority: after PoP Related Posts and PoP Content Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 360);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

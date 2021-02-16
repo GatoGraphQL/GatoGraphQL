@@ -18,9 +18,9 @@ class PoP_CommonAutomatedEmailsProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Notifications Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 890);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888890);
     }
 
     public function init()

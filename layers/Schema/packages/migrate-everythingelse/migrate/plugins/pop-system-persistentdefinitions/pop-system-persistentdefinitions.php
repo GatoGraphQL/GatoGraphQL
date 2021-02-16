@@ -20,7 +20,7 @@ class PoP_PersistentDefinitionsSystem
     {
 
         // Priority: after PoP System
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 220);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888220);
     }
     public function init()
     {

@@ -21,7 +21,7 @@ class PoP_SocialNetworkWebPlatform
     {
 
         // Priority: after PoP Add Comments TinyMCE Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 560);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888560);
     }
     public function init()
     {

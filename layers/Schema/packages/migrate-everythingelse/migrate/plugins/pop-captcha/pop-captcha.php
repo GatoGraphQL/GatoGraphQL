@@ -20,7 +20,7 @@ class PoP_Captcha
     {
 
         // Priority: after PoP Application
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 304);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888304);
     }
     public function init()
     {

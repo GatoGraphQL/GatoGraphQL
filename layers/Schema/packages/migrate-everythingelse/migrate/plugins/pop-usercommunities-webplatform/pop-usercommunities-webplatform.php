@@ -21,7 +21,7 @@ class PoP_UserCommunitiesWebPlatform
     {
 
         // Priority: after PoP Social Network Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 570);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888570);
     }
     public function init()
     {

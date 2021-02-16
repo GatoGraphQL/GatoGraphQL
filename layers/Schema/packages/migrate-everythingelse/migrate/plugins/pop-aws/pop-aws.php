@@ -18,10 +18,10 @@ class PoP_AWS
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Engine, and before everything else (except the "website-environment" plug-ins),
         // so we can set the POP_CDNFOUNDATION_CDN_ASSETS_URI constant in plugin_url before all other plug-ins need it
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 110);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888110);
     }
     public function init()
     {
