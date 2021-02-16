@@ -89,13 +89,7 @@ class AppLoader
         /**
          * Initialize and compile the System container
          */
-        foreach ($orderedComponentClasses as $componentClass) {
-            $componentConfiguration = $componentClassConfiguration[$componentClass] ?? [];
-            $componentClass::initializeSystemContainerServices(
-                $componentConfiguration
-            );
-        }
-        SystemContainerBuilderFactory::maybeCompileAndCacheContainer();
+        self::initializeAndBootSystemContainer($orderedComponentClasses);
 
         /**
          * Initialize the components
@@ -181,9 +175,26 @@ class AppLoader
     public static function bootApplication(): void
     {
         self::bootApplicationContainer();
-
-        // Boot all the components
         self::bootComponents();
+    }
+
+    /**
+     * Have all Components register their Container services,
+     * and already compile the container.
+     * This way, these services become available for initializing
+     * Application Container services.
+     *
+     * @param string[] $componentClasses
+     */
+    protected static function initializeAndBootSystemContainer(array $componentClasses): void
+    {
+        foreach ($componentClasses as $componentClass) {
+            $componentConfiguration = $componentClassConfiguration[$componentClass] ?? [];
+            $componentClass::initializeSystemContainerServices(
+                $componentConfiguration
+            );
+        }
+        SystemContainerBuilderFactory::maybeCompileAndCacheContainer();
     }
 
     protected static function bootApplicationContainer(): void
