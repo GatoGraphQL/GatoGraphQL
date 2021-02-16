@@ -68,6 +68,11 @@ abstract class AbstractContainerBuilderFactory
             }
         }
         $directory .= \DIRECTORY_SEPARATOR;
+        // Since we have 2 containers, store each under its namespace and classname
+        $containerNamespace = static::getContainerNamespace();
+        $containerClass = static::getContainerClass();
+        $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
+        $directory .= $containerClass . \DIRECTORY_SEPARATOR;
         // On Windows the whole path is limited to 258 chars
         if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
             if ($throwExceptionIfCacheSetupError) {
@@ -99,8 +104,6 @@ abstract class AbstractContainerBuilderFactory
             static::$instance = new ContainerBuilder();
         } else {
             require_once static::$cacheFile;
-            $containerNamespace = static::getContainerNamespace();
-            $containerClass = static::getContainerClass();
             $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClass}";
             static::$instance = new $containerFullyQuantifiedClass();
         }
