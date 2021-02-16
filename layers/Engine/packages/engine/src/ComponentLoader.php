@@ -6,8 +6,9 @@ namespace PoP\Engine;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Root\Managers\ComponentManager;
+use PoP\Root\ComponentLoader as RootComponentLoader;
 
-class ComponentLoader extends \PoP\Root\ComponentLoader
+class ComponentLoader extends RootComponentLoader
 {
     public static function bootComponents()
     {
