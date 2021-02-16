@@ -73,16 +73,6 @@ class AppLoader
     }
 
     /**
-     * Calculate the components in their initialization order
-     */
-    protected static function orderComponentsForInitialization(): void
-    {
-        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize
-        );
-    }
-
-    /**
      * Get the array of components ordered by how they must be initialized,
      * following the Composer dependencies tree
      *
@@ -164,8 +154,12 @@ class AppLoader
             $containerNamespace
         );
 
-        // Produce the order in which the Components must be initialized
-        self::orderComponentsForInitialization();
+        /**
+         * Calculate the components in their initialization order
+         */
+        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
+            self::$componentClassesToInitialize
+        );
 
         /**
          * Have all Components register their Container services,
