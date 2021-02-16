@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
-abstract class AbstractContainerBuilderFactory
+trait ContainerBuilderFactoryTrait
 {
     private static Container $instance;
     private static bool $cacheContainerConfiguration;
