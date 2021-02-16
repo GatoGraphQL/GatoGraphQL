@@ -28,13 +28,20 @@ trait ContainerBuilderFactoryTrait
      * @return void
      */
     public static function init(
-        bool $cacheContainerConfiguration = false,
+        ?bool $cacheContainerConfiguration = null,
         ?string $namespace = null,
         ?string $directory = null
     ): void {
         static::$cacheContainerConfiguration = $cacheContainerConfiguration;
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
+
+        // Indicate if to cache the container configuration, from configuration if defined, or from the environment
+        $cacheContainerConfiguration ??= Environment::cacheContainerConfiguration();
+
+        // Provide a namespace, from configuration if defined, or from the environment
+        $namespace ??= Environment::getCacheContainerConfigurationNamespace();
+
         /**
          * Code copied from Symfony FilesystemAdapter
          * @see https://github.com/symfony/cache/blob/master/Traits/FilesystemCommonTrait.php

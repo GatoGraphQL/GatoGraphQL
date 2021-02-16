@@ -87,13 +87,6 @@ class AppLoader
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
         DotenvBuilderFactory::init();
 
-        // Initialize the ContainerBuilder
-        // Indicate if to cache the container configuration, from configuration if defined, or from the environment
-        $cacheContainerConfiguration ??= Environment::cacheContainerConfiguration();
-
-        // Provide a namespace, from configuration if defined, or from the environment
-        $namespace ??= Environment::getCacheContainerConfigurationNamespace();
-
         /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
