@@ -117,12 +117,12 @@ abstract class AbstractContainerBuilderFactory
         return static::$cached;
     }
 
-    protected static function getContainerNamespace(): string
+    public static function getContainerNamespace(): string
     {
         return 'PoPContainer';
     }
 
-    abstract protected static function getContainerClass(): string;
+    abstract public static function getContainerClass(): string;
 
     /**
      * If the container is not cached, then compile it and cache it
