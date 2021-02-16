@@ -237,6 +237,10 @@ class AppLoader
         return array_values(array_unique($compilerPassClasses));
     }
 
+    /**
+     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
+     * for them to execute any custom extra logic
+     */
     protected static function bootComponents(): void
     {
         ComponentManager::beforeBoot();

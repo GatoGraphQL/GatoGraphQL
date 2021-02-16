@@ -11,7 +11,9 @@ use PoP\Root\AppLoader as RootAppLoader;
 class AppLoader extends RootAppLoader
 {
     /**
-     * Override to execute functions on CMS events
+     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
+     * for them to execute any custom extra logic.
+     * Override to execute functions on CMS events.
      */
     protected static function bootComponents(): void
     {
