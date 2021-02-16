@@ -13,3 +13,11 @@ parameters:
 			message: '#Static property PoP\\Root\\Container\\ContainerBuilderFactory\:\:\$instance \(Symfony\\Component\\DependencyInjection\\Container\) does not accept ApplicationServiceContainer\.#'
 			path: src/Container/ContainerBuilderFactory.php
 			count: 1
+		-
+			message: '#Instantiated class PoPContainer\\SystemServiceContainer not found\.#'
+			path: src/Container/SystemContainerBuilderFactory.php
+			count: 1
+		-
+			message: '#Static property PoP\\Root\\Container\\SystemContainerBuilderFactory\:\:\$instance \(Symfony\\Component\\DependencyInjection\\Container\) does not accept SystemServiceContainer\.#'
+			path: src/Container/SystemContainerBuilderFactory.php
+			count: 1
