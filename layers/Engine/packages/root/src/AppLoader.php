@@ -186,7 +186,7 @@ class AppLoader
          */
         foreach ($orderedComponentClasses as $componentClass) {
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
-            $componentClass::initializeSystemContainerServices(
+            $componentClass::initializeSystem(
                 $componentConfiguration
             );
         }

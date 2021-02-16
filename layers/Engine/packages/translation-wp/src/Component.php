@@ -43,7 +43,7 @@ class Component extends AbstractComponent
      *
      * @param array<string, mixed> $configuration
      */
-    public static function initializeSystemContainerServices(
+    protected static function initializeSystemContainerServices(
         array $configuration = []
     ): void {
         parent::initializeSystemContainerServices($configuration);
