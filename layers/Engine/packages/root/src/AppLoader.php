@@ -73,44 +73,6 @@ class AppLoader
     }
 
     /**
-     * Initialize the dependency injection containers
-     *
-     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     */
-    protected static function initializeContainers(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $namespace = null
-    ): void {
-        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
-        DotenvBuilderFactory::init();
-
-        /**
-         * System container: initialize it and compile it already,
-         * since it will be used to initialize the Application container
-         */
-        SystemContainerBuilderFactory::init(
-            $cacheContainerConfiguration,
-            $namespace
-        );
-
-        // Produce the order in which the Components must be initialized
-        self::orderComponentsForInitialization();
-
-        // Initialize and compile the System container
-        self::initializeAndBootSystemContainer();
-
-        /**
-         * Application container: initialize it only.
-         * It will be compiled later on
-         */
-        ContainerBuilderFactory::init(
-            $cacheContainerConfiguration,
-            $namespace
-        );
-    }
-
-    /**
      * Calculate the components in their initialization order
      */
     protected static function orderComponentsForInitialization(): void
@@ -118,41 +80,6 @@ class AppLoader
         self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
             self::$componentClassesToInitialize
         );
-    }
-
-    /**
-     * Initialize the PoP components
-     */
-    protected static function initializeComponents(): void
-    {
-        /**
-         * Allow each component to customize the configuration for itself,
-         * and for its depended-upon components.
-         * Hence this is executed from bottom to top
-         */
-        foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
-            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
-        }
-
-        /**
-         * Initialize the components
-         */
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            // Temporary solution until migrated:
-            // Initialize all depended-upon migration plugins
-            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
-                require_once $migrationPluginPath;
-            }
-
-            // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
-            $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
-            $componentClass::initialize(
-                $componentConfiguration,
-                $skipSchemaForComponent,
-                self::$skipSchemaComponentClasses
-            );
-        }
     }
 
     /**
@@ -225,20 +152,27 @@ class AppLoader
         ?bool $cacheContainerConfiguration = null,
         ?string $containerNamespace = null
     ): void {
-        self::initializeContainers($cacheContainerConfiguration, $containerNamespace);
-        self::initializeComponents();
-        self::bootApplicationContainer();
-        self::bootComponents();
-    }
+        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
+        DotenvBuilderFactory::init();
 
-    /**
-     * Have all Components register their Container services,
-     * and already compile the container.
-     * This way, these services become available for initializing
-     * Application Container services.
-     */
-    protected static function initializeAndBootSystemContainer(): void
-    {
+        /**
+         * System container: initialize it and compile it already,
+         * since it will be used to initialize the Application container
+         */
+        SystemContainerBuilderFactory::init(
+            $cacheContainerConfiguration,
+            $containerNamespace
+        );
+
+        // Produce the order in which the Components must be initialized
+        self::orderComponentsForInitialization();
+
+        /**
+         * Have all Components register their Container services,
+         * and already compile the container.
+         * This way, these services become available for initializing
+         * Application Container services.
+         */
         foreach (self::$orderedComponentClasses as $componentClass) {
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $componentClass::initializeSystemContainerServices(
@@ -246,9 +180,57 @@ class AppLoader
             );
         }
         SystemContainerBuilderFactory::maybeCompileAndCacheContainer();
+
+        /**
+         * Initialize the Application container only
+         */
+        ContainerBuilderFactory::init(
+            $cacheContainerConfiguration,
+            $containerNamespace
+        );
+
+        /**
+         * Allow each component to customize the configuration for itself,
+         * and for its depended-upon components.
+         * Hence this is executed from bottom to top
+         */
+        foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
+            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
+        }
+
+        /**
+         * Initialize the container services by the Components
+         */
+        foreach (self::$orderedComponentClasses as $componentClass) {
+            // Temporary solution until migrated:
+            // Initialize all depended-upon migration plugins
+            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
+                require_once $migrationPluginPath;
+            }
+
+            // Initialize the component, passing its configuration, and checking if its schema must be skipped
+            $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
+            $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
+            $componentClass::initialize(
+                $componentConfiguration,
+                $skipSchemaForComponent,
+                self::$skipSchemaComponentClasses
+            );
+        }
+
+        // Register CompilerPasses, Compile and Cache
+        // Symfony's DependencyInjection Application Container
+        $compilerPassClasses = self::getApplicationContainerCompilerPasses();
+        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
+
+        // Finally boot the components
+        self::bootComponents();
     }
 
-    protected static function bootApplicationContainer(): void
+    /**
+     * @return string[]
+     */
+    protected static function getApplicationContainerCompilerPasses(): array
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
@@ -258,10 +240,7 @@ class AppLoader
                 ...$componentClass::getContainerCompilerPassClasses()
             ];
         }
-        $compilerPassClasses = array_values(array_unique($compilerPassClasses));
-
-        // Compile and Cache Symfony's DependencyInjection Container Builder
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
+        return array_values(array_unique($compilerPassClasses));
     }
 
     protected static function bootComponents(): void
