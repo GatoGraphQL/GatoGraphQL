@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Config;
 
-use PoP\Root\Component\PHPServiceConfigurationTrait;
-use PoP\Root\Container\ContainerBuilderUtils;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
 use GraphQLByPoP\GraphQLServer\Environment;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
+use PoP\Root\Component\PHPServiceConfigurationTrait;
+use PoP\Root\Container\ContainerBuilderUtils;
+use PoP\Translation\Facades\SystemTranslationAPIFacade;
 
 class ServiceConfiguration
 {
@@ -138,11 +139,12 @@ class ServiceConfiguration
                 }
             }
             EOT;
-            // Watch out: in the Service Configuration we can't access other services yet,
-            // so can't translate the description, which depends on service TranslationAPI
-            // $translationAPI = TranslationAPIFacade::getInstance();
-            // $description = $translationAPI->__('GraphQL introspection query', 'examples-for-pop')
-            $description = 'GraphQL introspection query';
+            /**
+             * Watch out: in the Service Configuration we can't access other services yet,
+             * so we use the Translate service from the System Container
+             */
+            $translationAPI = SystemTranslationAPIFacade::getInstance();
+            $description = $translationAPI->__('GraphQL introspection query', 'examples-for-pop');
             // Inject the values into the service
             ContainerBuilderUtils::injectValuesIntoService(
                 GraphQLPersistedQueryManagerInterface::class,
