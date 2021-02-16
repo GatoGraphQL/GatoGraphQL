@@ -138,7 +138,6 @@ trait QueryDataModuleProcessorTrait
             $whitelisted_params = (array)HooksAPIFacade::getInstance()->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
-                    GD_URLPARAM_REDIRECTTO,
                     Params::PAGE_NUMBER,
                     Params::LIMIT,
                 )
