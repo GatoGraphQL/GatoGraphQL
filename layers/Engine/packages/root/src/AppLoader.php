@@ -180,13 +180,13 @@ class AppLoader
 
     public static function bootApplication(): void
     {
-        self::bootContainers();
+        self::bootApplicationContainer();
 
         // Boot all the components
         self::bootComponents();
     }
 
-    protected static function bootContainers(): void
+    protected static function bootApplicationContainer(): void
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
