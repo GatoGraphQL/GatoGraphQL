@@ -51,12 +51,12 @@ class Component extends AbstractComponent
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function doInitialize(
+    protected static function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
+        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         if (class_exists('\PoPSchema\CustomPosts\Component')) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');

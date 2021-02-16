@@ -37,7 +37,7 @@ abstract class AbstractComponent implements ComponentInterface
         array $skipSchemaComponentClasses = []
     ): void {
         // Initialize the self component
-        static::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
+        static::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
 
         // Allow the component to define runtime constants
         static::defineRuntimeConstants($configuration, $skipSchema, $skipSchemaComponentClasses);
@@ -87,7 +87,7 @@ abstract class AbstractComponent implements ComponentInterface
      * @param array<string, mixed> $configuration
      * @param string[] $skipSchemaComponentClasses
      */
-    protected static function doInitialize(
+    protected static function initializeContainerServices(
         array $configuration = [],
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
