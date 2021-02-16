@@ -131,9 +131,10 @@ class AppLoader
      * 1. Initialize Symfony's Dotenv component (to get config from ENV)
      * 2. Calculate in what order will the Components (including from main Plugin and Extensions) will be initialized (based on their Composer dependency order)
      * 3. Allow Components to customize the component configuration for themselves, and the components they can see
-     * 4. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
-     * 5. Initialize the Application Container, have all Components inject services, and compile it
-     * 6. Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
+     * 4. Register all Components with the ComponentManager
+     * 5. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
+     * 6. Initialize the Application Container, have all Components inject services, and compile it
+     * 7. Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
@@ -162,6 +163,13 @@ class AppLoader
         }
 
         /**
+         * Register all components in the ComponentManager
+         */
+        foreach ($orderedComponentClasses as $componentClass) {
+            ComponentManager::register($componentClass);
+        }
+
+        /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
@@ -185,6 +193,18 @@ class AppLoader
         SystemContainerBuilderFactory::maybeCompileAndCacheContainer();
 
         /**
+         * Register all components in the ComponentManager
+         */
+        foreach ($orderedComponentClasses as $componentClass) {
+            // Temporary solution until migrated:
+            // Initialize all depended-upon migration plugins
+            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
+                // var_dump($migrationPluginPath);
+                require_once $migrationPluginPath;
+            }
+        }
+
+        /**
          * Initialize the Application container only
          */
         ContainerBuilderFactory::init(
@@ -196,12 +216,6 @@ class AppLoader
          * Initialize the container services by the Components
          */
         foreach ($orderedComponentClasses as $componentClass) {
-            // Temporary solution until migrated:
-            // Initialize all depended-upon migration plugins
-            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
-                require_once $migrationPluginPath;
-            }
-
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = in_array($componentClass, self::$skipSchemaComponentClasses);
