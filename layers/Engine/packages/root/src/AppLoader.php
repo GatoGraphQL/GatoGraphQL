@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Managers\ComponentManager;
 
@@ -42,6 +43,14 @@ class AppLoader
         // Provide a namespace, from configuration if defined, or from the environment
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
 
+        // System container
+        SystemContainerBuilderFactory::init(
+            $cacheContainerConfiguration,
+            $namespace,
+            $directory
+        );
+
+        // Application container
         ContainerBuilderFactory::init(
             $cacheContainerConfiguration,
             $namespace,
@@ -76,6 +85,17 @@ class AppLoader
         foreach (array_reverse($orderedComponentClasses) as $componentClass) {
             $componentClass::customizeComponentClassConfiguration($componentClassConfiguration);
         }
+
+        /**
+         * Initialize and compile the System container
+         */
+        foreach ($orderedComponentClasses as $componentClass) {
+            $componentConfiguration = $componentClassConfiguration[$componentClass] ?? [];
+            $componentClass::initializeSystemContainerServices(
+                $componentConfiguration
+            );
+        }
+        SystemContainerBuilderFactory::maybeCompileAndCacheContainer();
 
         /**
          * Initialize the components
