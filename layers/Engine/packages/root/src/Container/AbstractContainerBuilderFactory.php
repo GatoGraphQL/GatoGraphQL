@@ -99,7 +99,10 @@ abstract class AbstractContainerBuilderFactory
             static::$instance = new ContainerBuilder();
         } else {
             require_once static::$cacheFile;
-            static::$instance = new \PoPContainer\ProjectServiceContainer();
+            $containerNamespace = static::getContainerNamespace();
+            $containerClass = static::getContainerClass();
+            $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClass}";
+            static::$instance = new $containerFullyQuantifiedClass();
         }
     }
     public static function getInstance(): Container
