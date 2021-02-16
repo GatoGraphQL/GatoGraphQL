@@ -238,11 +238,7 @@ class AppLoader
         ?string $containerNamespace = null,
         ?string $directory = null
     ): void {
-        self::initializeContainers(
-            $cacheContainerConfiguration,
-            $containerNamespace,
-            $directory
-        );
+        self::initializeContainers($cacheContainerConfiguration, $containerNamespace, $directory);
         self::initializeComponents();
         self::bootApplicationContainer();
         self::bootComponents();
