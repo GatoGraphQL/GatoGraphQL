@@ -6,9 +6,9 @@ namespace PoP\Engine;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Root\Managers\ComponentManager;
-use PoP\Root\ComponentLoader as RootComponentLoader;
+use PoP\Root\AppLoader as RootAppLoader;
 
-class ComponentLoader extends RootComponentLoader
+class AppLoader extends RootAppLoader
 {
     /**
      * Override to execute functions on CMS events

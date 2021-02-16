@@ -7,7 +7,7 @@ Plugin URI: https://github.com/getpop/engine-wp-bootloader/
 Author: Leonardo Losoviz
 */
 
-use PoP\Engine\ComponentLoader;
+use PoP\Engine\AppLoader;
 
 // Initialize PoP Engine through the Bootloader
-ComponentLoader::bootComponents();
+AppLoader::bootComponents();

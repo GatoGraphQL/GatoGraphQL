@@ -36,7 +36,7 @@ use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
 use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\Engine\ComponentLoader;
+use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
 
 class Plugin
@@ -309,13 +309,13 @@ class Plugin
         $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
 
         // Initialize the containers
-        ComponentLoader::initializeContainers(
+        AppLoader::initializeContainers(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
 
         // Initialize the plugin's Component and, with it,
         // all its dependencies from PoP
-        ComponentLoader::initializeComponents(
+        AppLoader::initializeComponents(
             [
                 Component::class,
             ],
@@ -331,7 +331,7 @@ class Plugin
     public function boot(): void
     {
         // Boot all PoP components, from this plugin and all extensions
-        ComponentLoader::bootComponents();
+        AppLoader::bootComponents();
 
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();

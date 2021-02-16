@@ -11,7 +11,7 @@ use PoP\Root\Managers\ComponentManager;
 /**
  * Component Loader
  */
-class ComponentLoader
+class AppLoader
 {
     /**
      * Has the component been initialized?
