@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Isolated\Symfony\Component\Finder\Finder;
-use PoP\Root\Container\ContainerBuilderFactory;
-use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
  * Must only scope the packages in vendor/, because:
@@ -76,9 +74,14 @@ return [
         'PoP\*',
         'GraphQLByPoP\*',
         'GraphQLAPI\*',
-        // Own container cache namespace. These 2 may the the same => `array_unique`
-        ContainerBuilderFactory::getContainerNamespace() . '\*',
-        SystemContainerBuilderFactory::getContainerNamespace() . '\*',
+        // Own container cache namespace
+        // Watch out! This value is being hardcoded!
+        // In the application, it can be overriden via code:
+        // - ContainerBuilderFactory::getContainerNamespace()
+        // - SystemContainerBuilderFactory::getContainerNamespace()
+        // But can't reference these classes here, since they are not found
+        // (unless adding the files to the autoload path)
+        'PoPContainer\*',
     ])),
     'files-whitelist' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
