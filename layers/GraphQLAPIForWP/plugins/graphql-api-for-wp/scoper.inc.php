@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Isolated\Symfony\Component\Finder\Finder;
+use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
  * Must only scope the packages in vendor/, because:
@@ -66,7 +68,7 @@ return [
             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
         ])
     ],
-    'whitelist' => [
+    'whitelist' => array_values(array_unique([
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
@@ -74,9 +76,10 @@ return [
         'PoP\*',
         'GraphQLByPoP\*',
         'GraphQLAPI\*',
-        // Own container cache
-        'PoPContainer\*',
-    ],
+        // Own container cache namespace. These 2 may the the same => `array_unique`
+        ContainerBuilderFactory::getContainerNamespace() . '\*',
+        SystemContainerBuilderFactory::getContainerNamespace() . '\*',
+    ])),
     'files-whitelist' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
         // doing `composer dumpautoload`, so skip it
