@@ -88,7 +88,6 @@ class Component extends AbstractComponent
             self::$COMPONENT_DIR = dirname(__DIR__);
             self::initYAMLServices(self::$COMPONENT_DIR);
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
-            ServiceConfiguration::initialize();
 
             // Conditional packages
             if (class_exists('\PoP\AccessControl\Component')) {
@@ -103,6 +102,7 @@ class Component extends AbstractComponent
             ) {
                 self::maybeInitPHPSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
+            ServiceConfiguration::initialize();
         }
     }
 
