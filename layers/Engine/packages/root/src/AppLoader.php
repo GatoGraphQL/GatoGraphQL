@@ -104,10 +104,8 @@ class AppLoader
             $directory
         );
 
-        // Get the list of components, in the order in which they must be initialized
-        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize
-        );
+        // Produce the order in which the Components must be initialized
+        self::orderComponentsForInitialization();
 
         // Initialize and compile the System container
         self::initializeAndBootSystemContainer();
@@ -120,6 +118,16 @@ class AppLoader
             $cacheContainerConfiguration,
             $namespace,
             $directory
+        );
+    }
+
+    /**
+     * Calculate the components in their initialization order
+     */
+    protected static function orderComponentsForInitialization(): void
+    {
+        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
+            self::$componentClassesToInitialize
         );
     }
 
@@ -218,8 +226,24 @@ class AppLoader
         }
     }
 
-    public static function bootApplication(): void
-    {
+    /**
+     * Boot the application
+     *
+     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
+     * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param boolean|null $directory If null, it will use a system temp folder
+     */
+    public static function bootApplication(
+        ?bool $cacheContainerConfiguration = null,
+        ?string $containerNamespace = null,
+        ?string $directory = null
+    ): void {
+        self::initializeContainers(
+            $cacheContainerConfiguration,
+            $containerNamespace,
+            $directory
+        );
+        self::initializeComponents();
         self::bootApplicationContainer();
         self::bootComponents();
     }

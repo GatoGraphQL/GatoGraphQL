@@ -324,16 +324,8 @@ class Plugin
      */
     public function boot(): void
     {
-        AppLoader::initializeContainers(
-            ...PluginConfiguration::getContainerCacheConfiguration()
-        );
-
-        // Initialize the plugin's Component and, with it,
-        // all its dependencies from PoP
-        AppLoader::initializeComponents();
-
         // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootApplication();
+        AppLoader::bootApplication(...PluginConfiguration::getContainerCacheConfiguration());
 
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
