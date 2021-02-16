@@ -6,6 +6,7 @@ namespace PoP\Root;
 
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
+use PoP\Root\Managers\ComponentManager;
 
 /**
  * Component Loader
@@ -155,5 +156,36 @@ class ComponentLoader
             // We reached the bottom of the rung, add the component to the list
             $orderedComponentClasses[] = $componentClass;
         }
+    }
+
+    public static function bootComponents(): void
+    {
+        self::bootContainers();
+
+        // Boot all the components
+        self::doBootComponents();
+    }
+
+    protected static function bootContainers(): void
+    {
+        // Collect the compiler pass classes from all components
+        $compilerPassClasses = [];
+        foreach (ComponentManager::getComponentClasses() as $componentClass) {
+            $compilerPassClasses = [
+                ...$compilerPassClasses,
+                ...$componentClass::getContainerCompilerPassClasses()
+            ];
+        }
+        $compilerPassClasses = array_values(array_unique($compilerPassClasses));
+
+        // Compile and Cache Symfony's DependencyInjection Container Builder
+        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
+    }
+
+    protected static function doBootComponents(): void
+    {
+        ComponentManager::beforeBoot();
+        ComponentManager::boot();
+        ComponentManager::afterBoot();
     }
 }

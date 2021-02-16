@@ -10,7 +10,10 @@ use PoP\Root\ComponentLoader as RootComponentLoader;
 
 class ComponentLoader extends RootComponentLoader
 {
-    public static function bootComponents()
+    /**
+     * Override to execute functions on CMS events
+     */
+    protected static function doBootComponents(): void
     {
         // Boot all the components
         ComponentManager::beforeBoot();

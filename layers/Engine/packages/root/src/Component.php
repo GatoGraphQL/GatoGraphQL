@@ -8,7 +8,6 @@ use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\CompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
-use PoP\Root\Managers\ComponentManager;
 
 /**
  * Initialize component
@@ -48,19 +47,6 @@ class Component extends AbstractComponent
      */
     public static function beforeBoot(): void
     {
-        // Collect the compiler pass classes from all components
-        $compilerPassClasses = [];
-        foreach (ComponentManager::getComponentClasses() as $componentClass) {
-            $compilerPassClasses = [
-                ...$compilerPassClasses,
-                ...$componentClass::getContainerCompilerPassClasses()
-            ];
-        }
-        $compilerPassClasses = array_values(array_unique($compilerPassClasses));
-
-        // Compile and Cache Symfony's DependencyInjection Container Builder
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
-
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
         /**
          * @var ServiceInstantiatorInterface
