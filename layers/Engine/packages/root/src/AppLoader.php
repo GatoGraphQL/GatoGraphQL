@@ -27,13 +27,6 @@ class AppLoader
      */
     protected static $componentClassesToInitialize = [];
     /**
-     * Calculare in what order the Component classes must be initialized,
-     * based on their dependencies on other Components
-     *
-     * @var string[]
-     */
-    protected static $orderedComponentClasses = [];
-    /**
      * [key]: Component class, [value]: Configuration
      *
      * @var string[]
@@ -157,7 +150,7 @@ class AppLoader
         /**
          * Calculate the components in their initialization order
          */
-        self::$orderedComponentClasses = self::getComponentsOrderedForInitialization(
+        $orderedComponentClasses = self::getComponentsOrderedForInitialization(
             self::$componentClassesToInitialize
         );
 
@@ -167,7 +160,7 @@ class AppLoader
          * This way, these services become available for initializing
          * Application Container services.
          */
-        foreach (self::$orderedComponentClasses as $componentClass) {
+        foreach ($orderedComponentClasses as $componentClass) {
             $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
             $componentClass::initializeSystemContainerServices(
                 $componentConfiguration
@@ -188,14 +181,14 @@ class AppLoader
          * and for its depended-upon components.
          * Hence this is executed from bottom to top
          */
-        foreach (array_reverse(self::$orderedComponentClasses) as $componentClass) {
+        foreach (array_reverse($orderedComponentClasses) as $componentClass) {
             $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
         }
 
         /**
          * Initialize the container services by the Components
          */
-        foreach (self::$orderedComponentClasses as $componentClass) {
+        foreach ($orderedComponentClasses as $componentClass) {
             // Temporary solution until migrated:
             // Initialize all depended-upon migration plugins
             foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
