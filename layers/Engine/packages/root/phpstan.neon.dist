@@ -6,10 +6,10 @@ parameters:
 	reportUnmatchedIgnoredErrors: false
 	ignoreErrors:
 		-
-			message: '#Instantiated class PoPContainer\\ProjectServiceContainer not found\.#'
+			message: '#Instantiated class PoPContainer\\ApplicationServiceContainer not found\.#'
 			path: src/Container/ContainerBuilderFactory.php
 			count: 1
 		-
-			message: '#Static property PoP\\Root\\Container\\ContainerBuilderFactory\:\:\$instance \(Symfony\\Component\\DependencyInjection\\Container\) does not accept ProjectServiceContainer\.#'
+			message: '#Static property PoP\\Root\\Container\\ContainerBuilderFactory\:\:\$instance \(Symfony\\Component\\DependencyInjection\\Container\) does not accept ApplicationServiceContainer\.#'
 			path: src/Container/ContainerBuilderFactory.php
 			count: 1

@@ -10,6 +10,6 @@ class ContainerBuilderFactory
 
     public static function getContainerClass(): string
     {
-        return 'ProjectServiceContainer';
+        return 'ApplicationServiceContainer';
     }
 }
