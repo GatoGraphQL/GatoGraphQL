@@ -66,10 +66,11 @@ class Component extends AbstractComponent
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
-        ServiceConfiguration::initialize();
 
         if (!in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
             self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
         }
+
+        ServiceConfiguration::initialize();
     }
 }
