@@ -126,7 +126,14 @@ class AppLoader
     }
 
     /**
-     * Boot the application
+     * Boot the application. It does these steps:
+     *
+     * 1. Initialize Symfony's Dotenv component (to get config from ENV)
+     * 2. Calculate in what order will the Components (including from main Plugin and Extensions) will be initialized (based on their Composer dependency order)
+     * 3. Allow Components to customize the component configuration for themselves, and the components they can see
+     * 4. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
+     * 5. Initialize the Application Container, have all Components inject services, and compile it
+     * 6. Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
