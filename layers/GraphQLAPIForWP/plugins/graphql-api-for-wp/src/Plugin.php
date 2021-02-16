@@ -308,6 +308,19 @@ class Plugin
         $componentClassConfiguration = PluginConfiguration::getComponentClassConfiguration();
         $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
 
+        // Initialize the containers
+        // [
+        //     $cacheContainerConfiguration,
+        //     $containerConfigurationCacheNamespace
+        // ] = PluginConfiguration::getContainerCacheConfiguration();
+        // ComponentLoader::initializeContainers(
+        //     $cacheContainerConfiguration,
+        //     $containerConfigurationCacheNamespace
+        // );
+        ComponentLoader::initializeContainers(
+            ...PluginConfiguration::getContainerCacheConfiguration()
+        );
+
         // Initialize the plugin's Component and, with it,
         // all its dependencies from PoP
         ComponentLoader::initializeComponents(

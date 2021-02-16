@@ -8,7 +8,6 @@ use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\CompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
-use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Managers\ComponentManager;
 
 /**
@@ -37,29 +36,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
-
-        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
-        DotenvBuilderFactory::init();
-
-        // Initialize the ContainerBuilder
-        // Indicate if to cache the container configuration, from configuration if defined, or from the environment
-        $cacheContainerConfiguration =
-            $configuration[Environment::CACHE_CONTAINER_CONFIGURATION] ??
-            Environment::cacheContainerConfiguration();
-
-        // Provide a namespace, from configuration if defined, or from the environment
-        $namespace =
-            $configuration[Environment::CONTAINER_CONFIGURATION_CACHE_NAMESPACE] ??
-            Environment::getCacheContainerConfigurationNamespace();
-
-        // No need to provide a directory => then it will use a system temp folder
-        $directory = null;
-        // $directory = dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'build' . \DIRECTORY_SEPARATOR . 'cache';
-        ContainerBuilderFactory::init(
-            $cacheContainerConfiguration,
-            $namespace,
-            $directory
-        );
 
         // Only after initializing the containerBuilder, can inject a service
         self::initYAMLServices(dirname(__DIR__));

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Dotenv\DotenvBuilderFactory;
+
 /**
  * Component Loader
  */
@@ -15,6 +18,35 @@ class ComponentLoader
      * @var string[]
      */
     protected static $initializedClasses = [];
+
+    /**
+     * Initialize the dependency injection containers
+     *
+     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
+     * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param boolean|null $directory If null, it will use a system temp folder
+     */
+    public static function initializeContainers(
+        ?bool $cacheContainerConfiguration = null,
+        ?string $namespace = null,
+        ?string $directory = null
+    ): void {
+        // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
+        DotenvBuilderFactory::init();
+
+        // Initialize the ContainerBuilder
+        // Indicate if to cache the container configuration, from configuration if defined, or from the environment
+        $cacheContainerConfiguration ??= Environment::cacheContainerConfiguration();
+
+        // Provide a namespace, from configuration if defined, or from the environment
+        $namespace ??= Environment::getCacheContainerConfigurationNamespace();
+
+        ContainerBuilderFactory::init(
+            $cacheContainerConfiguration,
+            $namespace,
+            $directory
+        );
+    }
 
     /**
      * Initialize the PoP components
