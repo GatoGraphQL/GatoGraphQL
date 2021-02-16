@@ -79,7 +79,7 @@ class AppLoader
      * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param boolean|null $directory If null, it will use a system temp folder
      */
-    public static function initializeContainers(
+    protected static function initializeContainers(
         ?bool $cacheContainerConfiguration = null,
         ?string $namespace = null,
         ?string $directory = null
@@ -134,7 +134,7 @@ class AppLoader
     /**
      * Initialize the PoP components
      */
-    public static function initializeComponents(): void
+    protected static function initializeComponents(): void
     {
         /**
          * Allow each component to customize the configuration for itself,
