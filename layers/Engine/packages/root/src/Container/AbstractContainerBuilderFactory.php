@@ -116,6 +116,8 @@ abstract class AbstractContainerBuilderFactory
         return 'PoPContainer';
     }
 
+    abstract protected static function getContainerClass(): string;
+
     /**
      * If the container is not cached, then compile it and cache it
      *
@@ -154,6 +156,7 @@ abstract class AbstractContainerBuilderFactory
                             // Save under own namespace to avoid conflicts
                             [
                                 'namespace' => static::getContainerNamespace(),
+                                'class' => static::getContainerClass(),
                             ]
                         )
                     );
