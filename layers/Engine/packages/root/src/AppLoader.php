@@ -139,19 +139,28 @@ class AppLoader
         DotenvBuilderFactory::init();
 
         /**
+         * Calculate the components in their initialization order
+         */
+        $orderedComponentClasses = self::getComponentsOrderedForInitialization(
+            self::$componentClassesToInitialize
+        );
+
+        /**
+         * Allow each component to customize the configuration for itself,
+         * and for its depended-upon components.
+         * Hence this is executed from bottom to top
+         */
+        foreach (array_reverse($orderedComponentClasses) as $componentClass) {
+            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
+        }
+
+        /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
         SystemContainerBuilderFactory::init(
             $cacheContainerConfiguration,
             $containerNamespace
-        );
-
-        /**
-         * Calculate the components in their initialization order
-         */
-        $orderedComponentClasses = self::getComponentsOrderedForInitialization(
-            self::$componentClassesToInitialize
         );
 
         /**
@@ -175,15 +184,6 @@ class AppLoader
             $cacheContainerConfiguration,
             $containerNamespace
         );
-
-        /**
-         * Allow each component to customize the configuration for itself,
-         * and for its depended-upon components.
-         * Hence this is executed from bottom to top
-         */
-        foreach (array_reverse($orderedComponentClasses) as $componentClass) {
-            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
-        }
 
         /**
          * Initialize the container services by the Components
