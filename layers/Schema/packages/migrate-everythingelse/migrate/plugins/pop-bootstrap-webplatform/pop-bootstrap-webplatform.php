@@ -20,9 +20,9 @@ class PoP_BootstrapWebPlatform
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Service Workers
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 440);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888440);
     }
     public function init()
     {

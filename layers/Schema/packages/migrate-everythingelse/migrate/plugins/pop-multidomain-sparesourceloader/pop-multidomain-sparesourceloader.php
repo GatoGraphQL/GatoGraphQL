@@ -21,7 +21,7 @@ class PoP_MultiDomainSPAResourceLoader
     {
 
         // Priority: after PoP Multidomain
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 430);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888430);
     }
     public function init()
     {

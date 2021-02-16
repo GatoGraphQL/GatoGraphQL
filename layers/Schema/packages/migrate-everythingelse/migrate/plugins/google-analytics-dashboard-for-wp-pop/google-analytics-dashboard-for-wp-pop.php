@@ -22,7 +22,7 @@ class GADWP_PoP
         );
 
         // Priority: after PoP Google Analytics
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 520);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888520);
     }
     public function getProviderValidationClass($class)
     {

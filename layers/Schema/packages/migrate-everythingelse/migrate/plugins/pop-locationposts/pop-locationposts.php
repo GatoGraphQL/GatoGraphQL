@@ -18,9 +18,9 @@ class PoP_LocationPosts
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Locations
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

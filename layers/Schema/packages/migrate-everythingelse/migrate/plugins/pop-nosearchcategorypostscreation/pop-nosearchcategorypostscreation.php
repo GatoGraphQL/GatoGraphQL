@@ -18,9 +18,9 @@ class PoP_NoSearchCategoryPostsCreation
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Posts Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 360);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888360);
     }
     public function init()
     {

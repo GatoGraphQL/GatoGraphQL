@@ -20,12 +20,12 @@ class PoP_Theme
     {
 
         // Priority: after PoP Engine
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 110);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888110);
     }
     public function init()
     {
         define('POP_THEME_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_THEME_INITIALIZED', true);

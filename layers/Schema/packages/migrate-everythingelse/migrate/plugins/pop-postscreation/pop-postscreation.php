@@ -18,9 +18,9 @@ class PoP_PostsCreation
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Related Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

@@ -18,18 +18,18 @@ class PoPWebPlatform
 {
     public function __construct()
     {
-        
+
         // Priority: new section, after PoP Application section
         HooksAPIFacade::getInstance()->addAction(
-            'plugins_loaded', 
+            'plugins_loaded',
             function() {
                 if ($this->validate()) {
                     require_once 'platforms/load.php';
                 }
-            }, 
+            },
             392
         );
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 400);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888400);
     }
     public function init()
     {
@@ -37,7 +37,7 @@ class PoPWebPlatform
         define('POP_ENGINEWEBPLATFORM_URL', plugins_url('', __FILE__));
 
         if ($this->validate()) {
-            
+
             $this->initialize();
             define('POP_ENGINEWEBPLATFORM_INITIALIZED', true);
         }

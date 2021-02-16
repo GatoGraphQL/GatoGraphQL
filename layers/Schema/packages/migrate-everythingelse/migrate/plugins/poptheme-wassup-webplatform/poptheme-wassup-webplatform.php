@@ -22,7 +22,7 @@ class PoP_ThemeWassupWebPlatform
     {
 
         // Priority: after everything
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 599);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888599);
     }
     public function init()
     {

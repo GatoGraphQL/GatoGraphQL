@@ -24,15 +24,15 @@ class Plugin
             'PoP_Users_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: mid section, after PoP Edit Users
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 255);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888255);
     }
     public function getProviderValidationClass($class)
     {
         return Validation::class;
     }
-    
+
     public function init()
     {
         if ($this->validate()) {

@@ -16,15 +16,15 @@ class PoP_PrettyPrint
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 510);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
     }
 
     public function init()
     {
         define('POP_PRETTYPRINT_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_PRETTYPRINT_INITIALIZED', true);

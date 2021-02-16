@@ -19,9 +19,9 @@ class PoP_UserAvatar
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Notifications
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

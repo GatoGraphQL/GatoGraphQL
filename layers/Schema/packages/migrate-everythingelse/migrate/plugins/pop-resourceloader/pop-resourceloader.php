@@ -22,7 +22,7 @@ class PoP_ResourceLoader
     {
 
         // Priority: after PoP Server-Side Rendering, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 404);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888404);
     }
     public function init()
     {

@@ -20,7 +20,7 @@ class PoP_AddCommentsTinyMCE
     {
 
         // Priority: after PoP Content Creation and PoP Add Comments
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 355);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888355);
     }
     public function init()
     {

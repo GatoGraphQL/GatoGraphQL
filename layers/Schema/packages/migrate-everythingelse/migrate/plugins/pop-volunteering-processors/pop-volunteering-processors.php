@@ -20,7 +20,7 @@ class PoP_VolunteeringProcessors
     {
 
         // Priority: after PoP User Platform Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 840);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888840);
     }
     public function init()
     {

@@ -18,9 +18,9 @@ class PoP_MasterCollectionProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: new section, after PoP Base Collection Processors section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 700);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888700);
     }
     public function init()
     {

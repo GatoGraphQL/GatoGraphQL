@@ -21,7 +21,7 @@ class PoP_ServiceWorkers
     {
 
         // Priority: after PoP Multidomain
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 430);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888430);
         // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()

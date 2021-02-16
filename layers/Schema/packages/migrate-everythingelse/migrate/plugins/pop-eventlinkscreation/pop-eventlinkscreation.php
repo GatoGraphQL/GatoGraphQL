@@ -20,7 +20,7 @@ class PoP_EventLinksCreation
     {
 
         // Priority: after PoP Events Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 390);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888390);
     }
     public function init()
     {

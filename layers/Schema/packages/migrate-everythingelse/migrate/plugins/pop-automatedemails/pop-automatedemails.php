@@ -20,7 +20,7 @@ class PoP_AutomatedEmails
     {
 
         // Priority: after PoP Server-Side Rendering
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 412);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888412);
     }
     public function init()
     {

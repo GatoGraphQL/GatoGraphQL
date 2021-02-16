@@ -18,7 +18,7 @@ class PoP_SocialLoginWebPlatform
     {
 
         // Priority: after PoP Notifications Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 550);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888550);
     }
 
     public function init()

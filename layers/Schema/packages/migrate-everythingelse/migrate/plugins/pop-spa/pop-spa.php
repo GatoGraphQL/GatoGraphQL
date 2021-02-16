@@ -20,7 +20,7 @@ class PoP_SPA
     {
 
         // Priority: after PoP Engine
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 110);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888110);
     }
     public function init()
     {

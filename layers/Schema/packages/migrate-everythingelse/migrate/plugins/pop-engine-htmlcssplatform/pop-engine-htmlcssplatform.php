@@ -19,18 +19,18 @@ class PoPHTMLCSSPlatform
 {
     public function __construct()
     {
-        
+
         // Priority: new section, after PoP Application section
         HooksAPIFacade::getInstance()->addAction(
-            'plugins_loaded', 
+            'plugins_loaded',
             function() {
                 if ($this->validate()) {
                     require_once 'platforms/load.php';
                 }
-            }, 
+            },
             392
         );
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 396);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888396);
     }
     public function init()
     {
@@ -38,7 +38,7 @@ class PoPHTMLCSSPlatform
         define('POP_ENGINEHTMLCSSPLATFORM_URL', plugins_url('', __FILE__));
 
         if ($this->validate()) {
-            
+
             $this->initialize();
             define('POP_ENGINEHTMLCSSPLATFORM_INITIALIZED', true);
         }

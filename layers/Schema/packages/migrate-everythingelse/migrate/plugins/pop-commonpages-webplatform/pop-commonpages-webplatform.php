@@ -18,15 +18,15 @@ class PoP_CommonPagesWebPlatform
 {
     public function __construct()
     {
-        
+
         // Priority: after ...
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 890);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888890);
     }
 
     public function init()
     {
         define('POP_COMMONPAGESWEBPLATFORM_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_COMMONPAGESWEBPLATFORM_INITIALIZED', true);

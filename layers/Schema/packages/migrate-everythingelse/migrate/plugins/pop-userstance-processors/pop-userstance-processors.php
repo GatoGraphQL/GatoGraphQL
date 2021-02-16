@@ -20,7 +20,7 @@ class PoP_UserStanceProcessors
     {
 
         // Priority: after PoP Content Creation Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 860);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888860);
     }
     public function init()
     {

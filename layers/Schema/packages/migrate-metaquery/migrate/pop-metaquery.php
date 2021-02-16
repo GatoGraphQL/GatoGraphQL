@@ -19,9 +19,9 @@ class Plugins
 {
     public function __construct()
     {
-        
+
         // Priority: new section, after PoP CMS Model and PoP Meta
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 210);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888210);
     }
     public function init()
     {

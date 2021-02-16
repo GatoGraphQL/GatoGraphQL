@@ -18,9 +18,9 @@ class PoP_ApplicationWP
 {
     public function __construct()
     {
-        
+
         // Priority: mid section, after PoP Application section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

@@ -24,9 +24,9 @@ class Plugins
             'PoP_EngineWebPlatform_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Web Platform Engine, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 401);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888401);
     }
     public function getProviderValidationClass($class)
     {

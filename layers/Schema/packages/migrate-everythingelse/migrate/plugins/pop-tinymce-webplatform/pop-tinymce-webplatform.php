@@ -21,7 +21,7 @@ class PoP_TinyMCEWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 510);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888510);
     }
     public function init()
     {

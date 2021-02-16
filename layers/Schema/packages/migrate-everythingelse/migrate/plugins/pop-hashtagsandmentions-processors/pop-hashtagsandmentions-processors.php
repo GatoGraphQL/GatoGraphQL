@@ -19,9 +19,9 @@ class PoP_HashtagsAndMentionsProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Application Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 810);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888810);
     }
     public function init()
     {

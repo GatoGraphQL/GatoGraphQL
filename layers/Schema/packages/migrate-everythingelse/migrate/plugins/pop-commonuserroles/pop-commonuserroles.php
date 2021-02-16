@@ -18,9 +18,9 @@ class PoP_CommonUserRoles
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP User Communities
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 380);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888380);
     }
     public function init()
     {

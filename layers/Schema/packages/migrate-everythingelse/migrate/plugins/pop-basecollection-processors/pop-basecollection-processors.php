@@ -19,9 +19,9 @@ class PoP_BaseCollectionProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Engine Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 610);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888610);
     }
     public function init()
     {

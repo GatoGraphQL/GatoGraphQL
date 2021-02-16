@@ -21,7 +21,7 @@ class PoP_EventsCreationWebPlatform
     {
 
         // Priority: after PoP Events Web Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 580);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888580);
     }
     public function init()
     {

@@ -18,9 +18,9 @@ class PoP_ThemeHelpers
 {
     public function __construct()
     {
-        
+
         // Priority: new section, after PoP Application Processors section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 900);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888900);
     }
     public function init()
     {

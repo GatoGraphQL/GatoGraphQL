@@ -20,7 +20,7 @@ class PoP_MultiDomain
     {
 
         // Priority: after PoP CDN
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 420);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888420);
         // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()

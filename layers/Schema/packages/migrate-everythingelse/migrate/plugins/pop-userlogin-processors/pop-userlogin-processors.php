@@ -21,7 +21,7 @@ class PoP_UserLoginProcessors
     {
 
         // Priority: after PoP Email Sender Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 820);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888820);
     }
     public function init()
     {

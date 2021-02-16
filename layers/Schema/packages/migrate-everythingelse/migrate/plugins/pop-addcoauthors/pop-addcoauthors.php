@@ -18,9 +18,9 @@ class PoP_AddCoauthors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP User Platform
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 340);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888340);
     }
     public function init()
     {

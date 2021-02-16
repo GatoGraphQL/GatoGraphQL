@@ -18,9 +18,9 @@ class PoP_System
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Forms
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 120);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888120);
     }
     public function init()
     {

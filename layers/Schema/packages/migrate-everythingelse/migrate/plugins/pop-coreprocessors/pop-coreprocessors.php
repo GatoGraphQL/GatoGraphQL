@@ -20,9 +20,9 @@ class PoP_CoreProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Bootstrap Collection Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 710);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888710);
         // HooksAPIFacade::getInstance()->addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()

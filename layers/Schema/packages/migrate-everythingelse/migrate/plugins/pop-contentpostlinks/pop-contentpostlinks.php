@@ -18,9 +18,9 @@ class PoP_ContentPostLinks
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Blog
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 320);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

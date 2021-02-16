@@ -26,7 +26,7 @@ class Plugins
         );
 
         // Priority: after PoP Engine, inner circle
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 24);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 88824);
     }
     public function getProviderValidationClass($class)
     {

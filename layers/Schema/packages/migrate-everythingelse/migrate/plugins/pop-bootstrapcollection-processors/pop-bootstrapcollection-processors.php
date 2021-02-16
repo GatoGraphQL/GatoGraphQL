@@ -18,11 +18,11 @@ class PoP_BootstrapCollectionProcessors
 {
     public function __construct()
     {
-        
+
         // // Priority: new section, after PoP Base Collection Processors section
-        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 700);
+        // HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888700);
         // Priority: after PoP Core Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 720);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888720);
     }
     public function init()
     {

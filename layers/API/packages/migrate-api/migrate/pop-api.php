@@ -8,7 +8,7 @@ class Plugin
     {
         // Allow the Theme to override definitions.
         // Priority: new section, after PoP CMS section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 30);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 88830);
     }
     public function init()
     {

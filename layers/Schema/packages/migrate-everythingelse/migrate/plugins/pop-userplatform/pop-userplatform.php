@@ -20,7 +20,7 @@ class PoP_UserPlatform
     {
 
         // Priority: after PoP User Login
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 330);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888330);
     }
     public function init()
     {

@@ -21,7 +21,7 @@ class PoP_Avatar_AWS
     {
 
         // Priority: after PoP Avatar
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 320);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888320);
     }
     public function init()
     {

@@ -20,7 +20,7 @@ class PoP_PreviewContent
     {
 
         // Priority: after PoP Content Creation
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888350);
     }
     public function init()
     {

@@ -21,7 +21,7 @@ class GFPoPGenericForms
     {
 
         // Priority: after PoP Social Network Processors
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 870);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888870);
     }
 
     public function init()

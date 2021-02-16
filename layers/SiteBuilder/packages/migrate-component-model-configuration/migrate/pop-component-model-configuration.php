@@ -19,7 +19,7 @@ class Plugin
 {
     public function __construct()
     {
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 25);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 88825);
     }
     public function init()
     {

@@ -24,15 +24,15 @@ class Plugin
             'PoP_Pages_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: mid section, after PoP Pages section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 250);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888250);
     }
     public function getProviderValidationClass($class)
     {
         return Validation::class;
     }
-    
+
     public function init()
     {
         if ($this->validate()) {

@@ -24,15 +24,15 @@ class Plugin
             'PoP_TaxonomyQuery_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: mid section, after PoP CMS Model WP and PoP TaxonomyQuery WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 260);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888260);
     }
     public function getProviderValidationClass($class)
     {
         return Validation::class;
     }
-    
+
     public function init()
     {
         if ($this->validate()) {

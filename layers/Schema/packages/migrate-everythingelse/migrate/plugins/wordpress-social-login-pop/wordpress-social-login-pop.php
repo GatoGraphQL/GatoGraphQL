@@ -27,7 +27,7 @@ class WSL_PoP
         );
 
         // Priority: after PoP Social Login
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 370);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888370);
     }
     public function getProviderValidationClass($class)
     {
