@@ -331,7 +331,7 @@ class Plugin
     public function boot(): void
     {
         // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootComponents();
+        AppLoader::bootApplication();
 
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();

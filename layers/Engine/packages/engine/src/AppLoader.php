@@ -13,7 +13,7 @@ class AppLoader extends RootAppLoader
     /**
      * Override to execute functions on CMS events
      */
-    protected static function doBootComponents(): void
+    protected static function bootComponents(): void
     {
         // Boot all the components
         ComponentManager::beforeBoot();

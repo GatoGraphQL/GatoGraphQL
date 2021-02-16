@@ -158,12 +158,12 @@ class AppLoader
         }
     }
 
-    public static function bootComponents(): void
+    public static function bootApplication(): void
     {
         self::bootContainers();
 
         // Boot all the components
-        self::doBootComponents();
+        self::bootComponents();
     }
 
     protected static function bootContainers(): void
@@ -182,7 +182,7 @@ class AppLoader
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
     }
 
-    protected static function doBootComponents(): void
+    protected static function bootComponents(): void
     {
         ComponentManager::beforeBoot();
         ComponentManager::boot();
