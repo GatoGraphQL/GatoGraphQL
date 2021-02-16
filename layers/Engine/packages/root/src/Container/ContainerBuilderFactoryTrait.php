@@ -32,15 +32,10 @@ trait ContainerBuilderFactoryTrait
         ?string $namespace = null,
         ?string $directory = null
     ): void {
-        static::$cacheContainerConfiguration = $cacheContainerConfiguration;
+        static::$cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
+        $namespace ??= Environment::getCacheContainerConfigurationNamespace();
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
-
-        // Indicate if to cache the container configuration, from configuration if defined, or from the environment
-        $cacheContainerConfiguration ??= Environment::cacheContainerConfiguration();
-
-        // Provide a namespace, from configuration if defined, or from the environment
-        $namespace ??= Environment::getCacheContainerConfigurationNamespace();
 
         /**
          * Code copied from Symfony FilesystemAdapter
