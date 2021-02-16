@@ -37,4 +37,17 @@ class Component extends AbstractComponent
         parent::doInitialize($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
     }
+
+    /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    public static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        parent::initializeSystemContainerServices($configuration);
+        // The same services injected into the application are injected into the system container
+        self::initYAMLSystemContainerServices(dirname(__DIR__), '', 'services.yaml');
+    }
 }

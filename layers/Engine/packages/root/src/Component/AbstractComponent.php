@@ -48,6 +48,8 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Initialize services for the system container
+     *
      * @param array<string, mixed> $configuration
      */
     public static function initializeSystemContainerServices(
