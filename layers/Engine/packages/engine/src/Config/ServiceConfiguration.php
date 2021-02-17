@@ -34,10 +34,8 @@ class ServiceConfiguration
         if (CacheControlComponent::isEnabled()) {
             ContainerBuilderUtils::injectValuesIntoService(
                 DataloadingEngineInterface::class,
-                'addMandatoryDirectives',
-                [
-                    CacheControlDirectiveResolver::getDirectiveName(),
-                ]
+                'addMandatoryDirectiveClass',
+                CacheControlDirectiveResolver::class,
             );
         }
     }

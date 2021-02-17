@@ -40,11 +40,4 @@ class DataloadingEngine implements DataloadingEngineInterface
             $directiveClasses
         );
     }
-    public function addMandatoryDirectives(array $directives): void
-    {
-        $this->mandatoryRootDirectives = array_merge(
-            $this->mandatoryRootDirectives,
-            $directives
-        );
-    }
 }
