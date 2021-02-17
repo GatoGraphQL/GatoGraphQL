@@ -6,7 +6,6 @@ namespace PoP\Engine;
 
 class Environment
 {
-    public const ADD_MANDATORY_CACHE_CONTROL_DIRECTIVE = 'ADD_MANDATORY_CACHE_CONTROL_DIRECTIVE';
     public const DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS = 'DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS';
 
     public static function disablePersistingDefinitionsOnEachRequest(): bool

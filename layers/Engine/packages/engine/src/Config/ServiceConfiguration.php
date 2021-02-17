@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Config;
 
-use PoP\Engine\ComponentConfiguration;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\CacheControl\Component as CacheControlComponent;
@@ -32,7 +31,7 @@ class ServiceConfiguration
             'addMandatoryDirectiveClass',
             SetSelfAsExpressionDirectiveResolver::class
         );
-        if (ComponentConfiguration::addMandatoryCacheControlDirective() && CacheControlComponent::isEnabled()) {
+        if (CacheControlComponent::isEnabled()) {
             ContainerBuilderUtils::injectValuesIntoService(
                 DataloadingEngineInterface::class,
                 'addMandatoryDirectives',

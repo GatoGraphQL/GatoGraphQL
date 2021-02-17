@@ -569,9 +569,6 @@ class PluginConfiguration
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $isDev = PluginEnvironment::isPluginEnvironmentDev();
 
-        $componentClassConfiguration[Component::class] = [
-            \PoP\Engine\Environment::ADD_MANDATORY_CACHE_CONTROL_DIRECTIVE => false,
-        ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => \GRAPHQL_API_URL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
