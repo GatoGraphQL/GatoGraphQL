@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\API;
 
 use PoP\API\Configuration\Request;
-use PoP\API\Config\ServiceConfiguration;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;

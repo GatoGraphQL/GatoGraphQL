@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\CustomPostsWP\Config\ServiceConfiguration;
 
 /**
  * Initialize component

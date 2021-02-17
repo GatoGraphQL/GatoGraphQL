@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Posts\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 

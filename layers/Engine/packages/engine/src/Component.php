@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Engine\Config\ServiceConfiguration;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 /**

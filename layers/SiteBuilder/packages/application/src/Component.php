@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Application;
 
-use PoP\Application\Config\ServiceConfiguration;
 use PoP\Application\Container\CompilerPasses\ConfigureDefinitionCompilerPass;
 use PoP\Root\Component\AbstractComponent;
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Component\ApplicationEvents;
-use PoP\ComponentModel\Config\ServiceConfiguration;
 use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;

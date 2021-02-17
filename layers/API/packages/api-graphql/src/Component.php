@@ -6,7 +6,6 @@ namespace PoP\GraphQLAPI;
 
 use PoP\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\GraphQLAPI\Config\ServiceConfiguration;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
