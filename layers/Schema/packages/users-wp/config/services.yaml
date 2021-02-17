@@ -6,8 +6,5 @@ services:
     PoPSchema\Users\TypeAPIs\UserTypeAPIInterface:
         class: \PoPSchema\UsersWP\TypeAPIs\UserTypeAPI
 
-    PoPSchema\Users\Conditional\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface:
-        class: \PoPSchema\UsersWP\Conditional\CustomPosts\TypeAPIs\CustomPostUserTypeAPI
-
     PoPSchema\UsersWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
