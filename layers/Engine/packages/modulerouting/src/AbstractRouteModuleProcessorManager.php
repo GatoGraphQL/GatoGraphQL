@@ -13,7 +13,6 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
 
     public function add(AbstractRouteModuleProcessor $processor): void
     {
-        var_dump('hola');
         foreach ($processor->getGroups() as $group) {
             $this->processors[$group] ??= [];
             $this->processors[$group][] = $processor;

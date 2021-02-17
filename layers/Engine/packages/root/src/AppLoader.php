@@ -199,7 +199,6 @@ class AppLoader
             // Temporary solution until migrated:
             // Initialize all depended-upon migration plugins
             foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
-                // var_dump($migrationPluginPath);
                 require_once $migrationPluginPath;
             }
         }
