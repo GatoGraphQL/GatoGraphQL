@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\TranslateDirective;
 
-use PoPSchema\TranslateDirective\Config\ServiceConfiguration;
 use PoP\Root\Component\AbstractComponent;
+use PoPSchema\TranslateDirective\Container\CompilerPasses\ConfigureTranslationServiceCompilerPass;
 
 /**
  * Initialize component
@@ -43,6 +43,17 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::initYAMLServices(self::$COMPONENT_DIR);
-        ServiceConfiguration::initialize();
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            ConfigureTranslationServiceCompilerPass::class,
+        ];
     }
 }
