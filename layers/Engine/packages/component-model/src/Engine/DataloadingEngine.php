@@ -28,8 +28,4 @@ class DataloadingEngine implements DataloadingEngineInterface
     {
         $this->mandatoryRootDirectiveClasses[] = $directiveClass;
     }
-    public function addMandatoryDirective(string $directive): void
-    {
-        $this->mandatoryRootDirectives[] = $directive;
-    }
 }
