@@ -38,11 +38,13 @@ class ServiceConfiguration
         // Inject the mandatory root directives
         ContainerBuilderUtils::injectValuesIntoService(
             DataloadingEngineInterface::class,
-            'addMandatoryDirectiveClasses',
-            [
-                ValidateDirectiveResolver::class,
-                ResolveValueAndMergeDirectiveResolver::class,
-            ]
+            'addMandatoryDirectiveClass',
+            ValidateDirectiveResolver::class,
+        );
+        ContainerBuilderUtils::injectValuesIntoService(
+            DataloadingEngineInterface::class,
+            'addMandatoryDirectiveClass',
+            ResolveValueAndMergeDirectiveResolver::class,
         );
     }
 }
