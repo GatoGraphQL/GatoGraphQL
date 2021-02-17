@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\Config;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
 use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\Translation\Facades\SystemTranslationAPIFacade;
@@ -24,13 +23,6 @@ class ServiceConfiguration
         ContainerBuilderUtils::injectServicesIntoService(
             DataStructureManagerInterface::class,
             'GraphQLByPoP\\GraphQLServer\\DataStructureFormatters',
-            'add'
-        );
-
-        // Add RouteModuleProcessors to the Manager
-        ContainerBuilderUtils::injectServicesIntoService(
-            RouteModuleProcessorManagerInterface::class,
-            'GraphQLByPoP\\GraphQLServer\\RouteModuleProcessors',
             'add'
         );
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Users\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -70,18 +69,11 @@ class Component extends AbstractComponent
         self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-        if (
-            class_exists('\PoP\API\Component')
-            && !in_array(\PoP\API\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/API');
+        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
         }
-
-        if (
-            class_exists('\PoP\RESTAPI\Component')
-            && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
         }
 
         if (class_exists('\PoPSchema\CustomPosts\Component')) {
@@ -96,7 +88,6 @@ class Component extends AbstractComponent
                 }
             }
         }
-        ServiceConfiguration::initialize();
     }
 
     /**

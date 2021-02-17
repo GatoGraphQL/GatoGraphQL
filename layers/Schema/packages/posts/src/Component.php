@@ -70,20 +70,29 @@ class Component extends AbstractComponent
         self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-        if (
-            class_exists('\PoPSchema\Users\Component')
-            && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
-        ) {
+        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
+        }
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+        }
+
+        if (class_exists('\PoPSchema\Users\Component')) {
             self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
-            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+            if (!in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)) {
+                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+            }
+            if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+                self::initYAMLServices(dirname(__DIR__), '/Conditional/Users/Conditional/API');
+            }
+            if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+                self::initYAMLServices(dirname(__DIR__), '/Conditional/Users/Conditional/RESTAPI');
+            }
         }
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
             self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
         }
-
-        // Initialize at the end
-        ServiceConfiguration::initialize();
     }
 
     /**

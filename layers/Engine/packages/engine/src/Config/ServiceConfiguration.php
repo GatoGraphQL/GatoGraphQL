@@ -9,7 +9,6 @@ use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
@@ -25,13 +24,6 @@ class ServiceConfiguration
         ContainerBuilderUtils::injectServicesIntoService(
             ModuleFilterManagerInterface::class,
             'PoP\\Engine\\ModuleFilters',
-            'add'
-        );
-
-        // Add RouteModuleProcessors to the Manager
-        ContainerBuilderUtils::injectServicesIntoService(
-            RouteModuleProcessorManagerInterface::class,
-            'PoP\\Engine\\RouteModuleProcessors',
             'add'
         );
 

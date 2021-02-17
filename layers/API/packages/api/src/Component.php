@@ -102,7 +102,6 @@ class Component extends AbstractComponent
             ) {
                 self::maybeInitPHPSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
-            ServiceConfiguration::initialize();
         }
     }
 

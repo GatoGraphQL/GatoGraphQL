@@ -6,11 +6,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Categories\Conditional\API\RouteModuleProcessors\:
-        resource: '../src/Conditional/API/RouteModuleProcessors/*'
-
-    PoPSchema\Categories\Conditional\RESTAPI\RouteModuleProcessors\:
-        resource: '../src/Conditional/RESTAPI/RouteModuleProcessors/*'
-
     PoP\Categories\LooseContracts\:
         resource: '../src/LooseContracts/*'

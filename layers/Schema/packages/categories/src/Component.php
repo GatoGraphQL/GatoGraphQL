@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Categories;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Categories\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -66,11 +65,11 @@ class Component extends AbstractComponent
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
-
-        if (!in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
+        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
         }
-
-        ServiceConfiguration::initialize();
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+        }
     }
 }
