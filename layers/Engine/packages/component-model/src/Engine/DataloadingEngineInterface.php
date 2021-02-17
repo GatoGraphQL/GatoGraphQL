@@ -8,5 +8,4 @@ use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
 
 interface DataloadingEngineInterface extends ServiceDefinitionIDRegistryInterface
 {
-    public function getMandatoryDirectives(): array;
 }
