@@ -626,6 +626,7 @@
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
             "@start-server"
         ],
+        "init-server": "@start-server",
         "start-server": [
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
             "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
@@ -650,6 +651,7 @@
         "preview-vendor-downgrade": "Run Rector in 'dry-run' mode to preview how the vendor/ folder will be downgraded to PHP 7.1",
         "preview-code-downgrade": "Run Rector in 'dry-run' mode to preview how the all code (i.e. src/ + vendor/ folders) will be downgraded to PHP 7.1",
         "build-server": "Initialize the Lando webserver with the 'GraphQL API for WordPress' demo site, for development. To be executed only the first time",
+        "init-server": "Alias of 'start-server",
         "start-server": "Start the Lando webserver with the 'GraphQL API for WordPress' demo site, for development",
         "rebuild-server": "Rebuild the Lando webserver",
         "validate-monorepo": "Validate that version constraints for dependencies are the same for all packages",
