@@ -32,14 +32,7 @@ class ServiceConfiguration
             'addMandatoryDirectiveClass',
             SetSelfAsExpressionDirectiveResolver::class
         );
-        if (ComponentConfiguration::addMandatoryCacheControlDirective()) {
-            static::configureCacheControl();
-        }
-    }
-
-    public static function configureCacheControl()
-    {
-        if (CacheControlComponent::isEnabled()) {
+        if (ComponentConfiguration::addMandatoryCacheControlDirective() && CacheControlComponent::isEnabled()) {
             ContainerBuilderUtils::injectValuesIntoService(
                 DataloadingEngineInterface::class,
                 'addMandatoryDirectives',
