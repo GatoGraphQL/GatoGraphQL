@@ -62,6 +62,5 @@ class Component extends AbstractComponent
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
             self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
         }
-        ServiceConfiguration::initialize();
     }
 }

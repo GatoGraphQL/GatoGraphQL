@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
-use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
+use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
 
-interface ModuleFilterManagerInterface
+interface ModuleFilterManagerInterface extends ServiceDefinitionIDRegistryInterface
 {
     public function getSelectedModuleFilterName(): ?string;
     public function setSelectedModuleFilterName(string $selectedModuleFilterName);
     public function getNotExcludedModuleSets();
-    public function add(ModuleFilterInterface ...$moduleFilters);
     public function neverExclude($neverExclude);
     public function excludeModule(array $module, array &$props);
     public function removeExcludedSubmodules(array $module, $submodules);

@@ -27,12 +27,5 @@ class ServiceConfiguration
                 false
             );
         }
-
-        // Add ModuleFilters to the ModuleFilterManager
-        ContainerBuilderUtils::injectServicesIntoService(
-            ModuleFilterManagerInterface::class,
-            'PoP\\ComponentModel\\ModuleFilters',
-            'add'
-        );
     }
 }

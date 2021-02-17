@@ -48,7 +48,6 @@ services:
 
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
-        exclude: '../src/ModuleFilters/*Interface.php'
         public: false
 
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
