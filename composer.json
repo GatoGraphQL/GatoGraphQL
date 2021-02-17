@@ -629,7 +629,7 @@
         "start-server": [
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
             "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
-            "composer update --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "composer install --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\"",
             "lando start"
         ],
