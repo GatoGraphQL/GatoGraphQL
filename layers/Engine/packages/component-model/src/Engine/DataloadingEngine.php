@@ -4,28 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-class DataloadingEngine implements DataloadingEngineInterface
+use PoP\Root\Registries\AbstractServiceDefinitionIDRegistry;
+
+class DataloadingEngine extends AbstractServiceDefinitionIDRegistry implements DataloadingEngineInterface
 {
-    /**
-     * @var string[]
-     */
-    protected array $mandatoryRootDirectiveClasses = [];
     /**
      * @var string[]
      */
     protected array $mandatoryRootDirectives = [];
 
-    public function getMandatoryDirectiveClasses(): array
-    {
-        return $this->mandatoryRootDirectiveClasses;
-    }
     public function getMandatoryDirectives(): array
     {
         return $this->mandatoryRootDirectives;
-    }
-
-    public function addMandatoryDirectiveClass(string $directiveClass): void
-    {
-        $this->mandatoryRootDirectiveClasses[] = $directiveClass;
     }
 }

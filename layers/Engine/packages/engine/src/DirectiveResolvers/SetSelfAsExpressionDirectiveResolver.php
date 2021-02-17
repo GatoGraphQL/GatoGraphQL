@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\FieldQuery\QueryHelpers;
-use PoP\Engine\Dataloading\Expressions;
+use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\Engine\Dataloading\Expressions;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
-class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirectiveResolver
+final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    const DIRECTIVE_NAME = 'setSelfAsExpression';
+    public const DIRECTIVE_NAME = 'setSelfAsExpression';
+
     public static function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;

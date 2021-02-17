@@ -34,17 +34,5 @@ class ServiceConfiguration
             'PoP\\ComponentModel\\ModuleFilters',
             'add'
         );
-
-        // Inject the mandatory root directives
-        ContainerBuilderUtils::injectValuesIntoService(
-            DataloadingEngineInterface::class,
-            'addMandatoryDirectiveClass',
-            ValidateDirectiveResolver::class,
-        );
-        ContainerBuilderUtils::injectValuesIntoService(
-            DataloadingEngineInterface::class,
-            'addMandatoryDirectiveClass',
-            ResolveValueAndMergeDirectiveResolver::class,
-        );
     }
 }

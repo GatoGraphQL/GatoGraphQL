@@ -12,6 +12,7 @@ use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeR
 use PoP\ComponentModel\Container\CompilerPasses\RegisterDataStructureFormatterCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterDirectiveResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\RegisterMandatoryDirectiveServiceTagCompilerPass;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -123,6 +124,7 @@ class Component extends AbstractComponent
             AfterBootAttachExtensionCompilerPass::class,
             RegisterFieldInterfaceResolverCompilerPass::class,
             RegisterDataStructureFormatterCompilerPass::class,
+            RegisterMandatoryDirectiveServiceTagCompilerPass::class,
         ];
     }
 }

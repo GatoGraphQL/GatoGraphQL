@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoP\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\ComponentConfiguration;
+use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 
-class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
+final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     /**
      * It must execute after everyone else!

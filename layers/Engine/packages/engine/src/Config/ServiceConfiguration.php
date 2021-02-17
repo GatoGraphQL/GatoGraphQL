@@ -6,11 +6,7 @@ namespace PoP\Engine\Config;
 
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
-use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
-use PoP\Engine\DirectiveResolvers\SetSelfAsExpressionDirectiveResolver;
 
 class ServiceConfiguration
 {
@@ -24,19 +20,5 @@ class ServiceConfiguration
             'PoP\\Engine\\ModuleFilters',
             'add'
         );
-
-        // Inject the mandatory root directives
-        ContainerBuilderUtils::injectValuesIntoService(
-            DataloadingEngineInterface::class,
-            'addMandatoryDirectiveClass',
-            SetSelfAsExpressionDirectiveResolver::class
-        );
-        if (CacheControlComponent::isEnabled()) {
-            ContainerBuilderUtils::injectValuesIntoService(
-                DataloadingEngineInterface::class,
-                'addMandatoryDirectiveClass',
-                CacheControlDirectiveResolver::class,
-            );
-        }
     }
 }

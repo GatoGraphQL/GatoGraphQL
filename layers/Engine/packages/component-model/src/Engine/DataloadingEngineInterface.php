@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-interface DataloadingEngineInterface
+use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+
+interface DataloadingEngineInterface extends ServiceDefinitionIDRegistryInterface
 {
-    public function getMandatoryDirectiveClasses(): array;
     public function getMandatoryDirectives(): array;
-    public function addMandatoryDirectiveClass(string $directiveClass): void;
 }
