@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Config\ServiceConfiguration;
+use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\ConfigureAccessControlCompilerPass;
 use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterAccessControlRuleBlockCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -129,7 +129,6 @@ class Component extends AbstractComponent
                 self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
-        ServiceConfiguration::initialize();
     }
 
     protected static function initComponentConfiguration(): void
@@ -174,6 +173,7 @@ class Component extends AbstractComponent
     {
         return [
             RegisterAccessControlRuleBlockCompilerPass::class,
+            ConfigureAccessControlCompilerPass::class,
         ];
     }
 }
