@@ -21,7 +21,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\DataloadUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\Configuration\Request;
+use PoP\Definitions\Configuration\Request;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\CheckpointProcessorManagerFactory;

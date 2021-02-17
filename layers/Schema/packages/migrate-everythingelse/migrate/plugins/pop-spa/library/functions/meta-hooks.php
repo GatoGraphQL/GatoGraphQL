@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
-use PoP\ComponentModel\Configuration\Request;
+use PoP\Definitions\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 

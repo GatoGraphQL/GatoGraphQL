@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\Configuration\Request;
+use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 
 class Environment
 {
@@ -76,7 +76,7 @@ class Environment
     public static function compactResponseJsonKeys()
     {
         // Do not compact if not mangled
-        if (!Request::isMangled()) {
+        if (!DefinitionsRequest::isMangled()) {
             return false;
         }
 

@@ -60,7 +60,6 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::initYAMLServices(dirname(__DIR__));
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-        ServiceConfiguration::initialize();
     }
 
     /**

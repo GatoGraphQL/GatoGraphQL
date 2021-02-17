@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\SPA;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\SPA\Config\ServiceConfiguration;
 
 /**
  * Initialize component

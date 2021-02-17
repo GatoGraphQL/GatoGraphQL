@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\Configuration\Request;
+use PoP\Definitions\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
