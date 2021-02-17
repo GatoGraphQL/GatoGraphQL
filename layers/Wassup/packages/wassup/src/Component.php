@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\Wassup;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSitesWassup\Wassup\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -99,6 +98,6 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::$COMPONENT_DIR = dirname(__DIR__);
         self::initYAMLServices(self::$COMPONENT_DIR);
-        ServiceConfiguration::initialize();
+        self::initYAMLServices(self::$COMPONENT_DIR, '/Overrides');
     }
 }

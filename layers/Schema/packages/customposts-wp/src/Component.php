@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\CustomPostsWP\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -47,7 +46,7 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
-        ServiceConfiguration::initialize();
+        self::initYAMLServices(dirname(__DIR__), '/Overrides');
+        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
     }
 }

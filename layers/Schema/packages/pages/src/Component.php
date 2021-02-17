@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Pages;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Pages\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -64,6 +63,11 @@ class Component extends AbstractComponent
         if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()) {
             self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPageTypeToCustomPostUnionTypes');
         }
-        ServiceConfiguration::initialize();
+        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
+        }
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+        }
     }
 }

@@ -15,6 +15,7 @@ use PoP\ComponentModel\Constants\Targets;
 use PoP\ComponentModel\Constants\Values;
 use PoP\Routing\RouteNatures;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\Routing\Facades\RoutingManagerFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
@@ -53,7 +54,7 @@ class ApplicationState
         $dataoutputmode = strtolower($_REQUEST[Params::DATAOUTPUTMODE] ?? '');
         $dboutputmode = strtolower($_REQUEST[Params::DATABASESOUTPUTMODE] ?? '');
         $target = strtolower($_REQUEST[Params::TARGET] ?? '');
-        $mangled = Request::isMangled() ? '' : Request::URLPARAMVALUE_MANGLED_NONE;
+        $mangled = DefinitionsRequest::isMangled() ? '' : DefinitionsRequest::URLPARAMVALUE_MANGLED_NONE;
         $actions = isset($_REQUEST[Params::ACTIONS]) ?
             array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
         $scheme = strtolower($_REQUEST[Params::SCHEME] ?? '');

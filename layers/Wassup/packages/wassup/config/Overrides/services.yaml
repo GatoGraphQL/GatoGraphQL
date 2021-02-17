@@ -1,0 +1,25 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSitesWassup\ContactUsMutations\MutationResolverBridges\ContactUsMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge
+
+    PoPSitesWassup\ContactUserMutations\MutationResolverBridges\ContactUserMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge
+
+    PoPSitesWassup\FlagMutations\MutationResolverBridges\FlagCustomPostMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge
+
+    PoPSitesWassup\VolunteerMutations\MutationResolverBridges\VolunteerMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge
+
+    PoPSitesWassup\ShareMutations\MutationResolverBridges\ShareByEmailMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge
+
+    PoPSitesWassup\NewsletterMutations\MutationResolverBridges\NewsletterSubscriptionMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge
+
+    PoPSitesWassup\NewsletterMutations\MutationResolverBridges\NewsletterUnsubscriptionMutationResolverBridge:
+        class: \PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\DefinitionPersistence;
 
+use PoP\DefinitionPersistence\Container\CompilerPasses\ConfigureDefinitionPersistenceCompilerPass;
 use PoP\Root\Component\AbstractComponent;
-use PoP\DefinitionPersistence\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -44,6 +44,17 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-        ServiceConfiguration::initialize();
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            ConfigureDefinitionPersistenceCompilerPass::class,
+        ];
     }
 }

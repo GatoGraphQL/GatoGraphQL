@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use PoP\Root\Component\AbstractComponent;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
+use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use GraphQLByPoP\GraphQLServer\Configuration\Request;
+use GraphQLByPoP\GraphQLServer\Container\CompilerPasses\ConfigureGraphQLPersistedQueryCompilerPass;
 use GraphQLByPoP\GraphQLServer\Environment;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
+use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Config\ServiceConfiguration;
-use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
-use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 
 /**
  * Initialize component
@@ -98,6 +98,7 @@ class Component extends AbstractComponent
             ComponentConfiguration::setConfiguration($configuration);
             self::$COMPONENT_DIR = dirname(__DIR__);
             self::initYAMLServices(self::$COMPONENT_DIR);
+            self::initYAMLServices(self::$COMPONENT_DIR, '/Overrides');
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
             // Boot conditional on having variables treated as expressions for @export directive
@@ -125,12 +126,23 @@ class Component extends AbstractComponent
             ) {
                 self::maybeInitPHPSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
-            ServiceConfiguration::initialize();
         }
     }
 
     protected static function resolveEnabled()
     {
         return GraphQLRequestComponent::isEnabled();
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            ConfigureGraphQLPersistedQueryCompilerPass::class,
+        ];
     }
 }

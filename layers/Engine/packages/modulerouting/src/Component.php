@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
+use PoP\ModuleRouting\Container\CompilerPasses\RegisterRouteModuleProcessorCompilerPass;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -22,6 +23,18 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\Root\Component::class,
+        ];
+    }
+
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterRouteModuleProcessorCompilerPass::class,
         ];
     }
 }

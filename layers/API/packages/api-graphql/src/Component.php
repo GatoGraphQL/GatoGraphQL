@@ -6,7 +6,6 @@ namespace PoP\GraphQLAPI;
 
 use PoP\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
-use PoP\GraphQLAPI\Config\ServiceConfiguration;
 use PoP\Root\Component\CanDisableComponentTrait;
 
 /**
@@ -53,7 +52,6 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             self::initYAMLServices(dirname(__DIR__));
-            ServiceConfiguration::initialize();
         }
     }
 

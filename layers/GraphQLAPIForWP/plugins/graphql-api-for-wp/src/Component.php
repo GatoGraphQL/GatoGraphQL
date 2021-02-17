@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Config\ServiceConfiguration;
+use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\ConfigureAccessControlCompilerPass;
 use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterAccessControlRuleBlockCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -14,11 +14,9 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EditingPersistedQuerySchemaConfiguratorExecuter;
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EndpointSchemaConfiguratorExecuter;
 use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\PersistedQuerySchemaConfiguratorExecuter;
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\Root\Component\AbstractComponent;
 
 /**
@@ -84,8 +82,11 @@ class Component extends AbstractComponent
             self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
             self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
         }
-        // Register the Cache services, if the module is not disabled
         $moduleRegistry = ModuleRegistryFacade::getInstance();
+        if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
+            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/CacheControl/Overrides');
+        }
+        // Register the Cache services, if the module is not disabled
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
             self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
@@ -128,7 +129,6 @@ class Component extends AbstractComponent
                 self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
-        ServiceConfiguration::initialize();
     }
 
     protected static function initComponentConfiguration(): void
@@ -158,18 +158,6 @@ class Component extends AbstractComponent
     {
         parent::boot();
 
-        // Enable the CacheControl, if the module is not disabled
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            // Unless previewing the query
-            if (!\is_preview()) {
-                $dataloadingEngine = DataloadingEngineFacade::getInstance();
-                $dataloadingEngine->addMandatoryDirectives([
-                    CacheControlDirectiveResolver::getDirectiveName(),
-                ]);
-            }
-        }
-
         // Configure the GraphQL query with Access/Cache Control Lists
         (new PersistedQuerySchemaConfiguratorExecuter())->init();
         (new EndpointSchemaConfiguratorExecuter())->init();
@@ -185,6 +173,7 @@ class Component extends AbstractComponent
     {
         return [
             RegisterAccessControlRuleBlockCompilerPass::class,
+            ConfigureAccessControlCompilerPass::class,
         ];
     }
 }

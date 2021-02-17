@@ -15,9 +15,6 @@ services:
     GraphQLByPoP\GraphQLServer\Hooks\:
         resource: '../src/Hooks/*'
 
-    GraphQLByPoP\GraphQLServer\DataStructureFormatters\:
-        resource: '../src/DataStructureFormatters/*'
-
     GraphQLByPoP\GraphQLServer\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
 

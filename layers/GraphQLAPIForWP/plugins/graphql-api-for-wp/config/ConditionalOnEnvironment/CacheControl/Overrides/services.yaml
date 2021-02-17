@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    # Override service, to disable caching when doing a preview
+    PoP\CacheControl\Managers\CacheControlEngineInterface:
+        class: \GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\CacheControl\Overrides\Services\Managers\CacheControlEngine

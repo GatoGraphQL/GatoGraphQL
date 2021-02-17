@@ -3,5 +3,8 @@ services:
         public: true
         autowire: true
 
+    PoPSchema\Users\Conditional\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface:
+        class: \PoPSchema\UsersWP\Conditional\CustomPosts\TypeAPIs\CustomPostUserTypeAPI
+
     PoPSchema\UsersWP\Conditional\CustomPosts\LooseContracts\:
         resource: '../../../src/Conditional/CustomPosts/LooseContracts/*'

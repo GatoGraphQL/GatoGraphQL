@@ -16,13 +16,14 @@ abstract class AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass impleme
         }
         $registryDefinition = $containerBuilder->getDefinition($this->getRegistryServiceDefinition());
         $definitions = $containerBuilder->getDefinitions();
+        $serviceClass = $this->getServiceClass();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if (
                 $definitionClass === null
                 || !is_a(
                     $definitionClass,
-                    $this->getServiceClass(),
+                    $serviceClass,
                     true
                 )
             ) {

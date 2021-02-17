@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoP\ModuleRouting;
 
 use PoP\ModuleRouting\AbstractRouteModuleProcessor;
+use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
 
-interface RouteModuleProcessorManagerInterface
+interface RouteModuleProcessorManagerInterface extends ServiceDefinitionIDRegistryInterface
 {
-    public function add(AbstractRouteModuleProcessor $processor): void;
     /**
      * @return AbstractRouteModuleProcessor[]
      */

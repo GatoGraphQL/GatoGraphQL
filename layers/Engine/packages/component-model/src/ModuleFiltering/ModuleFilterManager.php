@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\Root\Registries\AbstractServiceDefinitionIDRegistry;
 
-class ModuleFilterManager implements ModuleFilterManagerInterface
+class ModuleFilterManager extends AbstractServiceDefinitionIDRegistry implements ModuleFilterManagerInterface
 {
     public const URLPARAM_MODULEFILTER = 'modulefilter';
 
@@ -48,6 +50,13 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
 
     protected function init()
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        foreach ($this->getServiceDefinitionIDs() as $serviceDefinitionID) {
+            /** @var ModuleFilterInterface */
+            $moduleFilter = $instanceManager->getInstance($serviceDefinitionID);
+            $this->modulefilters[$moduleFilter->getName()] = $moduleFilter;
+        }
+
         // Lazy initialize so that we can inject all the moduleFilters before checking the selected one
         $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedModuleFilterName();
         if ($this->selected_filter_name) {
@@ -57,13 +66,6 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
             $this->not_excluded_module_sets = $this->not_excluded_module_sets_as_string = array();
         }
         $this->initialized = true;
-    }
-
-    public function add(ModuleFilterInterface ...$moduleFilters)
-    {
-        foreach ($moduleFilters as $moduleFilter) {
-            $this->modulefilters[$moduleFilter->getName()] = $moduleFilter;
-        }
     }
 
     /**

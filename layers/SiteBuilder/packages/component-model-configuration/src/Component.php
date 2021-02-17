@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\ConfigurationComponentModel\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -46,6 +45,5 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-        ServiceConfiguration::initialize();
     }
 }

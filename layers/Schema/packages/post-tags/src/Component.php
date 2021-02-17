@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\PostTags\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -67,13 +66,13 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
         self::$COMPONENT_DIR = dirname(__DIR__);
-        self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
-
-        if (class_exists('\PoP\RESTAPI\Component::class') && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/RESTAPI');
+        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
         }
-        ServiceConfiguration::initialize();
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+        }
     }
 
     /**

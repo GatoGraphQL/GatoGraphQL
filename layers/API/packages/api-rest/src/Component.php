@@ -6,7 +6,6 @@ namespace PoP\RESTAPI;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\RESTAPI\Config\ServiceConfiguration;
 use PoP\API\Component as APIComponent;
 
 /**
@@ -44,7 +43,6 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             self::initYAMLServices(dirname(__DIR__));
-            ServiceConfiguration::initialize();
         }
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts;
 
 use PoP\Root\Component\AbstractComponent;
-use PoPSchema\Posts\Config\ServiceConfiguration;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
@@ -67,23 +66,31 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
         self::$COMPONENT_DIR = dirname(__DIR__);
-        self::initYAMLServices(self::$COMPONENT_DIR);
         self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
-        if (
-            class_exists('\PoPSchema\Users\Component')
-            && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
-        ) {
+        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
+        }
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+        }
+
+        if (class_exists('\PoPSchema\Users\Component')) {
             self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
-            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+            if (!in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)) {
+                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+            }
+            if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+                self::initYAMLServices(dirname(__DIR__), '/Conditional/Users/Conditional/API');
+            }
+            if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+                self::initYAMLServices(dirname(__DIR__), '/Conditional/Users/Conditional/RESTAPI');
+            }
         }
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
             self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
         }
-
-        // Initialize at the end
-        ServiceConfiguration::initialize();
     }
 
     /**

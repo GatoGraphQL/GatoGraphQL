@@ -5,9 +5,3 @@ services:
 
     PoPSchema\Posts\Conditional\Users\Hooks\:
         resource: '../../../src/Conditional/Users/Hooks/*'
-
-    PoPSchema\Posts\Conditional\Users\Conditional\API\RouteModuleProcessors\:
-        resource: '../../../src/Conditional/Users/Conditional/API/RouteModuleProcessors/*'
-
-    PoPSchema\Posts\Conditional\Users\Conditional\RESTAPI\RouteModuleProcessors\:
-        resource: '../../../src/Conditional/Users/Conditional/RESTAPI/RouteModuleProcessors/*'
