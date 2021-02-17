@@ -98,6 +98,7 @@ class Component extends AbstractComponent
             ComponentConfiguration::setConfiguration($configuration);
             self::$COMPONENT_DIR = dirname(__DIR__);
             self::initYAMLServices(self::$COMPONENT_DIR);
+            self::initYAMLServices(self::$COMPONENT_DIR, '/Overrides');
             self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
 
             // Boot conditional on having variables treated as expressions for @export directive

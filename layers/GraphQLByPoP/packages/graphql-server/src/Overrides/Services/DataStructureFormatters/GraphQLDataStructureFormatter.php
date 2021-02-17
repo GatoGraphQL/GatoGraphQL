@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\DataStructureFormatters;
+namespace GraphQLByPoP\GraphQLServer\Overrides\Services\DataStructureFormatters;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 
 /**
  * Change the properties printed for the standard GraphQL response:
@@ -20,7 +21,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-class GraphQLDataStructureFormatter extends \PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter
+class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatter
 {
     /**
      * If it is a Union Type, we must remove the "*" from the name

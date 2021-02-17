@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\APIMirrorQuery;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\APIMirrorQuery\Config\ServiceConfiguration;
 
 /**
  * Initialize component
@@ -36,6 +35,5 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-        ServiceConfiguration::initialize();
     }
 }

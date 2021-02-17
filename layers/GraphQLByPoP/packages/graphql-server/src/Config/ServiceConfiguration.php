@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Config;
 
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
 use GraphQLByPoP\GraphQLServer\Environment;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\Translation\Facades\SystemTranslationAPIFacade;
@@ -17,15 +16,6 @@ class ServiceConfiguration
 
     protected static function configure(): void
     {
-        /**
-         * Override class GraphQLDataStructureFormatter from GraphQLAPI
-         */
-        ContainerBuilderUtils::injectServicesIntoService(
-            DataStructureManagerInterface::class,
-            'GraphQLByPoP\\GraphQLServer\\DataStructureFormatters',
-            'add'
-        );
-
         /**
          * GraphQL persisted query for Introspection query
          */

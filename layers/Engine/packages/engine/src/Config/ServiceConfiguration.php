@@ -27,12 +27,6 @@ class ServiceConfiguration
             'add'
         );
 
-        ContainerBuilderUtils::injectServicesIntoService(
-            DataStructureManagerInterface::class,
-            'PoP\\Engine\\DataStructureFormatters',
-            'add'
-        );
-
         // Inject the mandatory root directives
         ContainerBuilderUtils::injectValuesIntoService(
             DataloadingEngineInterface::class,
