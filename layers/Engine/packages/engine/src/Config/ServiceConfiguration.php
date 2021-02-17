@@ -9,7 +9,6 @@ use PoP\Root\Component\PHPServiceConfigurationTrait;
 use PoP\Root\Container\ContainerBuilderUtils;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\Engine\DirectiveResolvers\SetSelfAsExpressionDirectiveResolver;
@@ -40,7 +39,7 @@ class ServiceConfiguration
 
     public static function configureCacheControl()
     {
-        if (CacheControlComponent::isEnabled() && $_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (CacheControlComponent::isEnabled()) {
             ContainerBuilderUtils::injectValuesIntoService(
                 DataloadingEngineInterface::class,
                 'addMandatoryDirectives',
