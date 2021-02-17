@@ -18,9 +18,4 @@ class RegisterDataStructureFormatterCompilerPass extends AbstractInjectServiceDe
     {
         return DataStructureFormatterInterface::class;
     }
-
-    protected function getRegistryMethodCallName(): string
-    {
-        return 'add';
-    }
 }

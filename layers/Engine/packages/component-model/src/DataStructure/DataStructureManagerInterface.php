@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
-interface DataStructureManagerInterface
+use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+
+interface DataStructureManagerInterface extends ServiceDefinitionIDRegistryInterface
 {
-    public function add(DataStructureFormatterInterface $formatter): void;
     public function getDataStructureFormatter(string $name = null): DataStructureFormatterInterface;
 }

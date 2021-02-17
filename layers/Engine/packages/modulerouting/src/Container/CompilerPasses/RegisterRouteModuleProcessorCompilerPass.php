@@ -18,8 +18,4 @@ class RegisterRouteModuleProcessorCompilerPass extends AbstractInjectServiceDefi
     {
         return AbstractRouteModuleProcessor::class;
     }
-    protected function getRegistryMethodCallName(): string
-    {
-        return 'add';
-    }
 }
