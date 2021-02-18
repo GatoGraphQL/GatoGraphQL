@@ -1,12 +1,13 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\CustomPostMedia\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
-        public: true
 
     PoPSchema\CustomPostMedia\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true
 
     PoPSchema\CustomPostMedia\FieldInterfaceResolvers\:
         resource: '../src/FieldInterfaceResolvers/*'
-        public: true

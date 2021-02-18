@@ -1,3 +1,8 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\SPA\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
+        public: false

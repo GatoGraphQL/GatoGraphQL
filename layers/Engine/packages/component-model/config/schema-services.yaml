@@ -1,12 +1,13 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\ComponentModel\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true
 
     PoP\ComponentModel\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
-        public: true
 
     PoP\ComponentModel\FieldInterfaceResolvers\:
         resource: '../src/FieldInterfaceResolvers/*'
-        public: true

@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\:
         resource: '../src/EndpointHandlers/*'
-        public: true

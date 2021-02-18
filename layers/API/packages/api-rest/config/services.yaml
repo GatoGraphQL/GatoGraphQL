@@ -1,4 +1,8 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\RESTAPI\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
         public: true

@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\CustomPostMediaMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true

@@ -1,12 +1,13 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\Highlights\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true
 
     PoPSchema\Highlights\TypeResolverPickers\:
         resource: '../src/TypeResolverPickers/*'
-        public: true
 
     PoPSchema\Highlights\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
-        public: true

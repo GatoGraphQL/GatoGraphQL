@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\ConfigurableSchemaFeedback\Managers\SchemaFeedbackManagerInterface:
         class: \PoP\ConfigurableSchemaFeedback\Managers\SchemaFeedbackManager
-        public: true

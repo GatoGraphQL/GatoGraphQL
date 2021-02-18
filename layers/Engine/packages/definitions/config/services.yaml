@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\Definitions\DefinitionManagerInterface:
         class: \PoP\Definitions\DefinitionManager
-        public: true

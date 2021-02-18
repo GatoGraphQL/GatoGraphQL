@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     emoji_definition_resolver:
         class: \PoP\EmojiDefinitions\DefinitionResolver
-        public: true

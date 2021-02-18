@@ -1,8 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\Media\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true
 
     PoPSchema\Media\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
-        public: true

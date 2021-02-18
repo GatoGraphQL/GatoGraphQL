@@ -1,8 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\CacheControl\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
-        public: true
 
     PoP\CacheControl\TypeResolverDecorators\:
         resource: '../src/TypeResolverDecorators/*'
-        public: true

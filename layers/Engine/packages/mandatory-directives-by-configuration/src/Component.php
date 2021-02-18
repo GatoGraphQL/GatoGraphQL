@@ -22,19 +22,4 @@ class Component extends AbstractComponent
             \PoP\ComponentModel\Component::class,
         ];
     }
-
-    /**
-     * Initialize services
-     *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::initYAMLServices(dirname(__DIR__));
-    }
 }

@@ -1,8 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\AccessControl\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
-        public: true
 
     PoP\AccessControl\TypeResolverDecorators\:
         resource: '../src/TypeResolverDecorators/*'
-        public: true
