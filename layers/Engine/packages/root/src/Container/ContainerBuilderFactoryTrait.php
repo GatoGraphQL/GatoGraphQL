@@ -131,10 +131,10 @@ trait ContainerBuilderFactoryTrait
     /**
      * If the container is not cached, then compile it and cache it
      *
-     * @param string[] $compilerPassClasses Compiler Pass classes to register on the container
+     * @param CompilerPassInterface[] $compilerPasses Compiler Pass objects to register on the container
      */
     public static function maybeCompileAndCacheContainer(
-        array $compilerPassClasses = []
+        array $compilerPasses = []
     ): void {
         // Compile Symfony's DependencyInjection Container Builder
         // After compiling, cache it in disk for performance.
@@ -143,8 +143,8 @@ trait ContainerBuilderFactoryTrait
             /** @var ContainerBuilder */
             $containerBuilder = static::getInstance();
             // Inject all the compiler passes
-            foreach ($compilerPassClasses as $compilerPassClass) {
-                $containerBuilder->addCompilerPass(new $compilerPassClass());
+            foreach ($compilerPasses as $compilerPass) {
+                $containerBuilder->addCompilerPass($compilerPass);
             }
             // Compile the container
             $containerBuilder->compile();

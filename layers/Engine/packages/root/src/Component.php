@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Container\CompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 
@@ -23,6 +22,22 @@ class Component extends AbstractComponent
     {
         return [];
     }
+
+    /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     * @param string[] $skipSchemaComponentClasses
+     */
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        parent::initializeSystemContainerServices($configuration);
+
+        // Only after initializing the containerBuilder, can inject a service
+        self::initYAMLSystemContainerServices(dirname(__DIR__));
+    }
+
     /**
      * Initialize services
      *
@@ -53,17 +68,5 @@ class Component extends AbstractComponent
          */
         $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
         $serviceInstantiator->initializeServices();
-    }
-
-    /**
-     * Get all the compiler pass classes required to register on the container
-     *
-     * @return string[]
-     */
-    public static function getContainerCompilerPassClasses(): array
-    {
-        return [
-            AutomaticallyInstantiatedServiceCompilerPass::class,
-        ];
     }
 }
