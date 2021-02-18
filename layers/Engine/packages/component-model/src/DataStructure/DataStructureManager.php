@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\DataStructure\DataStructureFormatterInterface;
 use PoP\ComponentModel\State\ApplicationState;
 
 class DataStructureManager implements DataStructureManagerInterface
@@ -13,10 +13,21 @@ class DataStructureManager implements DataStructureManagerInterface
      * @var array<string, DataStructureFormatterInterface>
      */
     public array $formatters = [];
+    protected DataStructureFormatterInterface $defaultFormatter;
+
+    function __construct(DataStructureFormatterInterface $defaultFormatter)
+    {
+        $this->defaultFormatter = $defaultFormatter;
+    }
 
     public function addDataStructureFormatter(DataStructureFormatterInterface $formatter): void
     {
         $this->formatters[$formatter::getName()] = $formatter;
+    }
+
+    public function setDefaultDataStructureFormatter(DataStructureFormatterInterface $defaultFormatter): void
+    {
+        $this->defaultFormatter = $defaultFormatter;
     }
 
     public function getDataStructureFormatter(string $name = null): DataStructureFormatterInterface
@@ -33,12 +44,6 @@ class DataStructureManager implements DataStructureManagerInterface
             return $this->formatters[$name];
         };
 
-        // Return the default one
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var DefaultDataStructureFormatter
-         */
-        $formatter = $instanceManager->getInstance(DefaultDataStructureFormatter::class);
-        return $formatter;
+        return $this->defaultFormatter;
     }
 }
