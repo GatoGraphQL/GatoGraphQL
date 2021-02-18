@@ -12,8 +12,6 @@ use PoP\Root\Component\AbstractComponent;
  */
 class Component extends AbstractComponent
 {
-    public const VERSION = '0.2.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *

@@ -13,10 +13,6 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
  */
 class Component extends AbstractComponent
 {
-    public static $COMPONENT_DIR;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -65,8 +61,7 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::$COMPONENT_DIR = dirname(__DIR__);
-        self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
+        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
@@ -76,9 +71,9 @@ class Component extends AbstractComponent
         }
 
         if (class_exists('\PoPSchema\Users\Component')) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/Users');
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/Users');
             if (!in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)) {
-                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
             }
             if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
                 self::initYAMLServices(dirname(__DIR__), '/Conditional/Users/Conditional/API');
@@ -89,7 +84,7 @@ class Component extends AbstractComponent
         }
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
-            self::maybeInitPHPSchemaServices(self::$COMPONENT_DIR, $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
+            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
         }
     }
 
