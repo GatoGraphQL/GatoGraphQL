@@ -72,11 +72,11 @@ class AppLoader
      * @param string[] $componentClasses List of `Component` class to initialize
      * @return string[]
      */
-    protected static function getComponentsOrderedForInitialization(
+    final protected static function getComponentsOrderedForInitialization(
         array $componentClasses
     ): array {
         $orderedComponentClasses = [];
-        static::addComponentsOrderedForInitialization(
+        self::addComponentsOrderedForInitialization(
             $componentClasses,
             $orderedComponentClasses
         );
@@ -90,7 +90,7 @@ class AppLoader
      * @param string[] $componentClasses List of `Component` class to initialize
      * @param string[] $orderedComponentClasses List of `Component` class in order of initialization
      */
-    protected static function addComponentsOrderedForInitialization(
+    final protected static function addComponentsOrderedForInitialization(
         array $componentClasses,
         array &$orderedComponentClasses
     ): void {
@@ -106,13 +106,13 @@ class AppLoader
             self::$initializedClasses[] = $componentClass;
 
             // Initialize all depended-upon PoP components
-            static::addComponentsOrderedForInitialization(
+            self::addComponentsOrderedForInitialization(
                 $componentClass::getDependedComponentClasses(),
                 $orderedComponentClasses
             );
 
             // Initialize all depended-upon PoP conditional components, if they are installed
-            static::addComponentsOrderedForInitialization(
+            self::addComponentsOrderedForInitialization(
                 array_filter(
                     $componentClass::getDependedConditionalComponentClasses(),
                     'class_exists'
@@ -149,7 +149,7 @@ class AppLoader
         /**
          * Calculate the components in their initialization order
          */
-        $orderedComponentClasses = static::getComponentsOrderedForInitialization(
+        $orderedComponentClasses = self::getComponentsOrderedForInitialization(
             self::$componentClassesToInitialize
         );
 
