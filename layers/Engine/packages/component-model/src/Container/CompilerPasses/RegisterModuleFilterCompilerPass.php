@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass;
+use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterModuleFilterCompilerPass extends AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass
+class RegisterModuleFilterCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -17,5 +17,9 @@ class RegisterModuleFilterCompilerPass extends AbstractInjectServiceDefinitionID
     protected function getServiceClass(): string
     {
         return ModuleFilterInterface::class;
+    }
+    protected function getRegistryMethodCallName(): string
+    {
+        return 'addModuleFilter';
     }
 }
