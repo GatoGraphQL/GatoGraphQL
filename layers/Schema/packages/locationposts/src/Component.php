@@ -12,10 +12,6 @@ use PoP\Root\Component\AbstractComponent;
  */
 class Component extends AbstractComponent
 {
-    public static $COMPONENT_DIR;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -53,8 +49,7 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::$COMPONENT_DIR = dirname(__DIR__);
-        self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
+        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (Environment::addLocationPostTypeToCustomPostUnionTypes()) {
             self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes');
@@ -64,14 +59,14 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Tags\Component')
             && !in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Tags');
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Tags');
         }
 
         if (
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/Users');
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
         }
     }
 }

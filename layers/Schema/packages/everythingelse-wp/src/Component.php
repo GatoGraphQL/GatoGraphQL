@@ -11,10 +11,6 @@ use PoP\Root\Component\AbstractComponent;
  */
 class Component extends AbstractComponent
 {
-    public static $COMPONENT_DIR;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -52,13 +48,11 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::$COMPONENT_DIR = dirname(__DIR__);
-
         if (
             class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts');
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');
         }
     }
 }

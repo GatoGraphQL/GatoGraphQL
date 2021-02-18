@@ -15,10 +15,6 @@ class Component extends AbstractComponent
 {
     use CanDisableComponentTrait;
 
-    public static $COMPONENT_DIR;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -46,9 +42,8 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
-            self::$COMPONENT_DIR = dirname(__DIR__);
-            self::initYAMLServices(self::$COMPONENT_DIR);
-            self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
+            self::initYAMLServices(dirname(__DIR__));
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         }
     }
 

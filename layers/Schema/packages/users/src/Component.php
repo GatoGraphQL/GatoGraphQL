@@ -13,10 +13,6 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
  */
 class Component extends AbstractComponent
 {
-    public static $COMPONENT_DIR;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -65,9 +61,8 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::$COMPONENT_DIR = dirname(__DIR__);
-        self::initYAMLServices(self::$COMPONENT_DIR);
-        self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
+        self::initYAMLServices(dirname(__DIR__));
+        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
@@ -77,14 +72,14 @@ class Component extends AbstractComponent
         }
 
         if (class_exists('\PoPSchema\CustomPosts\Component')) {
-            self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts');
+            self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');
             if (!in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)) {
-                self::maybeInitYAMLSchemaServices(Component::$COMPONENT_DIR, $skipSchema, '/Conditional/CustomPosts');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CustomPosts');
                 if (
                     class_exists('\PoP\RESTAPI\Component')
                     && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
                 ) {
-                    self::initYAMLServices(Component::$COMPONENT_DIR, '/Conditional/CustomPosts/Conditional/RESTAPI');
+                    self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts/Conditional/RESTAPI');
                 }
             }
         }

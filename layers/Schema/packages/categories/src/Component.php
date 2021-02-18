@@ -11,10 +11,6 @@ use PoP\Root\Component\AbstractComponent;
  */
 class Component extends AbstractComponent
 {
-    public static $COMPONENT_DIR;
-
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
@@ -62,9 +58,8 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::$COMPONENT_DIR = dirname(__DIR__);
-        self::initYAMLServices(self::$COMPONENT_DIR);
-        self::maybeInitYAMLSchemaServices(self::$COMPONENT_DIR, $skipSchema);
+        self::initYAMLServices(dirname(__DIR__));
+        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
         }
