@@ -30,28 +30,35 @@ class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
             photos: "https://picsum.photos/v2/list?page=$photoPage&limit=10"
         ])@meshServices
 EOT;
+        /**
+         * Watch out: Symfony DI uses %...% for parameters,
+         * so we must escape the dollar sign when doing %self%, or we'll
+         * get an error:
+         * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter "self" must be defined."
+         * @see https://symfony.com/doc/2.2/components/dependency_injection/parameters.html#parameters-in-configuration-files
+         */
         $meshServiceDataPersistedFragment = <<<EOT
         --meshServices|
-        getAsyncJSON(getSelfProp(%self%, meshServices))@meshServiceData
+        getAsyncJSON(getSelfProp(%%self%%, meshServices))@meshServiceData
 EOT;
         $contentMeshPersistedFragment = <<<EOT
         --meshServiceData|
         echo([
             weatherForecast: extract(
-                getSelfProp(%self%, meshServiceData),
+                getSelfProp(%%self%%, meshServiceData),
                 weather.properties.periods
             ),
             photoGalleryURLs: extract(
-                getSelfProp(%self%, meshServiceData),
+                getSelfProp(%%self%%, meshServiceData),
                 photos.url
             ),
             githubMeta: echo([
                 description: extract(
-                    getSelfProp(%self%, meshServiceData),
+                    getSelfProp(%%self%%, meshServiceData),
                     github.description
                 ),
                 starCount: extract(
-                    getSelfProp(%self%, meshServiceData),
+                    getSelfProp(%%self%%, meshServiceData),
                     github.stargazers_count
                 )
             ])
@@ -72,10 +79,7 @@ EOT;
             'addPersistedFragment',
             [
                 'meshServiceData',
-                // Escape "%self%"
-                PersistedQueryUtils::addSpacingToExpressions(
-                    PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment)
-                ),
+                PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment),
                 $translationAPI->__('Retrieve data from the mesh services. This fragment includes calling fragment --meshServices', 'examples-for-pop')
             ]
         );
@@ -84,10 +88,7 @@ EOT;
             'addPersistedFragment',
             [
                 'contentMesh',
-                // Escape "%self%"
-                PersistedQueryUtils::addSpacingToExpressions(
-                    PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment)
-                ),
+                PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment),
                 $translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'. This fragment includes calling fragment --meshServiceData', 'examples-for-pop')
             ]
         );
