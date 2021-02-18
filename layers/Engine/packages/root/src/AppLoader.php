@@ -233,34 +233,11 @@ class AppLoader
         // Register CompilerPasses, Compile and Cache
         // Symfony's DependencyInjection Application Container
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
-        $compilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
-        $compilerPasses = array_merge(
-            $compilerPasses,
-            array_map(
-                fn ($class) => new $class(),
-                self::getApplicationContainerCompilerPasses()
-            )
-        );
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPasses);
+        $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
+        ContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
         static::bootComponents();
-    }
-
-    /**
-     * @return string[]
-     */
-    final protected static function getApplicationContainerCompilerPasses(): array
-    {
-        // Collect the compiler pass classes from all components
-        $compilerPassClasses = [];
-        foreach (ComponentManager::getComponentClasses() as $componentClass) {
-            $compilerPassClasses = [
-                ...$compilerPassClasses,
-                ...$componentClass::getContainerCompilerPassClasses()
-            ];
-        }
-        return array_values(array_unique($compilerPassClasses));
     }
 
     /**
