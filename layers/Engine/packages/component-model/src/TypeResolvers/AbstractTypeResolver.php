@@ -178,13 +178,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $dataloadingEngine = DataloadingEngineFacade::getInstance();
-        return array_merge(
-            array_map(
-                function ($directiveClass) use ($fieldQueryInterpreter) {
-                    return $fieldQueryInterpreter->listFieldDirective($directiveClass::getDirectiveName());
-                },
-                $dataloadingEngine->getServiceDefinitionIDs()
-            )
+        return array_map(
+            function ($directiveResolver) use ($fieldQueryInterpreter) {
+                return $fieldQueryInterpreter->listFieldDirective($directiveResolver::getDirectiveName());
+            },
+            $dataloadingEngine->getMandatoryDirectiveResolvers()
         );
     }
 
