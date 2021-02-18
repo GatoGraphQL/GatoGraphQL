@@ -634,6 +634,7 @@
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\"",
             "lando start"
         ],
+        "log-server-errors": "lando logs -t -f | grep \"error\"",
         "rebuild-server": "lando rebuild -y",
         "merge-monorepo": "monorepo-builder merge --ansi",
         "propagate-monorepo": "monorepo-builder propagate --ansi",
@@ -653,6 +654,7 @@
         "build-server": "Initialize the Lando webserver with the 'GraphQL API for WordPress' demo site, for development. To be executed only the first time",
         "init-server": "Alias of 'start-server",
         "start-server": "Start the Lando webserver with the 'GraphQL API for WordPress' demo site, for development",
+        "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "rebuild-server": "Rebuild the Lando webserver",
         "validate-monorepo": "Validate that version constraints for dependencies are the same for all packages",
         "merge-monorepo": "Create the monorepo's composer.json file, containing all dependencies from all packages",
