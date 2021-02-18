@@ -18,18 +18,11 @@ class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $containerBuilder): void
     {
         /**
-         * Watch out: this is a hack to avoid this error:
-         * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter " self " must be defined."
-         * This happens becase Symfony DI uses %...% for parameters,
-         * so in the persisted query below, it believes that %self% is parameter "self",
-         * when that is not the case (in PoP, %...% is an expression!)
-         * To fix it, define parameters in the container:
-         * - %self% => % self % because PoP can handle both cases
-         * - % self % => %self% because the cached container.php will hold "% self %", so this must be dealt with
-         * We can't do "%self% => %self%" because it throws a Circular Reference error
+         * Watch out: Symfony DI uses %...% for parameters,
+         * so we must escape the dollar sign when doing %self%, or we'll
+         * get an error:
+         * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter "self" must be defined."
          */
-        $containerBuilder->setParameter('self', '% self %');
-        $containerBuilder->setParameter(' self ', '%self%');
 
         // 'contentMesh' persisted fragments
         // Initialization of parameters
@@ -46,26 +39,26 @@ class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
 EOT;
         $meshServiceDataPersistedFragment = <<<EOT
         --meshServices|
-        getAsyncJSON(getSelfProp(%self%, meshServices))@meshServiceData
+        getAsyncJSON(getSelfProp(%%self%%, meshServices))@meshServiceData
 EOT;
         $contentMeshPersistedFragment = <<<EOT
         --meshServiceData|
         echo([
             weatherForecast: extract(
-                getSelfProp(%self%, meshServiceData),
+                getSelfProp(%%self%%, meshServiceData),
                 weather.properties.periods
             ),
             photoGalleryURLs: extract(
-                getSelfProp(%self%, meshServiceData),
+                getSelfProp(%%self%%, meshServiceData),
                 photos.url
             ),
             githubMeta: echo([
                 description: extract(
-                    getSelfProp(%self%, meshServiceData),
+                    getSelfProp(%%self%%, meshServiceData),
                     github.description
                 ),
                 starCount: extract(
-                    getSelfProp(%self%, meshServiceData),
+                    getSelfProp(%%self%%, meshServiceData),
                     github.stargazers_count
                 )
             ])
