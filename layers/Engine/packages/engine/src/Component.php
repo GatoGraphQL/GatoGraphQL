@@ -54,6 +54,7 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
         self::initYAMLServices(dirname(__DIR__));
+        self::initYAMLServices(dirname(__DIR__), '/Overrides');
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         if (!Environment::disableGuzzleOperators()) {
             self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/Guzzle');

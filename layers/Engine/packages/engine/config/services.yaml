@@ -13,9 +13,6 @@ services:
         arguments:
             $cacheItemPool: '@memory_cache_item_pool'
 
-    PoP\ComponentModel\Engine\EngineInterface:
-        class: \PoP\Engine\Engine\Engine
-
     PoP\Engine\ObjectModels\Root:
         class: \PoP\Engine\ObjectModels\Root
 
