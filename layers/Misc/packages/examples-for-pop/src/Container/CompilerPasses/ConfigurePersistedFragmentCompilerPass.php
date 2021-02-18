@@ -35,6 +35,7 @@ EOT;
          * so we must escape the dollar sign when doing %self%, or we'll
          * get an error:
          * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter "self" must be defined."
+         * @see https://symfony.com/doc/2.2/components/dependency_injection/parameters.html#parameters-in-configuration-files
          */
         $meshServiceDataPersistedFragment = <<<EOT
         --meshServices|
