@@ -76,7 +76,7 @@ class AppLoader
         array $componentClasses
     ): array {
         $orderedComponentClasses = [];
-        self::addComponentsOrderedForInitialization(
+        static::addComponentsOrderedForInitialization(
             $componentClasses,
             $orderedComponentClasses
         );
@@ -106,13 +106,13 @@ class AppLoader
             self::$initializedClasses[] = $componentClass;
 
             // Initialize all depended-upon PoP components
-            self::addComponentsOrderedForInitialization(
+            static::addComponentsOrderedForInitialization(
                 $componentClass::getDependedComponentClasses(),
                 $orderedComponentClasses
             );
 
             // Initialize all depended-upon PoP conditional components, if they are installed
-            self::addComponentsOrderedForInitialization(
+            static::addComponentsOrderedForInitialization(
                 array_filter(
                     $componentClass::getDependedConditionalComponentClasses(),
                     'class_exists'
@@ -149,7 +149,7 @@ class AppLoader
         /**
          * Calculate the components in their initialization order
          */
-        $orderedComponentClasses = self::getComponentsOrderedForInitialization(
+        $orderedComponentClasses = static::getComponentsOrderedForInitialization(
             self::$componentClassesToInitialize
         );
 
@@ -227,11 +227,11 @@ class AppLoader
 
         // Register CompilerPasses, Compile and Cache
         // Symfony's DependencyInjection Application Container
-        $compilerPassClasses = self::getApplicationContainerCompilerPasses();
+        $compilerPassClasses = static::getApplicationContainerCompilerPasses();
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
 
         // Finally boot the components
-        self::bootComponents();
+        static::bootComponents();
     }
 
     /**
