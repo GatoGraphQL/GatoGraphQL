@@ -6,32 +6,32 @@ namespace PoP\ComponentModel\DataStructure;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Root\Registries\AbstractServiceDefinitionIDRegistry;
 
-class DataStructureManager extends AbstractServiceDefinitionIDRegistry implements DataStructureManagerInterface
+class DataStructureManager implements DataStructureManagerInterface
 {
     protected bool $initialized = false;
     /**
      * @var array<string, DataStructureFormatterInterface>
      */
     public array $formatters = [];
+    /**
+     * @var DataStructureFormatterInterface[]
+     */
+    public array $dataStructureFormatters = [];
 
     protected function maybeInitialize(): void
     {
         if (!$this->initialized) {
             $this->initialized = true;
-            $instanceManager = InstanceManagerFacade::getInstance();
-            foreach ($this->getServiceDefinitionIDs() as $serviceDefinitionID) {
-                /** @var DataStructureFormatterInterface */
-                $service = $instanceManager->getInstance($serviceDefinitionID);
-                $this->add($service);
+            foreach ($this->dataStructureFormatters as $formatter) {
+                $this->formatters[$formatter::getName()] = $formatter;
             }
         }
     }
 
-    protected function add(DataStructureFormatterInterface $formatter): void
+    public function addDataStructureFormatter(DataStructureFormatterInterface $formatter): void
     {
-        $this->formatters[$formatter::getName()] = $formatter;
+        $this->dataStructureFormatters[] = $formatter;
     }
 
     public function getDataStructureFormatter(string $name = null): DataStructureFormatterInterface
