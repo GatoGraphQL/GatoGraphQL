@@ -227,7 +227,7 @@ class AppLoader
 
         // Register CompilerPasses, Compile and Cache
         // Symfony's DependencyInjection Application Container
-        $compilerPassClasses = static::getApplicationContainerCompilerPasses();
+        $compilerPassClasses = self::getApplicationContainerCompilerPasses();
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
 
         // Finally boot the components
@@ -237,7 +237,7 @@ class AppLoader
     /**
      * @return string[]
      */
-    protected static function getApplicationContainerCompilerPasses(): array
+    final protected static function getApplicationContainerCompilerPasses(): array
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
