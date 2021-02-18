@@ -26,7 +26,7 @@ class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionRouteModuleProcessor exte
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_UserAvatar_Module_MainPageSectionRouteModuleProcessor()
 	);
 }, 200);

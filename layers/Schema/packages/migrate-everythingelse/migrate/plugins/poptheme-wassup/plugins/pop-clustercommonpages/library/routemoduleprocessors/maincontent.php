@@ -26,7 +26,7 @@ class PoP_Application_ClusterCommonPages_Module_MainContentRouteModuleProcessor 
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Application_ClusterCommonPages_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

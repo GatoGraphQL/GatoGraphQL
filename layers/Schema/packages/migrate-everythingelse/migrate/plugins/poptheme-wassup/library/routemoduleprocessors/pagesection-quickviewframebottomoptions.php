@@ -34,7 +34,7 @@ class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor exte
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor()
 	);
 }, 200);

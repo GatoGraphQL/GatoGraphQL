@@ -26,7 +26,7 @@ class PoPTheme_Wassup_AddComments_Module_MainContentRouteModuleProcessor extends
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_AddComments_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

@@ -31,7 +31,7 @@ class PoPTheme_Wassup_ServiceWorkers_Module_ContentPageSectionTopLevelRouteModul
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_ServiceWorkers_Module_ContentPageSectionTopLevelRouteModuleProcessor()
 	);
 }, 200);

@@ -26,7 +26,7 @@ class PoPTheme_Wassup_ContentPostLinksCreation_Module_SideInfoContentPageSection
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoPTheme_Wassup_ContentPostLinksCreation_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);
 }, 200);

@@ -27,7 +27,7 @@ class PoP_EventLinksCreation_Module_MainContentRouteModuleProcessor extends \PoP
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_EventLinksCreation_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);
