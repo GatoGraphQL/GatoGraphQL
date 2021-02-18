@@ -72,7 +72,7 @@ class AppLoader
      * @param string[] $componentClasses List of `Component` class to initialize
      * @return string[]
      */
-    protected static function getComponentsOrderedForInitialization(
+    final protected static function getComponentsOrderedForInitialization(
         array $componentClasses
     ): array {
         $orderedComponentClasses = [];
@@ -90,7 +90,7 @@ class AppLoader
      * @param string[] $componentClasses List of `Component` class to initialize
      * @param string[] $orderedComponentClasses List of `Component` class in order of initialization
      */
-    protected static function addComponentsOrderedForInitialization(
+    final protected static function addComponentsOrderedForInitialization(
         array $componentClasses,
         array &$orderedComponentClasses
     ): void {
@@ -231,13 +231,13 @@ class AppLoader
         ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
 
         // Finally boot the components
-        self::bootComponents();
+        static::bootComponents();
     }
 
     /**
      * @return string[]
      */
-    protected static function getApplicationContainerCompilerPasses(): array
+    final protected static function getApplicationContainerCompilerPasses(): array
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
