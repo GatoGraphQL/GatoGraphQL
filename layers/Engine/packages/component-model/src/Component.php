@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Component\ApplicationEvents;
-use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\RegisterDataStructureFormatterCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\RegisterDirectiveResolverCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\RegisterMandatoryDirectiveServiceTagCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\RegisterTypeResolverCompilerPass;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -62,6 +55,18 @@ class Component extends AbstractComponent
     }
 
     /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        parent::initializeSystemContainerServices($configuration);
+        self::initYAMLSystemContainerServices(dirname(__DIR__));
+    }
+
+    /**
      * Boot component
      *
      * @return void
@@ -106,23 +111,5 @@ class Component extends AbstractComponent
 
         // This value will be used in the response. If compact, make sure each JS Key is unique
         define('POP_RESPONSE_PROP_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
-    }
-
-    /**
-     * Get all the compiler pass classes required to register on the container
-     *
-     * @return string[]
-     */
-    public static function getContainerCompilerPassClasses(): array
-    {
-        return [
-            RegisterDirectiveResolverCompilerPass::class,
-            BeforeBootAttachExtensionCompilerPass::class,
-            AfterBootAttachExtensionCompilerPass::class,
-            RegisterFieldInterfaceResolverCompilerPass::class,
-            RegisterDataStructureFormatterCompilerPass::class,
-            RegisterMandatoryDirectiveServiceTagCompilerPass::class,
-            RegisterTypeResolverCompilerPass::class,
-        ];
     }
 }

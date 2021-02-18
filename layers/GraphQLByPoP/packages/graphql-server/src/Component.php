@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponen
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use GraphQLByPoP\GraphQLServer\Container\CompilerPasses\ConfigureGraphQLPersistedQueryCompilerPass;
 use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
@@ -129,20 +128,22 @@ class Component extends AbstractComponent
         }
     }
 
+    /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        if (self::isEnabled()) {
+            parent::initializeSystemContainerServices($configuration);
+            self::initYAMLSystemContainerServices(dirname(__DIR__));
+        }
+    }
+
     protected static function resolveEnabled()
     {
         return GraphQLRequestComponent::isEnabled();
-    }
-
-    /**
-     * Get all the compiler pass classes required to register on the container
-     *
-     * @return string[]
-     */
-    public static function getContainerCompilerPassClasses(): array
-    {
-        return [
-            ConfigureGraphQLPersistedQueryCompilerPass::class,
-        ];
     }
 }
