@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP;
 
-use PoP\Root\Component\AbstractComponent;
+use Leoloso\ExamplesForPoP\Container\CompilerPasses\ConfigurePersistedFragmentCompilerPass;
+use Leoloso\ExamplesForPoP\Container\CompilerPasses\ConfigurePersistedQueryCompilerPass;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
@@ -47,16 +49,16 @@ class Component extends AbstractComponent
         }
     }
 
-    // /**
-    //  * Boot component
-    //  *
-    //  * @return void
-    //  */
-    // public static function beforeBoot(): void
-    // {
-    //     parent::beforeBoot();
-
-    //     // Initialize services
-    //     ServiceBoot::beforeBoot();
-    // }
+    /**
+     * Get all the compiler pass classes required to register on the container
+     *
+     * @return string[]
+     */
+    public static function getContainerCompilerPassClasses(): array
+    {
+        return [
+            ConfigurePersistedFragmentCompilerPass::class,
+            ConfigurePersistedQueryCompilerPass::class,
+        ];
+    }
 }
