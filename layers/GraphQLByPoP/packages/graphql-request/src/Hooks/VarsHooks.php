@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
-use PoP\API\Schema\QueryInputs;
-use PoP\API\State\ApplicationStateUtils;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
-use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use GraphQLByPoP\GraphQLRequest\Facades\GraphQLPersistedQueryManagerFacade;
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\API\Schema\QueryInputs;
+use PoP\API\State\ApplicationStateUtils;
+use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VarsHooks extends AbstractHookSet
 {
@@ -67,7 +68,10 @@ class VarsHooks extends AbstractHookSet
         // Set always. It will be overriden below
         $vars['standard-graphql'] = false;
 
-        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == GraphQLDataStructureFormatter::getName()) {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLDataStructureFormatter */
+        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $graphQLDataStructureFormatter->getName()) {
             $this->processURLParamVars($vars);
         }
     }

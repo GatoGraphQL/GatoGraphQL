@@ -9,11 +9,9 @@ use PoP\ComponentModel\Feedback\Tokens;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
-    public const NAME = 'graphql';
-
-    public static function getName(): string
+    public function getName(): string
     {
-        return self::NAME;
+        return 'graphql';
     }
 
     public function getFormattedData($data)

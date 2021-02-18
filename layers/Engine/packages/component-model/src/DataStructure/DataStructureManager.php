@@ -22,7 +22,7 @@ class DataStructureManager implements DataStructureManagerInterface
 
     public function addDataStructureFormatter(DataStructureFormatterInterface $formatter): void
     {
-        $this->formatters[$formatter::getName()] = $formatter;
+        $this->formatters[$formatter->getName()] = $formatter;
     }
 
     public function setDefaultDataStructureFormatter(DataStructureFormatterInterface $defaultFormatter): void
