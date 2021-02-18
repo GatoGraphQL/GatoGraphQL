@@ -6,11 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\General\BlockConstants;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 trait WithTypeFieldControlBlockTrait
 {
@@ -24,17 +21,12 @@ trait WithTypeFieldControlBlockTrait
     public function getTypeFieldsForPrint(array $typeFields): array
     {
         $groupFieldsUnderTypeForPrint = ComponentConfiguration::groupFieldsUnderTypeForPrint();
-        $instanceManager = InstanceManagerFacade::getInstance();
         $typeRegistry = TypeRegistryFacade::getInstance();
         $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
-        $typeResolverClasses = $typeRegistry->getTypeResolverClasses();
+        $typeResolvers = $typeRegistry->getTypeResolvers();
         $namespacedTypeNameNames = [];
-        foreach ($typeResolverClasses as $typeResolverClass) {
-            /**
-             * @var TypeResolverInterface
-             */
-            $typeResolver = $instanceManager->getInstance($typeResolverClass);
+        foreach ($typeResolvers as $typeResolver) {
             $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
             $namespacedTypeNameNames[$typeResolverNamespacedName] = $typeResolver->getMaybeNamespacedTypeName();
         }

@@ -7,11 +7,11 @@ namespace PoP\ComponentModel;
 use PoP\ComponentModel\Component\ApplicationEvents;
 use PoP\ComponentModel\Container\CompilerPasses\AfterBootAttachExtensionCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\BeforeBootAttachExtensionCompilerPass;
-use PoP\ComponentModel\Container\CompilerPasses\InjectTypeResolverClassIntoTypeRegistryCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterDataStructureFormatterCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterDirectiveResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterFieldInterfaceResolverCompilerPass;
 use PoP\ComponentModel\Container\CompilerPasses\RegisterMandatoryDirectiveServiceTagCompilerPass;
+use PoP\ComponentModel\Container\CompilerPasses\RegisterTypeResolverCompilerPass;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -116,13 +116,13 @@ class Component extends AbstractComponent
     public static function getContainerCompilerPassClasses(): array
     {
         return [
-            InjectTypeResolverClassIntoTypeRegistryCompilerPass::class,
             RegisterDirectiveResolverCompilerPass::class,
             BeforeBootAttachExtensionCompilerPass::class,
             AfterBootAttachExtensionCompilerPass::class,
             RegisterFieldInterfaceResolverCompilerPass::class,
             RegisterDataStructureFormatterCompilerPass::class,
             RegisterMandatoryDirectiveServiceTagCompilerPass::class,
+            RegisterTypeResolverCompilerPass::class,
         ];
     }
 }
