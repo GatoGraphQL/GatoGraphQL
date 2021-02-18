@@ -7,7 +7,6 @@ namespace PoPSchema\UserRolesACL;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoPSchema\UserRolesAccessControl\Component as UserRolesAccessControlComponent;
-use PoPSchema\UserRolesACL\Container\CompilerPasses\ConfigureAccessControlCompilerPass;
 
 /**
  * Initialize component
@@ -30,37 +29,22 @@ class Component extends AbstractComponent
         ];
     }
 
-    /**
-     * Initialize services
-     *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        if (self::isEnabled()) {
-            parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-            self::initYAMLServices(dirname(__DIR__));
-        }
-    }
-
     protected static function resolveEnabled()
     {
         return UserRolesAccessControlComponent::isEnabled();
     }
 
     /**
-     * Get all the compiler pass classes required to register on the container
+     * Initialize services for the system container
      *
-     * @return string[]
+     * @param array<string, mixed> $configuration
      */
-    public static function getContainerCompilerPassClasses(): array
-    {
-        return [
-            ConfigureAccessControlCompilerPass::class,
-        ];
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        if (self::isEnabled()) {
+            parent::initializeSystemContainerServices($configuration);
+            self::initYAMLSystemContainerServices(dirname(__DIR__));
+        }
     }
 }

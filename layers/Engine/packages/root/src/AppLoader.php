@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
+use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 use PoP\Root\Managers\ComponentManager;
 
 /**
@@ -190,7 +192,10 @@ class AppLoader
                 $componentConfiguration
             );
         }
-        SystemContainerBuilderFactory::maybeCompileAndCacheContainer();
+        $systemCompilerPasses = [
+            new RegisterSystemCompilerPassServiceCompilerPass(),
+        ];
+        SystemContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
 
         /**
          * Register all components in the ComponentManager
@@ -227,27 +232,12 @@ class AppLoader
 
         // Register CompilerPasses, Compile and Cache
         // Symfony's DependencyInjection Application Container
-        $compilerPassClasses = self::getApplicationContainerCompilerPasses();
-        ContainerBuilderFactory::maybeCompileAndCacheContainer($compilerPassClasses);
+        $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
+        $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
+        ContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
         static::bootComponents();
-    }
-
-    /**
-     * @return string[]
-     */
-    final protected static function getApplicationContainerCompilerPasses(): array
-    {
-        // Collect the compiler pass classes from all components
-        $compilerPassClasses = [];
-        foreach (ComponentManager::getComponentClasses() as $componentClass) {
-            $compilerPassClasses = [
-                ...$compilerPassClasses,
-                ...$componentClass::getContainerCompilerPassClasses()
-            ];
-        }
-        return array_values(array_unique($compilerPassClasses));
     }
 
     /**

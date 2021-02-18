@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\TranslateDirective\Translation\TranslationServiceInterface:
         class: \PoPSchema\TranslateDirective\Translation\TranslationService
-        public: true
