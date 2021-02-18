@@ -72,7 +72,10 @@ EOT;
             'addPersistedFragment',
             [
                 'meshServiceData',
-                PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment),
+                // Escape "%self%"
+                PersistedQueryUtils::addSpacingToExpressions(
+                    PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment)
+                ),
                 $translationAPI->__('Retrieve data from the mesh services. This fragment includes calling fragment --meshServices', 'examples-for-pop')
             ]
         );
@@ -81,7 +84,10 @@ EOT;
             'addPersistedFragment',
             [
                 'contentMesh',
-                PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment),
+                // Escape "%self%"
+                PersistedQueryUtils::addSpacingToExpressions(
+                    PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment)
+                ),
                 $translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'. This fragment includes calling fragment --meshServiceData', 'examples-for-pop')
             ]
         );
