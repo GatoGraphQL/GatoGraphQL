@@ -6,9 +6,9 @@ namespace PoP\ModuleRouting\Container\CompilerPasses;
 
 use PoP\ModuleRouting\AbstractRouteModuleProcessor;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass;
+use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterRouteModuleProcessorCompilerPass extends AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass
+class RegisterRouteModuleProcessorCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -17,5 +17,9 @@ class RegisterRouteModuleProcessorCompilerPass extends AbstractInjectServiceDefi
     protected function getServiceClass(): string
     {
         return AbstractRouteModuleProcessor::class;
+    }
+    protected function getRegistryMethodCallName(): string
+    {
+        return 'addRouteModuleProcessor';
     }
 }

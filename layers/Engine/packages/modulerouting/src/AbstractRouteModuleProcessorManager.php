@@ -4,31 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\Root\Registries\AbstractServiceDefinitionIDRegistry;
-
-abstract class AbstractRouteModuleProcessorManager extends AbstractServiceDefinitionIDRegistry implements RouteModuleProcessorManagerInterface
+abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcessorManagerInterface
 {
-    protected bool $initialized = false;
     /**
      * @var array<string, AbstractRouteModuleProcessor[]>
      */
     protected array $processors = [];
 
-    protected function maybeInitialize(): void
-    {
-        if (!$this->initialized) {
-            $this->initialized = true;
-            $instanceManager = InstanceManagerFacade::getInstance();
-            foreach ($this->getServiceDefinitionIDs() as $serviceDefinitionID) {
-                /** @var AbstractRouteModuleProcessor */
-                $service = $instanceManager->getInstance($serviceDefinitionID);
-                $this->add($service);
-            }
-        }
-    }
-
-    protected function add(AbstractRouteModuleProcessor $processor): void
+    public function addRouteModuleProcessor(AbstractRouteModuleProcessor $processor): void
     {
         foreach ($processor->getGroups() as $group) {
             $this->processors[$group] ??= [];
@@ -41,7 +24,6 @@ abstract class AbstractRouteModuleProcessorManager extends AbstractServiceDefini
      */
     public function getProcessors(string $group = null): array
     {
-        $this->maybeInitialize();
         $group ??= $this->getDefaultGroup();
         return $this->processors[$group] ?? array();
     }
