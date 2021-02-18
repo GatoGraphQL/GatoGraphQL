@@ -39,13 +39,9 @@ trait WithTypeFieldControlBlockTrait
             $namespacedTypeNameNames[$typeResolverNamespacedName] = $typeResolver->getMaybeNamespacedTypeName();
         }
         // For each interface, obtain its namespacedInterfaceName
-        $fieldInterfaceResolverClasses = $fieldInterfaceRegistry->getServiceDefinitionIDs();
+        $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
         $namespacedFieldInterfaceNameClasses = [];
-        foreach ($fieldInterfaceResolverClasses as $fieldInterfaceResolverClass) {
-            /**
-             * @var FieldInterfaceResolverInterface
-             */
-            $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
+        foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
             $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
             $namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver->getMaybeNamespacedInterfaceName();
         }

@@ -4,8 +4,24 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\Root\Registries\AbstractServiceDefinitionIDRegistry;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
-class FieldInterfaceRegistry extends AbstractServiceDefinitionIDRegistry implements FieldInterfaceRegistryInterface
+class FieldInterfaceRegistry implements FieldInterfaceRegistryInterface
 {
+    /**
+     * @var FieldInterfaceResolverInterface[]
+     */
+    protected array $fieldInterfaceResolvers = [];
+
+    public function addFieldInterfaceResolver(FieldInterfaceResolverInterface $fieldInterfaceResolver): void
+    {
+        $this->fieldInterfaceResolvers[] = $fieldInterfaceResolver;
+    }
+    /**
+     * @return FieldInterfaceResolverInterface[]
+     */
+    public function getFieldInterfaceResolvers(): array
+    {
+        return $this->fieldInterfaceResolvers;
+    }
 }
