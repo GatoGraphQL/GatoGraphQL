@@ -1,6 +1,3 @@
-parameters:
-    version: '0.1.0'
-
 services:
     _defaults:
         public: true
@@ -40,8 +37,6 @@ services:
 
     PoP\ComponentModel\Info\ApplicationInfoInterface:
         class: \PoP\ComponentModel\Info\ApplicationInfo
-        arguments:
-            $version: '%version%'
 
     PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
         class: '\PoP\ComponentModel\ModuleFiltering\ModuleFilterManager'
