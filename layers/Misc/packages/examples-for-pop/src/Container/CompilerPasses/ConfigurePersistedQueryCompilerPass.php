@@ -35,15 +35,17 @@ EOT;
         $translationAPI = SystemTranslationAPIFacade::getInstance();
         $persistedQueryManagerDefinition = $containerBuilder->getDefinition(PersistedQueryManagerInterface::class);
         $persistedQueryManagerDefinition->addMethodCall(
-            'contentMesh',
+            'add',
             [
+                'contentMesh',
                 PersistedQueryUtils::removeWhitespaces($contentMeshPersistedQuery),
                 $translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'', 'examples-for-pop')
             ]
         );
         $persistedQueryManagerDefinition->addMethodCall(
-            'userProps',
+            'add',
             [
+                'userProps',
                 PersistedQueryUtils::removeWhitespaces($userPropsPersistedQuery),
                 $translationAPI->__('Pre-defined set of user properties', 'examples-for-pop')
             ]
