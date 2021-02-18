@@ -149,7 +149,7 @@ class PoP_CommonUserRolesProcessors_Module_MainContentRouteModuleProcessor exten
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_CommonUserRolesProcessors_Module_MainContentRouteModuleProcessor()
 	);
 }, 200);

@@ -39,7 +39,7 @@ class PoP_Module_QuickviewFrameTopOptionsPageSectionRouteModuleProcessor extends
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
 		new PoP_Module_QuickviewFrameTopOptionsPageSectionRouteModuleProcessor()
 	);
 }, 200);

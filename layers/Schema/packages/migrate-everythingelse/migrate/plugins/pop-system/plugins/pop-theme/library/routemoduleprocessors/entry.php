@@ -26,7 +26,7 @@ class PoPSystem_Theme_Module_EntryRouteModuleProcessor extends \PoP\ModuleRoutin
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
     new PoPSystem_Theme_Module_EntryRouteModuleProcessor()
 	);
 }, 200);

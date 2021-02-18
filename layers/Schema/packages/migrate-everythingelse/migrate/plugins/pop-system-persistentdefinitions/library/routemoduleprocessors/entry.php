@@ -26,7 +26,7 @@ class PoPSystem_PersistentDefinitions_Module_EntryRouteModuleProcessor extends \
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
     new PoPSystem_PersistentDefinitions_Module_EntryRouteModuleProcessor()
 	);
 }, 200);
