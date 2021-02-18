@@ -6,8 +6,5 @@ services:
         public: true
         autowire: true
 
-    PoP\ComponentModel\Engine\EngineInterface:
-        class: \PoP\ConfigurationComponentModel\Engine\Engine
-
     PoP\ConfigurationComponentModel\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
