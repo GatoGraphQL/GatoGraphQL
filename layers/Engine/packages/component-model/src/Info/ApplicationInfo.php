@@ -10,14 +10,12 @@ class ApplicationInfo implements ApplicationInfoInterface
 {
     private string $version;
 
-    public function __construct(string $version)
+    /**
+     * Inject the version from the environment
+     */
+    public function __construct()
     {
-        $this->version = $version;
-
-        // If the version is provided by environment var, then use that one
-        if ($version = Environment::getApplicationVersion()) {
-            $this->version = $version;
-        }
+        $this->version = Environment::getApplicationVersion() ?? '';
     }
 
     public function getVersion(): string

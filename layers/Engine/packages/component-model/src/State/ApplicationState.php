@@ -59,9 +59,10 @@ class ApplicationState
             array_map('strtolower', $_REQUEST[Params::ACTIONS]) : [];
         $scheme = strtolower($_REQUEST[Params::SCHEME] ?? '');
         // The version could possibly be set from outside
+        $appVersion = ApplicationInfoFacade::getInstance()->getVersion();
         $version = Environment::enableVersionByParams() ?
-            $_REQUEST[Params::VERSION] ?? ApplicationInfoFacade::getInstance()->getVersion()
-            : ApplicationInfoFacade::getInstance()->getVersion();
+            ($_REQUEST[Params::VERSION] ?? $appVersion)
+            : $appVersion;
 
         $outputs = (array) HooksAPIFacade::getInstance()->applyFilters(
             'ApplicationState:outputs',
