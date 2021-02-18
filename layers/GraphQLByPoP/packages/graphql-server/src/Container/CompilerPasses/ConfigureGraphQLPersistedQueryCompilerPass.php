@@ -130,7 +130,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass implements CompilerPassInterfac
         $description = $translationAPI->__('GraphQL introspection query', 'examples-for-pop');
         $graphQLPersistedQueryManagerDefinition = $containerBuilder->getDefinition(GraphQLPersistedQueryManagerInterface::class);
         $graphQLPersistedQueryManagerDefinition->addMethodCall(
-            'add',
+            'addPersistedQuery',
             [
                 'introspectionQuery',
                 $introspectionPersistedQuery,
