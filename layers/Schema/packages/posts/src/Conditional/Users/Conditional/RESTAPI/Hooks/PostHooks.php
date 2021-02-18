@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\Conditional\Users\Hooks;
+namespace PoPSchema\Posts\Conditional\Users\Conditional\RESTAPI\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Users\Conditional\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
 
 class PostHooks extends AbstractHookSet
 {
-    const USER_RESTFIELDS = 'posts.id|title|date|url';
+    public const USER_RESTFIELDS = 'posts.id|title|date|url';
 
     protected function init()
     {

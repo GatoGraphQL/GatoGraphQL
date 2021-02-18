@@ -71,7 +71,6 @@ class Component extends AbstractComponent
         }
 
         if (class_exists('\PoPSchema\Users\Component')) {
-            self::initYAMLServices(dirname(__DIR__), '/Conditional/Users');
             if (!in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)) {
                 self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
             }

@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Posts\Conditional\Users\Conditional\RESTAPI\RouteModuleProcessors\:
         resource: '../../../../../src/Conditional/Users/Conditional/RESTAPI/RouteModuleProcessors/*'
+
+    PoPSchema\Posts\Conditional\Users\Conditional\RESTAPI\Hooks\:
+        resource: '../../../../../src/Conditional/Users/Conditional/RESTAPI/Hooks/*'
