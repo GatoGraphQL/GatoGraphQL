@@ -17,13 +17,6 @@ class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $containerBuilder): void
     {
-        /**
-         * Watch out: Symfony DI uses %...% for parameters,
-         * so we must escape the dollar sign when doing %self%, or we'll
-         * get an error:
-         * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter "self" must be defined."
-         */
-
         // 'contentMesh' persisted fragments
         // Initialization of parameters
         $githubRepo = $_REQUEST['githubRepo'] ?? 'leoloso/PoP';
@@ -37,6 +30,12 @@ class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
             photos: "https://picsum.photos/v2/list?page=$photoPage&limit=10"
         ])@meshServices
 EOT;
+        /**
+         * Watch out: Symfony DI uses %...% for parameters,
+         * so we must escape the dollar sign when doing %self%, or we'll
+         * get an error:
+         * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter "self" must be defined."
+         */
         $meshServiceDataPersistedFragment = <<<EOT
         --meshServices|
         getAsyncJSON(getSelfProp(%%self%%, meshServices))@meshServiceData
