@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\DataStructure\DataStructureFormatterInterface;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass;
+use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterDataStructureFormatterCompilerPass extends AbstractInjectServiceDefinitionIDIntoRegistryCompilerPass
+class RegisterDataStructureFormatterCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -17,5 +17,9 @@ class RegisterDataStructureFormatterCompilerPass extends AbstractInjectServiceDe
     protected function getServiceClass(): string
     {
         return DataStructureFormatterInterface::class;
+    }
+    protected function getRegistryMethodCallName(): string
+    {
+        return 'addDataStructureFormatter';
     }
 }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
-use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 
-interface ModuleFilterManagerInterface extends ServiceDefinitionIDRegistryInterface
+interface ModuleFilterManagerInterface
 {
+    public function addModuleFilter(ModuleFilterInterface $moduleFilter): void;
     public function getSelectedModuleFilterName(): ?string;
     public function setSelectedModuleFilterName(string $selectedModuleFilterName);
     public function getNotExcludedModuleSets();

@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
-interface DirectiveRegistryInterface extends ServiceDefinitionIDRegistryInterface
+interface DirectiveRegistryInterface
 {
+    public function addDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
+    /**
+     * @return DirectiveResolverInterface[]
+     */
+    public function getDirectiveResolvers(): array;
 }

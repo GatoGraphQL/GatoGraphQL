@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-use PoP\Root\Registries\ServiceDefinitionIDRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
 
-interface AccessControlRuleBlockRegistryInterface extends ServiceDefinitionIDRegistryInterface
+interface AccessControlRuleBlockRegistryInterface
 {
+    public function addAccessControlRuleBlock(AbstractAccessControlRuleBlock $accessControlRuleBlock): void;
+    /**
+     * @return AbstractAccessControlRuleBlock[]
+     */
+    public function getAccessControlRuleBlocks(): array;
 }
