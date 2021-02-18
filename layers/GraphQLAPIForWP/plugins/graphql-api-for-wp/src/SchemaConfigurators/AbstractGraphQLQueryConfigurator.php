@@ -50,7 +50,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      *
      * @return array<string, array>
      */
-    protected function getNamespacedFieldInterfaceNameResolvers(): array
+    protected function getNamespacedFieldInterfaceNameClasses(): array
     {
         if (is_null($this->namespacedFieldInterfaceNameClasses)) {
             $this->initNamespacedFieldInterfaceNameClasses();
@@ -152,7 +152,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
             ];
         }
         // If it is an interface, add all the types implementing that interface!
-        $namespacedFieldInterfaceNameClasses = $this->getNamespacedFieldInterfaceNameResolvers();
+        $namespacedFieldInterfaceNameClasses = $this->getNamespacedFieldInterfaceNameClasses();
         if ($fieldInterfaceResolverClass = $namespacedFieldInterfaceNameClasses[$maybeNamespacedFieldInterfaceName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
             return [
