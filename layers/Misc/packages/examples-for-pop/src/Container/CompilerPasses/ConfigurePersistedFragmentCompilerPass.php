@@ -17,6 +17,20 @@ class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $containerBuilder): void
     {
+        /**
+         * Watch out: this is a hack to avoid this error:
+         * "PHP Fatal error:  Uncaught Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException: The parameter " self " must be defined."
+         * This happens becase Symfony DI uses %...% for parameters,
+         * so in the persisted query below, it believes that %self% is parameter "self",
+         * when that is not the case (in PoP, %...% is an expression!)
+         * To fix it, define parameters in the container:
+         * - %self% => % self % because PoP can handle both cases
+         * - % self % => %self% because the cached container.php will hold "% self %", so this must be dealt with
+         * We can't do "%self% => %self%" because it throws a Circular Reference error
+         */
+        $containerBuilder->setParameter('self', '% self %');
+        $containerBuilder->setParameter(' self ', '%self%');
+
         // 'contentMesh' persisted fragments
         // Initialization of parameters
         $githubRepo = $_REQUEST['githubRepo'] ?? 'leoloso/PoP';
@@ -72,10 +86,7 @@ EOT;
             'addPersistedFragment',
             [
                 'meshServiceData',
-                // Escape "%self%"
-                PersistedQueryUtils::addSpacingToExpressions(
-                    PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment)
-                ),
+                PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment),
                 $translationAPI->__('Retrieve data from the mesh services. This fragment includes calling fragment --meshServices', 'examples-for-pop')
             ]
         );
@@ -84,10 +95,7 @@ EOT;
             'addPersistedFragment',
             [
                 'contentMesh',
-                // Escape "%self%"
-                PersistedQueryUtils::addSpacingToExpressions(
-                    PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment)
-                ),
+                PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment),
                 $translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'. This fragment includes calling fragment --meshServiceData', 'examples-for-pop')
             ]
         );
