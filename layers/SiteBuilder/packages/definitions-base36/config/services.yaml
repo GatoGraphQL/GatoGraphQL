@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     base36_definition_resolver:
         class: \PoP\Base36Definitions\DefinitionResolver
-        public: true

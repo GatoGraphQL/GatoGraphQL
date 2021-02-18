@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\APIMirrorQuery\DataStructureFormatters\:
         resource: '../src/DataStructureFormatters/*'
-        public: true

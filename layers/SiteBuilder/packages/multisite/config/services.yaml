@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     site_object:
         class: \PoP\Multisite\ObjectModels\Site
-        public: true

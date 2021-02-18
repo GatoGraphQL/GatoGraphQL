@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     GraphQLByPoP\GraphQLClientsForWP\Clients\:
         resource: '../src/Clients/*'
-        public: true

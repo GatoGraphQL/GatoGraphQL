@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\ConfigurableSchemaFeedback\TypeResolverDecorators\:
         resource: '../src/TypeResolverDecorators/*'
-        public: true

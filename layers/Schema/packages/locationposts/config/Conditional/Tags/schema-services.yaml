@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\LocationPosts\Conditional\Tags\FieldResolvers\:
         resource: '../../../src/Conditional/Tags/FieldResolvers/*'
-        public: true

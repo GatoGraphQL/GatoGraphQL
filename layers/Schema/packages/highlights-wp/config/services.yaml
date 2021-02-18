@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoPSchema\Highlights\TypeAPIs\HighlightTypeAPIInterface:
         class: \PoPSchema\HighlightsWP\TypeAPIs\HighlightTypeAPI
-        public: true

@@ -1,8 +1,10 @@
 services:
+    _defaults:
+        public: true
+        autowire: true
+
     PoP\API\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
-        public: true
 
     PoP\API\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-        public: true
