@@ -61,7 +61,7 @@ EOT;
         $translationAPI = SystemTranslationAPIFacade::getInstance();
         $persistedFragmentManagerDefinition = $containerBuilder->getDefinition(PersistedFragmentManagerInterface::class);
         $persistedFragmentManagerDefinition->addMethodCall(
-            'add',
+            'addPersistedFragment',
             [
                 'meshServices',
                 PersistedQueryUtils::removeWhitespaces($meshServicesPersistedFragment),
@@ -69,7 +69,7 @@ EOT;
             ]
         );
         $persistedFragmentManagerDefinition->addMethodCall(
-            'add',
+            'addPersistedFragment',
             [
                 'meshServiceData',
                 PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment),
@@ -78,7 +78,7 @@ EOT;
         );
 
         $persistedFragmentManagerDefinition->addMethodCall(
-            'add',
+            'addPersistedFragment',
             [
                 'contentMesh',
                 PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment),

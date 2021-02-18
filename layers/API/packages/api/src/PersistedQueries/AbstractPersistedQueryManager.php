@@ -54,7 +54,7 @@ abstract class AbstractPersistedQueryManager implements PersistedQueryManagerInt
         return substr($query, strlen(QuerySymbols::PERSISTED_QUERY));
     }
 
-    public function add(string $queryName, string $queryResolution, ?string $description = null): void
+    public function addPersistedQuery(string $queryName, string $queryResolution, ?string $description = null): void
     {
         $this->persistedQueries[$queryName] = $queryResolution;
 

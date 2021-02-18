@@ -35,7 +35,7 @@ EOT;
         $translationAPI = SystemTranslationAPIFacade::getInstance();
         $persistedQueryManagerDefinition = $containerBuilder->getDefinition(PersistedQueryManagerInterface::class);
         $persistedQueryManagerDefinition->addMethodCall(
-            'add',
+            'addPersistedQuery',
             [
                 'contentMesh',
                 PersistedQueryUtils::removeWhitespaces($contentMeshPersistedQuery),
@@ -43,7 +43,7 @@ EOT;
             ]
         );
         $persistedQueryManagerDefinition->addMethodCall(
-            'add',
+            'addPersistedQuery',
             [
                 'userProps',
                 PersistedQueryUtils::removeWhitespaces($userPropsPersistedQuery),

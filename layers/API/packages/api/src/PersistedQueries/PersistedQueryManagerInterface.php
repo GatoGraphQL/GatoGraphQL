@@ -17,6 +17,6 @@ interface PersistedQueryManagerInterface
      * Remove "!" to get the persisted query name
      */
     public function getPersistedQueryName(string $query): string;
-    public function add(string $queryName, string $queryResolution, ?string $description = null): void;
+    public function addPersistedQuery(string $queryName, string $queryResolution, ?string $description = null): void;
     public function getPersistedQueriesForSchema(): array;
 }
