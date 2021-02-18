@@ -9,9 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution
@@ -27,7 +25,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * Keep a map of all namespaced field interface names to their resolver classes
      * @var array<string, array>|null
      */
-    protected ?array $namespacedFieldInterfaceNameResolvers = null;
+    protected ?array $namespacedFieldInterfaceNameClasses = null;
     /**
      * Keep a map of all directives names to their resolver classes
      * @var array<string, array>|null
@@ -54,10 +52,10 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function getNamespacedFieldInterfaceNameResolvers(): array
     {
-        if (is_null($this->namespacedFieldInterfaceNameResolvers)) {
+        if (is_null($this->namespacedFieldInterfaceNameClasses)) {
             $this->initNamespacedFieldInterfaceNameClasses();
         }
-        return (array)$this->namespacedFieldInterfaceNameResolvers;
+        return (array)$this->namespacedFieldInterfaceNameClasses;
     }
 
     /**
@@ -88,10 +86,10 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $fieldInterfaceRegistry = FieldInterfaceRegistryFacade::getInstance();
         // For each interface, obtain its namespacedInterfaceName
         $fieldInterfaceResolvers = $fieldInterfaceRegistry->getFieldInterfaceResolvers();
-        $this->namespacedFieldInterfaceNameResolvers = [];
+        $this->namespacedFieldInterfaceNameClasses = [];
         foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
             $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
-            $this->namespacedFieldInterfaceNameResolvers[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver;
+            $this->namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = get_class($fieldInterfaceResolver);
         }
     }
 
@@ -112,20 +110,15 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $directiveRegistry = DirectiveRegistryFacade::getInstance();
-        $directiveResolverClasses = $directiveRegistry->getServiceDefinitionIDs();
+        $directiveResolvers = $directiveRegistry->getDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
         $this->directiveNameClasses = [];
-        foreach ($directiveResolverClasses as $directiveResolverClass) {
-            /**
-             * @var DirectiveResolverInterface
-             */
-            $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
+        foreach ($directiveResolvers as $directiveResolver) {
             $directiveResolverName = $directiveResolver->getDirectiveName();
-            $this->directiveNameClasses[$directiveResolverName][] = $directiveResolverClass;
+            $this->directiveNameClasses[$directiveResolverName][] = get_class($directiveResolver);
         }
     }
 
@@ -159,11 +152,11 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
             ];
         }
         // If it is an interface, add all the types implementing that interface!
-        $namespacedFieldInterfaceNameResolvers = $this->getNamespacedFieldInterfaceNameResolvers();
-        if ($fieldInterfaceResolver = $namespacedFieldInterfaceNameResolvers[$maybeNamespacedFieldInterfaceName] ?? null) {
+        $namespacedFieldInterfaceNameClasses = $this->getNamespacedFieldInterfaceNameResolvers();
+        if ($fieldInterfaceResolverClass = $namespacedFieldInterfaceNameClasses[$maybeNamespacedFieldInterfaceName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
             return [
-                [get_class($fieldInterfaceResolver), $field, $value],
+                [$fieldInterfaceResolverClass, $field, $value],
             ];
         }
 
