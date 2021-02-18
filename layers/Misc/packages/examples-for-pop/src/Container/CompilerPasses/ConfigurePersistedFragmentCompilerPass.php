@@ -61,23 +61,26 @@ EOT;
         $translationAPI = SystemTranslationAPIFacade::getInstance();
         $persistedFragmentManagerDefinition = $containerBuilder->getDefinition(PersistedFragmentManagerInterface::class);
         $persistedFragmentManagerDefinition->addMethodCall(
-            'meshServices',
+            'addPersistedFragment',
             [
+                'meshServices',
                 PersistedQueryUtils::removeWhitespaces($meshServicesPersistedFragment),
                 $translationAPI->__('Services required to create a \'content mesh\' for the application: GitHub data for a specific repository, weather data from the National Weather Service for a specific zone, and random photo data from Unsplash', 'examples-for-pop')
             ]
         );
         $persistedFragmentManagerDefinition->addMethodCall(
-            'meshServiceData',
+            'addPersistedFragment',
             [
+                'meshServiceData',
                 PersistedQueryUtils::removeWhitespaces($meshServiceDataPersistedFragment),
                 $translationAPI->__('Retrieve data from the mesh services. This fragment includes calling fragment --meshServices', 'examples-for-pop')
             ]
         );
 
         $persistedFragmentManagerDefinition->addMethodCall(
-            'contentMesh',
+            'addPersistedFragment',
             [
+                'contentMesh',
                 PersistedQueryUtils::removeWhitespaces($contentMeshPersistedFragment),
                 $translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'. This fragment includes calling fragment --meshServiceData', 'examples-for-pop')
             ]
