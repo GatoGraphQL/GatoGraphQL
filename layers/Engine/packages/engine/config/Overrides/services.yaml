@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\ComponentModel\Engine\EngineInterface:
+        class: \PoP\Engine\Engine\Engine
+
