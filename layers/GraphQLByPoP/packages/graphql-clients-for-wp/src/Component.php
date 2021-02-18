@@ -15,8 +15,6 @@ class Component extends AbstractComponent
 {
     use CanDisableComponentTrait;
 
-    // const VERSION = '0.1.0';
-
     /**
      * Classes from PoP components that must be initialized before this component
      *
