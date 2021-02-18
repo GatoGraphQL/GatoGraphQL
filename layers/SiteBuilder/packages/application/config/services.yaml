@@ -12,6 +12,3 @@ services:
 
     PoP\Application\LooseContracts\:
         resource: '../src/LooseContracts/*'
-
-    PoP\ComponentModel\Engine\EngineInterface:
-        class: \PoP\Application\Engine\Engine
