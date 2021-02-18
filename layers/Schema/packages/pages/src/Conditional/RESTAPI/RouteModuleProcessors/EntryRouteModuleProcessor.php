@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\Conditional\RESTAPI\RouteModuleProcessors;
 
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\API\Facades\FieldQueryConvertorFacade;
+use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\API\Facades\FieldQueryConvertorFacade;
+use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\Pages\Routing\RouteNatures;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
-use PoP\API\Response\Schemes as APISchemes;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     private static $restFieldsQuery;
     private static $restFields;
@@ -52,7 +51,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             'module' => [\PoP_Pages_Module_Processor_FieldDataloads::class, \PoP_Pages_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_PAGE, ['fields' => isset($vars['query']) ? $vars['query'] : self::getRESTFields()]],
             'conditions' => [
                 'scheme' => APISchemes::API,
-                'datastructure' => RESTDataStructureFormatter::getName(),
+                'datastructure' => $this->restDataStructureFormatter->getName(),
             ],
         ];
 

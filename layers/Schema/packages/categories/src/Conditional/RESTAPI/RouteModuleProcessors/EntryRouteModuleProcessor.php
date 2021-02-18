@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\Conditional\RESTAPI\RouteModuleProcessors;
 
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\API\Facades\FieldQueryConvertorFacade;
+use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\API\Facades\FieldQueryConvertorFacade;
+use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
-use PoP\API\Response\Schemes as APISchemes;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     public const HOOK_REST_FIELDS = __CLASS__ . ':RESTFields';
 
@@ -62,7 +61,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
-                'datastructure' => RESTDataStructureFormatter::getName(),
+                'datastructure' => $this->restDataStructureFormatter->getName(),
             ],
         ];
 
@@ -92,7 +91,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => RESTDataStructureFormatter::getName(),
+                    'datastructure' => $this->restDataStructureFormatter->getName(),
                 ],
             ];
         }
@@ -113,7 +112,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         //         'module' => $module,
         //         'conditions' => [
         //             'scheme' => APISchemes::API,
-        //             'datastructure' => RESTDataStructureFormatter::getName(),
+        //             'datastructure' => $this->restDataStructureFormatter->getName(),
         //         ],
         //     ];
         // }

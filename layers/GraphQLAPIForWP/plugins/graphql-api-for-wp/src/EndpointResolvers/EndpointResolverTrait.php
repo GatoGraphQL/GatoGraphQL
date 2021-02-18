@@ -89,11 +89,15 @@ trait EndpointResolverTrait
          */
         unset($_REQUEST[QueryInputs::QUERY]);
 
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLDataStructureFormatter */
+        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+
         // Indicate it is an API, of type GraphQL. Just by doing is, class
         // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks will process the GraphQL request
         [&$vars] = $vars_in_array;
         $vars['scheme'] = APISchemes::API;
-        $vars['datastructure'] = GraphQLDataStructureFormatter::getName();
+        $vars['datastructure'] = $graphQLDataStructureFormatter->getName();
 
         /**
          * Get the query and variables from the implementing class

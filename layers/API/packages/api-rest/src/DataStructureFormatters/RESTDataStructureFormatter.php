@@ -9,11 +9,9 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
-    public const NAME = 'rest';
-
-    public static function getName(): string
+    public function getName(): string
     {
-        return self::NAME;
+        return 'rest';
     }
 
     protected function getFields()

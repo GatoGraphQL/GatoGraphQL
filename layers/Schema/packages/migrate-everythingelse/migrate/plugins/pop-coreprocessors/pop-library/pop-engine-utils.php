@@ -1,8 +1,9 @@
 <?php
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
 
 class PoPCore_ModuleManager_Utils
 {
@@ -11,6 +12,9 @@ class PoPCore_ModuleManager_Utils
 
         // Retrieve the dataload-source that will produce the data. Add the params to the URL
         $vars = ApplicationState::getVars();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DBItemListDataStructureFormatter */
+        $dbItemListDataStructureFormatter = $instanceManager->getInstance(DBItemListDataStructureFormatter::class);
         $args = [
             \PoP\ComponentModel\Constants\Params::VERSION => $vars['version'],
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
@@ -19,7 +23,7 @@ class PoPCore_ModuleManager_Utils
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ],
             \PoP\ComponentModel\Constants\Params::TARGET => \PoP\ComponentModel\Constants\Targets::MAIN,
-            \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => DBItemListDataStructureFormatter::getName(),
+            \PoP\ComponentModel\Constants\Params::DATASTRUCTURE => $dbItemListDataStructureFormatter->getName(),
         ];
         if ($format) {
             $args[\PoP\ComponentModel\Constants\Params::FORMAT] = $format;

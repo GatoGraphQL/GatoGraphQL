@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\Conditional\RESTAPI\RouteModuleProcessors;
 
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\API\Facades\FieldQueryConvertorFacade;
+use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\API\Facades\FieldQueryConvertorFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
-use PoP\API\Response\Schemes as APISchemes;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     public const HOOK_REST_FIELDS = __CLASS__ . ':RESTFields';
 
@@ -64,7 +63,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
-                'datastructure' => RESTDataStructureFormatter::getName(),
+                'datastructure' => $this->restDataStructureFormatter->getName(),
                 'routing-state' => [
                     'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
                 ],
@@ -98,7 +97,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => RESTDataStructureFormatter::getName(),
+                    'datastructure' => $this->restDataStructureFormatter->getName(),
                 ],
             ];
         }
@@ -118,7 +117,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => RESTDataStructureFormatter::getName(),
+                    'datastructure' => $this->restDataStructureFormatter->getName(),
                     'routing-state' => [
                         'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
                     ],

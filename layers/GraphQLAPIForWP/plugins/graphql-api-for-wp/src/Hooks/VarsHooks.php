@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoP\Hooks\AbstractHookSet;
 
 class VarsHooks extends AbstractHookSet
 {
@@ -43,8 +44,11 @@ class VarsHooks extends AbstractHookSet
             // By setting explicit allowed datastructures, we avoid the empty one
             // being processed /?scheme=api <= native API
             // If ever need to support REST or another format, add a hook here
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var GraphQLDataStructureFormatter */
+            $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
             $allowedDataStructures = [
-                GraphQLDataStructureFormatter::getName(),
+                $graphQLDataStructureFormatter->getName(),
             ];
             if (
                 // If single endpoint not enabled

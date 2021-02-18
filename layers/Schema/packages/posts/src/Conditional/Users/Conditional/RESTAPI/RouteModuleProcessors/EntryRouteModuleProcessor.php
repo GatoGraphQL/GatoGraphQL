@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\Conditional\Users\Conditional\RESTAPI\RouteModuleProcessors;
 
-use PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\Hooks\CustomPostHooks;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\API\Facades\FieldQueryConvertorFacade;
+use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\API\Facades\FieldQueryConvertorFacade;
-use PoPSchema\Users\Routing\RouteNatures;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
+use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\CustomPosts\Conditional\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers;
-use PoP\API\Response\Schemes as APISchemes;
+use PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\Hooks\CustomPostHooks;
+use PoPSchema\Users\Routing\RouteNatures;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     private static $restFieldsQuery;
     private static $restFields;
@@ -70,7 +69,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => RESTDataStructureFormatter::getName(),
+                    'datastructure' => $this->restDataStructureFormatter->getName(),
                 ],
             ];
         }

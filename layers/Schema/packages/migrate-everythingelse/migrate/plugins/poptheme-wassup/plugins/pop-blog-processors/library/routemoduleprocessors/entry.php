@@ -1,14 +1,14 @@
 <?php
 
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\API\Response\Schemes as APISchemes;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
-class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
+class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     // /**
     //  * @return array<string, array<array>>
@@ -65,7 +65,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                     'module' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
-                        'datastructure' => RESTDataStructureFormatter::getName(),
+                        'datastructure' => $this->restDataStructureFormatter->getName(),
                     ],
                 ];
             }

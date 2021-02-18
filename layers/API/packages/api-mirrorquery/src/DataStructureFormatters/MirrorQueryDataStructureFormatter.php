@@ -12,11 +12,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
-    public const NAME = 'mirrorquery';
-
-    public static function getName(): string
+    public function getName(): string
     {
-        return self::NAME;
+        return 'mirrorquery';
     }
 
     protected function getFields()
