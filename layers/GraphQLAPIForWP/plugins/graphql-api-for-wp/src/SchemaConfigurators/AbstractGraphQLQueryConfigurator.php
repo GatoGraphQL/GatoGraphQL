@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\General\BlockConstants;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
 
@@ -63,18 +61,13 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initNamespacedTypeNameClasses(): void
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $typeRegistry = TypeRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
-        $typeResolverClasses = $typeRegistry->getTypeResolverClasses();
+        $typeResolvers = $typeRegistry->getTypeResolvers();
         $this->namespacedTypeNameClasses = [];
-        foreach ($typeResolverClasses as $typeResolverClass) {
-            /**
-             * @var TypeResolverInterface
-             */
-            $typeResolver = $instanceManager->getInstance($typeResolverClass);
+        foreach ($typeResolvers as $typeResolver) {
             $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
-            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = $typeResolverClass;
+            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = get_class($typeResolver);
         }
     }
 
