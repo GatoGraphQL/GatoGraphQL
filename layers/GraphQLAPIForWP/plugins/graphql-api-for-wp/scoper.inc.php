@@ -62,6 +62,7 @@ return [
             ])
             ->in('vendor'),
         Finder::create()->append([
+            'src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php',
             'vendor/getpop/routing-wp/src/Component.php',
             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
         ])
