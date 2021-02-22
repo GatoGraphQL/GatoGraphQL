@@ -10,6 +10,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Composable directives
 
+## 0.7.11 - 2021-02-22
+
+### Enhancement
+
+- Improved initialization speed (#412)
+
+### Fixed
+
+- Markdown pages not working (#433)
+
 ## 0.7.10 - 2021-02-01
 
 ### Fixed
