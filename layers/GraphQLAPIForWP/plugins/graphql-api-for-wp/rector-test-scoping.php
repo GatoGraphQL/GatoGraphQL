@@ -52,6 +52,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/nikic/fast-route/test/*',
         __DIR__ . '/vendor/psr/log/Psr/Log/Test/*',
         __DIR__ . '/vendor/symfony/service-contracts/Test/*',
+        __DIR__ . '/vendor/michelf/php-markdown/test/*',
         // Ignore errors from classes we don't have in our environment,
         // or that come from referencing a class present in DEV, not PROD
         __DIR__ . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',

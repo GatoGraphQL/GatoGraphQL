@@ -59,6 +59,7 @@ return [
                 '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
                 '#symfony/service-contracts/Test/#',
+                '#michelf/php-markdown/test/#',
             ])
             ->in('vendor'),
         Finder::create()->append([
