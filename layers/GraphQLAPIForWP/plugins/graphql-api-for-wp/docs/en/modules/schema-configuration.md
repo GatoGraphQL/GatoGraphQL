@@ -43,12 +43,32 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 These are the inputs in the body of the editor:
 
-| Input | Description | 
-| --- | --- |
-| **Access Control Lists** | (If module `Access Control` is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query |
-| **Cache Control Lists** | (If module `Cache Control` is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query |
-| **Field Deprecation Lists** | (If module `Field Deprecation` is enabled) Manage deprecation of fields in the schema, by selecting the Field Deprecation Lists that must be applied to the custom endpoint or persisted query |
-| **Options** | Customize the behavior of the schema configuration:<br/><br/>**Public/Private Schema:** (If module `Public/Private Schema` is enabled)<br/>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul><li>`"Public"`: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li>`"Private"`: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Namespace Types and Interfaces?:** (If module `Schema Namespacing` is enabled)<br/>Define if to have all types and interfaces in the schema automatically namespaced. If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Mutation Scheme:** (If module `Nested Mutations` is enabled)<br/>Define if to enable mutations, and if the redundant fields from the root must be removed. If `"Default"` is selected, the value selected in the Settings is used. |
+<table markdown="1">
+<thead>
+<tr>
+    <th>Input</th>
+    <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>**Access Control Lists**</td>
+    <td>(If module `Access Control` is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query</td>
+</tr>
+<tr>
+    <td>**Cache Control Lists**</td>
+    <td>(If module `Cache Control` is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
+</tr>
+<tr>
+    <td>**Field Deprecation Lists**</td>
+    <td>(If module `Field Deprecation` is enabled) Manage deprecation of fields in the schema, by selecting the Field Deprecation Lists that must be applied to the custom endpoint or persisted query</td>
+</tr>
+<tr>
+    <td>**Options**</td>
+    <td>Customize the behavior of the schema configuration:<br/><br/>**Public/Private Schema:** (If module `Public/Private Schema` is enabled)<br/>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul markdown="1"><li>`"Public"`: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li>`"Private"`: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Namespace Types and Interfaces?:** (If module `Schema Namespacing` is enabled)<br/>Define if to have all types and interfaces in the schema automatically namespaced. If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Mutation Scheme:** (If module `Nested Mutations` is enabled)<br/>Define if to enable mutations, and if the redundant fields from the root must be removed. If `"Default"` is selected, the value selected in the Settings is used.</td>
+</tr>
+</tbody>
+</table>
 
 These are the inputs in the Document settings:
 

@@ -25,7 +25,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::AUTOLOAD_PATHS, [
         __DIR__ . '/vendor/scoper-autoload.php',
-        __DIR__ . '/vendor/erusev/parsedown/Parsedown.php',
         __DIR__ . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
         __DIR__ . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
