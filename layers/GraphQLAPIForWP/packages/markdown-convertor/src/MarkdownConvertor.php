@@ -6,6 +6,11 @@ namespace GraphQLAPI\MarkdownConvertor;
 
 use Michelf\MarkdownExtra;
 
+/**
+ * Markdown formatter provided by `michelf/php-markdown`
+ *
+ * @see https://michelf.ca/projects/php-markdown/extra/
+ */
 class MarkdownConvertor implements MarkdownConvertorInterface
 {
     /**
