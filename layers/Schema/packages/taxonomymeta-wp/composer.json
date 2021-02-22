@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/taxonomymeta": "^0.7.11",
-        "pop-schema/taxonomies-wp": "^0.7.11",
-        "pop-schema/migrate-taxonomymeta-wp": "^0.7.11"
+        "pop-schema/taxonomymeta": "^0.8",
+        "pop-schema/taxonomies-wp": "^0.8",
+        "pop-schema/migrate-taxonomymeta-wp": "^0.8"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/taxonomyquery": "^0.7.11",
-        "pop-schema/metaquery-wp": "^0.7.11",
-        "pop-schema/taxonomymeta-wp": "^0.7.11",
-        "pop-schema/migrate-taxonomyquery-wp": "^0.7.11"
+        "pop-schema/taxonomyquery": "^0.8",
+        "pop-schema/metaquery-wp": "^0.8",
+        "pop-schema/taxonomymeta-wp": "^0.8",
+        "pop-schema/migrate-taxonomyquery-wp": "^0.8"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
