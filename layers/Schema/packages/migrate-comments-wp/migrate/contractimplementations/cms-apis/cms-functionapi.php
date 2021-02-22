@@ -81,7 +81,7 @@ class FunctionAPI extends \PoPSchema\Comments\FunctionAPI_Base
         }
         // For the comments, if there's no limit then it brings all results
         if (isset($query['limit'])) {
-            $query['number'] = $query['limit'];
+            $query['number'] = (int) $query['limit'];
             unset($query['limit']);
         }
         if (isset($query['search'])) {
