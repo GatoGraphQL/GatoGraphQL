@@ -25,7 +25,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::AUTOLOAD_PATHS, [
         __DIR__ . '/vendor/scoper-autoload.php',
-        __DIR__ . '/vendor/erusev/parsedown/Parsedown.php',
         __DIR__ . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
         __DIR__ . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
@@ -38,6 +37,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // files to skip
     $parameters->set(Option::SKIP, [
         '*/tests/*',
+
+        // The GraphQL API plugin does not require the REST package
+        // So ignore all code depending on it, or it throws error:
+        //   "Could not process
+        //   "vendor/pop-schema/pages/src/Conditional/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
+        //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
+        '*/Conditional/RESTAPI/*',
+
         // Exclude migrate libraries
         __DIR__ . '/vendor/getpop/migrate-*',
         __DIR__ . '/vendor/pop-schema/migrate-*',
@@ -45,6 +52,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/nikic/fast-route/test/*',
         __DIR__ . '/vendor/psr/log/Psr/Log/Test/*',
         __DIR__ . '/vendor/symfony/service-contracts/Test/*',
+        __DIR__ . '/vendor/michelf/php-markdown/test/*',
         // Ignore errors from classes we don't have in our environment,
         // or that come from referencing a class present in DEV, not PROD
         __DIR__ . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',

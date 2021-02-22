@@ -59,9 +59,11 @@ return [
                 '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
                 '#symfony/service-contracts/Test/#',
+                '#michelf/php-markdown/test/#',
             ])
             ->in('vendor'),
         Finder::create()->append([
+            'src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php',
             'vendor/getpop/routing-wp/src/Component.php',
             'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
         ])
@@ -178,18 +180,6 @@ return [
                 return str_replace(
                     "\\${prefix}\\parent",
                     'parent',
-                    $content
-                );
-            }
-
-            /**
-             * It changes the path to Parsedown source files in its composer.json
-             * Undo it!
-             */
-            if ($filePath == convertRelativeToFullPath('erusev/parsedown/composer.json')) {
-                return str_replace(
-                    ['"\\/Parsedown\\/"', '"psr-4"'],
-                    ['""', '"psr-0"'],
                     $content
                 );
             }

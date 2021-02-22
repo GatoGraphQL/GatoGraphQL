@@ -19,4 +19,4 @@ The response's `max-age` value is calculated as the lowest value from all the fi
 
 ## Resources
 
-Video showing how the response's `Cache-Control` header contains different `max-age` values depending on the Cache Control configuration for the fields in the query: https://vimeo.com/413503188.
+Video showing how the response's `Cache-Control` header contains different `max-age` values depending on the Cache Control configuration for the fields in the query: <https://vimeo.com/413503188>.

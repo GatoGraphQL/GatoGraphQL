@@ -71,12 +71,32 @@ By default, the persisted query's endpoint has path `/graphql-query/`, and this 
 
 These are the inputs in the body of the editor:
 
-| Input | Description | 
-| --- | --- |
-| **Title** | Persisted query's title |
-| **GraphiQL client** | Editor to write and execute the GraphQL query:<ul><li>Write the query on the textarea</li><li>Declare variables inside the query, and declare their values on the variables input at the bottom</li><li>Click on the "Run" button to execute the query</li><li>Obtain the results on the input on the right side</li><li>Click on "Docs" to inspect the schema information</li></ul>The Explorer (shown only if module `GraphiQL Explorer` is enabled) allows to click on the fields, and these are automatically added to the query |
-| **Schema configuration** | From the dropdown, select the schema configuration that applies to the persisted query, or one of these options:<ul><li>`"Default"`: the schema configuration is the one selected on the plugin's Settings</li><li>`"None"`: the persisted query will be unconstrained</li><li>`"Inherit from parent"`: Use the same schema configuration as the parent persisted query.<br/>This option is available when module `API Hierarchy` is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul> |
-| **Options** | Customize the behavior of the persisted query: <ul><li>**Enabled?:** If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li>**Accept variables as URL params?:** Allow URL params to override the values for variables defined in the GraphiQL client</li><li>**Inherit query from ancestor(s)?:** Use the same query as the parent persisted query.<br/>This option is available when module `API Hierarchy` is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul> |
+<table markdown="1">
+<thead>
+<tr>
+    <th>Input</th>
+    <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>**Title**</td>
+  <td>Persisted query's title</td>
+</tr>
+<tr>
+  <td>**GraphiQL client**</td>
+  <td>Editor to write and execute the GraphQL query: <ul markdown="1"><li>Write the query on the textarea</li><li>Declare variables inside the query, and declare their values on the variables input at the bottom</li><li>Click on the "Run" button to execute the query</li><li>Obtain the results on the input on the right side</li><li>Click on "Docs" to inspect the schema information</li></ul>The Explorer (shown only if module `GraphiQL Explorer` is enabled) allows to click on the fields, and these are automatically added to the query</td>
+</tr>
+<tr>
+  <td>**Schema configuration**</td>
+  <td>From the dropdown, select the schema configuration that applies to the persisted query, or one of these options: <ul markdown="1"><li>`"Default"`: the schema configuration is the one selected on the plugin's Settings</li><li>`"None"`: the persisted query will be unconstrained</li><li>`"Inherit from parent"`: Use the same schema configuration as the parent persisted query.<br/>This option is available when module `API Hierarchy` is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul></td>
+</tr>
+<tr>
+  <td>**Options**</td>
+  <td>Customize the behavior of the persisted query: <ul markdown="1"><li>**Enabled?:** If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li>**Accept variables as URL params?:** Allow URL params to override the values for variables defined in the GraphiQL client</li><li>**Inherit query from ancestor(s)?:** Use the same query as the parent persisted query.<br/>This option is available when module `API Hierarchy` is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul></td>
+</tr>
+</tbody>
+</table>
 
 These are the inputs in the Document settings:
 
@@ -95,4 +115,4 @@ These are the inputs in the Document settings:
 
 ## Resources
 
-Video showing how to create a persisted query: https://vimeo.com/443790273
+Video showing how to create a persisted query: <https://vimeo.com/443790273>.

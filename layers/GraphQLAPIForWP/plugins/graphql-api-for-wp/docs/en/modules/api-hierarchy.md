@@ -57,4 +57,4 @@ Alternatively, we can declare the configuration at the parent level, and then al
 
 ## Resources
 
-Video showing how to create an API hierarchy, and override the variables defined in the parent query: https://vimeo.com/413503010.
+Video showing how to create an API hierarchy, and override the variables defined in the parent query: <https://vimeo.com/413503010>.
