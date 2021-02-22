@@ -111,7 +111,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         $this->maybeFilterDataloadQueryArgs($query, $options);
 
         // To bring all results, limit is 0, not -1
-        if (isset($query['limit']) && $query['limit'] == -1) {
+        if (isset($query['limit']) && (int) $query['limit'] == -1) {
             $query['limit'] = 0;
         }
         $return_type = $options['return-type'] ?? null;

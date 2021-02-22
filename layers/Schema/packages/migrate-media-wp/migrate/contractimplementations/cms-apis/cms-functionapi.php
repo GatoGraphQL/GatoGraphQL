@@ -56,7 +56,7 @@ class FunctionAPI extends \PoPSchema\Media\FunctionAPI_Base
         if (isset($query['limit'])) {
             // Maybe restrict the limit, if higher than the max limit
             // Allow to not limit by max when querying from within the application
-            $limit = $query['limit'];
+            $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
                 $limit = TypeAPIUtils::getLimitOrMaxLimit(
                     $limit,
