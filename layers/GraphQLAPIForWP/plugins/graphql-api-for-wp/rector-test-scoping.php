@@ -38,6 +38,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // files to skip
     $parameters->set(Option::SKIP, [
         '*/tests/*',
+
+        // The GraphQL API plugin does not require the REST package
+        // So ignore all code depending on it, or it throws error:
+        //   "Could not process
+        //   "vendor/pop-schema/pages/src/Conditional/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
+        //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
+        '*/Conditional/RESTAPI/*',
+
         // Exclude migrate libraries
         __DIR__ . '/vendor/getpop/migrate-*',
         __DIR__ . '/vendor/pop-schema/migrate-*',

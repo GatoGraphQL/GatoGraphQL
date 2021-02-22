@@ -30,6 +30,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
+        // The GraphQL API plugin does not require the REST package
+        // So ignore all code depending on it, or it throws error:
+        //   "Could not process
+        //   "vendor/pop-schema/pages/src/Conditional/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
+        //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
+        '*/Conditional/RESTAPI/*',
+
         // These are skipped in the .sh since it's faster
         // // All the "migrate" folders
         // __DIR__ . '/vendor/getpop/migrate-*/*',
