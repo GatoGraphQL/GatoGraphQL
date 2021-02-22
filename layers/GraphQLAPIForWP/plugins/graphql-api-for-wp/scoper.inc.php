@@ -183,18 +183,6 @@ return [
                 );
             }
 
-            /**
-             * It changes the path to Parsedown source files in its composer.json
-             * Undo it!
-             */
-            if ($filePath == convertRelativeToFullPath('erusev/parsedown/composer.json')) {
-                return str_replace(
-                    ['"psr-4"', "\"${prefix}\\\\Parsedown\\\\\": \"\\/Parsedown\\/\""],
-                    ['"psr-0"', "\"${prefix}\\\\Parsedown\": \"\""],
-                    $content
-                );
-            }
-
             return $content;
         },
     ],
