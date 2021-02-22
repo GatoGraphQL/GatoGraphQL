@@ -6,4 +6,4 @@ User interface to deprecate fields, and indicate how they must be replaced.
 
 ## Resources
 
-Video showing how to deprecate fields: https://vimeo.com/413503110.
+Video showing how to deprecate fields: <https://vimeo.com/413503110>.

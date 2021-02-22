@@ -34,4 +34,4 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 ## Resources
 
-Video demonstrating usage of the public/private schema modes: https://vimeo.com/413503284.
+Video demonstrating usage of the public/private schema modes: <https://vimeo.com/413503284>.

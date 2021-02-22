@@ -95,4 +95,4 @@ These are the inputs in the Document settings:
 
 ## Resources
 
-Video showing how to create a persisted query: https://vimeo.com/443790273
+Video showing how to create a persisted query: <https://vimeo.com/443790273>.
