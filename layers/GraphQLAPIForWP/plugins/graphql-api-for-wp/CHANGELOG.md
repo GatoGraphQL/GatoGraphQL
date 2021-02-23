@@ -10,6 +10,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Composable directives
 
+## 0.7.12 - 2021-02-23
+
+### Fixed
+
+- GraphiQL client returning 406 status error with ModSecurity (#436)
+
 ## 0.7.11 - 2021-02-22
 
 ### Enhancement
