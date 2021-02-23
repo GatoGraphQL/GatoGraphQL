@@ -16,13 +16,13 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "pop-schema/posts": "^0.7.12",
-        "pop-schema/tags": "^0.7.12",
-        "pop-schema/migrate-post-tags": "^0.7.12"
+        "pop-schema/posts": "^0.8",
+        "pop-schema/tags": "^0.8",
+        "pop-schema/migrate-post-tags": "^0.8"
     },
     "require-dev": {
-        "getpop/api": "^0.7.12",
-        "getpop/api-rest": "^0.7.12",
+        "getpop/api": "^0.8",
+        "getpop/api-rest": "^0.8",
         "phpstan/phpstan": "^0.12, <0.12.70",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.9",
