@@ -16,12 +16,12 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "getpop/engine": "^0.7.13",
-        "getpop/migrate-api": "^0.7.13"
+        "getpop/engine": "^0.8",
+        "getpop/migrate-api": "^0.8"
     },
     "require-dev": {
-        "getpop/access-control": "^0.7.13",
-        "getpop/cache-control": "^0.7.13",
+        "getpop/access-control": "^0.8",
+        "getpop/cache-control": "^0.8",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.9",
