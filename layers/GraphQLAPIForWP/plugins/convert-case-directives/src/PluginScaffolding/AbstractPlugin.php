@@ -86,11 +86,15 @@ abstract class AbstractPlugin
                 $this->doSetup();
 
                 /**
-                 * Initialize/boot this extension plugin
+                 * Initialize/configure/boot this extension plugin
                  */
                 \add_action(
                     GraphQLAPIPlugin::HOOK_INITIALIZE_EXTENSION_PLUGIN,
                     [$this, 'initialize']
+                );
+                \add_action(
+                    GraphQLAPIPlugin::HOOK_CONFIGURE_EXTENSION_PLUGIN,
+                    [$this, 'configure']
                 );
                 \add_action(
                     GraphQLAPIPlugin::HOOK_BOOT_EXTENSION_PLUGIN,
@@ -150,6 +154,20 @@ abstract class AbstractPlugin
         AppLoader::addComponentClassesToInitialize(
             $this->getComponentClassesToInitialize()
         );
+    }
+
+    /**
+     * Plugin's configuration
+     */
+    final public function configure(): void
+    {
+        /**
+         * Check that the GraphQL API plugin is installed and activated.
+         */
+        if (!$this->isGraphQLAPIPluginActive()) {
+            // Exit
+            return;
+        }
 
         // Only after initializing the System Container,
         // we can obtain the configuration
