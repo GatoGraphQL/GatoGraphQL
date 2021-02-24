@@ -258,6 +258,38 @@ class Plugin
     }
 
     /**
+     * Add Component classes to be initialized
+     *
+     * @return string[] List of `Component` class to initialize
+     */
+    public function getComponentClassesToInitialize(): array
+    {
+        return [
+            Component::class,
+        ];
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return PluginConfiguration::getComponentClassConfiguration();
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return PluginConfiguration::getSkippingSchemaComponentClasses();
+    }
+
+    /**
      * Plugin initialization, executed on hook "plugins_loaded"
      * to wait for all extensions to be loaded
      *
@@ -298,24 +330,22 @@ class Plugin
 
         // Initialize the containers
         AppLoader::addComponentClassesToInitialize(
-            [
-                Component::class,
-            ]
+            $this->getComponentClassesToInitialize()
         );
 
         // Configure the plugin. This defines hooks to set environment variables,
-        // so must be executed
-        // before those hooks are triggered for first time
+        // so must be executed before those hooks are triggered for first time
         // (in ComponentConfiguration classes)
         PluginConfiguration::initialize();
 
-        // Only after initializing the System Container, we can obtain the configuration
+        // Only after initializing the System Container,
+        // we can obtain the configuration
         // (which may depend on hooks)
         AppLoader::addComponentClassConfiguration(
-            PluginConfiguration::getComponentClassConfiguration()
+            $this->getComponentClassConfiguration()
         );
         AppLoader::addSchemaComponentClassesToSkip(
-            PluginConfiguration::getSkippingSchemaComponentClasses()
+            $this->getSchemaComponentClassesToSkip()
         );
     }
 

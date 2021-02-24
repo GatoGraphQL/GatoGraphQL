@@ -49,22 +49,24 @@ class Plugin extends AbstractPlugin
     }
 
     /**
-     * Plugin set-up
+     * Add Component classes to be initialized
      *
-     * @return void
+     * @return string[] List of `Component` class to initialize
      */
-    public function doInitialize(): void
+    public function getComponentClassesToInitialize(): array
     {
-        // Initialize the plugin's Component and, with it, all its dependencies from PoP
-        AppLoader::addComponentClassesToInitialize(
-            [
-                \PoP\ConvertCaseDirectives\Component::class,
-            ]
-        );
+        return [
+            \PoP\ConvertCaseDirectives\Component::class,
+        ];
+    }
 
-        // Maybe skip schema components
-        AppLoader::addSchemaComponentClassesToSkip(
-            PluginConfiguration::getSkippingSchemaComponentClasses()
-        );
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return PluginConfiguration::getSkippingSchemaComponentClasses();
     }
 }

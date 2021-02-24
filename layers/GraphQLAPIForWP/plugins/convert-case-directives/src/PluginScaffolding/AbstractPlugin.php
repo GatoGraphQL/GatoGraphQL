@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives\PluginScaffolding;
 
-use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
+use PoP\Engine\AppLoader;
 
 abstract class AbstractPlugin
 {
@@ -101,6 +102,36 @@ abstract class AbstractPlugin
     }
 
     /**
+     * Add Component classes to be initialized
+     *
+     * @return string[] List of `Component` class to initialize
+     */
+    public function getComponentClassesToInitialize(): array
+    {
+        return [];
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return [];
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return [];
+    }
+
+    /**
      * Plugin's initialization
      *
      * @return void
@@ -114,8 +145,21 @@ abstract class AbstractPlugin
             // Exit
             return;
         }
-        // Execute the plugin's custom setup
-        $this->doInitialize();
+
+        // Initialize the containers
+        AppLoader::addComponentClassesToInitialize(
+            $this->getComponentClassesToInitialize()
+        );
+
+        // Only after initializing the System Container,
+        // we can obtain the configuration
+        // (which may depend on hooks)
+        AppLoader::addComponentClassConfiguration(
+            $this->getComponentClassConfiguration()
+        );
+        AppLoader::addSchemaComponentClassesToSkip(
+            $this->getSchemaComponentClassesToSkip()
+        );
     }
 
     /**
@@ -154,15 +198,6 @@ abstract class AbstractPlugin
     public function doSetup(): void
     {
         // Function to override
-    }
-
-    /**
-     * Initialize plugin. Function to override
-     *
-     * @return void
-     */
-    protected function doInitialize(): void
-    {
     }
 
     /**
