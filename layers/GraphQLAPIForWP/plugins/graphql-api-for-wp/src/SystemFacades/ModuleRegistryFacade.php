@@ -21,22 +21,5 @@ class ModuleRegistryFacade
          * @var ModuleRegistryInterface
          */
         return SystemContainerBuilderFactory::getInstance()->get(ModuleRegistryInterface::class);
-        // if (is_null(self::$instance)) {
-        //     // Instantiate
-        //     self::$instance = new ModuleRegistry();
-        //     // Add the ModuleResolvers
-        //     self::$instance->addModuleResolver(new PluginManagementFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new EndpointFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new SchemaConfigurationFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new AccessControlFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new VersioningFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new UserInterfaceFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new PerformanceFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new CacheFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new OperationalFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new ClientFunctionalityModuleResolver());
-        //     self::$instance->addModuleResolver(new SchemaTypeModuleResolver());
-        // }
-        // return self::$instance;
     }
 }
