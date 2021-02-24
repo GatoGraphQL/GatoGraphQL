@@ -25,14 +25,10 @@ class Component extends AbstractComponent
 
     /**
      * Initialize services for the system container
-     *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
      */
-    protected static function initializeSystemContainerServices(
-        array $configuration = []
-    ): void {
-        parent::initializeSystemContainerServices($configuration);
+    protected static function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
 
         // Only after initializing the containerBuilder, can inject a service
         self::initYAMLSystemContainerServices(dirname(__DIR__));

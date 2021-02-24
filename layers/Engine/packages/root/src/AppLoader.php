@@ -156,15 +156,6 @@ class AppLoader
         );
 
         /**
-         * Allow each component to customize the configuration for itself,
-         * and for its depended-upon components.
-         * Hence this is executed from bottom to top
-         */
-        foreach (array_reverse($orderedComponentClasses) as $componentClass) {
-            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
-        }
-
-        /**
          * Register all components in the ComponentManager
          */
         foreach ($orderedComponentClasses as $componentClass) {
@@ -187,15 +178,21 @@ class AppLoader
          * Application Container services.
          */
         foreach ($orderedComponentClasses as $componentClass) {
-            $componentConfiguration = self::$componentClassConfiguration[$componentClass] ?? [];
-            $componentClass::initializeSystem(
-                $componentConfiguration
-            );
+            $componentClass::initializeSystem();
         }
         $systemCompilerPasses = [
             new RegisterSystemCompilerPassServiceCompilerPass(),
         ];
         SystemContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+
+        /**
+         * Allow each component to customize the configuration for itself,
+         * and for its depended-upon components.
+         * Hence this is executed from bottom to top
+         */
+        foreach (array_reverse($orderedComponentClasses) as $componentClass) {
+            $componentClass::customizeComponentClassConfiguration(self::$componentClassConfiguration);
+        }
 
         /**
          * Register all components in the ComponentManager

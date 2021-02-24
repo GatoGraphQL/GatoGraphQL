@@ -45,23 +45,17 @@ abstract class AbstractComponent implements ComponentInterface
 
     /**
      * Initialize services for the system container
-     *
-     * @param array<string, mixed> $configuration
      */
-    final public static function initializeSystem(
-        array $configuration = []
-    ): void {
-        static::initializeSystemContainerServices($configuration);
+    final public static function initializeSystem(): void
+    {
+        static::initializeSystemContainerServices();
     }
 
     /**
      * Initialize services for the system container
-     *
-     * @param array<string, mixed> $configuration
      */
-    protected static function initializeSystemContainerServices(
-        array $configuration = []
-    ): void {
+    protected static function initializeSystemContainerServices(): void
+    {
         // Override
     }
 
