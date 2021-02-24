@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use GraphQLAPI\GraphQLAPI\General\CPTUtils;
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\General\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

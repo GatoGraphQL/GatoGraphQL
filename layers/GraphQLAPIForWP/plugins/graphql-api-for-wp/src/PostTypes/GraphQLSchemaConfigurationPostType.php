@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;

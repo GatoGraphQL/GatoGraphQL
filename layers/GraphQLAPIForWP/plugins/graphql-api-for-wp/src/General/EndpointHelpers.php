@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\General;
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 

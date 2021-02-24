@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback;
 
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\Root\Container\ContainerBuilderUtils;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

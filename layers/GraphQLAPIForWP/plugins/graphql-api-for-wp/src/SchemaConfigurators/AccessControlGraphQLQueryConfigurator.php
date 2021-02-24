@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;

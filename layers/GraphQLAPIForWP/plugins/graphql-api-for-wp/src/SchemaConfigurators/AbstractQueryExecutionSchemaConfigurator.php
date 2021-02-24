@@ -8,7 +8,7 @@ use WP_Post;
 use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use PoP\Engine\Environment as EngineEnvironment;
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
