@@ -93,8 +93,9 @@ class Component extends AbstractComponent
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
             self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/CacheControl/Overrides');
         }
-        // Register the Cache services, if the module is not disabled
-        if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
+        // Register the Container Cache services
+        // if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
+        if (PluginEnvironment::cacheContainers()) {
             self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
         // Maybe use GraphiQL with Explorer

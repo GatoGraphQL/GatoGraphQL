@@ -19,6 +19,9 @@ class PluginEnvironment
      */
     public const PLUGIN_ENVIRONMENT_DEV = 'development';
 
+    public const CACHE_CONTAINERS = 'CACHE_CONTAINERS';
+
+
     /**
      * Return a value for a variable, checking if it is defined in the environment
      * first, and in the wp-config.php second
@@ -63,5 +66,15 @@ class PluginEnvironment
     public static function isPluginEnvironmentDev(): bool
     {
         return self::getPluginEnvironment() == self::PLUGIN_ENVIRONMENT_DEV;
+    }
+
+    /**
+     * By default, cache for PROD, do not cache for DEV
+     */
+    public static function cacheContainers(): bool
+    {
+        return getenv(self::CACHE_CONTAINERS) !== false ?
+            strtolower(getenv(self::CACHE_CONTAINERS)) == "true"
+            : self::isPluginEnvironmentProd();
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Engine\Component;
 use PoP\APIEndpoints\EndpointUtils;
 use GraphQLAPI\GraphQLAPI\Environment;
 use PoP\AccessControl\Schema\SchemaModes;
@@ -53,7 +52,6 @@ use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsFor
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
-use GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -534,9 +532,8 @@ class PluginConfiguration
      */
     public static function getContainerCacheConfiguration(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         $containerConfigurationCacheNamespace = null;
-        if ($cacheContainerConfiguration = $moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
+        if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
             $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
             $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
         }
