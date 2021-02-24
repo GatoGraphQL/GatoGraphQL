@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\ConvertCaseDirectives\ModuleResolvers\:
-        resource: '../src/ModuleResolvers/*'
+    GraphQLAPI\ConvertCaseDirectives\SystemServices\:
+        resource: '../src/SystemServices/*'

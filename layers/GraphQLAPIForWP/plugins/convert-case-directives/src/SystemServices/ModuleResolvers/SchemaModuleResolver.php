@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ConvertCaseDirectives\ModuleResolvers;
+namespace GraphQLAPI\ConvertCaseDirectives\SystemServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;

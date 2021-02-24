@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives;
 
-use GraphQLAPI\ConvertCaseDirectives\ModuleResolvers\SchemaModuleResolver;
+use GraphQLAPI\ConvertCaseDirectives\SystemServices\ModuleResolvers\SchemaModuleResolver;
 use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPluginConfiguration;
 
 class PluginConfiguration extends AbstractPluginConfiguration
