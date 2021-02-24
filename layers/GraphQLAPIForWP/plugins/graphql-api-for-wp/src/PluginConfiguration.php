@@ -77,6 +77,13 @@ class PluginConfiguration
     protected static ?array $normalizedOptionValuesCache = null;
 
     /**
+     * Cache the Container Cache Configuration
+     *
+     * @var array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
+     */
+    protected static ?array $containerCacheConfigurationCache = null;
+
+    /**
      * Initialize all configuration
      */
     public static function initialize(): void
@@ -532,15 +539,18 @@ class PluginConfiguration
      */
     public static function getContainerCacheConfiguration(): array
     {
-        $containerConfigurationCacheNamespace = null;
-        if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
-            $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
-            $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
+        if (is_null(self::$containerCacheConfigurationCache)) {
+            $containerConfigurationCacheNamespace = null;
+            if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
+                $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
+                $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
+            }
+            self::$containerCacheConfigurationCache = [
+                $cacheContainerConfiguration,
+                $containerConfigurationCacheNamespace
+            ];
         }
-        return [
-            $cacheContainerConfiguration,
-            $containerConfigurationCacheNamespace
-        ];
+        return self::$containerCacheConfigurationCache;
     }
 
     /**
