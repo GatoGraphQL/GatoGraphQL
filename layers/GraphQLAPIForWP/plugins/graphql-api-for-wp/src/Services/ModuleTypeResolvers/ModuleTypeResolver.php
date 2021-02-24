@@ -27,7 +27,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     /**
      * @return string[]
      */
-    public static function getModuleTypesToResolve(): array
+    public function getModuleTypesToResolve(): array
     {
         return [
             self::ACCESS_CONTROL,

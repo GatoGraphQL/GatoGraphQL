@@ -16,7 +16,7 @@ class ModuleTypeRegistry implements ModuleTypeRegistryInterface
 
     public function addModuleTypeResolver(ModuleTypeResolverInterface $moduleTypeResolver): void
     {
-        foreach ($moduleTypeResolver::getModuleTypesToResolve() as $moduleType) {
+        foreach ($moduleTypeResolver->getModuleTypesToResolve() as $moduleType) {
             $this->moduleTypeResolvers[$moduleType] = $moduleTypeResolver;
         }
     }
