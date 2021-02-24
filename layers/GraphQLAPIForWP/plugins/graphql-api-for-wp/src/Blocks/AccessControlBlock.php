@@ -7,12 +7,12 @@ namespace GraphQLAPI\GraphQLAPI\Blocks;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\AccessControl\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AccessControlBlockCategory;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 
 /**
  * Access Control block

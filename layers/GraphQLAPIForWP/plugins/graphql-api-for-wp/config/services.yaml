@@ -3,6 +3,9 @@ services:
         public: true
         autowire: true
 
+    GraphQLAPI\GraphQLAPI\Services\:
+        resource: '../src/Services/*'
+
     GraphQLAPI\GraphQLAPI\Taxonomies\:
         resource: '../src/Taxonomies/*'
 
@@ -29,3 +32,6 @@ services:
 
     GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistry'
+
+    GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry'

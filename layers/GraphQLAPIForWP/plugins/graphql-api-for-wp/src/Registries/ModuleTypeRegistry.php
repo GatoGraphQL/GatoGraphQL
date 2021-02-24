@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
 use InvalidArgumentException;
-use GraphQLAPI\GraphQLAPI\ModuleTypeResolvers\ModuleTypeResolverInterface;
+use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolverInterface;
 
 class ModuleTypeRegistry implements ModuleTypeRegistryInterface
 {
@@ -16,7 +16,7 @@ class ModuleTypeRegistry implements ModuleTypeRegistryInterface
 
     public function addModuleTypeResolver(ModuleTypeResolverInterface $moduleTypeResolver): void
     {
-        foreach ($moduleTypeResolver::getModuleTypesToResolve() as $moduleType) {
+        foreach ($moduleTypeResolver->getModuleTypesToResolve() as $moduleType) {
             $this->moduleTypeResolvers[$moduleType] = $moduleTypeResolver;
         }
     }

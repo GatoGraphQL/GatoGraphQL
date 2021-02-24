@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry
+    GraphQLAPI\GraphQLAPI\SystemServices\Registries\ModuleRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\SystemServices\Registries\ModuleRegistry
 
     GraphQLAPI\GraphQLAPI\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
 
-    GraphQLAPI\GraphQLAPI\ModuleResolvers\:
-        resource: '../src/ModuleResolvers/*'
+    GraphQLAPI\GraphQLAPI\SystemServices\:
+        resource: '../src/SystemServices/*'
