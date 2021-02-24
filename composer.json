@@ -635,13 +635,13 @@
         "symlink-vendor-for-graphql-api-for-wp-plugin": [
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
             "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
-            "composer install --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "composer install --no-dev --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\""
         ],
         "symlink-vendor-for-graphql-api-convert-case-directives-plugin": [
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json', 'layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp');\"",
             "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json",
-            "composer install --working-dir=layers/GraphQLAPIForWP/plugins/convert-case-directives",
+            "composer install --no-dev --working-dir=layers/GraphQLAPIForWP/plugins/convert-case-directives",
             "php -r \"copy('layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json');\""
         ],
         "log-server-errors": "lando logs -t -f | grep \"error\"",
