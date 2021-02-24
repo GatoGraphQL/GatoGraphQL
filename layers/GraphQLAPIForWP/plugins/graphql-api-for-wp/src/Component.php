@@ -57,6 +57,18 @@ class Component extends AbstractComponent
     }
 
     /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        parent::initializeSystemContainerServices($configuration);
+        self::initYAMLSystemContainerServices(dirname(__DIR__));
+    }
+
+    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration
@@ -127,18 +139,6 @@ class Component extends AbstractComponent
                 self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
-    }
-
-    /**
-     * Initialize services for the system container
-     *
-     * @param array<string, mixed> $configuration
-     */
-    protected static function initializeSystemContainerServices(
-        array $configuration = []
-    ): void {
-        parent::initializeSystemContainerServices($configuration);
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
     }
 
     protected static function initComponentConfiguration(): void
