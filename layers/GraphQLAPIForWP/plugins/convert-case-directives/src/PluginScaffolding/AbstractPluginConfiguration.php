@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\ConvertCaseDirectives\PluginScaffolding;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
 
 abstract class AbstractPluginConfiguration
 {

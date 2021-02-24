@@ -9,7 +9,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;

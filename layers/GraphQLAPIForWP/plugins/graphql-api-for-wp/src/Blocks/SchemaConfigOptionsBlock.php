@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

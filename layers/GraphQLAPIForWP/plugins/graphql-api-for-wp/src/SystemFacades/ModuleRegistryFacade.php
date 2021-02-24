@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades;
+namespace GraphQLAPI\GraphQLAPI\SystemFacades;
 
 use GraphQLAPI\GraphQLAPI\SystemServices\Registries\ModuleRegistryInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
