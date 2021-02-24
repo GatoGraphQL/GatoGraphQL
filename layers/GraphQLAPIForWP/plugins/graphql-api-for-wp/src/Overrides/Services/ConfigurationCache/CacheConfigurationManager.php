@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\ConfigurationCache\Overrides;
+namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;

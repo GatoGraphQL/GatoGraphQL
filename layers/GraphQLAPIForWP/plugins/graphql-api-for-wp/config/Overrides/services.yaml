@@ -9,3 +9,7 @@ services:
     # (for that case, it will be overriden once again by another ConditionalOnEnvironment)
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
         class: '\GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient'
+
+    # Override to configure the cache with dynamic values
+    PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache\CacheConfigurationManager'
