@@ -628,14 +628,24 @@
         ],
         "init-server": "@start-server",
         "start-server": [
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
-            "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
-            "composer install --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\"",
+            "@symlink-vendor-for-graphql-api-for-wp-plugin",
+            "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
             "lando start"
         ],
+        "symlink-vendor-for-graphql-api-for-wp-plugin": [
+            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
+            "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
+            "composer install --no-dev --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\""
+        ],
+        "symlink-vendor-for-graphql-api-convert-case-directives-plugin": [
+            "php -r \"copy('layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json', 'layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp');\"",
+            "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json",
+            "composer install --no-dev --working-dir=layers/GraphQLAPIForWP/plugins/convert-case-directives",
+            "php -r \"copy('layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json');\""
+        ],
         "log-server-errors": "lando logs -t -f | grep \"error\"",
-        "rebuild-server": "lando rebuild -y",
+        "rebuild-server": "lando rebuild appserver -y",
         "merge-monorepo": "monorepo-builder merge --ansi",
         "propagate-monorepo": "monorepo-builder propagate --ansi",
         "validate-monorepo": "monorepo-builder validate --ansi",
@@ -654,6 +664,8 @@
         "build-server": "Initialize the Lando webserver with the 'GraphQL API for WordPress' demo site, for development. To be executed only the first time",
         "init-server": "Alias of 'start-server",
         "start-server": "Start the Lando webserver with the 'GraphQL API for WordPress' demo site, for development",
+        "symlink-vendor-for-graphql-api-for-wp-plugin": "Install vendor dependencies for the \"GraphQL API\" plugin, symlinking them to local folders in the monorepo",
+        "symlink-vendor-for-graphql-api-convert-case-directives-plugin": "Install vendor dependencies for the \"Convert Case Directives\" plugin, symlinking them to local folders in the monorepo",
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "rebuild-server": "Rebuild the Lando webserver",
         "validate-monorepo": "Validate that version constraints for dependencies are the same for all packages",

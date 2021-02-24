@@ -41,13 +41,10 @@ class Component extends AbstractComponent
 
     /**
      * Initialize services for the system container
-     *
-     * @param array<string, mixed> $configuration
      */
-    protected static function initializeSystemContainerServices(
-        array $configuration = []
-    ): void {
-        parent::initializeSystemContainerServices($configuration);
+    protected static function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
         self::initYAMLSystemContainerServices(dirname(__DIR__));
     }
 }

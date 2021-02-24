@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Engine\Component;
 use PoP\APIEndpoints\EndpointUtils;
 use GraphQLAPI\GraphQLAPI\Environment;
 use PoP\AccessControl\Schema\SchemaModes;
@@ -53,7 +52,6 @@ use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsFor
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
-use GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -77,6 +75,13 @@ class PluginConfiguration
      * @var array<string, mixed>|null
      */
     protected static ?array $normalizedOptionValuesCache = null;
+
+    /**
+     * Cache the Container Cache Configuration
+     *
+     * @var array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
+     */
+    protected static ?array $containerCacheConfigurationCache = null;
 
     /**
      * Initialize all configuration
@@ -534,16 +539,18 @@ class PluginConfiguration
      */
     public static function getContainerCacheConfiguration(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $containerConfigurationCacheNamespace = null;
-        if ($cacheContainerConfiguration = $moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
-            $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
+        if (is_null(self::$containerCacheConfigurationCache)) {
+            $containerConfigurationCacheNamespace = null;
+            if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
+                $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
+                $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
+            }
+            self::$containerCacheConfigurationCache = [
+                $cacheContainerConfiguration,
+                $containerConfigurationCacheNamespace
+            ];
         }
-        return [
-            $cacheContainerConfiguration,
-            $containerConfigurationCacheNamespace
-        ];
+        return self::$containerCacheConfigurationCache;
     }
 
     /**

@@ -1,10 +1,9 @@
 <?php
-use GraphQLAPI\ConvertCaseDirectives\Plugin;
 /*
 Plugin Name: GraphQL API - Convert Case Directives
 Plugin URI: https://github.com/GraphQLAPI/convert-case-directives
 Description: Directives to convert lower/title/upper case for the GraphQL API
-Version: 0.1.0
+Version: 0.7.13
 Requires at least: 5.4
 Requires PHP: 7.1
 Author: Leonardo Losoviz
@@ -15,13 +14,15 @@ Text Domain: graphql-api-convert-case-directives
 Domain Path: /languages
 */
 
+use GraphQLAPI\ConvertCaseDirectives\Plugin;
+
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
 
 define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_PLUGIN_FILE', __FILE__);
-define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.1.0');
+define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.7.13');
 
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');

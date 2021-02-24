@@ -10,4 +10,5 @@ Author: Leonardo Losoviz
 use PoP\Engine\AppLoader;
 
 // Initialize PoP Engine through the Bootloader
+AppLoader::bootSystem();
 AppLoader::bootApplication();

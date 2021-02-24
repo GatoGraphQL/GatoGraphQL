@@ -14,7 +14,16 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \PoP\ConvertCaseDirectives\Component::class,
+            \PoPSchema\ConvertCaseDirectives\Component::class,
         ];
+    }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected static function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
+        self::initYAMLSystemContainerServices(dirname(__DIR__));
     }
 }

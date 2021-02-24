@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\Container\SystemCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
@@ -57,6 +58,27 @@ class Component extends AbstractComponent
     }
 
     /**
+     * Compiler Passes for the System Container
+     *
+     * @return string[]
+     */
+    public static function getSystemContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterModuleResolverCompilerPass::class,
+        ];
+    }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected static function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
+        self::initYAMLSystemContainerServices(dirname(__DIR__));
+    }
+
+    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration
@@ -83,10 +105,6 @@ class Component extends AbstractComponent
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
             self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/CacheControl/Overrides');
-        }
-        // Register the Cache services, if the module is not disabled
-        if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/ConfigurationCache/Overrides');
         }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -127,18 +145,6 @@ class Component extends AbstractComponent
                 self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
-    }
-
-    /**
-     * Initialize services for the system container
-     *
-     * @param array<string, mixed> $configuration
-     */
-    protected static function initializeSystemContainerServices(
-        array $configuration = []
-    ): void {
-        parent::initializeSystemContainerServices($configuration);
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
     }
 
     protected static function initComponentConfiguration(): void

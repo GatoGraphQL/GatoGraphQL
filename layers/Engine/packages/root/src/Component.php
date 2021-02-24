@@ -7,6 +7,7 @@ namespace PoP\Root;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
+use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
 
 /**
  * Initialize component
@@ -24,15 +25,23 @@ class Component extends AbstractComponent
     }
 
     /**
-     * Initialize services for the system container
+     * Compiler Passes for the System Container
      *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
+     * @return string[]
      */
-    protected static function initializeSystemContainerServices(
-        array $configuration = []
-    ): void {
-        parent::initializeSystemContainerServices($configuration);
+    public static function getSystemContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterSystemCompilerPassServiceCompilerPass::class,
+        ];
+    }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected static function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
 
         // Only after initializing the containerBuilder, can inject a service
         self::initYAMLSystemContainerServices(dirname(__DIR__));

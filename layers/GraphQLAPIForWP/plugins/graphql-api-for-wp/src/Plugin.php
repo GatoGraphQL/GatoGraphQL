@@ -57,6 +57,10 @@ class Plugin
      */
     public const HOOK_INITIALIZE_EXTENSION_PLUGIN = __CLASS__ . ':initializeExtensionPlugin';
     /**
+     * Hook to configure extension plugins
+     */
+    public const HOOK_CONFIGURE_EXTENSION_PLUGIN = __CLASS__ . ':configureExtensionPlugin';
+    /**
      * Hook to boot extension plugins
      */
     public const HOOK_BOOT_EXTENSION_PLUGIN = __CLASS__ . ':bootExtensionPlugin';
@@ -77,9 +81,12 @@ class Plugin
      * 2. GraphQL API extensions => setup(): priority 0
      * 3. GraphQL API => initialize(): priority 10
      * 4. GraphQL API extensions => initialize(): priority 20
-     * 5. GraphQL API => bootApplication(): priority 30
-     * 6. GraphQL API => boot(): priority 40
-     * 7. GraphQL API extensions => boot(): priority 50
+     * 5. GraphQL API => bootSystem(): priority 30
+     * 3. GraphQL API => configure(): priority 40
+     * 4. GraphQL API extensions => configure(): priority 50
+     * 5. GraphQL API => bootApplication(): priority 60
+     * 6. GraphQL API => boot(): priority 70
+     * 7. GraphQL API extensions => boot(): priority 80
      *
      * @return void
      */
@@ -174,11 +181,16 @@ class Plugin
         \add_action('plugins_loaded', function () {
             \do_action(self::HOOK_INITIALIZE_EXTENSION_PLUGIN);
         }, 20);
-        \add_action('plugins_loaded', [$this, 'bootApplication'], 30);
-        \add_action('plugins_loaded', [$this, 'boot'], 40);
+        \add_action('plugins_loaded', [$this, 'bootSystem'], 30);
+        \add_action('plugins_loaded', [$this, 'configure'], 40);
+        \add_action('plugins_loaded', function () {
+            \do_action(self::HOOK_CONFIGURE_EXTENSION_PLUGIN);
+        }, 50);
+        \add_action('plugins_loaded', [$this, 'bootApplication'], 60);
+        \add_action('plugins_loaded', [$this, 'boot'], 70);
         \add_action('plugins_loaded', function () {
             \do_action(self::HOOK_BOOT_EXTENSION_PLUGIN);
-        }, 50);
+        }, 80);
     }
 
     /**
@@ -258,6 +270,38 @@ class Plugin
     }
 
     /**
+     * Add Component classes to be initialized
+     *
+     * @return string[] List of `Component` class to initialize
+     */
+    public function getComponentClassesToInitialize(): array
+    {
+        return [
+            Component::class,
+        ];
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return PluginConfiguration::getComponentClassConfiguration();
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return PluginConfiguration::getSkippingSchemaComponentClasses();
+    }
+
+    /**
      * Plugin initialization, executed on hook "plugins_loaded"
      * to wait for all extensions to be loaded
      *
@@ -296,23 +340,41 @@ class Plugin
             }
         }
 
+        // Initialize the containers
+        AppLoader::addComponentClassesToInitialize(
+            $this->getComponentClassesToInitialize()
+        );
+    }
+
+    /**
+     * Boot the system
+     */
+    public function bootSystem(): void
+    {
+        // Boot all PoP components, from this plugin and all extensions
+        AppLoader::bootSystem(
+            ...PluginConfiguration::getContainerCacheConfiguration()
+        );
+    }
+
+    /**
+     * Plugin configuration
+     */
+    public function configure(): void
+    {
         // Configure the plugin. This defines hooks to set environment variables,
-        // so must be executed
-        // before those hooks are triggered for first time
+        // so must be executed before those hooks are triggered for first time
         // (in ComponentConfiguration classes)
         PluginConfiguration::initialize();
 
-        // Component configuration
-        $componentClassConfiguration = PluginConfiguration::getComponentClassConfiguration();
-        $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
-
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize(
-            [
-                Component::class,
-            ],
-            $componentClassConfiguration,
-            $skipSchemaComponentClasses
+        // Only after initializing the System Container,
+        // we can obtain the configuration
+        // (which may depend on hooks)
+        AppLoader::addComponentClassConfiguration(
+            $this->getComponentClassConfiguration()
+        );
+        AppLoader::addSchemaComponentClassesToSkip(
+            $this->getSchemaComponentClassesToSkip()
         );
     }
 
@@ -322,7 +384,9 @@ class Plugin
     public function bootApplication(): void
     {
         // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootApplication(...PluginConfiguration::getContainerCacheConfiguration());
+        AppLoader::bootApplication(
+            ...PluginConfiguration::getContainerCacheConfiguration()
+        );
     }
 
     /**
