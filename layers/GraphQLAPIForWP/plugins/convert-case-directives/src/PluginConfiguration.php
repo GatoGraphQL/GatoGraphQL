@@ -19,7 +19,7 @@ class PluginConfiguration extends AbstractPluginConfiguration
     {
         return [
             SchemaModuleResolver::CONVERT_CASE_DIRECTIVES => [
-                \PoP\ConvertCaseDirectives\Component::class,
+                \GraphQLAPI\ConvertCaseDirectives\Component::class,
             ],
         ];
     }

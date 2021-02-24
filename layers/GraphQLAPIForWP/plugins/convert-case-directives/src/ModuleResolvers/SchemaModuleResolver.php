@@ -8,9 +8,9 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
-use PoP\ConvertCaseDirectives\DirectiveResolvers\LowerCaseStringDirectiveResolver;
-use PoP\ConvertCaseDirectives\DirectiveResolvers\TitleCaseStringDirectiveResolver;
-use PoP\ConvertCaseDirectives\DirectiveResolvers\UpperCaseStringDirectiveResolver;
+use GraphQLAPI\ConvertCaseDirectives\DirectiveResolvers\LowerCaseStringDirectiveResolver;
+use GraphQLAPI\ConvertCaseDirectives\DirectiveResolvers\TitleCaseStringDirectiveResolver;
+use GraphQLAPI\ConvertCaseDirectives\DirectiveResolvers\UpperCaseStringDirectiveResolver;
 
 class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
 {

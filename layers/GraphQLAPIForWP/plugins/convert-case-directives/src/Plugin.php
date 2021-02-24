@@ -56,7 +56,7 @@ class Plugin extends AbstractPlugin
     public function getComponentClassesToInitialize(): array
     {
         return [
-            \PoP\ConvertCaseDirectives\Component::class,
+            \GraphQLAPI\ConvertCaseDirectives\Component::class,
         ];
     }
 
