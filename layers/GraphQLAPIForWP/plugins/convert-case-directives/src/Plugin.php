@@ -55,16 +55,16 @@ class Plugin extends AbstractPlugin
      */
     public function doInitialize(): void
     {
-        // Component configuration
-        $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
-
         // Initialize the plugin's Component and, with it, all its dependencies from PoP
         AppLoader::addComponentClassesToInitialize(
             [
                 \PoP\ConvertCaseDirectives\Component::class,
-            ],
-            [],
-            $skipSchemaComponentClasses
+            ]
+        );
+
+        // Maybe skip schema components
+        AppLoader::addSchemaComponentClassesToSkip(
+            PluginConfiguration::getSkippingSchemaComponentClasses()
         );
     }
 }

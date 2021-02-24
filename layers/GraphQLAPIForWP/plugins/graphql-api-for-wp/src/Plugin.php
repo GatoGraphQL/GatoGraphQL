@@ -296,23 +296,26 @@ class Plugin
             }
         }
 
+        // Initialize the containers
+        AppLoader::addComponentClassesToInitialize(
+            [
+                Component::class,
+            ]
+        );
+
         // Configure the plugin. This defines hooks to set environment variables,
         // so must be executed
         // before those hooks are triggered for first time
         // (in ComponentConfiguration classes)
         PluginConfiguration::initialize();
 
-        // Component configuration
-        $componentClassConfiguration = PluginConfiguration::getComponentClassConfiguration();
-        $skipSchemaComponentClasses = PluginConfiguration::getSkippingSchemaComponentClasses();
-
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize(
-            [
-                Component::class,
-            ],
-            $componentClassConfiguration,
-            $skipSchemaComponentClasses
+        // Only after initializing the System Container, we can obtain the configuration
+        // (which may depend on hooks)
+        AppLoader::addComponentClassConfiguration(
+            PluginConfiguration::getComponentClassConfiguration()
+        );
+        AppLoader::addSchemaComponentClassesToSkip(
+            PluginConfiguration::getSkippingSchemaComponentClasses()
         );
     }
 

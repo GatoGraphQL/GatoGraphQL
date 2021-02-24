@@ -51,22 +51,38 @@ class AppLoader
      * Add Component classes to be initialized
      *
      * @param string[] $componentClasses List of `Component` class to initialize
-     * @param array<string, mixed> $componentClassConfiguration [key]: Component class, [value]: Configuration
-     * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
      */
     public static function addComponentClassesToInitialize(
-        array $componentClasses,
-        array $componentClassConfiguration = [],
-        array $skipSchemaComponentClasses = []
+        array $componentClasses
     ): void {
         self::$componentClassesToInitialize = array_merge(
             self::$componentClassesToInitialize,
             $componentClasses
         );
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @param array<string, mixed> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     */
+    public static function addComponentClassConfiguration(
+        array $componentClassConfiguration = []
+    ): void {
         self::$componentClassConfiguration = array_merge_recursive(
             self::$componentClassConfiguration,
             $componentClassConfiguration
         );
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
+     */
+    public static function addSchemaComponentClassesToSkip(
+        array $skipSchemaComponentClasses = []
+    ): void {
         self::$skipSchemaComponentClasses = array_merge(
             self::$skipSchemaComponentClasses,
             $skipSchemaComponentClasses
