@@ -87,6 +87,16 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * Compiler Passes for the System Container
+     *
+     * @return string[]
+     */
+    public static function getSystemContainerCompilerPassClasses(): array
+    {
+        return [];
+    }
+
+    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration

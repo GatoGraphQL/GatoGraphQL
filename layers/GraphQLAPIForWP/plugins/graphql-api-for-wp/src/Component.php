@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\Container\SystemCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
@@ -53,6 +54,18 @@ class Component extends AbstractComponent
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
             \GraphQLAPI\MarkdownConvertor\Component::class,
+        ];
+    }
+
+    /**
+     * Compiler Passes for the System Container
+     *
+     * @return string[]
+     */
+    public static function getSystemContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterModuleResolverCompilerPass::class,
         ];
     }
 

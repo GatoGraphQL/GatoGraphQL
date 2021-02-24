@@ -200,10 +200,27 @@ class AppLoader
         foreach (self::$orderedComponentClasses as $componentClass) {
             $componentClass::initializeSystem();
         }
-        $systemCompilerPasses = [
-            new RegisterSystemCompilerPassServiceCompilerPass(),
-        ];
+        $systemCompilerPasses = array_map(
+            fn ($class) => new $class(),
+            self::getSystemContainerCompilerPasses()
+        );
         SystemContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+    }
+
+    /**
+     * @return string[]
+     */
+    final protected static function getSystemContainerCompilerPasses(): array
+    {
+        // Collect the compiler pass classes from all components
+        $compilerPassClasses = [];
+        foreach (self::$orderedComponentClasses as $componentClass) {
+            $compilerPassClasses = [
+                ...$compilerPassClasses,
+                ...$componentClass::getSystemContainerCompilerPassClasses()
+            ];
+        }
+        return array_values(array_unique($compilerPassClasses));
     }
 
     /**

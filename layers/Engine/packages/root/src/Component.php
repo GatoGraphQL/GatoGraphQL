@@ -7,6 +7,7 @@ namespace PoP\Root;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
+use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
 
 /**
  * Initialize component
@@ -21,6 +22,18 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [];
+    }
+
+    /**
+     * Compiler Passes for the System Container
+     *
+     * @return string[]
+     */
+    public static function getSystemContainerCompilerPassClasses(): array
+    {
+        return [
+            RegisterSystemCompilerPassServiceCompilerPass::class,
+        ];
     }
 
     /**
