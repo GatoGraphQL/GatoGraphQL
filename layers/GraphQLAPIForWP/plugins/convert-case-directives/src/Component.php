@@ -14,7 +14,7 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \GraphQLAPI\ConvertCaseDirectives\Component::class,
+            \PoPSchema\ConvertCaseDirectives\Component::class,
         ];
     }
 
