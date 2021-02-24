@@ -228,9 +228,14 @@ class AppLoader
      *
      * 1. Initialize the Application Container, have all Components inject services, and compile it
      * 2. Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
+     *
+     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
+     * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      */
-    public static function bootApplication(): void
-    {
+    public static function bootApplication(
+        ?bool $cacheContainerConfiguration = null,
+        ?string $containerNamespace = null
+    ): void {
         /**
          * Allow each component to customize the configuration for itself,
          * and for its depended-upon components.

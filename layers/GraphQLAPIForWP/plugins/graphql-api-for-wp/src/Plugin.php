@@ -352,7 +352,9 @@ class Plugin
     public function bootSystem(): void
     {
         // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootSystem(...PluginConfiguration::getContainerCacheConfiguration());
+        AppLoader::bootSystem(
+            ...PluginConfiguration::getContainerCacheConfiguration()
+        );
     }
 
     /**
@@ -382,7 +384,9 @@ class Plugin
     public function bootApplication(): void
     {
         // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootApplication();
+        AppLoader::bootApplication(
+            ...PluginConfiguration::getContainerCacheConfiguration()
+        );
     }
 
     /**
