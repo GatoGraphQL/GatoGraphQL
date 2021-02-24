@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Facades;
 
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\SystemServices\Registries\ModuleRegistryInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 
 /**
