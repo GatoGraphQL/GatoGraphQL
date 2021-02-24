@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
+namespace GraphQLAPI\GraphQLAPI\Container\SystemCompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
