@@ -269,7 +269,7 @@ services:
         - >-
           layers/GraphQLAPIForWP/plugins/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api-convert-case-directives
         - >-
-          layers/Schema/packages/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/convert-case-directives
+          layers/Schema/packages/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api-convert-case-directives/vendor/pop-schema/convert-case-directives
     run:
       - >-
         wp config create --dbname=wordpress --dbuser=wordpress
