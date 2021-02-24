@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\General\RequestParams;
 use GraphQLAPI\GraphQLAPI\SystemFacades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Admin\TableActions\ModuleListTableAction;
 

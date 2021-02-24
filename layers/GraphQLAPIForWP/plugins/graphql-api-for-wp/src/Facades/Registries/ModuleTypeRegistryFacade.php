@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades;
+namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
 
 use GraphQLAPI\GraphQLAPI\ModuleTypeResolvers\ModuleTypeResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry;
