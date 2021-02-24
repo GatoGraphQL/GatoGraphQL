@@ -17,4 +17,16 @@ class Component extends AbstractComponent
             \PoP\ConvertCaseDirectives\Component::class,
         ];
     }
+
+    /**
+     * Initialize services for the system container
+     *
+     * @param array<string, mixed> $configuration
+     */
+    protected static function initializeSystemContainerServices(
+        array $configuration = []
+    ): void {
+        parent::initializeContainerServices($configuration);
+        self::initYAMLSystemContainerServices(dirname(__DIR__));
+    }
 }

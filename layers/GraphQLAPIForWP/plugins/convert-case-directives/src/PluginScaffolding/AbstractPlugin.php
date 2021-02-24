@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\ConvertCaseDirectives\PluginScaffolding;
 
 use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
-use GraphQLAPI\GraphQLAPI\Facades\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 
 abstract class AbstractPlugin
@@ -77,11 +76,11 @@ abstract class AbstractPlugin
                     // Exit
                     return;
                 }
-                // Add to the registry the ModuleResolvers from this plugin
-                $moduleRegistry = ModuleRegistryFacade::getInstance();
-                foreach ($this->getModuleResolverClasses() as $moduleResolverClass) {
-                    $moduleRegistry->addModuleResolver(new $moduleResolverClass());
-                }
+                // // Add to the registry the ModuleResolvers from this plugin
+                // $moduleRegistry = ModuleRegistryFacade::getInstance();
+                // foreach ($this->getModuleResolverClasses() as $moduleResolverClass) {
+                //     $moduleRegistry->addModuleResolver(new $moduleResolverClass());
+                // }
                 // Execute the plugin's custom setup, if any
                 $this->doSetup();
 
