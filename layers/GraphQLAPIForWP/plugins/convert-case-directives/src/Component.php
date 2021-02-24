@@ -23,7 +23,7 @@ class Component extends AbstractComponent
      */
     protected static function initializeSystemContainerServices(): void
     {
-        parent::initializeContainerServices($configuration);
+        parent::initializeSystemContainerServices();
         self::initYAMLSystemContainerServices(dirname(__DIR__));
     }
 }
