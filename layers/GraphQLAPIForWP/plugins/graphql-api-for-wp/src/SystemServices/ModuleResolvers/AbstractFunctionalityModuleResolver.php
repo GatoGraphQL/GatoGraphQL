@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleTypeResolvers\ModuleTypeResolver;
+use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 abstract class AbstractFunctionalityModuleResolver extends AbstractModuleResolver
 {

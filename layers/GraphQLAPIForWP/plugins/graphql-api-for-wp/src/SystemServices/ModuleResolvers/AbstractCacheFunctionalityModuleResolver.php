@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\ModuleTypeResolvers\ModuleTypeResolver;
+use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
  * The cache modules have different behavior depending on the environment:
