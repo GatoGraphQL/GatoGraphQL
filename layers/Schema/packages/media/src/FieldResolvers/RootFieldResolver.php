@@ -11,14 +11,18 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Media\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\Media\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
-use PoPSchema\Media\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
+    protected CustomPostTypeResolver $customPostTypeResolver;
+
+    function __construct(CustomPostTypeResolver $customPostTypeResolver)
+    {
+        $this->customPostTypeResolver = $customPostTypeResolver;
+    }
+
     public static function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -62,7 +66,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                             $translationAPI->__('The ID of the media element, of type \'%s\'', 'media'),
-                            CustomPostTypeResolver::NAME
+                            $this->customPostTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],

@@ -4,17 +4,30 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeAPIFacade;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 
 class CustomPostMutationResolverHooks extends AbstractHookSet
 {
+    protected MediaTypeResolver $mediaTypeResolver;
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        MediaTypeResolver $mediaTypeResolver
+    ) {
+        parent::__construct($hooksAPI, $translationAPI);
+        $this->mediaTypeResolver = $mediaTypeResolver;
+    }
+
     protected function init()
     {
         $this->hooksAPI->addFilter(
@@ -41,7 +54,7 @@ class CustomPostMutationResolverHooks extends AbstractHookSet
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                 $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
-                MediaTypeResolver::NAME
+                $this->mediaTypeResolver->getTypeName()
             ),
         ];
         return $fieldArgs;
