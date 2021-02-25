@@ -14,7 +14,7 @@ use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\Users\Environment as UsersEnvironment;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -135,7 +135,7 @@ class PluginConfiguration
         ) {
             $value = self::getNormalizedOptionValues();
             // Return the specific value to this module/option
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
+            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $optionName = $moduleResolver->getSettingOptionName($module, $option);
             return $value[$optionName];
@@ -190,7 +190,7 @@ class PluginConfiguration
      */
     protected static function defineEnvironmentConstantsFromSettings(): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         // All the environment variables to override
         $mappings = [
             // Editing Access Scheme
@@ -573,7 +573,7 @@ class PluginConfiguration
      */
     protected static function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = PluginEnvironment::isPluginEnvironmentDev();
 
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
@@ -635,7 +635,7 @@ class PluginConfiguration
      */
     protected static function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleToComponentClassConfigurationMappings = [
             [
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
@@ -693,7 +693,7 @@ class PluginConfiguration
      */
     public static function getSkippingSchemaComponentClasses(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
 
         // Component classes enabled/disabled by module
         $maybeSkipSchemaModuleComponentClasses = [
