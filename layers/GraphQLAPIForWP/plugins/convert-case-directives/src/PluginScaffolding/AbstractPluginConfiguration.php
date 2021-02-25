@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\ConvertCaseDirectives\PluginScaffolding;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 
 abstract class AbstractPluginConfiguration
 {
@@ -17,7 +17,7 @@ abstract class AbstractPluginConfiguration
      */
     public static function getSkippingSchemaComponentClasses(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
 
         // Component classes are skipped if the module is disabled
         $skipSchemaModuleComponentClasses = array_filter(
