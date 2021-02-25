@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
 // use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverInterface;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {

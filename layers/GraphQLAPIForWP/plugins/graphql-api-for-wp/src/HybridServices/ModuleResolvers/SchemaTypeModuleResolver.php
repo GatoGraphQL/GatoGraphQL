@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
@@ -14,17 +14,17 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
 
 class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 {

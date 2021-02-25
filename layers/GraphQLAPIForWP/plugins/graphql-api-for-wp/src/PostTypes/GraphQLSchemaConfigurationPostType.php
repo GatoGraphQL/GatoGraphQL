@@ -12,9 +12,9 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 
 class GraphQLSchemaConfigurationPostType extends AbstractPostType
 {

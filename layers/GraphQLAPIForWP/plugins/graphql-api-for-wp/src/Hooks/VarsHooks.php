@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Hooks;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;

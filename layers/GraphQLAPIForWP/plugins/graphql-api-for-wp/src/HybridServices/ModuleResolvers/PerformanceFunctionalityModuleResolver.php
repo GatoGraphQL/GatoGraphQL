@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**

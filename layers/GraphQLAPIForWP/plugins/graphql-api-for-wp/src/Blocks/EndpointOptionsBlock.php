@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\BlockCategories\EndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 
 /**
  * Endpoint Options block

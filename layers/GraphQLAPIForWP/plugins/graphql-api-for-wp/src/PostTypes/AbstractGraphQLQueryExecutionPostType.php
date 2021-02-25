@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use WP_Query;
 
 abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType

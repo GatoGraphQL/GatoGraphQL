@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\ConvertCaseDirectives\SystemServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\LowerCaseStringDirectiveResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\TitleCaseStringDirectiveResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\UpperCaseStringDirectiveResolver;

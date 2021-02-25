@@ -9,8 +9,8 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\General\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 

@@ -9,5 +9,5 @@ services:
     GraphQLAPI\GraphQLAPI\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
 
-    GraphQLAPI\GraphQLAPI\SystemServices\:
-        resource: '../src/SystemServices/*'
+    GraphQLAPI\GraphQLAPI\HybridServices\:
+        resource: '../src/HybridServices/*'

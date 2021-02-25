@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 
 class EndpointHelpers

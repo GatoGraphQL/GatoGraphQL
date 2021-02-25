@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\SystemCompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
