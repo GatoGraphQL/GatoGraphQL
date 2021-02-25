@@ -9,11 +9,9 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 
 class DirectiveTypeEnum extends AbstractEnum
 {
-    public const NAME = 'DirectiveType';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'DirectiveType';
     }
     public function getValues(): array
     {

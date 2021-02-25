@@ -8,11 +8,9 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class CustomPostModeratedStatusEnum extends AbstractEnum
 {
-    public const NAME = 'CustomPostModeratedStatus';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'CustomPostModeratedStatus';
     }
     public function getValues(): array
     {

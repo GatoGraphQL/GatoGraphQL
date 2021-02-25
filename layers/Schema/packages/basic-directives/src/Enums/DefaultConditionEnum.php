@@ -8,14 +8,12 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class DefaultConditionEnum extends AbstractEnum
 {
-    public const NAME = 'DefaultCondition';
-
     public const IS_NULL = 'IS_NULL';
     public const IS_EMPTY = 'IS_EMPTY';
 
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'DefaultCondition';
     }
     public function getValues(): array
     {

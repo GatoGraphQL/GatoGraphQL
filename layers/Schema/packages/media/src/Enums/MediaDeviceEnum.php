@@ -8,15 +8,13 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class MediaDeviceEnum extends AbstractEnum
 {
-    public const NAME = 'MediaDevice';
-
     public const MOBILE = 'MOBILE';
     public const DESKTOP = 'DESKTOP';
     public const AUTOMATIC = 'AUTOMATIC';
 
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'MediaDevice';
     }
     public function getValues(): array
     {

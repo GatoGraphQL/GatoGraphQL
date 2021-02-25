@@ -9,11 +9,9 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class SchemaFieldShapeEnum extends AbstractEnum
 {
-    public const NAME = 'SchemaOutputShape';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'SchemaOutputShape';
     }
     public function getValues(): array
     {
