@@ -10,11 +10,9 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\AbstractIntrospectionTypeResolver;
 
 class InputValueTypeResolver extends AbstractIntrospectionTypeResolver
 {
-    public const NAME = '__InputValue';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return '__InputValue';
     }
 
     public function getSchemaTypeDescription(): ?string

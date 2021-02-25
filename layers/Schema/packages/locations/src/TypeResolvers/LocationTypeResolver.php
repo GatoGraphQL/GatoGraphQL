@@ -11,11 +11,9 @@ use PoPSchema\Locations\Facades\LocationTypeAPIFacade;
 
 class LocationTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Location';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Location';
     }
 
     public function getSchemaTypeDescription(): ?string

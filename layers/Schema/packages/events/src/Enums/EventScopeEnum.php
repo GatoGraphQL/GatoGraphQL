@@ -8,11 +8,9 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class EventScopeEnum extends AbstractEnum
 {
-    public const NAME = 'EventScope';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'EventScope';
     }
     public function getValues(): array
     {

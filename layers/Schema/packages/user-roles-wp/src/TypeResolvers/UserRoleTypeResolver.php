@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class UserRoleTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'UserRole';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'UserRole';
     }
 
     public function getSchemaTypeDescription(): ?string

@@ -18,6 +18,13 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
+    protected MediaTypeResolver $mediaTypeResolver;
+
+    function __construct(MediaTypeResolver $mediaTypeResolver)
+    {
+        $this->mediaTypeResolver = $mediaTypeResolver;
+    }
+
     public static function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -74,7 +81,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                                 $translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
-                                MediaTypeResolver::NAME
+                                $this->mediaTypeResolver->getTypeName()
                             ),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],

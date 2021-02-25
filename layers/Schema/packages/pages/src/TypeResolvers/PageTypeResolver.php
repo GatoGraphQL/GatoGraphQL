@@ -10,11 +10,9 @@ use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
 
 class PageTypeResolver extends AbstractCustomPostTypeResolver
 {
-    public const NAME = 'Page';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Page';
     }
 
     public function getSchemaTypeDescription(): ?string

@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class SiteTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Site';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Site';
     }
 
     public function getSchemaTypeDescription(): ?string

@@ -13,10 +13,9 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInter
 
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
-    public const NAME = 'Commentable';
     public function getInterfaceName(): string
     {
-        return self::NAME;
+        return 'Commentable';
     }
 
     public function getSchemaInterfaceDescription(): ?string

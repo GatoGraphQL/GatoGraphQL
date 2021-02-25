@@ -1,8 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -19,10 +21,13 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var TypeResolverInterface */
+        $eventTypeResolver = $instanceManager->getInstance(EventTypeResolver::class);
         $field = $fieldQueryInterpreter->getField(
             'isType',
             [
-                'type' => EventTypeResolver::NAME,
+                'type' => $eventTypeResolver->getTypeName(),
             ]
         );
 

@@ -11,11 +11,9 @@ use PoPSchema\Highlights\TypeDataLoaders\HighlightTypeDataLoader;
 
 class HighlightTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Highlight';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Highlight';
     }
 
     public function getSchemaTypeDescription(): ?string

@@ -11,11 +11,9 @@ use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
 
 class EventTypeResolver extends AbstractCustomPostTypeResolver
 {
-    public const NAME = 'Event';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Event';
     }
 
     public function getSchemaTypeDescription(): ?string

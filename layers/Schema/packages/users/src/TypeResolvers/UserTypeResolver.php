@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class UserTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'User';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'User';
     }
 
     public function getSchemaTypeDescription(): ?string

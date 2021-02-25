@@ -10,11 +10,9 @@ use PoPSchema\Notifications\TypeDataLoaders\NotificationTypeDataLoader;
 
 class NotificationTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Notification';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Notification';
     }
 
     public function getSchemaTypeDescription(): ?string

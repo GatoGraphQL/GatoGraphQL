@@ -9,11 +9,9 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
 
 class DirectiveLocationEnum extends AbstractEnum
 {
-    public const NAME = 'DirectiveLocation';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'DirectiveLocation';
     }
     public function getValues(): array
     {

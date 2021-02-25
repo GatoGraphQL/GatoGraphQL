@@ -8,11 +8,9 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class MemberPrivilegeEnum extends AbstractEnum
 {
-    public const NAME = 'MemberPrivilege';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'MemberPrivilege';
     }
     public function getValues(): array
     {

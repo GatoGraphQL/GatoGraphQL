@@ -8,14 +8,12 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class FieldFeedbackTargetEnum extends AbstractEnum
 {
-    public const NAME = 'FieldFeedbackTarget';
-
     public const DB = 'db';
     public const SCHEMA = 'schema';
 
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'FieldFeedbackTarget';
     }
     public function getValues(): array
     {

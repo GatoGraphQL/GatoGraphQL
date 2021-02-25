@@ -10,11 +10,9 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\AbstractIntrospectionTypeResolver;
 
 class SchemaTypeResolver extends AbstractIntrospectionTypeResolver
 {
-    public const NAME = '__Schema';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return '__Schema';
     }
 
     public function getSchemaTypeDescription(): ?string

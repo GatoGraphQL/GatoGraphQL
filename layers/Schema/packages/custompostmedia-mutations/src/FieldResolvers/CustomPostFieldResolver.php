@@ -17,6 +17,13 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCu
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
+    protected MediaTypeResolver $mediaTypeResolver;
+
+    function __construct(MediaTypeResolver $mediaTypeResolver)
+    {
+        $this->mediaTypeResolver = $mediaTypeResolver;
+    }
+
     public static function getClassesToAttachTo(): array
     {
         return array(IsCustomPostFieldInterfaceResolver::class);
@@ -72,7 +79,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                             $translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
-                            MediaTypeResolver::NAME
+                            $this->mediaTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],

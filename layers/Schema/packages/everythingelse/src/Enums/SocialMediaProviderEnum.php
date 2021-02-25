@@ -8,11 +8,9 @@ use PoP\ComponentModel\Enums\AbstractEnum;
 
 class SocialMediaProviderEnum extends AbstractEnum
 {
-    public const NAME = 'SocialMediaProvider';
-
     protected function getEnumName(): string
     {
-        return self::NAME;
+        return 'SocialMediaProvider';
     }
     public function getValues(): array
     {

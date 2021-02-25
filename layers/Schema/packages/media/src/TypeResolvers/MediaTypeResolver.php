@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class MediaTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Media';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Media';
     }
 
     public function getSchemaTypeDescription(): ?string

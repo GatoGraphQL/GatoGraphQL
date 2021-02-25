@@ -14,11 +14,9 @@ class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResol
 {
     use ReservedNameTypeResolverTrait;
 
-    public const NAME = 'MutationRoot';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'MutationRoot';
     }
 
     public function getSchemaTypeDescription(): ?string

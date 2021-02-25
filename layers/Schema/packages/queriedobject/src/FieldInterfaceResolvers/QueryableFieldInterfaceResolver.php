@@ -10,11 +10,9 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResol
 
 class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
-    public const NAME = 'Queryable';
-
     public function getInterfaceName(): string
     {
-        return self::NAME;
+        return 'Queryable';
     }
 
     public function getSchemaInterfaceDescription(): ?string
