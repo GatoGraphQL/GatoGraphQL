@@ -10,11 +10,9 @@ use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaDefinitionReferenceTypeData
 
 class EnumValueTypeResolver extends AbstractIntrospectionTypeResolver
 {
-    public const NAME = '__EnumValue';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return '__EnumValue';
     }
 
     public function getSchemaTypeDescription(): ?string

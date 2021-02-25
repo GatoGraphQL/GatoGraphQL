@@ -10,11 +10,9 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\AbstractIntrospectionTypeResolver;
 
 class DirectiveTypeResolver extends AbstractIntrospectionTypeResolver
 {
-    public const NAME = '__Directive';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return '__Directive';
     }
 
     public function getSchemaTypeDescription(): ?string
