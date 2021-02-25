@@ -11,11 +11,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class StanceTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Stance';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Stance';
     }
 
     public function getSchemaTypeDescription(): ?string

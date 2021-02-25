@@ -10,11 +10,9 @@ use PoPSchema\GenericCustomPosts\TypeDataLoaders\GenericCustomPostTypeDataLoader
 
 class GenericCustomPostTypeResolver extends AbstractCustomPostTypeResolver
 {
-    public const NAME = 'GenericCustomPost';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'GenericCustomPost';
     }
 
     public function getSchemaTypeDescription(): ?string

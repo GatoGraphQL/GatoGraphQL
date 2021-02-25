@@ -11,11 +11,9 @@ use PoPSchema\CustomPosts\TypeDataLoaders\CustomPostUnionTypeDataLoader;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
-    public const NAME = 'CustomPostUnion';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'CustomPostUnion';
     }
 
     public function getSchemaTypeDescription(): ?string

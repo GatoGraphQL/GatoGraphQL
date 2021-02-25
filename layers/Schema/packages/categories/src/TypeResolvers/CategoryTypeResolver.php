@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class CategoryTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Category';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Category';
     }
 
     public function getSchemaTypeDescription(): ?string

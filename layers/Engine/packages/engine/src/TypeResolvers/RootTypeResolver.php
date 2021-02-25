@@ -15,11 +15,9 @@ class RootTypeResolver extends AbstractTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 
-    public const NAME = 'Root';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Root';
     }
 
     public function getSchemaTypeDescription(): ?string

@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class CommentTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Comment';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Comment';
     }
 
     public function getSchemaTypeDescription(): ?string

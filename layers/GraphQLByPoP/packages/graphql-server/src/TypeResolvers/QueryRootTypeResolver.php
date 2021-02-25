@@ -14,11 +14,9 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 
-    public const NAME = 'QueryRoot';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'QueryRoot';
     }
 
     public function getSchemaTypeDescription(): ?string

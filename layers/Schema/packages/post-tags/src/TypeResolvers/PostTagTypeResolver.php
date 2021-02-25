@@ -13,11 +13,9 @@ class PostTagTypeResolver extends AbstractTagTypeResolver
 {
     use PostTagAPISatisfiedContractTrait;
 
-    public const NAME = 'PostTag';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'PostTag';
     }
 
     public function getSchemaTypeDescription(): ?string

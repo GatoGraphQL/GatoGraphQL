@@ -10,11 +10,9 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class MenuTypeResolver extends AbstractTypeResolver
 {
-    public const NAME = 'Menu';
-
     public function getTypeName(): string
     {
-        return self::NAME;
+        return 'Menu';
     }
 
     public function getSchemaTypeDescription(): ?string
