@@ -71,6 +71,7 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
+        self::initYAMLSystemContainerServices(dirname(__DIR__), '', 'hybrid-services.yaml');
         self::initYAMLSystemContainerServices(dirname(__DIR__));
     }
 
@@ -86,6 +87,7 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
+        self::initYAMLServices(dirname(__DIR__), '', 'hybrid-services.yaml');
         self::initYAMLServices(dirname(__DIR__));
         self::initComponentConfiguration();
         // Override DI services
