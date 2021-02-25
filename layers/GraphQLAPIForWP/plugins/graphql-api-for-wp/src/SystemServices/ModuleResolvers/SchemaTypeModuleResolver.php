@@ -62,26 +62,32 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
 
-    protected CommentTypeResolver $commentTypeResolver;
-    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
-    protected GenericCustomPostTypeResolver $genericCustomPostTypeResolver;
-    protected MediaTypeResolver $mediaTypeResolver;
-    protected PageTypeResolver $pageTypeResolver;
-    protected PostTagTypeResolver $postTagTypeResolver;
-    protected PostTypeResolver $postTypeResolver;
-    protected UserRoleTypeResolver $userRoleTypeResolver;
-    protected UserTypeResolver $userTypeResolver;
+    /**
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers
+     */
+    protected ?CommentTypeResolver $commentTypeResolver;
+    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver;
+    protected ?MediaTypeResolver $mediaTypeResolver;
+    protected ?PageTypeResolver $pageTypeResolver;
+    protected ?PostTagTypeResolver $postTagTypeResolver;
+    protected ?PostTypeResolver $postTypeResolver;
+    protected ?UserRoleTypeResolver $userRoleTypeResolver;
+    protected ?UserTypeResolver $userTypeResolver;
 
     public function __construct(
-        CommentTypeResolver $commentTypeResolver,
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
-        MediaTypeResolver $mediaTypeResolver,
-        PageTypeResolver $pageTypeResolver,
-        PostTagTypeResolver $postTagTypeResolver,
-        PostTypeResolver $postTypeResolver,
-        UserRoleTypeResolver $userRoleTypeResolver,
-        UserTypeResolver $userTypeResolver
+        ?CommentTypeResolver $commentTypeResolver,
+        ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
+        ?MediaTypeResolver $mediaTypeResolver,
+        ?PageTypeResolver $pageTypeResolver,
+        ?PostTagTypeResolver $postTagTypeResolver,
+        ?PostTypeResolver $postTypeResolver,
+        ?UserRoleTypeResolver $userRoleTypeResolver,
+        ?UserTypeResolver $userTypeResolver
     ) {
         $this->commentTypeResolver = $commentTypeResolver;
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
