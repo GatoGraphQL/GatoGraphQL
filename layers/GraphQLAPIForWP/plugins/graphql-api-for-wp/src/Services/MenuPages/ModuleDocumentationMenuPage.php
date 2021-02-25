@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
 use InvalidArgumentException;
@@ -15,13 +14,6 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
-    protected MenuPageHelper $menuPageHelper;
-
-    function __construct(MenuPageHelper $menuPageHelper)
-    {
-        $this->menuPageHelper = $menuPageHelper;
-    }
-
     public function getMenuPageSlug(): string
     {
         $instanceManager = InstanceManagerFacade::getInstance();

@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\GraphiQLMenuPage:
+    GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage:
         class: '\GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\ConditionalOnEnvironment\GraphiQLExplorerInAdminClient\Overrides\Services\MenuPages\GraphiQLMenuPage'

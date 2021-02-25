@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\EnqueueReactMenuPageTrait;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\EnqueueReactMenuPageTrait;
 use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 
 /**
@@ -14,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 class GraphQLVoyagerMenuPage extends AbstractMenuPage
 {
     use EnqueueReactMenuPageTrait;
-    use GraphQLAPIMenuPageTrait;
 
     public function print(): void
     {

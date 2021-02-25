@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 
@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 class GraphiQLMenuPage extends AbstractMenuPage
 {
     use EnqueueReactMenuPageTrait;
-    use GraphQLAPIMenuPageTrait;
 
     public function print(): void
     {

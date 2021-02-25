@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus;
+namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
@@ -13,7 +11,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 {
-    abstract public static function getName(): string;
+    abstract public function getName(): string;
 
     /**
      * Initialize the endpoints

@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
 use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
 use InvalidArgumentException;
@@ -15,13 +14,6 @@ use InvalidArgumentException;
 class AboutMenuPage extends AbstractDocsMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
-
-    protected MenuPageHelper $menuPageHelper;
-
-    function __construct(MenuPageHelper $menuPageHelper)
-    {
-        $this->menuPageHelper = $menuPageHelper;
-    }
 
     public function getMenuPageSlug(): string
     {

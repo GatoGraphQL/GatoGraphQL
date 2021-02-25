@@ -4,18 +4,24 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
-use WP_Post;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\General\CPTUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\General\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use PoP\ComponentModel\State\ApplicationState;
+use WP_Post;
 
 abstract class AbstractPostType
 {
+    protected Menu $menu;
+
+    function __construct(Menu $menu)
+    {
+        $this->menu = $menu;
+    }
     /**
      * Add the hook to initialize the different post types
      *
@@ -372,7 +378,7 @@ abstract class AbstractPostType
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
                 'show_in_admin_bar' => $this->showInAdminBar(),
-                'show_in_menu' => $canAccessSchemaEditor ? Menu::getName() : false,
+                'show_in_menu' => $canAccessSchemaEditor ? $this->menu->getName() : false,
                 'show_in_rest' => true,
                 'supports' => [
                     'title',
