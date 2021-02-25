@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\ComponentModel\Component\ApplicationEvents;
+use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;

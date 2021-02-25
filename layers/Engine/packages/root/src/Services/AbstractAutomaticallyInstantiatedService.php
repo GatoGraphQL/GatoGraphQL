@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Services;
 
-use PoP\ComponentModel\Component\ApplicationEvents;
+use PoP\Root\Component\ApplicationEvents;
 
 /**
  * A service which must always be instantiated,
