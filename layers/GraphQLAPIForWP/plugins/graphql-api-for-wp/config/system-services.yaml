@@ -6,3 +6,6 @@ services:
     GraphQLAPI\GraphQLAPI\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
 
+    GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\:
+        resource: '../src/Container/HybridCompilerPasses/*'
+
