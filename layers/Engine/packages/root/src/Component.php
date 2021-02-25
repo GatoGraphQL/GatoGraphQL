@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
@@ -76,6 +77,36 @@ class Component extends AbstractComponent
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
-        $serviceInstantiator->initializeServices();
+        $serviceInstantiator->initializeServices(ApplicationEvents::BEFORE_BOOT);
+    }
+
+    /**
+     * Function called by the Bootloader after all components have been loaded
+     *
+     * @return void
+     */
+    public static function boot(): void
+    {
+        // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
+        /**
+         * @var ServiceInstantiatorInterface
+         */
+        $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator->initializeServices(ApplicationEvents::BOOT);
+    }
+
+    /**
+     * Function called by the Bootloader after all components have been loaded
+     *
+     * @return void
+     */
+    public static function afterBoot(): void
+    {
+        // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
+        /**
+         * @var ServiceInstantiatorInterface
+         */
+        $serviceInstantiator = ContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator->initializeServices(ApplicationEvents::AFTER_BOOT);
     }
 }

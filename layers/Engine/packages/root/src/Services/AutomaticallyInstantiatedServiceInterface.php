@@ -12,4 +12,5 @@ namespace PoP\Root\Services;
 interface AutomaticallyInstantiatedServiceInterface
 {
     public function initialize(): void;
+    public function getInstantiationEvent(): string;
 }

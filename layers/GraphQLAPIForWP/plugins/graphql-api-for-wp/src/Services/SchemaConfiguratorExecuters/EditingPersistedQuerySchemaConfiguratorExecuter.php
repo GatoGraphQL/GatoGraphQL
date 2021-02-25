@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;

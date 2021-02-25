@@ -7,13 +7,6 @@ namespace GraphQLAPI\GraphQLAPI;
 use GraphQLAPI\GraphQLAPI\Container\SystemCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EditingPersistedQuerySchemaConfiguratorExecuter;
-use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\EndpointSchemaConfiguratorExecuter;
-use GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters\PersistedQuerySchemaConfiguratorExecuter;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\CacheFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
@@ -166,20 +159,5 @@ class Component extends AbstractComponent
             PHP_INT_MAX,
             1
         );
-    }
-
-    /**
-     * Boot component
-     *
-     * @return void
-     */
-    public static function boot(): void
-    {
-        parent::boot();
-
-        // Configure the GraphQL query with Access/Cache Control Lists
-        (new PersistedQuerySchemaConfiguratorExecuter())->init();
-        (new EndpointSchemaConfiguratorExecuter())->init();
-        (new EditingPersistedQuerySchemaConfiguratorExecuter(new EndpointHelpers(new Menu(new MenuPageHelper()))))->init();
     }
 }

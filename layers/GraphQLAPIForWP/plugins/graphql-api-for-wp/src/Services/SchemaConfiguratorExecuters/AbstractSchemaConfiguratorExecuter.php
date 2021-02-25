@@ -2,16 +2,23 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfiguratorExecuters;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\SchemaConfigurators\SchemaConfiguratorInterface;
+use PoP\Root\Component\ApplicationEvents;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractSchemaConfiguratorExecuter
+abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {
+    public function getInstantiationEvent(): string
+    {
+        return ApplicationEvents::BOOT;
+    }
+
     /**
      * Initialize the configuration if a certain condition is satisfied
      */
-    public function init(): void
+    public function initialize(): void
     {
         if ($customPostID = $this->getCustomPostID()) {
             $schemaConfigurator = $this->getSchemaConfigurator();

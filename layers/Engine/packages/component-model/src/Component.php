@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\Component\ApplicationEvents;
+use PoP\Root\Component\ApplicationEvents;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -76,7 +76,8 @@ class Component extends AbstractComponent
         ComponentConfiguration::init();
 
         // Attach class extensions
-        AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::BEFORE_BOOT);
+        $attachExtensionService = AttachExtensionServiceFacade::getInstance();
+        $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
 
     /**
@@ -89,7 +90,8 @@ class Component extends AbstractComponent
         parent::afterBoot();
 
         // Attach class extensions
-        AttachExtensionServiceFacade::getInstance()->attachExtensions(ApplicationEvents::AFTER_BOOT);
+        $attachExtensionService = AttachExtensionServiceFacade::getInstance();
+        $attachExtensionService->attachExtensions(ApplicationEvents::AFTER_BOOT);
     }
 
     /**
