@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 /**
  * Menu Page

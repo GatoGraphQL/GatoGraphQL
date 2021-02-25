@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\EnqueueReactMenuPageTrait;
-use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\EnqueueReactMenuPageTrait;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 
 /**
  * Voyager page
@@ -14,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 class GraphQLVoyagerMenuPage extends AbstractMenuPage
 {
     use EnqueueReactMenuPageTrait;
-    use GraphQLAPIMenuPageTrait;
 
     public function print(): void
     {
@@ -74,7 +73,7 @@ class GraphQLVoyagerMenuPage extends AbstractMenuPage
             'graphQLByPoPGraphiQLSettings',
             array(
                 'nonce' => \wp_create_nonce('wp_rest'),
-                'endpoint' => EndpointHelpers::getAdminGraphQLEndpoint(),
+                'endpoint' => $this->endpointHelpers->getAdminGraphQLEndpoint(),
             )
         );
     }

@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 
 /**
  * Docs menu page
  */
 abstract class AbstractDocsMenuPage extends AbstractMenuPage
 {
-    use GraphQLAPIMenuPageTrait;
     use OpenInModalMenuPageTrait;
     use UseTabpanelMenuPageTrait;
 

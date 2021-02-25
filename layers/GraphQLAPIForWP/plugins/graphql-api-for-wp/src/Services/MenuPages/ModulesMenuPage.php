@@ -2,29 +2,19 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\AbstractTableMenuPage;
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractTableMenuPage;
 
 /**
  * Module menu page
  */
 class ModulesMenuPage extends AbstractTableMenuPage
 {
-    use GraphQLAPIMenuPageTrait;
     use OpenInModalTriggerMenuPageTrait;
 
     public const SCREEN_OPTION_NAME = 'graphql_api_modules_per_page';
-
-    protected MenuPageHelper $menuPageHelper;
-
-    function __construct(MenuPageHelper $menuPageHelper)
-    {
-        $this->menuPageHelper = $menuPageHelper;
-    }
 
     public function getMenuPageSlug(): string
     {

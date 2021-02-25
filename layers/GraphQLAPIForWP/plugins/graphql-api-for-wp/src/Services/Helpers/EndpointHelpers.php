@@ -2,15 +2,22 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
+use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 
 class EndpointHelpers
 {
+    protected Menu $menu;
+
+    function __construct(Menu $menu)
+    {
+        $this->menu = $menu;
+    }
 
     /**
      * Indicate if we are requesting
@@ -18,12 +25,12 @@ class EndpointHelpers
      *
      * @return boolean
      */
-    public static function isRequestingAdminGraphQLEndpoint(): bool
+    public function isRequestingAdminGraphQLEndpoint(): bool
     {
         return \is_admin()
             && 'POST' == $_SERVER['REQUEST_METHOD']
             && isset($_GET['page'])
-            && $_GET['page'] == Menu::getName()
+            && $_GET['page'] == $this->menu->getName()
             && isset($_GET[RequestParams::ACTION])
             && $_GET[RequestParams::ACTION] == RequestParams::ACTION_EXECUTE_QUERY;
     }
@@ -33,11 +40,11 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public static function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
+    public function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
     {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
-            Menu::getName(),
+            $this->menu->getName(),
             RequestParams::ACTION,
             RequestParams::ACTION_EXECUTE_QUERY
         ));

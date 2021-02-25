@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages\MenuPageInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
@@ -13,6 +16,19 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
+    protected Menu $menu;
+    protected MenuPageHelper $menuPageHelper;
+    protected EndpointHelpers $endpointHelpers;
+
+    function __construct(
+        Menu $menu,
+        MenuPageHelper $menuPageHelper,
+        EndpointHelpers $endpointHelpers
+    ) {
+        $this->menu = $menu;
+        $this->menuPageHelper = $menuPageHelper;
+        $this->endpointHelpers = $endpointHelpers;
+    }
 
     public function setHookName(string $hookName): void
     {
@@ -48,7 +64,11 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
         }
     }
 
-    abstract public function getMenuName(): string;
+    public function getMenuName(): string
+    {
+        return $this->menu->getName();
+    }
+
     abstract public function getMenuPageSlug(): string;
 
     protected function isCurrentScreen(): bool

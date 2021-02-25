@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 
 /**
  * GraphiQL page
@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
 class GraphiQLMenuPage extends AbstractMenuPage
 {
     use EnqueueReactMenuPageTrait;
-    use GraphQLAPIMenuPageTrait;
 
     public function print(): void
     {
@@ -103,7 +102,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             array_merge(
                 [
                     'defaultQuery' => $this->getDefaultQuery(),
-                    'endpoint' => EndpointHelpers::getAdminGraphQLEndpoint(),
+                    'endpoint' => $this->endpointHelpers->getAdminGraphQLEndpoint(),
                 ],
                 $scriptSettings
             )

@@ -178,6 +178,8 @@ abstract class AbstractPlugin
         AppLoader::addSchemaComponentClassesToSkip(
             $this->getSchemaComponentClassesToSkip()
         );
+        // Execute the plugin's custom config
+        $this->doConfigure();
     }
 
     /**
@@ -201,7 +203,7 @@ abstract class AbstractPlugin
     /**
      * List of ModuleResolver classes used in the plugin
      *
-     * @return array
+     * @return string[]
      */
     protected function getModuleResolverClasses(): array
     {
@@ -210,10 +212,16 @@ abstract class AbstractPlugin
 
     /**
      * Plugin set-up
-     *
-     * @return void
      */
-    public function doSetup(): void
+    protected function doSetup(): void
+    {
+        // Function to override
+    }
+
+    /**
+     * Plugin configuration
+     */
+    protected function doConfigure(): void
     {
         // Function to override
     }
@@ -237,8 +245,7 @@ abstract class AbstractPlugin
     /**
      * Get permalinks to work when activating the plugin
      *
-     * @see    https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
-     * @return void
+     * @see https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
      */
     public function activate(): void
     {
@@ -251,8 +258,7 @@ abstract class AbstractPlugin
     /**
      * Remove permalinks when deactivating the plugin
      *
-     * @see    https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     * @return void
+     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
      */
     public function deactivate(): void
     {
@@ -264,8 +270,6 @@ abstract class AbstractPlugin
 
     /**
      * Regenerate the timestamp
-     *
-     * @return void
      */
     protected function regenerateTimestamp(): void
     {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives;
 
-use PoP\Engine\AppLoader;
 use GraphQLAPI\ConvertCaseDirectives\PluginConfiguration;
 use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPlugin;
 use GraphQLAPI\ConvertCaseDirectives\SystemServices\ModuleResolvers\SchemaModuleResolver;
@@ -18,8 +17,6 @@ class Plugin extends AbstractPlugin
 
     /**
      * Plugin main file
-     *
-     * @return string
      */
     protected function getPluginFile(): string
     {
@@ -28,8 +25,6 @@ class Plugin extends AbstractPlugin
 
     /**
      * Plugin name
-     *
-     * @return string
      */
     protected function getPluginName(): string
     {
@@ -39,7 +34,7 @@ class Plugin extends AbstractPlugin
     /**
      * List of ModuleResolver classes used in the plugin
      *
-     * @return array
+     * @return string[]
      */
     protected function getModuleResolverClasses(): array
     {
