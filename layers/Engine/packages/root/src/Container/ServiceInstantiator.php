@@ -22,7 +22,7 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     {
         $this->serviceDefinitions[] = $serviceDefinition;
     }
-    public function initializeServices(): void
+    public function initializeServices(string $event): void
     {
         $containerBuilder = ContainerBuilderFactory::getInstance();
         foreach ($this->serviceDefinitions as $serviceDefinition) {

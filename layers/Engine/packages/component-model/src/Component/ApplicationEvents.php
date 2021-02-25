@@ -7,5 +7,6 @@ namespace PoP\ComponentModel\Component;
 class ApplicationEvents
 {
     public const BEFORE_BOOT = 'beforeBoot';
+    public const BOOT = 'boot';
     public const AFTER_BOOT = 'afterBoot';
 }
