@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
@@ -17,13 +18,16 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     protected ?string $hookName = null;
     protected Menu $menu;
     protected MenuPageHelper $menuPageHelper;
+    protected EndpointHelpers $endpointHelpers;
 
     function __construct(
         Menu $menu,
-        MenuPageHelper $menuPageHelper
+        MenuPageHelper $menuPageHelper,
+        EndpointHelpers $endpointHelpers
     ) {
         $this->menu = $menu;
         $this->menuPageHelper = $menuPageHelper;
+        $this->endpointHelpers = $endpointHelpers;
     }
 
     public function setHookName(string $hookName): void

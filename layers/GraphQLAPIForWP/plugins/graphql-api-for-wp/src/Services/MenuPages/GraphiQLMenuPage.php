@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 
 /**
  * GraphiQL page
@@ -102,7 +102,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             array_merge(
                 [
                     'defaultQuery' => $this->getDefaultQuery(),
-                    'endpoint' => EndpointHelpers::getAdminGraphQLEndpoint(),
+                    'endpoint' => $this->endpointHelpers->getAdminGraphQLEndpoint(),
                 ],
                 $scriptSettings
             )

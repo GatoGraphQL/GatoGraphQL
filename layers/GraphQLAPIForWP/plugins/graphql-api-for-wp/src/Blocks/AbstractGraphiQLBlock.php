@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
@@ -20,6 +20,13 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
+
+    protected EndpointHelpers $endpointHelpers;
+
+    function __construct(EndpointHelpers $endpointHelpers)
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
 
     protected function getBlockName(): string
     {
@@ -43,7 +50,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getAdminGraphQLEndpoint(): string
     {
-        return EndpointHelpers::getAdminGraphQLEndpoint(true);
+        return $this->endpointHelpers->getAdminGraphQLEndpoint(true);
     }
 
     /**

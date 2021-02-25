@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\EnqueueReactMenuPageTrait;
-use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 
 /**
  * Voyager page
@@ -73,7 +73,7 @@ class GraphQLVoyagerMenuPage extends AbstractMenuPage
             'graphQLByPoPGraphiQLSettings',
             array(
                 'nonce' => \wp_create_nonce('wp_rest'),
-                'endpoint' => EndpointHelpers::getAdminGraphQLEndpoint(),
+                'endpoint' => $this->endpointHelpers->getAdminGraphQLEndpoint(),
             )
         );
     }

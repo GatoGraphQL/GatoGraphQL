@@ -2,16 +2,22 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class EndpointHelpers
 {
+    protected Menu $menu;
+
+    function __construct(Menu $menu)
+    {
+        $this->menu = $menu;
+    }
 
     /**
      * Indicate if we are requesting
@@ -19,15 +25,12 @@ class EndpointHelpers
      *
      * @return boolean
      */
-    public static function isRequestingAdminGraphQLEndpoint(): bool
+    public function isRequestingAdminGraphQLEndpoint(): bool
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var Menu */
-        $menu = $instanceManager->getInstance(Menu::class);
         return \is_admin()
             && 'POST' == $_SERVER['REQUEST_METHOD']
             && isset($_GET['page'])
-            && $_GET['page'] == $menu->getName()
+            && $_GET['page'] == $this->menu->getName()
             && isset($_GET[RequestParams::ACTION])
             && $_GET[RequestParams::ACTION] == RequestParams::ACTION_EXECUTE_QUERY;
     }
@@ -37,14 +40,11 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public static function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
+    public function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var Menu */
-        $menu = $instanceManager->getInstance(Menu::class);
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
-            $menu->getName(),
+            $this->menu->getName(),
             RequestParams::ACTION,
             RequestParams::ACTION_EXECUTE_QUERY
         ));

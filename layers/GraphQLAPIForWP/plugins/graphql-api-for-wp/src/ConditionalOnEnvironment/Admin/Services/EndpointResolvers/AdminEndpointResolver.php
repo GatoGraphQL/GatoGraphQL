@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\EndpointResolvers;
 
 use PoP\EngineWP\Templates\TemplateHelpers;
-use GraphQLAPI\GraphQLAPI\General\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\EndpointResolvers\EndpointResolverTrait;
@@ -39,7 +39,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function isGraphQLQueryExecution(): bool
     {
-        return EndpointHelpers::isRequestingAdminGraphQLEndpoint();
+        return $this->endpointHelpers->isRequestingAdminGraphQLEndpoint();
     }
 
     /**
@@ -82,7 +82,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                  */
                 \printf(
                     '<script type="text/javascript">var GRAPHQL_API_ADMIN_ENDPOINT = "%s"</script>',
-                    EndpointHelpers::getAdminGraphQLEndpoint()
+                    $this->endpointHelpers->getAdminGraphQLEndpoint()
                 );
             }
         });

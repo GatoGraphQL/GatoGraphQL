@@ -334,7 +334,7 @@ abstract class AbstractBlock
         /**
          * Localize the script with custom data
          * Execute on hook "wp_print_scripts" and not now,
-         * because `getLocalizedData` might call EndpointHelpers::getAdminGraphQLEndpoint(),
+         * because `getLocalizedData` might call EndpointHelpers->getAdminGraphQLEndpoint(),
          * which calls ComponentModelComponentConfiguration::namespaceTypesAndInterfaces(),
          * which is initialized during "wp"
          */

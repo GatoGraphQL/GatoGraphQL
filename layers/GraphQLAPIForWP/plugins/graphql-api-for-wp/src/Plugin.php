@@ -23,6 +23,7 @@ use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
@@ -329,7 +330,8 @@ class Plugin
             // (maybe that happens under `initialize`)
             $menuPageHelper = new MenuPageHelper();
             $menu = new Menu($menuPageHelper);
-            $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper);
+            $endpointHelpers = new EndpointHelpers($menu);
+            $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper, $endpointHelpers);
             if (
                 (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
                 && !$menuPageHelper->isDocumentationScreen()
