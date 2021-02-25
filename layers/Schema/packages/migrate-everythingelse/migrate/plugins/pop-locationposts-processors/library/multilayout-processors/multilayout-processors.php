@@ -1,6 +1,8 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
@@ -15,11 +17,14 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
 
     public function addLayoutModules(&$layouts, $handle, $format = '')
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var TypeResolverInterface */
+        $locationPostTypeResolver = $instanceManager->getInstance(LocationPostTypeResolver::class);
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = $fieldQueryInterpreter->getField(
             'isType',
             [
-                'type' => LocationPostTypeResolver::NAME,
+                'type' => $locationPostTypeResolver->getTypeName(),
             ]
         );
         switch ($handle) {

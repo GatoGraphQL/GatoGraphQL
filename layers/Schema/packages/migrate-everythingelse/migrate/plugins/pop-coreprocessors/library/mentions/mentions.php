@@ -1,9 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
@@ -248,9 +250,12 @@ class PoP_Mentions
             $content = $match[0];
         } else {
             // Allow for the popover by adding data-popover-id
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var TypeResolverInterface */
+            $userTypeResolver = $instanceManager->getInstance(UserTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-'.RequestUtils::getDomainId($cmsengineapi->getSiteURL()).'-'.UserTypeResolver::NAME.'-'.$cmsusersresolver->getUserId($user),
+                '#popover-' . RequestUtils::getDomainId($cmsengineapi->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $cmsusersresolver->getUserId($user),
                 $cmsusersapi->getUserURL($cmsusersresolver->getUserId($user)),
                 $cmsusersresolver->getUserDisplayName($user)
             );
