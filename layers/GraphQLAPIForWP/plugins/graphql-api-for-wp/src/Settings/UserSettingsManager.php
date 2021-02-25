@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Settings;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 class UserSettingsManager implements UserSettingsManagerInterface
@@ -52,7 +52,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getSetting(string $module, string $option)
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
 
         // If the item is saved in the DB, retrieve it
