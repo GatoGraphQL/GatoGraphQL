@@ -11,11 +11,9 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResol
 
 class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
-    public const NAME = 'WithAuthor';
-
     public function getInterfaceName(): string
     {
-        return self::NAME;
+        return 'WithAuthor';
     }
 
     public function getSchemaInterfaceDescription(): ?string

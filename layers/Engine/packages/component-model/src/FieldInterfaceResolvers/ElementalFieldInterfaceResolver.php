@@ -10,10 +10,9 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResol
 
 class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
-    public const NAME = 'Elemental';
     public function getInterfaceName(): string
     {
-        return self::NAME;
+        return 'Elemental';
     }
 
     public function getSchemaInterfaceDescription(): ?string

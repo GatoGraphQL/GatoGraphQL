@@ -11,10 +11,9 @@ use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResol
 
 class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
-    public const NAME = 'SupportingFeaturedImage';
     public function getInterfaceName(): string
     {
-        return self::NAME;
+        return 'SupportingFeaturedImage';
     }
 
     public function getSchemaInterfaceDescription(): ?string

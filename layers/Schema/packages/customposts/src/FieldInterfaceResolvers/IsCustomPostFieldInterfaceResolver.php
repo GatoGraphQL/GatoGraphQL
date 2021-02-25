@@ -19,11 +19,9 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 {
     use EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 
-    public const NAME = 'IsCustomPost';
-
     public function getInterfaceName(): string
     {
-        return self::NAME;
+        return 'IsCustomPost';
     }
 
     public static function getImplementedInterfaceClasses(): array
