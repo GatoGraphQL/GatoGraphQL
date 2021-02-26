@@ -79,4 +79,4 @@ class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
 }
 
 // Static Initialization: Attach
-GD_WSL_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new GD_WSL_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

@@ -70,4 +70,4 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
 }
 
 // Static Initialization: Attach
-GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

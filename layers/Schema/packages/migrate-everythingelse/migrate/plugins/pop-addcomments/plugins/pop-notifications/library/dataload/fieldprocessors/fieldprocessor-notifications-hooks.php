@@ -202,4 +202,4 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 }
 
 // Static Initialization: Attach
-PoP_AddComments_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_AddComments_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

@@ -82,4 +82,4 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
 }
 
 // Static Initialization: Attach
-GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

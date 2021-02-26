@@ -72,4 +72,4 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
 }
 
 // Static Initialization: Attach
-GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

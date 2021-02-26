@@ -132,4 +132,4 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
 }
 
 // Static Initialization: Attach
-PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

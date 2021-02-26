@@ -77,4 +77,4 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
 }
 
 // Static Initialization: Attach
-PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

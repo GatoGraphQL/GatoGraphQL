@@ -116,4 +116,4 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
 }
 
 // Static Initialization: Attach
-UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

@@ -18,4 +18,4 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaI
 }
 
 // Static Initialization: Attach
-PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaItems::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

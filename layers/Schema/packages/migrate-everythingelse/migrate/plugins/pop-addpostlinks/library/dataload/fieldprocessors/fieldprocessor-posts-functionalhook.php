@@ -79,4 +79,4 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 }
 
 // Static Initialization: Attach
-PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

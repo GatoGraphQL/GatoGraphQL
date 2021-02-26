@@ -122,4 +122,4 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
 }
 
 // Static Initialization: Attach
-GD_SocialNetwork_DataLoad_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_SocialNetwork_DataLoad_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

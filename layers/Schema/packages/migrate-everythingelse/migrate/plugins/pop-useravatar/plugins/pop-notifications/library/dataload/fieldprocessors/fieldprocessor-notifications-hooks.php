@@ -111,4 +111,4 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
 }
 
 // Static Initialization: Attach
-PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

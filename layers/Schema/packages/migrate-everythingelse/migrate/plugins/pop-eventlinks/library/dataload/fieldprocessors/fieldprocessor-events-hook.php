@@ -101,4 +101,4 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
 }
 
 // Static Initialization: Attach
-GD_EM_DataLoad_FieldResolver_Events::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new GD_EM_DataLoad_FieldResolver_Events())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

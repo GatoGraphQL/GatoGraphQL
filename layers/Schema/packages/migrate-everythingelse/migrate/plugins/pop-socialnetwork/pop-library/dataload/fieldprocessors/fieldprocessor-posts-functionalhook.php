@@ -136,4 +136,4 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 }
 
 // Static Initialization: Attach
-GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

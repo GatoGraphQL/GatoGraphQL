@@ -72,4 +72,4 @@ class PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 }
 
 // Static Initialization: Attach
-PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

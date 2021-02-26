@@ -148,4 +148,4 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
 }
 
 // Static Initialization: Attach
-PoP_Application_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Application_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

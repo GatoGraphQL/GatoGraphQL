@@ -118,4 +118,4 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
 }
 
 // Static Initialization: Attach
-FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

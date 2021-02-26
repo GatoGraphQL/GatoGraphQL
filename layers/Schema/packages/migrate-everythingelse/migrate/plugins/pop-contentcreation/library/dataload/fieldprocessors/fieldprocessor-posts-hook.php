@@ -133,4 +133,4 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 }
 
 // Static Initialization: Attach
-GD_ContentCreation_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ContentCreation_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

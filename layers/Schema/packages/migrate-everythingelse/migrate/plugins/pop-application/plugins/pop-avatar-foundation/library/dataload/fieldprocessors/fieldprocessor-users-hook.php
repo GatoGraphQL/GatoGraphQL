@@ -86,4 +86,4 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
 }
 
 // Static Initialization: Attach
-PoP_Application_UserAvatar_DataLoad_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Application_UserAvatar_DataLoad_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

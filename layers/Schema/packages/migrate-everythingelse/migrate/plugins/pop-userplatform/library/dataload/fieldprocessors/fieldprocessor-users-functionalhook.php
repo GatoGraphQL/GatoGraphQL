@@ -90,4 +90,4 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
 }
 
 // Static Initialization: Attach
-GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

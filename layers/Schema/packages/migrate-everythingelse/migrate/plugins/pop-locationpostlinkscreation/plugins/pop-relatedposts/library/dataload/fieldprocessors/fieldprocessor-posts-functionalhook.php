@@ -77,4 +77,4 @@ class PoP_LocationPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts exten
 }
 
 // Static Initialization: Attach
-PoP_LocationPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_LocationPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

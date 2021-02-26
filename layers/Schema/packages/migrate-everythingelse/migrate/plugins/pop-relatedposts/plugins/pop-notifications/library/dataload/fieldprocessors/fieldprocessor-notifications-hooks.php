@@ -118,4 +118,4 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
 }
 
 // Static Initialization: Attach
-PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

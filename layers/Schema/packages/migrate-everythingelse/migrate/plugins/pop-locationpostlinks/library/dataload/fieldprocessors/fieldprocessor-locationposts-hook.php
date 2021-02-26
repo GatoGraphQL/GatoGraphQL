@@ -100,4 +100,4 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
 }
 
 // Static Initialization: Attach
-GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

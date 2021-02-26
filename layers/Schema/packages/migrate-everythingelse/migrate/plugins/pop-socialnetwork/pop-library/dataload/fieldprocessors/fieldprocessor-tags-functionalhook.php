@@ -75,4 +75,4 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 }
 
 // Static Initialization: Attach
-GD_DataLoad_FieldResolver_Tags::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_DataLoad_FieldResolver_Tags())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

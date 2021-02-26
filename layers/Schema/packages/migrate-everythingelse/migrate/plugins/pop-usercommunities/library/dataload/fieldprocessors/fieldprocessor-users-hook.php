@@ -183,4 +183,4 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
 }
 
 // Static Initialization: Attach
-GD_UserCommunities_DataLoad_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_UserCommunities_DataLoad_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

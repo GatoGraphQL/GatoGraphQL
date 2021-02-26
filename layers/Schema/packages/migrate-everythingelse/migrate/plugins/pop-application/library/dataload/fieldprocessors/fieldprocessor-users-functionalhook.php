@@ -96,4 +96,4 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
 }
 
 // Static Initialization: Attach
-PoP_Application_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Application_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

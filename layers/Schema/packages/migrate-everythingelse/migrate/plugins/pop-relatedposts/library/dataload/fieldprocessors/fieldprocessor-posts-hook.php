@@ -122,4 +122,4 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
 }
 
 // Static Initialization: Attach
-PoP_RelatedPosts_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_RelatedPosts_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

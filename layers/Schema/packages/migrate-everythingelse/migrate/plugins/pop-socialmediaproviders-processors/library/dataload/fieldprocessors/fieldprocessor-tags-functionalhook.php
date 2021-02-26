@@ -17,4 +17,4 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaIt
 }
 
 // Static Initialization: Attach
-PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

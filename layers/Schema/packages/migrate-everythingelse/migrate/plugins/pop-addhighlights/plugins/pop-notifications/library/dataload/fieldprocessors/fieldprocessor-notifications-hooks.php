@@ -116,4 +116,4 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
 }
 
 // Static Initialization: Attach
-PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

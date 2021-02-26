@@ -71,4 +71,4 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
 }
 
 // Static Initialization: Attach
-GD_ApplicationProcessors_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_ApplicationProcessors_DataLoad_FieldResolver_Posts())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

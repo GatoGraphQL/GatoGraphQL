@@ -264,4 +264,4 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
 }
 
 // Static Initialization: Attach
-PoP_SocialNetwork_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_SocialNetwork_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

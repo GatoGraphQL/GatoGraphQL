@@ -77,4 +77,4 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
 }
 
 // Static Initialization: Attach
-PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

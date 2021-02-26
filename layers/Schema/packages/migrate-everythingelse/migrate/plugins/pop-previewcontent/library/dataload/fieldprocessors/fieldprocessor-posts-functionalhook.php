@@ -67,4 +67,4 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
 }
 
 // Static Initialization: Attach
-PPPPoP_DataLoad_FieldResolver_FunctionalProfiles::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PPPPoP_DataLoad_FieldResolver_FunctionalProfiles())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
