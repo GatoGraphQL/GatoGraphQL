@@ -144,26 +144,4 @@ trait InitializeContainerServicesInComponentTrait
             self::loadServicesFromYAMLConfigIntoContainer($containerBuilder, $componentDir, $configPath, $fileName);
         }
     }
-
-    /**
-     * If param `$skipSchema` is `true`, initialize the schema services defined in the YAML configuration file.
-     * If not provided, use "schema-services.yaml"
-     *
-     * @param string $componentDir
-     * @param boolean $skipSchema
-     * @param string $configPath
-     * @param string $fileName
-     * @return void
-     */
-    public static function maybeInitPHPSchemaServices(
-        string $componentDir,
-        bool $skipSchema,
-        string $configPath = '',
-        string $fileName = 'schema-services.php'
-    ): void {
-        if ($skipSchema) {
-            return;
-        }
-        self::initPHPServices($componentDir, $configPath, $fileName);
-    }
 }
