@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
@@ -14,18 +14,17 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
 
 class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 {
@@ -63,39 +62,43 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
 
-    protected ?CommentTypeResolver $commentTypeResolver = null;
-    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
-    protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver = null;
-    protected ?MediaTypeResolver $mediaTypeResolver = null;
-    protected ?PageTypeResolver $pageTypeResolver = null;
-    protected ?PostTagTypeResolver $postTagTypeResolver = null;
-    protected ?PostTypeResolver $postTypeResolver = null;
-    protected ?UserRoleTypeResolver $userRoleTypeResolver = null;
-    protected ?UserTypeResolver $userTypeResolver = null;
-
     /**
-     * Temporary Hack! We can't inject the variables through dependency
-     * injection, because the ModuleResolver is defined in the
-     * SystemContainer, while all TypeResolvers are defined in the
-     * ApplicationContainer.
-     *
-     * Then, lazily get the instance from that container.
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers
      */
-    protected function initializeState(): void
-    {
-        if ($this->commentTypeResolver !== null) {
-            return;
-        }
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $this->commentTypeResolver = $instanceManager->getInstance(CommentTypeResolver::class);
-        $this->customPostUnionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
-        $this->genericCustomPostTypeResolver = $instanceManager->getInstance(GenericCustomPostTypeResolver::class);
-        $this->mediaTypeResolver = $instanceManager->getInstance(MediaTypeResolver::class);
-        $this->pageTypeResolver = $instanceManager->getInstance(PageTypeResolver::class);
-        $this->postTagTypeResolver = $instanceManager->getInstance(PostTagTypeResolver::class);
-        $this->postTypeResolver = $instanceManager->getInstance(PostTypeResolver::class);
-        $this->userRoleTypeResolver = $instanceManager->getInstance(UserRoleTypeResolver::class);
-        $this->userTypeResolver = $instanceManager->getInstance(UserTypeResolver::class);
+    protected ?CommentTypeResolver $commentTypeResolver;
+    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver;
+    protected ?MediaTypeResolver $mediaTypeResolver;
+    protected ?PageTypeResolver $pageTypeResolver;
+    protected ?PostTagTypeResolver $postTagTypeResolver;
+    protected ?PostTypeResolver $postTypeResolver;
+    protected ?UserRoleTypeResolver $userRoleTypeResolver;
+    protected ?UserTypeResolver $userTypeResolver;
+
+    public function __construct(
+        ?CommentTypeResolver $commentTypeResolver,
+        ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
+        ?MediaTypeResolver $mediaTypeResolver,
+        ?PageTypeResolver $pageTypeResolver,
+        ?PostTagTypeResolver $postTagTypeResolver,
+        ?PostTypeResolver $postTypeResolver,
+        ?UserRoleTypeResolver $userRoleTypeResolver,
+        ?UserTypeResolver $userTypeResolver
+    ) {
+        // Hack: Temporarily instantiate new class
+        $this->commentTypeResolver = $commentTypeResolver ?? new CommentTypeResolver();
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver ?? new CustomPostUnionTypeResolver();
+        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver ?? new GenericCustomPostTypeResolver();
+        $this->mediaTypeResolver = $mediaTypeResolver ?? new MediaTypeResolver();
+        $this->pageTypeResolver = $pageTypeResolver ?? new PageTypeResolver();
+        $this->postTagTypeResolver = $postTagTypeResolver ?? new PostTagTypeResolver();
+        $this->postTypeResolver = $postTypeResolver ?? new PostTypeResolver();
+        $this->userRoleTypeResolver = $userRoleTypeResolver ?? new UserRoleTypeResolver();
+        $this->userTypeResolver = $userTypeResolver ?? new UserTypeResolver();
     }
 
     /**
@@ -233,10 +236,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 
     public function getDescription(string $module): string
     {
-        /**
-         * Temporary hack
-         */
-        $this->initializeState();
         switch ($module) {
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
@@ -415,10 +414,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public function getSettings(string $module): array
     {
-        /**
-         * Temporary hack
-         */
-        $this->initializeState();
         $moduleSettings = parent::getSettings($module);
         // Common variables to set the limit on the schema types
         $limitArg = 'limit';

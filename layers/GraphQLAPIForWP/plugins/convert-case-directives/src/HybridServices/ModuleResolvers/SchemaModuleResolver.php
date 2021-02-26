@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ConvertCaseDirectives\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\LowerCaseStringDirectiveResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\TitleCaseStringDirectiveResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\UpperCaseStringDirectiveResolver;
@@ -17,6 +17,27 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
     use ModuleResolverTrait;
 
     public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';
+
+    /**
+    * Make all properties nullable, becase the ModuleRegistry is registered
+    * in the SystemContainer, where there are no typeResolvers so it will be null,
+    * and in the ApplicationContainer, from where the "Modules" page is resolved
+    * and which does have all the typeResolvers
+    */
+    protected ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver;
+    protected ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver;
+    protected ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver;
+
+    public function __construct(
+        ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver,
+        ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
+        ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
+    ) {
+        // Hack: Temporarily instantiate new class
+        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver ?? new UpperCaseStringDirectiveResolver();
+        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver ?? new LowerCaseStringDirectiveResolver();
+        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver ?? new TitleCaseStringDirectiveResolver();
+    }
 
     public static function getModulesToResolve(): array
     {
@@ -54,9 +75,9 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::CONVERT_CASE_DIRECTIVES:
                 return sprintf(
                     \__('Set of directives to manipulate strings: <code>@%s</code>, <code>@%s</code> and <code>@%s</code>', 'graphql-api'),
-                    UpperCaseStringDirectiveResolver::getDirectiveName(),
-                    LowerCaseStringDirectiveResolver::getDirectiveName(),
-                    TitleCaseStringDirectiveResolver::getDirectiveName()
+                    $this->upperCaseStringDirectiveResolver->getDirectiveName(),
+                    $this->lowerCaseStringDirectiveResolver->getDirectiveName(),
+                    $this->titleCaseStringDirectiveResolver->getDirectiveName()
                 );
         }
         return parent::getDescription($module);

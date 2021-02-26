@@ -14,7 +14,7 @@ use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\Users\Environment as UsersEnvironment;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -25,28 +25,28 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoPSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaTypeModuleResolver;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\CacheFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\CacheFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoPSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
@@ -135,7 +135,7 @@ class PluginConfiguration
         ) {
             $value = self::getNormalizedOptionValues();
             // Return the specific value to this module/option
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
+            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $optionName = $moduleResolver->getSettingOptionName($module, $option);
             return $value[$optionName];
@@ -190,7 +190,7 @@ class PluginConfiguration
      */
     protected static function defineEnvironmentConstantsFromSettings(): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         // All the environment variables to override
         $mappings = [
             // Editing Access Scheme
@@ -573,7 +573,7 @@ class PluginConfiguration
      */
     protected static function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = PluginEnvironment::isPluginEnvironmentDev();
 
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
@@ -635,7 +635,7 @@ class PluginConfiguration
      */
     protected static function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleToComponentClassConfigurationMappings = [
             [
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
@@ -693,7 +693,7 @@ class PluginConfiguration
      */
     public static function getSkippingSchemaComponentClasses(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
 
         // Component classes enabled/disabled by module
         $maybeSkipSchemaModuleComponentClasses = [

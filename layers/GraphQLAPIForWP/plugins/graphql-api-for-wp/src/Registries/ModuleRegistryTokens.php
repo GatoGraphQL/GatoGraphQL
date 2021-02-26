@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\Registries;
+namespace GraphQLAPI\GraphQLAPI\Registries;
 
 class ModuleRegistryTokens
 {

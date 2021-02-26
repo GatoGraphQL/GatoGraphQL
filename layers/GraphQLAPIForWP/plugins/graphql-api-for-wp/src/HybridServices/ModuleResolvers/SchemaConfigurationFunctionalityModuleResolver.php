@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
 use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
@@ -148,7 +147,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
@@ -157,8 +155,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
             ];
             foreach ($maybeWhereModules as $maybeWhereModule) {
-                if ($moduleRegistry->isModuleEnabled($maybeWhereModule)) {
-                    $whereModules[] = '▹ ' . $moduleRegistry->getModuleResolver($maybeWhereModule)->getName($maybeWhereModule);
+                if ($this->moduleRegistry->isModuleEnabled($maybeWhereModule)) {
+                    $whereModules[] = '▹ ' . $this->moduleRegistry->getModuleResolver($maybeWhereModule)->getName($maybeWhereModule);
                 }
             }
             // Build all the possible values by fetching all the Schema Configuration posts
@@ -215,7 +213,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
             ];
             $whereModuleNames = array_map(
-                fn ($whereModule) => '▹ ' . $moduleRegistry->getModuleResolver($whereModule)->getName($whereModule),
+                fn ($whereModule) => '▹ ' . $this->moduleRegistry->getModuleResolver($whereModule)->getName($whereModule),
                 $whereModules
             );
             $option = self::OPTION_MODE;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\SystemCompilerPasses;
+namespace GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverInterface;
-use GraphQLAPI\GraphQLAPI\SystemServices\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterModuleResolverCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

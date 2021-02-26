@@ -6,7 +6,7 @@ namespace GraphQLAPI\ConvertCaseDirectives;
 
 use GraphQLAPI\ConvertCaseDirectives\PluginConfiguration;
 use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPlugin;
-use GraphQLAPI\ConvertCaseDirectives\SystemServices\ModuleResolvers\SchemaModuleResolver;
+use GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers\SchemaModuleResolver;
 
 class Plugin extends AbstractPlugin
 {

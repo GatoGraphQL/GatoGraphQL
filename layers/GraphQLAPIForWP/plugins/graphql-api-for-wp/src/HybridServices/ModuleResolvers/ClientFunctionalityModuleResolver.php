@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\SystemServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 
@@ -164,7 +163,6 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
             $option = EndpointFunctionalityModuleResolver::OPTION_PATH;
@@ -202,7 +200,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::DESCRIPTION => \__('Use the Explorer in the GraphiQL client in the admin area?', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
+            if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
                 $option = self::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -215,7 +213,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
-            if ($moduleRegistry->isModuleEnabled(self::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
+            if ($this->moduleRegistry->isModuleEnabled(self::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
                 $option = self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -228,7 +226,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
-            if ($moduleRegistry->isModuleEnabled(self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
+            if ($this->moduleRegistry->isModuleEnabled(self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
                 $option = self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,

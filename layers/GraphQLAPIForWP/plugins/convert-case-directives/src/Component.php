@@ -24,6 +24,21 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
+        self::initYAMLSystemContainerServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+    }
+
+    /**
+     * Initialize services
+     *
+     * @param array<string, mixed> $configuration
+     * @param string[] $skipSchemaComponentClasses
+     */
+    protected static function initializeContainerServices(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
+        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
+        self::initYAMLServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 }
