@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
@@ -14,9 +17,6 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SupportMenuPage;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
@@ -26,10 +26,14 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 class Menu extends AbstractMenu
 {
     protected MenuPageHelper $menuPageHelper;
+    protected ModuleRegistryInterface $moduleRegistry;
 
-    function __construct(MenuPageHelper $menuPageHelper)
-    {
+    function __construct(
+        MenuPageHelper $menuPageHelper,
+        ModuleRegistryInterface $moduleRegistry
+    ) {
         $this->menuPageHelper = $menuPageHelper;
+        $this->moduleRegistry = $moduleRegistry;
     }
 
     public function getName(): string
@@ -157,8 +161,7 @@ class Menu extends AbstractMenu
             $settingsMenuPage->setHookName($hookName);
         }
 
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
+        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = GraphQLClientsForWPComponentConfiguration::getGraphiQLClientEndpoint();
             $submenu[$this->getName()][] = [
@@ -168,7 +171,7 @@ class Menu extends AbstractMenu
             ];
         }
 
-        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
+        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = GraphQLClientsForWPComponentConfiguration::getVoyagerClientEndpoint();
             $submenu[$this->getName()][] = [

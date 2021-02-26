@@ -8,11 +8,10 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\SchemaFeedbackByDirective\Facades\SchemaFeedbackManagerFacade;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 
 class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
@@ -26,8 +25,7 @@ class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigu
     public function executeSchemaConfiguration(int $fdlPostID): void
     {
         // Only if the module is not disabled
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(FunctionalityModuleResolver::SCHEMA_FEEDBACK)) {
+        if (!$this->moduleRegistry->isModuleEnabled(FunctionalityModuleResolver::SCHEMA_FEEDBACK)) {
             return;
         }
 

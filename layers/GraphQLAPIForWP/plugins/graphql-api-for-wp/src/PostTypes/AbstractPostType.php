@@ -4,23 +4,27 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\General\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 
 abstract class AbstractPostType
 {
     protected Menu $menu;
+    protected ModuleRegistryInterface $moduleRegistry;
 
-    function __construct(Menu $menu)
-    {
+    function __construct(
+        Menu $menu,
+        ModuleRegistryInterface $moduleRegistry
+    ) {
         $this->menu = $menu;
+        $this->moduleRegistry = $moduleRegistry;
     }
     /**
      * Add the hook to initialize the different post types
@@ -222,12 +226,11 @@ abstract class AbstractPostType
      */
     public function maybeAddExcerptAsDescription(string $content): string
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         /**
          * Check if it is enabled and it is this CPT...
          */
         if (
-            $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
+            $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
             && UserAuthorization::canAccessSchemaEditor()
             && \is_singular($this->getPostType())
         ) {
@@ -303,8 +306,7 @@ abstract class AbstractPostType
      */
     protected function isExcerptAsDescriptionEnabled(): bool
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        return $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION);
+        return $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION);
     }
 
     /**
@@ -314,8 +316,7 @@ abstract class AbstractPostType
      */
     protected function isAPIHierarchyModuleEnabled(): bool
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        return $moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY);
+        return $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY);
     }
 
     /**

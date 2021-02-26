@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 abstract class AbstractIndividualControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {

@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 
 class EndpointHelpers
 {
     protected Menu $menu;
+    protected ModuleRegistryInterface $moduleRegistry;
 
-    function __construct(Menu $menu)
-    {
+    function __construct(
+        Menu $menu,
+        ModuleRegistryInterface $moduleRegistry
+    ) {
         $this->menu = $menu;
+        $this->moduleRegistry = $moduleRegistry;
     }
 
     /**
@@ -50,8 +54,7 @@ class EndpointHelpers
         ));
         if ($enableLowLevelQueryEditing) {
             // Add /?edit_schema=1 so the query-type directives are also visible
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            if ($moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING)) {
+            if ($this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING)) {
                 $endpoint = \add_query_arg(GraphQLServerRequest::URLPARAM_EDIT_SCHEMA, true, $endpoint);
             }
         }

@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
@@ -84,8 +83,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     public function executeSchemaConfiguration(int $aclPostID): void
     {
         // Only if the module is not disabled
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
+        if (!$this->moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
             return;
         }
 
@@ -107,10 +105,10 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                 if (
                     $aclBlockItemNestedBlocks = array_filter(
                         $aclBlockItemNestedBlocks,
-                        function ($block) use ($moduleRegistry) {
+                        function ($block) : bool {
                             // If it has a corresponding module, check if it is enabled
                             if ($module = $this->getACLRuleBlockModule($block['blockName'])) {
-                                return $moduleRegistry->isModuleEnabled($module);
+                                return $this->moduleRegistry->isModuleEnabled($module);
                             }
                             // Otherwise it's always enabled
                             return true;

@@ -4,15 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Hooks;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class VarsHooks extends AbstractHookSet
 {
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        ModuleRegistryInterface $moduleRegistry
+    ) {
+        parent::__construct($hooksAPI, $translationAPI);
+        $this->moduleRegistry = $moduleRegistry;
+    }
+
     protected function init()
     {
         // Implement immediately, before VarsHooks in API adds output=json
@@ -40,7 +53,6 @@ class VarsHooks extends AbstractHookSet
     {
         [&$vars] = $vars_in_array;
         if (isset($vars['scheme']) && $vars['scheme'] == APISchemes::API) {
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
             // By setting explicit allowed datastructures, we avoid the empty one
             // being processed /?scheme=api <= native API
             // If ever need to support REST or another format, add a hook here
@@ -52,7 +64,7 @@ class VarsHooks extends AbstractHookSet
             ];
             if (
                 // If single endpoint not enabled
-                !$moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
+                !$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
                 // If datastructure is not GraphQL (or another allowed one)
                 || !in_array($vars['datastructure'], $allowedDataStructures)
             ) {

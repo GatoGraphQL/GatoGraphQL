@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\General\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\General\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\EditorScripts\HasDocumentationScriptTrait;
+use GraphQLAPI\GraphQLAPI\General\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\General\GeneralUtils;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -23,6 +24,13 @@ use GraphQLAPI\GraphQLAPI\EditorScripts\HasDocumentationScriptTrait;
 abstract class AbstractBlock
 {
     use HasDocumentationScriptTrait;
+
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    function __construct(ModuleRegistryInterface $moduleRegistry)
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
 
     /**
      * Execute this function to initialize the block

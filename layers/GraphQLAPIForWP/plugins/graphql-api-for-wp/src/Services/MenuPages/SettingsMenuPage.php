@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Settings\Options;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 /**
  * Settings menu page
@@ -20,6 +23,18 @@ class SettingsMenuPage extends AbstractMenuPage
 
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
+
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    function __construct(
+        Menu $menu,
+        MenuPageHelper $menuPageHelper,
+        EndpointHelpers $endpointHelpers,
+        ModuleRegistryInterface $moduleRegistry
+    ) {
+        parent::__construct($menu, $menuPageHelper, $endpointHelpers);
+        $this->moduleRegistry = $moduleRegistry;
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -137,11 +152,10 @@ class SettingsMenuPage extends AbstractMenuPage
      */
     public function normalizeSettings(array $value): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         $items = $this->getAllItems();
         foreach ($items as $item) {
             $module = $item['module'];
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
                 $type = $itemSetting[Properties::TYPE] ?? null;
                 /**
@@ -191,10 +205,9 @@ class SettingsMenuPage extends AbstractMenuPage
     protected function getAllItems(): array
     {
         $items = [];
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules(true, true, false);
+        $modules = $this->moduleRegistry->getAllModules(true, true, false);
         foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
             $items[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),

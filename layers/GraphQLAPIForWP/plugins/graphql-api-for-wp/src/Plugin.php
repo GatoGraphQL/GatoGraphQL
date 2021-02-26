@@ -13,8 +13,16 @@ use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserRolesB
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserStateBlock;
 use GraphQLAPI\GraphQLAPI\EditorScripts\AbstractEditorScript;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
@@ -23,19 +31,13 @@ use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
@@ -329,8 +331,9 @@ class Plugin
             // because their instantiation produces no side-effects
             // (maybe that happens under `initialize`)
             $menuPageHelper = new MenuPageHelper();
-            $menu = new Menu($menuPageHelper);
-            $endpointHelpers = new EndpointHelpers($menu);
+            $moduleRegistry = new ModuleRegistry();
+            $menu = new Menu($menuPageHelper, $moduleRegistry);
+            $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
             $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper, $endpointHelpers);
             if (
                 (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())

@@ -2,18 +2,27 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\General\BlockConstants;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
+use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    function __construct(
+        ModuleRegistryInterface $moduleRegistry
+    ) {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+
     /**
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null

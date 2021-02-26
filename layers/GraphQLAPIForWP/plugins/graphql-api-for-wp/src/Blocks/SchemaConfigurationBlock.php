@@ -54,11 +54,10 @@ class SchemaConfigurationBlock extends AbstractBlock
      */
     protected function getLocalizedData(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isAPIHierarchyEnabled' => $moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
+                'isAPIHierarchyEnabled' => $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
             ]
         );
     }

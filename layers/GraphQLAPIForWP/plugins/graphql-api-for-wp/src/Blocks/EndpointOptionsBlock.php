@@ -43,17 +43,16 @@ class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock
     protected function getBlockContent(array $attributes, string $content): string
     {
         $blockContent = parent::getBlockContent($attributes, $content);
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
 
         $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
-        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
+        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
             $blockContent .= sprintf(
                 $blockContentPlaceholder,
                 \__('Expose GraphiQL client?', 'graphql-api'),
                 $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED] ?? true)
             );
         }
-        if ($moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS)) {
+        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS)) {
             $blockContent .= sprintf(
                 $blockContentPlaceholder,
                 \__('Expose the Interactive Schema client?', 'graphql-api'),
@@ -71,12 +70,11 @@ class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock
      */
     protected function getLocalizedData(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isGraphiQLEnabled' => $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS),
-                'isVoyagerEnabled' => $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS),
+                'isGraphiQLEnabled' => $this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS),
+                'isVoyagerEnabled' => $this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS),
             ]
         );
     }
