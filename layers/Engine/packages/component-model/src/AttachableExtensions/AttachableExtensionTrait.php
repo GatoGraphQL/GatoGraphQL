@@ -21,7 +21,7 @@ trait AttachableExtensionTrait
      *
      * @return integer|null
      */
-    public static function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): ?int
     {
         return null;
     }
@@ -43,7 +43,7 @@ trait AttachableExtensionTrait
                 $attachableClass,
                 $group,
                 $extensionClass,
-                $extensionClass::getPriorityToAttachClasses() ?? $priority
+                $this->getPriorityToAttachClasses() ?? $priority
             );
         }
     }

@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class MakeTitleDirectiveResolver extends MakeTitleVersion010DirectiveResolver
 {
-    public static function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): ?int
     {
         return null;
     }

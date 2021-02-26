@@ -13,7 +13,7 @@ class RootFieldResolver extends \Leoloso\ExamplesForPoP\FieldResolvers\Legacy\Ve
     {
         return '0.2.0';
     }
-    public static function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): ?int
     {
         return 30;
     }
