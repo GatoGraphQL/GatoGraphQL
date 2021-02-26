@@ -71,9 +71,11 @@ class Component extends AbstractComponent
         }
 
         if (class_exists('\PoPSchema\Users\Component')) {
-            if (!in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
-            }
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),
+                '/Conditional/Users'
+            );
             if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
                 self::initServices(dirname(__DIR__), '/Conditional/Users/Conditional/API');
             }

@@ -62,18 +62,20 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (
-            class_exists('\PoPSchema\Tags\Component')
-            && !in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Tags');
+        if (class_exists('\PoPSchema\Tags\Component')) {
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses),
+                '/Conditional/Tags'
+            );
         }
 
-        if (
-            class_exists('\PoPSchema\Users\Component')
-            && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+        if (class_exists('\PoPSchema\Users\Component')) {
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),
+                '/Conditional/Users'
+            );
         }
 
         if (Environment::addEventTypeToCustomPostUnionTypes()) {
