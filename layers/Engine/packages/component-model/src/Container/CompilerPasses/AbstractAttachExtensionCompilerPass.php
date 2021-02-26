@@ -27,10 +27,19 @@ abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterf
                     continue;
                 }
 
-                $attachExtensionServiceDefinition->addMethodCall(
-                    'enqueueExtension',
-                    [$event, $definitionClass, $attachableGroup]
-                );
+                /**
+                 * Only attach the extension when autoconfigure => true
+                 * Then, if autoconfigure => false, the service is registered in the container,
+                 * but the class is not attached.
+                 * This is used for disabling the Schema services,
+                 * together with ForceAutoconfigureYamlFileLoader
+                 */
+                if ($definition->isAutoconfigured()) {
+                    $attachExtensionServiceDefinition->addMethodCall(
+                        'enqueueExtension',
+                        [$event, $definitionClass, $attachableGroup]
+                    );
+                }
                 // A service won't be of 2 attachable classes, so can skip checking
                 continue(2);
             }
