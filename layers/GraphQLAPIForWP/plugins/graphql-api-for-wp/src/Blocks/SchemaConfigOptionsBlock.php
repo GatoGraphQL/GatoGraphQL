@@ -61,8 +61,7 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
         $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
         $blockContent = '';
 
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA)) {
+        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA)) {
             $schemaModeLabels = [
                 SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
                 SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
@@ -74,7 +73,7 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
             );
         }
 
-        if ($moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
+        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
             $useNamespacingLabels = [
                 self::ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED => \__('✅ Yes', 'graphql-api'),
                 self::ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED => \__('❌ No', 'graphql-api'),
@@ -86,7 +85,7 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
             );
         }
 
-        if ($moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS)) {
+        if ($this->moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS)) {
             $mutationSchemeLabels = [
                 MutationSchemes::STANDARD => \__('❌ Do not enable nested mutations', 'graphql-api'),
                 MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('✅ Nested mutations enabled, keeping all mutation fields in the root type', 'graphql-api'),
@@ -129,13 +128,12 @@ EOT;
      */
     protected function getLocalizedData(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isPublicPrivateSchemaEnabled' => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA),
-                'isSchemaNamespacingEnabled' => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING),
-                'isNestedMutationsEnabled' => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS),
+                'isPublicPrivateSchemaEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA),
+                'isSchemaNamespacingEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING),
+                'isNestedMutationsEnabled' => $this->moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS),
             ]
         );
     }

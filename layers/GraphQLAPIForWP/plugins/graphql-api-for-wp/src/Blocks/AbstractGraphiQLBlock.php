@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\BlockCategories\PersistedQueryBlockCategory;
+use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * GraphiQL block
@@ -23,8 +24,11 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected EndpointHelpers $endpointHelpers;
 
-    function __construct(EndpointHelpers $endpointHelpers)
-    {
+    function __construct(
+        ModuleRegistryInterface $moduleRegistry,
+        EndpointHelpers $endpointHelpers
+    ) {
+        parent::__construct($moduleRegistry);
         $this->endpointHelpers = $endpointHelpers;
     }
 
