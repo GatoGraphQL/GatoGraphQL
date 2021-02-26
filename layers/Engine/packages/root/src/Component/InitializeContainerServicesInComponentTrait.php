@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Component;
 
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\Loader\ForceAutoconfigureYamlFileLoader;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 trait InitializeContainerServicesInComponentTrait
 {
     /**
-     * Initialize the services defiend in the YAML configuration file.
+     * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
      *
      * @param string $componentDir
@@ -37,7 +38,7 @@ trait InitializeContainerServicesInComponentTrait
     }
 
     /**
-     * Initialize the services defiend in the YAML configuration file.
+     * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
      *
      * @param string $componentDir
@@ -48,8 +49,8 @@ trait InitializeContainerServicesInComponentTrait
     protected static function loadServicesFromYAMLConfigIntoContainer(
         ContainerBuilder $containerBuilder,
         string $componentDir,
-        string $configPath = '',
-        string $fileName = 'services.yaml'
+        string $configPath,
+        string $fileName
     ): void {
         $componentPath = self::getComponentPath($componentDir, $configPath);
         $loader = new YamlFileLoader($containerBuilder, new FileLocator($componentPath));
@@ -57,7 +58,7 @@ trait InitializeContainerServicesInComponentTrait
     }
 
     /**
-     * Initialize the services defiend in the YAML configuration file.
+     * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
      *
      * @param string $componentDir
@@ -73,7 +74,7 @@ trait InitializeContainerServicesInComponentTrait
     }
 
     /**
-     * Initialize the services defiend in the PHP configuration file.
+     * Initialize the services defined in the PHP configuration file.
      * If not provided, use "services.yaml"
      *
      * @param string $componentDir
@@ -98,14 +99,9 @@ trait InitializeContainerServicesInComponentTrait
     }
 
     /**
-     * If param `$skipSchema` is `true`, initialize the schema services defiend in the YAML configuration file.
-     * If not provided, use "schema-services.yaml"
-     *
-     * @param string $componentDir
-     * @param boolean $skipSchema
-     * @param string $configPath
-     * @param string $fileName
-     * @return void
+     * If param `$skipSchema` is `true`, define the schema services
+     * in the container, but do not initialize them.
+     * If file name provided, use "schema-services.yaml"
      */
     public static function maybeInitYAMLSchemaServices(
         string $componentDir,
@@ -113,10 +109,18 @@ trait InitializeContainerServicesInComponentTrait
         string $configPath = '',
         string $fileName = 'schema-services.yaml'
     ): void {
-        if ($skipSchema) {
-            return;
+        if (!ContainerBuilderFactory::isCached()) {
+            /** @var ContainerBuilder */
+            $containerBuilder = ContainerBuilderFactory::getInstance();
+            $componentPath = self::getComponentPath($componentDir, $configPath);
+            $autoconfigure = !$skipSchema;
+            $loader = new ForceAutoconfigureYamlFileLoader(
+                $containerBuilder,
+                new FileLocator($componentPath),
+                $autoconfigure
+            );
+            $loader->load($fileName);
         }
-        self::initYAMLServices($componentDir, $configPath, $fileName);
     }
 
     /**
@@ -142,7 +146,7 @@ trait InitializeContainerServicesInComponentTrait
     }
 
     /**
-     * If param `$skipSchema` is `true`, initialize the schema services defiend in the YAML configuration file.
+     * If param `$skipSchema` is `true`, initialize the schema services defined in the YAML configuration file.
      * If not provided, use "schema-services.yaml"
      *
      * @param string $componentDir

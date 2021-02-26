@@ -19,11 +19,13 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
     public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';
 
     /**
-    * Make all properties nullable, becase the ModuleRegistry is registered
-    * in the SystemContainer, where there are no typeResolvers so it will be null,
-    * and in the ApplicationContainer, from where the "Modules" page is resolved
-    * and which does have all the typeResolvers
-    */
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers.
+     * Function `getDescription` will only be accessed from the Application Container,
+     * so the properties will not be null in that situation.
+     */
     protected ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver;
     protected ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver;
     protected ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver;
@@ -33,10 +35,9 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
         ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
     ) {
-        // Hack: Temporarily instantiate new class
-        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver ?? new UpperCaseStringDirectiveResolver();
-        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver ?? new LowerCaseStringDirectiveResolver();
-        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver ?? new TitleCaseStringDirectiveResolver();
+        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver;
+        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver;
+        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver;
     }
 
     public static function getModulesToResolve(): array
