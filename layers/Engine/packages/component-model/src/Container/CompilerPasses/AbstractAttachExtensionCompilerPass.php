@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterface
 {
@@ -16,7 +17,7 @@ abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterf
         $attachableClassGroups = $this->getAttachableClassGroups();
         $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
         $definitions = $containerBuilder->getDefinitions();
-        foreach ($definitions as $definition) {
+        foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null) {
                 continue;
@@ -37,7 +38,7 @@ abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterf
                 if ($definition->isAutoconfigured()) {
                     $attachExtensionServiceDefinition->addMethodCall(
                         'enqueueExtension',
-                        [$event, $definitionClass, $attachableGroup]
+                        [$event, $attachableGroup, new Reference($definitionID)]
                     );
                 }
                 // A service won't be of 2 attachable classes, so can skip checking

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolverPickers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 
-abstract class AbstractTypeResolverPicker implements TypeResolverPickerInterface
+abstract class AbstractTypeResolverPicker implements TypeResolverPickerInterface, AttachableExtensionInterface
 {
     use AttachableExtensionTrait;
 
