@@ -97,19 +97,19 @@ class Component extends AbstractComponent
 
             // Boot conditional on having variables treated as expressions for @export directive
             if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
             }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
             }
             // The @export directive depends on the Multiple Query Execution being enabled
             if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
             }
             // Attach @removeIfNull?
             if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
             }
             if (
                 class_exists('\PoP\CacheControl\Component')
@@ -118,7 +118,7 @@ class Component extends AbstractComponent
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
         }
     }

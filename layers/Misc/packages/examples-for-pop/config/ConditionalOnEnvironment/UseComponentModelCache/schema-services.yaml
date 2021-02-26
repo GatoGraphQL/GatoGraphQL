@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    Leoloso\ExamplesForPoP\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\:
+        resource: '../../../src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/*'

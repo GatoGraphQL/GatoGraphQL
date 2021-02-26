@@ -52,7 +52,7 @@ class Component extends AbstractComponent
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (Environment::addLocationPostTypeToCustomPostUnionTypes()) {
-            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes');
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes');
         }
 
         if (
