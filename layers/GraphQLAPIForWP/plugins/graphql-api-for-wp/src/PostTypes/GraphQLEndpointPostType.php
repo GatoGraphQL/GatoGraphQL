@@ -256,8 +256,7 @@ class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
     protected function isGraphiQLEnabled($postOrID): bool
     {
         // Check if disabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
+        if (!$this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
             return false;
         }
 
@@ -282,8 +281,7 @@ class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
     protected function isVoyagerEnabled($postOrID): bool
     {
         // Check if disabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS)) {
+        if (!$this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS)) {
             return false;
         }
 

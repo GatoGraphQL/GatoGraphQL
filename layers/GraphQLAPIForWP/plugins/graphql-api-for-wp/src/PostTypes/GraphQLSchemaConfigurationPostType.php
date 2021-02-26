@@ -82,7 +82,6 @@ class GraphQLSchemaConfigurationPostType extends AbstractPostType
     protected function getGutenbergTemplate(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         $template = [];
         // Add blocks depending on being enabled by module
         $blockClassModules = [
@@ -91,7 +90,7 @@ class GraphQLSchemaConfigurationPostType extends AbstractPostType
             SchemaConfigFieldDeprecationListBlock::class => VersioningFunctionalityModuleResolver::FIELD_DEPRECATION,
         ];
         foreach ($blockClassModules as $blockClass => $module) {
-            if ($moduleRegistry->isModuleEnabled($module)) {
+            if ($this->moduleRegistry->isModuleEnabled($module)) {
                 /**
                  * @var AbstractBlock
                  */

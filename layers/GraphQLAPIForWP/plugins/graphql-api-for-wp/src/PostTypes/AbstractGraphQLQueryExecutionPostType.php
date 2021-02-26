@@ -289,8 +289,7 @@ abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType
      */
     protected function maybeAddSchemaConfigurationBlock(array &$template): void
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
+        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /**
              * @var SchemaConfigurationBlock
