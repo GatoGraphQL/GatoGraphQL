@@ -98,7 +98,7 @@ class Component extends AbstractComponent
          */
         if (\is_admin()) {
             self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
-            self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
+            self::initSchemaServices(dirname(__DIR__), false, '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
