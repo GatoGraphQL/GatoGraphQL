@@ -26,5 +26,5 @@ interface AttachableExtensionInterface
      * @param integer $priority
      * @return void
      */
-    public static function attach(string $group, int $priority = 10);
+    public static function attach(string $group, int $priority = 10): void;
 }
