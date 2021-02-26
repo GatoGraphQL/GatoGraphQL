@@ -52,4 +52,4 @@ If this module is not enabled, the default behavior ir `Public`.
 
 ## Resources
 
-Video showing how access to different fields is granted or not, according to the configuration and the user executing the query: https://vimeo.com/413503383.
+Video showing how access to different fields is granted or not, according to the configuration and the user executing the query: <https://vimeo.com/413503383>.
