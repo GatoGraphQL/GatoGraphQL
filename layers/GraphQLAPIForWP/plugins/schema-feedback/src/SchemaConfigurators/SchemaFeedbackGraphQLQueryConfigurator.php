@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\SchemaFeedbackByDirective\Facades\SchemaFeedbackManagerFacade;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 
 class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {

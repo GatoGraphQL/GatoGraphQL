@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
 
 class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
@@ -45,8 +44,7 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
             return;
         }
         // Check it is enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
+        if (!$this->moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
             return;
         }
         $instanceManager = InstanceManagerFacade::getInstance();

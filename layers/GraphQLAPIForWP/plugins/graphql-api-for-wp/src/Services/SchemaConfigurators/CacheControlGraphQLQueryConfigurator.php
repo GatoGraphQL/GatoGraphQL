@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\CacheControl\Facades\CacheControlManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator

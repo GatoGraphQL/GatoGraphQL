@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\SchemaConfiguratorInterface;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 

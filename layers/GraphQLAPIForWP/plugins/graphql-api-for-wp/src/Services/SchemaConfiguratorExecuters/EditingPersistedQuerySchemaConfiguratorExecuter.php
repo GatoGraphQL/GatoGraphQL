@@ -6,16 +6,20 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\SchemaConfiguratorInterface;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\PersistedQuerySchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfigurator;
 
 class EditingPersistedQuerySchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     protected EndpointHelpers $endpointHelpers;
+    protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator;
 
-    function __construct(EndpointHelpers $endpointHelpers)
-    {
+    function __construct(
+        EndpointHelpers $endpointHelpers,
+        PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator
+    ) {
         $this->endpointHelpers = $endpointHelpers;
+        $this->persistedQuerySchemaConfigurator = $persistedQuerySchemaConfigurator;
     }
 
     /**
@@ -31,6 +35,6 @@ class EditingPersistedQuerySchemaConfiguratorExecuter extends AbstractSchemaConf
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return new PersistedQuerySchemaConfigurator();
+        return $this->persistedQuerySchemaConfigurator;
     }
 }

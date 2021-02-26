@@ -2,38 +2,46 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SchemaConfigurators;
+namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use WP_Post;
-use PoP\AccessControl\Schema\SchemaModes;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
-use PoP\Engine\Environment as EngineEnvironment;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PoP\AccessControl\Environment as AccessControlEnvironment;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock;
-use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\Environment as AccessControlEnvironment;
+use PoP\AccessControl\Schema\SchemaModes;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Engine\Environment as EngineEnvironment;
+use WP_Post;
 
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    function __construct(
+        ModuleRegistryInterface $moduleRegistry
+    ) {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+
     /**
      * Extract the items defined in the Schema Configuration,
      * and inject them into the service as to take effect in the current GraphQL query
@@ -41,8 +49,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     public function executeSchemaConfiguration(int $customPostID): void
     {
         // Check if it enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
+        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return;
         }
 
@@ -98,8 +105,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return $this->getUserSettingSchemaConfigurationID();
         } elseif ($schemaConfiguration == SchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
             // If disabled by module, then return nothing
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            if (!$moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
+            if (!$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
                 return null;
             }
             // Return the schema configuration from the parent, or null if no parent exists
@@ -149,8 +155,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationOptionsNamespacing(int $schemaConfigurationID): void
     {
         // Check if it enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
+        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
             return;
         }
 
@@ -198,8 +203,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationOptionsMutationScheme(int $schemaConfigurationID): void
     {
         // Check if it enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS)) {
+        if (!$this->moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS)) {
             return;
         }
 
@@ -257,8 +261,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationOptionsDefaultSchemaMode(int $schemaConfigurationID): void
     {
         // Check if it enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA)) {
+        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA)) {
             return;
         }
 
@@ -307,8 +310,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationAccessControlLists(int $schemaConfigurationID): void
     {
         // Check it is enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
+        if (!$this->moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
             return;
         }
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -337,8 +339,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationFieldDeprecationLists(int $schemaConfigurationID): void
     {
         // Check it is enabled by module
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        if (!$moduleRegistry->isModuleEnabled(VersioningFunctionalityModuleResolver::FIELD_DEPRECATION)) {
+        if (!$this->moduleRegistry->isModuleEnabled(VersioningFunctionalityModuleResolver::FIELD_DEPRECATION)) {
             return;
         }
         $instanceManager = InstanceManagerFacade::getInstance();
