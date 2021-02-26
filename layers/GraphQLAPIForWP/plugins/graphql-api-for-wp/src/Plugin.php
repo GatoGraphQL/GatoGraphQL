@@ -331,8 +331,9 @@ class Plugin
             // because their instantiation produces no side-effects
             // (maybe that happens under `initialize`)
             $menuPageHelper = new MenuPageHelper();
-            $menu = new Menu($menuPageHelper);
-            $endpointHelpers = new EndpointHelpers($menu, new ModuleRegistry());
+            $moduleRegistry = new ModuleRegistry();
+            $menu = new Menu($menuPageHelper, $moduleRegistry);
+            $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
             $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper, $endpointHelpers);
             if (
                 (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
