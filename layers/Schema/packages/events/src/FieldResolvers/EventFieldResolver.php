@@ -16,7 +16,7 @@ use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class EventFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(EventTypeResolver::class);
     }

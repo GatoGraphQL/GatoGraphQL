@@ -16,7 +16,7 @@ class UseDefaultFeaturedImageIDIfConditionDirectiveResolver extends AbstractUseD
         return self::DIRECTIVE_NAME;
     }
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

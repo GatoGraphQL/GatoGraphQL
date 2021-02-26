@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
 class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             IsCustomPostFieldInterfaceResolver::class,

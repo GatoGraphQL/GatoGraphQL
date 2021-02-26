@@ -32,7 +32,7 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
     /**
      * @return string[]
      */
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

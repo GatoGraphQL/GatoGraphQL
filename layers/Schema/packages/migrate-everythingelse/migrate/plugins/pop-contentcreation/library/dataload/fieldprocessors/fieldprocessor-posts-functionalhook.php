@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

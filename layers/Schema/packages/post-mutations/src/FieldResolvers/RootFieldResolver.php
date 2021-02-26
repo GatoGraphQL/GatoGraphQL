@@ -17,7 +17,7 @@ use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

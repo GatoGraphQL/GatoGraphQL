@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
 class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             IsCustomPostFieldInterfaceResolver::class,

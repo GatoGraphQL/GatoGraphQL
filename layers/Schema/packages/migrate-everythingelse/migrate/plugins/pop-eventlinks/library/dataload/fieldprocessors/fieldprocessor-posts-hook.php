@@ -7,7 +7,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class GD_EM_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             EventTypeResolver::class,

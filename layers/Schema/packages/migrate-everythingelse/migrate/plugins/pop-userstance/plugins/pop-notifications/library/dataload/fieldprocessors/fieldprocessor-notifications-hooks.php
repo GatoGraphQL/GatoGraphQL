@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }

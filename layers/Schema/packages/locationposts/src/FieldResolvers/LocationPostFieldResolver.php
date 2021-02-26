@@ -15,7 +15,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class LocationPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(LocationPostTypeResolver::class);
     }

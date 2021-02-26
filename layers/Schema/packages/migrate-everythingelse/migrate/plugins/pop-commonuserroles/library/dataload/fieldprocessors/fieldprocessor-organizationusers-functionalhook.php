@@ -10,7 +10,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
 {
     use OrganizationFieldResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }

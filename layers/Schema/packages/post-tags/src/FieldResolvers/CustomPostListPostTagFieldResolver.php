@@ -12,7 +12,7 @@ class CustomPostListPostTagFieldResolver extends AbstractCustomPostListTagFieldR
 {
     use PostTagAPISatisfiedContractTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(PostTagTypeResolver::class);
     }

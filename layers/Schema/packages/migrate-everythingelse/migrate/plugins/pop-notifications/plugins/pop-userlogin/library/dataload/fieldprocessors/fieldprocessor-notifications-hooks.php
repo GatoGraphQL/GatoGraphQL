@@ -7,7 +7,7 @@ use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }

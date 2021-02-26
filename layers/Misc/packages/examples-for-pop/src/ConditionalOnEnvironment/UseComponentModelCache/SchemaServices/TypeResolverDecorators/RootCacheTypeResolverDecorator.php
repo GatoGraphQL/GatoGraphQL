@@ -11,7 +11,7 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
  */
 class RootCacheTypeResolverDecorator extends AbstractCacheTypeResolverDecorator
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

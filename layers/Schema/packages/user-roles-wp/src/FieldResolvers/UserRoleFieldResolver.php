@@ -13,7 +13,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractReflectionPropertyFieldResolver;
 
 class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserRoleTypeResolver::class);
     }

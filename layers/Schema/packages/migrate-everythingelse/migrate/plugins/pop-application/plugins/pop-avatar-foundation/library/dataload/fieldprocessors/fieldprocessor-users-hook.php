@@ -7,7 +7,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }

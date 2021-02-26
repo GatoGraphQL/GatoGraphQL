@@ -11,7 +11,7 @@ use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceReso
 
 class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             IsCustomPostFieldInterfaceResolver::class,

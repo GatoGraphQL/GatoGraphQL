@@ -11,7 +11,7 @@ use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
 class PostTagListFieldResolver extends AbstractPostFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(PostTagTypeResolver::class);
     }

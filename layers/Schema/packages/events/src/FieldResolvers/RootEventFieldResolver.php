@@ -11,7 +11,7 @@ use PoPSchema\Events\FieldResolvers\AbstractEventFieldResolver;
 
 class RootEventFieldResolver extends AbstractEventFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

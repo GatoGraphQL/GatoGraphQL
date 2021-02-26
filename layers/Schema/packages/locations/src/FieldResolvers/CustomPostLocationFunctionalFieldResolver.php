@@ -9,7 +9,7 @@ use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceReso
 
 class CustomPostLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             IsCustomPostFieldInterfaceResolver::class,

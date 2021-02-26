@@ -15,7 +15,7 @@ use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(CommentTypeResolver::class);
     }

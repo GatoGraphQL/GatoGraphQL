@@ -9,7 +9,7 @@ use PoPSchema\GoogleTranslateDirective\DirectiveResolvers\AbstractGoogleTranslat
 
 class CustomPostGoogleTranslateDirectiveResolver extends AbstractGoogleTranslateDirectiveResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

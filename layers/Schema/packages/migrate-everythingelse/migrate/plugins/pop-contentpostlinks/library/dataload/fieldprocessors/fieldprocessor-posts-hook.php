@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

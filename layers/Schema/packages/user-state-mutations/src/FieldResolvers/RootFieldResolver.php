@@ -16,7 +16,7 @@ use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

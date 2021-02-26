@@ -13,7 +13,7 @@ use PoP\ComponentModel\FieldInterfaceResolvers\ElementalFieldInterfaceResolver;
 
 class ElementalFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             AbstractTypeResolver::class,

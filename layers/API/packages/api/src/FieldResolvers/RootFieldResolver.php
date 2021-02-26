@@ -22,7 +22,7 @@ use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

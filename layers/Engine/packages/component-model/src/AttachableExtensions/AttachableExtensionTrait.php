@@ -11,7 +11,7 @@ trait AttachableExtensionTrait
     /**
      * It is represented through a static class, because the extensions work at class level, not object level
      */
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [];
     }
@@ -38,7 +38,7 @@ trait AttachableExtensionTrait
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $extensionClass = get_called_class();
-        foreach ($extensionClass::getClassesToAttachTo() as $attachableClass) {
+        foreach ($this->getClassesToAttachTo() as $attachableClass) {
             $attachableExtensionManager->setExtensionClass(
                 $attachableClass,
                 $group,

@@ -11,7 +11,7 @@ use PoPSchema\Categories\TypeResolvers\CategoryTypeResolver;
 
 class CustomPostListCategoryFieldResolver extends AbstractCustomPostListFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(CategoryTypeResolver::class);
     }

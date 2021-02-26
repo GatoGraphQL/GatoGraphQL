@@ -7,7 +7,7 @@ use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(LocationPostTypeResolver::class);
     }

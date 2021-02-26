@@ -18,7 +18,7 @@ use PoPSchema\Events\FieldResolvers\AbstractEventFieldResolver;
  */
 abstract class EventTagFieldResolver extends AbstractEventFieldResolver
 {
-    // public static function getClassesToAttachTo(): array
+    // public function getClassesToAttachTo(): array
     // {
     //     return array(EventTagTypeResolver::class);
     // }

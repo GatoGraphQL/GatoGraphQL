@@ -18,7 +18,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }

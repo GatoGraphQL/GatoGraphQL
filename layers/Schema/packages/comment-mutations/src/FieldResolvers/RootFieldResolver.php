@@ -16,7 +16,7 @@ use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationR
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

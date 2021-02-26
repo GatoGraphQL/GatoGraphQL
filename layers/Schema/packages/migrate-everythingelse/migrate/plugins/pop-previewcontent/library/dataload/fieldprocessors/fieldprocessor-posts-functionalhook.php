@@ -7,7 +7,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
 class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

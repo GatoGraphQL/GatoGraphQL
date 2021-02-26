@@ -10,7 +10,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

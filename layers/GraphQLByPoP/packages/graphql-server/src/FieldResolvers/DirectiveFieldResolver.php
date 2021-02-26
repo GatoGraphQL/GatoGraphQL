@@ -19,7 +19,7 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(DirectiveTypeResolver::class);
     }

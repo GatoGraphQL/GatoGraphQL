@@ -19,7 +19,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             IsCustomPostFieldInterfaceResolver::class,

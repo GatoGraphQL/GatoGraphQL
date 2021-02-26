@@ -23,7 +23,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         $this->customPostTypeResolver = $customPostTypeResolver;
     }
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

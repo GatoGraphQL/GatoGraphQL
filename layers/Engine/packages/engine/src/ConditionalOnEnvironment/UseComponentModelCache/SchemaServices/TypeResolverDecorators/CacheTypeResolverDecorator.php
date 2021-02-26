@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 
 class CacheTypeResolverDecorator extends AbstractTypeResolverDecorator
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             AbstractTypeResolver::class,

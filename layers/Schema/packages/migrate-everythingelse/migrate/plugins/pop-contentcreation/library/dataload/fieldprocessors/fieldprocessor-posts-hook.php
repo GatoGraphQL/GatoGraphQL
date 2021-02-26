@@ -13,7 +13,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             IsCustomPostFieldInterfaceResolver::class,

@@ -17,7 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class StanceFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             StanceTypeResolver::class,

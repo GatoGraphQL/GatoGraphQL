@@ -8,7 +8,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             UserTypeResolver::class,

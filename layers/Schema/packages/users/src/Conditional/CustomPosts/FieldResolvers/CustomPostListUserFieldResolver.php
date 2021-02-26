@@ -11,7 +11,7 @@ use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
 
 class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }

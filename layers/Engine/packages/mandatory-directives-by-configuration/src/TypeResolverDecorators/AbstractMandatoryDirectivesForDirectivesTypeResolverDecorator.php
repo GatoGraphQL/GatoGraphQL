@@ -17,7 +17,7 @@ abstract class AbstractMandatoryDirectivesForDirectivesTypeResolverDecorator ext
      *
      * @return array
      */
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             AbstractTypeResolver::class,

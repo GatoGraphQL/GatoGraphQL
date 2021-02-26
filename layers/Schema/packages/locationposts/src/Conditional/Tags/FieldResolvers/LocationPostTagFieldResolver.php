@@ -18,7 +18,7 @@ use PoPSchema\LocationPosts\FieldResolvers\AbstractLocationPostFieldResolver;
  */
 abstract class LocationPostTagFieldResolver extends AbstractLocationPostFieldResolver
 {
-    // public static function getClassesToAttachTo(): array
+    // public function getClassesToAttachTo(): array
     // {
     //     return array(LocationTagTypeResolver::class);
     // }

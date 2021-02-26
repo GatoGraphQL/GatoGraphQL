@@ -11,7 +11,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class PostUserFieldResolver extends AbstractPostFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }

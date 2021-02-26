@@ -16,7 +16,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

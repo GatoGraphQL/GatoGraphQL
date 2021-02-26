@@ -17,7 +17,7 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
      *
      * @return array
      */
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

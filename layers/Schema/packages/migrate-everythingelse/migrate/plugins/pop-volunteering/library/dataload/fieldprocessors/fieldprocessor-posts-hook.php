@@ -7,7 +7,7 @@ use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceReso
 
 class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

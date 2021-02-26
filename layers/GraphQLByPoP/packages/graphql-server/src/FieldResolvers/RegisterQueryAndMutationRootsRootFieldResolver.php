@@ -20,7 +20,7 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
  */
 class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

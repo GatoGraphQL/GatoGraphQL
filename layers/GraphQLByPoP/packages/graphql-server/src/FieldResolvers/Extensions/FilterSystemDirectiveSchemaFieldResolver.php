@@ -19,7 +19,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(SchemaTypeResolver::class);
     }

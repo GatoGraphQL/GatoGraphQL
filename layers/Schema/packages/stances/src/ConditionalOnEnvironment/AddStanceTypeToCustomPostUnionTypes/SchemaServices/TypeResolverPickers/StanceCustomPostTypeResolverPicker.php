@@ -9,7 +9,7 @@ use PoPSchema\Stances\TypeResolverPickers\AbstractStanceTypeResolverPicker;
 
 class StanceCustomPostTypeResolverPicker extends AbstractStanceTypeResolverPicker
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             CustomPostUnionTypeResolver::class,

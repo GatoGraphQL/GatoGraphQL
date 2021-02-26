@@ -9,7 +9,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserLocationFunctionalFieldResolver extends AbstractLocationFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             UserTypeResolver::class,

@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class RootMeFieldResolver extends AbstractUserStateFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

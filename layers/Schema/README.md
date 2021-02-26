@@ -70,7 +70,7 @@ Adding fields to the type is done via a `FieldResolver`:
 ```php
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {
-  public static function getClassesToAttachTo(): array
+  public function getClassesToAttachTo(): array
   {
     return [
       UserTypeResolver::class,

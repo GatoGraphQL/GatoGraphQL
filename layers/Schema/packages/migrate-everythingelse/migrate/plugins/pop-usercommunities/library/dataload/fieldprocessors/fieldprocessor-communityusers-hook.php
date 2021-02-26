@@ -10,7 +10,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
 {
     use CommunityFieldResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }

@@ -12,7 +12,7 @@ use PoPSchema\TranslateDirective\DirectiveResolvers\AbstractTranslateDirectiveRe
  */
 class TranslateCacheTypeResolverDecorator extends AbstractCacheTypeResolverDecorator
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             AbstractTypeResolver::class,

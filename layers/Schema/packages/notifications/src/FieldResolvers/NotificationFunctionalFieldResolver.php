@@ -13,7 +13,7 @@ use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }

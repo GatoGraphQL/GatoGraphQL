@@ -12,7 +12,7 @@ use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(PostTypeResolver::class);
     }

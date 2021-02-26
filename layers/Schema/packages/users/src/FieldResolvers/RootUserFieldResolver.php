@@ -14,7 +14,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootUserFieldResolver extends AbstractUserFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

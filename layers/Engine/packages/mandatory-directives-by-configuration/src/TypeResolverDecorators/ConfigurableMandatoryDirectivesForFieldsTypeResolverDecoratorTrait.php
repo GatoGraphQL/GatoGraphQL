@@ -11,7 +11,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array_map(
             function ($entry) {
