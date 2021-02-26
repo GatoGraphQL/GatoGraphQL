@@ -39,6 +39,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::initYAMLServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        self::initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 }

@@ -81,12 +81,12 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
-            self::initYAMLServices(dirname(__DIR__));
+            self::initServices(dirname(__DIR__));
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages
             if (class_exists('\PoP\AccessControl\Component')) {
-                self::initYAMLServices(dirname(__DIR__), '/Conditional/AccessControl');
+                self::initServices(dirname(__DIR__), '/Conditional/AccessControl');
             }
             if (
                 class_exists('\PoP\CacheControl\Component')

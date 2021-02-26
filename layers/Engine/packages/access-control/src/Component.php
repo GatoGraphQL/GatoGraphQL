@@ -42,7 +42,7 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
-            self::initYAMLServices(dirname(__DIR__));
+            self::initServices(dirname(__DIR__));
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
         }
     }

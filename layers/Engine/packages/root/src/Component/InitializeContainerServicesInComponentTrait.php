@@ -22,7 +22,7 @@ trait InitializeContainerServicesInComponentTrait
      * @param string $fileName
      * @return void
      */
-    public static function initYAMLServices(
+    public static function initServices(
         string $componentDir,
         string $configPath = '',
         string $fileName = 'services.yaml'

@@ -62,7 +62,7 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
 
         // Only after initializing the containerBuilder, can inject a service
-        self::initYAMLServices(dirname(__DIR__));
+        self::initServices(dirname(__DIR__));
     }
 
     /**

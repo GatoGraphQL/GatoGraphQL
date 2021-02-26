@@ -61,25 +61,25 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::initYAMLServices(dirname(__DIR__));
+        self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
-            self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
+            self::initServices(dirname(__DIR__), '/Conditional/API');
         }
         if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
-            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+            self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
         }
 
         if (class_exists('\PoPSchema\CustomPosts\Component')) {
-            self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');
+            self::initServices(dirname(__DIR__), '/Conditional/CustomPosts');
             if (!in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)) {
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CustomPosts');
                 if (
                     class_exists('\PoP\RESTAPI\Component')
                     && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
                 ) {
-                    self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts/Conditional/RESTAPI');
+                    self::initServices(dirname(__DIR__), '/Conditional/CustomPosts/Conditional/RESTAPI');
                 }
             }
         }
