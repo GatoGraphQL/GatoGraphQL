@@ -89,15 +89,16 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         ?UserRoleTypeResolver $userRoleTypeResolver,
         ?UserTypeResolver $userTypeResolver
     ) {
-        $this->commentTypeResolver = $commentTypeResolver;
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;
-        $this->mediaTypeResolver = $mediaTypeResolver;
-        $this->pageTypeResolver = $pageTypeResolver;
-        $this->postTagTypeResolver = $postTagTypeResolver;
-        $this->postTypeResolver = $postTypeResolver;
-        $this->userRoleTypeResolver = $userRoleTypeResolver;
-        $this->userTypeResolver = $userTypeResolver;
+        // Hack: Temporarily instantiate new class
+        $this->commentTypeResolver = $commentTypeResolver ?? new CommentTypeResolver();
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver ?? new CustomPostUnionTypeResolver();
+        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver ?? new GenericCustomPostTypeResolver();
+        $this->mediaTypeResolver = $mediaTypeResolver ?? new MediaTypeResolver();
+        $this->pageTypeResolver = $pageTypeResolver ?? new PageTypeResolver();
+        $this->postTagTypeResolver = $postTagTypeResolver ?? new PostTagTypeResolver();
+        $this->postTypeResolver = $postTypeResolver ?? new PostTypeResolver();
+        $this->userRoleTypeResolver = $userRoleTypeResolver ?? new UserRoleTypeResolver();
+        $this->userTypeResolver = $userTypeResolver ?? new UserTypeResolver();
     }
 
     /**

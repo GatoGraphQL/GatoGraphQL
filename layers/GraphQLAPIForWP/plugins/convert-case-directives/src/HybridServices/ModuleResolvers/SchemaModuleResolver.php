@@ -33,9 +33,10 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
         ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
     ) {
-        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver;
-        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver;
-        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver;
+        // Hack: Temporarily instantiate new class
+        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver ?? new UpperCaseStringDirectiveResolver();
+        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver ?? new LowerCaseStringDirectiveResolver();
+        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver ?? new TitleCaseStringDirectiveResolver();
     }
 
     public static function getModulesToResolve(): array
