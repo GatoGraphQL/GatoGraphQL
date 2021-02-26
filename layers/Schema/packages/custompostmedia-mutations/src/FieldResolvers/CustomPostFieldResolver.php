@@ -24,7 +24,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         $this->mediaTypeResolver = $mediaTypeResolver;
     }
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(IsCustomPostFieldInterfaceResolver::class);
     }

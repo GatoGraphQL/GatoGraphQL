@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
  */
 class GlobalCacheTypeResolverDecorator extends AbstractCacheTypeResolverDecorator
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             AbstractTypeResolver::class,

@@ -13,7 +13,7 @@ use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 
 class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(MenuItemTypeResolver::class);
     }

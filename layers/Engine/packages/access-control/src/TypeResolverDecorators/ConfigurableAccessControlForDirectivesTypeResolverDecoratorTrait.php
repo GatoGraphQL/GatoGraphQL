@@ -26,7 +26,7 @@ trait ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait
      *
      * @return array
      */
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             AbstractTypeResolver::class,

@@ -12,7 +12,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }
@@ -202,4 +202,4 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 }
 
 // Static Initialization: Attach
-PoP_AddComments_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_AddComments_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

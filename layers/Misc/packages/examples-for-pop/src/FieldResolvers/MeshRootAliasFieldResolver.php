@@ -18,7 +18,7 @@ class MeshRootAliasFieldResolver extends AbstractDBDataFieldResolver
 {
     use AliasSchemaFieldResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

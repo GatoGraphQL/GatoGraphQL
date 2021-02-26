@@ -9,7 +9,7 @@ use PoPSchema\Events\TypeResolverPickers\AbstractEventTypeResolverPicker;
 
 class EventCustomPostTypeResolverPicker extends AbstractEventTypeResolverPicker
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             CustomPostUnionTypeResolver::class,

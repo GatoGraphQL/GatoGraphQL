@@ -13,7 +13,7 @@ use PoP\TraceTools\DirectiveResolvers\StartTraceExecutionTimeDirectiveResolver;
 
 class TraceTypeResolverDecorator extends AbstractTypeResolverDecorator
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             AbstractTypeResolver::class,

@@ -8,7 +8,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }
@@ -103,4 +103,4 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
 }
 
 // Static Initialization: Attach
-GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

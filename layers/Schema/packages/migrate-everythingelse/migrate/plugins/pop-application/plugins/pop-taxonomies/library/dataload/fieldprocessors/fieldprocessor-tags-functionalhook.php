@@ -7,7 +7,7 @@ use PoPSchema\Tags\TypeResolvers\AbstractTagTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(AbstractTagTypeResolver::class);
     }
@@ -64,4 +64,4 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
 }
 
 // Static Initialization: Attach
-PoP_Application_DataLoad_FieldResolver_Tags::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoP_Application_DataLoad_FieldResolver_Tags())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

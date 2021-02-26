@@ -19,7 +19,7 @@ use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaTypeDataLoader;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }

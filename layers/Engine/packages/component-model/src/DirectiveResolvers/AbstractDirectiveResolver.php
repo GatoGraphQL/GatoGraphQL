@@ -4,27 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use Exception;
 use Composer\Semver\Semver;
-use PoP\FieldQuery\QueryHelpers;
+use Exception;
 use League\Pipeline\StageInterface;
-use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\ResolverTypes;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
+use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
-abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
+abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface, AttachableExtensionInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDsDataFieldsDirectiveResolverTrait;

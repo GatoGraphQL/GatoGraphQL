@@ -16,7 +16,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class HighlightFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(HighlightTypeResolver::class);
     }

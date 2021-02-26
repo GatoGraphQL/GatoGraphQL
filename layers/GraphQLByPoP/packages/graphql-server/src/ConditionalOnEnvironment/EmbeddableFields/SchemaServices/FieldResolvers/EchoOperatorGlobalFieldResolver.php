@@ -28,7 +28,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     //  * so this one gets registered (otherwise, since `ADD_GLOBAL_FIELDS_TO_SCHEMA`
     //  * is false, the field would be removed)
     //  */
-    // public static function getPriorityToAttachClasses(): ?int
+    // public function getPriorityToAttachClasses(): ?int
     // {
     //     return 20;
     // }

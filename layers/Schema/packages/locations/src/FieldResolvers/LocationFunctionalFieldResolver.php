@@ -14,7 +14,7 @@ use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 
 class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(
             LocationTypeResolver::class,

@@ -9,7 +9,7 @@ use PoPSchema\Posts\TypeResolverPickers\AbstractPostTypeResolverPicker;
 
 class PostCustomPostTypeResolverPicker extends AbstractPostTypeResolverPicker
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             CustomPostUnionTypeResolver::class,

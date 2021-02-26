@@ -12,7 +12,7 @@ use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 
 class LocationFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(LocationTypeResolver::class);
     }

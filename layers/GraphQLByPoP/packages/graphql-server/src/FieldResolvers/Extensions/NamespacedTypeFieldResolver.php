@@ -15,12 +15,12 @@ class NamespacedTypeFieldResolver extends AbstractDBDataFieldResolver
 {
     use EnumTypeFieldSchemaDefinitionResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(TypeTypeResolver::class);
     }
 
-    public static function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): ?int
     {
         // Higher priority => Process first
         return 100;

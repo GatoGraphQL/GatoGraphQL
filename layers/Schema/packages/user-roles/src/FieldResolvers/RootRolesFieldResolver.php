@@ -12,7 +12,7 @@ class RootRolesFieldResolver extends AbstractDBDataFieldResolver
 {
     use RolesFieldResolverTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             RootTypeResolver::class,

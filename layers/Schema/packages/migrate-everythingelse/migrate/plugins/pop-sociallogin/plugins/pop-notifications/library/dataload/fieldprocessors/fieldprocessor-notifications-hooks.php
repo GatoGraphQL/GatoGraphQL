@@ -8,7 +8,7 @@ use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }
@@ -116,4 +116,4 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
 }
 
 // Static Initialization: Attach
-WSL_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new WSL_AAL_PoP_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

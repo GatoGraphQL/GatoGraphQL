@@ -12,7 +12,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class EnumValueFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(EnumValueTypeResolver::class);
     }

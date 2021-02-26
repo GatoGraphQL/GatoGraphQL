@@ -14,7 +14,7 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
 {
     use PostTagAPISatisfiedContractTrait;
 
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

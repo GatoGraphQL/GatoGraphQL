@@ -13,7 +13,7 @@ use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDec
 
 class CDNTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             MediaTypeResolver::class,

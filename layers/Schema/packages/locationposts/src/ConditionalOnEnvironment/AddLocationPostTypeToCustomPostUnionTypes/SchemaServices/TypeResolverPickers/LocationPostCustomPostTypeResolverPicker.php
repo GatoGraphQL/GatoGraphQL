@@ -9,7 +9,7 @@ use PoPSchema\LocationPosts\TypeResolverPickers\AbstractLocationPostTypeResolver
 
 class LocationPostCustomPostTypeResolverPicker extends AbstractLocationPostTypeResolverPicker
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             CustomPostUnionTypeResolver::class,

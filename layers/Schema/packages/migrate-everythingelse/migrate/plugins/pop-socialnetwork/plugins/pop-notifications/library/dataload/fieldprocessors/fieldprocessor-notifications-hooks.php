@@ -8,7 +8,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }
@@ -264,4 +264,4 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
 }
 
 // Static Initialization: Attach
-PoP_SocialNetwork_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new PoP_SocialNetwork_DataLoad_FieldResolver_Notifications())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

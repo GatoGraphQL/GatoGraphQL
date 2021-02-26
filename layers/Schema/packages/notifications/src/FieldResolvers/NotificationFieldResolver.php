@@ -18,7 +18,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
     }

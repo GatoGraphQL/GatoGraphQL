@@ -13,7 +13,7 @@ use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

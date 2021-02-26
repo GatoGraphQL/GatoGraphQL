@@ -7,7 +7,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
     }
@@ -79,4 +79,4 @@ class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
 }
 
 // Static Initialization: Attach
-GD_WSL_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
+(new GD_WSL_FieldResolver_Users())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

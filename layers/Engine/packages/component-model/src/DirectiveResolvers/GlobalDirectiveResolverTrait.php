@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait GlobalDirectiveResolverTrait
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         // Be attached to all typeResolvers
         return [

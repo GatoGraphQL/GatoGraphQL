@@ -17,7 +17,7 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
      *
      * @return array
      */
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,
@@ -30,7 +30,7 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
      *
      * @return integer|null
      */
-    public static function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): ?int
     {
         return 20;
     }

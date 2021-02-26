@@ -13,7 +13,7 @@ use PoPSchema\CustomPostMedia\FieldInterfaceResolvers\SupportingFeaturedImageFie
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             IsCustomPostFieldInterfaceResolver::class,

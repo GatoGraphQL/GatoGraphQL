@@ -10,7 +10,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(CommentTypeResolver::class);
     }
@@ -97,4 +97,4 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
 }
 
 // Static Initialization: Attach
-PoPGenericForms_DataLoad_FieldResolver_Comments::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+(new PoPGenericForms_DataLoad_FieldResolver_Comments())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

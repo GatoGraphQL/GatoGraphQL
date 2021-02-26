@@ -12,7 +12,7 @@ use PoP\Multisite\TypeResolvers\SiteTypeResolver;
 
 class SiteFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(SiteTypeResolver::class);
     }

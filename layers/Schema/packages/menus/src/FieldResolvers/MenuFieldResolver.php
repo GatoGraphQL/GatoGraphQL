@@ -17,7 +17,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(MenuTypeResolver::class);
     }

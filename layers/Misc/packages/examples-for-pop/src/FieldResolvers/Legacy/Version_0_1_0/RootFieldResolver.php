@@ -15,12 +15,12 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }
 
-    public static function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): ?int
     {
         // Higher priority => Process before the latest version fieldResolver
         return 20;

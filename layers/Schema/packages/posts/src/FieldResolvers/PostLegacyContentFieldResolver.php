@@ -14,7 +14,7 @@ use PoPSchema\CustomPosts\Types\Status;
 
 class PostLegacyContentFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return [
             PostTypeResolver::class,

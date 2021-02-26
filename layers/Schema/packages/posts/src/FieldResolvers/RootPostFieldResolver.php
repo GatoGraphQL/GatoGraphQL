@@ -16,7 +16,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPostFieldResolver extends AbstractPostFieldResolver
 {
-    public static function getClassesToAttachTo(): array
+    public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
     }
