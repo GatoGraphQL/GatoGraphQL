@@ -35,11 +35,17 @@ use WP_Post;
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
     protected ModuleRegistryInterface $moduleRegistry;
+    protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
+    protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator;
 
     function __construct(
-        ModuleRegistryInterface $moduleRegistry
+        ModuleRegistryInterface $moduleRegistry,
+        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+        FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
     ) {
         $this->moduleRegistry = $moduleRegistry;
+        $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
+        $this->fieldDeprecationGraphQLQueryConfigurator = $fieldDeprecationGraphQLQueryConfigurator;
     }
 
     /**
@@ -324,9 +330,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         );
         if (!is_null($schemaConfigACLBlockDataItem)) {
             if ($accessControlLists = $schemaConfigACLBlockDataItem['attrs'][SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS] ?? null) {
-                $configurator = new AccessControlGraphQLQueryConfigurator();
                 foreach ($accessControlLists as $accessControlListID) {
-                    $configurator->executeSchemaConfiguration($accessControlListID);
+                    $this->accessControlGraphQLQueryConfigurator->executeSchemaConfiguration($accessControlListID);
                 }
             }
         }
@@ -353,9 +358,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         );
         if (!is_null($schemaConfigFDLBlockDataItem)) {
             if ($fieldDeprecationLists = $schemaConfigFDLBlockDataItem['attrs'][SchemaConfigFieldDeprecationListBlock::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS] ?? null) {
-                $configurator = new FieldDeprecationGraphQLQueryConfigurator();
                 foreach ($fieldDeprecationLists as $fieldDeprecationListID) {
-                    $configurator->executeSchemaConfiguration($fieldDeprecationListID);
+                    $this->fieldDeprecationGraphQLQueryConfigurator->executeSchemaConfiguration($fieldDeprecationListID);
                 }
             }
         }

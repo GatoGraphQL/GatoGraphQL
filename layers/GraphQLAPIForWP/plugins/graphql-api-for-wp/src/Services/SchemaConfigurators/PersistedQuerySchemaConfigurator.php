@@ -4,15 +4,30 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;
+use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
+    protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
+
+    function __construct(
+        ModuleRegistryInterface $moduleRegistry,
+        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+        FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator,
+        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
+    ) {
+        parent::__construct($moduleRegistry, $accessControlGraphQLQueryConfigurator, $fieldDeprecationGraphQLQueryConfigurator);
+        $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
+    }
+
     /**
      * Apply all the settings defined in the Schema Configuration:
      * - Access Control Lists
@@ -58,9 +73,8 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
         );
         if (!is_null($schemaConfigCCLBlockDataItem)) {
             if ($cacheControlLists = $schemaConfigCCLBlockDataItem['attrs'][SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS] ?? null) {
-                $configurator = new CacheControlGraphQLQueryConfigurator();
                 foreach ($cacheControlLists as $cacheControlListID) {
-                    $configurator->executeSchemaConfiguration($cacheControlListID);
+                    $this->cacheControlGraphQLQueryConfigurator->executeSchemaConfiguration($cacheControlListID);
                 }
             }
         }
