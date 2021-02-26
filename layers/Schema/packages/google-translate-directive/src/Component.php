@@ -36,7 +36,7 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         if (Environment::enableGlobalGoogleTranslateDirective()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+            self::initSchemaServices(dirname(__DIR__), $skipSchema);
         }
     }
 }

@@ -37,9 +37,9 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (Environment::addStanceTypeToCustomPostUnionTypes()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes');
         }
     }
 }

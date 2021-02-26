@@ -57,7 +57,7 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (
             class_exists('\PoP\RESTAPI\Component')
@@ -70,7 +70,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
         }
     }
 }

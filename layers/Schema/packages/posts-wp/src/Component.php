@@ -48,7 +48,7 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes/Overrides');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

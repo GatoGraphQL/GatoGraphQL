@@ -54,14 +54,14 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             self::initYAMLServices(dirname(__DIR__));
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+            self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Init conditional on API package being installed
             if (
                 class_exists('\PoP\CacheControl\Component')
                 && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
             ) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl');
             }
         }
     }

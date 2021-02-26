@@ -77,7 +77,7 @@ trait InitializeContainerServicesInComponentTrait
      * in the container, but do not initialize them.
      * If file name provided, use "schema-services.yaml"
      */
-    public static function maybeInitYAMLSchemaServices(
+    public static function initSchemaServices(
         string $componentDir,
         bool $skipSchema,
         string $configPath = '',

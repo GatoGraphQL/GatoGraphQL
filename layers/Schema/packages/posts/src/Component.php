@@ -61,7 +61,7 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
@@ -72,7 +72,7 @@ class Component extends AbstractComponent
 
         if (class_exists('\PoPSchema\Users\Component')) {
             if (!in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
             }
             if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
                 self::initYAMLServices(dirname(__DIR__), '/Conditional/Users/Conditional/API');
@@ -83,7 +83,7 @@ class Component extends AbstractComponent
         }
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
         }
     }
 

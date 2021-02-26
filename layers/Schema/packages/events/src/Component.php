@@ -60,24 +60,24 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
         self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (
             class_exists('\PoPSchema\Tags\Component')
             && !in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Tags');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Tags');
         }
 
         if (
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
         }
 
         if (Environment::addEventTypeToCustomPostUnionTypes()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddEventTypeToCustomPostUnionTypes');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddEventTypeToCustomPostUnionTypes');
         }
     }
 }

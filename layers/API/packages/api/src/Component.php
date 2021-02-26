@@ -82,7 +82,7 @@ class Component extends AbstractComponent
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
             self::initYAMLServices(dirname(__DIR__));
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+            self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages
             if (class_exists('\PoP\AccessControl\Component')) {
@@ -95,7 +95,7 @@ class Component extends AbstractComponent
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
         }
     }

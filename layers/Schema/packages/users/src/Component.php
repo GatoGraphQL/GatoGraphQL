@@ -62,7 +62,7 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
         self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/API');
@@ -74,7 +74,7 @@ class Component extends AbstractComponent
         if (class_exists('\PoPSchema\CustomPosts\Component')) {
             self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');
             if (!in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CustomPosts');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CustomPosts');
                 if (
                     class_exists('\PoP\RESTAPI\Component')
                     && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)

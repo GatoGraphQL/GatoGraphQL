@@ -47,6 +47,6 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initYAMLServices(dirname(__DIR__));
         self::initYAMLServices(dirname(__DIR__), '/Overrides');
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
+        self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
     }
 }

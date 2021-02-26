@@ -55,12 +55,12 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::initYAMLServices(dirname(__DIR__));
         self::initYAMLServices(dirname(__DIR__), '/Overrides');
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (!Environment::disableGuzzleOperators()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/Guzzle');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/Guzzle');
         }
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
         }
     }
 }
