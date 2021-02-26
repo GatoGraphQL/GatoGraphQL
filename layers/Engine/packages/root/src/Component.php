@@ -45,7 +45,7 @@ class Component extends AbstractComponent
         parent::initializeSystemContainerServices();
 
         // Only after initializing the containerBuilder, can inject a service
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
+        self::initSystemServices(dirname(__DIR__));
     }
 
     /**

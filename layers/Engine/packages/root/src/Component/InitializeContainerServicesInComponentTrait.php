@@ -105,7 +105,7 @@ trait InitializeContainerServicesInComponentTrait
      * @param string $fileName
      * @return void
      */
-    public static function initYAMLSystemContainerServices(
+    public static function initSystemServices(
         string $componentDir,
         string $configPath = '',
         string $fileName = 'system-services.yaml'

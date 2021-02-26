@@ -24,7 +24,7 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
-        self::initYAMLSystemContainerServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        self::initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 
     /**
