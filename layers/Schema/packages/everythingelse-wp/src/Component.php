@@ -48,10 +48,7 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        if (
-            class_exists('\PoPSchema\CustomPosts\Component')
-            && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
-        ) {
+        if (class_exists('\PoPSchema\CustomPosts\Component')) {
             self::initServices(dirname(__DIR__), '/Conditional/CustomPosts');
         }
     }

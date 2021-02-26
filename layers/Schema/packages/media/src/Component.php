@@ -59,11 +59,12 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (
-            class_exists('\PoPSchema\Users\Component')
-            && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+        if (class_exists('\PoPSchema\Users\Component')) {
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),
+                '/Conditional/Users'
+            );
         }
     }
 }

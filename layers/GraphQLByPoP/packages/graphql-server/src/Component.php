@@ -113,12 +113,14 @@ class Component extends AbstractComponent
             }
             if (
                 class_exists('\PoP\CacheControl\Component')
-                && !in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses)
                 && class_exists('\PoP\AccessControl\Component')
-                && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
+                self::initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
+                    '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema'
+                );
             }
         }
     }

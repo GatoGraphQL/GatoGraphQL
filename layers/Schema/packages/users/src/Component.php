@@ -73,14 +73,13 @@ class Component extends AbstractComponent
 
         if (class_exists('\PoPSchema\CustomPosts\Component')) {
             self::initServices(dirname(__DIR__), '/Conditional/CustomPosts');
-            if (!in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CustomPosts');
-                if (
-                    class_exists('\PoP\RESTAPI\Component')
-                    && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
-                ) {
-                    self::initServices(dirname(__DIR__), '/Conditional/CustomPosts/Conditional/RESTAPI');
-                }
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses),
+                '/Conditional/CustomPosts'
+            );
+            if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+                self::initServices(dirname(__DIR__), '/Conditional/CustomPosts/Conditional/RESTAPI');
             }
         }
     }

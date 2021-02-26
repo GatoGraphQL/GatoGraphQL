@@ -59,18 +59,16 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (
-            class_exists('\PoP\RESTAPI\Component')
-            && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
-        ) {
+        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
             self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
         }
 
-        if (
-            class_exists('\PoPSchema\Users\Component')
-            && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
-        ) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+        if (class_exists('\PoPSchema\Users\Component')) {
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),
+                '/Conditional/Users'
+            );
         }
     }
 }
