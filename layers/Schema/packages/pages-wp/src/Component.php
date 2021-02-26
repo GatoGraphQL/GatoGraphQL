@@ -46,9 +46,9 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::initYAMLServices(dirname(__DIR__));
+        self::initServices(dirname(__DIR__));
         if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPageTypeToCustomPostUnionTypes/Overrides');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPageTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

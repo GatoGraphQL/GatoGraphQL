@@ -56,21 +56,21 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initServices(dirname(__DIR__));
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (
             class_exists('\PoP\RESTAPI\Component')
             && !in_array(\PoP\RESTAPI\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::initYAMLServices(dirname(__DIR__), '/Conditional/RESTAPI');
+            self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
         }
 
         if (
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
         }
     }
 }

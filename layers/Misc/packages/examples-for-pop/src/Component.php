@@ -39,9 +39,9 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
         }
     }
 
@@ -51,6 +51,6 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
+        self::initSystemServices(dirname(__DIR__));
     }
 }

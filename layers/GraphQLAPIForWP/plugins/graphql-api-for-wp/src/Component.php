@@ -71,8 +71,8 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
-        self::initYAMLSystemContainerServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
+        self::initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        self::initSystemServices(dirname(__DIR__));
     }
 
     /**
@@ -87,22 +87,22 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::initYAMLServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initYAMLServices(dirname(__DIR__));
+        self::initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        self::initServices(dirname(__DIR__));
         self::initComponentConfiguration();
         // Override DI services
-        self::initYAMLServices(dirname(__DIR__), '/Overrides');
+        self::initServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
         /**
          * FieldResolvers used to configure the services can also be accessed in the admin area
          */
         if (\is_admin()) {
-            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
-            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
+            self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
+            self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/CacheControl/Overrides');
+            self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/CacheControl/Overrides');
         }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -115,7 +115,7 @@ class Component extends AbstractComponent
                 ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
             )
         ) {
-            self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
+            self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/GraphiQLExplorerInAdminClient/Overrides');
         }
         if ($isGraphiQLExplorerEnabled) {
             if (
@@ -124,7 +124,7 @@ class Component extends AbstractComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
                 )
             ) {
-                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
+                self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInAdminPersistedQueries/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
@@ -132,7 +132,7 @@ class Component extends AbstractComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT
                 )
             ) {
-                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
+                self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
@@ -140,7 +140,7 @@ class Component extends AbstractComponent
                     ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
                 )
             ) {
-                self::initYAMLServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
+                self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
     }

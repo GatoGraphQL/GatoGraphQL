@@ -39,7 +39,7 @@ class Component extends AbstractComponent
     {
         if (self::isEnabled()) {
             parent::initializeSystemContainerServices();
-            self::initYAMLSystemContainerServices(dirname(__DIR__));
+            self::initSystemServices(dirname(__DIR__));
         }
     }
 }

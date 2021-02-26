@@ -52,7 +52,7 @@ class Component extends AbstractComponent
             class_exists('\PoPSchema\CustomPosts\Component')
             && !in_array(\PoPSchema\CustomPosts\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::initYAMLServices(dirname(__DIR__), '/Conditional/CustomPosts');
+            self::initServices(dirname(__DIR__), '/Conditional/CustomPosts');
         }
     }
 }

@@ -91,25 +91,25 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
-            self::initYAMLServices(dirname(__DIR__));
-            self::initYAMLServices(dirname(__DIR__), '/Overrides');
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+            self::initServices(dirname(__DIR__));
+            self::initServices(dirname(__DIR__), '/Overrides');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Boot conditional on having variables treated as expressions for @export directive
             if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
             }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
             }
             // The @export directive depends on the Multiple Query Execution being enabled
             if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
             }
             // Attach @removeIfNull?
             if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
             }
             if (
                 class_exists('\PoP\CacheControl\Component')
@@ -118,7 +118,7 @@ class Component extends AbstractComponent
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
         }
     }
@@ -130,7 +130,7 @@ class Component extends AbstractComponent
     {
         if (self::isEnabled()) {
             parent::initializeSystemContainerServices();
-            self::initYAMLSystemContainerServices(dirname(__DIR__));
+            self::initSystemServices(dirname(__DIR__));
         }
     }
 

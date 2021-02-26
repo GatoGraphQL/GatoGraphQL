@@ -57,13 +57,13 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (
             class_exists('\PoPSchema\Users\Component')
             && !in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses)
         ) {
-            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/Users');
         }
     }
 }

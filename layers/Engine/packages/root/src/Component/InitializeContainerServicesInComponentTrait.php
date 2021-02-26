@@ -16,13 +16,8 @@ trait InitializeContainerServicesInComponentTrait
     /**
      * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
-     *
-     * @param string $componentDir
-     * @param string $configPath
-     * @param string $fileName
-     * @return void
      */
-    public static function initYAMLServices(
+    public static function initServices(
         string $componentDir,
         string $configPath = '',
         string $fileName = 'services.yaml'
@@ -39,11 +34,6 @@ trait InitializeContainerServicesInComponentTrait
     /**
      * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
-     *
-     * @param string $componentDir
-     * @param string $configPath
-     * @param string $fileName
-     * @return void
      */
     protected static function loadServicesFromYAMLConfigIntoContainer(
         ContainerBuilder $containerBuilder,
@@ -77,7 +67,7 @@ trait InitializeContainerServicesInComponentTrait
      * in the container, but do not initialize them.
      * If file name provided, use "schema-services.yaml"
      */
-    public static function maybeInitYAMLSchemaServices(
+    public static function initSchemaServices(
         string $componentDir,
         bool $skipSchema,
         string $configPath = '',
@@ -99,13 +89,8 @@ trait InitializeContainerServicesInComponentTrait
 
     /**
      * Load services into the System Container
-     *
-     * @param string $componentDir
-     * @param string $configPath
-     * @param string $fileName
-     * @return void
      */
-    public static function initYAMLSystemContainerServices(
+    public static function initSystemServices(
         string $componentDir,
         string $configPath = '',
         string $fileName = 'system-services.yaml'

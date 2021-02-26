@@ -50,8 +50,8 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
-        self::initYAMLServices(dirname(__DIR__));
-        self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initServices(dirname(__DIR__));
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 
     /**
@@ -60,7 +60,7 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         parent::initializeSystemContainerServices();
-        self::initYAMLSystemContainerServices(dirname(__DIR__));
+        self::initSystemServices(dirname(__DIR__));
     }
 
     /**
