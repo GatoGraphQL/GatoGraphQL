@@ -39,7 +39,7 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
         if (Environment::addStanceTypeToCustomPostUnionTypes()) {
-            self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes');
+            self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes');
         }
     }
 }

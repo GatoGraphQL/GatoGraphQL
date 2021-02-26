@@ -95,7 +95,7 @@ class Component extends AbstractComponent
                 && !in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
-                self::maybeInitPHPSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
+                self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema, '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema');
             }
         }
     }

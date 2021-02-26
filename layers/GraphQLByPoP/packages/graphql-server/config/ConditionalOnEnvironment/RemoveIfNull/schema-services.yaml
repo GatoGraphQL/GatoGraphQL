@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\RemoveIfNull\SchemaServices\:
+        resource: '../../../src/ConditionalOnEnvironment/RemoveIfNull/SchemaServices/*'

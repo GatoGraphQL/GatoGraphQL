@@ -15,7 +15,7 @@ class ForceAutoconfigureYamlFileLoader extends YamlFileLoader
     public function __construct(
         ContainerBuilder $container,
         FileLocatorInterface $locator,
-        ?bool $autoconfigure = true
+        bool $autoconfigure = true
     ) {
         parent::__construct($container, $locator);
         $this->autoconfigure = $autoconfigure;
