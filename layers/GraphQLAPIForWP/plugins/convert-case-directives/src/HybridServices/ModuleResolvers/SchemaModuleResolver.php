@@ -16,7 +16,26 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
 {
     use ModuleResolverTrait;
 
-    public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';
+    public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';/**
+
+    * Make all properties nullable, becase the ModuleRegistry is registered
+    * in the SystemContainer, where there are no typeResolvers so it will be null,
+    * and in the ApplicationContainer, from where the "Modules" page is resolved
+    * and which does have all the typeResolvers
+    */
+    protected ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver;
+    protected ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver;
+    protected ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver;
+
+    public function __construct(
+        ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver,
+        ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
+        ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
+    ) {
+        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver;
+        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver;
+        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver;
+    }
 
     public static function getModulesToResolve(): array
     {
@@ -54,9 +73,9 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::CONVERT_CASE_DIRECTIVES:
                 return sprintf(
                     \__('Set of directives to manipulate strings: <code>@%s</code>, <code>@%s</code> and <code>@%s</code>', 'graphql-api'),
-                    UpperCaseStringDirectiveResolver::getDirectiveName(),
-                    LowerCaseStringDirectiveResolver::getDirectiveName(),
-                    TitleCaseStringDirectiveResolver::getDirectiveName()
+                    $this->upperCaseStringDirectiveResolver->getDirectiveName(),
+                    $this->lowerCaseStringDirectiveResolver->getDirectiveName(),
+                    $this->titleCaseStringDirectiveResolver->getDirectiveName()
                 );
         }
         return parent::getDescription($module);
