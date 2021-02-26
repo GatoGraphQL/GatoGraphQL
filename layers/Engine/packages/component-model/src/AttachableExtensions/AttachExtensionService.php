@@ -21,7 +21,7 @@ class AttachExtensionService implements AttachExtensionServiceInterface
     {
         foreach ($this->classGroups[$event] as $group => $extensions) {
             foreach ($extensions as $extension) {
-                $extension::attach($group);
+                $extension->attach($group);
             }
         }
     }

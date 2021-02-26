@@ -34,7 +34,7 @@ trait AttachableExtensionTrait
      * @param integer $priority
      * @return void
      */
-    public static function attach(string $group, int $priority = 10): void
+    public function attach(string $group, int $priority = 10): void
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $extensionClass = get_called_class();
