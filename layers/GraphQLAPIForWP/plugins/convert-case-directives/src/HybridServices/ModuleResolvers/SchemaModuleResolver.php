@@ -16,8 +16,9 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
 {
     use ModuleResolverTrait;
 
-    public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';/**
+    public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';
 
+    /**
     * Make all properties nullable, becase the ModuleRegistry is registered
     * in the SystemContainer, where there are no typeResolvers so it will be null,
     * and in the ApplicationContainer, from where the "Modules" page is resolved
