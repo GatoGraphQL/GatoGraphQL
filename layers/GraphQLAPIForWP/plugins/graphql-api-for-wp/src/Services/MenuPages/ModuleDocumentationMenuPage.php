@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractDocsMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use InvalidArgumentException;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
@@ -14,6 +19,18 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    function __construct(
+        Menu $menu,
+        MenuPageHelper $menuPageHelper,
+        EndpointHelpers $endpointHelpers,
+        ModuleRegistryInterface $moduleRegistry
+    ) {
+        parent::__construct($menu, $menuPageHelper, $endpointHelpers);
+        $this->moduleRegistry = $moduleRegistry;
+    }
+
     public function getMenuPageSlug(): string
     {
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -50,9 +67,8 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         $vars = [];
         parse_str($_SERVER['REQUEST_URI'], $vars);
         $module = urldecode($vars[RequestParams::MODULE]);
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
         try {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
         } catch (InvalidArgumentException $e) {
             return sprintf(
                 '<p>%s</p>',
