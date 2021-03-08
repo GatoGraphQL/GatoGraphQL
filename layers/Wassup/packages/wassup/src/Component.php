@@ -20,7 +20,6 @@ class Component extends AbstractComponent
     {
         return [
             \GraphQLByPoP\GraphQLServer\Component::class,
-            \Leoloso\ExamplesForPoP\Component::class,
             \PoP\FunctionFields\Component::class,
             \PoP\RESTAPI\Component::class,
             \PoP\TraceTools\Component::class,
