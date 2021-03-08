@@ -14,6 +14,10 @@
     "prefer-stable": true,
     "repositories": [
         {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        },
+        {
             "type": "vcs",
             "url": "https://github.com/leoloso/wp-muplugin-loader.git"
         }
@@ -22,7 +26,10 @@
         "php": "~7.4",
         "getpop/engine-wp-bootloader": "^0.8",
         "pop-sites-wassup/wassup": "^0.8",
-        "oomphinc/composer-installers-extender": "^2.0"
+        "oomphinc/composer-installers-extender": "^2.0",
+        "wpackagist-plugin/events-manager":"^5.9",
+        "wpackagist-plugin/aryo-activity-log":"^2.5",
+        "wpackagist-plugin/qtranslate-x":"^3.4"
     },
     "extra": {
         "branch-alias": {
