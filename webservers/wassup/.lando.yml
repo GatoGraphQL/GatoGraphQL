@@ -38,23 +38,23 @@ services:
         - >-
           ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
-          ../../layers/Engine/packages/application:/app/vendor/getpop/application
+          ../../layers/SiteBuilder/packages/application:/app/vendor/getpop/application
         - >-
-          ../../layers/Engine/packages/application-wp:/app/vendor/getpop/application-wp
+          ../../layers/SiteBuilder/packages/application-wp:/app/vendor/getpop/application-wp
         - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
         - >-
           ../../layers/Engine/packages/component-model:/app/vendor/getpop/component-model
         - >-
-          ../../layers/Engine/packages/component-model-configuration:/app/vendor/getpop/component-model-configuration
+          ../../layers/SiteBuilder/packages/component-model-configuration:/app/vendor/getpop/component-model-configuration
         - >-
-          ../../layers/Engine/packages/definitionpersistence:/app/vendor/getpop/definitionpersistence
+          ../../layers/SiteBuilder/packages/definitionpersistence:/app/vendor/getpop/definitionpersistence
         - >-
           ../../layers/Engine/packages/definitions:/app/vendor/getpop/definitions
         - >-
-          ../../layers/Engine/packages/definitions-base36:/app/vendor/getpop/definitions-base36
+          ../../layers/SiteBuilder/packages/definitions-base36:/app/vendor/getpop/definitions-base36
         - >-
-          ../../layers/Engine/packages/definitions-emoji:/app/vendor/getpop/definitions-emoji
+          ../../layers/SiteBuilder/packages/definitions-emoji:/app/vendor/getpop/definitions-emoji
         - '../../layers/Engine/packages/engine:/app/vendor/getpop/engine'
         - '../../layers/Engine/packages/engine-wp:/app/vendor/getpop/engine-wp'
         - >-
@@ -73,7 +73,7 @@ services:
         - >-
           ../../layers/Engine/packages/migrate-component-model:/app/vendor/getpop/migrate-component-model
         - >-
-          ../../layers/Engine/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
+          ../../layers/SiteBuilder/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
         - >-
           ../../layers/Engine/packages/migrate-engine:/app/vendor/getpop/migrate-engine
         - >-
@@ -83,14 +83,14 @@ services:
         - >-
           ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
         - >-
-          ../../layers/Engine/packages/resourceloader:/app/vendor/getpop/resourceloader
-        - '../../layers/Engine/packages/resources:/app/vendor/getpop/resources'
+          ../../layers/SiteBuilder/packages/resourceloader:/app/vendor/getpop/resourceloader
+        - '../../layers/SiteBuilder/packages/resources:/app/vendor/getpop/resources'
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
         - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
-        - '../../layers/Engine/packages/site:/app/vendor/getpop/site'
-        - '../../layers/Engine/packages/site-wp:/app/vendor/getpop/site-wp'
-        - '../../layers/Engine/packages/spa:/app/vendor/getpop/spa'
+        - '../../layers/SiteBuilder/packages/site:/app/vendor/getpop/site'
+        - '../../layers/SiteBuilder/packages/site-wp:/app/vendor/getpop/site-wp'
+        - '../../layers/SiteBuilder/packages/spa:/app/vendor/getpop/spa'
         - >-
           ../../layers/Engine/packages/trace-tools:/app/vendor/getpop/trace-tools
         - >-
