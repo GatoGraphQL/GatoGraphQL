@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;

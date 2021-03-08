@@ -379,7 +379,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars['nature'] = $nature;
         $vars['dataoutputitems'] = array(
             \PoP\ComponentModel\Constants\DataOutputItems::META,
-            \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+            \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
             \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
             \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             \PoP\ComponentModel\Constants\DataOutputItems::SESSION,
