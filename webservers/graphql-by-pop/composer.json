@@ -115,7 +115,6 @@
         "init-server": "@start-server",
         "start-server": [
             "@symlink-vendor",
-            "@load-engine",
             "lando start"
         ],
         "rebuild-server": [
@@ -128,10 +127,6 @@
             "sed -e 's#../../../../#../../#g' localized-composer.json.tmp > composer.json",
             "composer update --no-dev",
             "php -r \"copy('composer.json.tmp', 'composer.json');\""
-        ],
-        "load-engine": [
-            "sed -e \"s#require_once ABSPATH . 'wp-settings.php';#require_once(__DIR__ . '/../vendor/autoload.php'); require_once(__DIR__ . '/../code-src/initialize-pop-components.php'); require_once  ABSPATH  .  'wp-settings.php' ;#g\" wordpress/wp-config.php > wp-config.php.tmp",
-            "php -r \"copy('wp-config.php.tmp', 'wordpress/wp-config.php');\""
         ]
     }
 }
