@@ -13,7 +13,7 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
 
         // Hooks to allow the thememodes to do some functionality
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
-        
+
         // The embed must make the main pageSection scrollable using perfect-scrollbar, so that the fullscreen mode works fine
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_true');
 
@@ -45,19 +45,19 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
         $pagesections = parent::getFramepagesections($pagesections, $module);
 
         array_splice(
-            $pagesections, 
+            $pagesections,
             array_search(
-                [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_SIDE], 
+                [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_SIDE],
                 $pagesections
-            ), 
+            ),
             1
         );
         array_splice(
-            $pagesections, 
+            $pagesections,
             array_search(
-                [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_NAVIGATOR], 
+                [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_NAVIGATOR],
                 $pagesections
-            ), 
+            ),
             1
         );
 

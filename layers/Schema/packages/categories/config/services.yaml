@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoP\Categories\LooseContracts\:
+    PoPSchema\Categories\LooseContracts\:
         resource: '../src/LooseContracts/*'

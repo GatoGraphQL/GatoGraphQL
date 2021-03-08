@@ -1,0 +1,75 @@
+{
+    "name": "leoloso/wassup-demo-site",
+    "description": "Wassup Demo Site",
+    "homepage": "https://github.com/leoloso/PoP",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/wp-muplugin-loader.git"
+        }
+    ],
+    "require": {
+        "php": "~7.4",
+        "getpop/engine-wp-bootloader": "^0.8",
+        "pop-sites-wassup/wassup": "^0.8",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "wpackagist-plugin/events-manager":"^5.9",
+        "wpackagist-plugin/aryo-activity-log":"^2.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "installer-paths": {
+            "wordpress/wp-content/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "wordpress/wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin",
+                "getpop/engine-wp-bootloader"
+            ],
+            "wordpress/wp-content/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "build-server": [
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name wassup",
+            "@start-server"
+        ],
+        "init-server": "@start-server",
+        "start-server": [
+            "@symlink-vendor",
+            "lando start"
+        ],
+        "rebuild-server": [
+            "lando rebuild appserver -y"
+        ],
+        "symlink-vendor": [
+            "php -r \"copy('composer.json', 'composer.json.tmp');\"",
+            "php -r \"copy('composer.json', 'localized-composer.json.tmp');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package webservers/wassup/localized-composer.json.tmp",
+            "sed -e 's#../../../../layers/#../../layers/#g' localized-composer.json.tmp > composer.json",
+            "composer update --no-dev",
+            "php -r \"copy('composer.json.tmp', 'composer.json');\""
+        ]
+    }
+}

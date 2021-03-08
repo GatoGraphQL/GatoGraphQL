@@ -8,7 +8,7 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
 {
     public function __construct()
     {
-        
+
         // HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
 
         // Hooks to allow the thememodes to do some functionality

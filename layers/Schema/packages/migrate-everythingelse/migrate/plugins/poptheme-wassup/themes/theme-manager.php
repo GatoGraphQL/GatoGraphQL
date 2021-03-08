@@ -11,7 +11,7 @@ class PoPTheme_WassupManager
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD, array($this, 'backgroundLoad'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, array($this, 'filteringbyShowfilter'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, array($this, 'getBlocksidebarsOrientation'));
-        
+
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL, array($this, 'getEmbedUrl'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL, array($this, 'getPrintUrl'));
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN, array($this, 'isMainScrollable'));

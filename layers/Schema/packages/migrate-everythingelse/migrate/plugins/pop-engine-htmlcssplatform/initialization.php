@@ -21,6 +21,7 @@ class PoPHTMLCSSPlatform_Initialization
          * Load the Library first
          */
         require_once 'library/load.php';
+        require_once 'platforms/load.php';
     }
 }
 

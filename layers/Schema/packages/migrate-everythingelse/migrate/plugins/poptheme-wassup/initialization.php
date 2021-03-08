@@ -30,7 +30,7 @@ class PoPTheme_Wassup_Initialization
             function () {
                 include_once 'plugins/load.php';
             },
-            1500
+            8881500
         );
 
         /**

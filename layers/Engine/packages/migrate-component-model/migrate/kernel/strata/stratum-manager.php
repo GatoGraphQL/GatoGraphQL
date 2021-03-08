@@ -14,7 +14,7 @@ class StratumManager
         HooksAPIFacade::getInstance()->addAction(
             'plugins_loaded',
             array($this, 'init'),
-            395
+            888395
         );
     }
 
@@ -51,7 +51,7 @@ class StratumManager
     public function getStrata($stratum = null)
     {
         $stratum = $stratum ?? $this->selected_stratum;
-        return $this->stratum_strata[$stratum];
+        return $this->stratum_strata[$stratum] ?? [];
     }
 
     public function isDefaultStratum()

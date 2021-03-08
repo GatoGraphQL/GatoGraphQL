@@ -54,7 +54,7 @@ abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInt
     public function setDefinitionResolver(DefinitionResolverInterface $definition_resolver, string $group): void
     {
         $this->definition_resolvers[$group] = $definition_resolver;
-        $definition_resolver->setPersistedData($this->resolverData[$group]);
+        $definition_resolver->setPersistedData($this->resolverData[$group] ?? []);
     }
 
     public function getDefinitionResolver(string $group): ?DefinitionResolverInterface

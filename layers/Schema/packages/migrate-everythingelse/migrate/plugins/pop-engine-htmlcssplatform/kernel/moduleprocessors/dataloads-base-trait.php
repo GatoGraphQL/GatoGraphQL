@@ -17,7 +17,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             return $ret;
         }
-    
+
         if ($filter_module = $this->getFilterSubmodule($module)) {
             if ($this->getProp($module, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
@@ -37,7 +37,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
             $this->setProp($module, $props, 'show-filter', true);
-            
+
             if ($filter_module = $this->getFilterSubmodule($module)) {
 
                 // Class needed for the proxyForm's selector when proxying this one block
@@ -45,7 +45,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 
                 // Filter hidden: always hide it, eg: for Full Post
                 if ($show_filter = $this->getProp($module, $props, 'show-filter')) {
-                    
+
                     // "pop-blockfilter": Class needed for the proxyForm's selector when proxying this one form
                     $class = 'pop-blockfilter collapse alert alert-info form-horizontal';
 
@@ -67,14 +67,14 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
-            
+
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
             if ($filter_module = $this->getFilterSubmodule($module)) {
 
                 // Filter visible: if explicitly defined, or if currently filtering with it
                 if ($show_filter = $this->getProp($module, $props, 'show-filter')) {
-                    
+
                     // Comment Leo 31/10/2014: don't show the filter open when filtering by anymore for MESYM v4,
                     // it takes so much space specially in the embed, and in some case, eg:
                     // http://m3l.localhost/calendar/?calendaryear=2014&calendarmonth=7&searchfor&filter=events-calendar
@@ -94,7 +94,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                 }
             }
         }
-                
+
         parent::initRequestProps($module, $props);
     }
 

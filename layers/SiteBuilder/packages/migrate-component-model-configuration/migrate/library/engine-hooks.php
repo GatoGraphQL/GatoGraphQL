@@ -21,7 +21,7 @@ class VarsHooks
 
     public function getDataOutputItems($dataoutputitems)
     {
-        $dataoutputitems[] = \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS;
+        $dataoutputitems[] = \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS;
         return $dataoutputitems;
     }
 
@@ -36,7 +36,7 @@ class VarsHooks
             ),
             1,
             [
-                \PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS,
+                \PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS,
             ]
         );
         return $dataoutputitems;

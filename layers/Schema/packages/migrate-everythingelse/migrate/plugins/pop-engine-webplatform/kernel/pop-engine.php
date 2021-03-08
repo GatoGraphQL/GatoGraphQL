@@ -59,7 +59,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $dataoutputmode = $vars['dataoutputmode'];
         $dataoutputitems = $vars['dataoutputitems'];
 
-        $add_settings = in_array(\PoP\ComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems);
+        $add_settings = in_array(\PoP\ConfigurationComponentModel\Constants\DataOutputItems::MODULESETTINGS, $dataoutputitems);
 
         if ($add_settings) {
             $immutable_jssettings = $mutableonmodel_jssettings = null;
