@@ -42,6 +42,7 @@ class PoPWebPlatform_Initialization
          * Load the Library first
          */
         require_once 'library/load.php';
+        require_once 'platforms/load.php';
 
         // If it is a search engine, there's no need to output the scripts or initialize pop.Manager
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
