@@ -31,7 +31,7 @@ class PoP_ResourceLoader
         if ($this->validate()) {
             $this->initialize();
             define('POP_RESOURCELOADER_INITIALIZED', true);
-            HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 450);
+            HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 888450);
         }
     }
 

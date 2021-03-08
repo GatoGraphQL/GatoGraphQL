@@ -12,5 +12,5 @@ HooksAPIFacade::getInstance()->addAction('plugins_loaded', function() {
 	        HooksAPIFacade::getInstance()->addFilter('stylesheet_directory_uri', 'popCdnfoundationAssetsrc');
 	    }
 	},
-	30
+	88830
 );

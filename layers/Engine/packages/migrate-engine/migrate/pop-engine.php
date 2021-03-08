@@ -30,7 +30,7 @@ class Plugin
             define('POP_ENGINE_INITIALIZED', true);
 
             // Allow plug-ins to override values
-            HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 110);
+            HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'defineConstants'), 888110);
         }
     }
     public function defineConstants()
