@@ -124,7 +124,7 @@
             "php -r \"copy('composer.json', 'composer.json.tmp');\"",
             "php -r \"copy('composer.json', 'localized-composer.json.tmp');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package webservers/graphql-by-pop/localized-composer.json.tmp",
-            "sed -e 's#../../../../#../../#g' localized-composer.json.tmp > composer.json",
+            "sed -e 's#../../../../layers/#../../layers/#g' localized-composer.json.tmp > composer.json",
             "composer update --no-dev",
             "php -r \"copy('composer.json.tmp', 'composer.json');\""
         ]
