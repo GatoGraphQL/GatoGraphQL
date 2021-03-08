@@ -390,7 +390,6 @@ services:
       - wp plugin activate engine-wp-bootloader --path=wordpress
       - wp plugin activate events-manager --path=wordpress
       - wp plugin activate aryo-activity-log --path=wordpress
-      - wp plugin activate qtranslate-x --path=wordpress
       - cp assets/.htaccess wordpress
       - wp rewrite structure '/%postname%/' --hard --path=wordpress
 env_file:

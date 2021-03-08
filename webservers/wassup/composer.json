@@ -28,8 +28,7 @@
         "pop-sites-wassup/wassup": "^0.8",
         "oomphinc/composer-installers-extender": "^2.0",
         "wpackagist-plugin/events-manager":"^5.9",
-        "wpackagist-plugin/aryo-activity-log":"^2.5",
-        "wpackagist-plugin/qtranslate-x":"^3.4"
+        "wpackagist-plugin/aryo-activity-log":"^2.5"
     },
     "extra": {
         "branch-alias": {
