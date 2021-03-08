@@ -1,4 +1,5 @@
 /vendor/
 /wordpress/
-localized-composer.json.tmp
-defaults.local.env
+/defaults.local.env
+/localized-composer.json.tmp
+/wp-config.php.tmp
