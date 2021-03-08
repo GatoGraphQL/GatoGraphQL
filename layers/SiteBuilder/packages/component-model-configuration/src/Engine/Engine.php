@@ -23,7 +23,7 @@ class Engine extends \PoP\Engine\Engine\Engine implements EngineInterface
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_CONFIGURATION, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_CONFIGURATION, $vars['strata'] ?? [])) {
             return;
         }
 

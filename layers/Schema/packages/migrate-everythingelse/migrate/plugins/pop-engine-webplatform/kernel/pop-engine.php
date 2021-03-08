@@ -41,7 +41,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return $ret;
         }
 
@@ -176,7 +176,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return;
         }
 
@@ -221,7 +221,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return $meta;
         }
 
@@ -274,7 +274,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return $data;
         }
 

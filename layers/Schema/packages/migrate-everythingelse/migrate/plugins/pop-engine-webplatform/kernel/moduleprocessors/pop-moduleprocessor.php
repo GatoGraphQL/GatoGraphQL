@@ -30,7 +30,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
         // Validate that the platform level includes this one
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return $ret;
         }
 
@@ -231,7 +231,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
         // Validate that the platform level includes this one
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return $ret;
         }
 
@@ -268,7 +268,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
         // Validate that the platform level includes this one
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
+        if (!in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
             return $ret;
         }
 
