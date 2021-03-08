@@ -26,13 +26,13 @@ services:
         - >-
           ../../layers/API/packages/migrate-api-graphql:/app/vendor/getpop/migrate-api-graphql
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-parser:/app/vendor/wassup/graphql-parser
+          ../../layers/GraphQLByPoP/packages/graphql-parser:/app/vendor/graphql-by-pop/graphql-parser
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/wassup/graphql-query
+          ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-request:/app/vendor/wassup/graphql-request
+          ../../layers/GraphQLByPoP/packages/graphql-request:/app/vendor/graphql-by-pop/graphql-request
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/wassup/graphql-server
+          ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/graphql-by-pop/graphql-server
         - >-
           ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
         - >-
