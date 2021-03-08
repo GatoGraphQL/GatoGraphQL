@@ -27,7 +27,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
 
         HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
             $vars = ApplicationState::getVars();
-            if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
+            if (in_array(POP_STRATUM_WEB, $vars['strata'] ?? [])) {
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getName(), array($this, 'keepOpenTabs'));
             }
