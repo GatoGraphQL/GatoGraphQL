@@ -231,7 +231,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'] ?? [])) {
+        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             return $ret;
         }
 
@@ -268,7 +268,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'] ?? [])) {
+        if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             return $ret;
         }
 
@@ -365,7 +365,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     {
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'] ?? [])) {
+        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
 
             if ($dbobject_params = $this->getDbobjectParams($module)) {
                 $this->mergeProp($module, $props, 'dbobject-params', $dbobject_params);
@@ -391,7 +391,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     {
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();
-        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'] ?? [])) {
+        if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             $this->initHTMLCSSPlatformRequestProps($module, $props);
         }
         parent::initRequestProps($module, $props);
