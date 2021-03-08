@@ -9,6 +9,10 @@ Author: Leonardo Losoviz
 
 use PoP\Engine\AppLoader;
 
+if (!class_exists('\PoP\Engine\AppLoader')) {
+    return;
+}
+
 // Initialize PoP Engine through the Bootloader
 AppLoader::bootSystem();
 AppLoader::bootApplication();
