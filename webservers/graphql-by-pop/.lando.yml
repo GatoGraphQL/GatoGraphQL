@@ -264,7 +264,6 @@ services:
         wp core install --url=graphql-by-pop.lndo.site --title="GraphQL by PoP"
         --admin_user=admin --admin_password=admin
         --admin_email=admin@example.com --path=wordpress
-      - wp rewrite structure '/%postname%/' --hard --path=wordpress
       - sed "s#require_once ABSPATH . 'wp-settings.php';#require_once(__DIR__ . '/../vendor/autoload.php'); require_once(__DIR__ . '/../code-src/initialize-pop-components.php'); require_once  ABSPATH  .  'wp-settings.php' ;#g" wordpress/wp-config.php > wp-config.php.tmp
       - mv wp-config.php.tmp wordpress/wp-config.php
       - wp plugin activate engine-wp-bootloader --path=wordpress
@@ -273,6 +272,7 @@ services:
         wp plugin activate newsletter-subscriptions-rest-endpoints
         --path=wordpress
       - cp assets/.htaccess wordpress
+      - wp rewrite structure '/%postname%/' --hard --path=wordpress
 env_file:
   - defaults.env
   - defaults.local.env
