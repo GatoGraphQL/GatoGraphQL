@@ -7,5 +7,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 if (!is_admin()) {
     //override single page with formats?
+    if (!class_exists('EM_Event_Post')) {
+        return;
+    }
     HooksAPIFacade::getInstance()->removeFilter('the_content', array('EM_Event_Post','the_content'));
 }
