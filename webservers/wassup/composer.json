@@ -33,7 +33,8 @@
                 "type:wordpress-muplugin"
             ],
             "wordpress/wp-content/plugins/{$name}/": [
-                "type:wordpress-plugin"
+                "type:wordpress-plugin",
+                "getpop/engine-wp-bootloader"
             ],
             "wordpress/wp-content/themes/{$name}/": [
                 "type:wordpress-theme"
