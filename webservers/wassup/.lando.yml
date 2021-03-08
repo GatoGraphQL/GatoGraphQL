@@ -35,190 +35,345 @@ services:
           ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/wassup/graphql-server
         - >-
           ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
-        - ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
-        - ../../layers/Engine/packages/application:/app/vendor/getpop/application
-        - ../../layers/Engine/packages/application-wp:/app/vendor/getpop/application-wp
-        - ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
-        - ../../layers/Engine/packages/component-model:/app/vendor/getpop/component-model
-        - ../../layers/Engine/packages/component-model-configuration:/app/vendor/getpop/component-model-configuration
-        - ../../layers/Engine/packages/definitionpersistence:/app/vendor/getpop/definitionpersistence
-        - ../../layers/Engine/packages/definitions:/app/vendor/getpop/definitions
-        - ../../layers/Engine/packages/definitions-base36:/app/vendor/getpop/definitions-base36
-        - ../../layers/Engine/packages/definitions-emoji:/app/vendor/getpop/definitions-emoji
-        - ../../layers/Engine/packages/engine:/app/vendor/getpop/engine
-        - ../../layers/Engine/packages/engine-wp:/app/vendor/getpop/engine-wp
-        - ../../layers/Engine/packages/field-query:/app/vendor/getpop/field-query
-        - ../../layers/Engine/packages/filestore:/app/vendor/getpop/filestore
-        - ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
-        - ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - ../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks
-        - ../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp
-        - ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
-        - ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
-        - ../../layers/Engine/packages/migrate-component-model:/app/vendor/getpop/migrate-component-model
-        - ../../layers/Engine/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
-        - ../../layers/Engine/packages/migrate-engine:/app/vendor/getpop/migrate-engine
-        - ../../layers/Engine/packages/migrate-engine-wp:/app/vendor/getpop/migrate-engine-wp
-        - ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
-        - ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
-        - ../../layers/Engine/packages/resourceloader:/app/vendor/getpop/resourceloader
-        - ../../layers/Engine/packages/resources:/app/vendor/getpop/resources
-        - ../../layers/Engine/packages/root:/app/vendor/getpop/root
-        - ../../layers/Engine/packages/routing:/app/vendor/getpop/routing
-        - ../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp
-        - ../../layers/Engine/packages/site:/app/vendor/getpop/site
-        - ../../layers/Engine/packages/site-wp:/app/vendor/getpop/site-wp
-        - ../../layers/Engine/packages/spa:/app/vendor/getpop/spa
-        - ../../layers/Engine/packages/trace-tools:/app/vendor/getpop/trace-tools
-        - ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
-        - ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
-        - ../../layers/Schema/packages/basic-directives:/app/vendor/pop-schema/basic-directives
-        - ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
-        - ../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories
-        - ../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp
-        - ../../layers/Schema/packages/cdn-directive:/app/vendor/pop-schema/cdn-directive
-        - ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
-        - ../../layers/Schema/packages/comment-mutations-wp:/app/vendor/pop-schema/comment-mutations-wp
-        - ../../layers/Schema/packages/commentmeta:/app/vendor/pop-schema/commentmeta
-        - ../../layers/Schema/packages/commentmeta-wp:/app/vendor/pop-schema/commentmeta-wp
-        - ../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments
-        - ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
-        - ../../layers/Schema/packages/convert-case-directives:/app/vendor/pop-schema/convert-case-directives
-        - ../../layers/Schema/packages/custompost-mutations:/app/vendor/pop-schema/custompost-mutations
-        - ../../layers/Schema/packages/custompost-mutations-wp:/app/vendor/pop-schema/custompost-mutations-wp
-        - ../../layers/Schema/packages/custompostmedia:/app/vendor/pop-schema/custompostmedia
-        - ../../layers/Schema/packages/custompostmedia-mutations:/app/vendor/pop-schema/custompostmedia-mutations
-        - ../../layers/Schema/packages/custompostmedia-mutations-wp:/app/vendor/pop-schema/custompostmedia-mutations-wp
-        - ../../layers/Schema/packages/custompostmedia-wp:/app/vendor/pop-schema/custompostmedia-wp
-        - ../../layers/Schema/packages/custompostmeta:/app/vendor/pop-schema/custompostmeta
-        - ../../layers/Schema/packages/custompostmeta-wp:/app/vendor/pop-schema/custompostmeta-wp
-        - ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
-        - ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
-        - ../../layers/Schema/packages/event-mutations:/app/vendor/pop-schema/event-mutations
-        - ../../layers/Schema/packages/event-mutations-wp-em:/app/vendor/pop-schema/event-mutations-wp-em
-        - ../../layers/Schema/packages/events:/app/vendor/pop-schema/events
-        - ../../layers/Schema/packages/events-wp-em:/app/vendor/pop-schema/events-wp-em
-        - ../../layers/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
-        - ../../layers/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
-        - ../../layers/Schema/packages/google-translate-directive:/app/vendor/pop-schema/google-translate-directive
-        - ../../layers/Schema/packages/google-translate-directive-for-customposts:/app/vendor/pop-schema/google-translate-directive-for-customposts
-        - ../../layers/Schema/packages/highlights:/app/vendor/pop-schema/highlights
-        - ../../layers/Schema/packages/highlights-wp:/app/vendor/pop-schema/highlights-wp
-        - ../../layers/Schema/packages/locationposts:/app/vendor/pop-schema/locationposts
-        - ../../layers/Schema/packages/locationposts-wp:/app/vendor/pop-schema/locationposts-wp
-        - ../../layers/Schema/packages/locations:/app/vendor/pop-schema/locations
-        - ../../layers/Schema/packages/locations-wp-em:/app/vendor/pop-schema/locations-wp-em
-        - ../../layers/Schema/packages/media:/app/vendor/pop-schema/media
-        - ../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp
-        - ../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus
-        - ../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp
-        - ../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta
-        - ../../layers/Schema/packages/metaquery:/app/vendor/pop-schema/metaquery
-        - ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
-        - ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
-        - ../../layers/Schema/packages/migrate-categories-wp:/app/vendor/pop-schema/migrate-categories-wp
-        - ../../layers/Schema/packages/migrate-commentmeta:/app/vendor/pop-schema/migrate-commentmeta
-        - ../../layers/Schema/packages/migrate-commentmeta-wp:/app/vendor/pop-schema/migrate-commentmeta-wp
-        - ../../layers/Schema/packages/migrate-comments:/app/vendor/pop-schema/migrate-comments
-        - ../../layers/Schema/packages/migrate-comments-wp:/app/vendor/pop-schema/migrate-comments-wp
-        - ../../layers/Schema/packages/migrate-custompostmedia:/app/vendor/pop-schema/migrate-custompostmedia
-        - ../../layers/Schema/packages/migrate-custompostmedia-wp:/app/vendor/pop-schema/migrate-custompostmedia-wp
-        - ../../layers/Schema/packages/migrate-custompostmeta:/app/vendor/pop-schema/migrate-custompostmeta
-        - ../../layers/Schema/packages/migrate-custompostmeta-wp:/app/vendor/pop-schema/migrate-custompostmeta-wp
-        - ../../layers/Schema/packages/migrate-customposts:/app/vendor/pop-schema/migrate-customposts
-        - ../../layers/Schema/packages/migrate-customposts-wp:/app/vendor/pop-schema/migrate-customposts-wp
-        - ../../layers/Schema/packages/migrate-events:/app/vendor/pop-schema/migrate-events
-        - ../../layers/Schema/packages/migrate-events-wp-em:/app/vendor/pop-schema/migrate-events-wp-em
-        - ../../layers/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse
-        - ../../layers/Schema/packages/migrate-locations:/app/vendor/pop-schema/migrate-locations
-        - ../../layers/Schema/packages/migrate-locations-wp-em:/app/vendor/pop-schema/migrate-locations-wp-em
-        - ../../layers/Schema/packages/migrate-media:/app/vendor/pop-schema/migrate-media
-        - ../../layers/Schema/packages/migrate-media-wp:/app/vendor/pop-schema/migrate-media-wp
-        - ../../layers/Schema/packages/migrate-meta:/app/vendor/pop-schema/migrate-meta
-        - ../../layers/Schema/packages/migrate-metaquery:/app/vendor/pop-schema/migrate-metaquery
-        - ../../layers/Schema/packages/migrate-metaquery-wp:/app/vendor/pop-schema/migrate-metaquery-wp
-        - ../../layers/Schema/packages/migrate-pages:/app/vendor/pop-schema/migrate-pages
-        - ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp
-        - ../../layers/Schema/packages/migrate-post-tags:/app/vendor/pop-schema/migrate-post-tags
-        - ../../layers/Schema/packages/migrate-post-tags-wp:/app/vendor/pop-schema/migrate-post-tags-wp
-        - ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
-        - ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
-        - ../../layers/Schema/packages/migrate-queriedobject:/app/vendor/pop-schema/migrate-queriedobject
-        - ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
-        - ../../layers/Schema/packages/migrate-tags:/app/vendor/pop-schema/migrate-tags
-        - ../../layers/Schema/packages/migrate-tags-wp:/app/vendor/pop-schema/migrate-tags-wp
-        - ../../layers/Schema/packages/migrate-taxonomies:/app/vendor/pop-schema/migrate-taxonomies
-        - ../../layers/Schema/packages/migrate-taxonomies-wp:/app/vendor/pop-schema/migrate-taxonomies-wp
-        - ../../layers/Schema/packages/migrate-taxonomymeta:/app/vendor/pop-schema/migrate-taxonomymeta
-        - ../../layers/Schema/packages/migrate-taxonomymeta-wp:/app/vendor/pop-schema/migrate-taxonomymeta-wp
-        - ../../layers/Schema/packages/migrate-taxonomyquery:/app/vendor/pop-schema/migrate-taxonomyquery
-        - ../../layers/Schema/packages/migrate-taxonomyquery-wp:/app/vendor/pop-schema/migrate-taxonomyquery-wp
-        - ../../layers/Schema/packages/migrate-usermeta:/app/vendor/pop-schema/migrate-usermeta
-        - ../../layers/Schema/packages/migrate-usermeta-wp:/app/vendor/pop-schema/migrate-usermeta-wp
-        - ../../layers/Schema/packages/migrate-users:/app/vendor/pop-schema/migrate-users
-        - ../../layers/Schema/packages/migrate-users-wp:/app/vendor/pop-schema/migrate-users-wp
-        - ../../layers/Schema/packages/notifications:/app/vendor/pop-schema/notifications
-        - ../../layers/Schema/packages/notifications-wp:/app/vendor/pop-schema/notifications-wp
-        - ../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages
-        - ../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp
-        - ../../layers/Schema/packages/post-mutations:/app/vendor/pop-schema/post-mutations
-        - ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
-        - ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
-        - ../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts
-        - ../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp
-        - ../../layers/Schema/packages/queriedobject:/app/vendor/pop-schema/queriedobject
-        - ../../layers/Schema/packages/queriedobject-wp:/app/vendor/pop-schema/queriedobject-wp
-        - ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
-        - ../../layers/Schema/packages/stances:/app/vendor/pop-schema/stances
-        - ../../layers/Schema/packages/stances-wp:/app/vendor/pop-schema/stances-wp
-        - ../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags
-        - ../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp
-        - ../../layers/Schema/packages/taxonomies:/app/vendor/pop-schema/taxonomies
-        - ../../layers/Schema/packages/taxonomies-wp:/app/vendor/pop-schema/taxonomies-wp
-        - ../../layers/Schema/packages/taxonomymeta:/app/vendor/pop-schema/taxonomymeta
-        - ../../layers/Schema/packages/taxonomymeta-wp:/app/vendor/pop-schema/taxonomymeta-wp
-        - ../../layers/Schema/packages/taxonomyquery:/app/vendor/pop-schema/taxonomyquery
-        - ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
-        - ../../layers/Schema/packages/translate-directive:/app/vendor/pop-schema/translate-directive
-        - ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
-        - ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
-        - ../../layers/Schema/packages/user-roles-acl:/app/vendor/pop-schema/user-roles-acl
-        - ../../layers/Schema/packages/user-roles-wp:/app/vendor/pop-schema/user-roles-wp
-        - ../../layers/Schema/packages/user-state:/app/vendor/pop-schema/user-state
-        - ../../layers/Schema/packages/user-state-access-control:/app/vendor/pop-schema/user-state-access-control
-        - ../../layers/Schema/packages/user-state-mutations:/app/vendor/pop-schema/user-state-mutations
-        - ../../layers/Schema/packages/user-state-mutations-wp:/app/vendor/pop-schema/user-state-mutations-wp
-        - ../../layers/Schema/packages/user-state-wp:/app/vendor/pop-schema/user-state-wp
-        - ../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta
-        - ../../layers/Schema/packages/usermeta-wp:/app/vendor/pop-schema/usermeta-wp
-        - ../../layers/Schema/packages/users:/app/vendor/pop-schema/users
-        - ../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp
-        - ../../layers/Wassup/packages/comment-mutations:/app/vendor/pop-sites-wassup/comment-mutations
-        - ../../layers/Wassup/packages/contactus-mutations:/app/vendor/pop-sites-wassup/contactus-mutations
-        - ../../layers/Wassup/packages/contactuser-mutations:/app/vendor/pop-sites-wassup/contactuser-mutations
-        - ../../layers/Wassup/packages/custompost-mutations:/app/vendor/pop-sites-wassup/custompost-mutations
-        - ../../layers/Wassup/packages/custompostlink-mutations:/app/vendor/pop-sites-wassup/custompostlink-mutations
-        - ../../layers/Wassup/packages/event-mutations:/app/vendor/pop-sites-wassup/event-mutations
-        - ../../layers/Wassup/packages/eventlink-mutations:/app/vendor/pop-sites-wassup/eventlink-mutations
-        - ../../layers/Wassup/packages/everythingelse-mutations:/app/vendor/pop-sites-wassup/everythingelse-mutations
-        - ../../layers/Wassup/packages/flag-mutations:/app/vendor/pop-sites-wassup/flag-mutations
-        - ../../layers/Wassup/packages/form-mutations:/app/vendor/pop-sites-wassup/form-mutations
-        - ../../layers/Wassup/packages/gravityforms-mutations:/app/vendor/pop-sites-wassup/gravityforms-mutations
-        - ../../layers/Wassup/packages/highlight-mutations:/app/vendor/pop-sites-wassup/highlight-mutations
-        - ../../layers/Wassup/packages/location-mutations:/app/vendor/pop-sites-wassup/location-mutations
-        - ../../layers/Wassup/packages/locationpost-mutations:/app/vendor/pop-sites-wassup/locationpost-mutations
-        - ../../layers/Wassup/packages/locationpostlink-mutations:/app/vendor/pop-sites-wassup/locationpostlink-mutations
-        - ../../layers/Wassup/packages/newsletter-mutations:/app/vendor/pop-sites-wassup/newsletter-mutations
-        - ../../layers/Wassup/packages/notification-mutations:/app/vendor/pop-sites-wassup/notification-mutations
-        - ../../layers/Wassup/packages/post-mutations:/app/vendor/pop-sites-wassup/post-mutations
-        - ../../layers/Wassup/packages/postlink-mutations:/app/vendor/pop-sites-wassup/postlink-mutations
-        - ../../layers/Wassup/packages/share-mutations:/app/vendor/pop-sites-wassup/share-mutations
-        - ../../layers/Wassup/packages/socialnetwork-mutations:/app/vendor/pop-sites-wassup/socialnetwork-mutations
-        - ../../layers/Wassup/packages/stance-mutations:/app/vendor/pop-sites-wassup/stance-mutations
-        - ../../layers/Wassup/packages/system-mutations:/app/vendor/pop-sites-wassup/system-mutations
-        - ../../layers/Wassup/packages/user-state-mutations:/app/vendor/pop-sites-wassup/user-state-mutations
-        - ../../layers/Wassup/packages/volunteer-mutations:/app/vendor/pop-sites-wassup/volunteer-mutations
-        - ../../layers/Wassup/packages/wassup:/app/vendor/pop-sites-wassup/wassup
+        - >-
+          ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
+        - >-
+          ../../layers/Engine/packages/application:/app/vendor/getpop/application
+        - >-
+          ../../layers/Engine/packages/application-wp:/app/vendor/getpop/application-wp
+        - >-
+          ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
+        - >-
+          ../../layers/Engine/packages/component-model:/app/vendor/getpop/component-model
+        - >-
+          ../../layers/Engine/packages/component-model-configuration:/app/vendor/getpop/component-model-configuration
+        - >-
+          ../../layers/Engine/packages/definitionpersistence:/app/vendor/getpop/definitionpersistence
+        - >-
+          ../../layers/Engine/packages/definitions:/app/vendor/getpop/definitions
+        - >-
+          ../../layers/Engine/packages/definitions-base36:/app/vendor/getpop/definitions-base36
+        - >-
+          ../../layers/Engine/packages/definitions-emoji:/app/vendor/getpop/definitions-emoji
+        - '../../layers/Engine/packages/engine:/app/vendor/getpop/engine'
+        - '../../layers/Engine/packages/engine-wp:/app/vendor/getpop/engine-wp'
+        - >-
+          ../../layers/Engine/packages/field-query:/app/vendor/getpop/field-query
+        - '../../layers/Engine/packages/filestore:/app/vendor/getpop/filestore'
+        - >-
+          ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
+        - >-
+          ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
+        - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
+        - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
+        - >-
+          ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
+        - >-
+          ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
+        - >-
+          ../../layers/Engine/packages/migrate-component-model:/app/vendor/getpop/migrate-component-model
+        - >-
+          ../../layers/Engine/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
+        - >-
+          ../../layers/Engine/packages/migrate-engine:/app/vendor/getpop/migrate-engine
+        - >-
+          ../../layers/Engine/packages/migrate-engine-wp:/app/vendor/getpop/migrate-engine-wp
+        - >-
+          ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
+        - >-
+          ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
+        - >-
+          ../../layers/Engine/packages/resourceloader:/app/vendor/getpop/resourceloader
+        - '../../layers/Engine/packages/resources:/app/vendor/getpop/resources'
+        - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
+        - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
+        - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
+        - '../../layers/Engine/packages/site:/app/vendor/getpop/site'
+        - '../../layers/Engine/packages/site-wp:/app/vendor/getpop/site-wp'
+        - '../../layers/Engine/packages/spa:/app/vendor/getpop/spa'
+        - >-
+          ../../layers/Engine/packages/trace-tools:/app/vendor/getpop/trace-tools
+        - >-
+          ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
+        - >-
+          ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
+        - >-
+          ../../layers/Schema/packages/basic-directives:/app/vendor/pop-schema/basic-directives
+        - >-
+          ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
+        - >-
+          ../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories
+        - >-
+          ../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp
+        - >-
+          ../../layers/Schema/packages/cdn-directive:/app/vendor/pop-schema/cdn-directive
+        - >-
+          ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
+        - >-
+          ../../layers/Schema/packages/comment-mutations-wp:/app/vendor/pop-schema/comment-mutations-wp
+        - >-
+          ../../layers/Schema/packages/commentmeta:/app/vendor/pop-schema/commentmeta
+        - >-
+          ../../layers/Schema/packages/commentmeta-wp:/app/vendor/pop-schema/commentmeta-wp
+        - '../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments'
+        - >-
+          ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
+        - >-
+          ../../layers/Schema/packages/convert-case-directives:/app/vendor/pop-schema/convert-case-directives
+        - >-
+          ../../layers/Schema/packages/custompost-mutations:/app/vendor/pop-schema/custompost-mutations
+        - >-
+          ../../layers/Schema/packages/custompost-mutations-wp:/app/vendor/pop-schema/custompost-mutations-wp
+        - >-
+          ../../layers/Schema/packages/custompostmedia:/app/vendor/pop-schema/custompostmedia
+        - >-
+          ../../layers/Schema/packages/custompostmedia-mutations:/app/vendor/pop-schema/custompostmedia-mutations
+        - >-
+          ../../layers/Schema/packages/custompostmedia-mutations-wp:/app/vendor/pop-schema/custompostmedia-mutations-wp
+        - >-
+          ../../layers/Schema/packages/custompostmedia-wp:/app/vendor/pop-schema/custompostmedia-wp
+        - >-
+          ../../layers/Schema/packages/custompostmeta:/app/vendor/pop-schema/custompostmeta
+        - >-
+          ../../layers/Schema/packages/custompostmeta-wp:/app/vendor/pop-schema/custompostmeta-wp
+        - >-
+          ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
+        - >-
+          ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
+        - >-
+          ../../layers/Schema/packages/event-mutations:/app/vendor/pop-schema/event-mutations
+        - >-
+          ../../layers/Schema/packages/event-mutations-wp-em:/app/vendor/pop-schema/event-mutations-wp-em
+        - '../../layers/Schema/packages/events:/app/vendor/pop-schema/events'
+        - >-
+          ../../layers/Schema/packages/events-wp-em:/app/vendor/pop-schema/events-wp-em
+        - >-
+          ../../layers/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
+        - >-
+          ../../layers/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
+        - >-
+          ../../layers/Schema/packages/google-translate-directive:/app/vendor/pop-schema/google-translate-directive
+        - >-
+          ../../layers/Schema/packages/google-translate-directive-for-customposts:/app/vendor/pop-schema/google-translate-directive-for-customposts
+        - >-
+          ../../layers/Schema/packages/highlights:/app/vendor/pop-schema/highlights
+        - >-
+          ../../layers/Schema/packages/highlights-wp:/app/vendor/pop-schema/highlights-wp
+        - >-
+          ../../layers/Schema/packages/locationposts:/app/vendor/pop-schema/locationposts
+        - >-
+          ../../layers/Schema/packages/locationposts-wp:/app/vendor/pop-schema/locationposts-wp
+        - >-
+          ../../layers/Schema/packages/locations:/app/vendor/pop-schema/locations
+        - >-
+          ../../layers/Schema/packages/locations-wp-em:/app/vendor/pop-schema/locations-wp-em
+        - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
+        - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
+        - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
+        - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
+        - '../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta'
+        - >-
+          ../../layers/Schema/packages/metaquery:/app/vendor/pop-schema/metaquery
+        - >-
+          ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
+        - >-
+          ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
+        - >-
+          ../../layers/Schema/packages/migrate-categories-wp:/app/vendor/pop-schema/migrate-categories-wp
+        - >-
+          ../../layers/Schema/packages/migrate-commentmeta:/app/vendor/pop-schema/migrate-commentmeta
+        - >-
+          ../../layers/Schema/packages/migrate-commentmeta-wp:/app/vendor/pop-schema/migrate-commentmeta-wp
+        - >-
+          ../../layers/Schema/packages/migrate-comments:/app/vendor/pop-schema/migrate-comments
+        - >-
+          ../../layers/Schema/packages/migrate-comments-wp:/app/vendor/pop-schema/migrate-comments-wp
+        - >-
+          ../../layers/Schema/packages/migrate-custompostmedia:/app/vendor/pop-schema/migrate-custompostmedia
+        - >-
+          ../../layers/Schema/packages/migrate-custompostmedia-wp:/app/vendor/pop-schema/migrate-custompostmedia-wp
+        - >-
+          ../../layers/Schema/packages/migrate-custompostmeta:/app/vendor/pop-schema/migrate-custompostmeta
+        - >-
+          ../../layers/Schema/packages/migrate-custompostmeta-wp:/app/vendor/pop-schema/migrate-custompostmeta-wp
+        - >-
+          ../../layers/Schema/packages/migrate-customposts:/app/vendor/pop-schema/migrate-customposts
+        - >-
+          ../../layers/Schema/packages/migrate-customposts-wp:/app/vendor/pop-schema/migrate-customposts-wp
+        - >-
+          ../../layers/Schema/packages/migrate-events:/app/vendor/pop-schema/migrate-events
+        - >-
+          ../../layers/Schema/packages/migrate-events-wp-em:/app/vendor/pop-schema/migrate-events-wp-em
+        - >-
+          ../../layers/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse
+        - >-
+          ../../layers/Schema/packages/migrate-locations:/app/vendor/pop-schema/migrate-locations
+        - >-
+          ../../layers/Schema/packages/migrate-locations-wp-em:/app/vendor/pop-schema/migrate-locations-wp-em
+        - >-
+          ../../layers/Schema/packages/migrate-media:/app/vendor/pop-schema/migrate-media
+        - >-
+          ../../layers/Schema/packages/migrate-media-wp:/app/vendor/pop-schema/migrate-media-wp
+        - >-
+          ../../layers/Schema/packages/migrate-meta:/app/vendor/pop-schema/migrate-meta
+        - >-
+          ../../layers/Schema/packages/migrate-metaquery:/app/vendor/pop-schema/migrate-metaquery
+        - >-
+          ../../layers/Schema/packages/migrate-metaquery-wp:/app/vendor/pop-schema/migrate-metaquery-wp
+        - >-
+          ../../layers/Schema/packages/migrate-pages:/app/vendor/pop-schema/migrate-pages
+        - >-
+          ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp
+        - >-
+          ../../layers/Schema/packages/migrate-post-tags:/app/vendor/pop-schema/migrate-post-tags
+        - >-
+          ../../layers/Schema/packages/migrate-post-tags-wp:/app/vendor/pop-schema/migrate-post-tags-wp
+        - >-
+          ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
+        - >-
+          ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
+        - >-
+          ../../layers/Schema/packages/migrate-queriedobject:/app/vendor/pop-schema/migrate-queriedobject
+        - >-
+          ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
+        - >-
+          ../../layers/Schema/packages/migrate-tags:/app/vendor/pop-schema/migrate-tags
+        - >-
+          ../../layers/Schema/packages/migrate-tags-wp:/app/vendor/pop-schema/migrate-tags-wp
+        - >-
+          ../../layers/Schema/packages/migrate-taxonomies:/app/vendor/pop-schema/migrate-taxonomies
+        - >-
+          ../../layers/Schema/packages/migrate-taxonomies-wp:/app/vendor/pop-schema/migrate-taxonomies-wp
+        - >-
+          ../../layers/Schema/packages/migrate-taxonomymeta:/app/vendor/pop-schema/migrate-taxonomymeta
+        - >-
+          ../../layers/Schema/packages/migrate-taxonomymeta-wp:/app/vendor/pop-schema/migrate-taxonomymeta-wp
+        - >-
+          ../../layers/Schema/packages/migrate-taxonomyquery:/app/vendor/pop-schema/migrate-taxonomyquery
+        - >-
+          ../../layers/Schema/packages/migrate-taxonomyquery-wp:/app/vendor/pop-schema/migrate-taxonomyquery-wp
+        - >-
+          ../../layers/Schema/packages/migrate-usermeta:/app/vendor/pop-schema/migrate-usermeta
+        - >-
+          ../../layers/Schema/packages/migrate-usermeta-wp:/app/vendor/pop-schema/migrate-usermeta-wp
+        - >-
+          ../../layers/Schema/packages/migrate-users:/app/vendor/pop-schema/migrate-users
+        - >-
+          ../../layers/Schema/packages/migrate-users-wp:/app/vendor/pop-schema/migrate-users-wp
+        - >-
+          ../../layers/Schema/packages/notifications:/app/vendor/pop-schema/notifications
+        - >-
+          ../../layers/Schema/packages/notifications-wp:/app/vendor/pop-schema/notifications-wp
+        - '../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages'
+        - '../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp'
+        - >-
+          ../../layers/Schema/packages/post-mutations:/app/vendor/pop-schema/post-mutations
+        - >-
+          ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
+        - >-
+          ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
+        - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
+        - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
+        - >-
+          ../../layers/Schema/packages/queriedobject:/app/vendor/pop-schema/queriedobject
+        - >-
+          ../../layers/Schema/packages/queriedobject-wp:/app/vendor/pop-schema/queriedobject-wp
+        - >-
+          ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
+        - '../../layers/Schema/packages/stances:/app/vendor/pop-schema/stances'
+        - >-
+          ../../layers/Schema/packages/stances-wp:/app/vendor/pop-schema/stances-wp
+        - '../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags'
+        - '../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp'
+        - >-
+          ../../layers/Schema/packages/taxonomies:/app/vendor/pop-schema/taxonomies
+        - >-
+          ../../layers/Schema/packages/taxonomies-wp:/app/vendor/pop-schema/taxonomies-wp
+        - >-
+          ../../layers/Schema/packages/taxonomymeta:/app/vendor/pop-schema/taxonomymeta
+        - >-
+          ../../layers/Schema/packages/taxonomymeta-wp:/app/vendor/pop-schema/taxonomymeta-wp
+        - >-
+          ../../layers/Schema/packages/taxonomyquery:/app/vendor/pop-schema/taxonomyquery
+        - >-
+          ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
+        - >-
+          ../../layers/Schema/packages/translate-directive:/app/vendor/pop-schema/translate-directive
+        - >-
+          ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
+        - >-
+          ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
+        - >-
+          ../../layers/Schema/packages/user-roles-acl:/app/vendor/pop-schema/user-roles-acl
+        - >-
+          ../../layers/Schema/packages/user-roles-wp:/app/vendor/pop-schema/user-roles-wp
+        - >-
+          ../../layers/Schema/packages/user-state:/app/vendor/pop-schema/user-state
+        - >-
+          ../../layers/Schema/packages/user-state-access-control:/app/vendor/pop-schema/user-state-access-control
+        - >-
+          ../../layers/Schema/packages/user-state-mutations:/app/vendor/pop-schema/user-state-mutations
+        - >-
+          ../../layers/Schema/packages/user-state-mutations-wp:/app/vendor/pop-schema/user-state-mutations-wp
+        - >-
+          ../../layers/Schema/packages/user-state-wp:/app/vendor/pop-schema/user-state-wp
+        - '../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta'
+        - >-
+          ../../layers/Schema/packages/usermeta-wp:/app/vendor/pop-schema/usermeta-wp
+        - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
+        - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
+        - >-
+          ../../layers/Wassup/packages/comment-mutations:/app/vendor/pop-sites-wassup/comment-mutations
+        - >-
+          ../../layers/Wassup/packages/contactus-mutations:/app/vendor/pop-sites-wassup/contactus-mutations
+        - >-
+          ../../layers/Wassup/packages/contactuser-mutations:/app/vendor/pop-sites-wassup/contactuser-mutations
+        - >-
+          ../../layers/Wassup/packages/custompost-mutations:/app/vendor/pop-sites-wassup/custompost-mutations
+        - >-
+          ../../layers/Wassup/packages/custompostlink-mutations:/app/vendor/pop-sites-wassup/custompostlink-mutations
+        - >-
+          ../../layers/Wassup/packages/event-mutations:/app/vendor/pop-sites-wassup/event-mutations
+        - >-
+          ../../layers/Wassup/packages/eventlink-mutations:/app/vendor/pop-sites-wassup/eventlink-mutations
+        - >-
+          ../../layers/Wassup/packages/everythingelse-mutations:/app/vendor/pop-sites-wassup/everythingelse-mutations
+        - >-
+          ../../layers/Wassup/packages/flag-mutations:/app/vendor/pop-sites-wassup/flag-mutations
+        - >-
+          ../../layers/Wassup/packages/form-mutations:/app/vendor/pop-sites-wassup/form-mutations
+        - >-
+          ../../layers/Wassup/packages/gravityforms-mutations:/app/vendor/pop-sites-wassup/gravityforms-mutations
+        - >-
+          ../../layers/Wassup/packages/highlight-mutations:/app/vendor/pop-sites-wassup/highlight-mutations
+        - >-
+          ../../layers/Wassup/packages/location-mutations:/app/vendor/pop-sites-wassup/location-mutations
+        - >-
+          ../../layers/Wassup/packages/locationpost-mutations:/app/vendor/pop-sites-wassup/locationpost-mutations
+        - >-
+          ../../layers/Wassup/packages/locationpostlink-mutations:/app/vendor/pop-sites-wassup/locationpostlink-mutations
+        - >-
+          ../../layers/Wassup/packages/newsletter-mutations:/app/vendor/pop-sites-wassup/newsletter-mutations
+        - >-
+          ../../layers/Wassup/packages/notification-mutations:/app/vendor/pop-sites-wassup/notification-mutations
+        - >-
+          ../../layers/Wassup/packages/post-mutations:/app/vendor/pop-sites-wassup/post-mutations
+        - >-
+          ../../layers/Wassup/packages/postlink-mutations:/app/vendor/pop-sites-wassup/postlink-mutations
+        - >-
+          ../../layers/Wassup/packages/share-mutations:/app/vendor/pop-sites-wassup/share-mutations
+        - >-
+          ../../layers/Wassup/packages/socialnetwork-mutations:/app/vendor/pop-sites-wassup/socialnetwork-mutations
+        - >-
+          ../../layers/Wassup/packages/stance-mutations:/app/vendor/pop-sites-wassup/stance-mutations
+        - >-
+          ../../layers/Wassup/packages/system-mutations:/app/vendor/pop-sites-wassup/system-mutations
+        - >-
+          ../../layers/Wassup/packages/user-state-mutations:/app/vendor/pop-sites-wassup/user-state-mutations
+        - >-
+          ../../layers/Wassup/packages/volunteer-mutations:/app/vendor/pop-sites-wassup/volunteer-mutations
+        - >-
+          ../../layers/Wassup/packages/wassup:/app/vendor/pop-sites-wassup/wassup
     build_as_root:
       - a2enmod proxy proxy_http
     run:
