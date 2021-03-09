@@ -59,7 +59,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      *   $instanceManager->getInstance(...)
      *
      * DirectiveResolvers must still be added to schema-services.yml, though.
-     * Thsi is because they need to be registered, so that all directives
+     * This is because they need to be registered, so that all directives
      * can be displayed in the GraphQL API's Access Control Lists
      */
     final public function __construct(?string $directive = null)
