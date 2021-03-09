@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
-use GraphQLAPI\GraphQLAPI\General\BlockRenderingHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\BlockCategories\SchemaConfigurationBlockCategory;
-use GraphQLAPI\GraphQLAPI\General\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
 
 abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
@@ -53,6 +53,11 @@ abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
 EOF;
         $postContentElems = $foundPostListIDs = [];
         if ($postListIDs = $attributes[$this->getAttributeName()] ?? []) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var BlockRenderingHelpers */
+            $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
+            /** @var CPTUtils */
+            $cptUtils = $instanceManager->getInstance(CPTUtils::class);
             /**
              * @var WP_Post[]
              */
@@ -68,17 +73,17 @@ EOF;
             ]);
             foreach ($postObjects as $postObject) {
                 $foundPostListIDs[] = $postObject->ID;
-                $postDescription = CPTUtils::getCustomPostDescription($postObject);
+                $postDescription = $cptUtils->getCustomPostDescription($postObject);
                 $permalink = \get_permalink($postObject->ID);
                 $postContentElems[] = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        BlockRenderingHelpers::getCustomPostTitle($postObject)
+                        $blockRenderingHelpers->getCustomPostTitle($postObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        BlockRenderingHelpers::getCustomPostTitle($postObject)
+                        $blockRenderingHelpers->getCustomPostTitle($postObject)
                     )
                 ) . ($postDescription ?
                     '<br/><small>' . $postDescription . '</small>'

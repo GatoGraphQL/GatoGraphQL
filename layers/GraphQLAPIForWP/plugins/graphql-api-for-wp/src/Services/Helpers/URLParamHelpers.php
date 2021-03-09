@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 class URLParamHelpers
 {
@@ -17,7 +17,7 @@ class URLParamHelpers
      * @param string $str
      * @return string
      */
-    public static function encodeURIComponent(string $str): string
+    public function encodeURIComponent(string $str): string
     {
         $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
         return \strtr(\rawurlencode($str), $revert);

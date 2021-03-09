@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use WP_Post;
 
@@ -11,7 +11,7 @@ class BlockRenderingHelpers
     /**
      * Get a standardized title for a Custom Post
      */
-    public static function getCustomPostTitle(WP_Post $customPostObject): string
+    public function getCustomPostTitle(WP_Post $customPostObject): string
     {
         $title = $customPostObject->post_title ?
             $customPostObject->post_title :

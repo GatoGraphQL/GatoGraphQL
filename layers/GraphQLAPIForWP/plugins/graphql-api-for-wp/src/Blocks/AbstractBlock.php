@@ -7,10 +7,11 @@ namespace GraphQLAPI\GraphQLAPI\Blocks;
 use Error;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\EditorScripts\HasDocumentationScriptTrait;
-use GraphQLAPI\GraphQLAPI\General\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\General\GeneralUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -144,7 +145,10 @@ abstract class AbstractBlock
      */
     final protected function getBlockLocalizationName(): string
     {
-        return GeneralUtils::dashesToCamelCase($this->getBlockRegistrationName());
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GeneralUtils */
+        $generalUtils = $instanceManager->getInstance(GeneralUtils::class);
+        return $generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
      * Block class name: wp-block-namespace-blockName
@@ -257,7 +261,10 @@ abstract class AbstractBlock
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array(EditorHelpers::getEditingPostType(), $postTypes)) {
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var EditorHelpers */
+                $editorHelpers = $instanceManager->getInstance(EditorHelpers::class);
+                if (!in_array($editorHelpers->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }

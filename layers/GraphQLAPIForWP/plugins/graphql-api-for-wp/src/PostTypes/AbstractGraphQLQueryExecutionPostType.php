@@ -6,10 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
 use WP_Post;
 use PoP\ComponentModel\State\ApplicationState;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\EndpointResolvers\EndpointResolverTrait;
@@ -238,7 +237,10 @@ abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType
      */
     protected function getOptionsBlockDataItem($postOrID): ?array
     {
-        return BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getQueryExecutionOptionsBlock()
         );

@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
@@ -88,11 +88,13 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         }
 
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var AccessControlBlock
          */
         $block = $instanceManager->getInstance(AccessControlBlock::class);
-        $aclBlockItems = BlockHelpers::getBlocksOfTypeFromCustomPost(
+        $aclBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $aclPostID,
             $block
         );

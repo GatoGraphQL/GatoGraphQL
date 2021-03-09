@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\General\CPTUtils;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 
@@ -166,7 +167,10 @@ abstract class AbstractPostType
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    echo CPTUtils::getCustomPostDescription($post);
+                    $instanceManager = InstanceManagerFacade::getInstance();
+                    /** @var CPTUtils */
+                    $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                    echo $cptUtils->getCustomPostDescription($post);
                 }
                 break;
         }
@@ -241,7 +245,10 @@ abstract class AbstractPostType
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                if ($excerpt = CPTUtils::getCustomPostDescription($customPost)) {
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var CPTUtils */
+                $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                if ($excerpt = $cptUtils->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
                         $this->getAlignClass(),

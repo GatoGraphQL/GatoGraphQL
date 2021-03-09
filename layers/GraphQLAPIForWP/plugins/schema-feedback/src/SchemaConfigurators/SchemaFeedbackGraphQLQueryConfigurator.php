@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\SchemaFeedback\SchemaConfigurators;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -30,7 +30,9 @@ class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigu
         }
 
         $instanceManager = InstanceManagerFacade::getInstance();
-        $fdlBlockItems = BlockHelpers::getBlocksOfTypeFromCustomPost(
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $fdlBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $fdlPostID,
             $instanceManager->getInstance(SchemaFeedbackBlock::class)
         );

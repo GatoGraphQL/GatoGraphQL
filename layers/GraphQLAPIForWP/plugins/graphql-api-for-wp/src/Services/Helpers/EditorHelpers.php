@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 class EditorHelpers
 {
@@ -11,7 +11,7 @@ class EditorHelpers
      *
      * @return string
      */
-    public static function getEditingPostType(): ?string
+    public function getEditingPostType(): ?string
     {
         // When in the editor, there is no direct way to obtain the post type in hook "init",
         // since $typenow has not been initialized yet
@@ -51,7 +51,7 @@ class EditorHelpers
     /**
      * Get the post ID currently being edited in the editor
      */
-    public static function getEditingPostID(): ?int
+    public function getEditingPostID(): ?int
     {
         if (!\is_admin()) {
             return null;

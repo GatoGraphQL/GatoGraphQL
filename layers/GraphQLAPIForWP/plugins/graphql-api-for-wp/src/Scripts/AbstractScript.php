@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Scripts;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\General\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\General\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Base class for a Gutenberg script.
@@ -53,7 +53,10 @@ abstract class AbstractScript
      */
     final protected function getScriptLocalizationName(): string
     {
-        return GeneralUtils::dashesToCamelCase($this->getScriptName());
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GeneralUtils */
+        $generalUtils = $instanceManager->getInstance(GeneralUtils::class);
+        return $generalUtils->dashesToCamelCase($this->getScriptName());
     }
 
     /**

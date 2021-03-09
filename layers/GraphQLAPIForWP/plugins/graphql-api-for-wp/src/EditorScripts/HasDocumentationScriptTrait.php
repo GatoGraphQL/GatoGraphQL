@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\General\LocaleUtils;
-use GraphQLAPI\GraphQLAPI\General\DocumentationConstants;
+use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleUtils;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Add translatable documentation to the script.
@@ -38,7 +39,10 @@ trait HasDocumentationScriptTrait
         $data = [];
         // Add the locale language?
         if ($this->addLocalLanguage()) {
-            $data[DocumentationConstants::LOCALE_LANG] = LocaleUtils::getLocaleLanguage();
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var LocaleUtils */
+            $localeUtils = $instanceManager->getInstance(LocaleUtils::class);
+            $data[DocumentationConstants::LOCALE_LANG] = $localeUtils->getLocaleLanguage();
         }
         // Add the default language?
         if ($defaultLang = $this->getDefaultLanguage()) {
@@ -101,7 +105,10 @@ trait HasDocumentationScriptTrait
             \wp_enqueue_script($scriptName . '-' . $defaultLang);
         }
         if ($this->addLocalLanguage()) {
-            $localeLang = LocaleUtils::getLocaleLanguage();
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var LocaleUtils */
+            $localeUtils = $instanceManager->getInstance(LocaleUtils::class);
+            $localeLang = $localeUtils->getLocaleLanguage();
             // Check the current locale has been translated, otherwise if will try to load an unexisting file
             // If the locale lang is the same as the default lang, the file has already been loaded
             if ($localeLang != $defaultLang && in_array($localeLang, $this->getDocLanguages())) {

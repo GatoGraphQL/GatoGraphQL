@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use InvalidArgumentException;
-use PoP\ComponentModel\Misc\RequestUtils;
-use GraphQLAPI\GraphQLAPI\General\LocaleUtils;
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleUtils;
+use InvalidArgumentException;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -63,7 +64,10 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function getLocalizedFileDir(): string
     {
-        return $this->getFileDir(LocaleUtils::getLocaleLanguage());
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var LocaleUtils */
+        $localeUtils = $instanceManager->getInstance(LocaleUtils::class);
+        return $this->getFileDir($localeUtils->getLocaleLanguage());
     }
 
     /**

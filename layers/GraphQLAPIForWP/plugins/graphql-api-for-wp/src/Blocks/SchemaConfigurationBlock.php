@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
-use GraphQLAPI\GraphQLAPI\General\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\General\BlockRenderingHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
@@ -87,17 +86,22 @@ EOF;
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
-                $schemaConfigurationDescription = CPTUtils::getCustomPostDescription($schemaConfigurationObject);
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var BlockRenderingHelpers */
+                $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
+                /** @var CPTUtils */
+                $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                $schemaConfigurationDescription = $cptUtils->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        BlockRenderingHelpers::getCustomPostTitle($schemaConfigurationObject)
+                        $blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        BlockRenderingHelpers::getCustomPostTitle($schemaConfigurationObject)
+                        $blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
                     )
                 ) . ($schemaConfigurationDescription ?
                     '<br/><small>' . $schemaConfigurationDescription . '</small>'

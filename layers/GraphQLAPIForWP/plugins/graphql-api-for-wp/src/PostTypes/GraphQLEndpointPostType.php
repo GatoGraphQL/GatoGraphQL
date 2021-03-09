@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
 use WP_Post;
 use PoP\ComponentModel\State\ApplicationState;
-use GraphQLAPI\GraphQLAPI\General\RequestParams;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
