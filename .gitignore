@@ -1,4 +1,3 @@
-/wp-content/
 /build/
 /vendor/
 phpcs.xml
@@ -8,6 +7,5 @@ composer.lock
 # The root composer.lock is commited to the repo,
 # to make sure the CI doesn't fail
 !/composer.lock
-/wordpress/
 .lando.local.yml
 composer.json.tmp

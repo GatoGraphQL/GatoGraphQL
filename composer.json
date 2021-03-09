@@ -622,28 +622,9 @@
             "@preview-src-downgrade",
             "@preview-vendor-downgrade"
         ],
-        "build-server": [
-            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
-            "@start-server"
-        ],
-        "init-server": "@start-server",
-        "start-server": [
-            "@symlink-vendor-for-graphql-api-for-wp-plugin",
-            "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
-            "lando start"
-        ],
-        "symlink-vendor-for-graphql-api-for-wp-plugin": [
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
-            "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
-            "composer install --no-dev --working-dir=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\""
-        ],
-        "symlink-vendor-for-graphql-api-convert-case-directives-plugin": [
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json', 'layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp');\"",
-            "vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json",
-            "composer install --no-dev --working-dir=layers/GraphQLAPIForWP/plugins/convert-case-directives",
-            "php -r \"copy('layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp', 'layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json');\""
-        ],
+        "build-server": "composer build-server -d webservers/graphql-api-for-wp",
+        "init-server": "composer init-server -d webservers/graphql-api-for-wp",
+        "start-server": "composer start-server -d webservers/graphql-api-for-wp",
         "log-server-errors": "lando logs -t -f | grep \"error\"",
         "rebuild-server": "lando rebuild appserver -y",
         "merge-monorepo": "monorepo-builder merge --ansi",
