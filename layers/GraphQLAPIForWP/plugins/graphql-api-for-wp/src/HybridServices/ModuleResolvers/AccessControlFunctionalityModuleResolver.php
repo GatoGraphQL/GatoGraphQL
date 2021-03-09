@@ -24,7 +24,7 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::ACCESS_CONTROL,

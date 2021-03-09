@@ -19,7 +19,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING,

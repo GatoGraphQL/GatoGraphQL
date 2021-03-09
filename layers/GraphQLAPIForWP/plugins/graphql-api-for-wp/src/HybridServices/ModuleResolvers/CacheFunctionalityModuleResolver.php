@@ -26,7 +26,7 @@ class CacheFunctionalityModuleResolver extends AbstractCacheFunctionalityModuleR
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::CONFIGURATION_CACHE,

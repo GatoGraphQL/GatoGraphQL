@@ -36,7 +36,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::GRAPHIQL_FOR_SINGLE_ENDPOINT,

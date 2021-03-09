@@ -30,7 +30,7 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::MULTIPLE_QUERY_EXECUTION,

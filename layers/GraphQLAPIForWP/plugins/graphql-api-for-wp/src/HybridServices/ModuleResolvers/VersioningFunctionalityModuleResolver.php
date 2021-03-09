@@ -18,7 +18,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::FIELD_DEPRECATION,

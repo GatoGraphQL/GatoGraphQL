@@ -9,7 +9,7 @@ interface ModuleResolverInterface
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array;
+    public function getModulesToResolve(): array;
     /**
      * This is a list of lists of modules, as to model both OR and AND conditions
      * The innermost list is an OR: if any module is enabled, then the condition succeeds
