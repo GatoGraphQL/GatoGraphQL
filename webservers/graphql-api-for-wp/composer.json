@@ -41,19 +41,24 @@
         ],
         "init-server": "@start-server",
         "start-server": [
-            "@symlink-vendor",
+            "@symlink-vendor-for-graphql-api-for-wp-plugin",
+            "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
             "lando start"
         ],
         "rebuild-server": [
             "lando rebuild appserver -y"
         ],
-        "symlink-vendor": [
-            "php -r \"copy('composer.json', 'composer.json.tmp');\"",
-            "php -r \"copy('composer.json', 'localized-composer.json.tmp');\"",
-            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package webservers/graphql-api-for-wp/localized-composer.json.tmp",
-            "sed -e 's#../../../../layers/#../../layers/#g' localized-composer.json.tmp > composer.json",
-            "composer install --no-dev",
-            "php -r \"copy('composer.json.tmp', 'composer.json');\""
+        "symlink-vendor-for-graphql-api-for-wp-plugin": [
+            "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
+            "composer install --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\""
+        ],
+        "symlink-vendor-for-graphql-api-convert-case-directives-plugin": [
+            "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json', '../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json",
+            "composer install --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/convert-case-directives",
+            "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json');\""
         ]
     }
 }
