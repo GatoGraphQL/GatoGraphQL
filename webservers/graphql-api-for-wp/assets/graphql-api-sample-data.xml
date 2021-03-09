@@ -27,13 +27,13 @@
 
 <channel>
 	<title>GraphQL API dev</title>
-	<link>http://graphql-api-dev.lndo.site</link>
+	<link>http://graphql-api.lndo.site</link>
 	<description>Just another WordPress site</description>
 	<pubDate>Thu, 07 Jan 2021 07:10:25 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
-	<wp:base_site_url>http://graphql-api-dev.lndo.site</wp:base_site_url>
-	<wp:base_blog_url>http://graphql-api-dev.lndo.site</wp:base_blog_url>
+	<wp:base_site_url>http://graphql-api.lndo.site</wp:base_site_url>
+	<wp:base_blog_url>http://graphql-api.lndo.site</wp:base_blog_url>
 
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[admin@example.com]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 
@@ -88,10 +88,10 @@
 
 		<item>
 		<title>Home posts widget</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-query/website/home-posts-widget/</link>
+		<link>http://graphql-api.lndo.site/graphql-query/website/home-posts-widget/</link>
 		<pubDate>Tue, 05 Jan 2021 02:10:47 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-query&#038;p=5</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=5</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit:Int) {\n  posts(limit:$limit) {\n    id\n    url\n    title\n    author {\n      id\n      displayName\n      url\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
@@ -114,7 +114,7 @@
 														</item>
 					<item>
 		<title>Sample Page</title>
-		<link>http://graphql-api-dev.lndo.site/sample-page-2/</link>
+		<link>http://graphql-api.lndo.site/sample-page-2/</link>
 		<pubDate>Mon, 27 Jul 2020 11:28:57 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api-nginx.lndo.site/?page_id=2</guid>
@@ -158,7 +158,7 @@
 							</item>
 					<item>
 		<title>Home user widget</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-query/website/home-user-widget/</link>
+		<link>http://graphql-api.lndo.site/graphql-query/website/home-user-widget/</link>
 		<pubDate>Tue, 28 Jul 2020 11:05:44 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=8</guid>
@@ -188,7 +188,7 @@
 							</item>
 					<item>
 		<title>Released v0.6, check it out</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/released-v0-6-check-it-out/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/released-v0-6-check-it-out/</link>
 		<pubDate>Sat, 12 Dec 2020 03:56:13 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=13</guid>
@@ -280,7 +280,7 @@
 					</item>
 					<item>
 		<title>Working on flat chain syntax next</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/working-on-flat-chain-syntax-next/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/working-on-flat-chain-syntax-next/</link>
 		<pubDate>Sat, 12 Dec 2020 03:59:07 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=16</guid>
@@ -344,7 +344,7 @@
 							</item>
 					<item>
 		<title>Nested mutations are a must have</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/nested-mutations-are-a-must-have/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/nested-mutations-are-a-must-have/</link>
 		<pubDate>Sat, 12 Dec 2020 04:00:36 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=19</guid>
@@ -402,7 +402,7 @@
 							</item>
 					<item>
 		<title>Customize the schema for each client</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/customize-the-schema-for-each-client/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/customize-the-schema-for-each-client/</link>
 		<pubDate>Sat, 12 Dec 2020 04:02:18 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=21</guid>
@@ -562,7 +562,7 @@
 					</item>
 					<item>
 		<title>Home tag widget</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-query/website/home-post-widget/</link>
+		<link>http://graphql-api.lndo.site/graphql-query/website/home-post-widget/</link>
 		<pubDate>Sat, 12 Dec 2020 04:27:17 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=44</guid>
@@ -592,7 +592,7 @@
 							</item>
 					<item>
 		<title>Latest posts for mobile app</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-query/latest-posts-for-mobile-app/</link>
+		<link>http://graphql-api.lndo.site/graphql-query/latest-posts-for-mobile-app/</link>
 		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=65</guid>
@@ -622,10 +622,10 @@
 							</item>
 					<item>
 		<title>Mobile app</title>
-		<link>http://graphql-api-dev.lndo.site/graphql/mobile-app/</link>
+		<link>http://graphql-api.lndo.site/graphql/mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 06:55:24 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-endpoint&#038;p=176</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=176</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
@@ -646,10 +646,10 @@
 														</item>
 					<item>
 		<title>CCL for mobile app</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-ccl/ccl-for-mobile-app/</link>
+		<link>http://graphql-api.lndo.site/graphql-ccl/ccl-for-mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 06:56:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-ccl&#038;p=179</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=179</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/cache-control {"cacheControlMaxAge":30,"typeFields":["PoPSchema_QueriedObject_Queryable.url"]} /-->
 
@@ -670,10 +670,10 @@
 														</item>
 					<item>
 		<title>CCL for website</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-ccl/ccl-for-website/</link>
+		<link>http://graphql-api.lndo.site/graphql-ccl/ccl-for-website/</link>
 		<pubDate>Thu, 07 Jan 2021 06:58:10 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-ccl&#038;p=181</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-ccl&#038;p=181</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/cache-control {"cacheControlMaxAge":20,"typeFields":["PoPSchema_Users_User.displayName","PoPSchema_Users_User.firstname","PoPSchema_Users_User.lastname","PoPSchema_Users_User.name","PoPSchema_Users_User.nicename","PoPSchema_Users_User.userNicename"]} /-->
 
@@ -694,10 +694,10 @@
 														</item>
 					<item>
 		<title>PRO users</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-acl/pro-users/</link>
+		<link>http://graphql-api.lndo.site/graphql-acl/pro-users/</link>
 		<pubDate>Thu, 07 Jan 2021 06:59:29 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-acl&#038;p=184</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=184</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"schemaMode":"private","typeFields":["PoPSchema_Comments_Comment.content","PoPSchema_CustomPosts_IsCustomPost.content"]} -->
 <!-- wp:graphql-api/access-control-user-roles {"accessControlGroup":"roles","value":["editor","author"]} /-->
@@ -718,10 +718,10 @@
 														</item>
 					<item>
 		<title>Clients</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-acl/clients/</link>
+		<link>http://graphql-api.lndo.site/graphql-acl/clients/</link>
 		<pubDate>Thu, 07 Jan 2021 07:01:07 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-acl&#038;p=186</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=186</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"schemaMode":"public","typeFields":["PoPSchema_Comments_Commentable.hasComments","PoPSchema_CustomPostMedia_SupportingFeaturedImage.hasFeaturedImage"]} -->
 <!-- wp:graphql-api/access-control-user-state {"accessControlGroup":"state","value":"in"} /-->
@@ -746,10 +746,10 @@
 														</item>
 					<item>
 		<title>Visitors</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-acl/visitors/</link>
+		<link>http://graphql-api.lndo.site/graphql-acl/visitors/</link>
 		<pubDate>Thu, 07 Jan 2021 07:02:07 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-acl&#038;p=188</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-acl&#038;p=188</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/access-control {"typeFields":["PoPSchema_Media_Media.author","PoPSchema_Media_Media.height","PoPSchema_Media_Media.id","PoPSchema_Media_Media.src","PoPSchema_Media_Media.width","MutationRoot.addCommentToCustomPost","MutationRoot.createPost","MutationRoot.loginUser","MutationRoot.logoutUser","MutationRoot.removeFeaturedImageFromCustomPost","MutationRoot.replyComment","MutationRoot.setFeaturedImageOnCustomPost","MutationRoot.updatePost","MutationRoot.id"]} -->
 <!-- wp:graphql-api/access-control-user-roles {"accessControlGroup":"roles","value":["contributor"]} /-->
@@ -772,10 +772,10 @@
 														</item>
 					<item>
 		<title>Website</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-schemaconfig/website/</link>
+		<link>http://graphql-api.lndo.site/graphql-schemaconfig/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:03:18 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-access-control-lists {"accessControlLists":[188]} /-->
 
@@ -798,10 +798,10 @@
 														</item>
 					<item>
 		<title>Mobile app</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-schemaconfig/mobile-app/</link>
+		<link>http://graphql-api.lndo.site/graphql-schemaconfig/mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 07:03:47 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-access-control-lists {"accessControlLists":[186,184]} /-->
 
@@ -824,10 +824,10 @@
 														</item>
 					<item>
 		<title>Website</title>
-		<link>http://graphql-api-dev.lndo.site/graphql/website/</link>
+		<link>http://graphql-api.lndo.site/graphql/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:04:56 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-endpoint&#038;p=196</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=196</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":191} /-->
 
@@ -848,10 +848,10 @@
 														</item>
 					<item>
 		<title>Back-end (for DEV)</title>
-		<link>http://graphql-api-dev.lndo.site/graphql/back-end-for-dev/</link>
+		<link>http://graphql-api.lndo.site/graphql/back-end-for-dev/</link>
 		<pubDate>Thu, 07 Jan 2021 07:05:20 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-endpoint&#038;p=198</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=198</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration /-->
 
@@ -872,10 +872,10 @@
 														</item>
 					<item>
 		<title>Website</title>
-		<link>http://graphql-api-dev.lndo.site/graphql-query/website/</link>
+		<link>http://graphql-api.lndo.site/graphql-query/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:06:20 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-dev.lndo.site/?post_type=graphql-query&#038;p=200</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=200</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql /-->
 
@@ -898,7 +898,7 @@
 														</item>
 					<item>
 		<title>GraphQL or REST? Why not both?</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/graphql-or-rest-you-can-have-both/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/graphql-or-rest-you-can-have-both/</link>
 		<pubDate>Sat, 12 Dec 2020 04:04:54 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=23</guid>
@@ -969,7 +969,7 @@ video/mp4
 							</item>
 					<item>
 		<title>Public or Private API mode, for extra security</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/public-or-private-api-mode-for-extra-security/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/public-or-private-api-mode-for-extra-security/</link>
 		<pubDate>Sat, 12 Dec 2020 04:06:52 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=25</guid>
@@ -1060,7 +1060,7 @@ video/mp4
 					</item>
 					<item>
 		<title>HTTP caching improves performance</title>
-		<link>http://graphql-api-dev.lndo.site/2020/12/12/http-caching-improves-performance/</link>
+		<link>http://graphql-api.lndo.site/2020/12/12/http-caching-improves-performance/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=28</guid>
@@ -1111,7 +1111,7 @@ video/mp4
 					</item>
 					<item>
 		<title>Bye world!</title>
-		<link>http://graphql-api-dev.lndo.site/?p=171</link>
+		<link>http://graphql-api.lndo.site/?p=171</link>
 		<pubDate>Wed, 29 Jul 2020 06:02:47 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api-nginx.lndo.site/?p=10</guid>

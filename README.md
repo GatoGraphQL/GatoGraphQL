@@ -67,9 +67,9 @@ From then on, to start the server, execute:
 composer start-server
 ```
 
-The site will be available under `http://graphql-api-dev.lndo.site`.
+The site will be available under `http://graphql-api.lndo.site`.
 
-To access the [wp-admin](http://graphql-api-dev.lndo.site/wp-admin/):
+To access the [wp-admin](http://graphql-api.lndo.site/wp-admin/):
 
 - User: `admin`
 - Password: `admin`
