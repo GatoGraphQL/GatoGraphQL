@@ -22,7 +22,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
                 // So, in position [0], will always be the $typeOrFieldInterfaceResolverClass
                 return $entry[0];
             },
-            static::getConfigurationEntries()
+            $this->getConfigurationEntries()
         );
     }
 

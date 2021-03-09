@@ -22,6 +22,6 @@ trait ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait
 
     public function enabled(TypeResolverInterface $typeResolver): bool
     {
-        return parent::enabled($typeResolver) && !empty(static::getConfigurationEntries());
+        return parent::enabled($typeResolver) && !empty($this->getConfigurationEntries());
     }
 }

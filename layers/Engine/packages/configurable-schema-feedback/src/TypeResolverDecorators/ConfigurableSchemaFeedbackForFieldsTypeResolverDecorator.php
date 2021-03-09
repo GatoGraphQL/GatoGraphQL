@@ -13,7 +13,7 @@ use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\AbstractMandat
 
 class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractMandatoryDirectivesForFieldsTypeResolverDecorator
 {
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $schemaFeedbackManager = SchemaFeedbackManagerFacade::getInstance();
         return $schemaFeedbackManager->getEntriesForFields();

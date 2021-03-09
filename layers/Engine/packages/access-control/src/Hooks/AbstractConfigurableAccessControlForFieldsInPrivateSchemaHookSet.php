@@ -23,7 +23,7 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
 
     protected function enabled(): bool
     {
-        return parent::enabled() && !empty(static::getConfigurationEntries());
+        return parent::enabled() && !empty($this->getConfigurationEntries());
     }
 
     /**

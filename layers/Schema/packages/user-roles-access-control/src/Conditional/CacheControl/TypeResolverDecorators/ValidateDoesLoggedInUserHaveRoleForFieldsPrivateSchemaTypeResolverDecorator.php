@@ -10,7 +10,7 @@ use PoPSchema\UserRolesAccessControl\Conditional\CacheControl\TypeResolverDecora
 
 class ValidateDoesLoggedInUserHaveRoleForFieldsPrivateSchemaTypeResolverDecorator extends AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator
 {
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);

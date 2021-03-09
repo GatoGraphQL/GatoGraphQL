@@ -15,7 +15,7 @@ class DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet exten
      *
      * @return array
      */
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::DISABLED);
