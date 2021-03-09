@@ -21,7 +21,7 @@ class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'mapURL',

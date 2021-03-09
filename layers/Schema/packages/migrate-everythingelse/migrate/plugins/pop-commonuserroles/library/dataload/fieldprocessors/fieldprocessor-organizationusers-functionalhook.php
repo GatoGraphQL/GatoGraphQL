@@ -15,7 +15,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
         return array(UserTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'organizationTypesByName',

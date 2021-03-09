@@ -18,7 +18,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'references',

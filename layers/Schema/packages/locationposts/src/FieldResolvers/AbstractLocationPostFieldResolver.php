@@ -17,7 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractLocationPostFieldResolver extends AbstractQueryableFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'locationposts',

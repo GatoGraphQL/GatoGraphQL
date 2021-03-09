@@ -5,10 +5,26 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserState\FieldResolvers\GlobalFieldResolver;
 
 class DBEntriesHooks extends AbstractHookSet
 {
+    protected GlobalFieldResolver $globalFieldResolver;
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        GlobalFieldResolver $globalFieldResolver
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI
+        );
+        $this->globalFieldResolver = $globalFieldResolver;
+    }
+
     protected function init()
     {
         $this->hooksAPI->addFilter(
@@ -23,7 +39,7 @@ class DBEntriesHooks extends AbstractHookSet
     {
         $dbname_datafields['userstate'] = $this->hooksAPI->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',
-            GlobalFieldResolver::getFieldNamesToResolve()
+            $this->globalFieldResolver->getFieldNamesToResolve()
         );
         return $dbname_datafields;
     }

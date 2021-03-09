@@ -15,7 +15,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'multilayoutKeys',

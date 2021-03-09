@@ -14,7 +14,7 @@ interface FieldResolverInterface
      *
      * @return array
      */
-    public static function getFieldNamesToResolve(): array;
+    public function getFieldNamesToResolve(): array;
     /**
      * A list of classes of all the (GraphQL-style) interfaces the fieldResolver implements
      *

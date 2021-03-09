@@ -12,7 +12,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 {
     use FieldInterfaceSchemaDefinitionResolverTrait;
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return self::getFieldNamesToImplement();
     }

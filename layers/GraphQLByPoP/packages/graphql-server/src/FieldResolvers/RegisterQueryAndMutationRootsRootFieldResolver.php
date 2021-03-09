@@ -29,7 +29,7 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
      * Register the fields for the Standard GraphQL server only,
      * and when nested mutations are disabled
      */
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {

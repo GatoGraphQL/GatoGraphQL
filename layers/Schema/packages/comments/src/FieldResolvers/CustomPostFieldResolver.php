@@ -30,7 +30,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'areCommentsOpen',

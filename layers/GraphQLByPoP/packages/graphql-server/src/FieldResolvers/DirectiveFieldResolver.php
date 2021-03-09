@@ -24,7 +24,7 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
         return array(DirectiveTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'name',

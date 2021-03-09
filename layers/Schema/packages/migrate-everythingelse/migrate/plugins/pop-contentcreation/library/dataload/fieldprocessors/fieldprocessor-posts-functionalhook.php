@@ -17,7 +17,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
         ];
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'flagURL',

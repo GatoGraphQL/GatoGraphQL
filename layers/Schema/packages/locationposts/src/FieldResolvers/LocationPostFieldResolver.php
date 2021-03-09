@@ -20,7 +20,7 @@ class LocationPostFieldResolver extends AbstractDBDataFieldResolver
         return array(LocationPostTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'categories',

@@ -19,7 +19,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'multilayoutKeys',

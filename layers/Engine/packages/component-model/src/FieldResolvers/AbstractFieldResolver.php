@@ -266,7 +266,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
             // First try the one declared by the fieldResolver
             $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver);
-            if (!is_null($maybeSchemaDefinitionResolver) && in_array($fieldName, $maybeSchemaDefinitionResolver::getFieldNamesToResolve())) {
+            if (!is_null($maybeSchemaDefinitionResolver) && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())) {
                 $schemaDefinitionResolver = $maybeSchemaDefinitionResolver;
             } else {
                 // Otherwise, try through all of its interfaces

@@ -32,7 +32,7 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
         return array(TypeTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'kind',

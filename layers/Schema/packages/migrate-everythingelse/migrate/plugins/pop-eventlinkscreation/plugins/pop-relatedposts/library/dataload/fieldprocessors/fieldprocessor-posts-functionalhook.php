@@ -16,7 +16,7 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'addEventLinkURL',

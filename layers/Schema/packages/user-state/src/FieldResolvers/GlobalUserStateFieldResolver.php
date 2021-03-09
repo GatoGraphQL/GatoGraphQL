@@ -12,7 +12,7 @@ use PoPSchema\UserState\FieldResolvers\AbstractGlobalUserStateFieldResolver;
 
 class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'loggedInUserID',

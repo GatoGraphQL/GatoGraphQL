@@ -22,7 +22,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     protected ?array $safeVars = null;
 
     public const HOOK_SAFEVARS = __CLASS__ . ':safeVars';
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'if',

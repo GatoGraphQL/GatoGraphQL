@@ -1771,16 +1771,17 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function getFieldNamesResolvedByFieldResolver(string $fieldResolverClass): array
     {
         if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var FieldResolverInterface */
+            $fieldResolver = $instanceManager->getInstance($fieldResolverClass);
+
             // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
             $fieldNames = array_merge(
-                $fieldResolverClass::getFieldNamesToResolve(),
+                $fieldResolver->getFieldNamesToResolve(),
                 $fieldResolverClass::getFieldNamesFromInterfaces()
             );
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var FieldResolverInterface */
-            $fieldResolver = $instanceManager->getInstance($fieldResolverClass);
             // Also pass the implemented interfaces defining the field
             $fieldInterfaceResolverClasses = $fieldResolver::getImplementedInterfaceClasses();
             $fieldNames = array_filter(

@@ -17,7 +17,7 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
         return array(UserTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'role',

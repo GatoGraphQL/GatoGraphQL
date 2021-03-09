@@ -17,7 +17,7 @@ class SiteFieldResolver extends AbstractDBDataFieldResolver
         return array(SiteTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'domain',

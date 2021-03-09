@@ -24,7 +24,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         // Only register them for the standard GraphQL,
         // or for PQL if explicitly enabled

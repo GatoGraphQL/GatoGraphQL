@@ -20,7 +20,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         return array(CommentTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'content',

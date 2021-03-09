@@ -25,7 +25,7 @@ class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
         return $fieldArgs['branch'] == 'try-new-features' && $fieldArgs['project'] == 'block-metadata';
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'content',

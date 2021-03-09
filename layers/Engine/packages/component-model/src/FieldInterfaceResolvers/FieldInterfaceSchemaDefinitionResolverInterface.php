@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 interface FieldInterfaceSchemaDefinitionResolverInterface
 {
-    public static function getFieldNamesToResolve(): array;
+    public function getFieldNamesToResolve(): array;
     public function getSchemaFieldType(string $fieldName): ?string;
     public function isSchemaFieldResponseNonNullable(string $fieldName): bool;
     public function getSchemaFieldDescription(string $fieldName): ?string;

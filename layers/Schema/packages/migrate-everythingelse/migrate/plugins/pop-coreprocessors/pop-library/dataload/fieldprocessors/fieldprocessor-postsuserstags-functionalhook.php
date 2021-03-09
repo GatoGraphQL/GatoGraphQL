@@ -18,7 +18,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'printURL',

@@ -29,7 +29,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return array(IsCustomPostFieldInterfaceResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'setFeaturedImage',

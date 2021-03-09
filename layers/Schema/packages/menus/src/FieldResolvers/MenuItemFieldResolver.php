@@ -18,7 +18,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         return array(MenuItemTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'title',

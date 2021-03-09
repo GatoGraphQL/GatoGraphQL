@@ -15,7 +15,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'categories',

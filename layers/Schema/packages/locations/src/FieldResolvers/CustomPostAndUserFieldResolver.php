@@ -23,7 +23,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'hasLocations',

@@ -14,7 +14,7 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
         return array(PostTagTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'subscribeToTagURL',

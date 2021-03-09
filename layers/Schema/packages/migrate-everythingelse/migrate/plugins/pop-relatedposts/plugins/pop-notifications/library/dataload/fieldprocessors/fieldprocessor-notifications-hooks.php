@@ -14,7 +14,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
         return array(NotificationTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'icon',

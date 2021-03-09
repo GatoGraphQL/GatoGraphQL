@@ -18,7 +18,7 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
         return array(InputValueTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'name',
