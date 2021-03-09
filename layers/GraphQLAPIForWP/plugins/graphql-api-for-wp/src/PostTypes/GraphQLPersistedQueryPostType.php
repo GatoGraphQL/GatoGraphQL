@@ -4,21 +4,40 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use GraphQLAPI\GraphQLAPI\General\BlockContentHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryOptionsBlock;
-use GraphQLAPI\GraphQLAPI\General\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryOptionsBlock;
+use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractGraphQLQueryExecutionPostType;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks as GraphQLRequestVarsHooks;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;
 
 class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostType
 {
+    protected BlockContentHelpers $blockContentHelpers;
+    protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
+
+    function __construct(
+        Menu $menu,
+        ModuleRegistryInterface $moduleRegistry,
+        BlockContentHelpers $blockContentHelpers,
+        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
+    ) {
+        parent::__construct(
+            $menu,
+            $moduleRegistry
+        );
+        $this->blockContentHelpers = $blockContentHelpers;
+        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+    }
+
     /**
      * Custom Post Type name
      */
@@ -210,13 +229,13 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
                  */
                 list(
                     $inheritQuery
-                ) = BlockContentHelpers::getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                ) = $this->blockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
                 if ($inheritQuery) {
                     // Fetch the attributes using inheritance
                     list(
                         $inheritedGraphQLQuery,
                         $inheritedGraphQLVariables
-                    ) = GraphQLQueryPostTypeHelpers::getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+                    ) = $this->graphQLQueryPostTypeHelpers->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
                     // To render the variables in the block, they must be json_encoded
                     if ($inheritedGraphQLVariables) {
                         $inheritedGraphQLVariables = json_encode($inheritedGraphQLVariables);
@@ -256,7 +275,7 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
         /**
          * Extract the query from the post (or from its parents), and set it in $vars
          */
-        return GraphQLQueryPostTypeHelpers::getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+        return $this->graphQLQueryPostTypeHelpers->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
     }
 
     protected function getQueryExecutionOptionsBlock(): AbstractQueryExecutionOptionsBlock

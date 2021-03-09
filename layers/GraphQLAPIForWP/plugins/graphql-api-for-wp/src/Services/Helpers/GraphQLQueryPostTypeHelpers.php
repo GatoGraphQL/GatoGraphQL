@@ -2,14 +2,18 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\General\BlockContentHelpers;
 use WP_Post;
 
 class GraphQLQueryPostTypeHelpers
 {
+    protected BlockContentHelpers $blockContentHelpers;
 
+    public function __construct(BlockContentHelpers $blockContentHelpers)
+    {
+        $this->blockContentHelpers = $blockContentHelpers;
+    }
     /**
      * A GraphQL Query Custom Post Type is hierarchical: each query post can have a parent,
      * enabling to fetch attributes from the parent post
@@ -28,7 +32,7 @@ class GraphQLQueryPostTypeHelpers
      * @param bool $inheritAttributes Indicate if to fetch attributes (query/variables) from ancestor posts
      * @return mixed[] Array with 2 elements: [$graphQLQuery, $graphQLVariables]
      */
-    public static function getGraphQLQueryPostAttributes(?WP_Post $graphQLQueryPost, bool $inheritAttributes): array
+    public function getGraphQLQueryPostAttributes(?WP_Post $graphQLQueryPost, bool $inheritAttributes): array
     {
         /**
          * Obtain the attributes from the block:
@@ -45,12 +49,12 @@ class GraphQLQueryPostTypeHelpers
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
                 list(
                     $inheritQuery,
-                ) = BlockContentHelpers::getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                ) = $this->blockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
             }
             list(
                 $postGraphQLQuery,
                 $postGraphQLVariables
-            ) = BlockContentHelpers::getSingleGraphiQLBlockAttributesFromPost($graphQLQueryPost);
+            ) = $this->blockContentHelpers->getSingleGraphiQLBlockAttributesFromPost($graphQLQueryPost);
             // Set the query unless it must be inherited from the parent
             if (is_null($graphQLQuery) && !$inheritQuery) {
                 $graphQLQuery = $postGraphQLQuery;
