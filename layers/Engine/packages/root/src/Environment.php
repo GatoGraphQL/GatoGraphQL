@@ -30,12 +30,12 @@ class Environment
      * Because this code is executed to know from where to load the container configuration,
      * this env variable can't be configured using the .env file, must must be injected
      * straight into the webserver.
-     * If not defined, cache if the environment is PROD, not if it is DEV
+     * If not defined, do not cache if the environment is DEV, cache otherwise
      */
     public static function cacheContainerConfiguration(): bool
     {
         $useCache = getenv(self::CACHE_CONTAINER_CONFIGURATION);
-        return $useCache !== false ? strtolower($useCache) == "true" : self::isApplicationEnvironmentProd();
+        return $useCache !== false ? strtolower($useCache) == "true" : !self::isApplicationEnvironmentDev();
     }
 
     /**
