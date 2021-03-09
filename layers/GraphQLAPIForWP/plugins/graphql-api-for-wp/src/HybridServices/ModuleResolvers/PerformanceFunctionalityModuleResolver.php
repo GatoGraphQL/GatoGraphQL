@@ -39,6 +39,15 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     }
 
     /**
+     * The priority to display the modules from this resolver in the Modules page.
+     * The higher the number, the earlier it shows
+     */
+    public function getPriority(): int
+    {
+        return 140;
+    }
+
+    /**
      * Enable to customize a specific UI for the module
      */
     public function getModuleType(string $module): string
