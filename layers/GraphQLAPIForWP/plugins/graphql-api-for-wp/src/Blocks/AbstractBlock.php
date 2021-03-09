@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Blocks;
 use Error;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\EditorScripts\HasDocumentationScriptTrait;
-use GraphQLAPI\GraphQLAPI\General\GeneralUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
@@ -145,7 +145,10 @@ abstract class AbstractBlock
      */
     final protected function getBlockLocalizationName(): string
     {
-        return GeneralUtils::dashesToCamelCase($this->getBlockRegistrationName());
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GeneralUtils */
+        $generalUtils = $instanceManager->getInstance(GeneralUtils::class);
+        return $generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
      * Block class name: wp-block-namespace-blockName
