@@ -127,6 +127,15 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     }
 
     /**
+     * The priority to display the modules from this resolver in the Modules page.
+     * The higher the number, the earlier it shows
+     */
+    public function getPriority(): int
+    {
+        return 100;
+    }
+
+    /**
      * @return array<array> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
      */
     public function getDependedModuleLists(string $module): array

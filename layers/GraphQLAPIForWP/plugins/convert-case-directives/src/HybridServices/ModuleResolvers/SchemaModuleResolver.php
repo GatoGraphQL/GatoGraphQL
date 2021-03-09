@@ -47,6 +47,15 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         ];
     }
 
+    /**
+     * The priority to display the modules from this resolver in the Modules page.
+     * The higher the number, the earlier it shows
+     */
+    public function getPriority(): int
+    {
+        return 90;
+    }
+
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
