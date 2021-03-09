@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
-use GraphQLAPI\GraphQLAPI\General\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -89,8 +89,9 @@ EOF;
                 $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var BlockRenderingHelpers */
                 $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
-
-                $schemaConfigurationDescription = CPTUtils::getCustomPostDescription($schemaConfigurationObject);
+                /** @var CPTUtils */
+                $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                $schemaConfigurationDescription = $cptUtils->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?
                     \sprintf(

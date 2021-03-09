@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\BlockCategories\SchemaConfigurationBlockCategory;
-use GraphQLAPI\GraphQLAPI\General\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
 
 abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
@@ -56,6 +56,8 @@ EOF;
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var BlockRenderingHelpers */
             $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
+            /** @var CPTUtils */
+            $cptUtils = $instanceManager->getInstance(CPTUtils::class);
             /**
              * @var WP_Post[]
              */
@@ -71,7 +73,7 @@ EOF;
             ]);
             foreach ($postObjects as $postObject) {
                 $foundPostListIDs[] = $postObject->ID;
-                $postDescription = CPTUtils::getCustomPostDescription($postObject);
+                $postDescription = $cptUtils->getCustomPostDescription($postObject);
                 $permalink = \get_permalink($postObject->ID);
                 $postContentElems[] = ($permalink ?
                     \sprintf(
