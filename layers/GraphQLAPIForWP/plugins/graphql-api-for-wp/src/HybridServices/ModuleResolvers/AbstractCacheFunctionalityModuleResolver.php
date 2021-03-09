@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
+use PoP\Root\Environment as RootEnvironment;
 
 /**
  * The cache modules have different behavior depending on the environment:
@@ -37,8 +37,7 @@ abstract class AbstractCacheFunctionalityModuleResolver extends AbstractFunction
     public function isHidden(string $module): bool
     {
         if ($this->enabledEnvironmentBasedBehavior()) {
-            $environment = PluginEnvironment::getPluginEnvironment();
-            return $environment == PluginEnvironment::PLUGIN_ENVIRONMENT_PROD;
+            return RootEnvironment::isApplicationEnvironmentProd();
         }
         return parent::isHidden($module);
     }
@@ -46,8 +45,7 @@ abstract class AbstractCacheFunctionalityModuleResolver extends AbstractFunction
     public function isEnabledByDefault(string $module): bool
     {
         if ($this->enabledEnvironmentBasedBehavior()) {
-            $environment = PluginEnvironment::getPluginEnvironment();
-            return $environment == PluginEnvironment::PLUGIN_ENVIRONMENT_PROD;
+            return RootEnvironment::isApplicationEnvironmentProd();
         }
         return parent::isEnabledByDefault($module);
     }

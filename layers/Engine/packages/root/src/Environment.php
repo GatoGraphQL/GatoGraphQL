@@ -9,6 +9,20 @@ class Environment
     public const CACHE_CONTAINER_CONFIGURATION = 'CACHE_CONTAINER_CONFIGURATION';
     public const CONTAINER_CONFIGURATION_CACHE_NAMESPACE = 'CONTAINER_CONFIGURATION_CACHE_NAMESPACE';
     public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
+    public const APPLICATION_VERSION = 'APPLICATION_VERSION';
+
+    /**
+     * Environment
+     */
+    public const APPLICATION_ENVIRONMENT = 'APPLICATION_ENVIRONMENT';
+    /**
+     * The app runs in PROD
+     */
+    public const APPLICATION_ENVIRONMENT_PROD = 'production';
+    /**
+     * The app runs in DEV
+     */
+    public const APPLICATION_ENVIRONMENT_DEV = 'development';
 
     /**
      * Indicate if to cache the container configuration.
@@ -16,17 +30,12 @@ class Environment
      * Because this code is executed to know from where to load the container configuration,
      * this env variable can't be configured using the .env file, must must be injected
      * straight into the webserver.
-     * By default, do not cache, since that's the conservative approach that always works.
-     * Otherwise, if caching, newly installed modules (eg: on WordPress plugin) may not work
-     *
-     * @return boolean
+     * If not defined, do not cache if the environment is DEV, cache otherwise
      */
     public static function cacheContainerConfiguration(): bool
     {
-        // If the environment variable is not set, `getenv` returns the boolean `false`
-        // Otherwise, it returns the string value
         $useCache = getenv(self::CACHE_CONTAINER_CONFIGURATION);
-        return $useCache !== false ? strtolower($useCache) == "true" : false;
+        return $useCache !== false ? strtolower($useCache) == "true" : !self::isApplicationEnvironmentDev();
     }
 
     /**
@@ -68,6 +77,30 @@ class Environment
      */
     public static function getApplicationVersion(): ?string
     {
-        return getenv('APPLICATION_VERSION') !== false ? getenv('APPLICATION_VERSION') : null;
+        return getenv(self::APPLICATION_VERSION) !== false ? getenv(self::APPLICATION_VERSION) : null;
+    }
+
+    /**
+     * By default it is PROD. For DEV we must set the env var
+     */
+    public static function getApplicationEnvironment(): string
+    {
+        $default = self::APPLICATION_ENVIRONMENT_PROD;
+        $environment = getenv(self::APPLICATION_ENVIRONMENT) !== false ? getenv(self::APPLICATION_ENVIRONMENT) : $default;
+        $environments = [
+            self::APPLICATION_ENVIRONMENT_PROD,
+            self::APPLICATION_ENVIRONMENT_DEV,
+        ];
+        return in_array($environment, $environments) ? $environment : $default;
+    }
+
+    public static function isApplicationEnvironmentProd(): bool
+    {
+        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_PROD;
+    }
+
+    public static function isApplicationEnvironmentDev(): bool
+    {
+        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_DEV;
     }
 }

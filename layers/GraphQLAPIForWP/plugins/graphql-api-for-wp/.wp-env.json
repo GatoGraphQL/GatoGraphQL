@@ -7,6 +7,6 @@
 	"testsPort": 8089,
 	"config": {
         "WP_DEBUG_DISPLAY": true,
-        "GRAPHQL_API_PLUGIN_ENVIRONMENT": "development"
+        "GRAPHQL_API_APPLICATION_ENVIRONMENT": "development"
 	}
 }
