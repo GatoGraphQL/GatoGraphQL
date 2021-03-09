@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\OperationalFunctionalityModuleResolver;
@@ -88,11 +88,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigurationBlock
          */
         $block = $instanceManager->getInstance(SchemaConfigurationBlock::class);
-        $schemaConfigurationBlockDataItem = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigurationBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
             $block
         );
@@ -166,11 +168,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         }
 
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigOptionsBlock
          */
         $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );
@@ -214,11 +218,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         }
 
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigOptionsBlock
          */
         $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );
@@ -272,11 +278,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         }
 
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigOptionsBlock
          */
         $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );
@@ -320,11 +328,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigAccessControlListBlock
          */
         $block = $instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
-        $schemaConfigACLBlockDataItem = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigACLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );
@@ -348,11 +358,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigFieldDeprecationListBlock
          */
         $block = $instanceManager->getInstance(SchemaConfigFieldDeprecationListBlock::class);
-        $schemaConfigFDLBlockDataItem = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigFDLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );

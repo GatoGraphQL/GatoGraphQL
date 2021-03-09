@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\General;
+namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use WP_Post;
@@ -14,7 +14,7 @@ class BlockHelpers
      *
      * @var array<int, array>
      */
-    protected static array $blockCache = [];
+    protected array $blockCache = [];
 
     /**
      * Extract the blocks from the post
@@ -22,7 +22,7 @@ class BlockHelpers
      * @param WP_Post|int $configurationPostOrID
      * @return array<string, mixed> The block stores its data as property => value
      */
-    public static function getBlocksFromCustomPost(
+    public function getBlocksFromCustomPost(
         $configurationPostOrID
     ): array {
         if (\is_object($configurationPostOrID)) {
@@ -42,11 +42,11 @@ class BlockHelpers
         }
 
         // Get the blocks from the inner cache, if available
-        if (isset(self::$blockCache[$configurationPostID])) {
-            $blocks = self::$blockCache[$configurationPostID];
+        if (isset($this->blockCache[$configurationPostID])) {
+            $blocks = $this->blockCache[$configurationPostID];
         } else {
             $blocks = \parse_blocks($configurationPost->post_content);
-            self::$blockCache[$configurationPostID] = $blocks;
+            $this->blockCache[$configurationPostID] = $blocks;
         }
 
         return $blocks;
@@ -58,11 +58,11 @@ class BlockHelpers
      * @param WP_Post|int $configurationPostOrID
      * @return array<array> A list of block data, each as an array
      */
-    public static function getBlocksOfTypeFromCustomPost(
+    public function getBlocksOfTypeFromCustomPost(
         $configurationPostOrID,
         AbstractBlock $block
     ): array {
-        $blocks = self::getBlocksFromCustomPost($configurationPostOrID);
+        $blocks = $this->getBlocksFromCustomPost($configurationPostOrID);
 
         // Obtain the blocks for the provided block type
         $blockFullName = $block->getBlockFullName();
@@ -79,11 +79,11 @@ class BlockHelpers
      * @param WP_Post|int $configurationPostOrID
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
-    public static function getSingleBlockOfTypeFromCustomPost(
+    public function getSingleBlockOfTypeFromCustomPost(
         $configurationPostOrID,
         AbstractBlock $block
     ): ?array {
-        $blocks = self::getBlocksOfTypeFromCustomPost($configurationPostOrID, $block);
+        $blocks = $this->getBlocksOfTypeFromCustomPost($configurationPostOrID, $block);
         if (count($blocks) != 1) {
             return null;
         }

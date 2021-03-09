@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Schema\HookHelpers;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\FieldDeprecationBlock;
@@ -30,11 +30,13 @@ class FieldDeprecationGraphQLQueryConfigurator extends AbstractGraphQLQueryConfi
         }
 
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var FieldDeprecationBlock
          */
         $block = $instanceManager->getInstance(FieldDeprecationBlock::class);
-        $fdlBlockItems = BlockHelpers::getBlocksOfTypeFromCustomPost(
+        $fdlBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $fdlPostID,
             $block
         );

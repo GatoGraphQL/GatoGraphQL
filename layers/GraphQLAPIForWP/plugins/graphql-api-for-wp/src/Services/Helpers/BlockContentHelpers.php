@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryOptionsBlock;
-use GraphQLAPI\GraphQLAPI\General\BlockHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;
 
@@ -21,11 +20,13 @@ class BlockContentHelpers
     {
         // There must be only one block of type GraphiQL. Fetch it
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var PersistedQueryGraphiQLBlock
          */
         $block = $instanceManager->getInstance(PersistedQueryGraphiQLBlock::class);
-        $graphiQLBlock = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $graphiQLBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
         );
@@ -48,11 +49,13 @@ class BlockContentHelpers
     {
         // There must be only one block of type PersistedQueryOptionsBlock. Fetch it
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var PersistedQueryOptionsBlock
          */
         $block = $instanceManager->getInstance(PersistedQueryOptionsBlock::class);
-        $persistedQueryOptionsBlock = BlockHelpers::getSingleBlockOfTypeFromCustomPost(
+        $persistedQueryOptionsBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
         );
