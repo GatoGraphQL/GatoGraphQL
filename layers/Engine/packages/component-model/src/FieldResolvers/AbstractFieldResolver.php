@@ -52,7 +52,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      *
      * @return array
      */
-    public static function getFieldNamesFromInterfaces(): array
+    public function getFieldNamesFromInterfaces(): array
     {
         $fieldNames = [];
 

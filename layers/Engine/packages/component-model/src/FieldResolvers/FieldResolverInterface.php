@@ -26,7 +26,7 @@ interface FieldResolverInterface
      *
      * @return array
      */
-    public static function getFieldNamesFromInterfaces(): array;
+    public function getFieldNamesFromInterfaces(): array;
     /**
      * Get an instance of the object defining the schema for this fieldResolver
      *

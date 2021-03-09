@@ -1778,7 +1778,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
             $fieldNames = array_merge(
                 $fieldResolver->getFieldNamesToResolve(),
-                $fieldResolverClass::getFieldNamesFromInterfaces()
+                $fieldResolver->getFieldNamesFromInterfaces()
             );
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
