@@ -50,14 +50,13 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Implement all the fieldNames defined in the interfaces
      *
-     * @return array
+     * @return string[]
      */
     public function getFieldNamesFromInterfaces(): array
     {
         $fieldNames = [];
 
-        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-        foreach (self::getInterfaceClasses() as $interfaceClass) {
+        foreach ($this->getInterfaceClasses() as $interfaceClass) {
             $fieldNames = array_merge(
                 $fieldNames,
                 $interfaceClass::getFieldNamesToImplement()
@@ -77,7 +76,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      *
      * @return array
      */
-    public static function getInterfaceClasses(): array
+    public function getInterfaceClasses(): array
     {
         $interfaces = [];
 
@@ -271,7 +270,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             } else {
                 // Otherwise, try through all of its interfaces
                 $instanceManager = InstanceManagerFacade::getInstance();
-                foreach (self::getInterfaceClasses() as $interfaceClass) {
+                foreach ($this->getInterfaceClasses() as $interfaceClass) {
                     if (in_array($fieldName, $interfaceClass::getFieldNamesToImplement())) {
                         // Interfaces do not receive the typeResolver, so we must bridge it
                         $schemaDefinitionResolver = new InterfaceSchemaDefinitionResolverAdapter(
@@ -342,7 +341,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $fieldArgs
             );
             // 2. Applied on each of the implemented interfaces
-            foreach (self::getInterfaceClasses() as $interfaceClass) {
+            foreach ($this->getInterfaceClasses() as $interfaceClass) {
                 if (in_array($fieldName, $interfaceClass::getFieldNamesToImplement())) {
                     $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
                         $interfaceClass,
