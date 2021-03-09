@@ -15,7 +15,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
         return array(NotificationTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'icon',

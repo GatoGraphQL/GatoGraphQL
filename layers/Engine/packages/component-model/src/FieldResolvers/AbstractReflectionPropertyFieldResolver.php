@@ -110,7 +110,7 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
         return [];
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         // If explicitly stating what properties to include, then already use those
         $class = get_called_class();

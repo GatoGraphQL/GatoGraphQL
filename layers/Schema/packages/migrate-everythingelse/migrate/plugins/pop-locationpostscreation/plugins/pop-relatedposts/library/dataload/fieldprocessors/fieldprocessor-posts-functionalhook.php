@@ -16,7 +16,7 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
         ];
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'addLocationPostURL',

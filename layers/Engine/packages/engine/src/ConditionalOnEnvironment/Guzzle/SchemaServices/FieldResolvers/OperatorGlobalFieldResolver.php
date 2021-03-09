@@ -13,7 +13,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'getJSON',

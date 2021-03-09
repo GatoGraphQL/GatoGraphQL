@@ -12,7 +12,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 
 class GlobalFieldResolver extends AbstractGlobalFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'isUserLoggedIn',

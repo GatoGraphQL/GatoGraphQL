@@ -13,6 +13,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -42,7 +43,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     protected array $schemaDefinitionForFieldCache = [];
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];
     }
@@ -50,17 +51,16 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Implement all the fieldNames defined in the interfaces
      *
-     * @return array
+     * @return string[]
      */
-    public static function getFieldNamesFromInterfaces(): array
+    public function getFieldNamesFromInterfaces(): array
     {
         $fieldNames = [];
 
-        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-        foreach (self::getInterfaceClasses() as $interfaceClass) {
+        foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
             $fieldNames = array_merge(
                 $fieldNames,
-                $interfaceClass::getFieldNamesToImplement()
+                $fieldInterfaceResolver->getFieldNamesToImplement()
             );
         }
 
@@ -75,23 +75,17 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     /**
      * Implement all the fieldNames defined in the interfaces
      *
-     * @return array
+     * @return FieldInterfaceResolverInterface[]
      */
-    public static function getInterfaceClasses(): array
+    public function getFieldInterfaceResolvers(): array
     {
-        $interfaces = [];
-
-        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-        $class = get_called_class();
-        do {
-            $interfaces = array_merge(
-                $interfaces,
-                $class::getImplementedInterfaceClasses()
-            );
-            // Otherwise, continue iterating for the class parents
-        } while ($class = get_parent_class($class));
-
-        return array_values(array_unique($interfaces));
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return array_map(
+            function (string $class) use ($instanceManager) {
+                return $instanceManager->getInstance($class);
+            },
+            $this->getImplementedFieldInterfaceResolverClasses()
+        );
     }
 
     /**
@@ -266,16 +260,15 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
             // First try the one declared by the fieldResolver
             $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver);
-            if (!is_null($maybeSchemaDefinitionResolver) && in_array($fieldName, $maybeSchemaDefinitionResolver::getFieldNamesToResolve())) {
+            if (!is_null($maybeSchemaDefinitionResolver) && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())) {
                 $schemaDefinitionResolver = $maybeSchemaDefinitionResolver;
             } else {
                 // Otherwise, try through all of its interfaces
-                $instanceManager = InstanceManagerFacade::getInstance();
-                foreach (self::getInterfaceClasses() as $interfaceClass) {
-                    if (in_array($fieldName, $interfaceClass::getFieldNamesToImplement())) {
+                foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+                    if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
                         // Interfaces do not receive the typeResolver, so we must bridge it
                         $schemaDefinitionResolver = new InterfaceSchemaDefinitionResolverAdapter(
-                            $instanceManager->getInstance($interfaceClass)
+                            $fieldInterfaceResolver
                         );
                         break;
                     }
@@ -342,10 +335,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $fieldArgs
             );
             // 2. Applied on each of the implemented interfaces
-            foreach (self::getInterfaceClasses() as $interfaceClass) {
-                if (in_array($fieldName, $interfaceClass::getFieldNamesToImplement())) {
+            foreach ($this->getFieldInterfaceResolvers() as $fieldInterfaceResolver) {
+                if (in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement())) {
                     $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
-                        $interfaceClass,
+                        get_class($fieldInterfaceResolver),
                         $fieldName
                     );
                     $schemaDefinition = $hooksAPI->applyFilters(

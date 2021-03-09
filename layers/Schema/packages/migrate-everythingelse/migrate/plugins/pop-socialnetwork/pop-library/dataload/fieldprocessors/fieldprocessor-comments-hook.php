@@ -14,7 +14,7 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
         return array(CommentTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'taggedusers',

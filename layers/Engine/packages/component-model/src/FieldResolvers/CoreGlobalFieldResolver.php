@@ -13,7 +13,7 @@ use function strpos;
 
 class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'typeName',

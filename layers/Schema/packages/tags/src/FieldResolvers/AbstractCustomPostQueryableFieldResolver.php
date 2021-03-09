@@ -17,7 +17,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
 {
     use TagAPIRequestedContractTrait;
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'tags',

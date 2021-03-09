@@ -105,7 +105,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::SCHEMA_CUSTOMPOSTS,

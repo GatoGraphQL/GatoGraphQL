@@ -10,7 +10,7 @@ use PoP\AccessControl\TypeResolverDecorators\AbstractDisableAccessConfigurableAc
 
 class DisableAccessConfigurableAccessControlForFieldsInPublicSchemaTypeResolverDecorator extends AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaTypeResolverDecorator
 {
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::DISABLED);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
@@ -21,7 +22,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
                 // So, in position [0], will always be the $typeOrFieldInterfaceResolverClass
                 return $entry[0];
             },
-            static::getConfigurationEntries()
+            $this->getConfigurationEntries()
         );
     }
 
@@ -29,6 +30,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
 
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForFields = [];
         $fieldInterfaceResolverClasses = $typeResolver->getAllImplementedInterfaceClasses();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
@@ -36,8 +38,10 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
             // Calculate all the interfaces that define this fieldName
             $fieldInterfaceResolverClassesForField = array_values(array_filter(
                 $fieldInterfaceResolverClasses,
-                function ($fieldInterfaceResolverClass) use ($fieldName): bool {
-                    return in_array($fieldName, $fieldInterfaceResolverClass::getFieldNamesToImplement());
+                function ($fieldInterfaceResolverClass) use ($fieldName, $instanceManager): bool {
+                    /** @var FieldInterfaceResolverInterface */
+                    $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
+                    return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
                 }
             ));
             foreach (

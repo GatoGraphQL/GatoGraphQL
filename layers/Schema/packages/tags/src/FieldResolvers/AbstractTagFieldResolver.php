@@ -15,14 +15,14 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
 {
     use TagAPIRequestedContractTrait;
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,
         ];
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'url',

@@ -20,7 +20,7 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
         return array(SchemaTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'queryType',

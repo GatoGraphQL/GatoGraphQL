@@ -15,7 +15,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
     use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
     use ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait;
 
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);

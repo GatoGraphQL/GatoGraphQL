@@ -40,7 +40,7 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver;
     }
 
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::CONVERT_CASE_DIRECTIVES,

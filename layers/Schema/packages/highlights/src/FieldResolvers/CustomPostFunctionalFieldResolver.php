@@ -21,7 +21,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'addhighlightURL',

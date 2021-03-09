@@ -14,7 +14,7 @@ class FunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 
     public const SCHEMA_FEEDBACK = Plugin::NAMESPACE . '\schema-feedback';
 
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::SCHEMA_FEEDBACK,

@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait RolesFieldResolverTrait
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'roles',

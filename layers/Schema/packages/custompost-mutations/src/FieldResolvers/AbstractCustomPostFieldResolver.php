@@ -13,7 +13,7 @@ use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'update',

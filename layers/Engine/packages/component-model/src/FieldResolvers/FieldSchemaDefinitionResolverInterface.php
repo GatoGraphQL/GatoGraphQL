@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 interface FieldSchemaDefinitionResolverInterface
 {
-    public static function getFieldNamesToResolve(): array;
+    public function getFieldNamesToResolve(): array;
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string;
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool;
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string;

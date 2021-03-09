@@ -22,7 +22,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
         return $translationAPI->__('Fields concerning an entity\'s featured image', 'custompostmedia');
     }
 
-    public static function getFieldNamesToImplement(): array
+    public function getFieldNamesToImplement(): array
     {
         return [
             'hasFeaturedImage',

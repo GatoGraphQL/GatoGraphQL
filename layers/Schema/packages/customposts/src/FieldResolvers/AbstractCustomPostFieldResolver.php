@@ -15,12 +15,12 @@ use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResol
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [];
     }
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,

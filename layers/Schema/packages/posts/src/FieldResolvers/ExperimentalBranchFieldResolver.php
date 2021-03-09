@@ -41,14 +41,14 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
         return isset($fieldArgs['branch']) && $fieldArgs['branch'] == 'experimental';
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'excerpt',
         ];
     }
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];
     }

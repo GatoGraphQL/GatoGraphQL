@@ -27,7 +27,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::SINGLE_ENDPOINT,

@@ -13,7 +13,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      *
      * @return array
      */
-    abstract protected static function getConfigurationEntries(): array;
+    abstract protected function getConfigurationEntries(): array;
 
     /**
      * Field names to remove
@@ -30,7 +30,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
                 // So, in position [1], will always be the $fieldName
                 return $entry[1];
             },
-            static::getConfigurationEntries()
+            $this->getConfigurationEntries()
         );
     }
 
@@ -45,7 +45,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
         string $fieldName
     ): array {
         return $this->getMatchingEntries(
-            static::getConfigurationEntries(),
+            $this->getConfigurationEntries(),
             $typeResolver,
             $fieldInterfaceResolverClasses,
             $fieldName

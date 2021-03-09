@@ -22,7 +22,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'blockMetadata',

@@ -12,7 +12,7 @@ class ConfigurableCacheControlForFieldsTypeResolverDecorator extends AbstractMan
 {
     use ConfigurableCacheControlTypeResolverDecoratorTrait;
 
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $cacheControlManager = CacheControlManagerFacade::getInstance();
         return $cacheControlManager->getEntriesForFields();

@@ -31,7 +31,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     /**
      * @return string[]
      */
-    public static function getModulesToResolve(): array
+    public function getModulesToResolve(): array
     {
         return [
             self::CACHE_CONTROL,

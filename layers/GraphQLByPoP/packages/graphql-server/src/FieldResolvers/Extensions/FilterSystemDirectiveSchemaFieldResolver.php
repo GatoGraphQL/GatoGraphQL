@@ -24,7 +24,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
         return array(SchemaTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'directives',

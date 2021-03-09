@@ -18,7 +18,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
         return null;
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'locationsmapURL',

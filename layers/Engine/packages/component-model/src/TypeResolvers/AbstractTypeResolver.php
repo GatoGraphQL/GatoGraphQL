@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\ComponentModel\ErrorUtils;
-use PoP\ComponentModel\Environment;
 use League\Pipeline\PipelineBuilder;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\FieldHelpers;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\ErrorUtils;
+use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\FieldHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\FieldQuery\QueryUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
@@ -1555,7 +1556,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
             // Conveniently get the fields from the schema, which have already been calculated above
             // since they also include their interface fields
-            $interfaceFieldNames = $interfaceInstance::getFieldNamesToImplement();
+            $interfaceFieldNames = $interfaceInstance->getFieldNamesToImplement();
             // The Interface fields may be implemented as either FieldResolver fields or FieldResolver connections,
             // Eg: Interface "Elemental" has field "id" and connection "self"
             // Merge both cases into interface fields
@@ -1595,7 +1596,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             // An interface can itself implement interfaces!
             $interfaceImplementedInterfaceNames = [];
-            if ($interfaceImplementedInterfaceClasses = $interfaceInstance::getImplementedInterfaceClasses()) {
+            if ($interfaceImplementedInterfaceClasses = $interfaceInstance->getImplementedFieldInterfaceResolverClasses()) {
                 foreach ($interfaceImplementedInterfaceClasses as $interfaceImplementedInterfaceClass) {
                     $interfaceImplementedInterfaceInstance = $instanceManager->getInstance($interfaceImplementedInterfaceClass);
                     $interfaceImplementedInterfaceNames[] = $interfaceImplementedInterfaceInstance->getMaybeNamespacedInterfaceName();
@@ -1731,11 +1732,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldInterfaceResolverClasses): bool
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         // Calculate all the interfaces that define this fieldName
         $fieldInterfaceResolverClassesForField = array_values(array_filter(
             $fieldInterfaceResolverClasses,
-            function ($fieldInterfaceResolverClass) use ($fieldName): bool {
-                return in_array($fieldName, $fieldInterfaceResolverClass::getFieldNamesToImplement());
+            function ($fieldInterfaceResolverClass) use ($fieldName, $instanceManager): bool {
+                /** @var FieldInterfaceResolverInterface */
+                $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
+                return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
             }
         ));
         // Execute 2 filters: a generic one, and a specific one
@@ -1771,18 +1775,19 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function getFieldNamesResolvedByFieldResolver(string $fieldResolverClass): array
     {
         if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
-            // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
-            $fieldNames = array_merge(
-                $fieldResolverClass::getFieldNamesToResolve(),
-                $fieldResolverClass::getFieldNamesFromInterfaces()
-            );
-
-            // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var FieldResolverInterface */
             $fieldResolver = $instanceManager->getInstance($fieldResolverClass);
+
+            // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
+            $fieldNames = array_merge(
+                $fieldResolver->getFieldNamesToResolve(),
+                $fieldResolver->getFieldNamesFromInterfaces()
+            );
+
+            // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
             // Also pass the implemented interfaces defining the field
-            $fieldInterfaceResolverClasses = $fieldResolver::getImplementedInterfaceClasses();
+            $fieldInterfaceResolverClasses = $fieldResolver->getImplementedFieldInterfaceResolverClasses();
             $fieldNames = array_filter(
                 $fieldNames,
                 fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $fieldInterfaceResolverClasses)
@@ -1809,6 +1814,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaFieldResolvers = [];
+        $instanceManager = InstanceManagerFacade::getInstance();
 
         // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
         $classStack = [
@@ -1830,10 +1836,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $schemaFieldResolvers[$fieldName] = $fieldResolversForField;
                         }
                     }
+                    /** @var FieldResolverInterface */
+                    $fieldResolver = $instanceManager->getInstance($extensionClass);
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $extensionClass::getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     )));
                 }
                 // Otherwise, continue iterating for the class parents
@@ -1978,6 +1986,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $decoratorClasses;
     }
 
+    /**
+     * @return FieldInterfaceResolverInterface[]
+     */
     public function getAllImplementedInterfaceResolverInstances(): array
     {
         if (is_null($this->interfaceResolverInstances)) {
@@ -2017,7 +2028,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $processedFieldResolverClasses[] = $fieldResolverClass;
                     $interfaceClasses = array_merge(
                         $interfaceClasses,
-                        $fieldResolver::getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     );
                 }
             }
@@ -2075,10 +2086,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 foreach (array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS)) as $extensionClass => $extensionPriority) {
                     // Check if this fieldResolver can process this field, and if its priority is bigger than the previous found instance attached to the same class
+                    $fieldResolver = $instanceManager->getInstance($extensionClass);
                     $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
                     if (in_array($fieldName, $extensionClassFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                        $fieldResolver = $instanceManager->getInstance($extensionClass);
                         if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
                             $classTypeResolverPriorities[] = $extensionPriority;
                             $classFieldResolvers[] = $fieldResolver;
@@ -2087,7 +2098,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $extensionClass::getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     )));
                 }
                 // Sort the found units by their priority, and then add to the stack of all units, for all classes

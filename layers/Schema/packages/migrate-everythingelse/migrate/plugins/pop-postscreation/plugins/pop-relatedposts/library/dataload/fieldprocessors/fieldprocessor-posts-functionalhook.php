@@ -16,7 +16,7 @@ class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
 			'addpostURL',

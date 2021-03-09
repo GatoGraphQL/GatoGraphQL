@@ -21,7 +21,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'loginUser',

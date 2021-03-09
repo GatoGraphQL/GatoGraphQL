@@ -14,7 +14,7 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
         );
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'excerpt',

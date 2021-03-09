@@ -29,7 +29,7 @@ class RootCategoryFieldResolver extends AbstractCategoryFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return array_merge(
             parent::getFieldNamesToResolve(),

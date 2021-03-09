@@ -19,7 +19,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'sites',

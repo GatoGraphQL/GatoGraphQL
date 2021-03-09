@@ -16,7 +16,7 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchem
      *
      * @return array
      */
-    protected static function getConfigurationEntries(): array
+    protected function getConfigurationEntries(): array
     {
         $accessControlManager = AccessControlManagerFacade::getInstance();
         return $accessControlManager->getEntriesForFields(AccessControlGroups::STATE);

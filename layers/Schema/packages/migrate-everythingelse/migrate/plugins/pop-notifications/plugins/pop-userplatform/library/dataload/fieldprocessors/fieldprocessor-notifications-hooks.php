@@ -12,7 +12,7 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
         return array(NotificationTypeResolver::class);
     }
 
-    public static function getFieldNamesToResolve(): array
+    public function getFieldNamesToResolve(): array
     {
         return [
             'icon',
