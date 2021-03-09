@@ -1,6 +1,8 @@
 <?php
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
+use PoP\Engine\ModuleFilters\MainContentModule;
 
 define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');
 
@@ -14,12 +16,15 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
 
     public function initWebPlatformModelProps(array $module, array &$props)
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var MainContentModule */
+        $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
         $this->mergeImmutableJsconfigurationProp(
             $module,
             $props,
             array(
                 'fetchparams' => array(
-                    ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\Engine\ModuleFilters\MainContentModule::NAME,
+                    ModuleFilterManager::URLPARAM_MODULEFILTER => $mainContentModule->getName(),
                 ),
             )
         );

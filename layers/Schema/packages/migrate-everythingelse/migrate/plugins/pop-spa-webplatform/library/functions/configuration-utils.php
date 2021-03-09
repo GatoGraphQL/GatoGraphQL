@@ -1,7 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\SPA\ModuleFilters\Page;
 
 class PoP_SPAWebPlatform_ConfigurationUtils
 {
@@ -13,9 +15,13 @@ class PoP_SPAWebPlatform_ConfigurationUtils
 
             // If preloading (eg: INITIALFRAMES) then add the action=preload and modulefilter=page URL parameters
             if ($configuration['preload'] ?? null) {
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var Page */
+                $page = $instanceManager->getInstance(Page::class);
+
                 $url = GeneralUtils::addQueryArgs([
-                    \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\SPA\ModuleFilters\Page::NAME,
-                    \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => GD_URLPARAM_ACTION_PRELOAD,
+                    \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => $page->getName(),
+                    \PoP\ComponentModel\Constants\Params::ACTIONS . '[]' => GD_URLPARAM_ACTION_PRELOAD,
                 ], $url);
             }
             $url_targets[$url] = $configuration['targets'];

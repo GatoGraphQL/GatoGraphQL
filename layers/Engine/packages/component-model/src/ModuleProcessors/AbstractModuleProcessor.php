@@ -1032,11 +1032,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getDataloadSource(array $module, array &$props): string
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var ModulePaths */
+        $modulePaths = $instanceManager->getInstance(ModulePaths::class);
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = ModulePathHelpersFacade::getInstance()->getStringifiedModulePropagationCurrentPath($module);
         $ret = GeneralUtils::addQueryArgs([
-            ModuleFilterManager::URLPARAM_MODULEFILTER => ModulePaths::NAME,
+            ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
             ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
         ], RequestUtils::getCurrentUrl());
 

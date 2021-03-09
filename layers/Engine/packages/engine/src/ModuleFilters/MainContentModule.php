@@ -9,11 +9,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class MainContentModule extends AbstractModuleFilter
 {
-    public const NAME = 'maincontentmodule';
-
     public function getName()
     {
-        return self::NAME;
+        return 'maincontentmodule';
     }
 
     public function excludeModule(array $module, array &$props)

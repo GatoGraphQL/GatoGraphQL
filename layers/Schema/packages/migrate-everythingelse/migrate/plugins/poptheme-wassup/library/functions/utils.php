@@ -1,9 +1,11 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPThemeWassup_Utils
 {
@@ -11,13 +13,15 @@ class PoPThemeWassup_Utils
     public static function checkLoadingPagesectionModule()
     {
         if (is_null(self::$checkLoadingPagesectionModule)) {
-
             $vars = ApplicationState::getVars();
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var ModulePaths */
+            $modulePaths = $instanceManager->getInstance(ModulePaths::class);
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
             self::$checkLoadingPagesectionModule = HooksAPIFacade::getInstance()->applyFilters(
                 'PoPThemeWassup_Utils:checkLoadingPagesectionModule',
-                $vars['modulefilter'] !== \PoP\ComponentModel\ModuleFilters\ModulePaths::NAME
+                $vars['modulefilter'] !== $modulePaths->getName()
             );
         }
 
@@ -26,9 +30,8 @@ class PoPThemeWassup_Utils
 
     public static function getFrontendId($frontend_id, $group)
     {
-
         // As defined in helper generateId in helpers.handlebars.js
-        return $frontend_id.POP_CONSTANT_ID_SEPARATOR.$group;
+        return $frontend_id . POP_CONSTANT_ID_SEPARATOR . $group;
     }
 
     // Return all the classes to make the pageSections active inside the pageSectionGroup
@@ -36,7 +39,6 @@ class PoPThemeWassup_Utils
     // for javascript to execute to have content visible
     public static function getPagesectiongroupActivePagesectionClasses($active_classes = array())
     {
-
         // If PoP SSR is not defined, then there is no PoP_SSR_ServerUtils
         if (defined('POP_SSR_INITIALIZED')) {
             if (!PoP_SSR_ServerUtils::disableServerSideRendering()) {

@@ -9,7 +9,6 @@ use PoP\ComponentModel\ModulePath\ModulePathUtils;
 
 class ModulePaths extends AbstractModuleFilter
 {
-    public const NAME = 'modulepaths';
     public const URLPARAM_MODULEPATHS = 'modulepaths';
 
     /**
@@ -40,7 +39,7 @@ class ModulePaths extends AbstractModuleFilter
 
     public function getName()
     {
-        return self::NAME;
+        return 'modulepaths';
     }
 
     public function excludeModule(array $module, array &$props)

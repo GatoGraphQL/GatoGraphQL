@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\Constants\Targets;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
-use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\AbstractHookSet;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleFilters\Lazy;
+use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\Targets;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
+use PoP\Hooks\AbstractHookSet;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
@@ -58,6 +59,9 @@ class LazyLoadHookSet extends AbstractHookSet
     public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var Lazy */
+        $lazy = $instanceManager->getInstance(Lazy::class);
 
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {
@@ -67,7 +71,7 @@ class LazyLoadHookSet extends AbstractHookSet
                     DataOutputItems::MODULE_DATA,
                     DataOutputItems::DATABASES,
                 ],
-                ModuleFilterManager::URLPARAM_MODULEFILTER => Lazy::NAME,
+                ModuleFilterManager::URLPARAM_MODULEFILTER => $lazy->getName(),
                 Params::ACTIONS . '[]' => Actions::LOADLAZY,
             ], RequestUtils::getCurrentUrl());
             $engine->addBackgroundUrl($url, array(Targets::MAIN));

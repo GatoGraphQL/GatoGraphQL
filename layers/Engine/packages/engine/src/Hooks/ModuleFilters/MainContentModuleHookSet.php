@@ -4,11 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
+use PoP\Engine\ModuleFilters\MainContentModule;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\Translation\TranslationAPIInterface;
 
-class MainContentModule extends AbstractHookSet
+class MainContentModuleHookSet extends AbstractHookSet
 {
+    protected MainContentModule $mainContentModule;
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        MainContentModule $mainContentModule
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI
+        );
+        $this->mainContentModule = $mainContentModule;
+    }
+
     protected function init()
     {
         $this->hooksAPI->addAction(
@@ -28,7 +45,7 @@ class MainContentModule extends AbstractHookSet
         // Function `getRouteModuleByMostAllmatchingVarsProperties` actually needs to access all values in $vars
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == \PoP\Engine\ModuleFilters\MainContentModule::NAME) {
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->mainContentModule->getName()) {
             $vars['maincontentmodule'] = RouteModuleProcessorManagerFacade::getInstance()->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         }
     }
