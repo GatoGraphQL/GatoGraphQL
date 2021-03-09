@@ -48,7 +48,7 @@ class HeadModuleHookSet extends AbstractHookSet
     {
         [&$vars] = $vars_in_array;
         if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
-            if ($headmodule = $_REQUEST[$this->headModule::URLPARAM_HEADMODULE] ?? null) {
+            if ($headmodule = $_REQUEST[HeadModule::URLPARAM_HEADMODULE] ?? null) {
                 $vars['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
             }
         }
