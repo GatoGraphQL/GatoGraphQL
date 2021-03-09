@@ -43,7 +43,6 @@ services:
 
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
-        public: false
 
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
