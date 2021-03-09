@@ -9,6 +9,7 @@ class Environment
     public const CACHE_CONTAINER_CONFIGURATION = 'CACHE_CONTAINER_CONFIGURATION';
     public const CONTAINER_CONFIGURATION_CACHE_NAMESPACE = 'CONTAINER_CONFIGURATION_CACHE_NAMESPACE';
     public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
+    public const APPLICATION_VERSION = 'APPLICATION_VERSION';
 
     /**
      * Indicate if to cache the container configuration.
@@ -68,6 +69,6 @@ class Environment
      */
     public static function getApplicationVersion(): ?string
     {
-        return getenv('APPLICATION_VERSION') !== false ? getenv('APPLICATION_VERSION') : null;
+        return getenv(self::APPLICATION_VERSION) !== false ? getenv(self::APPLICATION_VERSION) : null;
     }
 }
