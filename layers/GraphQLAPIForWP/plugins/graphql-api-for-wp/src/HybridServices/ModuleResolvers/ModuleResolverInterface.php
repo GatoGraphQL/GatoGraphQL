@@ -11,6 +11,11 @@ interface ModuleResolverInterface
      */
     public function getModulesToResolve(): array;
     /**
+     * The priority to display the modules from this resolver in the Modules page.
+     * The higher the number, the earlier it shows
+     */
+    public function getPriority(): int;
+    /**
      * This is a list of lists of modules, as to model both OR and AND conditions
      * The innermost list is an OR: if any module is enabled, then the condition succeeds
      * The outermost list is an AND: all list must succeed for this module to be enabled

@@ -11,16 +11,47 @@ use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverInterface
 class ModuleRegistry implements ModuleRegistryInterface
 {
     /**
-     * @var array<string, ModuleResolverInterface>
+     * @var ModuleResolverInterface[]
      */
     protected array $moduleResolvers = [];
 
+    /**
+     * @var array<string, ModuleResolverInterface>
+     */
+    protected array $modulesResolversByModuleAndPriority = [];
+
+    /**
+     * @var array<string, ModuleResolverInterface>
+     */
+    protected array $moduleResolversByModule = [];
+
     public function addModuleResolver(ModuleResolverInterface $moduleResolver): void
     {
+        $this->moduleResolvers[] = $moduleResolver;
         foreach ($moduleResolver->getModulesToResolve() as $module) {
-            $this->moduleResolvers[$module] = $moduleResolver;
+            $this->moduleResolversByModule[$module] = $moduleResolver;
         }
     }
+    /**
+     * Order the moduleResolvers by priority
+     * @var array<string, ModuleResolverInterface>
+     */
+    protected function getModuleResolversByModuleAndPriority(): array
+    {
+        if (empty($this->modulesResolversByModuleAndPriority)) {
+            $moduleResolvers = $this->moduleResolvers;
+            uasort($moduleResolvers, function (ModuleResolverInterface $a, ModuleResolverInterface $b): int {
+                return $b->getPriority() <=> $a->getPriority();
+            });
+            foreach ($moduleResolvers as $moduleResolver) {
+                foreach ($moduleResolver->getModulesToResolve() as $module) {
+                    $this->modulesResolversByModuleAndPriority[$module] = $moduleResolver;
+                }
+            }
+        }
+        return $this->modulesResolversByModuleAndPriority;
+    }
+
     /**
      * @return string[]
      */
@@ -29,7 +60,7 @@ class ModuleRegistry implements ModuleRegistryInterface
         bool $onlyHasSettings = false,
         bool $onlyVisible = true
     ): array {
-        $modules = array_keys($this->moduleResolvers);
+        $modules = array_keys($this->getModuleResolversByModuleAndPriority());
         if ($onlyEnabled) {
             $modules = array_filter(
                 $modules,
@@ -55,13 +86,13 @@ class ModuleRegistry implements ModuleRegistryInterface
      */
     public function getModuleResolver(string $module): ModuleResolverInterface
     {
-        if (!isset($this->moduleResolvers[$module])) {
+        if (!isset($this->moduleResolversByModule[$module])) {
             throw new InvalidArgumentException(sprintf(
                 \__('Module \'%s\' does not exist', 'graphql-api'),
                 $module
             ));
         }
-        return $this->moduleResolvers[$module];
+        return $this->moduleResolversByModule[$module];
     }
     public function isModuleEnabled(string $module): bool
     {
