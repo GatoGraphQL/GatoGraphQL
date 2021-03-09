@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\General\DocumentationConstants;
+use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleUtils;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
