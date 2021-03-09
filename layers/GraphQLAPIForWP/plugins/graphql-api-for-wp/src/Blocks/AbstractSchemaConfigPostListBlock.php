@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
-use GraphQLAPI\GraphQLAPI\General\BlockRenderingHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\BlockCategories\SchemaConfigurationBlockCategory;
@@ -53,6 +53,9 @@ abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
 EOF;
         $postContentElems = $foundPostListIDs = [];
         if ($postListIDs = $attributes[$this->getAttributeName()] ?? []) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var BlockRenderingHelpers */
+            $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
             /**
              * @var WP_Post[]
              */
@@ -74,11 +77,11 @@ EOF;
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        BlockRenderingHelpers::getCustomPostTitle($postObject)
+                        $blockRenderingHelpers->getCustomPostTitle($postObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        BlockRenderingHelpers::getCustomPostTitle($postObject)
+                        $blockRenderingHelpers->getCustomPostTitle($postObject)
                     )
                 ) . ($postDescription ?
                     '<br/><small>' . $postDescription . '</small>'
