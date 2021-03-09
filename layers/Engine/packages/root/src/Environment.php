@@ -30,17 +30,12 @@ class Environment
      * Because this code is executed to know from where to load the container configuration,
      * this env variable can't be configured using the .env file, must must be injected
      * straight into the webserver.
-     * By default, do not cache, since that's the conservative approach that always works.
-     * Otherwise, if caching, newly installed modules (eg: on WordPress plugin) may not work
-     *
-     * @return boolean
+     * If not defined, cache if the environment is PROD, not if it is DEV
      */
     public static function cacheContainerConfiguration(): bool
     {
-        // If the environment variable is not set, `getenv` returns the boolean `false`
-        // Otherwise, it returns the string value
         $useCache = getenv(self::CACHE_CONTAINER_CONFIGURATION);
-        return $useCache !== false ? strtolower($useCache) == "true" : false;
+        return $useCache !== false ? strtolower($useCache) == "true" : self::isApplicationEnvironmentProd();
     }
 
     /**
