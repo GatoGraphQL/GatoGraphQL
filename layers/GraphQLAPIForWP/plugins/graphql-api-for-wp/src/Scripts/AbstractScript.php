@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Scripts;
 
 use Error;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Base class for a Gutenberg script.
