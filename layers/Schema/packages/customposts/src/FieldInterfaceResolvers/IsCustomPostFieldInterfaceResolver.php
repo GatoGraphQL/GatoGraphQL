@@ -24,7 +24,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         return 'IsCustomPost';
     }
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,

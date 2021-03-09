@@ -1596,7 +1596,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             // An interface can itself implement interfaces!
             $interfaceImplementedInterfaceNames = [];
-            if ($interfaceImplementedInterfaceClasses = $interfaceInstance->getImplementedInterfaceClasses()) {
+            if ($interfaceImplementedInterfaceClasses = $interfaceInstance->getImplementedFieldInterfaceResolverClasses()) {
                 foreach ($interfaceImplementedInterfaceClasses as $interfaceImplementedInterfaceClass) {
                     $interfaceImplementedInterfaceInstance = $instanceManager->getInstance($interfaceImplementedInterfaceClass);
                     $interfaceImplementedInterfaceNames[] = $interfaceImplementedInterfaceInstance->getMaybeNamespacedInterfaceName();
@@ -1787,7 +1787,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
             // Also pass the implemented interfaces defining the field
-            $fieldInterfaceResolverClasses = $fieldResolver->getImplementedInterfaceClasses();
+            $fieldInterfaceResolverClasses = $fieldResolver->getImplementedFieldInterfaceResolverClasses();
             $fieldNames = array_filter(
                 $fieldNames,
                 fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $fieldInterfaceResolverClasses)
@@ -1841,7 +1841,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $fieldResolver->getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     )));
                 }
                 // Otherwise, continue iterating for the class parents
@@ -2028,7 +2028,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $processedFieldResolverClasses[] = $fieldResolverClass;
                     $interfaceClasses = array_merge(
                         $interfaceClasses,
-                        $fieldResolver->getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     );
                 }
             }
@@ -2098,7 +2098,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $fieldResolver->getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedFieldInterfaceResolverClasses()
                     )));
                 }
                 // Sort the found units by their priority, and then add to the stack of all units, for all classes

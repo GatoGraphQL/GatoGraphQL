@@ -20,7 +20,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             SupportingFeaturedImageFieldInterfaceResolver::class,

@@ -15,7 +15,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
 {
     use TagAPIRequestedContractTrait;
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,

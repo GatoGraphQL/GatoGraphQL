@@ -20,7 +20,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         return [];
     }
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,

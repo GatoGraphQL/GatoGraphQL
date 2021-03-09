@@ -18,7 +18,7 @@ class CategoryFieldResolver extends AbstractDBDataFieldResolver
         return array(CategoryTypeResolver::class);
     }
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,

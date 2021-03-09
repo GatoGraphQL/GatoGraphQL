@@ -20,7 +20,7 @@ interface FieldResolverInterface
      *
      * @return array
      */
-    public function getImplementedInterfaceClasses(): array;
+    public function getImplementedFieldInterfaceResolverClasses(): array;
     /**
      * Obtain the fieldNames from all implemented interfaces
      *

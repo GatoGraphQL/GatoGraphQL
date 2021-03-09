@@ -48,7 +48,7 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];
     }

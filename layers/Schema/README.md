@@ -139,7 +139,7 @@ The definition of a field for the schema, and its resolution, is split into a mu
 - `resolveValue`
 - `getSchemaFieldArgs`
 - `isSchemaFieldResponseNonNullable`
-- `getImplementedInterfaceClasses`
+- `getImplementedFieldInterfaceResolverClasses`
 - `resolveFieldTypeResolverClass`
 - `resolveFieldMutationResolverClass`
 

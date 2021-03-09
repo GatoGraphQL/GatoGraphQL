@@ -23,7 +23,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [
             CommentableFieldInterfaceResolver::class,

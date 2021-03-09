@@ -43,7 +43,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     protected array $schemaDefinitionForFieldCache = [];
 
-    public function getImplementedInterfaceClasses(): array
+    public function getImplementedFieldInterfaceResolverClasses(): array
     {
         return [];
     }
@@ -84,7 +84,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             function (string $class) use ($instanceManager) {
                 return $instanceManager->getInstance($class);
             },
-            $this->getImplementedInterfaceClasses()
+            $this->getImplementedFieldInterfaceResolverClasses()
         );
     }
 
