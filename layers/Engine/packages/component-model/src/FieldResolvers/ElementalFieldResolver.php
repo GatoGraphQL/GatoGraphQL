@@ -20,7 +20,7 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedInterfaceClasses(): array
     {
         return [
             ElementalFieldInterfaceResolver::class,

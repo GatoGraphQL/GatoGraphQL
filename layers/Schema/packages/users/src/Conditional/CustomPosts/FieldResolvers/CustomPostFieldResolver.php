@@ -22,7 +22,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedInterfaceClasses(): array
     {
         return [
             WithAuthorFieldInterfaceResolver::class,

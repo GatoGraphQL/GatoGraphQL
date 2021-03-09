@@ -17,7 +17,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         return $this->getFieldNamesToImplement();
     }
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedInterfaceClasses(): array
     {
         return [];
     }

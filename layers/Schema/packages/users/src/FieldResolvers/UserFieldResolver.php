@@ -18,7 +18,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return array(UserTypeResolver::class);
     }
 
-    public static function getImplementedInterfaceClasses(): array
+    public function getImplementedInterfaceClasses(): array
     {
         return [
             QueryableFieldInterfaceResolver::class,

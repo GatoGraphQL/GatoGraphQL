@@ -1596,7 +1596,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             // An interface can itself implement interfaces!
             $interfaceImplementedInterfaceNames = [];
-            if ($interfaceImplementedInterfaceClasses = $interfaceInstance::getImplementedInterfaceClasses()) {
+            if ($interfaceImplementedInterfaceClasses = $interfaceInstance->getImplementedInterfaceClasses()) {
                 foreach ($interfaceImplementedInterfaceClasses as $interfaceImplementedInterfaceClass) {
                     $interfaceImplementedInterfaceInstance = $instanceManager->getInstance($interfaceImplementedInterfaceClass);
                     $interfaceImplementedInterfaceNames[] = $interfaceImplementedInterfaceInstance->getMaybeNamespacedInterfaceName();
@@ -1787,7 +1787,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
             // Also pass the implemented interfaces defining the field
-            $fieldInterfaceResolverClasses = $fieldResolver::getImplementedInterfaceClasses();
+            $fieldInterfaceResolverClasses = $fieldResolver->getImplementedInterfaceClasses();
             $fieldNames = array_filter(
                 $fieldNames,
                 fn ($fieldName) => $this->isFieldNameResolvedByFieldResolver($fieldResolver, $fieldName, $fieldInterfaceResolverClasses)
@@ -1814,6 +1814,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaFieldResolvers = [];
+        $instanceManager = InstanceManagerFacade::getInstance();
 
         // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
         $classStack = [
@@ -1835,10 +1836,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $schemaFieldResolvers[$fieldName] = $fieldResolversForField;
                         }
                     }
+                    /** @var FieldResolverInterface */
+                    $fieldResolver = $instanceManager->getInstance($extensionClass);
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $extensionClass::getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedInterfaceClasses()
                     )));
                 }
                 // Otherwise, continue iterating for the class parents
@@ -2025,7 +2028,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $processedFieldResolverClasses[] = $fieldResolverClass;
                     $interfaceClasses = array_merge(
                         $interfaceClasses,
-                        $fieldResolver::getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedInterfaceClasses()
                     );
                 }
             }
@@ -2083,10 +2086,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 foreach (array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS)) as $extensionClass => $extensionPriority) {
                     // Check if this fieldResolver can process this field, and if its priority is bigger than the previous found instance attached to the same class
+                    $fieldResolver = $instanceManager->getInstance($extensionClass);
                     $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
                     if (in_array($fieldName, $extensionClassFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                        $fieldResolver = $instanceManager->getInstance($extensionClass);
                         if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
                             $classTypeResolverPriorities[] = $extensionPriority;
                             $classFieldResolvers[] = $fieldResolver;
@@ -2095,7 +2098,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
-                        $extensionClass::getImplementedInterfaceClasses()
+                        $fieldResolver->getImplementedInterfaceClasses()
                     )));
                 }
                 // Sort the found units by their priority, and then add to the stack of all units, for all classes
