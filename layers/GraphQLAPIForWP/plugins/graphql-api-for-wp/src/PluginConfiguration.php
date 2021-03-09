@@ -52,6 +52,7 @@ use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsFor
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use PoP\Root\Environment as RootEnvironment;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -574,7 +575,7 @@ class PluginConfiguration
     protected static function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $isDev = PluginEnvironment::isPluginEnvironmentDev();
+        $isDev = RootEnvironment::isApplicationEnvironmentDev();
 
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => \GRAPHQL_API_URL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
@@ -592,7 +593,7 @@ class PluginConfiguration
         // Cache the container
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
             $componentClassConfiguration[\PoP\Root\Component::class] = [
-                \PoP\Root\Environment::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR => $isDev,
+                RootEnvironment::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR => $isDev,
             ];
         }
         $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [

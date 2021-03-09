@@ -12,6 +12,19 @@ class Environment
     public const APPLICATION_VERSION = 'APPLICATION_VERSION';
 
     /**
+     * Environment
+     */
+    public const APPLICATION_ENVIRONMENT = 'APPLICATION_ENVIRONMENT';
+    /**
+     * The app runs in PROD
+     */
+    public const APPLICATION_ENVIRONMENT_PROD = 'production';
+    /**
+     * The app runs in DEV
+     */
+    public const APPLICATION_ENVIRONMENT_DEV = 'development';
+
+    /**
      * Indicate if to cache the container configuration.
      * Using `getenv` instead of $_ENV because this latter one, somehow, doesn't work yet:
      * Because this code is executed to know from where to load the container configuration,
@@ -70,5 +83,32 @@ class Environment
     public static function getApplicationVersion(): ?string
     {
         return getenv(self::APPLICATION_VERSION) !== false ? getenv(self::APPLICATION_VERSION) : null;
+    }
+
+    /**
+     * By default it is PROD. For DEV we must set the env var
+     */
+    public static function getApplicationEnvironment(): string
+    {
+        $default = self::APPLICATION_ENVIRONMENT_PROD;
+        $environment = getenv(self::APPLICATION_ENVIRONMENT) !== false ? getenv(self::APPLICATION_ENVIRONMENT) : $default;
+        $environments = [
+            self::APPLICATION_ENVIRONMENT_PROD,
+            self::APPLICATION_ENVIRONMENT_DEV,
+        ];
+        if (!is_null($environment) && in_array($environment, $environments)) {
+            return $environment;
+        }
+        return $default;
+    }
+
+    public static function isApplicationEnvironmentProd(): bool
+    {
+        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_PROD;
+    }
+
+    public static function isApplicationEnvironmentDev(): bool
+    {
+        return self::getApplicationEnvironment() == self::APPLICATION_ENVIRONMENT_DEV;
     }
 }
