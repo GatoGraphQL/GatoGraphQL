@@ -21,7 +21,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
         return $translationAPI->__('Entities that can be queried through an URL', 'queriedobject');
     }
 
-    public static function getFieldNamesToImplement(): array
+    public function getFieldNamesToImplement(): array
     {
         return [
             'url',

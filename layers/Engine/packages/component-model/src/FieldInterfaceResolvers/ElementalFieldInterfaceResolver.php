@@ -21,7 +21,7 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
         return $translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
     }
 
-    public static function getFieldNamesToImplement(): array
+    public function getFieldNamesToImplement(): array
     {
         return [
             'id',

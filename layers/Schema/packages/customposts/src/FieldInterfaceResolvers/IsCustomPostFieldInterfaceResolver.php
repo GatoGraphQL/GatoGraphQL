@@ -37,7 +37,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         return $translationAPI->__('Entities representing a custom post', 'customposts');
     }
 
-    public static function getFieldNamesToImplement(): array
+    public function getFieldNamesToImplement(): array
     {
         return array_merge(
             parent::getFieldNamesToImplement(),

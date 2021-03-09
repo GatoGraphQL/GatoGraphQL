@@ -20,6 +20,9 @@ interface TypeResolverInterface
 
     // ... because all functions below have already been implemented in the Abstract base class
     public function getAllImplementedInterfaceClasses(): array;
+    /**
+     * @return FieldInterfaceResolverInterface[]
+     */
     public function getAllImplementedInterfaceResolverInstances(): array;
     public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
     public function getIdFieldTypeResolverClass(): string;

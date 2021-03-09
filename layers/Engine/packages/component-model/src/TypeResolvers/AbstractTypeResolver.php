@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\ComponentModel\ErrorUtils;
-use PoP\ComponentModel\Environment;
 use League\Pipeline\PipelineBuilder;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\FieldHelpers;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\ErrorUtils;
+use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\FieldHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\FieldQuery\QueryUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
@@ -1555,7 +1556,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
             // Conveniently get the fields from the schema, which have already been calculated above
             // since they also include their interface fields
-            $interfaceFieldNames = $interfaceInstance::getFieldNamesToImplement();
+            $interfaceFieldNames = $interfaceInstance->getFieldNamesToImplement();
             // The Interface fields may be implemented as either FieldResolver fields or FieldResolver connections,
             // Eg: Interface "Elemental" has field "id" and connection "self"
             // Merge both cases into interface fields
@@ -1731,11 +1732,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldInterfaceResolverClasses): bool
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         // Calculate all the interfaces that define this fieldName
         $fieldInterfaceResolverClassesForField = array_values(array_filter(
             $fieldInterfaceResolverClasses,
-            function ($fieldInterfaceResolverClass) use ($fieldName): bool {
-                return in_array($fieldName, $fieldInterfaceResolverClass::getFieldNamesToImplement());
+            function ($fieldInterfaceResolverClass) use ($fieldName, $instanceManager): bool {
+                /** @var FieldInterfaceResolverInterface */
+                $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
+                return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
             }
         ));
         // Execute 2 filters: a generic one, and a specific one
@@ -1979,6 +1983,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $decoratorClasses;
     }
 
+    /**
+     * @return FieldInterfaceResolverInterface[]
+     */
     public function getAllImplementedInterfaceResolverInstances(): array
     {
         if (is_null($this->interfaceResolverInstances)) {

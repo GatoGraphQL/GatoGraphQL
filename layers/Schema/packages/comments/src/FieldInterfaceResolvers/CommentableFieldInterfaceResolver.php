@@ -24,7 +24,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $translationAPI->__('The entity can receive comments', 'comments');
     }
 
-    public static function getFieldNamesToImplement(): array
+    public function getFieldNamesToImplement(): array
     {
         return [
             'areCommentsOpen',

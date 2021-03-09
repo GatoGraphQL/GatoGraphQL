@@ -13,7 +13,7 @@ interface FieldInterfaceResolverInterface extends FieldInterfaceSchemaDefinition
      *
      * @return array
      */
-    public static function getFieldNamesToImplement(): array;
+    public function getFieldNamesToImplement(): array;
     /**
      * An interface can itself implement other interfaces!
      *

@@ -22,7 +22,7 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
         return $translationAPI->__('Entities that have an author', 'queriedobject');
     }
 
-    public static function getFieldNamesToImplement(): array
+    public function getFieldNamesToImplement(): array
     {
         return [
             'author',
