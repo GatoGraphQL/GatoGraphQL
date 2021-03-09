@@ -9,12 +9,11 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class HeadModule extends AbstractModuleFilter
 {
-    public const NAME = 'headmodule';
     public const URLPARAM_HEADMODULE = 'headmodule';
 
     public function getName()
     {
-        return self::NAME;
+        return 'headmodule';
     }
 
     public function excludeModule(array $module, array &$props)

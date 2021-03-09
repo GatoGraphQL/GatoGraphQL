@@ -1,16 +1,20 @@
 <?php
 
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\SPA\ModuleFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 {
     public function getSubmodules(array $module): array
     {
-
         // If fetching a page, then load only the required pageSection modules and nothing else
         $vars = ApplicationState::getVars();
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == \PoP\SPA\ModuleFilters\Page::NAME) {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var Page */
+        $page = $instanceManager->getInstance(Page::class);
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $page->getName()) {
             $ret = array();
 
             switch ($module[1]) {

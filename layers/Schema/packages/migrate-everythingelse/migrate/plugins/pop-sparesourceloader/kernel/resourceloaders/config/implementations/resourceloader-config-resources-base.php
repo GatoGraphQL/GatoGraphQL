@@ -1,5 +1,8 @@
 <?php
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\SPA\ModuleFilters\Page;
+
 abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
     protected function getOptions()
@@ -32,10 +35,17 @@ abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extend
         // Domain
         $configuration['$domain'] = $cmsengineapi->getSiteURL();
 
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var Page */
+        $page = $instanceManager->getInstance(Page::class);
+
         // Get all the resources, for the different natures
         // Notice that we get the callback to filter results from the instantiating class
         $options = $this->getOptions();
-        $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::getResourceMapping(\PoP\SPA\ModuleFilters\Page::NAME, $options);
+        $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::getResourceMapping(
+            $page->getName(),
+            $options
+        );
 
         // Print the resource mapping information into the config file's configuration
         $configuration['$matchPaths'] = $this->matchPaths();

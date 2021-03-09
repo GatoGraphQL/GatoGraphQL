@@ -4,6 +4,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
+use PoP\Engine\ModuleFilters\MainContentModule;
 
 class PoPCore_ModuleManager_Utils
 {
@@ -15,10 +16,12 @@ class PoPCore_ModuleManager_Utils
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DBItemListDataStructureFormatter */
         $dbItemListDataStructureFormatter = $instanceManager->getInstance(DBItemListDataStructureFormatter::class);
+        /** @var MainContentModule */
+        $mainContentModule = $instanceManager->getInstance(MainContentModule::class);
         $args = [
             \PoP\ComponentModel\Constants\Params::VERSION => $vars['version'],
             \PoP\ComponentModel\Constants\Params::OUTPUT => \PoP\ComponentModel\Constants\Outputs::JSON,
-            ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\Engine\ModuleFilters\MainContentModule::NAME,
+            ModuleFilterManager::URLPARAM_MODULEFILTER => $mainContentModule->getName(),
             \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
                 \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
             ],

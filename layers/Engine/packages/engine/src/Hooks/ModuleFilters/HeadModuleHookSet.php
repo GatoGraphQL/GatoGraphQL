@@ -4,14 +4,30 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use PoP\Engine\ModuleFilters\Constants;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
-class HeadModule extends AbstractHookSet
+class HeadModuleHookSet extends AbstractHookSet
 {
+    protected HeadModule $headModule;
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        HeadModule $headModule
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI
+        );
+        $this->headModule = $headModule;
+    }
+
     protected function init()
     {
         $this->hooksAPI->addFilter(
@@ -31,8 +47,8 @@ class HeadModule extends AbstractHookSet
     public function addVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == \PoP\Engine\ModuleFilters\HeadModule::NAME) {
-            if ($headmodule = $_REQUEST[Constants::URLPARAM_HEADMODULE] ?? null) {
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
+            if ($headmodule = $_REQUEST[HeadModule::URLPARAM_HEADMODULE] ?? null) {
                 $vars['headmodule'] = ModuleUtils::getModuleFromOutputName($headmodule);
             }
         }
@@ -40,7 +56,7 @@ class HeadModule extends AbstractHookSet
     public function maybeAddComponent($components)
     {
         $vars = ApplicationState::getVars();
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == \PoP\Engine\ModuleFilters\HeadModule::NAME) {
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
             if ($headmodule = $vars['headmodule']) {
                 $components[] = $this->translationAPI->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
             }

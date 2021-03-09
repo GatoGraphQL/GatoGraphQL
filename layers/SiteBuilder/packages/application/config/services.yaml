@@ -5,7 +5,6 @@ services:
 
     PoP\Application\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
-        public: false
 
     PoP\Application\Hooks\:
         resource: '../src/Hooks/*'

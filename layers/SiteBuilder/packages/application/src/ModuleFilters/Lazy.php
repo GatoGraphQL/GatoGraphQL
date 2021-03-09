@@ -9,11 +9,9 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class Lazy extends AbstractModuleFilter
 {
-    public const NAME = 'lazy';
-
     public function getName()
     {
-        return self::NAME;
+        return 'lazy';
     }
 
     public function excludeModule(array $module, array &$props)

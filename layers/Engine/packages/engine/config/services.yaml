@@ -24,7 +24,6 @@ services:
 
     PoP\Engine\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
-        public: false
 
     PoP\Engine\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'

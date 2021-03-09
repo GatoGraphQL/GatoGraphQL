@@ -4,14 +4,31 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\ModulePath\ModulePathUtils;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\ModulePath\ModulePathUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
-class ModulePaths extends AbstractHookSet
+class ModulePathsHookSet extends AbstractHookSet
 {
+    protected ModulePaths $modulePaths;
+
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        ModulePaths $modulePaths
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI
+        );
+        $this->modulePaths = $modulePaths;
+    }
+
     protected function init()
     {
         $this->hooksAPI->addFilter(
@@ -31,14 +48,14 @@ class ModulePaths extends AbstractHookSet
     public function addVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == \PoP\ComponentModel\ModuleFilters\ModulePaths::NAME) {
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->modulePaths->getName()) {
             $vars['modulepaths'] = ModulePathUtils::getModulePaths();
         }
     }
     public function maybeAddComponent($components)
     {
         $vars = ApplicationState::getVars();
-        if (isset($vars['modulefilter']) && $vars['modulefilter'] == \PoP\ComponentModel\ModuleFilters\ModulePaths::NAME) {
+        if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->modulePaths->getName()) {
             if ($modulepaths = $vars['modulepaths']) {
                 $modulePathHelpers = ModulePathHelpersFacade::getInstance();
                 $paths = array_map(

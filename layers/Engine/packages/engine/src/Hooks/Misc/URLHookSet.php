@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\Misc;
 
-use PoP\Hooks\AbstractHookSet;
 use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\Hooks\AbstractHookSet;
 
 class URLHookSet extends AbstractHookSet
 {

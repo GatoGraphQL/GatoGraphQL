@@ -10,11 +10,9 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class Page extends AbstractModuleFilter
 {
-    public const NAME = 'page';
-
     public function getName()
     {
-        return self::NAME;
+        return 'page';
     }
 
     public function excludeModule(array $module, array &$props)
