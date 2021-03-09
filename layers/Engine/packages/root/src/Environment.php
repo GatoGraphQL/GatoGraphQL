@@ -91,10 +91,7 @@ class Environment
             self::APPLICATION_ENVIRONMENT_PROD,
             self::APPLICATION_ENVIRONMENT_DEV,
         ];
-        if (!is_null($environment) && in_array($environment, $environments)) {
-            return $environment;
-        }
-        return $default;
+        return in_array($environment, $environments) ? $environment : $default;
     }
 
     public static function isApplicationEnvironmentProd(): bool
