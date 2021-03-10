@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Scripts;
+namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;

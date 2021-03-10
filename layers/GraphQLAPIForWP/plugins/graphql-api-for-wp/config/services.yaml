@@ -6,9 +6,6 @@ services:
     GraphQLAPI\GraphQLAPI\Services\:
         resource: '../src/Services/*'
 
-    GraphQLAPI\GraphQLAPI\EditorScripts\:
-        resource: '../src/EditorScripts/*'
-
     GraphQLAPI\GraphQLAPI\Blocks\:
         resource: '../src/Blocks/*'
 
