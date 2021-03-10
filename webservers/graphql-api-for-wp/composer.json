@@ -59,6 +59,7 @@
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json",
             "composer install --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/convert-case-directives",
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json');\""
-        ]
+        ],
+        "log-server-errors": "lando logs -t -f | grep \"error\""
     }
 }

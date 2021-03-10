@@ -128,6 +128,7 @@
             "sed -e 's#../../../../layers/#../../layers/#g' localized-composer.json.tmp > composer.json",
             "composer update --no-dev",
             "php -r \"copy('composer.json.tmp', 'composer.json');\""
-        ]
+        ],
+        "log-server-errors": "lando logs -t -f | grep \"error\""
     }
 }
