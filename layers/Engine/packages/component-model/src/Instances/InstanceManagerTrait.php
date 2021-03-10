@@ -12,15 +12,6 @@ trait InstanceManagerTrait
      * @var array<string, object>
      */
     private array $instances = [];
-    /**
-     * @var array<string, string>
-     */
-    private array $overridingClasses = [];
-
-    public function overrideClass(string $overrideClass, string $withClass): void
-    {
-        $this->overridingClasses[$overrideClass] = $withClass;
-    }
 
     protected function hasClassBeenLoaded(string $class): bool
     {
@@ -29,17 +20,14 @@ trait InstanceManagerTrait
 
     public function getImplementationClass(string $class): string
     {
-        // Allow a class to take the place of another one
-        return $this->overridingClasses[$class] ?? $class;
+        $containerBuilder = ContainerBuilderFactory::getInstance();
+        $instance = $containerBuilder->get($class);
+        return get_class($instance);
     }
 
     public function getClassInstance(string $class): object
     {
         if (!$this->hasClassBeenLoaded($class)) {
-            // Allow a class to take the place of another one
-            $class = $this->getImplementationClass($class);
-
-            // First ask the ContainerBuilder to handle the class as a Service
             $containerBuilder = ContainerBuilderFactory::getInstance();
             if ($containerBuilder->has($class)) {
                 $instance = $containerBuilder->get($class);
