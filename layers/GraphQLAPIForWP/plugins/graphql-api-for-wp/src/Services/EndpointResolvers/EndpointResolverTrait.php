@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\EndpointResolvers;
+namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
 use WP_Post;
 use WP_Query;

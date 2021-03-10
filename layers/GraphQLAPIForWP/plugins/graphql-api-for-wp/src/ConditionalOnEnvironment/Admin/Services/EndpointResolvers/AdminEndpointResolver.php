@@ -8,8 +8,8 @@ use PoP\EngineWP\Templates\TemplateHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use GraphQLAPI\GraphQLAPI\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\EndpointResolvers\AbstractEndpointResolver;
+use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
+use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver
