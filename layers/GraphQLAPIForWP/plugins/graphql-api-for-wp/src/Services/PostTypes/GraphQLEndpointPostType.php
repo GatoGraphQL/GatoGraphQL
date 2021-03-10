@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;

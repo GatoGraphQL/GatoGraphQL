@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/schema-config-access-control-lists', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS
 		 */
 		accessControlLists: {
 			type: 'array',

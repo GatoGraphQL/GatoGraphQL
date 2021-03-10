@@ -68,7 +68,7 @@ registerBlockType( 'graphql-api/field-deprecation', {
 		 * The reason/description to deprecate the field
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\FieldDeprecationBlock::ATTRIBUTE_NAME_DEPRECATION_REASON
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\FieldDeprecationBlock::ATTRIBUTE_NAME_DEPRECATION_REASON
 		 */
 		deprecationReason: {
 			type: 'string',
@@ -77,7 +77,7 @@ registerBlockType( 'graphql-api/field-deprecation', {
 		 * List of selected fields, cacheible by their type
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS
 		 */
 		typeFields: {
 			type: 'array',

@@ -62,7 +62,7 @@ registerBlockType( 'graphql-api/schema-config-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING
 		 */
 		useNamespacing: {
 			type: 'string',
@@ -70,7 +70,7 @@ registerBlockType( 'graphql-api/schema-config-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
 		 */
 		mutationScheme: {
 			type: 'string',
@@ -78,7 +78,7 @@ registerBlockType( 'graphql-api/schema-config-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE
 		 */
 		defaultSchemaMode: {
 			type: 'string',

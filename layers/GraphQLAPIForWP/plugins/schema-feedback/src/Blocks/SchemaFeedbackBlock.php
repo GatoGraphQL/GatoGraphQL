@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\SchemaFeedback\BlockCategories\SchemaFeedbackBlockCategory;
 
 /**

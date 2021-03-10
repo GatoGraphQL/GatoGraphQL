@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/endpoint-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 		 */
 		isEnabled: {
 			type: 'boolean',
@@ -64,7 +64,7 @@ registerBlockType( 'graphql-api/endpoint-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED
 		 */
 		isGraphiQLEnabled: {
 			type: 'boolean',
@@ -72,7 +72,7 @@ registerBlockType( 'graphql-api/endpoint-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED
 		 */
 		isVoyagerEnabled: {
 			type: 'boolean',

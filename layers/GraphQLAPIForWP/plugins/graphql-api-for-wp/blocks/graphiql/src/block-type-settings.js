@@ -64,7 +64,7 @@ export const blockTypeSettings = {
 		 * To force the user to always edit the query, and thus save the state, then initialize the inputs to some default empty value, which is not useful as it is to the query
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY
 		 */
 		query: {
 			type: 'string',
@@ -72,7 +72,7 @@ export const blockTypeSettings = {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES
 		 */
 		variables: {
 			type: 'string',

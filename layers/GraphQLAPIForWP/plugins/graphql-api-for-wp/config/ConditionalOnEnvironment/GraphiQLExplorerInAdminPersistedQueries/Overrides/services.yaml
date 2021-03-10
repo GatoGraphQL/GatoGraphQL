@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock:
+    GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock:
         class: '\GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks\PersistedQueryGraphiQLWithExplorerBlock'
