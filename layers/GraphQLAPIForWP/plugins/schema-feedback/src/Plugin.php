@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use PoP\Root\Container\ContainerBuilderUtils;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
-use GraphQLAPI\SchemaFeedback\PostTypes\GraphQLSchemaFeedbackListPostType;
 
 class Plugin
 {
@@ -21,20 +18,7 @@ class Plugin
     public function initialize(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
 
-        // /**
-        //  * Initialize Post Types manually to control in what order they are added to the menu
-        //  */
-        // $postTypeServiceClassModules = [
-        //     GraphQLSchemaFeedbackListPostType::class => FunctionalityModuleResolver::SCHEMA_FEEDBACK,
-        // ];
-        // foreach ($postTypeServiceClassModules as $serviceClass => $module) {
-        //     // Check that the corresponding module is enabled
-        //     if ($moduleRegistry->isModuleEnabled($module)) {
-        //         $instanceManager->getInstance($serviceClass)->initialize();
-        //     }
-        // }
         /**
          * Blocks
          * The GraphiQL Block may be overriden to GraphiQLWithExplorerBlock

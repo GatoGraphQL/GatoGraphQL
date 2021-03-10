@@ -35,6 +35,14 @@ class GraphQLCacheControlListPostType extends AbstractPostType
     }
 
     /**
+     * The position on which to add the CPT on the menu.
+     */
+    protected function getMenuPosition(): int
+    {
+        return 5;
+    }
+
+    /**
      * Custom post type name
      */
     public function getPostTypeName(): string

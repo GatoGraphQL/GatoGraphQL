@@ -35,6 +35,14 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
     }
 
     /**
+     * The position on which to add the CPT on the menu.
+     */
+    protected function getMenuPosition(): int
+    {
+        return 7;
+    }
+
+    /**
      * Custom post type name
      *
      * @return void

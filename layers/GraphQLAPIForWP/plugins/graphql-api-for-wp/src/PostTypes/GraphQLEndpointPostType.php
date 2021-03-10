@@ -44,6 +44,14 @@ class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
     }
 
     /**
+     * The position on which to add the CPT on the menu.
+     */
+    protected function getMenuPosition(): int
+    {
+        return 1;
+    }
+
+    /**
      * Access endpoints under /graphql, or wherever it is configured to
      */
     protected function getSlugBase(): ?string

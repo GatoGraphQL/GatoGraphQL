@@ -63,6 +63,14 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
     }
 
     /**
+     * The position on which to add the CPT on the menu.
+     */
+    protected function getMenuPosition(): int
+    {
+        return 2;
+    }
+
+    /**
      * Access endpoints under /graphql-query, or wherever it is configured to
      *
      * @return string|null

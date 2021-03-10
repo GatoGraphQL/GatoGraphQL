@@ -36,9 +36,12 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
     public function initialize(): void
     {
         $postType = $this->getPostType();
+        // To satisfy the menu position, the CPT will be initialized
+        // earlier or later
         \add_action(
             'init',
-            [$this, 'initPostType']
+            [$this, 'initPostType'],
+            $this->getMenuPosition()
         );
         \add_action(
             'init',
@@ -362,6 +365,15 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
     protected function showInAdminBar(): bool
     {
         return false;
+    }
+
+    /**
+     * The position on which to add the CPT on the menu.
+     * This number will be used to initialize the CPT earlier or later
+     */
+    protected function getMenuPosition(): int
+    {
+        return 100;
     }
 
     /**
