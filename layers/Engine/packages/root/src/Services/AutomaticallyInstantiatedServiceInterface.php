@@ -13,4 +13,5 @@ interface AutomaticallyInstantiatedServiceInterface
 {
     public function initialize(): void;
     public function getInstantiationEvent(): string;
+    public function isServiceEnabled(): bool;
 }

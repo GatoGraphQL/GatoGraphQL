@@ -22,4 +22,9 @@ abstract class AbstractAutomaticallyInstantiatedService implements Automatically
     {
         return ApplicationEvents::BEFORE_BOOT;
     }
+
+    public function isServiceEnabled(): bool
+    {
+        return true;
+    }
 }
