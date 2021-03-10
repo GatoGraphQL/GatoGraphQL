@@ -20,7 +20,7 @@ class AccessControlUserCapabilitiesBlock extends AbstractItemListAccessControlRu
         return 'access-control-user-capabilities';
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_CAPABILITIES;
     }

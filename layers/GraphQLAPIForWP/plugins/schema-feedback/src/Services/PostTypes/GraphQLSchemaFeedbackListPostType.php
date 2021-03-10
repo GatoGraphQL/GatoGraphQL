@@ -29,7 +29,7 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return FunctionalityModuleResolver::SCHEMA_FEEDBACK;
     }

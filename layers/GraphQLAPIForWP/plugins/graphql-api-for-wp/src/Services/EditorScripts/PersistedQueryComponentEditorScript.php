@@ -25,7 +25,7 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
         return 'persisted-query-editor-components';
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return UserInterfaceFunctionalityModuleResolver::WELCOME_GUIDES;
     }

@@ -20,7 +20,7 @@ class AccessControlUserStateBlock extends AbstractAccessControlRuleBlock
         return 'access-control-user-state';
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_STATE;
     }

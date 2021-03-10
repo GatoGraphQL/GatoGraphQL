@@ -30,7 +30,7 @@ class GraphQLAccessControlListPostType extends AbstractPostType
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
     }

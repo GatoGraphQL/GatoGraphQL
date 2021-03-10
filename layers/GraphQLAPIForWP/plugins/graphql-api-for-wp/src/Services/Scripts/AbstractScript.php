@@ -35,7 +35,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
         \add_action('init', [$this, 'initScript']);
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return null;
     }

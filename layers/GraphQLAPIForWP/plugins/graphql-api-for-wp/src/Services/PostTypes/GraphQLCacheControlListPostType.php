@@ -29,7 +29,7 @@ class GraphQLCacheControlListPostType extends AbstractPostType
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
     }

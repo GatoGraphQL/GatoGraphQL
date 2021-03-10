@@ -57,7 +57,7 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }

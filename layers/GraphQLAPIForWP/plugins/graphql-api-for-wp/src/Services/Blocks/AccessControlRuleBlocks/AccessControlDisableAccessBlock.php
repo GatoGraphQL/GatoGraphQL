@@ -19,7 +19,7 @@ class AccessControlDisableAccessBlock extends AbstractAccessControlRuleBlock
         return 'access-control-disable-access';
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_DISABLE_ACCESS;
     }

@@ -37,7 +37,7 @@ class GraphQLSchemaConfigurationPostType extends AbstractPostType
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION;
     }

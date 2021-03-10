@@ -123,7 +123,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
         }
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return null;
     }

@@ -20,7 +20,7 @@ class AccessControlUserRolesBlock extends AbstractItemListAccessControlRuleBlock
         return 'access-control-user-roles';
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_ROLES;
     }

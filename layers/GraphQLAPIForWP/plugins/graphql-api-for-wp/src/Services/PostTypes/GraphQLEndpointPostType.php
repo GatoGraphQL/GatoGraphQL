@@ -38,7 +38,7 @@ class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
     }
