@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -13,9 +13,10 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Post;
 
-abstract class AbstractPostType
+abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
 {
     protected Menu $menu;
     protected ModuleRegistryInterface $moduleRegistry;
@@ -35,9 +36,12 @@ abstract class AbstractPostType
     public function initialize(): void
     {
         $postType = $this->getPostType();
+        // To satisfy the menu position, the CPT will be initialized
+        // earlier or later
         \add_action(
             'init',
-            [$this, 'initPostType']
+            [$this, 'initPostType'],
+            $this->getMenuPosition()
         );
         \add_action(
             'init',
@@ -117,6 +121,23 @@ abstract class AbstractPostType
                 2
             );
         }
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        $enablingModule = $this->getEnablingModule();
+        if ($enablingModule !== null) {
+            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+        }
+        return parent::isServiceEnabled();
     }
 
     /**
@@ -344,6 +365,15 @@ abstract class AbstractPostType
     protected function showInAdminBar(): bool
     {
         return false;
+    }
+
+    /**
+     * The position on which to add the CPT on the menu.
+     * This number will be used to initialize the CPT earlier or later
+     */
+    protected function getMenuPosition(): int
+    {
+        return 100;
     }
 
     /**

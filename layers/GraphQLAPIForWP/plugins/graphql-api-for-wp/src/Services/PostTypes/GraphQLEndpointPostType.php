@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
-use WP_Post;
-use PoP\ComponentModel\State\ApplicationState;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
-use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;
-use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractGraphQLQueryExecutionPostType;
+use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient;
+use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;
+use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractGraphQLQueryExecutionPostType;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
+use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
+use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
+use WP_Post;
 
 class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
 {
@@ -33,6 +33,22 @@ class GraphQLEndpointPostType extends AbstractGraphQLQueryExecutionPostType
     protected function getPostType(): string
     {
         return self::POST_TYPE;
+    }
+
+    /**
+     * Module that enables this PostType
+     */
+    protected function getEnablingModule(): ?string
+    {
+        return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
+    }
+
+    /**
+     * The position on which to add the CPT on the menu.
+     */
+    protected function getMenuPosition(): int
+    {
+        return 1;
     }
 
     /**

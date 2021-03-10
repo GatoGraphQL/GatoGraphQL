@@ -24,13 +24,13 @@ use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunc
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
@@ -38,7 +38,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\AbstractTaxonomy;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
@@ -405,38 +405,6 @@ class Plugin
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
 
-        /**
-         * Taxonomies must be initialized before Post Types
-         */
-        $taxonomyServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Taxonomies');
-        foreach ($taxonomyServiceClasses as $serviceClass) {
-            /**
-             * @var AbstractTaxonomy
-             */
-            $service = $instanceManager->getInstance($serviceClass);
-            $service->initialize();
-        }
-        /**
-         * Initialize Post Types manually to control in what order they are added to the menu
-         */
-        $postTypeServiceClassModules = [
-            GraphQLEndpointPostType::class => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-            GraphQLPersistedQueryPostType::class => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-            GraphQLSchemaConfigurationPostType::class => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            GraphQLAccessControlListPostType::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
-            GraphQLCacheControlListPostType::class => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
-            GraphQLFieldDeprecationListPostType::class => VersioningFunctionalityModuleResolver::FIELD_DEPRECATION,
-        ];
-        foreach ($postTypeServiceClassModules as $serviceClass => $module) {
-            // Check that the corresponding module is enabled
-            if ($moduleRegistry->isModuleEnabled($module)) {
-                /**
-                 * @var AbstractPostType
-                 */
-                $service = $instanceManager->getInstance($serviceClass);
-                $service->initialize();
-            }
-        }
         /**
          * Editor Scripts
          * They are all used to show the Welcome Guide

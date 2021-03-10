@@ -6,12 +6,6 @@ services:
     GraphQLAPI\GraphQLAPI\Services\:
         resource: '../src/Services/*'
 
-    GraphQLAPI\GraphQLAPI\Taxonomies\:
-        resource: '../src/Taxonomies/*'
-
-    GraphQLAPI\GraphQLAPI\PostTypes\:
-        resource: '../src/PostTypes/*'
-
     GraphQLAPI\GraphQLAPI\EditorScripts\:
         resource: '../src/EditorScripts/*'
 

@@ -6,10 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SchemaServices\FieldResolvers\CPTFieldResolver;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class QueryHooks extends AbstractHookSet

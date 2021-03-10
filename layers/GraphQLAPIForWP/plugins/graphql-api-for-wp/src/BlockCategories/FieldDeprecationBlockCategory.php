@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
 
 class FieldDeprecationBlockCategory extends AbstractBlockCategory
 {

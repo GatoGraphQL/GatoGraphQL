@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Taxonomies;
+namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
 
-abstract class AbstractTaxonomy
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+
+abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
 {
     /**
      * Taxonomy
@@ -14,7 +16,7 @@ abstract class AbstractTaxonomy
     /**
      * Add the hook to initialize the different taxonomies
      */
-    public function initialize(): void
+    final public function initialize(): void
     {
         \add_action(
             'init',

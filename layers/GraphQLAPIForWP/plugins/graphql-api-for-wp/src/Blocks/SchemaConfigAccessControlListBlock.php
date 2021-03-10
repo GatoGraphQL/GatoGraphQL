@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Blocks;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
 
 /**
  * Cache Control block

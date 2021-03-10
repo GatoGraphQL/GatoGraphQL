@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Taxonomies;
+namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
 
 class GraphQLQueryTaxonomy extends AbstractTaxonomy
 {

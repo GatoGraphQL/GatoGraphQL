@@ -32,7 +32,9 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
             fn ($service) => $service->getInstantiationEvent() == $event
         );
         foreach ($servicesForEvent as $service) {
-            $service->initialize();
+            if ($service->isServiceEnabled()) {
+                $service->initialize();
+            }
         }
     }
 }

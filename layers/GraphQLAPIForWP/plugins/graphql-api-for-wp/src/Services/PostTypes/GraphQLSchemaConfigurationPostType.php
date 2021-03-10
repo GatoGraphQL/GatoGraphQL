@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock;
+use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLSchemaConfigurationPostType extends AbstractPostType
 {
@@ -31,6 +32,22 @@ class GraphQLSchemaConfigurationPostType extends AbstractPostType
     protected function getPostType(): string
     {
         return self::POST_TYPE;
+    }
+
+    /**
+     * Module that enables this PostType
+     */
+    protected function getEnablingModule(): ?string
+    {
+        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION;
+    }
+
+    /**
+     * The position on which to add the CPT on the menu.
+     */
+    protected function getMenuPosition(): int
+    {
+        return 3;
     }
 
     /**
