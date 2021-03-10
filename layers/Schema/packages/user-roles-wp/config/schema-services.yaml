@@ -9,6 +9,9 @@ services:
     PoPSchema\UserRolesWP\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
+    PoPSchema\UserRolesWP\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'
+
     PoPSchema\UserRoles\FieldResolvers\RootRolesFieldResolver:
         class: \PoPSchema\UserRolesWP\Overrides\FieldResolvers\RootRolesFieldResolver
 

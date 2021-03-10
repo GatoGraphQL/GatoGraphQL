@@ -11,3 +11,6 @@ services:
 
     PoPSchema\Pages\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPSchema\Pages\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'

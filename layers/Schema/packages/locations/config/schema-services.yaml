@@ -8,3 +8,6 @@ services:
 
     PoPSchema\Locations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPSchema\Locations\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'
