@@ -29,7 +29,7 @@ class GraphQLFieldDeprecationListPostType extends AbstractPostType
     /**
      * Module that enables this PostType
      */
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
     }

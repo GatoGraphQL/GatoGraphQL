@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Hooks;
+namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SchemaServices\FieldResolvers\CPTFieldResolver;

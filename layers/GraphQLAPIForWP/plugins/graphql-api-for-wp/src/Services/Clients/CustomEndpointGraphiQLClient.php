@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Clients;
+namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
 use GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient;
 

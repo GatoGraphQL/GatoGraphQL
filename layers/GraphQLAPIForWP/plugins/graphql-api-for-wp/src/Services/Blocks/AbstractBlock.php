@@ -44,7 +44,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
         \add_action('init', [$this, 'initBlock']);
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return null;
     }

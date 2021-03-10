@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
-    public const HOOK_ACL_RULE_BLOCK_CLASS_MODULES = __CLASS__ . ':acl-url-block-class:modules';
-
     /**
-     * @var array<string, string>|null
+     * @var array<string, bool>|null
      */
-    protected ?array $aclRuleBlockNameModules = null;
+    protected ?array $aclRuleBlockNameEnabled = null;
 
     // protected function doInit(): void
     // {
@@ -31,47 +29,30 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     /**
      * Obtain the modules enabling/disabling each ACL rule block, through a hook
      *
-     * @return array<string, string> Pairings of blockClass => module
+     * @return array<string, bool>
      */
-    protected function getACLRuleBlockNameClasses(): array
-    {
-        return \apply_filters(
-            self::HOOK_ACL_RULE_BLOCK_CLASS_MODULES,
-            []
-        );
-    }
-
-    /**
-     * Obtain the modules enabling/disabling each ACL rule block, through a hook
-     *
-     * @return array<string, string>
-     */
-    protected function getACLRuleBlockNameModules(): array
+    protected function getACLRuleBlockNameEnabled(): array
     {
         // Lazy load
-        if (is_null($this->aclRuleBlockNameModules)) {
+        if (is_null($this->aclRuleBlockNameEnabled)) {
             // Obtain the block names from the block classes
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $aclRuleBlockClassModules = $this->getACLRuleBlockNameClasses();
-            $this->aclRuleBlockNameModules = [];
-            foreach ($aclRuleBlockClassModules as $blockClass => $module) {
-                /**
-                 * @var AbstractBlock
-                 */
-                $block = $instanceManager->getInstance($blockClass);
-                $this->aclRuleBlockNameModules[$block->getBlockFullName()] = $module;
+            $accessControlRuleBlockRegistry = AccessControlRuleBlockRegistryFacade::getInstance();
+            $aclRuleBlocks = $accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+            $this->aclRuleBlockNameEnabled = [];
+            foreach ($aclRuleBlocks as $block) {
+                $this->aclRuleBlockNameEnabled[$block->getBlockFullName()] = $block->isServiceEnabled();
             }
         }
-        return $this->aclRuleBlockNameModules;
+        return $this->aclRuleBlockNameEnabled;
     }
 
     /**
      * Obtain the module enabling/disabling a certain ACL rule block
      */
-    protected function getACLRuleBlockModule(string $blockName): ?string
+    protected function isACLRuleBlockEnabled(string $blockName): bool
     {
-        $aclRuleBlockNameModules = $this->getACLRuleBlockNameModules();
-        return $aclRuleBlockNameModules[$blockName];
+        $aclRuleBlockNameEnabled = $this->getACLRuleBlockNameEnabled();
+        return $aclRuleBlockNameEnabled[$blockName] ?? false;
     }
 
     /**
@@ -107,13 +88,8 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                 if (
                     $aclBlockItemNestedBlocks = array_filter(
                         $aclBlockItemNestedBlocks,
-                        function ($block) : bool {
-                            // If it has a corresponding module, check if it is enabled
-                            if ($module = $this->getACLRuleBlockModule($block['blockName'])) {
-                                return $this->moduleRegistry->isModuleEnabled($module);
-                            }
-                            // Otherwise it's always enabled
-                            return true;
+                        function ($block): bool {
+                            return $this->isACLRuleBlockEnabled($block['blockName']);
                         }
                     )
                 ) {

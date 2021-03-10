@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Clients;
+namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
-use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointClientTrait;
+use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointClientTrait;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\VoyagerClient;
 
 class CustomEndpointVoyagerClient extends VoyagerClient

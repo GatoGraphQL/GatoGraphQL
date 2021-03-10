@@ -3,12 +3,6 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\Hooks\:
-        resource: '../src/Hooks/*'
-
-    GraphQLAPI\GraphQLAPI\Clients\:
-        resource: '../src/Clients/*'
-
     GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface:
         class: '\GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParser'
 

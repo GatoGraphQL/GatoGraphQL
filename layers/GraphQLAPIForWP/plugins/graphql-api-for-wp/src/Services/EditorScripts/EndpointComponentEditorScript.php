@@ -25,7 +25,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
         return 'endpoint-editor-components';
     }
 
-    protected function getEnablingModule(): ?string
+    public function getEnablingModule(): ?string
     {
         return UserInterfaceFunctionalityModuleResolver::WELCOME_GUIDES;
     }

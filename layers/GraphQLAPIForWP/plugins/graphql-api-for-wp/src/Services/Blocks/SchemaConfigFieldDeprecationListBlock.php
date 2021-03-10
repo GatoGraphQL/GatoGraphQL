@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
 
 /**
@@ -16,6 +17,11 @@ class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPostList
     protected function getBlockName(): string
     {
         return 'schema-config-field-deprecation-lists';
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
     }
 
     protected function getAttributeName(): string
