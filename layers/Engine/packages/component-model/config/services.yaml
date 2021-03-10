@@ -44,6 +44,9 @@ services:
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
+    PoP\ComponentModel\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
 

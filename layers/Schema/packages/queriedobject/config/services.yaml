@@ -2,3 +2,6 @@ services:
     _defaults:
         public: true
         autowire: true
+
+    PoPSchema\QueriedObject\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

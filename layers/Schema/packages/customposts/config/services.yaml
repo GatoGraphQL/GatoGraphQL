@@ -8,3 +8,6 @@ services:
 
     PoPSchema\CustomPosts\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPSchema\CustomPosts\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

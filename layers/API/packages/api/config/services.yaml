@@ -24,3 +24,6 @@ services:
 
     PoP\API\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
+
+    PoP\API\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
