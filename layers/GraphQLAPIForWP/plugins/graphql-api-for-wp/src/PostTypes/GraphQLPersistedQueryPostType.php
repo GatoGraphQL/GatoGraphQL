@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks as GraphQLRequestVarsHooks;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;

@@ -38,7 +38,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Taxonomies\AbstractTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\AbstractTaxonomy;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
@@ -405,17 +405,6 @@ class Plugin
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
 
-        /**
-         * Taxonomies must be initialized before Post Types
-         */
-        $taxonomyServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Taxonomies');
-        foreach ($taxonomyServiceClasses as $serviceClass) {
-            /**
-             * @var AbstractTaxonomy
-             */
-            $service = $instanceManager->getInstance($serviceClass);
-            $service->initialize();
-        }
         /**
          * Initialize Post Types manually to control in what order they are added to the menu
          */

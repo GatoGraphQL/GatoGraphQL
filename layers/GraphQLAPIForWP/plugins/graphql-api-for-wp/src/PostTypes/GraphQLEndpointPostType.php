@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Taxonomies\GraphQLQueryTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient;
