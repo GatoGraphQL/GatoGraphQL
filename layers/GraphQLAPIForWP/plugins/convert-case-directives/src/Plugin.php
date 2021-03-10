@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives;
 
-use GraphQLAPI\ConvertCaseDirectives\PluginConfiguration;
+use GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers\SchemaModuleResolver;
 use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPlugin;
 
 class Plugin extends AbstractPlugin
@@ -43,12 +43,17 @@ class Plugin extends AbstractPlugin
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Provide the list of modules to check if they are enabled and,
+     * if they are not, what component classes must skip initialization
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return array
      */
-    public function getSchemaComponentClassesToSkip(): array
+    protected static function getModuleComponentClasses(): array
     {
-        return PluginConfiguration::getSkippingSchemaComponentClasses();
+        return [
+            SchemaModuleResolver::CONVERT_CASE_DIRECTIVES => [
+                \PoPSchema\ConvertCaseDirectives\Component::class,
+            ],
+        ];
     }
 }
