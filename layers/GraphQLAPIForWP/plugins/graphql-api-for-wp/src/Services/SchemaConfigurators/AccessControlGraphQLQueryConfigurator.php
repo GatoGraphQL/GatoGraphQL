@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
-    public const HOOK_ACL_RULE_BLOCK_CLASS_MODULES = __CLASS__ . ':acl-url-block-class:modules';
-
     /**
      * @var array<string, string>|null
      */
@@ -31,19 +29,6 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     /**
      * Obtain the modules enabling/disabling each ACL rule block, through a hook
      *
-     * @return array<string, string> Pairings of blockClass => module
-     */
-    protected function getACLRuleBlockNameClasses(): array
-    {
-        return \apply_filters(
-            self::HOOK_ACL_RULE_BLOCK_CLASS_MODULES,
-            []
-        );
-    }
-
-    /**
-     * Obtain the modules enabling/disabling each ACL rule block, through a hook
-     *
      * @return array<string, string>
      */
     protected function getACLRuleBlockNameModules(): array
@@ -51,15 +36,13 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         // Lazy load
         if (is_null($this->aclRuleBlockNameModules)) {
             // Obtain the block names from the block classes
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $aclRuleBlockClassModules = $this->getACLRuleBlockNameClasses();
+            $accessControlRuleBlockRegistry = AccessControlRuleBlockRegistryFacade::getInstance();
+            $aclRuleBlocks = $accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
             $this->aclRuleBlockNameModules = [];
-            foreach ($aclRuleBlockClassModules as $blockClass => $module) {
-                /**
-                 * @var AbstractBlock
-                 */
-                $block = $instanceManager->getInstance($blockClass);
-                $this->aclRuleBlockNameModules[$block->getBlockFullName()] = $module;
+            foreach ($aclRuleBlocks as $block) {
+                if ($module = $block->getEnablingModule()) {
+                    $this->aclRuleBlockNameModules[$block->getBlockFullName()] = $module;
+                }
             }
         }
         return $this->aclRuleBlockNameModules;
