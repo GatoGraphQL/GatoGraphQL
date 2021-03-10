@@ -405,27 +405,27 @@ class Plugin
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
 
-        /**
-         * Initialize Post Types manually to control in what order they are added to the menu
-         */
-        $postTypeServiceClassModules = [
-            GraphQLEndpointPostType::class => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-            GraphQLPersistedQueryPostType::class => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-            GraphQLSchemaConfigurationPostType::class => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            GraphQLAccessControlListPostType::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
-            GraphQLCacheControlListPostType::class => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
-            GraphQLFieldDeprecationListPostType::class => VersioningFunctionalityModuleResolver::FIELD_DEPRECATION,
-        ];
-        foreach ($postTypeServiceClassModules as $serviceClass => $module) {
-            // Check that the corresponding module is enabled
-            if ($moduleRegistry->isModuleEnabled($module)) {
-                /**
-                 * @var AbstractPostType
-                 */
-                $service = $instanceManager->getInstance($serviceClass);
-                $service->initialize();
-            }
-        }
+        // /**
+        //  * Initialize Post Types manually to control in what order they are added to the menu
+        //  */
+        // $postTypeServiceClassModules = [
+        //     GraphQLEndpointPostType::class => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
+        //     GraphQLPersistedQueryPostType::class => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
+        //     GraphQLSchemaConfigurationPostType::class => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+        //     GraphQLAccessControlListPostType::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
+        //     GraphQLCacheControlListPostType::class => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
+        //     GraphQLFieldDeprecationListPostType::class => VersioningFunctionalityModuleResolver::FIELD_DEPRECATION,
+        // ];
+        // foreach ($postTypeServiceClassModules as $serviceClass => $module) {
+        //     // Check that the corresponding module is enabled
+        //     if ($moduleRegistry->isModuleEnabled($module)) {
+        //         /**
+        //          * @var AbstractPostType
+        //          */
+        //         $service = $instanceManager->getInstance($serviceClass);
+        //         $service->initialize();
+        //     }
+        // }
         /**
          * Editor Scripts
          * They are all used to show the Welcome Guide

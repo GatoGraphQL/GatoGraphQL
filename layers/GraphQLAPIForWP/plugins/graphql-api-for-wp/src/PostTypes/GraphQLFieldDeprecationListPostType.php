@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\Blocks\FieldDeprecationBlock;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLFieldDeprecationListPostType extends AbstractPostType
@@ -23,6 +24,14 @@ class GraphQLFieldDeprecationListPostType extends AbstractPostType
     protected function getPostType(): string
     {
         return self::POST_TYPE;
+    }
+
+    /**
+     * Module that enables this PostType
+     */
+    protected function getEnablingModule(): ?string
+    {
+        return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
     }
 
     /**

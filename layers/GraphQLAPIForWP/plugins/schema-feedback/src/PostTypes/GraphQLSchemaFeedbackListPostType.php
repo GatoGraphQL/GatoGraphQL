@@ -6,6 +6,7 @@ namespace GraphQLAPI\SchemaFeedback\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
+use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLSchemaFeedbackListPostType extends AbstractPostType
@@ -23,6 +24,14 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
     protected function getPostType(): string
     {
         return self::POST_TYPE;
+    }
+
+    /**
+     * Module that enables this PostType
+     */
+    protected function getEnablingModule(): ?string
+    {
+        return FunctionalityModuleResolver::SCHEMA_FEEDBACK;
     }
 
     /**

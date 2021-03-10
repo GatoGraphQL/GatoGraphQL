@@ -13,9 +13,10 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Post;
 
-abstract class AbstractPostType
+abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
 {
     protected Menu $menu;
     protected ModuleRegistryInterface $moduleRegistry;
@@ -117,6 +118,23 @@ abstract class AbstractPostType
                 2
             );
         }
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        $enablingModule = $this->getEnablingModule();
+        if ($enablingModule !== null) {
+            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+        }
+        return parent::isServiceEnabled();
     }
 
     /**

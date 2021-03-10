@@ -23,18 +23,18 @@ class Plugin
         $instanceManager = InstanceManagerFacade::getInstance();
         $moduleRegistry = ModuleRegistryFacade::getInstance();
 
-        /**
-         * Initialize Post Types manually to control in what order they are added to the menu
-         */
-        $postTypeServiceClassModules = [
-            GraphQLSchemaFeedbackListPostType::class => FunctionalityModuleResolver::SCHEMA_FEEDBACK,
-        ];
-        foreach ($postTypeServiceClassModules as $serviceClass => $module) {
-            // Check that the corresponding module is enabled
-            if ($moduleRegistry->isModuleEnabled($module)) {
-                $instanceManager->getInstance($serviceClass)->initialize();
-            }
-        }
+        // /**
+        //  * Initialize Post Types manually to control in what order they are added to the menu
+        //  */
+        // $postTypeServiceClassModules = [
+        //     GraphQLSchemaFeedbackListPostType::class => FunctionalityModuleResolver::SCHEMA_FEEDBACK,
+        // ];
+        // foreach ($postTypeServiceClassModules as $serviceClass => $module) {
+        //     // Check that the corresponding module is enabled
+        //     if ($moduleRegistry->isModuleEnabled($module)) {
+        //         $instanceManager->getInstance($serviceClass)->initialize();
+        //     }
+        // }
         /**
          * Blocks
          * The GraphiQL Block may be overriden to GraphiQLWithExplorerBlock
