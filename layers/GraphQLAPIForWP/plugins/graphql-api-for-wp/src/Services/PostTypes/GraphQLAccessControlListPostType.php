@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLAccessControlListPostType extends AbstractPostType

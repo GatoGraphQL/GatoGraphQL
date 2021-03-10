@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
 
 class CacheControlBlockCategory extends AbstractBlockCategory
 {

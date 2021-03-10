@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use WP_Post;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\EndpointResolvers\EndpointResolverTrait;

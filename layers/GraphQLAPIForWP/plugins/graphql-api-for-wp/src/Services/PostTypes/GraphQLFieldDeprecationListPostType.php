@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Blocks\FieldDeprecationBlock;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLFieldDeprecationListPostType extends AbstractPostType

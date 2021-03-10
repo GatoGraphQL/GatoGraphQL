@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\Scripts\GraphQLByPoPScriptTrait;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
 
 /**
  * Components required to edit a GraphQL endpoint CPT

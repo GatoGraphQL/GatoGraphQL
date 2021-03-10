@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock;
@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctional
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLSchemaConfigurationPostType extends AbstractPostType

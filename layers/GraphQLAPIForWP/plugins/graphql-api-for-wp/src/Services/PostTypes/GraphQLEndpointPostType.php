@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Blocks\EndpointOptionsBlock;
@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractGraphQLQueryExecutionPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractGraphQLQueryExecutionPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;

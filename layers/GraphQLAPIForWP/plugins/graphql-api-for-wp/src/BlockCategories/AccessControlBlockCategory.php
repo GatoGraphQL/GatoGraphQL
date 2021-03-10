@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
 
 class AccessControlBlockCategory extends AbstractBlockCategory
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Clients;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 trait CustomEndpointClientTrait

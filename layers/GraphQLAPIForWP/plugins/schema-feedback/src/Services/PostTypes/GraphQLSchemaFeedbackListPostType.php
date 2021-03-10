@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\SchemaFeedback\PostTypes;
+namespace GraphQLAPI\SchemaFeedback\Services\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

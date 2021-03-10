@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
 
 class EndpointBlockCategory extends AbstractBlockCategory
 {

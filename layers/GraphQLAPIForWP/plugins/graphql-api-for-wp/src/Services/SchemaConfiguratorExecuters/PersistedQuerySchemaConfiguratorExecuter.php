@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfigurator;
 

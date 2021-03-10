@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
