@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\EditorScripts;
+namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\Scripts\AbstractScript;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 

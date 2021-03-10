@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Scripts;
+namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 /**
  * Trait to set common functions for a Gutenberg block for this plugin (GraphQL API)

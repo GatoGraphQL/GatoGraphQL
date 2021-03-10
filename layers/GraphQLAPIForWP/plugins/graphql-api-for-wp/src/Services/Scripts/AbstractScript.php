@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Scripts;
+namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 use Error;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
  * Base class for a Gutenberg script.
@@ -15,14 +17,39 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-create-block/
  */
-abstract class AbstractScript
+abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
+    protected ModuleRegistryInterface $moduleRegistry;
+
+    function __construct(
+        ModuleRegistryInterface $moduleRegistry
+    ) {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+
     /**
      * Execute this function to initialize the script
      */
-    public function initialize(): void
+    final public function initialize(): void
     {
         \add_action('init', [$this, 'initScript']);
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        $enablingModule = $this->getEnablingModule();
+        if ($enablingModule !== null) {
+            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+        }
+        return parent::isServiceEnabled();
     }
 
     /**

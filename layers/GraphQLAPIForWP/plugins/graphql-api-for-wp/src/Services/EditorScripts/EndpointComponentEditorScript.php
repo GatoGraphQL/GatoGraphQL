@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\EditorScripts;
+namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\Scripts\GraphQLByPoPScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
 
 /**
- * Components required to edit a GraphQL Persisted Query CPT
+ * Components required to edit a GraphQL endpoint CPT
  */
-class PersistedQueryComponentEditorScript extends AbstractEditorScript
+class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use GraphQLByPoPScriptTrait;
 
@@ -21,7 +22,12 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
      */
     protected function getScriptName(): string
     {
-        return 'persisted-query-editor-components';
+        return 'endpoint-editor-components';
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return UserInterfaceFunctionalityModuleResolver::WELCOME_GUIDES;
     }
 
     /**
@@ -68,7 +74,7 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLPersistedQueryPostType::POST_TYPE,
+                GraphQLEndpointPostType::POST_TYPE,
             ]
         );
     }
