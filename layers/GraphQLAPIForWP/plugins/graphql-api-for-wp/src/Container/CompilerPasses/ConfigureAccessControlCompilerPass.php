@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
+use Symfony\Component\ExpressionLanguage\Expression;
 
 class ConfigureAccessControlCompilerPass implements CompilerPassInterface
 {
@@ -19,10 +20,10 @@ class ConfigureAccessControlCompilerPass implements CompilerPassInterface
         // Obtain the capabilities from another service
         $userAuthorizationDefinitionService = str_replace('\\', '\\\\', UserAuthorizationInterface::class);
         $capabilities = [
-            sprintf(
-                '@=service("%s").getSchemaEditorAccessCapability()',
+            new Expression(sprintf(
+                'service("%s").getSchemaEditorAccessCapability()',
                 $userAuthorizationDefinitionService
-            )
+            ))
         ];
         $accessControlManagerDefinition->addMethodCall(
             'addEntriesForFields',
