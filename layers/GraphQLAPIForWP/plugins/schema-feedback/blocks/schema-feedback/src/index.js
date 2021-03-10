@@ -84,7 +84,7 @@ registerBlockType( 'graphql-api/schema-feedback', {
 		 * List of selected fields, cacheible by their type
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS
 		 */
 		typeFields: {
 			type: 'array',
@@ -94,7 +94,7 @@ registerBlockType( 'graphql-api/schema-feedback', {
 		 * List of selected directives
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_DIRECTIVES
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_DIRECTIVES
 		 */
 		directives: {
 			type: 'array',

@@ -68,7 +68,7 @@ registerBlockType( 'graphql-api/cache-control', {
 		 * The max-age amount, in seconds, to set on the Cache-Control header
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\CacheControlBlock::ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock::ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE
 		 */
 		cacheControlMaxAge: {
 			type: 'integer',
@@ -77,7 +77,7 @@ registerBlockType( 'graphql-api/cache-control', {
 		 * List of selected fields, cacheible by their type
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS
 		 */
 		typeFields: {
 			type: 'array',
@@ -87,7 +87,7 @@ registerBlockType( 'graphql-api/cache-control', {
 		 * List of selected directives
 		 *
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_DIRECTIVES
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock::ATTRIBUTE_NAME_DIRECTIVES
 		 */
 		directives: {
 			type: 'array',

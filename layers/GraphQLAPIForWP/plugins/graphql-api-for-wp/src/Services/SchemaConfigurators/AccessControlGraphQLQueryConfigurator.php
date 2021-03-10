@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {

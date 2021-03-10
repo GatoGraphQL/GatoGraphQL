@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/schema-config-cache-control-lists', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS
 		 */
 		cacheControlLists: {
 			type: 'array',

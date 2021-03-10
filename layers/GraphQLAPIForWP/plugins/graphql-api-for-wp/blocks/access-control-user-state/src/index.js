@@ -61,14 +61,14 @@ registerBlockType( 'graphql-api/access-control-user-state', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_GROUP
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_GROUP
 		 */
 		accessControlGroup: {
 			type: 'string',
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock::ATTRIBUTE_NAME_VALUE
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock::ATTRIBUTE_NAME_VALUE
 		 */
 		value: {
 			type: 'string',

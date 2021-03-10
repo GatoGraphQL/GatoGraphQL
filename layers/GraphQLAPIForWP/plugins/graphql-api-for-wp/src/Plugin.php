@@ -5,16 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\Admin\TableActions\ModuleListTableAction;
-use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlDisableAccessBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserCapabilitiesBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserRolesBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks\AccessControlUserStateBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
@@ -350,6 +343,11 @@ class Plugin
         );
     }
 
+    public function boot(): void
+    {
+        // Doing nothing yet
+    }
+
     /**
      * Plugin configuration
      */
@@ -380,59 +378,6 @@ class Plugin
         AppLoader::bootApplication(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
-    }
-
-    /**
-     * Plugin initialization, executed on hook "plugins_loaded"
-     * to wait for all extensions to be loaded
-     */
-    public function boot(): void
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-
-        /**
-         * Blocks
-         * The GraphiQL Block may be overriden to GraphiQLWithExplorerBlock
-         */
-        $blockServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Blocks', false);
-        foreach ($blockServiceClasses as $serviceClass) {
-            /**
-             * @var AbstractBlock
-             */
-            $service = $instanceManager->getInstance($serviceClass);
-            $service->initialize();
-        }
-        /**
-         * Access Control Nested Blocks
-         * Register them one by one, as to disable them if module is disabled
-         */
-        $accessControlRuleBlockServiceClassModules = [
-            AccessControlDisableAccessBlock::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_DISABLE_ACCESS,
-            AccessControlUserStateBlock::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_STATE,
-            AccessControlUserRolesBlock::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_ROLES,
-            AccessControlUserCapabilitiesBlock::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_CAPABILITIES,
-        ];
-        foreach ($accessControlRuleBlockServiceClassModules as $serviceClass => $module) {
-            if ($moduleRegistry->isModuleEnabled($module)) {
-                /**
-                 * @var AbstractBlock
-                 */
-                $service = $instanceManager->getInstance($serviceClass);
-                $service->initialize();
-            }
-        }
-        /**
-         * Block categories
-         */
-        $blockCategoryServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\BlockCategories');
-        foreach ($blockCategoryServiceClasses as $serviceClass) {
-            /**
-             * @var AbstractBlockCategory
-             */
-            $service = $instanceManager->getInstance($serviceClass);
-            $service->initialize();
-        }
     }
 
     /**

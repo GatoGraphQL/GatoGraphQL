@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/schema-config-field-deprecation-lists', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS
 		 */
 		fieldDeprecationLists: {
 			type: 'array',

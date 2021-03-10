@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;
 

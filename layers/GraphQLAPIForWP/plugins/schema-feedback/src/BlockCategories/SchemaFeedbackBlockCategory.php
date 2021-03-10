@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\SchemaFeedback\BlockCategories;
 
 use GraphQLAPI\SchemaFeedback\Services\PostTypes\GraphQLSchemaFeedbackListPostType;
-use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 
 class SchemaFeedbackBlockCategory extends AbstractBlockCategory
 {

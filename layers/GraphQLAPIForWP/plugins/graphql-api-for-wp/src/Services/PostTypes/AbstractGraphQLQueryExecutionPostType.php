@@ -9,10 +9,10 @@ use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use WP_Query;
 

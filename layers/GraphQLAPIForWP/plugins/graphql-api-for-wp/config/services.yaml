@@ -3,15 +3,6 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\Services\:
-        resource: '../src/Services/*'
-
-    GraphQLAPI\GraphQLAPI\Blocks\:
-        resource: '../src/Blocks/*'
-
-    GraphQLAPI\GraphQLAPI\BlockCategories\:
-        resource: '../src/BlockCategories/*'
-
     GraphQLAPI\GraphQLAPI\Hooks\:
         resource: '../src/Hooks/*'
 
@@ -26,3 +17,6 @@ services:
 
     GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry'
+
+    GraphQLAPI\GraphQLAPI\Services\:
+        resource: '../src/Services/*'

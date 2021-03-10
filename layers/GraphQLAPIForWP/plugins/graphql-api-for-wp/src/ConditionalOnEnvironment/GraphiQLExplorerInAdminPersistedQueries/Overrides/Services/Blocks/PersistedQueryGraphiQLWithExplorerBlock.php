@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Blocks\PersistedQueryGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 
 /**
  * GraphiQL with Explorer block

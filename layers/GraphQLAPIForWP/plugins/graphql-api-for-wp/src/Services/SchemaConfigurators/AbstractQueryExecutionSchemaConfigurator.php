@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigAccessControlListBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
