@@ -6,8 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointGraphiQLClient;
-use GraphQLAPI\GraphQLAPI\Clients\CustomEndpointVoyagerClient;
+use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
+use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
