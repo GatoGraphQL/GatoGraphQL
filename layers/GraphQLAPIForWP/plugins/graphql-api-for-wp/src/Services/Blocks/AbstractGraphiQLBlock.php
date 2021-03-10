@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
@@ -26,9 +27,10 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     function __construct(
         ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
         EndpointHelpers $endpointHelpers
     ) {
-        parent::__construct($moduleRegistry);
+        parent::__construct($moduleRegistry, $userAuthorization);
         $this->endpointHelpers = $endpointHelpers;
     }
 

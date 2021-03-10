@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctio
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
@@ -311,7 +312,8 @@ class Plugin
             // (maybe that happens under `initialize`)
             $menuPageHelper = new MenuPageHelper();
             $moduleRegistry = new ModuleRegistry();
-            $menu = new Menu($menuPageHelper, $moduleRegistry);
+            $userAuthorization = new UserAuthorization();
+            $menu = new Menu($menuPageHelper, $moduleRegistry, $userAuthorization);
             $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
             $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper, $endpointHelpers);
             if (

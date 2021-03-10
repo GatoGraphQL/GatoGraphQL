@@ -4,18 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\EndpointResolvers;
 
-use PoP\EngineWP\Templates\TemplateHelpers;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
+use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
+use PoP\EngineWP\Templates\TemplateHelpers;
 use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver
 {
     use EndpointResolverTrait {
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
+    }
+
+    protected UserAuthorizationInterface $userAuthorization;
+
+    function __construct(
+        EndpointHelpers $endpointHelpers,
+        UserAuthorizationInterface $userAuthorization
+    ) {
+        parent::__construct($endpointHelpers);
+        $this->userAuthorization = $userAuthorization;
     }
 
     /**
@@ -76,7 +86,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     {
         \add_action('admin_print_scripts', function () {
             // Make sure the user has access to the editor
-            if (UserAuthorization::canAccessSchemaEditor()) {
+            if ($this->userAuthorization->canAccessSchemaEditor()) {
                 /**
                  * The endpoint against which to execute GraphQL queries while on the WordPress admin
                  */
@@ -103,7 +113,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
             'init',
             function () {
                 // Make sure the user has access to the editor
-                if (UserAuthorization::canAccessSchemaEditor()) {
+                if ($this->userAuthorization->canAccessSchemaEditor()) {
                     $this->upstreamExecuteGraphQLQuery();
                 }
             }
@@ -124,7 +134,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
             'admin_init',
             function () {
                 // Make sure the user has access to the editor
-                if (UserAuthorization::canAccessSchemaEditor()) {
+                if ($this->userAuthorization->canAccessSchemaEditor()) {
                     include TemplateHelpers::getTemplateFile();
                     die;
                 }

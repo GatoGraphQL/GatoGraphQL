@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -20,13 +20,16 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
 {
     protected Menu $menu;
     protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
 
     function __construct(
         Menu $menu,
-        ModuleRegistryInterface $moduleRegistry
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization
     ) {
         $this->menu = $menu;
         $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
     }
     /**
      * Add the hook to initialize the different post types
@@ -256,7 +259,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
          */
         if (
             $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
-            && UserAuthorization::canAccessSchemaEditor()
+            && $this->userAuthorization->canAccessSchemaEditor()
             && \is_singular($this->getPostType())
         ) {
             /**
@@ -406,7 +409,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
             'show_ui' => true,
             'publicly_queryable' => true,
         );
-        $canAccessSchemaEditor = UserAuthorization::canAccessSchemaEditor();
+        $canAccessSchemaEditor = $this->userAuthorization->canAccessSchemaEditor();
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
             array(
