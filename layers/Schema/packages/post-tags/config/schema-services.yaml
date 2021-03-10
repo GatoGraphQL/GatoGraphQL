@@ -8,3 +8,6 @@ services:
 
     PoPSchema\PostTags\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPSchema\PostTags\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'

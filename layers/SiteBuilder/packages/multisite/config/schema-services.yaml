@@ -8,3 +8,6 @@ services:
 
     PoP\Multisite\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoP\Multisite\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'
