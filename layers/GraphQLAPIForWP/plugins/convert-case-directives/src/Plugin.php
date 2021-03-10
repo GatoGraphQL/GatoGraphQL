@@ -6,7 +6,6 @@ namespace GraphQLAPI\ConvertCaseDirectives;
 
 use GraphQLAPI\ConvertCaseDirectives\PluginConfiguration;
 use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPlugin;
-use GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers\SchemaModuleResolver;
 
 class Plugin extends AbstractPlugin
 {
@@ -29,18 +28,6 @@ class Plugin extends AbstractPlugin
     protected function getPluginName(): string
     {
         return \__('GraphQL API - Convert Case Directives', 'graphql-api-convert-case-directives');
-    }
-
-    /**
-     * List of ModuleResolver classes used in the plugin
-     *
-     * @return string[]
-     */
-    protected function getModuleResolverClasses(): array
-    {
-        return [
-            SchemaModuleResolver::class,
-        ];
     }
 
     /**

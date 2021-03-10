@@ -197,16 +197,6 @@ abstract class AbstractPlugin
     }
 
     /**
-     * List of ModuleResolver classes used in the plugin
-     *
-     * @return string[]
-     */
-    protected function getModuleResolverClasses(): array
-    {
-        return [];
-    }
-
-    /**
      * Plugin set-up
      */
     protected function doSetup(): void
