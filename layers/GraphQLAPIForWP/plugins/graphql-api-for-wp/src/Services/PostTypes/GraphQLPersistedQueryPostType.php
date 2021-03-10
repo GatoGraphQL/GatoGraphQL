@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
 
+use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractGraphQLQueryExecutionPostType;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractGraphQLQueryExecutionPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks as GraphQLRequestVarsHooks;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -28,12 +28,14 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
     function __construct(
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
         BlockContentHelpers $blockContentHelpers,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
     ) {
         parent::__construct(
             $menu,
-            $moduleRegistry
+            $moduleRegistry,
+            $userAuthorization
         );
         $this->blockContentHelpers = $blockContentHelpers;
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
@@ -240,7 +242,7 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
 
             // Check if the user is authorized to see the content
             $ancestorContent = null;
-            if (UserAuthorization::canAccessSchemaEditor()) {
+            if ($this->userAuthorization->canAccessSchemaEditor()) {
                 /**
                  * If the query has a parent, also render the inherited output
                  */

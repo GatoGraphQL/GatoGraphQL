@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use Error;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
@@ -28,10 +28,14 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     use HasDocumentationScriptTrait;
 
     protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
 
-    function __construct(ModuleRegistryInterface $moduleRegistry)
-    {
+    function __construct(
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization
+    ) {
         $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
     }
 
     /**
@@ -357,7 +361,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
             /**
              * Show only if the user has the right permission
              */
-            if (UserAuthorization::canAccessSchemaEditor()) {
+            if ($this->userAuthorization->canAccessSchemaEditor()) {
                 $blockConfiguration['render_callback'] = [$this, 'renderBlock'];
             } else {
                 $blockConfiguration['render_callback'] = [$this, 'renderUnauthorizedAccess'];

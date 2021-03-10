@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
@@ -27,13 +27,16 @@ class Menu extends AbstractMenu
 {
     protected MenuPageHelper $menuPageHelper;
     protected ModuleRegistryInterface $moduleRegistry;
+    protected UserAuthorizationInterface $userAuthorization;
 
     function __construct(
         MenuPageHelper $menuPageHelper,
-        ModuleRegistryInterface $moduleRegistry
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization
     ) {
         $this->menuPageHelper = $menuPageHelper;
         $this->moduleRegistry = $moduleRegistry;
+        $this->userAuthorization = $userAuthorization;
     }
 
     public function getName(): string
@@ -47,7 +50,7 @@ class Menu extends AbstractMenu
 
         $instanceManager = InstanceManagerFacade::getInstance();
 
-        $schemaEditorAccessCapability = UserAuthorization::getSchemaEditorAccessCapability();
+        $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
         \add_menu_page(
             __('GraphQL API', 'graphql-api'),
             __('GraphQL API', 'graphql-api'),
@@ -223,7 +226,7 @@ class Menu extends AbstractMenu
             $supportMenuPage->setHookName($hookName);
         }
 
-        // $schemaEditorAccessCapability = UserAuthorization::getSchemaEditorAccessCapability();
+        // $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
         // if (\current_user_can($schemaEditorAccessCapability)) {
         //     global $submenu;
         //     $submenu[$this->getName()][] = [

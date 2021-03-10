@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Security\AccessSchemes;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -100,7 +100,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $defaultValues = [
             self::SCHEMA_EDITING_ACCESS => [
-                self::OPTION_EDITING_ACCESS_SCHEME => UserAuthorization::ACCESS_SCHEME_ADMIN_ONLY,
+                self::OPTION_EDITING_ACCESS_SCHEME => AccessSchemes::ADMIN_ONLY,
             ],
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
@@ -136,8 +136,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::DESCRIPTION => \__('Scheme to decide which users can edit the schema (Persisted Queries, Custom Endpoints and related post types) and with what permissions', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    UserAuthorization::ACCESS_SCHEME_ADMIN_ONLY => \__('Admin user(s) only', 'graphql-api'),
-                    UserAuthorization::ACCESS_SCHEME_POST => \__('Use same access workflow as for editing posts', 'graphql-api'),
+                    AccessSchemes::ADMIN_ONLY => \__('Admin user(s) only', 'graphql-api'),
+                    AccessSchemes::POST => \__('Use same access workflow as for editing posts', 'graphql-api'),
                 ],
             ];
         } elseif ($module == self::GENERAL) {

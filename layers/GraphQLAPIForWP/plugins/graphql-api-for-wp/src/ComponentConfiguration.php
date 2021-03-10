@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
+use GraphQLAPI\GraphQLAPI\Security\AccessSchemes;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration
 {
@@ -157,7 +157,7 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::EDITING_ACCESS_SCHEME;
         $selfProperty = &self::$getEditingAccessScheme;
-        $defaultValue = UserAuthorization::ACCESS_SCHEME_ADMIN_ONLY;
+        $defaultValue = AccessSchemes::ADMIN_ONLY;
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(
