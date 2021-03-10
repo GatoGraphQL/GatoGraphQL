@@ -32,18 +32,6 @@ class Plugin extends AbstractPlugin
     }
 
     /**
-     * List of ModuleResolver classes used in the plugin
-     *
-     * @return string[]
-     */
-    protected function getModuleResolverClasses(): array
-    {
-        return [
-            SchemaModuleResolver::class,
-        ];
-    }
-
-    /**
      * Add Component classes to be initialized
      *
      * @return string[] List of `Component` class to initialize
