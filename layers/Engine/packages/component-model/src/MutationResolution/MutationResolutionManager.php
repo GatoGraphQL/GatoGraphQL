@@ -47,7 +47,7 @@ class MutationResolutionManager implements MutationResolutionManagerInterface
          * To avoid this problem, get the actual implementation class for this class
          */
         $instanceManager = InstanceManagerFacade::getInstance();
-        $class = $instanceManager->getImplementationClass($class);
+        $class = $instanceManager->getInstanceClass($class);
         return $this->results[$class];
     }
 }

@@ -8,7 +8,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 
 trait InstanceManagerTrait
 {
-    public function getImplementationClass(string $class): string
+    public function getInstanceClass(string $class): string
     {
         return get_class($this->getInstance($class));
     }
