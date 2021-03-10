@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\EditorScripts;
 
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Scripts\GraphQLByPoPScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
 
@@ -22,6 +23,11 @@ class EndpointComponentEditorScript extends AbstractEditorScript
     protected function getScriptName(): string
     {
         return 'endpoint-editor-components';
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return UserInterfaceFunctionalityModuleResolver::WELCOME_GUIDES;
     }
 
     /**
