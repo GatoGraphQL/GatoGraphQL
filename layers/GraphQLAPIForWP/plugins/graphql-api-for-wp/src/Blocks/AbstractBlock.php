@@ -6,12 +6,13 @@ namespace GraphQLAPI\GraphQLAPI\Blocks;
 
 use Error;
 use GraphQLAPI\GraphQLAPI\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -22,7 +23,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  * (this package provides the scaffolding for a single-block plugin,
  * so the plugin .php file is ignored registering a single block is ignored, and everything else is used)
  */
-abstract class AbstractBlock
+abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 {
     use HasDocumentationScriptTrait;
 
@@ -38,9 +39,26 @@ abstract class AbstractBlock
      *
      * @return void
      */
-    public function initialize(): void
+    final public function initialize(): void
     {
         \add_action('init', [$this, 'initBlock']);
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        $enablingModule = $this->getEnablingModule();
+        if ($enablingModule !== null) {
+            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+        }
+        return parent::isServiceEnabled();
     }
 
     /**

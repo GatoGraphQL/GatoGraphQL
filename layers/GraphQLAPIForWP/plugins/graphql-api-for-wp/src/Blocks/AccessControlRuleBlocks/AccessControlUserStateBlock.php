@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Blocks\AccessControlRuleBlocks;
 
-use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use GraphQLAPI\GraphQLAPI\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 
 /**
  * Access Control Disable Access block
@@ -17,6 +18,11 @@ class AccessControlUserStateBlock extends AbstractAccessControlRuleBlock
     protected function getBlockName(): string
     {
         return 'access-control-user-state';
+    }
+
+    protected function getEnablingModule(): ?string
+    {
+        return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL_RULE_USER_STATE;
     }
 
     protected function isDynamicBlock(): bool

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\BlockCategories;
 
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Post;
 
-abstract class AbstractBlockCategory
+abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService
 {
-    public function initialize(): void
+    final public function initialize(): void
     {
         \add_filter(
             'block_categories',
