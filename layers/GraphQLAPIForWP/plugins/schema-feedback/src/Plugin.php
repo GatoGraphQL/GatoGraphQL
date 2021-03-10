@@ -15,27 +15,6 @@ class Plugin
      */
     public const NAMESPACE = __NAMESPACE__;
 
-    public function initialize(): void
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
-        /**
-         * Blocks
-         * The GraphiQL Block may be overriden to GraphiQLWithExplorerBlock
-         */
-        $blockServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\Blocks', false);
-        foreach ($blockServiceClasses as $serviceClass) {
-            $instanceManager->getInstance($serviceClass)->initialize();
-        }
-        /**
-         * Block categories
-         */
-        $blockCategoryServiceClasses = ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\BlockCategories');
-        foreach ($blockCategoryServiceClasses as $serviceClass) {
-            $instanceManager->getInstance($serviceClass)->initialize();
-        }
-    }
-
     /**
      * Get permalinks to work when activating the plugin
      *
