@@ -625,7 +625,7 @@
         "build-server": "composer build-server -d webservers/graphql-api-for-wp",
         "init-server": "composer init-server -d webservers/graphql-api-for-wp",
         "start-server": "composer start-server -d webservers/graphql-api-for-wp",
-        "log-server-errors": "lando logs -t -f | grep \"error\"",
+        "log-server-errors": "composer log-server-errors -d webservers/graphql-api-for-wp",
         "rebuild-server": "lando rebuild appserver -y",
         "merge-monorepo": "monorepo-builder merge --ansi",
         "propagate-monorepo": "monorepo-builder propagate --ansi",
