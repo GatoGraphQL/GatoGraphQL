@@ -102,16 +102,16 @@ class GraphQLSchemaConfigurationPostType extends AbstractPostType
         $template = [];
         // Add blocks depending on being enabled by module
         $blockClassModules = [
-            SchemaConfigAccessControlListBlock::class => AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
-            SchemaConfigCacheControlListBlock::class => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
-            SchemaConfigFieldDeprecationListBlock::class => VersioningFunctionalityModuleResolver::FIELD_DEPRECATION,
+            SchemaConfigAccessControlListBlock::class,
+            SchemaConfigCacheControlListBlock::class,
+            SchemaConfigFieldDeprecationListBlock::class,
         ];
-        foreach ($blockClassModules as $blockClass => $module) {
-            if ($this->moduleRegistry->isModuleEnabled($module)) {
-                /**
-                 * @var AbstractBlock
-                 */
-                $block = $instanceManager->getInstance($blockClass);
+        foreach ($blockClassModules as $blockClass) {
+            /**
+             * @var AbstractBlock
+             */
+            $block = $instanceManager->getInstance($blockClass);
+            if ($block->isServiceEnabled()) {
                 $template[] = [$block->getBlockFullName()];
             }
         }

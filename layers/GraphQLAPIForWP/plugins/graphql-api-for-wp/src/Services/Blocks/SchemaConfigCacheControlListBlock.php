@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
 
 /**
@@ -16,6 +17,11 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPostListBloc
     protected function getBlockName(): string
     {
         return 'schema-config-cache-control-lists';
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
     }
 
     protected function getAttributeName(): string

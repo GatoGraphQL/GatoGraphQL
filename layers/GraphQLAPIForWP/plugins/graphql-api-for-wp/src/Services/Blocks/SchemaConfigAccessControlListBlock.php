@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
 
 /**
@@ -16,6 +17,11 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPostListBlo
     protected function getBlockName(): string
     {
         return 'schema-config-access-control-lists';
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
     }
 
     protected function getAttributeName(): string
