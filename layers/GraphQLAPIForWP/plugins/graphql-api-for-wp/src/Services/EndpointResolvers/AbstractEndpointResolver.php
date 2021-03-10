@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\EndpointResolvers;
+namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
