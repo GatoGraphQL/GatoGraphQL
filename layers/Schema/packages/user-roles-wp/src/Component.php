@@ -50,5 +50,6 @@ class Component extends AbstractComponent
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
+        self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
     }
 }
