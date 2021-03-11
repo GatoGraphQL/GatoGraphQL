@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 
 interface AttachableExtensionManagerInterface
 {
-    public function setExtensionClass(string $attachableClass, string $group, AttachableExtensionInterface $extensionClass): void;
+    public function setExtensionClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void;
     /**
      * @return array<string, array<string, AttachableExtensionInterface[]>
      */

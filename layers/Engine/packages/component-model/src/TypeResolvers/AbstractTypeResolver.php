@@ -1768,8 +1768,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * Return the fieldNames resolved by the fieldResolverClass, adding a hook to disable each of them (eg: to implement a private schema)
      *
-     * @param string $extensionClass
-     * @return array
+     * @return string[]
      */
     protected function getFieldNamesResolvedByFieldResolver(FieldResolverInterface $fieldResolver): array
     {
