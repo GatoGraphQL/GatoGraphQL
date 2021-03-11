@@ -9,7 +9,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class MakeTitleVersion020DirectiveResolver extends MakeTitleVersion010DirectiveResolver
 {
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachClasses(): int
     {
         // Higher priority => Process before the latest version fieldResolver
         return 30;
