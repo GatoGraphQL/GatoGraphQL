@@ -176,4 +176,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * @return string|null
      */
     public function getSchemaDirectiveVersion(TypeResolverInterface $typeResolver): ?string;
+    /**
+     * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
+     */
+    public function isGlobal(TypeResolverInterface $typeResolver): bool;
 }
