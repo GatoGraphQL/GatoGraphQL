@@ -1822,8 +1822,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
                 foreach ($fieldResolvers as $fieldResolver) {
                     // Process the fields which have not been processed yet
-                    $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
-                    foreach (array_diff($extensionClassFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                    foreach (array_diff($extensionFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
                         // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
                         // If using an ACL to remove a field from an interface,
                         // getting the fieldResolvers for that field will be empty
@@ -2079,8 +2079,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 /** @var FieldResolverInterface[] */
                 $extensionFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
                 foreach ($extensionFieldResolvers as $fieldResolver) {
-                    $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
-                    if (in_array($fieldName, $extensionClassFieldNames)) {
+                    $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                    if (in_array($fieldName, $extensionFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
                         if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
                             $extensionPriority = $fieldResolver->getPriorityToAttachClasses();
@@ -2160,10 +2160,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             /** @var FieldResolverInterface[] */
             $fieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
             foreach ($fieldResolvers as $fieldResolver) {
-                $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
+                $extensionFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
                 $ret = array_merge(
                     $ret,
-                    $extensionClassFieldNames
+                    $extensionFieldNames
                 );
             }
             // Continue iterating for the class parents
