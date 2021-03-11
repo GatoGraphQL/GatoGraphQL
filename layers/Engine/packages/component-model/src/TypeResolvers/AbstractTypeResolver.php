@@ -904,16 +904,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     /**
-     * Is this a Union Type? By default it is not
-     *
-     * @return bool
-     */
-    public function isUnionType(): bool
-    {
-        return false;
-    }
-
-    /**
      * Watch out! This function will be overridden for the UnionTypeResolver
      *
      * Collect all directives for all fields, and then build a single directive pipeline for all fields,

@@ -23,16 +23,6 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      */
     protected ?array $typeResolverPickers = null;
 
-    /**
-     * This is a Union Type
-     *
-     * @return bool
-     */
-    public function isUnionType(): bool
-    {
-        return true;
-    }
-
     final public function getTypeOutputName(): string
     {
         return UnionTypeHelpers::getUnionTypeCollectionName(parent::getTypeOutputName());
