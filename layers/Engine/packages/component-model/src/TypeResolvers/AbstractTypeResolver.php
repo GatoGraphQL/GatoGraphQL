@@ -86,7 +86,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     private array $fieldDirectiveIDFields = [];
     /**
-     * @var array<string, array>
+     * @var array<string, string>
      */
     private array $fieldDirectivesFromFieldCache = [];
     /**
