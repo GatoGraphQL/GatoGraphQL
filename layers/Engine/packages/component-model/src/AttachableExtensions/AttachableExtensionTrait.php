@@ -31,12 +31,11 @@ trait AttachableExtensionTrait
     public function attach(string $group): void
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-        $extensionClass = get_called_class();
         foreach ($this->getClassesToAttachTo() as $attachableClass) {
             $attachableExtensionManager->setExtensionClass(
                 $attachableClass,
                 $group,
-                $extensionClass
+                $this
             );
         }
     }

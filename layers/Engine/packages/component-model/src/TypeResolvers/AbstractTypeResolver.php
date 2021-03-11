@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use League\Pipeline\PipelineBuilder;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Environment;
@@ -25,6 +24,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
@@ -49,9 +49,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     protected ?array $schemaDefinition = null;
     /**
-     * @var array<string, array>|null
+     * @var array<string,DirectiveResolverInterface[]>|null
      */
-    protected ?array $directiveNameClasses = null;
+    protected ?array $directiveNameResolvers = null;
     /**
      * @var array<string, FieldResolverInterface>|null
      */
@@ -59,7 +59,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * @var string[]|null
      */
-    protected ?array $typeResolverDecoratorClasses = null;
+    protected ?array $typeResolverDecorators = null;
     /**
      * @var array<string, array>|null
      */
@@ -134,12 +134,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return null;
     }
 
-    public function getDirectiveNameClasses(): array
+    /**
+     * @return array<string,DirectiveResolverInterface[]>
+     */
+    public function getDirectiveNameResolvers(): array
     {
-        if (is_null($this->directiveNameClasses)) {
-            $this->directiveNameClasses = $this->calculateFieldDirectiveNameClasses();
+        if (is_null($this->directiveNameResolvers)) {
+            $this->directiveNameResolvers = $this->calculateFieldDirectiveNameResolvers();
         }
-        return $this->directiveNameClasses;
+        return $this->directiveNameResolvers;
     }
 
     public function getIdFieldTypeResolverClass(): string
@@ -654,9 +657,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $directiveName = $fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
         $directiveArgs = $fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
 
-        $directiveNameClasses = $this->getDirectiveNameClasses();
-        $directiveClasses = $directiveNameClasses[$directiveName];
-        if (is_null($directiveClasses)) {
+        $directiveNameResolvers = $this->getDirectiveNameResolvers();
+        $directiveResolvers = $directiveNameResolvers[$directiveName];
+        if (is_null($directiveResolvers)) {
             return null;
         }
 
@@ -665,12 +668,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         foreach ($fieldDirectiveFields as $field) {
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
             $fieldName = $fieldQueryInterpreter->getFieldName($field);
-            foreach ($directiveClasses as $directiveClass) {
-                $directiveSupportedFieldNames = $directiveClass::getFieldNamesToApplyTo();
+            foreach ($directiveResolvers as $directiveResolver) {
+                $directiveSupportedFieldNames = $directiveResolver::getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
                     continue;
                 }
+                $directiveClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
                 if (!isset($this->directiveResolverInstanceCache[$directiveClass][$fieldDirective])) {
                     $this->directiveResolverInstanceCache[$directiveClass][$fieldDirective] = new $directiveClass($fieldDirective);
@@ -861,21 +865,18 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * Execute a hook to allow to disable directives (eg: to implement a private schema)
      *
-     * @param array $directiveNameClasses
-     * @return array
+     * @param array<string,DirectiveResolverInterface[]> $directiveNameResolvers
+     * @return array<string,DirectiveResolverInterface[]> $directiveNameResolvers
      */
-    protected function filterDirectiveNameClasses(array $directiveNameClasses): array
+    protected function filterDirectiveNameResolvers(array $directiveNameResolvers): array
     {
         // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
         $hooksAPI = HooksAPIFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         return array_filter(
-            $directiveNameClasses,
-            function ($directiveName) use ($hooksAPI, $directiveNameClasses, $instanceManager) {
-                $directiveResolverClasses = $directiveNameClasses[$directiveName];
-                foreach ($directiveResolverClasses as $directiveResolverClass) {
-                    /** @var DirectiveResolverInterface */
-                    $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
+            $directiveNameResolvers,
+            function ($directiveName) use ($hooksAPI, $directiveNameResolvers) {
+                $directiveResolvers = $directiveNameResolvers[$directiveName];
+                foreach ($directiveResolvers as $directiveResolver) {
                     // Execute 2 filters: a generic one, and a specific one
                     if (
                         $hooksAPI->applyFilters(
@@ -1636,20 +1637,17 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function getSchemaDirectiveResolvers(bool $global): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $directiveResolverInstances = [];
-        $directiveNameClasses = $this->getDirectiveNameClasses();
-        foreach ($directiveNameClasses as $directiveName => $directiveClasses) {
-            foreach ($directiveClasses as $directiveClass) {
-                /** @var DirectiveResolverInterface */
-                $directiveResolverInstance = $instanceManager->getInstance($directiveClass);
+        $directiveNameResolvers = $this->getDirectiveNameResolvers();
+        foreach ($directiveNameResolvers as $directiveName => $directiveResolvers) {
+            foreach ($directiveResolvers as $directiveResolver) {
                 // A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
-                if ($directiveResolverInstance->skipAddingToSchemaDefinition()) {
+                if ($directiveResolver->skipAddingToSchemaDefinition()) {
                     continue;
                 }
-                $isGlobal = $directiveResolverInstance->isGlobal($this);
+                $isGlobal = $directiveResolver->isGlobal($this);
                 if (($global && $isGlobal) || (!$global && !$isGlobal)) {
-                    $directiveResolverInstances[$directiveName] = $directiveResolverInstance;
+                    $directiveResolverInstances[$directiveName] = $directiveResolver;
                 }
             }
         }
@@ -1773,13 +1771,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * @param string $extensionClass
      * @return array
      */
-    protected function getFieldNamesResolvedByFieldResolver(string $fieldResolverClass): array
+    protected function getFieldNamesResolvedByFieldResolver(FieldResolverInterface $fieldResolver): array
     {
+        $fieldResolverClass = get_class($fieldResolver);
         if (!isset($this->fieldNamesResolvedByFieldResolver[$fieldResolverClass])) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var FieldResolverInterface */
-            $fieldResolver = $instanceManager->getInstance($fieldResolverClass);
-
             // Merge the fieldNames resolved by this field resolver class, and the interfaces it implements
             $fieldNames = array_merge(
                 $fieldResolver->getFieldNamesToResolve(),
@@ -1815,7 +1810,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $schemaFieldResolvers = [];
-        $instanceManager = InstanceManagerFacade::getInstance();
 
         // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
         $classStack = [
@@ -1825,9 +1819,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $class = array_shift($classStack);
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
-                foreach ($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS) as $extensionClass) {
+                /** @var FieldResolverInterface[] */
+                $fieldResolvers = $attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS);
+                foreach ($fieldResolvers as $fieldResolver) {
                     // Process the fields which have not been processed yet
-                    $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
+                    $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
                     foreach (array_diff($extensionClassFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
                         // Watch out here: no fieldArgs!!!! So this deals with the base case (static), not with all cases (runtime)
                         // If using an ACL to remove a field from an interface,
@@ -1837,8 +1833,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $schemaFieldResolvers[$fieldName] = $fieldResolversForField;
                         }
                     }
-                    /** @var FieldResolverInterface */
-                    $fieldResolver = $instanceManager->getInstance($extensionClass);
                     // The interfaces implemented by the FieldResolver can have, themselves, fieldResolvers attached to them
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
@@ -1863,19 +1857,16 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function calculateAllMandatoryDirectivesForFields(): array
     {
         $mandatoryDirectivesForFields = [];
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $typeResolverDecoratorClasses = $this->getAllTypeResolverDecoratorClassess();
-        foreach ($typeResolverDecoratorClasses as $typeResolverDecoratorClass) {
-            $typeResolverDecoratorInstance = $instanceManager->getInstance($typeResolverDecoratorClass);
+        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        foreach ($typeResolverDecorators as $typeResolverDecorator) {
             // array_merge_recursive so that if 2 different decorators add a directive for the same field, the results are merged together, not override each other
-            if ($typeResolverDecoratorInstance->enabled($this)) {
+            if ($typeResolverDecorator->enabled($this)) {
                 $mandatoryDirectivesForFields = array_merge_recursive(
                     $mandatoryDirectivesForFields,
-                    $typeResolverDecoratorInstance->getMandatoryDirectivesForFields($this)
+                    $typeResolverDecorator->getMandatoryDirectivesForFields($this)
                 );
             }
         }
-
         return $mandatoryDirectivesForFields;
     }
 
@@ -1890,15 +1881,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function calculateAllPrecedingMandatoryDirectivesForDirectives(): array
     {
         $precedingMandatoryDirectivesForDirectives = [];
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $typeResolverDecoratorClasses = $this->getAllTypeResolverDecoratorClassess();
-        foreach ($typeResolverDecoratorClasses as $typeResolverDecoratorClass) {
-            $typeResolverDecoratorInstance = $instanceManager->getInstance($typeResolverDecoratorClass);
+        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        foreach ($typeResolverDecorators as $typeResolverDecorator) {
             // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
-            if ($typeResolverDecoratorInstance->enabled($this)) {
+            if ($typeResolverDecorator->enabled($this)) {
                 $precedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $precedingMandatoryDirectivesForDirectives,
-                    $typeResolverDecoratorInstance->getPrecedingMandatoryDirectivesForDirectives($this)
+                    $typeResolverDecorator->getPrecedingMandatoryDirectivesForDirectives($this)
                 );
             }
         }
@@ -1917,15 +1906,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function calculateAllSucceedingMandatoryDirectivesForDirectives(): array
     {
         $succeedingMandatoryDirectivesForDirectives = [];
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $typeResolverDecoratorClasses = $this->getAllTypeResolverDecoratorClassess();
-        foreach ($typeResolverDecoratorClasses as $typeResolverDecoratorClass) {
-            $typeResolverDecoratorInstance = $instanceManager->getInstance($typeResolverDecoratorClass);
+        $typeResolverDecorators = $this->getAllTypeResolverDecorators();
+        foreach ($typeResolverDecorators as $typeResolverDecorator) {
             // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
-            if ($typeResolverDecoratorInstance->enabled($this)) {
+            if ($typeResolverDecorator->enabled($this)) {
                 $succeedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $succeedingMandatoryDirectivesForDirectives,
-                    $typeResolverDecoratorInstance->getSucceedingMandatoryDirectivesForDirectives($this)
+                    $typeResolverDecorator->getSucceedingMandatoryDirectivesForDirectives($this)
                 );
             }
         }
@@ -1933,17 +1920,17 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $succeedingMandatoryDirectivesForDirectives;
     }
 
-    protected function getAllTypeResolverDecoratorClassess(): array
+    protected function getAllTypeResolverDecorators(): array
     {
-        if (is_null($this->typeResolverDecoratorClasses)) {
-            $this->typeResolverDecoratorClasses = $this->calculateAllTypeResolverDecoratorClasses();
+        if (is_null($this->typeResolverDecorators)) {
+            $this->typeResolverDecorators = $this->calculateAllTypeResolverDecorators();
         }
-        return $this->typeResolverDecoratorClasses;
+        return $this->typeResolverDecorators;
     }
 
-    protected function calculateAllTypeResolverDecoratorClasses(): array
+    protected function calculateAllTypeResolverDecorators(): array
     {
-        $decoratorClasses = [];
+        $typeResolverDecorators = [];
         /**
          * Also get the decorators for the implemented interfaces
          */
@@ -1954,44 +1941,43 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $this->getAllImplementedInterfaceClasses()
         );
         foreach ($classes as $class) {
-            $decoratorClasses = array_merge(
-                $decoratorClasses,
-                $this->calculateAllTypeResolverDecoratorClassesForTypeOrInterfaceClass($class)
+            $typeResolverDecorators = array_merge(
+                $typeResolverDecorators,
+                $this->calculateAllTypeResolverDecoratorsForTypeOrInterfaceClass($class)
             );
         }
 
-        return $decoratorClasses;
+        return $typeResolverDecorators;
     }
 
-    protected function calculateAllTypeResolverDecoratorClassesForTypeOrInterfaceClass(string $class): array
+    /**
+     * @return TypeResolverDecoratorInterface[]
+     */
+    protected function calculateAllTypeResolverDecoratorsForTypeOrInterfaceClass(string $class): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-        $decoratorClasses = [];
+        $typeResolverDecorators = [];
 
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            $extensionClasses = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
+            /** @var TypeResolverDecoratorInterface[] */
+            $extensionTypeResolverDecorators = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
-                function ($extensionClass) use ($instanceManager): int {
-                    /** @var AttachableExtensionInterface */
-                    $attachableExtension = $instanceManager->getInstance($extensionClass);
-                    return $attachableExtension->getPriorityToAttachClasses();
-                },
-                $extensionClasses
+                fn (TypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachClasses(),
+                $extensionTypeResolverDecorators
             );
-            array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $extensionClasses);
+            array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $extensionTypeResolverDecorators);
             // Add them to the results
-            $decoratorClasses = array_merge(
-                $decoratorClasses,
-                $extensionClasses
+            $typeResolverDecorators = array_merge(
+                $typeResolverDecorators,
+                $extensionTypeResolverDecorators
             );
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));
 
-        return $decoratorClasses;
+        return $typeResolverDecorators;
     }
 
     /**
@@ -2076,7 +2062,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $fieldName = $fieldQueryInterpreter->getFieldName($field);
         $fieldArgs = $fieldQueryInterpreter->extractStaticFieldArguments($field);
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $fieldResolvers = [];
         // Get the fieldResolvers attached to this typeResolver and to all the interfaces it implements
@@ -2092,10 +2077,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $classFieldResolvers = [];
 
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                foreach (array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS)) as $extensionClass) {
-                    // Check if this fieldResolver can process this field, and if its priority is bigger than the previous found instance attached to the same class
-                    $fieldResolver = $instanceManager->getInstance($extensionClass);
-                    $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
+                /** @var FieldResolverInterface[] */
+                $extensionFieldResolvers = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS));
+                foreach ($extensionFieldResolvers as $fieldResolver) {
+                    $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
                     if (in_array($fieldName, $extensionClassFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
                         if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
@@ -2125,11 +2110,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $fieldResolvers;
     }
 
-    protected function calculateFieldDirectiveNameClasses(): array
+    protected function calculateFieldDirectiveNameResolvers(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-        $directiveNameClasses = [];
+        $directiveNameResolvers = [];
 
         // Directives can also be attached to the interface implemented by this typeResolver
         $classes = array_merge(
@@ -2142,30 +2126,27 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                $extensionClasses = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
+                /** @var DirectiveResolverInterface[] */
+                $directiveResolvers = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
-                    function ($extensionClass) use ($instanceManager): int {
-                        /** @var AttachableExtensionInterface */
-                        $attachableExtension = $instanceManager->getInstance($extensionClass);
-                        return $attachableExtension->getPriorityToAttachClasses();
-                    },
-                    $extensionClasses
+                    fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachClasses(),
+                    $directiveResolvers
                 );
-                array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $extensionClasses);
+                array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $directiveResolvers);
                 // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
-                foreach ($extensionClasses as $extensionClass) {
-                    $directiveName = $extensionClass::getDirectiveName();
-                    $directiveNameClasses[$directiveName][] = $extensionClass;
+                foreach ($directiveResolvers as $directiveResolver) {
+                    $directiveName = $directiveResolver::getDirectiveName();
+                    $directiveNameResolvers[$directiveName][] = $directiveResolver;
                 }
                 // Continue iterating for the class parents
             } while ($class = get_parent_class($class));
         }
 
         // Validate that the user has access to the directives (eg: can remove access to them for non logged-in users)
-        $directiveNameClasses = $this->filterDirectiveNameClasses($directiveNameClasses);
+        $directiveNameResolvers = $this->filterDirectiveNameResolvers($directiveNameResolvers);
 
-        return $directiveNameClasses;
+        return $directiveNameResolvers;
     }
 
     protected function calculateFieldNamesToResolve(): array
@@ -2177,8 +2158,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         $class = $this->getTypeResolverClassToCalculateSchema();
         do {
-            foreach ($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS) as $extensionClass) {
-                $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
+            /** @var FieldResolverInterface[] */
+            $fieldResolvers = $attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS);
+            foreach ($fieldResolvers as $fieldResolver) {
+                $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
                 $ret = array_merge(
                     $ret,
                     $extensionClassFieldNames
