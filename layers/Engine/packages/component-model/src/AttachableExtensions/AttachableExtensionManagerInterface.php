@@ -12,5 +12,5 @@ interface AttachableExtensionManagerInterface
     /**
      * @return array<string, array<string, AttachableExtensionInterface[]>
      */
-    public function getExtensionClasses(string $attachableClass, string $group): array;
+    public function getAttachedExtensions(string $attachableClass, string $group): array;
 }

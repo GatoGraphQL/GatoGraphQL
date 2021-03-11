@@ -1820,7 +1820,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
                 /** @var FieldResolverInterface[] */
-                $fieldResolvers = $attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS);
+                $fieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
                 foreach ($fieldResolvers as $fieldResolver) {
                     // Process the fields which have not been processed yet
                     $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
@@ -1962,7 +1962,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var TypeResolverDecoratorInterface[] */
-            $extensionTypeResolverDecorators = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
+            $extensionTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (TypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachClasses(),
@@ -2078,7 +2078,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var FieldResolverInterface[] */
-                $extensionFieldResolvers = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS));
+                $extensionFieldResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS));
                 foreach ($extensionFieldResolvers as $fieldResolver) {
                     $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
                     if (in_array($fieldName, $extensionClassFieldNames)) {
@@ -2127,7 +2127,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var DirectiveResolverInterface[] */
-                $directiveResolvers = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
+                $directiveResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
                     fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachClasses(),
@@ -2159,7 +2159,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $class = $this->getTypeResolverClassToCalculateSchema();
         do {
             /** @var FieldResolverInterface[] */
-            $fieldResolvers = $attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS);
+            $fieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::FIELDRESOLVERS);
             foreach ($fieldResolvers as $fieldResolver) {
                 $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($fieldResolver);
                 $ret = array_merge(
