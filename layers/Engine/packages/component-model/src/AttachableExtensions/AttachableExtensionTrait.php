@@ -32,7 +32,7 @@ trait AttachableExtensionTrait
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         foreach ($this->getClassesToAttachTo() as $attachableClass) {
-            $attachableExtensionManager->setExtensionClass(
+            $attachableExtensionManager->attachExtensionToClass(
                 $attachableClass,
                 $group,
                 $this

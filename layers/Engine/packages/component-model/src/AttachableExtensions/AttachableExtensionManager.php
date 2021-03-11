@@ -13,7 +13,7 @@ class AttachableExtensionManager implements AttachableExtensionManagerInterface
      */
     protected array $attachableExtensions = [];
 
-    public function setExtensionClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void
+    public function attachExtensionToClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void
     {
         $this->attachableExtensions[$attachableClass][$group][] = $attachableExtension;
     }
