@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP\TypeResolverDecorators;
 
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CDNDirective\DirectiveResolvers\CDNDirectiveResolver;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoPSchema\CDNDirective\ComponentConfiguration as CDNComponentConfiguration;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\CDNDirective\ComponentConfiguration as CDNComponentConfiguration;
+use PoPSchema\CDNDirective\DirectiveResolvers\CDNDirectiveResolver;
+use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 
 class CDNTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
 {
@@ -36,8 +38,11 @@ class CDNTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
         ) {
             // Add the mapping
             $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var DirectiveResolverInterface */
+            $cdnDirectiveResolver = $instanceManager->getInstance(CDNDirectiveResolver::class);
             $cdnDirective = $fieldQueryInterpreter->getDirective(
-                CDNDirectiveResolver::getDirectiveName()
+                $cdnDirectiveResolver->getDirectiveName()
             );
             $mandatoryDirectivesForFields['src'] = [
                 $cdnDirective,

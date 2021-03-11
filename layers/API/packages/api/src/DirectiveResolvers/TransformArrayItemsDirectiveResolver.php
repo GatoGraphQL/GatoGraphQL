@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\API\DirectiveResolvers;
 
-use PoP\FieldQuery\QuerySyntax;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Engine\DirectiveResolvers\ForEachDirectiveResolver;
 use PoP\Engine\DirectiveResolvers\ApplyFunctionDirectiveResolver;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Engine\DirectiveResolvers\ForEachDirectiveResolver;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolver
 {
@@ -43,15 +45,20 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $translationAPI = TranslationAPIFacade::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $forEachDirectiveResolver = $instanceManager->getInstance(ForEachDirectiveResolver::class);
+        /** @var DirectiveResolverInterface */
+        $applyFunctionDirectiveResolver = $instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
         return sprintf(
             $translationAPI->__('Use %s instead', 'component-model'),
             $fieldQueryInterpreter->getFieldDirectivesAsString([
                 [
-                    ForEachDirectiveResolver::getDirectiveName(),
+                    $forEachDirectiveResolver->getDirectiveName(),
                     '',
                     $fieldQueryInterpreter->getFieldDirectivesAsString([
                         [
-                            ApplyFunctionDirectiveResolver::getDirectiveName(),
+                            $applyFunctionDirectiveResolver->getDirectiveName(),
                         ],
                     ]),
                 ],

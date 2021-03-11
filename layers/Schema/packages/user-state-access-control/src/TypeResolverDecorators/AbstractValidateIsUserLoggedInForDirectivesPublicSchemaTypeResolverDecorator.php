@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
@@ -21,13 +23,18 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolv
     {
         $mandatoryDirectivesForDirectives = [];
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $validateIsUserLoggedInForDirectivesDirectiveResolver = $instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
         // This is the required "validateIsUserLoggedIn" directive
         $validateIsUserLoggedInDirective = $fieldQueryInterpreter->getDirective(
-            ValidateIsUserLoggedInForDirectivesDirectiveResolver::getDirectiveName()
+            $validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
         );
         // Add the mapping
-        foreach ($this->getDirectiveResolverClasses() as $needValidateIsUserLoggedInDirective) {
-            $mandatoryDirectivesForDirectives[$needValidateIsUserLoggedInDirective::getDirectiveName()] = [
+        foreach ($this->getDirectiveResolverClasses() as $needValidateIsUserLoggedInDirectiveResolverClass) {
+            /** @var DirectiveResolverInterface */
+            $needValidateIsUserLoggedInDirectiveResolver = $instanceManager->getInstance($needValidateIsUserLoggedInDirectiveResolverClass);
+            $mandatoryDirectivesForDirectives[$needValidateIsUserLoggedInDirectiveResolver->getDirectiveName()] = [
                 $validateIsUserLoggedInDirective,
             ];
         }
@@ -36,7 +43,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolv
     /**
      * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
      *
-     * @return array
+     * @return string[]
      */
     abstract protected function getDirectiveResolverClasses(): array;
 }

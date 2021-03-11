@@ -5,29 +5,31 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
-use InvalidArgumentException;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryHelpers;
-use GraphQLByPoP\GraphQLParser\Parser\Parser;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Field;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
-use GraphQLByPoP\GraphQLParser\Execution\Request;
-use PoP\Translation\TranslationAPIInterface;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
-use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use GraphQLByPoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
 use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use GraphQLByPoP\GraphQLParser\Execution\Request;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Field;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use GraphQLByPoP\GraphQLParser\Parser\Parser;
+use GraphQLByPoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
+use InvalidArgumentException;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\Translation\TranslationAPIInterface;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -313,9 +315,12 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected function restrainFieldsByTypeOrInterface(array $fragmentFieldPaths, string $fragmentModel): array
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $includeDirectiveResolver = $instanceManager->getInstance(IncludeDirectiveResolver::class);
         // Create the <include> directive, if the fragment references the type or interface
         $includeDirective = $fieldQueryInterpreter->composeFieldDirective(
-            IncludeDirectiveResolver::getDirectiveName(),
+            $includeDirectiveResolver->getDirectiveName(),
             $fieldQueryInterpreter->getFieldArgsAsString([
                 'if' => $fieldQueryInterpreter->getField(
                     'or',
