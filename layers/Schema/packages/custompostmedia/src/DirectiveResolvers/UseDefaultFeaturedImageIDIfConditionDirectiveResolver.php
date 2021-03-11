@@ -10,10 +10,9 @@ use PoPSchema\BasicDirectives\DirectiveResolvers\AbstractUseDefaultValueIfCondit
 
 class UseDefaultFeaturedImageIDIfConditionDirectiveResolver extends AbstractUseDefaultValueIfConditionDirectiveResolver
 {
-    const DIRECTIVE_NAME = 'defaultFeaturedImage';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'defaultFeaturedImage';
     }
 
     public function getClassesToAttachTo(): array
@@ -22,7 +21,7 @@ class UseDefaultFeaturedImageIDIfConditionDirectiveResolver extends AbstractUseD
             IsCustomPostFieldInterfaceResolver::class,
         ];
     }
-    public static function getFieldNamesToApplyTo(): array
+    public function getFieldNamesToApplyTo(): array
     {
         return [
             'featuredImage',

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
 
@@ -15,11 +17,14 @@ trait ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait
 
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForDirectives = [];
         foreach ($this->getEntries() as $entry) {
             $directiveResolverClass = $entry[0];
             $entryValue = $entry[1] ?? null; // this might be any value (string, array, etc) or, if not defined, null
-            $directiveName = $directiveResolverClass::getDirectiveName();
+            /** @var DirectiveResolverInterface */
+            $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
+            $directiveName = $directiveResolver->getDirectiveName();
             $mandatoryDirectivesForDirectives[$directiveName] = $this->getMandatoryDirectives($entryValue);
         }
         return $mandatoryDirectivesForDirectives;

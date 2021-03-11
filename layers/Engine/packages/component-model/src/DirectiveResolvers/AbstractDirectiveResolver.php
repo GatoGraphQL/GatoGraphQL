@@ -318,7 +318,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      *
      * @return array
      */
-    public static function getFieldNamesToApplyTo(): array
+    public function getFieldNamesToApplyTo(): array
     {
         // By default, apply to all fieldNames
         return [];
@@ -368,7 +368,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  */
                 $versionConstraint =
                     $directiveArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT]
-                    ?? VersioningHelpers::getVersionConstraintsForDirective(static::getDirectiveName())
+                    ?? VersioningHelpers::getVersionConstraintsForDirective($this->getDirectiveName())
                     ?? $vars['version-constraint'];
                 /**
                  * If the query doesn't restrict the version, then do not process
@@ -905,7 +905,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             SchemaDefinition::ARGNAME_DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
             SchemaDefinition::ARGNAME_DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
         ];
-        if ($limitedToFields = $this::getFieldNamesToApplyTo()) {
+        if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
         }
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\TypeResolverDecorators;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoPSchema\GoogleTranslateDirective\DirectiveResolvers\GlobalGoogleTranslateDirectiveResolver;
 use PoPSchema\TranslateDirective\DirectiveResolvers\AbstractTranslateDirectiveResolver;
 
 /**
@@ -33,8 +36,11 @@ class TranslateCacheTypeResolverDecorator extends AbstractCacheTypeResolverDecor
          */
         $enabled = false;
         if ($enabled) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var DirectiveResolverInterface */
+            $globalGoogleTranslateDirectiveResolver = $instanceManager->getInstance(GlobalGoogleTranslateDirectiveResolver::class);
             return [
-                AbstractTranslateDirectiveResolver::getDirectiveName(),
+                $globalGoogleTranslateDirectiveResolver->getDirectiveName(),
             ];
         }
         return [];

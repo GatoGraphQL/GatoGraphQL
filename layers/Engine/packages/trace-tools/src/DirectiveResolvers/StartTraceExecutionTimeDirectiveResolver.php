@@ -18,10 +18,9 @@ class StartTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveRe
 {
     use TraceDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'startTraceExecutionTime';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'startTraceExecutionTime';
     }
 
     /**

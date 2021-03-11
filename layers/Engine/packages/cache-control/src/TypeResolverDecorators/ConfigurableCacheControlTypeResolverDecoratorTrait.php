@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PoP\CacheControl\TypeResolverDecorators;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait ConfigurableCacheControlTypeResolverDecoratorTrait
 {
@@ -20,9 +23,11 @@ trait ConfigurableCacheControlTypeResolverDecoratorTrait
     {
         $maxAge = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $directiveName = AbstractCacheControlDirectiveResolver::getDirectiveName();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $cacheControlDirectiveResolver = $instanceManager->getInstance(CacheControlDirectiveResolver::class);
         $cacheControlDirective = $fieldQueryInterpreter->getDirective(
-            $directiveName,
+            $cacheControlDirectiveResolver->getDirectiveName(),
             [
                 'maxAge' => $maxAge,
             ]

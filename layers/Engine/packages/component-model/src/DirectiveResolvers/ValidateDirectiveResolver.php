@@ -13,11 +13,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    public const DIRECTIVE_NAME = 'validate';
-
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'validate';
     }
 
     /**

@@ -185,7 +185,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $dataloadingEngine = DataloadingEngineFacade::getInstance();
         return array_map(
             function ($directiveResolver) use ($fieldQueryInterpreter) {
-                return $fieldQueryInterpreter->listFieldDirective($directiveResolver::getDirectiveName());
+                return $fieldQueryInterpreter->listFieldDirective($directiveResolver->getDirectiveName());
             },
             $dataloadingEngine->getMandatoryDirectiveResolvers()
         );
@@ -669,7 +669,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
             $fieldName = $fieldQueryInterpreter->getFieldName($field);
             foreach ($directiveResolvers as $directiveResolver) {
-                $directiveSupportedFieldNames = $directiveResolver::getFieldNamesToApplyTo();
+                $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
                     continue;
@@ -2102,7 +2102,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedDirectiveResolvers);
                 // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
                 foreach ($attachedDirectiveResolvers as $directiveResolver) {
-                    $directiveName = $directiveResolver::getDirectiveName();
+                    $directiveName = $directiveResolver->getDirectiveName();
                     $directiveNameResolvers[$directiveName][] = $directiveResolver;
                 }
                 // Continue iterating for the class parents

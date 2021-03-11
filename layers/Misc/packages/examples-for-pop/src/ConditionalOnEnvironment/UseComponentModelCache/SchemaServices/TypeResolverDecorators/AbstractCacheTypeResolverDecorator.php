@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\DirectiveResolvers\SaveCacheDirectiveResolver;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\DirectiveResolvers\SaveCacheDirectiveResolver;
 
 /**
  * Add directive @cache to fields expensive to calculate
@@ -54,8 +56,11 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
     protected function getCacheDirective(): array
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $saveCacheDirectiveResolver = $instanceManager->getInstance(SaveCacheDirectiveResolver::class);
         return $fieldQueryInterpreter->getDirective(
-            SaveCacheDirectiveResolver::getDirectiveName(),
+            $saveCacheDirectiveResolver->getDirectiveName(),
             [
                 'time' => $this->getTime(),
             ]

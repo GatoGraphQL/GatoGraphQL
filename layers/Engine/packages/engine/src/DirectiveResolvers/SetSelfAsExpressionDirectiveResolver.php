@@ -15,11 +15,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    public const DIRECTIVE_NAME = 'setSelfAsExpression';
-
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'setSelfAsExpression';
     }
 
     /**

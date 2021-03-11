@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ConditionalOnEnvironment\UseComponentModelCache\SchemaServices\DirectiveResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\PipelinePositions;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
-use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
+use PoP\ComponentModel\TypeResolvers\PipelinePositions;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Cache\CacheTypes;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 /**
  * Load the field value from the cache. This directive is executed before `@resolveAndMerge`,
@@ -25,10 +27,9 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
     use CacheDirectiveResolverTrait;
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'loadCache';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'loadCache';
     }
 
     /**
@@ -117,9 +118,13 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             // Find the position of the @cache directive. Compare by name and not by class, just in case the directive class was overriden
             $pos = 0;
             $found = false;
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var DirectiveResolverInterface */
+            $saveCacheDirectiveResolver = $instanceManager->getInstance(SaveCacheDirectiveResolver::class);
+            $directiveName = $saveCacheDirectiveResolver->getDirectiveName();
             while (!$found && $pos < count($succeedingPipelineDirectiveResolverInstances)) {
                 $directiveResolverInstance = $succeedingPipelineDirectiveResolverInstances[$pos];
-                if ($directiveResolverInstance->getDirectiveName() == SaveCacheDirectiveResolver::getDirectiveName()) {
+                if ($directiveResolverInstance->getDirectiveName() == $directiveName) {
                     $found = true;
                 } else {
                     $pos++;
