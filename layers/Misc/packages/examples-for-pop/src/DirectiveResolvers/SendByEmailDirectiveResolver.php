@@ -12,10 +12,9 @@ use PoP\ComponentModel\Feedback\Tokens;
 
 class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    public const DIRECTIVE_NAME = 'sendByEmail';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'sendByEmail';
     }
 
     // public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array

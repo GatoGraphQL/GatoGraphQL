@@ -14,10 +14,9 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use FilterIDsSatisfyingConditionDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'skip';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'skip';
     }
 
     /**

@@ -16,10 +16,9 @@ class UpperCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
 {
     use GlobalDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'upperCase';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'upperCase';
     }
 
     protected function transformValue($value, $id, string $field, string $fieldOutputKey, TypeResolverInterface $typeResolver, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

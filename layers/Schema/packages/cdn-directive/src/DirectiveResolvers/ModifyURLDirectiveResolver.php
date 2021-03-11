@@ -17,10 +17,9 @@ class ModifyURLDirectiveResolver extends AbstractTransformFieldStringValueDirect
 {
     use GlobalDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'modifyURL';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'modifyURL';
     }
 
     protected function transformValue($value, $id, string $field, string $fieldOutputKey, TypeResolverInterface $typeResolver, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

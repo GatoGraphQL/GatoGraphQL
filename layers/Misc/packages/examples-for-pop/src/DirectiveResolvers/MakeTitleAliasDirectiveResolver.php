@@ -11,10 +11,9 @@ class MakeTitleAliasDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use AliasSchemaDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'unambiguousMakeTitle';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'unambiguousMakeTitle';
     }
 
     protected static function getAliasedDirectiveResolverClass(): string

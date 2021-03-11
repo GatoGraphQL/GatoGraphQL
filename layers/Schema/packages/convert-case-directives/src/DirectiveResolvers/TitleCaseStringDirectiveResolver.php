@@ -16,10 +16,9 @@ class TitleCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
 {
     use GlobalDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'titleCase';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'titleCase';
     }
 
     protected function transformValue($value, $id, string $field, string $fieldOutputKey, TypeResolverInterface $typeResolver, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

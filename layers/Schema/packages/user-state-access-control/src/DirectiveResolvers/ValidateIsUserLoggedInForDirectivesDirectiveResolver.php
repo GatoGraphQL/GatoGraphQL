@@ -6,10 +6,9 @@ namespace PoPSchema\UserStateAccessControl\DirectiveResolvers;
 
 class ValidateIsUserLoggedInForDirectivesDirectiveResolver extends ValidateIsUserLoggedInDirectiveResolver
 {
-    const DIRECTIVE_NAME = 'validateIsUserLoggedInForDirectives';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'validateIsUserLoggedInForDirectives';
     }
 
     protected function isValidatingDirective(): bool

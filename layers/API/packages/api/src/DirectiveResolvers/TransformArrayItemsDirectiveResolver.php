@@ -19,10 +19,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolver
 {
     protected const PROPERTY_SEPARATOR = ':';
-    public const DIRECTIVE_NAME = 'transformArrayItems';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'transformArrayItems';
     }
 
     /**

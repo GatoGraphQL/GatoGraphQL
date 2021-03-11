@@ -29,10 +29,9 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
      * and because "traceExecutionTime" involves both "startTraceExecutionTime" and "endTraceExecutionTime",
      * where "startTraceExecutionTime" is added as a mandatory directive on directive
      */
-    const DIRECTIVE_NAME = 'traceExecutionTime';
     public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'traceExecutionTime';
     }
 
     /**
