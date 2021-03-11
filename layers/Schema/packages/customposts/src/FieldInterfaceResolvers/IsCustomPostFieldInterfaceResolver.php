@@ -202,7 +202,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 $customPostContentFormatEnum->getValues()
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => self::getDefaultContentFormatValue(),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultContentFormatValue(),
                         ],
                     ]
                 );
@@ -211,7 +211,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         return $schemaFieldArgs;
     }
 
-    public static function getDefaultContentFormatValue(): string
+    public function getDefaultContentFormatValue(): string
     {
         return CustomPostContentFormatEnum::HTML;
     }
