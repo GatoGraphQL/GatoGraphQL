@@ -205,9 +205,16 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         do {
             // All the pickers and their priorities for this class level
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            $extensionPickerClassPriorities = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
-            $classPickerPriorities = array_values($extensionPickerClassPriorities);
-            $classPickerClasses = array_keys($extensionPickerClassPriorities);
+            $classPickerClasses = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
+            // Order them by priority: higher priority are evaluated first
+            $classPickerPriorities = array_map(
+                function ($extensionClass) use ($instanceManager): int {
+                    /** @var AttachableExtensionInterface */
+                    $attachableExtension = $instanceManager->getInstance($extensionClass);
+                    return $attachableExtension->getPriorityToAttachClasses();
+                },
+                $classPickerClasses
+            );
             $classPickers = array_map(function ($extensionClass) use ($instanceManager) {
                 return $instanceManager->getInstance($extensionClass);
             }, $classPickerClasses);

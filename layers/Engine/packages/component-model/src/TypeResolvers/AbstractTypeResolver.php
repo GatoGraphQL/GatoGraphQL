@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use League\Pipeline\PipelineBuilder;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Environment;
@@ -1824,7 +1825,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $class = array_shift($classStack);
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
-                foreach ($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS) as $extensionClass => $extensionPriority) {
+                foreach ($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS) as $extensionClass) {
                     // Process the fields which have not been processed yet
                     $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
                     foreach (array_diff($extensionClassFieldNames, array_keys($schemaFieldResolvers)) as $fieldName) {
@@ -1964,16 +1965,23 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function calculateAllTypeResolverDecoratorClassesForTypeOrInterfaceClass(string $class): array
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $decoratorClasses = [];
 
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            $extensionClassPriorities = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
+            $extensionClasses = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
             // Order them by priority: higher priority are evaluated first
-            $extensionClasses = array_keys($extensionClassPriorities);
-            $extensionPriorities = array_values($extensionClassPriorities);
+            $extensionPriorities = array_map(
+                function ($extensionClass) use ($instanceManager): int {
+                    /** @var AttachableExtensionInterface */
+                    $attachableExtension = $instanceManager->getInstance($extensionClass);
+                    return $attachableExtension->getPriorityToAttachClasses();
+                },
+                $extensionClasses
+            );
             array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $extensionClasses);
             // Add them to the results
             $decoratorClasses = array_merge(
@@ -2084,13 +2092,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $classFieldResolvers = [];
 
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                foreach (array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS)) as $extensionClass => $extensionPriority) {
+                foreach (array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS)) as $extensionClass) {
                     // Check if this fieldResolver can process this field, and if its priority is bigger than the previous found instance attached to the same class
                     $fieldResolver = $instanceManager->getInstance($extensionClass);
                     $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
                     if (in_array($fieldName, $extensionClassFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
                         if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
+                            $extensionPriority = $fieldResolver->getPriorityToAttachClasses();
                             $classTypeResolverPriorities[] = $extensionPriority;
                             $classFieldResolvers[] = $fieldResolver;
                         }
@@ -2118,6 +2127,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function calculateFieldDirectiveNameClasses(): array
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $directiveNameClasses = [];
 
@@ -2132,10 +2142,16 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                $extensionClassPriorities = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
+                $extensionClasses = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
                 // Order them by priority: higher priority are evaluated first
-                $extensionClasses = array_keys($extensionClassPriorities);
-                $extensionPriorities = array_values($extensionClassPriorities);
+                $extensionPriorities = array_map(
+                    function ($extensionClass) use ($instanceManager): int {
+                        /** @var AttachableExtensionInterface */
+                        $attachableExtension = $instanceManager->getInstance($extensionClass);
+                        return $attachableExtension->getPriorityToAttachClasses();
+                    },
+                    $extensionClasses
+                );
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $extensionClasses);
                 // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
                 foreach ($extensionClasses as $extensionClass) {
@@ -2161,7 +2177,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         $class = $this->getTypeResolverClassToCalculateSchema();
         do {
-            foreach ($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS) as $extensionClass => $extensionPriority) {
+            foreach ($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::FIELDRESOLVERS) as $extensionClass) {
                 $extensionClassFieldNames = $this->getFieldNamesResolvedByFieldResolver($extensionClass);
                 $ret = array_merge(
                     $ret,
