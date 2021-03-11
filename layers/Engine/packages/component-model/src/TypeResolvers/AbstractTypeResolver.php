@@ -185,7 +185,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $dataloadingEngine = DataloadingEngineFacade::getInstance();
         return array_map(
             function ($directiveResolver) use ($fieldQueryInterpreter) {
-                return $fieldQueryInterpreter->listFieldDirective($directiveResolver::getDirectiveName());
+                return $fieldQueryInterpreter->listFieldDirective($directiveResolver->getDirectiveName());
             },
             $dataloadingEngine->getMandatoryDirectiveResolvers()
         );
@@ -2102,7 +2102,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedDirectiveResolvers);
                 // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
                 foreach ($attachedDirectiveResolvers as $directiveResolver) {
-                    $directiveName = $directiveResolver::getDirectiveName();
+                    $directiveName = $directiveResolver->getDirectiveName();
                     $directiveNameResolvers[$directiveName][] = $directiveResolver;
                 }
                 // Continue iterating for the class parents

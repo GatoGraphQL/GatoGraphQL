@@ -107,7 +107,7 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
         // Add the traces
         $schemaTraces[] = [
             Tokens::PATH => [$this->directive],
-            Tokens::NAME => static::getDirectiveName(),
+            Tokens::NAME => $this->getDirectiveName(),
             Tokens::EXTENSIONS => [
                 Tokens::ID_FIELDS => array_map(
                     function ($dataFields) {
