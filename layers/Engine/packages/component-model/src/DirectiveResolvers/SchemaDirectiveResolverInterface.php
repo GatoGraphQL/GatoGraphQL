@@ -60,9 +60,6 @@ interface SchemaDirectiveResolverInterface
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return bool
      */
     public function isGlobal(TypeResolverInterface $typeResolver): bool;
 }
