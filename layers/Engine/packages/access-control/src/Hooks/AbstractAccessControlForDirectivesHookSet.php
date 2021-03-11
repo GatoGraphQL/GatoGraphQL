@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
@@ -20,10 +21,10 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         // If no directiveNames defined, apply to all of them
         if (
             $directiveNames = array_map(
-                function ($directiveResolverClass) {
-                    return $directiveResolverClass::getDirectiveName();
+                function ($directiveResolver) {
+                    return $directiveResolver->getDirectiveName();
                 },
-                $this->getDirectiveResolverClasses()
+                $this->getDirectiveResolvers()
             )
         ) {
             foreach ($directiveNames as $directiveName) {
@@ -65,13 +66,20 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     }
     /**
      * Affected directives
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param FieldResolverInterface $directiveResolver
-     * @param string $directiveName
-     * @return boolean
      */
     abstract protected function getDirectiveResolverClasses(): array;
+    /**
+     * Affected directives
+     * @return DirectiveResolverInterface[]
+     */
+    protected function getDirectiveResolvers(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        return array_map(
+            fn (string $directiveResolverClass) => $instanceManager->getInstance($directiveResolverClass),
+            $this->getDirectiveResolverClasses()
+        );
+    }
     /**
      * Decide if to remove the directiveNames
      *
