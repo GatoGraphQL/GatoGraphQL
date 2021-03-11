@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class RootFieldResolver extends \Leoloso\ExamplesForPoP\FieldResolvers\Legacy\Version_0_1_0\RootFieldResolver
 {
-    public function getPriorityToAttachClasses(): int
+    public function getPriorityToAttachToClasses(): int
     {
         return null;
     }

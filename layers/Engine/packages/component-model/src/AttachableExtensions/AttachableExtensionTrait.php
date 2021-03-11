@@ -19,7 +19,7 @@ trait AttachableExtensionTrait
     /**
      * The priority with which to attach to the class. The higher the priority, the sooner it will be processed
      */
-    public function getPriorityToAttachClasses(): int
+    public function getPriorityToAttachToClasses(): int
     {
         return 10;
     }

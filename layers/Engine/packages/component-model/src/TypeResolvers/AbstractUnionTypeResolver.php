@@ -209,7 +209,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
             $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
-                fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachClasses(),
+                fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
                 $attachedTypeResolverPickers
             );
 

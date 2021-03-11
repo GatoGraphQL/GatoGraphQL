@@ -1964,7 +1964,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $attachedTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERDECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
-                fn (TypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachClasses(),
+                fn (TypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
                 $attachedTypeResolverDecorators
             );
             array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedTypeResolverDecorators);
@@ -2083,7 +2083,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     if (in_array($fieldName, $extensionFieldNames)) {
                         // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
                         if ($fieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
-                            $extensionPriority = $fieldResolver->getPriorityToAttachClasses();
+                            $extensionPriority = $fieldResolver->getPriorityToAttachToClasses();
                             $classTypeResolverPriorities[] = $extensionPriority;
                             $classFieldResolvers[] = $fieldResolver;
                         }
@@ -2129,7 +2129,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $attachedDirectiveResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVERESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
-                    fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachClasses(),
+                    fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),
                     $attachedDirectiveResolvers
                 );
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedDirectiveResolvers);

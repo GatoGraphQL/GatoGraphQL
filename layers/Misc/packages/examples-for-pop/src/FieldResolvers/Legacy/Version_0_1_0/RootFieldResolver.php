@@ -20,7 +20,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         return array(RootTypeResolver::class);
     }
 
-    public function getPriorityToAttachClasses(): int
+    public function getPriorityToAttachToClasses(): int
     {
         // Higher priority => Process before the latest version fieldResolver
         return 20;
