@@ -19,25 +19,23 @@ trait AttachableExtensionTrait
     /**
      * The priority with which to attach to the class. The higher the priority, the sooner it will be processed
      */
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
-        return null;
+        return 10;
     }
 
     /**
      * There are 2 ways of setting a priority: either by configuration through parameter, or explicity defined in the class itself
      * The priority in the class has priority (pun intended ;))
      */
-    public function attach(string $group, int $priority = 10): void
+    public function attach(string $group): void
     {
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
-        $extensionClass = get_called_class();
         foreach ($this->getClassesToAttachTo() as $attachableClass) {
-            $attachableExtensionManager->setExtensionClass(
+            $attachableExtensionManager->attachExtensionToClass(
                 $attachableClass,
                 $group,
-                $extensionClass,
-                $this->getPriorityToAttachClasses() ?? $priority
+                $this
             );
         }
     }

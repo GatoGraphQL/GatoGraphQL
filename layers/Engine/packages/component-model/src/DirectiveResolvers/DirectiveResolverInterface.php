@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-interface DirectiveResolverInterface
+interface DirectiveResolverInterface extends AttachableExtensionInterface
 {
     public static function getDirectiveName(): string;
     /**

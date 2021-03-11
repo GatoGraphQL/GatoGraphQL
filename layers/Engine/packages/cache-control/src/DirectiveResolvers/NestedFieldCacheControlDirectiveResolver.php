@@ -32,7 +32,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     /**
      * It must execute before anyone else!
      */
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         return PHP_INT_MAX;
     }

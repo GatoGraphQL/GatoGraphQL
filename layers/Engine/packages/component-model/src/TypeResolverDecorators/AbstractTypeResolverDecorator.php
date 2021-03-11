@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolverDecorators;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInterface, AttachableExtensionInterface
+abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInterface
 {
     /**
      * This class is attached to a TypeResolver

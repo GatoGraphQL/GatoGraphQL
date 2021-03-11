@@ -17,7 +17,7 @@ class MakeTitleVersion010DirectiveResolver extends AbstractGlobalDirectiveResolv
         return self::DIRECTIVE_NAME;
     }
 
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         // Higher priority => Process before the latest version fieldResolver
         return 20;

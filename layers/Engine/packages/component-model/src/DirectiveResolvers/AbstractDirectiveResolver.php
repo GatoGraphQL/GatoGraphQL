@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use Composer\Semver\Semver;
 use Exception;
 use League\Pipeline\StageInterface;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveTypes;
@@ -25,7 +24,7 @@ use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface, AttachableExtensionInterface
+abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDsDataFieldsDirectiveResolverTrait;

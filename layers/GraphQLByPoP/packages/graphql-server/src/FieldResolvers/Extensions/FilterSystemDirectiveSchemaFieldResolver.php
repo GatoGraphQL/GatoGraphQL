@@ -31,7 +31,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
         ];
     }
 
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         // Higher priority => Process first
         return 100;

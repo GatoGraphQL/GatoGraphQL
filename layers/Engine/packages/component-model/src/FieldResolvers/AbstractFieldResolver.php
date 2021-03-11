@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use Composer\Semver\Semver;
 use Exception;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
 use PoP\ComponentModel\Environment;
@@ -29,7 +28,7 @@ use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface, AttachableExtensionInterface
+abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
     /**
      * This class is attached to a TypeResolver

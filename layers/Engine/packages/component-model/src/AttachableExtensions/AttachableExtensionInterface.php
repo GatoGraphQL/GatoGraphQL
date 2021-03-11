@@ -14,11 +14,11 @@ interface AttachableExtensionInterface
     /**
      * The priority with which to attach to the class. The higher the priority, the sooner it will be processed
      */
-    public function getPriorityToAttachClasses(): ?int;
+    public function getPriorityToAttachToClasses(): int;
 
     /**
      * There are 2 ways of setting a priority: either by configuration through parameter, or explicity defined in the class itself
      * The priority in the class has priority (pun intended ;))
      */
-    public function attach(string $group, int $priority = 10): void;
+    public function attach(string $group): void;
 }
