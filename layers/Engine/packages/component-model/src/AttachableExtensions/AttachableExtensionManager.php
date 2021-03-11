@@ -11,11 +11,11 @@ class AttachableExtensionManager implements AttachableExtensionManagerInterface
     /**
      * @var array<string, array<string, AttachableExtensionInterface[]>
      */
-    protected array $extensionClasses = [];
+    protected array $attachableExtensions = [];
 
     public function setExtensionClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void
     {
-        $this->extensionClasses[$attachableClass][$group][] = $attachableExtension;
+        $this->attachableExtensions[$attachableClass][$group][] = $attachableExtension;
     }
 
     /**
@@ -23,6 +23,6 @@ class AttachableExtensionManager implements AttachableExtensionManagerInterface
      */
     public function getAttachedExtensions(string $attachableClass, string $group): array
     {
-        return $this->extensionClasses[$attachableClass][$group] ?? [];
+        return $this->attachableExtensions[$attachableClass][$group] ?? [];
     }
 }
