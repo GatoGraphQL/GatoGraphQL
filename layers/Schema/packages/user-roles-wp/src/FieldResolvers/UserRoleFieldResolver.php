@@ -18,7 +18,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
         return array(UserRoleTypeResolver::class);
     }
 
-    protected static function getTypeClass(): string
+    protected function getTypeClass(): string
     {
         return \WP_Role::class;
     }
