@@ -86,7 +86,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     private array $fieldDirectiveIDFields = [];
     /**
-     * @var array<string, array>
+     * @var array<string, string>
      */
     private array $fieldDirectivesFromFieldCache = [];
     /**
@@ -904,140 +904,107 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     /**
-     * Is this a Union Type? By default it is not
+     * Watch out! This function will be overridden for the UnionTypeResolver
      *
-     * @return bool
-     */
-    public function isUnionType(): bool
-    {
-        return false;
-    }
-
-    /**
      * Collect all directives for all fields, and then build a single directive pipeline for all fields,
      * including all directives, even if they don't apply to all fields
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
-     *
-     * @param array $ids_data_fields
-     * @param array $resultIDItems
-     * @return void
      */
     public function enqueueFillingResultItemsFromIDs(array $ids_data_fields)
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
-        // Watch out! The UnionType must obtain the mandatoryDirectivesForFields
-        // from each of its target types!
-        // This is mandatory, because the UnionType doesn't have fields by itself.
-        // Otherwise, TypeResolverDecorators can't have their defined ACL rules
-        // work when querying a union type (eg: "customPosts")
-        if ($this->isUnionType()) {
-            $targetTypeResolverClassMandatoryDirectivesForFields = [];
-            $targetTypeResolverClasses = $this->getTargetTypeResolverClasses();
-            foreach ($targetTypeResolverClasses as $targetTypeResolverClass) {
-                $targetTypeResolver = $instanceManager->getInstance($targetTypeResolverClass);
-                $targetTypeResolverClassMandatoryDirectivesForFields[$targetTypeResolverClass] = $targetTypeResolver->getAllMandatoryDirectivesForFields();
-            }
-            // If the type data resolver is union, the dbKey where the value is stored
-            // is contained in the ID itself, with format dbKey/ID.
-            // Remove this information, and get purely the ID
-            $resultItemIDs = array_map(
-                function ($composedID) {
-                    list(
-                        $dbKey,
-                        $id
-                    ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
-                    return $id;
-                },
-                array_keys($ids_data_fields)
-            );
-            $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($resultItemIDs);
-        } else {
-            $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
-        }
+        $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
-        $fieldDirectiveCounter = [];
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $data_fields['direct'];
-            // Watch out: If there are conditional fields, these will be processed by this directive too
-            // Hence, collect all these fields, and add them as if they were direct
-            $conditionalFields = FieldHelpers::extractConditionalFields($data_fields);
-            $fields = array_unique(array_merge(
-                $fields,
-                $conditionalFields
-            ));
-            if ($this->isUnionType()) {
-                list(
-                    $dbKey,
-                    $resultItemID
-                ) = UnionTypeHelpers::extractDBObjectTypeAndID($id);
-                $resultItemIDTargetTypeResolver = $resultItemIDTargetTypeResolvers[$resultItemID];
-                $mandatoryDirectivesForFields = $targetTypeResolverClassMandatoryDirectivesForFields[get_class($resultItemIDTargetTypeResolver)];
-            }
-            foreach ($fields as $field) {
-                if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
-                    // Get the directives from the field
-                    $directives = $fieldQueryInterpreter->getDirectives($field);
+            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
+            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+        }
+    }
 
-                    // Add the mandatory directives defined for this field or for any field in this typeResolver
-                    $fieldName = $fieldQueryInterpreter->getFieldName($field);
-                    if (
-                        $mandatoryDirectivesForField = array_merge(
-                            $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
-                            $mandatoryDirectivesForFields[$fieldName] ?? []
-                        )
-                    ) {
-                        // The mandatory directives must be placed first!
-                        $directives = array_merge(
-                            $mandatoryDirectivesForField,
-                            $directives
-                        );
-                    }
+    /**
+     * Split function, so it can be invoked both from here and from the UnionTypeResolver
+     */
+    protected function getFieldsToEnqueueFillingResultItemsFromIDs(array $data_fields)
+    {
+        $fields = $data_fields['direct'];
+        // Watch out: If there are conditional fields, these will be processed by this directive too
+        // Hence, collect all these fields, and add them as if they were direct
+        $conditionalFields = FieldHelpers::extractConditionalFields($data_fields);
+        return array_unique(array_merge(
+            $fields,
+            $conditionalFields
+        ));
+    }
 
-                    // Place the mandatory "system" directives at the beginning of the list, then they will be added to their needed position in the pipeline
+    /**
+     * Split function, so it can be invoked both from here and from the UnionTypeResolver
+     */
+    public function doEnqueueFillingResultItemsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, $id, array $data_fields)
+    {
+        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $fieldDirectiveCounter = [];
+        foreach ($fields as $field) {
+            if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
+                // Get the directives from the field
+                $directives = $fieldQueryInterpreter->getDirectives($field);
+
+                // Add the mandatory directives defined for this field or for any field in this typeResolver
+                $fieldName = $fieldQueryInterpreter->getFieldName($field);
+                if (
+                    $mandatoryDirectivesForField = array_merge(
+                        $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
+                        $mandatoryDirectivesForFields[$fieldName] ?? []
+                    )
+                ) {
+                    // The mandatory directives must be placed first!
                     $directives = array_merge(
-                        $mandatorySystemDirectives,
+                        $mandatoryDirectivesForField,
                         $directives
                     );
-                    // If the directives must be preceded by other directives, add them now
-                    $directives = $this->addMandatoryDirectivesForDirectives($directives);
-
-                    // Convert from directive to fieldDirective
-                    $fieldDirectives = implode(
-                        QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
-                        array_map(
-                            [$fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
-                            $directives
-                        )
-                    );
-                    // Assign in the cache
-                    $this->fieldDirectivesFromFieldCache[$field] = $fieldDirectives;
                 }
-                // Extract all the directives, and store which fields they process
-                foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field]) as $fieldDirective) {
-                    // Watch out! Directives can be repeated, and then they must be executed multiple times
-                    // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
-                    // However, because we are adding the $idsDataFields under key $fieldDirective, when the 2nd occurrence of the directive is found,
-                    // adding data would just override the previous entry, and we can't keep track that it's another iteration
-                    // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
-                    // in which the "|" symbol could not be part of the field naturally
-                    if (isset($fieldDirectiveCounter[$field][(string)$id][$fieldDirective])) {
-                        // Increase counter and add to $fieldDirective
-                        $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field][(string)$id][$fieldDirective]);
-                    } else {
-                        $fieldDirectiveCounter[$field][(string)$id][$fieldDirective] = 0;
-                    }
-                    // Store which ID/field this directive must process
-                    if (in_array($field, $data_fields['direct'])) {
-                        $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'][] = $field;
-                    }
-                    if ($conditionalFields = $data_fields['conditional'][$field] ?? null) {
-                        $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] = array_merge_recursive(
-                            $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] ?? [],
-                            $conditionalFields
-                        );
-                    }
+
+                // Place the mandatory "system" directives at the beginning of the list, then they will be added to their needed position in the pipeline
+                $directives = array_merge(
+                    $mandatorySystemDirectives,
+                    $directives
+                );
+                // If the directives must be preceded by other directives, add them now
+                $directives = $this->addMandatoryDirectivesForDirectives($directives);
+
+                // Convert from directive to fieldDirective
+                $fieldDirectives = implode(
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                    array_map(
+                        [$fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
+                        $directives
+                    )
+                );
+                // Assign in the cache
+                $this->fieldDirectivesFromFieldCache[$field] = $fieldDirectives;
+            }
+            // Extract all the directives, and store which fields they process
+            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field]) as $fieldDirective) {
+                // Watch out! Directives can be repeated, and then they must be executed multiple times
+                // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
+                // However, because we are adding the $idsDataFields under key $fieldDirective, when the 2nd occurrence of the directive is found,
+                // adding data would just override the previous entry, and we can't keep track that it's another iteration
+                // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
+                // in which the "|" symbol could not be part of the field naturally
+                if (isset($fieldDirectiveCounter[$field][(string)$id][$fieldDirective])) {
+                    // Increase counter and add to $fieldDirective
+                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field][(string)$id][$fieldDirective]);
+                } else {
+                    $fieldDirectiveCounter[$field][(string)$id][$fieldDirective] = 0;
+                }
+                // Store which ID/field this directive must process
+                if (in_array($field, $data_fields['direct'])) {
+                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'][] = $field;
+                }
+                if ($conditionalFields = $data_fields['conditional'][$field] ?? null) {
+                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] = array_merge_recursive(
+                        $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] ?? [],
+                        $conditionalFields
+                    );
                 }
             }
         }
