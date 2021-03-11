@@ -669,7 +669,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
             $fieldName = $fieldQueryInterpreter->getFieldName($field);
             foreach ($directiveResolvers as $directiveResolver) {
-                $directiveSupportedFieldNames = $directiveResolver::getFieldNamesToApplyTo();
+                $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
                     continue;

@@ -21,7 +21,7 @@ class UseDefaultFeaturedImageIDIfConditionDirectiveResolver extends AbstractUseD
             IsCustomPostFieldInterfaceResolver::class,
         ];
     }
-    public static function getFieldNamesToApplyTo(): array
+    public function getFieldNamesToApplyTo(): array
     {
         return [
             'featuredImage',

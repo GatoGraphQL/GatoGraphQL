@@ -16,7 +16,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      *
      * @return array
      */
-    public static function getFieldNamesToApplyTo(): array;
+    public function getFieldNamesToApplyTo(): array;
     /**
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.

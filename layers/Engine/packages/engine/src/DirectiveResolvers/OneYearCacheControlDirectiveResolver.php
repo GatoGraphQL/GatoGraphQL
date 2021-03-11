@@ -8,7 +8,7 @@ use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 
 class OneYearCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
-    public static function getFieldNamesToApplyTo(): array
+    public function getFieldNamesToApplyTo(): array
     {
         return [
             'id',

@@ -16,7 +16,7 @@ class MakeTitleAliasDirectiveResolver extends AbstractGlobalDirectiveResolver
         return 'unambiguousMakeTitle';
     }
 
-    protected static function getAliasedDirectiveResolverClass(): string
+    protected function getAliasedDirectiveResolverClass(): string
     {
         return MakeTitleDirectiveResolver::class;
     }

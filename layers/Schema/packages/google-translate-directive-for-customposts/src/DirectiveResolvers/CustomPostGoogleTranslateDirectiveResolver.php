@@ -15,7 +15,7 @@ class CustomPostGoogleTranslateDirectiveResolver extends AbstractGoogleTranslate
             IsCustomPostFieldInterfaceResolver::class,
         ];
     }
-    public static function getFieldNamesToApplyTo(): array
+    public function getFieldNamesToApplyTo(): array
     {
         return [
             'title',
