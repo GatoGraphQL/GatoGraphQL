@@ -126,7 +126,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                         $ofTypes
                     );
                     $directiveRegistry = DirectiveRegistryFacade::getInstance();
-                    $ofTypeDirectiveResolverClasses = array_filter(
+                    $ofTypeDirectiveResolvers = array_filter(
                         $directiveRegistry->getDirectiveResolvers(),
                         function ($directiveResolver) use ($ofTypes) {
                             return in_array($directiveResolver->getDirectiveType(), $ofTypes);
@@ -134,17 +134,17 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                     );
                     // Calculate the directive IDs
                     $ofTypeDirectiveIDs = array_map(
-                        function ($directiveResolverClass) {
+                        function ($directiveResolver) {
                             // To retrieve the ID, use the same method to calculate the ID
                             // used when creating a new Directive instance
                             // (which we can't do here, since it has side-effects)
                             $directiveSchemaDefinitionPath = [
                                 SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES,
-                                $directiveResolverClass::getDirectiveName(),
+                                $directiveResolver->getDirectiveName(),
                             ];
                             return SchemaDefinitionHelpers::getID($directiveSchemaDefinitionPath);
                         },
-                        $ofTypeDirectiveResolverClasses
+                        $ofTypeDirectiveResolvers
                     );
                     return array_intersect(
                         $directiveIDs,
