@@ -183,7 +183,7 @@ class RemoveIfNullDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public const DIRECTIVE_NAME = 'removeIfNull';
 
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

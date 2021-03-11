@@ -17,7 +17,7 @@ class LowerCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
     use GlobalDirectiveResolverTrait;
 
     const DIRECTIVE_NAME = 'lowerCase';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

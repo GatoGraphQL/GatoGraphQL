@@ -17,7 +17,7 @@ class UpperCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
     use GlobalDirectiveResolverTrait;
 
     const DIRECTIVE_NAME = 'upperCase';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

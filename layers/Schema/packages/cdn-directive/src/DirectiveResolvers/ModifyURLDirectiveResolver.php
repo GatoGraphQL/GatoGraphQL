@@ -18,7 +18,7 @@ class ModifyURLDirectiveResolver extends AbstractTransformFieldStringValueDirect
     use GlobalDirectiveResolverTrait;
 
     const DIRECTIVE_NAME = 'modifyURL';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

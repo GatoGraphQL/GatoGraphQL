@@ -15,7 +15,7 @@ use PoPSchema\CDNDirective\ComponentConfiguration;
 class CDNDirectiveResolver extends ModifyURLDirectiveResolver
 {
     const DIRECTIVE_NAME = 'cdn';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

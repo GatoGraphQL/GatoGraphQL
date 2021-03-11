@@ -17,7 +17,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 {
     public const DIRECTIVE_NAME = 'setSelfAsExpression';
 
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

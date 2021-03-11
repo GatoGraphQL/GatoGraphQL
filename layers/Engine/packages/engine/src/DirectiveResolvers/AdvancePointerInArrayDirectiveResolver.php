@@ -15,7 +15,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
     public const DIRECTIVE_NAME = 'advancePointerInArray';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

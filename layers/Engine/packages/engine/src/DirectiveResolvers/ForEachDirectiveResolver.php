@@ -18,7 +18,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
     public const DIRECTIVE_NAME = 'forEach';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

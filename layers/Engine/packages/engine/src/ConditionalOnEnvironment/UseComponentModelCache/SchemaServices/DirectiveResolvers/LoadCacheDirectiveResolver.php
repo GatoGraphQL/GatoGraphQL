@@ -28,7 +28,7 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
     const DIRECTIVE_NAME = 'loadCache';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

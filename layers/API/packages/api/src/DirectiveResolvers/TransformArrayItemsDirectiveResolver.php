@@ -20,7 +20,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
 {
     protected const PROPERTY_SEPARATOR = ':';
     public const DIRECTIVE_NAME = 'transformArrayItems';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

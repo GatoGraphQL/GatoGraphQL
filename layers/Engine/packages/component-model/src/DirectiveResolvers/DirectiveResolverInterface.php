@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface
 {
-    public static function getDirectiveName(): string;
+    public function getDirectiveName(): string;
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them

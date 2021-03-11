@@ -11,7 +11,7 @@ use PoPSchema\BasicDirectives\DirectiveResolvers\AbstractUseDefaultValueIfCondit
 class UseDefaultFeaturedImageIDIfConditionDirectiveResolver extends AbstractUseDefaultValueIfConditionDirectiveResolver
 {
     const DIRECTIVE_NAME = 'defaultFeaturedImage';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }

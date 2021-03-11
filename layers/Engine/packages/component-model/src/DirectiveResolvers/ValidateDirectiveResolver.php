@@ -15,7 +15,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 {
     public const DIRECTIVE_NAME = 'validate';
 
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
         return self::DIRECTIVE_NAME;
     }
