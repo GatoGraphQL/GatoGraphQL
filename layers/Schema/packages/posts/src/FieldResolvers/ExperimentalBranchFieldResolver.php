@@ -30,7 +30,7 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
      *
      * @return integer|null
      */
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         return 20;
     }

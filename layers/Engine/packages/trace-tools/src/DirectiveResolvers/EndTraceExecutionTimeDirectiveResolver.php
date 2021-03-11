@@ -29,10 +29,9 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
      * and because "traceExecutionTime" involves both "startTraceExecutionTime" and "endTraceExecutionTime",
      * where "startTraceExecutionTime" is added as a mandatory directive on directive
      */
-    const DIRECTIVE_NAME = 'traceExecutionTime';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'traceExecutionTime';
     }
 
     /**
@@ -107,7 +106,7 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
         // Add the traces
         $schemaTraces[] = [
             Tokens::PATH => [$this->directive],
-            Tokens::NAME => static::getDirectiveName(),
+            Tokens::NAME => $this->getDirectiveName(),
             Tokens::EXTENSIONS => [
                 Tokens::ID_FIELDS => array_map(
                     function ($dataFields) {

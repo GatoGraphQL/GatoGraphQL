@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 
-interface FieldResolverInterface
+interface FieldResolverInterface extends AttachableExtensionInterface
 {
     /**
      * Get an array with the fieldNames that this fieldResolver resolves

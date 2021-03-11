@@ -11,9 +11,8 @@ class UseDefaultValueIfConditionDirectiveResolver extends AbstractUseDefaultValu
 {
     use GlobalDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'default';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'default';
     }
 }

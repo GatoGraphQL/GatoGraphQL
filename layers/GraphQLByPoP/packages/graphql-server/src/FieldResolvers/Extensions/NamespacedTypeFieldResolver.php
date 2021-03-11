@@ -20,7 +20,7 @@ class NamespacedTypeFieldResolver extends AbstractDBDataFieldResolver
         return array(TypeTypeResolver::class);
     }
 
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         // Higher priority => Process first
         return 100;

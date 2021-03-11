@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\TypeResolverDecorators;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
 
 trait ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait
@@ -20,8 +22,11 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait
     {
         $roles = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $directiveResoverClass = $this->getValidateRoleDirectiveResolverClass();
-        $directiveName = $directiveResoverClass::getDirectiveName();
+        $directiveResolverClass = $this->getValidateRoleDirectiveResolverClass();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
+        $directiveName = $directiveResolver->getDirectiveName();
         $validateDoesLoggedInUserHaveAnyRoleDirective = $fieldQueryInterpreter->getDirective(
             $directiveName,
             [

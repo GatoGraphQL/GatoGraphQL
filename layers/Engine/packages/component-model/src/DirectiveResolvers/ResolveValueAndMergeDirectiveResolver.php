@@ -16,11 +16,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    public const DIRECTIVE_NAME = 'resolveValueAndMerge';
-
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'resolveValueAndMerge';
     }
 
     /**

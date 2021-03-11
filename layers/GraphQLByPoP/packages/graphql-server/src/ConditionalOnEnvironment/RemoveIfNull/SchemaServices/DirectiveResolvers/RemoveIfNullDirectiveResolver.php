@@ -181,11 +181,9 @@ class RemoveIfNullDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
-    public const DIRECTIVE_NAME = 'removeIfNull';
-
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'removeIfNull';
     }
 
     public function resolveDirective(

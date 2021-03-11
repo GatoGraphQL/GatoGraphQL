@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\VariablesAsExpressions\SchemaServices\FieldResolvers;
 
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
+use GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\MultipleQueryExecution\SchemaServices\DirectiveResolvers\ExportDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\MultipleQueryExecution\SchemaServices\DirectiveResolvers\ExportDirectiveResolver;
-use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -53,7 +55,10 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $exportDirectiveName = ExportDirectiveResolver::getDirectiveName();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var DirectiveResolverInterface */
+        $exportDirectiveResolver = $instanceManager->getInstance(ExportDirectiveResolver::class);
+        $exportDirectiveName = $exportDirectiveResolver->getDirectiveName();
         $descriptions = [
             'exportedVariables' => sprintf(
                 $translationAPI->__('Returns a dictionary with the values for all variables exported through the `%s` directive', 'graphql-server'),

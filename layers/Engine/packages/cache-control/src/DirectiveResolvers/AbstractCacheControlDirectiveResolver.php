@@ -13,10 +13,9 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
-    const DIRECTIVE_NAME = 'cacheControl';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'cacheControl';
     }
 
     /**

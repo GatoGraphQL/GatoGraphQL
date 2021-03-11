@@ -20,10 +20,9 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    public const DIRECTIVE_NAME = 'applyFunction';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'applyFunction';
     }
 
     /**

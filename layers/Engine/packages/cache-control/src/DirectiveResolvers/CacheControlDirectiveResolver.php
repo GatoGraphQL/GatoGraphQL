@@ -12,7 +12,7 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
     /**
      * It must execute after everyone else!
      */
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         return 0;
     }

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolverDecorators;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-interface TypeResolverDecoratorInterface
+interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
 {
     /**
      * Allow to disable the functionality

@@ -26,7 +26,10 @@ interface TypeResolverInterface
     public function getAllImplementedInterfaceResolverInstances(): array;
     public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
     public function getIdFieldTypeResolverClass(): string;
-    public function getDirectiveNameClasses(): array;
+    /**
+     * @return array<string,DirectiveResolverInterface[]>
+     */
+    public function getDirectiveNameResolvers(): array;
     public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
     public function enqueueFillingResultItemsFromIDs(array $ids_data_fields);
     public function fillResultItems(

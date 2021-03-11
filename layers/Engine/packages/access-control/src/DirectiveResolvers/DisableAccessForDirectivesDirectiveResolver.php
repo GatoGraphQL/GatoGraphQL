@@ -6,10 +6,9 @@ namespace PoP\AccessControl\DirectiveResolvers;
 
 class DisableAccessForDirectivesDirectiveResolver extends DisableAccessDirectiveResolver
 {
-    const DIRECTIVE_NAME = 'disableAccessForDirectives';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'disableAccessForDirectives';
     }
 
     protected function isValidatingDirective(): bool

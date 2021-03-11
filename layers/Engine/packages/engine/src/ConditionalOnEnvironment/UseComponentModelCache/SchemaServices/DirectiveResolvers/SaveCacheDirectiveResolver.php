@@ -40,10 +40,9 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
      * and because "cache" involves both "loadCache" and "saveCache", where "loadCache"
      * is added as a mandatory directive on directive
      */
-    const DIRECTIVE_NAME = 'cache';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'cache';
     }
 
     /**

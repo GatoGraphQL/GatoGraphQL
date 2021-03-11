@@ -27,7 +27,7 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * The specific `DirectiveResolver` class that is being aliased
      */
-    abstract protected static function getAliasedDirectiveResolverClass(): string;
+    abstract protected function getAliasedDirectiveResolverClass(): string;
 
     /**
      * Aliased `DirectiveResolver` instance
@@ -36,7 +36,7 @@ trait AliasSchemaDirectiveResolverTrait
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(
-            static::getAliasedDirectiveResolverClass()
+            $this->getAliasedDirectiveResolverClass()
         );
     }
 
@@ -131,10 +131,10 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public static function getFieldNamesToApplyTo(): array
+    public function getFieldNamesToApplyTo(): array
     {
-        $aliasedDirectiveResolverClass = static::getAliasedDirectiveResolverClass();
-        return $aliasedDirectiveResolverClass::getFieldNamesToApplyTo();
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
+        return $aliasedDirectiveResolver->getFieldNamesToApplyTo();
     }
 
     /**

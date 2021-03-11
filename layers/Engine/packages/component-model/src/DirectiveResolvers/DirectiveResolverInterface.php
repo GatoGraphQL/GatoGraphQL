@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-interface DirectiveResolverInterface
+interface DirectiveResolverInterface extends AttachableExtensionInterface
 {
-    public static function getDirectiveName(): string;
+    public function getDirectiveName(): string;
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
      *
      * @return array
      */
-    public static function getFieldNamesToApplyTo(): array;
+    public function getFieldNamesToApplyTo(): array;
     /**
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.
@@ -175,4 +176,8 @@ interface DirectiveResolverInterface
      * @return string|null
      */
     public function getSchemaDirectiveVersion(TypeResolverInterface $typeResolver): ?string;
+    /**
+     * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
+     */
+    public function isGlobal(TypeResolverInterface $typeResolver): bool;
 }

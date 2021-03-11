@@ -16,10 +16,9 @@ class LowerCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
 {
     use GlobalDirectiveResolverTrait;
 
-    const DIRECTIVE_NAME = 'lowerCase';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'lowerCase';
     }
 
     protected function transformValue($value, $id, string $field, string $fieldOutputKey, TypeResolverInterface $typeResolver, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

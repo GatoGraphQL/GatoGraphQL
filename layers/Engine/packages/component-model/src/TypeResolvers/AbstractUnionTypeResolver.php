@@ -23,16 +23,6 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      */
     protected ?array $typeResolverPickers = null;
 
-    /**
-     * This is a Union Type
-     *
-     * @return bool
-     */
-    public function isUnionType(): bool
-    {
-        return true;
-    }
-
     final public function getTypeOutputName(): string
     {
         return UnionTypeHelpers::getUnionTypeCollectionName(parent::getTypeOutputName());
@@ -149,6 +139,65 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     // }
 
     /**
+     * Watch out! This function overrides the implementation from the for the AbstractTypeResolver
+     *
+     * Collect all directives for all fields, and then build a single directive pipeline for all fields,
+     * including all directives, even if they don't apply to all fields
+     * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
+     * to different fields. After producing the pipeline, add the mandatory items
+     */
+    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields)
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /**
+         * This section is different from parent's implementation
+         */
+        // Watch out! The UnionType must obtain the mandatoryDirectivesForFields
+        // from each of its target types!
+        // This is mandatory, because the UnionType doesn't have fields by itself.
+        // Otherwise, TypeResolverDecorators can't have their defined ACL rules
+        // work when querying a union type (eg: "customPosts")
+        $targetTypeResolverClassMandatoryDirectivesForFields = [];
+        $targetTypeResolverClasses = $this->getTargetTypeResolverClasses();
+        foreach ($targetTypeResolverClasses as $targetTypeResolverClass) {
+            $targetTypeResolver = $instanceManager->getInstance($targetTypeResolverClass);
+            $targetTypeResolverClassMandatoryDirectivesForFields[$targetTypeResolverClass] = $targetTypeResolver->getAllMandatoryDirectivesForFields();
+        }
+        // If the type data resolver is union, the dbKey where the value is stored
+        // is contained in the ID itself, with format dbKey/ID.
+        // Remove this information, and get purely the ID
+        $resultItemIDs = array_map(
+            function ($composedID) {
+                list(
+                    $dbKey,
+                    $id
+                ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
+                return $id;
+            },
+            array_keys($ids_data_fields)
+        );
+        $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($resultItemIDs);
+
+        $mandatorySystemDirectives = $this->getMandatoryDirectives();
+        foreach ($ids_data_fields as $id => $data_fields) {
+            $fields = $this->getFieldsToEnqueueFillingResultItemsFromIDs($data_fields);
+
+            /**
+             * This section is different from parent's implementation
+             */
+            list(
+                $dbKey,
+                $resultItemID
+            ) = UnionTypeHelpers::extractDBObjectTypeAndID($id);
+            $resultItemIDTargetTypeResolver = $resultItemIDTargetTypeResolvers[$resultItemID];
+            $mandatoryDirectivesForFields = $targetTypeResolverClassMandatoryDirectivesForFields[get_class($resultItemIDTargetTypeResolver)];
+
+            $this->doEnqueueFillingResultItemsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+        }
+    }
+
+    /**
      * In order to enable elements from different types (such as posts and users) to have same ID,
      * add the type to the ID
      *
@@ -205,19 +254,20 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         do {
             // All the pickers and their priorities for this class level
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-            $extensionPickerClassPriorities = array_reverse($attachableExtensionManager->getExtensionClasses($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
-            $classPickerPriorities = array_values($extensionPickerClassPriorities);
-            $classPickerClasses = array_keys($extensionPickerClassPriorities);
-            $classPickers = array_map(function ($extensionClass) use ($instanceManager) {
-                return $instanceManager->getInstance($extensionClass);
-            }, $classPickerClasses);
+            /** @var TypeResolverPickerInterface[] */
+            $attachedTypeResolverPickers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::TYPERESOLVERPICKERS));
+            // Order them by priority: higher priority are evaluated first
+            $extensionPriorities = array_map(
+                fn (TypeResolverPickerInterface $typeResolverPicker) => $typeResolverPicker->getPriorityToAttachToClasses(),
+                $attachedTypeResolverPickers
+            );
 
             // Sort the found pickers by their priority, and then add to the stack of all pickers, for all classes
             // Higher priority means they execute first!
-            array_multisort($classPickerPriorities, SORT_DESC, SORT_NUMERIC, $classPickers);
+            array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedTypeResolverPickers);
             $typeResolverPickers = array_merge(
                 $typeResolverPickers,
-                $classPickers
+                $attachedTypeResolverPickers
             );
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));

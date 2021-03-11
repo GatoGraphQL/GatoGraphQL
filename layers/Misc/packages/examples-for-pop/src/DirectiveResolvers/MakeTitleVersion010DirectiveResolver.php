@@ -11,13 +11,12 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class MakeTitleVersion010DirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    public const DIRECTIVE_NAME = 'makeTitle';
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'makeTitle';
     }
 
-    public function getPriorityToAttachClasses(): ?int
+    public function getPriorityToAttachToClasses(): int
     {
         // Higher priority => Process before the latest version fieldResolver
         return 20;

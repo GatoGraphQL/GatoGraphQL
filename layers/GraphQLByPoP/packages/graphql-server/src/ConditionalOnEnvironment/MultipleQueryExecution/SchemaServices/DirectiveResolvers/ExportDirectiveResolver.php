@@ -63,11 +63,9 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
  */
 class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    public const DIRECTIVE_NAME = 'export';
-
-    public static function getDirectiveName(): string
+    public function getDirectiveName(): string
     {
-        return self::DIRECTIVE_NAME;
+        return 'export';
     }
 
     /**
