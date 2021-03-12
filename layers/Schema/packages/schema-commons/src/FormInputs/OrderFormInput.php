@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\FormInputs;
+namespace PoP\SchemaCommons\FormInputs;
+
+use PoP\Engine\FormInputs\SelectFormInput;
 
 class OrderFormInput extends SelectFormInput
 {

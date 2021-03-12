@@ -11,8 +11,8 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Engine\FormInputs\MultiValueFromStringFormInput;
-use PoP\Engine\FormInputs\OrderFormInput;
+use PoP\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
+use PoP\SchemaCommons\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 

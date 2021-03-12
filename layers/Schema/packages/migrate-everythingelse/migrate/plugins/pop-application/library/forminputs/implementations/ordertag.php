@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\FormInputs\OrderFormInput;
+use PoP\SchemaCommons\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_FormInput_OrderTag extends OrderFormInput

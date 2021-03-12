@@ -8,3 +8,6 @@ services:
 
     PoPSchema\SchemaCommons\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
+
+    PoPSchema\SchemaCommons\FormInputs\:
+        resource: '../src/FormInputs/*'
