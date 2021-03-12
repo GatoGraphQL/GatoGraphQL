@@ -1,7 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\PostTags\ModuleProcessors;
+
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
-class PoP_PostTags_Module_Processor_FieldDataloads extends PoP_Tags_Module_Processor_FieldDataloads
+class FieldDataloads extends PoP_Tags_Module_Processor_FieldDataloads
 {
     public function getTypeResolverClass(array $module): ?string
     {
@@ -14,6 +19,3 @@ class PoP_PostTags_Module_Processor_FieldDataloads extends PoP_Tags_Module_Proce
         return parent::getTypeResolverClass($module);
     }
 }
-
-
-

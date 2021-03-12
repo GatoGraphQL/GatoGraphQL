@@ -6,6 +6,7 @@ namespace PoPSchema\PostTags\TypeDataLoaders;
 
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\Tags\TypeDataLoaders\AbstractTagTypeDataLoader;
+use PoPSchema\PostTags\ModuleProcessors\FieldDataloads;
 
 class PostTagTypeDataLoader extends AbstractTagTypeDataLoader
 {
@@ -13,6 +14,6 @@ class PostTagTypeDataLoader extends AbstractTagTypeDataLoader
 
     public function getFilterDataloadingModule(): ?array
     {
-        return [\PoP_PostTags_Module_Processor_FieldDataloads::class, \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
+        return [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
     }
 }

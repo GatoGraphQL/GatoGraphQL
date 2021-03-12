@@ -9,6 +9,7 @@ use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
+use PoPSchema\PostTags\ModuleProcessors\FieldDataloads;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -20,7 +21,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $ret[TagRouteNatures::TAG][] = [
-            'module' => [\PoP_PostTags_Module_Processor_FieldDataloads::class, \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
+            'module' => [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
@@ -39,7 +40,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
-            POP_POSTTAGS_ROUTE_POSTTAGS => [\PoP_PostTags_Module_Processor_FieldDataloads::class, \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
+            POP_POSTTAGS_ROUTE_POSTTAGS => [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [

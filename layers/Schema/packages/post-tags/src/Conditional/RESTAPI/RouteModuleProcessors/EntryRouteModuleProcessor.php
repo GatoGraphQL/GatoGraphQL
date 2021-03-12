@@ -12,6 +12,7 @@ use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\PostTags\ModuleProcessors\FieldDataloads;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -53,8 +54,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $ret[TagRouteNatures::TAG][] = [
             'module' => [
-                \PoP_PostTags_Module_Processor_FieldDataloads::class,
-                \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
+                FieldDataloads::class,
+                FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -83,8 +84,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
             POP_POSTTAGS_ROUTE_POSTTAGS => [
-                \PoP_PostTags_Module_Processor_FieldDataloads::class,
-                \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+                FieldDataloads::class,
+                FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
