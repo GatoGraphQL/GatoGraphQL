@@ -61,11 +61,6 @@ class Component extends AbstractComponent
         self::initSystemServices(dirname(__DIR__));
     }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function beforeBoot(): void
     {
         // Initialize the Component Configuration
@@ -75,11 +70,6 @@ class Component extends AbstractComponent
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function afterBoot(): void
     {
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();

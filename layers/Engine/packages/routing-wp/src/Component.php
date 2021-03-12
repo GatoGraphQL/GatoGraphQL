@@ -38,11 +38,6 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
     }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function beforeBoot(): void
     {
         Cortex::boot();
