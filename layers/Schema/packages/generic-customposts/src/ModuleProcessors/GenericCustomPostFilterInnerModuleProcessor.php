@@ -7,6 +7,7 @@ namespace PoPSchema\GenericCustomPosts\ModuleProcessors;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
 
 class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -32,7 +33,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                     [\PoP_CustomPosts_Module_Processor_FilterInputs::class, \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
@@ -41,7 +42,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT:
                 $inputmodules = [
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                     [\PoP_CustomPosts_Module_Processor_FilterInputs::class, \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],

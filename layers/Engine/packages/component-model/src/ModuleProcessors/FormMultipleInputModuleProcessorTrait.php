@@ -1,6 +1,10 @@
 <?php
 
-abstract class PoP_Module_Processor_MultipleInputsFormInputsBase extends PoP_Module_Processor_FormInputsBase
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\ModuleProcessors;
+
+trait FormMultipleInputModuleProcessorTrait
 {
     public function getInputSubnames(array $module)
     {
@@ -21,7 +25,6 @@ abstract class PoP_Module_Processor_MultipleInputsFormInputsBase extends PoP_Mod
 
     public function getInputName(array $module)
     {
-
         // Allow for multiple names, for multiple inputs
         $name = $this->getName($module);
         $names = array();

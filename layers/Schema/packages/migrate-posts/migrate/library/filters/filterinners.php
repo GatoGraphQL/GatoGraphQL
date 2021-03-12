@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
 
 class PoP_Posts_Module_Processor_CustomFilterInners extends AbstractModuleProcessor
 {
@@ -26,13 +27,13 @@ class PoP_Posts_Module_Processor_CustomFilterInners extends AbstractModuleProces
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
             self::MODULE_FILTERINNER_POSTCOUNT => [
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],

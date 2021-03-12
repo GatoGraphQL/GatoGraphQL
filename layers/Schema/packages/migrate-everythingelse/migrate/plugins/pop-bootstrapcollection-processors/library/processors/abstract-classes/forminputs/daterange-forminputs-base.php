@@ -1,7 +1,11 @@
 <?php
 
+use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+
 abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_Processor_MultipleInputsFormInputsBase
 {
+    use FormMultipleInputModuleProcessorTrait;
+
     public function getTemplateResource(array $module, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_DATERANGE];
@@ -19,7 +23,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         if ($this->useTime($module)) {
             return array('from', 'to', 'fromtime', 'totime', 'readable');
         }
-        
+
         return array('from', 'to', 'readable');
     }
 
@@ -28,7 +32,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         if ($this->useTime($module)) {
             return \PoP\Engine\GD_FormInput_DateRangeTime::class;
         }
-        
+
         return \PoP\Engine\GD_FormInput_DateRange::class;
     }
 
@@ -49,7 +53,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-        
+
         if ($this->useTime($module)) {
             $ret['timepicker'] = 'timepicker';
             $ret['subfields'] = array(
@@ -81,7 +85,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         $this->setProp($module, $props, 'placeholder', $this->getLabel($module, $props));
 
         $this->appendProp($module, $props, 'class', 'make-daterangepicker');
-        
+
         $this->setProp($module, $props, 'daterange-class', 'opens-right');
         $daterange_class = $this->getProp($module, $props, 'daterange-class');
         $this->appendProp($module, $props, 'class', $daterange_class);

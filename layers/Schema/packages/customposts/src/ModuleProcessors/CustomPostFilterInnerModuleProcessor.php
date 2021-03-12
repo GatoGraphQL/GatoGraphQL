@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPosts\ModuleProcessors;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
 
 class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -37,7 +38,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                 ];
@@ -46,7 +47,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             case self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT:
                 $inputmodules = [
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                 ];

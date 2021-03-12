@@ -2,7 +2,6 @@
 
 require_once 'forminputs-base.php';
 // require_once 'forminputs-base-wrapper.php';
-require_once 'multipleinputs-forminputs-base.php';
 require_once 'boolean-forminputs-trait.php';
 require_once 'editor-forminputs-base.php';
 require_once 'select-forminputs-base.php';
