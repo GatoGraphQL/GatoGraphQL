@@ -1,7 +1,10 @@
 <?php
-namespace PoP\Engine;
 
-trait GD_FormInput_BooleanTrait
+declare(strict_types=1);
+
+namespace PoP\Engine\FormInputs;
+
+trait BooleanFormInputTrait
 {
     protected function getValueFromSource(array $source)
     {

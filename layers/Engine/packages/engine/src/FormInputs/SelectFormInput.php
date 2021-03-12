@@ -1,9 +1,12 @@
 <?php
-namespace PoP\Engine;
+
+declare(strict_types=1);
+
+namespace PoP\Engine\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormInput;
 
-class GD_FormInput_Select extends FormInput
+class SelectFormInput extends FormInput
 {
     /**
      * Function to override

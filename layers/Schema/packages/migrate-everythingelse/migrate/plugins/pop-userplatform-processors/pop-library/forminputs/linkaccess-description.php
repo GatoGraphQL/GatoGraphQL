@@ -1,12 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Engine\FormInputs\SelectFormInput;
 
-class GD_FormInput_LinkAccessDescription extends \PoP\Engine\GD_FormInput_Select
+class GD_FormInput_LinkAccessDescription extends SelectFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
-        
+
         $values = array_merge(
             $values,
             array(
@@ -15,10 +16,10 @@ class GD_FormInput_LinkAccessDescription extends \PoP\Engine\GD_FormInput_Select
                 'walledgarded' => TranslationAPIFacade::getInstance()->__('User account needed', 'poptheme-wassup'),
             )
         );
-        
+
         return $values;
     }
-    
+
     public function getDefaultValue()
     {
         return 'free';

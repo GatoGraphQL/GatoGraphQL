@@ -1,7 +1,10 @@
 <?php
-namespace PoP\Engine;
 
-class GD_FormInput_Order extends GD_FormInput_Select
+declare(strict_types=1);
+
+namespace PoP\Engine\FormInputs;
+
+class OrderFormInput extends SelectFormInput
 {
     public function getValue(?array $source = null)
     {

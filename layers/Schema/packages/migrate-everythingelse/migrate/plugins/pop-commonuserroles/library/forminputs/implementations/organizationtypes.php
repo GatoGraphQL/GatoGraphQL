@@ -1,8 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_FormInput_OrganizationTypes extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_FormInput_OrganizationTypes extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {
@@ -24,7 +25,7 @@ class GD_FormInput_OrganizationTypes extends \PoP\Engine\GD_FormInput_MultiSelec
             $values,
             HooksAPIFacade::getInstance()->applyFilters('wassup_organizationtypes', $types)
         );
-        
+
         return $values;
     }
 }

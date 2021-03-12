@@ -22,6 +22,9 @@ services:
     PoP\Engine\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
+    PoP\Engine\FormInputs\:
+        resource: '../src/FormInputs/*'
+
     PoP\Engine\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 

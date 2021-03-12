@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_FormInput_MultiStance extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_FormInput_MultiStance extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {
@@ -16,7 +17,7 @@ class GD_FormInput_MultiStance extends \PoP\Engine\GD_FormInput_MultiSelect
             $item = POP_USERSTANCE_TAXONOMY_STANCE.'|'.$term;
             $values[$item] = $name;
         }
-        
+
         return $values;
     }
 }

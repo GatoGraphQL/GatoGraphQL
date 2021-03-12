@@ -1,8 +1,12 @@
 <?php
-namespace PoP\Engine;
+
+declare(strict_types=1);
+
+namespace PoP\Engine\FormInputs;
+
 use PoP\ComponentModel\PoP_InputUtils;
 
-class GD_FormInput_MultipleInputs extends GD_FormInput_MultiSelect
+class MultipleInputFormInput extends MultipleSelectFormInput
 {
     public $subnames;
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Engine\FormInputs\MultipleInputFormInput;
+
 trait FormMultipleInputModuleProcessorTrait
 {
     public function getInputSubnames(array $module)
@@ -20,7 +22,7 @@ trait FormMultipleInputModuleProcessorTrait
 
     public function getInputClass(array $module)
     {
-        return \PoP\Engine\GD_FormInput_MultipleInputs::class;
+        return MultipleInputFormInput::class;
     }
 
     public function getInputName(array $module)

@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
+use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Engine\FormInputs\MultiValueFromStringFormInput;
+use PoP\Engine\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
-use PoP\ComponentModel\FormInputs\FormMultipleInput;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class CommonFilterInputs extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -54,11 +56,11 @@ class CommonFilterInputs extends AbstractFormInputModuleProcessor implements Dat
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_ORDER:
-                return \PoP\Engine\GD_FormInput_Order::class;
+                return OrderFormInput::class;
             case self::MODULE_FILTERINPUT_IDS:
                 return FormMultipleInput::class;
             case self::MODULE_FILTERINPUT_ID:
-                return \PoP\Engine\GD_FormInput_MultiValueFromString::class;
+                return MultiValueFromStringFormInput::class;
         }
 
         return parent::getInputClass($module);

@@ -1,8 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_FormInput_UnmoderatedStatus extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_FormInput_UnmoderatedStatus extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {

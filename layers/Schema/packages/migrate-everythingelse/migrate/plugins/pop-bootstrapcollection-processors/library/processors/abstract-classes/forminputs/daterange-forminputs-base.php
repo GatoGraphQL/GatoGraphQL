@@ -1,6 +1,8 @@
 <?php
 
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\FormInputs\DateRangeFormInput;
+use PoP\Engine\FormInputs\DateRangeTime;
 
 abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_Processor_MultipleInputsFormInputsBase
 {
@@ -30,10 +32,10 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
     public function getInputClass(array $module)
     {
         if ($this->useTime($module)) {
-            return \PoP\Engine\GD_FormInput_DateRangeTime::class;
+            return DateRangeTime::class;
         }
 
-        return \PoP\Engine\GD_FormInput_DateRange::class;
+        return DateRangeFormInput::class;
     }
 
     public function getDbobjectField(array $module)
