@@ -37,23 +37,6 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
         return $filterInputs[$module[1]] ?? null;
     }
 
-    public function getInputName(array $module)
-    {
-        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_DATES:
-                // Allow for multiple names, for multiple inputs
-                $name = $this->getName($module);
-                $names = array();
-                foreach ($this->getInputSubnames($module) as $subname) {
-                    $names[$subname] = $formInputHelperService->getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
-                }
-                return $names;
-        }
-
-        return parent::getInputName($module);
-    }
-
     public function getInputOptions(array $module)
     {
         $options = parent::getInputOptions($module);
