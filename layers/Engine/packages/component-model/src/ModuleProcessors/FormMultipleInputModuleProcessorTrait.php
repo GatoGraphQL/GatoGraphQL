@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\FormInputs\MultipleInputFormInput;
 
 trait FormMultipleInputModuleProcessorTrait

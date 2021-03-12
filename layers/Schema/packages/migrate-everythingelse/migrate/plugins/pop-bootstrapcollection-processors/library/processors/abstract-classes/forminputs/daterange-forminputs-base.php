@@ -1,10 +1,11 @@
 <?php
 
+use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\Engine\FormInputs\DateRangeFormInput;
 use PoP\Engine\FormInputs\DateRangeTimeFormInput;
 
-abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_Processor_MultipleInputsFormInputsBase
+abstract class PoP_Module_Processor_DateRangeFormInputsBase extends AbstractFormInputModuleProcessor
 {
     use FormMultipleInputModuleProcessorTrait;
 
