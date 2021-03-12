@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\ModuleProcessors;
 
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\Tags\ModuleProcessors\FieldDataloads as TagFieldDataloads;
 
-class FieldDataloads extends PoP_Tags_Module_Processor_FieldDataloads
+class FieldDataloads extends TagFieldDataloads
 {
     public function getTypeResolverClass(array $module): ?string
     {

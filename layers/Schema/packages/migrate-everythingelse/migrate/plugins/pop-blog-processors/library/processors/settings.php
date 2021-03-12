@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\Tags\ModuleProcessors\FieldDataloads;
 
 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(
@@ -24,10 +25,10 @@ $moduleprocessor_manager->overrideProcessorClass(
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Tags_Module_Processor_FieldDataloads::class,
+    FieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Tags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
         PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );
