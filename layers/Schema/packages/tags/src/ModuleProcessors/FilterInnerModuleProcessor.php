@@ -6,7 +6,7 @@ namespace PoPSchema\Tags\ModuleProcessors;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class FilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -27,17 +27,17 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
 
         $inputmodules = [
             self::MODULE_FILTERINNER_TAGS => [
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
             self::MODULE_FILTERINNER_TAGCOUNT => [
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
-                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
         ];
         if (
