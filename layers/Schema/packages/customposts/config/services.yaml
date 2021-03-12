@@ -11,3 +11,6 @@ services:
 
     PoPSchema\CustomPosts\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\CustomPosts\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

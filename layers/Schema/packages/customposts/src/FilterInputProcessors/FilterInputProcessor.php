@@ -1,6 +1,8 @@
 <?php
 
-namespace PoPSchema\CustomPosts;
+declare(strict_types=1);
+
+namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;

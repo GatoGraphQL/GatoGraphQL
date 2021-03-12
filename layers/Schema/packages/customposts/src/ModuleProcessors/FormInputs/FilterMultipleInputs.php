@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\PoP_InputUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
 class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -30,7 +31,7 @@ class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements D
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [\PoPSchema\CustomPosts\FilterInputProcessor::class, \PoPSchema\CustomPosts\FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
+            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
         ];
         return $filterInputs[$module[1]] ?? null;
     }

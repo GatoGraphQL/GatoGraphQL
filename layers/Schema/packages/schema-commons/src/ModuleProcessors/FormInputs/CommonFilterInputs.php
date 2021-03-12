@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
-use PoP\Engine\FilterInputProcessor;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;

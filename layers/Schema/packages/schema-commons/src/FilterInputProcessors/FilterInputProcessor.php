@@ -1,5 +1,8 @@
 <?php
-namespace PoP\Engine;
+
+declare(strict_types=1);
+
+namespace PoPSchema\SchemaCommons\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
