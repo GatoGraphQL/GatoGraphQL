@@ -1,10 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\Posts\ModuleProcessors;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
 
-class PoP_Posts_Module_Processor_CustomFilterInners extends AbstractModuleProcessor
+class FilterInners extends AbstractModuleProcessor
 {
     public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
     public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
@@ -38,11 +43,13 @@ class PoP_Posts_Module_Processor_CustomFilterInners extends AbstractModuleProces
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Posts:FilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
-        )) {
+        if (
+            $modules = HooksAPIFacade::getInstance()->applyFilters(
+                'Posts:FilterInners:inputmodules',
+                $inputmodules[$module[1]],
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules
@@ -51,6 +58,3 @@ class PoP_Posts_Module_Processor_CustomFilterInners extends AbstractModuleProces
         return $ret;
     }
 }
-
-
-
