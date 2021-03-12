@@ -1,9 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\Tags\ModuleProcessors;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 
-class PoP_Tags_Module_Processor_CustomFilterInners extends AbstractModuleProcessor
+class FilterInners extends AbstractModuleProcessor
 {
     public const MODULE_FILTERINNER_TAGS = 'filterinner-tags';
     public const MODULE_FILTERINNER_TAGCOUNT = 'filterinner-tagcount';
@@ -35,11 +40,13 @@ class PoP_Tags_Module_Processor_CustomFilterInners extends AbstractModuleProcess
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Tags:FilterInners:inputmodules',
-            $inputmodules[$module[1]],
-            $module
-        )) {
+        if (
+            $modules = HooksAPIFacade::getInstance()->applyFilters(
+                'Tags:FilterInners:inputmodules',
+                $inputmodules[$module[1]],
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules

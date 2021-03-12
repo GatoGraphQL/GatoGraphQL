@@ -8,6 +8,7 @@ use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\Tags\ModuleProcessors\FilterInners;
 
 class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -61,9 +62,9 @@ class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return [PoP_Tags_Module_Processor_CustomFilterInners::class, PoP_Tags_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_TAGS];
+                return [FilterInners::class, FilterInners::MODULE_FILTERINNER_TAGS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
-                return [PoP_Tags_Module_Processor_CustomFilterInners::class, PoP_Tags_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_TAGCOUNT];
+                return [FilterInners::class, FilterInners::MODULE_FILTERINNER_TAGCOUNT];
         }
 
         return parent::getFilterSubmodule($module);
