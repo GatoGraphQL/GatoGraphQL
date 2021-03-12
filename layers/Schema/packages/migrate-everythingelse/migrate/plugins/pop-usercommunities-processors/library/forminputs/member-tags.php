@@ -1,12 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_URE_FormInput_MemberTags extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_URE_FormInput_MemberTags extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
-        
+
         $values = array_merge(
             $values,
             array(
@@ -18,7 +19,7 @@ class GD_URE_FormInput_MemberTags extends \PoP\Engine\GD_FormInput_MultiSelect
                 'unknown' => TranslationAPIFacade::getInstance()->__('Unknown', 'ure-popprocessors'),
             )
         );
-        
+
         return $values;
     }
 }

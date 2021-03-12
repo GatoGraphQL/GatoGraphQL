@@ -1,10 +1,12 @@
 <?php
-class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
     public const FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_LINKCATEGORIES],

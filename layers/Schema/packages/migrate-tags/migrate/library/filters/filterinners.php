@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 
 class PoP_Tags_Module_Processor_CustomFilterInners extends AbstractModuleProcessor
 {
@@ -21,17 +22,17 @@ class PoP_Tags_Module_Processor_CustomFilterInners extends AbstractModuleProcess
 
         $inputmodules = [
             self::MODULE_FILTERINNER_TAGS => [
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ORDER],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_LIMIT],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_OFFSET],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_IDS],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
             self::MODULE_FILTERINNER_TAGCOUNT => [
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_IDS],
-                [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(

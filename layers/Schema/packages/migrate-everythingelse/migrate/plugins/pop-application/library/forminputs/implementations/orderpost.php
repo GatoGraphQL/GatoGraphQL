@@ -1,12 +1,13 @@
 <?php
+use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class GD_FormInput_OrderPost extends \PoP\Engine\GD_FormInput_Order
+class GD_FormInput_OrderPost extends OrderFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
-        
+
         $values = array_merge(
             $values,
             array(
@@ -18,7 +19,7 @@ class GD_FormInput_OrderPost extends \PoP\Engine\GD_FormInput_Order
                 'title|DESC' => TranslationAPIFacade::getInstance()->__('Title descending', 'pop-application')
             )
         );
-        
+
         return $values;
     }
 }

@@ -167,7 +167,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
                 return array(
                     'from' => $eventTypeAPI->getFormattedStartDate($event, 'Y-m-d'),
                     'to' => $eventTypeAPI->getFormattedEndDate($event, 'Y-m-d'),
-                    'readable' => $eventTypeAPI->getFormattedStartDate($event, 'd/m/Y') . GD_DATERANGE_SEPARATOR . $eventTypeAPI->getFormattedEndDate($event, 'd/m/Y'),
+                    'readable' => $eventTypeAPI->getFormattedStartDate($event, 'd/m/Y') . ' - ' . $eventTypeAPI->getFormattedEndDate($event, 'd/m/Y'),
                 );
 
             case 'daterangetime':
@@ -176,7 +176,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
                     'to' => $eventTypeAPI->getFormattedEndDate($event, 'Y-m-d'),
                     'fromtime' => $eventTypeAPI->getFormattedStartDate($event, 'H:i'),
                     'totime' => $eventTypeAPI->getFormattedEndDate($event, 'H:i'),
-                    'readable' => $eventTypeAPI->getFormattedStartDate($event, 'd/m/Y h:i A') . GD_DATERANGE_SEPARATOR . $eventTypeAPI->getFormattedEndDate($event, 'd/m/Y h:i A'),
+                    'readable' => $eventTypeAPI->getFormattedStartDate($event, 'd/m/Y h:i A') . ' - ' . $eventTypeAPI->getFormattedEndDate($event, 'd/m/Y h:i A'),
                 );
         }
 

@@ -1,7 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_FormInput_PostSections extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_FormInput_PostSections extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {
@@ -10,7 +11,7 @@ class GD_FormInput_PostSections extends \PoP\Engine\GD_FormInput_MultiSelect
         foreach (PoP_Application_Utils::getContentpostsectionCats() as $cat) {
             $values[$cat] = HooksAPIFacade::getInstance()->applyFilters('GD_FormInput_PostSections:cat:name', gdGetCategoryname($cat), $cat);
         }
-        
+
         return $values;
     }
 }

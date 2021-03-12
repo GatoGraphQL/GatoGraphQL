@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_SocialLogin_API
 {
@@ -16,11 +17,7 @@ class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_Soc
 
         $authenticate_base_url = site_url('wp-login.php', 'login_post') . (strpos(site_url('wp-login.php', 'login_post'), '?') ? '&' : '?') . "action=wordpress_social_authenticate&";
 
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        // overwrite endpoint_url if need'd
-        // if( $cmsengineapi->getOption( 'wsl_settings_hide_wp_login' ) == 1 ){
-        //     $authenticate_base_url = WORDPRESS_SOCIAL_LOGIN_PLUGIN_URL . "/services/authenticate.php?";
-        // }
+        $cmsService = CMSServiceFacade::getInstance();
 
         global $WORDPRESS_SOCIAL_LOGIN_PROVIDERS_CONFIG;
 
@@ -55,7 +52,7 @@ class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_Soc
             $provider_id     = @ $item["provider_id"];
             $provider_name   = @ $item["provider_name"];
 
-            if ($cmsengineapi->getOption('wsl_settings_' . $provider_id . '_enabled')) {
+            if ($cmsService->getOption('wsl_settings_' . $provider_id . '_enabled')) {
                 $authenticate_url = $authenticate_base_url . "provider=" . $provider_id . "&redirect_to=" . urlencode($current_page_url);
                 $networklinks[] = array(
                     'id' => $provider_id,

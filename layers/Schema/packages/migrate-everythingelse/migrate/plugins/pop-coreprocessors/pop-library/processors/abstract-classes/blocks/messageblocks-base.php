@@ -1,6 +1,7 @@
 <?php
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
 {
@@ -14,8 +15,8 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
 
         // If no sticky posts, then make sure we're bringing no results
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $sticky = $cmsengineapi->getOption('sticky_posts');
+        $cmsService = CMSServiceFacade::getInstance();
+        $sticky = $cmsService->getOption('sticky_posts');
         if (!$sticky) {
             // $sticky = array('-1');
             $ret['load'] = false;

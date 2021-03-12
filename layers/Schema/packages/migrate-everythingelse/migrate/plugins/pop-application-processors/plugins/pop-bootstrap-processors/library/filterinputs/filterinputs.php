@@ -1,6 +1,7 @@
 <?php
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
-class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
     public const FILTERINPUT_CATEGORIES = 'filterinput-categories';
@@ -8,7 +9,7 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends \PoP\Comp
     public const FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
     public const FILTERINPUT_VOLUNTEERSNEEDED = 'filterinput-volunteersneeded';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_APPLIESTO],

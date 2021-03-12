@@ -1,9 +1,12 @@
 <?php
 
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 
 abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Processor_MultipleInputsFormInputsBase
 {
+    use FormMultipleInputModuleProcessorTrait;
+
     public function getTemplateResource(array $module, array &$props): ?array
     {
         return [PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor::class, PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_CAPTCHA];
@@ -37,11 +40,11 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
 
         // Save the captcha image URL
         $ret['captcha-imgsrc'] = GD_Captcha::getImageSrc($encoded, $random);
-        
+
         // Save the values to recreate/validate the captcha
         $ret['encoded'] = $encoded;
         $ret['random'] = $random;
-                
+
         return $ret;
     }
 
@@ -56,7 +59,7 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
         if ($wrapper_class = $this->getProp($module, $props, 'wrapper-class')) {
             $ret[GD_JS_CLASSES]['wrapper'] = $wrapper_class;
         }
-                
+
         return $ret;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-interface FormComponent extends \PoP\ComponentModel\FormComponent
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface as UpstreamFormComponentModuleProcessorInterface;
+
+interface FormComponentModuleProcessorInterface extends UpstreamFormComponentModuleProcessorInterface
 {
     public function getLabel(array $module, array &$props);
 }

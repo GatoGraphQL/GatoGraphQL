@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAutomatedEmails_Module_Processor_SectionBlocksBase
 {
@@ -49,7 +50,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
 
     public function getTitle(array $module, array &$props)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
@@ -60,7 +61,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
                 // while the title is set on runtime, so only then we can have the date on the title!
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('Upcoming events — %s <small><a href="%s">View online</a></small>', 'pop-commonautomatedemails-processors'),
-                    date($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))),
+                    date($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))),
                     RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS)
                 );
         }

@@ -3,10 +3,6 @@ namespace PoP\Engine\WP;
 
 class FunctionAPI extends \PoP\Engine\FunctionAPI_Base
 {
-    public function getOption($option, $default = false)
-    {
-        return get_option($option, $default);
-    }
     public function redirect($url)
     {
         wp_redirect($url);

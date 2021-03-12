@@ -39,7 +39,13 @@ services:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
     PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
-        class: '\PoP\ComponentModel\ModuleFiltering\ModuleFilterManager'
+        class: \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager
+
+    PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\FormInputHelperService
+
+    PoP\ComponentModel\FormInputs\:
+        resource: '../src/FormInputs/*'
 
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
@@ -64,6 +70,9 @@ services:
 
     PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface:
         class: \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManager
+
+    PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
+        class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager
 
     PoP\ComponentModel\Registries\TypeRegistryInterface:
         class: \PoP\ComponentModel\Registries\TypeRegistry

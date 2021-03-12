@@ -1,12 +1,13 @@
 <?php
+use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class GD_FormInput_OrderComment extends \PoP\Engine\GD_FormInput_Order
+class GD_FormInput_OrderComment extends OrderFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
-        
+
         $values = array_merge(
             $values,
             array(
@@ -14,7 +15,7 @@ class GD_FormInput_OrderComment extends \PoP\Engine\GD_FormInput_Order
                 'date|ASC' => TranslationAPIFacade::getInstance()->__('Earliest added', 'pop-application'),
             )
         );
-        
+
         return $values;
     }
 }

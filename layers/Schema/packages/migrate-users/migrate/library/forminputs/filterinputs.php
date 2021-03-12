@@ -5,8 +5,10 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
-class PoP_Users_Module_Processor_FilterInputs extends \PoP\ComponentModel\AbstractFormInputs implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+class PoP_Users_Module_Processor_FilterInputs extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
@@ -24,8 +26,8 @@ class PoP_Users_Module_Processor_FilterInputs extends \PoP\ComponentModel\Abstra
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_NAME => [\PoPSchema\Users\FilterInputProcessor::class, \PoPSchema\Users\FilterInputProcessor::FILTERINPUT_NAME],
-            self::MODULE_FILTERINPUT_EMAILS => [\PoPSchema\Users\FilterInputProcessor::class, \PoPSchema\Users\FilterInputProcessor::FILTERINPUT_EMAILS],
+            self::MODULE_FILTERINPUT_NAME => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_NAME],
+            self::MODULE_FILTERINPUT_EMAILS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAILS],
         ];
         return $filterInputs[$module[1]] ?? null;
     }

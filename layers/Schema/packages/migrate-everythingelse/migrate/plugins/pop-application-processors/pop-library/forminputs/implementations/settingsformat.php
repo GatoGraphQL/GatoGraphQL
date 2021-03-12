@@ -1,13 +1,14 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\FormInputs\SelectFormInput;
 
-class GD_FormInput_SettingsFormat extends \PoP\Engine\GD_FormInput_Select
+class GD_FormInput_SettingsFormat extends SelectFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
-        
+
         $values = array_merge(
             $values,
             array(
@@ -31,10 +32,10 @@ class GD_FormInput_SettingsFormat extends \PoP\Engine\GD_FormInput_Select
                 POP_FORMAT_LIST => TranslationAPIFacade::getInstance()->__('List', 'poptheme-wassup'),
             )
         );
-        
+
         return $values;
     }
-    
+
     public function getDefaultValue()
     {
         $vars = ApplicationState::getVars();
@@ -54,7 +55,7 @@ class GD_FormInput_SettingsFormat extends \PoP\Engine\GD_FormInput_Select
                 return $selected;
             }
         }
-    
+
         return POP_FORMAT_SIMPLEVIEW;
     }
 }

@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
@@ -67,7 +68,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
 
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
@@ -79,7 +80,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
                 $ret['status'] = 'null';
 
                 // Limit: 2 times the default for posts
-                $ret['limit'] = $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 2;
+                $ret['limit'] = $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 2;
                 break;
         }
 

@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Users\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPSchema\Users\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'

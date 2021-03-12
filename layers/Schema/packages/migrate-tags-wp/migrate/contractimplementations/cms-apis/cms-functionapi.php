@@ -7,6 +7,7 @@ use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSchema\Tags\FunctionAPI
 {
@@ -149,8 +150,8 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
     }
     public function getTagBase()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        return $cmsengineapi->getOption($this->getTagBaseOption());
+        $cmsService = CMSServiceFacade::getInstance();
+        return $cmsService->getOption($this->getTagBaseOption());
     }
 
     public function setPostTags($post_id, array $tags, bool $append = false)

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 /**
  * This class is a parent class which online gateways may extend. There are various variables and functions that are automatically taken care of by
@@ -18,15 +19,15 @@ if (class_exists("EM_Gateway")) {
         public $button_enabled = true;
         public $payment_return = true;
         public $count_pending_spaces = false;
-    
+
         /**
          * Sets up gateaway and adds relevant actions/filters
          */
         public function __construct()
         {
             //Booking Interception
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            if ($this->is_active() && absint($cmsengineapi->getOption('em_'.$this->gateway.'_booking_timeout')) > 0) {
+            $cmsService = CMSServiceFacade::getInstance();
+            if ($this->is_active() && absint($cmsService->getOption('em_'.$this->gateway.'_booking_timeout')) > 0) {
                 $this->count_pending_spaces = true;
             }
             parent::__construct();
@@ -41,7 +42,7 @@ if (class_exists("EM_Gateway")) {
                 //set up cron
                 if (has_action($cron, 'em_gateway_booking_timeout')) {             // Change Leo
                     $timestamp = wp_next_scheduled($cron);
-                    if (absint($cmsengineapi->getOption('em_'.$this->gateway.'_booking_timeout')) > 0 && !$timestamp) {
+                    if (absint($cmsService->getOption('em_'.$this->gateway.'_booking_timeout')) > 0 && !$timestamp) {
                         $result = wp_schedule_event(time(), 'em_minute', $cron, array('gateway' => $this->gateway));             // Change Leo
                     } elseif (!$timestamp) {
                         wp_unschedule_event($timestamp, $cron);
@@ -55,14 +56,14 @@ if (class_exists("EM_Gateway")) {
                 }
             }
         }
-    
-        
+
+
         /*
         * --------------------------------------------------
         * Booking Interception - functions that modify booking object behaviour
         * --------------------------------------------------
         */
-        
+
         /**
          * Intercepts return data after a booking has been made and adds paypal vars, modifies feedback message.
          *
@@ -73,23 +74,23 @@ if (class_exists("EM_Gateway")) {
         public function bookingFormFeedback($return, $EM_Booking = false)
         {
             //Double check $EM_Booking is an EM_Booking object and that we have a booking awaiting payment.
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+            $cmsService = CMSServiceFacade::getInstance();
             if (is_object($EM_Booking) && $this->uses_gateway($EM_Booking)) {
                 if (!empty($return['result']) && $EM_Booking->get_price() > 0 && $EM_Booking->booking_status == $this->status) {
-                    $return['message'] = $cmsengineapi->getOption('em_'.$this->gateway.'_booking_feedback');
+                    $return['message'] = $cmsService->getOption('em_'.$this->gateway.'_booking_feedback');
                     $gateway_url = $this->getGatewayUrl();                // Change Leo
                     $gateway_vars = $this->getGatewayVars($EM_Booking);                    // Change Leo
                     $gateway_return = array('gateway_url'=>$gateway_url, 'gateway_vars'=>$gateway_vars);            // Change Leo
                     $return = array_merge($return, $gateway_return);
                 } else {
                     //returning a free message
-                    $return['message'] = $cmsengineapi->getOption('em_'.$this->gateway.'_booking_feedback_free');
+                    $return['message'] = $cmsService->getOption('em_'.$this->gateway.'_booking_feedback_free');
                 }
             }
             return $return;
         }
-    
-        
+
+
         /**
          * Called if AJAX isn't being used, i.e. a javascript script failed and forms are being reloaded instead.
          *
@@ -104,7 +105,7 @@ if (class_exists("EM_Gateway")) {
             }
             return $feedback;
         }
-        
+
         /**
          * Triggered by the em_booking_add_yourgateway action, hooked in EM_Gateway. Overrides EM_Gateway to account for non-ajax bookings (i.e. broken JS on site).
          *
@@ -119,13 +120,13 @@ if (class_exists("EM_Gateway")) {
                 HooksAPIFacade::getInstance()->addAction('option_dbem_booking_feedback', array($this, 'bookingFormFeedbackFallback'));
             }
         }
-        
+
         /*
         * --------------------------------------------------
         * Booking UI - modifications to booking pages and tables containing paypal bookings
         * --------------------------------------------------
         */
-        
+
         /**
          * Instead of a simple status string, a resume payment button is added to the status message so user can resume booking from their my-bookings page.
          *
@@ -153,16 +154,16 @@ if (class_exists("EM_Gateway")) {
             }
             return $message;
         }
-    
+
         /**
          * Outputs extra custom content e.g. the PayPal logo by default.
          */
         public function bookingForm()
         {
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            echo $cmsengineapi->getOption('em_'.$this->gateway.'_form');
+            $cmsService = CMSServiceFacade::getInstance();
+            echo $cmsService->getOption('em_'.$this->gateway.'_form');
         }
-        
+
         /**
          * Outputs some JavaScript during the emGatewayJs action, which is run inside a script html tag, located in gateways/gateway.paypal.js
          */
@@ -174,7 +175,7 @@ if (class_exists("EM_Gateway")) {
                 include $file;
             }
         }
-        
+
         /**
          * Adds relevant actions to booking shown in the bookings table
          *
@@ -188,13 +189,13 @@ if (class_exists("EM_Gateway")) {
                 'edit' => '<a class="em-bookings-edit" href="'.em_add_get_params($EM_Booking->getEvent()->get_bookings_url(), array('booking_id'=>$EM_Booking->booking_id, 'em_ajax'=>null, 'em_obj'=>null)).'">'.TranslationAPIFacade::getInstance()->__('Edit/View', 'dbem').'</a>',
             );
         }
-        
+
         /*
         * --------------------------------------------------
         * Gateway Specific Functions - these functions MUST be overridden by each online gateway class
         * --------------------------------------------------
         */
-        
+
         /**
          * Retreive the paypal vars needed to send to the gatway to proceed with payment
          *
@@ -203,7 +204,7 @@ if (class_exists("EM_Gateway")) {
         public function getGatewayVars($EM_Booking)
         {
         }
-        
+
         /**
          * gets paypal gateway url (sandbox or live mode)
          *
@@ -212,97 +213,97 @@ if (class_exists("EM_Gateway")) {
         public function getGatewayUrl()
         {
         }
-        
-        
+
+
         public function sayThanks()
         {
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+            $cmsService = CMSServiceFacade::getInstance();
             if ($_REQUEST['thanks'] == 1) {
-                echo "<div class='em-booking-message em-booking-message-success'>".$cmsengineapi->getOption('em_'.$this->gateway.'_booking_feedback_thanks').'</div>';
+                echo "<div class='em-booking-message em-booking-message-success'>".$cmsService->getOption('em_'.$this->gateway.'_booking_feedback_thanks').'</div>';
             }
         }
-    
+
         /**
          * Runs when PayPal sends IPNs to the return URL provided during bookings and EM setup. Bookings are updated and transactions are recorded accordingly.
          */
         public function handlePaymentReturn()
         {
         }
-        
-    
-        
+
+
+
         /*
         * --------------------------------------------------
         * Gateway Settings Functions
         * --------------------------------------------------
         */
-        
+
         /**
          * Outputs custom PayPal setting fields in the settings page
          */
         public function mysettings()
         {
             // Change Leo
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+            $cmsService = CMSServiceFacade::getInstance();
             global $EM_options; ?>
             <table class="form-table">
             <tbody>
               <tr valign="top">
                   <th scope="row"><?php _e('Success Message', 'em-pro') ?></th>
                   <td>
-                    <input type="text" name="<?php echo $this->gateway ?>_booking_feedback" value="<?php esc_attr_e($cmsengineapi->getOption('em_'. $this->gateway . "_booking_feedback")); ?>" style='width: 40em;' /><br />
+                    <input type="text" name="<?php echo $this->gateway ?>_booking_feedback" value="<?php esc_attr_e($cmsService->getOption('em_'. $this->gateway . "_booking_feedback")); ?>" style='width: 40em;' /><br />
                     <em><?php _e('The message that is shown to a user when a booking is successful whilst being redirected to PayPal for payment.', 'em-pro'); ?></em>
                   </td>
               </tr>
               <tr valign="top">
                   <th scope="row"><?php _e('Success Free Message', 'em-pro') ?></th>
                   <td>
-                    <input type="text" name="<?php echo $this->gateway ?>_booking_feedback_free" value="<?php esc_attr_e($cmsengineapi->getOption('em_'. $this->gateway . "_booking_feedback_free")); ?>" style='width: 40em;' /><br />
+                    <input type="text" name="<?php echo $this->gateway ?>_booking_feedback_free" value="<?php esc_attr_e($cmsService->getOption('em_'. $this->gateway . "_booking_feedback_free")); ?>" style='width: 40em;' /><br />
                     <em><?php _e('If some cases if you allow a free ticket (e.g. pay at gate) as well as paid tickets, this message will be shown and the user will not be redirected to PayPal.', 'em-pro'); ?></em>
                   </td>
               </tr>
               <tr valign="top">
                   <th scope="row"><?php _e('Thank You Message', 'em-pro') ?></th>
                   <td>
-                    <input type="text" name="<?php echo $this->gateway ?>_booking_feedback_thanks" value="<?php esc_attr_e($cmsengineapi->getOption('em_'. $this->gateway . "_booking_feedback_thanks")); ?>" style='width: 40em;' /><br />
+                    <input type="text" name="<?php echo $this->gateway ?>_booking_feedback_thanks" value="<?php esc_attr_e($cmsService->getOption('em_'. $this->gateway . "_booking_feedback_thanks")); ?>" style='width: 40em;' /><br />
                     <em><?php _e('If you choose to return users to the default Events Manager thank you page after a user has paid on PayPal, you can customize the thank you message here.', 'em-pro'); ?></em>
                   </td>
               </tr>
               <tr valign="top">
                   <th scope="row"><?php _e('Return URL', 'em-pro') ?></th>
                   <td>
-                    <input type="text" name="<?php echo $this->gateway ?>_return" value="<?php esc_attr_e($cmsengineapi->getOption('em_'. $this->gateway . "_return")); ?>" style='width: 40em;' /><br />
+                    <input type="text" name="<?php echo $this->gateway ?>_return" value="<?php esc_attr_e($cmsService->getOption('em_'. $this->gateway . "_return")); ?>" style='width: 40em;' /><br />
                     <em><?php _e('Once a payment is completed, users will be offered a link to this URL which confirms to the user that a payment is made. If you would to customize the thank you page, create a new page and add the link here. For automatic redirect, you need to turn auto-return on in your PayPal settings.', 'em-pro'); ?></em>
                   </td>
               </tr>
               <tr valign="top">
                   <th scope="row"><?php _e('Cancel URL', 'em-pro') ?></th>
                   <td>
-                    <input type="text" name="<?php echo $this->gateway ?>_cancel_return" value="<?php esc_attr_e($cmsengineapi->getOption('em_'. $this->gateway . "_cancel_return")); ?>" style='width: 40em;' /><br />
+                    <input type="text" name="<?php echo $this->gateway ?>_cancel_return" value="<?php esc_attr_e($cmsService->getOption('em_'. $this->gateway . "_cancel_return")); ?>" style='width: 40em;' /><br />
                     <em><?php _e('Whilst paying on PayPal, if a user cancels, they will be redirected to this page.', 'em-pro'); ?></em>
                   </td>
-              </tr>          
+              </tr>
               <tr valign="top">
                   <th scope="row"><?php _e('Delete Bookings Pending Payment', 'em-pro') ?></th>
                   <td>
-                    <input type="text" name="<?php echo $this->gateway ?>_booking_timeout" style="width:50px;" value="<?php esc_attr_e($cmsengineapi->getOption('em_'. $this->gateway . "_booking_timeout")); ?>" style='width: 40em;' /> <?php _e('minutes', 'em-pro'); ?><br />
+                    <input type="text" name="<?php echo $this->gateway ?>_booking_timeout" style="width:50px;" value="<?php esc_attr_e($cmsService->getOption('em_'. $this->gateway . "_booking_timeout")); ?>" style='width: 40em;' /> <?php _e('minutes', 'em-pro'); ?><br />
                     <em><?php _e('Once a booking is started and the user is taken to PayPal, Events Manager stores a booking record in the database to identify the incoming payment. These spaces may be considered reserved if you enable <em>Reserved unconfirmed spaces?</em> in your Events &gt; Settings page. If you would like these bookings to expire after x minutes, please enter a value above (note that bookings will be deleted, and any late payments will need to be refunded manually via PayPal).', 'em-pro'); ?></em>
                   </td>
               </tr>
               <tr valign="top">
                   <th scope="row"><?php _e('Manually approve completed transactions?', 'em-pro') ?></th>
                   <td>
-                    <input type="checkbox" name="<?php echo $this->gateway ?>_manual_approval" value="1" <?php echo ($cmsengineapi->getOption('em_'. $this->gateway . "_manual_approval")) ? 'checked="checked"':''; ?> /><br />
+                    <input type="checkbox" name="<?php echo $this->gateway ?>_manual_approval" value="1" <?php echo ($cmsService->getOption('em_'. $this->gateway . "_manual_approval")) ? 'checked="checked"':''; ?> /><br />
                     <em><?php _e('By default, when someone pays for a booking, it gets automatically approved once the payment is confirmed. If you would like to manually verify and approve bookings, tick this box.', 'em-pro'); ?></em><br />
                     <em><?php echo sprintf(TranslationAPIFacade::getInstance()->__('Approvals must also be required for all bookings in your <a href="%s">settings</a> for this to work properly.', 'em-pro'), EM_ADMIN_URL.'&amp;page=events-manager-options'); ?></em>
                   </td>
-              </tr>          
+              </tr>
             </tbody>
             </table>
-            
+
             <?php
         }
-    
+
         /*
         * Run when saving PayPal settings, saves the settings available in EM_Gateway_Paypal::mysettings()
         */
@@ -310,7 +311,7 @@ if (class_exists("EM_Gateway")) {
         {
             parent::update();
             $gateway_options = array(
-    
+
                 $this->gateway . "_site" => $_REQUEST[ $this->gateway.'_site' ],
                 $this->gateway . "_tax" => $_REQUEST[ $this->gateway.'_button' ],
                 $this->gateway . "_manual_approval" => $_REQUEST[ $this->gateway.'_manual_approval' ],
@@ -329,8 +330,8 @@ if (class_exists("EM_Gateway")) {
             return true;
         }
     }
-    
-    
+
+
     /**
      * Deletes bookings pending payment that are more than x minutes old, defined by paypal options.
      */
@@ -338,10 +339,10 @@ if (class_exists("EM_Gateway")) {
     {
         global $wpdb;
         $gateway = $args['gateway'];
-        
+
         //Get a time from when to delete
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $minutes_to_subtract = absint($cmsengineapi->getOption('em_'.$gateway.'_booking_timeout'));
+        $cmsService = CMSServiceFacade::getInstance();
+        $minutes_to_subtract = absint($cmsService->getOption('em_'.$gateway.'_booking_timeout'));
         if ($minutes_to_subtract > 0) {
             //get booking IDs without pending transactions
             $booking_ids = $wpdb->get_col('SELECT b.booking_id FROM '.EM_BOOKINGS_TABLE.' b LEFT JOIN '.EM_TRANSACTIONS_TABLE." t ON t.booking_id=b.booking_id  WHERE booking_date < TIMESTAMPADD(MINUTE, -{$minutes_to_subtract}, NOW()) AND booking_status=4 AND transaction_id IS NULL");

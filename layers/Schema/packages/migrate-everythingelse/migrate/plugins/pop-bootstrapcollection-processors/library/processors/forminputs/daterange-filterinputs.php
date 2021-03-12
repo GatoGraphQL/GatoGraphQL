@@ -4,6 +4,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
 class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Processor_DateRangeFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -21,7 +22,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [\PoPSchema\CustomPosts\FilterInputProcessor::class, \PoPSchema\CustomPosts\FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
+            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
         ];
         return $filterInputs[$module[1]] ?? null;
     }

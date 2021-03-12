@@ -1,10 +1,12 @@
 <?php
-class PoP_Module_Processor_MultiSelectFilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class PoP_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
     public const FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_MODERATEDPOSTSTATUS],

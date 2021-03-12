@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP_Module_Processor_FormInputsBase
@@ -119,8 +120,8 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         $url = $this->getSourceUrl($module, $props);
 
         // Bring 10 times the pre-defined result set
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $limit = $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10;
+        $cmsService = CMSServiceFacade::getInstance();
+        $limit = $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10;
         return GeneralUtils::addQueryArgs([
             \PoP\ComponentModel\Constants\Params::LIMIT => $limit,
         ], $url);

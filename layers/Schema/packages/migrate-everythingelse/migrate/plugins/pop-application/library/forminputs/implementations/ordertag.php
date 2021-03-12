@@ -1,12 +1,13 @@
 <?php
+use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class GD_FormInput_OrderTag extends \PoP\Engine\GD_FormInput_Order
+class GD_FormInput_OrderTag extends OrderFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
-        
+
         $values = array_merge(
             $values,
             array(
@@ -16,7 +17,7 @@ class GD_FormInput_OrderTag extends \PoP\Engine\GD_FormInput_Order
                 'count|ASC' => TranslationAPIFacade::getInstance()->__('Count lowest', 'pop-application'),
             )
         );
-        
+
         return $values;
     }
 

@@ -1,10 +1,12 @@
 <?php
-class PoP_Module_Processor_FormsFilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
     public const FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],

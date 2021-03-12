@@ -15,6 +15,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -186,7 +187,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ) {
         $notification = $resultItem;
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -216,12 +217,12 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             case 'histTimeNogmt':
                 // In the DB, the time is saved without GMT. However, in the front-end we need the GMT factored in,
                 // because moment.js will
-                return $notification->hist_time - ($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600);
+                return $notification->hist_time - ($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600);
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('%s ago', 'pop-notifications'),
-                    \humanTiming($notification->hist_time - ($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600))
+                    \humanTiming($notification->hist_time - ($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600))
                 );
 
             case 'status':

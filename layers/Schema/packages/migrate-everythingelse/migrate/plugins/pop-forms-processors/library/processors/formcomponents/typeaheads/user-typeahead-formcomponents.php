@@ -23,7 +23,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_FilterInputs::class, PoP_Module_Processor_FilterInputs::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
