@@ -34,7 +34,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         if (Environment::enableGlobalGoogleTranslateDirective()) {
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
         }

@@ -89,7 +89,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         if (self::isEnabled()) {
-            parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
             ComponentConfiguration::setConfiguration($configuration);
             self::initServices(dirname(__DIR__));
             self::initServices(dirname(__DIR__), '/Overrides');
