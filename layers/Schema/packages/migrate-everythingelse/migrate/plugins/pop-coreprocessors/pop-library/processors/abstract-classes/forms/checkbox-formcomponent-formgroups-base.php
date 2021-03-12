@@ -1,6 +1,8 @@
 <?php
 
-abstract class PoP_Module_Processor_NoLabelFormComponentGroupsBase extends PoP_Module_Processor_FormComponentGroupsBase implements FormComponent
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+
+abstract class PoP_Module_Processor_NoLabelFormComponentGroupsBase extends PoP_Module_Processor_FormComponentGroupsBase implements FormComponentModuleProcessorInterface
 {
     public function initModelProps(array $module, array &$props)
     {

@@ -14,6 +14,7 @@ use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 {
@@ -106,7 +107,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'date':
@@ -120,7 +121,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                                 $translationAPI->__('Date format, as defined in %s', 'customposts'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );

@@ -1,14 +1,15 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_FormInput_ContactUs_Topics extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_FormInput_ContactUs_Topics extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {
         $values = parent::getAllValues($label);
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        
+
         $topics = HooksAPIFacade::getInstance()->applyFilters(
             'gd_gf_contactus_topics',
             array(
@@ -20,7 +21,7 @@ class GD_FormInput_ContactUs_Topics extends \PoP\Engine\GD_FormInput_MultiSelect
         foreach ($topics as $topic) {
             $values[$cmsapplicationhelpers->sanitizeTitle($topic)] = $topic;
         }
-        
+
         return $values;
     }
 }

@@ -1,8 +1,9 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
-abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponent
+abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
@@ -45,7 +46,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = [
             ModuleUtils::getModuleOutputName($featuredimageinner),
         ];
-                
+
         return $ret;
     }
 
@@ -61,7 +62,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
     public function initWebPlatformModelProps(array $module, array &$props)
     {
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
-        
+
         // Set the "pop-merge" class to be able to redraw the inner layout
         $this->appendProp($module, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($featuredimageinner));
 

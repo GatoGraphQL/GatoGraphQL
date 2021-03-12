@@ -1,9 +1,11 @@
 <?php
-class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_AUTHORROLE_MULTISELECT],

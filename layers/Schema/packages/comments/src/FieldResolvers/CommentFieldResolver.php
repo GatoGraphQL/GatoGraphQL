@@ -12,6 +12,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -142,7 +143,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         switch ($fieldName) {
             case 'date':
                 return array_merge(
@@ -155,7 +156,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
                                 $translationAPI->__('Date format, as defined in %s', 'pop-comments'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );

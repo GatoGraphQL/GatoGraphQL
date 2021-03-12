@@ -1,7 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
-class GD_FormInput_ContentSections extends \PoP\Engine\GD_FormInput_MultiSelect
+class GD_FormInput_ContentSections extends MultipleSelectFormInput
 {
     public function getAllValues($label = null)
     {
@@ -19,12 +20,12 @@ class GD_FormInput_ContentSections extends \PoP\Engine\GD_FormInput_MultiSelect
                 $formatted[$item] = HooksAPIFacade::getInstance()->applyFilters('GD_FormInput_ContentSections:taxonomyterms:name', $item, $taxonomy, $term);
             }
         }
-        
+
         $values = array_merge(
             $values,
             $formatted
         );
-        
+
         return $values;
     }
 }

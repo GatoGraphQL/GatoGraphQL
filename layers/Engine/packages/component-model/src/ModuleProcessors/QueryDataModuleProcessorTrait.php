@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -68,13 +69,13 @@ trait QueryDataModuleProcessorTrait
     public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null)
     {
         if ($active_filterqueryargs_modules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            global $pop_filterinputprocessor_manager;
+            $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
+            $filterInputProcessorManager = FilterInputProcessorManagerFacade::getInstance();
             foreach ($active_filterqueryargs_modules as $submodule) {
-                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+                $submodule_processor = $moduleProcessorManager->getProcessor($submodule);
                 $value = $submodule_processor->getValue($submodule, $source);
                 if ($filterInput = $submodule_processor->getFilterInput($submodule)) {
-                    $pop_filterinputprocessor_manager->getProcessor($filterInput)->filterDataloadQueryArgs($filterInput, $query, $value);
+                    $filterInputProcessorManager->getProcessor($filterInput)->filterDataloadQueryArgs($filterInput, $query, $value);
                 }
             }
         }
@@ -90,14 +91,14 @@ trait QueryDataModuleProcessorTrait
         }
 
         $modules = [];
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
         // Check if the module has any filtercomponent
         if ($filterqueryargs_modules = $this->getDataloadQueryArgsFilteringModules($module)) {
             // Check if if we're currently filtering by any filtercomponent
             $modules = array_filter(
                 $filterqueryargs_modules,
-                function ($module) use ($moduleprocessor_manager, $source) {
-                    return !is_null($moduleprocessor_manager->getProcessor($module)->getValue($module, $source));
+                function ($module) use ($moduleProcessorManager, $source) {
+                    return !is_null($moduleProcessorManager->getProcessor($module)->getValue($module, $source));
                 }
             );
         }
@@ -108,11 +109,11 @@ trait QueryDataModuleProcessorTrait
 
     public function getDataloadQueryArgsFilteringModules(array $module): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
         return array_values(array_filter(
             $this->getDatasetmoduletreeSectionFlattenedModules($module),
-            function ($module) use ($moduleprocessor_manager) {
-                return $moduleprocessor_manager->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
+            function ($module) use ($moduleProcessorManager) {
+                return $moduleProcessorManager->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
             }
         ));
     }

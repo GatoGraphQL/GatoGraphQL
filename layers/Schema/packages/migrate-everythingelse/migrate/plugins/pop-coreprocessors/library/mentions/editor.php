@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
 function gdMentionsExternalPlugins($plugins)
@@ -56,8 +57,7 @@ function gdMentionsBeforeInit($mceInit)
 HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsMentionsManagerImpl');
 function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 {
-    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        // $filter_manager = \PoP\Engine\FilterManagerFactory::getInstance();
+    $cmsService = CMSServiceFacade::getInstance();
 
     // global $gd_filtercomponent_name, $gd_filtercomponent_orderuser, $gd_filtercomponent_ordertag;
     $query_wildcard = urlencode(GD_JSPLACEHOLDER_QUERY);
@@ -105,7 +105,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $users_baselineurl = GeneralUtils::addQueryArgs([
-        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
+        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $users_baselineurl);
 
     $users_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($users_baselineurl, POP_FORMAT_MENTION);
@@ -139,7 +139,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $tags_baselineurl = GeneralUtils::addQueryArgs([
-        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
+        \PoP\ComponentModel\Constants\Params::LIMIT => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $tags_baselineurl);
 
     $tags_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($tags_baselineurl, POP_FORMAT_MENTION);

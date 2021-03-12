@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\SchemaCommons\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\SchemaCommons\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
+
+    PoPSchema\SchemaCommons\FormInputs\:
+        resource: '../src/FormInputs/*'

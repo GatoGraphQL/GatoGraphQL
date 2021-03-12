@@ -1,8 +1,9 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
-abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponent
+abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
@@ -55,7 +56,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         $this->setProp($module, $props, 'wrapper-class', 'row');
         $this->setProp($module, $props, 'map-class', 'col-sm-9 col-sm-push-3');
         $this->setProp($module, $props, 'typeahead-class', 'col-sm-3 col-sm-pull-9');
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -75,7 +76,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         $ret[GD_JS_CLASSES]['wrapper'] = $this->getProp($module, $props, 'wrapper-class');
         $ret[GD_JS_CLASSES]['map'] = $this->getProp($module, $props, 'map-class');
         $ret[GD_JS_CLASSES]['typeahead'] = $this->getProp($module, $props, 'typeahead-class');
-                
+
         return $ret;
     }
 }

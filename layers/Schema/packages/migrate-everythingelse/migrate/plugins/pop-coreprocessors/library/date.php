@@ -2,13 +2,11 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-define('GD_DATERANGE_SEPARATOR', ' - ');
-
 HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdJqueryConstantsDaterangeImpl');
 function gdJqueryConstantsDaterangeImpl($jqueryConstants)
 {
-    $jqueryConstants['DATERANGE_SEPARATOR'] = GD_DATERANGE_SEPARATOR;
-    
+    $jqueryConstants['DATERANGE_SEPARATOR'] = ' - ';
+
     /*
     $jqueryConstants['DATERANGE_TODAY'] = TranslationAPIFacade::getInstance()->__('Today', 'pop-coreprocessors');
     $jqueryConstants['DATERANGE_THISMONTH'] = TranslationAPIFacade::getInstance()->__('This Month', 'pop-coreprocessors');
@@ -53,6 +51,6 @@ function gdJqueryConstantsDaterangeImpl($jqueryConstants)
         TranslationAPIFacade::getInstance()->__('November', 'pop-coreprocessors'),
         TranslationAPIFacade::getInstance()->__('December', 'pop-coreprocessors'),
     );
-    
+
     return $jqueryConstants;
 }

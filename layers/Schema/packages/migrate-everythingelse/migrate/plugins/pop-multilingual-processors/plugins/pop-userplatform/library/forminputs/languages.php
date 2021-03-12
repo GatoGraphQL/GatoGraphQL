@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\FormInputs\SelectFormInput;
 
-class GD_QT_FormInput_Languages extends \PoP\Engine\GD_FormInput_Select
+class GD_QT_FormInput_Languages extends SelectFormInput
 {
     public function getAllValues($label = null)
     {
@@ -13,10 +14,10 @@ class GD_QT_FormInput_Languages extends \PoP\Engine\GD_FormInput_Select
         foreach ($sorted_languages as $language) {
             $values[$language] = $pluginapi->getLanguageName($language);
         }
-        
+
         return $values;
     }
-    
+
     public function getDefaultValue()
     {
         $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();

@@ -1,6 +1,8 @@
 <?php
 
-abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends PoP_Module_Processor_AlertsBase implements FormComponent
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+
+abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends PoP_Module_Processor_AlertsBase implements FormComponentModuleProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
