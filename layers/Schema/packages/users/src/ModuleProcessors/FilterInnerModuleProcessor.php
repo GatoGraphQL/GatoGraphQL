@@ -7,6 +7,7 @@ namespace PoPSchema\Users\ModuleProcessors;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\FilterInputModuleProcessor;
 
 class FilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -27,8 +28,8 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
 
         $inputmodules = [
             self::MODULE_FILTERINNER_USERS => [
-                [PoP_Users_Module_Processor_FilterInputs::class, PoP_Users_Module_Processor_FilterInputs::MODULE_FILTERINPUT_NAME],
-                [PoP_Users_Module_Processor_FilterInputs::class, PoP_Users_Module_Processor_FilterInputs::MODULE_FILTERINPUT_EMAILS],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
@@ -36,8 +37,8 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
             self::MODULE_FILTERINNER_USERCOUNT => [
-                [PoP_Users_Module_Processor_FilterInputs::class, PoP_Users_Module_Processor_FilterInputs::MODULE_FILTERINPUT_NAME],
-                [PoP_Users_Module_Processor_FilterInputs::class, PoP_Users_Module_Processor_FilterInputs::MODULE_FILTERINPUT_EMAILS],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
