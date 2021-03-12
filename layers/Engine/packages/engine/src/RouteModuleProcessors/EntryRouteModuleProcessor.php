@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\RouteModuleProcessors;
 
+use PoP\Engine\ModuleProcessors\RootModuleProcessors;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
@@ -16,7 +17,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
 
         $ret[] = [
-            'module' => [\PoP_Engine_Module_Processor_Elements::class, \PoP_Engine_Module_Processor_Elements::MODULE_EMPTY],
+            'module' => [RootModuleProcessors::class, RootModuleProcessors::MODULE_EMPTY],
         ];
 
         return $ret;

@@ -1,7 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoP\Engine\ModuleProcessors;
+
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 
-class PoP_Engine_Module_Processor_Elements extends AbstractModuleProcessor
+class RootModuleProcessors extends AbstractModuleProcessor
 {
     public const MODULE_EMPTY = 'empty';
 
