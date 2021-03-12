@@ -6,7 +6,7 @@ class UserStance_DataLoad_FilterHooks
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'Stances:FilterInners:inputmodules',
+            'Stances:FilterInnerModuleProcessor:inputmodules',
             array($this, 'filtercomponents'),
             10,
             2
@@ -26,12 +26,12 @@ class UserStance_DataLoad_FilterHooks
             [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_STANCES_STANCE],
         ])) {
             array_splice(
-                $filterinputs, 
+                $filterinputs,
                 array_search(
-                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH], 
+                    [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
                     $filterinputs
-                )+1, 
-                0, 
+                )+1,
+                0,
                 [
                     [UserStance_URE_Module_Processor_FormInputGroups::class, UserStance_URE_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT],
                 ]
@@ -47,12 +47,12 @@ class UserStance_DataLoad_FilterHooks
             [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_STANCES_STANCE],
         ])) {
             array_splice(
-                $filterinputs, 
+                $filterinputs,
                 array_search(
-                    [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH], 
+                    [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
                     $filterinputs
-                )+1, 
-                0, 
+                )+1,
+                0,
                 [
                     [UserStance_URE_Module_Processor_MultiSelectFilterInputs::class, UserStance_URE_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT],
                 ]
@@ -61,7 +61,7 @@ class UserStance_DataLoad_FilterHooks
         return $filterinputs;
     }
 }
-    
+
 /**
  * Initialize
  */

@@ -6,7 +6,7 @@ namespace PoP\Engine\FormInputs;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class DateRangeTime extends MultipleInputFormInput
+class DateRangeTimeFormInput extends MultipleInputFormInput
 {
     public function __construct($params = array())
     {

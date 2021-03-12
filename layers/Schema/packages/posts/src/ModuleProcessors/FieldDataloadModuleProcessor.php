@@ -8,9 +8,9 @@ use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoPSchema\Posts\ModuleProcessors\FilterInners;
+use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 
-class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
 
@@ -62,9 +62,9 @@ class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
-                return [FilterInners::class, FilterInners::MODULE_FILTERINNER_POSTS];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
-                return [FilterInners::class, FilterInners::MODULE_FILTERINNER_POSTCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

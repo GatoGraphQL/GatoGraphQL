@@ -28,7 +28,7 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Locations:FilterInners:inputmodules',
+            'Locations:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

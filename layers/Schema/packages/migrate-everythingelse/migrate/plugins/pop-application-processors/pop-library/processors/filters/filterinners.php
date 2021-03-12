@@ -143,7 +143,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Blog:FilterInners:inputmodules',
+            'Blog:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

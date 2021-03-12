@@ -12,7 +12,7 @@ use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\CustomPosts\Conditional\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers;
 use PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\Hooks\CustomPostHooks;
 use PoPSchema\Users\Routing\RouteNatures;
-use PoPSchema\Posts\Conditional\Users\ModuleProcessors\FieldDataloads;
+use PoPSchema\Posts\Conditional\Users\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -56,8 +56,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         // Author's posts
         $routemodules = array(
             POP_POSTS_ROUTE_POSTS => [
-                FieldDataloads::class,
-                FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :

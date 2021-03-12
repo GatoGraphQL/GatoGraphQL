@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ModuleProcessors;
+namespace PoPSchema\Posts\ModuleProcessors;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
 
-class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
+class FilterInnerModuleProcessor extends AbstractModuleProcessor
 {
-    public const MODULE_FILTERINNER_COMMENTS = 'filterinner-comments';
+    public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
+    public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_COMMENTS],
+            [self::class, self::MODULE_FILTERINNER_POSTS],
+            [self::class, self::MODULE_FILTERINNER_POSTCOUNT],
         );
     }
 
@@ -25,7 +27,7 @@ class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
         $ret = parent::getSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_COMMENTS => [
+            self::MODULE_FILTERINNER_POSTS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
@@ -34,10 +36,16 @@ class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
+            self::MODULE_FILTERINNER_POSTCOUNT => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+                [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+            ],
         ];
         if (
             $modules = HooksAPIFacade::getInstance()->applyFilters(
-                'Comments:FilterInnerModuleProcessor:inputmodules',
+                'Posts:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module
             )

@@ -8,8 +8,8 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloads;
-use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
@@ -22,7 +22,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $ret[TagRouteNatures::TAG][] = [
-            'module' => [PostTagFieldDataloads::class, PostTagFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
+            'module' => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
@@ -41,7 +41,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
-            POP_POSTTAGS_ROUTE_POSTTAGS => [PostTagFieldDataloads::class, PostTagFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
+            POP_POSTTAGS_ROUTE_POSTTAGS => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -52,7 +52,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ];
         }
         $routemodules = array(
-            POP_POSTS_ROUTE_POSTS => [TagPostFieldDataloads::class, TagPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
+            POP_POSTS_ROUTE_POSTS => [TagPostFieldDataloadModuleProcessor::class, TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[TagRouteNatures::TAG][$route][] = [

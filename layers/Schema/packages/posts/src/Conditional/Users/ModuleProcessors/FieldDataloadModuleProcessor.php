@@ -8,9 +8,9 @@ use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\Posts\ModuleProcessors\FilterInners;
+use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 
-class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'dataload-relationalfields-authorpostlist';
 
@@ -61,7 +61,7 @@ class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
-                return [FilterInners::class, FilterInners::MODULE_FILTERINNER_POSTS];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTS];
         }
 
         return parent::getFilterSubmodule($module);

@@ -9,7 +9,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\Categories\TypeResolvers\CategoryTypeResolver;
 
-class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
 

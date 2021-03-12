@@ -8,7 +8,7 @@ use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
-use PoPSchema\Categories\ModuleProcessors\FieldDataloads;
+use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -19,7 +19,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     {
         $ret = array();
         $ret[CategoryRouteNatures::CATEGORY][] = [
-            'module' => [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY],
+            'module' => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],
@@ -34,7 +34,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     {
         $ret = array();
         $routemodules = array(
-            POP_CATEGORIES_ROUTE_CATEGORIES => [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
+            POP_CATEGORIES_ROUTE_CATEGORIES => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -46,7 +46,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         }
         // Commented until creating route POP_CUSTOMPOSTS_ROUTE_CUSTOMPOSTS
         // $routemodules = array(
-        //     POP_CUSTOMPOSTS_ROUTE_CUSTOMPOSTS => [FieldDataloads::class, \PoP_Categories_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
+        //     POP_CUSTOMPOSTS_ROUTE_CUSTOMPOSTS => [FieldDataloadModuleProcessor::class, \PoP_Categories_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
         // );
         // foreach ($routemodules as $route => $module) {
         //     $ret[CategoryRouteNatures::CATEGORY][$route][] = [

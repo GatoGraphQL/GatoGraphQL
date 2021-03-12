@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloads;
-use PoPSchema\Tags\ModuleProcessors\FieldDataloads as TagFieldDataloads;
-use PoPSchema\Posts\ModuleProcessors\FieldDataloads as PostFieldDataloads;
-use PoPSchema\Users\ModuleProcessors\FieldDataloads as UserFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPSchema\Tags\ModuleProcessors\FieldDataloadModuleProcessor as TagFieldDataloads;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
+use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
 use PoPSchema\Posts\Conditional\Users\ModuleProcessors as UserPostFieldDataloads;
 
 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -29,11 +29,11 @@ $moduleprocessor_manager->overrideProcessorClass(
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    FieldDataloads::class,
+    FieldDataloadModuleProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
         TagFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
-        TagPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+        TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );
 

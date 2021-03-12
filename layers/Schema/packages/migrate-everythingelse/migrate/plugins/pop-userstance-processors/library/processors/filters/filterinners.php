@@ -81,7 +81,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Stances:FilterInners:inputmodules',
+            'Stances:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

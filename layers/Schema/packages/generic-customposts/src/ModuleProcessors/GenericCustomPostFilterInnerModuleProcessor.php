@@ -6,9 +6,9 @@ namespace PoPSchema\GenericCustomPosts\ModuleProcessors;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputs;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
+use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -30,29 +30,29 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
         switch ($module[1]) {
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST:
                 $inputmodules = [
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
-                    [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
-                    [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
+                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT:
                 $inputmodules = [
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
-                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
-                    [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+                    [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
+                    [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
         }
         if (
             $modules = HooksAPIFacade::getInstance()->applyFilters(
-                'GenericCustomPosts:FilterInners:inputmodules',
+                'GenericCustomPosts:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules,
                 $module
             )
