@@ -7,6 +7,7 @@ namespace PoPSchema\Posts\Conditional\Users\Conditional\API\RouteModuleProcessor
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPSchema\Users\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
+use PoPSchema\Users\Conditional\CustomPosts\ModuleProcessors\FieldDataloads;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -18,10 +19,13 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
 
         // Author's posts
+        /**
+         * @todo Fix: currently showing custom posts, not posts
+         */
         $routemodules = array(
             POP_POSTS_ROUTE_POSTS => [
-                \PoP_Users_Posts_Module_Processor_FieldDataloads::class,
-                \PoP_Users_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
+                FieldDataloads::class,
+                FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
             ],
         );
         foreach ($routemodules as $route => $module) {

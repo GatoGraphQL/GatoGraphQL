@@ -4,6 +4,7 @@ use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloads;
 use PoPSchema\Tags\ModuleProcessors\FieldDataloads as TagFieldDataloads;
 use PoPSchema\Posts\ModuleProcessors\FieldDataloads as PostFieldDataloads;
 use PoPSchema\Users\ModuleProcessors\FieldDataloads as UserFieldDataloads;
+use PoPSchema\Users\Conditional\CustomPosts\ModuleProcessors\FieldDataloads as UserCustomPostFieldDataloads;
 
 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(
@@ -21,10 +22,10 @@ $moduleprocessor_manager->overrideProcessorClass(
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Users_Posts_Module_Processor_FieldDataloads::class,
+    UserCustomPostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Users_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+        UserCustomPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(

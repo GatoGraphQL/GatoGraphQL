@@ -1,10 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\Users\Conditional\CustomPosts\ModuleProcessors;
+
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
-class PoP_Users_Posts_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'dataload-relationalfields-authorpostlist';
 
