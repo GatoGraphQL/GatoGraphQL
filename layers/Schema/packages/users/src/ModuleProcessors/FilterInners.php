@@ -1,9 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\Users\ModuleProcessors;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 
-class PoP_Users_Module_Processor_CustomFilterInners extends AbstractModuleProcessor
+class FilterInners extends AbstractModuleProcessor
 {
     public const MODULE_FILTERINNER_USERS = 'filterinner-users';
     public const MODULE_FILTERINNER_USERCOUNT = 'filterinner-usercount';
