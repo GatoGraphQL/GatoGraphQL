@@ -1,12 +1,14 @@
 <?php
 namespace PoPSchema\Users;
 
-class FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_NAME = 'filterinput-name';
     public const FILTERINPUT_EMAILS = 'filterinput-emails';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_NAME],

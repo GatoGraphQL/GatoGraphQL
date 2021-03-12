@@ -5,8 +5,9 @@ namespace PoPSchema\CustomPosts;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
-class FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const NON_EXISTING_CUSTOM_POST_TYPE = 'non-existing-customp-post-type';
 
@@ -15,7 +16,7 @@ class FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProces
     public const FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_CUSTOMPOSTDATES],

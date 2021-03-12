@@ -1,11 +1,13 @@
 <?php
-class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
     public const URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
     public const URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::URE_FILTERINPUT_INDIVIDUALINTERESTS],

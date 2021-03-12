@@ -65,6 +65,9 @@ services:
     PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface:
         class: \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManager
 
+    PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
+        class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager
+
     PoP\ComponentModel\Registries\TypeRegistryInterface:
         class: \PoP\ComponentModel\Registries\TypeRegistry
 

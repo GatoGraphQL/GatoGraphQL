@@ -1,9 +1,11 @@
 <?php
-class PoP_Events_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class PoP_Events_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_EVENTSCOPE],

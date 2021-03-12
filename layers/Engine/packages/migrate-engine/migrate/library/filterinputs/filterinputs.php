@@ -1,7 +1,9 @@
 <?php
 namespace PoP\Engine;
 
-class FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+
+class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_ORDER = 'filterinput-order';
     public const FILTERINPUT_LIMIT = 'filterinput-limit';
@@ -10,7 +12,7 @@ class FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProces
     public const FILTERINPUT_DATES = 'filterinput-dates';
     public const FILTERINPUT_INCLUDE = 'filterinput-include';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_ORDER],

@@ -1,7 +1,8 @@
 <?php
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
-class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
+class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
     public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';
@@ -10,7 +11,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
     public const URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
     public const URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
 
-    public function getFilterInputsToProcess()
+    public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST],
