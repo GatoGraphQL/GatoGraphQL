@@ -8,3 +8,6 @@ services:
 
     PoPSchema\Events\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\Events\Enums\:
+        resource: '../src/Enums/*'
