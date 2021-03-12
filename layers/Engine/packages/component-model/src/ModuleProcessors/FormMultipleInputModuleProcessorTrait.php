@@ -29,7 +29,7 @@ trait FormMultipleInputModuleProcessorTrait
         $name = $this->getName($module);
         $names = array();
         foreach ($this->getInputSubnames($module) as $subname) {
-            $names[$subname] = \PoP\ComponentModel\PoP_InputUtils::getMultipleinputsName($name, $subname).($this->isMultiple($module) ? '[]' : '');
+            $names[$subname] = \PoP\ComponentModel\PoP_InputUtils::getMultipleinputsName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
         }
         return $names;
     }
