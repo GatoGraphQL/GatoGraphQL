@@ -8,7 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
-use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputs;
+use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -37,7 +37,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT:
@@ -46,7 +46,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                    [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
         }
