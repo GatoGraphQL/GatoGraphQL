@@ -12,7 +12,7 @@ use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\CustomPosts\Conditional\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers;
 use PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\Hooks\CustomPostHooks;
 use PoPSchema\Users\Routing\RouteNatures;
-use PoPSchema\Users\Conditional\CustomPosts\ModuleProcessors\FieldDataloads;
+use PoPSchema\Posts\Conditional\Users\ModuleProcessors\FieldDataloads;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -54,9 +54,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $ret = array();
         $vars = ApplicationState::getVars();
         // Author's posts
-        /**
-         * @todo Fix: currently showing custom posts, not posts
-         */
         $routemodules = array(
             POP_POSTS_ROUTE_POSTS => [
                 FieldDataloads::class,
