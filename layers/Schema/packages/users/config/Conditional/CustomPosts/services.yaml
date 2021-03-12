@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Users\Conditional\CustomPosts\LooseContracts\:
         resource: '../../../src/Conditional/CustomPosts/LooseContracts/*'
+
+    PoPSchema\Users\Conditional\CustomPosts\ModuleProcessors\:
+        resource: '../../../src/Conditional/CustomPosts/ModuleProcessors/*'

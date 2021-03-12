@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Tags\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPSchema\Tags\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

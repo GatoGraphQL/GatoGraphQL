@@ -61,6 +61,7 @@ class Component extends AbstractComponent
     ): void {
         parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
+        self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
@@ -71,6 +72,10 @@ class Component extends AbstractComponent
         }
 
         if (class_exists('\PoPSchema\Users\Component')) {
+            self::initServices(
+                dirname(__DIR__),
+                '/Conditional/Users'
+            );
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),

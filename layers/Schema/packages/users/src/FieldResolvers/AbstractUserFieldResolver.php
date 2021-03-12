@@ -12,6 +12,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\ModuleProcessors\FieldDataloads;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -82,7 +83,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'userCount':
-                return [\PoP_Users_Module_Processor_FieldDataloads::class, \PoP_Users_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT];
+                return [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
