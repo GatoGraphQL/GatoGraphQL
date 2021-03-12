@@ -11,8 +11,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloads;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -104,8 +105,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         }
         $routemodules = array(
             POP_POSTS_ROUTE_POSTS => [
-                \PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::class,
-                \PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+                TagPostFieldDataloads::class,
+                TagPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\Conditional\API\RouteModuleProcessors;
 
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoP\API\Response\Schemes as APISchemes;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloads;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -51,7 +52,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             ];
         }
         $routemodules = array(
-            POP_POSTS_ROUTE_POSTS => [\PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::class, \PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
+            POP_POSTS_ROUTE_POSTS => [TagPostFieldDataloads::class, TagPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[TagRouteNatures::TAG][$route][] = [

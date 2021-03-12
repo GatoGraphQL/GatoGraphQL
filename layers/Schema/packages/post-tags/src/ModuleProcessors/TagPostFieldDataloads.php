@@ -1,11 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\PostTags\ModuleProcessors;
+
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
-class PoP_Taxonomies_Posts_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class TagPostFieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
 
