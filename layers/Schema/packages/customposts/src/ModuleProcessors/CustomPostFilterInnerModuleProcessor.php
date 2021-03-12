@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPosts\ModuleProcessors;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 
 class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -32,22 +33,22 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST:
             case self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST:
                 $inputmodules = [
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ORDER],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_LIMIT],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_OFFSET],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_DATES],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_IDS],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                 ];
                 break;
             case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT:
             case self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT:
                 $inputmodules = [
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_DATES],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_IDS],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                 ];
                 break;
         }

@@ -6,6 +6,7 @@ namespace PoPSchema\GenericCustomPosts\ModuleProcessors;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 
 class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -27,22 +28,22 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
         switch ($module[1]) {
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTLIST:
                 $inputmodules = [
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ORDER],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_LIMIT],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_OFFSET],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_DATES],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_IDS],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                     [\PoP_CustomPosts_Module_Processor_FilterInputs::class, \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT:
                 $inputmodules = [
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_SEARCH],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_DATES],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_IDS],
-                    [\PoP_Module_Processor_FilterInputs::class, \PoP_Module_Processor_FilterInputs::MODULE_FILTERINPUT_ID],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_DATES],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
+                    [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
                     [\PoP_CustomPosts_Module_Processor_FilterInputs::class, \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
