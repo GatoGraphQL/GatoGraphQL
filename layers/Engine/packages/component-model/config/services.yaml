@@ -41,6 +41,9 @@ services:
     PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
         class: '\PoP\ComponentModel\ModuleFiltering\ModuleFilterManager'
 
+    PoP\ComponentModel\FormInputs\:
+        resource: '../src/FormInputs/*'
+
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
