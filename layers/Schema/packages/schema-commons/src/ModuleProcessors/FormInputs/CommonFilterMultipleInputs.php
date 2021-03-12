@@ -14,6 +14,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -119,12 +120,12 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
             case self::MODULE_FILTERINPUT_DATES:
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
-                $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+                $cmsService = CMSServiceFacade::getInstance();
                 return sprintf(
                     $translationAPI->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
                     $formInputHelperService->getMultipleInputName($name, $subnames[0]),
                     $formInputHelperService->getMultipleInputName($name, $subnames[1]),
-                    $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))
+                    $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))
                 );
         }
         return null;

@@ -101,8 +101,6 @@ function gdEmEventOutputEventDates($attString, $event, $format, $target)
         switch ($result) {
             case '#_EVENTDATESTART':
             case '#_EVENTDATEEND':
-                // $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                //$date_format = ( $cmsengineapi->getOption('dbem_date_format') ) ? getOption('dbem_date_format'):getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'));
                 // Possible Formats required: http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
                 // WP Formats: http://codex.wordpress.org/Formatting_Date_and_Time
                 $date_format = 'c'; // ISO8601

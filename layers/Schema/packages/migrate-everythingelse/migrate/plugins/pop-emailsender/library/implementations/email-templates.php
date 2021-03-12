@@ -9,6 +9,7 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -129,7 +130,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
         );
 
         $comment_styles = HooksAPIFacade::getInstance()->applyFilters('sendemailToUsersFromComment:comment_styles', array('width: 100%'));
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $comment_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
             '<tr valign="top">'.
@@ -141,7 +142,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar_html,
             $comment->comment_author_url,
             $comment->comment_author,
-            $cmsengineapi->getDate($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
+            $cmsengineapi->getDate($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
             $cmscommentsresolver->getCommentContent($comment)
         );
 

@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -83,13 +84,13 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
 
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 // Limit: 2 times the default for posts
                 $notifications_query_args = array(
-                    'limit' => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 2,
+                    'limit' => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 2,
                 );
 
                 $ret = array_merge(

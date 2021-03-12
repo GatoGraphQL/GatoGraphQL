@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_EmailSender_Utils
 {
@@ -75,8 +76,8 @@ class PoP_EmailSender_Utils
     }
     public static function getCharset()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        return HooksAPIFacade::getInstance()->applyFilters('gd_email_charset', strtolower($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:charset'))));
+        $cmsService = CMSServiceFacade::getInstance();
+        return HooksAPIFacade::getInstance()->applyFilters('gd_email_charset', strtolower($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:charset'))));
     }
 
     public static function sendemailToUsers($emails, $names, $subject, $msg, $individual = true, $header = null, $frame = null)

@@ -7,14 +7,15 @@ namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $current = $cmsengineapi->getOption('active_plugins');
+        $cmsService = CMSServiceFacade::getInstance();
+        $current = $cmsService->getOption('active_plugins');
         // @todo Rename package!
         // `plugin_basename` is a WordPress function,
         // so this package must be called "system-mutations-wp",

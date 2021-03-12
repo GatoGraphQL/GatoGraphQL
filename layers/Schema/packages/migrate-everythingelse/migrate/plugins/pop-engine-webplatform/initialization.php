@@ -7,6 +7,7 @@ use PoP\Definitions\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoPSchema\CustomPosts\Types\Status;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 define('POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS', 'popwebplatform-keepopentabs');
 
@@ -153,8 +154,8 @@ class PoPWebPlatform_Initialization
 
     public function getJqueryConstants()
     {
-
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
 
         // Define all jQuery constants
         //---------------------------------------------------------------------------------
@@ -203,7 +204,7 @@ class PoPWebPlatform_Initialization
             // Define variable below to be overriden by WP Super Cache (if plugin disabled, it won't break anything)
             'AJAXURL' => admin_url('admin-ajax.php', 'relative'),
             'UPLOADURL' => admin_url('async-upload.php', 'relative'),
-            'GMT_OFFSET' => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')),
+            'GMT_OFFSET' => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')),
             'DATAOUTPUTMODE' => $vars['dataoutputmode'],
             'DBOUTPUTMODE' => $vars['dboutputmode'],
             'ERROR_MESSAGE' => '<div class="alert alert-danger alert-block fade in"><button type="button" class="close" data-dismiss="alert">x</button>{0}</div>',

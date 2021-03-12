@@ -9,13 +9,14 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler
 {
     protected function getLimit()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        return $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
+        $cmsService = CMSServiceFacade::getInstance();
+        return $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
     }
 
     public function getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array

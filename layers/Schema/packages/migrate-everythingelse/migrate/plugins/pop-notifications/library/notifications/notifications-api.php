@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_Notifications_API
 {
@@ -81,7 +82,7 @@ class PoP_Notifications_API
 
         global $wpdb;
         $results = array();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 
         // Merge with the defaults
@@ -95,7 +96,7 @@ class PoP_Notifications_API
                 'hist_time_compare' => '<',
                 'order' => 'ASC',
                 'orderby' => '',
-                'limit' => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')),
+                'limit' => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')),
                 'pagenumber' => 1,
                 'joinstatus' => true,
                 'status' => '',
@@ -561,7 +562,7 @@ class PoP_Notifications_API
                 // Otherwise, it will show the full activity history of his/her followed users, community members, etc. That's not cool
                 if ($user_registered = $cmsusersapi->getUserRegistrationDate($user_id)) {
                     // user_registered date does not take into account the GMT, so add it again
-                    $user_registered_time = strtotime($user_registered) + ($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600);
+                    $user_registered_time = strtotime($user_registered) + ($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600);
 
                     $sql_where_user_ands[] = sprintf(
                         '
