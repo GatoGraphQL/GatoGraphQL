@@ -1,9 +1,12 @@
 <?php
-namespace PoP\ComponentModel;
 
-class PoP_InputUtils
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\HelperServices;
+
+class FormInputHelperService implements FormInputHelperServiceInterface
 {
-    public static function getMultipleInputName(string $name, string $subname): string
+    public function getMultipleInputName(string $name, string $subname): string
     {
         // Use "_" instead of "-" so it's compatible with GraphQL
         // Then, a query field will be called "date_from" (allowed) instead of "date-from" (forbidden)

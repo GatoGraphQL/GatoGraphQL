@@ -39,7 +39,10 @@ services:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
     PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
-        class: '\PoP\ComponentModel\ModuleFiltering\ModuleFilterManager'
+        class: \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager
+
+    PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\FormInputHelperService
 
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'

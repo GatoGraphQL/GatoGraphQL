@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\FormInputs\MultipleInputFormInput;
 
 trait FormMultipleInputModuleProcessorTrait
@@ -27,11 +29,12 @@ trait FormMultipleInputModuleProcessorTrait
 
     public function getInputName(array $module)
     {
+        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         // Allow for multiple names, for multiple inputs
         $name = $this->getName($module);
         $names = array();
         foreach ($this->getInputSubnames($module) as $subname) {
-            $names[$subname] = \PoP\ComponentModel\PoP_InputUtils::getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
+            $names[$subname] = $formInputHelperService->getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
         }
         return $names;
     }

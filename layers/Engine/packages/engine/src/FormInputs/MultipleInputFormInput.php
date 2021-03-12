@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FormInputs;
 
-use PoP\ComponentModel\PoP_InputUtils;
+use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
 
 class MultipleInputFormInput extends MultipleSelectFormInput
 {
@@ -23,10 +23,11 @@ class MultipleInputFormInput extends MultipleSelectFormInput
 
     protected function getValueFromSource(array $source)
     {
+        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         $name = $this->getName();
         $value = array();
         foreach ($this->getSubnames() as $subname) {
-            $fullsubname = PoP_InputUtils::getMultipleInputName($name, $subname);
+            $fullsubname = $formInputHelperService->getMultipleInputName($name, $subname);
             if (isset($source[$fullsubname])) {
                 $value[$subname] = $source[$fullsubname];
             }

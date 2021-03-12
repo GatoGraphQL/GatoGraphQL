@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
+use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
-use PoP\ComponentModel\PoP_InputUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
@@ -38,13 +38,14 @@ class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements D
 
     public function getInputName(array $module)
     {
+        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:
                 // Allow for multiple names, for multiple inputs
                 $name = $this->getName($module);
                 $names = array();
                 foreach ($this->getInputSubnames($module) as $subname) {
-                    $names[$subname] = PoP_InputUtils::getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
+                    $names[$subname] = $formInputHelperService->getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
                 }
                 return $names;
         }
@@ -90,14 +91,15 @@ class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements D
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
+        $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
                     $translationAPI->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
-                    \PoP\ComponentModel\PoP_InputUtils::getMultipleInputName($name, $subnames[0]),
-                    \PoP\ComponentModel\PoP_InputUtils::getMultipleInputName($name, $subnames[1])
+                    $formInputHelperService->getMultipleInputName($name, $subnames[0]),
+                    $formInputHelperService->getMultipleInputName($name, $subnames[1])
                 );
         }
         return null;
