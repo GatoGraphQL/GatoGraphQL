@@ -102,6 +102,3 @@ class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements D
         return null;
     }
 }
-
-
-

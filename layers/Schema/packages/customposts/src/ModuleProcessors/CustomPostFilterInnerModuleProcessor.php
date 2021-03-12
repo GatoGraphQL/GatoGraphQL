@@ -8,6 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
+use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputs;
 
 class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -60,10 +61,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
             ])
         ) {
-            $inputmodules[] = [
-                \PoP_CustomPosts_Module_Processor_FilterInputs::class,
-                \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES
-            ];
+            $inputmodules[] = [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES];
         }
         if (
             $modules = HooksAPIFacade::getInstance()->applyFilters(

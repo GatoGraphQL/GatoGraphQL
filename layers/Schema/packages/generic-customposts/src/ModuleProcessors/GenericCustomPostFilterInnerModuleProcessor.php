@@ -8,6 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
+use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputs;
 
 class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
 {
@@ -36,7 +37,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                     [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
-                    [\PoP_CustomPosts_Module_Processor_FilterInputs::class, \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+                    [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
             case self::MODULE_FILTERINNER_GENERICCUSTOMPOSTCOUNT:
@@ -45,7 +46,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                     [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
-                    [\PoP_CustomPosts_Module_Processor_FilterInputs::class, \PoP_CustomPosts_Module_Processor_FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
+                    [FilterInputs::class, FilterInputs::MODULE_FILTERINPUT_GENERICPOSTTYPES],
                 ];
                 break;
         }
