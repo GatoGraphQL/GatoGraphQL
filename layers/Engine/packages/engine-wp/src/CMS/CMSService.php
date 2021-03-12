@@ -8,7 +8,10 @@ use PoP\Engine\CMS\CMSServiceInterface;
 
 class CMSService implements CMSServiceInterface
 {
-    public function getOption(string $option, $default = false): mixed
+    /**
+     * @return mixed
+     */
+    public function getOption(string $option, $default = false)
     {
         return get_option($option, $default);
     }

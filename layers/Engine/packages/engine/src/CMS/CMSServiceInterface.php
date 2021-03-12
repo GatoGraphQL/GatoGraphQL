@@ -6,5 +6,8 @@ namespace PoP\Engine\CMS;
 
 interface CMSServiceInterface
 {
-    public function getOption(string $option, $default = false): mixed;
+    /**
+     * @return mixed
+     */
+    public function getOption(string $option, $default = false);
 }
