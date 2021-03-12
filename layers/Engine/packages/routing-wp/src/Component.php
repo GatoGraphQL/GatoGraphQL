@@ -45,9 +45,6 @@ class Component extends AbstractComponent
      */
     public static function beforeBoot(): void
     {
-        parent::beforeBoot();
-
-        // Boot Cortex
         Cortex::boot();
     }
 }

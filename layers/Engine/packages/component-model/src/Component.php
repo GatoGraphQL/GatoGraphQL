@@ -68,12 +68,9 @@ class Component extends AbstractComponent
      */
     public static function beforeBoot(): void
     {
-        parent::beforeBoot();
-
         // Initialize the Component Configuration
         ComponentConfiguration::init();
 
-        // Attach class extensions
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
@@ -85,9 +82,6 @@ class Component extends AbstractComponent
      */
     public static function afterBoot(): void
     {
-        parent::afterBoot();
-
-        // Attach class extensions
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::AFTER_BOOT);
     }

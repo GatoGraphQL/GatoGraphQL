@@ -31,9 +31,6 @@ class Component extends AbstractComponent
      */
     public static function beforeBoot(): void
     {
-        parent::beforeBoot();
-
-        // Initialize classes
         Routes::init();
     }
 }
