@@ -73,6 +73,7 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
+                    branch: 'master'
                     package-directory: '${{ matrix.package.path }}'
                     split-repository-organization: '${{ matrix.package.organization }}'
                     split-repository-name: '${{ matrix.package.name }}'
