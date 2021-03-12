@@ -2,13 +2,14 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloads;
 use PoPSchema\Tags\ModuleProcessors\FieldDataloads;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloads as PostFieldDataloads;
 
 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Posts_Module_Processor_FieldDataloads::class,
+    PostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+        PostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
