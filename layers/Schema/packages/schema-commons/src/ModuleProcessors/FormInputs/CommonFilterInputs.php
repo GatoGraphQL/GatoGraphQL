@@ -87,7 +87,7 @@ class CommonFilterInputs extends AbstractFormInputModuleProcessor implements Dat
             self::MODULE_FILTERINPUT_IDS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$module[1]] ?? parent::getSchemaFilterInputType($module);
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -107,7 +107,7 @@ class CommonFilterInputs extends AbstractFormInputModuleProcessor implements Dat
                 \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR
             ),
         ];
-        return $descriptions[$module[1]] ?? parent::getSchemaFilterInputDescription($module);
+        return $descriptions[$module[1]] ?? null;
     }
 }
 

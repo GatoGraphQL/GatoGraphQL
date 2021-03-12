@@ -123,7 +123,7 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
         $types = [
             self::MODULE_FILTERINPUT_DATES => SchemaDefinition::TYPE_DATE,
         ];
-        return $types[$module[1]] ?? parent::getSchemaFilterInputType($module);
+        return $types[$module[1]] ?? null;
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
@@ -141,7 +141,7 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
                     $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))
                 );
         }
-        return parent::getSchemaFilterInputDescription($module);
+        return null;
     }
 }
 
