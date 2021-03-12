@@ -1,5 +1,5 @@
 <?php
-use PoP\SchemaCommons\FormInputs\OrderFormInput;
+use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_FormInput_OrderComment extends OrderFormInput
