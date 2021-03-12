@@ -5,15 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP\Overrides\TypeResolvers;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoPSchema\CustomPostsWP\Overrides\TypeDataLoaders\CustomPostUnionTypeDataLoader;
 
 class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver
 {
-    public function getTypeDataLoaderClass(): string
-    {
-        return CustomPostUnionTypeDataLoader::class;
-    }
-
     /**
      * Overriding function to provide optimization:
      * instead of calling ->isIDOfType on each object (as in parent function),
