@@ -25,9 +25,8 @@ class DateRangeTime extends MultipleInputFormInput
                 $datefrom = $from . ' ' . $fromtime . ':00';
                 $dateto = $to . ' ' . $totime . ':00';
                 $this->selected['readable'] = sprintf(
-                    TranslationAPIFacade::getInstance()->__('%1$s%2$s%3$s', 'pop-application'),
+                    TranslationAPIFacade::getInstance()->__('%1$s - %2$s', 'engine'),
                     date('d/m/Y g:i A', strtotime($datefrom)),
-                    GD_DATERANGE_SEPARATOR,
                     date('d/m/Y g:i A', strtotime($dateto))
                 );
             }

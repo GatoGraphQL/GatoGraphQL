@@ -18,9 +18,8 @@ class DateRangeFormInput extends MultipleInputFormInput
             if ($this->selected['from'] && $this->selected['to']) {
                 // Value to send back to the user, with a nice format
                 $this->selected['readable'] = sprintf(
-                    TranslationAPIFacade::getInstance()->__('%1$s%2$s%3$s', 'pop-application'),
+                    TranslationAPIFacade::getInstance()->__('%1$s - %2$s', 'engine'),
                     date('m/d/Y', strtotime($this->selected['from'])),
-                    GD_DATERANGE_SEPARATOR,
                     date('m/d/Y', strtotime($this->selected['to']))
                 );
             }
