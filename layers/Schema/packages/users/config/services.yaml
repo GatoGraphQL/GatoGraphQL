@@ -8,3 +8,6 @@ services:
 
     PoPSchema\Users\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
+
+    PoPSchema\Users\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'

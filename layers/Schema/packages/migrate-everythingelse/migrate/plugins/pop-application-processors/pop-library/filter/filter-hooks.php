@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as PostFilterInners;
 
 class PoPThemeWassup_DataLoad_FilterHooks
 {
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'Blog:FilterInners:inputmodules',
+            'Blog:FilterInnerModuleProcessor:inputmodules',
             array($this, 'modifyPostFilterInputs'),
             10,
             2
@@ -22,7 +23,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
     public function modifyPostFilterInputs($filterinputs, array $module)
     {
         $is_post = in_array($module, [
-            [PoP_Posts_Module_Processor_CustomFilterInners::class, PoP_Posts_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_POSTS],
+            [PostFilterInners::class, PostFilterInners::MODULE_FILTERINNER_POSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORCATEGORYPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_TAGPOSTS],
@@ -40,9 +41,9 @@ class PoPThemeWassup_DataLoad_FilterHooks
 
             if (defined('POP_TAXONOMYQUERY_INITIALIZED') && PoP_Application_TaxonomyQuery_ConfigurationUtils::enableFilterAllcontentByTaxonomy() && PoP_ApplicationProcessors_Utils::addSections()) {
                 array_splice(
-                    $filterinputs, 
-                    $pos+1, 
-                    0, 
+                    $filterinputs,
+                    $pos+1,
+                    0,
                     array(
                         [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_CONTENTSECTIONS],
                     )
@@ -52,23 +53,23 @@ class PoPThemeWassup_DataLoad_FilterHooks
         if ($is_post || $is_content) {
             // filter-tagallcontent doesn't have the hashtags, so use search there
             $pos = in_array(
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS], 
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
                 $filterinputs
             ) ? array_search(
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS], 
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_HASHTAGS],
                 $filterinputs
-            ) : 
+            ) :
             array_search(
-                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH], 
+                [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_SEARCH],
                 $filterinputs
             );
-            
+
             // Adding needed components in reverse order because the one component we always know will be there is hashtags, it's the reference one, then we start adding from right to left
             if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
                 array_splice(
-                    $filterinputs, 
-                    $pos+1, 
-                    0, 
+                    $filterinputs,
+                    $pos+1,
+                    0,
                     array(
                         [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_APPLIESTO],
                     )
@@ -76,9 +77,9 @@ class PoPThemeWassup_DataLoad_FilterHooks
             }
             if (PoP_ApplicationProcessors_Utils::addCategories()) {
                 array_splice(
-                    $filterinputs, 
-                    $pos+1, 
-                    0, 
+                    $filterinputs,
+                    $pos+1,
+                    0,
                     array(
                         [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::MODULE_FILTERINPUTGROUP_CATEGORIES],
                     )
@@ -92,7 +93,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
     public function modifyPostSimpleFilterInputs($filterinputs, array $module)
     {
         $is_post = in_array($module, [
-            [PoP_Posts_Module_Processor_CustomFilterInners::class, PoP_Posts_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_POSTS],
+            [PostFilterInners::class, PostFilterInners::MODULE_FILTERINNER_POSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORCATEGORYPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_TAGPOSTS],
@@ -110,9 +111,9 @@ class PoPThemeWassup_DataLoad_FilterHooks
 
             if (defined('POP_TAXONOMYQUERY_INITIALIZED') && PoP_Application_TaxonomyQuery_ConfigurationUtils::enableFilterAllcontentByTaxonomy() && PoP_ApplicationProcessors_Utils::addSections()) {
                 array_splice(
-                    $filterinputs, 
-                    $pos+1, 
-                    0, 
+                    $filterinputs,
+                    $pos+1,
+                    0,
                     array(
                         [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_CONTENTSECTIONS],
                     )
@@ -122,22 +123,22 @@ class PoPThemeWassup_DataLoad_FilterHooks
         if ($is_post || $is_content) {
             // filter-tagallcontent doesn't have the hashtags, so use search there
             $pos = in_array(
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS], 
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
                 $filterinputs
             ) ? array_search(
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS], 
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
                 $filterinputs
             ) : array_search(
-                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH], 
+                [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
                 $filterinputs
             );
-            
+
             // Adding needed components in reverse order because the one component we always know will be there is hashtags, it's the reference one, then we start adding from right to left
             if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
                 array_splice(
-                    $filterinputs, 
-                    $pos+1, 
-                    0, 
+                    $filterinputs,
+                    $pos+1,
+                    0,
                     array(
                         [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_APPLIESTO],
                     )
@@ -145,9 +146,9 @@ class PoPThemeWassup_DataLoad_FilterHooks
             }
             if (PoP_ApplicationProcessors_Utils::addCategories()) {
                 array_splice(
-                    $filterinputs, 
-                    $pos+1, 
-                    0, 
+                    $filterinputs,
+                    $pos+1,
+                    0,
                     array(
                         [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::MODULE_FILTERINPUT_CATEGORIES],
                     )
@@ -158,7 +159,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
         return $filterinputs;
     }
 }
-    
+
 /**
  * Initialize
  */

@@ -1,34 +1,39 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPSchema\Tags\ModuleProcessors\FieldDataloadModuleProcessor as TagFieldDataloads;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
+use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
+use PoPSchema\Posts\Conditional\Users\ModuleProcessors as UserPostFieldDataloads;
 
 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Posts_Module_Processor_FieldDataloads::class,
+    PostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+        PostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Users_Module_Processor_FieldDataloads::class,
+    UserFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Users_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
+        UserFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Users_Posts_Module_Processor_FieldDataloads::class,
+    UserPostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Users_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+        UserPostFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Tags_Module_Processor_FieldDataloads::class,
+    FieldDataloadModuleProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Tags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
-        PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+        TagFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );
 

@@ -10,6 +10,7 @@ use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Posts\Conditional\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -22,8 +23,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [
-                \PoP_Posts_Module_Processor_FieldDataloads::class,
-                \PoP_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -48,8 +49,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $routemodules = array(
             POP_POSTS_ROUTE_POSTS => [
-                \PoP_Posts_Module_Processor_FieldDataloads::class,
-                \PoP_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :

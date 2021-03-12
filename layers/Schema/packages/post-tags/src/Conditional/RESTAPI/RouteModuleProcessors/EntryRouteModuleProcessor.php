@@ -11,6 +11,8 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
@@ -53,8 +55,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $ret[TagRouteNatures::TAG][] = [
             'module' => [
-                \PoP_PostTags_Module_Processor_FieldDataloads::class,
-                \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
+                PostTagFieldDataloadModuleProcessor::class,
+                PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -83,8 +85,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
             POP_POSTTAGS_ROUTE_POSTTAGS => [
-                \PoP_PostTags_Module_Processor_FieldDataloads::class,
-                \PoP_PostTags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+                PostTagFieldDataloadModuleProcessor::class,
+                PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -103,8 +105,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         }
         $routemodules = array(
             POP_POSTS_ROUTE_POSTS => [
-                \PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::class,
-                \PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+                TagPostFieldDataloadModuleProcessor::class,
+                TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :

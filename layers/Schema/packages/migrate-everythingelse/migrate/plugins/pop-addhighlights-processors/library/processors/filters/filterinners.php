@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Highlights:FilterInners:inputmodules',
+            'Highlights:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

@@ -11,6 +11,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
+use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -51,8 +52,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $ret[CategoryRouteNatures::CATEGORY][] = [
             'module' => [
-                \PoP_Categories_Module_Processor_FieldDataloads::class,
-                \PoP_Categories_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -77,8 +78,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $routemodules = array(
             POP_CATEGORIES_ROUTE_CATEGORIES => [
-                \PoP_Categories_Module_Processor_FieldDataloads::class,
-                \PoP_Categories_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -98,7 +99,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         // Commented until creating route POP_CUSTOMPOSTS_ROUTE_CUSTOMPOSTS
         // $routemodules = array(
         //     POP_CUSTOMPOSTS_ROUTE_CUSTOMPOSTS => [
-        //         \PoP_Categories_Module_Processor_FieldDataloads::class,
+        //         FieldDataloadModuleProcessor::class,
         //         \PoP_Categories_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
         //         [
         //             'fields' => isset($vars['query']) ?

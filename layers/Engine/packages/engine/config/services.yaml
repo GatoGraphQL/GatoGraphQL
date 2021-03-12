@@ -31,6 +31,9 @@ services:
     PoP\Engine\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
 
+    PoP\Engine\ModuleProcessors\:
+        resource: '../src/ModuleProcessors/*'
+
     PoP\Engine\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 

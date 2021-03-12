@@ -57,7 +57,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
             );
         }
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Links:FilterInners:inputmodules',
+            'Links:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {
