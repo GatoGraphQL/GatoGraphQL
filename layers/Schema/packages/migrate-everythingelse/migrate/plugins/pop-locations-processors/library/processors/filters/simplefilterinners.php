@@ -22,7 +22,7 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Locations:FilterInners:inputmodules',
+            'Locations:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

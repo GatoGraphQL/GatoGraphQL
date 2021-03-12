@@ -9,7 +9,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Posts\ModuleProcessors\FilterInners;
+use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 
 class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -62,7 +62,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return [FilterInners::class, FilterInners::MODULE_FILTERINNER_POSTS];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_POSTS];
         }
 
         return parent::getFilterSubmodule($module);

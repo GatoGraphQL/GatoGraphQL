@@ -31,7 +31,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'CommonUserRoles:FilterInners:inputmodules',
+            'CommonUserRoles:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

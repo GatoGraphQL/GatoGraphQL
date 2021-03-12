@@ -65,7 +65,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
         }
         if (
             $modules = HooksAPIFacade::getInstance()->applyFilters(
-                'CustomPosts:FilterInners:inputmodules',
+                'CustomPosts:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules,
                 $module
             )

@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\ModuleProcessors;
+namespace PoPSchema\Tags\ModuleProcessors;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputs;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputs;
 
-class FilterInners extends AbstractModuleProcessor
+class FilterInnerModuleProcessor extends AbstractModuleProcessor
 {
-    public const MODULE_FILTERINNER_POSTS = 'filterinner-posts';
-    public const MODULE_FILTERINNER_POSTCOUNT = 'filterinner-postcount';
+    public const MODULE_FILTERINNER_TAGS = 'filterinner-tags';
+    public const MODULE_FILTERINNER_TAGCOUNT = 'filterinner-tagcount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINNER_POSTS],
-            [self::class, self::MODULE_FILTERINNER_POSTCOUNT],
+            [self::class, self::MODULE_FILTERINNER_TAGS],
+            [self::class, self::MODULE_FILTERINNER_TAGCOUNT],
         );
     }
 
@@ -27,25 +26,23 @@ class FilterInners extends AbstractModuleProcessor
         $ret = parent::getSubmodules($module);
 
         $inputmodules = [
-            self::MODULE_FILTERINNER_POSTS => [
+            self::MODULE_FILTERINNER_TAGS => [
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ORDER],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_LIMIT],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_OFFSET],
-                [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
-            self::MODULE_FILTERINNER_POSTCOUNT => [
+            self::MODULE_FILTERINNER_TAGCOUNT => [
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_SEARCH],
-                [CommonFilterMultipleInputs::class, CommonFilterMultipleInputs::MODULE_FILTERINPUT_DATES],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_IDS],
                 [CommonFilterInputs::class, CommonFilterInputs::MODULE_FILTERINPUT_ID],
             ],
         ];
         if (
             $modules = HooksAPIFacade::getInstance()->applyFilters(
-                'Posts:FilterInners:inputmodules',
+                'Tags:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module
             )
@@ -58,3 +55,6 @@ class FilterInners extends AbstractModuleProcessor
         return $ret;
     }
 }
+
+
+

@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     protected function getFilteredInputSubmodules(array $module)
     {
         return HooksAPIFacade::getInstance()->applyFilters(
-            'FilterInners:inputmodules',
+            'FilterInnerModuleProcessor:inputmodules',
             $this->getInputSubmodules($module),
             $module
         );
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
                 $ret,
                 $input_modules
             );
-        
+
             // // Add the hidden input with the name of the filter
             // $ret[] = [self::class, self::MODULE_FORMINPUT_FILTERNAME];
         }
@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
         if ($submitbtn = $this->getSubmitbtnModule($module)) {
             $ret[] = $submitbtn;
         }
-        
+
         return $ret;
     }
 
@@ -67,7 +67,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     //     // By default get the forminput. This can be overriden to get the getFilterinput for a simpler filter, as used in the sideinfo.
     //     return $filtercomponent->getForminput();
     // }
-    
+
     // public function getFilter(array $module)
     // {
     //     return null;
@@ -85,7 +85,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     // }
 
     // function getModuleCbActions(array $module, array &$props) {
-    
+
     //     // Comment Leo 23/08/2017: The filter must not be re-drawn after reloading/refreshing content,
     //     // it must not be affected by the data coming back from fetching json data, the filter is outside this scope
     //     return array(

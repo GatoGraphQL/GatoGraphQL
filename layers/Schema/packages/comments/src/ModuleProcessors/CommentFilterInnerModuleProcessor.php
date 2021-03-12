@@ -37,7 +37,7 @@ class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
         ];
         if (
             $modules = HooksAPIFacade::getInstance()->applyFilters(
-                'Comments:FilterInners:inputmodules',
+                'Comments:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module
             )

@@ -36,7 +36,7 @@ class PoP_Categories_Module_Processor_CustomFilterInners extends AbstractModuleP
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Categories:FilterInners:inputmodules',
+            'Categories:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

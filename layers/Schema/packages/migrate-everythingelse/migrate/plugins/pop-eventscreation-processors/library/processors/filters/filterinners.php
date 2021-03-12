@@ -30,7 +30,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Events:FilterInners:inputmodules',
+            'Events:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

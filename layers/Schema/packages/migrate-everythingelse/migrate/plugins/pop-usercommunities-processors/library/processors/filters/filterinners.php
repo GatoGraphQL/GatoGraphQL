@@ -33,7 +33,7 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
             ],
         ];
         if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'UserCommunities:FilterInners:inputmodules',
+            'UserCommunities:FilterInnerModuleProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {
