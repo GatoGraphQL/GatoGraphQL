@@ -1,9 +1,10 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\FormInputModuleProcessorTrait;
 
-abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponent
+abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
-    use FormComponentValueTrait, \PoP\ComponentModel\FormInputsTrait;
+    use FormComponentValueTrait, FormInputModuleProcessorTrait;
 
     //-------------------------------------------------
     // PUBLIC Functions
@@ -18,7 +19,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
     {
         return false;
     }
-    
+
     public function getLabel(array $module, array &$props)
     {
         return $this->getLabelText($module, $props).($this->isMandatory($module, $props) ? GD_CONSTANT_MANDATORY : '');
@@ -29,14 +30,14 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
         if ($this->getProp($module, $props, 'mandatory')) {
             return true;
         }
-    
+
         return false;
     }
 
     //-------------------------------------------------
     // OTHER Functions (Organize!)
     //-------------------------------------------------
-    
+
     public function getLabelText(array $module, array &$props)
     {
         return '';
@@ -59,7 +60,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-    
+
         if ($this->executeClearInput($module, $props)) {
             $this->addJsmethod($ret, 'clearInput');
         }
@@ -72,7 +73,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
         if ($this->isHidden($module, $props)) {
             $this->appendProp($module, $props, 'class', 'hidden');
         }
-        
+
         $this->appendProp($module, $props, 'input-class', GD_FORM_INPUT);
 
         // first set mandatory, only then label, since label will use the value of mandatory
@@ -97,7 +98,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
         $this->addMetaFormcomponentDataFields($ret, $module, $props);
         return $ret;
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);

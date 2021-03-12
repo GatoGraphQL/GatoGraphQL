@@ -1,6 +1,7 @@
 <?php
+use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 
-abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_Processor_FormGroupsBase implements FormComponent
+abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_Processor_FormGroupsBase implements FormComponentModuleProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
@@ -12,7 +13,7 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
     public function getComponentName(array $module)
     {
 
-        // Because this class is a FormComponent, input_name is the inner components input_name
+        // Because this class is a FormComponentModuleProcessorInterface, input_name is the inner components input_name
         return $this->getInputName($module);
     }
 

@@ -1,6 +1,10 @@
 <?php
-namespace PoP\ComponentModel;
-interface FormComponent
+
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\ModuleProcessors;
+
+interface FormComponentModuleProcessorInterface
 {
     public function getValue(array $module, ?array $source = null);
     public function getDefaultValue(array $module, array &$props);
