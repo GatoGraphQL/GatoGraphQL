@@ -150,6 +150,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
+          branch: 'master'
           package-directory: 'build/downgraded-code'
           split-repository-organization: 'GraphQLAPI'
           split-repository-name: 'graphql-api-for-wp-dist'
