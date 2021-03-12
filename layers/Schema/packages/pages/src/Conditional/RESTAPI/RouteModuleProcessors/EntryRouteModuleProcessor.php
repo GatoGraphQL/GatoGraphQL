@@ -10,6 +10,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoPSchema\Pages\Routing\RouteNatures;
+use PoPSchema\Pages\ModuleProcessors\FieldDataloads;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -48,7 +49,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 
         $vars = ApplicationState::getVars();
         $ret[RouteNatures::PAGE][] = [
-            'module' => [\PoP_Pages_Module_Processor_FieldDataloads::class, \PoP_Pages_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_PAGE, ['fields' => isset($vars['query']) ? $vars['query'] : self::getRESTFields()]],
+            'module' => [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_PAGE, ['fields' => isset($vars['query']) ? $vars['query'] : self::getRESTFields()]],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->restDataStructureFormatter->getName(),

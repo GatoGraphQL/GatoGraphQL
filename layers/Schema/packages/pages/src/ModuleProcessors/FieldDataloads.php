@@ -1,9 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\Pages\ModuleProcessors;
+
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 
-class PoP_Pages_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
 

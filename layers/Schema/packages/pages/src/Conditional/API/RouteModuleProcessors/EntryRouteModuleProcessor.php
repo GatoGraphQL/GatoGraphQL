@@ -7,6 +7,7 @@ namespace PoPSchema\Pages\Conditional\API\RouteModuleProcessors;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPSchema\Pages\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
+use PoPSchema\Pages\ModuleProcessors\FieldDataloads;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -18,7 +19,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
 
         $ret[RouteNatures::PAGE][] = [
-            'module' => [\PoP_Pages_Module_Processor_FieldDataloads::class, \PoP_Pages_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_PAGE],
+            'module' => [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_PAGE],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],
