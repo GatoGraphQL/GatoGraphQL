@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\SchemaCommons\FormInputs;
+namespace PoPSchema\SchemaCommons\FormInputs;
 
 use PoP\Engine\FormInputs\SelectFormInput;
 
