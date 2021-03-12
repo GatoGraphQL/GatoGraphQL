@@ -5,6 +5,3 @@ services:
 
     PoP\ConfigurationComponentModel\RouteModuleProcessors\:
         resource: '../src/RouteModuleProcessors/*'
-
-    PoP\ConfigurationComponentModel\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
