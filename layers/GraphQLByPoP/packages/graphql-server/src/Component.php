@@ -130,8 +130,7 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         if (self::isEnabled()) {
-            parent::initializeSystemContainerServices();
-            self::initSystemServices(dirname(__DIR__));
+                self::initSystemServices(dirname(__DIR__));
         }
     }
 

@@ -42,9 +42,6 @@ class Component extends AbstractComponent
      */
     protected static function initializeSystemContainerServices(): void
     {
-        parent::initializeSystemContainerServices();
-
-        // Only after initializing the containerBuilder, can inject a service
         self::initSystemServices(dirname(__DIR__));
     }
 
