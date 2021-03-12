@@ -1,11 +1,14 @@
 <?php
-namespace PoP\ComponentModel;
 
-class GD_FormInput
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\FormInputs;
+
+class FormInput
 {
-    public $name;
+    public string $name;
     public $filter;
-    public $selected;
+    public ?string $selected = null;
 
     public function __construct($params = array())
     {

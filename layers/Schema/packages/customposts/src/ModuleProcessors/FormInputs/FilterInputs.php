@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 
 class FilterInputs extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -42,7 +43,7 @@ class FilterInputs extends AbstractFormInputModuleProcessor implements DataloadQ
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_GENERICPOSTTYPES:
             case self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES:
-                return \PoP\ComponentModel\GD_FormInput_MultiInput::class;
+                return FormMultipleInput::class;
         }
 
         return parent::getInputClass($module);

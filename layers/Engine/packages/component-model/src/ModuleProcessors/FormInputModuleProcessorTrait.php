@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\GD_FormInput;
-use PoP\ComponentModel\GD_FormInput_MultiInput;
+use PoP\ComponentModel\FormInputs\FormInput;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 
 trait FormInputModuleProcessorTrait
 {
@@ -26,10 +26,10 @@ trait FormInputModuleProcessorTrait
     public function getInputClass(array $module)
     {
         if ($this->isMultiple($module)) {
-            return GD_FormInput_MultiInput::class;
+            return FormMultipleInput::class;
         }
 
-        return GD_FormInput::class;
+        return FormInput::class;
     }
 
     public function getInput(array $module)

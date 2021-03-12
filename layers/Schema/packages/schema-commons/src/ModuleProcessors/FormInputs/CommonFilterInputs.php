@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 
 class CommonFilterInputs extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -55,7 +56,7 @@ class CommonFilterInputs extends AbstractFormInputModuleProcessor implements Dat
             case self::MODULE_FILTERINPUT_ORDER:
                 return \PoP\Engine\GD_FormInput_Order::class;
             case self::MODULE_FILTERINPUT_IDS:
-                return \PoP\ComponentModel\GD_FormInput_MultiInput::class;
+                return FormMultipleInput::class;
             case self::MODULE_FILTERINPUT_ID:
                 return \PoP\Engine\GD_FormInput_MultiValueFromString::class;
         }

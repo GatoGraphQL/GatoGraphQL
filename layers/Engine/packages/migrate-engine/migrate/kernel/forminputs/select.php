@@ -1,10 +1,10 @@
 <?php
 namespace PoP\Engine;
-use PoP\ComponentModel\GD_FormInput;
 
-class GD_FormInput_Select extends GD_FormInput
+use PoP\ComponentModel\FormInputs\FormInput;
+
+class GD_FormInput_Select extends FormInput
 {
-
     /**
      * Function to override
      */
@@ -16,14 +16,14 @@ class GD_FormInput_Select extends GD_FormInput
 
         return array();
     }
-    
-    
+
+
     public function getSelectedValue()
     {
         if (is_null($this->selected)) {
             return null;
         }
-    
+
         $all = $this->getAllValues();
         if ($this->isMultiple()) {
             $value = array();
@@ -33,7 +33,7 @@ class GD_FormInput_Select extends GD_FormInput
         } else {
             $value = $all[$this->selected];
         }
-        
+
         return $value;
     }
 }
