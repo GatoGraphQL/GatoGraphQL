@@ -10,7 +10,7 @@ use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Users\ModuleProcessors\FilterInners;
 
-class FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
 

@@ -11,7 +11,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Users\ModuleProcessors\FieldDataloads;
+use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -52,8 +52,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $ret[UserRouteNatures::USER][] = [
             'module' => [
-                FieldDataloads::class,
-                FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
@@ -77,8 +77,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $routemodules = array(
             POP_USERS_ROUTE_USERS => [
-                FieldDataloads::class,
-                FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
+                FieldDataloadModuleProcessor::class,
+                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :

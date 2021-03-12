@@ -2,33 +2,30 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTags\ModuleProcessors;
+namespace PoPSchema\Posts\Conditional\Users\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\Posts\ModuleProcessors\FilterInners;
 
-class TagPostFieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
-    use QueriedDBObjectModuleProcessorTrait;
-
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'dataload-relationalfields-tagpostlist';
+    public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'dataload-relationalfields-authorpostlist';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
+            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST],
         );
     }
 
     public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return CustomPostTypeResolver::class;
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
+                return PostTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);
@@ -37,7 +34,7 @@ class TagPostFieldDataloads extends AbstractRelationalFieldDataloadModuleProcess
     public function getQueryInputOutputHandlerClass(array $module): ?string
     {
         switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 return ListQueryInputOutputHandler::class;
         }
 
@@ -49,9 +46,11 @@ class TagPostFieldDataloads extends AbstractRelationalFieldDataloadModuleProcess
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
         switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 $vars = ApplicationState::getVars();
-                $ret['tag-ids'] = [$vars['routing-state']['queried-object-id']];
+                $ret['authors'] = [
+                    $vars['routing-state']['queried-object-id'],
+                ];
                 break;
         }
 
@@ -61,7 +60,7 @@ class TagPostFieldDataloads extends AbstractRelationalFieldDataloadModuleProcess
     public function getFilterSubmodule(array $module): ?array
     {
         switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 return [FilterInners::class, FilterInners::MODULE_FILTERINNER_POSTS];
         }
 

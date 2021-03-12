@@ -8,7 +8,7 @@ use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\ModuleProcessors\FieldDataloads;
+use PoPSchema\Tags\ModuleProcessors\FieldDataloadModuleProcessor;
 
 abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
@@ -16,7 +16,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function getFilterDataloadingModule(): ?array
     {
-        return [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
+        return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
     }
 
     public function getObjects(array $ids): array

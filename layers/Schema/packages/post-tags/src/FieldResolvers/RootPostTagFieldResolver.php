@@ -13,7 +13,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -105,7 +105,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'postTagCount':
-                return [PostTagFieldDataloads::class, PostTagFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
+                return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }

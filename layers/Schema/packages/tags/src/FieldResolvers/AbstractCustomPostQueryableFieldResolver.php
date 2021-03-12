@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Tags\ModuleProcessors\FieldDataloads;
+use PoPSchema\Tags\ModuleProcessors\FieldDataloadModuleProcessor;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -85,7 +85,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     {
         switch ($fieldName) {
             case 'tagCount':
-                return [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }

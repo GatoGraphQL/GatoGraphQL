@@ -12,7 +12,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Categories\ModuleProcessors\FieldDataloads;
+use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
 
 abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -83,7 +83,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResol
     {
         switch ($fieldName) {
             case 'categoryCount':
-                return [FieldDataloads::class, FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
