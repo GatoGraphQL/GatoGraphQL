@@ -48,7 +48,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
@@ -59,37 +58,20 @@ class Component extends AbstractComponent
      */
     protected static function initializeSystemContainerServices(): void
     {
-        parent::initializeSystemContainerServices();
         self::initSystemServices(dirname(__DIR__));
     }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function beforeBoot(): void
     {
-        parent::beforeBoot();
-
         // Initialize the Component Configuration
         ComponentConfiguration::init();
 
-        // Attach class extensions
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function afterBoot(): void
     {
-        parent::afterBoot();
-
-        // Attach class extensions
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::AFTER_BOOT);
     }

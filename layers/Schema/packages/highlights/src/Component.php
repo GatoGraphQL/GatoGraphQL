@@ -35,7 +35,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (Environment::addHighlightTypeToCustomPostUnionTypes()) {
             self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddHighlightTypeToCustomPostUnionTypes');

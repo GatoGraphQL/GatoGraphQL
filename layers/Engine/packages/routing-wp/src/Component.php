@@ -35,20 +35,11 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initServices(dirname(__DIR__));
     }
 
-    /**
-     * Boot component
-     *
-     * @return void
-     */
     public static function beforeBoot(): void
     {
-        parent::beforeBoot();
-
-        // Boot Cortex
         Cortex::boot();
     }
 }

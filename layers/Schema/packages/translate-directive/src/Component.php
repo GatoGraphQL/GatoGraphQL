@@ -35,7 +35,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        parent::initializeContainerServices($configuration, $skipSchema, $skipSchemaComponentClasses);
         self::initServices(dirname(__DIR__));
     }
 
@@ -44,7 +43,6 @@ class Component extends AbstractComponent
      */
     protected static function initializeSystemContainerServices(): void
     {
-        parent::initializeSystemContainerServices();
         self::initSystemServices(dirname(__DIR__));
     }
 }
