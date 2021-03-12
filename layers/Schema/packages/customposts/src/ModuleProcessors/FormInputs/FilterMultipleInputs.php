@@ -44,7 +44,7 @@ class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements D
                 $name = $this->getName($module);
                 $names = array();
                 foreach ($this->getInputSubnames($module) as $subname) {
-                    $names[$subname] = PoP_InputUtils::getMultipleinputsName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
+                    $names[$subname] = PoP_InputUtils::getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
                 }
                 return $names;
         }
@@ -96,8 +96,8 @@ class FilterMultipleInputs extends AbstractFormInputModuleProcessor implements D
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
                     $translationAPI->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
-                    \PoP\ComponentModel\PoP_InputUtils::getMultipleinputsName($name, $subnames[0]),
-                    \PoP\ComponentModel\PoP_InputUtils::getMultipleinputsName($name, $subnames[1])
+                    \PoP\ComponentModel\PoP_InputUtils::getMultipleInputName($name, $subnames[0]),
+                    \PoP\ComponentModel\PoP_InputUtils::getMultipleInputName($name, $subnames[1])
                 );
         }
         return null;

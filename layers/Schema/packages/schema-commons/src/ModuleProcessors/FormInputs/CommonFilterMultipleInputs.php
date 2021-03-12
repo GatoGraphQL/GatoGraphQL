@@ -45,7 +45,7 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
                 $name = $this->getName($module);
                 $names = array();
                 foreach ($this->getInputSubnames($module) as $subname) {
-                    $names[$subname] = PoP_InputUtils::getMultipleinputsName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
+                    $names[$subname] = PoP_InputUtils::getMultipleInputName($name, $subname) . ($this->isMultiple($module) ? '[]' : '');
                 }
                 return $names;
         }
@@ -92,7 +92,7 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
                 // Add the other elements, using the original documantation as placeholder
                 $schemaDefinitionItems[] = array_merge(
                     [
-                        SchemaDefinition::ARGNAME_NAME => PoP_InputUtils::getMultipleinputsName($name, $subnames[0]),
+                        SchemaDefinition::ARGNAME_NAME => PoP_InputUtils::getMultipleInputName($name, $subnames[0]),
                     ],
                     $schemaDefinition,
                     [
@@ -104,7 +104,7 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
                 );
                 $schemaDefinitionItems[] = array_merge(
                     [
-                        SchemaDefinition::ARGNAME_NAME => PoP_InputUtils::getMultipleinputsName($name, $subnames[1]),
+                        SchemaDefinition::ARGNAME_NAME => PoP_InputUtils::getMultipleInputName($name, $subnames[1]),
                     ],
                     $schemaDefinition,
                     [
@@ -136,8 +136,8 @@ class CommonFilterMultipleInputs extends AbstractFormInputModuleProcessor implem
                 $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
                 return sprintf(
                     $translationAPI->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
-                    PoP_InputUtils::getMultipleinputsName($name, $subnames[0]),
-                    PoP_InputUtils::getMultipleinputsName($name, $subnames[1]),
+                    PoP_InputUtils::getMultipleInputName($name, $subnames[0]),
+                    PoP_InputUtils::getMultipleInputName($name, $subnames[1]),
                     $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))
                 );
         }

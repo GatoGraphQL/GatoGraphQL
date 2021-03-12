@@ -26,7 +26,7 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         $name = $this->getName();
         $value = array();
         foreach ($this->getSubnames() as $subname) {
-            $fullsubname = PoP_InputUtils::getMultipleinputsName($name, $subname);
+            $fullsubname = PoP_InputUtils::getMultipleInputName($name, $subname);
             if (isset($source[$fullsubname])) {
                 $value[$subname] = $source[$fullsubname];
             }

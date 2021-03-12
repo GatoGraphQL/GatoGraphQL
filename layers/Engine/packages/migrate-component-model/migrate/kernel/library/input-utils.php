@@ -3,7 +3,7 @@ namespace PoP\ComponentModel;
 
 class PoP_InputUtils
 {
-    public static function getMultipleinputsName($name, $subname)
+    public static function getMultipleInputName($name, $subname)
     {
         // Use "_" instead of "-" so it's compatible with GraphQL
         // Then, a query field will be called "date_from" (allowed) instead of "date-from" (forbidden)
