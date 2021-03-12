@@ -193,7 +193,7 @@ jobs:
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
 
             -   name: Publish to DIST repo
-                uses: symplify/monorepo-split-github-action@1
+                uses: symplify/monorepo-split-github-action@1.1
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
