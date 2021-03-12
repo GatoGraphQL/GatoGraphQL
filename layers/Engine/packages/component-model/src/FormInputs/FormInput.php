@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\FormInputs;
 class FormInput
 {
     public string $name;
-    public $filter;
     public ?string $selected = null;
 
     public function __construct($params = array())
@@ -15,9 +14,7 @@ class FormInput
         $this->name = $params['name'];
 
         // Selected value. If provided, use it
-        if (isset($params['selected'])) {
-            $this->selected = $params['selected'];
-        }
+        $this->selected = $params['selected'] ?? null;
     }
 
     public function isMultiple()
