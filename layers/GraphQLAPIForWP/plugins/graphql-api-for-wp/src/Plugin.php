@@ -38,19 +38,6 @@ class Plugin extends AbstractGraphQLAPIPlugin
     public const OPTION_PLUGIN_VERSION = 'graphql-api-plugin-version';
 
     /**
-     * Hook to initalize extension plugins
-     */
-    public const HOOK_INITIALIZE_EXTENSION_PLUGIN = __CLASS__ . ':initializeExtensionPlugin';
-    /**
-     * Hook to configure extension plugins
-     */
-    public const HOOK_CONFIGURE_EXTENSION_PLUGIN = __CLASS__ . ':configureExtensionPlugin';
-    /**
-     * Hook to boot extension plugins
-     */
-    public const HOOK_BOOT_EXTENSION_PLUGIN = __CLASS__ . ':bootExtensionPlugin';
-
-    /**
      * Plugin set-up, executed immediately when loading the plugin.
      * There are three stages for this plugin, and for each extension plugin:
      * `setup`, `initialize` and `boot`.

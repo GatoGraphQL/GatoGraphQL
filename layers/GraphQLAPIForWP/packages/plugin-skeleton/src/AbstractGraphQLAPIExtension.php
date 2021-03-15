@@ -7,7 +7,6 @@ namespace GraphQLAPI\PluginSkeleton;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\AppLoader;
@@ -102,15 +101,15 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
                  * Initialize/configure/boot this extension plugin
                  */
                 \add_action(
-                    GraphQLAPIPlugin::HOOK_INITIALIZE_EXTENSION_PLUGIN,
+                    self::HOOK_INITIALIZE_EXTENSION_PLUGIN,
                     [$this, 'initialize']
                 );
                 \add_action(
-                    GraphQLAPIPlugin::HOOK_CONFIGURE_EXTENSION_PLUGIN,
+                    self::HOOK_CONFIGURE_EXTENSION_PLUGIN,
                     [$this, 'configure']
                 );
                 \add_action(
-                    GraphQLAPIPlugin::HOOK_BOOT_EXTENSION_PLUGIN,
+                    self::HOOK_BOOT_EXTENSION_PLUGIN,
                     [$this, 'boot']
                 );
             },
