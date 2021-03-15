@@ -299,6 +299,18 @@ abstract class AbstractGraphQLAPIExtension
         }
 
         // Unregister all CPTs from this plugin
+        $this->unregisterCustomPostTypes();
+
+        // Filter the ones that belong to this plugin
+        $this->regenerateTimestamp();
+    }
+
+    /**
+     * Remove the CPTs from the DB
+     */
+    protected function unregisterCustomPostTypes(): void
+    {
+        // Unregister all CPTs from this plugin
         if ($customPostTypes = $this->getExtensionCustomPostTypes()) {
             foreach ($customPostTypes as $customPostType) {
                 $customPostType->unregisterPostType();
@@ -307,9 +319,6 @@ abstract class AbstractGraphQLAPIExtension
             // Clear the permalinks to remove the CPT's rules from the database
             \flush_rewrite_rules();
         }
-
-        // Filter the ones that belong to this plugin
-        $this->regenerateTimestamp();
     }
 
     /**
