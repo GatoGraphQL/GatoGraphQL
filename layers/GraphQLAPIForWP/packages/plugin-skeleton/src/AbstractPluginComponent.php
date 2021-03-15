@@ -8,11 +8,19 @@ use PoP\Root\Component\AbstractComponent;
 
 abstract class AbstractPluginComponent extends AbstractComponent
 {
-    protected static ?string $pluginFolder = null;
+    /**
+     * @var string[]
+     */
+    private static array $pluginFolders = [];
 
     public static function setPluginFolder(string $pluginFolder): void
     {
-        self::$pluginFolder = $pluginFolder;
+        static::$pluginFolders[get_called_class()] = $pluginFolder;
+    }
+
+    public static function getPluginFolder(): ?string
+    {
+        return static::$pluginFolders[get_called_class()] ?? null;
     }
 
     /**
@@ -22,14 +30,15 @@ abstract class AbstractPluginComponent extends AbstractComponent
      */
     protected static function initializeSystemContainerServices(): void
     {
-        if (self::$pluginFolder === null) {
+        $pluginFolder = static::getPluginFolder();
+        if ($pluginFolder === null) {
             return;
         }
-        if (file_exists(self::$pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'system-services.yaml')) {
-            self::initSystemServices(self::$pluginFolder);
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
+            self::initSystemServices($pluginFolder, '', 'hybrid-services.yaml');
         }
-        if (file_exists(self::$pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
-            self::initSystemServices(self::$pluginFolder, '', 'hybrid-services.yaml');
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'system-services.yaml')) {
+            self::initSystemServices($pluginFolder);
         }
     }
 
@@ -46,17 +55,18 @@ abstract class AbstractPluginComponent extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        if (self::$pluginFolder === null) {
+        $pluginFolder = static::getPluginFolder();
+        if ($pluginFolder === null) {
             return;
         }
-        if (file_exists(self::$pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'services.yaml')) {
-            self::initServices(self::$pluginFolder);
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
+            self::initServices($pluginFolder, '', 'hybrid-services.yaml');
         }
-        if (file_exists(self::$pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
-            self::initServices(self::$pluginFolder, '', 'hybrid-services.yaml');
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'services.yaml')) {
+            self::initServices($pluginFolder);
         }
-        if (file_exists(self::$pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'schema-services.yaml')) {
-            self::initSchemaServices(self::$pluginFolder, $skipSchema);
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'schema-services.yaml')) {
+            self::initSchemaServices($pluginFolder, $skipSchema);
         }
     }
 }
