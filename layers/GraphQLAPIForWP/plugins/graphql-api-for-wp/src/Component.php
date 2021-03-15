@@ -66,15 +66,6 @@ class Component extends AbstractPluginComponent
     }
 
     /**
-     * Initialize services for the system container
-     */
-    protected static function initializeSystemContainerServices(): void
-    {
-        self::initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initSystemServices(dirname(__DIR__));
-    }
-
-    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration
@@ -85,8 +76,11 @@ class Component extends AbstractPluginComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initServices(dirname(__DIR__));
+        parent::initializeContainerServices(
+            $configuration,
+            $skipSchema,
+            $skipSchemaComponentClasses
+        );
         self::initComponentConfiguration();
         // Override DI services
         self::initServices(dirname(__DIR__), '/Overrides');

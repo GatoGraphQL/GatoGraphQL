@@ -20,6 +20,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\PluginSkeleton\AbstractGraphQLAPIPlugin;
+use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
@@ -316,10 +317,17 @@ class Plugin extends AbstractGraphQLAPIPlugin
             }
         }
 
+        // Set the plugin folder on all the Extension Components
+        $componentClasses = $this->getComponentClassesToInitialize();
+        $pluginFolder = dirname($this->pluginFile);
+        foreach ($componentClasses as $componentClass) {
+            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
+                $componentClass::setPluginFolder($pluginFolder);
+            }
+        }
+
         // Initialize the containers
-        AppLoader::addComponentClassesToInitialize(
-            $this->getComponentClassesToInitialize()
-        );
+        AppLoader::addComponentClassesToInitialize($componentClasses);
     }
 
     /**
