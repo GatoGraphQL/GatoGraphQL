@@ -31,18 +31,29 @@ abstract class AbstractGraphQLAPIExtension
      */
     protected function addAdminNoticeError(): void
     {
-        \add_action('admin_notices', function () {
-            \_e(sprintf(
-                '<div class="notice notice-error is-dismissible">' .
-                    '<p>%s</p>' .
-                '</div>',
-                sprintf(
-                    \__('Plugin <strong>%1$s</strong> is not installed or activated. Without it, plugin <strong>%2$s</strong> cannot be enabled.'),
-                    \__('GraphQL API for WordPress'),
-                    $this->getPluginName()
-                )
-            ));
-        });
+        if ($errorMessage = $this->getGraphQLAPIPluginInactiveAdminNoticeErrorMessage()) {
+            \add_action('admin_notices', function () use ($errorMessage) {
+                \_e(sprintf(
+                    '<div class="notice notice-error is-dismissible">' .
+                        '<p>%s</p>' .
+                    '</div>',
+                    $errorMessage
+                ));
+            });
+        }
+    }
+
+    /**
+     * The message to show in the admin notices, when the GraphQL API plugin
+     * is not installed or activated
+     */
+    protected function getGraphQLAPIPluginInactiveAdminNoticeErrorMessage(): ?string
+    {
+        return sprintf(
+            \__('Plugin <strong>%1$s</strong> is not installed or activated. Without it, plugin <strong>%2$s</strong> cannot be enabled.'),
+            \__('GraphQL API for WordPress'),
+            $this->getPluginName()
+        );
     }
 
     /**
