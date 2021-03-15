@@ -19,13 +19,13 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\PluginSkeleton\AbstractGraphQLAPIPlugin;
+use GraphQLAPI\PluginSkeleton\AbstractPlugin;
 use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
 
-class Plugin extends AbstractGraphQLAPIPlugin
+class Plugin extends AbstractPlugin
 {
     /**
      * Plugin's namespace

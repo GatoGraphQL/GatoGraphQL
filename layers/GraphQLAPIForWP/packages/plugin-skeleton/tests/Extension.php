@@ -2,7 +2,7 @@
 
 namespace GraphQLAPI\PluginSkeleton;
 
-class Extension extends AbstractGraphQLAPIExtension
+class Extension extends AbstractExtension
 {
     /**
      * Plugin main file
