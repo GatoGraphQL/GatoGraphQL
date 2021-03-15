@@ -13,21 +13,6 @@ use PoP\Engine\AppLoader;
 
 abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
 {
-    private string $pluginFile;
-
-    final public function __construct(string $pluginFile)
-    {
-        $this->pluginFile = $pluginFile;
-    }
-
-    /**
-     * The plugin name
-     */
-    protected function getPluginName(): string
-    {
-        return trim(substr($this->pluginFile, strlen(\WP_PLUGIN_DIR)), '/');
-    }
-
     /**
      * The PSR-4 namespace, with format "vendor\project"
      */
@@ -282,14 +267,6 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
      */
     protected function doBoot(): void
     {
-    }
-
-    /**
-     * Plugin main file
-     */
-    protected function getPluginFile(): string
-    {
-        return $this->pluginFile;
     }
 
     /**

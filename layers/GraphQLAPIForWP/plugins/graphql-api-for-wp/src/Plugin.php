@@ -65,7 +65,7 @@ class Plugin extends AbstractGraphQLAPIPlugin
     public function setup(): void
     {
         // Functions to execute when activating/deactivating the plugin
-        \register_deactivation_hook(\GRAPHQL_API_PLUGIN_FILE, [$this, 'deactivate']);
+        \register_deactivation_hook($this->getPluginFile(), [$this, 'deactivate']);
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
          * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
@@ -79,7 +79,7 @@ class Plugin extends AbstractGraphQLAPIPlugin
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
         \register_activation_hook(
-            \GRAPHQL_API_PLUGIN_FILE,
+            $this->getPluginFile(),
             function (): void {
                 // By removing the option (in case it already exists from a previously-installed version),
                 // the next request will know the plugin was just installed

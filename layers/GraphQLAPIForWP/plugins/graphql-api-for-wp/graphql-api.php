@@ -68,4 +68,4 @@ if (!file_exists($autoloadFile)) {
 require_once($autoloadFile);
 
 // Create and set-up the plugin instance
-(new Plugin())->setup();
+(new Plugin(__FILE__))->setup();
