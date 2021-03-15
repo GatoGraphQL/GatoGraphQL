@@ -10,7 +10,6 @@ use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
@@ -20,7 +19,7 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
         // Obtain the capabilities from another service
         $userAuthorizationDefinitionService = str_replace('\\', '\\\\', UserAuthorizationInterface::class);
         $capabilities = [
-            new Expression(sprintf(
+            $this->createExpression(sprintf(
                 'service("%s").getSchemaEditorAccessCapability()',
                 $userAuthorizationDefinitionService
             ))

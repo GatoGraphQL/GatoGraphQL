@@ -9,6 +9,7 @@ use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\ExpressionLanguage\Expression;
 
 /**
  * This class enables to leak the implementation of Compiler Passes to the application.
@@ -38,5 +39,10 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
     protected function createReference(string $id): Reference
     {
         return new Reference($id);
+    }
+
+    protected function createExpression(string $expression): Expression
+    {
+        return new Expression($expression);
     }
 }
