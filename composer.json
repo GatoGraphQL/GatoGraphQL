@@ -369,11 +369,6 @@
         }
     },
     "extra": {
-        "installer-paths": {
-            "wordpress/wp-content/plugins/{$name}/": [
-                "type:wordpress-plugin"
-            ]
-        },
         "wordpress-install-dir": "vendor/wordpress/wordpress"
     },
     "replace": {
