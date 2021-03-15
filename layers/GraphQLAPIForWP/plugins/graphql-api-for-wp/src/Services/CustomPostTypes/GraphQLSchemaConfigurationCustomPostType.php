@@ -25,7 +25,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
         return self::CUSTOM_POST_TYPE;
     }

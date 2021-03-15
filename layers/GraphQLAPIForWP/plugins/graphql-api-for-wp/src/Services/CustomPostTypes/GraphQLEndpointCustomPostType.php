@@ -30,7 +30,7 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
     /**
      * Custom Post Type name
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
         return self::CUSTOM_POST_TYPE;
     }

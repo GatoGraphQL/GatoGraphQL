@@ -162,7 +162,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
         /**
          * Check if it is this CPT...
          */
-        if (\is_singular($this->getPostType())) {
+        if (\is_singular($this->getCustomPostType())) {
             $vars = ApplicationState::getVars();
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
@@ -190,7 +190,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
      */
     public function getNature(string $nature, WP_Query $query): string
     {
-        if ($query->is_singular($this->getPostType())) {
+        if ($query->is_singular($this->getCustomPostType())) {
             return $this->getUpstreamNature($nature, $query);
         }
 
@@ -264,7 +264,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     public function addGraphQLVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        if (\is_singular($this->getPostType()) && $this->isEnabled($vars['routing-state']['queried-object-id'])) {
+        if (\is_singular($this->getCustomPostType()) && $this->isEnabled($vars['routing-state']['queried-object-id'])) {
             $this->upstreamAddGraphQLVars($vars_in_array);
         }
     }

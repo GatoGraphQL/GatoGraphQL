@@ -51,7 +51,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
         return self::CUSTOM_POST_TYPE;
     }
@@ -331,7 +331,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
      */
     public function addGraphQLVars(array $vars_in_array): void
     {
-        if (\is_singular($this->getPostType())) {
+        if (\is_singular($this->getCustomPostType())) {
             // Check if it is enabled, by configuration
             [&$vars] = $vars_in_array;
             if (!$this->isEnabled($vars['routing-state']['queried-object-id'])) {
