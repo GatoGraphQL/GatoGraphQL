@@ -45,9 +45,7 @@
             "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
             "lando start"
         ],
-        "rebuild-server": [
-            "lando rebuild appserver -y"
-        ],
+        "rebuild-server": "lando rebuild appserver -y",
         "symlink-vendor-for-graphql-api-for-wp-plugin": [
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
