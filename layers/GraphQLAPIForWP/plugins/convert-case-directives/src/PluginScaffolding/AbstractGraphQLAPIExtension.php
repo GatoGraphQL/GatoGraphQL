@@ -282,7 +282,9 @@ abstract class AbstractGraphQLAPIExtension
         }
 
         // Flush rewrite rules: needed if the extension registers CPTs
-        \flush_rewrite_rules();
+        if ($this->getExtensionCustomPostTypes() !== []) {
+            \flush_rewrite_rules();
+        }
 
         $this->regenerateTimestamp();
     }
