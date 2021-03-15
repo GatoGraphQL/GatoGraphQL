@@ -151,7 +151,7 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
      */
     public function getSchemaComponentClassesToSkip(): array
     {
-        return static::getSkippingSchemaComponentClasses();
+        return $this->getSkippingSchemaComponentClasses();
     }
 
     /**
@@ -160,13 +160,13 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
      *
      * @return string[]
      */
-    protected static function getSkippingSchemaComponentClasses(): array
+    protected function getSkippingSchemaComponentClasses(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
 
         // Component classes are skipped if the module is disabled
         $skipSchemaModuleComponentClasses = array_filter(
-            static::getModuleComponentClasses(),
+            $this->getModuleComponentClasses(),
             function ($module) use ($moduleRegistry) {
                 return !$moduleRegistry->isModuleEnabled($module);
             },
@@ -185,7 +185,7 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
      *
      * @return string[]
      */
-    protected static function getModuleComponentClasses(): array
+    protected function getModuleComponentClasses(): array
     {
         return [];
     }

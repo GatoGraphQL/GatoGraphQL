@@ -40,7 +40,7 @@ class GraphQLAPIExtension extends AbstractGraphQLAPIExtension
      *
      * @return array
      */
-    protected static function getModuleComponentClasses(): array
+    protected function getModuleComponentClasses(): array
     {
         return [
             SchemaModuleResolver::CONVERT_CASE_DIRECTIVES => [
