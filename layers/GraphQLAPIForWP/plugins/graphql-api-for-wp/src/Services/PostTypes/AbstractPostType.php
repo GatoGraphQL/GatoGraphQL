@@ -16,7 +16,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Post;
 
-abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     protected Menu $menu;
     protected ModuleRegistryInterface $moduleRegistry;
