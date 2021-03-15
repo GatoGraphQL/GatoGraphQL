@@ -16,7 +16,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "michelf/php-markdown": "^1.9",
         "getpop/engine": "^0.8"
     },
     "require-dev": {
