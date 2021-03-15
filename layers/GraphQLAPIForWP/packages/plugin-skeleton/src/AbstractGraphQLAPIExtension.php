@@ -195,7 +195,7 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
         $componentClasses = $this->getComponentClassesToInitialize();
         $pluginFolder = dirname($this->pluginFile);
         foreach ($componentClasses as $componentClass) {
-            if (is_a($componentClass, AbstractExtensionComponent::class, true)) {
+            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
                 $componentClass::setPluginFolder($pluginFolder);
             }
         }

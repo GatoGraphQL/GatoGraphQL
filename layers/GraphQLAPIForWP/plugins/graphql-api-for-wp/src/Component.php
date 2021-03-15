@@ -9,15 +9,15 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\Root\Component\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Component extends AbstractPluginComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
