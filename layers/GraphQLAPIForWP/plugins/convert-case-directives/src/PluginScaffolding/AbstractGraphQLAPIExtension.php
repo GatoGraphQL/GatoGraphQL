@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives\PluginScaffolding;
 
+use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\AppLoader;
 
@@ -16,6 +18,16 @@ abstract class AbstractGraphQLAPIExtension
      * The plugin name
      */
     abstract protected function getPluginName(): string;
+
+    /**
+     * The PSR-4 namespace, with format "vendor\project"
+     */
+    protected function getExtensionNamespace(): string
+    {
+        $class = get_called_class();
+        $parts = explode('\\', $class);
+        return $parts[0] . '\\' . $parts[1];
+    }
 
     /**
      * Indicate if the main plugin is installed and activated
@@ -285,7 +297,34 @@ abstract class AbstractGraphQLAPIExtension
         if (!$this->isGraphQLAPIPluginActive()) {
             return;
         }
+
+        // Unregister all CPTs from this plugin
+        if ($customPostTypes = $this->getExtensionCustomPostTypes()) {
+            foreach ($customPostTypes as $customPostType) {
+                $customPostType->unregisterPostType();
+            }
+
+            // Clear the permalinks to remove the CPT's rules from the database
+            \flush_rewrite_rules();
+        }
+
+        // Filter the ones that belong to this plugin
         $this->regenerateTimestamp();
+    }
+
+    /**
+     * Get the CPTs from this plugin
+     *
+     * @return CustomPostTypeInterface[]
+     */
+    public function getExtensionCustomPostTypes(): array
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        // Filter the ones that belong to this plugin
+        return array_filter(
+            $customPostTypeRegistry->getCustomPostTypes(),
+            fn (CustomPostTypeInterface $customPostType) => str_starts_with(get_class($customPostType), $this->getExtensionNamespace() . '\\')
+        );
     }
 
     /**
