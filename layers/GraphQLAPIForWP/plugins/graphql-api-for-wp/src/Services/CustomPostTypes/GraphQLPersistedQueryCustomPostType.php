@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -14,13 +14,13 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractGraphQLQueryExecutionPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks as GraphQLRequestVarsHooks;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;
 
-class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostType
+class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
     protected BlockContentHelpers $blockContentHelpers;
     protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
@@ -44,16 +44,16 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-query';
+    public const CUSTOM_POST_TYPE = 'graphql-query';
 
     /**
      * Custom Post Type name
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**
@@ -331,7 +331,7 @@ class GraphQLPersistedQueryPostType extends AbstractGraphQLQueryExecutionPostTyp
      */
     public function addGraphQLVars(array $vars_in_array): void
     {
-        if (\is_singular($this->getPostType())) {
+        if (\is_singular($this->getCustomPostType())) {
             // Check if it is enabled, by configuration
             [&$vars] = $vars_in_array;
             if (!$this->isEnabled($vars['routing-state']['queried-object-id'])) {

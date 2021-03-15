@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 
 class CacheControlBlockCategory extends AbstractBlockCategory
 {
@@ -18,7 +18,7 @@ class CacheControlBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLCacheControlListPostType::POST_TYPE,
+            GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

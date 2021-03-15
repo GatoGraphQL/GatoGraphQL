@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLCacheControlListPostType extends AbstractPostType
+class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-ccl';
+    public const CUSTOM_POST_TYPE = 'graphql-ccl';
 
     /**
      * Custom Post Type name
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**

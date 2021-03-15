@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -16,7 +16,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Post;
 
-abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     protected Menu $menu;
     protected ModuleRegistryInterface $moduleRegistry;
@@ -38,7 +38,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
      */
     public function initialize(): void
     {
-        $postType = $this->getPostType();
+        $postType = $this->getCustomPostType();
         // To satisfy the menu position, the CPT will be initialized
         // earlier or later
         \add_action(
@@ -210,7 +210,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
      */
     public function maybeAddPostTypeTableActions(array $actions, $post): array
     {
-        if ($post->post_type == $this->getPostType()) {
+        if ($post->post_type == $this->getCustomPostType()) {
             $actions = \array_merge(
                 $actions,
                 $this->getPostTypeTableActions($post)
@@ -260,7 +260,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
         if (
             $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
             && $this->userAuthorization->canAccessSchemaEditor()
-            && \is_singular($this->getPostType())
+            && \is_singular($this->getCustomPostType())
         ) {
             /**
              * Add the excerpt (if not empty) as description of the GraphQL query
@@ -298,7 +298,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
         return strtolower(str_replace(' ', '-', $this->getPostTypeName()));
     }
@@ -491,7 +491,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
      */
     public function registerPostType(): void
     {
-        \register_post_type($this->getPostType(), $this->getPostTypeArgs());
+        \register_post_type($this->getCustomPostType(), $this->getPostTypeArgs());
     }
 
     /**
@@ -501,7 +501,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
      */
     public function unregisterPostType(): void
     {
-        \unregister_post_type($this->getPostType());
+        \unregister_post_type($this->getCustomPostType());
     }
 
     /**
@@ -523,7 +523,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
     public function maybeLockGutenbergTemplate(): void
     {
         if (!empty($this->getGutenbergTemplate()) && $this->lockGutenbergTemplate()) {
-            $post_type_object = \get_post_type_object($this->getPostType());
+            $post_type_object = \get_post_type_object($this->getCustomPostType());
             if (!is_null($post_type_object)) {
                 $post_type_object->template_lock = 'all';
             }
@@ -541,7 +541,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
         /**
          * Check it is this CPT
          */
-        if ($post->post_type == $this->getPostType()) {
+        if ($post->post_type == $this->getCustomPostType()) {
             if ($blocks = $this->getGutenbergBlocksForCustomPostType()) {
                 return $blocks;
             }
@@ -578,7 +578,7 @@ abstract class AbstractPostType extends AbstractAutomaticallyInstantiatedService
     //         /**
     //          * Check if it is this CPT
     //          */
-    //         if ($post->post_type == $this->getPostType()) {
+    //         if ($post->post_type == $this->getCustomPostType()) {
     //             return $blocks;
     //         } elseif ($this->removeGutenbergBlocksForOtherPostTypes($post)) {
     //             // Remove this CPT's blocks from other post types.

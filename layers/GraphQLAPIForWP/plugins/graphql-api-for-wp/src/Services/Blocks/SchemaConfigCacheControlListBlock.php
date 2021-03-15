@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 
 /**
  * Cache Control block
@@ -29,9 +29,9 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPostListBloc
         return self::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS;
     }
 
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
-        return GraphQLCacheControlListPostType::POST_TYPE;
+        return GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getHeader(): string

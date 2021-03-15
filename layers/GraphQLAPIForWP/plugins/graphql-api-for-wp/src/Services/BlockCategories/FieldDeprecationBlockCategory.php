@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 
 class FieldDeprecationBlockCategory extends AbstractBlockCategory
 {
@@ -18,7 +18,7 @@ class FieldDeprecationBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLFieldDeprecationListPostType::POST_TYPE,
+            GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

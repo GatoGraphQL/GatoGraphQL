@@ -11,7 +11,7 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
      */
     protected function getCustomPostID(): ?int
     {
-        if (\is_singular($this->getPostType())) {
+        if (\is_singular($this->getCustomPostType())) {
             // Watch out! If accessing $vars it triggers setting ComponentConfiguration vars,
             // but we have not set the hooks yet!
             // For instance for `namespaceTypesAndInterfaces()`,
@@ -25,5 +25,5 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
         return null;
     }
 
-    abstract protected function getPostType(): string;
+    abstract protected function getCustomPostType(): string;
 }

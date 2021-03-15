@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use WP_Query;
 
-abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType
+abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCustomPostType
 {
     use EndpointResolverTrait {
         EndpointResolverTrait::getNature as getUpstreamNature;
@@ -162,7 +162,7 @@ abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType
         /**
          * Check if it is this CPT...
          */
-        if (\is_singular($this->getPostType())) {
+        if (\is_singular($this->getCustomPostType())) {
             $vars = ApplicationState::getVars();
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
@@ -190,7 +190,7 @@ abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType
      */
     public function getNature(string $nature, WP_Query $query): string
     {
-        if ($query->is_singular($this->getPostType())) {
+        if ($query->is_singular($this->getCustomPostType())) {
             return $this->getUpstreamNature($nature, $query);
         }
 
@@ -264,7 +264,7 @@ abstract class AbstractGraphQLQueryExecutionPostType extends AbstractPostType
     public function addGraphQLVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        if (\is_singular($this->getPostType()) && $this->isEnabled($vars['routing-state']['queried-object-id'])) {
+        if (\is_singular($this->getCustomPostType()) && $this->isEnabled($vars['routing-state']['queried-object-id'])) {
             $this->upstreamAddGraphQLVars($vars_in_array);
         }
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
 
 class PersistedQueryBlockCategory extends AbstractBlockCategory
 {
@@ -18,7 +18,7 @@ class PersistedQueryBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLPersistedQueryPostType::POST_TYPE,
+            GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

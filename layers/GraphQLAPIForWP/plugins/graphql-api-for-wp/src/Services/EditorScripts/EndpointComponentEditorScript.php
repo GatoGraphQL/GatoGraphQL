@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
 
 /**
  * Components required to edit a GraphQL endpoint CPT
@@ -74,7 +74,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLEndpointPostType::POST_TYPE,
+                GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
             ]
         );
     }
