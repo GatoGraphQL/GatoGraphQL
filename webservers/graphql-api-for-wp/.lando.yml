@@ -19,6 +19,8 @@ services:
         - >-
           ../../layers/GraphQLAPIForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/markdown-convertor
         - >-
+          ../../layers/GraphQLAPIForWP/packages/plugin-skeleton:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/plugin-skeleton
+        - >-
           ../../layers/Engine/packages/access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control
         - >-
           ../../layers/Engine/packages/cache-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/cache-control
