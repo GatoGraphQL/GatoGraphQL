@@ -14,9 +14,9 @@ use Symfony\Component\ExpressionLanguage\Expression;
 
 class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
+        $accessControlManagerDefinition = $containerBuilderWrapper->getDefinition(AccessControlManagerInterface::class);
         // Obtain the capabilities from another service
         $userAuthorizationDefinitionService = str_replace('\\', '\\\\', UserAuthorizationInterface::class);
         $capabilities = [

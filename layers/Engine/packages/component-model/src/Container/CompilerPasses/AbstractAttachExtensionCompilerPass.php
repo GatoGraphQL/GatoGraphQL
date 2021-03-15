@@ -11,12 +11,12 @@ use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractAttachExtensionCompilerPass extends AbstractCompilerPass
 {
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         $event = $this->getAttachExtensionEvent();
         $attachableClassGroups = $this->getAttachableClassGroups();
-        $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
-        $definitions = $containerBuilder->getDefinitions();
+        $attachExtensionServiceDefinition = $containerBuilderWrapper->getDefinition(AttachExtensionServiceInterface::class);
+        $definitions = $containerBuilderWrapper->getDefinitions();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null) {

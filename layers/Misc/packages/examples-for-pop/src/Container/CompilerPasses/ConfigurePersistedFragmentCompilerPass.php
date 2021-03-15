@@ -15,7 +15,7 @@ class ConfigurePersistedFragmentCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         // 'contentMesh' persisted fragments
         // Initialization of parameters
@@ -66,7 +66,7 @@ EOT;
 EOT;
         // Inject the values into the service
         $translationAPI = SystemTranslationAPIFacade::getInstance();
-        $persistedFragmentManagerDefinition = $containerBuilder->getDefinition(PersistedFragmentManagerInterface::class);
+        $persistedFragmentManagerDefinition = $containerBuilderWrapper->getDefinition(PersistedFragmentManagerInterface::class);
         $persistedFragmentManagerDefinition->addMethodCall(
             'addPersistedFragment',
             [

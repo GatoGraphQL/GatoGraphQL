@@ -27,7 +27,7 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
     /**
      * Compiler passes must implement the logic in this function, not in `process`
      */
-    abstract protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void;
+    abstract protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void;
 
     protected function enabled(): bool
     {

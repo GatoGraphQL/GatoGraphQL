@@ -14,11 +14,11 @@ class ConfigureTranslationServiceCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         // If there is a default translation provider, inject it into the service
         if ($defaultTranslationProvider = Environment::getDefaultTranslationProvider()) {
-            $translationServiceDefinition = $containerBuilder->getDefinition(TranslationServiceInterface::class);
+            $translationServiceDefinition = $containerBuilderWrapper->getDefinition(TranslationServiceInterface::class);
             $translationServiceDefinition->addMethodCall(
                 'setDefaultProvider',
                 [

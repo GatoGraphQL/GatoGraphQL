@@ -20,7 +20,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         $introspectionPersistedQuery = <<<EOT
         query IntrospectionQuery {
@@ -129,7 +129,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
          */
         $translationAPI = SystemTranslationAPIFacade::getInstance();
         $description = $translationAPI->__('GraphQL introspection query', 'examples-for-pop');
-        $graphQLPersistedQueryManagerDefinition = $containerBuilder->getDefinition(GraphQLPersistedQueryManagerInterface::class);
+        $graphQLPersistedQueryManagerDefinition = $containerBuilderWrapper->getDefinition(GraphQLPersistedQueryManagerInterface::class);
         $graphQLPersistedQueryManagerDefinition->addMethodCall(
             'addPersistedQuery',
             [

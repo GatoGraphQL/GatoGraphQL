@@ -9,10 +9,10 @@ use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCompilerPass
 {
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $registryDefinition = $containerBuilder->getDefinition($this->getRegistryServiceDefinition());
-        $definitions = $containerBuilder->getDefinitions();
+        $registryDefinition = $containerBuilderWrapper->getDefinition($this->getRegistryServiceDefinition());
+        $definitions = $containerBuilderWrapper->getDefinitions();
         $serviceClass = $this->getServiceClass();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();

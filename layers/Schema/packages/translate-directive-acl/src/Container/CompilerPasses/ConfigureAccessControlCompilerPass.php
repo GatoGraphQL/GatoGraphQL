@@ -18,9 +18,9 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
+        $accessControlManagerDefinition = $containerBuilderWrapper->getDefinition(AccessControlManagerInterface::class);
         if (Environment::userMustBeLoggedInToAccessTranslateDirective()) {
             $accessControlManagerDefinition->addMethodCall(
                 'addEntriesForDirectives',

@@ -15,9 +15,9 @@ class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $definitionManagerDefinition = $containerBuilder->getDefinition(DefinitionManagerInterface::class);
+        $definitionManagerDefinition = $containerBuilderWrapper->getDefinition(DefinitionManagerInterface::class);
         $definitionManagerDefinition->addMethodCall(
             'setDefinitionResolver',
             [

@@ -10,11 +10,11 @@ use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPass
 {
-    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $serviceInstantiatorDefinition = $containerBuilder->getDefinition(ServiceInstantiatorInterface::class);
+        $serviceInstantiatorDefinition = $containerBuilderWrapper->getDefinition(ServiceInstantiatorInterface::class);
         $serviceClass = $this->getServiceClass();
-        $definitions = $containerBuilder->getDefinitions();
+        $definitions = $containerBuilderWrapper->getDefinitions();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null || !is_a($definitionClass, $serviceClass, true)) {
