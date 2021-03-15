@@ -5,25 +5,26 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\Admin\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\PluginSkeleton\AbstractGraphQLAPIPlugin;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
 
-class Plugin
+class Plugin extends AbstractGraphQLAPIPlugin
 {
     /**
      * Plugin's namespace

@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\AppLoader;
 
-abstract class AbstractGraphQLAPIExtension
+abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
 {
     /**
      * The plugin name
