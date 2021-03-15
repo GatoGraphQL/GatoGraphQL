@@ -33,7 +33,7 @@ abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
 
     abstract protected function getAttributeName(): string;
 
-    abstract protected function getPostType(): string;
+    abstract protected function getCustomPostType(): string;
 
     abstract protected function getHeader(): string;
 
@@ -64,7 +64,7 @@ EOF;
             $postObjects = \get_posts([
                 'include' => $postListIDs,
                 'posts_per_page' => -1,
-                'post_type' => $this->getPostType(),
+                'post_type' => $this->getCustomPostType(),
                 'post_status' => [
                     'publish',
                     'draft',

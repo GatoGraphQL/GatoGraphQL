@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\SchemaFeedback\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
-use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
-use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\FieldDeprecationBlock;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLSchemaFeedbackListPostType extends AbstractPostType
+class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-feedback-list';
+    public const CUSTOM_POST_TYPE = 'graphql-deprec-list';
 
     /**
      * Custom Post Type name
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**
@@ -31,7 +31,7 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
      */
     public function getEnablingModule(): ?string
     {
-        return FunctionalityModuleResolver::SCHEMA_FEEDBACK;
+        return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
     }
 
     /**
@@ -39,17 +39,15 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
      */
     protected function getMenuPosition(): int
     {
-        return 7;
+        return 6;
     }
 
     /**
      * Custom post type name
-     *
-     * @return void
      */
     public function getPostTypeName(): string
     {
-        return \__('Schema Feedback List', 'graphql-api-schema-feedback');
+        return \__('Field Deprecation List', 'graphql-api');
     }
 
     /**
@@ -60,7 +58,7 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
-        return \__('Schema Feedback Lists', 'graphql-api-schema-feedback');
+        return \__('Field Deprecation Lists', 'graphql-api');
     }
 
     /**
@@ -87,17 +85,17 @@ class GraphQLSchemaFeedbackListPostType extends AbstractPostType
     /**
      * Gutenberg templates to lock down the Custom Post Type to
      *
-     * @return array
+     * @return array<array> Every element is an array with template name in first pos, and attributes then
      */
     protected function getGutenbergTemplate(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
-         * @var SchemaFeedbackBlock
+         * @var FieldDeprecationBlock
          */
-        $schemaFeedbackBlock = $instanceManager->getInstance(SchemaFeedbackBlock::class);
+        $fieldDeprecationBlock = $instanceManager->getInstance(FieldDeprecationBlock::class);
         return [
-            [$schemaFeedbackBlock->getBlockFullName()],
+            [$fieldDeprecationBlock->getBlockFullName()],
         ];
     }
 }

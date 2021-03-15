@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -406,9 +406,9 @@ class Plugin
         // First, unregister the post type, so the rules are no longer in memory.
         $instanceManager = InstanceManagerFacade::getInstance();
         $postTypeObjects = array_map(
-            function ($serviceClass) use ($instanceManager): AbstractPostType {
+            function ($serviceClass) use ($instanceManager): AbstractCustomPostType {
                 /**
-                 * @var AbstractPostType
+                 * @var AbstractCustomPostType
                  */
                 $postTypeObject = $instanceManager->getInstance($serviceClass);
                 return $postTypeObject;

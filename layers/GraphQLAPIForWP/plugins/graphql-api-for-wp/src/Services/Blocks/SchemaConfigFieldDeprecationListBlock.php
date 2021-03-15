@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 
 /**
  * Cache Control block
@@ -29,9 +29,9 @@ class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPostList
         return self::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS;
     }
 
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
-        return GraphQLFieldDeprecationListPostType::POST_TYPE;
+        return GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getHeader(): string

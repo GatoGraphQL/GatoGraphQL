@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 
 class AccessControlBlockCategory extends AbstractBlockCategory
 {
@@ -19,7 +19,7 @@ class AccessControlBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLAccessControlListPostType::POST_TYPE,
+            GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

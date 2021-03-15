@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
@@ -18,7 +18,7 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLSchemaConfigurationPostType::POST_TYPE,
+            GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

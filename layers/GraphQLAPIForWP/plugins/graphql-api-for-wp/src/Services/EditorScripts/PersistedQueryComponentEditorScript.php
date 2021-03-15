@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
 
 /**
  * Components required to edit a GraphQL Persisted Query CPT
@@ -74,7 +74,7 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLPersistedQueryPostType::POST_TYPE,
+                GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
             ]
         );
     }

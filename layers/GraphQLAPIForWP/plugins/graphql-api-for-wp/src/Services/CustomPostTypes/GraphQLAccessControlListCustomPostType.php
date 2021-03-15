@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLAccessControlListPostType extends AbstractPostType
+class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-acl';
+    public const CUSTOM_POST_TYPE = 'graphql-acl';
 
     /**
      * Custom Post Type name
      *
      * @return string
      */
-    protected function getPostType(): string
+    protected function getCustomPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**

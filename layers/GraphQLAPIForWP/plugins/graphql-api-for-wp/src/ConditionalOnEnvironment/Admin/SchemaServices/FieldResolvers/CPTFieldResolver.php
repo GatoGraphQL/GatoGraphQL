@@ -12,10 +12,10 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -178,10 +178,10 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 // Execute for the corresponding field name
                 $customPostTypes = [
-                    'accessControlLists' => GraphQLAccessControlListPostType::POST_TYPE,
-                    'cacheControlLists' => GraphQLCacheControlListPostType::POST_TYPE,
-                    'fieldDeprecationLists' => GraphQLFieldDeprecationListPostType::POST_TYPE,
-                    'schemaConfigurations' => GraphQLSchemaConfigurationPostType::POST_TYPE,
+                    'accessControlLists' => GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
+                    'cacheControlLists' => GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
+                    'fieldDeprecationLists' => GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
+                    'schemaConfigurations' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
                 ];
                 $query['custompost-types'] = [
                     $customPostTypes[$fieldName],

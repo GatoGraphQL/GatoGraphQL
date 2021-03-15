@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
@@ -177,7 +177,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              */
             $customPosts = \get_posts([
                 'posts_per_page' => -1,
-                'post_type' => GraphQLSchemaConfigurationPostType::POST_TYPE,
+                'post_type' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
                 'post_status' => 'publish',
             ]);
             if (!empty($customPosts)) {

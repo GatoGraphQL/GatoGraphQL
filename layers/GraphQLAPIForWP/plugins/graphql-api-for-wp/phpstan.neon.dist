@@ -4,7 +4,7 @@ parameters:
     ignoreErrors:
         -
             message: '#^Access to an undefined property WP_Post_Type::\$template_lock\.$#'
-            path: src/PostTypes/AbstractPostType.php
+            path: src/PostTypes/AbstractCustomPostType.php
         -
             message: '#^Unreachable statement - code above always terminates\.$#'
             path: src/Blocks/AbstractGraphiQLBlock.php
@@ -14,7 +14,7 @@ parameters:
             path: src/Scripts/GraphQLByPoPScriptTrait.php
         -
             message: '#^Cannot access an offset on array<string>\|bool\|string\.$#'
-            path: src/PostTypes/AbstractPostType.php
+            path: src/PostTypes/AbstractCustomPostType.php
     bootstrapFiles:
         - graphql-api.php
     level: 8
