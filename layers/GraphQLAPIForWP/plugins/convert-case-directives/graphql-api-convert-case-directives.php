@@ -28,4 +28,4 @@ define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.7.13');
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create and set-up the plugin instance
-(new GraphQLAPIExtension())->setup();
+(new GraphQLAPIExtension(__FILE__))->setup();

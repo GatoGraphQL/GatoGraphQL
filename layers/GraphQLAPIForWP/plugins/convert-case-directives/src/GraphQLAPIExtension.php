@@ -15,14 +15,6 @@ class GraphQLAPIExtension extends AbstractGraphQLAPIExtension
     public const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Plugin main file
-     */
-    protected function getPluginFile(): string
-    {
-        return \GRAPHQL_API_CONVERT_CASE_DIRECTIVES_PLUGIN_FILE;
-    }
-
-    /**
      * Plugin name
      */
     protected function getPluginName(): string

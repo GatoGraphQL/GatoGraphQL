@@ -13,6 +13,13 @@ use PoP\Engine\AppLoader;
 
 abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
 {
+    private string $pluginFile;
+
+    final public function __construct(string $pluginFile)
+    {
+        $this->pluginFile = $pluginFile;
+    }
+
     /**
      * The plugin name
      */
@@ -270,7 +277,10 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
     /**
      * Plugin main file
      */
-    abstract protected function getPluginFile(): string;
+    protected function getPluginFile(): string
+    {
+        return $this->pluginFile;
+    }
 
     /**
      * Get permalinks to work when activating the plugin
