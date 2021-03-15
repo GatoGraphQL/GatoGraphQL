@@ -14,7 +14,7 @@ Text Domain: graphql-api-convert-case-directives
 Domain Path: /languages
 */
 
-use GraphQLAPI\ConvertCaseDirectives\Plugin;
+use GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -28,4 +28,4 @@ define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.7.13');
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create and set-up the plugin instance
-(new Plugin())->setup();
+(new GraphQLAPIExtension())->setup();
