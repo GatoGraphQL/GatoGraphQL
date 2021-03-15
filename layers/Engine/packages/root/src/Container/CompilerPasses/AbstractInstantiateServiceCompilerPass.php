@@ -6,7 +6,6 @@ namespace PoP\Root\Container\CompilerPasses;
 
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Root\Container\ServiceInstantiatorInterface;
-use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPass
 {
@@ -23,7 +22,7 @@ abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPa
 
             $serviceInstantiatorDefinition->addMethodCall(
                 'addService',
-                [new Reference($definitionID)]
+                [$this->createReference($definitionID)]
             );
         }
     }

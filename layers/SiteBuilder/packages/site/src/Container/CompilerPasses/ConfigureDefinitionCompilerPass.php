@@ -8,7 +8,6 @@ use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Resources\DefinitionGroups;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
 {
@@ -21,7 +20,7 @@ class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
         $definitionManagerDefinition->addMethodCall(
             'setDefinitionResolver',
             [
-                new Reference('base36_definition_resolver'),
+                $this->createReference('base36_definition_resolver'),
                 DefinitionGroups::RESOURCES
             ]
         );

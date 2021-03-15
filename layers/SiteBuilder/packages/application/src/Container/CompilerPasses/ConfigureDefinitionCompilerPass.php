@@ -8,7 +8,6 @@ use PoP\ComponentModel\Modules\DefinitionGroups;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
 {
@@ -21,7 +20,7 @@ class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
         $definitionManagerDefinition->addMethodCall(
             'setDefinitionResolver',
             [
-                new Reference('emoji_definition_resolver'),
+                $this->createReference('emoji_definition_resolver'),
                 DefinitionGroups::MODULES
             ]
         );

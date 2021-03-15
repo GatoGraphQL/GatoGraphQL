@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\CompilerPasses;
 
-use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Root\Container\ContainerBuilderWrapper;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * This class enables to leak the implementation of Compiler Passes to the application.
@@ -32,5 +33,10 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
     protected function enabled(): bool
     {
         return true;
+    }
+
+    protected function createReference(string $id): Reference
+    {
+        return new Reference($id);
     }
 }

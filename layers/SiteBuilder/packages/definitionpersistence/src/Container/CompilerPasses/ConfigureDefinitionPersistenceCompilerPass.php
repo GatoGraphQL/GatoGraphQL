@@ -7,7 +7,6 @@ namespace PoP\DefinitionPersistence\Container\CompilerPasses;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ConfigureDefinitionPersistenceCompilerPass extends AbstractCompilerPass
 {
@@ -20,7 +19,7 @@ class ConfigureDefinitionPersistenceCompilerPass extends AbstractCompilerPass
         $definitionManagerDefinition->addMethodCall(
             'setDefinitionPersistence',
             [
-                new Reference('file_definition_persistence')
+                $this->createReference('file_definition_persistence')
             ]
         );
     }

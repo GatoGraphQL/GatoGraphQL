@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Root\Container\CompilerPasses;
 
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
-use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCompilerPass
 {
@@ -30,7 +29,7 @@ abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCom
             // Register the service in the corresponding registry
             $registryDefinition->addMethodCall(
                 $this->getRegistryMethodCallName(),
-                [new Reference($definitionID)]
+                [$this->createReference($definitionID)]
             );
         }
     }
