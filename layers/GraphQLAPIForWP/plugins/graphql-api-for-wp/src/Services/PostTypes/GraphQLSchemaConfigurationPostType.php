@@ -14,10 +14,10 @@ use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctional
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractPostType;
+use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLSchemaConfigurationPostType extends AbstractPostType
+class GraphQLSchemaConfigurationPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name
