@@ -321,10 +321,12 @@ abstract class AbstractGraphQLAPIExtension
     {
         $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
         // Filter the ones that belong to this plugin
-        return array_filter(
+        // Use $serviceDefinitionID for if the class is overriden
+        return array_values(array_filter(
             $customPostTypeRegistry->getCustomPostTypes(),
-            fn (CustomPostTypeInterface $customPostType) => str_starts_with(get_class($customPostType), $this->getExtensionNamespace() . '\\')
-        );
+            fn (string $serviceDefinitionID) => str_starts_with($serviceDefinitionID, $this->getExtensionNamespace() . '\\'),
+            ARRAY_FILTER_USE_KEY
+        ));
     }
 
     /**
