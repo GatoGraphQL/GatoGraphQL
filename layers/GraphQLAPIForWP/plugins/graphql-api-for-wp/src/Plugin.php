@@ -282,6 +282,8 @@ class Plugin extends AbstractPlugin
      */
     public function initialize(): void
     {
+        parent::initialize();
+
         /**
          * Watch out! If we are in the Modules page and enabling/disabling
          * a module, then already take that new state!
@@ -316,18 +318,6 @@ class Plugin extends AbstractPlugin
                 $moduleListTable->maybeProcessAction();
             }
         }
-
-        // Set the plugin folder on all the Extension Components
-        $componentClasses = $this->getComponentClassesToInitialize();
-        $pluginFolder = dirname($this->pluginFile);
-        foreach ($componentClasses as $componentClass) {
-            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
-                $componentClass::setPluginFolder($pluginFolder);
-            }
-        }
-
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize($componentClasses);
     }
 
     /**

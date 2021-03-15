@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginSkeleton;
 
+use PoP\Engine\AppLoader;
+
 abstract class AbstractPlugin
 {
     /**
@@ -43,5 +45,41 @@ abstract class AbstractPlugin
     protected function getPluginName(): string
     {
         return trim(substr($this->pluginFile, strlen(\WP_PLUGIN_DIR)), '/');
+    }
+
+    /**
+     * Plugin's initialization
+     */
+    public function initialize(): void
+    {
+        $this->initializeComponentClasses();
+    }
+
+    /**
+     * Inititalize Plugin's components
+     */
+    protected function initializeComponentClasses(): void
+    {
+        // Set the plugin folder on all the Extension Components
+        $componentClasses = $this->getComponentClassesToInitialize();
+        $pluginFolder = dirname($this->pluginFile);
+        foreach ($componentClasses as $componentClass) {
+            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
+                $componentClass::setPluginFolder($pluginFolder);
+            }
+        }
+
+        // Initialize the containers
+        AppLoader::addComponentClassesToInitialize($componentClasses);
+    }
+
+    /**
+     * Add Component classes to be initialized
+     *
+     * @return string[] List of `Component` class to initialize
+     */
+    public function getComponentClassesToInitialize(): array
+    {
+        return [];
     }
 }

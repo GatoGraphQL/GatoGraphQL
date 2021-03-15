@@ -113,16 +113,6 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Add Component classes to be initialized
-     *
-     * @return string[] List of `Component` class to initialize
-     */
-    public function getComponentClassesToInitialize(): array
-    {
-        return [];
-    }
-
-    /**
      * Add configuration for the Component classes
      *
      * @return array<string, mixed> [key]: Component class, [value]: Configuration
@@ -191,17 +181,7 @@ abstract class AbstractExtension extends AbstractPlugin
             return;
         }
 
-        // Set the plugin folder on all the Extension Components
-        $componentClasses = $this->getComponentClassesToInitialize();
-        $pluginFolder = dirname($this->pluginFile);
-        foreach ($componentClasses as $componentClass) {
-            if (is_a($componentClass, AbstractPluginComponent::class, true)) {
-                $componentClass::setPluginFolder($pluginFolder);
-            }
-        }
-
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize($componentClasses);
+        parent::initialize();
     }
 
     /**
