@@ -22,7 +22,7 @@ abstract class AbstractGraphQLAPIExtension
     /**
      * The PSR-4 namespace, with format "vendor\project"
      */
-    protected function getExtensionNamespace(): string
+    public function getExtensionNamespace(): string
     {
         $class = get_called_class();
         $parts = explode('\\', $class);
@@ -179,7 +179,10 @@ abstract class AbstractGraphQLAPIExtension
      *
      * @return string[]
      */
-    abstract protected static function getModuleComponentClasses(): array;
+    protected static function getModuleComponentClasses(): array
+    {
+        return [];
+    }
 
     /**
      * Plugin's initialization
