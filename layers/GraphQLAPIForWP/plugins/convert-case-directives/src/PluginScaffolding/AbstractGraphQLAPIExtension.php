@@ -268,6 +268,10 @@ abstract class AbstractGraphQLAPIExtension
         if (!$this->isGraphQLAPIPluginActive()) {
             return;
         }
+
+        // Flush rewrite rules: needed if the extension registers CPTs
+        \flush_rewrite_rules();
+
         $this->regenerateTimestamp();
     }
 
