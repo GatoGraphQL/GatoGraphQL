@@ -6,16 +6,16 @@ namespace Leoloso\ExamplesForPoP\Container\CompilerPasses;
 
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryUtils;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Translation\Facades\SystemTranslationAPIFacade;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ConfigurePersistedQueryCompilerPass implements CompilerPassInterface
+class ConfigurePersistedQueryCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         // Persisted queries
         $contentMeshPersistedQuery = <<<EOT
@@ -33,7 +33,7 @@ EOT;
 EOT;
         // Inject the values into the service
         $translationAPI = SystemTranslationAPIFacade::getInstance();
-        $persistedQueryManagerDefinition = $containerBuilder->getDefinition(PersistedQueryManagerInterface::class);
+        $persistedQueryManagerDefinition = $containerBuilderWrapper->getDefinition(PersistedQueryManagerInterface::class);
         $persistedQueryManagerDefinition->addMethodCall(
             'addPersistedQuery',
             [

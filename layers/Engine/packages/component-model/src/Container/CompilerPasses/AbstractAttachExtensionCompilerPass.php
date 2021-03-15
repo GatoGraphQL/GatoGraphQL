@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
-abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterface
+abstract class AbstractAttachExtensionCompilerPass extends AbstractCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         $event = $this->getAttachExtensionEvent();
         $attachableClassGroups = $this->getAttachableClassGroups();
-        $attachExtensionServiceDefinition = $containerBuilder->getDefinition(AttachExtensionServiceInterface::class);
-        $definitions = $containerBuilder->getDefinitions();
+        $attachExtensionServiceDefinition = $containerBuilderWrapper->getDefinition(AttachExtensionServiceInterface::class);
+        $definitions = $containerBuilderWrapper->getDefinitions();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null) {
@@ -38,7 +37,7 @@ abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterf
                 if ($definition->isAutoconfigured()) {
                     $attachExtensionServiceDefinition->addMethodCall(
                         'enqueueExtension',
-                        [$event, $attachableGroup, new Reference($definitionID)]
+                        [$event, $attachableGroup, $this->createReference($definitionID)]
                     );
                 }
                 // A service won't be of 2 attachable classes, so can skip checking

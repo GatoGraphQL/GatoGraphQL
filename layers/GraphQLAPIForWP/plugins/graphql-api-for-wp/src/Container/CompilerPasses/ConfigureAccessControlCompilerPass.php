@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use PoP\AccessControl\Services\AccessControlManagerInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use PoP\AccessControl\Services\AccessControlManagerInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
-use Symfony\Component\ExpressionLanguage\Expression;
 
-class ConfigureAccessControlCompilerPass implements CompilerPassInterface
+class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
+        $accessControlManagerDefinition = $containerBuilderWrapper->getDefinition(AccessControlManagerInterface::class);
         // Obtain the capabilities from another service
         $userAuthorizationDefinitionService = str_replace('\\', '\\\\', UserAuthorizationInterface::class);
         $capabilities = [
-            new Expression(sprintf(
+            $this->createExpression(sprintf(
                 'service("%s").getSchemaEditorAccessCapability()',
                 $userAuthorizationDefinitionService
             ))

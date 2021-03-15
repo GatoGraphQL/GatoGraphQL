@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\CompilerPasses;
 
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Root\Container\ServiceInstantiatorInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
-abstract class AbstractInstantiateServiceCompilerPass implements CompilerPassInterface
+abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $serviceInstantiatorDefinition = $containerBuilder->getDefinition(ServiceInstantiatorInterface::class);
+        $serviceInstantiatorDefinition = $containerBuilderWrapper->getDefinition(ServiceInstantiatorInterface::class);
         $serviceClass = $this->getServiceClass();
-        $definitions = $containerBuilder->getDefinitions();
+        $definitions = $containerBuilderWrapper->getDefinitions();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null || !is_a($definitionClass, $serviceClass, true)) {
@@ -24,7 +22,7 @@ abstract class AbstractInstantiateServiceCompilerPass implements CompilerPassInt
 
             $serviceInstantiatorDefinition->addMethodCall(
                 'addService',
-                [new Reference($definitionID)]
+                [$this->createReference($definitionID)]
             );
         }
     }

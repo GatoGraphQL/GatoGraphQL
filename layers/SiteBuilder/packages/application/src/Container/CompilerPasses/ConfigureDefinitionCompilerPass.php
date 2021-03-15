@@ -4,24 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\Application\Container\CompilerPasses;
 
-use PoP\Definitions\DefinitionManagerInterface;
 use PoP\ComponentModel\Modules\DefinitionGroups;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use PoP\Definitions\DefinitionManagerInterface;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
-class ConfigureDefinitionCompilerPass implements CompilerPassInterface
+class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $definitionManagerDefinition = $containerBuilder->getDefinition(DefinitionManagerInterface::class);
+        $definitionManagerDefinition = $containerBuilderWrapper->getDefinition(DefinitionManagerInterface::class);
         $definitionManagerDefinition->addMethodCall(
             'setDefinitionResolver',
             [
-                new Reference('emoji_definition_resolver'),
+                $this->createReference('emoji_definition_resolver'),
                 DefinitionGroups::MODULES
             ]
         );

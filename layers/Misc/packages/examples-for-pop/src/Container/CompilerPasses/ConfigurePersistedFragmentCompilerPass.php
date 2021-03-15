@@ -6,16 +6,16 @@ namespace Leoloso\ExamplesForPoP\Container\CompilerPasses;
 
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryUtils;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Translation\Facades\SystemTranslationAPIFacade;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ConfigurePersistedFragmentCompilerPass implements CompilerPassInterface
+class ConfigurePersistedFragmentCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         // 'contentMesh' persisted fragments
         // Initialization of parameters
@@ -66,7 +66,7 @@ EOT;
 EOT;
         // Inject the values into the service
         $translationAPI = SystemTranslationAPIFacade::getInstance();
-        $persistedFragmentManagerDefinition = $containerBuilder->getDefinition(PersistedFragmentManagerInterface::class);
+        $persistedFragmentManagerDefinition = $containerBuilderWrapper->getDefinition(PersistedFragmentManagerInterface::class);
         $persistedFragmentManagerDefinition->addMethodCall(
             'addPersistedFragment',
             [

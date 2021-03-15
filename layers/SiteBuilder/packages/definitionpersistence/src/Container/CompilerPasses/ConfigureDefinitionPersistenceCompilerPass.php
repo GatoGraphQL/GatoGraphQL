@@ -5,22 +5,21 @@ declare(strict_types=1);
 namespace PoP\DefinitionPersistence\Container\CompilerPasses;
 
 use PoP\Definitions\DefinitionManagerInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
-class ConfigureDefinitionPersistenceCompilerPass implements CompilerPassInterface
+class ConfigureDefinitionPersistenceCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $definitionManagerDefinition = $containerBuilder->getDefinition(DefinitionManagerInterface::class);
+        $definitionManagerDefinition = $containerBuilderWrapper->getDefinition(DefinitionManagerInterface::class);
         $definitionManagerDefinition->addMethodCall(
             'setDefinitionPersistence',
             [
-                new Reference('file_definition_persistence')
+                $this->createReference('file_definition_persistence')
             ]
         );
     }

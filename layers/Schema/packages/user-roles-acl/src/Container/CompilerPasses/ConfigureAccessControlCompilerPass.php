@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesACL\Container\CompilerPasses;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use PoPSchema\UserRolesACL\Environment;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoP\AccessControl\Services\AccessControlGroups as AccessControlGroups;
+use PoP\AccessControl\Services\AccessControlManagerInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
+use PoPSchema\UserRolesACL\Environment;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
 
-class ConfigureAccessControlCompilerPass implements CompilerPassInterface
+class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
+        $accessControlManagerDefinition = $containerBuilderWrapper->getDefinition(AccessControlManagerInterface::class);
         // Inject the access control entries
         if (Environment::disableRolesFields()) {
             $accessControlManagerDefinition->addMethodCall(

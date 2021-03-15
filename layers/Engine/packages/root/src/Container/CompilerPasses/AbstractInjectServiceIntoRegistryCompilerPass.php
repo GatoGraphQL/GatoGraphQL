@@ -4,19 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\CompilerPasses;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
-abstract class AbstractInjectServiceIntoRegistryCompilerPass implements CompilerPassInterface
+abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        if (!$this->enabled()) {
-            return;
-        }
-        $registryDefinition = $containerBuilder->getDefinition($this->getRegistryServiceDefinition());
-        $definitions = $containerBuilder->getDefinitions();
+        $registryDefinition = $containerBuilderWrapper->getDefinition($this->getRegistryServiceDefinition());
+        $definitions = $containerBuilderWrapper->getDefinitions();
         $serviceClass = $this->getServiceClass();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
@@ -34,7 +29,7 @@ abstract class AbstractInjectServiceIntoRegistryCompilerPass implements Compiler
             // Register the service in the corresponding registry
             $registryDefinition->addMethodCall(
                 $this->getRegistryMethodCallName(),
-                [new Reference($definitionID)]
+                [$this->createReference($definitionID)]
             );
         }
     }
@@ -42,9 +37,4 @@ abstract class AbstractInjectServiceIntoRegistryCompilerPass implements Compiler
     abstract protected function getRegistryServiceDefinition(): string;
     abstract protected function getServiceClass(): string;
     abstract protected function getRegistryMethodCallName(): string;
-
-    protected function enabled(): bool
-    {
-        return true;
-    }
 }
