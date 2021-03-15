@@ -23,7 +23,10 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
     /**
      * The plugin name
      */
-    abstract protected function getPluginName(): string;
+    protected function getPluginName(): string
+    {
+        return trim(substr($this->pluginFile, strlen(\WP_PLUGIN_DIR)), '/');
+    }
 
     /**
      * The PSR-4 namespace, with format "vendor\project"
