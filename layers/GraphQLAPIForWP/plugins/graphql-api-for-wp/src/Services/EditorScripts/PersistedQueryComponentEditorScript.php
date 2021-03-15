@@ -74,7 +74,7 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLPersistedQueryCustomPostType::POST_TYPE,
+                GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
             ]
         );
     }

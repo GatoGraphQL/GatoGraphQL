@@ -44,7 +44,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-query';
+    public const CUSTOM_POST_TYPE = 'graphql-query';
 
     /**
      * Custom Post Type name
@@ -53,7 +53,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
      */
     protected function getPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**

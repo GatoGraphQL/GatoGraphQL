@@ -18,7 +18,7 @@ class PersistedQueryBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLPersistedQueryCustomPostType::POST_TYPE,
+            GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

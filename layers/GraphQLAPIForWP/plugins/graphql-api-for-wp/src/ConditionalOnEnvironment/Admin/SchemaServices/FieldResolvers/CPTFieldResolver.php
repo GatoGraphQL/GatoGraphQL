@@ -178,10 +178,10 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 // Execute for the corresponding field name
                 $customPostTypes = [
-                    'accessControlLists' => GraphQLAccessControlListCustomPostType::POST_TYPE,
-                    'cacheControlLists' => GraphQLCacheControlListCustomPostType::POST_TYPE,
-                    'fieldDeprecationLists' => GraphQLFieldDeprecationListCustomPostType::POST_TYPE,
-                    'schemaConfigurations' => GraphQLSchemaConfigurationCustomPostType::POST_TYPE,
+                    'accessControlLists' => GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
+                    'cacheControlLists' => GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
+                    'fieldDeprecationLists' => GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
+                    'schemaConfigurations' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
                 ];
                 $query['custompost-types'] = [
                     $customPostTypes[$fieldName],

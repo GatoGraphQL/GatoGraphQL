@@ -46,10 +46,10 @@ class QueryHooks extends AbstractHookSet
             $query['post_type'] = array_diff(
                 $query['post_type'],
                 [
-                    GraphQLAccessControlListCustomPostType::POST_TYPE,
-                    GraphQLCacheControlListCustomPostType::POST_TYPE,
-                    GraphQLFieldDeprecationListCustomPostType::POST_TYPE,
-                    GraphQLSchemaConfigurationCustomPostType::POST_TYPE,
+                    GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
                 ]
             );
             // If there are no valid postTypes, then return no results

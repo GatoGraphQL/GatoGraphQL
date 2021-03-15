@@ -20,7 +20,7 @@ class PersistedQuerySchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
 
     protected function getPostType(): string
     {
-        return GraphQLPersistedQueryCustomPostType::POST_TYPE;
+        return GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface

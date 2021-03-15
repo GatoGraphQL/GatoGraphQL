@@ -18,7 +18,7 @@ class FieldDeprecationBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLFieldDeprecationListCustomPostType::POST_TYPE,
+            GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

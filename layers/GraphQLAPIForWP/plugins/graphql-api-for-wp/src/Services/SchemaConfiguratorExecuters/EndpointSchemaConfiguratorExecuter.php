@@ -20,7 +20,7 @@ class EndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfigu
 
     protected function getPostType(): string
     {
-        return GraphQLEndpointCustomPostType::POST_TYPE;
+        return GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface

@@ -31,7 +31,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPostListBlo
 
     protected function getPostType(): string
     {
-        return GraphQLAccessControlListCustomPostType::POST_TYPE;
+        return GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getHeader(): string

@@ -19,7 +19,7 @@ class SchemaFeedbackBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLSchemaFeedbackListCustomPostType::POST_TYPE,
+            GraphQLSchemaFeedbackListCustomPostType::CUSTOM_POST_TYPE,
         ];
     }
 

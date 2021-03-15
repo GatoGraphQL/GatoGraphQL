@@ -15,7 +15,7 @@ trait CustomEndpointClientTrait
      */
     protected function isClientDisabled(): bool
     {
-        if (!\is_singular(GraphQLEndpointCustomPostType::POST_TYPE)) {
+        if (!\is_singular(GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE)) {
             return true;
         }
         return parent::isClientDisabled();

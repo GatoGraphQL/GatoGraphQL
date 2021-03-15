@@ -31,7 +31,7 @@ class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPostList
 
     protected function getPostType(): string
     {
-        return GraphQLFieldDeprecationListCustomPostType::POST_TYPE;
+        return GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getHeader(): string

@@ -74,7 +74,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLEndpointCustomPostType::POST_TYPE,
+                GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
             ]
         );
     }

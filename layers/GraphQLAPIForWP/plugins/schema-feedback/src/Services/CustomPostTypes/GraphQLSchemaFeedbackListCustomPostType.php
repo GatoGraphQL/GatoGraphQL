@@ -14,7 +14,7 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-feedback-list';
+    public const CUSTOM_POST_TYPE = 'graphql-feedback-list';
 
     /**
      * Custom Post Type name
@@ -23,7 +23,7 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
      */
     protected function getPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**

@@ -177,7 +177,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              */
             $customPosts = \get_posts([
                 'posts_per_page' => -1,
-                'post_type' => GraphQLSchemaConfigurationCustomPostType::POST_TYPE,
+                'post_type' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
                 'post_status' => 'publish',
             ]);
             if (!empty($customPosts)) {

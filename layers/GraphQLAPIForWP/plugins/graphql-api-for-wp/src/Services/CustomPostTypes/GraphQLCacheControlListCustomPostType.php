@@ -14,7 +14,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-ccl';
+    public const CUSTOM_POST_TYPE = 'graphql-ccl';
 
     /**
      * Custom Post Type name
@@ -23,7 +23,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getPostType(): string
     {
-        return self::POST_TYPE;
+        return self::CUSTOM_POST_TYPE;
     }
 
     /**

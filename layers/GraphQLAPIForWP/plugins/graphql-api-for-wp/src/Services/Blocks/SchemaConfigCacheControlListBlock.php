@@ -31,7 +31,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPostListBloc
 
     protected function getPostType(): string
     {
-        return GraphQLCacheControlListCustomPostType::POST_TYPE;
+        return GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE;
     }
 
     protected function getHeader(): string

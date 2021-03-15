@@ -585,12 +585,12 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 $genericCustomPostTypes,
                 [
                     // Post Types from GraphQL API that contain private data
-                    GraphQLAccessControlListCustomPostType::POST_TYPE,
-                    GraphQLCacheControlListCustomPostType::POST_TYPE,
-                    GraphQLFieldDeprecationListCustomPostType::POST_TYPE,
-                    GraphQLSchemaConfigurationCustomPostType::POST_TYPE,
-                    GraphQLEndpointCustomPostType::POST_TYPE,
-                    GraphQLPersistedQueryCustomPostType::POST_TYPE,
+                    GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
+                    GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
                     // WordPress internal CPTs
                     // Attachment not allowed because its post_status="inherit",
                     // not "publish", and the API filters by "publish" entries
