@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\AppLoader;
 
-abstract class AbstractPlugin
+abstract class AbstractGraphQLAPIExtension
 {
     /**
      * The plugin name
