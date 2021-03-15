@@ -7,7 +7,7 @@ namespace PoP\Root\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-final class ContainerBuilderWrapper implements CompilerPassContainerInterface
+final class ContainerBuilderWrapper implements ContainerBuilderWrapperInterface
 {
     private ContainerBuilder $containerBuilder;
 

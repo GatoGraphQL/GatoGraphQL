@@ -6,7 +6,7 @@ namespace PoPSchema\TranslateDirectiveACL\Container\CompilerPasses;
 
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
-use PoP\Root\Container\CompilerPassContainerInterface;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\TranslateDirective\DirectiveResolvers\AbstractTranslateDirectiveResolver;
 use PoPSchema\TranslateDirectiveACL\Environment;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
@@ -18,7 +18,7 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(CompilerPassContainerInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
     {
         $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
         if (Environment::userMustBeLoggedInToAccessTranslateDirective()) {

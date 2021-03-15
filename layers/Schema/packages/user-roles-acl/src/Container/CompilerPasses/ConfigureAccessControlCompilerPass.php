@@ -8,7 +8,7 @@ use PoP\AccessControl\Services\AccessControlGroups as AccessControlGroups;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
-use PoP\Root\Container\CompilerPassContainerInterface;
+use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
 use PoPSchema\UserRolesACL\Environment;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
@@ -20,7 +20,7 @@ class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(CompilerPassContainerInterface $containerBuilder): void
+    protected function doProcess(ContainerBuilderWrapperInterface $containerBuilder): void
     {
         $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
         // Inject the access control entries

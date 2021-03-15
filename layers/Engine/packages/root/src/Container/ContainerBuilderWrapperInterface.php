@@ -7,7 +7,7 @@ namespace PoP\Root\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-interface CompilerPassContainerInterface
+interface ContainerBuilderWrapperInterface
 {
     public function getContainerBuilder(): ContainerBuilder;
     public function getDefinition(string $id): Definition;
