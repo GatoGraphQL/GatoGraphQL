@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback\Services\PostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\AbstractCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryPostType;
 
 /**
  * Components required to edit a GraphQL Persisted Query CPT

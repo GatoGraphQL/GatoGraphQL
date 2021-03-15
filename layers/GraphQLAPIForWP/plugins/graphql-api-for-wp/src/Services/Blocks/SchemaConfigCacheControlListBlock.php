@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListPostType;
 
 /**
  * Cache Control block

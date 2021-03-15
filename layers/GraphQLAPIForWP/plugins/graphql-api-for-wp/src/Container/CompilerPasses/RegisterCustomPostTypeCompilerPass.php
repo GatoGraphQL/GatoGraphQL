@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\CustomPostTypeInterface;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterCustomPostTypeCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

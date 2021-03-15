@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLPersistedQueryPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointPostType;
 
 /**
  * It comprises the endpoint and the persisted query CPTs

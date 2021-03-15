@@ -12,10 +12,10 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLCacheControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLSchemaConfigurationPostType;
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListPostType;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 

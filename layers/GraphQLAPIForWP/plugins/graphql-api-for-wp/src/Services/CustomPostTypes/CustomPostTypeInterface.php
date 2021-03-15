@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\PostTypes;
+namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 interface CustomPostTypeInterface
 {

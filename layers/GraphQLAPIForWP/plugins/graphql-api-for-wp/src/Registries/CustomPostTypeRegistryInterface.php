@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-use GraphQLAPI\GraphQLAPI\Services\PostTypes\CustomPostTypeInterface;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 
 interface CustomPostTypeRegistryInterface
 {
