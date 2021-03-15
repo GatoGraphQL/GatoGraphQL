@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\CompilerPasses;
 
+use PoP\Root\Container\CompilerPassContainerInterface;
 use PoP\Root\Container\ServiceInstantiatorInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPass
 {
-    protected function doProcess(ContainerBuilder $containerBuilder): void
+    protected function doProcess(CompilerPassContainerInterface $containerBuilder): void
     {
         $serviceInstantiatorDefinition = $containerBuilder->getDefinition(ServiceInstantiatorInterface::class);
         $serviceClass = $this->getServiceClass();

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\CompilerPasses;
 
+use PoP\Root\Container\CompilerPassContainerInterface;
+use PoP\Root\Container\ContainerBuilderWrapper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -19,13 +21,13 @@ abstract class AbstractCompilerPass implements CompilerPassInterface
         if (!$this->enabled()) {
             return;
         }
-        $this->doProcess($containerBuilder);
+        $this->doProcess(new ContainerBuilderWrapper($containerBuilder));
     }
 
     /**
      * Compiler passes must implement the logic in this function, not in `process`
      */
-    abstract protected function doProcess(ContainerBuilder $containerBuilder): void;
+    abstract protected function doProcess(CompilerPassContainerInterface $containerBuilder): void;
 
     protected function enabled(): bool
     {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\CompilerPasses;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PoP\Root\Container\CompilerPassContainerInterface;
 use Symfony\Component\DependencyInjection\Reference;
 
 abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCompilerPass
 {
-    protected function doProcess(ContainerBuilder $containerBuilder): void
+    protected function doProcess(CompilerPassContainerInterface $containerBuilder): void
     {
         $registryDefinition = $containerBuilder->getDefinition($this->getRegistryServiceDefinition());
         $definitions = $containerBuilder->getDefinitions();

@@ -25,4 +25,12 @@ final class ContainerBuilderWrapper implements CompilerPassContainerInterface
     {
         return $this->containerBuilder->getDefinition($id);
     }
+
+    /**
+     * @return Definition[] An array of Definition instances
+     */
+    final public function getDefinitions(): array
+    {
+        return $this->containerBuilder->getDefinitions();
+    }
 }

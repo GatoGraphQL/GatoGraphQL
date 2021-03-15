@@ -11,4 +11,8 @@ interface CompilerPassContainerInterface
 {
     public function getContainerBuilder(): ContainerBuilder;
     public function getDefinition(string $id): Definition;
+    /**
+     * @return Definition[] An array of Definition instances
+     */
+    public function getDefinitions(): array;
 }

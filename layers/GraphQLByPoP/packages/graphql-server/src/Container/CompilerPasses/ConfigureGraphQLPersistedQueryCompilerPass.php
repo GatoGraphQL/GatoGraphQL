@@ -7,8 +7,8 @@ namespace GraphQLByPoP\GraphQLServer\Container\CompilerPasses;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
 use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
+use PoP\Root\Container\CompilerPassContainerInterface;
 use PoP\Translation\Facades\SystemTranslationAPIFacade;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
 {
@@ -20,7 +20,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
     /**
      * GraphQL persisted query for Introspection query
      */
-    protected function doProcess(ContainerBuilder $containerBuilder): void
+    protected function doProcess(CompilerPassContainerInterface $containerBuilder): void
     {
         $introspectionPersistedQuery = <<<EOT
         query IntrospectionQuery {
