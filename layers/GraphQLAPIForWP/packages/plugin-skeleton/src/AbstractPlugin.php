@@ -19,6 +19,9 @@ abstract class AbstractPlugin
      */
     public const HOOK_BOOT_EXTENSION_PLUGIN = __CLASS__ . ':bootExtensionPlugin';
 
+    /**
+     * The main plugin file
+     */
     protected string $pluginFile;
 
     final public function __construct(string $pluginFile)
