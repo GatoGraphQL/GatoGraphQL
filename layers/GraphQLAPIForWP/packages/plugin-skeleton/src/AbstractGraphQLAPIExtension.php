@@ -206,10 +206,17 @@ abstract class AbstractGraphQLAPIExtension extends AbstractGraphQLAPIPlugin
             return;
         }
 
+        // Set the plugin folder on all the Extension Components
+        $componentClasses = $this->getComponentClassesToInitialize();
+        $pluginFolder = dirname($this->pluginFile);
+        foreach ($componentClasses as $componentClass) {
+            if (is_a($componentClass, AbstractExtensionComponent::class, true)) {
+                $componentClass::setPluginFolder($pluginFolder);
+            }
+        }
+
         // Initialize the containers
-        AppLoader::addComponentClassesToInitialize(
-            $this->getComponentClassesToInitialize()
-        );
+        AppLoader::addComponentClassesToInitialize($componentClasses);
     }
 
     /**
