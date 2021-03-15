@@ -6,10 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SchemaServices\FieldResolvers\CPTFieldResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class QueryHooks extends AbstractHookSet
@@ -46,10 +46,10 @@ class QueryHooks extends AbstractHookSet
             $query['post_type'] = array_diff(
                 $query['post_type'],
                 [
-                    GraphQLAccessControlListPostType::POST_TYPE,
-                    GraphQLCacheControlListPostType::POST_TYPE,
-                    GraphQLFieldDeprecationListPostType::POST_TYPE,
-                    GraphQLSchemaConfigurationPostType::POST_TYPE,
+                    GraphQLAccessControlListCustomPostType::POST_TYPE,
+                    GraphQLCacheControlListCustomPostType::POST_TYPE,
+                    GraphQLFieldDeprecationListCustomPostType::POST_TYPE,
+                    GraphQLSchemaConfigurationCustomPostType::POST_TYPE,
                 ]
             );
             // If there are no valid postTypes, then return no results

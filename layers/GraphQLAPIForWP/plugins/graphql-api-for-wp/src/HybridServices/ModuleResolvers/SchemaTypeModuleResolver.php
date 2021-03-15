@@ -12,15 +12,15 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -585,12 +585,12 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 $genericCustomPostTypes,
                 [
                     // Post Types from GraphQL API that contain private data
-                    GraphQLAccessControlListPostType::POST_TYPE,
-                    GraphQLCacheControlListPostType::POST_TYPE,
-                    GraphQLFieldDeprecationListPostType::POST_TYPE,
-                    GraphQLSchemaConfigurationPostType::POST_TYPE,
-                    GraphQLEndpointPostType::POST_TYPE,
-                    GraphQLPersistedQueryPostType::POST_TYPE,
+                    GraphQLAccessControlListCustomPostType::POST_TYPE,
+                    GraphQLCacheControlListCustomPostType::POST_TYPE,
+                    GraphQLFieldDeprecationListCustomPostType::POST_TYPE,
+                    GraphQLSchemaConfigurationCustomPostType::POST_TYPE,
+                    GraphQLEndpointCustomPostType::POST_TYPE,
+                    GraphQLPersistedQueryCustomPostType::POST_TYPE,
                     // WordPress internal CPTs
                     // Attachment not allowed because its post_status="inherit",
                     // not "publish", and the API filters by "publish" entries

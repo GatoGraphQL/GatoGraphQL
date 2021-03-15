@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\FieldDeprecationBlock;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
+use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLFieldDeprecationListPostType extends AbstractCustomPostType
+class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name
      */
-    public const POST_TYPE = 'graphql-deprec-list';
+    public const POST_TYPE = 'graphql-ccl';
 
     /**
      * Custom Post Type name
@@ -31,7 +31,7 @@ class GraphQLFieldDeprecationListPostType extends AbstractCustomPostType
      */
     public function getEnablingModule(): ?string
     {
-        return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
+        return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
     }
 
     /**
@@ -39,7 +39,7 @@ class GraphQLFieldDeprecationListPostType extends AbstractCustomPostType
      */
     protected function getMenuPosition(): int
     {
-        return 6;
+        return 5;
     }
 
     /**
@@ -47,7 +47,7 @@ class GraphQLFieldDeprecationListPostType extends AbstractCustomPostType
      */
     public function getPostTypeName(): string
     {
-        return \__('Field Deprecation List', 'graphql-api');
+        return \__('Cache Control List', 'graphql-api');
     }
 
     /**
@@ -58,18 +58,7 @@ class GraphQLFieldDeprecationListPostType extends AbstractCustomPostType
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
-        return \__('Field Deprecation Lists', 'graphql-api');
-    }
-
-    /**
-     * Indicate if, whenever this CPT is saved/updated,
-     * the timestamp must be regenerated
-     *
-     * @return boolean
-     */
-    protected function regenerateTimestampOnSave(): bool
-    {
-        return true;
+        return \__('Cache Control Lists', 'graphql-api');
     }
 
     /**
@@ -91,11 +80,11 @@ class GraphQLFieldDeprecationListPostType extends AbstractCustomPostType
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
-         * @var FieldDeprecationBlock
+         * @var CacheControlBlock
          */
-        $fieldDeprecationBlock = $instanceManager->getInstance(FieldDeprecationBlock::class);
+        $cacheControlBlock = $instanceManager->getInstance(CacheControlBlock::class);
         return [
-            [$fieldDeprecationBlock->getBlockFullName()],
+            [$cacheControlBlock->getBlockFullName()],
         ];
     }
 }

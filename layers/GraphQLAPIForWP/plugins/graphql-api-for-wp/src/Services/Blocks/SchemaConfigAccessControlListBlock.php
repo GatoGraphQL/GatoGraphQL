@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 
 /**
  * Cache Control block
@@ -31,7 +31,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPostListBlo
 
     protected function getPostType(): string
     {
-        return GraphQLAccessControlListPostType::POST_TYPE;
+        return GraphQLAccessControlListCustomPostType::POST_TYPE;
     }
 
     protected function getHeader(): string

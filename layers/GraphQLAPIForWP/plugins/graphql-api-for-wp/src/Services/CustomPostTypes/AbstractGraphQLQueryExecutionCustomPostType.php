@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use WP_Query;
 
-abstract class AbstractGraphQLQueryExecutionPostType extends AbstractCustomPostType
+abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCustomPostType
 {
     use EndpointResolverTrait {
         EndpointResolverTrait::getNature as getUpstreamNature;

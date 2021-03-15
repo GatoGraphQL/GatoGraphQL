@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfigurator;
 
@@ -20,7 +20,7 @@ class PersistedQuerySchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
 
     protected function getPostType(): string
     {
-        return GraphQLPersistedQueryPostType::POST_TYPE;
+        return GraphQLPersistedQueryCustomPostType::POST_TYPE;
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface

@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AccessControlFunctional
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLAccessControlListPostType extends AbstractCustomPostType
+class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name
