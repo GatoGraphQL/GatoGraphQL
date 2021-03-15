@@ -14,15 +14,11 @@ abstract class AbstractPlugin
 {
     /**
      * The plugin name
-     *
-     * @return void
      */
     abstract protected function getPluginName(): string;
 
     /**
      * Indicate if the main plugin is installed and activated
-     *
-     * @return boolean
      */
     final protected function isGraphQLAPIPluginActive(): bool
     {
@@ -32,8 +28,6 @@ abstract class AbstractPlugin
     /**
      * If the GraphQL API plugin is not installed and activated,
      * show an error for the admin
-     *
-     * @return void
      */
     protected function addAdminNoticeError(): void
     {
@@ -54,8 +48,6 @@ abstract class AbstractPlugin
     /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
-     *
-     * @return void
      */
     final public function setup(): void
     {
@@ -137,7 +129,7 @@ abstract class AbstractPlugin
      * Provide the classes of the components whose
      * schema initialization must be skipped
      *
-     * @return array
+     * @return string[]
      */
     protected static function getSkippingSchemaComponentClasses(): array
     {
@@ -162,14 +154,12 @@ abstract class AbstractPlugin
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what component classes must skip initialization
      *
-     * @return array
+     * @return string[]
      */
     abstract protected static function getModuleComponentClasses(): array;
 
     /**
      * Plugin's initialization
-     *
-     * @return void
      */
     final public function initialize(): void
     {
@@ -215,8 +205,6 @@ abstract class AbstractPlugin
 
     /**
      * Plugin's booting
-     *
-     * @return void
      */
     final public function boot(): void
     {
@@ -249,8 +237,6 @@ abstract class AbstractPlugin
 
     /**
      * Initialize plugin. Function to override
-     *
-     * @return void
      */
     protected function doBoot(): void
     {
@@ -258,8 +244,6 @@ abstract class AbstractPlugin
 
     /**
      * Plugin main file
-     *
-     * @return string
      */
     abstract protected function getPluginFile(): string;
 
