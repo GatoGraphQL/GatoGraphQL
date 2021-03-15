@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use PoP\AccessControl\Services\AccessControlManagerInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use PoP\AccessControl\Services\AccessControlManagerInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups as UserRolesAccessControlGroups;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\ExpressionLanguage\Expression;
 
-class ConfigureAccessControlCompilerPass implements CompilerPassInterface
+class ConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilder $containerBuilder): void
     {
         $accessControlManagerDefinition = $containerBuilder->getDefinition(AccessControlManagerInterface::class);
         // Obtain the capabilities from another service

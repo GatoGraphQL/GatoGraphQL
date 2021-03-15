@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\AttachableExtensions\AttachExtensionServiceInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-abstract class AbstractAttachExtensionCompilerPass implements CompilerPassInterface
+abstract class AbstractAttachExtensionCompilerPass extends AbstractCompilerPass
 {
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilder $containerBuilder): void
     {
         $event = $this->getAttachExtensionEvent();
         $attachableClassGroups = $this->getAttachableClassGroups();

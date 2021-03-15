@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\TranslateDirective\Container\CompilerPasses;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoPSchema\TranslateDirective\Environment;
 use PoPSchema\TranslateDirective\Translation\TranslationServiceInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ConfigureTranslationServiceCompilerPass implements CompilerPassInterface
+class ConfigureTranslationServiceCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilder $containerBuilder): void
     {
         // If there is a default translation provider, inject it into the service
         if ($defaultTranslationProvider = Environment::getDefaultTranslationProvider()) {

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\Application\Container\CompilerPasses;
 
-use PoP\Definitions\DefinitionManagerInterface;
 use PoP\ComponentModel\Modules\DefinitionGroups;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use PoP\Definitions\DefinitionManagerInterface;
+use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class ConfigureDefinitionCompilerPass implements CompilerPassInterface
+class ConfigureDefinitionCompilerPass extends AbstractCompilerPass
 {
     /**
      * GraphQL persisted query for Introspection query
      */
-    public function process(ContainerBuilder $containerBuilder): void
+    protected function doProcess(ContainerBuilder $containerBuilder): void
     {
         $definitionManagerDefinition = $containerBuilder->getDefinition(DefinitionManagerInterface::class);
         $definitionManagerDefinition->addMethodCall(
