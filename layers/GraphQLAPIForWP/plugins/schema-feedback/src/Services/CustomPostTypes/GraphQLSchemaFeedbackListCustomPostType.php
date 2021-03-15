@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\SchemaFeedback\Services\PostTypes;
+namespace GraphQLAPI\SchemaFeedback\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
-class GraphQLSchemaFeedbackListPostType extends AbstractCustomPostType
+class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
 {
     /**
      * Custom Post Type name

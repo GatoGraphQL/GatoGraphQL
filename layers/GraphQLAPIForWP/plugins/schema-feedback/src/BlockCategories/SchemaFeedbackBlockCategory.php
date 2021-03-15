@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback\BlockCategories;
 
-use GraphQLAPI\SchemaFeedback\Services\PostTypes\GraphQLSchemaFeedbackListPostType;
+use GraphQLAPI\SchemaFeedback\Services\CustomPostTypes\GraphQLSchemaFeedbackListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 
 class SchemaFeedbackBlockCategory extends AbstractBlockCategory
@@ -19,7 +19,7 @@ class SchemaFeedbackBlockCategory extends AbstractBlockCategory
     public function getPostTypes(): array
     {
         return [
-            GraphQLSchemaFeedbackListPostType::POST_TYPE,
+            GraphQLSchemaFeedbackListCustomPostType::POST_TYPE,
         ];
     }
 
