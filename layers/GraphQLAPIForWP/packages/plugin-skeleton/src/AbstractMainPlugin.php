@@ -32,6 +32,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function setup(): void
     {
+        parent::setup();
+
         /**
          * Wait until "plugins_loaded" to initialize the plugin, because:
          *
