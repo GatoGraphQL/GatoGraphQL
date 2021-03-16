@@ -10,12 +10,6 @@ use GraphQLAPI\PluginSkeleton\AbstractPlugin;
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
     /**
-     * Store the plugin version in the Options table, to track when
-     * the plugin is installed/updated
-     */
-    public const OPTION_PLUGIN_VERSION = 'graphql-api-plugin-version';
-
-    /**
      * Activate the plugin
      */
     public function activate(): void
@@ -24,7 +18,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
 
         // By removing the option (in case it already exists from a previously-installed version),
         // the next request will know the plugin was just installed
-        \update_option(self::OPTION_PLUGIN_VERSION, false);
+        \update_option(PluginOptions::PLUGIN_VERSION, false);
     }
 
     /**
@@ -79,12 +73,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             'admin_init',
             function (): void {
                 // If there is no version stored, it's the first screen after activating the plugin
-                $isPluginJustActivated = \get_option(self::OPTION_PLUGIN_VERSION) === false;
+                $isPluginJustActivated = \get_option(PluginOptions::PLUGIN_VERSION) === false;
                 if (!$isPluginJustActivated) {
                     return;
                 }
                 // Update to the current version
-                \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                \update_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
                 // Required logic after plugin is activated
                 \flush_rewrite_rules();
 
@@ -96,12 +90,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             'admin_init',
             function (): void {
                 // If the flag is true, it's the first screen after activating an extension
-                $justActivatedExtension = \get_option(self::OPTION_ACTIVATED_EXTENSION) !== false;
+                $justActivatedExtension = \get_option(PluginOptions::ACTIVATED_EXTENSION) !== false;
                 if (!$justActivatedExtension) {
                     return;
                 }
                 // Remove the entry
-                \delete_option(self::OPTION_ACTIVATED_EXTENSION);
+                \delete_option(PluginOptions::ACTIVATED_EXTENSION);
                 // Required logic after extension is activated
                 \flush_rewrite_rules();
 
@@ -120,12 +114,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 // Check if the plugin has been updated: if the stored version in the DB
                 // and the current plugin's version are different
                 // It could also be false from the first time we install the plugin
-                $storedVersion = \get_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
                 if (!$storedVersion || $storedVersion == \GRAPHQL_API_VERSION) {
                     return;
                 }
                 // Update to the current version
-                \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                \update_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
 
                 $this->pluginJustUpdated($storedVersion);
             }

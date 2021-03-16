@@ -231,7 +231,7 @@ abstract class AbstractExtension extends AbstractPlugin
         parent::activate();
 
         // Tell the main Plugin to flush the rewrite rules (for if the extension contains CPTs)
-        \update_option(self::OPTION_ACTIVATED_EXTENSION, $this->getPluginName());
+        \update_option(PluginOptions::ACTIVATED_EXTENSION, $this->getPluginName());
     }
 
     /**

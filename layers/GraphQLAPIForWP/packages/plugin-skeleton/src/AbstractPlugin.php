@@ -12,12 +12,6 @@ use PoP\Engine\AppLoader;
 abstract class AbstractPlugin
 {
     /**
-     * Store when an extension is activated in the Options table,
-     * to flush the rewrite rules
-     */
-    public const OPTION_ACTIVATED_EXTENSION = 'graphql-api-activated-extension';
-
-    /**
      * The main plugin file
      */
     protected string $pluginFile;
