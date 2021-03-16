@@ -20,7 +20,6 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\PluginSkeleton\AbstractPlugin;
-use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 use PoP\Root\Container\ContainerBuilderUtils;
@@ -60,8 +59,6 @@ class Plugin extends AbstractPlugin
      * 5. GraphQL API => bootApplication(): priority 60
      * 6. GraphQL API => boot(): priority 70
      * 7. GraphQL API extensions => boot(): priority 80
-     *
-     * @return void
      */
     public function setup(): void
     {
@@ -337,24 +334,14 @@ class Plugin extends AbstractPlugin
     }
 
     /**
-     * Plugin configuration
+     * Configure the plugin.
+     * This defines hooks to set environment variables,
+     * so must be executed before those hooks are triggered for first time
+     * (in ComponentConfiguration classes)
      */
-    public function configure(): void
+    protected function callPluginConfiguration(): void
     {
-        // Configure the plugin. This defines hooks to set environment variables,
-        // so must be executed before those hooks are triggered for first time
-        // (in ComponentConfiguration classes)
         PluginConfiguration::initialize();
-
-        // Only after initializing the System Container,
-        // we can obtain the configuration
-        // (which may depend on hooks)
-        AppLoader::addComponentClassConfiguration(
-            $this->getComponentClassConfiguration()
-        );
-        AppLoader::addSchemaComponentClassesToSkip(
-            $this->getSchemaComponentClassesToSkip()
-        );
     }
 
     /**

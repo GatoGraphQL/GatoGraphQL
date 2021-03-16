@@ -82,4 +82,53 @@ abstract class AbstractPlugin
     {
         return [];
     }
+
+    /**
+     * Plugin configuration
+     */
+    public function configure(): void
+    {
+        // Configure the plugin. This defines hooks to set environment variables,
+        // so must be executed before those hooks are triggered for first time
+        // (in ComponentConfiguration classes)
+        $this->callPluginConfiguration();
+
+        // Only after initializing the System Container,
+        // we can obtain the configuration
+        // (which may depend on hooks)
+        AppLoader::addComponentClassConfiguration(
+            $this->getComponentClassConfiguration()
+        );
+        AppLoader::addSchemaComponentClassesToSkip(
+            $this->getSchemaComponentClassesToSkip()
+        );
+    }
+
+    /**
+     * Configure the plugin.
+     */
+    protected function callPluginConfiguration(): void
+    {
+        // Override if needed
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return [];
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return [];
+    }
 }

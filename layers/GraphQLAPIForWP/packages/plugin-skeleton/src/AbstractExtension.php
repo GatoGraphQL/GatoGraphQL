@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\AppLoader;
 
 abstract class AbstractExtension extends AbstractPlugin
 {
@@ -113,16 +112,6 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Add configuration for the Component classes
-     *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
-     */
-    public function getComponentClassConfiguration(): array
-    {
-        return [];
-    }
-
-    /**
      * Add schema Component classes to skip initializing
      *
      * @return string[] List of `Component` class which must not initialize their Schema services
@@ -197,15 +186,8 @@ abstract class AbstractExtension extends AbstractPlugin
             return;
         }
 
-        // Only after initializing the System Container,
-        // we can obtain the configuration
-        // (which may depend on hooks)
-        AppLoader::addComponentClassConfiguration(
-            $this->getComponentClassConfiguration()
-        );
-        AppLoader::addSchemaComponentClassesToSkip(
-            $this->getSchemaComponentClassesToSkip()
-        );
+        parent::configure();
+
         // Execute the plugin's custom config
         $this->doConfigure();
     }
