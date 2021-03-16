@@ -9,6 +9,24 @@ use GraphQLAPI\PluginSkeleton\AbstractPlugin;
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
     /**
+     * Store the plugin version in the Options table, to track when
+     * the plugin is installed/updated
+     */
+    public const OPTION_PLUGIN_VERSION = 'graphql-api-plugin-version';
+
+    /**
+     * Activate the plugin
+     */
+    public function activate(): void
+    {
+        parent::activate();
+
+        // By removing the option (in case it already exists from a previously-installed version),
+        // the next request will know the plugin was just installed
+        \update_option(self::OPTION_PLUGIN_VERSION, false);
+    }
+
+    /**
      * There are three stages for the main plugin, and for each extension plugin:
      * `setup`, `initialize` and `boot`.
      *
@@ -34,6 +52,45 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         parent::setup();
 
+        \add_action(
+            'admin_init',
+            function (): void {
+                // If there is no version stored, it's the first screen after activating the plugin
+                $isPluginJustActivated = \get_option(self::OPTION_PLUGIN_VERSION) === false;
+                if (!$isPluginJustActivated) {
+                    return;
+                }
+                // Update to the current version
+                \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                // Required logic after plugin is activated
+                \flush_rewrite_rules();
+
+                $this->pluginJustActivated();
+            }
+        );
+
+        \add_action(
+            'admin_init',
+            function (): void {
+                // Do not execute when doing Ajax, since we can't show the one-time
+                // admin notice to the user then
+                if (\wp_doing_ajax()) {
+                    return;
+                }
+                // Check if the plugin has been updated: if the stored version in the DB
+                // and the current plugin's version are different
+                // It could also be false from the first time we install the plugin
+                $storedVersion = \get_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                if (!$storedVersion || $storedVersion == \GRAPHQL_API_VERSION) {
+                    return;
+                }
+                // Update to the current version
+                \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+
+                $this->pluginJustUpdated($storedVersion);
+            }
+        );
+
         /**
          * Wait until "plugins_loaded" to initialize the plugin, because:
          *
@@ -54,6 +111,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
         }, 80);
+    }
+
+    /**
+     * Execute logic after the plugin has just been activated
+     */
+    protected function pluginJustActivated(): void
+    {
+    }
+
+    /**
+     * Execute logic after the plugin has just been updated
+     */
+    protected function pluginJustUpdated(string $storedVersion): void
+    {
     }
 
     /**
