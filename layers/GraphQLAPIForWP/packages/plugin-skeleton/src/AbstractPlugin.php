@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\Engine\AppLoader;
 
@@ -140,5 +142,51 @@ abstract class AbstractPlugin
     {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $userSettingsManager->storeTimestamp();
+    }
+
+    /**
+     * Remove the CPTs from the DB
+     */
+    protected function unregisterPluginCustomPostTypes(): void
+    {
+        // Unregister all CPTs from this plugin
+        if ($customPostTypes = $this->getPluginCustomPostTypes()) {
+            foreach ($customPostTypes as $customPostType) {
+                $customPostType->unregisterPostType();
+            }
+
+            // Clear the permalinks to remove the CPT's rules from the database
+            \flush_rewrite_rules();
+        }
+    }
+
+    /**
+     * Get the CPTs from this plugin
+     *
+     * @return CustomPostTypeInterface[]
+     */
+    public function getPluginCustomPostTypes(): array
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        // Filter the ones that belong to this plugin
+        // Use $serviceDefinitionID for if the class is overriden
+        return array_values(array_filter(
+            $customPostTypeRegistry->getCustomPostTypes(),
+            fn (string $serviceDefinitionID) => str_starts_with(
+                $serviceDefinitionID,
+                $this->getExtensionNamespace() . '\\'
+            ),
+            ARRAY_FILTER_USE_KEY
+        ));
+    }
+
+    /**
+     * The PSR-4 namespace, with format "vendor\project"
+     */
+    public function getExtensionNamespace(): string
+    {
+        $class = get_called_class();
+        $parts = explode('\\', $class);
+        return $parts[0] . '\\' . $parts[1];
     }
 }

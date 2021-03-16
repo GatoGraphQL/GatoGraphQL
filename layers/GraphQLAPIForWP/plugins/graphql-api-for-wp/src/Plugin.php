@@ -370,29 +370,11 @@ class Plugin extends AbstractPlugin
     /**
      * Remove permalinks when deactivating the plugin
      *
-     * @see    https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     * @return void
+     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
      */
     public function deactivate(): void
     {
-        // First, unregister the post type, so the rules are no longer in memory.
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $postTypeObjects = array_map(
-            function ($serviceClass) use ($instanceManager): AbstractCustomPostType {
-                /**
-                 * @var AbstractCustomPostType
-                 */
-                $postTypeObject = $instanceManager->getInstance($serviceClass);
-                return $postTypeObject;
-            },
-            ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\PostTypes')
-        );
-        foreach ($postTypeObjects as $postTypeObject) {
-            $postTypeObject->unregisterPostType();
-        }
-
-        // Then, clear the permalinks to remove the post type's rules from the database.
-        \flush_rewrite_rules();
+        $this->unregisterPluginCustomPostTypes();
 
         // Remove the timestamp
         $this->removeTimestamp();
