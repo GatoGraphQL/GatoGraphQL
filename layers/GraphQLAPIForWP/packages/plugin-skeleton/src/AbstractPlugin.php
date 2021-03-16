@@ -204,11 +204,6 @@ abstract class AbstractPlugin
      */
     public function activate(): void
     {
-        // Flush rewrite rules: needed if the extension registers CPTs
-        if ($this->getPluginCustomPostTypes() !== []) {
-            \flush_rewrite_rules();
-        }
-
         // Initialize the timestamp
         $this->regenerateTimestamp();
     }
