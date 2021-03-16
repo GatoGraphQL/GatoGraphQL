@@ -228,12 +228,10 @@ abstract class AbstractExtension extends AbstractPlugin
             return;
         }
 
-        // Flush rewrite rules: needed if the extension registers CPTs
-        if ($this->getPluginCustomPostTypes() !== []) {
-            \flush_rewrite_rules();
-        }
-
         parent::activate();
+
+        // Tell the main Plugin to flush the rewrite rules (for if the extension contains CPTs)
+        \update_option(PluginOptions::ACTIVATED_EXTENSION, $this->getPluginName());
     }
 
     /**

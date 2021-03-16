@@ -30,97 +30,28 @@ class Plugin extends AbstractMainPlugin
     public const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Store the plugin version in the Options table, to track when
-     * the plugin is installed/updated
+     * Show an admin notice with a link to the latest release notes
      */
-    public const OPTION_PLUGIN_VERSION = 'graphql-api-plugin-version';
-
-    /**
-     * Activate the plugin
-     */
-    public function activate(): void
+    protected function pluginJustUpdated(string $storedVersion): void
     {
-        parent::activate();
-
-        // By removing the option (in case it already exists from a previously-installed version),
-        // the next request will know the plugin was just installed
-        \update_option(self::OPTION_PLUGIN_VERSION, false);
-    }
-
-    /**
-     * Remove permalinks when deactivating the plugin
-     *
-     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     */
-    public function deactivate(): void
-    {
-        parent::deactivate();
-
-        // Remove the timestamp
-        $this->removeTimestamp();
-    }
-
-    /**
-     * Plugin set-up, executed immediately when loading the plugin.
-     */
-    public function setup(): void
-    {
-        parent::setup();
-
-        \add_action(
-            'admin_init',
-            function (): void {
-                // If there is no version stored, it's the first screen after activating the plugin
-                $isPluginJustActivated = \get_option(self::OPTION_PLUGIN_VERSION) === false;
-                if (!$isPluginJustActivated) {
-                    return;
-                }
-                // Update to the current version
-                \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
-                // Required logic after plugin is activated
-                \flush_rewrite_rules();
-            }
-        );
-        /**
-         * Show an admin notice with a link to the latest release notes
-         */
-        \add_action(
-            'admin_init',
-            function (): void {
-                // Do not execute when doing Ajax, since we can't show the one-time
-                // admin notice to the user then
-                if (\wp_doing_ajax()) {
-                    return;
-                }
-                // Check if the plugin has been updated: if the stored version in the DB
-                // and the current plugin's version are different
-                // It could also be false from the first time we install the plugin
-                $storedVersion = \get_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
-                if (!$storedVersion || $storedVersion == \GRAPHQL_API_VERSION) {
-                    return;
-                }
-                // Update to the current version
-                \update_option(self::OPTION_PLUGIN_VERSION, \GRAPHQL_API_VERSION);
-                // Admin notice: Check if it is enabled
-                $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                if (
-                    !$userSettingsManager->getSetting(
-                        PluginManagementFunctionalityModuleResolver::GENERAL,
-                        PluginManagementFunctionalityModuleResolver::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE
-                    )
-                ) {
-                    return;
-                }
-                // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
-                $currentMinorReleaseVersion = $this->getMinorReleaseVersion(\GRAPHQL_API_VERSION);
-                $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
-                if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
-                    return;
-                }
-                // All checks passed, show the release notes
-                $this->showReleaseNotesInAdminNotice();
-            }
-        );
+        // Admin notice: Check if it is enabled
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        if (
+            !$userSettingsManager->getSetting(
+                PluginManagementFunctionalityModuleResolver::GENERAL,
+                PluginManagementFunctionalityModuleResolver::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE
+            )
+        ) {
+            return;
+        }
+        // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
+        $currentMinorReleaseVersion = $this->getMinorReleaseVersion(\GRAPHQL_API_VERSION);
+        $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
+        if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
+            return;
+        }
+        // All checks passed, show the release notes
+        $this->showReleaseNotesInAdminNotice();
     }
 
     /**
@@ -308,14 +239,5 @@ class Plugin extends AbstractMainPlugin
         AppLoader::bootApplication(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
-    }
-
-    /**
-     * Regenerate the timestamp
-     */
-    protected function removeTimestamp(): void
-    {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->removeTimestamp();
     }
 }
