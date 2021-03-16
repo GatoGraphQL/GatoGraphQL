@@ -95,6 +95,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         \add_action(
             'admin_init',
             function (): void {
+                // If the flag is true, it's the first screen after activating an extension
+                $justActivatedExtension = \get_option(self::OPTION_ACTIVATED_EXTENSION) !== false;
+                if (!$justActivatedExtension) {
+                    return;
+                }
+                // Remove the entry
+                \delete_option(self::OPTION_ACTIVATED_EXTENSION);
+                // Required logic after extension is activated
+                \flush_rewrite_rules();
+
+                $this->extensionJustActivated((string) $justActivatedExtension);
+            }
+        );
+
+        \add_action(
+            'admin_init',
+            function (): void {
                 // Do not execute when doing Ajax, since we can't show the one-time
                 // admin notice to the user then
                 if (\wp_doing_ajax()) {
@@ -140,6 +157,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * Execute logic after the plugin has just been activated
      */
     protected function pluginJustActivated(): void
+    {
+    }
+
+    /**
+     * Execute logic after the plugin has just been activated
+     */
+    protected function extensionJustActivated(string $extension): void
     {
     }
 
