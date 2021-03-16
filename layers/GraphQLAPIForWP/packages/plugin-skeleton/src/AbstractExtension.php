@@ -54,9 +54,7 @@ abstract class AbstractExtension extends AbstractPlugin
      */
     final public function setup(): void
     {
-        // Functions to execute when activating/deactivating the plugin
-        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
-        \register_deactivation_hook($this->getPluginFile(), [$this, 'deactivate']);
+        parent::setup();
 
         /**
          * Priority 0: before the GraphQL API plugin is initialized
@@ -191,8 +189,16 @@ abstract class AbstractExtension extends AbstractPlugin
             // Exit
             return;
         }
+
         // Execute the plugin's custom setup
         $this->doBoot();
+    }
+
+    /**
+     * Initialize plugin. Function to override
+     */
+    protected function doBoot(): void
+    {
     }
 
     /**
@@ -212,13 +218,6 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Initialize plugin. Function to override
-     */
-    protected function doBoot(): void
-    {
-    }
-
-    /**
      * Get permalinks to work when activating the plugin
      *
      * @see https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
@@ -229,12 +228,7 @@ abstract class AbstractExtension extends AbstractPlugin
             return;
         }
 
-        // Flush rewrite rules: needed if the extension registers CPTs
-        if ($this->getPluginCustomPostTypes() !== []) {
-            \flush_rewrite_rules();
-        }
-
-        $this->regenerateTimestamp();
+        parent::activate();
     }
 
     /**
@@ -248,8 +242,6 @@ abstract class AbstractExtension extends AbstractPlugin
             return;
         }
 
-        $this->unregisterPluginCustomPostTypes();
-
-        $this->regenerateTimestamp();
+        parent::deactivate();
     }
 }

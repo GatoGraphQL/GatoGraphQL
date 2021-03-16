@@ -42,30 +42,6 @@ class Plugin extends AbstractMainPlugin
     {
         parent::setup();
 
-        // Functions to execute when activating/deactivating the plugin
-        \register_deactivation_hook($this->getPluginFile(), [$this, 'deactivate']);
-        /**
-         * PoP depends on hook "init" to set-up the endpoint rewrite,
-         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
-         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
-         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
-         * is activated, and any non-default GraphQL endpoint is not set.
-         *
-         * The solution (hack) is to check if the plugin has just been installed,
-         * and then apply the logic, on every request in the admin!
-         *
-         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
-         */
-        \register_activation_hook(
-            $this->getPluginFile(),
-            function (): void {
-                // By removing the option (in case it already exists from a previously-installed version),
-                // the next request will know the plugin was just installed
-                \update_option(self::OPTION_PLUGIN_VERSION, false);
-                // This is the proper activation logic
-                $this->activate();
-            }
-        );
         \add_action(
             'admin_init',
             function (): void {
@@ -310,15 +286,15 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Get permalinks to work when activating the plugin
-     *
-     * @see    https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
-     * @return void
+     * Activate the plugin
      */
     public function activate(): void
     {
-        // Initialize the timestamp
-        $this->regenerateTimestamp();
+        parent::activate();
+
+        // By removing the option (in case it already exists from a previously-installed version),
+        // the next request will know the plugin was just installed
+        \update_option(self::OPTION_PLUGIN_VERSION, false);
     }
 
     /**
@@ -328,7 +304,7 @@ class Plugin extends AbstractMainPlugin
      */
     public function deactivate(): void
     {
-        $this->unregisterPluginCustomPostTypes();
+        parent::deactivate();
 
         // Remove the timestamp
         $this->removeTimestamp();

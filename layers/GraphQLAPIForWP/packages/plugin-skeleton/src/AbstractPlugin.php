@@ -189,4 +189,52 @@ abstract class AbstractPlugin
         $parts = explode('\\', $class);
         return $parts[0] . '\\' . $parts[1];
     }
+
+    /**
+     * Plugin set-up, executed immediately when loading the plugin.
+     */
+    public function setup(): void
+    {
+        // Functions to execute when activating/deactivating the plugin
+        \register_deactivation_hook($this->getPluginFile(), [$this, 'deactivate']);
+        /**
+         * PoP depends on hook "init" to set-up the endpoint rewrite,
+         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
+         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
+         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
+         * is activated, and any non-default GraphQL endpoint is not set.
+         *
+         * The solution (hack) is to check if the plugin has just been installed,
+         * and then apply the logic, on every request in the admin!
+         *
+         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
+         */
+        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
+    }
+
+    /**
+     * Activate the plugin
+     */
+    public function activate(): void
+    {
+        // Flush rewrite rules: needed if the extension registers CPTs
+        if ($this->getPluginCustomPostTypes() !== []) {
+            \flush_rewrite_rules();
+        }
+
+        // Initialize the timestamp
+        $this->regenerateTimestamp();
+    }
+
+    /**
+     * Remove permalinks when deactivating the plugin
+     *
+     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
+     */
+    public function deactivate(): void
+    {
+        $this->unregisterPluginCustomPostTypes();
+
+        $this->regenerateTimestamp();
+    }
 }
