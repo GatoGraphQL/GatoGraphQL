@@ -213,7 +213,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         if ($post->post_type == $this->getCustomPostType()) {
             $actions = \array_merge(
                 $actions,
-                $this->getPostTypeTableActions($post)
+                $this->getCustomPostTypeTableActions($post)
             );
         }
         return $actions;
@@ -225,7 +225,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param WP_Post $post
      * @return array<string, string>
      */
-    protected function getPostTypeTableActions($post): array
+    protected function getCustomPostTypeTableActions($post): array
     {
         return [];
     }
