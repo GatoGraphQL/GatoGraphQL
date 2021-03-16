@@ -161,7 +161,7 @@ abstract class AbstractPlugin
             $customPostTypeRegistry->getCustomPostTypes(),
             fn (string $serviceDefinitionID) => str_starts_with(
                 $serviceDefinitionID,
-                $this->getExtensionNamespace() . '\\'
+                $this->getPluginNamespace() . '\\'
             ),
             ARRAY_FILTER_USE_KEY
         ));
@@ -170,7 +170,7 @@ abstract class AbstractPlugin
     /**
      * The PSR-4 namespace, with format "vendor\project"
      */
-    public function getExtensionNamespace(): string
+    public function getPluginNamespace(): string
     {
         $class = get_called_class();
         $parts = explode('\\', $class);
