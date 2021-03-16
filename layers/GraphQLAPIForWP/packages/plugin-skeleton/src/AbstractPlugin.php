@@ -139,7 +139,7 @@ abstract class AbstractPlugin
         // Unregister all CPTs from this plugin
         if ($customPostTypes = $this->getPluginCustomPostTypes()) {
             foreach ($customPostTypes as $customPostType) {
-                $customPostType->unregisterPostType();
+                $customPostType->unregister();
             }
 
             // Clear the permalinks to remove the CPT's rules from the database

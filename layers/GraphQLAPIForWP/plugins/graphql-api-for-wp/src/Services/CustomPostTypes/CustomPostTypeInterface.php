@@ -9,5 +9,5 @@ interface CustomPostTypeInterface
     /**
      * Unregister the custom post type
      */
-    public function unregisterPostType(): void;
+    public function unregister(): void;
 }
