@@ -13,5 +13,5 @@ interface CustomPostTypeInterface
     /**
      * Register the custom post type
      */
-    public function register(): void;
+    public function registerCustomPostType(): void;
 }
