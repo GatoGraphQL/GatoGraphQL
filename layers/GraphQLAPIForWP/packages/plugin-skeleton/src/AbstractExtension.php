@@ -242,7 +242,7 @@ abstract class AbstractExtension extends AbstractPlugin
         }
 
         // Flush rewrite rules: needed if the extension registers CPTs
-        if ($this->getExtensionCustomPostTypes() !== []) {
+        if ($this->getPluginCustomPostTypes() !== []) {
             \flush_rewrite_rules();
         }
 
@@ -273,7 +273,7 @@ abstract class AbstractExtension extends AbstractPlugin
     protected function unregisterCustomPostTypes(): void
     {
         // Unregister all CPTs from this plugin
-        if ($customPostTypes = $this->getExtensionCustomPostTypes()) {
+        if ($customPostTypes = $this->getPluginCustomPostTypes()) {
             foreach ($customPostTypes as $customPostType) {
                 $customPostType->unregisterPostType();
             }
@@ -288,7 +288,7 @@ abstract class AbstractExtension extends AbstractPlugin
      *
      * @return CustomPostTypeInterface[]
      */
-    public function getExtensionCustomPostTypes(): array
+    public function getPluginCustomPostTypes(): array
     {
         $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
         // Filter the ones that belong to this plugin
