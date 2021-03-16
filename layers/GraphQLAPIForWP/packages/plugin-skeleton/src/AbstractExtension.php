@@ -6,7 +6,6 @@ namespace GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
@@ -299,14 +298,5 @@ abstract class AbstractExtension extends AbstractPlugin
             fn (string $serviceDefinitionID) => str_starts_with($serviceDefinitionID, $this->getExtensionNamespace() . '\\'),
             ARRAY_FILTER_USE_KEY
         ));
-    }
-
-    /**
-     * Regenerate the timestamp
-     */
-    protected function regenerateTimestamp(): void
-    {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
     }
 }

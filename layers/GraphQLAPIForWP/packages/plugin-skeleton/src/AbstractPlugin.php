@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\Engine\AppLoader;
 
 abstract class AbstractPlugin
@@ -130,5 +131,14 @@ abstract class AbstractPlugin
     public function getSchemaComponentClassesToSkip(): array
     {
         return [];
+    }
+
+    /**
+     * Regenerate the timestamp
+     */
+    protected function regenerateTimestamp(): void
+    {
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $userSettingsManager->storeTimestamp();
     }
 }

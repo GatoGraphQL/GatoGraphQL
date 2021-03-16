@@ -364,8 +364,7 @@ class Plugin extends AbstractPlugin
     public function activate(): void
     {
         // Initialize the timestamp
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
+        $this->regenerateTimestamp();
     }
 
     /**
@@ -396,6 +395,14 @@ class Plugin extends AbstractPlugin
         \flush_rewrite_rules();
 
         // Remove the timestamp
+        $this->removeTimestamp();
+    }
+
+    /**
+     * Regenerate the timestamp
+     */
+    protected function removeTimestamp(): void
+    {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $userSettingsManager->removeTimestamp();
     }
