@@ -499,7 +499,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return void
      */
-    public function unregister(): void
+    public function unregisterCustomPostType(): void
     {
         \unregister_post_type($this->getCustomPostType());
     }
