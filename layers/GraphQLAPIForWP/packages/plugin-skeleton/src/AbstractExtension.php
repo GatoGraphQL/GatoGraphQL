@@ -150,7 +150,7 @@ abstract class AbstractExtension extends AbstractPlugin
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what component classes must skip initialization
      *
-     * @return string[]
+     * @return array<string,string[]>
      */
     protected function getModuleComponentClasses(): array
     {
