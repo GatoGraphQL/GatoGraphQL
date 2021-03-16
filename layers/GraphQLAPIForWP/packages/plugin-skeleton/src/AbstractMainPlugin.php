@@ -90,7 +90,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             'admin_init',
             function (): void {
                 // If the flag is true, it's the first screen after activating an extension
-                $justActivatedExtension = \get_option(PluginOptions::ACTIVATED_EXTENSION) !== false;
+                $justActivatedExtension = \get_option(PluginOptions::ACTIVATED_EXTENSION);
                 if (!$justActivatedExtension) {
                     return;
                 }
