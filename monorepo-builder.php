@@ -2,19 +2,6 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\CustomBumpInterdependencyCommand;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\MergePhpstanCommand;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\PackageEntriesJsonCommand;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SourcePackagesCommand;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command\SymlinkLocalPackageCommand;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\CustomDependencyUpdater;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PackageEntriesJsonProvider;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SourcePackagesProvider;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Neon\NeonFilePrinter;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\PHPStanNeonContentProvider;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
@@ -89,22 +76,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    /** Commands */
+    /** Set all services */
     $services
-        ->set(CustomPackageProvider::class)
-        ->set(CustomPackage::class)
-        ->set(CustomDependencyUpdater::class)
-        ->set(CustomBumpInterdependencyCommand::class)
-        ->set(PackageUtils::class)
-        ->set(PackageEntriesJsonProvider::class)
-        ->set(PackageEntriesJsonCommand::class)
-        ->set(SourcePackagesProvider::class)
-        ->set(SourcePackagesCommand::class)
-        ->set(NeonFilePrinter::class)
-        ->set(NeonPrinter::class)
-        ->set(PHPStanNeonContentProvider::class)
-        ->set(MergePhpstanCommand::class)
-        ->set(SymlinkLocalPackageCommand::class);
+        ->set(NeonPrinter::class) // Required to inject into PHPStanNeonContentProvider
+        ->load('PoP\\PoP\\', 'src/*');
 
     /** release workers - in order to execute */
     $services->set(UpdateReplaceReleaseWorker::class);
