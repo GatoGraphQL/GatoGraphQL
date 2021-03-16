@@ -10,9 +10,6 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 /**
  * Initialize component
@@ -81,7 +78,6 @@ class Component extends AbstractPluginComponent
             $skipSchema,
             $skipSchemaComponentClasses
         );
-        self::initComponentConfiguration();
         // Override DI services
         self::initServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
@@ -135,23 +131,5 @@ class Component extends AbstractPluginComponent
                 self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
-    }
-
-    protected static function initComponentConfiguration(): void
-    {
-        /**
-         * Enable the schema entity registries, as to retrieve the type/directive resolver classes
-         * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
-         */
-        $hookName = ComponentConfigurationHelpers::getHookName(
-            ComponentModelComponentConfiguration::class,
-            ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES
-        );
-        \add_filter(
-            $hookName,
-            fn () => true,
-            PHP_INT_MAX,
-            1
-        );
     }
 }
