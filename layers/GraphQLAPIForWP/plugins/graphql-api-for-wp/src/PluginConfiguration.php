@@ -581,7 +581,7 @@ class PluginConfiguration
          * Enable the schema entity registries, as to retrieve the type/directive resolver classes
          * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
          */
-        $componentClassConfiguration[\PoP\ComponentModel\Environment::class] = [
+        $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             \PoP\ComponentModel\Environment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
