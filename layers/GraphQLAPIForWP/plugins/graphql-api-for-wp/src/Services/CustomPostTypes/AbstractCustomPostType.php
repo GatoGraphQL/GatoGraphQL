@@ -43,7 +43,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         // earlier or later
         \add_action(
             'init',
-            [$this, 'initPostType'],
+            [$this, 'initCustomPostType'],
             $this->getMenuPosition()
         );
         \add_action(
@@ -479,7 +479,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return void
      */
-    public function initPostType(): void
+    public function initCustomPostType(): void
     {
         $this->registerCustomPostType();
     }
