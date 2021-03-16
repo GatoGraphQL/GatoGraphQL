@@ -481,7 +481,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function initPostType(): void
     {
-        $this->registerPostType();
+        $this->register();
     }
 
     /**
@@ -489,7 +489,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return void
      */
-    public function registerPostType(): void
+    public function register(): void
     {
         \register_post_type($this->getCustomPostType(), $this->getPostTypeArgs());
     }
