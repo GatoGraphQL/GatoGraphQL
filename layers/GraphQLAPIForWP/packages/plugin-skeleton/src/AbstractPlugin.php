@@ -12,19 +12,6 @@ use PoP\Engine\AppLoader;
 abstract class AbstractPlugin
 {
     /**
-     * Hook to initalize extension plugins
-     */
-    public const HOOK_INITIALIZE_EXTENSION_PLUGIN = __CLASS__ . ':initializeExtensionPlugin';
-    /**
-     * Hook to configure extension plugins
-     */
-    public const HOOK_CONFIGURE_EXTENSION_PLUGIN = __CLASS__ . ':configureExtensionPlugin';
-    /**
-     * Hook to boot extension plugins
-     */
-    public const HOOK_BOOT_EXTENSION_PLUGIN = __CLASS__ . ':bootExtensionPlugin';
-
-    /**
      * The main plugin file
      */
     protected string $pluginFile;

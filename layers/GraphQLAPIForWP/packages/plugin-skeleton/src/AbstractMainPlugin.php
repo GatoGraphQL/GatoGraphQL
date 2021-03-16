@@ -40,17 +40,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          */
         \add_action('plugins_loaded', [$this, 'initialize'], 10);
         \add_action('plugins_loaded', function () {
-            \do_action(self::HOOK_INITIALIZE_EXTENSION_PLUGIN);
+            \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION_PLUGIN);
         }, 20);
         \add_action('plugins_loaded', [$this, 'bootSystem'], 30);
         \add_action('plugins_loaded', [$this, 'configure'], 40);
         \add_action('plugins_loaded', function () {
-            \do_action(self::HOOK_CONFIGURE_EXTENSION_PLUGIN);
+            \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION_PLUGIN);
         }, 50);
         \add_action('plugins_loaded', [$this, 'bootApplication'], 60);
         \add_action('plugins_loaded', [$this, 'boot'], 70);
         \add_action('plugins_loaded', function () {
-            \do_action(self::HOOK_BOOT_EXTENSION_PLUGIN);
+            \do_action(PluginLifecycleHooks::BOOT_EXTENSION_PLUGIN);
         }, 80);
     }
 

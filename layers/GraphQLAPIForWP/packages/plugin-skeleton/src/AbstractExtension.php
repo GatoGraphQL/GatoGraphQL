@@ -80,15 +80,15 @@ abstract class AbstractExtension extends AbstractPlugin
                  * Initialize/configure/boot this extension plugin
                  */
                 \add_action(
-                    self::HOOK_INITIALIZE_EXTENSION_PLUGIN,
+                    PluginLifecycleHooks::INITIALIZE_EXTENSION_PLUGIN,
                     [$this, 'initialize']
                 );
                 \add_action(
-                    self::HOOK_CONFIGURE_EXTENSION_PLUGIN,
+                    PluginLifecycleHooks::CONFIGURE_EXTENSION_PLUGIN,
                     [$this, 'configure']
                 );
                 \add_action(
-                    self::HOOK_BOOT_EXTENSION_PLUGIN,
+                    PluginLifecycleHooks::BOOT_EXTENSION_PLUGIN,
                     [$this, 'boot']
                 );
             },
