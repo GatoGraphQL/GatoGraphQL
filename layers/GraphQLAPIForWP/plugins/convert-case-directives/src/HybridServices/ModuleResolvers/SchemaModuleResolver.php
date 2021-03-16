@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractSchemaTypeModuleResolver;
@@ -16,7 +16,7 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
 {
     use ModuleResolverTrait;
 
-    public const CONVERT_CASE_DIRECTIVES = Plugin::NAMESPACE . '\convert-case-directives';
+    public const CONVERT_CASE_DIRECTIVES = GraphQLAPIExtension::NAMESPACE . '\convert-case-directives';
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered

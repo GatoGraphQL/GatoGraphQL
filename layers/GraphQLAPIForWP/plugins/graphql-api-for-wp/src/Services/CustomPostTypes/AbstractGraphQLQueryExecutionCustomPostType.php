@@ -57,9 +57,9 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
      * @param WP_Post $post
      * @return array<string, string>
      */
-    protected function getPostTypeTableActions($post): array
+    protected function getCustomPostTypeTableActions($post): array
     {
-        $actions = parent::getPostTypeTableActions($post);
+        $actions = parent::getCustomPostTypeTableActions($post);
         $post_type_object = \get_post_type_object($post->post_type);
 
         /**

@@ -9,15 +9,12 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\Root\Component\AbstractComponent;
+use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Component extends AbstractPluginComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -66,15 +63,6 @@ class Component extends AbstractComponent
     }
 
     /**
-     * Initialize services for the system container
-     */
-    protected static function initializeSystemContainerServices(): void
-    {
-        self::initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initSystemServices(dirname(__DIR__));
-    }
-
-    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration
@@ -85,9 +73,11 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
-        self::initServices(dirname(__DIR__));
-        self::initComponentConfiguration();
+        parent::initializeContainerServices(
+            $configuration,
+            $skipSchema,
+            $skipSchemaComponentClasses
+        );
         // Override DI services
         self::initServices(dirname(__DIR__), '/Overrides');
         // Conditional DI settings
@@ -141,23 +131,5 @@ class Component extends AbstractComponent
                 self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
         }
-    }
-
-    protected static function initComponentConfiguration(): void
-    {
-        /**
-         * Enable the schema entity registries, as to retrieve the type/directive resolver classes
-         * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
-         */
-        $hookName = ComponentConfigurationHelpers::getHookName(
-            ComponentModelComponentConfiguration::class,
-            ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES
-        );
-        \add_filter(
-            $hookName,
-            fn () => true,
-            PHP_INT_MAX,
-            1
-        );
     }
 }

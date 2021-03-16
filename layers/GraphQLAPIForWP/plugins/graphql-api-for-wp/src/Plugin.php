@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\Admin\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -19,11 +18,11 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
-use PoP\Root\Container\ContainerBuilderUtils;
 
-class Plugin
+class Plugin extends AbstractMainPlugin
 {
     /**
      * Plugin's namespace
@@ -37,69 +36,37 @@ class Plugin
     public const OPTION_PLUGIN_VERSION = 'graphql-api-plugin-version';
 
     /**
-     * Hook to initalize extension plugins
+     * Activate the plugin
      */
-    public const HOOK_INITIALIZE_EXTENSION_PLUGIN = __CLASS__ . ':initializeExtensionPlugin';
+    public function activate(): void
+    {
+        parent::activate();
+
+        // By removing the option (in case it already exists from a previously-installed version),
+        // the next request will know the plugin was just installed
+        \update_option(self::OPTION_PLUGIN_VERSION, false);
+    }
+
     /**
-     * Hook to configure extension plugins
+     * Remove permalinks when deactivating the plugin
+     *
+     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
      */
-    public const HOOK_CONFIGURE_EXTENSION_PLUGIN = __CLASS__ . ':configureExtensionPlugin';
-    /**
-     * Hook to boot extension plugins
-     */
-    public const HOOK_BOOT_EXTENSION_PLUGIN = __CLASS__ . ':bootExtensionPlugin';
+    public function deactivate(): void
+    {
+        parent::deactivate();
+
+        // Remove the timestamp
+        $this->removeTimestamp();
+    }
 
     /**
      * Plugin set-up, executed immediately when loading the plugin.
-     * There are three stages for this plugin, and for each extension plugin:
-     * `setup`, `initialize` and `boot`.
-     *
-     * This is because:
-     *
-     * - The plugin must execute its logic before the extensions
-     * - The services can't be booted before all services have been initialized
-     *
-     * To attain the needed order, we execute them using hook "plugins_loaded":
-     *
-     * 1. GraphQL API => setup(): immediately
-     * 2. GraphQL API extensions => setup(): priority 0
-     * 3. GraphQL API => initialize(): priority 10
-     * 4. GraphQL API extensions => initialize(): priority 20
-     * 5. GraphQL API => bootSystem(): priority 30
-     * 3. GraphQL API => configure(): priority 40
-     * 4. GraphQL API extensions => configure(): priority 50
-     * 5. GraphQL API => bootApplication(): priority 60
-     * 6. GraphQL API => boot(): priority 70
-     * 7. GraphQL API extensions => boot(): priority 80
-     *
-     * @return void
      */
     public function setup(): void
     {
-        // Functions to execute when activating/deactivating the plugin
-        \register_deactivation_hook(\GRAPHQL_API_PLUGIN_FILE, [$this, 'deactivate']);
-        /**
-         * PoP depends on hook "init" to set-up the endpoint rewrite,
-         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
-         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
-         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
-         * is activated, and any non-default GraphQL endpoint is not set.
-         *
-         * The solution (hack) is to check if the plugin has just been installed,
-         * and then apply the logic, on every request in the admin!
-         *
-         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
-         */
-        \register_activation_hook(
-            \GRAPHQL_API_PLUGIN_FILE,
-            function (): void {
-                // By removing the option (in case it already exists from a previously-installed version),
-                // the next request will know the plugin was just installed
-                \update_option(self::OPTION_PLUGIN_VERSION, false);
-                // This is the proper activation logic
-                $this->activate();
-            }
-        );
+        parent::setup();
+
         \add_action(
             'admin_init',
             function (): void {
@@ -154,27 +121,6 @@ class Plugin
                 $this->showReleaseNotesInAdminNotice();
             }
         );
-
-        /**
-         * Wait until "plugins_loaded" to initialize the plugin, because:
-         *
-         * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
-         * - Allow other plugins to inject their own functionality
-         */
-        \add_action('plugins_loaded', [$this, 'initialize'], 10);
-        \add_action('plugins_loaded', function () {
-            \do_action(self::HOOK_INITIALIZE_EXTENSION_PLUGIN);
-        }, 20);
-        \add_action('plugins_loaded', [$this, 'bootSystem'], 30);
-        \add_action('plugins_loaded', [$this, 'configure'], 40);
-        \add_action('plugins_loaded', function () {
-            \do_action(self::HOOK_CONFIGURE_EXTENSION_PLUGIN);
-        }, 50);
-        \add_action('plugins_loaded', [$this, 'bootApplication'], 60);
-        \add_action('plugins_loaded', [$this, 'boot'], 70);
-        \add_action('plugins_loaded', function () {
-            \do_action(self::HOOK_BOOT_EXTENSION_PLUGIN);
-        }, 80);
     }
 
     /**
@@ -293,6 +239,8 @@ class Plugin
      */
     public function initialize(): void
     {
+        parent::initialize();
+
         /**
          * Watch out! If we are in the Modules page and enabling/disabling
          * a module, then already take that new state!
@@ -327,11 +275,6 @@ class Plugin
                 $moduleListTable->maybeProcessAction();
             }
         }
-
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize(
-            $this->getComponentClassesToInitialize()
-        );
     }
 
     /**
@@ -345,30 +288,15 @@ class Plugin
         );
     }
 
-    public function boot(): void
-    {
-        // Doing nothing yet
-    }
-
     /**
-     * Plugin configuration
+     * Configure the plugin.
+     * This defines hooks to set environment variables,
+     * so must be executed before those hooks are triggered for first time
+     * (in ComponentConfiguration classes)
      */
-    public function configure(): void
+    protected function callPluginConfiguration(): void
     {
-        // Configure the plugin. This defines hooks to set environment variables,
-        // so must be executed before those hooks are triggered for first time
-        // (in ComponentConfiguration classes)
         PluginConfiguration::initialize();
-
-        // Only after initializing the System Container,
-        // we can obtain the configuration
-        // (which may depend on hooks)
-        AppLoader::addComponentClassConfiguration(
-            $this->getComponentClassConfiguration()
-        );
-        AppLoader::addSchemaComponentClassesToSkip(
-            $this->getSchemaComponentClassesToSkip()
-        );
     }
 
     /**
@@ -383,46 +311,10 @@ class Plugin
     }
 
     /**
-     * Get permalinks to work when activating the plugin
-     *
-     * @see    https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
-     * @return void
+     * Regenerate the timestamp
      */
-    public function activate(): void
+    protected function removeTimestamp(): void
     {
-        // Initialize the timestamp
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
-    }
-
-    /**
-     * Remove permalinks when deactivating the plugin
-     *
-     * @see    https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     * @return void
-     */
-    public function deactivate(): void
-    {
-        // First, unregister the post type, so the rules are no longer in memory.
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $postTypeObjects = array_map(
-            function ($serviceClass) use ($instanceManager): AbstractCustomPostType {
-                /**
-                 * @var AbstractCustomPostType
-                 */
-                $postTypeObject = $instanceManager->getInstance($serviceClass);
-                return $postTypeObject;
-            },
-            ContainerBuilderUtils::getServiceClassesUnderNamespace(__NAMESPACE__ . '\\PostTypes')
-        );
-        foreach ($postTypeObjects as $postTypeObject) {
-            $postTypeObject->unregisterPostType();
-        }
-
-        // Then, clear the permalinks to remove the post type's rules from the database.
-        \flush_rewrite_rules();
-
-        // Remove the timestamp
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $userSettingsManager->removeTimestamp();
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback\ModuleResolvers;
 
-use GraphQLAPI\SchemaFeedback\Plugin;
+use GraphQLAPI\SchemaFeedback\GraphQLAPIExtension;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\AbstractFunctionalityModuleResolver;
 
@@ -12,7 +12,7 @@ class FunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
 
-    public const SCHEMA_FEEDBACK = Plugin::NAMESPACE . '\schema-feedback';
+    public const SCHEMA_FEEDBACK = GraphQLAPIExtension::NAMESPACE . '\schema-feedback';
 
     public function getModulesToResolve(): array
     {

@@ -320,9 +320,9 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
      * @param WP_Post $post
      * @return array<string, string>
      */
-    protected function getPostTypeTableActions($post): array
+    protected function getCustomPostTypeTableActions($post): array
     {
-        $actions = parent::getPostTypeTableActions($post);
+        $actions = parent::getCustomPostTypeTableActions($post);
 
         /**
          * If neither GraphiQL or Voyager are enabled, then already return

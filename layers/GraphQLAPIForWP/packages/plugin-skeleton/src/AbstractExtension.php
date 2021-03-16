@@ -2,27 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ConvertCaseDirectives\PluginScaffolding;
+namespace GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIPlugin;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\AppLoader;
 
-abstract class AbstractPlugin
+abstract class AbstractExtension extends AbstractPlugin
 {
     /**
-     * The plugin name
-     *
-     * @return void
-     */
-    abstract protected function getPluginName(): string;
-
-    /**
      * Indicate if the main plugin is installed and activated
-     *
-     * @return boolean
      */
     final protected function isGraphQLAPIPluginActive(): bool
     {
@@ -32,36 +20,41 @@ abstract class AbstractPlugin
     /**
      * If the GraphQL API plugin is not installed and activated,
      * show an error for the admin
-     *
-     * @return void
      */
     protected function addAdminNoticeError(): void
     {
-        \add_action('admin_notices', function () {
-            \_e(sprintf(
-                '<div class="notice notice-error is-dismissible">' .
-                    '<p>%s</p>' .
-                '</div>',
-                sprintf(
-                    \__('Plugin <strong>%1$s</strong> is not installed or activated. Without it, plugin <strong>%2$s</strong> cannot be enabled.'),
-                    \__('GraphQL API for WordPress'),
-                    $this->getPluginName()
-                )
-            ));
-        });
+        if ($errorMessage = $this->getGraphQLAPIPluginInactiveAdminNoticeErrorMessage()) {
+            \add_action('admin_notices', function () use ($errorMessage) {
+                \_e(sprintf(
+                    '<div class="notice notice-error is-dismissible">' .
+                        '<p>%s</p>' .
+                    '</div>',
+                    $errorMessage
+                ));
+            });
+        }
+    }
+
+    /**
+     * The message to show in the admin notices, when the GraphQL API plugin
+     * is not installed or activated
+     */
+    protected function getGraphQLAPIPluginInactiveAdminNoticeErrorMessage(): ?string
+    {
+        return sprintf(
+            \__('Plugin <strong>%1$s</strong> is not installed or activated. Without it, plugin <strong>%2$s</strong> cannot be enabled.'),
+            \__('GraphQL API for WordPress'),
+            $this->getPluginName()
+        );
     }
 
     /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
-     *
-     * @return void
      */
     final public function setup(): void
     {
-        // Functions to execute when activating/deactivating the plugin
-        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
-        \register_deactivation_hook($this->getPluginFile(), [$this, 'deactivate']);
+        parent::setup();
 
         /**
          * Priority 0: before the GraphQL API plugin is initialized
@@ -87,40 +80,20 @@ abstract class AbstractPlugin
                  * Initialize/configure/boot this extension plugin
                  */
                 \add_action(
-                    GraphQLAPIPlugin::HOOK_INITIALIZE_EXTENSION_PLUGIN,
+                    PluginLifecycleHooks::INITIALIZE_EXTENSION,
                     [$this, 'initialize']
                 );
                 \add_action(
-                    GraphQLAPIPlugin::HOOK_CONFIGURE_EXTENSION_PLUGIN,
+                    PluginLifecycleHooks::CONFIGURE_EXTENSION,
                     [$this, 'configure']
                 );
                 \add_action(
-                    GraphQLAPIPlugin::HOOK_BOOT_EXTENSION_PLUGIN,
+                    PluginLifecycleHooks::BOOT_EXTENSION,
                     [$this, 'boot']
                 );
             },
             0
         );
-    }
-
-    /**
-     * Add Component classes to be initialized
-     *
-     * @return string[] List of `Component` class to initialize
-     */
-    public function getComponentClassesToInitialize(): array
-    {
-        return [];
-    }
-
-    /**
-     * Add configuration for the Component classes
-     *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
-     */
-    public function getComponentClassConfiguration(): array
-    {
-        return [];
     }
 
     /**
@@ -130,22 +103,22 @@ abstract class AbstractPlugin
      */
     public function getSchemaComponentClassesToSkip(): array
     {
-        return static::getSkippingSchemaComponentClasses();
+        return $this->getSkippingSchemaComponentClasses();
     }
 
     /**
      * Provide the classes of the components whose
      * schema initialization must be skipped
      *
-     * @return array
+     * @return string[]
      */
-    protected static function getSkippingSchemaComponentClasses(): array
+    protected function getSkippingSchemaComponentClasses(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
 
         // Component classes are skipped if the module is disabled
         $skipSchemaModuleComponentClasses = array_filter(
-            static::getModuleComponentClasses(),
+            $this->getModuleComponentClasses(),
             function ($module) use ($moduleRegistry) {
                 return !$moduleRegistry->isModuleEnabled($module);
             },
@@ -162,14 +135,15 @@ abstract class AbstractPlugin
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what component classes must skip initialization
      *
-     * @return array
+     * @return array<string,string[]>
      */
-    abstract protected static function getModuleComponentClasses(): array;
+    protected function getModuleComponentClasses(): array
+    {
+        return [];
+    }
 
     /**
      * Plugin's initialization
-     *
-     * @return void
      */
     final public function initialize(): void
     {
@@ -181,10 +155,7 @@ abstract class AbstractPlugin
             return;
         }
 
-        // Initialize the containers
-        AppLoader::addComponentClassesToInitialize(
-            $this->getComponentClassesToInitialize()
-        );
+        parent::initialize();
     }
 
     /**
@@ -200,23 +171,14 @@ abstract class AbstractPlugin
             return;
         }
 
-        // Only after initializing the System Container,
-        // we can obtain the configuration
-        // (which may depend on hooks)
-        AppLoader::addComponentClassConfiguration(
-            $this->getComponentClassConfiguration()
-        );
-        AppLoader::addSchemaComponentClassesToSkip(
-            $this->getSchemaComponentClassesToSkip()
-        );
+        parent::configure();
+
         // Execute the plugin's custom config
         $this->doConfigure();
     }
 
     /**
      * Plugin's booting
-     *
-     * @return void
      */
     final public function boot(): void
     {
@@ -227,8 +189,16 @@ abstract class AbstractPlugin
             // Exit
             return;
         }
+
         // Execute the plugin's custom setup
         $this->doBoot();
+    }
+
+    /**
+     * Initialize plugin. Function to override
+     */
+    protected function doBoot(): void
+    {
     }
 
     /**
@@ -248,22 +218,6 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Initialize plugin. Function to override
-     *
-     * @return void
-     */
-    protected function doBoot(): void
-    {
-    }
-
-    /**
-     * Plugin main file
-     *
-     * @return string
-     */
-    abstract protected function getPluginFile(): string;
-
-    /**
      * Get permalinks to work when activating the plugin
      *
      * @see https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
@@ -273,7 +227,13 @@ abstract class AbstractPlugin
         if (!$this->isGraphQLAPIPluginActive()) {
             return;
         }
-        $this->regenerateTimestamp();
+
+        // Flush rewrite rules: needed if the extension registers CPTs
+        if ($this->getPluginCustomPostTypes() !== []) {
+            \flush_rewrite_rules();
+        }
+
+        parent::activate();
     }
 
     /**
@@ -286,15 +246,7 @@ abstract class AbstractPlugin
         if (!$this->isGraphQLAPIPluginActive()) {
             return;
         }
-        $this->regenerateTimestamp();
-    }
 
-    /**
-     * Regenerate the timestamp
-     */
-    protected function regenerateTimestamp(): void
-    {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
+        parent::deactivate();
     }
 }

@@ -369,11 +369,6 @@
         }
     },
     "extra": {
-        "installer-paths": {
-            "wordpress/wp-content/plugins/{$name}/": [
-                "type:wordpress-plugin"
-            ]
-        },
         "wordpress-install-dir": "vendor/wordpress/wordpress"
     },
     "replace": {
@@ -629,7 +624,7 @@
         "init-server": "composer init-server -d webservers/graphql-api-for-wp",
         "start-server": "composer start-server -d webservers/graphql-api-for-wp",
         "log-server-errors": "composer log-server-errors -d webservers/graphql-api-for-wp",
-        "rebuild-server": "lando rebuild appserver -y",
+        "rebuild-server": "composer rebuild-server -d webservers/graphql-api-for-wp",
         "merge-monorepo": "monorepo-builder merge --ansi",
         "propagate-monorepo": "monorepo-builder propagate --ansi",
         "validate-monorepo": "monorepo-builder validate --ansi",

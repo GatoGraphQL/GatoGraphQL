@@ -43,7 +43,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         // earlier or later
         \add_action(
             'init',
-            [$this, 'initPostType'],
+            [$this, 'initCustomPostType'],
             $this->getMenuPosition()
         );
         \add_action(
@@ -87,13 +87,13 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          */
         \add_filter(
             'post_row_actions',
-            [$this, 'maybeAddPostTypeTableActions'],
+            [$this, 'maybeAddCustomPostTypeTableActions'],
             10,
             2
         );
         \add_filter(
             'page_row_actions',
-            [$this, 'maybeAddPostTypeTableActions'],
+            [$this, 'maybeAddCustomPostTypeTableActions'],
             10,
             2
         );
@@ -208,12 +208,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param WP_Post $post
      * @return array<string, string>
      */
-    public function maybeAddPostTypeTableActions(array $actions, $post): array
+    public function maybeAddCustomPostTypeTableActions(array $actions, $post): array
     {
         if ($post->post_type == $this->getCustomPostType()) {
             $actions = \array_merge(
                 $actions,
-                $this->getPostTypeTableActions($post)
+                $this->getCustomPostTypeTableActions($post)
             );
         }
         return $actions;
@@ -225,7 +225,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param WP_Post $post
      * @return array<string, string>
      */
-    protected function getPostTypeTableActions($post): array
+    protected function getCustomPostTypeTableActions($post): array
     {
         return [];
     }
@@ -394,7 +394,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return array<string, mixed>
      */
-    protected function getPostTypeArgs(): array
+    protected function getCustomPostTypeArgs(): array
     {
         $name_uc = $this->getPostTypeName();
         $names_uc = $this->getPostTypePluralNames(true);
@@ -479,9 +479,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return void
      */
-    public function initPostType(): void
+    public function initCustomPostType(): void
     {
-        $this->registerPostType();
+        $this->registerCustomPostType();
     }
 
     /**
@@ -489,9 +489,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return void
      */
-    public function registerPostType(): void
+    public function registerCustomPostType(): void
     {
-        \register_post_type($this->getCustomPostType(), $this->getPostTypeArgs());
+        \register_post_type($this->getCustomPostType(), $this->getCustomPostTypeArgs());
     }
 
     /**
@@ -499,7 +499,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return void
      */
-    public function unregisterPostType(): void
+    public function unregisterCustomPostType(): void
     {
         \unregister_post_type($this->getCustomPostType());
     }

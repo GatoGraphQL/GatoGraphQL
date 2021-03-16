@@ -577,6 +577,13 @@ class PluginConfiguration
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
 
+        /**
+         * Enable the schema entity registries, as to retrieve the type/directive resolver classes
+         * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
+         */
+        $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
+            \PoP\ComponentModel\Environment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
+        ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => \GRAPHQL_API_URL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];

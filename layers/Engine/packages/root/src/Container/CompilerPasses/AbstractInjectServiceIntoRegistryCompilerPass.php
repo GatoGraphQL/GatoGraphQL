@@ -29,7 +29,10 @@ abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCom
             // Register the service in the corresponding registry
             $registryDefinition->addMethodCall(
                 $this->getRegistryMethodCallName(),
-                [$this->createReference($definitionID)]
+                [
+                    $this->createReference($definitionID),
+                    $definitionID
+                ]
             );
         }
     }

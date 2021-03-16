@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 
 interface CustomPostTypeRegistryInterface
 {
-    public function addCustomPostType(CustomPostTypeInterface $customPostType): void;
+    public function addCustomPostType(CustomPostTypeInterface $customPostType, string $serviceDefinitionID): void;
     /**
      * @return CustomPostTypeInterface[]
      */

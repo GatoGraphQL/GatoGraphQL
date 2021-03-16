@@ -5,22 +5,14 @@ declare(strict_types=1);
 namespace GraphQLAPI\ConvertCaseDirectives;
 
 use GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers\SchemaModuleResolver;
-use GraphQLAPI\ConvertCaseDirectives\PluginScaffolding\AbstractPlugin;
+use GraphQLAPI\PluginSkeleton\AbstractExtension;
 
-class Plugin extends AbstractPlugin
+class GraphQLAPIExtension extends AbstractExtension
 {
     /**
      * Plugin's namespace
      */
     public const NAMESPACE = __NAMESPACE__;
-
-    /**
-     * Plugin main file
-     */
-    protected function getPluginFile(): string
-    {
-        return \GRAPHQL_API_CONVERT_CASE_DIRECTIVES_PLUGIN_FILE;
-    }
 
     /**
      * Plugin name
@@ -46,9 +38,9 @@ class Plugin extends AbstractPlugin
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what component classes must skip initialization
      *
-     * @return array
+     * @return array<string,string[]>
      */
-    protected static function getModuleComponentClasses(): array
+    protected function getModuleComponentClasses(): array
     {
         return [
             SchemaModuleResolver::CONVERT_CASE_DIRECTIVES => [
