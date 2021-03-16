@@ -394,7 +394,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @return array<string, mixed>
      */
-    protected function getPostTypeArgs(): array
+    protected function getCustomPostTypeArgs(): array
     {
         $name_uc = $this->getPostTypeName();
         $names_uc = $this->getPostTypePluralNames(true);
@@ -491,7 +491,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function registerCustomPostType(): void
     {
-        \register_post_type($this->getCustomPostType(), $this->getPostTypeArgs());
+        \register_post_type($this->getCustomPostType(), $this->getCustomPostTypeArgs());
     }
 
     /**
