@@ -36,6 +36,31 @@ class Plugin extends AbstractMainPlugin
     public const OPTION_PLUGIN_VERSION = 'graphql-api-plugin-version';
 
     /**
+     * Activate the plugin
+     */
+    public function activate(): void
+    {
+        parent::activate();
+
+        // By removing the option (in case it already exists from a previously-installed version),
+        // the next request will know the plugin was just installed
+        \update_option(self::OPTION_PLUGIN_VERSION, false);
+    }
+
+    /**
+     * Remove permalinks when deactivating the plugin
+     *
+     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
+     */
+    public function deactivate(): void
+    {
+        parent::deactivate();
+
+        // Remove the timestamp
+        $this->removeTimestamp();
+    }
+
+    /**
      * Plugin set-up, executed immediately when loading the plugin.
      */
     public function setup(): void
@@ -283,31 +308,6 @@ class Plugin extends AbstractMainPlugin
         AppLoader::bootApplication(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
-    }
-
-    /**
-     * Activate the plugin
-     */
-    public function activate(): void
-    {
-        parent::activate();
-
-        // By removing the option (in case it already exists from a previously-installed version),
-        // the next request will know the plugin was just installed
-        \update_option(self::OPTION_PLUGIN_VERSION, false);
-    }
-
-    /**
-     * Remove permalinks when deactivating the plugin
-     *
-     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     */
-    public function deactivate(): void
-    {
-        parent::deactivate();
-
-        // Remove the timestamp
-        $this->removeTimestamp();
     }
 
     /**
