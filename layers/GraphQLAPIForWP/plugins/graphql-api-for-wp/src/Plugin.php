@@ -30,19 +30,6 @@ class Plugin extends AbstractMainPlugin
     public const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Remove permalinks when deactivating the plugin
-     *
-     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     */
-    public function deactivate(): void
-    {
-        parent::deactivate();
-
-        // Remove the timestamp
-        $this->removeTimestamp();
-    }
-
-    /**
      * Show an admin notice with a link to the latest release notes
      */
     protected function pluginJustUpdated(string $storedVersion): void
@@ -252,14 +239,5 @@ class Plugin extends AbstractMainPlugin
         AppLoader::bootApplication(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
-    }
-
-    /**
-     * Regenerate the timestamp
-     */
-    protected function removeTimestamp(): void
-    {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->removeTimestamp();
     }
 }

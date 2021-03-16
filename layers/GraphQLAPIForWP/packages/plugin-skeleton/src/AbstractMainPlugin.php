@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\PluginSkeleton\AbstractPlugin;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
@@ -24,6 +25,28 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         // By removing the option (in case it already exists from a previously-installed version),
         // the next request will know the plugin was just installed
         \update_option(self::OPTION_PLUGIN_VERSION, false);
+    }
+
+    /**
+     * Remove permalinks when deactivating the plugin
+     *
+     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
+     */
+    public function deactivate(): void
+    {
+        parent::deactivate();
+
+        // Remove the timestamp
+        $this->removeTimestamp();
+    }
+
+    /**
+     * Regenerate the timestamp
+     */
+    protected function removeTimestamp(): void
+    {
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $userSettingsManager->removeTimestamp();
     }
 
     /**
