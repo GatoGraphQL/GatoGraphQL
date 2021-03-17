@@ -25,24 +25,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 abstract class AbstractExtension extends AbstractPlugin
 {
     /**
-     * If the GraphQL API plugin is not installed and activated,
-     * show an error for the admin
-     */
-    protected function addAdminNoticeError(): void
-    {
-        if ($errorMessage = $this->getGraphQLAPIPluginInactiveAdminNoticeErrorMessage()) {
-            \add_action('admin_notices', function () use ($errorMessage) {
-                \_e(sprintf(
-                    '<div class="notice notice-error is-dismissible">' .
-                        '<p>%s</p>' .
-                    '</div>',
-                    $errorMessage
-                ));
-            });
-        }
-    }
-
-    /**
      * The message to show in the admin notices, when the GraphQL API plugin
      * is not installed or activated
      */
