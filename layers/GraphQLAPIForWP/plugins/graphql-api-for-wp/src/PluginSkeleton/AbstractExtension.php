@@ -108,28 +108,9 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Plugin's configuration
-     */
-    final public function configure(): void
-    {
-        parent::configure();
-
-        // Execute the plugin's custom config
-        $this->doConfigure();
-    }
-
-    /**
      * Plugin set-up
      */
     protected function doSetup(): void
-    {
-        // Function to override
-    }
-
-    /**
-     * Plugin configuration
-     */
-    protected function doConfigure(): void
     {
         // Function to override
     }
