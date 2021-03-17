@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Admin\Tables\AbstractItemListTable;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Table menu page
@@ -83,14 +82,12 @@ abstract class AbstractTableMenuPage extends AbstractMenuPage
         }
 
         /**
-         * Instantiate the table object
+         * Instantiate the table object.
+         * It inherits from \WP_List_Table, which is not available when defining services.
+         * Hence, cannot use the container.
          */
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var AbstractItemListTable
-         */
-        $tableObject = $instanceManager->getInstance($this->getTableClass());
-        $this->tableObject = $tableObject;
+        $tableClass = $this->getTableClass();
+        $this->tableObject = new $tableClass();
         /**
          * Set properties
          */
