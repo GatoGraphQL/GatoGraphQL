@@ -231,18 +231,4 @@ abstract class AbstractExtension extends AbstractPlugin
     {
         // Function to override
     }
-
-    /**
-     * Remove permalinks when deactivating the plugin
-     *
-     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     */
-    public function deactivate(): void
-    {
-        if (!$this->isGraphQLAPIPluginActive()) {
-            return;
-        }
-
-        parent::deactivate();
-    }
 }
