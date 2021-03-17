@@ -15,6 +15,37 @@ abstract class AbstractContentParser implements ContentParserInterface
 {
     public const PATH_URL_TO_DOCS = 'pathURLToDocs';
 
+    protected string $baseDir;
+    protected string $baseURL;
+
+    /**
+     * @param string|null $baseDir Where to look for the documentation
+     * @param string|null $baseURL URL for the documentation
+     */
+    public function __construct(?string $baseDir = null, ?string $baseURL = null)
+    {
+        $this->setBaseDir($baseDir);
+        $this->setBaseURL($baseURL);
+    }
+
+    /**
+     * Inject the dir where to look for the documentation.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setBaseDir(?string $baseDir = null): void
+    {
+        $this->baseDir = $baseDir ?? constant('GRAPHQL_API_DIR');
+    }
+
+    /**
+     * Inject the URL where to look for the documentation.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setBaseURL(?string $baseURL = null): void
+    {
+        $this->baseURL = $baseURL ?? constant('GRAPHQL_API_URL');
+    }
+
     /**
      * Parse the file's Markdown into HTML Content
      *
@@ -92,7 +123,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function getFileDir(string $lang): string
     {
-        return constant('GRAPHQL_API_DIR') . "/docs/${lang}";
+        return $this->baseDir . "/docs/${lang}";
     }
 
     /**
@@ -101,7 +132,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected function getDefaultFileURL(): string
     {
         $lang = $this->getDefaultDocsLanguage();
-        return constant('GRAPHQL_API_URL') . "docs/${lang}";
+        return $this->baseURL . "docs/${lang}";
     }
 
     /**

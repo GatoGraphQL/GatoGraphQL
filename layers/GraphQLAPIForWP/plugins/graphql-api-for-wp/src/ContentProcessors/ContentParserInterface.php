@@ -7,6 +7,18 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 interface ContentParserInterface
 {
     /**
+     * Inject the dir where to look for the documentation.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setBaseDir(?string $baseDir = null): void;
+
+    /**
+     * Inject the URL where to look for the documentation.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setBaseURL(?string $baseDir = null): void;
+
+    /**
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the docs/en/ folder
