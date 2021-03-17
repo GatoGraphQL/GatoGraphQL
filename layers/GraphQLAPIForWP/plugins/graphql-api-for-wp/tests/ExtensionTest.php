@@ -1,6 +1,6 @@
 <?php
 
-namespace GraphQLAPI\PluginSkeleton;
+namespace GraphQLAPI\GraphQLAPI;
 
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class ExtensionTest extends TestCase
         $extension = new Extension('');
         $this->assertEquals(
             $extension->getPluginNamespace(),
-            'GraphQLAPI\PluginSkeleton'
+            'GraphQLAPI\GraphQLAPI'
         );
     }
 }

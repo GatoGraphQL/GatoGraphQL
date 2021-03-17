@@ -18,7 +18,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 

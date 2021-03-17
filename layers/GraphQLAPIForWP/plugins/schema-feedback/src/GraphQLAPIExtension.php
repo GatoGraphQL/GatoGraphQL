@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\SchemaFeedback;
 
-use GraphQLAPI\PluginSkeleton\AbstractExtension;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class GraphQLAPIExtension extends AbstractExtension
 {
