@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Admin\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\Services\Admin\TableActions\ModuleListTableAction;
 
 /**
  * Module Table

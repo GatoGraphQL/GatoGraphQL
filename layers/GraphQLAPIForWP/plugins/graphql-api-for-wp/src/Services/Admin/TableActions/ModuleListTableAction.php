@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\TableActions;
+namespace GraphQLAPI\GraphQLAPI\Services\Admin\TableActions;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 
