@@ -38,9 +38,6 @@ abstract class AbstractExtension extends AbstractPlugin
         \add_action(
             'plugins_loaded',
             function (): void {
-                // Execute the plugin's custom setup, if any
-                $this->doSetup();
-
                 /**
                  * Initialize/configure/boot this extension plugin
                  */
@@ -56,6 +53,9 @@ abstract class AbstractExtension extends AbstractPlugin
                     PluginLifecycleHooks::BOOT_EXTENSION,
                     [$this, 'boot']
                 );
+
+                // Execute the plugin's custom setup, if any
+                $this->doSetup();
             },
             PluginLifecyclePriorities::SETUP_EXTENSIONS
         );
