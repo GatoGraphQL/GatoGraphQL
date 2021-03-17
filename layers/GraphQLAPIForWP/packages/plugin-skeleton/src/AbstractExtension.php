@@ -20,7 +20,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  *
  * Then, the activation must be done on the extension's main file.
  *
- * @see
+ * @see https://github.com/leoloso/PoP/blob/bdbe7c911f3a7919c42e19d42a1354de1a94806c/layers/GraphQLAPIForWP/plugins/convert-case-directives/graphql-api-convert-case-directives.php#L29
  */
 abstract class AbstractExtension extends AbstractPlugin
 {
