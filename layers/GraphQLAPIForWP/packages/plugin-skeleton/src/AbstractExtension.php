@@ -92,7 +92,7 @@ abstract class AbstractExtension extends AbstractPlugin
                     [$this, 'boot']
                 );
             },
-            100
+            PluginLifecyclePriorities::SETUP_EXTENSIONS
         );
     }
 

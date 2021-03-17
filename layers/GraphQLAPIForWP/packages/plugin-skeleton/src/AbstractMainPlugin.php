@@ -131,20 +131,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
          * - Allow other plugins to inject their own functionality
          */
-        \add_action('plugins_loaded', [$this, 'initialize'], 110);
+        \add_action('plugins_loaded', [$this, 'initialize'], PluginLifecyclePriorities::INITIALIZE_PLUGIN);
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
-        }, 120);
-        \add_action('plugins_loaded', [$this, 'bootSystem'], 130);
-        \add_action('plugins_loaded', [$this, 'configure'], 140);
+        }, PluginLifecyclePriorities::INITIALIZE_EXTENSIONS);
+        \add_action('plugins_loaded', [$this, 'bootSystem'], PluginLifecyclePriorities::BOOT_SYSTEM);
+        \add_action('plugins_loaded', [$this, 'configure'], PluginLifecyclePriorities::CONFIGURE_PLUGIN);
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
-        }, 150);
-        \add_action('plugins_loaded', [$this, 'bootApplication'], 160);
-        \add_action('plugins_loaded', [$this, 'boot'], 170);
+        }, PluginLifecyclePriorities::CONFIGURE_EXTENSIONS);
+        \add_action('plugins_loaded', [$this, 'bootApplication'], PluginLifecyclePriorities::BOOT_APPLICATION);
+        \add_action('plugins_loaded', [$this, 'boot'], PluginLifecyclePriorities::BOOT_PLUGIN);
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
-        }, 180);
+        }, PluginLifecyclePriorities::BOOT_EXTENSIONS);
     }
 
     /**
