@@ -14,8 +14,6 @@ Text Domain: graphql-api-convert-case-directives
 Domain Path: /languages
 */
 
-use GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension;
-
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
@@ -36,5 +34,5 @@ add_action('plugins_loaded', function (): void {
     if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
         return;
     }
-    (new GraphQLAPIExtension(__FILE__))->setup();
+    (new \GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension(__FILE__))->setup();
 });
