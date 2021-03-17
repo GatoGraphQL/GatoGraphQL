@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\SettingsMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\SettingsMutationResolver;
 
 HooksAPIFacade::getInstance()->addAction(
     'popcms:init',

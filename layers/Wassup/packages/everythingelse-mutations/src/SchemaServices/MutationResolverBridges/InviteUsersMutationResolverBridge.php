@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\InviteUsersMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\InviteUsersMutationResolver;
 
 class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResolverBridge
 {

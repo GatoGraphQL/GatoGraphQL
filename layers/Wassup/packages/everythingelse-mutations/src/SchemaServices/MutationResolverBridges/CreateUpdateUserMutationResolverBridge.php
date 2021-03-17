@@ -9,7 +9,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\CreateUpdateUserMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
 
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

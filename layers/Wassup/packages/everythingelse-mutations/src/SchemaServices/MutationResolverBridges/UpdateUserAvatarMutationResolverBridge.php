@@ -6,7 +6,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\UpdateUserAvatarMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\UpdateUserAvatarMutationResolver;
 
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

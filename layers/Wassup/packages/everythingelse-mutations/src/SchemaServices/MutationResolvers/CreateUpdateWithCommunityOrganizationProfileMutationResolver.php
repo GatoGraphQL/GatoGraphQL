@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers;
+namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends CreateUpdateWithCommunityProfileMutationResolver
 {

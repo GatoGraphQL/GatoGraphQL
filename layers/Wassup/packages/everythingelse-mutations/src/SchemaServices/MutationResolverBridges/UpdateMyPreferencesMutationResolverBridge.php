@@ -7,7 +7,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\UpdateMyPreferencesMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\UpdateMyPreferencesMutationResolver;
 
 class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

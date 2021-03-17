@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers;
+namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;

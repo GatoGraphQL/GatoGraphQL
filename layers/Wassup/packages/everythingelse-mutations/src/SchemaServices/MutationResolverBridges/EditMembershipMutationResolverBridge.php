@@ -8,7 +8,7 @@ use PoPSchema\Users\Constants\InputNames;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\EditMembershipMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\EditMembershipMutationResolver;
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

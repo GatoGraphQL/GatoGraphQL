@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers;
+namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;

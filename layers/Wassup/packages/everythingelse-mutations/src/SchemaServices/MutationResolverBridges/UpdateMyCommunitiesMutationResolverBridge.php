@@ -8,7 +8,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\MutationResolverUtils\MutationResolverUtils;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\UpdateMyCommunitiesMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\UpdateMyCommunitiesMutationResolver;
 
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

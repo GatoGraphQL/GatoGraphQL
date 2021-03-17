@@ -6,7 +6,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
-use PoPSitesWassup\Services\EverythingElseMutations\MutationResolvers\CreateUpdateProfileMutationResolver;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
