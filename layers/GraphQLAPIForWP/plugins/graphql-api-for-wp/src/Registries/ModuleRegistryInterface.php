@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
 use InvalidArgumentException;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 
 interface ModuleRegistryInterface
 {

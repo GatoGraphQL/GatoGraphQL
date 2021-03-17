@@ -5,6 +5,3 @@ services:
 
     GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry
-
-    GraphQLAPI\GraphQLAPI\HybridServices\:
-        resource: '../src/HybridServices/*'

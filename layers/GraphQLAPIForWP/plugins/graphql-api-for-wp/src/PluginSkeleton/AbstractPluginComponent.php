@@ -37,6 +37,13 @@ abstract class AbstractPluginComponent extends AbstractComponent
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
             self::initSystemServices($pluginFolder, '', 'hybrid-services.yaml');
         }
+        /**
+         * ModuleResolvers are also hybrid, but they are defined on a different config
+         * to make it easier to understand (for documentation)
+         */
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'module-services.yaml')) {
+            self::initSystemServices($pluginFolder, '', 'module-services.yaml');
+        }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'system-services.yaml')) {
             self::initSystemServices($pluginFolder);
         }
@@ -61,6 +68,13 @@ abstract class AbstractPluginComponent extends AbstractComponent
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
             self::initServices($pluginFolder, '', 'hybrid-services.yaml');
+        }
+        /**
+         * ModuleResolvers are also hybrid, but they are defined on a different config
+         * to make it easier to understand (for documentation)
+         */
+        if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'module-services.yaml')) {
+            self::initServices($pluginFolder, '', 'module-services.yaml');
         }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'services.yaml')) {
             self::initServices($pluginFolder);

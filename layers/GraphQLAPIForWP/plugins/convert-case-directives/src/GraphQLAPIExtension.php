@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives;
 
-use GraphQLAPI\ConvertCaseDirectives\HybridServices\ModuleResolvers\SchemaModuleResolver;
+use GraphQLAPI\ConvertCaseDirectives\ModuleResolvers\SchemaModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class GraphQLAPIExtension extends AbstractExtension
