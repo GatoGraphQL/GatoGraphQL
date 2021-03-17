@@ -2,7 +2,7 @@ name: wassup
 recipe: wordpress
 config:
   webroot: wordpress
-  php: '7.4'
+  php: '8.0'
   ssl: true
   database: mariadb
   xdebug: false
