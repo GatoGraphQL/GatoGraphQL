@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\EverythingElseMutations\Services\MutationResolverBridges;
+namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;

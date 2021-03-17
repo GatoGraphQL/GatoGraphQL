@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\EverythingElseMutations\Services\MutationResolverBridges;
+namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
 use PoPSchema\Users\Constants\InputNames;
 use PoP\ComponentModel\State\ApplicationState;
