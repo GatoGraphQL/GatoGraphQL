@@ -30,7 +30,7 @@ class Component extends AbstractComponent
          * Until we can do the migration, added a flag to not register
          * the components with issues, so the the webserver doesn't fail.
          */
-        $skipLoadingUnmigratedComponents = true;
+        $skipLoadingUnmigratedComponents = false;
         return array_merge(
             [
                 // These ones are working OK
