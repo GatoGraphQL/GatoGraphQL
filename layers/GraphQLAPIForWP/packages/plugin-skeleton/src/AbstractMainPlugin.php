@@ -58,20 +58,47 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         parent::setup();
 
         /**
-         * Logic to check if the plugin has just been activated or updated.
+         * PoP depends on hook "init" to set-up the endpoint rewrite,
+         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
+         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
+         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
+         * is activated, and any non-default GraphQL endpoint is not set.
          *
-         * Regenerate the container here, and not in the `activate` function,
-         * because `activate` doesn't get called within the "plugins_loaded" hook.
-         * This is not an issue to register the main plugin, but it is for extensions,
-         * since they need to ask if the main plugin exists (since AbstractExtension
-         * is located there), and that can only be done in "plugins_loaded".
+         * The solution (hack) is to check if the plugin has just been installed,
+         * and then apply the logic, on every request in the admin!
          *
-         * Doing it here works, because "admin_init" is called before the
-         * services are initialized.
+         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
+         */
+        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
+
+        // Dump the container whenever a new plugin or extension is activated
+        $this->handleNewActivations();
+
+        // Initialize the procedure to register/initialize plugin and extensions
+        $this->executeSetupProcedure();
+    }
+
+    /**
+     * Check if the plugin has just been activated or updated,
+     * or if an extension has just been activated.
+     *
+     * Regenerate the container here, and not in the `activate` function,
+     * because `activate` doesn't get called within the "plugins_loaded" hook.
+     * This is not an issue to register the main plugin, but it is for extensions,
+     * since they need to ask if the main plugin exists (since AbstractExtension
+     * is located there), and that can only be done in "plugins_loaded".
+     */
+    protected function handleNewActivations(): void
+    {
+        /**
+         * Logic to check if the main plugin has just been activated or updated.
          */
         \add_action(
-            'admin_init',
+            'plugins_loaded',
             function (): void {
+                if (!\is_admin()) {
+                    return;
+                }
                 // If there is no version stored, it's the first screen after activating the plugin
                 $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
                 $isPluginJustActivated = $storedVersion === false;
@@ -91,15 +118,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 } elseif ($isPluginJustUpdated) {
                     $this->pluginJustUpdated($storedVersion);
                 }
-            }
+            },
+            PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
 
         /**
          * Logic to check if an extension has just been activated.
          */
         \add_action(
-            'admin_init',
+            'plugins_loaded',
             function (): void {
+                if (!\is_admin()) {
+                    return;
+                }
                 // If the flag is true, it's the first screen after activating an extension
                 $justActivatedExtension = \get_option(PluginOptions::ACTIVATED_EXTENSION);
                 if (!$justActivatedExtension) {
@@ -113,25 +144,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 $this->regenerateTimestamp();
                 // Implement custom additional functionality
                 $this->extensionJustActivated();
-            }
+            },
+            PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
-
-        /**
-         * PoP depends on hook "init" to set-up the endpoint rewrite,
-         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
-         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
-         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
-         * is activated, and any non-default GraphQL endpoint is not set.
-         *
-         * The solution (hack) is to check if the plugin has just been installed,
-         * and then apply the logic, on every request in the admin!
-         *
-         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
-         */
-        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
-
-        // Initialize the procedure to register/initialize plugin and extensions
-        $this->executeSetupProcedure();
     }
 
     /**
