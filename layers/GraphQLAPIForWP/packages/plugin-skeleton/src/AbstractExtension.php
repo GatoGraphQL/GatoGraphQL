@@ -57,7 +57,7 @@ abstract class AbstractExtension extends AbstractPlugin
         parent::setup();
 
         /**
-         * Priority 0: before the GraphQL API plugin is initialized
+         * Priority 100: before the GraphQL API plugin is initialized
          */
         \add_action(
             'plugins_loaded',
@@ -92,7 +92,7 @@ abstract class AbstractExtension extends AbstractPlugin
                     [$this, 'boot']
                 );
             },
-            0
+            100
         );
     }
 

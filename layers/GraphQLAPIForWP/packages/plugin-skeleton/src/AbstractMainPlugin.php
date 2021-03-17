@@ -55,15 +55,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * To attain the needed order, we execute them using hook "plugins_loaded":
      *
      * 1. GraphQL API => setup(): immediately
-     * 2. GraphQL API extensions => setup(): priority 0
-     * 3. GraphQL API => initialize(): priority 10
-     * 4. GraphQL API extensions => initialize(): priority 20
-     * 5. GraphQL API => bootSystem(): priority 30
-     * 3. GraphQL API => configure(): priority 40
-     * 4. GraphQL API extensions => configure(): priority 50
-     * 5. GraphQL API => bootApplication(): priority 60
-     * 6. GraphQL API => boot(): priority 70
-     * 7. GraphQL API extensions => boot(): priority 80
+     * 2. GraphQL API extensions => setup(): priority 100
+     * 3. GraphQL API => initialize(): priority 110
+     * 4. GraphQL API extensions => initialize(): priority 120
+     * 5. GraphQL API => bootSystem(): priority 130
+     * 3. GraphQL API => configure(): priority 140
+     * 4. GraphQL API extensions => configure(): priority 150
+     * 5. GraphQL API => bootApplication(): priority 160
+     * 6. GraphQL API => boot(): priority 170
+     * 7. GraphQL API extensions => boot(): priority 180
      */
     public function setup(): void
     {
@@ -131,20 +131,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
          * - Allow other plugins to inject their own functionality
          */
-        \add_action('plugins_loaded', [$this, 'initialize'], 10);
+        \add_action('plugins_loaded', [$this, 'initialize'], 110);
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
-        }, 20);
-        \add_action('plugins_loaded', [$this, 'bootSystem'], 30);
-        \add_action('plugins_loaded', [$this, 'configure'], 40);
+        }, 120);
+        \add_action('plugins_loaded', [$this, 'bootSystem'], 130);
+        \add_action('plugins_loaded', [$this, 'configure'], 140);
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
-        }, 50);
-        \add_action('plugins_loaded', [$this, 'bootApplication'], 60);
-        \add_action('plugins_loaded', [$this, 'boot'], 70);
+        }, 150);
+        \add_action('plugins_loaded', [$this, 'bootApplication'], 160);
+        \add_action('plugins_loaded', [$this, 'boot'], 170);
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
-        }, 80);
+        }, 180);
     }
 
     /**
