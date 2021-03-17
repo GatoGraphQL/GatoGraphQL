@@ -25,19 +25,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 abstract class AbstractExtension extends AbstractPlugin
 {
     /**
-     * The message to show in the admin notices, when the GraphQL API plugin
-     * is not installed or activated
-     */
-    protected function getGraphQLAPIPluginInactiveAdminNoticeErrorMessage(): ?string
-    {
-        return sprintf(
-            \__('Plugin <strong>%1$s</strong> is not installed or activated. Without it, plugin <strong>%2$s</strong> cannot be enabled.'),
-            \__('GraphQL API for WordPress'),
-            $this->getPluginName()
-        );
-    }
-
-    /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
      */
