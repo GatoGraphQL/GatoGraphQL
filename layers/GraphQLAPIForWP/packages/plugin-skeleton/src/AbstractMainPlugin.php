@@ -58,6 +58,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         parent::setup();
 
         /**
+         * Logic to check if the plugin has just been activated or updated.
+         *
          * Regenerate the container here, and not in the `activate` function,
          * because `activate` doesn't get called within the "plugins_loaded" hook.
          * This is not an issue to register the main plugin, but it is for extensions,
@@ -92,6 +94,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             }
         );
 
+        /**
+         * Logic to check if an extension has just been activated.
+         */
         \add_action(
             'admin_init',
             function (): void {
