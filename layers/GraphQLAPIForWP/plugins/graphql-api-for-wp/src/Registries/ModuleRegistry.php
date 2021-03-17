@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Registries;
 
 use InvalidArgumentException;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {

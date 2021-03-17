@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 interface ModuleResolverInterface
 {
