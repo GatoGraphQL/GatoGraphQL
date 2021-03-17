@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\PluginSkeleton;
+namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
 {

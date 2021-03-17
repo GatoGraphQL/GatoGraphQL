@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\HybridServices\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 
 /**
  * Initialize component

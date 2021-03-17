@@ -16,7 +16,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "graphql-api/plugin-skeleton": "^0.8",
         "pop-schema/convert-case-directives": "^0.8"
     },
     "require-dev": {

@@ -17,7 +17,6 @@
     "require": {
         "php": "^7.4|^8.0",
         "graphql-api/markdown-convertor": "^0.8",
-        "graphql-api/plugin-skeleton": "^0.8",
         "pop-schema/generic-customposts": "^0.8",
         "pop-schema/commentmeta-wp": "^0.8",
         "pop-schema/comments-wp": "^0.8",

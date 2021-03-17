@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives;
 
-use GraphQLAPI\PluginSkeleton\AbstractExtensionComponent;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionComponent;
 
 /**
  * Initialize component
