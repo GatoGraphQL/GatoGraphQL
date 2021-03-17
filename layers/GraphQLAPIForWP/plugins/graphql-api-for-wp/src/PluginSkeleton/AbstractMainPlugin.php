@@ -211,11 +211,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     abstract public function bootSystem(): void;
 
-    public function boot(): void
-    {
-        // Doing nothing yet
-    }
-
     /**
      * Boot the application
      */

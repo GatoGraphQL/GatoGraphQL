@@ -108,14 +108,6 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Plugin's booting
-     */
-    public function boot(): void
-    {
-        // Function to override
-    }
-
-    /**
      * Plugin set-up
      */
     protected function doSetup(): void
