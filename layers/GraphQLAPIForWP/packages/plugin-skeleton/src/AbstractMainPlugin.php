@@ -52,18 +52,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * - The plugin must execute its logic before the extensions
      * - The services can't be booted before all services have been initialized
      *
-     * To attain the needed order, we execute them using hook "plugins_loaded":
-     *
-     * 1. GraphQL API => setup(): immediately
-     * 2. GraphQL API extensions => setup(): priority 100
-     * 3. GraphQL API => initialize(): priority 110
-     * 4. GraphQL API extensions => initialize(): priority 120
-     * 5. GraphQL API => bootSystem(): priority 130
-     * 3. GraphQL API => configure(): priority 140
-     * 4. GraphQL API extensions => configure(): priority 150
-     * 5. GraphQL API => bootApplication(): priority 160
-     * 6. GraphQL API => boot(): priority 170
-     * 7. GraphQL API extensions => boot(): priority 180
+     * To attain the needed order, we execute them using hook "plugins_loaded",
+     * with all the priorities defined in PluginLifecyclePriorities
      */
     public function setup(): void
     {
@@ -125,6 +115,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             }
         );
 
+        $this->executeSetupProcedure();
+    }
+
+    /**
+     * There are three stages for the main plugin, and for each extension plugin:
+     * `setup`, `initialize` and `boot`.
+     *
+     * This is because:
+     *
+     * - The plugin must execute its logic before the extensions
+     * - The services can't be booted before all services have been initialized
+     *
+     * To attain the needed order, we execute them using hook "plugins_loaded",
+     * with all the priorities defined in PluginLifecyclePriorities
+     */
+    final protected function executeSetupProcedure(): void
+    {
         /**
          * Wait until "plugins_loaded" to initialize the plugin, because:
          *
