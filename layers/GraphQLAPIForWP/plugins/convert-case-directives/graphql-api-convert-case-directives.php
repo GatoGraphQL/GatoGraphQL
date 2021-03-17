@@ -21,6 +21,8 @@ if (!defined('ABSPATH')) {
 
 define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_PLUGIN_FILE', __FILE__);
 define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.7.13');
+define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_DIR', dirname(__FILE__));
+define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_URL', plugin_dir_url(__FILE__));
 
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
