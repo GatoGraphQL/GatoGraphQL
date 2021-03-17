@@ -95,6 +95,14 @@ abstract class AbstractPlugin
     }
 
     /**
+     * Plugin's booting
+     */
+    public function boot(): void
+    {
+        // Function to override
+    }
+
+    /**
      * Add configuration for the Component classes
      *
      * @return array<string, mixed> [key]: Component class, [value]: Configuration
