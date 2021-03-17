@@ -25,45 +25,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 abstract class AbstractExtension extends AbstractPlugin
 {
     /**
-     * Indicate if the main plugin is installed and activated
-     */
-    final protected function isGraphQLAPIPluginActive(): bool
-    {
-        return class_exists('\GraphQLAPI\GraphQLAPI\Plugin');
-    }
-
-    /**
-     * If the GraphQL API plugin is not installed and activated,
-     * show an error for the admin
-     */
-    protected function addAdminNoticeError(): void
-    {
-        if ($errorMessage = $this->getGraphQLAPIPluginInactiveAdminNoticeErrorMessage()) {
-            \add_action('admin_notices', function () use ($errorMessage) {
-                \_e(sprintf(
-                    '<div class="notice notice-error is-dismissible">' .
-                        '<p>%s</p>' .
-                    '</div>',
-                    $errorMessage
-                ));
-            });
-        }
-    }
-
-    /**
-     * The message to show in the admin notices, when the GraphQL API plugin
-     * is not installed or activated
-     */
-    protected function getGraphQLAPIPluginInactiveAdminNoticeErrorMessage(): ?string
-    {
-        return sprintf(
-            \__('Plugin <strong>%1$s</strong> is not installed or activated. Without it, plugin <strong>%2$s</strong> cannot be enabled.'),
-            \__('GraphQL API for WordPress'),
-            $this->getPluginName()
-        );
-    }
-
-    /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
      */
@@ -77,20 +38,6 @@ abstract class AbstractExtension extends AbstractPlugin
         \add_action(
             'plugins_loaded',
             function (): void {
-                /**
-                 * Check that the GraphQL API plugin is installed and activated.
-                 * Otherwise show an error, and skip initializing the plugin.
-                 */
-                if (!$this->isGraphQLAPIPluginActive()) {
-                    // Show an error message to the admin
-                    $this->addAdminNoticeError();
-                    // Exit
-                    return;
-                }
-
-                // Execute the plugin's custom setup, if any
-                $this->doSetup();
-
                 /**
                  * Initialize/configure/boot this extension plugin
                  */
@@ -106,6 +53,9 @@ abstract class AbstractExtension extends AbstractPlugin
                     PluginLifecycleHooks::BOOT_EXTENSION,
                     [$this, 'boot']
                 );
+
+                // Execute the plugin's custom setup, if any
+                $this->doSetup();
             },
             PluginLifecyclePriorities::SETUP_EXTENSIONS
         );
@@ -158,76 +108,9 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Plugin's initialization
-     */
-    final public function initialize(): void
-    {
-        /**
-         * Check that the GraphQL API plugin is installed and activated.
-         */
-        if (!$this->isGraphQLAPIPluginActive()) {
-            // Exit
-            return;
-        }
-
-        parent::initialize();
-    }
-
-    /**
-     * Plugin's configuration
-     */
-    final public function configure(): void
-    {
-        /**
-         * Check that the GraphQL API plugin is installed and activated.
-         */
-        if (!$this->isGraphQLAPIPluginActive()) {
-            // Exit
-            return;
-        }
-
-        parent::configure();
-
-        // Execute the plugin's custom config
-        $this->doConfigure();
-    }
-
-    /**
-     * Plugin's booting
-     */
-    final public function boot(): void
-    {
-        /**
-         * Check that the GraphQL API plugin is installed and activated.
-         */
-        if (!$this->isGraphQLAPIPluginActive()) {
-            // Exit
-            return;
-        }
-
-        // Execute the plugin's custom setup
-        $this->doBoot();
-    }
-
-    /**
-     * Initialize plugin. Function to override
-     */
-    protected function doBoot(): void
-    {
-    }
-
-    /**
      * Plugin set-up
      */
     protected function doSetup(): void
-    {
-        // Function to override
-    }
-
-    /**
-     * Plugin configuration
-     */
-    protected function doConfigure(): void
     {
         // Function to override
     }

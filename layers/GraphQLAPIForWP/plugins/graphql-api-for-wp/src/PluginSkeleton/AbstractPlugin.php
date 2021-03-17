@@ -30,14 +30,6 @@ abstract class AbstractPlugin
     }
 
     /**
-     * The plugin name
-     */
-    protected function getPluginName(): string
-    {
-        return trim(substr($this->pluginFile, strlen(\WP_PLUGIN_DIR)), '/');
-    }
-
-    /**
      * Plugin's initialization
      */
     public function initialize(): void

@@ -15,14 +15,6 @@ class GraphQLAPIExtension extends AbstractExtension
     public const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Plugin name
-     */
-    protected function getPluginName(): string
-    {
-        return \__('GraphQL API - Convert Case Directives', 'graphql-api-convert-case-directives');
-    }
-
-    /**
      * Add Component classes to be initialized
      *
      * @return string[] List of `Component` class to initialize
