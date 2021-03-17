@@ -1,6 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\RedirectQueryInputOutputHandler;
-use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\SettingsMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\SettingsMutationResolverBridge;
 
 class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_DataloadsBase
 {
