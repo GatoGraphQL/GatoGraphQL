@@ -14,7 +14,11 @@ class PluginOptions
 
     /**
      * Store when an extension is activated in the Options table,
-     * to flush the rewrite rules
+     * to flush the rewrite rules.
+     *
+     * Watch out: when registering a new extension,
+     * this value will be added manually, not via the const.
+     * Then, do NOT change this value!
      */
-    public const ACTIVATED_EXTENSION = 'graphql-api-activated-extension';
+    public const ACTIVATED_EXTENSION = 'graphql-api-extension';
 }

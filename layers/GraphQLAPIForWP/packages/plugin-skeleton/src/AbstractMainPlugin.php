@@ -14,8 +14,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function activate(): void
     {
-        parent::activate();
-
         // By removing the option (in case it already exists from a previously-installed version),
         // the next request will know the plugin was just installed
         \update_option(PluginOptions::PLUGIN_VERSION, false);
@@ -59,20 +57,38 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         parent::setup();
 
+        /**
+         * Regenerate the container here, and not in the `activate` function,
+         * because `activate` doesn't get called within the "plugins_loaded" hook.
+         * This is not an issue to register the main plugin, but it is for extensions,
+         * since they need to ask if the main plugin exists (since AbstractExtension
+         * is located there), and that can only be done in "plugins_loaded".
+         *
+         * Doing it here works, because "admin_init" is called before the
+         * services are initialized.
+         */
         \add_action(
             'admin_init',
             function (): void {
                 // If there is no version stored, it's the first screen after activating the plugin
-                $isPluginJustActivated = \get_option(PluginOptions::PLUGIN_VERSION) === false;
-                if (!$isPluginJustActivated) {
+                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                $isPluginJustActivated = $storedVersion === false;
+                $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== \GRAPHQL_API_VERSION;
+                if (!$isPluginJustActivated || !$isPluginJustUpdated) {
                     return;
                 }
                 // Update to the current version
                 \update_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
-                // Required logic after plugin is activated
+                // If new CPTs have rewrite rules, these must be flushed
                 \flush_rewrite_rules();
-
-                $this->pluginJustActivated();
+                // Regenerate the timestamp, to generate the service container
+                $this->regenerateTimestamp();
+                // Implement custom additional functionality
+                if ($isPluginJustActivated) {
+                    $this->pluginJustActivated();
+                } elseif ($isPluginJustUpdated) {
+                    $this->pluginJustUpdated($storedVersion);
+                }
             }
         );
 
@@ -86,35 +102,30 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 }
                 // Remove the entry
                 \delete_option(PluginOptions::ACTIVATED_EXTENSION);
-                // Required logic after extension is activated
+                // If new CPTs have rewrite rules, these must be flushed
                 \flush_rewrite_rules();
-
-                $this->extensionJustActivated((string) $justActivatedExtension);
+                // Regenerate the timestamp, to generate the service container
+                $this->regenerateTimestamp();
+                // Implement custom additional functionality
+                $this->extensionJustActivated();
             }
         );
 
-        \add_action(
-            'admin_init',
-            function (): void {
-                // Do not execute when doing Ajax, since we can't show the one-time
-                // admin notice to the user then
-                if (\wp_doing_ajax()) {
-                    return;
-                }
-                // Check if the plugin has been updated: if the stored version in the DB
-                // and the current plugin's version are different
-                // It could also be false from the first time we install the plugin
-                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
-                if (!$storedVersion || $storedVersion == \GRAPHQL_API_VERSION) {
-                    return;
-                }
-                // Update to the current version
-                \update_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+        /**
+         * PoP depends on hook "init" to set-up the endpoint rewrite,
+         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
+         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
+         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
+         * is activated, and any non-default GraphQL endpoint is not set.
+         *
+         * The solution (hack) is to check if the plugin has just been installed,
+         * and then apply the logic, on every request in the admin!
+         *
+         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
+         */
+        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
 
-                $this->pluginJustUpdated($storedVersion);
-            }
-        );
-
+        // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
     }
 
@@ -164,7 +175,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     /**
      * Execute logic after the plugin has just been activated
      */
-    protected function extensionJustActivated(string $extension): void
+    protected function extensionJustActivated(): void
     {
     }
 

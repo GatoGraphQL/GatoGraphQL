@@ -27,5 +27,14 @@ define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.7.13');
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Create and set-up the plugin instance
-(new GraphQLAPIExtension(__FILE__))->setup();
+register_activation_hook(__FILE__, function (): void {
+    \update_option('graphql-api-extension', true);
+});
+
+// If the GraphQL API plugin is active => Create and set-up the extension
+add_action('plugins_loaded', function (): void {
+    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+        return;
+    }
+    (new GraphQLAPIExtension(__FILE__))->setup();
+});
