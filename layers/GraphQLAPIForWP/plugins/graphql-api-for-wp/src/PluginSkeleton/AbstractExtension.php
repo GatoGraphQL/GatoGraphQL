@@ -25,14 +25,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 abstract class AbstractExtension extends AbstractPlugin
 {
     /**
-     * Indicate if the main plugin is installed and activated
-     */
-    final protected function isGraphQLAPIPluginActive(): bool
-    {
-        return class_exists('\GraphQLAPI\GraphQLAPI\Plugin');
-    }
-
-    /**
      * If the GraphQL API plugin is not installed and activated,
      * show an error for the admin
      */
@@ -77,17 +69,6 @@ abstract class AbstractExtension extends AbstractPlugin
         \add_action(
             'plugins_loaded',
             function (): void {
-                /**
-                 * Check that the GraphQL API plugin is installed and activated.
-                 * Otherwise show an error, and skip initializing the plugin.
-                 */
-                if (!$this->isGraphQLAPIPluginActive()) {
-                    // Show an error message to the admin
-                    $this->addAdminNoticeError();
-                    // Exit
-                    return;
-                }
-
                 // Execute the plugin's custom setup, if any
                 $this->doSetup();
 
@@ -158,34 +139,10 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Plugin's initialization
-     */
-    final public function initialize(): void
-    {
-        /**
-         * Check that the GraphQL API plugin is installed and activated.
-         */
-        if (!$this->isGraphQLAPIPluginActive()) {
-            // Exit
-            return;
-        }
-
-        parent::initialize();
-    }
-
-    /**
      * Plugin's configuration
      */
     final public function configure(): void
     {
-        /**
-         * Check that the GraphQL API plugin is installed and activated.
-         */
-        if (!$this->isGraphQLAPIPluginActive()) {
-            // Exit
-            return;
-        }
-
         parent::configure();
 
         // Execute the plugin's custom config
@@ -197,14 +154,6 @@ abstract class AbstractExtension extends AbstractPlugin
      */
     final public function boot(): void
     {
-        /**
-         * Check that the GraphQL API plugin is installed and activated.
-         */
-        if (!$this->isGraphQLAPIPluginActive()) {
-            // Exit
-            return;
-        }
-
         // Execute the plugin's custom setup
         $this->doBoot();
     }
