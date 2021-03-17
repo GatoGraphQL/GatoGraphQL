@@ -119,22 +119,6 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
-     * Plugin's booting
-     */
-    final public function boot(): void
-    {
-        // Execute the plugin's custom setup
-        $this->doBoot();
-    }
-
-    /**
-     * Initialize plugin. Function to override
-     */
-    protected function doBoot(): void
-    {
-    }
-
-    /**
      * Plugin set-up
      */
     protected function doSetup(): void
