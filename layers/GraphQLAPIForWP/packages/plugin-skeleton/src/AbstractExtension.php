@@ -7,6 +7,21 @@ namespace GraphQLAPI\PluginSkeleton;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
+/**
+ * This class is hosted within the graphql-api-for-wp plugin, and not
+ * within the extension plugin. That means that the main plugin
+ * must be installed, for any extension to work.
+ *
+ * This class doesn't have an `activate` function, because `activate`
+ * can't be executed within "plugins_loaded", on which we find out if the
+ * main plugin is installed and activated.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#more-information
+ *
+ * Then, the activation must be done on the extension's main file.
+ *
+ * @see
+ */
 abstract class AbstractExtension extends AbstractPlugin
 {
     /**
@@ -57,7 +72,7 @@ abstract class AbstractExtension extends AbstractPlugin
         parent::setup();
 
         /**
-         * Priority 0: before the GraphQL API plugin is initialized
+         * Priority 100: before the GraphQL API plugin is initialized
          */
         \add_action(
             'plugins_loaded',
@@ -92,7 +107,7 @@ abstract class AbstractExtension extends AbstractPlugin
                     [$this, 'boot']
                 );
             },
-            0
+            PluginLifecyclePriorities::SETUP_EXTENSIONS
         );
     }
 
@@ -215,36 +230,5 @@ abstract class AbstractExtension extends AbstractPlugin
     protected function doConfigure(): void
     {
         // Function to override
-    }
-
-    /**
-     * Get permalinks to work when activating the plugin
-     *
-     * @see https://codex.wordpress.org/Function_Reference/register_post_type#Flushing_Rewrite_on_Activation
-     */
-    public function activate(): void
-    {
-        if (!$this->isGraphQLAPIPluginActive()) {
-            return;
-        }
-
-        parent::activate();
-
-        // Tell the main Plugin to flush the rewrite rules (for if the extension contains CPTs)
-        \update_option(PluginOptions::ACTIVATED_EXTENSION, $this->getPluginName());
-    }
-
-    /**
-     * Remove permalinks when deactivating the plugin
-     *
-     * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
-     */
-    public function deactivate(): void
-    {
-        if (!$this->isGraphQLAPIPluginActive()) {
-            return;
-        }
-
-        parent::deactivate();
     }
 }
