@@ -48,6 +48,9 @@ trait HasMarkdownDocumentationModuleResolverTrait
     {
         if ($markdownFilename = $this->getMarkdownFilename($module)) {
             $markdownContentParser = MarkdownContentParserFacade::getInstance();
+            // Inject the place to look for the documentation
+            $markdownContentParser->setBaseDir($this->getBaseDir());
+            $markdownContentParser->setBaseURL($this->getBaseURL());
             try {
                 return $markdownContentParser->getContent(
                     'modules/' . $markdownFilename,
@@ -65,4 +68,14 @@ trait HasMarkdownDocumentationModuleResolverTrait
         }
         return null;
     }
+
+    /**
+     * Get the dir where to look for the documentation.
+     */
+    abstract protected function getBaseDir(): string;
+
+    /**
+     * Get the URL where to look for the documentation.
+     */
+    abstract protected function getBaseURL(): string;
 }
