@@ -7,6 +7,7 @@ namespace GraphQLAPI\SchemaFeedback\ModuleResolvers;
 use GraphQLAPI\SchemaFeedback\GraphQLAPIExtension;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 class FunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -27,7 +28,7 @@ class FunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
             case self::SCHEMA_FEEDBACK:
                 return [
                     [
-                        \GraphQLAPI\GraphQLAPI\ModuleResolvers\FunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
                     ],
                 ];
         }
