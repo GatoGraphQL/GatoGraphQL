@@ -30,16 +30,48 @@ With **GraphQL**, you provide any query to a single endpoint, which returns exac
 
 Hence, we obtain multiple endpoints with predefined data, as in REST, but these are created using GraphQL, obtaining the advantages from each and avoiding their disadvantages:
 
-| Advantages | Disadvantages |
-| --- | --- |
-| ✅ Accessed via `GET` or `POST` | ~~❌ It's tedious to create all the endpoints~~ |
-| ✅ Can be cached on the server or CDN | ~~❌ A project may face bottlenecks waiting for endpoints to be ready~~ |
-| ✅ It's secure: only intended data is exposed | ~~❌ Producing documentation is mandatory~~ |
-| ✅ No under/over fetching of data | ~~❌ It can be slow (mainly for mobile apps), since the application may need several requests to retrieve all the data~~ |
-| ✅ It can be fast, since all data is retrieved in a single request | ~~❌ Accessed only via `POST`~~ |
-| ✅ It enables rapid iteration of the project | ~~❌ It can't be cached on the server or CDN, making it slower and more expensive than it could be~~ |
-| ✅ It can be self-documented | ~~❌ It may require to reinvent the wheel , such asuploading files or caching~~ |
-| ✅ It provides an editor for the query (GraphiQL) that simplifies the task | ~~❌ Must deal with additional complexities, such as the N+1 problem~~ 👈🏻 this issue is [resolved by the underlying engine](https://graphql-by-pop.com/docs/architecture/suppressing-n-plus-one-problem.html) |
+<table markdown="1">
+<thead>
+<tr>
+    <th>Advantages</th>
+    <th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>✅ Accessed via `GET` or `POST`</td>
+    <td><s>❌ It's tedious to create all the endpoints</s></td>
+</tr>
+<tr>
+    <td>✅ Can be cached on the server or CDN</td>
+    <td><s>❌ A project may face bottlenecks waiting for endpoints to be ready</s></td>
+</tr>
+<tr>
+    <td>✅ It's secure: only intended data is exposed</td>
+    <td><s>❌ Producing documentation is mandatory</s></td>
+</tr>
+<tr>
+    <td>✅ No under/over fetching of data</td>
+    <td><s>❌ It can be slow (mainly for mobile apps), since the application may need several requests to retrieve all the data</s></td>
+</tr>
+<tr>
+    <td>✅ It can be fast, since all data is retrieved in a single request</td>
+    <td><s>❌ Accessed only via `POST`</s></td>
+</tr>
+<tr>
+    <td>✅ It enables rapid iteration of the project</td>
+    <td><s>❌ It can't be cached on the server or CDN, making it slower and more expensive than it could be</s></td>
+</tr>
+<tr>
+    <td>✅ It can be self-documented</td>
+    <td><s>❌ It may require to reinvent the wheel , such asuploading files or caching</s></td>
+</tr>
+<tr>
+    <td>✅ It provides an editor for the query (GraphiQL) that simplifies the task</td>
+    <td><s>❌ Must deal with additional complexities, such as the N+1 problem</s> 👈🏻 this issue is [resolved by the underlying engine](https://graphql-by-pop.com/docs/architecture/suppressing-n-plus-one-problem.html)</td>
+</tr>
+</tbody>
+</table>
 
 ## How to use
 

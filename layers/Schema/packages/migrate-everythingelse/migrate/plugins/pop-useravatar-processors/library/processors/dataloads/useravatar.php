@@ -4,8 +4,8 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\UpdateUserAvatarMutationResolverBridge;
-use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\FileUploadPictureMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\UpdateUserAvatarMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\FileUploadPictureMutationResolverBridge;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module_Processor_DataloadsBase
 {
