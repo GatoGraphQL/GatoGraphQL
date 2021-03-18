@@ -26,7 +26,7 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 ## Requirements
 
 - WordPress 5.4 or above
-- PHP 7.4+ for development
+- PHP 8.0+ for development
 - PHP 7.1+ for production
 
 ## Install
@@ -128,6 +128,8 @@ cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install
 
 Launch a development server, with WordPress installed and the GraphQL API plugin activated, through [Lando](https://lando.dev/).
 
+Please make sure you have Lando installed, with version `3.0.26` or upwards (or install it from [here](https://github.com/lando/lando/releases/tag/v3.0.26)).
+
 The first time, to install the server, execute:
 
 ```bash
@@ -191,7 +193,7 @@ This method requires the code for the component to be divided into 2 separate pa
 
 Requirements:
 
-- PHP 7.4+ for development
+- PHP 8.0+ for development
 - PHP 7.1+ for production (through release [`graphql-api.zip`][latest-release-url])
 
 ### Supported PHP features
@@ -289,7 +291,7 @@ Detailed explanation of the plugin goals, and how it renders the WordPress philo
 
 ### PHP Architecture
 
-Articles explaining how the plugin is coded using PHP 7.4 but can run on PHP 7.1:
+Articles explaining how the plugin is coded using PHP 8.0 but can run on PHP 7.1:
 
 1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
 2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)

@@ -39,7 +39,7 @@ Add `<translate(provider:google)>` to the field to translate in the API query
 
 Requirements:
 
-- PHP 7.4+ for development
+- PHP 8.0+ for development
 - PHP 7.1+ for production
 
 ### Supported PHP features

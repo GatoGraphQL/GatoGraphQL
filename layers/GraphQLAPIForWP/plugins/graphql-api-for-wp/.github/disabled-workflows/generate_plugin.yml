@@ -2,12 +2,12 @@
 # GitHub Action:
 # Whenever creating a new release of the source code,
 # also create a release of the installable plugin,
-# and downgrading it from PHP 7.4 to 7.1 to support more users.
+# and downgrading it from PHP 8.0 to 7.1 to support more users.
 ####################################################################################
 # Steps to execute:
 # - Checkout the source code
 # - Run "composer install" for development, to install dependencies for Rector
-# - Run Rector to downgrade code from PHP 7.4 to 7.1
+# - Run Rector to downgrade code from PHP 8.0 to 7.1
 # - Run "composer install" for production (required dependencies are already under vendor/)
 # - Create a .zip file, excluding:
 #   - All hidden files (.git, .gitignore, etc)
@@ -33,10 +33,10 @@ jobs:
         uses: actions/checkout@v2
 
         # see https://github.com/shivammathur/setup-php
-      - name: Use PHP 7.4
+      - name: Use PHP 8.0
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.0
           coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
 
       - name: Replace PHP version in plugin main file
         run: |
-          sed -i 's/Requires PHP: 7.4/Requires PHP: 7.1/' graphql-api.php
+          sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' graphql-api.php
 
       - name: Build project for production
         run: |

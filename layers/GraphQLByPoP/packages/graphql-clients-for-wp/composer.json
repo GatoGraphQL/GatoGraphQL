@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "getpop/api-clients": "^0.8",
         "getpop/api-endpoints-for-wp": "^0.8",
         "graphql-by-pop/graphql-server": "^0.8"

@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "pop-sites-wassup/custompost-mutations": "^0.8"
     },
     "require-dev": {

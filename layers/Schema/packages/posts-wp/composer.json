@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "pop-schema/posts": "^0.8",
         "pop-schema/customposts-wp": "^0.8",
         "pop-schema/migrate-posts-wp": "^0.8"

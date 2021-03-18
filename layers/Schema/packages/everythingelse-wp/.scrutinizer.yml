@@ -11,7 +11,7 @@ build:
                 override: [php-scrutinizer-run]
     environment:
         php:
-            version: "7.4"
+            version: "8.0"
 
 filter:
     excluded_paths: [tests/*]

@@ -70,7 +70,7 @@ PoP uses hooks (as pioneered by [WordPress](https://codex.wordpress.org/Plugin_A
 
 Requirements:
 
-- PHP 7.4+ for development
+- PHP 8.0+ for development
 - PHP 7.1+ for production
 
 ### Supported PHP features
