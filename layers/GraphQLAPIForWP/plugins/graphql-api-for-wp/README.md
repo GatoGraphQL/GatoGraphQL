@@ -26,7 +26,7 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 ## Requirements
 
 - WordPress 5.4 or above
-- PHP 7.4+ for development
+- PHP 8.0+ for development
 - PHP 7.1+ for production
 
 ## Install
@@ -191,7 +191,7 @@ This method requires the code for the component to be divided into 2 separate pa
 
 Requirements:
 
-- PHP 7.4+ for development
+- PHP 8.0+ for development
 - PHP 7.1+ for production (through release [`graphql-api.zip`][latest-release-url])
 
 ### Supported PHP features
