@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "graphql-by-pop/graphql-server": "^0.8",
         "pop-schema/translate-directive": "^0.8",
         "pop-schema/media": "^0.8",
