@@ -190,7 +190,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
      */
     public function getAlignClass(): string
     {
-        return 'aligncenter';
+        return '';
     }
 
     /**
