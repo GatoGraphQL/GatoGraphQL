@@ -13,8 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // here we can define, what sets of rules will be applied
     $parameters->set(Option::SETS, [
-        // @todo Uncomment when PHP 8.0 released
-        // DowngradeSetList::PHP_80,
+        DowngradeSetList::PHP_80,
         DowngradeSetList::PHP_74,
         DowngradeSetList::PHP_73,
         DowngradeSetList::PHP_72,
