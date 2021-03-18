@@ -28,7 +28,7 @@ This is how the layers in PoP relate to each other:
 
 ## PHP versions
 
-All packages in this monorepo require PHP 7.4 for development, but contain only PHP code that can be transpiled to PHP 7.1 for production.
+All packages in this monorepo require PHP 8.0 for development, but contain only PHP code that can be transpiled to PHP 7.1 for production.
 
 ### Supported PHP features
 

@@ -289,7 +289,7 @@ Detailed explanation of the plugin goals, and how it renders the WordPress philo
 
 ### PHP Architecture
 
-Articles explaining how the plugin is coded using PHP 7.4 but can run on PHP 7.1:
+Articles explaining how the plugin is coded using PHP 8.0 but can run on PHP 7.1:
 
 1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
 2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)
