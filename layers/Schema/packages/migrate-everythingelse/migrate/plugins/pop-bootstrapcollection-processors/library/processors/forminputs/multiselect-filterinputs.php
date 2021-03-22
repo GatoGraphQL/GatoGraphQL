@@ -100,7 +100,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         return $descriptions[$module[1]] ?? null;
     }
 
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)
+    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($module[1]) {

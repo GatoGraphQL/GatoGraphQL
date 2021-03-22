@@ -14,8 +14,6 @@ trait FieldSchemaDefinitionResolverTrait
 
     /**
      * Return the object implementing the schema definition for this fieldResolver
-     *
-     * @return void
      */
     public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
     {

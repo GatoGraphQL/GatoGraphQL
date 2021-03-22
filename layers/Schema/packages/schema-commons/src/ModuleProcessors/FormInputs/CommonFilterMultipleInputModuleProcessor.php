@@ -60,7 +60,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         return $names[$module[1]] ?? parent::getName($module);
     }
 
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)
+    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
     {
         // Replace the "date" item with "date-from" and "date-to"
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
