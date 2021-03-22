@@ -886,9 +886,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * @param [type] $typeResolver
      * @param [type] $fieldArgValue
      * @param [type] $variables
-     * @return mixed
      */
-    public function maybeConvertFieldArgumentValue($fieldArgValue, ?array $variables = null)
+    public function maybeConvertFieldArgumentValue($fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
             // Remove the white spaces before and after
