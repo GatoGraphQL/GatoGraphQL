@@ -147,8 +147,6 @@ class VarsHooks extends AbstractHookSet
     /**
      * Function is public so it can be invoked from the WordPress plugin
      *
-     * @param array $vars
-     * @param string $graphQLQuery
      * @return void
      */
     public function addGraphQLQueryToVars(array &$vars, string $graphQLQuery, ?string $operationName = null)

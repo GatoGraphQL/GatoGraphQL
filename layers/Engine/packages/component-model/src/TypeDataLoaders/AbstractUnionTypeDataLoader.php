@@ -12,9 +12,6 @@ abstract class AbstractUnionTypeDataLoader extends AbstractTypeDataLoader
 
     /**
      * Iterate through all unionTypes and delegate to each resolving the IDs each of them can resolve
-     *
-     * @param array $ids
-     * @return array
      */
     public function getObjects(array $ids): array
     {

@@ -22,8 +22,6 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -32,8 +30,6 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * Do not allow dynamic fields
-     *
-     * @return bool
      */
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
@@ -52,8 +48,6 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * Setting it more than once makes no sense
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool
     {
@@ -79,17 +73,6 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * Copy the data under the relational object into the current object
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

@@ -108,7 +108,6 @@ class Cache implements CacheInterface
     /**
      * Save immediately. Can override to save as deferred
      *
-     * @param CacheItemInterface $cacheItem
      * @return void
      */
     protected function saveCache(CacheItemInterface $cacheItem)

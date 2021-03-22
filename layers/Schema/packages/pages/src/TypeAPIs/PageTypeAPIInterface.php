@@ -15,7 +15,6 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * Indicates if the passed object is of type Page
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfPageType($object): bool;
     /**
@@ -34,24 +33,16 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
     public function getPage($id);
     /**
      * Get the list of pages
-     *
-     * @param array $query
-     * @param array $options
-     * @return array
      */
     public function getPages(array $query, array $options = []): array;
     /**
      * Get the number of pages
      *
-     * @param array $query
-     * @param array $options
      * @return array
      */
     public function getPageCount(array $query = [], array $options = []): int;
     /**
      * Page custom post type
-     *
-     * @return string
      */
     public function getPageCustomPostType(): string;
     /**

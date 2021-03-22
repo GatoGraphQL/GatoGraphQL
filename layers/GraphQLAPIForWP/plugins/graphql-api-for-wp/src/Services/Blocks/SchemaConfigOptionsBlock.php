@@ -140,8 +140,6 @@ EOT;
 
     /**
      * Register index.css
-     *
-     * @return boolean
      */
     protected function registerEditorCSS(): bool
     {
@@ -149,8 +147,6 @@ EOT;
     }
     /**
      * Register style-index.css
-     *
-     * @return boolean
      */
     protected function registerCommonStyleCSS(): bool
     {

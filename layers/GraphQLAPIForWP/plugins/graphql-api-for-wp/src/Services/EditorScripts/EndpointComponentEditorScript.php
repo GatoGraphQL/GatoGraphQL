@@ -17,8 +17,6 @@ class EndpointComponentEditorScript extends AbstractEditorScript
 
     /**
      * Block name
-     *
-     * @return string
      */
     protected function getScriptName(): string
     {
@@ -32,8 +30,6 @@ class EndpointComponentEditorScript extends AbstractEditorScript
 
     /**
      * Add the locale language to the localized data?
-     *
-     * @return bool
      */
     protected function addLocalLanguage(): bool
     {

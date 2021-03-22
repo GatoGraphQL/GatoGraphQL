@@ -33,9 +33,6 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
      * - Access Control Lists
      * - Cache Control Lists
      * - Field Deprecation Lists
-     *
-     * @param integer $schemaConfigurationID
-     * @return void
      */
     protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
     {
@@ -48,9 +45,6 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
     /**
      * Apply all the settings defined in the Schema Configuration for:
      * - Cache Control Lists
-     *
-     * @param integer $schemaConfigurationID
-     * @return void
      */
     protected function executeSchemaConfigurationCacheControlLists(int $schemaConfigurationID): void
     {

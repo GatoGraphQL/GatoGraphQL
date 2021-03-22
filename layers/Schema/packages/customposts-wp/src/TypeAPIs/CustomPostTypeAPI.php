@@ -71,8 +71,6 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     /**
      * Limit of how many custom posts can be retrieved in the query.
      * Override this value for specific custom post types
-     *
-     * @return integer
      */
     protected function getCustomPostListMaxLimit(): int
     {

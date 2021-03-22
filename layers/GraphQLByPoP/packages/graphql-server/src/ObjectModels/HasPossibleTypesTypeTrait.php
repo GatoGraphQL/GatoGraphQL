@@ -25,8 +25,6 @@ trait HasPossibleTypesTypeTrait
     }
     /**
      * Obtain the reference to the type from the registryMap
-     *
-     * @return void
      */
     protected function initPossibleTypes(): void
     {

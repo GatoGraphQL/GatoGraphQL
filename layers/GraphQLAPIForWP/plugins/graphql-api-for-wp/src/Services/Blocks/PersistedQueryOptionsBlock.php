@@ -27,8 +27,6 @@ class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
 
     /**
      * Add the locale language to the localized data?
-     *
-     * @return bool
      */
     protected function addLocalLanguage(): bool
     {

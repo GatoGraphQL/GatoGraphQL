@@ -46,8 +46,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * It can store the value in the cache.
      * Use cache with care: if the schema is dynamic, it should not be cached.
      * Public schema: can cache, Private schema: cannot cache.
-     *
-     * @return array
      */
     public function &getFullSchemaDefinition(): array
     {
@@ -351,9 +349,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     /**
      * Convert the field type from its internal representation (eg: "array:Post") to the GraphQL standard representation (eg: "[Post]")
-     *
-     * @param array $fieldSchemaDefinitionPath
-     * @return void
      */
     protected function introduceSDLNotationToFieldSchemaDefinition(array $fieldSchemaDefinitionPath): void
     {
@@ -391,9 +386,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * When doing /?edit_schema=true, "Schema" type directives will also be added the FIELD location,
      * so that they show up in GraphiQL and can be added to a persisted query
      * When that happens, append '("Schema" type directive)' to the directive's description
-     *
-     * @param array $directiveSchemaDefinitionPath
-     * @return void
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
@@ -416,8 +408,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append the field or directive's version to its description
-     *
-     * @param array $fieldOrDirectiveSchemaDefinitionPath
      */
     protected function addVersionToSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
     {
@@ -436,8 +426,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append param "nestedUnder" to the directive
-     *
-     * @param array $directiveSchemaDefinitionPath
      */
     protected function addNestedDirectiveDataToSchemaDirectiveArgs(array $directiveSchemaDefinitionPath): void
     {
@@ -453,8 +441,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append the "Mutation" label to the field's description
-     *
-     * @param array $fieldSchemaDefinitionPath
      */
     protected function addMutationLabelToSchemaFieldDescription(array $fieldSchemaDefinitionPath): void
     {

@@ -20,8 +20,6 @@ class RootCacheTypeResolverDecorator extends AbstractCacheTypeResolverDecorator
 
     /**
      * Get the fields to cache
-     *
-     * @return array
      */
     protected function getFieldNamesToCache(): array
     {

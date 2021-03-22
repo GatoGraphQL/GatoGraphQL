@@ -46,10 +46,6 @@ class GeneralUtils
     /**
      * Add paramters "key" => "value" to the URL
      * Implementation based on that from https://stackoverflow.com/a/5809881
-     *
-     * @param array $keyValues
-     * @param string $url
-     * @return string
      */
     public static function addQueryArgs(array $keyValues, string $url): string
     {
@@ -82,8 +78,6 @@ class GeneralUtils
      * Implementation based on that from https://stackoverflow.com/a/5809881
      *
      * @param array $keyValues
-     * @param string $url
-     * @return string
      */
     public static function removeQueryArgs(array $keys, string $url): string
     {

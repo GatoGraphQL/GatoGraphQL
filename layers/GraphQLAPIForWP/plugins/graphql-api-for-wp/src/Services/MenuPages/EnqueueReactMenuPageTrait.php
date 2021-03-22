@@ -9,8 +9,6 @@ trait EnqueueReactMenuPageTrait
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueReactAssets(bool $addInFooter = true): void
     {

@@ -20,7 +20,6 @@ interface LocationTypeAPIInterface
      * Indicates if the passed object is of type Location
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfLocationType($object): bool;
 }

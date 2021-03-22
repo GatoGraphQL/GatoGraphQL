@@ -17,10 +17,6 @@ class InputObject extends AbstractAst implements ValueInterface
 
     protected $object = [];
 
-    /**
-     * @param array    $object
-     * @param Location $location
-     */
     public function __construct(array $object, Location $location)
     {
         parent::__construct($location);

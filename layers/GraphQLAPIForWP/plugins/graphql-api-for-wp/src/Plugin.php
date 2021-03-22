@@ -171,8 +171,6 @@ class Plugin extends AbstractMainPlugin
     /**
      * Plugin initialization, executed on hook "plugins_loaded"
      * to wait for all extensions to be loaded
-     *
-     * @return void
      */
     public function initialize(): void
     {

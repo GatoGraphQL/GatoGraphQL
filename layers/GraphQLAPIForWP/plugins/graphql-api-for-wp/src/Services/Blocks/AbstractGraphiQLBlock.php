@@ -78,8 +78,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     /**
      * Load index.css from editor.scss
-     *
-     * @return boolean
      */
     protected function registerEditorCSS(): bool
     {
@@ -88,8 +86,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     /**
      * GraphiQL default query
-     *
-     * @return string
      */
     protected function getDefaultQuery(): string
     {

@@ -25,9 +25,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
 {
     /**
      * If it is a Union Type, we must remove the "*" from the name
-     *
-     * @param string $dbKey
-     * @return string
      */
     protected function getTypeName(string $dbKey): string
     {
@@ -57,7 +54,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      *
      * @param string $dbKey
      * @param [type] $id
-     * @param array $item
      * @return array
      */
     protected function addFieldOrDirectiveEntryToExtensions(array &$extensions, array $item): void
@@ -89,10 +85,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Change properties for GraphQL
      *
-     * @param string $dbKey
      * @param [type] $id
-     * @param array $item
-     * @return array
      */
     protected function getDBEntryExtensions(string $dbKey, $id, array $item): array
     {
@@ -110,10 +103,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
 
     /**
      * Change properties for GraphQL
-     *
-     * @param string $dbKey
-     * @param array $item
-     * @return array
      */
     protected function getSchemaEntryExtensions(string $dbKey, array $item): array
     {
@@ -130,8 +119,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Override the parent function, to place the locations from outside extensions
      *
-     * @param string $message
-     * @param array $extensions
      * @return void
      */
     protected function getQueryEntry(string $message, array $extensions): array
@@ -159,8 +146,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
 
     /**
      * Change properties for GraphQL
-     *
-     * @return array
      */
     protected function getQueryEntryExtensions(): array
     {

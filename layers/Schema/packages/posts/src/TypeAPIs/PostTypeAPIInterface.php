@@ -15,7 +15,6 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
      * Indicates if the passed object is of type Post
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfPostType($object): bool;
     /**
@@ -34,24 +33,16 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
     public function getPost($id);
     /**
      * Get the list of posts
-     *
-     * @param array $query
-     * @param array $options
-     * @return array
      */
     public function getPosts(array $query, array $options = []): array;
     /**
      * Get the number of posts
      *
-     * @param array $query
-     * @param array $options
      * @return array
      */
     public function getPostCount(array $query = [], array $options = []): int;
     /**
      * Post custom post type
-     *
-     * @return string
      */
     public function getPostCustomPostType(): string;
 }

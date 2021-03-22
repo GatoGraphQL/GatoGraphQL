@@ -12,26 +12,19 @@ interface FieldResolverInterface extends AttachableExtensionInterface
 {
     /**
      * Get an array with the fieldNames that this fieldResolver resolves
-     *
-     * @return array
      */
     public function getFieldNamesToResolve(): array;
     /**
      * A list of classes of all the (GraphQL-style) interfaces the fieldResolver implements
-     *
-     * @return array
      */
     public function getImplementedFieldInterfaceResolverClasses(): array;
     /**
      * Obtain the fieldNames from all implemented interfaces
-     *
-     * @return array
      */
     public function getFieldNamesFromInterfaces(): array;
     /**
      * Get an instance of the object defining the schema for this fieldResolver
      *
-     * @param TypeResolverInterface $typeResolver
      * @param string $fieldName
      * @param array<string, mixed> $fieldArgs
      * @return void
@@ -41,20 +34,12 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * Fields may not be directly visible in the schema,
      * eg: because they are used only by the application, and must not
      * be exposed to the user (eg: "accessControlLists")
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return boolean
      */
     public function skipAddingToSchemaDefinition(TypeResolverInterface $typeResolver, string $fieldName): bool;
     public function getSchemaDefinitionForField(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array;
     public function getSchemaFieldVersion(TypeResolverInterface $typeResolver, string $fieldName): ?string;
     /**
      * Indicate if the fields are global (i.e. they apply to all typeResolvers)
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return boolean
      */
     public function isGlobal(TypeResolverInterface $typeResolver, string $fieldName): bool;
 
@@ -62,9 +47,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
      * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldArgs['branch'])
      *
-     * @param string $fieldName
      * @param array<string, mixed> $fieldArgs
-     * @return boolean
      */
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool;
     public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array;
@@ -117,9 +100,6 @@ interface FieldResolverInterface extends AttachableExtensionInterface
     ): ?array;
     /**
      * Define if to use the version to decide if to process the field or not
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return boolean
      */
     public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool;
 }

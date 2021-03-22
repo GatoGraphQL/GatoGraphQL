@@ -20,8 +20,6 @@ class GlobalValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDecorator ext
 
     /**
      * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
-     *
-     * @return array
      */
     protected function getDirectiveResolverClasses(): array
     {

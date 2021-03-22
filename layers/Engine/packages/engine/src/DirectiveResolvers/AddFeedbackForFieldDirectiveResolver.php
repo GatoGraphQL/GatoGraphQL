@@ -24,8 +24,6 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
 
     /**
      * This is a system directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -49,24 +47,6 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
 
     /**
      * Execute the directive
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $idsDataFields
-     * @param array $succeedingPipelineIDsDataFields
-     * @param array $succeedingPipelineDirectiveResolverInstances
-     * @param array $resultIDItems
-     * @param array $unionDBKeyIDs
-     * @param array $dbItems
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $dbDeprecations
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

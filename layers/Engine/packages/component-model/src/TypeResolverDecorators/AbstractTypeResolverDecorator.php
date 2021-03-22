@@ -18,7 +18,6 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     /**
      * Allow to disable the functionality
      *
-     * @param TypeResolverInterface $typeResolver
      * @return array
      */
     public function enabled(TypeResolverInterface $typeResolver): bool
@@ -28,9 +27,6 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
 
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {
@@ -40,9 +36,6 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     /**
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied before
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
@@ -52,9 +45,6 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
     /**
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied after
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getSucceedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {

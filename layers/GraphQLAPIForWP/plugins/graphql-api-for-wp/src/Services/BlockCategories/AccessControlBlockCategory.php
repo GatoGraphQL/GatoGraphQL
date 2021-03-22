@@ -25,8 +25,6 @@ class AccessControlBlockCategory extends AbstractBlockCategory
 
     /**
      * Block category's slug
-     *
-     * @return string
      */
     protected function getBlockCategorySlug(): string
     {
@@ -35,8 +33,6 @@ class AccessControlBlockCategory extends AbstractBlockCategory
 
     /**
      * Block category's title
-     *
-     * @return string
      */
     protected function getBlockCategoryTitle(): string
     {

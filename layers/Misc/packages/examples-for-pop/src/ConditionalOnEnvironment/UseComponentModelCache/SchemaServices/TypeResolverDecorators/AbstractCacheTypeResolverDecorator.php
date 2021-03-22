@@ -19,8 +19,6 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
     /**
      * Time that the cache is valid
      * By default, it caches for 1 hour
-     *
-     * @return integer|null
      */
     protected function getTime(): ?int
     {
@@ -30,8 +28,6 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
 
     /**
      * Get the fields to cache. Function to override
-     *
-     * @return array
      */
     protected function getFieldNamesToCache(): array
     {
@@ -40,8 +36,6 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
 
     /**
      * Get the directives to cache. Function to override
-     *
-     * @return array
      */
     protected function getDirectiveNamesToCache(): array
     {
@@ -50,8 +44,6 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
 
     /**
      * Get the cache directive
-     *
-     * @return array
      */
     protected function getCacheDirective(): array
     {
@@ -69,9 +61,6 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
 
     /**
      * Cache fields
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {
@@ -89,9 +78,6 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
 
     /**
      * Cache directives
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getSucceedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {

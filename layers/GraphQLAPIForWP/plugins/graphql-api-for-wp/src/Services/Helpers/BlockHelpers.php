@@ -19,11 +19,10 @@ class BlockHelpers
     /**
      * Extract the blocks from the post
      *
-     * @param WP_Post|int $configurationPostOrID
      * @return array<string, mixed> The block stores its data as property => value
      */
     public function getBlocksFromCustomPost(
-        $configurationPostOrID
+        \WP_Post|int $configurationPostOrID
     ): array {
         if (\is_object($configurationPostOrID)) {
             $configurationPost = $configurationPostOrID;
@@ -55,11 +54,10 @@ class BlockHelpers
     /**
      * Read the configuration post, and extract the configuration, contained through the specified block
      *
-     * @param WP_Post|int $configurationPostOrID
      * @return array<array> A list of block data, each as an array
      */
     public function getBlocksOfTypeFromCustomPost(
-        $configurationPostOrID,
+        \WP_Post|int $configurationPostOrID,
         AbstractBlock $block
     ): array {
         $blocks = $this->getBlocksFromCustomPost($configurationPostOrID);
@@ -76,11 +74,10 @@ class BlockHelpers
      * Read the single block of a certain type, contained in the post.
      * If there are more than 1, or none, return null
      *
-     * @param WP_Post|int $configurationPostOrID
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
     public function getSingleBlockOfTypeFromCustomPost(
-        $configurationPostOrID,
+        \WP_Post|int $configurationPostOrID,
         AbstractBlock $block
     ): ?array {
         $blocks = $this->getBlocksOfTypeFromCustomPost($configurationPostOrID, $block);

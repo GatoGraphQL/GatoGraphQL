@@ -12,8 +12,6 @@ abstract class AbstractAccessControlForFieldsInPrivateSchemaHookSet extends Abst
 {
     /**
      * Indicate if this hook is enabled
-     *
-     * @return boolean
      */
     protected function enabled(): bool
     {

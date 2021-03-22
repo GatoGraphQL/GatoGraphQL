@@ -17,8 +17,6 @@ interface CacheConfigurationManagerInterface
      * items will be stored
      *
      * @see https://symfony.com/doc/current/components/cache/adapters/filesystem_adapter.html
-     *
-     * @return string
      */
     public function getNamespace(): string;
 }

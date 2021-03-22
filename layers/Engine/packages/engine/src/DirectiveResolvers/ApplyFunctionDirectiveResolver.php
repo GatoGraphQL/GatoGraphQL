@@ -27,8 +27,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -97,15 +95,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     /**
      * Execute a function on the affected field
      *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
      * @return void
      */
     protected function regenerateAndExecuteFunction(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
@@ -268,19 +257,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     /**
      * Place all the reserved variables into the `$variables` context
      *
-     * @param TypeResolverInterface $typeResolver
      * @param [type] $id
-     * @param string $field
-     * @param array $resultIDItems
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
      * @return void
      */
     protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

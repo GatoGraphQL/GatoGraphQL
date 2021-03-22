@@ -47,9 +47,6 @@ class CustomPostUnionTypeHelpers
      *   and not the Union (since it's more efficient)
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
-     *
-     * @param string $unionTypeResolverClass
-     * @return string|null
      */
     public static function getCustomPostUnionOrTargetTypeResolverClass(
         string $unionTypeResolverClass = CustomPostUnionTypeResolver::class

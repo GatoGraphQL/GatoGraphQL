@@ -21,8 +21,6 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -31,8 +29,6 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     /**
      * Do not allow dynamic fields
-     *
-     * @return bool
      */
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
@@ -60,17 +56,6 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     /**
      * Duplicate a property from the current object
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

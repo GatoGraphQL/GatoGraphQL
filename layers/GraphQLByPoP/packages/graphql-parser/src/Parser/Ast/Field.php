@@ -25,9 +25,6 @@ class Field extends AbstractAst implements FieldInterface
     /**
      * @param string   $name
      * @param string   $alias
-     * @param array    $arguments
-     * @param array    $directives
-     * @param Location $location
      */
     public function __construct($name, $alias, array $arguments, array $directives, Location $location)
     {

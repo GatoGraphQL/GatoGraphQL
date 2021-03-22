@@ -19,10 +19,6 @@ class SchemaHelpers
      *
      * - field response: isNonNullable
      * - field argument: isMandatory (its provided value can still be null)
-     *
-     * @param string $type
-     * @param boolean|null $isNonNullableOrMandatory
-     * @return string
      */
     public static function getTypeToOutputInSchema(string $type, ?bool $isNonNullableOrMandatory = false): string
     {

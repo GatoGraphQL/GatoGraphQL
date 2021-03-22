@@ -31,10 +31,6 @@ class Query extends AbstractAst implements FieldInterface
      *
      * @param string   $name
      * @param string   $alias
-     * @param array    $arguments
-     * @param array    $fields
-     * @param array    $directives
-     * @param Location $location
      */
     public function __construct($name, $alias, array $arguments, array $fields, array $directives, Location $location)
     {

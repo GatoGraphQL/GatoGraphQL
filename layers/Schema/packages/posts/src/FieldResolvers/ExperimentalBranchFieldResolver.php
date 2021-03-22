@@ -14,8 +14,6 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
 {
     /**
      * Attach to Posts only
-     *
-     * @return array
      */
     public function getClassesToAttachTo(): array
     {

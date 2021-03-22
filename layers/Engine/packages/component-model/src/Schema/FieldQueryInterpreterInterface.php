@@ -11,10 +11,6 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
 {
     /**
      * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
-     *
-     * @param string $field
-     * @param array|null $variables
-     * @return array
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array;
     public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array;

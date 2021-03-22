@@ -23,8 +23,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * This is a system directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {

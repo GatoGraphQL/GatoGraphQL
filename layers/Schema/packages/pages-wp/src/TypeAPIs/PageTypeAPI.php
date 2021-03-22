@@ -39,7 +39,6 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
      * Indicates if the passed object is of type Page
      *
      * @param object $object
-     * @return boolean
      */
     public function isInstanceOfPageType($object): bool
     {
@@ -65,7 +64,6 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
      * Indicate if an page with provided ID exists
      *
      * @param int $id
-     * @return bool
      */
     public function pageExists($id): bool
     {
@@ -75,8 +73,6 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
     /**
      * Limit of how many custom posts can be retrieved in the query.
      * Override this value for specific custom post types
-     *
-     * @return integer
      */
     protected function getCustomPostListMaxLimit(): int
     {

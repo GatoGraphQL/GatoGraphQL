@@ -13,8 +13,6 @@ class GraphQLQueryTaxonomy extends AbstractTaxonomy
 
     /**
      * Taxonomy
-     *
-     * @return string
      */
     public function getTaxonomy(): string
     {
@@ -33,7 +31,6 @@ class GraphQLQueryTaxonomy extends AbstractTaxonomy
      * Taxonomy plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     * @return string
      */
     protected function getTaxonomyPluralNames(bool $uppercase = true): string
     {

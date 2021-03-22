@@ -21,8 +21,6 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -31,8 +29,6 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
 
     /**
      * Do not allow dynamic fields
-     *
-     * @return bool
      */
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
@@ -64,7 +60,6 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     /**
      * Directly point to the element under the specified path
      *
-     * @param array $array
      * @return void
      */
     protected function getArrayItems(array &$array, $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
@@ -98,8 +93,6 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
      *
      * Otherwise it adds the results under a parallel entry, not overriding
      * the original ones.
-     *
-     * @param int|string $arrayItemKey
      */
     protected function addProcessedItemBackToDBItems(
         TypeResolverInterface $typeResolver,
@@ -111,7 +104,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         array &$dbTraces,
         $id,
         string $fieldOutputKey,
-        $arrayItemKey,
+        int|string $arrayItemKey,
         $arrayItemValue
     ): void {
         if (!is_array($arrayItemValue)) {

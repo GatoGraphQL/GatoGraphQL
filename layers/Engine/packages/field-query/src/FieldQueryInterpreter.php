@@ -221,9 +221,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * Replace the fieldArgs in the field
      *
-     * @param string $field
      * @param array<string, mixed> $fieldArgs
-     * @return string
      */
     protected function replaceFieldArgs(string $field, array $fieldArgs = []): string
     {

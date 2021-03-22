@@ -37,14 +37,6 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
 
     /**
      * Validate a custom condition
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $dataFields
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $variables
-     * @return void
      */
     protected function validateFields(TypeResolverInterface $typeResolver, array $dataFields, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, array &$variables, array &$failedDataFields): void
     {
@@ -63,17 +55,12 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
 
     /**
      * Condition to validate. Return `true` for success, `false` for failure
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return boolean
      */
     abstract protected function validateCondition(TypeResolverInterface $typeResolver): bool;
 
     /**
      * Show a different error message depending on if we are validating the whole field, or a directive
      * By default, validate the whole field
-     *
-     * @return boolean
      */
     protected function isValidatingDirective(): bool
     {

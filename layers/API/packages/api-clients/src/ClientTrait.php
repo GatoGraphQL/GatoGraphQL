@@ -14,20 +14,14 @@ trait ClientTrait
 
     /**
      * Relative Path
-     *
-     * @return string
      */
     abstract protected function getClientRelativePath(): string;
     /**
      * JavaScript file name
-     *
-     * @return string
      */
     abstract protected function getJSFilename(): string;
     /**
      * HTML file name
-     *
-     * @return string
      */
     protected function getIndexFilename(): string
     {
@@ -42,14 +36,10 @@ trait ClientTrait
     }
     /**
      * Base dir
-     *
-     * @return string
      */
     abstract protected function getComponentBaseDir(): string;
     /**
      * Base URL
-     *
-     * @return string|null
      */
     protected function getComponentBaseURL(): ?string
     {
@@ -57,15 +47,11 @@ trait ClientTrait
     }
     /**
      * Endpoint URL
-     *
-     * @return string
      */
     abstract protected function getEndpointURL(): string;
 
     /**
      * HTML to print the client
-     *
-     * @return string
      */
     public function getClientHTML(): string
     {
@@ -125,8 +111,6 @@ trait ClientTrait
 
     /**
      * If the endpoint for the client is requested, print the client and exit
-     *
-     * @return void
      */
     protected function executeEndpoint(): void
     {

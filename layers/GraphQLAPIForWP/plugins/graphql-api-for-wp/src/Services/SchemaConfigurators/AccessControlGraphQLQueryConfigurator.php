@@ -58,8 +58,6 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     /**
      * Extract the access control items defined in the CPT,
      * and inject them into the service as to take effect in the current GraphQL query
-     *
-     * @return void
      */
     public function executeSchemaConfiguration(int $aclPostID): void
     {

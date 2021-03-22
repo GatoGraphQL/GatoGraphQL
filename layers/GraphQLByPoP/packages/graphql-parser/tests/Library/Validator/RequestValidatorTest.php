@@ -26,7 +26,6 @@ class RequestValidatorTest extends TestCase
 
     /**
      * @dataProvider invalidRequestProvider
-     * @param Request $request
      */
     public function testInvalidRequests(Request $request)
     {

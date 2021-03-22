@@ -27,10 +27,6 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      * Because we can't obtain this data from reflection yet, explicitly define it
      *
      * @see https://github.com/getpop/component-model/issues/1
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return string|null
      */
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
@@ -45,10 +41,6 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      * Because we can't obtain this data from reflection yet, explicitly define it
      *
      * @see https://github.com/getpop/component-model/issues/1
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return boolean
      */
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
@@ -66,10 +58,6 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      * Because we can't obtain this data from reflection yet, explicitly define it
      *
      * @see https://github.com/getpop/component-model/issues/1
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return string|null
      */
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {

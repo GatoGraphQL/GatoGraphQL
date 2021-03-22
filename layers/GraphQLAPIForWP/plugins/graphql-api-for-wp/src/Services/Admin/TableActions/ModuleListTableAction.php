@@ -24,8 +24,6 @@ class ModuleListTableAction extends AbstractListTableAction
 
     /**
      * Please notice that creatin a new instance carries side effects
-     *
-     * @param boolean $allowSideEffects
      */
     public function __construct(bool $allowSideEffects = true)
     {
@@ -44,8 +42,6 @@ class ModuleListTableAction extends AbstractListTableAction
      * Executing this function from within `setModulesEnabledValue` is too late,
      * since hook "admin_notices" will have been executed by then
      * Then, deduce if there will be an operation, and always say "successful"
-     *
-     * @return void
      */
     public function maybeAddAdminNotice(): void
     {

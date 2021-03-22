@@ -42,7 +42,6 @@ class Cache extends \PoP\ComponentModel\Cache\Cache
     /**
      * Override to save as deferred, on hook "popcms:shutdown"
      *
-     * @param CacheItemInterface $cacheItem
      * @return void
      */
     protected function saveCache(CacheItemInterface $cacheItem)

@@ -24,9 +24,6 @@ class CacheTypeResolverDecorator extends AbstractTypeResolverDecorator
 
     /**
      * Directives @loadCache and @saveCache (called @cache) always go together
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {

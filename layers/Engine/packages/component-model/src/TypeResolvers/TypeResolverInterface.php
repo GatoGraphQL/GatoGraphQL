@@ -76,15 +76,6 @@ interface TypeResolverInterface
      * 1. the directiveResolverInstance
      * 2. its fieldDirective
      * 3. the fields it affects
-     *
-     * @param array $fieldDirectives
-     * @param array $fieldDirectiveFields
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $schemaNotices
-     * @param array $schemaTraces
-     * @return array
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,

@@ -13,7 +13,6 @@ interface LocationPostTypeAPIInterface
      * Indicates if the passed object is of type LocationPost
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfLocationPostType($object): bool;
     /**

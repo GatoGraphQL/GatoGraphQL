@@ -46,8 +46,6 @@ class CacheControlBlock extends AbstractControlBlock
 
     /**
      * Add the locale language to the localized data?
-     *
-     * @return bool
      */
     protected function addLocalLanguage(): bool
     {

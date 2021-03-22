@@ -27,7 +27,6 @@ class VariableReference extends AbstractAst implements ValueInterface
     /**
      * @param string        $name
      * @param Variable|null $variable
-     * @param Location      $location
      */
     public function __construct($name, Variable $variable = null, Location $location)
     {

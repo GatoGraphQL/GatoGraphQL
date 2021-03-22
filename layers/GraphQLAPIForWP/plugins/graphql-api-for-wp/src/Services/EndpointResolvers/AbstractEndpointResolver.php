@@ -18,8 +18,6 @@ abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiate
 
     /**
      * Initialize the resolver
-     *
-     * @return void
      */
     public function initialize(): void
     {

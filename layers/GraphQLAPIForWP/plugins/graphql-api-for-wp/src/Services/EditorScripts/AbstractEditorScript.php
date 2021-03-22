@@ -34,8 +34,6 @@ abstract class AbstractEditorScript extends AbstractScript
 
     /**
      * URL to the script
-     *
-     * @return string
      */
     protected function getScriptDirURL(): string
     {
@@ -59,8 +57,6 @@ abstract class AbstractEditorScript extends AbstractScript
 
     /**
      * Where is the script stored
-     *
-     * @return string
      */
     protected function getScriptDir(): string
     {

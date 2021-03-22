@@ -146,11 +146,6 @@ class PluginConfiguration
 
     /**
      * Process the "URL path" option values
-     *
-     * @param string $value
-     * @param string $module
-     * @param string $option
-     * @return string
      */
     protected static function getURLPathSettingValue(
         string $value,
@@ -167,11 +162,6 @@ class PluginConfiguration
 
     /**
      * Process the "URL base path" option values
-     *
-     * @param string $value
-     * @param string $module
-     * @param string $option
-     * @return string
      */
     protected static function getCPTPermalinkBasePathSettingValue(
         string $value,
@@ -627,9 +617,6 @@ class PluginConfiguration
 
     /**
      * Return the opposite value
-     *
-     * @param boolean $value
-     * @return boolean
      */
     protected static function opposite(bool $value): bool
     {

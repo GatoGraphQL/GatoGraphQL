@@ -25,9 +25,6 @@ class CDNTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
     /**
      * If the from/to URLs were defined for the CDN, then attach the CDN directive
      * to the corresponding fields
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {

@@ -43,8 +43,6 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Initialize the class instance
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -226,8 +224,6 @@ class SettingsMenuPage extends AbstractMenuPage
     /**
      * If `true`, print the sections using tabs
      * If `false`, print the sections one below the other
-     *
-     * @return boolean
      */
     protected function printWithTabs(): bool
     {
@@ -236,8 +232,6 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Print the settings form
-     *
-     * @return void
      */
     public function print(): void
     {
@@ -326,8 +320,6 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueAssets(): void
     {

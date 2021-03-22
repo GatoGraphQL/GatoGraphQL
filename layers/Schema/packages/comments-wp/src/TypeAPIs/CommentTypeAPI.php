@@ -16,7 +16,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
      * Indicates if the passed object is of type Comment
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfCommentType($object): bool
     {

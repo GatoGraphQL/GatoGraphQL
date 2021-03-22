@@ -26,7 +26,6 @@ trait PropertyDataStructureFormatterTrait
      * Iterate all the way down the data entries until it's not an array anymore, and then print the entry in a `property=value` format
      *
      * @param [type] $data
-     * @param string $property
      * @return void
      */
     protected function iterativelyPrintDataEntries(&$data, string $property)

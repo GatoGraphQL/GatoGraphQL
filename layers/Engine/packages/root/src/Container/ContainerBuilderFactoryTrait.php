@@ -25,7 +25,6 @@ trait ContainerBuilderFactoryTrait
      * @param bool|null $cacheContainerConfiguration Indicate if to cache the container configuration. If null, the default value is used
      * @param string|null $namespace subdirectory under which to store the cache. If null, it will use a system temp folder
      * @param string|null $directory directory where to store the cache. If null, the default value is used
-     * @return void
      */
     public static function init(
         ?bool $cacheContainerConfiguration = null,

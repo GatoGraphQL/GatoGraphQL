@@ -20,7 +20,6 @@ interface HighlightTypeAPIInterface
      * Indicates if the passed object is of type Highlight
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfHighlightType($object): bool;
     /**

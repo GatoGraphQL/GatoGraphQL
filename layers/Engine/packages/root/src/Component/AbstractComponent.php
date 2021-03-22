@@ -121,8 +121,6 @@ abstract class AbstractComponent implements ComponentInterface
 
     /**
      * Function called by the Bootloader after all components have been loaded
-     *
-     * @return void
      */
     public static function beforeBoot(): void
     {
@@ -130,8 +128,6 @@ abstract class AbstractComponent implements ComponentInterface
 
     /**
      * Function called by the Bootloader when booting the system
-     *
-     * @return void
      */
     public static function boot(): void
     {
@@ -139,8 +135,6 @@ abstract class AbstractComponent implements ComponentInterface
 
     /**
      * Function called by the Bootloader when booting the system
-     *
-     * @return void
      */
     public static function afterBoot(): void
     {

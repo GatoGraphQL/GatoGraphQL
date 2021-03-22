@@ -22,8 +22,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 
     /**
      * Custom Post Type name
-     *
-     * @return string
      */
     protected function getCustomPostType(): string
     {
@@ -58,7 +56,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      * Custom Post Type plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     * @return string
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
@@ -69,8 +66,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      * Whenever this CPT is saved/updated, the timestamp must be regenerated,
      * because it contains Field Deprecation Lists,
      * which can change the schema
-     *
-     * @return boolean
      */
     protected function regenerateTimestampOnSave(): bool
     {
@@ -79,8 +74,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 
     /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     *
-     * @return boolean
      */
     public function usePostExcerptAsDescription(): bool
     {
@@ -122,8 +115,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 
     /**
      * Indicates if to lock the Gutenberg templates
-     *
-     * @return boolean
      */
     protected function lockGutenbergTemplate(): bool
     {

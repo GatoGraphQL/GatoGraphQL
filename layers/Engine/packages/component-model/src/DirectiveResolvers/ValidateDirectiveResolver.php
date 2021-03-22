@@ -20,8 +20,6 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
     /**
      * This is a system directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -30,8 +28,6 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
     /**
      * Execute only once
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool
     {

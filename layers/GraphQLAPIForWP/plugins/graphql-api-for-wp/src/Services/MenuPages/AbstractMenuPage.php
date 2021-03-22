@@ -53,8 +53,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Maybe enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     public function maybeEnqueueAssets(): void
     {
@@ -96,8 +94,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueAssets(): void
     {

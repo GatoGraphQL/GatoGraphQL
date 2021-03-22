@@ -13,9 +13,6 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
 {
     /**
      * Validate checkpoints
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return boolean
      */
     protected function validateCondition(TypeResolverInterface $typeResolver): bool
     {
@@ -27,9 +24,6 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
 
     /**
      * Provide the checkpoint to validate
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     abstract protected function getValidationCheckpointSet(TypeResolverInterface $typeResolver): array;
 }

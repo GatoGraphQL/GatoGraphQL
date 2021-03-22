@@ -21,8 +21,6 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -31,8 +29,6 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * Do not allow dynamic fields
-     *
-     * @return bool
      */
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
@@ -71,13 +67,6 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * Validate that the number of elements in the fields `properties` and `expressions` match one another
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $directiveArgs
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return array
      */
     public function validateDirectiveArgumentsForSchema(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
@@ -115,17 +104,6 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * Copy the data under the relational object into the current object
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

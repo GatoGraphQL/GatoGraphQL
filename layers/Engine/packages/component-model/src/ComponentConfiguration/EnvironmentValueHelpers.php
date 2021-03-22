@@ -14,7 +14,6 @@ class EnvironmentValueHelpers
      * A string is true if its lowercase value is either "true" or "on", or if it's "1"
      *
      * @param string $value environment value
-     * @return boolean
      */
     public static function toBool(string $value): bool
     {
@@ -36,7 +35,6 @@ class EnvironmentValueHelpers
      * Convert the environment value from a comma separated string to array
      *
      * @param string $value environment value
-     * @return array
      */
     public static function commaSeparatedStringToArray(string $value): array
     {

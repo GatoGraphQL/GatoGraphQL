@@ -24,9 +24,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
 
     /**
      * Property fields: Those fields which have a numeric key only
-     *
-     * @param array $module
-     * @return array
      */
     protected function getPropertyFields(array $module): array
     {
@@ -44,9 +41,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
 
     /**
      * Nested fields: Those fields which have a field as key and an array of submodules as value
-     *
-     * @param array $module
-     * @return array
      */
     protected function getFieldsWithNestedSubfields(array $module): array
     {

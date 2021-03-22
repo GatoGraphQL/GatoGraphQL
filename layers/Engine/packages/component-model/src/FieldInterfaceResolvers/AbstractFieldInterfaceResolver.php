@@ -55,9 +55,6 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
      * This will make fieldArg "versionConstraint" be always added to fields implementing an interface,
      * even if they do not have a version. However, the other way around, to say `false`,
      * would not allow any field implementing an interface to be versioned. So this way is better.
-     *
-     * @param string $fieldName
-     * @return boolean
      */
     protected function hasSchemaFieldVersion(string $fieldName): bool
     {

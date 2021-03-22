@@ -14,8 +14,6 @@ abstract class AbstractMandatoryDirectivesForDirectivesTypeResolverDecorator ext
 
     /**
      * By default, it is valid everywhere
-     *
-     * @return array
      */
     public function getClassesToAttachTo(): array
     {

@@ -20,8 +20,6 @@ trait WPClientTrait
     }
     /**
      * Base Dir
-     *
-     * @return string
      */
     protected function getComponentBaseDir(): string
     {
@@ -30,8 +28,6 @@ trait WPClientTrait
 
     /**
      * Endpoint URL
-     *
-     * @return string
      */
     protected function getEndpointURL(): string
     {

@@ -8,8 +8,6 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
 {
     /**
      * Initialize the client
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -58,11 +56,8 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
     //         ]
     //     );
     // }
-
     /**
      * If the endpoint for the client is requested, do something
-     *
-     * @return void
      */
     public function parseRequest(): void
     {
@@ -73,8 +68,6 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
 
     /**
      * Execute the endpoint. Function to override
-     *
-     * @return void
      */
     protected function executeEndpoint(): void
     {

@@ -26,8 +26,6 @@ abstract class AbstractCacheFunctionalityModuleResolver extends AbstractFunction
 
     /**
      * Allow to change the behavior based on the environment
-     *
-     * @return boolean
      */
     protected function enabledEnvironmentBasedBehavior(): bool
     {

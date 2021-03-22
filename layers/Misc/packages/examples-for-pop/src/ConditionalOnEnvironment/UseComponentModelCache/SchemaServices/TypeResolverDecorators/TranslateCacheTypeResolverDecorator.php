@@ -24,8 +24,6 @@ class TranslateCacheTypeResolverDecorator extends AbstractCacheTypeResolverDecor
 
     /**
      * Get the directives to cache
-     *
-     * @return array
      */
     protected function getDirectiveNamesToCache(): array
     {

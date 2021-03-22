@@ -13,8 +13,6 @@ trait AccessControlConfigurableMandatoryDirectivesForItemsTrait
      * Indicates if the entry having no schema mode set must also be processed
      * To decide, it gets the default schema mode and checks its the same with
      * the one from this object
-     *
-     * @return bool
      */
     protected function doesSchemaModeProcessNullControlEntry(): bool
     {

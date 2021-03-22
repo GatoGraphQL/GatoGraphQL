@@ -13,8 +13,6 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchem
 {
     /**
      * Configuration entries
-     *
-     * @return array
      */
     protected function getConfigurationEntries(): array
     {

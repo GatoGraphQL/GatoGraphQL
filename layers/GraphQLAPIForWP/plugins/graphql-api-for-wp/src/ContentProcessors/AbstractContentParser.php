@@ -386,10 +386,6 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     /**
      * Convert relative paths to absolute paths for image URLs
-     *
-     * @param string $pathURL
-     * @param string $htmlContent
-     * @return string
      */
     protected function appendPathURLToImages(string $pathURL, string $htmlContent): string
     {
@@ -398,10 +394,6 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     /**
      * Convert relative paths to absolute paths for image URLs
-     *
-     * @param string $pathURL
-     * @param string $htmlContent
-     * @return string
      */
     protected function appendPathURLToAnchors(string $pathURL, string $htmlContent): string
     {
@@ -410,12 +402,6 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     /**
      * Convert relative paths to absolute paths for elements
-     *
-     * @param string $tag
-     * @param string $attr
-     * @param string $pathURL
-     * @param string $htmlContent
-     * @return string
      */
     protected function appendPathURLToElement(string $tag, string $attr, string $pathURL, string $htmlContent): string
     {

@@ -341,10 +341,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     /**
      * Indicate if the given value is valid for that option
      *
-     * @param string $module
-     * @param string $option
      * @param mixed $value
-     * @return bool
      */
     public function isValidValue(string $module, string $option, $value): bool
     {
@@ -378,8 +375,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     /**
      * Default value for an option set by the module
      *
-     * @param string $module
-     * @param string $option
      * @return mixed Anything the setting might be: an array|string|bool|int|null
      */
     public function getSettingsDefaultValue(string $module, string $option)

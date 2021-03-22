@@ -14,8 +14,6 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
 {
     /**
      * Initialize the endpoints
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -36,8 +34,6 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
 
     /**
      * Check if the PoP API has been enabled
-     *
-     * @return boolean
      */
     protected function isNativeAPIEnabled(): bool
     {
@@ -48,8 +44,6 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
 
     /**
      * Indicate this is an API request
-     *
-     * @return void
      */
     protected function executeEndpoint(): void
     {

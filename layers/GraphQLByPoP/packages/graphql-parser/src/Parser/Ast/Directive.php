@@ -20,8 +20,6 @@ class Directive extends AbstractAst
 
     /**
      * @param string   $name
-     * @param array    $arguments
-     * @param Location $location
      */
     public function __construct($name, array $arguments, Location $location)
     {

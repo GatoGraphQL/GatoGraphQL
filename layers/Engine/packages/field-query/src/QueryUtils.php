@@ -12,14 +12,13 @@ class QueryUtils
     /**
      * @param string[]|string|null $skipFromChars
      * @param string[]|string|null $skipUntilChars
-     * @return int|false
      */
     public static function findFirstSymbolPosition(
         string $haystack,
         string $needle,
         $skipFromChars = '',
         $skipUntilChars = ''
-    ) {
+    ): int|false {
         // Edge case: If the string starts with the symbol, then the array count of splitting the elements will be 1
         if (substr($haystack, 0, strlen($needle)) == $needle) {
             return 0;
@@ -54,14 +53,13 @@ class QueryUtils
     /**
      * @param string[]|string|null $skipFromChars
      * @param string[]|string|null $skipUntilChars
-     * @return int|false
      */
     public static function findLastSymbolPosition(
         string $haystack,
         string $needle,
         $skipFromChars = '',
         $skipUntilChars = ''
-    ) {
+    ): int|false {
         // Edge case: If the string finishes with the symbol, then the array count of splitting the elements will be 1
         if (substr($haystack, -1 * strlen($needle)) == $needle) {
             return strlen($haystack) - strlen($needle);
