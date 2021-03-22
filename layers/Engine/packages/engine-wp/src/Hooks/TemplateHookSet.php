@@ -9,7 +9,7 @@ use PoP\EngineWP\Templates\TemplateHelpers;
 
 class TemplateHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             'template_include',

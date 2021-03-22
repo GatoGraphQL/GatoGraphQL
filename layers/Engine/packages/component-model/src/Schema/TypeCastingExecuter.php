@@ -17,11 +17,8 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
 
     /**
      * Cast the value to the indicated type, or return null or Error (with a message) if it fails
-     *
-     * @param string $value
-     * @return void
      */
-    public function cast(string $type, $value)
+    public function cast(string $type, mixed $value): mixed
     {
         switch ($type) {
             case SchemaDefinition::TYPE_MIXED:

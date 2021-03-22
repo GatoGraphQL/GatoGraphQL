@@ -31,9 +31,6 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     public function getEvents($query = array(), array $options = []): array;
     /**
      * Get the number of events
-     *
-     * @param array $query
-     * @return array
      */
     public function getEventCount($query = array(), array $options = []): int;
 
@@ -56,8 +53,6 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Function needed for the Delegator TypeResolver (CustomPostUnionTypeResolver::class)
      * to decide what typeResolver to use based on the object's post type
-     *
-     * @return void
      */
     public function getEventCustomPostType(): string;
     public function getEventCustomPostTypeSlug(): string;

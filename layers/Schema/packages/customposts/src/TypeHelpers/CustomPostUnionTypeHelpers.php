@@ -17,8 +17,6 @@ class CustomPostUnionTypeHelpers
 {
     /**
      * Obtain the post types from all member typeResolvers
-     *
-     * @return void
      */
     public static function getTargetTypeResolverCustomPostTypes(string $unionTypeResolverClass): array
     {

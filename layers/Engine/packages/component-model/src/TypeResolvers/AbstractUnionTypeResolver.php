@@ -36,9 +36,9 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     /**
      * Remove the type from the ID to resolve the objects through `getObjects` (check parent class)
      *
-     * @return void
+     * @return mixed[]
      */
-    protected function getIDsToQuery(array $ids_data_fields)
+    protected function getIDsToQuery(array $ids_data_fields): array
     {
         $ids = parent::getIDsToQuery($ids_data_fields);
 

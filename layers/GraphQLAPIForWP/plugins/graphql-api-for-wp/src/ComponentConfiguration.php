@@ -22,8 +22,6 @@ class ComponentConfiguration
 
     // /**
     //  * URL base for the module, pointing to graphql-api.com
-    //  *
-    //  * @return string
     //  */
     // public static function getModuleURLBase(): string
     // {

@@ -72,8 +72,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     public function isRepeatable(): bool;
     /**
      * Indicate if the directive needs to be passed $idsDataFields filled with data to be able to execute
-     *
-     * @return void
      */
     public function needsIDsDataFieldsToExecute(): bool;
     /**
@@ -103,16 +101,10 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     ): void;
     /**
      * Get an instance of the object defining the schema for this fieldResolver
-     *
-     * @param string $fieldName
-     * @param array<string, mixed> $fieldArgs
-     * @return void
      */
     public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?SchemaDirectiveResolverInterface;
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
-     *
-     * @return void
      */
     public function skipAddingToSchemaDefinition(): bool;
     public function getSchemaDefinitionForDirective(TypeResolverInterface $typeResolver): array;

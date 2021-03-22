@@ -25,8 +25,6 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
 
     /**
      * Function to execute all code to satisfy the contracts
-     *
-     * @return void
      */
-    abstract protected function resolveContracts();
+    abstract protected function resolveContracts(): void;
 }

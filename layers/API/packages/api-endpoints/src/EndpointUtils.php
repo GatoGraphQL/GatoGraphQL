@@ -8,12 +8,8 @@ class EndpointUtils
 {
     /**
      * Indicate if the URI ends with the given endpoint
-     *
-     * @param string $uri
-     * @param string $endpointURI
-     * @return boolean
      */
-    public static function removeMarkersFromURI($uri): string
+    public static function removeMarkersFromURI(string $uri): string
     {
         // Remove everything after "?" and "#"
         $symbols = ['?', '#'];

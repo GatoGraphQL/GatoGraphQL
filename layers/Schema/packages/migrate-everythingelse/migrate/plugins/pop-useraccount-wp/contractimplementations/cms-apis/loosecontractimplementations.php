@@ -7,7 +7,7 @@ use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 {
-	protected function resolveContracts()
+	protected function resolveContracts(): void
     {
 		// Filters.
 		$this->hooksAPI->addFilter('login_url', function($url, $redirect) {

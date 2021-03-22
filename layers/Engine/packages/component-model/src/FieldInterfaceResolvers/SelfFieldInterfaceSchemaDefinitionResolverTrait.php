@@ -15,11 +15,6 @@ trait SelfFieldInterfaceSchemaDefinitionResolverTrait
 
     /**
      * The object resolves its own schema definition
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @param array<string, mixed> $fieldArgs
-     * @return void
      */
     public function getSchemaDefinitionResolver(): ?FieldSchemaDefinitionResolverInterface
     {

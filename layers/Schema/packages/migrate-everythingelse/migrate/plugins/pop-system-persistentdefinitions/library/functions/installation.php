@@ -6,7 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_System_Engine_ModuleDefinitionHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             'PoP:system:save-definition-file',

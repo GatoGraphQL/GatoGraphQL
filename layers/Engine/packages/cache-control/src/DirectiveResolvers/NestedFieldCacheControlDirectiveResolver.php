@@ -75,8 +75,6 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 
     /**
      * Calculate the max-age involving also the composed fields
-     *
-     * @return integer
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

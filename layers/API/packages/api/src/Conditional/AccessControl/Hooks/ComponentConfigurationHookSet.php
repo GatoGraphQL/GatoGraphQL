@@ -12,7 +12,7 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 
 class ComponentConfigurationHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         /**
          * Do not enable caching when doing a private schema mode

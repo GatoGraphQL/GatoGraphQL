@@ -11,8 +11,6 @@ class Environment
 
     /**
      * Customize the Location Post type name
-     *
-     * @return void
      */
     public static function getLocationPostTypeName(): ?string
     {

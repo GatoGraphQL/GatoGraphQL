@@ -9,7 +9,7 @@ use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
-    protected function resolveContracts()
+    protected function resolveContracts(): void
     {
         $this->nameResolver->implementNames([
             LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY => 'edit_posts',

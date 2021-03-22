@@ -13,7 +13,7 @@ use PoP\API\Response\Schemes as APISchemes;
 
 class RoutingHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             '\PoP\Routing:uri-route',

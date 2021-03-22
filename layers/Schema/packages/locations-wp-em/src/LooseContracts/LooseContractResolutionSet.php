@@ -8,7 +8,7 @@ use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
-    protected function resolveContracts()
+    protected function resolveContracts(): void
     {
         $this->nameResolver->implementNames([
             'popcomponent:locations:dbcolumn:orderby:locations:name' => 'location_name',

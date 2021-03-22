@@ -13,7 +13,7 @@ use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFaca
 
 class NestedMutationHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             HookHelpers::getHookNameToFilterField(),

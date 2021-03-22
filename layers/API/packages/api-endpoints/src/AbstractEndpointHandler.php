@@ -41,8 +41,6 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
 
     /**
      * Get the requested URI to compare it against the endpoint
-     *
-     * @return void
      */
     protected function getRequestedURI(): string
     {
@@ -54,8 +52,6 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
 
     /**
      * Indicate if the endpoint has been requested
-     *
-     * @return void
      */
     protected function isEndpointRequested(): bool
     {

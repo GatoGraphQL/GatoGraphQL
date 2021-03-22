@@ -17,8 +17,6 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
 
     /**
      * Allow to disable the functionality
-     *
-     * @return array
      */
     public function enabled(TypeResolverInterface $typeResolver): bool
     {

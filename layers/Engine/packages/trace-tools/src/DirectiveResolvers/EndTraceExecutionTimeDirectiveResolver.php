@@ -36,8 +36,6 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
 
     /**
      * Place it after the validation and before it's added to $dbItems in the resolveAndMerge directive
-     *
-     * @return void
      */
     public function getPipelinePosition(): string
     {

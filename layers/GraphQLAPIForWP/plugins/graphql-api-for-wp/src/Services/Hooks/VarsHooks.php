@@ -23,7 +23,7 @@ class VarsHooks extends AbstractHookSet
         parent::__construct($hooksAPI, $translationAPI);
     }
 
-    protected function init()
+    protected function init(): void
     {
         // Implement immediately, before VarsHooks in API adds output=json
         $this->hooksAPI->addAction(

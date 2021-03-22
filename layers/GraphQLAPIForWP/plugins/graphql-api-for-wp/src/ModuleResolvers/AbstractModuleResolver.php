@@ -121,9 +121,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     // /**
     //  * By default, point to https://graphql-api.com/modules/{component-slug}
-    //  *
-    //  * @param string $module
-    //  * @return string|null
     //  */
     // public function getURL(string $module): ?string
     // {
@@ -147,9 +144,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     // /**
     //  * Return the default URL base for the module, defined through configuration
     //  * By default, point to https://graphql-api.com/modules/{component-slug}
-    //  *
-    //  * @param string $module
-    //  * @return string
     //  */
     // protected function getURLBase(string $module): string
     // {

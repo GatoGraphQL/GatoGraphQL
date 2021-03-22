@@ -24,10 +24,6 @@ interface FieldResolverInterface extends AttachableExtensionInterface
     public function getFieldNamesFromInterfaces(): array;
     /**
      * Get an instance of the object defining the schema for this fieldResolver
-     *
-     * @param string $fieldName
-     * @param array<string, mixed> $fieldArgs
-     * @return void
      */
     public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface;
     /**

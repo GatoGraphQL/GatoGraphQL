@@ -34,8 +34,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
      * Otherwise, use the default one, if set.
      * Using this function because `resolveCanProcess` doesn't get the default value,
      * i.e. when arg "provider" is not provided in the query
-     *
-     * @return void
      */
     protected function getProvider(array $directiveArgs): ?string
     {
@@ -282,8 +280,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
 
     /**
      * Failure message to show the user, originated from Guzzle client's error
-     *
-     * @return void
      */
     protected function getClientFailureMessage(Error $error, string $provider): string
     {

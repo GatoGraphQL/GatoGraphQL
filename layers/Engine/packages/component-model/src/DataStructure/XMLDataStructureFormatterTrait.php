@@ -27,12 +27,8 @@ trait XMLDataStructureFormatterTrait
     /**
      * Fill an xml element with the contents from the array
      * Taken from https://stackoverflow.com/a/5965940
-     *
-     * @param SimpleXMLElement $object
-     * @param array $data
-     * @return void
      */
-    protected function arrayToXML($data, &$xml_data)
+    protected function arrayToXML(array $data, SimpleXMLElement &$xml_data): void
     {
         foreach ($data as $key => $value) {
             if (is_numeric($key)) {

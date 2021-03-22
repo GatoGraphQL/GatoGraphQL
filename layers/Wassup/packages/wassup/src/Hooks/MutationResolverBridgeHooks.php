@@ -9,7 +9,7 @@ use PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAdd
 
 class MutationResolverBridgeHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             GravityFormsAddEntryToFormMutationResolverBridge::HOOK_FORM_FIELDNAMES,

@@ -79,8 +79,6 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
      * @see https://codex.wordpress.org/Rewrite_API/add_rewrite_endpoint
      *
      * Using EP_ROOT means that whole URL must match the endpoint.
-     *
-     * @return boolean
      */
     protected function getRewriteMask(): int
     {
@@ -89,10 +87,8 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
 
     /**
      * Add the endpoints to WordPress
-     *
-     * @return void
      */
-    public function addRewriteEndpoints()
+    public function addRewriteEndpoints(): void
     {
         // The endpoint passed to `add_rewrite_endpoint` cannot have "/" on either end, or it doesn't work
         \add_rewrite_endpoint(trim($this->endpoint, '/'), $this->getRewriteMask());
@@ -100,11 +96,8 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
 
     /**
      * Add the endpoint query vars
-     *
-     * @param array $query_vars
-     * @return void
      */
-    public function addQueryVar($query_vars)
+    public function addQueryVar(array $query_vars): array
     {
         $query_vars[] = $this->endpoint;
         return $query_vars;

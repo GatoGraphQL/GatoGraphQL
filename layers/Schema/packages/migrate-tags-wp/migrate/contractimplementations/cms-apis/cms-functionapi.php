@@ -15,14 +15,10 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
 
     /**
      * Implement this function by the actual service
-     *
-     * @return string
      */
     abstract protected function getTaxonomyName(): string;
     /**
      * Implement this function by the actual service
-     *
-     * @return string
      */
     abstract protected function getTagBaseOption(): string;
 

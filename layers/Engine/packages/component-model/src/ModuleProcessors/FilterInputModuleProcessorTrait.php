@@ -22,10 +22,8 @@ trait FilterInputModuleProcessorTrait
 
     /**
      * Function to override
-     *
-     * @return void
      */
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)
+    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
     {
     }
 

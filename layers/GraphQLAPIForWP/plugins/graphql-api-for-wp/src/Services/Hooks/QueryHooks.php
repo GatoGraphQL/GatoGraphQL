@@ -16,7 +16,7 @@ class QueryHooks extends AbstractHookSet
 {
     public const NON_EXISTING_ID = "non-existing";
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             'CMSAPI:customposts:query',

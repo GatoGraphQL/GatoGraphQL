@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 
 class ApplicationStateHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         // ----------------------------------------
         // Commented, since `is_admin` is added to

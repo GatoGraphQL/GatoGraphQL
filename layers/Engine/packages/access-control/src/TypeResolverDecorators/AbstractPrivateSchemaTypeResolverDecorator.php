@@ -13,8 +13,6 @@ abstract class AbstractPrivateSchemaTypeResolverDecorator extends AbstractTypeRe
 {
     /**
      * Enable only for private schema
-     *
-     * @return array
      */
     public function enabled(TypeResolverInterface $typeResolver): bool
     {

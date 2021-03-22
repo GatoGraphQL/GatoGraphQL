@@ -10,7 +10,7 @@ use PoPSchema\UserState\State\ApplicationStateUtils;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             'ApplicationState:addVars',

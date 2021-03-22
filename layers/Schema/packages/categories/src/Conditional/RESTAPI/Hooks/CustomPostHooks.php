@@ -11,7 +11,7 @@ class CustomPostHooks extends AbstractHookSet
 {
     const CATEGORY_RESTFIELDS = 'categories.id|name|url';
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             EntryRouteModuleProcessorHelpers::HOOK_REST_FIELDS,

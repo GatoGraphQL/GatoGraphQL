@@ -11,7 +11,7 @@ use PoP\Engine\ComponentConfiguration;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,

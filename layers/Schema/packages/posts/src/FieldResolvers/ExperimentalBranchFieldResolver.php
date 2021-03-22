@@ -25,8 +25,6 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
     /**
      * The priority with which to attach to the class. The higher the priority, the sooner it will be processed
      * Have a higher priority than the class it extends, as to override it
-     *
-     * @return integer|null
      */
     public function getPriorityToAttachToClasses(): int
     {

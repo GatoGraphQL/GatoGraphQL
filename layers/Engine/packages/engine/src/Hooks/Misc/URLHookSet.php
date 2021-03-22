@@ -9,7 +9,7 @@ use PoP\Hooks\AbstractHookSet;
 
 class URLHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             'RequestUtils:current_url:remove_params',

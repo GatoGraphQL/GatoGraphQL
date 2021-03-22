@@ -28,8 +28,6 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
 
     /**
      * The value in the 2nd element from the entry
-     *
-     * @return string
      */
     protected function getRequiredEntryValue(): ?string
     {
@@ -38,11 +36,6 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
 
     /**
      * Remove directiveName "translate" if the user is not logged in
-     *
-     * @param boolean $include
-     * @param TypeResolverInterface $typeResolver
-     * @param string $directiveName
-     * @return boolean
      */
     protected function getDirectiveResolverClasses(): array
     {

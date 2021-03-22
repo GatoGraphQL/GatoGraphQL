@@ -119,7 +119,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return $descriptions[$module[1]] ?? null;
     }
 
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)
+    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($module[1]) {

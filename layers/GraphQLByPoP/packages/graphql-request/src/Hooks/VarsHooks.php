@@ -22,7 +22,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
         $this->hooksAPI->addAction(
@@ -146,10 +146,8 @@ class VarsHooks extends AbstractHookSet
 
     /**
      * Function is public so it can be invoked from the WordPress plugin
-     *
-     * @return void
      */
-    public function addGraphQLQueryToVars(array &$vars, string $graphQLQuery, ?string $operationName = null)
+    public function addGraphQLQueryToVars(array &$vars, string $graphQLQuery, ?string $operationName = null): void
     {
         // Take the existing variables from $vars, so they must be set in advance
         $variables = $vars['variables'] ?? [];

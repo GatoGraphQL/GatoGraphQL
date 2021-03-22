@@ -38,8 +38,6 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * This directive must go at the very beginning
-     *
-     * @return void
      */
     public function getPipelinePosition(): string
     {

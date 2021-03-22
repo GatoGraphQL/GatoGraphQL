@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 
 class DBEntriesHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             'PoP\API\DataloaderHooks:metaFields',

@@ -31,8 +31,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * This directive must be the first one of its group
-     *
-     * @return void
      */
     public function getPipelinePosition(): string
     {

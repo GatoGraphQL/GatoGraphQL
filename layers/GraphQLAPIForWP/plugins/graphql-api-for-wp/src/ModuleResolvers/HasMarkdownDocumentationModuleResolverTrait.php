@@ -18,8 +18,6 @@ trait HasMarkdownDocumentationModuleResolverTrait
     /**
      * The name of the Markdown filename.
      * By default, it's the same as the slug
-     *
-     * @return string
      */
     public function getMarkdownFilename(string $module): ?string
     {

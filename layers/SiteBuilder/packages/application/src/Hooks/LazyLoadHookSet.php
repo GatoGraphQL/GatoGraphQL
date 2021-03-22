@@ -18,7 +18,7 @@ use PoP\Hooks\AbstractHookSet;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',

@@ -13,8 +13,6 @@ class FunctionAPI extends \PoPSchema\Tags\WP\AbstractFunctionAPI implements \PoP
 
     /**
      * Implement this function by the actual service
-     *
-     * @return string
      */
     protected function getTaxonomyName(): string
     {
@@ -23,8 +21,6 @@ class FunctionAPI extends \PoPSchema\Tags\WP\AbstractFunctionAPI implements \PoP
     }
     /**
      * Implement this function by the actual service
-     *
-     * @return string
      */
     protected function getTagBaseOption(): string
     {

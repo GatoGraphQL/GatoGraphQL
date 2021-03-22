@@ -8,7 +8,7 @@ use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
-    protected function resolveContracts()
+    protected function resolveContracts(): void
     {
         // Actions
         $this->hooksAPI->addAction('wp_insert_comment', function ($comment_id, $comment) {

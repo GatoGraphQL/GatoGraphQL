@@ -28,8 +28,6 @@ interface SchemaDirectiveResolverInterface
     public function getFilteredSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array;
     /**
      * Expressions set by the directive
-     *
-     * @return string|null
      */
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array;
     /**

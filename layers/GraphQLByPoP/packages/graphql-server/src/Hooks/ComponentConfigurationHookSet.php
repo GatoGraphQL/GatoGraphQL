@@ -14,7 +14,7 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 
 class ComponentConfigurationHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
             /**

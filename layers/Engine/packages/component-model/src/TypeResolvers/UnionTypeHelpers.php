@@ -36,11 +36,8 @@ class UnionTypeHelpers
 
     /**
      * Extracts the DB key and ID from the resultItem ID
-     *
-     * @param array $composedDBKeyResultItemID
-     * @return void
      */
-    public static function extractDBObjectTypeAndID(string $composedDBKeyResultItemID)
+    public static function extractDBObjectTypeAndID(string $composedDBKeyResultItemID): array
     {
         return explode(
             UnionTypeSymbols::DBOBJECT_COMPOSED_TYPE_ID_SEPARATOR,
@@ -50,11 +47,8 @@ class UnionTypeHelpers
 
     /**
      * Extracts the ID from the resultItem ID
-     *
-     * @param array $composedDBKeyResultItemID
-     * @return void
      */
-    public static function extractDBObjectID(string $composedDBObjectTypeAndID)
+    public static function extractDBObjectID(string $composedDBObjectTypeAndID): mixed
     {
         $elements = explode(
             UnionTypeSymbols::DBOBJECT_COMPOSED_TYPE_ID_SEPARATOR,
