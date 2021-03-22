@@ -163,10 +163,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * Create the service configuration entries comprising a directive and its value
      * It returns an array of arrays
      *
-     * @param mixed $value
      * @return array<array> The list of entries, where an entry is an array [$directiveResolverClass, $value]
      */
-    protected function getEntriesFromDirective(string $selectedDirective, $value): ?array
+    protected function getEntriesFromDirective(string $selectedDirective, mixed $value): ?array
     {
         $directiveNameClasses = $this->getDirectiveNameClasses();
         // Obtain the directive resolver class from the directive name.
