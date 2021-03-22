@@ -13,11 +13,11 @@ interface CustomPostTypeAPIInterface
      * @param array<string, mixed> $data
      * @return mixed the ID of the created custom post
      */
-    public function createCustomPost(array $data);
+    public function createCustomPost(array $data): mixed;
     /**
      * @param array<string, mixed> $data
      * @return mixed the ID of the updated custom post
      */
-    public function updateCustomPost(array $data);
+    public function updateCustomPost(array $data): mixed;
     public function canUserEditCustomPost($userID, $customPostID): bool;
 }

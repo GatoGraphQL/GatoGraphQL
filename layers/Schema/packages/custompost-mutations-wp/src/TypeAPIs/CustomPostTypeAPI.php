@@ -40,7 +40,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
      * @param array<string, mixed> $data
      * @return mixed the ID of the created custom post
      */
-    public function createCustomPost(array $data)
+    public function createCustomPost(array $data): mixed
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
@@ -50,7 +50,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
      * @param array<string, mixed> $data
      * @return mixed the ID of the updated custom post
      */
-    public function updateCustomPost(array $data)
+    public function updateCustomPost(array $data): mixed
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
