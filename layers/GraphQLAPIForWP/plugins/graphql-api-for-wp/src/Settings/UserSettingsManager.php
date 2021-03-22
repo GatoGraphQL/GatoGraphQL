@@ -91,10 +91,8 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     /**
      * Get the stored value for the option under the group
-     *
-     * @return mixed
      */
-    protected function getItem(string $optionName, string $item)
+    protected function getItem(string $optionName, string $item): mixed
     {
         $this->maybeLoadOptions($optionName);
         return $this->options[$optionName][$item];
