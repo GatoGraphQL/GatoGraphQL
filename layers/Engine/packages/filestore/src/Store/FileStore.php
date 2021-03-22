@@ -46,10 +46,7 @@ class FileStore implements FileStoreInterface
         return false;
     }
 
-    /**
-     * @return mixed
-     */
-    public function get(AbstractFile $file)
+    public function get(AbstractFile $file): mixed
     {
         $filePath = $file->getFilepath();
         if (file_exists($filePath)) {

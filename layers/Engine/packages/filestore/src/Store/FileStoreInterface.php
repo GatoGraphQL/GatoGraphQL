@@ -13,8 +13,5 @@ interface FileStoreInterface
      */
     public function save(AbstractFile $file, $contents): void;
     public function delete(AbstractFile $file): bool;
-    /**
-     * @return mixed
-     */
-    public function get(AbstractFile $file);
+    public function get(AbstractFile $file): mixed;
 }
