@@ -10,7 +10,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class SchemaCacheHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             CacheUtils::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,

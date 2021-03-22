@@ -22,7 +22,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
         $this->hooksAPI->addAction(

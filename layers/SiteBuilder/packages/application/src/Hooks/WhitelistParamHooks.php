@@ -10,7 +10,7 @@ use PoP\ComponentModel\ModuleProcessors\Constants;
 
 class WhitelistParamHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,

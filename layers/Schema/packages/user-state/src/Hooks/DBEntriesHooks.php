@@ -22,7 +22,7 @@ class DBEntriesHooks extends AbstractHookSet
         );
     }
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',

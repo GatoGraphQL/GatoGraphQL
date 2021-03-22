@@ -21,7 +21,7 @@ class PoP_Mailer_AWS_Engine
         );
     }
 
-    protected function init()
+    protected function init(): void
     {
         if (!$this->s3) {
             $this->s3 = Aws::factory(POP_MAILER_AWS_DIR.'/config/aws-config.php')->get('s3')->registerStreamWrapper();

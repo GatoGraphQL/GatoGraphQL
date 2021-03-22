@@ -13,7 +13,7 @@ use PoP\Routing\Facades\RoutingManagerFacade;
 
 class SetupCortexHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             'cortex.routes',

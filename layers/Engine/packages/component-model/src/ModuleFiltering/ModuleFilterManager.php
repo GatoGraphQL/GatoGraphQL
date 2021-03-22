@@ -45,7 +45,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         $this->modulefilters[$moduleFilter->getName()] = $moduleFilter;
     }
 
-    protected function init()
+    protected function init(): void
     {
         // Lazy initialize so that we can inject all the moduleFilters before checking the selected one
         $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedModuleFilterName();

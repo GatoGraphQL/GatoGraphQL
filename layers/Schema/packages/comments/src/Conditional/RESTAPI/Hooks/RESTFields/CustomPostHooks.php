@@ -11,7 +11,7 @@ class CustomPostHooks extends AbstractHookSet
 {
     const COMMENT_RESTFIELDS = 'comments.id|content';
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             EntryRouteModuleProcessorHelpers::HOOK_REST_FIELDS,

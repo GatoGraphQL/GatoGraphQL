@@ -23,7 +23,7 @@ class MainContentModuleHookSet extends AbstractHookSet
         );
     }
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             'augmentVarsProperties',

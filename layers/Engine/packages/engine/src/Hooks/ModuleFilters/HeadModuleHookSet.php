@@ -25,7 +25,7 @@ class HeadModuleHookSet extends AbstractHookSet
         );
     }
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,

@@ -10,7 +10,7 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 class DefinitionPersistenceHookSet extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addAction(
             'popcms:shutdown',

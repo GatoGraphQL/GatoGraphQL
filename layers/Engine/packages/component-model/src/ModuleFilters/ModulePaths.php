@@ -27,7 +27,7 @@ class ModulePaths extends AbstractModuleFilter
     {
     }
 
-    protected function init()
+    protected function init(): void
     {
         $this->paths = ModulePathUtils::getModulePaths();
         $this->propagation_unsettled_paths = $this->paths;

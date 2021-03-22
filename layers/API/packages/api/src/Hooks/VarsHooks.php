@@ -23,7 +23,7 @@ use PoP\API\Response\Schemes as APISchemes;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         // Execute early, since others (eg: SPA) will be based on these updated values
         $this->hooksAPI->addAction(

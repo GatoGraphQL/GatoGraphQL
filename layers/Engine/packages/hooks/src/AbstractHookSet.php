@@ -27,5 +27,5 @@ abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
      *
      * @return void
      */
-    abstract protected function init();
+    abstract protected function init(): void;
 }

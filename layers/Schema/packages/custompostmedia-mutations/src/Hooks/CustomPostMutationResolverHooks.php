@@ -25,7 +25,7 @@ class CustomPostMutationResolverHooks extends AbstractHookSet
         parent::__construct($hooksAPI, $translationAPI);
     }
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             SchemaDefinitionHelpers::HOOK_UPDATE_SCHEMA_FIELD_ARGS,

@@ -11,7 +11,7 @@ class PostHooks extends AbstractHookSet
 {
     const TAG_RESTFIELDS = 'tags.id|name|url';
 
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             EntryRouteModuleProcessorHelpers::HOOK_REST_FIELDS,

@@ -14,7 +14,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected function init()
+    protected function init(): void
     {
         $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
