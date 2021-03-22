@@ -162,7 +162,6 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -172,7 +171,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'genericCustomPost':

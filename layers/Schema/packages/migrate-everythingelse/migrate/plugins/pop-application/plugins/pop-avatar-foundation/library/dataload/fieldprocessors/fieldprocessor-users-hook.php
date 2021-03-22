@@ -63,7 +63,6 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -73,7 +72,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $user = $resultItem;
         switch ($fieldName) {
             case 'avatar':

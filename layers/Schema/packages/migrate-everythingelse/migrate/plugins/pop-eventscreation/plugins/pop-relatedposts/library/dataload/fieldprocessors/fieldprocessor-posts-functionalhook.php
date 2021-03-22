@@ -45,7 +45,6 @@ class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractFuncti
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -55,7 +54,7 @@ class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractFuncti
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $post = $resultItem;
         switch ($fieldName) {
             case 'addEventURL':

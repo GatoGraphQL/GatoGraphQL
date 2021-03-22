@@ -88,7 +88,6 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -98,7 +97,7 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $resultItem;
         switch ($fieldName) {

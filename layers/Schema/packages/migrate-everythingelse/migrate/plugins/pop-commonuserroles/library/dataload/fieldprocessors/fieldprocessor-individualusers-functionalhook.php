@@ -44,7 +44,6 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -54,7 +53,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $user = $resultItem;
         switch ($fieldName) {
             case 'individualInterestsByName':

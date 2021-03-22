@@ -73,7 +73,6 @@ class RootCategoryFieldResolver extends AbstractCategoryFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -83,7 +82,7 @@ class RootCategoryFieldResolver extends AbstractCategoryFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmscategoriesapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'category':

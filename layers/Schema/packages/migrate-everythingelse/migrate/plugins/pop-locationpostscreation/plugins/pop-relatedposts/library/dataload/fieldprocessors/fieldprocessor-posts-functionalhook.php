@@ -45,7 +45,6 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -55,7 +54,7 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $post = $resultItem;
         switch ($fieldName) {
             case 'addLocationPostURL':

@@ -41,7 +41,6 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -51,7 +50,7 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $tag = $resultItem;
         switch ($fieldName) {
              // Needed for tinyMCE-mention plug-in

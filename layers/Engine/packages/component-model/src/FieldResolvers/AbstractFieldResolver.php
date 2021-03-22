@@ -504,7 +504,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -514,7 +513,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         // If a MutationResolver is declared, let it resolve the value
         if ($mutationResolverClass = $this->resolveFieldMutationResolverClass($typeResolver, $fieldName)) {
             $instanceManager = InstanceManagerFacade::getInstance();

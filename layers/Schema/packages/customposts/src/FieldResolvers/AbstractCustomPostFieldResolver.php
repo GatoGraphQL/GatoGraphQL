@@ -39,7 +39,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -49,7 +48,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $resultItem;

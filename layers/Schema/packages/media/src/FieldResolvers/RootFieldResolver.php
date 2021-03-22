@@ -88,7 +88,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -98,7 +97,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'mediaItems':

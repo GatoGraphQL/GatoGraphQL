@@ -74,7 +74,6 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -84,7 +83,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'post':

@@ -81,7 +81,6 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -91,7 +90,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();

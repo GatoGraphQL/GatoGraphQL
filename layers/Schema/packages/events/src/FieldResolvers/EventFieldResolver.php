@@ -103,7 +103,6 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -113,7 +112,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $cmstagsresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();

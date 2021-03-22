@@ -41,7 +41,6 @@ class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolve
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -51,7 +50,7 @@ class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolve
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $user = $resultItem;
         switch ($fieldName) {

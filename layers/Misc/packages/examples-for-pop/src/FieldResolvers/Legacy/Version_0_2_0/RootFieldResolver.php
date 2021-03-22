@@ -49,7 +49,6 @@ class RootFieldResolver extends \Leoloso\ExamplesForPoP\FieldResolvers\Legacy\Ve
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -59,7 +58,7 @@ class RootFieldResolver extends \Leoloso\ExamplesForPoP\FieldResolvers\Legacy\Ve
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $value = parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
         switch ($fieldName) {
             case 'userServiceURLs':

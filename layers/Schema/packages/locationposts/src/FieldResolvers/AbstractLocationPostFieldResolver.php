@@ -101,7 +101,6 @@ abstract class AbstractLocationPostFieldResolver extends AbstractQueryableFieldR
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -111,7 +110,7 @@ abstract class AbstractLocationPostFieldResolver extends AbstractQueryableFieldR
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $locationPostTypeAPI = LocationPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'locationposts':

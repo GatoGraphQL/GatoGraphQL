@@ -47,7 +47,6 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -57,7 +56,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $notification = $resultItem;
         switch ($fieldName) {
             case 'multilayoutKeys':

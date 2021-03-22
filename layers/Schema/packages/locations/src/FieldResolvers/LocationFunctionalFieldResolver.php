@@ -61,7 +61,6 @@ class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -71,7 +70,7 @@ class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         switch ($fieldName) {
             case 'mapURL':
                 // Decode it, because add_query_arg sends the params encoded and it doesn't look nice

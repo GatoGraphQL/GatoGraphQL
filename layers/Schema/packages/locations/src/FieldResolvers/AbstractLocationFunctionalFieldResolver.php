@@ -47,7 +47,6 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -57,7 +56,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         switch ($fieldName) {
             case 'locationsmapURL':
                 $locations = $typeResolver->resolveValue($resultItem, 'locations', $variables, $expressions, $options);

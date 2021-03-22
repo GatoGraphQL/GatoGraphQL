@@ -48,7 +48,6 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -58,7 +57,7 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $post = $resultItem;
         switch ($fieldName) {
             case 'highlightsLazy':

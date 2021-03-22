@@ -87,7 +87,6 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -97,7 +96,7 @@ class ExperimentalBranchFieldResolver extends CustomPostFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         switch ($fieldName) {
             case 'excerpt':
                 // Obtain the required parameter values (or default to some basic values)

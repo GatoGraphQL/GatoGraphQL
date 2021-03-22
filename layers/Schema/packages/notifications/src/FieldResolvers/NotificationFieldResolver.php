@@ -175,7 +175,6 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -185,7 +184,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $notification = $resultItem;
         $cmsService = CMSServiceFacade::getInstance();
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();

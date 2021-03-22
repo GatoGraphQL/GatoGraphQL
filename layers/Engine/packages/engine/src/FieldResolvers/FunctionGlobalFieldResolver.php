@@ -82,7 +82,6 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -92,7 +91,7 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         switch ($fieldName) {
             case 'getSelfProp':
                 // Retrieve the property from either 'dbItems' (i.e. it was loaded during the current iteration)
