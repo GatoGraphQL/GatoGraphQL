@@ -13,10 +13,7 @@ abstract class AbstractCreateUpdateLocationPostMutationResolver extends Abstract
         return \POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
     }
 
-    /**
-     * @param mixed $post_id
-     */
-    protected function additionals($post_id, array $form_data): void
+    protected function additionals(mixed $post_id, array $form_data): void
     {
         parent::additionals($post_id, $form_data);
 

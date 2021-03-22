@@ -8,10 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class LoginMutationResolver extends \PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver
 {
-    /**
-     * @param mixed $user_id Maybe int, maybe string
-     */
-    protected function getUserAlreadyLoggedInErrorMessage($user_id): string
+    protected function getUserAlreadyLoggedInErrorMessage(mixed $user_id): string
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

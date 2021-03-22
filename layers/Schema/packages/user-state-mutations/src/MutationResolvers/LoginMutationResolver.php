@@ -35,10 +35,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    /**
-     * @param mixed $user_id Maybe int, maybe string
-     */
-    protected function getUserAlreadyLoggedInErrorMessage($user_id): string
+    protected function getUserAlreadyLoggedInErrorMessage(mixed $user_id): string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return $translationAPI->__('You are already logged in', 'user-state-mutations');

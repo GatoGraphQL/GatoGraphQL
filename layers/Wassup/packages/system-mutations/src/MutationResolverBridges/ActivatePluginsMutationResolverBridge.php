@@ -15,10 +15,7 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
         return ActivatePluginsMutationResolver::class;
     }
 
-    /**
-     * @param mixed $result_ids Maybe an int, maybe a string
-     */
-    public function getSuccessString($result_ids): ?string
+    public function getSuccessString(mixed $result_ids): ?string
     {
         return $result_ids ? sprintf(
             TranslationAPIFacade::getInstance()->__('Successfully activated plugins: %s.', 'pop-system-wp'),
