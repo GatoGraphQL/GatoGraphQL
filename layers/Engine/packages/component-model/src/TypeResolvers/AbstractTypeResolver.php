@@ -691,7 +691,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $fieldArgs;
     }
 
-    protected function getIDsToQuery(array $ids_data_fields)
+    /**
+     * @return mixed[]
+     */
+    protected function getIDsToQuery(array $ids_data_fields): array
     {
         return array_keys($ids_data_fields);
     }
