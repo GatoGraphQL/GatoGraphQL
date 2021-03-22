@@ -19,8 +19,6 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
 
     /**
      * Do add this directive to the schema
-     *
-     * @return void
      */
     public function skipAddingToSchemaDefinition(): bool
     {

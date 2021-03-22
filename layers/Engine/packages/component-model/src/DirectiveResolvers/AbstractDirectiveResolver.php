@@ -433,8 +433,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     /**
      * By default, place the directive after the ResolveAndMerge directive, so the property will be in $dbItems by then
-     *
-     * @return void
      */
     public function getPipelinePosition(): string
     {
@@ -454,8 +452,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Indicate if the directive needs to be passed $idsDataFields filled with data to be able to execute
      * Because most commonly it will need, the default value is `true`
-     *
-     * @return void
      */
     public function needsIDsDataFieldsToExecute(): bool
     {
@@ -718,7 +714,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     //  *
     //  * @param array $idsDataFields
     //  * @param array $schemaErrors
-    //  * @return void
     //  */
     // protected function validateAndFilterFieldsForDirective(array &$idsDataFields, array &$schemaErrors, array &$schemaWarnings)
     // {
@@ -775,10 +770,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
-     *
-     * @return void
      */
-    protected function processFailure(string $failureMessage, array $failedFields, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$schemaErrors, array &$schemaWarnings)
+    protected function processFailure(string $failureMessage, array $failedFields, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$schemaErrors, array &$schemaWarnings): void
     {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
