@@ -36,8 +36,6 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
     /**
      * This directive must be the first one of the group at the middle
-     *
-     * @return void
      */
     public function getPipelinePosition(): string
     {

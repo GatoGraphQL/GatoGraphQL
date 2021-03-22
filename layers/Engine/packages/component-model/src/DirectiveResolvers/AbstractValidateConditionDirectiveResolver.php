@@ -24,8 +24,6 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     /**
      * If validating a directive, place it after resolveAndMerge
      * Otherwise, before
-     *
-     * @return void
      */
     public function getPipelinePosition(): string
     {
