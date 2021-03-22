@@ -193,7 +193,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         // Add into the $idsDataFields object for the array items
                         // Watch out: function `regenerateAndExecuteFunction` receives `$idsDataFields` and not `$idsDataFieldOutputKeys`, so then re-create the "field" assigning a new alias
                         // If it has an alias, use it. If not, use the fieldName
-                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, $key);
+                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                         $arrayItemProperty = $fieldQueryInterpreter->composeField(
                             $fieldName,
                             $fieldArgs,
@@ -282,7 +282,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     $arrayItems = $this->getArrayItems($array, $id, $field, $typeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemDBErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach ($arrayItems as $key => &$value) {
-                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, $key);
+                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                         $arrayItemProperty = $fieldQueryInterpreter->composeField(
                             $fieldName,
                             $fieldArgs,
@@ -346,12 +346,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
     /**
      * Create a property for storing the array item in the current object
-     *
-     * @param string $fieldOutputKey
-     * @param [type] $key
-     * @return void
      */
-    protected function createPropertyForArrayItem(string $fieldAliasOrName, $key): string
+    protected function createPropertyForArrayItem(string $fieldAliasOrName, string $key): string
     {
         return implode(self::PROPERTY_SEPARATOR, [$fieldAliasOrName, $key]);
     }
@@ -364,14 +360,22 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     //     // $pos = QueryUtils::findLastSymbolPosition($arrayItemProperty, self::PROPERTY_SEPARATOR);
     //     return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     // }
-    /**
-     * Add the $key in addition to the $value
-     *
-     * @param [type] $id
-     * @return void
-     */
-    protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    {
+    protected function addExpressionsForResultItem(
+        TypeResolverInterface $typeResolver,
+        $id,
+        string $field,
+        array &$resultIDItems,
+        array &$dbItems,
+        array &$previousDBItems,
+        array &$variables,
+        array &$messages,
+        array &$dbErrors,
+        array &$dbWarnings,
+        array &$dbDeprecations,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations
+    ): void {
         $translationAPI = TranslationAPIFacade::getInstance();
         // Enable the query to provide variables to pass down
         $addExpressions = $this->directiveArgsForSchema['addExpressions'] ?? [];
@@ -420,10 +424,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $value = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, $key, $resolvedValue, $messages);
+                $this->addExpressionForResultItem($id, (string) $key, $resolvedValue, $messages);
             }
             foreach ($appendExpressions as $key => $value) {
-                $existingValue = $this->getExpressionForResultItem($id, $key, $messages) ?? [];
+                $existingValue = $this->getExpressionForResultItem($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
@@ -452,7 +456,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $existingValue[] = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, $key, $existingValue, $messages);
+                $this->addExpressionForResultItem($id, (string) $key, $existingValue, $messages);
             }
         }
     }

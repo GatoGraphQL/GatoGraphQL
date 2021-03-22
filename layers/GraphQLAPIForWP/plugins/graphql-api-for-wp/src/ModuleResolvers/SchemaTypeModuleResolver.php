@@ -321,27 +321,25 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 
     /**
      * Indicate if the given value is valid for that option
-     *
-     * @param mixed $value
      */
-    public function isValidValue(string $module, string $option, $value): bool
+    public function isValidValue(string $module, string $option, mixed $value): bool
     {
         if (
             in_array(
                 $module,
                 [
-                self::SCHEMA_CUSTOMPOSTS,
-                // self::SCHEMA_GENERIC_CUSTOMPOSTS,
-                // self::SCHEMA_POSTS,
-                self::SCHEMA_USERS,
-                self::SCHEMA_TAGS,
-                // self::SCHEMA_PAGES,
+                    self::SCHEMA_CUSTOMPOSTS,
+                    // self::SCHEMA_GENERIC_CUSTOMPOSTS,
+                    // self::SCHEMA_POSTS,
+                    self::SCHEMA_USERS,
+                    self::SCHEMA_TAGS,
+                    // self::SCHEMA_PAGES,
                 ]
             ) && in_array(
                 $option,
                 [
-                self::OPTION_LIST_DEFAULT_LIMIT,
-                self::OPTION_LIST_MAX_LIMIT,
+                    self::OPTION_LIST_DEFAULT_LIMIT,
+                    self::OPTION_LIST_MAX_LIMIT,
                 ]
             )
         ) {
@@ -355,10 +353,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 
     /**
      * Default value for an option set by the module
-     *
-     * @return mixed Anything the setting might be: an array|string|bool|int|null
      */
-    public function getSettingsDefaultValue(string $module, string $option)
+    public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         $defaultValues = [
             self::SCHEMA_CUSTOMPOSTS => [

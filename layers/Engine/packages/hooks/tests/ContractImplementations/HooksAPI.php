@@ -14,12 +14,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return true;
     }
-    /**
-     * @param mixed $value
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public function applyFilters(string $tag, $value, ...$args)
+    public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
         return $value;
     }
@@ -30,10 +25,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return true;
     }
-    /**
-     * @param mixed ...$args
-     */
-    public function doAction(string $tag, ...$args): void
+    public function doAction(string $tag, mixed ...$args): void
     {
     }
 }

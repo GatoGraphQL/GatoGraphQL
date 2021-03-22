@@ -53,7 +53,6 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -63,7 +62,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $user = $resultItem;
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();

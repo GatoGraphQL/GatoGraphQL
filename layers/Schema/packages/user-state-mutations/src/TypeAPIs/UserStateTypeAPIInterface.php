@@ -12,6 +12,6 @@ interface UserStateTypeAPIInterface
     /**
      * @return mixed Result or Error
      */
-    public function login(array $credentials);
+    public function login(array $credentials): mixed;
     public function logout(): void;
 }

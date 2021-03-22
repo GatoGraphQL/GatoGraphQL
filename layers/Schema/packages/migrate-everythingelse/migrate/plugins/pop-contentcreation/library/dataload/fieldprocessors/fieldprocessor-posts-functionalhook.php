@@ -46,7 +46,6 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -56,7 +55,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $post = $resultItem;
         switch ($fieldName) {
             case 'flagURL':

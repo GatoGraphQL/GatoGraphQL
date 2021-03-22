@@ -35,19 +35,13 @@ class LoginMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    /**
-     * @param mixed $user_id Maybe int, maybe string
-     */
-    protected function getUserAlreadyLoggedInErrorMessage($user_id): string
+    protected function getUserAlreadyLoggedInErrorMessage(mixed $user_id): string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return $translationAPI->__('You are already logged in', 'user-state-mutations');
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         // If the user is already logged in, then return the error
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();

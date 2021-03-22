@@ -45,12 +45,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->hasItem(Options::SETTINGS, $item);
     }
 
-    /**
-     * No return type because it could be a bool/int/string
-     *
-     * @return mixed
-     */
-    public function getSetting(string $module, string $option)
+    public function getSetting(string $module, string $option): mixed
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -96,10 +91,8 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     /**
      * Get the stored value for the option under the group
-     *
-     * @return mixed
      */
-    protected function getItem(string $optionName, string $item)
+    protected function getItem(string $optionName, string $item): mixed
     {
         $this->maybeLoadOptions($optionName);
         return $this->options[$optionName][$item];
@@ -127,10 +120,8 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     /**
      * Store the options in the DB
-     *
-     * @param mixed $value
      */
-    protected function storeItem(string $optionName, string $item, $value): void
+    protected function storeItem(string $optionName, string $item, mixed $value): void
     {
         $this->storeItems($optionName, [$item => $value]);
     }

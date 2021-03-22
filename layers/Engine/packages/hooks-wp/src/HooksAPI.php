@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\HooksWP;
 
 use PoP\Hooks\HooksAPIInterface;
+
 class HooksAPI implements HooksAPIInterface
 {
     public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
@@ -15,12 +16,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return \remove_filter($tag, $function_to_remove, $priority);
     }
-    /**
-     * @param mixed $value
-     * @param mixed ...$args
-     * @return mixed
-     */
-    public function applyFilters(string $tag, $value, ...$args)
+    public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
         return \apply_filters($tag, $value, ...$args);
     }
@@ -32,10 +28,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return \remove_action($tag, $function_to_remove, $priority);
     }
-    /**
-     * @param mixed ...$args
-     */
-    public function doAction(string $tag, ...$args): void
+    public function doAction(string $tag, mixed ...$args): void
     {
         \do_action($tag, ...$args);
     }

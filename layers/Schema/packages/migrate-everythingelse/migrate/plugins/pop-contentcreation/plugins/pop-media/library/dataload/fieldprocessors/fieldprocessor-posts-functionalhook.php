@@ -44,7 +44,6 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -54,7 +53,7 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmsmediapostsapi = \PoPSchema\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {

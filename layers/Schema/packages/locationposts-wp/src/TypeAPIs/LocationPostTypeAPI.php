@@ -17,21 +17,16 @@ class LocationPostTypeAPI extends PostTypeAPI implements LocationPostTypeAPIInte
 {
     /**
      * Indicates if the passed object is of type LocationPost
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationPostType($object): bool
+    public function isInstanceOfLocationPostType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
     }
 
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getLocationPost($id)
+    public function getLocationPost(mixed $id): ?object
     {
         $post = get_post($id);
         if (!$post || $post->post_type != \POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
@@ -42,16 +37,13 @@ class LocationPostTypeAPI extends PostTypeAPI implements LocationPostTypeAPIInte
 
     /**
      * Indicate if an locationPost with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function locationPostExists($id): bool
+    public function locationPostExists(mixed $id): bool
     {
         return $this->getLocationPost($id) != null;
     }
 
-    public function getLocationPosts($query, array $options = []): array
+    public function getLocationPosts(array $query, array $options = []): array
     {
         return $this->getPosts($query, $options);
     }

@@ -11,15 +11,10 @@ interface LocationTypeAPIInterface
 {
     /**
      * Return the location's ID
-     *
-     * @param [type] $location
-     * @return void
      */
-    public function getID($location);
+    public function getID(object $location): mixed;
     /**
      * Indicates if the passed object is of type Location
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationType($object): bool;
+    public function isInstanceOfLocationType(object $object): bool;
 }

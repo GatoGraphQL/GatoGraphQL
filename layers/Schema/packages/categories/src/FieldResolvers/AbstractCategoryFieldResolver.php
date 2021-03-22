@@ -93,7 +93,6 @@ abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResol
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -103,7 +102,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResol
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmscategoriesapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'categories':

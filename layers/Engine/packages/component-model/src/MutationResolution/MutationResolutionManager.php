@@ -28,18 +28,12 @@ class MutationResolutionManager implements MutationResolutionManagerInterface
         $this->results = [];
     }
 
-    /**
-     * @param mixed $result
-     */
-    public function setResult(string $class, $result): void
+    public function setResult(string $class, mixed $result): void
     {
         $this->results[$class] = $result;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getResult(string $class)
+    public function getResult(string $class): mixed
     {
         /**
          * Calling `setResult` uses get_called_class(), so if the class was overriden,

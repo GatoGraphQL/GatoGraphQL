@@ -9,8 +9,8 @@ use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 
 interface UnionTypeResolverInterface
 {
-    // public function addTypeToID($resultItemID): string;
-    public function getTypeResolverClassForResultItem($resultItemID);
+    // public function addTypeToID(mixed $resultItemID): string;
+    public function getTypeResolverClassForResultItem(mixed $resultItemID);
     public function getTargetTypeResolverPicker(object $resultItem): ?TypeResolverPickerInterface;
     public function getTargetTypeResolver(object $resultItem): ?TypeResolverInterface;
     public function getResultItemIDTargetTypeResolvers(array $ids): array;

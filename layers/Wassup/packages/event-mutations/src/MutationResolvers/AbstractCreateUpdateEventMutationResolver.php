@@ -59,10 +59,7 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
         $eventMutationTypeAPI->populate($EM_Event, $post_data);
     }
 
-    /**
-     * @return mixed
-     */
-    protected function save(\EM_Event &$EM_Event, array $post_data)
+    protected function save(\EM_Event &$EM_Event, array $post_data): mixed
     {
         $EM_Event = $this->populate($EM_Event, $post_data);
         $EM_Event->save();
@@ -73,7 +70,7 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
      * @param array<string, mixed> $data
      * @return mixed the ID of the updated custom post
      */
-    protected function executeUpdateCustomPost(array $post_data)
+    protected function executeUpdateCustomPost(array $post_data): mixed
     {
         $EM_Event = new \EM_Event($post_data['id'], 'post_id');
         return $this->save($EM_Event, $post_data);
@@ -83,7 +80,7 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
      * @param array<string, mixed> $data
      * @return mixed the ID of the updated custom post
      */
-    protected function executeCreateCustomPost(array $post_data)
+    protected function executeCreateCustomPost(array $post_data): mixed
     {
         $EM_Event = new \EM_Event();
         return $this->save($EM_Event, $post_data);

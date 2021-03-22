@@ -85,10 +85,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

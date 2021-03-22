@@ -8,13 +8,7 @@ use PoP\FileStore\File\AbstractFile;
 
 interface FileStoreInterface
 {
-    /**
-     * @param mixed $contents
-     */
-    public function save(AbstractFile $file, $contents): void;
+    public function save(AbstractFile $file, mixed $contents): void;
     public function delete(AbstractFile $file): bool;
-    /**
-     * @return mixed
-     */
-    public function get(AbstractFile $file);
+    public function get(AbstractFile $file): mixed;
 }

@@ -101,7 +101,6 @@ class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -111,7 +110,7 @@ class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {

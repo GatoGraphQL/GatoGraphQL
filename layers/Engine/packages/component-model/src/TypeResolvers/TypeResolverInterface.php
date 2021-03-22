@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 interface TypeResolverInterface
 {
     // Only these 4 functions must be implemented by a new Type class...
-    public function getID(object $resultItem);
+    public function getID(object $resultItem): mixed;
     public function getTypeName(): string;
     public function getNamespace(): string;
     public function getNamespacedTypeName(): string;
@@ -24,14 +24,14 @@ interface TypeResolverInterface
      * @return FieldInterfaceResolverInterface[]
      */
     public function getAllImplementedInterfaceResolverInstances(): array;
-    public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
+    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed;
     public function getIdFieldTypeResolverClass(): string;
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */
     public function getDirectiveNameResolvers(): array;
     public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields);
+    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
     public function fillResultItems(
         array $ids_data_fields,
         array &$unionDBKeyIDs,
@@ -60,7 +60,6 @@ interface TypeResolverInterface
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         object $resultItem,
@@ -68,7 +67,7 @@ interface TypeResolverInterface
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    );
+    ): mixed;
     public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array;
     public function hasFieldResolversForField(string $field): bool;
     /**

@@ -21,12 +21,7 @@ interface UserSettingsManagerInterface
      */
     public function removeTimestamp(): void;
     public function hasSetting(string $item): bool;
-    /**
-     * No return type because it could be a bool/int/string
-     *
-     * @return mixed
-     */
-    public function getSetting(string $module, string $option);
+    public function getSetting(string $module, string $option): mixed;
     public function hasSetModuleEnabled(string $moduleID): bool;
     public function isModuleEnabled(string $moduleID): bool;
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void;

@@ -150,12 +150,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return get_called_class();
     }
 
-    public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
+    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
     {
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            function ($id) {
+            function (mixed $id) {
                 return UnionTypeHelpers::getDBObjectComposedTypeAndID(
                     $this,
                     $id
@@ -696,7 +696,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedResultItemIDError($resultItemID)
+    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
@@ -704,7 +704,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             sprintf(
                 $translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getTypeOutputName(),
-                $resultItemID
+                (string) $resultItemID
             )
         );
     }
@@ -767,7 +767,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             $ids_data_fields = array_filter(
                 $ids_data_fields,
-                function ($id) use ($unresolvedResultItemIDs) {
+                function (mixed $id) use ($unresolvedResultItemIDs) {
                     return !in_array($id, $unresolvedResultItemIDs);
                 },
                 ARRAY_FILTER_USE_KEY
@@ -894,7 +894,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields)
+    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
     {
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
@@ -1295,7 +1295,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         object $resultItem,
@@ -1303,7 +1302,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)

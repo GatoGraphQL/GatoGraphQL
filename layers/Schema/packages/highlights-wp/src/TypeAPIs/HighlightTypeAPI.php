@@ -16,32 +16,24 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
 {
     /**
      * Return the post's ID
-     *
-     * @param [type] $post
-     * @return void
      */
-    public function getID($post)
+    public function getID(object $post): mixed
     {
         return $post->ID;
     }
 
     /**
      * Indicates if the passed object is of type Highlight
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfHighlightType($object): bool
+    public function isInstanceOfHighlightType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 
     /**
      * Get the highlight with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getHighlight($id)
+    public function getHighlight(mixed $id): ?object
     {
         $post = get_post($id);
         if (!$post || $post->post_type != \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
@@ -52,11 +44,8 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
 
     /**
      * Indicate if an highlight with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function highlightExists($id): bool
+    public function highlightExists(mixed $id): bool
     {
         return $this->getHighlight($id) != null;
     }

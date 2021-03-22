@@ -11,29 +11,18 @@ interface HighlightTypeAPIInterface
 {
     /**
      * Return the highlight's ID
-     *
-     * @param [type] $highlight
-     * @return void
      */
-    public function getID($highlight);
+    public function getID(object $highlight): mixed;
     /**
      * Indicates if the passed object is of type Highlight
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfHighlightType($object): bool;
+    public function isInstanceOfHighlightType(object $object): bool;
     /**
      * Get the highlight with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getHighlight($id);
+    public function getHighlight(mixed $id): ?object;
     /**
      * Indicate if an highlight with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function highlightExists($id): bool;
+    public function highlightExists(mixed $id): bool;
 }

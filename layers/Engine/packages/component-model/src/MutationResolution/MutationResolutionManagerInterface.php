@@ -8,13 +8,7 @@ interface MutationResolutionManagerInterface
 {
     public function clearResults(): void;
 
-    /**
-     * @param mixed $result
-     */
-    public function setResult(string $class, $result): void;
+    public function setResult(string $class, mixed $result): void;
 
-    /**
-     * @return mixed
-     */
-    public function getResult(string $class);
+    public function getResult(string $class): mixed;
 }

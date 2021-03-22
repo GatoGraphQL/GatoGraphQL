@@ -73,7 +73,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -83,7 +82,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'user':

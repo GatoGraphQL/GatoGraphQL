@@ -13,10 +13,7 @@ abstract class AbstractCRUDComponentMutationResolverBridge extends AbstractCompo
         return true;
     }
 
-    /**
-     * @param mixed $result_id Maybe an int, maybe a string
-     */
-    protected function modifyDataProperties(array &$data_properties, $result_id): void
+    protected function modifyDataProperties(array &$data_properties, mixed $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
 

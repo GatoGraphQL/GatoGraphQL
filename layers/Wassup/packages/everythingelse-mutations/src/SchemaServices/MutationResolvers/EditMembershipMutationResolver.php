@@ -16,10 +16,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
  */
 class EditMembershipMutationResolver extends AbstractMutationResolver
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];
         $community = $form_data['community'];

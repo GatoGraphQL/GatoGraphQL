@@ -39,10 +39,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    /**
-     * @param mixed $comment_id
-     */
-    protected function additionals($comment_id, array $form_data): void
+    protected function additionals(mixed $comment_id, array $form_data): void
     {
         HooksAPIFacade::getInstance()->doAction('gd_addcomment', $comment_id, $form_data);
     }
@@ -78,10 +75,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $comment_data;
     }
 
-    /**
-     * @return mixed
-     */
-    protected function insertComment(array $comment_data)
+    protected function insertComment(array $comment_data): mixed
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         return $commentTypeAPI->insertComment($comment_data);
@@ -89,12 +83,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     /**
      * @param string[] $errors
-     * @return mixed|null
      */
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);

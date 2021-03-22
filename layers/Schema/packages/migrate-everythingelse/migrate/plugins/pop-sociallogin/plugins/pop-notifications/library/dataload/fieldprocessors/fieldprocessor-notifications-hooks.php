@@ -66,7 +66,6 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -76,7 +75,7 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $notification = $resultItem;
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

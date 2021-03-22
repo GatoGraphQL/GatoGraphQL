@@ -7,6 +7,7 @@ use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_User_Query;
 
 class FunctionAPI extends \PoPSchema\Users\FunctionAPI_Base
 {
@@ -185,11 +186,8 @@ class FunctionAPI extends \PoPSchema\Users\FunctionAPI_Base
     /**
      * Modify the SQL query, replacing searching for a single email
      * (with SQL operation "=") to multiple ones (with SQL operation "IN")
-     *
-     * @param [type] $query
-     * @return void
      */
-    public function enableMultipleEmails($query)
+    public function enableMultipleEmails(WP_User_Query $query): void
     {
         $qv =& $query->query_vars;
         if (isset($qv['search'])) {

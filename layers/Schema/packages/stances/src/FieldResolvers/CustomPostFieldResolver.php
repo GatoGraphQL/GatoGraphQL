@@ -81,7 +81,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -91,7 +90,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $customPost = $resultItem;
         switch ($fieldName) {

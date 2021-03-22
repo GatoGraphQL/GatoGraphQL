@@ -33,6 +33,6 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
         array $variables,
         array $expressions
     ): array;
-    public function maybeConvertFieldArgumentValue($fieldArgValue, ?array $variables = null);
-    public function maybeConvertFieldArgumentArrayValue($fieldArgValue, ?array $variables = null);
+    public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed;
+    public function maybeConvertFieldArgumentArrayValue(mixed $fieldArgValue, ?array $variables = null): mixed;
 }

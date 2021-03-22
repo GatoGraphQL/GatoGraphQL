@@ -55,7 +55,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -65,7 +64,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {

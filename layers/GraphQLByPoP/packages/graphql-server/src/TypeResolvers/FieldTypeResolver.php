@@ -21,7 +21,7 @@ class FieldTypeResolver extends AbstractIntrospectionTypeResolver
         return $translationAPI->__('Representation of a GraphQL type\'s field', 'graphql-server');
     }
 
-    public function getID(object $resultItem)
+    public function getID(object $resultItem): mixed
     {
         $field = $resultItem;
         return $field->getID();

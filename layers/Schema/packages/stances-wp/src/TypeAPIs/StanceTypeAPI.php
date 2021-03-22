@@ -16,32 +16,24 @@ class StanceTypeAPI implements StanceTypeAPIInterface
 {
     /**
      * Return the post's ID
-     *
-     * @param [type] $post
-     * @return void
      */
-    public function getID($post)
+    public function getID(object $post): mixed
     {
         return $post->ID;
     }
 
     /**
      * Indicates if the passed object is of type Stance
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfStanceType($object): bool
+    public function isInstanceOfStanceType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \POP_USERSTANCE_POSTTYPE_USERSTANCE;
     }
 
     /**
      * Get the stance with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getStance($id)
+    public function getStance(mixed $id): ?object
     {
         $post = get_post($id);
         if (!$post || $post->post_type != \POP_USERSTANCE_POSTTYPE_USERSTANCE) {
@@ -52,11 +44,8 @@ class StanceTypeAPI implements StanceTypeAPIInterface
 
     /**
      * Indicate if an stance with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function stanceExists($id): bool
+    public function stanceExists(mixed $id): bool
     {
         return $this->getStance($id) != null;
     }

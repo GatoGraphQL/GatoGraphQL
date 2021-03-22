@@ -58,7 +58,6 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -68,7 +67,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $comment = $resultItem;
         switch ($fieldName) {
             case 'contentClipped':

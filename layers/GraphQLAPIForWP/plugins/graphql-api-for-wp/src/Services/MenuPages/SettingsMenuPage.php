@@ -329,10 +329,8 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Get the option value
-     *
-     * @return mixed
      */
-    protected function getOptionValue(string $module, string $option)
+    protected function getOptionValue(string $module, string $option): mixed
     {
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         return $userSettingsManager->getSetting($module, $option);

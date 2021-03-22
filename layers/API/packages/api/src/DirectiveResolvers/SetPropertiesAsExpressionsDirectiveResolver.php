@@ -149,7 +149,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                     continue;
                 }
                 // Check if the value already exists
-                $expressionName = $expressionNames[$i];
+                $expressionName = (string) $expressionNames[$i];
                 $existingValue = $this->getExpressionForResultItem($id, $expressionName, $messages);
                 if (!is_null($existingValue)) {
                     $dbWarnings[(string)$id][] = [

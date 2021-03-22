@@ -12,10 +12,8 @@ class PluginConfigurationHelpers
     /**
      * Determine if the environment variable was defined
      * as a constant in wp-config.php
-     *
-     * @return mixed
      */
-    public static function getWPConfigConstantValue(string $envVariable)
+    public static function getWPConfigConstantValue(string $envVariable): mixed
     {
         return constant(self::getWPConfigConstantName($envVariable));
     }

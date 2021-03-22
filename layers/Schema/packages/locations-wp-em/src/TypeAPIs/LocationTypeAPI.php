@@ -14,20 +14,15 @@ class LocationTypeAPI implements LocationTypeAPIInterface
 {
     /**
      * Return the location's ID
-     *
-     * @param [type] $location
-     * @return void
      */
-    public function getID($location)
+    public function getID(object $location): mixed
     {
         return $location->post_id;
     }
     /**
      * Indicates if the passed object is of type Location
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationType($object): bool
+    public function isInstanceOfLocationType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \EM_POST_TYPE_LOCATION;
     }

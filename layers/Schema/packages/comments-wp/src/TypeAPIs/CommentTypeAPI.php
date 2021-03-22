@@ -14,10 +14,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Comment
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfCommentType($object): bool
+    public function isInstanceOfCommentType(object $object): bool
     {
         return $object instanceof WP_Comment;
     }

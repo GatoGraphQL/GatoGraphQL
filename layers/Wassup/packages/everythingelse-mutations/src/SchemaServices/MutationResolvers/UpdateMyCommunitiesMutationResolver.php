@@ -10,10 +10,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];
 

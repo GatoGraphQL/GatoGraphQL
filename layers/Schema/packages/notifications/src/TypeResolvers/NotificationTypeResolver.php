@@ -21,7 +21,7 @@ class NotificationTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('Notifications for the user', 'notifications');
     }
 
-    public function getID(object $resultItem)
+    public function getID(object $resultItem): mixed
     {
         $notification = $resultItem;
         return $notification->histid;

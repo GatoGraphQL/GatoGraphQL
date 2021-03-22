@@ -31,8 +31,5 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
         }
     }
 
-    protected function printData(&$data)
-    {
-        echo $data;
-    }
+    abstract protected function printData(array &$data): void;
 }

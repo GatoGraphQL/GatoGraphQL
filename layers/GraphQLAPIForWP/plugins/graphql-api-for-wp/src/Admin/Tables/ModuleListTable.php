@@ -137,10 +137,8 @@ class ModuleListTable extends AbstractItemListTable
      *
      * @param int $per_page
      * @param int $page_number
-     *
-     * @return mixed
      */
-    public function getItems($per_page = 5, $page_number = 1)
+    public function getItems($per_page = 5, $page_number = 1): mixed
     {
         $results = $this->getAllItems();
         return array_splice(

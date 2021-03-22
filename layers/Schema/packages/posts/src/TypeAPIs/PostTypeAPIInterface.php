@@ -13,24 +13,16 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Post
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfPostType($object): bool;
+    public function isInstanceOfPostType(object $object): bool;
     /**
      * Indicate if an post with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function postExists($id): bool;
+    public function postExists(mixed $id): bool;
     /**
      * Get the post with provided ID or, if it doesn't exist, null
-     *
-     * @param int $id
-     * @return void
      */
-    public function getPost($id);
+    public function getPost(mixed $id): ?object;
     /**
      * Get the list of posts
      */

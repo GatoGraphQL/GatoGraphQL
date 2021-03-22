@@ -13,24 +13,16 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Page
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfPageType($object): bool;
+    public function isInstanceOfPageType(object $object): bool;
     /**
      * Indicate if an page with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function pageExists($id): bool;
+    public function pageExists(mixed $id): bool;
     /**
      * Get the page with provided ID or, if it doesn't exist, null
-     *
-     * @param int $id
-     * @return void
      */
-    public function getPage($id);
+    public function getPage(mixed $id): ?object;
     /**
      * Get the list of pages
      */
@@ -48,8 +40,6 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
-     *
-     * @return null|ID
      */
-    public function getHomeStaticPageID();
+    public function getHomeStaticPageID(): mixed;
 }

@@ -13,8 +13,6 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Tag
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfTagType($object): bool;
+    public function isInstanceOfTagType(object $object): bool;
 }

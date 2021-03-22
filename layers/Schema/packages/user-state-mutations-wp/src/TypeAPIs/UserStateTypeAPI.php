@@ -18,7 +18,7 @@ class UserStateTypeAPI implements UserStateTypeAPIInterface
     /**
      * @return mixed Result or Error
      */
-    public function login(array $credentials)
+    public function login(array $credentials): mixed
     {
         // Convert params
         if (isset($credentials['login'])) {

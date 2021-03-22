@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
-use Psr\Cache\CacheItemPoolInterface;
-use Psr\Cache\CacheItemInterface;
+use DateInterval;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 class Cache implements CacheInterface
 {
@@ -18,25 +19,28 @@ class Cache implements CacheInterface
     ) {
     }
 
-    protected function getKey($id, $type)
+    protected function getKey(string $id, string $type)
     {
         return $type . '.' . $id;
     }
 
-    protected function getCacheItem($id, $type): CacheItemInterface
+    protected function getCacheItem(string $id, string $type): CacheItemInterface
     {
         return $this->cacheItemPool->getItem($this->getKey($id, $type));
     }
 
-    public function hasCache($id, $type)
+    public function hasCache(string $id, string $type): bool
     {
         $cacheItem = $this->getCacheItem($id, $type);
         return $cacheItem->isHit();
     }
 
-    public function deleteCache($id, $type): void
+    /**
+     * @return boolean True if the item was successfully removed. False if there was an error.
+     */
+    public function deleteCache(string $id, string $type): bool
     {
-        $this->cacheItemPool->deleteItem($this->getKey($id, $type));
+        return $this->cacheItemPool->deleteItem($this->getKey($id, $type));
     }
 
     public function clear(): void
@@ -48,18 +52,14 @@ class Cache implements CacheInterface
     /**
      * If the item is not cached, it will return `null`
      * @see https://www.php-fig.org/psr/psr-6/
-     *
-     * @param [type] $id
-     * @param [type] $type
-     * @return mixed
      */
-    public function getCache($id, $type)
+    public function getCache(string $id, string $type): mixed
     {
         $cacheItem = $this->getCacheItem($id, $type);
         return $cacheItem->get();
     }
 
-    public function getComponentModelCache($id, $type)
+    public function getComponentModelCache(string $id, string $type): mixed
     {
         $content = $this->getCache($id, $type);
 
@@ -70,13 +70,12 @@ class Cache implements CacheInterface
     /**
      * Store the cache
      *
-     * @param [type] $id key under which to store the cache
-     * @param [type] $type the type of the cache, used to distinguish groups of caches
-     * @param [type] $content the value to cache
-     * @param [type] $time time after which the cache expires, in seconds
-     * @return void
+     * @param string $id key under which to store the cache
+     * @param string $type the type of the cache, used to distinguish groups of caches
+     * @param mixed $content the value to cache
+     * @param int|DateInterval|null $time time after which the cache expires, in seconds
      */
-    public function storeCache($id, $type, $content, $time = null)
+    public function storeCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void
     {
         $cacheItem = $this->getCacheItem($id, $type);
         $cacheItem->set($content);
@@ -85,15 +84,9 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Store the cache
-     *
-     * @param [type] $id key under which to store the cache
-     * @param [type] $type the type of the cache, used to distinguish groups of caches
-     * @param [type] $content the value to cache
-     * @param [type] $time time after which the cache expires, in seconds
-     * @return void
+     * Store the cache by component model
      */
-    public function storeComponentModelCache($id, $type, $content, $time = null)
+    public function storeComponentModelCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void
     {
         // Before saving the cache, replace the data specific to this execution with generic placeholders
         $content = $this->replaceCurrentExecutionDataWithPlaceholders($content);
@@ -102,21 +95,19 @@ class Cache implements CacheInterface
 
     /**
      * Save immediately. Can override to save as deferred
-     *
-     * @return void
      */
-    protected function saveCache(CacheItemInterface $cacheItem)
+    protected function saveCache(CacheItemInterface $cacheItem): void
     {
         $this->cacheItemPool->save($cacheItem);
     }
 
-    public function getCacheByModelInstance($type)
+    public function getCacheByModelInstance(string $type): mixed
     {
         return $this->getComponentModelCache($this->modelInstance->getModelInstanceId(), $type);
     }
 
-    public function storeCacheByModelInstance($type, $content)
+    public function storeCacheByModelInstance(string $type, mixed $content): void
     {
-        return $this->storeCache($this->modelInstance->getModelInstanceId(), $type, $content);
+        $this->storeCache($this->modelInstance->getModelInstanceId(), $type, $content);
     }
 }

@@ -26,21 +26,16 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
 
     /**
      * Return the event's ID
-     *
-     * @param [type] $event
-     * @return void
      */
-    public function getID($event)
+    public function getID(object $event): mixed
     {
         return $event->post_id;
     }
 
     /**
      * Indicates if the passed object is of type Event
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfEventType($object): bool
+    public function isInstanceOfEventType(object $object): bool
     {
         return
             $object instanceof EM_Event ||
@@ -54,11 +49,8 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
      * Get the event with provided ID or, if it doesn't exist, null
      * The provided ID is that for the wp_posts table, not em_events
      * (it is `post_id`, not `event_id`)
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getEvent($customPostID)
+    public function getEvent(mixed $customPostID): ?object
     {
         $event = em_get_event($customPostID, 'post_id');
         // If passing the ID of a post (not an event) function `em_get_event`
@@ -72,11 +64,8 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
 
     /**
      * Indicate if an event with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function eventExists($id): bool
+    public function eventExists(mixed $id): bool
     {
         return $this->getEvent($id) != null;
     }

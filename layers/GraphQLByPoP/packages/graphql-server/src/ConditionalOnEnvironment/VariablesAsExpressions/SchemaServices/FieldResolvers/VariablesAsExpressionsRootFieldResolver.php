@@ -115,7 +115,6 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -125,7 +124,7 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $graphQLQueryConvertor = GraphQLQueryConvertorFacade::getInstance();
         switch ($fieldName) {
             case 'exportedVariables':

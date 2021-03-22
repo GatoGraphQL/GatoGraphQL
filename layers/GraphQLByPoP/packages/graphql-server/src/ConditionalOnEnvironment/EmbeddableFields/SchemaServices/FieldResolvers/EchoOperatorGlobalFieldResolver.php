@@ -98,7 +98,6 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -108,7 +107,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         switch ($fieldName) {
             case 'echoStr':
                 return $fieldArgs['value'];

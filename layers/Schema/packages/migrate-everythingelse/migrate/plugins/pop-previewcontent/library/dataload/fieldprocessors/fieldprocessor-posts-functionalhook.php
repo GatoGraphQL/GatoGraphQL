@@ -43,7 +43,6 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -53,7 +52,7 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {

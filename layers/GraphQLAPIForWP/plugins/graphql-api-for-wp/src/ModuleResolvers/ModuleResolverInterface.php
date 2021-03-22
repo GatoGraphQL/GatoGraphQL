@@ -62,16 +62,12 @@ interface ModuleResolverInterface
     public function getSettingOptionName(string $module, string $option): string;
     /**
      * Indicate if the given value is valid for that option
-     *
-     * @param mixed $value
      */
-    public function isValidValue(string $module, string $option, $value): bool;
+    public function isValidValue(string $module, string $option, mixed $value): bool;
     /**
-     * Name of the setting item, to store in the DB
-     *
-     * @return mixed
+     * Default value for an option set by the module
      */
-    public function getSettingsDefaultValue(string $module, string $option);
+    public function getSettingsDefaultValue(string $module, string $option): mixed;
     public function isEnabledByDefault(string $module): bool;
     // public function getURL(string $module): ?string;
     public function getSlug(string $module): string;

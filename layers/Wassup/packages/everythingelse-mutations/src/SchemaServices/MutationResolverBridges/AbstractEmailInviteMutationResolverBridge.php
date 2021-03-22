@@ -10,10 +10,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class AbstractEmailInviteMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    /**
-     * @param mixed $result_id Maybe an int, maybe a string
-     */
-    public function getSuccessString($result_id): ?string
+    public function getSuccessString(mixed $result_id): ?string
     {
         $emails = (array) $result_id;
         return sprintf(

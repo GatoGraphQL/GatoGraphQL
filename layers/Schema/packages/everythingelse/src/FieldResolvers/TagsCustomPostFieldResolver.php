@@ -61,7 +61,6 @@ class TagsCustomPostFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -71,7 +70,7 @@ class TagsCustomPostFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {

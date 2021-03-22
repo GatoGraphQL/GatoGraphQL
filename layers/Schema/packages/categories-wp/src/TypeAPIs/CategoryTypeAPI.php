@@ -15,10 +15,8 @@ class CategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterfac
 {
     /**
      * Indicates if the passed object is of type Category
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfCategoryType($object): bool
+    public function isInstanceOfCategoryType(object $object): bool
     {
         return ($object instanceof WP_Taxonomy) && $object->hierarchical == true;
     }

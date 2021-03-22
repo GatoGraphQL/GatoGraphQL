@@ -256,12 +256,23 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     /**
      * Place all the reserved variables into the `$variables` context
-     *
-     * @param [type] $id
-     * @return void
      */
-    protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    {
+    protected function addExpressionsForResultItem(
+        TypeResolverInterface $typeResolver,
+        $id,
+        string $field,
+        array &$resultIDItems,
+        array &$dbItems,
+        array &$previousDBItems,
+        array &$variables,
+        array &$messages,
+        array &$dbErrors,
+        array &$dbWarnings,
+        array &$dbDeprecations,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations
+    ): void {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);

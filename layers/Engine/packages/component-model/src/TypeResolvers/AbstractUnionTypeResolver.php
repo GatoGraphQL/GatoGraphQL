@@ -49,7 +49,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
+    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
@@ -120,11 +120,8 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
 
     // /**
     //  * Add the type to the ID
-    //  *
-    //  * @param [type] $resultItem
-    //  * @return void
     //  */
-    // public function addTypeToID($resultItemID): string
+    // public function addTypeToID(mixed $resultItemID): string
     // {
     //     $instanceManager = InstanceManagerFacade::getInstance();
     //     if ($resultItemTypeResolverClass = $this->getTypeResolverClassForResultItem($resultItemID)) {
@@ -145,7 +142,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields)
+    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
@@ -199,11 +196,8 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     /**
      * In order to enable elements from different types (such as posts and users) to have same ID,
      * add the type to the ID
-     *
-     * @param [type] $resultItem
-     * @return void
      */
-    public function getID(object $resultItem)
+    public function getID(object $resultItem): mixed
     {
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
@@ -320,7 +314,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return $typeResolverPickers;
     }
 
-    public function getTypeResolverClassForResultItem($resultItemID)
+    public function getTypeResolverClassForResultItem(mixed $resultItemID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -370,14 +364,14 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return null;
     }
 
-    protected function getUnresolvedResultItemIDError($resultItemID)
+    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
                 $translationAPI->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
-                $resultItemID
+                (string) $resultItemID
             )
         );
     }
@@ -398,7 +392,6 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         object $resultItem,
@@ -406,7 +399,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {

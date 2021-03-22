@@ -4,36 +4,32 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
+use DateInterval;
+
 interface CacheInterface
 {
-    public function hasCache($id, $type);
+    public function hasCache(string $id, string $type): bool;
     /**
-     * If the item is not cached, it will return `null`
-     * @see https://www.php-fig.org/psr/psr-6/
-     *
-     * @param [type] $id
-     * @param [type] $type
-     * @return mixed
+     * @return boolean True if the item was successfully removed. False if there was an error.
      */
-    public function deleteCache($id, $type): void;
+    public function deleteCache(string $id, string $type): bool;
     /**
      * Remove all entries in the cache
      */
     public function clear(): void;
-    public function getCache($id, $type);
-    public function getComponentModelCache($id, $type);
+    public function getCache(string $id, string $type): mixed;
+    public function getComponentModelCache(string $id, string $type): mixed;
 
     /**
      * Store the cache
      *
-     * @param [type] $id key under which to store the cache
-     * @param [type] $type the type of the cache, used to distinguish groups of caches
-     * @param [type] $content the value to cache
-     * @param [type] $time time after which the cache expires, in seconds
-     * @return void
+     * @param string $id key under which to store the cache
+     * @param string $type the type of the cache, used to distinguish groups of caches
+     * @param mixed $content the value to cache
+     * @param int|DateInterval|null $time time after which the cache expires, in seconds
      */
-    public function storeCache($id, $type, $content, $time = null);
-    public function storeComponentModelCache($id, $type, $content, $time = null);
-    public function getCacheByModelInstance($type);
-    public function storeCacheByModelInstance($type, $content);
+    public function storeCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void;
+    public function storeComponentModelCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void;
+    public function getCacheByModelInstance(string $type): mixed;
+    public function storeCacheByModelInstance(string $type, mixed $content): void;
 }

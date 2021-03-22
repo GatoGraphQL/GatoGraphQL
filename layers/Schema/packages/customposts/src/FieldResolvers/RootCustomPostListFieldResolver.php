@@ -79,7 +79,6 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -89,7 +88,7 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'customPost':

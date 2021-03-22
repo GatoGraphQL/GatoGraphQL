@@ -224,7 +224,7 @@ class Schema
         return new Directive($fullSchemaDefinition, $directiveSchemaDefinitionPath);
     }
 
-    public function getID()
+    public function getID(): string
     {
         return $this->id;
     }

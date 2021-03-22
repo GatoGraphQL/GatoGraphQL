@@ -8,7 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResolverInterface
 {
-    public function getTheUserRole($userObjectOrID)
+    public function getTheUserRole(mixed $userObjectOrID): string
     {
         $roles = $this->getUserRoles($userObjectOrID);
         $role = $roles[0];
@@ -20,13 +20,13 @@ abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResol
         );
     }
 
-    public function userCan($userObjectOrID, $capability)
+    public function userCan(mixed $userObjectOrID, string $capability): bool
     {
         $capabilities = $this->getUserCapabilities($userObjectOrID);
         return in_array($capability, $capabilities);
     }
 
-    public function hasRole($userObjectOrID, $role)
+    public function hasRole(mixed $userObjectOrID, string $role): bool
     {
         $roles = $this->getUserRoles($userObjectOrID);
         return in_array($role, $roles);

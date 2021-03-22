@@ -197,22 +197,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    /**
-     * @param mixed $customPostID
-     */
-    protected function additionals($customPostID, array $form_data): void
+    protected function additionals(mixed $customPostID, array $form_data): void
     {
     }
-    /**
-     * @param mixed $customPostID
-     */
-    protected function updateAdditionals($customPostID, array $form_data, array $log): void
+    protected function updateAdditionals(mixed $customPostID, array $form_data, array $log): void
     {
     }
-    /**
-     * @param mixed $customPostID
-     */
-    protected function createAdditionals($customPostID, array $form_data): void
+    protected function createAdditionals(mixed $customPostID, array $form_data): void
     {
     }
 
@@ -258,9 +249,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     /**
      * @param array<string, mixed> $data
-     * @return mixed the ID of the updated custom post
      */
-    protected function executeUpdateCustomPost(array $data)
+    protected function executeUpdateCustomPost(array $data): mixed
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->updateCustomPost($data);
@@ -272,10 +262,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     //     return $form_data[MutationInputProperties::CATEGORIES];
     // }
 
-    /**
-     * @param mixed $customPostID
-     */
-    protected function createUpdateCustomPost(array $form_data, $customPostID): void
+    protected function createUpdateCustomPost(array $form_data, mixed $customPostID): void
     {
         // @TODO: Migrate when package "Categories" is completed
         // // Set categories for any taxonomy (not only for "category")
@@ -286,10 +273,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // }
     }
 
-    /**
-     * @param mixed $customPostID
-     */
-    protected function getUpdateCustomPostDataLog($customPostID, array $form_data): array
+    protected function getUpdateCustomPostDataLog(mixed $customPostID, array $form_data): array
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $log = array(
@@ -302,7 +286,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return mixed The ID of the updated entity, or an Error
      */
-    protected function update(array $form_data)
+    protected function update(array $form_data): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getUpdateCustomPostData($form_data);
@@ -339,7 +323,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @param array<string, mixed> $data
      * @return mixed the ID of the created custom post
      */
-    protected function executeCreateCustomPost(array $data)
+    protected function executeCreateCustomPost(array $data): mixed
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->createCustomPost($data);
@@ -348,7 +332,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return mixed The ID of the created entity, or an Error
      */
-    protected function create(array $form_data)
+    protected function create(array $form_data): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getCreateCustomPostData($form_data);

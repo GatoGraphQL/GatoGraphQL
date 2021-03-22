@@ -75,7 +75,6 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -85,7 +84,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $locationpost = $resultItem;
         switch ($fieldName) {
             // Override fields for Location Post Links

@@ -67,7 +67,6 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -77,7 +76,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;

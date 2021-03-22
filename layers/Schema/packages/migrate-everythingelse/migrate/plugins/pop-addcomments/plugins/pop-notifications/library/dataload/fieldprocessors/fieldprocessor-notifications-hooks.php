@@ -85,7 +85,6 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -95,7 +94,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $vars = ApplicationState::getVars();
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();

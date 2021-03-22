@@ -37,21 +37,16 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
 
     /**
      * Indicates if the passed object is of type Page
-     *
-     * @param object $object
      */
-    public function isInstanceOfPageType($object): bool
+    public function isInstanceOfPageType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == 'page';
     }
 
     /**
      * Get the page with provided ID or, if it doesn't exist, null
-     *
-     * @param int $id
-     * @return WP_Post|null
      */
-    public function getPage($id)
+    public function getPage(mixed $id): ?object
     {
         $page = get_post($id);
         if (!$page || $page->post_type != 'page') {
@@ -62,10 +57,8 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
 
     /**
      * Indicate if an page with provided ID exists
-     *
-     * @param int $id
      */
-    public function pageExists($id): bool
+    public function pageExists(mixed $id): bool
     {
         return $this->getPage($id) != null;
     }
@@ -97,10 +90,8 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
     /**
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
-     *
-     * @return int|null
      */
-    public function getHomeStaticPageID()
+    public function getHomeStaticPageID(): mixed
     {
         if (get_option('show_on_front') !== 'page') {
             // Errors go in here

@@ -95,7 +95,6 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -105,7 +104,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $tagapi = $this->getTypeAPI();
         $post = $resultItem;
         switch ($fieldName) {

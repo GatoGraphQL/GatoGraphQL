@@ -67,7 +67,6 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -77,7 +76,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $media = $resultItem;
         switch ($fieldName) {
             case 'src':

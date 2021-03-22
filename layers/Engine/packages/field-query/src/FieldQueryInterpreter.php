@@ -245,10 +245,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAField($fieldArgValue): bool
+    public function isFieldArgumentValueAField(mixed $fieldArgValue): bool
     {
         // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
         // then it is a field
@@ -265,10 +262,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             && strpos($fieldArgValue, QuerySyntax::SYMBOL_FIELDARGS_OPENING);
     }
 
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAnExpression($fieldArgValue): bool
+    public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
     {
         // If it starts and ends with "%", it is an expression
         return
@@ -284,10 +278,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             ) == QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
     }
 
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAVariable($fieldArgValue): bool
+    public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool
     {
         // If it starts with "$", it is a variable
         return
@@ -299,10 +290,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             ) == QuerySyntax::SYMBOL_VARIABLE_PREFIX;
     }
 
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueDynamic($fieldArgValue): bool
+    public function isFieldArgumentValueDynamic(mixed $fieldArgValue): bool
     {
         return
             $this->isFieldArgumentValueAField($fieldArgValue) ||
@@ -310,10 +298,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->isFieldArgumentValueAVariable($fieldArgValue);
     }
 
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAnArrayRepresentedAsString($fieldArgValue): bool
+    public function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
     {
         // If it starts with "[" and finishes with "]"
         return

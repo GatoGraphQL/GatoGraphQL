@@ -29,16 +29,13 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 
     /**
      * Return the post's ID
-     *
-     * @param object $customPost
-     * @return void
      */
-    public function getID($customPost)
+    public function getID(object $customPost): mixed
     {
         return $customPost->ID;
     }
 
-    public function getStatus($customPostObjectOrID): ?string
+    public function getStatus(mixed $customPostObjectOrID): ?string
     {
         $status = get_post_status($customPostObjectOrID);
         return CustomPostTypeAPIUtils::convertPostStatusFromCMSToPoP($status);
@@ -233,7 +230,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         return \get_post_types($query);
     }
 
-    public function getPermalink($customPostObjectOrID): ?string
+    public function getPermalink(mixed $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -251,7 +248,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     }
 
 
-    public function getSlug($customPostObjectOrID): ?string
+    public function getSlug(mixed $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -268,16 +265,16 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         return $post_name;
     }
 
-    public function getExcerpt($customPostObjectOrID): ?string
+    public function getExcerpt(mixed $customPostObjectOrID): ?string
     {
         return \get_the_excerpt($customPostObjectOrID);
     }
-    protected function getCustomPostObjectAndID($customPostObjectOrID): array
+    protected function getCustomPostObjectAndID(mixed $customPostObjectOrID): array
     {
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
     }
 
-    public function getTitle($customPostObjectOrID): ?string
+    public function getTitle(mixed $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -286,7 +283,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         return apply_filters('the_title', $customPost->post_title, $customPostID);
     }
 
-    public function getContent($customPostObjectOrID): ?string
+    public function getContent(mixed $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -295,7 +292,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         return apply_filters('the_content', $customPost->post_content);
     }
 
-    public function getPlainTextContent($customPostObjectOrID): string
+    public function getPlainTextContent(mixed $customPostObjectOrID): string
     {
         list(
             $customPost,
@@ -315,7 +312,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         return strip_tags($ret);
     }
 
-    public function getPublishedDate($customPostObjectOrID): ?string
+    public function getPublishedDate(mixed $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -324,7 +321,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         return $customPost->post_date;
     }
 
-    public function getModifiedDate($customPostObjectOrID): ?string
+    public function getModifiedDate(mixed $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -332,7 +329,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
         return $customPost->post_modified;
     }
-    public function getCustomPostType($customPostObjectOrID): string
+    public function getCustomPostType(mixed $customPostObjectOrID): string
     {
         list(
             $customPost,
@@ -343,11 +340,8 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 
     /**
      * Get the post with provided ID or, if it doesn't exist, null
-     *
-     * @param int $id
-     * @return void
      */
-    public function getCustomPost($id)
+    public function getCustomPost(mixed $id): ?object
     {
         return \get_post($id);
     }

@@ -51,10 +51,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
 
     /**
      * Change properties for GraphQL
-     *
-     * @param string $dbKey
-     * @param [type] $id
-     * @return array
      */
     protected function addFieldOrDirectiveEntryToExtensions(array &$extensions, array $item): void
     {
@@ -84,10 +80,8 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
     /**
      * Change properties for GraphQL
-     *
-     * @param [type] $id
      */
-    protected function getDBEntryExtensions(string $dbKey, $id, array $item): array
+    protected function getDBEntryExtensions(string $dbKey, mixed $id, array $item): array
     {
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {

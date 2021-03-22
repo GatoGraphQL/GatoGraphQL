@@ -43,10 +43,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         }
     }
 
-    /**
-     * @param mixed $post_id
-     */
-    protected function createAdditionals($post_id, array $form_data): void
+    protected function createAdditionals(mixed $post_id, array $form_data): void
     {
         parent::createAdditionals($post_id, $form_data);
 
@@ -56,10 +53,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
     }
 
-    /**
-     * @param mixed $post_id
-     */
-    protected function updateAdditionals($post_id, array $form_data, array $log): void
+    protected function updateAdditionals(mixed $post_id, array $form_data, array $log): void
     {
         parent::updateAdditionals($post_id, $form_data, $log);
 

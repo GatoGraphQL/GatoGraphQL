@@ -11,8 +11,6 @@ interface MenuTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Menu
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfMenuType($object): bool;
+    public function isInstanceOfMenuType(object $object): bool;
 }

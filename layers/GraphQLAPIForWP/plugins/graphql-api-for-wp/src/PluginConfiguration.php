@@ -122,11 +122,8 @@ class PluginConfiguration
      * Hidden input "form-origin" is used to only execute for this plugin,
      * since options.php is used everywhere, including WP core and other plugins.
      * Otherwise, it may thrown an exception!
-     *
-     * @param mixed $value
-     * @return mixed
      */
-    protected static function maybeOverrideValueFromForm($value, string $module, string $option)
+    protected static function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
         if (

@@ -57,7 +57,6 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -67,7 +66,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    );
+    ): mixed;
     /**
      * The mutation can be validated either on the schema (`false`)
      * on on the resultItem (`true`)

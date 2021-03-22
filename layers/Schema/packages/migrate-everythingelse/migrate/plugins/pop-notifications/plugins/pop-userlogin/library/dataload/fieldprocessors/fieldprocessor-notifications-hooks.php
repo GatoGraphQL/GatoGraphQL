@@ -66,7 +66,6 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -76,7 +75,7 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $notification = $resultItem;
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($fieldName) {

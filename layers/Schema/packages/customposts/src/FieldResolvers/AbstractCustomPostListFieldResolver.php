@@ -127,7 +127,6 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -137,7 +136,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'customPosts':

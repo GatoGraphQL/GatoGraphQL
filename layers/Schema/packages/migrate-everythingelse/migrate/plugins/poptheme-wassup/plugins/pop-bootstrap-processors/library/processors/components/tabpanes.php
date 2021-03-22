@@ -62,7 +62,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getID(array $module, array &$props)
+    public function getID(array $module, array &$props): string
     {
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_ADDONS:

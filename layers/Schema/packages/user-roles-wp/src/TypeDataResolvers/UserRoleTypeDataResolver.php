@@ -13,12 +13,20 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return 'administrator';
     }
 
+    /**
+     * @return string[]
+     */
     public function getRoleNames(): array
     {
         $userRoles = \wp_roles();
         return array_keys($userRoles->roles);
     }
 
+    /**
+     * All available capabilities
+     *
+     * @return string[]
+     */
     public function getCapabilities(): array
     {
         /**
@@ -35,7 +43,10 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return array_values(array_unique($capabilities));
     }
 
-    public function getUserRoles($userObjectOrID): array
+    /**
+     * @return string[]
+     */
+    public function getUserRoles(mixed $userObjectOrID): array
     {
         if (is_object($userObjectOrID)) {
             $user = $userObjectOrID;
@@ -45,7 +56,10 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return $user->roles;
     }
 
-    public function getUserCapabilities($userObjectOrID): array
+    /**
+     * @return string[]
+     */
+    public function getUserCapabilities(mixed $userObjectOrID): array
     {
         $roles = $this->getUserRoles($userObjectOrID);
         $capabilities = [];
@@ -59,12 +73,12 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return array_values(array_unique($capabilities));
     }
 
-    public function getTheUserRole($userObjectOrID)
+    public function getTheUserRole(mixed $userObjectOrID): string
     {
         return \get_the_user_role($userObjectOrID);
     }
 
-    public function userCan($userObjectOrID, $capability)
+    public function userCan(mixed $userObjectOrID, string $capability): bool
     {
         return \user_can($userObjectOrID, $capability);
     }

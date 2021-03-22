@@ -61,7 +61,6 @@ class SiteFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -71,7 +70,7 @@ class SiteFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $site = $resultItem;
         switch ($fieldName) {
             case 'domain':

@@ -59,11 +59,8 @@ class CustomPostMutationResolverHooks extends AbstractHookSet
 
     /**
      * If entry "featuredImageID" has an ID, set it. If it is null, remove it
-     *
-     * @param mixed $customPostID
-     * @param mixed $form_data
      */
-    public function setOrRemoveFeaturedImage($customPostID, $form_data): void
+    public function setOrRemoveFeaturedImage(mixed $customPostID, array $form_data): void
     {
         $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();
         if (isset($form_data[MutationInputProperties::FEATUREDIMAGE_ID])) {

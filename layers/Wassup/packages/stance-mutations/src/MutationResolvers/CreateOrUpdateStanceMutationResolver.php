@@ -8,10 +8,7 @@ use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
 class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMutationResolver
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         if ($this->isUpdate($form_data)) {
             return $this->update($form_data);

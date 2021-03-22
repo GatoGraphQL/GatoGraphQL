@@ -13,12 +13,9 @@ interface CustomPostTypeAPIInterface extends CustomPostTypeInterface
 {
     /**
      * Get the custom post with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getCustomPost($id);
-    public function getCustomPostType($objectOrID): string;
+    public function getCustomPost(mixed $id): ?object;
+    public function getCustomPostType(mixed $objectOrID): string;
     /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options

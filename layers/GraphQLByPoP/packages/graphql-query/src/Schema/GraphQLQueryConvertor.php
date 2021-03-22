@@ -484,9 +484,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     /**
      * Function copied from youshido/graphql/src/Execution/Processor.php
-     *
-     * @param [type] $payload
-     * @return void
      */
     protected function parseAndCreateRequest(
         string $payload,

@@ -15,13 +15,13 @@ class AbstractHighlightTypeResolverPicker extends AbstractTypeResolverPicker
         return HighlightTypeResolver::class;
     }
 
-    public function isInstanceOfType($object): bool
+    public function isInstanceOfType(object $object): bool
     {
         $highlightTypeAPI = HighlightTypeAPIFacade::getInstance();
         return $highlightTypeAPI->isInstanceOfHighlightType($object);
     }
 
-    public function isIDOfType($resultItemID): bool
+    public function isIDOfType(mixed $resultItemID): bool
     {
         $highlightTypeAPI = HighlightTypeAPIFacade::getInstance();
         return $highlightTypeAPI->highlightExists($resultItemID);

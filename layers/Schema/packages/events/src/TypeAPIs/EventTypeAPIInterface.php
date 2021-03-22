@@ -13,24 +13,16 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Event
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfEventType($object): bool;
+    public function isInstanceOfEventType(object $object): bool;
     /**
      * Indicate if an event with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function eventExists($id): bool;
+    public function eventExists(mixed $id): bool;
     /**
      * Get the event with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getEvent($customPostID);
+    public function getEvent(mixed $customPostID): ?object;
     /**
      * Get the list of events
      *

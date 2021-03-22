@@ -11,29 +11,18 @@ interface LocationPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type LocationPost
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationPostType($object): bool;
+    public function isInstanceOfLocationPostType(object $object): bool;
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getLocationPost($id);
+    public function getLocationPost(mixed $id): ?object;
     /**
      * Indicate if an locationPost with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function locationPostExists($id): bool;
+    public function locationPostExists(mixed $id): bool;
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getLocationPosts($query, array $options = []): array;
+    public function getLocationPosts(array $query, array $options = []): array;
 }

@@ -129,10 +129,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * - If the field involves an interface, the entry can be many, 1 for each type
      * implementing the interface
      *
-     * @param mixed $value
      * @return array<array> The list of entries, where an entry is an array [$typeResolverClass, $field, $value]
      */
-    protected function getEntriesFromField(string $selectedField, $value): array
+    protected function getEntriesFromField(string $selectedField, mixed $value): array
     {
         $namespacedTypeNameClasses = $this->getNamespacedTypeNameClasses();
         // The field is composed by the type namespaced name, and the field name, separated by "."
@@ -164,10 +163,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * Create the service configuration entries comprising a directive and its value
      * It returns an array of arrays
      *
-     * @param mixed $value
      * @return array<array> The list of entries, where an entry is an array [$directiveResolverClass, $value]
      */
-    protected function getEntriesFromDirective(string $selectedDirective, $value): ?array
+    protected function getEntriesFromDirective(string $selectedDirective, mixed $value): ?array
     {
         $directiveNameClasses = $this->getDirectiveNameClasses();
         // Obtain the directive resolver class from the directive name.

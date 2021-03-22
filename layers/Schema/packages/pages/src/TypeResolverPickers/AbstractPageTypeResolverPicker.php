@@ -15,13 +15,13 @@ abstract class AbstractPageTypeResolverPicker extends AbstractTypeResolverPicker
         return PageTypeResolver::class;
     }
 
-    public function isInstanceOfType($object): bool
+    public function isInstanceOfType(object $object): bool
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         return $pageTypeAPI->isInstanceOfPageType($object);
     }
 
-    public function isIDOfType($resultItemID): bool
+    public function isIDOfType(mixed $resultItemID): bool
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         return $pageTypeAPI->pageExists($resultItemID);

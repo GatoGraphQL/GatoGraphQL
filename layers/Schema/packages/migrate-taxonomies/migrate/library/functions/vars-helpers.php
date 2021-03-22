@@ -7,11 +7,8 @@ class VarsHelpers
     /**
      * Save the name of the taxonomy as an attribute,
      * needed to match the RouteModuleProcessor vars conditions
-     *
-     * @param [type] $vars
-     * @return void
      */
-    public static function addQueriedObjectTaxonomyNameToVars(&$vars)
+    public static function addQueriedObjectTaxonomyNameToVars(array &$vars): void
     {
         $taxonomyTypeAPI = TaxonomyTypeAPIFacade::getInstance();
         $termObjectID = $vars['routing-state']['queried-object-id'];

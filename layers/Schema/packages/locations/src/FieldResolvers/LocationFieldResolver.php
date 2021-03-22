@@ -55,7 +55,6 @@ class LocationFieldResolver extends AbstractDBDataFieldResolver
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         TypeResolverInterface $typeResolver,
@@ -65,7 +64,7 @@ class LocationFieldResolver extends AbstractDBDataFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $pluginapi = \PoP_Locations_APIFactory::getInstance();
         $location = $resultItem;
         switch ($fieldName) {
