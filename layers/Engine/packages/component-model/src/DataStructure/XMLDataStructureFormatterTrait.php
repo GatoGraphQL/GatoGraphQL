@@ -15,11 +15,8 @@ trait XMLDataStructureFormatterTrait
 
     /**
      * Iterate the array and print all the entries as a properties file
-     *
-     * @param [type] $data
-     * @return void
      */
-    protected function printData(&$data)
+    protected function printData(array &$data): void
     {
         // Code taken from Function taken from https://stackoverflow.com/a/5965940
         $xml_data = new SimpleXMLElement('<?xml version="1.0"?><data></data>');
