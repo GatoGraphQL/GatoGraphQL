@@ -42,8 +42,6 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
 
     /**
      * Custom post type name
-     *
-     * @return void
      */
     public function getPostTypeName(): string
     {
