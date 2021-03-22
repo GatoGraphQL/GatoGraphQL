@@ -58,9 +58,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
 
     /**
      * Given a field, return its corresponding "not(isEmpty($field))
-     *
-     * @param array $fields
-     * @return array
      */
     protected function getNotIsEmptyConditionField(string $field): string
     {

@@ -31,9 +31,6 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     public function getEvents($query = array(), array $options = []): array;
     /**
      * Get the number of events
-     *
-     * @param array $query
-     * @return array
      */
     public function getEventCount($query = array(), array $options = []): int;
 

@@ -11,8 +11,6 @@ interface TypeResolverDecoratorInterface extends AttachableExtensionInterface
 {
     /**
      * Allow to disable the functionality
-     *
-     * @return array
      */
     public function enabled(TypeResolverInterface $typeResolver): bool;
     /**

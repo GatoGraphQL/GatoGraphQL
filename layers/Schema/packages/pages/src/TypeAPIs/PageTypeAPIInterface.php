@@ -29,8 +29,6 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
     public function getPages(array $query, array $options = []): array;
     /**
      * Get the number of pages
-     *
-     * @return array
      */
     public function getPageCount(array $query = [], array $options = []): int;
     /**
