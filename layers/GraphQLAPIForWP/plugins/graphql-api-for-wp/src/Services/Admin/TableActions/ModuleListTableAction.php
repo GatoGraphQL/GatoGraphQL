@@ -88,10 +88,8 @@ class ModuleListTableAction extends AbstractListTableAction
     /**
      * Process bulk and single actions.
      * This function can be executed only once, from either the Plugin class or the table
-     *
-     * @return void
      */
-    public function maybeProcessAction()
+    public function maybeProcessAction(): void
     {
         // Process only once
         if ($this->processed) {
