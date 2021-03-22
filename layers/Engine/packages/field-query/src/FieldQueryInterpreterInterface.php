@@ -10,26 +10,11 @@ interface FieldQueryInterpreterInterface
     public function getFieldArgs(string $field): ?string;
     public function isSkipOuputIfNullField(string $field): bool;
     public function removeSkipOuputIfNullFromField(string $field): string;
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAField($fieldArgValue): bool;
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAVariable($fieldArgValue): bool;
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAnExpression($fieldArgValue): bool;
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueDynamic($fieldArgValue): bool;
-    /**
-     * @param mixed $fieldArgValue
-     */
-    public function isFieldArgumentValueAnArrayRepresentedAsString($fieldArgValue): bool;
+    public function isFieldArgumentValueAField(mixed $fieldArgValue): bool;
+    public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool;
+    public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool;
+    public function isFieldArgumentValueDynamic(mixed $fieldArgValue): bool;
+    public function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool;
     public function createFieldArgValueAsFieldFromFieldName(string $fieldName): string;
     public function getFieldAlias(string $field): ?string;
     /**

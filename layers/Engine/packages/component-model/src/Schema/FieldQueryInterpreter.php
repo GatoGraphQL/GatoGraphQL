@@ -840,7 +840,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         // If any casting can't be done, show an error
         if (
-            $failedCastingFieldArgs = array_filter($castedFieldArgs, function ($fieldArgValue) {
+            $failedCastingFieldArgs = array_filter($castedFieldArgs, function (mixed $fieldArgValue) {
                 return is_null($fieldArgValue);
             })
         ) {
@@ -899,7 +899,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldArgValue = stripcslashes($fieldArgValue);
 
                 // If it has quotes at the beginning and end, it's a string. Remove them
-                if ($this->isFieldArgumentValueWrappedWithStringSymbols($fieldArgValue)) {
+                if ($this->isFieldArgumentValueWrappedWithStringSymbols((string) $fieldArgValue)) {
                     $fieldArgValue = substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING));
                 }
 
@@ -915,14 +915,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgValue;
     }
 
-    protected function isFieldArgumentValueWrappedWithStringSymbols($fieldArgValue): bool
+    protected function isFieldArgumentValueWrappedWithStringSymbols(string $fieldArgValue): bool
     {
         return
             substr($fieldArgValue, 0, strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING)) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING &&
             substr($fieldArgValue, -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING)) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING;
     }
 
-    protected function maybeConvertFieldArgumentVariableValue($fieldArgValue, ?array $variables)
+    protected function maybeConvertFieldArgumentVariableValue(mixed $fieldArgValue, ?array $variables): mixed
     {
         // If it is a variable, retrieve the actual value from the request
         if ($this->isFieldArgumentValueAVariable($fieldArgValue)) {
@@ -948,7 +948,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgValue;
     }
 
-    protected function maybeConvertFieldArgumentArrayValueFromStringToArray(string $fieldArgValue)
+    protected function maybeConvertFieldArgumentArrayValueFromStringToArray(string $fieldArgValue): mixed
     {
         // If surrounded by [...], it is an array
         if ($this->isFieldArgumentValueAnArrayRepresentedAsString($fieldArgValue)) {
@@ -1011,7 +1011,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function maybeResolveFieldArgumentValueForResultItem(
         TypeResolverInterface $typeResolver,
         object $resultItem,
-        $fieldArgValue,
+        mixed $fieldArgValue,
         ?array $variables,
         ?array $expressions
     ): mixed {
@@ -1063,7 +1063,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(TypeResolverInterface $typeResolver, $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(TypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
@@ -1074,7 +1074,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
         // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
         // and is not wrapped with quotes, then it is a field. Validate it and resolve it
-        if (!empty($fieldArgValue) && is_string($fieldArgValue) && !is_numeric($fieldArgValue) && !$this->isFieldArgumentValueWrappedWithStringSymbols($fieldArgValue)) {
+        if (!empty($fieldArgValue) && is_string($fieldArgValue) && !is_numeric($fieldArgValue) && !$this->isFieldArgumentValueWrappedWithStringSymbols((string) $fieldArgValue)) {
             $fieldArgValue = (string)$fieldArgValue;
             // If it has the fieldArg brackets, and the last bracket is at the end, then it's a field!
             list(
@@ -1124,7 +1124,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return [];
     }
 
-    protected function resolveFieldArgumentValueWarningsForSchema(TypeResolverInterface $typeResolver, $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueWarningsForSchema(TypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
@@ -1141,7 +1141,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return [];
     }
 
-    protected function resolveFieldArgumentValueDeprecationsForSchema(TypeResolverInterface $typeResolver, $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueDeprecationsForSchema(TypeResolverInterface $typeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
