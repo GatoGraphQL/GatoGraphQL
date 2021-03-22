@@ -882,8 +882,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * - A variable, if it starts with "$"
      * - An array, if it is surrounded with brackets and split with commas ([..., ..., ...])
      * - A number/string/field otherwise
-     *
-     * @param array|null $variables
      */
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
