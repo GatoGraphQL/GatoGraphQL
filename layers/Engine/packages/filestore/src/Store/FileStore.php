@@ -9,10 +9,7 @@ use PoP\FileStore\File\AbstractFile;
 
 class FileStore implements FileStoreInterface
 {
-    /**
-     * @param mixed $contents
-     */
-    public function save(AbstractFile $file, $contents): void
+    public function save(AbstractFile $file, mixed $contents): void
     {
         $filePath = $file->getFilepath();
 

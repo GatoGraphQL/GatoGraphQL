@@ -8,10 +8,7 @@ use PoP\FileStore\File\AbstractFile;
 
 class JSONFileStore extends FileStore
 {
-    /**
-     * @param mixed $contents
-     */
-    public function save(AbstractFile $file, $contents): void
+    public function save(AbstractFile $file, mixed $contents): void
     {
         // Encode it and save it
         parent::save($file, json_encode($contents));
