@@ -133,10 +133,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         // }
     }
 
-    /**
-     * @param mixed $customPostID
-     */
-    protected function additionals($customPostID, array $form_data): void
+    protected function additionals(mixed $customPostID, array $form_data): void
     {
         parent::additionals($customPostID, $form_data);
 
@@ -228,10 +225,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         return $this->maybeAddParentCategories($cats);
     }
 
-    /**
-     * @param mixed $customPostID
-     */
-    protected function createUpdateCustomPost(array $form_data, $customPostID): void
+    protected function createUpdateCustomPost(array $form_data, mixed $customPostID): void
     {
         parent::createUpdateCustomPost($form_data, $customPostID);
 
@@ -240,10 +234,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         }
     }
 
-    /**
-     * @param mixed $customPostID
-     */
-    protected function getUpdateCustomPostDataLog($customPostID, array $form_data): array
+    protected function getUpdateCustomPostDataLog(mixed $customPostID, array $form_data): array
     {
         $log = parent::getUpdateCustomPostDataLog($customPostID, $form_data);
 
