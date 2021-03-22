@@ -129,10 +129,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      * - If the field involves an interface, the entry can be many, 1 for each type
      * implementing the interface
      *
-     * @param mixed $value
      * @return array<array> The list of entries, where an entry is an array [$typeResolverClass, $field, $value]
      */
-    protected function getEntriesFromField(string $selectedField, $value): array
+    protected function getEntriesFromField(string $selectedField, mixed $value): array
     {
         $namespacedTypeNameClasses = $this->getNamespacedTypeNameClasses();
         // The field is composed by the type namespaced name, and the field name, separated by "."
