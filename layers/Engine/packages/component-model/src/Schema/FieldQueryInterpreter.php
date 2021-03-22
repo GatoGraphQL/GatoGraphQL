@@ -883,11 +883,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * - An array, if it is surrounded with brackets and split with commas ([..., ..., ...])
      * - A number/string/field otherwise
      *
-     * @param [type] $typeResolver
-     * @param [type] $fieldArgValue
-     * @param [type] $variables
+     * @param array|null $variables
      */
-    public function maybeConvertFieldArgumentValue($fieldArgValue, ?array $variables = null): mixed
+    public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
             // Remove the white spaces before and after
@@ -987,7 +985,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgValue;
     }
 
-    public function maybeConvertFieldArgumentArrayValue($fieldArgValue, ?array $variables = null)
+    public function maybeConvertFieldArgumentArrayValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
             $fieldArgValue = $this->maybeConvertFieldArgumentArrayValueFromStringToArray($fieldArgValue);
