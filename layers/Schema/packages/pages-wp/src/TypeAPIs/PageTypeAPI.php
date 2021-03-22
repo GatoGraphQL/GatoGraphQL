@@ -37,10 +37,8 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
 
     /**
      * Indicates if the passed object is of type Page
-     *
-     * @param object $object
      */
-    public function isInstanceOfPageType($object): bool
+    public function isInstanceOfPageType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == 'page';
     }

@@ -11,8 +11,6 @@ interface MediaTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Media
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfMediaType($object): bool;
+    public function isInstanceOfMediaType(object $object): bool;
 }

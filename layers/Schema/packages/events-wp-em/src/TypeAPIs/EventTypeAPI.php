@@ -37,10 +37,8 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
 
     /**
      * Indicates if the passed object is of type Event
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfEventType($object): bool
+    public function isInstanceOfEventType(object $object): bool
     {
         return
             $object instanceof EM_Event ||

@@ -27,10 +27,8 @@ class StanceTypeAPI implements StanceTypeAPIInterface
 
     /**
      * Indicates if the passed object is of type Stance
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfStanceType($object): bool
+    public function isInstanceOfStanceType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \POP_USERSTANCE_POSTTYPE_USERSTANCE;
     }

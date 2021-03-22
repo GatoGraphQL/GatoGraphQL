@@ -13,10 +13,8 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Page
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfPageType($object): bool;
+    public function isInstanceOfPageType(object $object): bool;
     /**
      * Indicate if an page with provided ID exists
      *

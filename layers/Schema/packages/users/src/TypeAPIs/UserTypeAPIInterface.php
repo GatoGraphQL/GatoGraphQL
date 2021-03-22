@@ -11,8 +11,6 @@ interface UserTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type User
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfUserType($object): bool;
+    public function isInstanceOfUserType(object $object): bool;
 }

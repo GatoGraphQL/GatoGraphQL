@@ -18,10 +18,8 @@ interface StanceTypeAPIInterface
     public function getID($stance);
     /**
      * Indicates if the passed object is of type Stance
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfStanceType($object): bool;
+    public function isInstanceOfStanceType(object $object): bool;
     /**
      * Get the stance with provided ID or, if it doesn't exist, null
      *

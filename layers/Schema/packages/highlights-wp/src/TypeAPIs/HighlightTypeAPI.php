@@ -27,10 +27,8 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
 
     /**
      * Indicates if the passed object is of type Highlight
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfHighlightType($object): bool
+    public function isInstanceOfHighlightType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }

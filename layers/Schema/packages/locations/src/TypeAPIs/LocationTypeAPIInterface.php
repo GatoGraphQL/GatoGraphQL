@@ -18,8 +18,6 @@ interface LocationTypeAPIInterface
     public function getID($location);
     /**
      * Indicates if the passed object is of type Location
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationType($object): bool;
+    public function isInstanceOfLocationType(object $object): bool;
 }

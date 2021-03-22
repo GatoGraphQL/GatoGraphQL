@@ -18,10 +18,8 @@ interface HighlightTypeAPIInterface
     public function getID($highlight);
     /**
      * Indicates if the passed object is of type Highlight
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfHighlightType($object): bool;
+    public function isInstanceOfHighlightType(object $object): bool;
     /**
      * Get the highlight with provided ID or, if it doesn't exist, null
      *

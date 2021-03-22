@@ -13,10 +13,8 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Post
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfPostType($object): bool;
+    public function isInstanceOfPostType(object $object): bool;
     /**
      * Indicate if an post with provided ID exists
      *

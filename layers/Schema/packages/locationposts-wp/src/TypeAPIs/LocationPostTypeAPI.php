@@ -17,10 +17,8 @@ class LocationPostTypeAPI extends PostTypeAPI implements LocationPostTypeAPIInte
 {
     /**
      * Indicates if the passed object is of type LocationPost
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationPostType($object): bool
+    public function isInstanceOfLocationPostType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
     }

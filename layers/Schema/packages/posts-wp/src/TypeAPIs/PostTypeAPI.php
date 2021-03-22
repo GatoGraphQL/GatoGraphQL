@@ -36,10 +36,8 @@ class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
 
     /**
      * Indicates if the passed object is of type Post
-     *
-     * @param object $object
      */
-    public function isInstanceOfPostType($object): bool
+    public function isInstanceOfPostType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == 'post';
     }

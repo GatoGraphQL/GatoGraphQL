@@ -13,8 +13,6 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Category
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfCategoryType($object): bool;
+    public function isInstanceOfCategoryType(object $object): bool;
 }

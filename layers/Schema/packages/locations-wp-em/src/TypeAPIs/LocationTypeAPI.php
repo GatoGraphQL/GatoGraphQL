@@ -24,10 +24,8 @@ class LocationTypeAPI implements LocationTypeAPIInterface
     }
     /**
      * Indicates if the passed object is of type Location
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationType($object): bool
+    public function isInstanceOfLocationType(object $object): bool
     {
         return ($object instanceof WP_Post) && $object->post_type == \EM_POST_TYPE_LOCATION;
     }

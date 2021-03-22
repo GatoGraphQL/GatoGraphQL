@@ -11,10 +11,8 @@ interface LocationPostTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type LocationPost
-     *
-     * @param [type] $object
      */
-    public function isInstanceOfLocationPostType($object): bool;
+    public function isInstanceOfLocationPostType(object $object): bool;
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
      *
