@@ -7,7 +7,7 @@ use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 
 class PoP_UserPlatformWP_LooseContractImplementations extends AbstractLooseContractResolutionSet
 {
-	protected function resolveContracts()
+	protected function resolveContracts(): void
     {
 		$this->nameResolver->implementNames([
 			'popcomponent:userplatform:dbcolumn:orderby:users:lastediteddate' => 'meta_value',
