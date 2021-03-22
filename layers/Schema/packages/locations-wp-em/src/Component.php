@@ -39,7 +39,6 @@ class Component extends AbstractComponent
     /**
      * Enable if plugin Events Manager is installed
      *
-     * @return void
      * @todo Fix: This code is executed before plugins are loaded, so `defined('EM_VERSION')` returns always `false`. Temporarily return always `true`
      */
     protected static function resolveEnabled(): bool
