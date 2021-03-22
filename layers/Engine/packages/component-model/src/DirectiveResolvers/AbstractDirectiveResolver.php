@@ -361,7 +361,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  */
                 try {
                     return Semver::satisfies($schemaDirectiveVersion, $versionConstraint);
-                } catch (Exception $e) {
+                } catch (Exception) {
                     return false;
                 }
             }

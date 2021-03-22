@@ -30,7 +30,7 @@ class SupportMenuPage extends AbstractDocsMenuPage
         $markdownContentParser = MarkdownContentParserFacade::getInstance();
         try {
             return $markdownContentParser->getContent('support.md', '', [ContentParserOptions::TAB_CONTENT => false]);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',
                 \__('Oops, there was a problem loading the page', 'graphql-api')

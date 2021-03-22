@@ -52,7 +52,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
                         ContentParserOptions::TAB_CONTENT => true,
                     ]
                 );
-            } catch (InvalidArgumentException $e) {
+            } catch (InvalidArgumentException) {
                 return sprintf(
                     '<p>%s</p>',
                     \__('Oops, the documentation for this module is not available', 'graphql-api')

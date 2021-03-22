@@ -55,7 +55,7 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
         $markdownContentParser = MarkdownContentParserFacade::getInstance();
         try {
             return $markdownContentParser->getContent($doc, $this->getRelativePathDir());
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',
                 sprintf(

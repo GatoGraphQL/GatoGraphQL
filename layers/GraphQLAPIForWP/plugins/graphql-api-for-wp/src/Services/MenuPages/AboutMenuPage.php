@@ -38,7 +38,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $markdownContentParser = MarkdownContentParserFacade::getInstance();
         try {
             return $markdownContentParser->getContent('about.md', '', [ContentParserOptions::TAB_CONTENT => true]);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',
                 \__('Oops, there was a problem loading the page', 'graphql-api')

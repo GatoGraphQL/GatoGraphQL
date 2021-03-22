@@ -147,7 +147,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  */
                 try {
                     return Semver::satisfies($schemaFieldVersion, $versionConstraint);
-                } catch (Exception $e) {
+                } catch (Exception) {
                     return false;
                 }
             }

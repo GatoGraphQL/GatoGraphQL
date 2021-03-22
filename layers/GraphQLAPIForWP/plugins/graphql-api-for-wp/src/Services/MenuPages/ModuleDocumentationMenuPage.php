@@ -69,7 +69,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         $module = urldecode($vars[RequestParams::MODULE]);
         try {
             $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',
                 sprintf(
