@@ -18,7 +18,7 @@ abstract class AbstractListTableAction
      *
      * @return string|false The action name or False if no action was selected
      */
-    public function currentAction()
+    public function currentAction(): string|false
     {
         if (isset($_REQUEST['filter_action']) && ! empty($_REQUEST['filter_action'])) {
             return false;

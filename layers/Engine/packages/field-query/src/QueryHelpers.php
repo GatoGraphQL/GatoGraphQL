@@ -70,10 +70,7 @@ class QueryHelpers
         ];
     }
 
-    /**
-     * @return int|false
-     */
-    public static function findFieldAliasSymbolPosition(string $field)
+    public static function findFieldAliasSymbolPosition(string $field): int|false
     {
         return QueryUtils::findFirstSymbolPosition(
             $field,
@@ -89,10 +86,7 @@ class QueryHelpers
         );
     }
 
-    /**
-     * @return int|false
-     */
-    public static function findSkipOutputIfNullSymbolPosition(string $field)
+    public static function findSkipOutputIfNullSymbolPosition(string $field): int|false
     {
         return QueryUtils::findFirstSymbolPosition(
             $field,
