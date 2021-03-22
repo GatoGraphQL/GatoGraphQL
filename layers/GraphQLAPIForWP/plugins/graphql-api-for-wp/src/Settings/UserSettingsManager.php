@@ -120,10 +120,8 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     /**
      * Store the options in the DB
-     *
-     * @param mixed $value
      */
-    protected function storeItem(string $optionName, string $item, $value): void
+    protected function storeItem(string $optionName, string $item, mixed $value): void
     {
         $this->storeItems($optionName, [$item => $value]);
     }
