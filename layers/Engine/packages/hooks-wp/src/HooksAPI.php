@@ -28,10 +28,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return \remove_action($tag, $function_to_remove, $priority);
     }
-    /**
-     * @param mixed ...$args
-     */
-    public function doAction(string $tag, ...$args): void
+    public function doAction(string $tag, mixed ...$args): void
     {
         \do_action($tag, ...$args);
     }

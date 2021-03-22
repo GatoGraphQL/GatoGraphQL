@@ -25,10 +25,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return true;
     }
-    /**
-     * @param mixed ...$args
-     */
-    public function doAction(string $tag, ...$args): void
+    public function doAction(string $tag, mixed ...$args): void
     {
     }
 }
