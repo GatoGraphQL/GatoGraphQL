@@ -65,7 +65,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
      */
     protected function getArrayItems(array &$array, mixed $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
-        if ($if = $this->directiveArgsForSchema['if']) {
+        if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             $translationAPI = TranslationAPIFacade::getInstance();
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out

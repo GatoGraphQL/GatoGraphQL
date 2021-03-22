@@ -22,7 +22,7 @@ class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     {
-        return $fieldArgs['branch'] == 'try-new-features' && $fieldArgs['project'] == 'block-metadata';
+        return ($fieldArgs['branch'] ?? null) == 'try-new-features' && ($fieldArgs['project'] ?? null) == 'block-metadata';
     }
 
     public function getFieldNamesToResolve(): array
