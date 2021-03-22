@@ -10,9 +10,7 @@ use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use PoP\Translation\Facades\TranslationAPIFacade;
-
-use function GuzzleHttp\Promise\unwrap;
-use function GuzzleHttp\Promise\settle;
+use GuzzleHttp\Promise\Utils;
 
 class GuzzleHelpers
 {
@@ -130,10 +128,10 @@ class GuzzleHelpers
 
             // Wait on all of the requests to complete. Throws a ConnectException
             // if any of the requests fail
-            $results = unwrap($promises);
+            $results = Utils::unwrap($promises);
 
             // Wait for the requests to complete, even if some of them fail
-            $results = settle($promises)->wait();
+            $results = Utils::settle($promises)->wait();
 
             // You can access each result using the key provided to the unwrap function.
             return array_map(
