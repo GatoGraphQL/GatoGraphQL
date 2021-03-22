@@ -25,7 +25,7 @@ class Site
         // $this->name = $name;
         // $this->description = $description;
     }
-    public function getID()
+    public function getID(): string
     {
         return $this->id;
     }
