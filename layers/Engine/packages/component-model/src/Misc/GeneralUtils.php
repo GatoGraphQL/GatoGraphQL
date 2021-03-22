@@ -23,10 +23,8 @@ class GeneralUtils
 
     /**
      * Check if the thing is of type Error
-     *
-     * @param mixed $thing
      */
-    public static function isError($thing): bool
+    public static function isError(mixed $thing): bool
     {
         return $thing !== null && $thing instanceof Error;
     }
