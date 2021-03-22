@@ -140,8 +140,6 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
 
     /**
      * Default value for an option set by the module
-     *
-     * @return mixed Anything the setting might be: an array|string|bool|int|null
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {

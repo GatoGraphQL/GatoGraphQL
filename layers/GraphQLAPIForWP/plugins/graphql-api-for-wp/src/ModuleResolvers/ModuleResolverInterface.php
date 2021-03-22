@@ -67,9 +67,7 @@ interface ModuleResolverInterface
      */
     public function isValidValue(string $module, string $option, $value): bool;
     /**
-     * Name of the setting item, to store in the DB
-     *
-     * @return mixed
+     * Default value for an option set by the module
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed;
     public function isEnabledByDefault(string $module): bool;
