@@ -364,14 +364,22 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     //     // $pos = QueryUtils::findLastSymbolPosition($arrayItemProperty, self::PROPERTY_SEPARATOR);
     //     return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     // }
-    /**
-     * Add the $key in addition to the $value
-     *
-     * @param [type] $id
-     * @return void
-     */
-    protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    {
+    protected function addExpressionsForResultItem(
+        TypeResolverInterface $typeResolver,
+        $id,
+        string $field,
+        array &$resultIDItems,
+        array &$dbItems,
+        array &$previousDBItems,
+        array &$variables,
+        array &$messages,
+        array &$dbErrors,
+        array &$dbWarnings,
+        array &$dbDeprecations,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations
+    ): void {
         $translationAPI = TranslationAPIFacade::getInstance();
         // Enable the query to provide variables to pass down
         $addExpressions = $this->directiveArgsForSchema['addExpressions'] ?? [];
@@ -420,10 +428,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $value = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, $key, $resolvedValue, $messages);
+                $this->addExpressionForResultItem($id, (string) $key, $resolvedValue, $messages);
             }
             foreach ($appendExpressions as $key => $value) {
-                $existingValue = $this->getExpressionForResultItem($id, $key, $messages) ?? [];
+                $existingValue = $this->getExpressionForResultItem($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
@@ -452,7 +460,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $existingValue[] = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, $key, $existingValue, $messages);
+                $this->addExpressionForResultItem($id, (string) $key, $existingValue, $messages);
             }
         }
     }

@@ -280,14 +280,22 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     }
 
-    /**
-     * Add the $key in addition to the $value
-     *
-     * @param [type] $id
-     * @return void
-     */
-    protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    {
+    protected function addExpressionsForResultItem(
+        TypeResolverInterface $typeResolver,
+        $id,
+        string $field,
+        array &$resultIDItems,
+        array &$dbItems,
+        array &$previousDBItems,
+        array &$variables,
+        array &$messages,
+        array &$dbErrors,
+        array &$dbWarnings,
+        array &$dbDeprecations,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations
+    ): void {
         // First let the parent add $value, then also add $key, which can be deduced from the fieldOutputKey
         parent::addExpressionsForResultItem($typeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
