@@ -314,7 +314,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return $typeResolverPickers;
     }
 
-    public function getTypeResolverClassForResultItem($resultItemID)
+    public function getTypeResolverClassForResultItem(mixed $resultItemID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -364,14 +364,14 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return null;
     }
 
-    protected function getUnresolvedResultItemIDError($resultItemID)
+    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
                 $translationAPI->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
-                $resultItemID
+                (string) $resultItemID
             )
         );
     }

@@ -95,7 +95,7 @@ class ErrorUtils
         }
         return $error;
     }
-    public static function getNoFieldResolverProcessesFieldError($resultItemID, string $fieldName, array $fieldArgs): Error
+    public static function getNoFieldResolverProcessesFieldError(mixed $resultItemID, string $fieldName, array $fieldArgs): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return self::getError(
@@ -104,7 +104,7 @@ class ErrorUtils
             sprintf(
                 $translationAPI->__('No FieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
                 $fieldName,
-                $resultItemID
+                (string) $resultItemID
             )
         );
     }

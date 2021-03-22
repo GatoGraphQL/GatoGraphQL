@@ -696,7 +696,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedResultItemIDError($resultItemID)
+    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
@@ -704,7 +704,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             sprintf(
                 $translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getTypeOutputName(),
-                $resultItemID
+                (string) $resultItemID
             )
         );
     }

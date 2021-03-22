@@ -21,7 +21,7 @@ abstract class AbstractEventTypeResolverPicker extends AbstractTypeResolverPicke
         return $eventTypeAPI->isInstanceOfEventType($object);
     }
 
-    public function isIDOfType($resultItemID): bool
+    public function isIDOfType(mixed $resultItemID): bool
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         return $eventTypeAPI->eventExists($resultItemID);

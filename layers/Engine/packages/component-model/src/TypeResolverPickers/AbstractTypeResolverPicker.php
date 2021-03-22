@@ -10,7 +10,7 @@ abstract class AbstractTypeResolverPicker implements TypeResolverPickerInterface
 {
     use AttachableExtensionTrait;
 
-    public function isIDOfType($resultItemID): bool
+    public function isIDOfType(mixed $resultItemID): bool
     {
         return true;
     }
