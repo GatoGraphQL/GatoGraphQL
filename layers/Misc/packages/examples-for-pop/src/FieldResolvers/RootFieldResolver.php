@@ -13,7 +13,7 @@ class RootFieldResolver extends \Leoloso\ExamplesForPoP\FieldResolvers\Legacy\Ve
 {
     public function getPriorityToAttachToClasses(): int
     {
-        return null;
+        return 10;
     }
 
     public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool

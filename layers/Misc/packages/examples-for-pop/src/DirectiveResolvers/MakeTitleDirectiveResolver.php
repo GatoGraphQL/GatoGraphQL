@@ -13,7 +13,7 @@ class MakeTitleDirectiveResolver extends MakeTitleVersion010DirectiveResolver
 {
     public function getPriorityToAttachToClasses(): int
     {
-        return null;
+        return 10;
     }
 
     public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool
