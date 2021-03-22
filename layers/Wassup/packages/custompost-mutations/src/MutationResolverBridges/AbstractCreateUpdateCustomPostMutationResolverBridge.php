@@ -32,8 +32,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     /**
      * The ID comes directly as a parameter in the request, it's not a form field
-     *
-     * @return mixed
      */
     protected function getUpdateCustomPostID(): mixed
     {
