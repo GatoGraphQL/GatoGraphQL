@@ -53,7 +53,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         return $id;
     }
 
-    public function getID(array $module, array &$props)
+    public function getID(array $module, array &$props): string
     {
         $moduleOutputName = ModuleUtils::getModuleOutputName($module);
         // if ($this->fixedId($module, $props)) {
