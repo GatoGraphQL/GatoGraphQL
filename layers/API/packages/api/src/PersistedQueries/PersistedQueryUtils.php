@@ -10,9 +10,6 @@ class PersistedQueryUtils
 {
     /**
      * Trim, and remove tabs and new lines
-     *
-     * @param string $fragmentResolution
-     * @return string
      */
     public static function removeWhitespaces(string $fragmentResolution): string
     {
@@ -23,9 +20,6 @@ class PersistedQueryUtils
      * Symfony's DependencyInjection component uses format "%parameter%", and PoP API uses format "%expression%",
      * so when passing an expression like "%self%" it throws an exception, expecting this to be a parameter (which doesn't exist!)
      * To fix it, we add a space in all expressions like this: "% expression %", which works for the PoP API since the expression name is trimmed
-     *
-     * @param string $fragmentResolution
-     * @return string
      */
     public static function addSpacingToExpressions(string $fragmentResolution): string
     {
@@ -34,9 +28,6 @@ class PersistedQueryUtils
 
     /**
      * Retrieve the query name from the persisted query param, which starts with "!"
-     *
-     * @param string $query
-     * @return string
      */
     public static function maybeGetPersistedQuery(string $query): string
     {

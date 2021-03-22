@@ -388,11 +388,9 @@ class Parser extends Tokenizer
     }
 
     /**
-     * @return array|InputList|InputObject|Literal|VariableReference
-     *
      * @throws SyntaxErrorException
      */
-    protected function parseValue()
+    protected function parseValue(): array|InputList|InputObject|Literal|VariableReference
     {
         switch ($this->lookAhead->getType()) {
             case Token::TYPE_LSQUARE_BRACE:

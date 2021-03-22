@@ -28,9 +28,6 @@ class EndpointUtils
 
     /**
      * Make sure the URI has "/" at both ends
-     *
-     * @param string $uri
-     * @return string
      */
     public static function slashURI(string $uri): string
     {
@@ -39,10 +36,6 @@ class EndpointUtils
 
     /**
      * Indicate if the URI ends with the given endpoint
-     *
-     * @param string $uri
-     * @param string $endpointURI
-     * @return boolean
      */
     public static function doesURIEndWith(string $uri, string $endpointURI): bool
     {

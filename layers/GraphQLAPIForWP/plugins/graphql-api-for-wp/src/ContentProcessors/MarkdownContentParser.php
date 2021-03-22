@@ -8,11 +8,8 @@ use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
-    protected MarkdownConvertorInterface $markdownConvertorInterface;
-
-    function __construct(MarkdownConvertorInterface $markdownConvertorInterface)
+    function __construct(protected MarkdownConvertorInterface $markdownConvertorInterface)
     {
-        $this->markdownConvertorInterface = $markdownConvertorInterface;
     }
 
     /**

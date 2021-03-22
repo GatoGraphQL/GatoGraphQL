@@ -16,18 +16,12 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
-    protected Menu $menu;
-    protected MenuPageHelper $menuPageHelper;
-    protected EndpointHelpers $endpointHelpers;
 
     function __construct(
-        Menu $menu,
-        MenuPageHelper $menuPageHelper,
-        EndpointHelpers $endpointHelpers
+        protected Menu $menu,
+        protected MenuPageHelper $menuPageHelper,
+        protected EndpointHelpers $endpointHelpers
     ) {
-        $this->menu = $menu;
-        $this->menuPageHelper = $menuPageHelper;
-        $this->endpointHelpers = $endpointHelpers;
     }
 
     public function setHookName(string $hookName): void
@@ -53,8 +47,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Maybe enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     public function maybeEnqueueAssets(): void
     {
@@ -96,8 +88,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueAssets(): void
     {

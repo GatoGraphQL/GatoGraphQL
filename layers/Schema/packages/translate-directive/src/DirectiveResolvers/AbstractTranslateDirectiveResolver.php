@@ -26,8 +26,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
 
         /**
      * The name of the API's provider
-     *
-     * @return array
      */
     abstract public function getProvidersToResolve(): array;
 
@@ -37,7 +35,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
      * Using this function because `resolveCanProcess` doesn't get the default value,
      * i.e. when arg "provider" is not provided in the query
      *
-     * @param array $directiveArgs
      * @return void
      */
     protected function getProvider(array $directiveArgs): ?string
@@ -51,11 +48,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
 
     /**
      * Only process the directive if this directiveResolver can handle the provider
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $directiveName
-     * @param array $directiveArgs
-     * @return boolean
      */
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
@@ -291,8 +283,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
     /**
      * Failure message to show the user, originated from Guzzle client's error
      *
-     * @param Error $error
-     * @param string $provider
      * @return void
      */
     protected function getClientFailureMessage(Error $error, string $provider): string

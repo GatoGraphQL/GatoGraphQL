@@ -9,17 +9,12 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {
-    protected EndpointHelpers $endpointHelpers;
-
-    function __construct(EndpointHelpers $endpointHelpers)
+    function __construct(protected EndpointHelpers $endpointHelpers)
     {
-        $this->endpointHelpers = $endpointHelpers;
     }
 
     /**
      * Initialize the resolver
-     *
-     * @return void
      */
     public function initialize(): void
     {

@@ -13,7 +13,6 @@ use PoP\ComponentModel\ErrorHandling\Error;
 abstract class AbstractFormComponentMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     /**
-     * @param array $data_properties
      * @return array<string, mixed>|null
      */
     public function execute(array &$data_properties): ?array

@@ -32,8 +32,6 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
 
     /**
      * Configuration entries
-     *
-     * @return array
      */
     protected function getConfigurationEntries(): array
     {
@@ -43,11 +41,6 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
 
     /**
      * Decide if to remove the fieldNames
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param FieldResolverInterface $fieldResolver
-     * @param string $fieldName
-     * @return boolean
      */
     protected function removeFieldName(
         TypeResolverInterface $typeResolver,

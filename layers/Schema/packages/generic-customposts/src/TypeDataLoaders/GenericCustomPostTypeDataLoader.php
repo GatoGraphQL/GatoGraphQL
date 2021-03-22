@@ -12,9 +12,6 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     /**
      * Override the custompost-types from the parent
-     *
-     * @param array $ids
-     * @return array
      */
     public function getObjectQuery(array $ids): array
     {

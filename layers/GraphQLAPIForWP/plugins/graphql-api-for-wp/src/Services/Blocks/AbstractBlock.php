@@ -27,21 +27,14 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 {
     use HasDocumentationScriptTrait;
 
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-
     function __construct(
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected UserAuthorizationInterface $userAuthorization
     ) {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
     }
 
     /**
      * Execute this function to initialize the block
-     *
-     * @return void
      */
     final public function initialize(): void
     {
@@ -67,26 +60,18 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Plugin dir
-     *
-     * @return string
      */
     abstract protected function getPluginDir(): string;
     /**
      * Plugin URL
-     *
-     * @return string
      */
     abstract protected function getPluginURL(): string;
     /**
      * Block namespace
-     *
-     * @return string
      */
     abstract protected function getBlockNamespace(): string;
     /**
      * Block name
-     *
-     * @return string
      */
     abstract protected function getBlockName(): string;
 
@@ -118,8 +103,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     }
     /**
      * Register index.css
-     *
-     * @return boolean
      */
     protected function registerEditorCSS(): bool
     {
@@ -127,8 +110,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     }
     /**
      * Register style-index.css
-     *
-     * @return boolean
      */
     protected function registerCommonStyleCSS(): bool
     {
@@ -136,8 +117,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     }
     /**
      * The block full name: namespace/blockName
-     *
-     * @return string
      */
     final public function getBlockFullName(): string
     {
@@ -149,8 +128,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     }
     /**
      * Block registration name: namespace-blockName
-     *
-     * @return string
      */
     final protected function getBlockRegistrationName(): string
     {
@@ -162,8 +139,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     }
     /**
      * Block registration name: namespace-blockName
-     *
-     * @return string
      */
     final protected function getBlockLocalizationName(): string
     {
@@ -174,8 +149,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     }
     /**
      * Block class name: wp-block-namespace-blockName
-     *
-     * @return string
      */
     protected function getBlockClassName(): string
     {
@@ -205,8 +178,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Where is the block stored
-     *
-     * @return string
      */
     protected function getBlockDirURL(): string
     {
@@ -215,8 +186,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Where is the block stored
-     *
-     * @return string
      */
     protected function getBlockDir(): string
     {

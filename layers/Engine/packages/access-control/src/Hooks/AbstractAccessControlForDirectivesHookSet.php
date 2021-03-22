@@ -47,8 +47,6 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
 
     /**
      * Return true if the directives must be disabled
-     *
-     * @return boolean
      */
     protected function enabled(): bool
     {
@@ -83,10 +81,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     /**
      * Decide if to remove the directiveNames
      *
-     * @param TypeResolverInterface $typeResolver
      * @param FieldResolverInterface $directiveResolver
-     * @param string $directiveName
-     * @return boolean
      */
     protected function removeDirective(TypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {

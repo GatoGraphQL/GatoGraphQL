@@ -19,7 +19,6 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      *
      * @param [type] $object
-     * @return string
      */
     public function getTermTaxonomyName($termObjectOrID): string
     {

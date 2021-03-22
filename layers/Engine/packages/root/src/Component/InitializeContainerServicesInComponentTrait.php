@@ -50,8 +50,6 @@ trait InitializeContainerServicesInComponentTrait
      * Initialize the services defined in the YAML configuration file.
      * If not provided, use "services.yaml"
      *
-     * @param string $componentDir
-     * @param string $configPath
      * @param string $fileName
      * @return void
      */

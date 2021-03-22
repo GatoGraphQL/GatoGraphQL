@@ -31,15 +31,11 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
 
     /**
      * Block category's slug
-     *
-     * @return string
      */
     abstract protected function getBlockCategorySlug(): string;
 
     /**
      * Block category's title
-     *
-     * @return string
      */
     abstract protected function getBlockCategoryTitle(): string;
 
@@ -47,7 +43,6 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      * Register the category when in the corresponding CPT
      *
      * @param array<array> $categories List of categories, each item is an array with props "slug" and "title"
-     * @param WP_Post $post
      * @return array<array> List of categories, each item is an array with props "slug" and "title"
      */
     public function getBlockCategories(array $categories, WP_Post $post): array

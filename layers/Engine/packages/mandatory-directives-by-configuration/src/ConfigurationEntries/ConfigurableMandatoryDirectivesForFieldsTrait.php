@@ -10,15 +10,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
     /**
      * Configuration entries
-     *
-     * @return array
      */
     abstract protected function getConfigurationEntries(): array;
 
     /**
      * Field names to remove
-     *
-     * @return array
      */
     protected function getFieldNames(): array
     {
@@ -36,8 +32,6 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Configuration entries
-     *
-     * @return array
      */
     final protected function getEntries(
         TypeResolverInterface $typeResolver,
@@ -56,9 +50,6 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
      *
      * @param boolean $include
-     * @param array $entryList
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
      * @return boolean
      */
     final protected function getMatchingEntries(

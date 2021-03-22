@@ -28,8 +28,6 @@ class ComponentConfiguration
 
     /**
      * Initialize component configuration
-     *
-     * @return void
      */
     public static function init(): void
     {
@@ -44,8 +42,6 @@ class ComponentConfiguration
 
     /**
      * Indicate if the configuration is overriden by params
-     *
-     * @return boolean
      */
     public static function doingOverrideConfiguration(): bool
     {
@@ -77,8 +73,6 @@ class ComponentConfiguration
     /**
      * Access layer to the environment variable, enabling to override its value
      * Indicate if the configuration can be set through params
-     *
-     * @return bool
      */
     public static function enableConfigByParams(): bool
     {
@@ -101,8 +95,6 @@ class ComponentConfiguration
     /**
      * Access layer to the environment variable, enabling to override its value
      * Indicate if to use the cache
-     *
-     * @return bool
      */
     public static function useComponentModelCache(): bool
     {
@@ -135,8 +127,6 @@ class ComponentConfiguration
      * This functionality is not used by PoP itself, hence it defaults to `false`
      * It can be used by making a mapping from type name to type resolver class, as to reference a type
      * by a name, if needed (eg: to save in the application's configuration)
-     *
-     * @return bool
      */
     public static function enableSchemaEntityRegistries(): bool
     {

@@ -10,9 +10,6 @@ class CacheControlEngine implements CacheControlEngineInterface
 
     /**
      * Add a max age from a requested field
-     *
-     * @param integer $maxAge
-     * @return void
      */
     public function addMaxAge(int $maxAge): void
     {

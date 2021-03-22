@@ -25,8 +25,6 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
      * Create a key from the arrays, to cache the results
      *
      * @param array<string, mixed> $fieldArgs
-     * @param array|null $options
-     * @return string
      */
     protected function getArgumentKey(?array $fieldArgs, ?array $options): string
     {
@@ -37,10 +35,6 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
      * Produce the schema definition. It can store the value in the cache.
      * Use cache with care: if the schema is dynamic, it should not be cached.
      * Public schema: can cache, Private schema: cannot cache.
-     *
-     * @param array|null $fieldArgs
-     * @param array|null $options
-     * @return array
      */
     public function &getSchemaDefinition(?array $fieldArgs = [], ?array $options = []): array
     {

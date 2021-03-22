@@ -60,8 +60,6 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
     }
 
     /**
-     * @param \EM_Event $EM_Event
-     * @param array $post_data
      * @return mixed
      */
     protected function save(\EM_Event &$EM_Event, array $post_data)

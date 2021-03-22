@@ -48,7 +48,6 @@ class Variable extends AbstractAst implements ValueInterface
      * @param bool     $nullable
      * @param bool     $isArray
      * @param bool     $arrayElementNullable
-     * @param Location $location
      */
     public function __construct($name, $type, $nullable, $isArray, $arrayElementNullable, Location $location)
     {

@@ -13,8 +13,6 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
 {
     /**
      * Indicate if this hook is enabled
-     *
-     * @return boolean
      */
     protected function enabled(): bool
     {
@@ -63,17 +61,10 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     }
     /**
      * Field names to remove
-     *
-     * @return array
      */
     abstract protected function getFieldNames(): array;
     /**
      * Decide if to remove the fieldNames
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param FieldResolverInterface $fieldResolver
-     * @param string $fieldName
-     * @return boolean
      */
     protected function removeFieldName(
         TypeResolverInterface $typeResolver,

@@ -29,8 +29,6 @@ class GraphiQLMenuPage extends AbstractMenuPage
      * Override, because this is the default page, so it is invoked
      * with the menu slug wp-admin/admin.php?page=graphql_api,
      * and not the menu page slug wp-admin/admin.php?page=graphql_api_graphiql
-     *
-     * @return string
      */
     public function getScreenID(): string
     {
@@ -44,8 +42,6 @@ class GraphiQLMenuPage extends AbstractMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueGraphiQLClientAssets(): void
     {
@@ -59,8 +55,6 @@ class GraphiQLMenuPage extends AbstractMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueGraphiQLCustomAssets(): void
     {
@@ -111,8 +105,6 @@ class GraphiQLMenuPage extends AbstractMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueAssets(): void
     {

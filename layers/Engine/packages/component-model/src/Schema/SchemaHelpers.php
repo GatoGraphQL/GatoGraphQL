@@ -70,7 +70,6 @@ class SchemaHelpers
     /**
      * Remove the deprecated enumValues from the schema definition
      *
-     * @param array $enumValueDefinitions
      * @return void
      */
     public static function removeDeprecatedEnumValuesFromSchemaDefinition(array $enumValueDefinitions): array
@@ -149,11 +148,6 @@ class SchemaHelpers
 
     /**
      * If the internal type is "id", convert it to its type name
-     *
-     * @param string $type
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return string
      */
     public static function convertTypeIDToTypeName(
         string $type,
@@ -187,9 +181,6 @@ class SchemaHelpers
     /**
      * Following PSR-4, namespaces must contain the owner (eg: "PoP") and project name (eg: "ComponentModel")
      * Extract these 2 elements to namespace the types/interfaces
-     *
-     * @param string $namespace
-     * @return string
      */
     protected static function getOwnerAndProjectFromNamespace(string $namespace): string
     {

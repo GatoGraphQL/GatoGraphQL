@@ -61,8 +61,6 @@ class Component extends AbstractComponent
 
     /**
      * Function called by the Bootloader after all components have been loaded
-     *
-     * @return void
      */
     public static function beforeBoot(): void
     {
@@ -76,8 +74,6 @@ class Component extends AbstractComponent
 
     /**
      * Function called by the Bootloader after all components have been loaded
-     *
-     * @return void
      */
     public static function boot(): void
     {
@@ -91,8 +87,6 @@ class Component extends AbstractComponent
 
     /**
      * Function called by the Bootloader after all components have been loaded
-     *
-     * @return void
      */
     public static function afterBoot(): void
     {

@@ -19,7 +19,6 @@ trait HasMarkdownDocumentationModuleResolverTrait
      * The name of the Markdown filename.
      * By default, it's the same as the slug
      *
-     * @param string $module
      * @return string
      */
     public function getMarkdownFilename(string $module): ?string
@@ -29,9 +28,6 @@ trait HasMarkdownDocumentationModuleResolverTrait
 
     /**
      * Does the module have HTML Documentation?
-     *
-     * @param string $module
-     * @return bool
      */
     public function hasDocumentation(string $module): bool
     {
@@ -40,9 +36,6 @@ trait HasMarkdownDocumentationModuleResolverTrait
 
     /**
      * HTML Documentation for the module
-     *
-     * @param string $module
-     * @return string|null
      */
     public function getDocumentation(string $module): ?string
     {
@@ -59,7 +52,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
                         ContentParserOptions::TAB_CONTENT => true,
                     ]
                 );
-            } catch (InvalidArgumentException $e) {
+            } catch (InvalidArgumentException) {
                 return sprintf(
                     '<p>%s</p>',
                     \__('Oops, the documentation for this module is not available', 'graphql-api')

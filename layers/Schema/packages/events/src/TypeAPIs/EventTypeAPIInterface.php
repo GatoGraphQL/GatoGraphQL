@@ -15,7 +15,6 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
      * Indicates if the passed object is of type Event
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfEventType($object): bool;
     /**
@@ -36,15 +35,12 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
      * Get the list of events
      *
      * @param array $query
-     * @param array $options
-     * @return array
      */
     public function getEvents($query = array(), array $options = []): array;
     /**
      * Get the number of events
      *
      * @param array $query
-     * @param array $options
      * @return array
      */
     public function getEventCount($query = array(), array $options = []): int;

@@ -72,8 +72,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.
      * By default, use the Query type
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -84,8 +82,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * If a directive does not operate over the resultItems, then it must not allow to add fields or dynamic values in the directive arguments
      * Otherwise, it can lead to errors, since the field would never be transformed/casted to the expected type
      * Eg: <cacheControl(maxAge:id())>
-     *
-     * @return bool
      */
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
@@ -245,13 +241,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     /**
      * By default, validate if there are deprecated fields
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $directiveArgs
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return array
      */
     public function validateDirectiveArgumentsForSchema(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
@@ -315,8 +304,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
-     *
-     * @return array
      */
     public function getFieldNamesToApplyTo(): array
     {
@@ -326,9 +313,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     /**
      * Define if to use the version to decide if to process the directive or not
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return boolean
      */
     public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool
     {
@@ -338,11 +322,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * By default, the directiveResolver instance can process the directive
      * This function can be overriden to force certain value on the directive args before it can be executed
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $directiveName
-     * @param array $directiveArgs
-     * @return boolean
      */
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
@@ -382,7 +361,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  */
                 try {
                     return Semver::satisfies($schemaDirectiveVersion, $versionConstraint);
-                } catch (Exception $e) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -463,8 +442,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * By default, a directive can be executed only one time for "Schema" and "System"
      * type directives (eg: <translate(en,es),translate(es,en)>),
      * and many times for the other types, "Query" and "Scripting"
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool
     {
@@ -484,9 +461,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     /**
      * Indicate that there is data in variable $idsDataFields
-     *
-     * @param array $idsDataFields
-     * @return boolean
      */
     protected function hasIDsDataFields(array &$idsDataFields): bool
     {
@@ -736,7 +710,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     //     // Check that the directive can be applied to all provided fields
     //     $this->validateAndFilterFieldsForDirective($idsDataFields, $schemaErrors, $schemaWarnings);
     // }
-
     // /**
     //  * Check that the directive can be applied to all provided fields
     //  *
@@ -747,12 +720,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     // protected function validateAndFilterFieldsForDirective(array &$idsDataFields, array &$schemaErrors, array &$schemaWarnings)
     // {
     //     $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
-
     //     // If this function returns an empty array, then it supports all fields, then do nothing
     //     if (!$directiveSupportedFieldNames) {
     //         return;
     //     }
-
     //     // Check if all fields are supported by this directive
     //     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
     //     $failedFields = [];
@@ -798,14 +769,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     //         $this->processFailure($failureMessage, $failedFields, $idsDataFields, $schemaErrors, $schemaWarnings);
     //     }
     // }
-
-
     /**
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
      *
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
      * @return void
      */
     protected function processFailure(string $failureMessage, array $failedFields, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$schemaErrors, array &$schemaWarnings)
@@ -887,8 +854,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Directives may not be directly visible in the schema,
      * eg: because their name is duplicated across directives (eg: "cacheControl")
      * or because they are used through code (eg: "validateIsUserLoggedIn")
-     *
-     * @return boolean
      */
     public function skipAddingToSchemaDefinition(): bool
     {

@@ -13,11 +13,9 @@ class DataStructureManager implements DataStructureManagerInterface
      * @var array<string, DataStructureFormatterInterface>
      */
     public array $formatters = [];
-    protected DataStructureFormatterInterface $defaultFormatter;
 
-    function __construct(DataStructureFormatterInterface $defaultFormatter)
+    function __construct(protected DataStructureFormatterInterface $defaultFormatter)
     {
-        $this->defaultFormatter = $defaultFormatter;
     }
 
     public function addDataStructureFormatter(DataStructureFormatterInterface $formatter): void

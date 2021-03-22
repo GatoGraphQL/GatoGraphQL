@@ -25,7 +25,6 @@ trait WithVersionConstraintFieldOrDirectiveResolverTrait
      *
      * @param array $schemaDirectiveArgs
      * @param string|null $version the version of the fieldResolver/directiveResolver
-     * @return void
      */
     protected function maybeAddVersionConstraintSchemaFieldOrDirectiveArg(array &$schemaFieldOrDirectiveArgs, bool $hasVersion): void
     {

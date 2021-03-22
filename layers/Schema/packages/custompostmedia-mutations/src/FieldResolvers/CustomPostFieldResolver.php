@@ -17,11 +17,8 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCu
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    protected MediaTypeResolver $mediaTypeResolver;
-
-    function __construct(MediaTypeResolver $mediaTypeResolver)
+    function __construct(protected MediaTypeResolver $mediaTypeResolver)
     {
-        $this->mediaTypeResolver = $mediaTypeResolver;
     }
 
     public function getClassesToAttachTo(): array

@@ -121,23 +121,7 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
      *
      * ... exports variable $postIDsAndTitles as an array, where each item is a dictionary {"id": post ID, "title": post title}
      *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $idsDataFields
-     * @param array $succeedingPipelineIDsDataFields
-     * @param array $succeedingPipelineDirectiveResolverInstances
-     * @param array $resultIDItems
-     * @param array $unionDBKeyIDs
-     * @param array $dbItems
-     * @param array $previousDBItems
-     * @param array $variables
      * @param array $_messages
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $dbDeprecations
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

@@ -12,8 +12,6 @@ class DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet exten
 {
     /**
      * Configuration entries
-     *
-     * @return array
      */
     protected function getConfigurationEntries(): array
     {

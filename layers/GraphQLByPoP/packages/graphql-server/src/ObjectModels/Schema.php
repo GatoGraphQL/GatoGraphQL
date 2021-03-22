@@ -21,7 +21,6 @@ use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegis
 
 class Schema
 {
-    protected string $id;
     /**
      * @var ScalarType[]
      */
@@ -34,10 +33,10 @@ class Schema
     protected ?AbstractType $mutationType = null;
     protected ?AbstractType $subscriptionType = null;
 
-    public function __construct(array $fullSchemaDefinition, string $id)
-    {
-        $this->id = $id;
-
+    public function __construct(
+        array $fullSchemaDefinition,
+        protected string $id
+    ) {
         // Initialize the global elements before anything, since they will
         // be references from the ObjectType: Fields/Connections/Directives
         // 1. Initialize all the Scalar types
@@ -289,7 +288,7 @@ class Schema
     public function getType(string $typeName): ?AbstractType
     {
         // If the provided typeName contains the namespace separator, then compare by qualifiedType
-        $useQualifiedName = strpos($typeName, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR) !== false;
+        $useQualifiedName = str_contains($typeName, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR);
         // From all the types, get the one that has this name
         foreach ($this->types as $type) {
             // The provided `$typeName` can include namespaces or not

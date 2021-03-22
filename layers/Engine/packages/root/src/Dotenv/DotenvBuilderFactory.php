@@ -10,8 +10,6 @@ class DotenvBuilderFactory
 {
     /**
      * Initialize the file location to the document root
-     *
-     * @return void
      */
     public static function init(): void
     {

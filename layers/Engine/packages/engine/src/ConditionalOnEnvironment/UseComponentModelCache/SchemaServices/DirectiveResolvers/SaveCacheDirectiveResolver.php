@@ -47,23 +47,6 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     /**
      * Save all the field values into the cache
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $idsDataFields
-     * @param array $succeedingPipelineIDsDataFields
-     * @param array $resultIDItems
-     * @param array $unionDBKeyIDs
-     * @param array $dbItems
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $dbDeprecations
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

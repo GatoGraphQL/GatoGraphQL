@@ -62,7 +62,6 @@ trait FieldOrDirectiveResolverTrait
      * In that case, the validation will be done inside ->resolveValue(),
      * and will be treated as a $dbError, not a $schemaError
      *
-     * @param TypeResolverInterface $typeResolver
      * @param string $directiveName
      * @param array $directiveArgs
      * @param array $schemaDirectiveArgs

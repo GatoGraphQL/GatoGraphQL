@@ -18,14 +18,11 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }
 
-    protected UserAuthorizationInterface $userAuthorization;
-
     function __construct(
         EndpointHelpers $endpointHelpers,
-        UserAuthorizationInterface $userAuthorization
+        protected UserAuthorizationInterface $userAuthorization
     ) {
         parent::__construct($endpointHelpers);
-        $this->userAuthorization = $userAuthorization;
     }
 
     /**
@@ -44,8 +41,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     /**
      * Execute the GraphQL query when posting to:
      * /wp-admin/edit.php?page=graphql_api&action=execute_query
-     *
-     * @return boolean
      */
     protected function isGraphQLQueryExecution(): bool
     {
@@ -54,8 +49,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
 
     /**
      * Initialize the resolver
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -79,8 +72,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     /**
      * Print JS variables which are used by several blocks,
      * before the blocks are loaded
-     *
-     * @return void
      */
     protected function printGlobalVariables(): void
     {
@@ -100,8 +91,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
 
     /**
      * Execute the GraphQL query
-     *
-     * @return void
      */
     protected function executeGraphQLQuery(): void
     {
@@ -125,8 +114,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      * which are used only in the front-end.
      * When in the admin, we must manually load the template,
      * and then exit
-     *
-     * @return void
      */
     protected function printTemplateInAdminAndExit(): void
     {

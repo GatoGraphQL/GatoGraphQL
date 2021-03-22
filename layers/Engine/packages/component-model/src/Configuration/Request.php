@@ -17,8 +17,6 @@ class Request
 
     /**
      * Indicates the version constraint for all fields/directives in the query
-     *
-     * @return string|null
      */
     public static function getVersionConstraint(): ?string
     {

@@ -13,26 +13,16 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
-     *
-     * @return array
      */
     public function getFieldNamesToApplyTo(): array;
     /**
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.
      * By default, use the Query type
-     *
-     * @return string
      */
     public function getDirectiveType(): string;
     /**
      * Extract and validate the directive arguments
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return array
      */
     public function dissectAndValidateDirectiveForSchema(
         TypeResolverInterface $typeResolver,
@@ -47,13 +37,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
 
     /**
      * Enable the directiveResolver to validate the directive arguments in a custom way
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $directiveArgs
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return array
      */
     public function validateDirectiveArgumentsForSchema(
         TypeResolverInterface $typeResolver,
@@ -71,18 +54,10 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * 1. At the beginning, before the Validate pipeline
      * 2. In the middle, between the Validate and Resolve directives
      * 3. At the end, after the ResolveAndMerge directive
-     *
-     * @return string
      */
     public function getPipelinePosition(): string;
     /**
      * Indicate if the directiveResolver can process the directive with the given name and args
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $directiveName
-     * @param array $directiveArgs
-     * @param string $field
-     * @return boolean
      */
     public function resolveCanProcess(
         TypeResolverInterface $typeResolver,
@@ -93,8 +68,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     ): bool;
     /**
      * Indicates if the directive can be added several times to the pipeline, or only once
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool;
     /**
@@ -105,24 +78,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     public function needsIDsDataFieldsToExecute(): bool;
     /**
      * Execute the directive
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $idsDataFields
-     * @param array $succeedingPipelineIDsDataFields
-     * @param array $succeedingPipelineDirectiveResolverInstances
-     * @param array $resultIDItems
-     * @param array $unionDBKeyIDs
-     * @param array $dbItems
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $dbDeprecations
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,
@@ -149,7 +104,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     /**
      * Get an instance of the object defining the schema for this fieldResolver
      *
-     * @param TypeResolverInterface $typeResolver
      * @param string $fieldName
      * @param array<string, mixed> $fieldArgs
      * @return void
@@ -164,16 +118,10 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     public function getSchemaDefinitionForDirective(TypeResolverInterface $typeResolver): array;
     /**
      * Define if to use the version to decide if to process the directive or not
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return boolean
      */
     public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool;
     /**
      * The version of the directive, using semantic versioning
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return string|null
      */
     public function getSchemaDirectiveVersion(TypeResolverInterface $typeResolver): ?string;
     /**

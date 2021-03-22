@@ -24,12 +24,13 @@ abstract class AbstractSchemaDefinitionReferenceObject
     /**
      * Build a new Schema Definition Reference Object
      *
-     * @param array $fullSchemaDefinition
-     * @param array $schemaDefinitionPath
      * @param array $customDefinition Pass custom values that will override the ones defined in $schemaDefinition
      */
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
-    {
+    public function __construct(
+        array &$fullSchemaDefinition,
+        array $schemaDefinitionPath,
+        array $customDefinition = []
+    ) {
         // Also save this variable to lazy initi new types in HasTypeSchemaDefinitionReferenceTrait
         $this->fullSchemaDefinition = $fullSchemaDefinition;
         $this->schemaDefinitionPath = $schemaDefinitionPath;
@@ -51,8 +52,6 @@ abstract class AbstractSchemaDefinitionReferenceObject
 
     /**
      * By default, types are static
-     *
-     * @return boolean
      */
     public function isDynamicType(): bool
     {

@@ -21,8 +21,6 @@ class ModuleListTable extends AbstractItemListTable
 
     /**
      * Singular name of the listed records
-     *
-     * @return string
      */
     public function getItemSingularName(): string
     {
@@ -31,8 +29,6 @@ class ModuleListTable extends AbstractItemListTable
 
     /**
      * Plural name of the listed records
-     *
-     * @return string
      */
     public function getItemPluralName(): string
     {
@@ -81,8 +77,6 @@ class ModuleListTable extends AbstractItemListTable
 
     /**
      * Gets the current filtering view
-     *
-     * @return string
      */
     protected function getCurrentView(): string
     {
@@ -530,8 +524,6 @@ class ModuleListTable extends AbstractItemListTable
 
     /**
      * Enqueue the required assets
-     *
-     * @return void
      */
     public function enqueueAssets(): void
     {

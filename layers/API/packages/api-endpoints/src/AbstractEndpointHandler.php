@@ -33,8 +33,6 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
     /**
      * If `true`, the endpoint must exactly match the URL
      * If `false`, the endpoint is triggered when it is contained at the end of the URL
-     *
-     * @return boolean
      */
     protected function doesEndpointMatchWholeURL(): bool
     {

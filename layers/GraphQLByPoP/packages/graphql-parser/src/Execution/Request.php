@@ -216,11 +216,9 @@ class Request
     }
 
     /**
-     * @param array|string $variables
-     *
      * @return $this
      */
-    public function setVariables($variables)
+    public function setVariables(array|string $variables)
     {
         if (!is_array($variables)) {
             $variables = json_decode($variables, true);

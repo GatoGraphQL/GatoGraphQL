@@ -15,8 +15,6 @@ abstract class AbstractGoogleTranslateDirectiveResolver extends AbstractTranslat
 
     /**
      * The name of the API's provider
-     *
-     * @return array
      */
     public function getProvidersToResolve(): array
     {

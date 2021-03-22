@@ -196,15 +196,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * 1. the directiveResolverInstance
      * 2. its fieldDirective
      * 3. the fields it affects
-     *
-     * @param array $fieldDirectives
-     * @param array $fieldDirectiveFields
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $schemaNotices
-     * @param array $schemaTraces
-     * @return array
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
@@ -693,12 +684,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * By default, do nothing
      *
-     * @param string $field
      * @param array<string, mixed> $fieldArgs
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return array
      */
     public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
@@ -819,9 +805,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * Eg: a directive `@validateDoesUserHaveCapability` must be preceded by a directive `@validateIsUserLoggedIn`
      *
      * The process is recursive: mandatory directives can have their own mandatory directives, and these are added too
-     *
-     * @param array $directives
-     * @return array
      */
     protected function addMandatoryDirectivesForDirectives(array $directives): array
     {

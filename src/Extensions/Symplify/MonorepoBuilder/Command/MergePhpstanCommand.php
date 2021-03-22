@@ -15,16 +15,10 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class MergePhpstanCommand extends AbstractSymplifyCommand
 {
-    private PHPStanNeonContentProvider $phpstanNeonContentProvider;
-    private NeonFilePrinter $neonFilePrinter;
-
     public function __construct(
-        PHPStanNeonContentProvider $phpstanNeonContentProvider,
-        NeonFilePrinter $neonFilePrinter
+        private PHPStanNeonContentProvider $phpstanNeonContentProvider,
+        private NeonFilePrinter $neonFilePrinter
     ) {
-        $this->phpstanNeonContentProvider = $phpstanNeonContentProvider;
-        $this->neonFilePrinter = $neonFilePrinter;
-
         parent::__construct();
     }
 

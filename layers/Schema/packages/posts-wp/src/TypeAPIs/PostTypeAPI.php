@@ -38,7 +38,6 @@ class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
      * Indicates if the passed object is of type Post
      *
      * @param object $object
-     * @return boolean
      */
     public function isInstanceOfPostType($object): bool
     {
@@ -74,8 +73,6 @@ class PostTypeAPI extends CustomPostTypeAPI implements PostTypeAPIInterface
     /**
      * Limit of how many custom posts can be retrieved in the query.
      * Override this value for specific custom post types
-     *
-     * @return integer
      */
     protected function getCustomPostListMaxLimit(): int
     {

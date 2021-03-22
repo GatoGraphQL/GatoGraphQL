@@ -36,7 +36,6 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     /**
      * Remove the type from the ID to resolve the objects through `getObjects` (check parent class)
      *
-     * @param array $ids_data_fields
      * @return void
      */
     protected function getIDsToQuery(array $ids_data_fields)
@@ -464,10 +463,6 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
 
     /**
      * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used (that depends on each resultItem), it can't resolve error validation
-     *
-     * @param string $field
-     * @param array $variables
-     * @return array
      */
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array
     {

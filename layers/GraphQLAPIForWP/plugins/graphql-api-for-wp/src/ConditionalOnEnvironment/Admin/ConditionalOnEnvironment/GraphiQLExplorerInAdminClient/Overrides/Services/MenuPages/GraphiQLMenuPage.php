@@ -44,8 +44,6 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueGraphiQLCustomAssets(): void
     {

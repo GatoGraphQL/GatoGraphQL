@@ -14,8 +14,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * Validations are by default a "Schema" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -24,8 +22,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * Each validate can execute multiple times (eg: an added @validateIsUserLoggedIn)
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool
     {

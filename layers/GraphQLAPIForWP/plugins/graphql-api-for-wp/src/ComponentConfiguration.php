@@ -31,7 +31,6 @@ class ComponentConfiguration
     //     $envVariable = Environment::MODULE_URL_BASE;
     //     $selfProperty = &self::$getModuleURLBase;
     //     $defaultValue = 'https://graphql-api.com/modules/';
-
     //     // Initialize property from the environment/hook
     //     self::maybeInitializeConfigurationValue(
     //         $envVariable,
@@ -40,11 +39,8 @@ class ComponentConfiguration
     //     );
     //     return $selfProperty;
     // }
-
     /**
      * Group the fields under the type when printing it for the user
-     *
-     * @return boolean
      */
     public static function groupFieldsUnderTypeForPrint(): bool
     {
@@ -105,8 +101,6 @@ class ComponentConfiguration
 
     /**
      * The slug to use as base when accessing the custom endpoint
-     *
-     * @return string
      */
     public static function getCustomEndpointSlugBase(): string
     {
@@ -126,8 +120,6 @@ class ComponentConfiguration
 
     /**
      * The slug to use as base when accessing the persisted query
-     *
-     * @return string
      */
     public static function getPersistedQuerySlugBase(): string
     {
@@ -149,8 +141,6 @@ class ComponentConfiguration
      * If `"admin"`, only the admin can compose a GraphQL query and endpoint
      * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
      * but not publish the query, Editor role can publish it, etc)
-     *
-     * @return string
      */
     public static function getEditingAccessScheme(): string
     {

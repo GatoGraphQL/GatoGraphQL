@@ -20,7 +20,6 @@ interface StanceTypeAPIInterface
      * Indicates if the passed object is of type Stance
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfStanceType($object): bool;
     /**

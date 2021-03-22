@@ -51,8 +51,6 @@ abstract class AbstractEnum implements EnumInterface
 
     /**
      * Enum name
-     *
-     * @return string
      */
     abstract protected function getEnumName(): string;
 
@@ -64,8 +62,6 @@ abstract class AbstractEnum implements EnumInterface
      * values => ["ONE", "TWO"] and coreValues => ["one", "two"]
      *
      * If `null`, `getValues` is used
-     *
-     * @return array|null
      */
     public function getCoreValues(): ?array
     {
@@ -73,9 +69,6 @@ abstract class AbstractEnum implements EnumInterface
     }
     /**
      * Given an enum value, obtain its core value
-     *
-     * @param string $enumValue
-     * @return string|null
      */
     final public function getCoreValue(string $enumValue): ?string
     {

@@ -14,7 +14,6 @@ abstract class AbstractPrivateSchemaTypeResolverDecorator extends AbstractTypeRe
     /**
      * Enable only for private schema
      *
-     * @param TypeResolverInterface $typeResolver
      * @return array
      */
     public function enabled(TypeResolverInterface $typeResolver): bool

@@ -22,10 +22,8 @@ class ApplicationStateUtils
      * The requested query is used to display the data, for instance for GraphQL.
      * It's saved under "requested-query" in $vars, and it's optional: if empty,
      * requested = executable => the executable query from $vars['query'] can be used
-     *
-     * @param array|string $query
      */
-    public static function maybeConvertQueryAndAddToVars(array &$vars, $query): void
+    public static function maybeConvertQueryAndAddToVars(array &$vars, array|string $query): void
     {
         // The fields param can either be an array or a string. Convert them to array
         if (is_array($query)) {

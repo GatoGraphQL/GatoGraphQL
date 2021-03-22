@@ -18,8 +18,6 @@ class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
 
     /**
      * Custom Post Type name
-     *
-     * @return string
      */
     protected function getCustomPostType(): string
     {
@@ -54,7 +52,6 @@ class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
      * Custom Post Type plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     * @return string
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
@@ -64,8 +61,6 @@ class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
     /**
      * Indicate if, whenever this CPT is saved/updated,
      * the timestamp must be regenerated
-     *
-     * @return boolean
      */
     protected function regenerateTimestampOnSave(): bool
     {
@@ -74,8 +69,6 @@ class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
 
     /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     *
-     * @return boolean
      */
     public function usePostExcerptAsDescription(): bool
     {

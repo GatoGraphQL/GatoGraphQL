@@ -18,8 +18,6 @@ abstract class AbstractDynamicType extends AbstractType
      * field in the schema or, if not provided, it is dynamically generated.
      * This name is either namespaced or not (depending on configuration),
      * it doesn't support the two different cases
-     *
-     * @return string
      */
     public function getNamespacedName(): string
     {
@@ -31,8 +29,6 @@ abstract class AbstractDynamicType extends AbstractType
      * field in the schema or, if not provided, it is dynamically generated
      * This name is either namespaced or not (depending on configuration),
      * it doesn't support the two different cases
-     *
-     * @return string
      */
     public function getElementName(): string
     {
@@ -71,8 +67,6 @@ abstract class AbstractDynamicType extends AbstractType
     /**
      * Indicate under what property in the schema definition
      * is the Dynamic Type's name provided
-     *
-     * @return string
      */
     abstract protected function getDynamicTypeNamePropertyInSchema(): string;
 }

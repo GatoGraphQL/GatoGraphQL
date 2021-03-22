@@ -27,9 +27,7 @@ class Fragment extends AbstractAst
     /**
      * @param string          $name
      * @param string          $model
-     * @param array           $directives
      * @param Field[]|Query[] $fields
-     * @param Location        $location
      */
     public function __construct($name, $model, array $directives, array $fields, Location $location)
     {

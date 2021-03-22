@@ -50,9 +50,6 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
     /**
      * Extract the description from the docComment
      * Adapted from https://github.com/nadirlc/comment-manager/blob/master/DescriptionParser.php
-     *
-     * @param string $docComment
-     * @return string
      */
     public function extractDescriptionText(string $docComment): string
     {

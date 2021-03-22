@@ -15,15 +15,12 @@ use PoP\Translation\TranslationAPIInterface;
 
 class VarsHooks extends AbstractHookSet
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
-        ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry
     ) {
         parent::__construct($hooksAPI, $translationAPI);
-        $this->moduleRegistry = $moduleRegistry;
     }
 
     protected function init()

@@ -40,10 +40,6 @@ class SchemaDefinitionHelpers
      *
      * @deprecated 0.1.0 The error above must be fixed for the Enum, by unifying its name wherever it is referenced
      * This solution with the interfaces creates other issue: The type cannot customize its field schema definition
-     *
-     * @param array $fullSchemaDefinition
-     * @param array $interfaceNames
-     * @return array
      */
     protected static function getFieldInterfaces(array &$fullSchemaDefinition, array $interfaceNames): array
     {

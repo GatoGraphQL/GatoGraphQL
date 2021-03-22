@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\GuzzleHelpers;
 
-use function GuzzleHttp\Promise\unwrap;
-use function GuzzleHttp\Promise\settle;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise;
 use PoP\ComponentModel\ErrorHandling\Error;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use PoP\Translation\Facades\TranslationAPIFacade;
+
+use function GuzzleHttp\Promise\unwrap;
+use function GuzzleHttp\Promise\settle;
 
 class GuzzleHelpers
 {
@@ -21,10 +21,9 @@ class GuzzleHelpers
      *
      * @param string $url The Endpoint URL
      * @param array $bodyJSONQuery The form params
-     * @param string $method
      * @return array|Error The payload if successful as an array, or an Error object containing the error message in case of failure
      */
-    public static function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST')
+    public static function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array|Error
     {
         $client = new Client();
         try {
@@ -65,7 +64,7 @@ class GuzzleHelpers
             substr($contentType, 0, strlen('application/json')) == 'application/json'
             || (
                 substr($contentType, 0, strlen('application/')) == 'application/'
-                && strpos($contentType, '+json') !== false
+                && str_contains($contentType, '+json')
             );
         if (!$isJSONContentType) {
             // Throw an error
@@ -93,7 +92,6 @@ class GuzzleHelpers
      *
      * @param string $url The Endpoint URL
      * @param array $bodyJSONQueries The form params
-     * @param string $method
      * @return mixed The payload if successful as an array, or an Error object containing the error message in case of failure
      */
     public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST')
@@ -110,7 +108,6 @@ class GuzzleHelpers
      *
      * @param array $urls The endpoints to fetch
      * @param array $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
-     * @param string $method
      * @return void
      */
     public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST')

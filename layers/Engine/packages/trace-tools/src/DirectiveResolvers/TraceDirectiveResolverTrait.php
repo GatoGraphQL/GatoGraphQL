@@ -11,8 +11,6 @@ trait TraceDirectiveResolverTrait
 {
     /**
      * Operations can be executed only once
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool
     {

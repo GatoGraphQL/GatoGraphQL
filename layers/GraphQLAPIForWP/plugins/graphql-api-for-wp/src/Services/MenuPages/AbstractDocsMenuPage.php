@@ -53,8 +53,6 @@ abstract class AbstractDocsMenuPage extends AbstractMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueAssets(): void
     {

@@ -17,7 +17,6 @@ class CategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterfac
      * Indicates if the passed object is of type Category
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfCategoryType($object): bool
     {

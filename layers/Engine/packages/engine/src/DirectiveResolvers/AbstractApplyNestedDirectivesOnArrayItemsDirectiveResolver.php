@@ -66,20 +66,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
      * 1. Unpack the elements of the array into a temporary property for each, in the current object
      * 2. Execute <transformProperty> on each property
      * 3. Pack into the array, once again, and remove all temporary properties
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,
@@ -333,7 +319,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     }
     /**
      * Place the result for the array in the original property
-     * @param int|string $arrayItemKey
      */
     protected function addProcessedItemBackToDBItems(
         TypeResolverInterface $typeResolver,
@@ -345,7 +330,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         array &$dbTraces,
         $id,
         string $fieldOutputKey,
-        $arrayItemKey,
+        int|string $arrayItemKey,
         $arrayItemValue
     ): void {
         $dbItems[(string)$id][$fieldOutputKey][$arrayItemKey] = $arrayItemValue;
@@ -379,23 +364,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     //     // $pos = QueryUtils::findLastSymbolPosition($arrayItemProperty, self::PROPERTY_SEPARATOR);
     //     return explode(self::PROPERTY_SEPARATOR, $arrayItemProperty);
     // }
-
     /**
      * Add the $key in addition to the $value
      *
-     * @param TypeResolverInterface $typeResolver
      * @param [type] $id
-     * @param string $field
-     * @param array $resultIDItems
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
      * @return void
      */
     protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

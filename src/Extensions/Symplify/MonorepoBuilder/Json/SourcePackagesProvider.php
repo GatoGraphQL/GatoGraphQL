@@ -10,15 +10,10 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 
 final class SourcePackagesProvider
 {
-    private CustomPackageProvider $customPackageProvider;
-    private PackageUtils $packageUtils;
-
     public function __construct(
-        CustomPackageProvider $customPackageProvider,
-        PackageUtils $packageUtils
+        private CustomPackageProvider $customPackageProvider,
+        private PackageUtils $packageUtils
     ) {
-        $this->customPackageProvider = $customPackageProvider;
-        $this->packageUtils = $packageUtils;
     }
 
     /**

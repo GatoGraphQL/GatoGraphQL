@@ -16,8 +16,6 @@ class Environment
 
     /**
      * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
-     *
-     * @return bool
      */
     public static function removeFieldIfDirectiveFailed(): bool
     {
@@ -26,8 +24,6 @@ class Environment
 
     /**
      * Indicate: If a directive fails, then stop execution of the directive pipeline altogether
-     *
-     * @return bool
      */
     public static function stopDirectivePipelineExecutionIfDirectiveFailed(): bool
     {
@@ -39,7 +35,6 @@ class Environment
      * using the same semantic versioning constraint rules used by Composer
      *
      * @see https://getcomposer.org/doc/articles/versions.md Composer's semver constraint rules
-     * @return bool
      */
     public static function enableSemanticVersionConstraints(): bool
     {

@@ -17,8 +17,6 @@ trait CacheDirectiveResolverTrait
 {
     /**
      * This is a "Schema" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -28,10 +26,7 @@ trait CacheDirectiveResolverTrait
     /**
      * Create a unique ID under which to store the cache, based on the type, ID and field (without the alias)
      *
-     * @param TypeResolverInterface $typeResolver
      * @param [type] $id
-     * @param string $field
-     * @return string
      */
     protected function getCacheID(TypeResolverInterface $typeResolver, $id, string $field): string
     {

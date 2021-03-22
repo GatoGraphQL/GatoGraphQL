@@ -34,15 +34,11 @@ abstract class AbstractItemListTable extends WP_List_Table
 
     /**
      * Singular name of the listed records
-     *
-     * @return string
      */
     abstract public function getItemSingularName(): string;
 
     /**
      * Plural name of the listed records
-     *
-     * @return string
      */
     abstract public function getItemPluralName(): string;
 
@@ -75,8 +71,6 @@ abstract class AbstractItemListTable extends WP_List_Table
 
     /**
      * Enqueue the required assets
-     *
-     * @return void
      */
     public function enqueueAssets(): void
     {

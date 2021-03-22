@@ -15,12 +15,8 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class SourcePackagesCommand extends AbstractSymplifyCommand
 {
-    private SourcePackagesProvider $sourcePackagesProvider;
-
-    public function __construct(SourcePackagesProvider $sourcePackagesProvider)
+    public function __construct(private SourcePackagesProvider $sourcePackagesProvider)
     {
-        $this->sourcePackagesProvider = $sourcePackagesProvider;
-
         parent::__construct();
     }
 

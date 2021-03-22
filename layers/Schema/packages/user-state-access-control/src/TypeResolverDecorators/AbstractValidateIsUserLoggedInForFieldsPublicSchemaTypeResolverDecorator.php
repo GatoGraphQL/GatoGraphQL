@@ -15,9 +15,6 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
 {
     /**
      * Verify that the user is logged in before checking the roles/capabilities
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
@@ -44,8 +41,6 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     }
     /**
      * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
-     *
-     * @return array
      */
     protected function getDirectiveResolverClasses(): array
     {
@@ -54,9 +49,6 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {
@@ -81,8 +73,6 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     }
     /**
      * Provide the classes for all the directiveResolverClasses that need the "validateIsUserLoggedIn" directive
-     *
-     * @return array
      */
     protected function getFieldNames(): array
     {

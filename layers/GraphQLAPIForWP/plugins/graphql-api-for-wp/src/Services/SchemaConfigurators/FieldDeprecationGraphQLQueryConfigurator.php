@@ -19,8 +19,6 @@ class FieldDeprecationGraphQLQueryConfigurator extends AbstractGraphQLQueryConfi
     /**
      * Extract the configuration items defined in the CPT,
      * and inject them into the service as to take effect in the current GraphQL query
-     *
-     * @return void
      */
     public function executeSchemaConfiguration(int $fdlPostID): void
     {

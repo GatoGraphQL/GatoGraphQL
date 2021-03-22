@@ -36,10 +36,7 @@ class NamespacedTypeFieldResolver extends AbstractDBDataFieldResolver
     /**
      * Only use this fieldResolver when parameter `namespaced` is provided. Otherwise, use the default implementation
      *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
      * @param array<string, mixed> $fieldArgs
-     * @return boolean
      */
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     {

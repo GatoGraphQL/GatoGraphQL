@@ -11,8 +11,6 @@ trait GraphiQLWithExplorerBlockTrait
 {
  /**
      * Override the location of the script
-     *
-     * @return string
      */
     protected function getBlockDirURL(): string
     {

@@ -10,15 +10,12 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class ForceAutoconfigureYamlFileLoader extends YamlFileLoader
 {
-    protected bool $autoconfigure;
-
     public function __construct(
         ContainerBuilder $container,
         FileLocatorInterface $locator,
-        bool $autoconfigure = true
+        protected bool $autoconfigure = true
     ) {
         parent::__construct($container, $locator);
-        $this->autoconfigure = $autoconfigure;
     }
 
     /**

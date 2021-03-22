@@ -24,8 +24,6 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {

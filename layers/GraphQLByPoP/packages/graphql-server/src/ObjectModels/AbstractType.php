@@ -13,8 +13,6 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
 
     /**
      * Once all types are initialized, call this function to further link to other types
-     *
-     * @return void
      */
     public function initializeTypeDependencies(): void
     {
@@ -33,8 +31,6 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
     /**
      * Static types: their names are defined under property "name"
      * from the schema definition
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -46,8 +42,6 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
     }
     /**
      * There are no extensions currently implemented for the Type
-     *
-     * @return array
      */
     public function getExtensions(): array
     {

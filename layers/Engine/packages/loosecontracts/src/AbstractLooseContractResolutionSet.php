@@ -11,18 +11,11 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected LooseContractManagerInterface $looseContractManager;
-    protected NameResolverInterface $nameResolver;
-    protected HooksAPIInterface $hooksAPI;
-
     public function __construct(
-        LooseContractManagerInterface $looseContractManager,
-        NameResolverInterface $nameResolver,
-        HooksAPIInterface $hooksAPI
+        protected LooseContractManagerInterface $looseContractManager,
+        protected NameResolverInterface $nameResolver,
+        protected HooksAPIInterface $hooksAPI
     ) {
-        $this->looseContractManager = $looseContractManager;
-        $this->nameResolver = $nameResolver;
-        $this->hooksAPI = $hooksAPI;
     }
 
     final public function initialize(): void

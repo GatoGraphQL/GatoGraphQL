@@ -18,23 +18,14 @@ use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
-    protected Menu $menu;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-
     function __construct(
-        Menu $menu,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization
+        protected Menu $menu,
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected UserAuthorizationInterface $userAuthorization
     ) {
-        $this->menu = $menu;
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
     }
     /**
      * Add the hook to initialize the different post types
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -146,8 +137,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Indicate if, whenever this CPT is created/updated,
      * the timestamp must be regenerated
-     *
-     * @return boolean
      */
     protected function regenerateTimestampOnSave(): bool
     {
@@ -232,8 +221,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     *
-     * @return boolean
      */
     public function usePostExcerptAsDescription(): bool
     {
@@ -286,8 +273,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Custom Post Type singular name
-     *
-     * @return string
      */
     abstract protected function getPostTypeName(): string;
     /**
@@ -295,8 +280,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * From documentation: Max. 20 characters and may only contain lowercase alphanumeric characters,
      * dashes, and underscores.
      * @see https://codex.wordpress.org/Function_Reference/register_post_type#Parameters
-     *
-     * @return string
      */
     protected function getCustomPostType(): string
     {
@@ -306,7 +289,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * Custom Post Type plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     * @return string
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
@@ -322,8 +304,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * By default it's false because, for configuration CPTs (Access Control Lists,
      * Cache Control Lists, Schema Configuration, etc), this data is private,
      * must not be exposed.
-     *
-     * @return boolean
      */
     protected function isPublic(): bool
     {
@@ -332,8 +312,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Is the excerpt used as description for the CPT?
-     *
-     * @return bool
      */
     protected function isExcerptAsDescriptionEnabled(): bool
     {
@@ -342,8 +320,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Is the API Hierarchy Module enabled?
-     *
-     * @return bool
      */
     protected function isAPIHierarchyModuleEnabled(): bool
     {
@@ -352,8 +328,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Hierarchical
-     *
-     * @return bool
      */
     protected function isHierarchical(): bool
     {
@@ -362,8 +336,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Show in admin bar
-     *
-     * @return bool
      */
     protected function showInAdminBar(): bool
     {
@@ -381,8 +353,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * If provided, rewrite the slug
-     *
-     * @return string|null
      */
     protected function getSlugBase(): ?string
     {
@@ -476,8 +446,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Initialize the post type
-     *
-     * @return void
      */
     public function initCustomPostType(): void
     {
@@ -486,8 +454,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Register the post type
-     *
-     * @return void
      */
     public function registerCustomPostType(): void
     {
@@ -496,8 +462,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Unregister the post type
-     *
-     * @return void
      */
     public function unregisterCustomPostType(): void
     {
@@ -517,7 +481,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Lock down the Custom Post Type to use the given Gutenberg templates
      *
-     * @return void
      * @see https://developer.wordpress.org/block-editor/developers/block-api/block-templates/#locking
      */
     public function maybeLockGutenbergTemplate(): void
@@ -536,7 +499,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param string[]|bool $allowedBlocks The list of blocks, or `true` for all of them
      * @return string[]|bool The list of blocks, or `true` for all of them
      */
-    public function allowGutenbergBlocksForCustomPostType($allowedBlocks, WP_Post $post)
+    public function allowGutenbergBlocksForCustomPostType(array|bool $allowedBlocks, WP_Post $post): array|bool
     {
         /**
          * Check it is this CPT
@@ -652,8 +615,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Indicates if to lock the Gutenberg templates
-     *
-     * @return boolean
      */
     protected function lockGutenbergTemplate(): bool
     {

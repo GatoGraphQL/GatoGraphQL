@@ -89,9 +89,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     /**
      * Define if to use the version to decide if to process the field or not
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return boolean
      */
     public function decideCanProcessBasedOnVersionConstraint(TypeResolverInterface $typeResolver): bool
     {
@@ -102,9 +99,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
      * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldArgs['branch'])
      *
-     * @param string $fieldName
      * @param array<string, mixed> $fieldArgs
-     * @return boolean
      */
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     {
@@ -152,7 +147,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  */
                 try {
                     return Semver::satisfies($schemaFieldVersion, $versionConstraint);
-                } catch (Exception $e) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -233,10 +228,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * Fields may not be directly visible in the schema,
      * eg: because they are used only by the application, and must not
      * be exposed to the user (eg: "accessControlLists")
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
-     * @return boolean
      */
     public function skipAddingToSchemaDefinition(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
@@ -245,8 +236,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     /**
      * Get the "schema" properties as for the fieldName
-     *
-     * @return array
      */
     public function getSchemaDefinitionForField(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): array
     {

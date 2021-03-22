@@ -12,15 +12,10 @@ class Cache implements CacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
-    protected CacheItemPoolInterface $cacheItemPool;
-    protected ModelInstanceInterface $modelInstance;
-
     public function __construct(
-        CacheItemPoolInterface $cacheItemPool,
-        ModelInstanceInterface $modelInstance
+        protected CacheItemPoolInterface $cacheItemPool,
+        protected ModelInstanceInterface $modelInstance
     ) {
-        $this->cacheItemPool = $cacheItemPool;
-        $this->modelInstance = $modelInstance;
     }
 
     protected function getKey($id, $type)
@@ -108,7 +103,6 @@ class Cache implements CacheInterface
     /**
      * Save immediately. Can override to save as deferred
      *
-     * @param CacheItemInterface $cacheItem
      * @return void
      */
     protected function saveCache(CacheItemInterface $cacheItem)

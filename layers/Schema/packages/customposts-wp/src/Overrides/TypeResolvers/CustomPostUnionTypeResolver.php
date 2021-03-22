@@ -13,9 +13,6 @@ class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\C
      * instead of calling ->isIDOfType on each object (as in parent function),
      * in which case we must make a DB call for each result,
      * we obtain all the types from executing a single query against the DB
-     *
-     * @param array $ids
-     * @return array
      */
     public function getResultItemIDTargetTypeResolvers(array $ids): array
     {

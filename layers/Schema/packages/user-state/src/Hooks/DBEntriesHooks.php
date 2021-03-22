@@ -11,18 +11,15 @@ use PoPSchema\UserState\FieldResolvers\GlobalFieldResolver;
 
 class DBEntriesHooks extends AbstractHookSet
 {
-    protected GlobalFieldResolver $globalFieldResolver;
-
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
-        GlobalFieldResolver $globalFieldResolver
+        protected GlobalFieldResolver $globalFieldResolver
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI
         );
-        $this->globalFieldResolver = $globalFieldResolver;
     }
 
     protected function init()

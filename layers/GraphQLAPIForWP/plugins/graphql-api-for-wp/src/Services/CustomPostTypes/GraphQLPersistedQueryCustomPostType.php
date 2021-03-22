@@ -22,23 +22,18 @@ use WP_Post;
 
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
-    protected BlockContentHelpers $blockContentHelpers;
-    protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
-
     function __construct(
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
-        BlockContentHelpers $blockContentHelpers,
-        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
+        protected BlockContentHelpers $blockContentHelpers,
+        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
     ) {
         parent::__construct(
             $menu,
             $moduleRegistry,
             $userAuthorization
         );
-        $this->blockContentHelpers = $blockContentHelpers;
-        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
     }
 
     /**
@@ -48,8 +43,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * Custom Post Type name
-     *
-     * @return string
      */
     protected function getCustomPostType(): string
     {
@@ -74,8 +67,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * Access endpoints under /graphql-query, or wherever it is configured to
-     *
-     * @return string|null
      */
     protected function getSlugBase(): ?string
     {
@@ -94,7 +85,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
      * Custom Post Type plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     * @return string
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
@@ -103,8 +93,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * Label to show on the "execute" action in the CPT table
-     *
-     * @return string
      */
     protected function getExecuteActionLabel(): string
     {
@@ -134,8 +122,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * The Query is publicly accessible, and the permalink must be configurable
-     *
-     * @return boolean
      */
     protected function isPublic(): bool
     {
@@ -201,8 +187,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * Indicates if to lock the Gutenberg templates
-     *
-     * @return boolean
      */
     protected function lockGutenbergTemplate(): bool
     {
@@ -211,8 +195,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     *
-     * @return boolean
      */
     public function usePostExcerptAsDescription(): bool
     {
@@ -309,10 +291,8 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     /**
      * Indicate if the GraphQL variables must override the URL params
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function doURLParamsOverrideGraphQLVariables($postOrID): bool
+    protected function doURLParamsOverrideGraphQLVariables(WP_Post|int $postOrID): bool
     {
         $default = true;
         $optionsBlockDataItem = $this->getOptionsBlockDataItem($postOrID);

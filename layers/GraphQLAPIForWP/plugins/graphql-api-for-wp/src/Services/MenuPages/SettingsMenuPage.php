@@ -24,16 +24,13 @@ class SettingsMenuPage extends AbstractMenuPage
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
-    protected ModuleRegistryInterface $moduleRegistry;
-
     function __construct(
         Menu $menu,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry
     ) {
         parent::__construct($menu, $menuPageHelper, $endpointHelpers);
-        $this->moduleRegistry = $moduleRegistry;
     }
 
     public function getMenuPageSlug(): string
@@ -43,8 +40,6 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Initialize the class instance
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -226,8 +221,6 @@ class SettingsMenuPage extends AbstractMenuPage
     /**
      * If `true`, print the sections using tabs
      * If `false`, print the sections one below the other
-     *
-     * @return boolean
      */
     protected function printWithTabs(): bool
     {
@@ -236,8 +229,6 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Print the settings form
-     *
-     * @return void
      */
     public function print(): void
     {
@@ -326,8 +317,6 @@ class SettingsMenuPage extends AbstractMenuPage
 
     /**
      * Enqueue the required assets and initialize the localized scripts
-     *
-     * @return void
      */
     protected function enqueueAssets(): void
     {

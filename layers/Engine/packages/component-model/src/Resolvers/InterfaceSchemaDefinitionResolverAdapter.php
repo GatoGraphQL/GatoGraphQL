@@ -17,18 +17,13 @@ use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
  */
 class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionResolverInterface
 {
-    private FieldInterfaceResolverInterface $fieldInterfaceResolver;
-
-    public function __construct(FieldInterfaceResolverInterface $fieldInterfaceResolver)
+    public function __construct(private FieldInterfaceResolverInterface $fieldInterfaceResolver)
     {
-        $this->fieldInterfaceResolver = $fieldInterfaceResolver;
     }
 
     /**
      * This function will never be called for the Adapter,
      * but must be implemented to satisfy the interface
-     *
-     * @return array
      */
     public function getFieldNamesToResolve(): array
     {

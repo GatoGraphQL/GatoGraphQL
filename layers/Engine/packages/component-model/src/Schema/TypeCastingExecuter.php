@@ -11,18 +11,13 @@ use DateTime;
 
 class TypeCastingExecuter implements TypeCastingExecuterInterface
 {
-    private TranslationAPIInterface $translationAPI;
-
-    public function __construct(
-        TranslationAPIInterface $translationAPI
-    ) {
-        $this->translationAPI = $translationAPI;
+    public function __construct(private TranslationAPIInterface $translationAPI)
+    {
     }
 
     /**
      * Cast the value to the indicated type, or return null or Error (with a message) if it fails
      *
-     * @param string $type
      * @param string $value
      * @return void
      */

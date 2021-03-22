@@ -18,10 +18,6 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
 
     /**
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
-     *
-     * @param array $entryList
-     * @param string|null $value
-     * @return array
      */
     final protected function getMatchingEntries(array $entryList, ?string $value): array
     {

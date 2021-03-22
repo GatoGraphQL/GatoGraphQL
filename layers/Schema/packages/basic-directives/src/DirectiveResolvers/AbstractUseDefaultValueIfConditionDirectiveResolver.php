@@ -80,7 +80,6 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
      * Indicate if the value matches the condition under which to inject the default value
      *
      * @param mixed $value
-     * @return boolean
      */
     protected function matchesCondition(string $condition, $value): bool
     {

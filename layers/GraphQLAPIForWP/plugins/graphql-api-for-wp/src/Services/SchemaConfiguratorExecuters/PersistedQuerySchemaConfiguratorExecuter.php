@@ -10,12 +10,8 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfi
 
 class PersistedQuerySchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator;
-
-    function __construct(
-        PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator
-    ) {
-        $this->persistedQuerySchemaConfigurator = $persistedQuerySchemaConfigurator;
+    function __construct(protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator)
+    {
     }
 
     protected function getCustomPostType(): string

@@ -12,10 +12,6 @@ class TypeAPIUtils
 {
     /**
      * Return the minimum number from between the request limit and the max limit.
-     *
-     * @param integer|null $limit
-     * @param integer|null $maxLimit
-     * @return integer|null
      */
     public static function getLimitOrMaxLimit(
         ?int $limit,

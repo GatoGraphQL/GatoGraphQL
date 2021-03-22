@@ -11,8 +11,6 @@ class VoyagerClient extends AbstractClient
 {
     /**
      * Indicate if the client is disabled
-     *
-     * @return boolean
      */
     protected function isClientDisabled(): bool
     {

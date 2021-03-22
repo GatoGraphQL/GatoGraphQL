@@ -17,7 +17,6 @@ class TagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
      * Indicates if the passed object is of type Tag
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfTagType($object): bool
     {

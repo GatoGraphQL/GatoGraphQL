@@ -15,9 +15,6 @@ class UnionTypeHelpers
 {
     /**
      * If the type data resolver starts with "*" then it's union
-     *
-     * @param string $type
-     * @return boolean
      */
     public static function isUnionType(string $type): bool
     {
@@ -31,9 +28,6 @@ class UnionTypeHelpers
 
     /**
      * Extract the original Union type name (i.e. without "*")
-     *
-     * @param string $unionTypeCollectionName
-     * @return string
      */
     public static function removePrefixFromUnionTypeName(string $unionTypeCollectionName): string
     {
@@ -93,9 +87,6 @@ class UnionTypeHelpers
      *   and not the Union (since it's more efficient)
      * - If there are none types, return `null`. As a consequence,
      *   the ID is returned as a field, not as a connection
-     *
-     * @param string $unionTypeResolverClass
-     * @return string|null
      */
     public static function getUnionOrTargetTypeResolverClass(string $unionTypeResolverClass): ?string
     {

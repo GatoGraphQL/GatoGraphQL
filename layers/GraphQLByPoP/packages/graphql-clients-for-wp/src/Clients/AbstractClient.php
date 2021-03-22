@@ -16,8 +16,6 @@ abstract class AbstractClient extends AbstractEndpointHandler
 
     /**
      * Initialize the client
-     *
-     * @return void
      */
     public function initialize(): void
     {
@@ -31,8 +29,6 @@ abstract class AbstractClient extends AbstractEndpointHandler
 
     /**
      * Indicate if the client is disabled
-     *
-     * @return boolean
      */
     protected function isClientDisabled(): bool
     {

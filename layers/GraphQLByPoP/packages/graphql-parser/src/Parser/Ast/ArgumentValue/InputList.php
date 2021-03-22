@@ -17,10 +17,6 @@ class InputList extends AbstractAst implements ValueInterface
 
     protected $list = [];
 
-    /**
-     * @param array    $list
-     * @param Location $location
-     */
     public function __construct(array $list, Location $location)
     {
         parent::__construct($location);

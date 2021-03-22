@@ -123,7 +123,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'isType':
                 $typeName = $fieldArgs['type'];
                 // If the provided typeName contains the namespace separator, then compare by qualifiedType
-                if (strpos($typeName, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR) !== false) {
+                if (str_contains($typeName, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR)) {
                     /**
                      * @todo Replace the code below with:
                      *
@@ -146,7 +146,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                 $interface = $fieldArgs['interface'];
                 $implementedInterfaceResolverInstances = $typeResolver->getAllImplementedInterfaceResolverInstances();
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
-                $useNamespaced = strpos($interface, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR) !== false;
+                $useNamespaced = str_contains($interface, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR);
                 $implementedInterfaceNames = array_map(
                     function ($interfaceResolver) use ($useNamespaced) {
                         if ($useNamespaced) {

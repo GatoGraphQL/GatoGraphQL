@@ -11,8 +11,6 @@ interface MenuPageInterface
 {
     /**
      * Print the menu page HTML content
-     *
-     * @return void
      */
     public function print(): void;
     public function getScreenID(): string;

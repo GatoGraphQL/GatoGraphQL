@@ -21,8 +21,6 @@ class VersioningHelpers
 
     /**
      * Initialize the dictionary with the version constraints for specific fields in the schema
-     *
-     * @return void
      */
     protected static function initializeVersionConstraintsForFields(): void
     {
@@ -61,10 +59,6 @@ class VersioningHelpers
 
     /**
      * Indicates the version constraints for specific fields in the schema
-     *
-     * @param string $maybeNamespacedTypeName
-     * @param string $fieldName
-     * @return string|null
      */
     public static function getVersionConstraintsForField(string $maybeNamespacedTypeName, string $fieldName): ?string
     {
@@ -79,7 +73,6 @@ class VersioningHelpers
      *
      * @param string $maybeNamespacedTypeName
      * @param string $fieldName
-     * @return string|null
      */
     public static function getVersionConstraintsForDirective(string $directiveName): ?string
     {

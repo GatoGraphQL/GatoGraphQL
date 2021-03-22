@@ -10,12 +10,8 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterfa
 
 class EndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    protected EndpointSchemaConfigurator $endpointSchemaConfigurator;
-
-    function __construct(
-        EndpointSchemaConfigurator $endpointSchemaConfigurator
-    ) {
-        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+    function __construct(protected EndpointSchemaConfigurator $endpointSchemaConfigurator)
+    {
     }
 
     protected function getCustomPostType(): string

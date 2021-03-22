@@ -25,9 +25,6 @@ class TraceTypeResolverDecorator extends AbstractTypeResolverDecorator
     /**
      * Directives @startTraceExecutionTime and @endTraceExecutionTime
      * (called @traceExecutionTime) always go together
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return array
      */
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {

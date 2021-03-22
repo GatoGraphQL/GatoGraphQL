@@ -15,12 +15,8 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
 {
-    private PackageEntriesJsonProvider $packageEntriesJsonProvider;
-
-    public function __construct(PackageEntriesJsonProvider $packageEntriesJsonProvider)
+    public function __construct(private PackageEntriesJsonProvider $packageEntriesJsonProvider)
     {
-        $this->packageEntriesJsonProvider = $packageEntriesJsonProvider;
-
         parent::__construct();
     }
 

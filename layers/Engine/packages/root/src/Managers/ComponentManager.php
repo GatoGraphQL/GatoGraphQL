@@ -32,8 +32,6 @@ class ComponentManager
 
     /**
      * Boot all components
-     *
-     * @return void
      */
     public static function beforeBoot(): void
     {
@@ -44,8 +42,6 @@ class ComponentManager
 
     /**
      * Boot all components
-     *
-     * @return void
      */
     public static function boot(): void
     {
@@ -56,8 +52,6 @@ class ComponentManager
 
     /**
      * Boot all components
-     *
-     * @return void
      */
     public static function afterBoot(): void
     {

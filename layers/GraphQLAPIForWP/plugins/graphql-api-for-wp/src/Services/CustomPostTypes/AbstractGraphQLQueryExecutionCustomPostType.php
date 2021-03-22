@@ -201,10 +201,8 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
 
     /**
      * Read the options block and check the value of attribute "isEnabled"
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function isOptionsBlockValueOn($postOrID, string $attribute, bool $default): bool
+    protected function isOptionsBlockValueOn(WP_Post|int $postOrID, string $attribute, bool $default): bool
     {
         $optionsBlockDataItem = $this->getOptionsBlockDataItem($postOrID);
         // If there was no options block, something went wrong in the post content
@@ -218,10 +216,8 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
 
     /**
      * Read the options block and check the value of attribute "isEnabled"
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function isEnabled($postOrID): bool
+    protected function isEnabled(WP_Post|int $postOrID): bool
     {
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(
@@ -232,10 +228,9 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     }
 
     /**
-     * @param WP_Post|int $postOrID
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
-    protected function getOptionsBlockDataItem($postOrID): ?array
+    protected function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
@@ -248,10 +243,8 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
 
     /**
      * Indicate if the GraphQL variables must override the URL params
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function doURLParamsOverrideGraphQLVariables($postOrID): bool
+    protected function doURLParamsOverrideGraphQLVariables(WP_Post|int $postOrID): bool
     {
         return true;
     }

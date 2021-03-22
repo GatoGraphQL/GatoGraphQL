@@ -20,8 +20,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     /**
      * Set the cache even when there are no elements: they might've been removed due to some validation, and this caching maxAge must be respected!
-     *
-     * @return boolean
      */
     public function needsIDsDataFieldsToExecute(): bool
     {
@@ -40,8 +38,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     /**
      * This is a "Schema" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -50,8 +46,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     /**
      * Allow it to execute multiple times
-     *
-     * @return boolean
      */
     public function isRepeatable(): bool
     {
@@ -83,12 +77,9 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     //         $schemaDefinition[SchemaDefinition::ARGNAME_MAX_AGE] = $maxAge;
     //     }
     // }
-
     /**
      * Do not allow dynamic fields, or it may throw an exception
      * Eg: <cacheControl(maxAge:id())>
-     *
-     * @return bool
      */
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
@@ -97,17 +88,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     /**
      * Get the cache control for this field, and set it on the Engine
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,

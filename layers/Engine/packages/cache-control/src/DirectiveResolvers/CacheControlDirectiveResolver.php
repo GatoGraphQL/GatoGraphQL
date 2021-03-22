@@ -29,8 +29,6 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
 
     /**
      * The default max-age is configured through an environment variable
-     *
-     * @return integer|null
      */
     public function getMaxAge(): ?int
     {

@@ -8,11 +8,8 @@ use WP_Post;
 
 class GraphQLQueryPostTypeHelpers
 {
-    protected BlockContentHelpers $blockContentHelpers;
-
-    public function __construct(BlockContentHelpers $blockContentHelpers)
+    public function __construct(protected BlockContentHelpers $blockContentHelpers)
     {
-        $this->blockContentHelpers = $blockContentHelpers;
     }
     /**
      * A GraphQL Query Custom Post Type is hierarchical: each query post can have a parent,

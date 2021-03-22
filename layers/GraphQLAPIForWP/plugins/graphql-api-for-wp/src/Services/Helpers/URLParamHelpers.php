@@ -13,9 +13,6 @@ class URLParamHelpers
      * // Add variables parameter always (empty if no variables defined), so that GraphiQL doesn't use a cached one
      * $url .= '&variables=' . ($variables ? URLParamHelpers::encodeURIComponent($variables) : '');
      * Taken from https://stackoverflow.com/a/1734255
-     *
-     * @param string $str
-     * @return string
      */
     public function encodeURIComponent(string $str): string
     {

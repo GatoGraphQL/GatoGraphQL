@@ -18,8 +18,6 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
 
     /**
      * Custom Post Type name
-     *
-     * @return string
      */
     protected function getCustomPostType(): string
     {
@@ -56,7 +54,6 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
      * Custom Post Type plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     * @return string
      */
     protected function getPostTypePluralNames(bool $uppercase): string
     {
@@ -66,8 +63,6 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
     /**
      * Indicate if, whenever this CPT is saved/updated,
      * the timestamp must be regenerated
-     *
-     * @return boolean
      */
     protected function regenerateTimestampOnSave(): bool
     {
@@ -76,8 +71,6 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
 
     /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     *
-     * @return boolean
      */
     public function usePostExcerptAsDescription(): bool
     {
@@ -86,8 +79,6 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
 
     /**
      * Gutenberg templates to lock down the Custom Post Type to
-     *
-     * @return array
      */
     protected function getGutenbergTemplate(): array
     {

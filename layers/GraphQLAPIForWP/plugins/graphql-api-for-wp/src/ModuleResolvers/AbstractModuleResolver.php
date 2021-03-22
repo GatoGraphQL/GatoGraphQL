@@ -11,11 +11,8 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-
-    function __construct(ModuleRegistryInterface $moduleRegistry)
+    function __construct(protected ModuleRegistryInterface $moduleRegistry)
     {
-        $this->moduleRegistry = $moduleRegistry;
     }
 
     /**
@@ -104,10 +101,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * Indicate if the given value is valid for that option
      *
-     * @param string $module
-     * @param string $option
      * @param mixed $value
-     * @return bool
      */
     public function isValidValue(string $module, string $option, $value): bool
     {
@@ -117,8 +111,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * Default value for an option set by the module
      *
-     * @param string $module
-     * @param string $option
      * @return mixed Anything the setting might be: an array|string|bool|int|null
      */
     public function getSettingsDefaultValue(string $module, string $option)
@@ -167,12 +159,8 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     // {
     //     return ComponentConfiguration::getModuleURLBase();
     // }
-
     /**
      * Does the module have HTML Documentation?
-     *
-     * @param string $module
-     * @return bool
      */
     public function hasDocumentation(string $module): bool
     {
@@ -181,9 +169,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     /**
      * HTML Documentation for the module
-     *
-     * @param string $module
-     * @return string|null
      */
     public function getDocumentation(string $module): ?string
     {

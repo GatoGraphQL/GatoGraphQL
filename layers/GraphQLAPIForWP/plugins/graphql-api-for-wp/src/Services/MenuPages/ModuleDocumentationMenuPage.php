@@ -19,16 +19,13 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-
     function __construct(
         Menu $menu,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry
     ) {
         parent::__construct($menu, $menuPageHelper, $endpointHelpers);
-        $this->moduleRegistry = $moduleRegistry;
     }
 
     public function getMenuPageSlug(): string
@@ -69,7 +66,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         $module = urldecode($vars[RequestParams::MODULE]);
         try {
             $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',
                 sprintf(

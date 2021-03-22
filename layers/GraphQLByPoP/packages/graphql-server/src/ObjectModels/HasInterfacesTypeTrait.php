@@ -19,8 +19,6 @@ trait HasInterfacesTypeTrait
     protected array $interfaces;
     /**
      * Reference the already-registered interfaces
-     *
-     * @return void
      */
     protected function initInterfaces(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {

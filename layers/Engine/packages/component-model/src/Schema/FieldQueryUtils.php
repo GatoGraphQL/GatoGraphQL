@@ -36,10 +36,6 @@ class FieldQueryUtils
 
     /**
      * Indicate if the fieldArgValue is whatever is needed to know, executed against a $callback function
-     *
-     * @param array $fieldArgValues
-     * @param callback $callback
-     * @return boolean
      */
     public static function isAnyFieldArgumentValueASomething(array $fieldArgValues, callable $callback): bool
     {

@@ -124,8 +124,6 @@ EOF;
     }
     /**
      * Register index.css
-     *
-     * @return boolean
      */
     protected function registerEditorCSS(): bool
     {
@@ -135,8 +133,6 @@ EOF;
     /**
      * Register style-index.css
      * It contains the styles for the list of elements
-     *
-     * @return boolean
      */
     protected function registerCommonStyleCSS(): bool
     {

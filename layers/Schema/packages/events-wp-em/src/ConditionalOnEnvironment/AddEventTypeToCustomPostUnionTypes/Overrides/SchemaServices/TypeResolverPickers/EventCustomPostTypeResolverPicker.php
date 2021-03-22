@@ -16,7 +16,6 @@ class EventCustomPostTypeResolverPicker extends UpstreamEventCustomPostTypeResol
      * Needed as to be able to access all fields from an event
      *
      * @param array $customPosts An array with "key" the ID, "value" the object
-     * @return array
      */
     public function maybeCastCustomPosts(array $customPosts): array
     {

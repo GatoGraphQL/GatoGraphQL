@@ -16,7 +16,6 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      * Indicates if the passed object is of type Menu
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfMenuType($object): bool
     {

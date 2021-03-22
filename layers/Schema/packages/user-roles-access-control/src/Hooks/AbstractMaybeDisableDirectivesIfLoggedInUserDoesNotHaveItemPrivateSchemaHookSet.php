@@ -23,7 +23,6 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
      * Indicate if the user has the item, to be implemented
      *
      * @param string $item
-     * @return boolean
      */
     abstract protected function doesCurrentUserHaveAnyItem(array $items): bool;
 

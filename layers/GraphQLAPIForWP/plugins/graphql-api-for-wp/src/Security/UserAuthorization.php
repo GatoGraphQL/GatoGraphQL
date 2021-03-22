@@ -28,8 +28,6 @@ class UserAuthorization implements UserAuthorizationInterface
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager
      * against the admin endpoint /wp-admin/?page=graphql_api, and execute queries against it).
      * If access to admin only, then it is "manage_options". Otherwise, it is "edit_posts"
-     *
-     * @return string
      */
     public function getSchemaEditorAccessCapability(): string
     {

@@ -26,8 +26,6 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
 
     /**
      * This is a "Scripting" type directive
-     *
-     * @return string
      */
     public function getDirectiveType(): string
     {
@@ -36,9 +34,6 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
 
     /**
      * No need to use this function anymore
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @return string|null
      */
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
     {
@@ -71,20 +66,6 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
      * 1. Unpack the elements of the array into a temporary property for each, in the current object
      * 2. Execute <transformProperty> on each property
      * 3. Pack into the array, once again, and remove all temporary properties
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param array $resultIDItems
-     * @param array $idsDataFields
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
-     * @return void
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,
@@ -302,19 +283,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     /**
      * Add the $key in addition to the $value
      *
-     * @param TypeResolverInterface $typeResolver
      * @param [type] $id
-     * @param string $field
-     * @param array $resultIDItems
-     * @param array $dbItems
-     * @param array $dbErrors
-     * @param array $dbWarnings
-     * @param array $schemaErrors
-     * @param array $schemaWarnings
-     * @param array $schemaDeprecations
-     * @param array $previousDBItems
-     * @param array $variables
-     * @param array $messages
      * @return void
      */
     protected function addExpressionsForResultItem(TypeResolverInterface $typeResolver, $id, string $field, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)

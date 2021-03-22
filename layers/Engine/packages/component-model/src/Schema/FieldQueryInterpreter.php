@@ -68,18 +68,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
-
-    // Services
-    protected TypeCastingExecuterInterface $typeCastingExecuter;
-
     public function __construct(
         TranslationAPIInterface $translationAPI,
         FeedbackMessageStoreInterface $feedbackMessageStore,
-        TypeCastingExecuterInterface $typeCastingExecuter,
+        protected TypeCastingExecuterInterface $typeCastingExecuter,
         QueryParserInterface $queryParser
     ) {
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
-        $this->typeCastingExecuter = $typeCastingExecuter;
     }
 
     /**
@@ -88,7 +83,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      *
      * @param TypeResolverInterface $typeResolver
      * @param string $field
-     * @return array
      */
     public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array
     {
@@ -104,8 +98,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
      *
      * @param TypeResolverInterface $typeResolver
-     * @param string $field
-     * @return array
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array
     {
@@ -194,15 +186,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     /**
      * Extract the arguments for either the field or directive. If the argument name has not been provided, attempt to deduce it from the schema, or show a warning if not possible
-     *
-     * @param string $fieldOrDirective
-     * @param array $fieldOrDirectiveArgElems
-     * @param boolean $orderedFieldOrDirectiveArgNamesEnabled
-     * @param array $fieldOrDirectiveArgumentNameTypes
-     * @param array $fieldArgumentNameDefaultValues
-     * @param array|null $variables
-     * @param array $schemaWarnings
-     * @return array
      */
     protected function extractAndValidateFielOrDirectiveArguments(
         string $fieldOrDirective,

@@ -20,8 +20,6 @@ trait HasTypeSchemaDefinitionReferenceTrait
     }
     /**
      * Obtain the reference to the type from the registryMap
-     *
-     * @return void
      */
     protected function initType(): void
     {

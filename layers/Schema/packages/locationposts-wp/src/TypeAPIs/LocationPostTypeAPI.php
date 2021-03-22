@@ -19,7 +19,6 @@ class LocationPostTypeAPI extends PostTypeAPI implements LocationPostTypeAPIInte
      * Indicates if the passed object is of type LocationPost
      *
      * @param [type] $object
-     * @return boolean
      */
     public function isInstanceOfLocationPostType($object): bool
     {

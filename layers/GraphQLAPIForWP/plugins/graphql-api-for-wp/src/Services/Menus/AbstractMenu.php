@@ -15,8 +15,6 @@ abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 
     /**
      * Initialize the endpoints
-     *
-     * @return void
      */
     public function initialize(): void
     {

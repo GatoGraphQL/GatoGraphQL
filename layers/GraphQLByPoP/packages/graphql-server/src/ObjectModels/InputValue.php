@@ -26,8 +26,6 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
     }
     /**
      * Undocumented function
-     *
-     * @return string|null
      */
     public function getDefaultValue(): ?string
     {

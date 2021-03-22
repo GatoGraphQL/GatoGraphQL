@@ -19,12 +19,8 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-
-    function __construct(
-        ModuleRegistryInterface $moduleRegistry
-    ) {
-        $this->moduleRegistry = $moduleRegistry;
+    function __construct(protected ModuleRegistryInterface $moduleRegistry)
+    {
     }
 
     /**

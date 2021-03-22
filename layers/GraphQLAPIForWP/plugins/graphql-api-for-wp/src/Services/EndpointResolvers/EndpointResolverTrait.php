@@ -18,8 +18,6 @@ trait EndpointResolverTrait
 {
     /**
      * Execute the GraphQL query
-     *
-     * @return void
      */
     protected function executeGraphQLQuery(): void
     {
@@ -65,10 +63,8 @@ trait EndpointResolverTrait
 
     /**
      * Indicate if the GraphQL variables must override the URL params
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function doURLParamsOverrideGraphQLVariables($postOrID): bool
+    protected function doURLParamsOverrideGraphQLVariables(WP_Post|int $postOrID): bool
     {
         return false;
     }

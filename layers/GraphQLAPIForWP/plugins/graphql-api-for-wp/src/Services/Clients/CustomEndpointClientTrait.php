@@ -23,8 +23,6 @@ trait CustomEndpointClientTrait
 
     /**
      * Endpoint URL
-     *
-     * @return string
      */
     protected function getEndpointURL(): string
     {

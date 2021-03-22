@@ -266,10 +266,8 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
 
     /**
      * Read the options block and check the value of attribute "isGraphiQLEnabled"
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function isGraphiQLEnabled($postOrID): bool
+    protected function isGraphiQLEnabled(WP_Post|int $postOrID): bool
     {
         // Check if disabled by module
         if (!$this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
@@ -291,10 +289,8 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
 
     /**
      * Read the options block and check the value of attribute "isVoyagerEnabled"
-     *
-     * @param WP_Post|int $postOrID
      */
-    protected function isVoyagerEnabled($postOrID): bool
+    protected function isVoyagerEnabled(WP_Post|int $postOrID): bool
     {
         // Check if disabled by module
         if (!$this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS)) {

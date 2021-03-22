@@ -33,15 +33,10 @@ use PoP\Translation\TranslationAPIInterface;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        FeedbackMessageStoreInterface $feedbackMessageStore
+        protected TranslationAPIInterface $translationAPI,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore
     ) {
-        $this->translationAPI = $translationAPI;
-        $this->feedbackMessageStore = $feedbackMessageStore;
     }
 
     /**
@@ -139,9 +134,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     /**
      * Indicates if the variable must be dealt with as an expression: if its name starts with "_"
-     *
-     * @param string $variableName
-     * @return boolean
      */
     public function treatVariableAsExpression(string $variableName): bool
     {
@@ -309,8 +301,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     /**
      * Restrain fields to the model through directive <include(if:isType($model))>
-     *
-     * @return array
      */
     protected function restrainFieldsByTypeOrInterface(array $fragmentFieldPaths, string $fragmentModel): array
     {
@@ -496,7 +486,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      * Function copied from youshido/graphql/src/Execution/Processor.php
      *
      * @param [type] $payload
-     * @param array $variables
      * @return void
      */
     protected function parseAndCreateRequest(

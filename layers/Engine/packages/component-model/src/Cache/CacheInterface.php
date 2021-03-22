@@ -18,8 +18,6 @@ interface CacheInterface
     public function deleteCache($id, $type): void;
     /**
      * Remove all entries in the cache
-     *
-     * @return void
      */
     public function clear(): void;
     public function getCache($id, $type);
