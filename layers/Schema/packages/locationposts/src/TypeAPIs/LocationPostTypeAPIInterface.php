@@ -24,5 +24,5 @@ interface LocationPostTypeAPIInterface
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
      */
-    public function getLocationPosts($query, array $options = []): array;
+    public function getLocationPosts(array $query, array $options = []): array;
 }
