@@ -69,8 +69,6 @@ class SchemaHelpers
 
     /**
      * Remove the deprecated enumValues from the schema definition
-     *
-     * @return void
      */
     public static function removeDeprecatedEnumValuesFromSchemaDefinition(array $enumValueDefinitions): array
     {
