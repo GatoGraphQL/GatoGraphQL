@@ -1007,11 +1007,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      * - An array, if it is surrounded with brackets and split with commas ([..., ..., ...])
      * - A number
      * - A field
-     *
-     * @param [type] $typeResolver
-     * @param [type] $fieldArgValue
-     * @param [type] $variables
-     * @return mixed
      */
     protected function maybeResolveFieldArgumentValueForResultItem(
         TypeResolverInterface $typeResolver,
@@ -1019,7 +1014,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $fieldArgValue,
         ?array $variables,
         ?array $expressions
-    ) {
+    ): mixed {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
             return array_map(
