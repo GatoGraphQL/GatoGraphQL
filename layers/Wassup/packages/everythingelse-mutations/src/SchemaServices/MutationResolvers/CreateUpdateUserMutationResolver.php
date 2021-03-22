@@ -218,7 +218,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @return mixed The ID of the updated entity, or an Error
      */
-    protected function update(array $form_data)
+    protected function update(array $form_data): mixed
     {
         // Do the Post update
         $user_id = $this->updateuser($form_data);
@@ -238,7 +238,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @return mixed The ID of the created entity, or an Error
      */
-    protected function create(array $form_data)
+    protected function create(array $form_data): mixed
     {
         $user_id = $this->createuser($form_data);
         if (GeneralUtils::isError($user_id)) {

@@ -258,9 +258,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     /**
      * @param array<string, mixed> $data
-     * @return mixed the ID of the updated custom post
      */
-    protected function executeUpdateCustomPost(array $data)
+    protected function executeUpdateCustomPost(array $data): mixed
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->updateCustomPost($data);
@@ -302,7 +301,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return mixed The ID of the updated entity, or an Error
      */
-    protected function update(array $form_data)
+    protected function update(array $form_data): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getUpdateCustomPostData($form_data);
@@ -339,7 +338,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @param array<string, mixed> $data
      * @return mixed the ID of the created custom post
      */
-    protected function executeCreateCustomPost(array $data)
+    protected function executeCreateCustomPost(array $data): mixed
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->createCustomPost($data);
@@ -348,7 +347,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return mixed The ID of the created entity, or an Error
      */
-    protected function create(array $form_data)
+    protected function create(array $form_data): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getCreateCustomPostData($form_data);

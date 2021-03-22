@@ -11,10 +11,7 @@ use PoPSchema\CommentMutations\TypeAPIs\CommentTypeAPIInterface;
  */
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
-    /**
-     * @return mixed
-     */
-    public function insertComment(array $comment_data)
+    public function insertComment(array $comment_data): mixed
     {
         // Convert the parameters
         if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
