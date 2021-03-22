@@ -22,7 +22,7 @@ class EventTypeResolver extends AbstractCustomPostTypeResolver
         return $translationAPI->__('Representation of an event', 'events');
     }
 
-    // public function getID(object $resultItem)
+    // public function getID(object $resultItem): mixed
     // {
     //     $eventTypeAPI = EventTypeAPIFacade::getInstance();
     //     return $eventTypeAPI->getID($resultItem);

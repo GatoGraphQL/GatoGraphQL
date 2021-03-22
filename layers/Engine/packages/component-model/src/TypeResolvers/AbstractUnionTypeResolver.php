@@ -120,11 +120,8 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
 
     // /**
     //  * Add the type to the ID
-    //  *
-    //  * @param [type] $resultItem
-    //  * @return void
     //  */
-    // public function addTypeToID($resultItemID): string
+    // public function addTypeToID(mixed $resultItemID): string
     // {
     //     $instanceManager = InstanceManagerFacade::getInstance();
     //     if ($resultItemTypeResolverClass = $this->getTypeResolverClassForResultItem($resultItemID)) {
@@ -199,11 +196,8 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     /**
      * In order to enable elements from different types (such as posts and users) to have same ID,
      * add the type to the ID
-     *
-     * @param [type] $resultItem
-     * @return void
      */
-    public function getID(object $resultItem)
+    public function getID(object $resultItem): mixed
     {
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {

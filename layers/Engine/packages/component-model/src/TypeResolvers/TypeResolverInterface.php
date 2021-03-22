@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 interface TypeResolverInterface
 {
     // Only these 4 functions must be implemented by a new Type class...
-    public function getID(object $resultItem);
+    public function getID(object $resultItem): mixed;
     public function getTypeName(): string;
     public function getNamespace(): string;
     public function getNamespacedTypeName(): string;
