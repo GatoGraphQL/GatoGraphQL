@@ -9,7 +9,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
  */
 class CustomPostTypeAPIHelpers
 {
-    public static function getCustomPostObjectAndID($customPostObjectOrID): array
+    public static function getCustomPostObjectAndID(mixed $customPostObjectOrID): array
     {
         if (is_object($customPostObjectOrID)) {
             $customPost = $customPostObjectOrID;
