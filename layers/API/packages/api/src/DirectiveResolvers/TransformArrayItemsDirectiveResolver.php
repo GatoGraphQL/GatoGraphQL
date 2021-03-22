@@ -178,7 +178,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                     // Add into the $idsDataFields object for the array items
                     // Watch out: function `regenerateAndExecuteFunction` receives `$idsDataFields` and not `$idsDataFieldOutputKeys`, so then re-create the "field" assigning a new alias
                     // If it has an alias, use it. If not, use the fieldName
-                    $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, $key);
+                    $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                     $arrayItemProperty = $fieldQueryInterpreter->composeField(
                         $fieldName,
                         $fieldArgs,
@@ -225,7 +225,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 $arrayValue = [];
                 $array = $value;
                 foreach ($array as $key => $value) {
-                    $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, $key);
+                    $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                     $arrayItemProperty = $fieldQueryInterpreter->composeField(
                         $fieldName,
                         $fieldArgs,
@@ -265,12 +265,8 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
 
     /**
      * Create a property for storing the array item in the current object
-     *
-     * @param string $fieldOutputKey
-     * @param [type] $key
-     * @return void
      */
-    protected function createPropertyForArrayItem(string $fieldAliasOrName, $key): string
+    protected function createPropertyForArrayItem(string $fieldAliasOrName, string $key): string
     {
         return implode(self::PROPERTY_SEPARATOR, [$fieldAliasOrName, $key]);
     }

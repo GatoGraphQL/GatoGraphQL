@@ -193,7 +193,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         // Add into the $idsDataFields object for the array items
                         // Watch out: function `regenerateAndExecuteFunction` receives `$idsDataFields` and not `$idsDataFieldOutputKeys`, so then re-create the "field" assigning a new alias
                         // If it has an alias, use it. If not, use the fieldName
-                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, $key);
+                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                         $arrayItemProperty = $fieldQueryInterpreter->composeField(
                             $fieldName,
                             $fieldArgs,
@@ -282,7 +282,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     $arrayItems = $this->getArrayItems($array, $id, $field, $typeResolver, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemDBErrors, $arrayItemDBWarnings, $arrayItemDBDeprecations);
                     // The value is an array. Unpack all the elements into their own property
                     foreach ($arrayItems as $key => &$value) {
-                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, $key);
+                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                         $arrayItemProperty = $fieldQueryInterpreter->composeField(
                             $fieldName,
                             $fieldArgs,
@@ -346,12 +346,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
     /**
      * Create a property for storing the array item in the current object
-     *
-     * @param string $fieldOutputKey
-     * @param [type] $key
-     * @return void
      */
-    protected function createPropertyForArrayItem(string $fieldAliasOrName, $key): string
+    protected function createPropertyForArrayItem(string $fieldAliasOrName, string $key): string
     {
         return implode(self::PROPERTY_SEPARATOR, [$fieldAliasOrName, $key]);
     }
