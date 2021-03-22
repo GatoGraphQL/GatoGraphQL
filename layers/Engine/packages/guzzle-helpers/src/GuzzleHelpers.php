@@ -41,7 +41,7 @@ class GuzzleHelpers
         return [];
     }
 
-    protected static function validateAndDecodeJSONResponse(ResponseInterface $response)
+    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): mixed
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         if ($response->getStatusCode() != 200) {
@@ -94,7 +94,7 @@ class GuzzleHelpers
      * @param array $bodyJSONQueries The form params
      * @return mixed The payload if successful as an array, or an Error object containing the error message in case of failure
      */
-    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST')
+    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): mixed
     {
         $urls = [];
         for ($i = 0; $i < count($bodyJSONQueries); $i++) {
@@ -108,9 +108,8 @@ class GuzzleHelpers
      *
      * @param array $urls The endpoints to fetch
      * @param array $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
-     * @return void
      */
-    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST')
+    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): mixed
     {
         if (!$urls) {
             return [];
