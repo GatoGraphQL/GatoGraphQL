@@ -41,7 +41,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return TranslationAPIFacade::getInstance()->__('Highlight', 'poptheme-wassup');
     }
 
-    public function getSuccessString($result_id): ?string
+    public function getSuccessString(mixed $result_id): ?string
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $status = $customPostTypeAPI->getStatus($result_id);

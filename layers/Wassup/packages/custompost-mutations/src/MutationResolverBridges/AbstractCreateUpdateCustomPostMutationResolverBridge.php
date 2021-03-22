@@ -165,10 +165,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return null;
     }
 
-    /**
-     * @param mixed $result_id Maybe an int, maybe a string
-     */
-    public function getSuccessString($result_id): ?string
+    public function getSuccessString(mixed $result_id): ?string
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $status = $customPostTypeAPI->getStatus($result_id);
