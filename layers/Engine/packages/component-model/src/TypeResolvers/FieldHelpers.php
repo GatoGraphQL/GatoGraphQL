@@ -8,8 +8,6 @@ class FieldHelpers
 {
     /**
      * Extracts all the deep conditional fields as an array of unique elements
-     *
-     * @return void
      */
     public static function extractConditionalFields(array $dataFields): array
     {
