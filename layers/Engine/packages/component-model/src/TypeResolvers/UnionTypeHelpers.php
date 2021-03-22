@@ -67,16 +67,13 @@ class UnionTypeHelpers
 
     /**
      * Creates a composed string containing the type and ID of the dbObject
-     *
-     * @param array $composedDBKeyResultItemID
-     * @return void
      */
-    public static function getDBObjectComposedTypeAndID(TypeResolverInterface $typeResolver, $id): string
+    public static function getDBObjectComposedTypeAndID(TypeResolverInterface $typeResolver, mixed $id): string
     {
         return
             $typeResolver->getTypeOutputName() .
             UnionTypeSymbols::DBOBJECT_COMPOSED_TYPE_ID_SEPARATOR .
-            $id;
+            (string) $id;
     }
 
     /**

@@ -11,27 +11,18 @@ interface StanceTypeAPIInterface
 {
     /**
      * Return the stance's ID
-     *
-     * @param [type] $stance
-     * @return void
      */
-    public function getID($stance);
+    public function getID(object $stance): mixed;
     /**
      * Indicates if the passed object is of type Stance
      */
     public function isInstanceOfStanceType(object $object): bool;
     /**
      * Get the stance with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getStance($id);
+    public function getStance(mixed $id): ?object;
     /**
      * Indicate if an stance with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function stanceExists($id): bool;
+    public function stanceExists(mixed $id): bool;
 }

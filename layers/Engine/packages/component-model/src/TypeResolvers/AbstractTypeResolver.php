@@ -155,7 +155,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            function ($id) {
+            function (mixed $id) {
                 return UnionTypeHelpers::getDBObjectComposedTypeAndID(
                     $this,
                     $id
@@ -767,7 +767,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             $ids_data_fields = array_filter(
                 $ids_data_fields,
-                function ($id) use ($unresolvedResultItemIDs) {
+                function (mixed $id) use ($unresolvedResultItemIDs) {
                     return !in_array($id, $unresolvedResultItemIDs);
                 },
                 ARRAY_FILTER_USE_KEY

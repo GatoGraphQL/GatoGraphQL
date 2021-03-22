@@ -410,7 +410,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForResultItem($id, array &$variables, array &$messages): array
+    protected function getExpressionsForResultItem(mixed $id, array &$variables, array &$messages): array
     {
         // Create a custom $variables containing all the properties from $dbItems for this resultItem
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
@@ -421,12 +421,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         );
     }
 
-    protected function addExpressionForResultItem($id, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForResultItem(mixed $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] = $value;
     }
 
-    protected function getExpressionForResultItem($id, string $key, array &$messages): mixed
+    protected function getExpressionForResultItem(mixed $id, string $key, array &$messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key];
     }

@@ -205,7 +205,7 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
          */
         $value = [];
         $allFields = array_unique(GeneralUtils::arrayFlatten(array_map(
-            function ($idDataFields) {
+            function (array $idDataFields) {
                 return $idDataFields['direct'];
             },
             $idsDataFields

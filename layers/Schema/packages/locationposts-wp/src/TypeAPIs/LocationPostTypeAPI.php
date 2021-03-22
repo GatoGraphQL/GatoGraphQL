@@ -25,11 +25,8 @@ class LocationPostTypeAPI extends PostTypeAPI implements LocationPostTypeAPIInte
 
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function getLocationPost($id)
+    public function getLocationPost(mixed $id): ?object
     {
         $post = get_post($id);
         if (!$post || $post->post_type != \POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
@@ -40,11 +37,8 @@ class LocationPostTypeAPI extends PostTypeAPI implements LocationPostTypeAPIInte
 
     /**
      * Indicate if an locationPost with provided ID exists
-     *
-     * @param [type] $id
-     * @return void
      */
-    public function locationPostExists($id): bool
+    public function locationPostExists(mixed $id): bool
     {
         return $this->getLocationPost($id) != null;
     }

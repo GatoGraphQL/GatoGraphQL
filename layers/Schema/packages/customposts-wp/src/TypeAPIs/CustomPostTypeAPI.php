@@ -29,11 +29,8 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 
     /**
      * Return the post's ID
-     *
-     * @param object $customPost
-     * @return void
      */
-    public function getID($customPost)
+    public function getID(object $customPost): mixed
     {
         return $customPost->ID;
     }
@@ -343,11 +340,8 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 
     /**
      * Get the post with provided ID or, if it doesn't exist, null
-     *
-     * @param int $id
-     * @return void
      */
-    public function getCustomPost($id)
+    public function getCustomPost(mixed $id): ?object
     {
         return \get_post($id);
     }
