@@ -24,14 +24,14 @@ interface TypeResolverInterface
      * @return FieldInterfaceResolverInterface[]
      */
     public function getAllImplementedInterfaceResolverInstances(): array;
-    public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs);
+    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed;
     public function getIdFieldTypeResolverClass(): string;
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */
     public function getDirectiveNameResolvers(): array;
     public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields);
+    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void;
     public function fillResultItems(
         array $ids_data_fields,
         array &$unionDBKeyIDs,

@@ -150,7 +150,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return get_called_class();
     }
 
-    public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
+    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
     {
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
@@ -894,7 +894,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields)
+    public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
     {
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();

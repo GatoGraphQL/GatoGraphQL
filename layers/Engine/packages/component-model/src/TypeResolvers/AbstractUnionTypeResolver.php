@@ -49,7 +49,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    public function getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
+    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
@@ -142,7 +142,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      */
-    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields)
+    final public function enqueueFillingResultItemsFromIDs(array $ids_data_fields): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
