@@ -65,7 +65,7 @@ class VersioningHelpers
         if (is_null(self::$versionConstraintsForFields)) {
             self::initializeVersionConstraintsForFields();
         }
-        return self::$versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName];
+        return self::$versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] ?? null;
     }
 
     /**
