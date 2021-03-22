@@ -11,8 +11,6 @@ trait WPClientTrait
 {
     /**
      * Base URL
-     *
-     * @return string
      */
     protected function getComponentBaseURL(): ?string
     {

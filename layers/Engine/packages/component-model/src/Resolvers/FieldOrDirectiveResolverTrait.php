@@ -61,11 +61,6 @@ trait FieldOrDirectiveResolverTrait
      * For instance, this doesn't work: /?query=arrayItem(posts(),3)
      * In that case, the validation will be done inside ->resolveValue(),
      * and will be treated as a $dbError, not a $schemaError
-     *
-     * @param string $directiveName
-     * @param array $directiveArgs
-     * @param array $schemaDirectiveArgs
-     * @return string|null
      */
     protected function maybeValidateEnumFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $schemaFieldOrDirectiveArgs, string $type): ?array
     {

@@ -8,8 +8,6 @@ class EditorHelpers
 {
     /**
      * Get the post type currently being created/edited in the editor
-     *
-     * @return string
      */
     public function getEditingPostType(): ?string
     {
