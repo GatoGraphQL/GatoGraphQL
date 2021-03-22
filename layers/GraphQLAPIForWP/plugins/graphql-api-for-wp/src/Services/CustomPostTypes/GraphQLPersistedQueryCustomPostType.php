@@ -22,23 +22,18 @@ use WP_Post;
 
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
-    protected BlockContentHelpers $blockContentHelpers;
-    protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
-
     function __construct(
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
-        BlockContentHelpers $blockContentHelpers,
-        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
+        protected BlockContentHelpers $blockContentHelpers,
+        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
     ) {
         parent::__construct(
             $menu,
             $moduleRegistry,
             $userAuthorization
         );
-        $this->blockContentHelpers = $blockContentHelpers;
-        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
     }
 
     /**

@@ -15,18 +15,15 @@ use PoP\Translation\TranslationAPIInterface;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
-    protected ModulePaths $modulePaths;
-
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
-        ModulePaths $modulePaths
+        protected ModulePaths $modulePaths
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI
         );
-        $this->modulePaths = $modulePaths;
     }
 
     protected function init()

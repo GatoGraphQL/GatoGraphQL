@@ -17,15 +17,10 @@ final class PHPStanNeonContentProvider
      */
     private const INCLUDES_KEY = 'includes';
 
-    private SourcePackagesProvider $sourcePackagesProvider;
-    private NeonPrinter $neonPrinter;
-
     public function __construct(
-        SourcePackagesProvider $sourcePackagesProvider,
-        NeonPrinter $neonPrinter
+        private SourcePackagesProvider $sourcePackagesProvider,
+        private NeonPrinter $neonPrinter
     ) {
-        $this->sourcePackagesProvider = $sourcePackagesProvider;
-        $this->neonPrinter = $neonPrinter;
     }
 
     /**

@@ -16,16 +16,13 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
-    protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
-
     function __construct(
         ModuleRegistryInterface $moduleRegistry,
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
         FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator,
-        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
+        protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
         parent::__construct($moduleRegistry, $accessControlGraphQLQueryConfigurator, $fieldDeprecationGraphQLQueryConfigurator);
-        $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
     }
 
     /**

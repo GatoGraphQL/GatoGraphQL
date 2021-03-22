@@ -9,10 +9,7 @@ use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 
 abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    protected RESTDataStructureFormatter $restDataStructureFormatter;
-
-    function __construct(RESTDataStructureFormatter $restDataStructureFormatter)
+    function __construct(protected RESTDataStructureFormatter $restDataStructureFormatter)
     {
-        $this->restDataStructureFormatter = $restDataStructureFormatter;
     }
 }

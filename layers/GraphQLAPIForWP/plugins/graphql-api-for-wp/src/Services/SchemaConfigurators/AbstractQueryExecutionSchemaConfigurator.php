@@ -34,18 +34,11 @@ use WP_Post;
 
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
-    protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator;
-
     function __construct(
-        ModuleRegistryInterface $moduleRegistry,
-        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
-        FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+        protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
     ) {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
-        $this->fieldDeprecationGraphQLQueryConfigurator = $fieldDeprecationGraphQLQueryConfigurator;
     }
 
     /**

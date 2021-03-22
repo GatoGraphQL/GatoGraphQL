@@ -38,19 +38,11 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      */
     private ?array $fragmentsFromRequestCache = null;
 
-    // Services
-    protected TranslationAPIInterface $translationAPI;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected QueryParserInterface $queryParser;
-
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        QueryParserInterface $queryParser
+        protected TranslationAPIInterface $translationAPI,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected QueryParserInterface $queryParser
     ) {
-        $this->translationAPI = $translationAPI;
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->queryParser = $queryParser;
     }
 
     public function convertAPIQuery(string $operationDotNotation, ?array $fragments = null): FieldQuerySet

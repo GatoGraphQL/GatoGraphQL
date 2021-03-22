@@ -10,11 +10,6 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class CustomPackage
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var SmartFileInfo
      */
     private $rootDirectoryFileInfo;
@@ -29,10 +24,10 @@ final class CustomPackage
      */
     private $shortDirectory;
 
-    public function __construct(string $name, SmartFileInfo $composerJsonFileInfo)
-    {
-        $this->name = $name;
-
+    public function __construct(
+        private string $name,
+        SmartFileInfo $composerJsonFileInfo
+    ) {
         $this->shortName = (string) Strings::after($name, '/', -1);
 
         $this->rootDirectoryFileInfo = new SmartFileInfo($composerJsonFileInfo->getPath());

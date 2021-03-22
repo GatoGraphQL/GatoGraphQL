@@ -21,7 +21,6 @@ use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegis
 
 class Schema
 {
-    protected string $id;
     /**
      * @var ScalarType[]
      */
@@ -34,10 +33,10 @@ class Schema
     protected ?AbstractType $mutationType = null;
     protected ?AbstractType $subscriptionType = null;
 
-    public function __construct(array $fullSchemaDefinition, string $id)
-    {
-        $this->id = $id;
-
+    public function __construct(
+        array $fullSchemaDefinition,
+        protected string $id
+    ) {
         // Initialize the global elements before anything, since they will
         // be references from the ObjectType: Fields/Connections/Directives
         // 1. Initialize all the Scalar types

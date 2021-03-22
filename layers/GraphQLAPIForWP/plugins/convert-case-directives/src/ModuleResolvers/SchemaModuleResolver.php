@@ -25,18 +25,11 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    protected ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver;
-    protected ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver;
-    protected ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver;
-
     public function __construct(
-        ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver,
-        ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
-        ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
+        protected ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver,
+        protected ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
+        protected ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
     ) {
-        $this->upperCaseStringDirectiveResolver = $upperCaseStringDirectiveResolver;
-        $this->lowerCaseStringDirectiveResolver = $lowerCaseStringDirectiveResolver;
-        $this->titleCaseStringDirectiveResolver = $titleCaseStringDirectiveResolver;
     }
 
     public function getModulesToResolve(): array

@@ -33,15 +33,10 @@ use PoP\Translation\TranslationAPIInterface;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-
     public function __construct(
-        TranslationAPIInterface $translationAPI,
-        FeedbackMessageStoreInterface $feedbackMessageStore
+        protected TranslationAPIInterface $translationAPI,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore
     ) {
-        $this->translationAPI = $translationAPI;
-        $this->feedbackMessageStore = $feedbackMessageStore;
     }
 
     /**

@@ -68,18 +68,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
-
-    // Services
-    protected TypeCastingExecuterInterface $typeCastingExecuter;
-
     public function __construct(
         TranslationAPIInterface $translationAPI,
         FeedbackMessageStoreInterface $feedbackMessageStore,
-        TypeCastingExecuterInterface $typeCastingExecuter,
+        protected TypeCastingExecuterInterface $typeCastingExecuter,
         QueryParserInterface $queryParser
     ) {
         parent::__construct($translationAPI, $feedbackMessageStore, $queryParser);
-        $this->typeCastingExecuter = $typeCastingExecuter;
     }
 
     /**

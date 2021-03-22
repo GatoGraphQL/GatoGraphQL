@@ -11,14 +11,10 @@ use PoP\Engine\AppLoader;
 
 abstract class AbstractPlugin
 {
-    /**
-     * The main plugin file
-     */
-    protected string $pluginFile;
-
-    final public function __construct(string $pluginFile)
-    {
-        $this->pluginFile = $pluginFile;
+    final public function __construct(
+        /** The main plugin file */
+        protected string $pluginFile
+    ) {
     }
 
     /**

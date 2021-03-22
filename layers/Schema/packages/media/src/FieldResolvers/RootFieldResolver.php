@@ -16,11 +16,8 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    protected CustomPostTypeResolver $customPostTypeResolver;
-
-    function __construct(CustomPostTypeResolver $customPostTypeResolver)
+    function __construct(protected CustomPostTypeResolver $customPostTypeResolver)
     {
-        $this->customPostTypeResolver = $customPostTypeResolver;
     }
 
     public function getClassesToAttachTo(): array

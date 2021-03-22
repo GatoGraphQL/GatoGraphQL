@@ -17,15 +17,12 @@ use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 
 class CustomPostMutationResolverHooks extends AbstractHookSet
 {
-    protected MediaTypeResolver $mediaTypeResolver;
-
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
-        MediaTypeResolver $mediaTypeResolver
+        protected MediaTypeResolver $mediaTypeResolver
     ) {
         parent::__construct($hooksAPI, $translationAPI);
-        $this->mediaTypeResolver = $mediaTypeResolver;
     }
 
     protected function init()

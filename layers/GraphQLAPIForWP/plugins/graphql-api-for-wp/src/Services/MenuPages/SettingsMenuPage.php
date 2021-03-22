@@ -24,16 +24,13 @@ class SettingsMenuPage extends AbstractMenuPage
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
-    protected ModuleRegistryInterface $moduleRegistry;
-
     function __construct(
         Menu $menu,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
-        ModuleRegistryInterface $moduleRegistry
+        protected ModuleRegistryInterface $moduleRegistry
     ) {
         parent::__construct($menu, $menuPageHelper, $endpointHelpers);
-        $this->moduleRegistry = $moduleRegistry;
     }
 
     public function getMenuPageSlug(): string

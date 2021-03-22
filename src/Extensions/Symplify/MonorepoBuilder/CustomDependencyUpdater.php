@@ -10,14 +10,8 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class CustomDependencyUpdater
 {
-    /**
-     * @var JsonFileManager
-     */
-    private $jsonFileManager;
-
-    public function __construct(JsonFileManager $jsonFileManager)
+    public function __construct(private JsonFileManager $jsonFileManager)
     {
-        $this->jsonFileManager = $jsonFileManager;
     }
 
     /**

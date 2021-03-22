@@ -10,13 +10,10 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class NeonFilePrinter
 {
-    private SmartFileSystem $smartFileSystem;
-    private SymfonyStyle $symfonyStyle;
-
-    public function __construct(SmartFileSystem $smartFileSystem, SymfonyStyle $symfonyStyle)
-    {
-        $this->smartFileSystem = $smartFileSystem;
-        $this->symfonyStyle = $symfonyStyle;
+    public function __construct(
+        private SmartFileSystem $smartFileSystem,
+        private SymfonyStyle $symfonyStyle
+    ) {
     }
 
     public function printContentToOutputFile(string $neonFileContent, string $outputFilePath): void

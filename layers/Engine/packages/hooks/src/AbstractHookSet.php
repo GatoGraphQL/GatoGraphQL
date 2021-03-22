@@ -10,15 +10,10 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected TranslationAPIInterface $translationAPI;
-
     public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI
+        protected HooksAPIInterface $hooksAPI,
+        protected TranslationAPIInterface $translationAPI
     ) {
-        $this->hooksAPI = $hooksAPI;
-        $this->translationAPI = $translationAPI;
     }
 
     final public function initialize(): void

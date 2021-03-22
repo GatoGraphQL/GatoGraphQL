@@ -14,18 +14,15 @@ use PoP\Translation\TranslationAPIInterface;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
-    protected HeadModule $headModule;
-
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
-        HeadModule $headModule
+        protected HeadModule $headModule
     ) {
         parent::__construct(
             $hooksAPI,
             $translationAPI
         );
-        $this->headModule = $headModule;
     }
 
     protected function init()

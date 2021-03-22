@@ -70,36 +70,17 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    protected ?CommentTypeResolver $commentTypeResolver;
-    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver;
-    protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver;
-    protected ?MediaTypeResolver $mediaTypeResolver;
-    protected ?PageTypeResolver $pageTypeResolver;
-    protected ?PostTagTypeResolver $postTagTypeResolver;
-    protected ?PostTypeResolver $postTypeResolver;
-    protected ?UserRoleTypeResolver $userRoleTypeResolver;
-    protected ?UserTypeResolver $userTypeResolver;
-
     public function __construct(
-        ?CommentTypeResolver $commentTypeResolver,
-        ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
-        ?MediaTypeResolver $mediaTypeResolver,
-        ?PageTypeResolver $pageTypeResolver,
-        ?PostTagTypeResolver $postTagTypeResolver,
-        ?PostTypeResolver $postTypeResolver,
-        ?UserRoleTypeResolver $userRoleTypeResolver,
-        ?UserTypeResolver $userTypeResolver
+        protected ?CommentTypeResolver $commentTypeResolver,
+        protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
+        protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
+        protected ?MediaTypeResolver $mediaTypeResolver,
+        protected ?PageTypeResolver $pageTypeResolver,
+        protected ?PostTagTypeResolver $postTagTypeResolver,
+        protected ?PostTypeResolver $postTypeResolver,
+        protected ?UserRoleTypeResolver $userRoleTypeResolver,
+        protected ?UserTypeResolver $userTypeResolver
     ) {
-        $this->commentTypeResolver = $commentTypeResolver;
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;
-        $this->mediaTypeResolver = $mediaTypeResolver;
-        $this->pageTypeResolver = $pageTypeResolver;
-        $this->postTagTypeResolver = $postTagTypeResolver;
-        $this->postTypeResolver = $postTypeResolver;
-        $this->userRoleTypeResolver = $userRoleTypeResolver;
-        $this->userTypeResolver = $userTypeResolver;
     }
 
     /**

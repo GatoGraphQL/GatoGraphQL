@@ -15,12 +15,8 @@ use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-
-    function __construct(
-        ModuleRegistryInterface $moduleRegistry
-    ) {
-        $this->moduleRegistry = $moduleRegistry;
+    function __construct(protected ModuleRegistryInterface $moduleRegistry)
+    {
     }
 
     /**

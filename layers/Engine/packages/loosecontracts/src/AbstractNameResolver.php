@@ -6,12 +6,8 @@ namespace PoP\LooseContracts;
 
 abstract class AbstractNameResolver implements NameResolverInterface
 {
-    protected LooseContractManagerInterface $looseContractManager;
-
-    public function __construct(
-        LooseContractManagerInterface $looseContractManager
-    ) {
-        $this->looseContractManager = $looseContractManager;
+    public function __construct(protected LooseContractManagerInterface $looseContractManager)
+    {
     }
 
     public function implementName(string $abstractName, string $implementationName): void

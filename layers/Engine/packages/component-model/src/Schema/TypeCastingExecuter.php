@@ -11,12 +11,8 @@ use DateTime;
 
 class TypeCastingExecuter implements TypeCastingExecuterInterface
 {
-    private TranslationAPIInterface $translationAPI;
-
-    public function __construct(
-        TranslationAPIInterface $translationAPI
-    ) {
-        $this->translationAPI = $translationAPI;
+    public function __construct(private TranslationAPIInterface $translationAPI)
+    {
     }
 
     /**

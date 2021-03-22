@@ -12,15 +12,10 @@ use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 
 class EndpointHelpers
 {
-    protected Menu $menu;
-    protected ModuleRegistryInterface $moduleRegistry;
-
     function __construct(
-        Menu $menu,
-        ModuleRegistryInterface $moduleRegistry
+        protected Menu $menu,
+        protected ModuleRegistryInterface $moduleRegistry
     ) {
-        $this->menu = $menu;
-        $this->moduleRegistry = $moduleRegistry;
     }
 
     /**

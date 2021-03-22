@@ -8,12 +8,8 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected LooseContractManagerInterface $looseContractManager;
-
-    public function __construct(
-        LooseContractManagerInterface $looseContractManager
-    ) {
-        $this->looseContractManager = $looseContractManager;
+    public function __construct(protected LooseContractManagerInterface $looseContractManager)
+    {
     }
 
     final public function initialize(): void

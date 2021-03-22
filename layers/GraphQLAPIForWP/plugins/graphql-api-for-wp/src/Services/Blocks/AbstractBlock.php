@@ -27,15 +27,10 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 {
     use HasDocumentationScriptTrait;
 
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-
     function __construct(
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected UserAuthorizationInterface $userAuthorization
     ) {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
     }
 
     /**

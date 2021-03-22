@@ -11,12 +11,13 @@ class ScalarType extends AbstractType
 {
     use NonDocumentableTypeTrait;
 
-    protected string $name;
-
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, string $name, array $customDefinition = [])
-    {
+    public function __construct(
+        array &$fullSchemaDefinition,
+        array $schemaDefinitionPath,
+        protected string $name,
+        array $customDefinition = []
+    ) {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
-        $this->name = $name;
     }
 
     public function getName(): string

@@ -25,18 +25,11 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class Menu extends AbstractMenu
 {
-    protected MenuPageHelper $menuPageHelper;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-
     function __construct(
-        MenuPageHelper $menuPageHelper,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization
+        protected MenuPageHelper $menuPageHelper,
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected UserAuthorizationInterface $userAuthorization
     ) {
-        $this->menuPageHelper = $menuPageHelper;
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
     }
 
     public function getName(): string

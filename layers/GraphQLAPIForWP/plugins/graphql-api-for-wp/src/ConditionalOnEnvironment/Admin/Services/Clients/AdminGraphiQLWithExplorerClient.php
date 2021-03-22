@@ -9,11 +9,8 @@ use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnEnvironment\UseGraphiQLExplore
 
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
-    protected EndpointHelpers $endpointHelpers;
-
-    function __construct(EndpointHelpers $endpointHelpers)
+    function __construct(protected EndpointHelpers $endpointHelpers)
     {
-        $this->endpointHelpers = $endpointHelpers;
     }
 
     /**

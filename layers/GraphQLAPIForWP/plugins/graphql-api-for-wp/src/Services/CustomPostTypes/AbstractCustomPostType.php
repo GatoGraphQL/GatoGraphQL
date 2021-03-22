@@ -18,18 +18,11 @@ use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
-    protected Menu $menu;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-
     function __construct(
-        Menu $menu,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization
+        protected Menu $menu,
+        protected ModuleRegistryInterface $moduleRegistry,
+        protected UserAuthorizationInterface $userAuthorization
     ) {
-        $this->menu = $menu;
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
     }
     /**
      * Add the hook to initialize the different post types

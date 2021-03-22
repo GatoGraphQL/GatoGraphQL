@@ -18,11 +18,8 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    protected MediaTypeResolver $mediaTypeResolver;
-
-    function __construct(MediaTypeResolver $mediaTypeResolver)
+    function __construct(protected MediaTypeResolver $mediaTypeResolver)
     {
-        $this->mediaTypeResolver = $mediaTypeResolver;
     }
 
     public function getClassesToAttachTo(): array

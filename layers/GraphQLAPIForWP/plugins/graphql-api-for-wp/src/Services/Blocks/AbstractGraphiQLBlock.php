@@ -23,15 +23,12 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
-    protected EndpointHelpers $endpointHelpers;
-
     function __construct(
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
-        EndpointHelpers $endpointHelpers
+        protected EndpointHelpers $endpointHelpers
     ) {
         parent::__construct($moduleRegistry, $userAuthorization);
-        $this->endpointHelpers = $endpointHelpers;
     }
 
     protected function getBlockName(): string
