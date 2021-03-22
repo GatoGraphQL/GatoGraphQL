@@ -37,8 +37,6 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
 
     /**
      * Execute always, even if validation is false
-     *
-     * @return void
      */
     public function needsIDsDataFieldsToExecute(): bool
     {
