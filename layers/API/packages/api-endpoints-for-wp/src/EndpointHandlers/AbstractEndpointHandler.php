@@ -79,8 +79,6 @@ abstract class AbstractEndpointHandler extends \PoP\APIEndpoints\AbstractEndpoin
      * @see https://codex.wordpress.org/Rewrite_API/add_rewrite_endpoint
      *
      * Using EP_ROOT means that whole URL must match the endpoint.
-     *
-     * @return boolean
      */
     protected function getRewriteMask(): int
     {

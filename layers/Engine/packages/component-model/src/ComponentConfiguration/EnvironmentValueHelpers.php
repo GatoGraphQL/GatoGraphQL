@@ -24,7 +24,6 @@ class EnvironmentValueHelpers
      * Convert the environment value from string to int
      *
      * @param string $value environment value
-     * @return boolean
      */
     public static function toInt(string $value): int
     {

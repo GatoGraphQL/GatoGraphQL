@@ -28,11 +28,6 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
 
     /**
      * Remove directiveName "translate" if the user is not logged in
-     *
-     * @param boolean $include
-     * @param TypeResolverInterface $typeResolver
-     * @param string $directiveName
-     * @return boolean
      */
     protected function getDirectiveResolverClasses(): array
     {

@@ -40,11 +40,6 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     // /**
     //  * Only use this fieldResolver when parameter `ofTypes` is provided.
     //  * Otherwise, use the default implementation
-    //  *
-    //  * @param TypeResolverInterface $typeResolver
-    //  * @param string $fieldName
-    //  * @param array<string, mixed> $fieldArgs
-    //  * @return boolean
     //  */
     // public function resolveCanProcess(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): bool
     // {

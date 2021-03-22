@@ -18,9 +18,6 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
-     *
-     * @param boolean $include
-     * @return boolean
      */
     final protected function getMatchingEntries(
         array $entryList,

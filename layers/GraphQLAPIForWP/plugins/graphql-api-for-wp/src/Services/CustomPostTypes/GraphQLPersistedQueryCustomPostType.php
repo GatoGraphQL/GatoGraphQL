@@ -150,8 +150,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 
     // /**
     //  * Show in admin bar
-    //  *
-    //  * @return bool
     //  */
     // protected function showInAdminBar(): bool
     // {
