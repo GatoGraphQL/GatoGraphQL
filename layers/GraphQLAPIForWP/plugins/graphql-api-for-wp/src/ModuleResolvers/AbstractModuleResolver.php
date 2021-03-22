@@ -113,7 +113,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
      *
      * @return mixed Anything the setting might be: an array|string|bool|int|null
      */
-    public function getSettingsDefaultValue(string $module, string $option)
+    public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         return null;
     }
