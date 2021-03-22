@@ -1281,7 +1281,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return array();
     }
 
-    final private function getSubmodulesByGroup(array $module, $components = array()): array
+    private function getSubmodulesByGroup(array $module, $components = array()): array
     {
         if (empty($components)) {
             $components = array(
