@@ -63,25 +63,25 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $types = [
+        return match($fieldName) {
             'accessControlLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'cacheControlLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'fieldDeprecationLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'schemaConfigurations' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'accessControlLists' => $translationAPI->__('Access Control Lists', 'graphql-api'),
             'cacheControlLists' => $translationAPI->__('Cache Control Lists', 'graphql-api'),
             'fieldDeprecationLists' => $translationAPI->__('Field Deprecation Lists', 'graphql-api'),
             'schemaConfigurations' => $translationAPI->__('Schema Configurations', 'graphql-api'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
+        };
     }
 
     /**
