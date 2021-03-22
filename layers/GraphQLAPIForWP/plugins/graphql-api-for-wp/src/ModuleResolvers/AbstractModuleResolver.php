@@ -100,10 +100,8 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     /**
      * Indicate if the given value is valid for that option
-     *
-     * @param mixed $value
      */
-    public function isValidValue(string $module, string $option, $value): bool
+    public function isValidValue(string $module, string $option, mixed $value): bool
     {
         return true;
     }
