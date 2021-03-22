@@ -42,7 +42,7 @@ class Component extends AbstractComponent
      * @return void
      * @todo Fix: This code is executed before plugins are loaded, so `defined('EM_VERSION')` returns always `false`. Temporarily return always `true`
      */
-    protected static function resolveEnabled()
+    protected static function resolveEnabled(): bool
     {
         return true;
         return defined('EM_VERSION');

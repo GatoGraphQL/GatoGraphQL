@@ -42,8 +42,6 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 
     /**
      * By returning `null`, the schema definition comes from the interface
-     *
-     * @return void
      */
     public function getSchemaDefinitionResolver(TypeResolverInterface $typeResolver): ?FieldSchemaDefinitionResolverInterface
     {

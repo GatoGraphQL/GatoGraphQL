@@ -112,8 +112,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
     /**
      * Override the parent function, to place the locations from outside extensions
-     *
-     * @return void
      */
     protected function getQueryEntry(string $message, array $extensions): array
     {

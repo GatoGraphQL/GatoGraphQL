@@ -49,7 +49,7 @@ class Component extends AbstractComponent
         }
     }
 
-    protected static function resolveEnabled()
+    protected static function resolveEnabled(): bool
     {
         return GraphQLServerComponent::isEnabled();
     }
