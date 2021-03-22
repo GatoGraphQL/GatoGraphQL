@@ -70,10 +70,10 @@ class Cache implements CacheInterface
     /**
      * Store the cache
      *
-     * @param [type] $id key under which to store the cache
-     * @param [type] $type the type of the cache, used to distinguish groups of caches
-     * @param [type] $content the value to cache
-     * @param [type] $time time after which the cache expires, in seconds
+     * @param string $id key under which to store the cache
+     * @param string $type the type of the cache, used to distinguish groups of caches
+     * @param mixed $content the value to cache
+     * @param int|DateInterval|null $time time after which the cache expires, in seconds
      */
     public function storeCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void
     {
@@ -84,13 +84,7 @@ class Cache implements CacheInterface
     }
 
     /**
-     * Store the cache
-     *
-     * @param [type] $id key under which to store the cache
-     * @param [type] $type the type of the cache, used to distinguish groups of caches
-     * @param [type] $content the value to cache
-     * @param [type] $time time after which the cache expires, in seconds
-     * @return void
+     * Store the cache by component model
      */
     public function storeComponentModelCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void
     {
@@ -101,8 +95,6 @@ class Cache implements CacheInterface
 
     /**
      * Save immediately. Can override to save as deferred
-     *
-     * @return void
      */
     protected function saveCache(CacheItemInterface $cacheItem): void
     {

@@ -26,7 +26,7 @@ interface CacheInterface
      * @param string $id key under which to store the cache
      * @param string $type the type of the cache, used to distinguish groups of caches
      * @param mixed $content the value to cache
-     * @param [type] $time time after which the cache expires, in seconds
+     * @param int|DateInterval|null $time time after which the cache expires, in seconds
      */
     public function storeCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void;
     public function storeComponentModelCache(string $id, string $type, mixed $content, int|DateInterval|null $time = null): void;
