@@ -434,7 +434,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                 foreach ($value as &$targetProps) {
                     foreach ($fieldArgs['source'] as $sourceProps) {
                         if (array_key_exists($index, $targetProps) && $targetProps[$index] == $sourceProps[$index]) {
-                            $properties = $fieldArgs['properties'] ? $fieldArgs['properties'] : array_keys($sourceProps);
+                            $properties = isset($fieldArgs['properties']) ? $fieldArgs['properties'] : array_keys($sourceProps);
                             foreach ($properties as $property) {
                                 $targetProps[$property] = $sourceProps[$property];
                             }
