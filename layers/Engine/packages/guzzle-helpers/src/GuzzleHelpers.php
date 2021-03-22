@@ -64,7 +64,7 @@ class GuzzleHelpers
             substr($contentType, 0, strlen('application/json')) == 'application/json'
             || (
                 substr($contentType, 0, strlen('application/')) == 'application/'
-                && strpos($contentType, '+json') !== false
+                && str_contains($contentType, '+json')
             );
         if (!$isJSONContentType) {
             // Throw an error

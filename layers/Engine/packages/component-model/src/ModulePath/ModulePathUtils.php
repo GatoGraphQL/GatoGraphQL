@@ -25,7 +25,7 @@ class ModulePathUtils
                 $paths,
                 function ($item) use ($paths) {
                     foreach ($paths as $path) {
-                        if (strlen($item) > strlen($path) && strpos($item, $path) === 0 && $item[strlen($path)] == ModulePath::MODULE_SEPARATOR) {
+                        if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ModulePath::MODULE_SEPARATOR) {
                             return false;
                         }
                     }
