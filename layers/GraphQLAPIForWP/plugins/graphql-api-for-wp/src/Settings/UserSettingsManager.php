@@ -45,12 +45,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->hasItem(Options::SETTINGS, $item);
     }
 
-    /**
-     * No return type because it could be a bool/int/string
-     *
-     * @return mixed
-     */
-    public function getSetting(string $module, string $option)
+    public function getSetting(string $module, string $option): mixed
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
