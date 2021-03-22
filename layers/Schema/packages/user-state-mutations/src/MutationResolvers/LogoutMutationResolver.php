@@ -20,10 +20,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
         $this->validateUserIsLoggedIn($errors);
         return $errors;
     }
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];

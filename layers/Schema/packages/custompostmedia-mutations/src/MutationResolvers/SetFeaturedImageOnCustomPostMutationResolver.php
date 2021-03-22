@@ -13,10 +13,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $mediaItemID = $form_data[MutationInputProperties::MEDIA_ITEM_ID];

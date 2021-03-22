@@ -11,10 +11,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 
 class CreateLocationMutationResolver extends AbstractMutationResolver
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         // Allow EM PoP to initialize the field names as it needs them to populate the object in function getPost($validate = true),
         // in file plugins/events-manager/classes/em-location.php

@@ -177,10 +177,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create

@@ -91,10 +91,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         return \PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $result = $this->doExecute($form_data);
 

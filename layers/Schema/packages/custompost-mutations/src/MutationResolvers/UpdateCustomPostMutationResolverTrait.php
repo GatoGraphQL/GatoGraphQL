@@ -6,10 +6,7 @@ namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
 trait UpdateCustomPostMutationResolverTrait
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         return $this->update($form_data);
     }

@@ -31,10 +31,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $target_id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $target_id = $this->update($form_data);
         $this->additionals($target_id, $form_data);

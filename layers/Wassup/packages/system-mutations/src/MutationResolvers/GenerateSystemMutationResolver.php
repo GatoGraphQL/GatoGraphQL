@@ -9,10 +9,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GenerateSystemMutationResolver extends AbstractMutationResolver
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         HooksAPIFacade::getInstance()->doAction('PoP:system-generate');
         return true;

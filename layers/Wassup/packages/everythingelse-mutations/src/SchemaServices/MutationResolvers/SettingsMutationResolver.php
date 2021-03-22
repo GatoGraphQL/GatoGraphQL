@@ -24,10 +24,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

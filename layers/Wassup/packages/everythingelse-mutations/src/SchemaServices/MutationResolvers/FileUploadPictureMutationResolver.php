@@ -8,10 +8,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class FileUploadPictureMutationResolver extends AbstractMutationResolver
 {
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         // Copy the images to the fileupload-userphoto upload folder
         $user_id = $form_data['user_id'];

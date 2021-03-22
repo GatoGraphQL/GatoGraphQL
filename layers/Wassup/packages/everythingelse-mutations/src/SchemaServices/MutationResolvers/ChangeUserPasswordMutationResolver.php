@@ -57,10 +57,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         return $user_data;
     }
 
-    /**
-     * @return mixed
-     */
-    public function execute(array $form_data)
+    public function execute(array $form_data): mixed
     {
         $user_data = $this->getChangepasswordData($form_data);
         $result = $this->executeChangepassword($user_data);
