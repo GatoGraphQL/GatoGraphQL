@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
+use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -103,11 +104,11 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('Search for elements containing the given string', 'pop-engine'),
             self::MODULE_FILTERINPUT_IDS => sprintf(
                 $translationAPI->__('Limit results to elements with the given IDs', 'pop-engine'),
-                \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR
+                Param::VALUE_SEPARATOR
             ),
             self::MODULE_FILTERINPUT_ID => sprintf(
                 $translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'pop-engine'),
-                \PoP\ComponentModel\Tokens\Param::VALUE_SEPARATOR
+                Param::VALUE_SEPARATOR
             ),
         ];
         return $descriptions[$module[1]] ?? null;
