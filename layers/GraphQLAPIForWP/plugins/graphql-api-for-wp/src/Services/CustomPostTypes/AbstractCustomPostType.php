@@ -530,10 +530,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     // /**
     //  * Restrict the Gutenberg blocks available for this Custom Post Type
-    //  *
-    //  * @param [type] $allowedBlocks
-    //  * @param [type] $post
-    //  * @return array
     //  */
     // public function allowGutenbergBlocksForCustomPostType($allowedBlocks, $post)
     // {
@@ -560,9 +556,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     // }
     // /**
     //  * Indicate if to not allow this CPT's blocks in other Custom Post Types
-    //  *
-    //  * @param [type] $post
-    //  * @return boolean
     //  */
     // protected function removeGutenbergBlocksForOtherPostTypes($post): bool
     // {
