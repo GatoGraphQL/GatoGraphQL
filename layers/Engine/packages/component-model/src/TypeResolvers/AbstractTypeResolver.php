@@ -1295,7 +1295,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
-     * @return mixed
      */
     public function resolveValue(
         object $resultItem,
@@ -1303,7 +1302,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ) {
+    ): mixed {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)
