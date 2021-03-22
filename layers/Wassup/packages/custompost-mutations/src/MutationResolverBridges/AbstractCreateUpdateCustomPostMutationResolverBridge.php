@@ -19,10 +19,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
 
-    /**
-     * @param mixed $result_id Maybe an int, maybe a string
-     */
-    protected function modifyDataProperties(array &$data_properties, $result_id): void
+    protected function modifyDataProperties(array &$data_properties, mixed $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
 

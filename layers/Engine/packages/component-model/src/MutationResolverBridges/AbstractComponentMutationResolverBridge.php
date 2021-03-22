@@ -22,10 +22,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
 
     /**
-     * @param mixed $result_id Maybe an int, maybe a string
      * @return string[]
      */
-    public function getSuccessStrings($result_id): array
+    public function getSuccessStrings(mixed $result_id): array
     {
         $success_string = $this->getSuccessString($result_id);
         return $success_string !== null ? [$success_string] : [];
@@ -108,10 +107,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $return;
     }
 
-    /**
-     * @param mixed $result_id Maybe an int, maybe a string
-     */
-    protected function modifyDataProperties(array &$data_properties, $result_id): void
+    protected function modifyDataProperties(array &$data_properties, mixed $result_id): void
     {
     }
 }
