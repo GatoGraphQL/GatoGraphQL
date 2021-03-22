@@ -23,9 +23,6 @@ interface LocationPostTypeAPIInterface
     public function locationPostExists(mixed $id): bool;
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
-     *
-     * @param [type] $id
-     * @return void
      */
     public function getLocationPosts($query, array $options = []): array;
 }

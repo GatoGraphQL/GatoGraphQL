@@ -11,26 +11,24 @@ interface UserRoleTypeDataResolverInterface
      */
     public function getAdminRoleName(): string;
     /**
-     * Role names
+     * @return string[]
      */
     public function getRoleNames(): array;
     /**
      * All available capabilities
+     *
+     * @return string[]
      */
     public function getCapabilities(): array;
     /**
-     * User roles
-     *
-     * @param [type] $userObjectOrID
+     * @return string[]
      */
-    public function getUserRoles($userObjectOrID): array;
+    public function getUserRoles(mixed $userObjectOrID): array;
     /**
-     * User capabilities
-     *
-     * @param [type] $userObjectOrID
+     * @return string[]
      */
-    public function getUserCapabilities($userObjectOrID): array;
-    public function getTheUserRole($userObjectOrID);
-    public function userCan($userObjectOrID, $capability);
-    public function hasRole($userObjectOrID, $role);
+    public function getUserCapabilities(mixed $userObjectOrID): array;
+    public function getTheUserRole(mixed $userObjectOrID): string;
+    public function userCan(mixed $userObjectOrID, string $capability): bool;
+    public function hasRole(mixed $userObjectOrID, string $role): bool;
 }

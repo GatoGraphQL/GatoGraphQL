@@ -9,7 +9,7 @@ namespace PoPSchema\TaxonomiesWP\TypeAPIs;
  */
 class TaxonomyTypeAPIHelpers
 {
-    public static function getTermObjectAndID($termObjectOrID): array
+    public static function getTermObjectAndID(mixed $termObjectOrID): array
     {
         if (is_object($termObjectOrID)) {
             $termObject = $termObjectOrID;

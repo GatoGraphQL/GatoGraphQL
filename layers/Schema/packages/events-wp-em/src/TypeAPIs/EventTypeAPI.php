@@ -49,9 +49,6 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
      * Get the event with provided ID or, if it doesn't exist, null
      * The provided ID is that for the wp_posts table, not em_events
      * (it is `post_id`, not `event_id`)
-     *
-     * @param [type] $id
-     * @return void
      */
     public function getEvent(mixed $customPostID): ?object
     {
