@@ -78,10 +78,8 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
     }
     /**
      * Indicate if the value matches the condition under which to inject the default value
-     *
-     * @param mixed $value
      */
-    protected function matchesCondition(string $condition, $value): bool
+    protected function matchesCondition(string $condition, mixed $value): bool
     {
         switch ($condition) {
             case DefaultConditionEnum::IS_NULL:
