@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 
