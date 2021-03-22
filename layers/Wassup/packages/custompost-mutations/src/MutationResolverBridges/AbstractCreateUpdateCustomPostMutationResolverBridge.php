@@ -38,7 +38,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
      *
      * @return mixed
      */
-    protected function getUpdateCustomPostID()
+    protected function getUpdateCustomPostID(): mixed
     {
         return $_REQUEST[InputNames::POST_ID] ?? null;
     }
