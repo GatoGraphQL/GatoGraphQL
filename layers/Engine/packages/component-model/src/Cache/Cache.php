@@ -51,9 +51,8 @@ class Cache implements CacheInterface
      *
      * @param [type] $id
      * @param [type] $type
-     * @return mixed
      */
-    public function getCache($id, $type)
+    public function getCache($id, $type): mixed
     {
         $cacheItem = $this->getCacheItem($id, $type);
         return $cacheItem->get();

@@ -20,7 +20,7 @@ interface CacheInterface
      * Remove all entries in the cache
      */
     public function clear(): void;
-    public function getCache($id, $type);
+    public function getCache($id, $type): mixed;
     public function getComponentModelCache($id, $type);
 
     /**
