@@ -99,7 +99,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         $function = $this->directiveArgsForSchema['function'];
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
-        $target = $this->directiveArgsForSchema['target'];
+        $target = $this->directiveArgsForSchema['target'] ?? null;
 
         $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

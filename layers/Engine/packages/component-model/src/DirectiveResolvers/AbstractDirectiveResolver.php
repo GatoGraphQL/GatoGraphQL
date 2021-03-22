@@ -428,7 +428,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     protected function getExpressionForResultItem(mixed $id, string $key, array &$messages): mixed
     {
-        return $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key];
+        return $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] ?? null;
     }
 
     /**
