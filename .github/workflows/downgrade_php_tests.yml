@@ -85,9 +85,9 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # --dry-run would fail if there are changes. But since we're applying the same downgrade config,
-            # (which we just applied), then there should be no changes and exit with success
-            # Test everything, including migrate-* packages, and Composer dependencies not requiring downgrade
+            # Test everything, including Composer dependencies which (supposedly)
+            # do not require downgrading
+            # Applying the same Rector downgrade config is good enough (any Rector would do the job)
             -   name: Run Rector on PHP 7.1
-                run: ~/.composer/vendor/rector/rector-prefixed/bin/rector process layers/ vendor/ --config=rector-downgrade-code.php --ansi --dry-run
+                run: ~/.composer/vendor/rector/rector-prefixed/bin/rector process layers/ vendor/ --config=rector-downgrade-code.php --ansi
 
