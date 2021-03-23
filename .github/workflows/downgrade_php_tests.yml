@@ -54,6 +54,36 @@ jobs:
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
+            # Prepare for testing on PHP 7.1
+            # Install Rector prefixed global since it conflicts with local packages
+            -   name: Install Rector prefixed
+                run: composer global require rector/rector-prefixed
+
+            # We need the WordPress stubs for testing (they are installed in DEV)
+            # Symfony Cache has "psr/simple-cache" for DEV not PROD, making the static analysis fail
+            -   name: Install DEV dependencies needed in PROD (for testing)
+                run: composer require php-stubs/wordpress-stubs psr/simple-cache:^1.0
+
+            # Only PROD dependencies must be tested
+            -   name: Keep dependencies for PROD only (for testing)
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-dev"
+
+            # Upload artifact with downgraded code, for debugging
+            -   name: Create build folder
+                run: mkdir build
+            -   name: Install zip
+                uses: montudor/action-zip@v0.1.1
+            -   name: Create zip
+                run: zip -X -r build/downgraded-code.zip layers/ vendor/ stubs/
+            -   name: Upload artifact
+                uses: actions/upload-artifact@v2
+                with:
+                    name: downgraded-code
+                    path: build/downgraded-code.zip
+                    retention-days: 1
+
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
             # @see https://github.com/leoloso/PoP/pull/304/checks?check_run_id=1668406313#step:4:5
@@ -70,9 +100,9 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # @todo Fix this code
-            # @see https://github.com/leoloso/PoP/issues/299
+            # Test everything, including Composer dependencies which (supposedly)
+            # do not require downgrading
+            # Applying the same Rector downgrade config is good enough (any Rector would do the job)
             -   name: Run Rector on PHP 7.1
-                run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
-            #   run: vendor/bin/rector-php71 process $LOCAL_PACKAGE_SRCS vendor --ansi --dry-run
+                run: ~/.composer/vendor/rector/rector-prefixed/bin/rector process layers/ vendor/ --config=rector-downgrade-code.php --ansi
 
