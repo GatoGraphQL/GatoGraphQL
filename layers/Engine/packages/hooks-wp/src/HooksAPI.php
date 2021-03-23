@@ -16,7 +16,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return \remove_filter($tag, $function_to_remove, $priority);
     }
-    public function applyFilters(string $tag, mixed $value, ...$args): mixed
+    public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
         return \apply_filters($tag, $value, ...$args);
     }
@@ -28,7 +28,7 @@ class HooksAPI implements HooksAPIInterface
     {
         return \remove_action($tag, $function_to_remove, $priority);
     }
-    public function doAction(string $tag, ...$args): void
+    public function doAction(string $tag, mixed ...$args): void
     {
         \do_action($tag, ...$args);
     }
