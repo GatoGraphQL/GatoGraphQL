@@ -60,9 +60,8 @@ jobs:
                 run: composer global require rector/rector-prefixed
 
             # We need the WordPress stubs for testing (they are installed in DEV)
-            # Symfony Cache has "psr/simple-cache" for DEV not PROD, making the static analysis fail
             -   name: Install DEV dependencies needed in PROD (for testing)
-                run: composer require php-stubs/wordpress-stubs psr/simple-cache:^1.0
+                run: composer require php-stubs/wordpress-stubs
 
             # Only PROD dependencies must be tested
             -   name: Keep dependencies for PROD only (for testing)
