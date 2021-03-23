@@ -54,8 +54,13 @@ jobs:
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
-            # Prepare for testing on PHP 7.1: Use PROD dependencies only
-            -   name: Keep dependencies for PROD only
+            # Prepare for testing on PHP 7.1
+            # Install Rector prefixed global since it conflicts with local packages
+            -   name: Install Rector prefixed
+                run: composer global require rector/rector-prefixed
+
+            # Only PROD dependencies must be tested
+            -   name: Keep dependencies for PROD only (for testing)
                 run: composer install --no-dev --no-progress --ansi
 
             # Executing `composer config platform-check false` throws error:
@@ -73,11 +78,6 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            # Prepare for testing on PHP 7.1
-            # Install global since otherwise it conflicts with other packages
-            -   name: Install Rector prefixed
-                run: composer global require rector/rector-prefixed
 
             # --dry-run would fail if there are changes. But since we're applying the same downgrade config,
             # (which we just applied), then there should be no changes and exit with success
