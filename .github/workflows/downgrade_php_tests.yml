@@ -54,6 +54,10 @@ jobs:
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
+            # Prepare for testing on PHP 7.1 (before switching PHP version)
+            -   name: Install Rector prefixed
+                run: composer require rector/rector-prefixed
+
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
             # @see https://github.com/leoloso/PoP/pull/304/checks?check_run_id=1668406313#step:4:5
@@ -69,9 +73,6 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            -   name: Install Rector prefixed
-                run: composer require rector/rector-prefixed
 
             # --dry-run would fail if there are changes. But since we're applying the same downgrade config,
             # (which we just applied), then there should be no changes and exit with success
