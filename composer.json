@@ -13,6 +13,7 @@
         "michelf/php-markdown": "^1.9",
         "obsidian/polyfill-hrtime": "^0.1",
         "psr/cache": "^1.0",
+        "psr/simple-cache": "^1.0",
         "symfony/cache": "^5.1",
         "symfony/config": "^5.1",
         "symfony/dependency-injection": "^5.1",
