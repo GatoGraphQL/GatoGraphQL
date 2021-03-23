@@ -61,7 +61,9 @@ jobs:
 
             # Only PROD dependencies must be tested
             -   name: Keep dependencies for PROD only (for testing)
-                run: composer install --no-dev --no-progress --ansi
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-dev"
 
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
