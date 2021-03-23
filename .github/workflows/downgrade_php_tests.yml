@@ -65,6 +65,10 @@ jobs:
                 with:
                     composer-options: "--no-dev"
 
+            # We need the WordPress stubs for testing (they are installed in DEV)
+            -   name: Install WordPress stubs
+                run: composer require php-stubs/wordpress-stubs
+
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
             # @see https://github.com/leoloso/PoP/pull/304/checks?check_run_id=1668406313#step:4:5
