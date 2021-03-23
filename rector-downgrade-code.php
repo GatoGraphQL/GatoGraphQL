@@ -7,6 +7,15 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
+/**
+ * Temporary bug fix:
+ * `Option::AUTOLOAD_PATHS` not working, so load the files outside the config
+ *
+ * @see https://github.com/rectorphp/rector/issues/5951#issuecomment-804790816
+ */
+require_once __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php';
+require_once __DIR__ . '/stubs/wpackagist-plugin/events-manager/em-stubs.php';
+
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
