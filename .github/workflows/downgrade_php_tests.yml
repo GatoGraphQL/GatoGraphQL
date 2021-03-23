@@ -83,6 +83,7 @@ jobs:
 
             # --dry-run would fail if there are changes. But since we're applying the same downgrade config,
             # (which we just applied), then there should be no changes and exit with success
+            # Test everything, including migrate-* packages, and Composer dependencies not requiring downgrade
             -   name: Run Rector on PHP 7.1
-                run: ~/.composer/vendor/rector/rector-prefixed/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} vendor --config=rector-downgrade-code.php --ansi --dry-run
+                run: ~/.composer/vendor/rector/rector-prefixed/bin/rector process layers/ vendor/ --config=rector-downgrade-code.php --ansi --dry-run
 
