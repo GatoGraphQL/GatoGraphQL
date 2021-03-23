@@ -66,6 +66,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/composer/*',
         // Same for Composer scripts
         __DIR__ . '/vendor/lkwdwrd/wp-muplugin-loader/*',
+        // Ignore unused classes that fail because they require DEV dependency
+        __DIR__ . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
+        __DIR__ . '/vendor/symfony/yaml/Command/LintCommand.php',
+        // All the bootstrap80.php are loaded for PHP 8.0 only
+        __DIR__ . '/vendor/symfony/polyfill-*/bootstrap80.php',
     ]);
 
     // /**
