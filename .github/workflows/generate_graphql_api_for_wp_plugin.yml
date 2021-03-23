@@ -154,12 +154,6 @@ jobs:
                 with:
                     composer-options: "--ignore-platform-reqs"
 
-            # @todo Fix this code
-            # @see https://github.com/leoloso/PoP/issues/299
-            -   name: Run Rector on PHP 7.1
-                run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
-            #     run: vendor/bin/rector-php71 process build/downgraded-graphql-api-for-wp --ansi --dry-run
-
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
         needs: test
