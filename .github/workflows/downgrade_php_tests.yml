@@ -90,7 +90,7 @@ jobs:
                 with:
                     name: downgraded-code
                     path: build/downgraded-code.zip
-                    retention-days: 3
+                    retention-days: 1
 
             -   name: Switch to PHP 7.1
                 uses: shivammathur/setup-php@v2
