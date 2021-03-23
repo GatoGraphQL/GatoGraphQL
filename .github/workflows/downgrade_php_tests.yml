@@ -78,6 +78,20 @@ jobs:
                 # run: composer config platform-check false
                 run: rm vendor/composer/platform_check.php
 
+            # Upload artifact with downgraded code, for debugging
+            -   name: Create build folder
+                run: mkdir build
+            -   name: Install zip
+                uses: montudor/action-zip@v0.1.1
+            -   name: Create zip
+                run: zip -X -r build/downgraded-code.zip layers/ vendor/
+            -   name: Upload artifact
+                uses: actions/upload-artifact@v2
+                with:
+                    name: downgraded-code
+                    path: build/downgraded-code.zip
+                    retention-days: 3
+
             -   name: Switch to PHP 7.1
                 uses: shivammathur/setup-php@v2
                 with:
