@@ -48,6 +48,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // ------------------------------------
         // The skips below are for testing the downgrade on PHP 7.1
         // ------------------------------------
+        // Skip testing the code that is not shipped for the GraphQL API,
+        // since this code is not being downgraded in first place (so no need to test it)
+        __DIR__ . '/layers/Misc/*',
+        __DIR__ . '/layers/SiteBuilder/*',
+        __DIR__ . '/layers/Wassup/*',
         // All the migrate-* packages must also be tested for PHP 7.1.
         // But I already know they all pass, and they are not added any new code,
         // so we can skip them to reduce the testing time
