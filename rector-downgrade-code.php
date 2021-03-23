@@ -40,6 +40,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
         __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
         __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
+        // Temporarily skip testing the code that is not yet shipped for any project,
+        // to make the testing process take less time, and be able to complete
+        __DIR__ . '/layers/Misc/*',
+        __DIR__ . '/layers/SiteBuilder/*',
+        __DIR__ . '/layers/Wassup/*',
+        __DIR__ . '/layers/Schema/packages/migrate-everythingelse/*',
     ]);
 
     // /**
