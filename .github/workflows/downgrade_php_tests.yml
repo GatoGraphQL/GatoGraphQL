@@ -54,6 +54,10 @@ jobs:
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
+            # Prepare for testing on PHP 7.1: Use PROD dependencies only
+            -   name: Keep dependencies for PROD only
+                run: composer install --no-dev --no-progress --ansi
+
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
             # @see https://github.com/leoloso/PoP/pull/304/checks?check_run_id=1668406313#step:4:5
