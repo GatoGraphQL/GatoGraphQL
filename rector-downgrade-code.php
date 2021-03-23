@@ -40,6 +40,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
         __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
         __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
+        // ------------------------------------
+        // The skips below are for testing the downgrade on PHP 7.1
+        // ------------------------------------
         // Temporarily skip testing the code that is not yet shipped for any project,
         // to make the testing process take less time, and be able to complete
         __DIR__ . '/layers/Misc/*',
@@ -50,6 +53,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // But I already know they all pass, and they are not added any new code,
         // so we can skip them to reduce the testing time
         '*/migrate-*',
+        // Skip the tests also,
+        '*/tests/*',
     ]);
 
     // /**
