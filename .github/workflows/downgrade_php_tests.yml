@@ -70,9 +70,11 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # @todo Fix this code
-            # @see https://github.com/leoloso/PoP/issues/299
+            -   name: Install Rector prefixed
+                run: composer require rector/rector-prefixed
+
+            # --dry-run would fail if there are changes. But since we're applying the same downgrade config,
+            # (which we just applied), then there should be no changes and exit with success
             -   name: Run Rector on PHP 7.1
-                run: echo "Running Rector on PHP 7.1 must be enabled, once available (https://github.com/leoloso/PoP/issues/299)"
-            #   run: vendor/bin/rector-php71 process $LOCAL_PACKAGE_SRCS vendor --ansi --dry-run
+                run: vendor/bin/rector-prefixed process ${{ needs.provide_data.outputs.package_srcs }} vendor --config=rector-downgrade-code.php --ansi --dry-run
 
