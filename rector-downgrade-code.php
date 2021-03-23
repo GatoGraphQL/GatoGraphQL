@@ -46,6 +46,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/layers/SiteBuilder/*',
         __DIR__ . '/layers/Wassup/*',
         __DIR__ . '/layers/Schema/packages/migrate-everythingelse/*',
+        // All the migrate-* packages must also be tested for PHP 7.1.
+        // But I already know they all pass, and they are not added any new code,
+        // so we can skip them to reduce the testing time
+        '*/migrate-*',
     ]);
 
     // /**
