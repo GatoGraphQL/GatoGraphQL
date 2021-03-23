@@ -38,8 +38,7 @@
         "test": "phpunit",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",
-        "analyse": "phpstan analyse",
-        "preview-code-downgrade": "rector process src --config=rector-downgrade-code.php --dry-run --ansi"
+        "analyse": "phpstan analyse"
     },
     "extra": {
         "branch-alias": {
