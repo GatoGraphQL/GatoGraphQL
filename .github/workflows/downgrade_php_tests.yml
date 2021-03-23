@@ -59,15 +59,15 @@ jobs:
             -   name: Install Rector prefixed
                 run: composer global require rector/rector-prefixed
 
+            # We need the WordPress stubs for testing (they are installed in DEV)
+            -   name: Install WordPress stubs (for testing)
+                run: composer require php-stubs/wordpress-stubs
+
             # Only PROD dependencies must be tested
             -   name: Keep dependencies for PROD only (for testing)
                 uses: "ramsey/composer-install@v1"
                 with:
                     composer-options: "--no-dev"
-
-            # We need the WordPress stubs for testing (they are installed in DEV)
-            -   name: Install WordPress stubs (for testing)
-                run: composer require php-stubs/wordpress-stubs
 
             # Executing `composer config platform-check false` throws error:
             # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
