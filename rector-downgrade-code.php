@@ -22,6 +22,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
 
+    // Do not change the code, other than the required rules
+    $parameters->set(Option::AUTO_IMPORT_NAMES, false);
+    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::AUTOLOAD_PATHS, [
         // full directory
