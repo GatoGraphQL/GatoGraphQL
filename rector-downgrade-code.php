@@ -59,6 +59,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         '*/migrate-*',
         // Skip the tests also,
         '*/tests/*',
+        '*/test/*',
+        '*/Test/*',
+        // Avoid errors from downgrading Composer's generated files
+        // (we already know they run on PHP 7.1)
+        __DIR__ . '/vendor/composer/*',
+        // Same for Composer scripts
+        __DIR__ . '/vendor/lkwdwrd/wp-muplugin-loader/*',
     ]);
 
     // /**
