@@ -380,7 +380,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    protected function getUnresolvedResultItemError(object $resultItem)
+    protected function getUnresolvedResultItemError(object $resultItem): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
@@ -407,7 +407,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
-            return self::getUnresolvedResultItemError($resultItem);
+            return $this->getUnresolvedResultItemError($resultItem);
         }
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
