@@ -21,7 +21,7 @@ class UserTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('Representation of a user', 'users');
     }
 
-    public function getID(object $resultItem): string | id
+    public function getID(object $resultItem): string | int
     {
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $user = $resultItem;
