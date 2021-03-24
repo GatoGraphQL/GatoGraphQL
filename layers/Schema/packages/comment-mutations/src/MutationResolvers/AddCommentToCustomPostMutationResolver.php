@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMutations\MutationResolvers;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -86,6 +87,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     {
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);
+        if (GeneralUtils::isError($comment_id)) {
+            return $comment_id;
+        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($comment_id, $form_data);
