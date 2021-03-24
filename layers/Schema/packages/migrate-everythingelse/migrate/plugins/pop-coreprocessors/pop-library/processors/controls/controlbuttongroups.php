@@ -36,16 +36,16 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS:
                 $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS];
                 break;
-        
+
             case self::MODULE_CONTROLBUTTONGROUP_FILTER:
                 $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_FILTERTOGGLE];
                 break;
-        
+
             case self::MODULE_CONTROLBUTTONGROUP_CURRENTURL:
                 $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CURRENTURL];
                 break;
@@ -86,18 +86,18 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
                 $ret[] = [PoP_Module_Processor_CustomAnchorControls::class, PoP_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TAGSLINK];
                 break;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS:
                 $this->appendProp($module, $props, 'class', 'hidden-sm hidden-md hidden-lg');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

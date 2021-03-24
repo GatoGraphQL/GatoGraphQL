@@ -65,7 +65,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
             case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
                 return GD_SOCIALMEDIA_PROVIDER_TWITTER;
-            
+
             case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
             case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
             case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
@@ -96,7 +96,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
             case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'twitter']);
-            
+
             case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
             case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
             case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
@@ -207,7 +207,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
         return parent::getFontawesome($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:

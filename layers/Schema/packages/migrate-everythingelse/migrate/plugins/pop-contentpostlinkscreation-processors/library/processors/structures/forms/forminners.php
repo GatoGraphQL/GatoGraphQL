@@ -24,7 +24,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-        
+
         switch ($module[1]) {
             case self::MODULE_FORMINNER_CONTENTPOSTLINK:
                 return array_merge(
@@ -39,13 +39,13 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
         return parent::getComponentSubmodules($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINNER_CONTENTPOSTLINK:
                 $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE];
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE];
-                
+
                 if (!($form_left_class = $this->getProp($module, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
                 }
@@ -56,7 +56,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
                 $this->appendProp($rightside, $props, 'class', $form_right_class);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -30,11 +30,11 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
                     [PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::class, PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY],
                 );
         }
-        
+
         return parent::getSubmodules($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
@@ -43,7 +43,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

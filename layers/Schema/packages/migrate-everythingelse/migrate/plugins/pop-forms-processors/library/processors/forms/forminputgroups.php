@@ -121,7 +121,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUTGROUP_SENDERNAME:

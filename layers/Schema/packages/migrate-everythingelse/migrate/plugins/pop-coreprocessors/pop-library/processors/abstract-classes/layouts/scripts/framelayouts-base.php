@@ -35,16 +35,16 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        
+
         $layout = $this->getLayoutSubmodule($module);
         $script = $this->getScriptSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = ModuleUtils::getModuleOutputName($layout);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['script'] = ModuleUtils::getModuleOutputName($script);
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $script = $this->getScriptSubmodule($module);
         $this->setProp($script, $props, 'frame-module', $module);

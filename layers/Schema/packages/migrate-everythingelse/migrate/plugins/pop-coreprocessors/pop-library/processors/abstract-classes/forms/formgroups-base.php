@@ -59,7 +59,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataMo
         // We initialize it here as the inner module, however at this stage, FormGroupsBase, it is not really needed
         return $this->getComponentSubmodule($module);
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -93,7 +93,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataMo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // No need for the input to have a label or a placeholder (for the text inputs) anymore

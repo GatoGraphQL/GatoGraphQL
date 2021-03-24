@@ -24,11 +24,11 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
             case self::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
                 return [PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
@@ -54,7 +54,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 $this->setProp($trigger, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -65,7 +65,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
             case self::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
                 return '';
         }
-        
+
         return parent::getLabel($module, $props);
     }
 }

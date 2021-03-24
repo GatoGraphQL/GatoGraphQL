@@ -85,7 +85,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($this->enableSuggestions($module)) {
             // No suggestions by default. It's overridable from above

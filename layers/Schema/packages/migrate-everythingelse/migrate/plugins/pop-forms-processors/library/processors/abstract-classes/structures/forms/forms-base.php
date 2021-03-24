@@ -14,12 +14,12 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         $ret = parent::getJsmethods($module, $props);
 
         // $this->addJsmethod($ret, 'formHandleDisabledLayer');
-        
+
         $form_type = $this->getFormType($module, $props);
         if ($form_type == GD_SUBMITFORMTYPE_FETCHBLOCK) {
             $this->addJsmethod($ret, 'forms');
         }
-        
+
         if ($this->getProp($module, $props, 'intercept-action-url')) {
             $this->addJsmethod($ret, 'interceptForm', 'interceptor');
         }
@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         return null;
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'action', $this->getAction($module, $props));
         parent::initRequestProps($module, $props);

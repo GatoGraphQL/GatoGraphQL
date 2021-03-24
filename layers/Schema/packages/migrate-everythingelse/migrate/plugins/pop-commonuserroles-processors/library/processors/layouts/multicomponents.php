@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:

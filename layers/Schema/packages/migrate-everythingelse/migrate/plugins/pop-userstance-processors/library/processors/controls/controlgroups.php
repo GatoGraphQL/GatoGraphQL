@@ -48,11 +48,11 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
 
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    
+
         switch ($module[1]) {
             case self::MODULE_CONTROLGROUP_STANCESTATS:
                 // Make them collapsible, with a control expanding them by looking for class "collapse"
@@ -60,7 +60,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
                 $this->appendProp([UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_STANCESTATS], $props, 'class', 'collapse');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -97,7 +97,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $name = $this->getName($module);
-        
+
         // Allow to add extra classes (eg: "pop-form-clear")
         $class = $this->getProp($module, $props, 'class');
         $quicktags = $this->addQuicktags($module, $props);
@@ -122,16 +122,16 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         $initialtext = $this->getInitialtext($module, $props);
         $ret['initial-text'] = $initialtext;
         $ret['editor-code'] = PoP_EditorUtils::getEditorCode($editor_id, $initialtext, $options);
-                
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($this->autofocus($module, $props)) {
             $this->appendProp($module, $props, 'class', 'pop-editor-autofocus');
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

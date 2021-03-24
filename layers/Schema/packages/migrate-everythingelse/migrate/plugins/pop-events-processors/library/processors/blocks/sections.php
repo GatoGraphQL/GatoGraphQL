@@ -282,7 +282,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getTitle($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_EVENTS_CAROUSEL:

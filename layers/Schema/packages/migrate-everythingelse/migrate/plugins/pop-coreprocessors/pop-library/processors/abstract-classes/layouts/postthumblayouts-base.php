@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POSTTHUMB];
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
     public function getThumbField(array $module, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
-            $this->getThumbFieldName($module, $props), 
+            $this->getThumbFieldName($module, $props),
             $this->getThumbFieldArgs($module, $props),
             $this->getThumbFieldAlias($module, $props)
         );
@@ -109,7 +109,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
 
         if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['thumb-extras'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $thumb_extras
             );
         }
@@ -117,7 +117,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'img-class', $this->getThumbImgClass($module));
         parent::initModelProps($module, $props);

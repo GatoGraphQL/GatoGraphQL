@@ -561,7 +561,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
         return PostTypeResolver::class;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:

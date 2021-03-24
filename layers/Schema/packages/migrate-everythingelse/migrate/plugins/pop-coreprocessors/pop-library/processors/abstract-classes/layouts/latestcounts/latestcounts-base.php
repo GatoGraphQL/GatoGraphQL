@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_LatestCountsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Initially hidden

@@ -69,13 +69,13 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         parent::initWebPlatformModelProps($module, $props);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);

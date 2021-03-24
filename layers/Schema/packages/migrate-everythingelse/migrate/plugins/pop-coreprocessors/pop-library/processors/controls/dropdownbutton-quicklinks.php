@@ -52,7 +52,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
             $ret,
             $modules
         );
-        
+
         return $ret;
     }
 
@@ -65,7 +65,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 return 'btn btn-compact btn-link';
         }
-        
+
         return parent::getBtnClass($module);
     }
 
@@ -76,7 +76,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 return TranslationAPIFacade::getInstance()->__('Options', 'pop-coreprocessors');
-        
+
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
                 return TranslationAPIFacade::getInstance()->__('Contact/Links', 'pop-coreprocessors');
         }
@@ -91,7 +91,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 return 'fa-angle-down';
-        
+
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
                 return 'fa-link';
         }
@@ -99,7 +99,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getFontawesome($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:

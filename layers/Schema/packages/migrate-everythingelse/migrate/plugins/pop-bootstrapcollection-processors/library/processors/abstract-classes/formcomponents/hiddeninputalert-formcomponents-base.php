@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_HiddenInputAlertFormComponentsBase extends P
         return false;
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
         parent::initRequestProps($module, $props);

@@ -19,11 +19,11 @@ abstract class PoP_Module_Processor_ContentsBase extends PoP_Module_Processor_St
         if ($description = $this->getProp($module, $props, 'description')) {
             $ret[GD_JS_DESCRIPTION] = $description;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'description', $this->getDescription($module, $props));
         $this->appendProp($module, $props, 'class', 'pop-content');

@@ -38,13 +38,13 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         return null;
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

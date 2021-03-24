@@ -51,7 +51,7 @@ trait DataloadModuleProcessorTrait
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->metaInitProps($module, $props);
         parent::initModelProps($module, $props);

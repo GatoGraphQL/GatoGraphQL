@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
             case self::MODULE_QUICKLINKGROUP_POST:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE];
                 break;
-                
+
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOM:
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED:
                 // Allow TPP Debate website to remove the Comments from the post list
@@ -55,8 +55,8 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                     $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
                 $submodules = HooksAPIFacade::getInstance()->applyFilters(
-                    'PoP_Module_Processor_CustomQuicklinkGroups:modules', 
-                    $submodules, 
+                    'PoP_Module_Processor_CustomQuicklinkGroups:modules',
+                    $submodules,
                     $module
                 );
                 $ret = array_merge(
@@ -79,8 +79,8 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                     $submodules[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
                 $submodules = HooksAPIFacade::getInstance()->applyFilters(
-                    'PoP_Module_Processor_CustomQuicklinkGroups:modules', 
-                    $submodules, 
+                    'PoP_Module_Processor_CustomQuicklinkGroups:modules',
+                    $submodules,
                     $module
                 );
                 $ret = array_merge(
@@ -108,7 +108,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Allow to not show the "Important?" label, since it's too bulky
                 if (HooksAPIFacade::getInstance()->applyFilters(
-                    'PoP_Module_Processor_CustomQuicklinkGroups:updownvotepost:addlabel', 
+                    'PoP_Module_Processor_CustomQuicklinkGroups:updownvotepost:addlabel',
                     false
                 )) {
                     $ret[] = [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL];
@@ -142,7 +142,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
             case self::MODULE_QUICKLINKGROUP_USER_EDITMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_QuicklinkButtonGroups::class, GD_URE_Module_Processor_QuicklinkButtonGroups::MODULE_URE_QUICKLINKBUTTONGROUP_USER_EDITMEMBERSHIP];
                 break;
-                
+
             case self::MODULE_QUICKLINKGROUP_TAG:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_TAGSHARE];
                 break;
@@ -151,7 +151,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
@@ -169,7 +169,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
                 $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

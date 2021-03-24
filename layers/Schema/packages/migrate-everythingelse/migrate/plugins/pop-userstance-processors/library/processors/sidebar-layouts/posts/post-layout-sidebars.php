@@ -31,7 +31,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE:

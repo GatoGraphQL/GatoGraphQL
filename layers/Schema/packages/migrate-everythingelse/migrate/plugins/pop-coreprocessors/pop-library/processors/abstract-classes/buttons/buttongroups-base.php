@@ -120,7 +120,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($header_type = $this->getHeaderType($module, $props)) {
             // header type 'btn-group' needs that same class

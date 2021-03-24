@@ -34,15 +34,15 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
 
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_GROUP_LOGGEDINUSERDATA:
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

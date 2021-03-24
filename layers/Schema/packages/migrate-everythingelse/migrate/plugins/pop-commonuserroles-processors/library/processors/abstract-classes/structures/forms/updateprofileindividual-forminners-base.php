@@ -13,7 +13,7 @@ abstract class GD_URE_Module_Processor_UpdateProfileIndividualFormInnersBase ext
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Change the title for the Individual Description

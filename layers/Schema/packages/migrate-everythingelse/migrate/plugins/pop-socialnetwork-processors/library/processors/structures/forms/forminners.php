@@ -34,12 +34,12 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
                 if (defined('POP_FORMSWEBPLATFORM_INITIALIZED')) {
                     if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
                         array_splice(
-                            $ret, 
+                            $ret,
                             array_search(
-                                [PoP_SocialNetwork_Module_Processor_SubmitButtons::class, PoP_SocialNetwork_Module_Processor_SubmitButtons::MODULE_GF_SUBMITBUTTON_SENDMESSAGETOUSER], 
+                                [PoP_SocialNetwork_Module_Processor_SubmitButtons::class, PoP_SocialNetwork_Module_Processor_SubmitButtons::MODULE_GF_SUBMITBUTTON_SENDMESSAGETOUSER],
                                 $ret
-                            ), 
-                            0, 
+                            ),
+                            0,
                             array(
                                 [PoP_Captcha_Module_Processor_FormInputGroups::class, PoP_Captcha_Module_Processor_FormInputGroups::MODULE_FORMINPUTGROUP_CAPTCHA],
                             )
@@ -58,8 +58,8 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
 
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields
@@ -69,7 +69,7 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
             array(&$props),
             $this
         );
-        
+
         parent::initModelProps($module, $props);
     }
 }

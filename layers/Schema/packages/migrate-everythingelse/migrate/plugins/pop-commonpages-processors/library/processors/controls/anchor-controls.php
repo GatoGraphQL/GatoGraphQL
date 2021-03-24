@@ -73,7 +73,7 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
 
         return parent::getText($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:

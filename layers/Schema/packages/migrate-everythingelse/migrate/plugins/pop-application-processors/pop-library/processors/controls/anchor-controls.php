@@ -77,7 +77,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
 
         return parent::getText($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOST:

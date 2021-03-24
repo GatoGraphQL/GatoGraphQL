@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $this->getName($module);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
 
@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $trigger_module = $this->getTriggerSubmodule($module);
 

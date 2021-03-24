@@ -109,7 +109,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:

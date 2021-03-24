@@ -68,7 +68,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($this->isHidden($module, $props)) {
             $this->appendProp($module, $props, 'class', 'hidden');

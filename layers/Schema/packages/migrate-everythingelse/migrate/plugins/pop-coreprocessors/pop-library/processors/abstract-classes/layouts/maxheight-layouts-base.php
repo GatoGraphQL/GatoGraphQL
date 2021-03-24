@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MAXHEIGHT];
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
     }
 
     // function getShowmoreBtnHtml(array $module, array &$props) {
-        
+
     //     $titles = $this->getShowmoreBtnTitles($module, $props);
     //     return sprintf(
     //         '<div class="dynamicbtn-wrapper"><button class="js-dynamic-show-hide button %1$s" title="%2$s" data-replace-text="%3$s">%2$s</button></div>',
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
     // }
 
     // function getShowmoreBtnTitles(array $module, array &$props) {
-        
+
     //     return array(
     //         'more' => TranslationAPIFacade::getInstance()->__('Show more', 'pop-coreprocessors'),
     //         'less' => TranslationAPIFacade::getInstance()->__('Show less', 'pop-coreprocessors'),
@@ -86,7 +86,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
 
         if ($inners = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $inners
             );
         }
@@ -105,7 +105,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
 
         // // Integrate with plug-in "Dynamic max height plugin for jQuery"
         // if ($this->getProp($module, $props, 'maxheight')) {
-            
+
         //     $ret[GD_JS_CLASSES]['inner'] = 'dynamic-height-wrap';
         //     $ret['description-bottom'] = $this->getShowmoreBtnHtml($module, $props);
         // }
@@ -113,7 +113,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'maxheight', $this->getMaxheight($module, $props));
         // $maxheight = $this->getProp($module, $props, 'maxheight');
@@ -125,7 +125,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         //         'data-maxheight' => $maxheight,
         //     ));
         // }
-        
+
         parent::initModelProps($module, $props);
     }
 }

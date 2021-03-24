@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Modul
         return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-hidden-print');
         parent::initModelProps($module, $props);

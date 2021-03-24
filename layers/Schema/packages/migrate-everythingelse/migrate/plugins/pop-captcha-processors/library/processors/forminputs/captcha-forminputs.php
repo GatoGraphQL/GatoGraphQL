@@ -18,7 +18,7 @@ class PoP_Module_Processor_CaptchaFormInputs extends PoP_Module_Processor_Captch
             case self::MODULE_FORMINPUT_CAPTCHA:
                 return TranslationAPIFacade::getInstance()->__('Captcha', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CaptchaFormInputs extends PoP_Module_Processor_Captch
             case self::MODULE_FORMINPUT_CAPTCHA:
                 return true;
         }
-        
+
         return parent::isMandatory($module, $props);
     }
 
@@ -49,14 +49,14 @@ class PoP_Module_Processor_CaptchaFormInputs extends PoP_Module_Processor_Captch
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // If we don't use the loggedinuser-data, then show the inputs always
         if (!PoP_FormUtils::useLoggedinuserData()) {
             $this->appendProp($module, $props, 'wrapper-class', 'visible-always');
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -24,14 +24,14 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
                 $this->setProp([PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST], $props, 'staticmap-size', '480x150');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

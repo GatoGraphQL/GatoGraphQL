@@ -249,7 +249,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // switch ($module[1]) {

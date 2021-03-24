@@ -33,7 +33,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
             case self::MODULE_BLOCK_NEWSLETTER:
                 return '';
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -50,16 +50,16 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                 $ret[] = [GenericForms_Module_Processor_PageCodes::class, GenericForms_Module_Processor_PageCodes::MODULE_PAGECODE_NEWSLETTER];
                 $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTER];
                 break;
-                
+
             case self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION:
                 $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION];
                 break;
         }
-    
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $newsletter_description = HooksAPIFacade::getInstance()->applyFilters(
@@ -92,7 +92,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                         RouteUtils::getRouteURL(POP_NEWSLETTER_ROUTE_NEWSLETTER),
                         $description_bottom
                     );
-                    
+
                     $this->setProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'description-bottom', $description_bottom);
                 }
                 break;
@@ -116,7 +116,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                 $this->appendProp($module, $props, 'class', 'block-newsletter');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

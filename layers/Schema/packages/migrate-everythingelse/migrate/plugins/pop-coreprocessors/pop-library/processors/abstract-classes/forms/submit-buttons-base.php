@@ -39,18 +39,18 @@ abstract class PoP_Module_Processor_SubmitButtonsBase extends PoP_Module_Process
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         // Needed for clicking on 'Retry' when there was a problem in the block
         $this->addJsmethod($ret, 'saveLastClicked');
 
         if ($this->getLoadingText($module, $props)) {
             $this->addJsmethod($ret, 'onFormSubmitToggleButtonState');
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($loading_text = $this->getLoadingText($module, $props)) {
             $this->mergeProp(
@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_SubmitButtonsBase extends PoP_Module_Process
                 )
             );
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -55,7 +55,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
         return parent::getTarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK:

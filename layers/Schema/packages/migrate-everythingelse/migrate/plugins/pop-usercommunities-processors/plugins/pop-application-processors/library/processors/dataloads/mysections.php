@@ -50,7 +50,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
@@ -69,7 +69,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
                 return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::MODULE_FILTER_MYMEMBERS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -95,7 +95,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         $vars = ApplicationState::getVars();
         switch ($module[1]) {
          // Members of the Community
@@ -125,7 +125,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
         return parent::getTypeResolverClass($module);
     }
-    
+
     protected function getCheckpointmessageModule(array $module)
     {
         switch ($module[1]) {
@@ -137,7 +137,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return parent::getCheckpointmessageModule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:

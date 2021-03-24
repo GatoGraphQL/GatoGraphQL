@@ -88,7 +88,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 return TranslationAPIFacade::getInstance()->__('Mark as unread', 'pop-notifications-processors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -115,7 +115,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
                 $ret .= ' pop-functional '.AAL_CLASS_NOTIFICATION_MARKASREAD;
                 break;
-                    
+
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 $ret .= ' pop-functional '.AAL_CLASS_NOTIFICATION_MARKASUNREAD;
                 break;
@@ -124,7 +124,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
@@ -140,7 +140,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 );
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

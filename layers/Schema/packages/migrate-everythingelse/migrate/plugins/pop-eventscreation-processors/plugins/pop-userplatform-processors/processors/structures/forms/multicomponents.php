@@ -16,8 +16,8 @@ class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
     {
         $ret = parent::getSubmodules($module);
 
-        $status = GD_CreateUpdate_Utils::moderate() ? 
-            [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : 
+        $status = GD_CreateUpdate_Utils::moderate() ?
+            [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
 
         switch ($module[1]) {
@@ -35,7 +35,7 @@ class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -44,13 +44,13 @@ class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
                 if (!($classs = $this->getProp($module, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
                     $classs = 'alert alert-info';
                 }
-                $status = GD_CreateUpdate_Utils::moderate() ? 
-                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : 
+                $status = GD_CreateUpdate_Utils::moderate() ?
+                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :
                     [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
                 $this->appendProp($status, $props, 'class', $classs);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -61,13 +61,13 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 $url = RequestUtils::getCurrentUrl();
                 // Remove the 'source' param if it exists on the current url
                 $url = GeneralUtils::removeQueryArgs([GD_URLPARAM_URECONTENTSOURCE], $url);
-                
+
                 return PoP_URE_ModuleManager_Utils::addSource($url, $source);
         }
 
         return parent::getHref($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -80,7 +80,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                     self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
                 $source = $sources[$module[1]];
-            
+
                 $this->appendProp($module, $props, 'class', 'btn btn-sm btn-default');
                 if ($source == $vars['source']) {
                     $this->appendProp($module, $props, 'class', 'active');

@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
             case self::MODULE_FORMINPUT_EM_LOCATIONREGION:
                 return TranslationAPIFacade::getInstance()->__('Region', 'em-popprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -58,7 +58,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
             case self::MODULE_FORMINPUT_EM_LOCATIONTOWN:
                 return true;
         }
-        
+
         return parent::isMandatory($module, $props);
     }
 
@@ -69,7 +69,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
             case self::MODULE_FORMINPUT_EM_LOCATIONLNG:
                 return true;
         }
-        
+
         return parent::isHidden($module, $props);
     }
 
@@ -131,7 +131,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     //     return parent::getName($module);
     // }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONLAT:
@@ -151,7 +151,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
                 $this->appendProp($module, $props, 'class', 'address-input');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

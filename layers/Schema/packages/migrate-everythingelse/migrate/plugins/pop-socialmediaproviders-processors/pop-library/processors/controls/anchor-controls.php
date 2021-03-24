@@ -60,7 +60,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         return parent::getFontawesome($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

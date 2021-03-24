@@ -24,7 +24,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
             case self::MODULE_FORMINPUT_EMAIL:
                 return TranslationAPIFacade::getInstance()->__('Your Email', 'pop-genericforms');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -35,14 +35,14 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
             case self::MODULE_FORMINPUT_EMAIL:
                 return true;
         }
-        
+
         return parent::isMandatory($module, $props);
     }
 
     public function getInputOptions(array $module)
     {
         $options = parent::getInputOptions($module);
-    
+
         // When submitting the form, if user is logged in, then use these values.
         // Otherwise, use the values sent in the form
         $vars = ApplicationState::getVars();
@@ -59,7 +59,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
                     break;
             }
         }
-        
+
         return $options;
     }
 
@@ -73,7 +73,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -91,7 +91,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_NAME:
@@ -104,7 +104,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

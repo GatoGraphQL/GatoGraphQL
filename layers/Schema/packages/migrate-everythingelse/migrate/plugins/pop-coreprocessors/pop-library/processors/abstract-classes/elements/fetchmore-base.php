@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // $classs = $this->get_general_prop($props, 'btn-submit-class') ? $this->get_general_prop($props, 'btn-submit-class') : 'btn btn-info btn-block';

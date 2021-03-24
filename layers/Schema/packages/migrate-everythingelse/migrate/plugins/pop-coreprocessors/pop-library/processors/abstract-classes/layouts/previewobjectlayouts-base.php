@@ -82,11 +82,11 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
         if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = ModuleUtils::getModuleOutputName($quicklinkgroup_bottom);
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Artificial property added to identify the module when adding module-resources

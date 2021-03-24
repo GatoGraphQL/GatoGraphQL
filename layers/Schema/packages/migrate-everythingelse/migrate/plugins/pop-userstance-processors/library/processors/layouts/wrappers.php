@@ -50,7 +50,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return null;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:

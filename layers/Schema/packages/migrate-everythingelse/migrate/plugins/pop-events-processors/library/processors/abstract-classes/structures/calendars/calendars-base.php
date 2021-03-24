@@ -32,11 +32,11 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-        
+
         if ($controlgroup = $this->getControlgroupSubmodule($module)) {
             $ret[] = $controlgroup;
         }
-        
+
         return $ret;
     }
 
@@ -45,11 +45,11 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        
+
         if ($controlgroup = $this->getControlgroupSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup'] = ModuleUtils::getModuleOutputName($controlgroup);
         }
-        
+
         return $ret;
     }
 
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
 
         $inner = $this->getInnerSubmodule($module);
         $ret['calendar']['layouts'] = $moduleprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
-        
+
         if ($options = $this->getOptions($module, $props)) {
             $ret['calendar']['options'] = $options;
         }
@@ -79,7 +79,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

@@ -317,7 +317,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
         return parent::horizontalMediaLayout($module);
     }
-    
+
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
@@ -368,7 +368,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:

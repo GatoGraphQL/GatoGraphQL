@@ -26,7 +26,7 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP:
@@ -36,7 +36,7 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

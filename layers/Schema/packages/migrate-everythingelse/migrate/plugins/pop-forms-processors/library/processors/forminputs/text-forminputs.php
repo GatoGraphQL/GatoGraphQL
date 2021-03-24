@@ -28,7 +28,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
             case self::MODULE_FORMINPUT_SENDERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your name', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -63,7 +63,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
             case self::MODULE_FORMINPUT_TARGETURL:
                 return 'url';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 
@@ -80,7 +80,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 $this->addJsmethod($ret, 'fillAddonInput');
                 // }
                 break;
-                
+
             case self::MODULE_FORMINPUT_TARGETURL:
                 // // fill the input when a new Addon PageSection is created
                 // if ($this->getProp($module, $props, 'replicable')) {
@@ -91,7 +91,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
             case self::MODULE_FORMINPUT_BROWSERURL:
                 $this->addJsmethod($ret, 'browserUrl');
                 break;
-        
+
             case self::MODULE_FORMINPUT_SENDERNAME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -124,11 +124,11 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
             // case self::MODULE_FORMINPUT_FILTERNAME:
                 return true;
         }
-        
+
         return parent::isHidden($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_TARGETURL:
@@ -168,7 +168,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

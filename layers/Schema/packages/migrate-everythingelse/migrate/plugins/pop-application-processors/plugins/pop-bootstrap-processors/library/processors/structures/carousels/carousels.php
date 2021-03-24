@@ -3,7 +3,7 @@
 class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
     public const MODULE_CAROUSEL_USERS = 'carousel-users';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -11,7 +11,7 @@ class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carousel
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSEL_USERS:
@@ -20,7 +20,7 @@ class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carousel
                 $this->appendProp($module, $props, 'class', 'widget widget-info');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

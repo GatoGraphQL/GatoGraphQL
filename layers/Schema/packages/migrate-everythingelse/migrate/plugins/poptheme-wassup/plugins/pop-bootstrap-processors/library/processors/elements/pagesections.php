@@ -173,7 +173,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return parent::getID($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_QUICKVIEW:

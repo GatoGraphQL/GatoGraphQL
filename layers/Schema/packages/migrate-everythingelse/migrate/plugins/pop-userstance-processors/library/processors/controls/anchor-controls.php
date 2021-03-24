@@ -178,7 +178,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getHref($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:

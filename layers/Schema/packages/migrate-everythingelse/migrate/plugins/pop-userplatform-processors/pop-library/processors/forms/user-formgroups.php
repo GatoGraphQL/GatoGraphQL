@@ -75,7 +75,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         return parent::getInfo($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Override the placeholders

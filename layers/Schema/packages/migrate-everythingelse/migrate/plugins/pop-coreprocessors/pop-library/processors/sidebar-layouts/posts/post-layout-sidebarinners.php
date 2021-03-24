@@ -28,37 +28,37 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
                 $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
                 break;
         }
-        
+
         return $ret;
     }
 
     // function getWrapperClass(array $module) {
 
     //     switch ($module[1]) {
-            
+
     //         case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
     //         case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
 
     //             return 'row';
     //     }
-    
+
     //     return parent::getWrapperClass($module);
     // }
-    
+
     // function getWidgetwrapperClass(array $module) {
 
     //     switch ($module[1]) {
-            
+
     //         case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
     //         case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
-            
+
     //             return 'col-xsm-6';
     //     }
-    
+
     //     return parent::getWidgetwrapperClass($module);
     // }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:

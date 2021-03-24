@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_CustomDelegatorFiltersBase extends PoP_Modul
         return 'alert alert-info';
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', $this->getClasses($module, $props));
         parent::initModelProps($module, $props);

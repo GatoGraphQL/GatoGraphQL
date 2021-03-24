@@ -38,7 +38,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 
         return parent::getLocationsInput($module);
     }
-    
+
     public function getLayoutSubmodules(array $module)
     {
 
@@ -48,7 +48,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         // being the user logged out and only then he log in, the refetchBlock doesn't work because it doesn't have the pid/_wpnonce values
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubmodules($module);
-        
+
         switch ($module[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
                 return array_merge(
@@ -63,7 +63,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         return parent::getComponentSubmodules($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINNER_EVENTLINK:
@@ -71,8 +71,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 
                 // Make it into left/right columns
                 $rightside_module = [PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::class, PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE];
-                $leftside_module = $this->isLink($module) ? 
-                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE] : 
+                $leftside_module = $this->isLink($module) ?
+                    [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE] :
                     [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
                 if (!($form_left_class = $this->getProp($module, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
@@ -84,7 +84,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
                 $this->appendProp($rightside_module, $props, 'class', $form_right_class);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

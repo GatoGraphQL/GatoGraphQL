@@ -33,7 +33,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return getRouteIcon(POP_EVENTSCREATION_ROUTE_MYPASTEVENTS, false);
-        
+
             case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
                 return 'fa-plus';
         }
@@ -52,7 +52,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
                     self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT => POP_EVENTSCREATION_ROUTE_ADDEVENT,
                 );
                 $route = $routes[$module[1]];
-                
+
                 return RouteUtils::getRouteURL($route);
         }
 
@@ -71,7 +71,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
         return parent::getTarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:

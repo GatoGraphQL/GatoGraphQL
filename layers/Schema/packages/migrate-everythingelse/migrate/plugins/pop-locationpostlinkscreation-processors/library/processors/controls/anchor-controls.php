@@ -53,7 +53,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_AnchorControls extends PoP_
 
         return parent::getTarget($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:

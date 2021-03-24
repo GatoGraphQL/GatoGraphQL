@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
     {
         return null;
     }
-    
+
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
     {
         return true;
     }
-    
+
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
         return '';
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-feedbackmessage');
         parent::initModelProps($module, $props);

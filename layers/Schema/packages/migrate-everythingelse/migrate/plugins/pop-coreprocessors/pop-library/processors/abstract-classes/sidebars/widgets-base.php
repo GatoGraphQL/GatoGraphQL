@@ -132,9 +132,9 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModul
     //     return $ret;
     // }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
-            
+
         // $sidebarcomponent_inner = $this->getSidebarcomponentInner($module);
         // $this->add_settings_id($sidebarcomponent_inner, $props, 'sidebarcomponent-inner');
 
@@ -195,7 +195,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModul
 
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $layouts
             );
         }

@@ -33,7 +33,7 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT:
@@ -44,7 +44,7 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
                 $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

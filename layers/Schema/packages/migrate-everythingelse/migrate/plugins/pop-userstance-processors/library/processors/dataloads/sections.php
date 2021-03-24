@@ -876,7 +876,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR:

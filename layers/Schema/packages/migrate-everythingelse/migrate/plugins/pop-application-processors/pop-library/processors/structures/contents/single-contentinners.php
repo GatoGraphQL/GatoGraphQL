@@ -36,7 +36,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
             case self::MODULE_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_MultipleComponentLayoutWrappers::class, Wassup_Module_Processor_MultipleComponentLayoutWrappers::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION];
                 break;
-            
+
             case self::MODULE_CONTENTINNER_USERPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_MultipleComponentLayoutWrappers::class, Wassup_Module_Processor_MultipleComponentLayoutWrappers::MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION];
                 break;
@@ -45,7 +45,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CONTENTINNER_HIGHLIGHTSINGLE:
@@ -53,7 +53,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
                 $this->appendProp($module, $props, 'class', 'well');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

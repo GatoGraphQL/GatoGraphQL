@@ -46,7 +46,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return false;
         }
-        
+
         return parent::isMultiple($module);
     }
 
@@ -59,7 +59,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return 'location';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 
@@ -79,7 +79,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

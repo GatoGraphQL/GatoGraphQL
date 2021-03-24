@@ -31,7 +31,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
             case self::MODULE_BUTTON_POSTPERMALINK:
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTPERMALINK];
-            
+
             case self::MODULE_BUTTON_POSTCOMMENTS:
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTCOMMENTS];
 
@@ -72,12 +72,12 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
             case self::MODULE_BUTTON_POSTPERMALINK:
                 return TranslationAPIFacade::getInstance()->__('Permalink', 'pop-coreprocessors');
-            
+
             case self::MODULE_BUTTON_POSTCOMMENTS:
             case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -88,7 +88,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return GD_URLPARAM_TARGET_PRINT;
         }
-        
+
         return parent::getLinktarget($module, $props);
     }
 
@@ -100,7 +100,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-print';
                 break;
-        
+
             case self::MODULE_BUTTON_POSTPERMALINK:
             case self::MODULE_BUTTON_POSTCOMMENTS:
             case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
@@ -111,7 +111,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
@@ -119,7 +119,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 $this->setProp($module, $props, 'resourceloader', 'socialmedia');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

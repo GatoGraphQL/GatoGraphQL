@@ -35,7 +35,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
                 $ret[] = [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAP_DIV];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -49,7 +49,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         return parent::getTitle($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_LOCATIONSMAP:
@@ -57,7 +57,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
                 $this->appendProp([[PoP_Module_Processor_LocationsMapDataloads::class, PoP_Module_Processor_LocationsMapDataloads::MODULE_DATALOAD_LOCATIONSMAP], [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONS_MAP]], $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

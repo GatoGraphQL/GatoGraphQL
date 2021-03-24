@@ -25,12 +25,12 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         if (defined('POP_FORMSWEBPLATFORM_INITIALIZED')) {
             if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
                 array_splice(
-                    $components, 
+                    $components,
                     array_search(
-                        [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SUBMIT], 
+                        [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_SUBMIT],
                         $components
-                    ), 
-                    0, 
+                    ),
+                    0,
                     array(
                         [PoP_Captcha_Module_Processor_FormInputGroups::class, PoP_Captcha_Module_Processor_FormInputGroups::MODULE_FORMINPUTGROUP_CAPTCHA],
                     )
@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
                 $mandatory[] = [PoP_Captcha_Module_Processor_FormInputGroups::class, PoP_Captcha_Module_Processor_FormInputGroups::MODULE_FORMINPUTGROUP_CAPTCHA];
             }
         }
-        
+
         return HooksAPIFacade::getInstance()->applyFilters(
             'pop_module:createuser:mandatory-components',
             $mandatory,
@@ -70,7 +70,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Make all formComponentGroups be collapsed if they are non-mandatory

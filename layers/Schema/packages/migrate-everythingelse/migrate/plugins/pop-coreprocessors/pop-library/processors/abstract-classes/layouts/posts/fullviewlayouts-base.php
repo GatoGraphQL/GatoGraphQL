@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     {
         return GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP;
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -72,18 +72,18 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
 
         if ($abovecontent_modules = $this->getAbovecontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $abovecontent_modules
             );
         }
 
         if ($content_modules = $this->getContentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $content_modules
             );
         }
-        
+
         return $ret;
     }
 
@@ -94,9 +94,9 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     //     return $ret;
     // }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
-            
+
         // Make it waypoint
         $this->appendProp($module, $props, 'class', 'waypoint');
 

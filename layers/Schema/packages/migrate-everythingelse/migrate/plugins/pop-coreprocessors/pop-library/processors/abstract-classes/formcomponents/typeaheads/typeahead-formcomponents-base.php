@@ -36,13 +36,13 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return $moduleprocessor_manager->getProcessor($input)->getLabel($input, $submodule_props);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $typeahead_class = $this->getTypeaheadClass($module, $props);
         $this->appendProp($module, $props, 'class', $typeahead_class);

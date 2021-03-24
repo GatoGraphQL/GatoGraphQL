@@ -99,7 +99,7 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'title-class', $this->getTitleClass($module));
         $this->setProp($module, $props, 'html-tag', $this->getHtmlTag($module, $props));

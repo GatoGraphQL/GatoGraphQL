@@ -59,12 +59,12 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 $ret[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT];
                 $ret[] = [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM];
                 break;
-                
+
             case self::MODULE_GROUP_HOME_WIDGETAREA:
                 // Add the blocks
                 if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-                    'PoP_Module_Processor_CustomGroups:modules:home_widgetarea', 
-                    array(), 
+                    'PoP_Module_Processor_CustomGroups:modules:home_widgetarea',
+                    array(),
                     $module
                 )) {
                     $ret = array_merge(
@@ -73,12 +73,12 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                     );
                 }
                 break;
-                
+
             case self::MODULE_GROUP_AUTHOR_WIDGETAREA:
                 // Add the blocks
                 if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-                    'PoP_Module_Processor_CustomGroups:modules:author_widgetarea', 
-                    array(), 
+                    'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
+                    array(),
                     $module
                 )) {
                     $ret = array_merge(
@@ -87,15 +87,15 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                     );
                 }
                 break;
-                
+
             case self::MODULE_GROUP_TAG_WIDGETAREA:
                 $modules = array();
                 $modules[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT];
 
                 // Allow to add the Featured Carousel
                 if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-                    'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea', 
-                    $modules, 
+                    'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea',
+                    $modules,
                     $module
                 )) {
                     $ret = array_merge(
@@ -119,7 +119,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_GROUP_AUTHORTOP:
                 $ret[] = [self::class, self::MODULE_GROUP_AUTHOR_DESCRIPTION];
-                    
+
                 // Allow MESYM to override this
                 if ($widgetarea = HooksAPIFacade::getInstance()->applyFilters(
                     'PoP_Module_Processor_CustomGroups:authortop:modules:widget',
@@ -164,7 +164,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 $frontend_id = $this->getFrontendId($module, $props);
                 $collapsible_frontend_id = $frontend_id.'collapse';
                 $this->setProp([$collapsible_submodules[$module[1]]], $props, 'frontend-id', $collapsible_frontend_id);
-                
+
                 // Then set the frontend-id to the labels
                 $label_submodules_set = array(
                     self::MODULE_GROUP_HOME_WELCOME => array(
@@ -189,7 +189,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
         parent::initWebPlatformRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_GROUP_HOME_WELCOMEACCOUNT:
@@ -233,7 +233,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_GROUP_HOME_WELCOME:
             case self::MODULE_GROUP_HOME_COMPACTWELCOME:
                 $this->appendProp($module, $props, 'class', 'blockgroup-home-welcome');
-        
+
                 // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
                 if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
                      // Set the params for the cookie: show the welcome message, until the user clicks on "Close"

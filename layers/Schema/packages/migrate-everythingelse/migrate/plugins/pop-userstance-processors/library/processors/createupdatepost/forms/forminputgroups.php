@@ -22,18 +22,18 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         switch ($module[1]) {
             case self::MODULE_FORMINPUTGROUP_STANCEEDITOR:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
-            
+
             case self::MODULE_FORMINPUTGROUP_BUTTONGROUP_STANCE:
                 return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
 
             case self::MODULE_FILTERINPUTGROUP_BUTTONGROUP_STANCE:
                 return [UserStance_Module_Processor_MultiSelectFilterInputs::class, UserStance_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_STANCE_MULTISELECT];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -43,7 +43,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
                 $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Write here...', 'pop-userstance-processors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
             case self::MODULE_FORMINPUTGROUP_STANCEEDITOR:
                 return TranslationAPIFacade::getInstance()->__('You can leave 1 general stance, and 1 stance for each article on the website. Your opinions can be edited any moment.', 'pop-userstance-processors');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
@@ -65,11 +65,11 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
             case self::MODULE_FORMINPUTGROUP_BUTTONGROUP_STANCE:
                 return TranslationAPIFacade::getInstance()->__('Your stance:', 'pop-userstance-processors');
-        
+
             case self::MODULE_FILTERINPUTGROUP_BUTTONGROUP_STANCE:
                 return TranslationAPIFacade::getInstance()->__('Stance:', 'pop-userstance-processors');
         }
-        
+
         return parent::getLabel($module, $props);
     }
 

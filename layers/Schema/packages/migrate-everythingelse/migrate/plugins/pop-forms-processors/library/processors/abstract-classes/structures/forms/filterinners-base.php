@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
         return [PoP_Module_Processor_FormGroups::class, PoP_Module_Processor_FormGroups::MODULE_SUBMITBUTTONFORMGROUP_SEARCH];
     }
 
-    // public function initModelProps(array $module, array &$props)
+    // public function initModelProps(array $module, array &$props): void
     // {
     //     $this->setProp([[self::class, self::MODULE_FORMINPUT_FILTERNAME]], $props, 'filter', $this->getFilter($module));
     //     parent::initModelProps($module, $props);

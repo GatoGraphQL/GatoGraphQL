@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // // The downloadpicture module will need to be rendered dynamically on runtime
@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
         $this->setProp($downloadpicture_module, $props, 'dynamic-module', true);
 
         $this->appendProp($module, $props, 'class', 'pop-fileupload');
-        
+
         // Load the picture immediately
         $this->appendProp($module, $props, 'class', 'pop-fileupload-loadfromserver');
 
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-        
+
         $ret['module-download'] = $this->getDownloadpictureSubmodule($module);
         $ret['module-upload'] = $this->getUploadpictureSubmodule($module);
 
@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
         if ($rel = gdImageRel()) {
             $ret['image-rel'] = $rel;
         }
-                
+
         return $ret;
     }
 

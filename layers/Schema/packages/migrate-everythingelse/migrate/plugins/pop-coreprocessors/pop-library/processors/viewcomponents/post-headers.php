@@ -22,15 +22,15 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
 
         return parent::headerShowUrl($module, $props);
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_POST_URL:
                 $this->appendProp($module, $props, 'class', 'alert alert-warning alert-sm');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

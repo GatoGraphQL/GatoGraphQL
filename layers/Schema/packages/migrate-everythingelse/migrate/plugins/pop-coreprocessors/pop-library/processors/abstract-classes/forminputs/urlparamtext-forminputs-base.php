@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_UrlParamTextFormInputsBase extends PoP_Modul
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // if ($this->getProp($module, $props, 'replicable')) {
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_UrlParamTextFormInputsBase extends PoP_Modul
             )
         );
         // }
-        
+
         parent::initModelProps($module, $props);
     }
 }

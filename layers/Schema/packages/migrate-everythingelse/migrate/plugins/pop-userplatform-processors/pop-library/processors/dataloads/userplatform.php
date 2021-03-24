@@ -143,7 +143,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getCheckpointmessageModule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $vars = ApplicationState::getVars();
         switch ($module[1]) {

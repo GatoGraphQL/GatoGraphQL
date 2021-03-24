@@ -42,7 +42,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
                         $submodule[0],
-                        $submodule[1], 
+                        $submodule[1],
                         $moduleAtts
                     ];
                 }
@@ -52,7 +52,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_PAGESECTIONCONTAINER_HOLE:

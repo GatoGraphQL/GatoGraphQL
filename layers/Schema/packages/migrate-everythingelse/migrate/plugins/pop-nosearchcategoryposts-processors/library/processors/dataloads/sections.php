@@ -4453,7 +4453,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
         return PostTypeResolver::class;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR:

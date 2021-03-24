@@ -51,22 +51,22 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $this->appendProp($module, $props, 'class', 'userpostinteraction-single');
                 break;
-        
+
             case self::MODULE_CONTENTINNER_STANCESINGLE:
                 $this->appendProp($module, $props, 'class', 'alert');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
@@ -85,7 +85,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                 }
                 break;
         }
-            
+
         parent::initRequestProps($module, $props);
     }
 }

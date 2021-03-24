@@ -56,7 +56,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
         return parent::isUpdate($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_EVENT_UPDATE:

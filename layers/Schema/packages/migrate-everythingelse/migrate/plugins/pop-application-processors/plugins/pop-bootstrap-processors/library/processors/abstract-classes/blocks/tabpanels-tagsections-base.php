@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_TagTabPanelSectionBlocksBase extends PoP_Mod
         return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUPOSTLIST];
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'blockgroup-tagsections');
 

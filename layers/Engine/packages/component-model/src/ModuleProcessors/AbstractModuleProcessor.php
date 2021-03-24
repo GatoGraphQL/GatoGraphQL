@@ -58,7 +58,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the module to its string representation to access it in the array
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -90,7 +90,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
 
         // Initiate the current level.
-        $this->$eval_self_fn($module, $module_props);
+        $eval_self_fn($module, $module_props);
 
         // Immediately after initiating the current level, extract all child attributes out from the $props, and place it on the other variable
         $targetted_props_to_propagate = $module_props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES];
@@ -102,7 +102,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Allow the $module to add general props for all its descendant modules
         $wildcard_props_to_propagate = array_merge(
             $wildcard_props_to_propagate,
-            $this->$get_props_for_descendant_modules_fn($module, $module_props)
+            $get_props_for_descendant_modules_fn($module, $module_props)
         );
 
         // Propagate
@@ -122,7 +122,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 if (!$submodule_processor->startDataloadingSection($submodule)) {
                     $submodule_wildcard_props_to_propagate = array_merge(
                         $submodule_wildcard_props_to_propagate,
-                        $this->$get_props_for_descendant_datasetmodules_fn($module, $module_props)
+                        $get_props_for_descendant_datasetmodules_fn($module, $module_props)
                     );
                 }
 
@@ -132,9 +132,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
 
-    public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function initModelPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree('initModelProps', 'getModelPropsForDescendantModules', 'getModelPropsForDescendantDatasetmodules', __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree([$this, 'initModelProps'], [$this, 'getModelPropsForDescendantModules'], [$this, 'getModelPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getModelPropsForDescendantModules(array $module, array &$props): array
@@ -161,7 +161,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return [];
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         // Set property "succeeding-typeResolver" on every module, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($typeResolver_class = $this->getTypeResolverClass($module)) {
@@ -214,9 +214,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
     }
 
-    public function initRequestPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate)
+    public function initRequestPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree('initRequestProps', 'getRequestPropsForDescendantModules', 'getRequestPropsForDescendantDatasetmodules', __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree([$this, 'initRequestProps'], [$this, 'getRequestPropsForDescendantModules'], [$this, 'getRequestPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getRequestPropsForDescendantModules(array $module, array &$props): array
@@ -229,7 +229,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return array();
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -407,7 +407,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array())
+    protected function getPropGroupField(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed
     {
         $group = $this->getPropGroup($group, $module, $props, $starting_from_modulepath);
         return $group[$field] ?? null;
@@ -451,11 +451,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         $this->mergeGroupProp(Props::ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
     }
-    public function getGroupProp(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array())
+    public function getGroupProp(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed
     {
         return $this->getPropGroupField($group, $module, $props, $field, $starting_from_modulepath);
     }
-    public function getProp(array $module, array &$props, string $field, array $starting_from_modulepath = array())
+    public function getProp(array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed
     {
         return $this->getGroupProp(Props::ATTRIBUTES, $module, $props, $field, $starting_from_modulepath);
     }
@@ -637,7 +637,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return null;
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties)
+    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
     {
         // Do nothing
     }

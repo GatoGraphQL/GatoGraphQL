@@ -44,7 +44,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
 
         return parent::getLabel($module, $props);
     }
-    
+
     public function getFontawesome(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -68,7 +68,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
 
         return parent::getBtnClass($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:

@@ -40,11 +40,11 @@ abstract class PoP_Module_Processor_DropdownButtonMenuLayoutsBase extends PoP_Mo
         if ($this->innerList($module, $props)) {
             $ret['inner-list'] = true;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'dropdownmenu-class', $this->getDropdownmenuClass($module, $props));
         parent::initModelProps($module, $props);

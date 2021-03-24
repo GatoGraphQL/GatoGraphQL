@@ -30,7 +30,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
 
         return null;
     }
-    
+
     protected function isPostMap(array $module)
     {
         return false;
@@ -46,7 +46,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         return 'vertical';
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -59,7 +59,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         } elseif ($this->isPostMap($module)) {
             $this->appendProp($module, $props, 'class', 'postscrollmap');
         }
-        
+
         // By default the scrollmap is vertical
         $this->setProp($module, $props, 'direction', $this->getMapDirection($module, $props));
         $direction = $this->getProp($module, $props, 'direction');
@@ -70,7 +70,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         // Set the direction on the ScrollMap
         $inner_module = $this->getInnerSubmodule($module);
         $this->setProp($inner_module, $props, 'direction', $direction);
-        
+
         parent::initModelProps($module, $props);
     }
 }

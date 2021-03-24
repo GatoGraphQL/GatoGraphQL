@@ -4,7 +4,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_EditorFormInputsBase
 {
     public const MODULE_FORMINPUT_COMMENTEDITOR = 'forminputcommenteditor'; // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -13,25 +13,25 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     }
 
     // function getRows(array $module, array &$props) {
-    
+
     //     switch ($module[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
-                
+
     //             return 3;
     //     }
-        
+
     //     return parent::getRows($module, $props);
     // }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 $this->appendProp($module, $props, 'class', 'pop-editor-form-clear');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -41,7 +41,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Comment', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
-        
+
         return parent::isMandatory($module, $props);
     }
 
@@ -75,7 +75,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
-        
+
         return parent::autofocus($module, $props);
     }
 
@@ -84,10 +84,10 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     //     switch ($module[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
-                
+
     //             return TranslationAPIFacade::getInstance()->__('Type comment here...', 'pop-coreprocessors');
     //     }
-        
+
     //     return parent::getPlaceholder($module, $props);
     // }
 }

@@ -21,12 +21,12 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
         if ($controls_top = $this->getControlsTopSubmodule($module)) {
             $ret[] = $controls_top;
         }
-    
+
         // Slideshow with indicators?
         if ($indicators = $this->getLayoutIndicatorSubmodules($module)) {
             $ret[] = $indicators;
         }
-        
+
         return $ret;
     }
 
@@ -68,7 +68,7 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
     {
         return '';
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -91,8 +91,8 @@ abstract class PoP_Module_Processor_CarouselsBase extends PoP_Module_Processor_S
 
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         if ($controls_bottom = $this->getControlsBottomSubmodule($module)) {
             $this->setProp($controls_bottom, $props, 'carousel-module', $module);

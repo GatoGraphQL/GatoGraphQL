@@ -19,7 +19,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
         // being the user logged out and only then he log in, the refetchBlock doesn't work because it doesn't have the pid/_wpnonce values
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubmodules($module);
-        
+
         switch ($module[1]) {
             case self::MODULE_FORMINNER_POST:
                 return array_merge(
@@ -34,13 +34,13 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
         return parent::getComponentSubmodules($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINNER_POST:
                 $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_POST_RIGHTSIDE];
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_POST_LEFTSIDE];
-                
+
                 if (!($form_left_class = $this->getProp($module, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
                 }
@@ -51,7 +51,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
                 $this->appendProp($rightside, $props, 'class', $form_right_class);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

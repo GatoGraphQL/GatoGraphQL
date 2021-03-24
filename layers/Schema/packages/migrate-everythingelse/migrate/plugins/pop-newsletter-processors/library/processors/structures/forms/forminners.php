@@ -80,7 +80,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
 
         parent::initWebPlatformModelProps($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields
@@ -90,7 +90,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
             array(&$props),
             $this
         );
-        
+
         parent::initModelProps($module, $props);
     }
 }

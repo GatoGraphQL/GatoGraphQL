@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSEL_EVENTS:
@@ -25,7 +25,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
                 $this->appendProp($module, $props, 'class', 'widget widget-info');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

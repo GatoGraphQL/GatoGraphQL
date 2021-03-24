@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_DIV];
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
 
         if ($inners = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $inners
             );
         }
@@ -58,7 +58,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
         return true;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Open the infoWindow automatically when the map has only 1 marker?
@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataModul
                 )
             );
         }
-    
+
         parent::initModelProps($module, $props);
     }
 }

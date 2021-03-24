@@ -33,8 +33,8 @@ abstract class PoP_Module_Processor_ButtonControlsBase extends PoP_Module_Proces
 
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', $this->getBtnClass($module, $props));
         parent::initModelProps($module, $props);

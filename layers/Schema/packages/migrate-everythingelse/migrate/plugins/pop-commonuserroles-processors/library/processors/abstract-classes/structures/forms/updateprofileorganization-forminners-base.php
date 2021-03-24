@@ -6,19 +6,19 @@ abstract class GD_URE_Module_Processor_UpdateProfileOrganizationFormInnersBase e
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-        
+
         // Add common Create/Update components
         PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubmodules($module, $ret, $this);
 
         if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
             // Add extra components
             array_splice(
-                $ret, 
+                $ret,
                 array_search(
-                    [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_DESCRIPTION], 
+                    [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_DESCRIPTION],
                     $ret
-                )+1, 
-                0, 
+                )+1,
+                0,
                 [
                     [PoP_Module_Processor_Dividers::class, PoP_Module_Processor_Dividers::MODULE_DIVIDER],
                     [GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups::class, GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],
@@ -29,7 +29,7 @@ abstract class GD_URE_Module_Processor_UpdateProfileOrganizationFormInnersBase e
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Change the label

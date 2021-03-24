@@ -28,7 +28,7 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
             case self::MODULE_BLOCK_COMMENTS_SCROLL:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_COMMENTS];
         }
-        
+
         return parent::getControlgroupTopSubmodule($module);
     }
 
@@ -45,18 +45,18 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
                 $ret[] = [PoP_Module_Processor_CommentsDataloads::class, PoP_Module_Processor_CommentsDataloads::MODULE_DATALOAD_ADDCOMMENT];
                 break;
         }
-    
+
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_COMMENTS_SCROLL:
                 $this->appendProp($module, $props, 'class', 'block-comments');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

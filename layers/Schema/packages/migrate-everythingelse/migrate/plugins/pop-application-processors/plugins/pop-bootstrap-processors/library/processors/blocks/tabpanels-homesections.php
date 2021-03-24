@@ -45,7 +45,7 @@ class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processo
         return parent::getControlgroupTopSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_HOMECONTENT:

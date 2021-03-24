@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_PostSelectableTypeaheadFormComponentsBase
 {
     use SuggestionsSelectableTypeaheadFormComponentsTrait;
-    
+
     public function getInputSubmodule(array $module)
     {
         return [GD_EM_Module_Processor_InputGroupFormComponents::class, GD_EM_Module_Processor_InputGroupFormComponents::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION];
@@ -18,13 +18,13 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
     {
         return 'fa-fw fa-map-marker';
     }
-    
+
     public function fixedId(array $module, array &$props): bool
     {
         return true;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

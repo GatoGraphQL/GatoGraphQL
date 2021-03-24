@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_TabPanelComponentsBase extends PoP_Module_Pr
     {
         return '';
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -46,11 +46,11 @@ abstract class PoP_Module_Processor_TabPanelComponentsBase extends PoP_Module_Pr
         if ($content_class = $this->getContentClass($module, $props)) {
             $ret[GD_JS_CLASSES]['content'] = $content_class;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Through this class, we can identify the blockgroups with tabpanels and place the controlgroup_bottom to the right of the tabs

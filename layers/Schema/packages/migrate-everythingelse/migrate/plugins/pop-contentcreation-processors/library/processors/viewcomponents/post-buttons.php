@@ -64,7 +64,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         return parent::getTitle($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:

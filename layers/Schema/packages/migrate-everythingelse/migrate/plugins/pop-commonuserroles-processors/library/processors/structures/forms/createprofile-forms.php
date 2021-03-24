@@ -44,7 +44,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -62,7 +62,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORM_PROFILEORGANIZATION_CREATE:
@@ -71,7 +71,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
                 $this->appendProp($module, $props, 'class', 'visible-notloggedin');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

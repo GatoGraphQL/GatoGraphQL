@@ -23,7 +23,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -32,22 +32,22 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 return GD_FormInput_ModeratedStatusDescription::class;
-        
+
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return GD_FormInput_LinkAccessDescription::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 $this->appendProp($module, $props, 'class', 'form-input-status');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -56,24 +56,24 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 return 'status';
-        
+
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return 'linkaccess';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 $this->addJsmethod($ret, 'manageStatus');
                 break;
         }
-        
+
         return $ret;
     }
 }

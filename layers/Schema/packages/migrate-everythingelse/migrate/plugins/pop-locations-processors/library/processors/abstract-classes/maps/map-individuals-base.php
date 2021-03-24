@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
         $ret[] = $this->getMapdivSubmodule($module);
         $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
         $ret[] = $this->getDrawmarkersSubmodule($module);
-        
+
         return $ret;
     }
 
@@ -54,11 +54,11 @@ abstract class PoP_Module_Processor_MapIndividualsBase extends PoPEngine_QueryDa
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = ModuleUtils::getModuleOutputName($map_div);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-drawmarkers'] = ModuleUtils::getModuleOutputName($drawmarkers);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-resetmarkers'] = ModuleUtils::getModuleOutputName($resetmarkers);
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $map_div = $this->getMapdivSubmodule($module);
         $this->setProp($map_div, $props, 'open-onemarker-infowindow', $this->openOnemarkerInfowindow($module));

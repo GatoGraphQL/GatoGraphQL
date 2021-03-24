@@ -25,7 +25,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars extends Po
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT:

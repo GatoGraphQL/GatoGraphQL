@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         if ($fetchmore = $this->getFetchmoreButtonSubmodule($module)) {
             $ret[] = $fetchmore;
         }
-                
+
         return $ret;
     }
 
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         if ($inner_class = $this->getProp($module, $props, 'inner-class')) {
             $ret[GD_JS_CLASSES]['inner'] = $inner_class;
         }
-        
+
         return $ret;
     }
 
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         return $this->getFetchmoreButtonSubmodule($module) && $this->getProp($module, $props, 'show-fetchmore');
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'show-fetchmore', true);
         $this->setProp($module, $props, 'description', $this->getDescription($module, $props));

@@ -22,17 +22,17 @@ abstract class PoP_Module_Processor_SocialLoginElementsBase extends PoPEngine_Qu
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-    
+
         $ret['networklinks'] = getSocialloginNetworklinks();
         $ret[GD_JS_CLASSES]['link'] = $this->getBtnClass($module, $props);
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'sociallogin-networklinks');
-        
+
         parent::initModelProps($module, $props);
     }
 }
