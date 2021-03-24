@@ -132,7 +132,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
 
-    public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function initModelPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         $this->executeInitPropsModuletree([$this, 'initModelProps'], [$this, 'getModelPropsForDescendantModules'], [$this, 'getModelPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
