@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeAPIInterface;
 
 /**
@@ -11,7 +13,7 @@ use PoPSchema\CommentMutations\TypeAPIs\CommentTypeAPIInterface;
  */
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
-    public function insertComment(array $comment_data): mixed
+    public function insertComment(array $comment_data): string | int | Error
     {
         // Convert the parameters
         if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
@@ -52,6 +54,14 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $comment_data['comment_post_ID'] = $comment_data['customPostID'];
             unset($comment_data['customPostID']);
         }
-        return \wp_insert_comment($comment_data);
+        $commentID = \wp_insert_comment($comment_data);
+        if ($commentID === false) {
+            $translationAPI = TranslationAPIFacade::getInstance();
+            return new Error(
+                'insert-comment-error',
+                $translationAPI->__('Could not create the comment', 'comment-mutations-wp')
+            );
+        }
+        return $commentID;
     }
 }

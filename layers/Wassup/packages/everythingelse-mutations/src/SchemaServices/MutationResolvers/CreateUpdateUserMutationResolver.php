@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {
@@ -218,7 +219,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @return mixed The ID of the updated entity, or an Error
      */
-    protected function update(array $form_data): mixed
+    protected function update(array $form_data): string | int | Error
     {
         // Do the Post update
         $user_id = $this->updateuser($form_data);
@@ -238,7 +239,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @return mixed The ID of the created entity, or an Error
      */
-    protected function create(array $form_data): mixed
+    protected function create(array $form_data): string | int | Error
     {
         $user_id = $this->createuser($form_data);
         if (GeneralUtils::isError($user_id)) {

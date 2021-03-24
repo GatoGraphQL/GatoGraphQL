@@ -250,7 +250,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param array<string, mixed> $data
      */
-    protected function executeUpdateCustomPost(array $data): mixed
+    protected function executeUpdateCustomPost(array $data): string | int | null
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->updateCustomPost($data);
@@ -286,7 +286,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return mixed The ID of the updated entity, or an Error
      */
-    protected function update(array $form_data): mixed
+    protected function update(array $form_data): string | int | Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getUpdateCustomPostData($form_data);
@@ -299,7 +299,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
         $result = $this->executeUpdateCustomPost($post_data);
 
-        if ($result === 0) {
+        if ($result === null) {
             return new Error(
                 'update-error',
                 $translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
@@ -323,7 +323,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @param array<string, mixed> $data
      * @return mixed the ID of the created custom post
      */
-    protected function executeCreateCustomPost(array $data): mixed
+    protected function executeCreateCustomPost(array $data): string | int | null
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->createCustomPost($data);
@@ -332,13 +332,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return mixed The ID of the created entity, or an Error
      */
-    protected function create(array $form_data): mixed
+    protected function create(array $form_data): string | int | Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getCreateCustomPostData($form_data);
         $customPostID = $this->executeCreateCustomPost($post_data);
 
-        if ($customPostID == 0) {
+        if ($customPostID === null) {
             return new Error(
                 'create-error',
                 $translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')

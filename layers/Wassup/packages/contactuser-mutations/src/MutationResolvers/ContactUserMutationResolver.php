@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
 {

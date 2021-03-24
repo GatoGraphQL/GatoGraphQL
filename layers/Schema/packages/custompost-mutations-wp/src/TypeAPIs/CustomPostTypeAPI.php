@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Engine\ErrorHandling\ErrorUtils;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use WP_Error;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -38,23 +41,25 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     }
     /**
      * @param array<string, mixed> $data
-     * @return mixed the ID of the created custom post
+     * @return string|int|null the ID of the created custom post, or null if there was an error
      */
-    public function createCustomPost(array $data): mixed
+    public function createCustomPost(array $data): string | int | null | Error
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
-        return \wp_insert_post($data);
+        $postIDOrError = \wp_insert_post($data);
+        return ErrorUtils::returnResultOrConvertError($postIDOrError);
     }
     /**
      * @param array<string, mixed> $data
-     * @return mixed the ID of the updated custom post
+     * @return string|int|null the ID of the updated custom post, or null if the post doesn't exist
      */
-    public function updateCustomPost(array $data): mixed
+    public function updateCustomPost(array $data): string | int | null | Error
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
-        return \wp_update_post($data);
+        $postIDOrError = \wp_update_post($data);
+        return ErrorUtils::returnResultOrConvertError($postIDOrError);
     }
     public function canUserEditCustomPost($userID, $customPostID): bool
     {
