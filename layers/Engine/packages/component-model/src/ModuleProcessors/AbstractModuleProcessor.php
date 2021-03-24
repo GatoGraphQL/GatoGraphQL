@@ -214,7 +214,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
     }
 
-    public function initRequestPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate)
+    public function initRequestPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         $this->executeInitPropsModuletree('initRequestProps', 'getRequestPropsForDescendantModules', 'getRequestPropsForDescendantDatasetmodules', __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }

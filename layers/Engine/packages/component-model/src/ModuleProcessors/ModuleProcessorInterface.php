@@ -14,7 +14,7 @@ interface ModuleProcessorInterface
     public function getModelPropsForDescendantModules(array $module, array &$props): array;
     public function getModelPropsForDescendantDatasetmodules(array $module, array &$props): array;
     public function initModelProps(array $module, array &$props): void;
-    public function initRequestPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+    public function initRequestPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getRequestPropsForDescendantModules(array $module, array &$props): array;
     public function getRequestPropsForDescendantDatasetmodules(array $module, array &$props): array;
     public function initRequestProps(array $module, array &$props);
