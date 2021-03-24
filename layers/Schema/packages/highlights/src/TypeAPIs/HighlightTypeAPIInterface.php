@@ -12,7 +12,7 @@ interface HighlightTypeAPIInterface
     /**
      * Return the highlight's ID
      */
-    public function getID(object $highlight): mixed;
+    public function getID(object $highlight): string | int;
     /**
      * Indicates if the passed object is of type Highlight
      */

@@ -12,7 +12,7 @@ interface StanceTypeAPIInterface
     /**
      * Return the stance's ID
      */
-    public function getID(object $stance): mixed;
+    public function getID(object $stance): string | int;
     /**
      * Indicates if the passed object is of type Stance
      */

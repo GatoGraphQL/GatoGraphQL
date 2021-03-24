@@ -49,7 +49,11 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
+    /**
+     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @return string|int|array<string|int>
+     */
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
@@ -197,7 +201,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      * In order to enable elements from different types (such as posts and users) to have same ID,
      * add the type to the ID
      */
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {

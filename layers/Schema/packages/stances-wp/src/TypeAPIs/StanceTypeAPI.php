@@ -17,7 +17,7 @@ class StanceTypeAPI implements StanceTypeAPIInterface
     /**
      * Return the post's ID
      */
-    public function getID(object $post): mixed
+    public function getID(object $post): string | int
     {
         return $post->ID;
     }

@@ -39,5 +39,5 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
      */
-    public function getHomeStaticPageID(): mixed;
+    public function getHomeStaticPageID(): string | int;
 }

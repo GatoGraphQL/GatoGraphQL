@@ -33,7 +33,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     /**
      * The ID comes directly as a parameter in the request, it's not a form field
      */
-    protected function getUpdateCustomPostID(): mixed
+    protected function getUpdateCustomPostID(): string | int | null
     {
         return $_REQUEST[InputNames::POST_ID] ?? null;
     }

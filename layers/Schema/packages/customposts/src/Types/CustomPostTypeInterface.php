@@ -9,7 +9,7 @@ interface CustomPostTypeInterface
     /**
      * Return the object's ID
      */
-    public function getID(object $object): mixed;
+    public function getID(object $object): string | int;
     public function getContent(mixed $objectOrID): ?string;
     public function getPlainTextContent(mixed $objectOrID): string;
     public function getPermalink(mixed $objectOrID): ?string;

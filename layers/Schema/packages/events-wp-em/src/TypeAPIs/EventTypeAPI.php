@@ -27,7 +27,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
     /**
      * Return the event's ID
      */
-    public function getID(object $event): mixed
+    public function getID(object $event): string | int
     {
         return $event->post_id;
     }

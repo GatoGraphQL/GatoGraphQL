@@ -26,7 +26,7 @@ class RootTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('Root type, starting from which the query is executed', 'api');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         /** @var Root */
         $root = $resultItem;

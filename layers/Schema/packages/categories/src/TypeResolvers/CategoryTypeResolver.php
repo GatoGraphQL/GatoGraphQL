@@ -21,7 +21,7 @@ class CategoryTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('Representation of a category, added to a post', 'categories');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | id
     {
         $cmscategoriesresolver = \PoPSchema\Categories\ObjectPropertyResolverFactory::getInstance();
         $category = $resultItem;

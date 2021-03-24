@@ -30,7 +30,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     /**
      * Return the post's ID
      */
-    public function getID(object $customPost): mixed
+    public function getID(object $customPost): string | int
     {
         return $customPost->ID;
     }

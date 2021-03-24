@@ -150,7 +150,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return get_called_class();
     }
 
-    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
+    /**
+     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @return string|int|array<string|int>
+     */
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
