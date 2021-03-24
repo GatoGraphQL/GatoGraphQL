@@ -41,7 +41,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
         HooksAPIFacade::getInstance()->doAction('gd_undodownvotepost', $target_id, $form_data);
     }
 
-    protected function update($form_data)
+    protected function update($form_data): string | int
     {
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];

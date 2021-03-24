@@ -25,7 +25,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         HooksAPIFacade::getInstance()->doAction('gd_updateusermetavalue', $target_id, $form_data);
     }
 
-    protected function update($form_data)
+    protected function update($form_data): string | int
     {
         $target_id = $form_data['target_id'];
         return $target_id;
