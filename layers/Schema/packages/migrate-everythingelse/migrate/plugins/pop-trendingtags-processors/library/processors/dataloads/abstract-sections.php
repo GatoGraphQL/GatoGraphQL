@@ -4,7 +4,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 
 abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
         // One Week by default for the trending topics

@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_Processor_CreateUpdateUserDataloadsBase
 {
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $vars = ApplicationState::getVars();
         return $vars['global-userstate']['current-user-id'];

@@ -612,7 +612,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return DataSources::MUTABLEONREQUEST;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         return array();
     }
