@@ -9,7 +9,7 @@ interface ModuleProcessorInterface
     public function getModulesToProcess(): array;
     public function getSubmodules(array $module): array;
     public function getAllSubmodules(array $module): array;
-    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
+    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function getModelPropsForDescendantModules(array $module, array &$props): array;
     public function getModelPropsForDescendantDatasetmodules(array $module, array &$props): array;
