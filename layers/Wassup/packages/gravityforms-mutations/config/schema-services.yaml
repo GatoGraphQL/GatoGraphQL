@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSitesWassup\GravityFormsMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

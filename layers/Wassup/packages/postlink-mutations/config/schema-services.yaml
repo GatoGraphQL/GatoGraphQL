@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSitesWassup\PostLinkMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

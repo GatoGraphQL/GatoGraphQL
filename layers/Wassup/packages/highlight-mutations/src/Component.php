@@ -22,4 +22,18 @@ class Component extends AbstractComponent
             \PoPSitesWassup\CustomPostMutations\Component::class,
         ];
     }
+
+    /**
+     * Initialize services
+     *
+     * @param array<string, mixed> $configuration
+     * @param string[] $skipSchemaComponentClasses
+     */
+    protected static function initializeContainerServices(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
+    }
 }
