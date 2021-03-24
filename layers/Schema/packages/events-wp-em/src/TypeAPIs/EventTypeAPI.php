@@ -70,24 +70,24 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         return $this->getEvent($id) != null;
     }
 
-    protected function getEventFromObjectOrId($post_or_post_id)
+    protected function getEventFromObjectOrId(string | int | object $post_or_post_id)
     {
         return is_object($post_or_post_id) ? $post_or_post_id : em_get_event($post_or_post_id, 'post_id');
     }
 
-    public function isFutureEvent($post_or_post_id): bool
+    public function isFutureEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
         return \POP_CONSTANT_TIME < $EM_Event->start;
     }
 
-    public function isCurrentEvent($post_or_post_id): bool
+    public function isCurrentEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
         return $EM_Event->start <= \POP_CONSTANT_TIME && \POP_CONSTANT_TIME < $EM_Event->end;
     }
 
-    public function isPastEvent($post_or_post_id): bool
+    public function isPastEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
         return $EM_Event->end < \POP_CONSTANT_TIME;

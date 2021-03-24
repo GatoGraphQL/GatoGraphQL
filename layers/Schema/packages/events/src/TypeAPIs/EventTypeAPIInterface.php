@@ -34,9 +34,9 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
      */
     public function getEventCount($query = array(), array $options = []): int;
 
-    public function isFutureEvent($post_or_post_id): bool;
-    public function isCurrentEvent($post_or_post_id): bool;
-    public function isPastEvent($post_or_post_id): bool;
+    public function isFutureEvent(string | int | object $post_or_post_id): bool;
+    public function isCurrentEvent(string | int | object $post_or_post_id): bool;
+    public function isPastEvent(string | int | object $post_or_post_id): bool;
     public function getCategories($event): array;
     public function getLocation($event);
     public function getDates($event);
