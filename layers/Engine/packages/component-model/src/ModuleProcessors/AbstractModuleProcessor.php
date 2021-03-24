@@ -58,7 +58,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate)
+    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the module to its string representation to access it in the array
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
