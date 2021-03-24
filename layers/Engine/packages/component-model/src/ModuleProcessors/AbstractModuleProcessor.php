@@ -407,7 +407,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array())
+    protected function getPropGroupField(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed
     {
         $group = $this->getPropGroup($group, $module, $props, $starting_from_modulepath);
         return $group[$field] ?? null;
@@ -451,7 +451,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         $this->mergeGroupProp(Props::ATTRIBUTES, $module_or_modulepath, $props, $field, $value, $starting_from_modulepath);
     }
-    public function getGroupProp(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array())
+    public function getGroupProp(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed
     {
         return $this->getPropGroupField($group, $module, $props, $field, $starting_from_modulepath);
     }
