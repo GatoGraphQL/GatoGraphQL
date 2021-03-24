@@ -387,7 +387,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         // }
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();

@@ -85,7 +85,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINNER_LOSTPWDRESET:

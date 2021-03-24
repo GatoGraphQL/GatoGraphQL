@@ -50,7 +50,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         return parent::getControlgroupBottomSubmodule($module);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();

@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
         return $this->getInputName($module);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
         parent::initRequestProps($module, $props);

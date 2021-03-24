@@ -17,7 +17,7 @@ interface ModuleProcessorInterface
     public function initRequestPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     public function getRequestPropsForDescendantModules(array $module, array &$props): array;
     public function getRequestPropsForDescendantDatasetmodules(array $module, array &$props): array;
-    public function initRequestProps(array $module, array &$props);
+    public function initRequestProps(array $module, array &$props): void;
     public function setProp(array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
     public function appendGroupProp(string $group, array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
     public function appendProp(array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;

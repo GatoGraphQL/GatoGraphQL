@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
         return $ret;
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($module, $props);
         parent::initRequestProps($module, $props);

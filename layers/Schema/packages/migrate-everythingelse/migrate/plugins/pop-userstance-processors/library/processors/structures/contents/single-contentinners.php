@@ -66,7 +66,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         parent::initModelProps($module, $props);
     }
 
-    public function initRequestProps(array $module, array &$props)
+    public function initRequestProps(array $module, array &$props): void
     {
         $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
