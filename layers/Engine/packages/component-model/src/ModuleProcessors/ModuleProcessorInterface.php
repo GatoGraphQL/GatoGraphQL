@@ -24,7 +24,7 @@ interface ModuleProcessorInterface
     public function mergeGroupProp(string $group, array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
     public function mergeProp(array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
     public function getGroupProp(string $group, array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed;
-    public function getProp(array $module, array &$props, string $field, array $starting_from_modulepath = array());
+    public function getProp(array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed;
     public function mergeGroupIterateKeyProp(string $group, array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
     public function mergeIterateKeyProp(array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;
     public function pushProp(string $group, array $module_or_modulepath, array &$props, string $field, $value, array $starting_from_modulepath = array()): void;

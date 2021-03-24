@@ -455,7 +455,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         return $this->getPropGroupField($group, $module, $props, $field, $starting_from_modulepath);
     }
-    public function getProp(array $module, array &$props, string $field, array $starting_from_modulepath = array())
+    public function getProp(array $module, array &$props, string $field, array $starting_from_modulepath = array()): mixed
     {
         return $this->getGroupProp(Props::ATTRIBUTES, $module, $props, $field, $starting_from_modulepath);
     }
