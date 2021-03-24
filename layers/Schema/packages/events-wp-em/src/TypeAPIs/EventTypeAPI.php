@@ -213,12 +213,12 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         return $EM_Event->output('#_EVENTDATEEND');
     }
 
-    public function getFormattedStartDate(object $EM_Event, $format)
+    public function getFormattedStartDate(object $EM_Event, string $format)
     {
         return date_i18n($format, $EM_Event->start);
     }
 
-    public function getFormattedEndDate(object $EM_Event, $format)
+    public function getFormattedEndDate(object $EM_Event, string $format)
     {
         return date_i18n($format, $EM_Event->end);
     }

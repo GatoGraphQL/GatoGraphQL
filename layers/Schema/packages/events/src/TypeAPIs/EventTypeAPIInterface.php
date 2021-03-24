@@ -43,8 +43,8 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     public function getTimes(object $event);
     public function getStartDate(object $event);
     public function getEndDate(object $event);
-    public function getFormattedStartDate(object $event, $format);
-    public function getFormattedEndDate(object $event, $format);
+    public function getFormattedStartDate(object $event, string $format);
+    public function getFormattedEndDate(object $event, string $format);
     public function isAllDay(object $event): bool;
     public function getGooglecalendarUrl(object $event);
     public function getIcalUrl(object $event);
