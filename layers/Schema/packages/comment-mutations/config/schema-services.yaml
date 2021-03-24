@@ -5,3 +5,6 @@ services:
 
     PoPSchema\CommentMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPSchema\CommentMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

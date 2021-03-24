@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSitesWassup\ShareMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
+    PoPSitesWassup\ShareMutations\MutationResolverBridges\:
+        resource: '../src/MutationResolverBridges/*'

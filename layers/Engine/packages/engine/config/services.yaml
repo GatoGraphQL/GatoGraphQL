@@ -25,6 +25,9 @@ services:
     PoP\Engine\FormInputs\:
         resource: '../src/FormInputs/*'
 
+    PoP\Engine\CheckpointProcessors\:
+        resource: '../src/CheckpointProcessors/*'
+
     PoP\Engine\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 

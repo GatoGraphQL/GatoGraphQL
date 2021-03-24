@@ -44,6 +44,9 @@ services:
     PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\FormInputHelperService
 
+    PoP\ComponentModel\CheckpointProcessors\:
+        resource: '../src/CheckpointProcessors/*'
+
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'
 

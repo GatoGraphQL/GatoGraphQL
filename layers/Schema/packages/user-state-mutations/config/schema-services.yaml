@@ -5,3 +5,6 @@ services:
 
     PoPSchema\UserStateMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPSchema\UserStateMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

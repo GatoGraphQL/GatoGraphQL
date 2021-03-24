@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSitesWassup\LocationPostLinkMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
+    PoPSitesWassup\LocationPostLinkMutations\MutationResolverBridges\:
+        resource: '../src/MutationResolverBridges/*'
