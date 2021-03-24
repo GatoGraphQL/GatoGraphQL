@@ -61,7 +61,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         $postIDOrError = \wp_update_post($data);
         return ErrorUtils::returnResultOrConvertError($postIDOrError);
     }
-    public function canUserEditCustomPost($userID, $customPostID): bool
+    public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
     {
         return \user_can($userID, 'edit_post', $customPostID);
     }

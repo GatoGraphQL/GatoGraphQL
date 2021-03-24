@@ -21,5 +21,5 @@ interface CustomPostTypeAPIInterface
      * @return string|int|null the ID of the updated custom post, or null if the post did not exist
      */
     public function updateCustomPost(array $data): string | int | null | Error;
-    public function canUserEditCustomPost($userID, $customPostID): bool;
+    public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool;
 }
