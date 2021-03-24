@@ -3,26 +3,17 @@ namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\ErrorHandling\ErrorCodes;
+use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 
 class ErrorUtils
 {
-    // public const ERRORCODE_NODIRECTIVE = 'no-directive';
-    public const ERRORCODE_NONNULLABLEFIELD = 'non-nullable-field';
-    public const ERRORCODE_NOFIELD = 'no-field';
-    public const ERRORCODE_VALIDATIONFAILED = 'validation-failed';
-    public const ERRORCODE_NOFIELDRESOLVERUNITPROCESSESFIELD = 'no-fieldresolverunit-processes-field';
-    public const ERRORCODE_NESTEDSCHEMAERRORS = 'nested-schema-errors';
-    public const ERRORCODE_NESTEDDBERRORS = 'nested-db-errors';
-    public const ERRORCODE_NESTEDERRORS = 'nested-errors';
-
-    public const ERRORDATA_FIELD_NAME = 'fieldName';
-
     // public static function getNoDirectiveError(string $directiveName): Error
     // {
     //     $translationAPI = TranslationAPIFacade::getInstance();
     //     return self::getError(
     //         $directiveName,
-    //         self::ERRORCODE_NODIRECTIVE,
+    //         ErrorCodes::NODIRECTIVE,
     //         $translationAPI->__('No DirectiveResolver resolves this directive', 'pop-component-model')
     //     );
     // }
@@ -41,7 +32,7 @@ class ErrorUtils
         $translationAPI = TranslationAPIFacade::getInstance();
         return self::getError(
             $fieldName,
-            self::ERRORCODE_NOFIELD,
+            ErrorCodes::NOFIELD,
             sprintf(
                 $translationAPI->__('No FieldResolver resolves field \'%s\'', 'pop-component-model'),
                 $fieldName
@@ -60,7 +51,7 @@ class ErrorUtils
         $translationAPI = TranslationAPIFacade::getInstance();
         return self::getError(
             $fieldName,
-            self::ERRORCODE_NONNULLABLEFIELD,
+            ErrorCodes::NONNULLABLEFIELD,
             sprintf(
                 $translationAPI->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
                 $fieldName
@@ -74,14 +65,14 @@ class ErrorUtils
         if (count($validationDescriptions) == 1) {
             return self::getError(
                 $fieldName,
-                self::ERRORCODE_VALIDATIONFAILED,
+                ErrorCodes::VALIDATIONFAILED,
                 $validationDescriptions[0]
             );
         }
         $translationAPI = TranslationAPIFacade::getInstance();
         $error = self::getError(
             $fieldName,
-            self::ERRORCODE_VALIDATIONFAILED,
+            ErrorCodes::VALIDATIONFAILED,
             sprintf(
                 $translationAPI->__('Field \'%s\' could not be processed due to previous error(s)', 'pop-component-model'),
                 $fieldName
@@ -100,7 +91,7 @@ class ErrorUtils
         $translationAPI = TranslationAPIFacade::getInstance();
         return self::getError(
             $fieldName,
-            self::ERRORCODE_NOFIELDRESOLVERUNITPROCESSESFIELD,
+            ErrorCodes::NOFIELDRESOLVERUNITPROCESSESFIELD,
             sprintf(
                 $translationAPI->__('No FieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
                 $fieldName,
@@ -113,7 +104,7 @@ class ErrorUtils
         $translationAPI = TranslationAPIFacade::getInstance();
         $error = self::getError(
             $fieldName,
-            self::ERRORCODE_NESTEDSCHEMAERRORS,
+            ErrorCodes::NESTEDSCHEMAERRORS,
             sprintf(
                 $translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
@@ -133,7 +124,7 @@ class ErrorUtils
         $translationAPI = TranslationAPIFacade::getInstance();
         $error = self::getError(
             $fieldName,
-            self::ERRORCODE_NESTEDDBERRORS,
+            ErrorCodes::NESTEDDBERRORS,
             sprintf(
                 $translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
@@ -161,7 +152,7 @@ class ErrorUtils
         $translationAPI = TranslationAPIFacade::getInstance();
         $error = self::getError(
             $fieldName,
-            self::ERRORCODE_NESTEDERRORS,
+            ErrorCodes::NESTEDERRORS,
             sprintf(
                 $translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
@@ -183,7 +174,7 @@ class ErrorUtils
         return new Error(
             $errorCode,
             $errorMessage,
-            [self::ERRORDATA_FIELD_NAME => $fieldName]
+            [ErrorDataTokens::FIELD_NAME => $fieldName]
         );
     }
 }
