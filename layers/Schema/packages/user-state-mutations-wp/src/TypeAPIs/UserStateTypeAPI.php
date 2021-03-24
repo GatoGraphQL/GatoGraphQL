@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 
-use PoP\Engine\ErrorHandling\ErrorUtils;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeAPIInterface;
 
@@ -35,7 +35,8 @@ class UserStateTypeAPI implements UserStateTypeAPIInterface
         $result = \wp_signon($credentials);
 
         // If it is an error, convert from WP_Error to Error
-        $result = ErrorUtils::returnResultOrConvertError($result);
+        $errorHelper = ErrorHelperFacade::getInstance();
+        $result = $errorHelper->returnResultOrConvertError($result);
 
         // Set the current user already, so that it already says "user logged in" for the toplevel feedback
         if (GeneralUtils::isError($result)) {

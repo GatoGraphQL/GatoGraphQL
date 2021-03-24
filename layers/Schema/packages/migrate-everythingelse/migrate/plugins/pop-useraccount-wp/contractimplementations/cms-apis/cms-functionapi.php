@@ -1,14 +1,15 @@
 <?php
 namespace PoP\UserAccount\WP;
 
-use PoP\Engine\ErrorHandling\ErrorUtils;
+use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
 
 class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
 {
     public function getPasswordResetKey($user_data)
     {
         $result = get_password_reset_key($user_data);
-        return ErrorUtils::returnResultOrConvertError($result);
+        $errorHelper = ErrorHelperFacade::getInstance();
+        return $errorHelper->returnResultOrConvertError($result);
     }
 
     public function checkPassword($user_id, $password)
@@ -21,7 +22,8 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
     public function checkPasswordResetKey($key, $login)
     {
         $result = check_password_reset_key($key, $login);
-        return ErrorUtils::returnResultOrConvertError($result);
+        $errorHelper = ErrorHelperFacade::getInstance();
+        return $errorHelper->returnResultOrConvertError($result);
     }
 
     protected function convertQueryArgsFromPoPToCMSForInsertUpdateUser(&$query)

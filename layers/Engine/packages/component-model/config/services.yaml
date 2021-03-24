@@ -53,6 +53,9 @@ services:
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
+    PoP\ComponentModel\ErrorHandling\ErrorProviderInterface:
+        class: \PoP\ComponentModel\ErrorHandling\ErrorProvider
+
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
 
