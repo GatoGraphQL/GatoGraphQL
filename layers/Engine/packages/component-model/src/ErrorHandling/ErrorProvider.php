@@ -1,17 +1,28 @@
 <?php
-namespace PoP\ComponentModel;
+
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\ErrorHandling;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ErrorHandling\ErrorCodes;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 
-class ErrorUtils
+class ErrorProvider implements ErrorProviderInterface
 {
-    // public static function getNoDirectiveError(string $directiveName): Error
+    public function getError(string $fieldName, string $errorCode, string $errorMessage): Error
+    {
+        return new Error(
+            $errorCode,
+            $errorMessage,
+            [ErrorDataTokens::FIELD_NAME => $fieldName]
+        );
+    }
+    // public function getNoDirectiveError(string $directiveName): Error
     // {
     //     $translationAPI = TranslationAPIFacade::getInstance();
-    //     return self::getError(
+    //     return $this->getError(
     //         $directiveName,
     //         ErrorCodes::NO_DIRECTIVE,
     //         $translationAPI->__('No DirectiveResolver resolves this directive', 'pop-component-model')
@@ -27,10 +38,10 @@ class ErrorUtils
      * @param string $fieldName
      * @return Error
      */
-    public static function getNoFieldError(string $fieldName): Error
+    public function getNoFieldError(string $fieldName): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return self::getError(
+        return $this->getError(
             $fieldName,
             ErrorCodes::NO_FIELD,
             sprintf(
@@ -46,10 +57,10 @@ class ErrorUtils
      * @param string $fieldName
      * @return Error
      */
-    public static function getNonNullableFieldError(string $fieldName): Error
+    public function getNonNullableFieldError(string $fieldName): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return self::getError(
+        return $this->getError(
             $fieldName,
             ErrorCodes::NON_NULLABLE_FIELD,
             sprintf(
@@ -58,19 +69,19 @@ class ErrorUtils
             )
         );
     }
-    public static function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error
+    public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error
     {
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         if (count($validationDescriptions) == 1) {
-            return self::getError(
+            return $this->getError(
                 $fieldName,
                 ErrorCodes::VALIDATION_FAILED,
                 $validationDescriptions[0]
             );
         }
         $translationAPI = TranslationAPIFacade::getInstance();
-        $error = self::getError(
+        $error = $this->getError(
             $fieldName,
             ErrorCodes::VALIDATION_FAILED,
             sprintf(
@@ -86,10 +97,10 @@ class ErrorUtils
         }
         return $error;
     }
-    public static function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
+    public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return self::getError(
+        return $this->getError(
             $fieldName,
             ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
             sprintf(
@@ -99,10 +110,10 @@ class ErrorUtils
             )
         );
     }
-    public static function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error
+    public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $error = self::getError(
+        $error = $this->getError(
             $fieldName,
             ErrorCodes::NESTED_SCHEMA_ERRORS,
             sprintf(
@@ -119,10 +130,10 @@ class ErrorUtils
 
         return $error;
     }
-    public static function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error
+    public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $error = self::getError(
+        $error = $this->getError(
             $fieldName,
             ErrorCodes::NESTED_DB_ERRORS,
             sprintf(
@@ -147,10 +158,10 @@ class ErrorUtils
 
         return $error;
     }
-    public static function getNestedErrorsFieldError(array $errors, string $fieldName): Error
+    public function getNestedErrorsFieldError(array $errors, string $fieldName): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $error = self::getError(
+        $error = $this->getError(
             $fieldName,
             ErrorCodes::NESTED_ERRORS,
             sprintf(
@@ -168,13 +179,5 @@ class ErrorUtils
         }
 
         return $error;
-    }
-    public static function getError(string $fieldName, string $errorCode, string $errorMessage): Error
-    {
-        return new Error(
-            $errorCode,
-            $errorMessage,
-            [ErrorDataTokens::FIELD_NAME => $fieldName]
-        );
     }
 }

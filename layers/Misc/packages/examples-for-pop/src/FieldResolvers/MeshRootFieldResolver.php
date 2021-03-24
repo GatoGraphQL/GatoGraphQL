@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP\FieldResolvers;
 
-use PoP\ComponentModel\ErrorUtils;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\ErrorHandling\ErrorProviderFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class MeshRootFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -224,7 +224,8 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                     }
                 );
                 if (!empty($maybeErrors)) {
-                    return ErrorUtils::getNestedErrorsFieldError($maybeErrors, $fieldName);
+                    $errorProvider = ErrorProviderFacade::getInstance();
+                    return $errorProvider->getNestedErrorsFieldError($maybeErrors, $fieldName);
                 }
                 return [
                     'weatherForecast' => $weatherForecast,

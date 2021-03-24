@@ -10,7 +10,7 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\ErrorUtils;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -101,6 +101,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * @var array<string, array>
      */
     private array $fieldNamesResolvedByFieldResolver = [];
+
+    public function __construct(
+        protected ErrorProviderInterface $errorProvider
+    ) {
+    }
 
     public function getNamespace(): string
     {
@@ -1329,7 +1334,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             //     $feedbackMessageStore->addSchemaWarnings($schemaWarnings);
             // }
             if ($schemaErrors) {
-                return ErrorUtils::getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
+                return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
             }
 
             // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the resultItem
@@ -1364,7 +1369,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $feedbackMessageStore->addDBWarnings($dbWarnings);
             }
             if ($dbErrors) {
-                return ErrorUtils::getNestedDBErrorsFieldError($dbErrors, $fieldName);
+                return $this->errorProvider->getNestedDBErrorsFieldError($dbErrors, $fieldName);
             }
 
             foreach ($fieldResolvers as $fieldResolver) {
@@ -1372,7 +1377,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 if ($fieldResolver->resolveCanProcessResultItem($this, $resultItem, $fieldName, $fieldArgs)) {
                     if ($validateSchemaOnResultItem) {
                         if ($maybeErrors = $fieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                            return ErrorUtils::getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
+                            return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
                         if ($maybeDeprecations = $fieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($resultItem);
@@ -1386,7 +1391,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         }
                     }
                     if ($validationErrorDescriptions = $fieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
-                        return ErrorUtils::getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
+                        return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
                     // Resolve the value
                     $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -1394,20 +1399,20 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     if (is_null($value)) {
                         $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
                         if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null) {
-                            return ErrorUtils::getNonNullableFieldError($fieldName);
+                            return $this->errorProvider->getNonNullableFieldError($fieldName);
                         }
                     }
                     // Everything is good, return the value (which could also be an Error!)
                     return $value;
                 }
             }
-            return ErrorUtils::getNoFieldResolverProcessesFieldError($this->getID($resultItem), $fieldName, $fieldArgs);
+            return $this->errorProvider->getNoFieldResolverProcessesFieldError($this->getID($resultItem), $fieldName, $fieldArgs);
         }
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         $fieldName = $fieldQueryInterpreter->getFieldName($field);
-        return ErrorUtils::getNoFieldError($fieldName);
+        return $this->errorProvider->getNoFieldError($fieldName);
     }
 
     protected function processFlatShapeSchemaDefinition(array $options = [])

@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\Schema;
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryHelpers;
-use PoP\ComponentModel\ErrorUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
