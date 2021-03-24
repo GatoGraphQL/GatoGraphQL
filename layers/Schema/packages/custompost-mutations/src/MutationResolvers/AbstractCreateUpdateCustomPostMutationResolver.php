@@ -197,13 +197,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function additionals(mixed $customPostID, array $form_data): void
+    protected function additionals(int | string $customPostID, array $form_data): void
     {
     }
-    protected function updateAdditionals(mixed $customPostID, array $form_data, array $log): void
+    protected function updateAdditionals(int | string $customPostID, array $form_data, array $log): void
     {
     }
-    protected function createAdditionals(mixed $customPostID, array $form_data): void
+    protected function createAdditionals(int | string $customPostID, array $form_data): void
     {
     }
 
@@ -262,7 +262,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     //     return $form_data[MutationInputProperties::CATEGORIES];
     // }
 
-    protected function createUpdateCustomPost(array $form_data, mixed $customPostID): void
+    protected function createUpdateCustomPost(array $form_data, int | string $customPostID): void
     {
         // @TODO: Migrate when package "Categories" is completed
         // // Set categories for any taxonomy (not only for "category")
@@ -273,7 +273,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // }
     }
 
-    protected function getUpdateCustomPostDataLog(mixed $customPostID, array $form_data): array
+    protected function getUpdateCustomPostDataLog(int | string $customPostID, array $form_data): array
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $log = array(

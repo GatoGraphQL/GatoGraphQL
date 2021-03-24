@@ -22,7 +22,7 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Get the event with provided ID or, if it doesn't exist, null
      */
-    public function getEvent(mixed $customPostID): ?object;
+    public function getEvent(int | string $customPostID): ?object;
     /**
      * Get the list of events
      *
