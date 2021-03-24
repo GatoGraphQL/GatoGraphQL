@@ -167,7 +167,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getFeedbackmessageModule($module);
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties)
+    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
 

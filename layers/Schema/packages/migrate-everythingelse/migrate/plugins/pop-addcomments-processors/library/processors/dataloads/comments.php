@@ -118,7 +118,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getTypeResolverClass($module);
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties)
+    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
 

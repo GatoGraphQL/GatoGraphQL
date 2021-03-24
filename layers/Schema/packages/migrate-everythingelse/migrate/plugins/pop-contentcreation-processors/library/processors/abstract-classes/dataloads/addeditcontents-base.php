@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties)
+    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
 
