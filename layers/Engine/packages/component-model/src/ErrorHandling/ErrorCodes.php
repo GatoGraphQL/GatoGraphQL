@@ -6,12 +6,12 @@ namespace PoP\ComponentModel\ErrorHandling;
 
 class ErrorCodes
 {
-    // public const NODIRECTIVE = 'no-directive';
-    public const NONNULLABLEFIELD = 'non-nullable-field';
-    public const NOFIELD = 'no-field';
-    public const VALIDATIONFAILED = 'validation-failed';
-    public const NOFIELDRESOLVERUNITPROCESSESFIELD = 'no-fieldresolverunit-processes-field';
-    public const NESTEDSCHEMAERRORS = 'nested-schema-errors';
-    public const NESTEDDBERRORS = 'nested-db-errors';
-    public const NESTEDERRORS = 'nested-errors';
+    // public const NO_DIRECTIVE = 'no-directive';
+    public const NON_NULLABLE_FIELD = 'non-nullable-field';
+    public const NO_FIELD = 'no-field';
+    public const VALIDATION_FAILED = 'validation-failed';
+    public const NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD = 'no-fieldresolverunit-processes-field';
+    public const NESTED_SCHEMA_ERRORS = 'nested-schema-errors';
+    public const NESTED_DB_ERRORS = 'nested-db-errors';
+    public const NESTED_ERRORS = 'nested-errors';
 }
