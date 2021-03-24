@@ -5,3 +5,6 @@ services:
 
     PoPSchema\CustomPostMediaMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPSchema\CustomPostMediaMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

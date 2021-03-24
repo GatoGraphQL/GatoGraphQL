@@ -110,5 +110,6 @@ class Component extends AbstractComponent
     ): void {
         self::initServices(dirname(__DIR__));
         self::initServices(dirname(__DIR__), '/Overrides');
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

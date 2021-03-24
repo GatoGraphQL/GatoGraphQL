@@ -5,3 +5,6 @@ services:
 
     PoPSchema\UserState\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPSchema\UserState\CheckpointProcessors\:
+        resource: '../src/CheckpointProcessors/*'
