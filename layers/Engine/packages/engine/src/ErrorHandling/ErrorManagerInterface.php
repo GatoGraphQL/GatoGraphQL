@@ -9,5 +9,5 @@ use PoP\ComponentModel\ErrorHandling\Error;
 interface ErrorManagerInterface
 {
     public function convertFromCMSToPoPError(mixed $cmsError): Error;
-    public function isCMSError(mixed $object): bool;
+    public function isCMSError(mixed $thing): bool;
 }
