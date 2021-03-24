@@ -37,7 +37,7 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CALENDAR_EVENTSMAP:

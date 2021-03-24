@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_CreateUpdatePostFormInnersBase extends PoP_M
         if (!GD_CreateUpdate_Utils::moderate()) {
             return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT];
         }
-        
+
         return [PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS];
     }
     protected function getEditorInitialvalue(array $module)
@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_CreateUpdatePostFormInnersBase extends PoP_M
         return null;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Set an initial value?
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_CreateUpdatePostFormInnersBase extends PoP_M
             $editor = $this->getEditorInput($module);
             $this->setProp($editor, $props, 'default-value', $initialvalue);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

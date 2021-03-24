@@ -2935,7 +2935,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         return parent::getLatestcountSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_CATEGORYPOSTS00_CAROUSEL:

@@ -86,7 +86,7 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'img-class', 'img-responsive');
         $this->setProp($module, $props, 'setbtn-class', 'btn btn-sm btn-primary');

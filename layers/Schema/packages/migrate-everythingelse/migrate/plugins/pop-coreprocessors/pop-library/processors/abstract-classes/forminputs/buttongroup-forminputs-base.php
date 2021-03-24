@@ -39,11 +39,11 @@ abstract class PoP_Module_Processor_ButtonGroupFormInputsBase extends PoP_Module
         $multiple = $this->isMultiple($module);
         $ret['compare-by'] = $multiple ? 'in' : 'eq';
         $ret['type'] = $multiple ? 'checkbox' : 'radio';
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'btn-class', $this->getInputbtnClass($module, $props));
         $this->setProp($module, $props, 'btn-classes', $this->getInputbtnClasses($module, $props));

@@ -141,7 +141,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP:

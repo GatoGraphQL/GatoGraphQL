@@ -22,18 +22,18 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_CODE_EXTERNAL:
                 // This is all this block does: load the external url defined in parameter "url"
                 $this->addJsmethod($ret, 'clickURLParam');
                 break;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CODE_EXTERNAL:
@@ -41,7 +41,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

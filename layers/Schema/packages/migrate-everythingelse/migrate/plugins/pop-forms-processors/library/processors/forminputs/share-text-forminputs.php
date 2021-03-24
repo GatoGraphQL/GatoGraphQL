@@ -19,11 +19,11 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_COPYSEARCHURL:
                 return TranslationAPIFacade::getInstance()->__('Copy Search URL', 'pop-coreprocessors');
-                
+
             case self::MODULE_FORMINPUT_API:
                 return TranslationAPIFacade::getInstance()->__('Copy URL', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -57,7 +57,7 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_COPYSEARCHURL:
@@ -72,7 +72,7 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
                 );
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

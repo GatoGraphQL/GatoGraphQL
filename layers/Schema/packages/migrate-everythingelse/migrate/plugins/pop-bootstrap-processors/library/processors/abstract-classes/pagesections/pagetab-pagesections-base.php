@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         parent::initModelProps($module, $props);

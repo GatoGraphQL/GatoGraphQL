@@ -24,7 +24,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebars extends PoP_Modul
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VERTICALSIDEBAR_SINGLE_STANCE:

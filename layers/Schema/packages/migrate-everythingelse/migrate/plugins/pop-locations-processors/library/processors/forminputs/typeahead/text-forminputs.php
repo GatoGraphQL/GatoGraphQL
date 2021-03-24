@@ -18,11 +18,11 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:

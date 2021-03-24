@@ -103,7 +103,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

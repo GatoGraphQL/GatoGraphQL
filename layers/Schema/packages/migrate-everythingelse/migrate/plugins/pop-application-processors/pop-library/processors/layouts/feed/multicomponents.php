@@ -42,13 +42,13 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW:
                 // Make the User Post Interaction group a collapse, initially collapsed
                 $this->appendProp([self::class, self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY], $props, 'class', 'collapse');
-                
+
                 // Indicate the button what collapse to open
                 $this->setProp([PoP_Module_Processor_FeedButtons::class, PoP_Module_Processor_FeedButtons::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY], $props, 'target-module', [self::class, self::MODULE_MULTICOMPONENT_USERPOSTACTIVITY]);
                 break;

@@ -63,7 +63,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Override the placeholders

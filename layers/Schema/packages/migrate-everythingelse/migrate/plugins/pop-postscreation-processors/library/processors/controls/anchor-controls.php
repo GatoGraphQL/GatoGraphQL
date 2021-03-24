@@ -40,7 +40,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
                     self::MODULE_ANCHORCONTROL_ADDPOSTLINK => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
                 );
                 $route = $routes[$module[1]];
-                
+
                 return RouteUtils::getRouteURL($route);
         }
 
@@ -58,7 +58,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
 
         return parent::getTarget($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_ADDPOSTLINK:

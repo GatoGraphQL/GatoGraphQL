@@ -27,11 +27,11 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
                     $labels[$module[1]]
                 );
         }
-    
+
         return parent::getCode($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
@@ -39,7 +39,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
                 $this->setProp($module, $props, 'resourceloader', 'functionbutton');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

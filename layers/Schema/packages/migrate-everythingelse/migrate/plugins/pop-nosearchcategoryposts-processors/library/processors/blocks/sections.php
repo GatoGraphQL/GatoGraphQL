@@ -1605,7 +1605,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS17_SCROLL_ADDONS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS17_SCROLL_ADDONS],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS18_SCROLL_ADDONS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS18_SCROLL_ADDONS],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS19_SCROLL_ADDONS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS19_SCROLL_ADDONS],
-            
+
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS],
@@ -1626,7 +1626,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS],
-            
+
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -1668,7 +1668,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -1689,7 +1689,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-                        
+
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_LIST],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_SCROLL_LIST],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS02_SCROLL_LIST],
@@ -1731,7 +1731,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS17_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS17_SCROLL_LINE],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS18_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS18_SCROLL_LINE],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS19_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS19_SCROLL_LINE],
-            
+
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS],
@@ -1752,7 +1752,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS],
-            
+
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -1794,7 +1794,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -1815,7 +1815,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-            
+
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_LIST],
@@ -1836,7 +1836,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_LIST],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_LIST],
-            
+
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_LINE],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_LINE],
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_LINE],
@@ -1878,7 +1878,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_DETAILS],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_DETAILS],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS],
-            
+
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -1920,7 +1920,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -1941,7 +1941,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL],
-            
+
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_LIST],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_LIST],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_LIST],
@@ -1962,7 +1962,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS17_SCROLL_LIST],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS18_SCROLL_LIST],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST],
-            
+
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS00_SCROLL_LINE],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS01_SCROLL_LINE],
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_LINE => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS02_SCROLL_LINE],
@@ -2237,7 +2237,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
                 // case self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS17_SCROLL_LINE:
                 // case self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS18_SCROLL_LINE:
                 // case self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS19_SCROLL_LINE:
-            
+
                 // Allow URE to add the ContentSource switch
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST];
 
@@ -2934,7 +2934,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
         return parent::getLatestcountSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_CAROUSEL:
@@ -3062,7 +3062,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

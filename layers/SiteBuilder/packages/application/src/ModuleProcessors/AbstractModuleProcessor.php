@@ -128,7 +128,7 @@ abstract class AbstractModuleProcessor extends \PoP\ConfigurationComponentModel\
         return $this->getProp($module, $props, 'lazy-load') ?? false;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         // If it is a dataloading module, then set all the props related to data
         if ($this->moduleLoadsData($module)) {

@@ -26,7 +26,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_HEADER],
-            
+
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR],
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_ADDONS],
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_DETAILS],
@@ -35,7 +35,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_LINE],
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_RELATED],
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EDIT],
-            
+
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT],
 
@@ -82,7 +82,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
             case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
-                
+
             case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 return [PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::class, PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT];
 
@@ -297,7 +297,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_ABOVETITLE
                 );
-            
+
             case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 return array(
                     GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT
@@ -364,7 +364,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
             case self::MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
-        
+
             case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 $ret[GD_JS_CLASSES]['content'] = 'well';
                 break;
@@ -392,7 +392,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getTitleBeforeauthors($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_HEADER:

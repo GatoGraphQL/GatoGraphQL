@@ -69,7 +69,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
         return parent::isUpdate($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:

@@ -29,7 +29,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
             case self::MODULE_LAYOUT_POPOVER_USER_AVATAR26:
                 return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_POPOVER];
         }
-        
+
         return parent::getLayoutSubmodule($module);
     }
 
@@ -63,11 +63,11 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
                     return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::MODULE_LAYOUTPOST_AUTHORNAME];
             }
         }
-        
+
         return parent::getLayoutContentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_POPOVER_USER:
@@ -79,7 +79,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
                 $this->appendProp($module, $props, 'class', 'pop-elem');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

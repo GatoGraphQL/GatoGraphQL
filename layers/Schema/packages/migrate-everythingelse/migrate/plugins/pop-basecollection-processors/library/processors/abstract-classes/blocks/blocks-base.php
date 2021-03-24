@@ -189,7 +189,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         parent::initWebPlatformModelProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'show-controls', true);
         if ($showControls = $this->getProp($module, $props, 'show-controls')) {

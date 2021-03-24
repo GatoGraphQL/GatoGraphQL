@@ -84,7 +84,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_TABLE_EDIT:

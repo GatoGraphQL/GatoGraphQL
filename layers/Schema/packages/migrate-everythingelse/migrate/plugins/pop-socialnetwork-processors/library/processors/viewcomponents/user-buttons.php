@@ -70,7 +70,7 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:

@@ -55,7 +55,7 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_REFERENCES:

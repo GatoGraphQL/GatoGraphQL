@@ -19,11 +19,11 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
             case self::MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return [PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_USER];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -39,7 +39,7 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
                 $this->setProp($trigger, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -49,7 +49,7 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
             case self::MODULE_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return '';
         }
-        
+
         return parent::getLabel($module, $props);
     }
 }

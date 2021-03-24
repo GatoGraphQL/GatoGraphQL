@@ -32,7 +32,7 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
@@ -44,7 +44,7 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
         $bottomframeoptions = $this->getFramebottomoptionsSubmodules($module);
         foreach ($this->getFrameoptionsSubmodules($module) as $submodule) {
             $this->appendProp([$submodule], $props, 'class', 'blocksection-controls pull-right');
-            
+
             if (in_array($submodule, $topframeoptions)) {
                 $this->appendProp([$submodule], $props, 'class', 'top');
             } elseif (in_array($submodule, $bottomframeoptions)) {

@@ -14,18 +14,18 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV];
                 $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT];
                 break;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:

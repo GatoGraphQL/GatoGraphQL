@@ -29,7 +29,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
-    
+
     public function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
@@ -67,7 +67,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
@@ -75,7 +75,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

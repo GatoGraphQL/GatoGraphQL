@@ -19,11 +19,11 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
             case self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG:
                 return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -39,7 +39,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
                 $this->setProp($trigger, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -49,7 +49,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
             case self::MODULE_FORMCOMPONENTGROUP_CARD_FLAG:
                 return '';
         }
-        
+
         return parent::getLabel($module, $props);
     }
 }

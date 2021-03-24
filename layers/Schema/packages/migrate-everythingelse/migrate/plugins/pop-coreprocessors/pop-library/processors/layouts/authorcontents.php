@@ -23,14 +23,14 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
         return parent::getDescriptionMaxlength($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTAUTHOR_CONTENT:
                 $this->appendProp($module, $props, 'class', 'layoutauthor readable clearfix');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

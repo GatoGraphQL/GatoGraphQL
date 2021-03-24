@@ -28,7 +28,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         // Validate that the strata includes the required stratum
         $vars = ApplicationState::getVars();

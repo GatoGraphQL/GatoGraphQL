@@ -38,7 +38,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         switch ($module[1]) {
             case self::MODULE_BUTTON_POSTEDIT:
                 return 'editURL';
-        
+
             case self::MODULE_BUTTON_POSTPREVIEW:
                 return 'previewURL';
         }
@@ -58,7 +58,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
             case self::MODULE_BUTTON_POSTPREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Preview', 'pop-coreprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -68,7 +68,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
             case self::MODULE_BUTTON_POSTPREVIEW:
                 return PoP_Application_Utils::getPreviewTarget();
         }
-        
+
         return parent::getLinktarget($module, $props);
     }
 
@@ -87,7 +87,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BUTTON_POSTPREVIEW:
@@ -97,7 +97,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
                 }
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

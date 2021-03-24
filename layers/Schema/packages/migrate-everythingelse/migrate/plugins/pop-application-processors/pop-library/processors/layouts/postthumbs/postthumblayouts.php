@@ -85,7 +85,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 return 'thumbFullSrc';
-            
+
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
                 return 'editURL';
         }
@@ -152,7 +152,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
         return parent::getThumbImgClass($module);
     }
-    
+
     public function getDbobjectParams(array $module): array
     {
         switch ($module[1]) {
@@ -170,7 +170,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getDbobjectParams($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED:

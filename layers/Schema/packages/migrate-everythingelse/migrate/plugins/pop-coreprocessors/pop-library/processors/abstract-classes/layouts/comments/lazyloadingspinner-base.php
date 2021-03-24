@@ -16,11 +16,11 @@ abstract class PoP_Module_Processor_LazyLoadingSpinnerLayoutsBase extends PoPEng
             '<div class="pop-lazyload-loading">%s</div>',
             GD_CONSTANT_LOADING_SPINNER.' '.TranslationAPIFacade::getInstance()->__('Loading data', 'poptheme-wassup')
         );
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'appendable', true);
         $this->setProp($module, $props, 'appendable-class', GD_CLASS_SPINNER);

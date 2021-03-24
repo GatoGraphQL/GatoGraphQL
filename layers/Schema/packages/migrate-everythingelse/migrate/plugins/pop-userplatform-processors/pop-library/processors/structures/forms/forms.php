@@ -26,7 +26,7 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORM_MYPREFERENCES:
@@ -34,7 +34,7 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
                 $this->appendProp($module, $props, 'class', 'form-mypreferences');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

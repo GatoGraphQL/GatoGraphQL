@@ -11,7 +11,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSEL_AUTHORMEMBERS:
@@ -19,7 +19,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Pr
                 $this->appendProp($module, $props, 'class', 'widget widget-info');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

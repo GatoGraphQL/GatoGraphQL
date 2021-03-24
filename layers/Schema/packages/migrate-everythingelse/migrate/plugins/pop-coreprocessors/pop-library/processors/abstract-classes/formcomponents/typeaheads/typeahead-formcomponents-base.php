@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $typeahead_class = $this->getTypeaheadClass($module, $props);
         $this->appendProp($module, $props, 'class', $typeahead_class);

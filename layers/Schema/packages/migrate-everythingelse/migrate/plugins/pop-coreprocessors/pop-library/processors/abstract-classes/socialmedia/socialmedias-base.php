@@ -19,11 +19,11 @@ abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataM
         if ($this->useCounter($module)) {
             $this->addJsmethod($ret, 'socialmediaCounter');
         }
-        
+
         return $ret;
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         $title = $this->getProp($module, $props, 'title');
         foreach ($this->getSubmodules($module) as $submodule) {
@@ -35,9 +35,9 @@ abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataM
                 $this->setProp([$submodule], $props, 'load-socialmedia-counter', true);
             }
         }
-        
+
         $this->appendProp($module, $props, 'class', 'pop-hidden-print');
-        
+
         parent::initModelProps($module, $props);
     }
 }

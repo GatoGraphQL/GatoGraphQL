@@ -55,17 +55,17 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
     {
         return null;
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         $ret[] = $this->getTriggerLayoutSubmodule($module);
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $trigger_layout = $this->getTriggerLayoutSubmodule($module);
         $this->appendProp($trigger_layout, $props, 'class', GD_CLASS_TRIGGERLAYOUT);
@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         if (!$this->isMultiple($module)) {
             $this->setProp($module, $props, 'max-selected', 1);
         }
-        
+
         $input = $this->getInputSubmodule($module);
         $this->appendProp($input, $props, 'class', 'max-selected-disable');
 
@@ -106,7 +106,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
 
         $trigger_layout = $this->getTriggerLayoutSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = ModuleUtils::getModuleOutputName($trigger_layout);
-        
+
         if ($maxSelected = $this->getProp($module, $props, 'max-selected')) {
             $ret['max-selected'] = $maxSelected;
         }

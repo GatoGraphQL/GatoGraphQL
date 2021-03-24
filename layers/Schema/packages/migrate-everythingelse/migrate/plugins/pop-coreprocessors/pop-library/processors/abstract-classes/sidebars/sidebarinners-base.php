@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_SidebarInnersBase extends PoP_Module_Process
         return '';
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($wrapper_class = $this->getWrapperClass($module)) {
             $this->appendProp($module, $props, 'class', $wrapper_class);

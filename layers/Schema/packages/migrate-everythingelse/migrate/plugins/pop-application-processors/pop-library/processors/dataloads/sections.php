@@ -130,7 +130,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:

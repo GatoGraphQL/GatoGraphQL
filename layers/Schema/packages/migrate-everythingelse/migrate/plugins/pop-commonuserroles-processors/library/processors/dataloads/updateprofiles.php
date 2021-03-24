@@ -76,7 +76,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         return parent::getCheckpointmessageModule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:

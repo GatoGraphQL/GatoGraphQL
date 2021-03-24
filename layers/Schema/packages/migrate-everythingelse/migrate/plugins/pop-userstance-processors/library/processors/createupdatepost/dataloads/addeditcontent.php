@@ -197,7 +197,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $name = PoP_UserStance_PostNameUtils::getNameUc();
         switch ($module[1]) {

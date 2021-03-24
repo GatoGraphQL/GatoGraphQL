@@ -35,7 +35,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:

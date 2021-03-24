@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($this->showDescription($module, $props)) {
             $this->appendProp($module, $props, 'class', 'showdescription');

@@ -56,7 +56,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
         return parent::isUpdate($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_POST_UPDATE:

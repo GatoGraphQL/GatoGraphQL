@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR

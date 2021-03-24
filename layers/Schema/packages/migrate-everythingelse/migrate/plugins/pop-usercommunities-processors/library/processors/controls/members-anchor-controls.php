@@ -70,7 +70,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         return parent::getTarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

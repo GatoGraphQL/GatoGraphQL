@@ -56,7 +56,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
         return parent::getTextfieldClose($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:

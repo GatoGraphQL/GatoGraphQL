@@ -46,7 +46,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Extra classes

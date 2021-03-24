@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_
             TranslationAPIFacade::getInstance()->__('Scroll down to load more results', 'poptheme-wassup')
         );
     }
-    
+
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'mapdetails');
 

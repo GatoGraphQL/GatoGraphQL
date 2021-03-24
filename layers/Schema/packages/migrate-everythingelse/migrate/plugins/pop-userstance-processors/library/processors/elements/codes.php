@@ -65,7 +65,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                     TranslationAPIFacade::getInstance()->__('Stance from our users: ', 'pop-userstance-processors')
                 );
         }
-    
+
         return parent::getCode($module, $props);
     }
 
@@ -80,14 +80,14 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
             case self::MODULE_CODE_POSTSTANCE:
                 return 'span';
         }
-    
+
         return parent::getHtmlTag($module, $props);
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    
+
         switch ($module[1]) {
          // case self::MODULE_CODE_STANCECOUNT_GENERAL:
          // case self::MODULE_CODE_STANCECOUNT_ARTICLE:
@@ -102,7 +102,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                 $this->appendProp($module, $props, 'class', 'pop-stance-combined');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataMo
     {
         return null;
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -17,10 +17,10 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataMo
         if ($inner = $this->getInnerSubmodule($module)) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
-    
+
     public function addFetchedData(array $module, array &$props)
     {
         return true;
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataMo
             }
         }
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -45,11 +45,11 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataMo
         if ($inner = $this->getInnerSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inner'] = ModuleUtils::getModuleOutputName($inner);
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // // Make the inner module callback updatable

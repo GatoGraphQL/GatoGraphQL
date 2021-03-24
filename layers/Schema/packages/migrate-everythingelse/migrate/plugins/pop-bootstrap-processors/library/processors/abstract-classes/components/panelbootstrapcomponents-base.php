@@ -328,7 +328,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return false;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($this->lazyLoadInactivePanels($module, $props)) {
             $active_submodule = $this->getActivepanelSubmodule($module);

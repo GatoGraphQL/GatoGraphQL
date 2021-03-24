@@ -24,7 +24,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostForms extends PoP_Modul
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORM_POST:

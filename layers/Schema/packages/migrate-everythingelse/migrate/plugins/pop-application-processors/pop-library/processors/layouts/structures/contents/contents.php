@@ -36,7 +36,7 @@ class Wassup_Module_Processor_LayoutContents extends PoP_Module_Processor_Conten
         return parent::addFetchedData($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE:

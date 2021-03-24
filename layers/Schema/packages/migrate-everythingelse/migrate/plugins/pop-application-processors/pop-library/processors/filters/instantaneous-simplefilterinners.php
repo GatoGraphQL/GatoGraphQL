@@ -38,7 +38,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         }
         return $ret;
     }
-    
+
     // public function getFilter(array $module)
     // {
     //     switch ($module[1]) {
@@ -64,7 +64,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         return parent::getTriggerInternaltarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_INSTANTANEOUSFILTERINNER_CONTENTSECTIONS:

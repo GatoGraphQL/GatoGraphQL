@@ -49,7 +49,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
         return parent::addFetchedData($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:

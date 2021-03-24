@@ -18,7 +18,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
             case self::MODULE_FORMINPUT_EMBEDCODE:
                 return TranslationAPIFacade::getInstance()->__('Embed code', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_EMBEDCODE:
@@ -66,7 +66,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
                 );
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

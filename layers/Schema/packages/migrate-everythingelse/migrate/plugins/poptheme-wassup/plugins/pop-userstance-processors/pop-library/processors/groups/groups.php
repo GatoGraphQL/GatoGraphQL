@@ -37,7 +37,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_CAROUSEL];
                 }
-                
+
                 // Allow TPPDebate to add the Featured Block
                 if ($layouts = HooksAPIFacade::getInstance()->applyFilters(
                     'UserStance_Module_Processor_CustomGroups:modules:hometop',
@@ -84,7 +84,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_USERSTANCE_GROUP_HOMETOP:
@@ -115,7 +115,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                         getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).sprintf(TranslationAPIFacade::getInstance()->__('Your %s', 'pop-userstance-processors'), PoP_UserStance_PostNameUtils::getNameLc())
                     )
                 );
-                        
+
                 $this->appendProp([[UserStance_Module_Processor_CustomControlGroups::class, UserStance_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_STANCESTATS]], $props, 'class', 'col-sm-4');
                 $this->setProp(
                     [
@@ -151,7 +151,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 $this->appendProp($module, $props, 'class', 'vt-author-thoughtslides');
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

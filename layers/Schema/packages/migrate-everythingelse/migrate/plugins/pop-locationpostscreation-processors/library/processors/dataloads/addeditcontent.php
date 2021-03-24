@@ -69,7 +69,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
         return parent::isUpdate($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOST_UPDATE:

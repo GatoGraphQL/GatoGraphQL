@@ -20,7 +20,7 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CONTENT_COMMENTSINGLE:

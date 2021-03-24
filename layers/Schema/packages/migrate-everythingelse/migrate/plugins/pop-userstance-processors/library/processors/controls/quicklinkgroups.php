@@ -33,7 +33,7 @@ class UserStance_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_QUICKLINKGROUP_STANCECONTENT:
@@ -45,7 +45,7 @@ class UserStance_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Proce
                 $this->appendProp($downlevels[$module[1]], $props, 'class', 'btn-group');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

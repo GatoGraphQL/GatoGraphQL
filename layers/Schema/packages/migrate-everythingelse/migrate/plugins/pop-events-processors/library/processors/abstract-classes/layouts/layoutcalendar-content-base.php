@@ -33,13 +33,13 @@ abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine
         if ($this->getProp($module, $props, 'show-title')) {
             $ret['show-title'] = true;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
-    
+
         // Show the title by default
         $this->setProp($module, $props, 'show-title', true);
         parent::initModelProps($module, $props);

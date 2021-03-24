@@ -161,7 +161,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return [];
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         // Set property "succeeding-typeResolver" on every module, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($typeResolver_class = $this->getTypeResolverClass($module)) {

@@ -46,7 +46,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'heading';
         }
-    
+
         return parent::getPanelHeaderType($module);
     }
 
@@ -56,7 +56,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return false;
         }
-    
+
         return parent::closeParent($module);
     }
 
@@ -99,7 +99,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
 
                 return $ret;
         }
-    
+
         return parent::getPanelTitle($module);
     }
 
@@ -109,11 +109,11 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'span';
         }
-    
+
         return parent::getPaneltitleHtmltag($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:

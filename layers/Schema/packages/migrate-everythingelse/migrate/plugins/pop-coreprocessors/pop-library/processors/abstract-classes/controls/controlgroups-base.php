@@ -6,8 +6,8 @@ abstract class PoP_Module_Processor_ControlGroupsBase extends PoPEngine_QueryDat
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_CONTROLGROUP];
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         if ($blocktarget = $this->getProp($module, $props, 'control-target')) {
             foreach ($this->getSubmodules($module) as $submodule) {

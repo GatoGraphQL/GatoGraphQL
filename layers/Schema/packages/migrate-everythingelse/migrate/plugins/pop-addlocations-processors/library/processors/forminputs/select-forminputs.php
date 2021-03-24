@@ -18,7 +18,7 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
                 return TranslationAPIFacade::getInstance()->__('Country', 'em-popprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -28,7 +28,7 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
                 return GD_FormInput_EM_LocationCountries::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -45,14 +45,14 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
     //     return parent::getName($module);
     // }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
                 $this->appendProp($module, $props, 'class', 'address-input');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

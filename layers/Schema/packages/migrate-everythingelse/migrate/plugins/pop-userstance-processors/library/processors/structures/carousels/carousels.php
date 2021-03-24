@@ -15,7 +15,7 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSEL_STANCES:
@@ -26,7 +26,7 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
                 $this->appendProp($module, $props, 'class', 'widget');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

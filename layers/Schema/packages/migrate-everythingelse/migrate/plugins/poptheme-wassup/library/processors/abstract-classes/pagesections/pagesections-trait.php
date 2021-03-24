@@ -38,7 +38,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
             $this->getFrameoptionsSubmodules($module)
         );
     }
-    
+
     public function getMutableonmodelConfiguration(array $module, array &$props): array
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -47,11 +47,11 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 
         if ($submodules = $this->getFrameoptionsSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['frameoptions'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $submodules
             );
         }
-        
+
         return $ret;
     }
 
@@ -59,7 +59,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
@@ -71,7 +71,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
         $bottomframeoptions = $this->getFramebottomoptionsSubmodules($module);
         foreach ($this->getFrameoptionsSubmodules($module) as $submodule) {
             $this->appendProp([$submodule], $props, 'class', 'blocksection-controls pull-right');
-            
+
             if (in_array($submodule, $topframeoptions)) {
                 $this->appendProp([$submodule], $props, 'class', 'top');
             } elseif (in_array($submodule, $bottomframeoptions)) {

@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         $this->mergeProp(
@@ -52,7 +52,7 @@ abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_P
                 $this->appendProp($module, $props, 'class', 'active');
             }
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

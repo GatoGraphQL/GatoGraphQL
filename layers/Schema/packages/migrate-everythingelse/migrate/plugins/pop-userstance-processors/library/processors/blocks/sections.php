@@ -462,7 +462,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getLatestcountSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHORSTANCES_CAROUSEL:

@@ -87,7 +87,7 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'textfield-class', $this->getTextfieldClass($module, $props));
         parent::initModelProps($module, $props);

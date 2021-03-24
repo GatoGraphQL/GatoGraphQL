@@ -46,7 +46,7 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
         return parent::getFetchmoreButtonSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Extra classes

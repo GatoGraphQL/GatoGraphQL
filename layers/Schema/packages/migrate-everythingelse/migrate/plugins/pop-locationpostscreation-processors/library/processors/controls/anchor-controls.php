@@ -45,7 +45,7 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
                         self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
                     );
                     $route = $routes[$module[1]];
-                    
+
                     return RouteUtils::getRouteURL($route);
                 }
                 break;
@@ -65,7 +65,7 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
 
         return parent::getTarget($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:

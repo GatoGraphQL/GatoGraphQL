@@ -53,7 +53,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:

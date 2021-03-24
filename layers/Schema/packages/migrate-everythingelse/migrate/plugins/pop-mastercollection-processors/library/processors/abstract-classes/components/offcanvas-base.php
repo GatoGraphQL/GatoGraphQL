@@ -74,15 +74,15 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataMod
         }
         if ($submodules = $this->getSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $submodules
             );
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $offcanvas_class = $this->getOffcanvasClass($module, $props);
         $this->appendProp($module, $props, 'class', 'offcanvas '.$offcanvas_class);

@@ -37,7 +37,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Extra classes

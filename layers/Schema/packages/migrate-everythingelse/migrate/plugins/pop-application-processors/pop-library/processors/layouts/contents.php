@@ -89,7 +89,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
             case self::MODULE_LAYOUT_CONTENT_COMMENT:
                 // Make the images inside img-responsive
                 $this->addJsmethod($ret, 'imageResponsive');
-                
+
                 // Add the popover for the @mentions
                 $this->addJsmethod($ret, 'contentPopover');
                 break;
@@ -98,9 +98,9 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
-    
+
         // Hide the @mentions popover code
         switch ($module[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:

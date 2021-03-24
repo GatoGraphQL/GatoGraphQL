@@ -70,7 +70,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Extra classes

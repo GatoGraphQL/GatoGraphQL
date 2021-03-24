@@ -282,7 +282,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($author_module = $this->getAuthorModule($module)) {
             $this->appendProp($author_module, $props, 'class', 'preview-author');

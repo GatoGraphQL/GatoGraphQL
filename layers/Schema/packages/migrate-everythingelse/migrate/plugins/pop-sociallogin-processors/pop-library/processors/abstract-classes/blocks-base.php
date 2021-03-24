@@ -7,7 +7,7 @@ abstract class GD_WSL_Module_Processor_NetworkLinkBlocksBase extends PoP_Module_
         $ret = parent::getJsmethods($module, $props);
 
         $this->addJsmethod($ret, 'addDomainClass');
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -20,7 +20,7 @@ abstract class GD_WSL_Module_Processor_NetworkLinkBlocksBase extends PoP_Module_
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Visible only if the user not logged in

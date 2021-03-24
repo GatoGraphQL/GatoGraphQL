@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
         return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_CARD];
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             // Pass same information to its trigger

@@ -84,7 +84,7 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_STANCETARGET:

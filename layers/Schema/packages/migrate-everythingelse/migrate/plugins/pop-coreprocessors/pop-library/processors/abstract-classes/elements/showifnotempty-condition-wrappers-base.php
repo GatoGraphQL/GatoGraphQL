@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase extends P
         return null;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-show-notempty');
         if ($textfield_module = $this->getTextfieldModule($module, $props)) {

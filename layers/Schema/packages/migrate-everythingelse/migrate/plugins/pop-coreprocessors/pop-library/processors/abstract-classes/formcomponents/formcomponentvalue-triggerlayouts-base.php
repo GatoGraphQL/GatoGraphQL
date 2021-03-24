@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $trigger_module = $this->getTriggerSubmodule($module);
 

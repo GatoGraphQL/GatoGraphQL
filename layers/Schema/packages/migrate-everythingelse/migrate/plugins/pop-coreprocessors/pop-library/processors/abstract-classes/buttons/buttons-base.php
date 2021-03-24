@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataModul
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         $ret[] = $this->getButtoninnerSubmodule($module);
 
         return $ret;
@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataModul
                 $ret['title'] = $title;
             }
         }
-        
+
         $ret['url-field'] = $this->getUrlField($module);
         if ($linktarget = $this->getLinktarget($module, $props)) {
             $ret['linktarget'] = $linktarget;
@@ -103,11 +103,11 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataModul
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $buttoninner = $this->getButtoninnerSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['buttoninner'] = ModuleUtils::getModuleOutputName($buttoninner);
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($btn_class = $this->getBtnClass($module, $props)) {
             $this->appendProp($module, $props, 'btn-class', $btn_class);

@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Make the thumb image responsive if it is not the media layout

@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $component = $this->getComponentSubmodule($module);
 

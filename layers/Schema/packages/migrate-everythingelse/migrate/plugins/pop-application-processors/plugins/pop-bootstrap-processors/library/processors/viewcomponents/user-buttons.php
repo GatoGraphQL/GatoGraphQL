@@ -52,7 +52,7 @@ class PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons exten
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA:

@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-multilayout');
         parent::initModelProps($module, $props);
@@ -61,7 +61,7 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
             $ret['default-module'] = ModuleUtils::getModuleOutputName($defaultLayout);
         }
         $ret['condition-on-data-field-modules'] = array_map(
-            [ModuleUtils::class, 'getModuleOutputName'], 
+            [ModuleUtils::class, 'getModuleOutputName'],
             $this->getMultipleLayoutSubmodules($module)
         );
 

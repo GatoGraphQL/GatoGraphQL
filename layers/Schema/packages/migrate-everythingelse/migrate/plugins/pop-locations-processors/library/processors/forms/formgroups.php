@@ -41,7 +41,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
         return parent::getInfo($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

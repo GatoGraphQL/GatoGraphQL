@@ -66,7 +66,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -83,14 +83,14 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_SUBMENU_ACCOUNT:
                 $this->appendProp($module, $props, 'class', 'visible-notloggedin');
                 break;
         }
-    
+
         parent::initModelProps($module, $props);
     }
 }

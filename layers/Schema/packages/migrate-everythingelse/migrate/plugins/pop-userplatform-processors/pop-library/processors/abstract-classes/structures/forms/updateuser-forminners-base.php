@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_UpdateUserFormInnersBase extends PoP_Module_
         );
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_USERNAME], $props, 'readonly', true);
         parent::initModelProps($module, $props);

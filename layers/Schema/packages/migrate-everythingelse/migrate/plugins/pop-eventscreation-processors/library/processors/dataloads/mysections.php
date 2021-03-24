@@ -133,7 +133,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Events: choose to only select past/future

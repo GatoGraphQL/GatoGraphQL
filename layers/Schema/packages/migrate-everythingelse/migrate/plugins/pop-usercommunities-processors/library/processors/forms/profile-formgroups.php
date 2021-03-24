@@ -78,7 +78,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
         return parent::getInfo($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES:

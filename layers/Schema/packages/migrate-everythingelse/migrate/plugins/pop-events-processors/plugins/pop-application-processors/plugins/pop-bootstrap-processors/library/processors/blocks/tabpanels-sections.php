@@ -59,7 +59,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         return parent::getDelegatorfilterSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($filter_module = $this->getDelegatorfilterSubmodule($module)) {
             // Events: choose to only select past/future

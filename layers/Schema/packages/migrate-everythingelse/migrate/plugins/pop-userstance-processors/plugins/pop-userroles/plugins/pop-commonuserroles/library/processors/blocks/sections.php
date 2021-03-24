@@ -83,7 +83,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
         return parent::getControlgroupTopSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL:

@@ -61,7 +61,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_CONTENT_SINGLE:

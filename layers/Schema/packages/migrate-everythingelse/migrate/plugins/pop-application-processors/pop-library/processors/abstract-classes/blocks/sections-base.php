@@ -111,7 +111,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return null;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         // If the inner module is a DataloadingModule, then transfer dataloading properties to its contained module
         if ($inner_module = $this->getInnerSubmodule($module)) {

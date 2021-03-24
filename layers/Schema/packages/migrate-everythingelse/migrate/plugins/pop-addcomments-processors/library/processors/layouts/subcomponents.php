@@ -62,7 +62,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
         return parent::isIndividual($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_POSTCOMMENTS:

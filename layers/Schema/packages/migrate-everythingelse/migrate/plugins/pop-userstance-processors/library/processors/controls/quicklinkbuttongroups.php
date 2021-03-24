@@ -18,7 +18,7 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_STANCEEDIT:
                 $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_STANCEEDIT];
@@ -35,11 +35,11 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
                 $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::MODULE_BUTTON_POSTSTANCES_AGAINST];
                 break;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE:

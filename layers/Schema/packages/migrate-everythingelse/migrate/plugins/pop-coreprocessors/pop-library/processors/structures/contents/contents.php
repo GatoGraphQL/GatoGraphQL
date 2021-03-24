@@ -31,7 +31,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $vars = ApplicationState::getVars();
 

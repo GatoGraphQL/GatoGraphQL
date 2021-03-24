@@ -16,7 +16,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $ret = array_merge(
@@ -28,7 +28,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
                 );
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -38,7 +38,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'btn btn-compact btn-link';
         }
-        
+
         return parent::getBtnClass($module);
     }
 
@@ -62,14 +62,14 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
         return parent::getLabel($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $this->appendProp($module, $props, 'class', 'pop-addrelatedpost-dropdown');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

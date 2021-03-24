@@ -69,7 +69,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_TOGGLEMAP:

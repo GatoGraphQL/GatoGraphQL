@@ -32,7 +32,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return 'fa-envelope';
-        
+
             case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:
                 return 'fa-user-plus';
         }
@@ -62,7 +62,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
         return parent::getTarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_INVITENEWUSERS:

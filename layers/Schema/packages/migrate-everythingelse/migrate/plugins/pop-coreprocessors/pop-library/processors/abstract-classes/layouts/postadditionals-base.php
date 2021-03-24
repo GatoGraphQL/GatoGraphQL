@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PostAdditionalLayoutsBase extends PoPEngine_
         return array('multilayoutKeys');
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-multilayout-label');
         parent::initModelProps($module, $props);

@@ -36,7 +36,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
 
             case self::MODULE_FORM_LOGOUT:
                 return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_LOGOUT];
-            
+
             case self::MODULE_FORM_USER_CHANGEPASSWORD:
                 return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::MODULE_FORMINNER_USER_CHANGEPASSWORD];
         }
@@ -54,7 +54,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
         }
-        
+
         return $ret;
     }
     public function getImmutableJsconfiguration(array $module, array &$props): array
@@ -66,7 +66,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
                 break;
-        
+
             case self::MODULE_FORM_LOGOUT:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
@@ -76,7 +76,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
@@ -142,7 +142,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 $this->setProp($module, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

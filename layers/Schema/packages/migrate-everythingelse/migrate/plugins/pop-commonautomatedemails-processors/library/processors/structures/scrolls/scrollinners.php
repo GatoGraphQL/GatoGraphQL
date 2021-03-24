@@ -65,7 +65,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS:

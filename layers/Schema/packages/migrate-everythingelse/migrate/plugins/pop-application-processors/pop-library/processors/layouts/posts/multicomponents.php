@@ -33,7 +33,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
                     $layouts[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS];
                 }
                 break;
-            
+
             case self::MODULE_MULTICOMPONENT_USERPOSTINTERACTION:
                 $layouts = array(
                     [PoP_Module_Processor_CustomWrapperLayouts::class, PoP_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION],
@@ -53,8 +53,8 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
         return HooksAPIFacade::getInstance()->applyFilters(
-            'Wassup_Module_Processor_MultipleComponentLayouts:userpostinteraction_layouts', 
-            $layouts, 
+            'Wassup_Module_Processor_MultipleComponentLayouts:userpostinteraction_layouts',
+            $layouts,
             $module
         );
     }
@@ -76,7 +76,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
@@ -84,7 +84,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
                 $this->appendProp($module, $props, 'class', 'userpostinteraction-single');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

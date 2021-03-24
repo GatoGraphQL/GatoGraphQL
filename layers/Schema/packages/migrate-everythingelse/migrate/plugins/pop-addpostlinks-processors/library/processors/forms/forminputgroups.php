@@ -18,7 +18,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
             case self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 return [PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::MODULE_ADDPOSTLINKS_FORMINPUT_LINK];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -28,11 +28,11 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
             case self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 return TranslationAPIFacade::getInstance()->__('The URL from an external webpage, directly referenced by this post.', 'poptheme-wassup');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
@@ -40,7 +40,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
                 $this->setProp($component, $props, 'placeholder', 'https://...');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

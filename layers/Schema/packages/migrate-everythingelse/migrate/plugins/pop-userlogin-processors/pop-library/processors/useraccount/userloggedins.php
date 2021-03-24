@@ -23,7 +23,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
             case self::MODULE_USERACCOUNT_USERLOGGEDINPROMPT:
                 return TranslationAPIFacade::getInstance()->__('You are already logged in as', 'pop-coreprocessors');
         }
-    
+
         return parent::getTitleTop($module, $props);
     }
 
@@ -38,14 +38,14 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
                     TranslationAPIFacade::getInstance()->__('Logout?', 'pop-coreprocessors')
                 );
         }
-    
+
         return parent::getTitleBottom($module, $props);
     }
 
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -68,7 +68,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
@@ -79,7 +79,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
                 $this->appendProp($module, $props, 'class', 'visible-loggedin');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

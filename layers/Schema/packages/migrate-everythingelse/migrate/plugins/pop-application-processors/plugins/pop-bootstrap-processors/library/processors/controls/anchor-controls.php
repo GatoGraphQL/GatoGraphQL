@@ -50,7 +50,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
         return parent::getHref($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_SHAREBYEMAIL:

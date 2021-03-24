@@ -154,7 +154,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         return parent::getTarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

@@ -38,7 +38,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
                 $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -49,7 +49,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEACCOUNT];
         }
-        
+
         return parent::getControlgroupTopSubmodule($module);
     }
 
@@ -60,14 +60,14 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::MODULE_SUBMENU_ACCOUNT];
         }
-        
+
         return parent::getSubmenuSubmodule($module);
     }
-    
-    public function initModelProps(array $module, array &$props)
+
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    
+
         switch ($module[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
@@ -84,7 +84,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
                 $this->appendProp([PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT], $props, 'class', 'well');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

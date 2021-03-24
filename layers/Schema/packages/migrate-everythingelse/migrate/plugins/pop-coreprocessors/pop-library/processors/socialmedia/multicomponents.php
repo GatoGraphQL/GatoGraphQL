@@ -81,7 +81,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:

@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_CarouselInnersBase extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'layout-grid', $this->getLayoutGrid($module, $props));
 

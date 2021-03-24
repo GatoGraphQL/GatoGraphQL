@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
         return null;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Specify the block target

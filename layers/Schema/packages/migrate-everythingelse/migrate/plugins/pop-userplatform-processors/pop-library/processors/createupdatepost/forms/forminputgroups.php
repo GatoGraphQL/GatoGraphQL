@@ -144,7 +144,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
             case self::MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
-            
+
             case self::MODULE_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES:
                 return [PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::class, PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES];
 
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
             case self::MODULE_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS:
                 return [PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::class, PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -173,11 +173,11 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
             case self::MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Please copy/paste any important content from the original post.', 'poptheme-wassup');
         }
-        
+
         return parent::getInfo($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $component = $this->getComponentSubmodule($module);
         switch ($module[1]) {
@@ -186,10 +186,10 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
                 break;
 
          // case self::MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR:
-                
+
          //     $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Copy/paste here...', 'poptheme-wassup'));
          //     break;
-                
+
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES:
             case self::MODULE_FORMINPUTGROUP_CATEGORIES:
                 $this->setProp($component, $props, 'label', TranslationAPIFacade::getInstance()->__('Select categories', 'poptheme-wassup'));
@@ -204,7 +204,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
                 $this->setProp($component, $props, 'label', $label);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -214,7 +214,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
             case self::MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Highlight:', 'poptheme-wassup');
         }
-        
+
         return parent::getLabel($module, $props);
     }
 }

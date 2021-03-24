@@ -24,7 +24,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORM_CONTENTPOSTLINK:

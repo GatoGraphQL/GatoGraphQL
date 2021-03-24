@@ -64,7 +64,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER:

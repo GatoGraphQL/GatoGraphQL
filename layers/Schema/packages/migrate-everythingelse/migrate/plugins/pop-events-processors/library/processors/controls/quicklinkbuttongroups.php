@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
@@ -27,11 +27,11 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
                 $ret[] = [GD_EM_Module_Processor_DropdownButtonQuicklinks::class, GD_EM_Module_Processor_DropdownButtonQuicklinks::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS];
                 break;
         }
-        
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
@@ -40,7 +40,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

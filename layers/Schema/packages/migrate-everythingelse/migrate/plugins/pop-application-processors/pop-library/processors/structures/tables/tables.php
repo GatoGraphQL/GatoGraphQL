@@ -56,11 +56,11 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');
                 break;
         }
-    
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_TABLE_MYHIGHLIGHTS:

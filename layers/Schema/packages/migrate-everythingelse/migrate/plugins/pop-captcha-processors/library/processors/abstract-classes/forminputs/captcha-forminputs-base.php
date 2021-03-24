@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
         return [PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor::class, PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_CAPTCHA];
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Use the label as placeholder

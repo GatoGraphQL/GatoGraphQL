@@ -29,11 +29,11 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
                 $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
                 break;
         }
-    
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_CREATELOCATION:

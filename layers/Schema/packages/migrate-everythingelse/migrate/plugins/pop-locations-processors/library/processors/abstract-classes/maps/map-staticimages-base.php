@@ -13,11 +13,11 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-        
+
         if ($urlparam = $this->getUrlparamSubmodule($module)) {
             $ret[] = $urlparam;
         }
-        
+
         return $ret;
     }
 
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'staticmap-size', $this->getStaticmapSize($module, $props));
         parent::initModelProps($module, $props);

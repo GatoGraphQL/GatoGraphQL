@@ -6,13 +6,13 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
     public function getLayoutSubmodules(array $module)
     {
         $components = parent::getLayoutSubmodules($module);
-    
+
         // Add common Create/Update components
         PoP_Module_Processor_CreateUpdateProfileFormsUtils::getFormSubmodules($module, $components, $this);
 
         // Hook for Newsletter
         $components = HooksAPIFacade::getInstance()->applyFilters('pop_module:createprofile:components', $components, $module, $this);
-        
+
         return $components;
     }
 
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // For the Creation, set the Display Email by default on Yes

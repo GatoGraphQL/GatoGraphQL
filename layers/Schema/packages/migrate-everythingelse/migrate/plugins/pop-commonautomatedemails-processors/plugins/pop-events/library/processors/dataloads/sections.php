@@ -125,7 +125,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:

@@ -494,7 +494,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         return PostTypeResolver::class;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:

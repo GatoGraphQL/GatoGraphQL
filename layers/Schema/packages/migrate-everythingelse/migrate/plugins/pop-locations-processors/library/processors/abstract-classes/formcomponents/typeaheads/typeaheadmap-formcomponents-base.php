@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         parent::initRequestProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

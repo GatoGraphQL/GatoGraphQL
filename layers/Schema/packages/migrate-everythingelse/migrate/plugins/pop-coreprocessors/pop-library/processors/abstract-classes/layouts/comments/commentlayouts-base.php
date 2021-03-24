@@ -140,7 +140,7 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($this->isRuntimeAdded($module, $props)) {
             $this->appendProp($module, $props, 'class', 'pop-highlight');

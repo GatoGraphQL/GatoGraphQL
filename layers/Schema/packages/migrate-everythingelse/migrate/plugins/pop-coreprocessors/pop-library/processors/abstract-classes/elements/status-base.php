@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_StatusBase extends PoPEngine_QueryDataModule
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-        
+
         // Error: allow for status-specific message, or a general one
         $ret[GD_JS_TITLES]['error'] = sprintf(
             // status = 0 => User is offline
@@ -35,19 +35,19 @@ abstract class PoP_Module_Processor_StatusBase extends PoPEngine_QueryDataModule
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         $this->addJsmethod($ret, 'switchTargetClass', 'error-dismiss');
         $this->addJsmethod($ret, 'retrySendRequest', 'retry');
 
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->setProp($module, $props, 'class', 'top');
         $this->setProp($module, $props, 'loading-msg', GD_CONSTANT_LOADING_MSG);
         $this->setProp($module, $props, 'loading-spinner', GD_CONSTANT_LOADING_SPINNER);
-        
+
         parent::initModelProps($module, $props);
     }
 }

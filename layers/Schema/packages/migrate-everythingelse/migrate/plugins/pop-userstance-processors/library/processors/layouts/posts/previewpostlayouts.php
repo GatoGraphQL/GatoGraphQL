@@ -122,7 +122,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
 
         return parent::getAuthorAvatarModule($module);
     }
-    
+
     public function getBottomSubmodules(array $module)
     {
         $ret = parent::getBottomSubmodules($module);
@@ -188,7 +188,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
 
         return parent::authorPositions($module);
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -237,7 +237,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
         return parent::getTitleBeforeauthors($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHOR:

@@ -83,7 +83,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
         return parent::getLinktarget($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:

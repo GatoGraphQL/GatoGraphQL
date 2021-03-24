@@ -19,11 +19,11 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
             case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET];
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
                 $this->setProp($trigger, $props, 'description', $description);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -51,7 +51,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
             case self::MODULE_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return '';
         }
-        
+
         return parent::getLabel($module, $props);
     }
 }

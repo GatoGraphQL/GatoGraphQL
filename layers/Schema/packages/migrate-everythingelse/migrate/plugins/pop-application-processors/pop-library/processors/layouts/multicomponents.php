@@ -25,7 +25,7 @@ class PoP_Module_Processor_MaxHeightLayoutMultipleComponents extends PoP_Module_
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT:

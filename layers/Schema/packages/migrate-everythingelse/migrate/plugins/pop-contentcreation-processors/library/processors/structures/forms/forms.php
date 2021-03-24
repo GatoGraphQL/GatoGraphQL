@@ -25,7 +25,7 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_FORM_FLAG:

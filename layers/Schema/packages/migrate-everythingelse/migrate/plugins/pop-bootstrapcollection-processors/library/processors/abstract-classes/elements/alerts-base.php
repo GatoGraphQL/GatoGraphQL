@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataModule
                 $layouts
             );
         }
-        
+
         return $ret;
     }
 
@@ -85,15 +85,15 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataModule
 
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $layouts
             );
         }
-        
+
         if ($this->addFeedbackobjectClass($module, $props)) {
             $ret['add-feedbackobject-class'] = true;
         }
-        
+
         if ($this->useCookie($module, $props)) {
             $ret['use-cookies'] = true;
         }
@@ -116,12 +116,12 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataModule
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($class = $this->getAlertBaseClass($module, $props)) {
             $this->appendProp($module, $props, 'class', $class);
         }
-        
+
         // Allow this value to be set from above
         if ($class = $this->getProp($module, $props, 'alert-class')) {
             $this->appendProp($module, $props, 'class', $class);

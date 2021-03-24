@@ -89,7 +89,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return parent::getControlgroupTopSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR:

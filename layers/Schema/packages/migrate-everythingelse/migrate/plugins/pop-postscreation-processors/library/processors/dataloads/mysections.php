@@ -103,7 +103,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getTypeResolverClass($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPOSTS_TABLE_EDIT:

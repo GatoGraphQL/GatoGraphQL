@@ -15,11 +15,11 @@ abstract class PoP_Module_Processor_TextareaFormInputsBase extends PoP_Module_Pr
         if ($placeholder = $this->getProp($module, $props, 'placeholder')) {
             $ret['placeholder'] = $placeholder;
         }
-                
+
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Use the label as placeholder

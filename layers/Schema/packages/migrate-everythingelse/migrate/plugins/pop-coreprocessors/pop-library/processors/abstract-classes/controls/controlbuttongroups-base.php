@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_ControlButtonGroupsBase extends PoPEngine_Qu
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_CONTROLBUTTONGROUP];
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         if ($blocktarget = $this->getProp($module, $props, 'control-target')) {
             foreach ($this->getSubmodules($module) as $submodule) {

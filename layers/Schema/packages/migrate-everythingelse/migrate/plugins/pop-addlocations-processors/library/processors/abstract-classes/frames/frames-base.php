@@ -16,7 +16,7 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'pop-map-locationgeocode');
         parent::initModelProps($module, $props);
@@ -53,10 +53,10 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
 
         $mapdiv = $this->getMapdivSubmodule($module);
         $form = $this->getFormSubmodule($module);
-        
+
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['form-createlocation'] = ModuleUtils::getModuleOutputName($form);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = ModuleUtils::getModuleOutputName($mapdiv);
-        
+
         return $ret;
     }
 }

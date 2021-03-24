@@ -79,7 +79,7 @@ class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         return parent::getItemWrapper($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_WIDGET_FORM_LOCATIONPOSTDETAILS:

@@ -50,13 +50,13 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                     self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
                 );
                 $route = $routes[$module[1]];
-                
+
                 return RouteUtils::getRouteURL($route);
         }
 
         return parent::getHref($module, $props);
     }
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:

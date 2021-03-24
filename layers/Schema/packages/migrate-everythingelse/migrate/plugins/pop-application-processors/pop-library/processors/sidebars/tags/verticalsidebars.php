@@ -24,7 +24,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Proce
         return parent::getInnerSubmodule($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_VERTICALSIDEBAR_TAG:

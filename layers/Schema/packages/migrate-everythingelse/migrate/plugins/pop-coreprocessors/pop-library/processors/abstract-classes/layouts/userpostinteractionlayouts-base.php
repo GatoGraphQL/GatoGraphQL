@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
 
     public function addUseravatar(array $module, array &$props)
     {
-    
+
         // If the plugin to create avatar is defined, then enable it
         return PoP_Application_ConfigurationUtils::useUseravatar();
     }
@@ -59,11 +59,11 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
 
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $layouts
             );
         }
-        
+
         if ($user_avatar = $this->getLoggedinUseravatarSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = ModuleUtils::getModuleOutputName($user_avatar);
         }
@@ -84,7 +84,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'frame-addcomment');
 

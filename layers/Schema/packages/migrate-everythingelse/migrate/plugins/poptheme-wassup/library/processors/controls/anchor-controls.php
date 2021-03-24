@@ -57,7 +57,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS:
                 return 'glyphicon-arrow-right';
-            
+
             case self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return 'glyphicon-arrow-left';
 
@@ -69,7 +69,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         return parent::getIcon($module);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -104,7 +104,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
                 } elseif (in_array($module, $tablet)) {
                     $classs = 'hidden-xs';
                 }
-                
+
                 $back = array(
                     [self::class, self::MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK],
                 );

@@ -44,7 +44,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         return parent::getTextfieldModule($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:

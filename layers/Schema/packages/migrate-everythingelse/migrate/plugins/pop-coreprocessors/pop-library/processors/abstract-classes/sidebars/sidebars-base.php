@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_SidebarsBase extends PoP_Module_Processor_Co
         return false;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
         $this->appendProp($module, $props, 'class', 'sidebar');
         parent::initModelProps($module, $props);

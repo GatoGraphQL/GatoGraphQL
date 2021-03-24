@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Use the label as placeholder

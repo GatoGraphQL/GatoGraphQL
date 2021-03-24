@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
 
     public function initWebPlatformModelProps(array $module, array &$props)
     {
-    
+
         // Bind the Embed iframe and the input together. When the input value changes, the iframe
         // will update itself with the URL in the input
         $iframe = $this->getProp($module, $props, 'iframe-module');
@@ -20,14 +20,14 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
         parent::initWebPlatformModelProps($module, $props);
     }
 
-    public function initModelProps(array $module, array &$props)
+    public function initModelProps(array $module, array &$props): void
     {
 
         // Bind the Embed iframe and the input together. When the input value changes, the iframe
         // will update itself with the URL in the input
         $iframe = $this->getProp($module, $props, 'iframe-module');
         // $this->setProp($iframe, $props, 'module-cb', true);
-        
+
         $input = $this->getProp($module, $props, 'input-module');
         $this->mergeProp(
             $module,
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
                 'data-input-target' => $input,
             )
         );
-        
+
         parent::initModelProps($module, $props);
     }
 }
