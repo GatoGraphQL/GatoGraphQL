@@ -170,7 +170,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         return count($events);
     }
 
-    public function getCategories($EM_Event): array
+    public function getCategories(object $EM_Event): array
     {
         // Returns an array of (term_id => category_object)
         return $EM_Event->get_categories()->terms;
@@ -188,54 +188,54 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         return $customPostTypeAPI->getCustomPostType($customPostID) == $this->getEventCustomPostType();
     }
 
-    public function getLocation($EM_Event)
+    public function getLocation(object $EM_Event)
     {
         return $EM_Event->output('#_LOCATIONPOSTID');
     }
 
-    public function getDates($EM_Event)
+    public function getDates(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTDATES');
     }
 
-    public function getTimes($EM_Event)
+    public function getTimes(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTTIMES');
     }
 
-    public function getStartDate($EM_Event)
+    public function getStartDate(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTDATESTART');
     }
 
-    public function getEndDate($EM_Event)
+    public function getEndDate(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTDATEEND');
     }
 
-    public function getFormattedStartDate($EM_Event, $format)
+    public function getFormattedStartDate(object $EM_Event, $format)
     {
         return date_i18n($format, $EM_Event->start);
     }
 
-    public function getFormattedEndDate($EM_Event, $format)
+    public function getFormattedEndDate(object $EM_Event, $format)
     {
         return date_i18n($format, $EM_Event->end);
     }
 
-    public function isAllDay($EM_Event): bool
+    public function isAllDay(object $EM_Event): bool
     {
         // This returns a string. Return a bool instead
         $value = $EM_Event->output('#_EVENTALLDAY');
         return $value ? true : false;
     }
 
-    public function getGooglecalendarUrl($EM_Event)
+    public function getGooglecalendarUrl(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTGCALURL');
     }
 
-    public function getIcalUrl($EM_Event)
+    public function getIcalUrl(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTICALURL');
     }

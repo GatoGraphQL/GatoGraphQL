@@ -37,17 +37,17 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     public function isFutureEvent(string | int | object $post_or_post_id): bool;
     public function isCurrentEvent(string | int | object $post_or_post_id): bool;
     public function isPastEvent(string | int | object $post_or_post_id): bool;
-    public function getCategories($event): array;
-    public function getLocation($event);
-    public function getDates($event);
-    public function getTimes($event);
-    public function getStartDate($event);
-    public function getEndDate($event);
-    public function getFormattedStartDate($event, $format);
-    public function getFormattedEndDate($event, $format);
-    public function isAllDay($event): bool;
-    public function getGooglecalendarUrl($event);
-    public function getIcalUrl($event);
+    public function getCategories(object $event): array;
+    public function getLocation(object $event);
+    public function getDates(object $event);
+    public function getTimes(object $event);
+    public function getStartDate(object $event);
+    public function getEndDate(object $event);
+    public function getFormattedStartDate(object $event, $format);
+    public function getFormattedEndDate(object $event, $format);
+    public function isAllDay(object $event): bool;
+    public function getGooglecalendarUrl(object $event);
+    public function getIcalUrl(object $event);
 
     public function isEvent($customPostObjectOrID): bool;
     /**
