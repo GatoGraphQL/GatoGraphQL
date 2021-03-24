@@ -46,7 +46,7 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
     /**
      * @return string[]
      */
-    public function getUserRoles(mixed $userObjectOrID): array
+    public function getUserRoles(string | int | object $userObjectOrID): array
     {
         if (is_object($userObjectOrID)) {
             $user = $userObjectOrID;
@@ -59,7 +59,7 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
     /**
      * @return string[]
      */
-    public function getUserCapabilities(mixed $userObjectOrID): array
+    public function getUserCapabilities(string | int | object $userObjectOrID): array
     {
         $roles = $this->getUserRoles($userObjectOrID);
         $capabilities = [];
@@ -73,12 +73,12 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return array_values(array_unique($capabilities));
     }
 
-    public function getTheUserRole(mixed $userObjectOrID): string
+    public function getTheUserRole(string | int | object $userObjectOrID): string
     {
         return \get_the_user_role($userObjectOrID);
     }
 
-    public function userCan(mixed $userObjectOrID, string $capability): bool
+    public function userCan(string | int | object $userObjectOrID, string $capability): bool
     {
         return \user_can($userObjectOrID, $capability);
     }

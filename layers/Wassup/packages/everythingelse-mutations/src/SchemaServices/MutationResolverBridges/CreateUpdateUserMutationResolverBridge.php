@@ -18,7 +18,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         return CreateUpdateUserMutationResolver::class;
     }
 
-    public function getSuccessString(mixed $result_id): ?string
+    public function getSuccessString(string | int $result_id): ?string
     {
         // For the update, gotta return the success string
         // If user is logged in => It's Update

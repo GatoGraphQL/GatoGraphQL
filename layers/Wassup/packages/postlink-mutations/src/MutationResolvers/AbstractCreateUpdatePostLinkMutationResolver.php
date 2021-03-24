@@ -22,7 +22,7 @@ abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCrea
         MutationResolverUtils::validateContent($errors, $form_data);
     }
 
-    protected function additionals(mixed $post_id, array $form_data): void
+    protected function additionals(string | int $post_id, array $form_data): void
     {
         parent::additionals($post_id, $form_data);
 

@@ -9,10 +9,13 @@ use PoP\ComponentModel\TypeResolverPickers\TypeResolverPickerInterface;
 
 interface UnionTypeResolverInterface
 {
-    // public function addTypeToID(mixed $resultItemID): string;
-    public function getTypeResolverClassForResultItem(mixed $resultItemID);
+    // public function addTypeToID(string | int $resultItemID): string;
+    public function getTypeResolverClassForResultItem(string | int $resultItemID);
     public function getTargetTypeResolverPicker(object $resultItem): ?TypeResolverPickerInterface;
     public function getTargetTypeResolver(object $resultItem): ?TypeResolverInterface;
+    /**
+     * @param array<string|int> $ids
+     */
     public function getResultItemIDTargetTypeResolvers(array $ids): array;
     public function getTargetTypeResolverClasses(): array;
     public function getSchemaTypeInterfaceClass(): ?string;

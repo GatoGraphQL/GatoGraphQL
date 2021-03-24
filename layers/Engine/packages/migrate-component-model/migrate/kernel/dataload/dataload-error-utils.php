@@ -95,7 +95,7 @@ class ErrorUtils
         }
         return $error;
     }
-    public static function getNoFieldResolverProcessesFieldError(mixed $resultItemID, string $fieldName, array $fieldArgs): Error
+    public static function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return self::getError(

@@ -16,7 +16,7 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-    public function getSuccessString(mixed $result_id): ?string
+    public function getSuccessString(string | int $result_id): ?string
     {
         return null;
     }
@@ -24,7 +24,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     /**
      * @return string[]
      */
-    public function getSuccessStrings(mixed $result_id): array
+    public function getSuccessStrings(string | int $result_id): array
     {
         $success_string = $this->getSuccessString($result_id);
         return $success_string !== null ? [$success_string] : [];
@@ -107,7 +107,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $return;
     }
 
-    protected function modifyDataProperties(array &$data_properties, mixed $result_id): void
+    protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
     {
     }
 }

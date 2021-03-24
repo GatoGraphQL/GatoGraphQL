@@ -125,7 +125,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     // /**
     //  * Add the type to the ID
     //  */
-    // public function addTypeToID(mixed $resultItemID): string
+    // public function addTypeToID(string | int $resultItemID): string
     // {
     //     $instanceManager = InstanceManagerFacade::getInstance();
     //     if ($resultItemTypeResolverClass = $this->getTypeResolverClassForResultItem($resultItemID)) {
@@ -318,7 +318,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return $typeResolverPickers;
     }
 
-    public function getTypeResolverClassForResultItem(mixed $resultItemID)
+    public function getTypeResolverClassForResultItem(string | int $resultItemID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -368,7 +368,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return null;
     }
 
-    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
+    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(

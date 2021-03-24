@@ -11,7 +11,7 @@ use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeAPIInterface;
  */
 class CustomPostMediaTypeAPI implements CustomPostMediaTypeAPIInterface
 {
-    public function setFeaturedImage(int | string $customPostID, mixed $mediaItemID): void
+    public function setFeaturedImage(int | string $customPostID, string | int $mediaItemID): void
     {
         \set_post_thumbnail($customPostID, $mediaItemID);
     }

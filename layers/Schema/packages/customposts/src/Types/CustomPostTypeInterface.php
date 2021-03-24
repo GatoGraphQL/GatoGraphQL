@@ -10,13 +10,13 @@ interface CustomPostTypeInterface
      * Return the object's ID
      */
     public function getID(object $object): string | int;
-    public function getContent(mixed $objectOrID): ?string;
-    public function getPlainTextContent(mixed $objectOrID): string;
-    public function getPermalink(mixed $objectOrID): ?string;
+    public function getContent(string | int | object $objectOrID): ?string;
+    public function getPlainTextContent(string | int | object $objectOrID): string;
+    public function getPermalink(string | int | object $objectOrID): ?string;
     public function getSlug($postObjectOrID): ?string;
-    public function getStatus(mixed $objectOrID): ?string;
-    public function getPublishedDate(mixed $objectOrID): ?string;
-    public function getModifiedDate(mixed $objectOrID): ?string;
-    public function getTitle(mixed $objectOrID): ?string;
-    public function getExcerpt(mixed $objectOrID): ?string;
+    public function getStatus(string | int | object $objectOrID): ?string;
+    public function getPublishedDate(string | int | object $objectOrID): ?string;
+    public function getModifiedDate(string | int | object $objectOrID): ?string;
+    public function getTitle(string | int | object $objectOrID): ?string;
+    public function getExcerpt(string | int | object $objectOrID): ?string;
 }

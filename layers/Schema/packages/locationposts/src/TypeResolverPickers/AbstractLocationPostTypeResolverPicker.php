@@ -21,7 +21,7 @@ class AbstractLocationPostTypeResolverPicker extends AbstractTypeResolverPicker
         return $locationPostTypeAPI->isInstanceOfLocationPostType($object);
     }
 
-    public function isIDOfType(mixed $resultItemID): bool
+    public function isIDOfType(string | int $resultItemID): bool
     {
         $locationPostTypeAPI = LocationPostTypeAPIFacade::getInstance();
         return $locationPostTypeAPI->locationPostExists($resultItemID);
