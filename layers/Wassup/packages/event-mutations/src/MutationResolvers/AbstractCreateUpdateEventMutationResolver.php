@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EventMutations\MutationResolvers;
 
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
@@ -66,13 +67,13 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
         return $EM_Event->post_id;
     }
 
-    protected function executeUpdateCustomPost(array $post_data): string | int | null
+    protected function executeUpdateCustomPost(array $post_data): string | int | null | Error
     {
         $EM_Event = new \EM_Event($post_data['id'], 'post_id');
         return $this->save($EM_Event, $post_data);
     }
 
-    protected function executeCreateCustomPost(array $post_data): string | int | null
+    protected function executeCreateCustomPost(array $post_data): string | int | null | Error
     {
         $EM_Event = new \EM_Event();
         return $this->save($EM_Event, $post_data);

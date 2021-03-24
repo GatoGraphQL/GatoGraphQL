@@ -12,6 +12,7 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -250,7 +251,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param array<string, mixed> $data
      */
-    protected function executeUpdateCustomPost(array $data): string | int | null
+    protected function executeUpdateCustomPost(array $data): string | int | null | Error
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->updateCustomPost($data);
@@ -299,7 +300,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
         $result = $this->executeUpdateCustomPost($post_data);
 
-        if ($result === null) {
+        if (GeneralUtils::isError($result)) {
+            return $result;
+        } elseif ($result === null) {
             return new Error(
                 'update-error',
                 $translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
@@ -323,7 +326,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @param array<string, mixed> $data
      * @return mixed the ID of the created custom post
      */
-    protected function executeCreateCustomPost(array $data): string | int | null
+    protected function executeCreateCustomPost(array $data): string | int | null | Error
     {
         $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
         return $customPostTypeAPI->createCustomPost($data);
@@ -338,7 +341,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $post_data = $this->getCreateCustomPostData($form_data);
         $customPostID = $this->executeCreateCustomPost($post_data);
 
-        if ($customPostID === null) {
+        if (GeneralUtils::isError($customPostID)) {
+            return $customPostID;
+        } elseif ($customPostID === null) {
             return new Error(
                 'create-error',
                 $translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
