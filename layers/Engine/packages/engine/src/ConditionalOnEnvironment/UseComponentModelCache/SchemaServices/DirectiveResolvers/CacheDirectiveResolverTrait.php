@@ -26,7 +26,7 @@ trait CacheDirectiveResolverTrait
     /**
      * Create a unique ID under which to store the cache, based on the type, ID and field (without the alias)
      */
-    protected function getCacheID(TypeResolverInterface $typeResolver, mixed $id, string $field): string
+    protected function getCacheID(TypeResolverInterface $typeResolver, int | string $id, string $field): string
     {
         // Remove the alias from the field
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

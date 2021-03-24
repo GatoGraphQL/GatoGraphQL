@@ -150,12 +150,16 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return get_called_class();
     }
 
-    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
+    /**
+     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @return string|int|array<string|int>
+     */
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            function (mixed $id) {
+            function (int | string $id) {
                 return UnionTypeHelpers::getDBObjectComposedTypeAndID(
                     $this,
                     $id
@@ -699,7 +703,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return array_keys($ids_data_fields);
     }
 
-    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
+    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
@@ -707,7 +711,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             sprintf(
                 $translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getTypeOutputName(),
-                (string) $resultItemID
+                $resultItemID
             )
         );
     }
@@ -770,7 +774,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             $ids_data_fields = array_filter(
                 $ids_data_fields,
-                function (mixed $id) use ($unresolvedResultItemIDs) {
+                function (int | string $id) use ($unresolvedResultItemIDs) {
                     return !in_array($id, $unresolvedResultItemIDs);
                 },
                 ARRAY_FILTER_USE_KEY

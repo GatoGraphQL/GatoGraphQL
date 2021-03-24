@@ -49,7 +49,11 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    public function getQualifiedDBObjectIDOrIDs(mixed $dbObjectIDOrIDs): mixed
+    /**
+     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @return string|int|array<string|int>
+     */
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
     {
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $resultItemIDTargetTypeResolvers = $this->getResultItemIDTargetTypeResolvers($dbObjectIDs);
@@ -121,7 +125,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     // /**
     //  * Add the type to the ID
     //  */
-    // public function addTypeToID(mixed $resultItemID): string
+    // public function addTypeToID(string | int $resultItemID): string
     // {
     //     $instanceManager = InstanceManagerFacade::getInstance();
     //     if ($resultItemTypeResolverClass = $this->getTypeResolverClassForResultItem($resultItemID)) {
@@ -197,7 +201,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
      * In order to enable elements from different types (such as posts and users) to have same ID,
      * add the type to the ID
      */
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
@@ -314,7 +318,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return $typeResolverPickers;
     }
 
-    public function getTypeResolverClassForResultItem(mixed $resultItemID)
+    public function getTypeResolverClassForResultItem(string | int $resultItemID)
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -364,7 +368,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         return null;
     }
 
-    protected function getUnresolvedResultItemIDError(mixed $resultItemID)
+    protected function getUnresolvedResultItemIDError(string | int $resultItemID)
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
@@ -376,7 +380,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         );
     }
 
-    protected function getUnresolvedResultItemError(object $resultItem)
+    protected function getUnresolvedResultItemError(object $resultItem): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
@@ -403,7 +407,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
         // Check that a typeResolver from this Union can process this resultItem, or return an arror
         $targetTypeResolver = $this->getTargetTypeResolver($resultItem);
         if (is_null($targetTypeResolver)) {
-            return self::getUnresolvedResultItemError($resultItem);
+            return $this->getUnresolvedResultItemError($resultItem);
         }
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue

@@ -21,7 +21,7 @@ class SiteTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         $site = $resultItem;
         return $site->getID();

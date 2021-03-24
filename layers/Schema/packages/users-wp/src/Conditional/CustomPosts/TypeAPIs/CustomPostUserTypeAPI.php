@@ -12,7 +12,7 @@ use PoPSchema\Users\Conditional\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterf
  */
 class CustomPostUserTypeAPI implements CustomPostUserTypeAPIInterface
 {
-    public function getAuthorID(mixed $customPostObjectOrID)
+    public function getAuthorID(string | int | object $customPostObjectOrID)
     {
         list(
             $customPost,

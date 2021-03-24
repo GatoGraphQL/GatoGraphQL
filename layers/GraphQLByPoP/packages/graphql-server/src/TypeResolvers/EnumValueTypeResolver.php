@@ -21,7 +21,7 @@ class EnumValueTypeResolver extends AbstractIntrospectionTypeResolver
         return $translationAPI->__('Representation of an Enum value in GraphQL', 'graphql-server');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         $enumValue = $resultItem;
         return $enumValue->getID();

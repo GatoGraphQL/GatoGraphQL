@@ -22,7 +22,7 @@ abstract class AbstractCreateUpdateEventMutationResolverBridge extends AbstractC
         return $form_data;
     }
 
-    protected function modifyDataProperties(array &$data_properties, mixed $result_id): void
+    protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
         $data_properties[DataloadingConstants::QUERYARGS]['status'] = array('pending', 'draft', 'published');

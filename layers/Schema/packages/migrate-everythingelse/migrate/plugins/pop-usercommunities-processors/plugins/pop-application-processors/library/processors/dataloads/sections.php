@@ -201,7 +201,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $ret = parent::getDBObjectIDOrIDs($module, $props, $data_properties);
 

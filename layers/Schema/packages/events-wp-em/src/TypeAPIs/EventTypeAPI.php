@@ -27,7 +27,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
     /**
      * Return the event's ID
      */
-    public function getID(object $event): mixed
+    public function getID(object $event): string | int
     {
         return $event->post_id;
     }
@@ -50,7 +50,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
      * The provided ID is that for the wp_posts table, not em_events
      * (it is `post_id`, not `event_id`)
      */
-    public function getEvent(mixed $customPostID): ?object
+    public function getEvent(int | string $customPostID): ?object
     {
         $event = em_get_event($customPostID, 'post_id');
         // If passing the ID of a post (not an event) function `em_get_event`
@@ -65,29 +65,29 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
     /**
      * Indicate if an event with provided ID exists
      */
-    public function eventExists(mixed $id): bool
+    public function eventExists(int | string $id): bool
     {
         return $this->getEvent($id) != null;
     }
 
-    protected function getEventFromObjectOrId($post_or_post_id)
+    protected function getEventFromObjectOrId(string | int | object $post_or_post_id)
     {
         return is_object($post_or_post_id) ? $post_or_post_id : em_get_event($post_or_post_id, 'post_id');
     }
 
-    public function isFutureEvent($post_or_post_id): bool
+    public function isFutureEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
         return \POP_CONSTANT_TIME < $EM_Event->start;
     }
 
-    public function isCurrentEvent($post_or_post_id): bool
+    public function isCurrentEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
         return $EM_Event->start <= \POP_CONSTANT_TIME && \POP_CONSTANT_TIME < $EM_Event->end;
     }
 
-    public function isPastEvent($post_or_post_id): bool
+    public function isPastEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
         return $EM_Event->end < \POP_CONSTANT_TIME;
@@ -170,7 +170,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         return count($events);
     }
 
-    public function getCategories($EM_Event): array
+    public function getCategories(object $EM_Event): array
     {
         // Returns an array of (term_id => category_object)
         return $EM_Event->get_categories()->terms;
@@ -188,54 +188,54 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
         return $customPostTypeAPI->getCustomPostType($customPostID) == $this->getEventCustomPostType();
     }
 
-    public function getLocation($EM_Event)
+    public function getLocation(object $EM_Event)
     {
         return $EM_Event->output('#_LOCATIONPOSTID');
     }
 
-    public function getDates($EM_Event)
+    public function getDates(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTDATES');
     }
 
-    public function getTimes($EM_Event)
+    public function getTimes(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTTIMES');
     }
 
-    public function getStartDate($EM_Event)
+    public function getStartDate(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTDATESTART');
     }
 
-    public function getEndDate($EM_Event)
+    public function getEndDate(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTDATEEND');
     }
 
-    public function getFormattedStartDate($EM_Event, $format)
+    public function getFormattedStartDate(object $EM_Event, string $format)
     {
         return date_i18n($format, $EM_Event->start);
     }
 
-    public function getFormattedEndDate($EM_Event, $format)
+    public function getFormattedEndDate(object $EM_Event, string $format)
     {
         return date_i18n($format, $EM_Event->end);
     }
 
-    public function isAllDay($EM_Event): bool
+    public function isAllDay(object $EM_Event): bool
     {
         // This returns a string. Return a bool instead
         $value = $EM_Event->output('#_EVENTALLDAY');
         return $value ? true : false;
     }
 
-    public function getGooglecalendarUrl($EM_Event)
+    public function getGooglecalendarUrl(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTGCALURL');
     }
 
-    public function getIcalUrl($EM_Event)
+    public function getIcalUrl(object $EM_Event)
     {
         return $EM_Event->output('#_EVENTICALURL');
     }

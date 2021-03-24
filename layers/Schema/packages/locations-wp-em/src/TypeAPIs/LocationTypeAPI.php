@@ -15,7 +15,7 @@ class LocationTypeAPI implements LocationTypeAPIInterface
     /**
      * Return the location's ID
      */
-    public function getID(object $location): mixed
+    public function getID(object $location): string | int
     {
         return $location->post_id;
     }

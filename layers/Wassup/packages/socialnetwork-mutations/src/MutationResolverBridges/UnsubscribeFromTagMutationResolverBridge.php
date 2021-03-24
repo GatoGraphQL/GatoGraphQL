@@ -19,7 +19,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
         return false;
     }
 
-    public function getSuccessString(mixed $result_id): ?string
+    public function getSuccessString(string | int $result_id): ?string
     {
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();

@@ -21,7 +21,7 @@ class AbstractStanceTypeResolverPicker extends AbstractTypeResolverPicker
         return $stanceTypeAPI->isInstanceOfStanceType($object);
     }
 
-    public function isIDOfType(mixed $resultItemID): bool
+    public function isIDOfType(string | int $resultItemID): bool
     {
         $stanceTypeAPI = StanceTypeAPIFacade::getInstance();
         return $stanceTypeAPI->stanceExists($resultItemID);

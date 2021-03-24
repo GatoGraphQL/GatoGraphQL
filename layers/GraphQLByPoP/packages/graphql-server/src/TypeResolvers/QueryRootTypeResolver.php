@@ -25,7 +25,7 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
         return $translationAPI->__('Query type, starting from which the query is executed', 'graphql-server');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         /** @var QueryRoot */
         $queryRoot = $resultItem;

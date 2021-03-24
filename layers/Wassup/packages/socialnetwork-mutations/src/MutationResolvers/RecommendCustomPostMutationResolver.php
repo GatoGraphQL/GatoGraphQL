@@ -48,7 +48,7 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     //     $value[] = $target_id;
     // }
 
-    protected function update($form_data)
+    protected function update($form_data): string | int
     {
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];

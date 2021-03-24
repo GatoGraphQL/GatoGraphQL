@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\Facades\CommentTypeAPIFacade;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
@@ -39,7 +40,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    protected function additionals(mixed $comment_id, array $form_data): void
+    protected function additionals(string | int $comment_id, array $form_data): void
     {
         HooksAPIFacade::getInstance()->doAction('gd_addcomment', $comment_id, $form_data);
     }
@@ -75,15 +76,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $comment_data;
     }
 
-    protected function insertComment(array $comment_data): mixed
+    protected function insertComment(array $comment_data): string | int | Error
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         return $commentTypeAPI->insertComment($comment_data);
     }
 
-    /**
-     * @param string[] $errors
-     */
     public function execute(array $form_data): mixed
     {
         $comment_data = $this->getCommentData($form_data);

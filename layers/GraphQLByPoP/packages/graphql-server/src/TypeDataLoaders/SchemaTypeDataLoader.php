@@ -19,7 +19,7 @@ class SchemaTypeDataLoader extends AbstractTypeDataLoader
         return SchemaTypeResolver::class;
     }
 
-    protected function getTypeNewInstance(mixed $id)
+    protected function getTypeNewInstance(int | string $id)
     {
         return new Schema(
             $this->getSchemaDefinition($id),

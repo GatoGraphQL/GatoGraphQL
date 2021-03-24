@@ -58,7 +58,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate)
+    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the module to its string representation to access it in the array
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -132,7 +132,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $modulefilter_manager->restoreFromPropagation($module, $props);
     }
 
-    public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate)
+    public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         $this->executeInitPropsModuletree('initModelProps', 'getModelPropsForDescendantModules', 'getModelPropsForDescendantDatasetmodules', __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
@@ -612,7 +612,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return DataSources::MUTABLEONREQUEST;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         return array();
     }

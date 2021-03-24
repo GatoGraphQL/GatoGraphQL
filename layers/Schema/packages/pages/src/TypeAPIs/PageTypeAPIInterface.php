@@ -18,11 +18,11 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Indicate if an page with provided ID exists
      */
-    public function pageExists(mixed $id): bool;
+    public function pageExists(int | string $id): bool;
     /**
      * Get the page with provided ID or, if it doesn't exist, null
      */
-    public function getPage(mixed $id): ?object;
+    public function getPage(int | string $id): ?object;
     /**
      * Get the list of pages
      */
@@ -39,5 +39,5 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
      */
-    public function getHomeStaticPageID(): mixed;
+    public function getHomeStaticPageID(): string | int;
 }

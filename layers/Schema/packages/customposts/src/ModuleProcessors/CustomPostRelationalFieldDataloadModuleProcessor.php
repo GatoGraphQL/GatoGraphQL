@@ -30,7 +30,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
         );
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\UserStateMutations\Facades\UserStateTypeAPIFacade;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\UserState\State\ApplicationStateUtils;
+use PoPSchema\UserStateMutations\Facades\UserStateTypeAPIFacade;
 
 class LogoutMutationResolver extends AbstractMutationResolver
 {

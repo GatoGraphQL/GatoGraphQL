@@ -12,7 +12,7 @@ interface LocationTypeAPIInterface
     /**
      * Return the location's ID
      */
-    public function getID(object $location): mixed;
+    public function getID(object $location): string | int;
     /**
      * Indicates if the passed object is of type Location
      */

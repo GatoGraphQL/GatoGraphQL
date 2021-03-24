@@ -8,7 +8,7 @@ use PoP\Engine\Facades\ErrorHandling\ErrorManagerFacade;
 
 class ErrorUtils
 {
-    public static function returnResultOrConvertError(object $result): object
+    public static function returnResultOrConvertError(mixed $result): mixed
     {
         $errorManager = ErrorManagerFacade::getInstance();
         if ($errorManager->isCMSError($result)) {

@@ -11,14 +11,14 @@ use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
  */
 class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
-    protected function getTermObjectAndID(mixed $termObjectOrID): array
+    protected function getTermObjectAndID(string | int | object $termObjectOrID): array
     {
         return TaxonomyTypeAPIHelpers::getTermObjectAndID($termObjectOrID);
     }
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
-    public function getTermTaxonomyName(mixed $termObjectOrID): string
+    public function getTermTaxonomyName(string | int | object $termObjectOrID): string
     {
         list(
             $termObject,

@@ -10,7 +10,7 @@ use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {
-    public function convertFromCMSToPoPError(object $cmsError): Error
+    public function convertFromCMSToPoPError(mixed $cmsError): Error
     {
         $error = new Error();
         /** @var WP_Error */
@@ -21,8 +21,8 @@ class ErrorManager extends AbstractErrorManager
         return $error;
     }
 
-    public function isCMSError(object $object): bool
+    public function isCMSError(mixed $thing): bool
     {
-        return \is_wp_error($object);
+        return \is_wp_error($thing);
     }
 }

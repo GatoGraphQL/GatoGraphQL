@@ -47,7 +47,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         return new GD_UndoUpvotePost();
     }
 
-    protected function update($form_data)
+    protected function update($form_data): string | int
     {
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];

@@ -128,7 +128,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:

@@ -81,7 +81,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Change properties for GraphQL
      */
-    protected function getDBEntryExtensions(string $dbKey, mixed $id, array $item): array
+    protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
     {
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {

@@ -53,7 +53,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     //     return parent::getNature($module);
     // }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:

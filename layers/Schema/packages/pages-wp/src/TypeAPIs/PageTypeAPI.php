@@ -46,7 +46,7 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
     /**
      * Get the page with provided ID or, if it doesn't exist, null
      */
-    public function getPage(mixed $id): ?object
+    public function getPage(int | string $id): ?object
     {
         $page = get_post($id);
         if (!$page || $page->post_type != 'page') {
@@ -58,7 +58,7 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
     /**
      * Indicate if an page with provided ID exists
      */
-    public function pageExists(mixed $id): bool
+    public function pageExists(int | string $id): bool
     {
         return $this->getPage($id) != null;
     }
@@ -91,7 +91,7 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
      */
-    public function getHomeStaticPageID(): mixed
+    public function getHomeStaticPageID(): string | int
     {
         if (get_option('show_on_front') !== 'page') {
             // Errors go in here

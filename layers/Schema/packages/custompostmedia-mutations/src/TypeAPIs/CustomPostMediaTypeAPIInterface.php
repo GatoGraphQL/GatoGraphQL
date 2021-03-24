@@ -9,7 +9,7 @@ namespace PoPSchema\CustomPostMediaMutations\TypeAPIs;
  */
 interface CustomPostMediaTypeAPIInterface
 {
-    public function setFeaturedImage(mixed $customPostID, mixed $mediaItemID): void;
+    public function setFeaturedImage(int | string $customPostID, string | int $mediaItemID): void;
 
-    public function removeFeaturedImage(mixed $customPostID): void;
+    public function removeFeaturedImage(int | string $customPostID): void;
 }

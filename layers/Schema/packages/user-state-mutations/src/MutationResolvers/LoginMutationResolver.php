@@ -30,12 +30,12 @@ class LoginMutationResolver extends AbstractMutationResolver
 
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
-            $errors[] = $this->getUserAlreadyLoggedInErrorMessage($user_id);
+            $errors[] = $this->getUserAlreadyLoggedInErrorMessage($vars['global-userstate']['current-user-id']);
         }
         return $errors;
     }
 
-    protected function getUserAlreadyLoggedInErrorMessage(mixed $user_id): string
+    protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return $translationAPI->__('You are already logged in', 'user-state-mutations');

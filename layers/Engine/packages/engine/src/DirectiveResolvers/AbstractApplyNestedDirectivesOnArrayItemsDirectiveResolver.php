@@ -339,7 +339,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(array &$array, mixed $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array;
+    abstract protected function getArrayItems(array &$array, int | string $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array;
 
     /**
      * Create a property for storing the array item in the current object

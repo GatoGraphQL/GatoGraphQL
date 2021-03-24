@@ -19,7 +19,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
 
-    protected function modifyDataProperties(array &$data_properties, mixed $result_id): void
+    protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
 
@@ -33,7 +33,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     /**
      * The ID comes directly as a parameter in the request, it's not a form field
      */
-    protected function getUpdateCustomPostID(): mixed
+    protected function getUpdateCustomPostID(): string | int | null
     {
         return $_REQUEST[InputNames::POST_ID] ?? null;
     }
@@ -160,7 +160,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return null;
     }
 
-    public function getSuccessString(mixed $result_id): ?string
+    public function getSuccessString(string | int $result_id): ?string
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $status = $customPostTypeAPI->getStatus($result_id);

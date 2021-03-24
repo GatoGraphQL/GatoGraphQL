@@ -97,7 +97,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
         $vars = ApplicationState::getVars();

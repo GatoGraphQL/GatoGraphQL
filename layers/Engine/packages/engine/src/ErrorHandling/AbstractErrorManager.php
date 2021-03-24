@@ -8,8 +8,8 @@ use Throwable;
 
 abstract class AbstractErrorManager implements ErrorManagerInterface
 {
-    public function isCMSError(object $object): bool
+    public function isCMSError(mixed $thing): bool
     {
-        return $object instanceof Throwable;
+        return $thing instanceof Throwable;
     }
 }

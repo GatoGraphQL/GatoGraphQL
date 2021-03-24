@@ -21,7 +21,7 @@ class MenuItemTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         $cmsmenusresolver = \PoPSchema\Menus\ObjectPropertyResolverFactory::getInstance();
         $menuItem = $resultItem;

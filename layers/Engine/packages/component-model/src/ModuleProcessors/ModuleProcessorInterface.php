@@ -9,8 +9,8 @@ interface ModuleProcessorInterface
     public function getModulesToProcess(): array;
     public function getSubmodules(array $module): array;
     public function getAllSubmodules(array $module): array;
-    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
-    public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+    public function executeInitPropsModuletree($eval_self_fn, $get_props_for_descendant_modules_fn, $get_props_for_descendant_datasetmodules_fn, $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
+    public function initModelPropsModuletree(array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
     public function getModelPropsForDescendantModules(array $module, array &$props): array;
     public function getModelPropsForDescendantDatasetmodules(array $module, array &$props): array;
     public function initModelProps(array $module, array &$props);
@@ -33,7 +33,7 @@ interface ModuleProcessorInterface
     public function getImmutableDatasetsettings(array $module, array &$props): array;
     public function getDatasetDatabaseKeys(array $module, array &$props): array;
     public function getDatasource(array $module, array &$props): string;
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties);
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
     public function getTypeResolverClass(array $module): ?string;
     public function getComponentMutationResolverBridgeClass(array $module): ?string;
     public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties);

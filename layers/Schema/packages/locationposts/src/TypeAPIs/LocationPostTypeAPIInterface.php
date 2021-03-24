@@ -16,11 +16,11 @@ interface LocationPostTypeAPIInterface
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
      */
-    public function getLocationPost(mixed $id): ?object;
+    public function getLocationPost(int | string $id): ?object;
     /**
      * Indicate if an locationPost with provided ID exists
      */
-    public function locationPostExists(mixed $id): bool;
+    public function locationPostExists(int | string $id): bool;
     /**
      * Get the locationPost with provided ID or, if it doesn't exist, null
      */

@@ -26,7 +26,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
-    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
+    public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $vars = ApplicationState::getVars();
         switch ($module[1]) {

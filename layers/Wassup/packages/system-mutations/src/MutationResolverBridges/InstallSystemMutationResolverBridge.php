@@ -14,7 +14,7 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
     {
         return InstallSystemMutationResolver::class;
     }
-    public function getSuccessString(mixed $result_id): ?string
+    public function getSuccessString(string | int $result_id): ?string
     {
         return TranslationAPIFacade::getInstance()->__('System action "install" executed successfully.', 'pop-system');
     }

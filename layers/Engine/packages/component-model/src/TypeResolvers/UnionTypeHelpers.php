@@ -48,7 +48,7 @@ class UnionTypeHelpers
     /**
      * Extracts the ID from the resultItem ID
      */
-    public static function extractDBObjectID(string $composedDBObjectTypeAndID): mixed
+    public static function extractDBObjectID(string $composedDBObjectTypeAndID): string | int
     {
         $elements = explode(
             UnionTypeSymbols::DBOBJECT_COMPOSED_TYPE_ID_SEPARATOR,
@@ -62,7 +62,7 @@ class UnionTypeHelpers
     /**
      * Creates a composed string containing the type and ID of the dbObject
      */
-    public static function getDBObjectComposedTypeAndID(TypeResolverInterface $typeResolver, mixed $id): string
+    public static function getDBObjectComposedTypeAndID(TypeResolverInterface $typeResolver, int | string $id): string
     {
         return
             $typeResolver->getTypeOutputName() .

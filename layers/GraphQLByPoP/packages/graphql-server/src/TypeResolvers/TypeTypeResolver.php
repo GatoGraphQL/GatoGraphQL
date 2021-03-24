@@ -21,7 +21,7 @@ class TypeTypeResolver extends AbstractIntrospectionTypeResolver
         return $translationAPI->__('Representation of each GraphQL type in the graph', 'graphql-server');
     }
 
-    public function getID(object $resultItem): mixed
+    public function getID(object $resultItem): string | int
     {
         $type = $resultItem;
         return $type->getID();
