@@ -341,7 +341,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     /**
      * Get the post with provided ID or, if it doesn't exist, null
      */
-    public function getCustomPost(mixed $id): ?object
+    public function getCustomPost(int | string $id): ?object
     {
         return \get_post($id);
     }

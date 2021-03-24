@@ -20,9 +20,9 @@ interface HighlightTypeAPIInterface
     /**
      * Get the highlight with provided ID or, if it doesn't exist, null
      */
-    public function getHighlight(mixed $id): ?object;
+    public function getHighlight(int | string $id): ?object;
     /**
      * Indicate if an highlight with provided ID exists
      */
-    public function highlightExists(mixed $id): bool;
+    public function highlightExists(int | string $id): bool;
 }

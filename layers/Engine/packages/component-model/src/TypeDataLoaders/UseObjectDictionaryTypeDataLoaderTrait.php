@@ -23,5 +23,5 @@ trait UseObjectDictionaryTypeDataLoaderTrait
     }
 
     abstract protected function getTypeResolverClass(): string;
-    abstract protected function getTypeNewInstance(mixed $id);
+    abstract protected function getTypeNewInstance(int | string $id);
 }

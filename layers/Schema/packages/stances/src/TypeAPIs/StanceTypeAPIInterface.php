@@ -20,9 +20,9 @@ interface StanceTypeAPIInterface
     /**
      * Get the stance with provided ID or, if it doesn't exist, null
      */
-    public function getStance(mixed $id): ?object;
+    public function getStance(int | string $id): ?object;
     /**
      * Indicate if an stance with provided ID exists
      */
-    public function stanceExists(mixed $id): bool;
+    public function stanceExists(int | string $id): bool;
 }

@@ -41,7 +41,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         // Calculate the $idsDataFields that must be removed from all the upcoming stages of the pipeline
         $idsDataFieldsToRemove = array_filter(
             $idsDataFields,
-            function (mixed $id) use ($idsToRemove) {
+            function (int | string $id) use ($idsToRemove) {
                 return in_array($id, $idsToRemove);
             },
             ARRAY_FILTER_USE_KEY

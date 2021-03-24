@@ -65,7 +65,7 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
     /**
      * Indicate if an event with provided ID exists
      */
-    public function eventExists(mixed $id): bool
+    public function eventExists(int | string $id): bool
     {
         return $this->getEvent($id) != null;
     }

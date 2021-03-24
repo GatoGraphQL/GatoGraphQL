@@ -18,7 +18,7 @@ interface EventTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Indicate if an event with provided ID exists
      */
-    public function eventExists(mixed $id): bool;
+    public function eventExists(int | string $id): bool;
     /**
      * Get the event with provided ID or, if it doesn't exist, null
      */

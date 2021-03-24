@@ -178,7 +178,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
-    protected function getDBEntryExtensions(string $dbKey, mixed $id, array $item): array
+    protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
     {
         return [
             'type' => 'dataObject',
