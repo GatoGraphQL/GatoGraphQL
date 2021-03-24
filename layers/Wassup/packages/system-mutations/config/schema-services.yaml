@@ -5,3 +5,6 @@ services:
 
     PoPSitesWassup\SystemMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PoPSitesWassup\SystemMutations\MutationResolverBridges\:
+        resource: '../src/MutationResolverBridges/*'

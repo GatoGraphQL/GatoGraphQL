@@ -5,3 +5,6 @@ services:
 
     PoPSitesWassup\ContactUserMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PoPSitesWassup\ContactUserMutations\MutationResolverBridges\:
+        resource: '../src/MutationResolverBridges/*'

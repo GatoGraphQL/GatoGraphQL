@@ -5,3 +5,6 @@ services:
 
     PoPSitesWassup\GravityFormsMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\:
+        resource: '../src/MutationResolverBridges/*'
