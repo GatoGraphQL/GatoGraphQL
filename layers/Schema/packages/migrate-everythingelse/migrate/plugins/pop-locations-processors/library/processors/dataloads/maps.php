@@ -38,7 +38,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
                 $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -66,7 +66,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_LOCATIONSMAP:
                 return LocationTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
 }

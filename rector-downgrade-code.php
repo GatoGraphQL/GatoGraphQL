@@ -7,15 +7,6 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-/**
- * Temporary bug fix:
- * `Option::AUTOLOAD_PATHS` not working, so load the files outside the config
- *
- * @see https://github.com/rectorphp/rector/issues/5951#issuecomment-804790816
- */
-require_once __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php';
-require_once __DIR__ . '/stubs/wpackagist-plugin/events-manager/em-stubs.php';
-
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
@@ -36,7 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    $parameters->set(Option::AUTOLOAD_PATHS, [
+    $parameters->set(Option::BOOTSTRAP_FILES, [
         // full directory
         __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
         // Avoid error: "Class EM_Event not found"
