@@ -71,7 +71,7 @@ jobs:
             -   name: Install zip
                 uses: montudor/action-zip@v0.1.1
             -   name: Create zip
-                run: zip -X -r build/downgraded-code.zip layers/ vendor/ stubs/
+                run: zip -X -r build/downgraded-code.zip . -x *.git* build/\* php-parallel-lint/\*
             -   name: Upload artifact
                 uses: actions/upload-artifact@v2
                 with:
