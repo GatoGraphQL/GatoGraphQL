@@ -54,6 +54,16 @@ jobs:
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
+            # Run Rector again with --dry-run, check no further downgrades are executed
+            # This serves 2 purposes:
+            # 1. Make sure that all downgrades were executed, i.e. chained downgrades were executed successfully
+            # 2. Check that no buggy code has been produced from running a buggy Rector rule
+            -   name: (Again) Local packages - Downgrade PHP code via Rector
+                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi --dry-run
+
+            -   name: (Again) Dependencies - Downgrade PHP code via Rector
+                run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php "--dry-run"
+
             # Prepare for testing on PHP 7.1
             -   name: Install PHP Parallel Lint
                 run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi
