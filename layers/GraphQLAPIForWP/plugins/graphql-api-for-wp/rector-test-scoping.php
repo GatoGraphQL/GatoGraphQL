@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    $parameters->set(Option::AUTOLOAD_PATHS, [
+    $parameters->set(Option::BOOTSTRAP_FILES, [
         __DIR__ . '/vendor/scoper-autoload.php',
         __DIR__ . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
         __DIR__ . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
