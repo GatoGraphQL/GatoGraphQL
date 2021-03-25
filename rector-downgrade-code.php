@@ -44,33 +44,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
         __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
         __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
-
-        // ------------------------------------
-        // The skips below are for testing the downgrade on PHP 7.1
-        // ------------------------------------
-        // Skip testing the code that is not shipped for the GraphQL API,
-        // since this code is not being downgraded in first place (so no need to test it)
-        __DIR__ . '/layers/Misc/*',
-        __DIR__ . '/layers/SiteBuilder/*',
-        __DIR__ . '/layers/Wassup/*',
-        // All the migrate-* packages must also be tested for PHP 7.1.
-        // But I already know they all pass, and they are not added any new code,
-        // so we can skip them to reduce the testing time
-        '*/migrate-*',
-        // Skip the tests also,
-        '*/tests/*',
-        '*/test/*',
-        '*/Test/*',
-        // Avoid errors from downgrading Composer's generated files
-        // (we already know they run on PHP 7.1)
-        __DIR__ . '/vendor/composer/*',
-        // Same for Composer scripts
-        __DIR__ . '/vendor/lkwdwrd/wp-muplugin-loader/*',
-        // Ignore unused classes that fail because they require DEV dependency
-        __DIR__ . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
-        __DIR__ . '/vendor/symfony/yaml/Command/LintCommand.php',
-        // All the bootstrap80.php are loaded for PHP 8.0 only
-        __DIR__ . '/vendor/symfony/polyfill-*/bootstrap80.php',
     ]);
 
     // /**
