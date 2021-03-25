@@ -55,19 +55,15 @@ jobs:
                 run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
 
             # Prepare for testing on PHP 7.1
-            # Install Rector prefixed global since it conflicts with local packages
-            -   name: Install Rector prefixed
-                run: composer global require rector/rector-prefixed
-
-            # We need the WordPress stubs for testing (they are installed in DEV)
-            -   name: Install DEV dependencies needed in PROD (for testing)
-                run: composer require php-stubs/wordpress-stubs
+            -   name: Install PHP Parallel Lint
+                run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi
 
             # Only PROD dependencies must be tested
+            # --ignore-platform-reqs to avoid Composer checking the PHP 8.0 requirement
             -   name: Keep dependencies for PROD only (for testing)
                 uses: "ramsey/composer-install@v1"
                 with:
-                    composer-options: "--no-dev"
+                    composer-options: "--no-dev --ignore-platform-reqs"
 
             # Upload artifact with downgraded code, for debugging
             -   name: Create build folder
@@ -83,14 +79,6 @@ jobs:
                     path: build/downgraded-code.zip
                     retention-days: 1
 
-            # Executing `composer config platform-check false` throws error:
-            # Failed to execute regex: PREG_JIT_STACKLIMIT_ERROR
-            # @see https://github.com/leoloso/PoP/pull/304/checks?check_run_id=1668406313#step:4:5
-            # Then, just manually delete the platform_check.php file
-            -   name: Avoid Composer v2 platform checks
-                # run: composer config platform-check false
-                run: rm vendor/composer/platform_check.php
-
             -   name: Switch to PHP 7.1
                 uses: shivammathur/setup-php@v2
                 with:
@@ -101,7 +89,10 @@ jobs:
 
             # Test everything, including Composer dependencies which (supposedly)
             # do not require downgrading
-            # Applying the same Rector downgrade config is good enough (any Rector would do the job)
-            -   name: Run Rector on PHP 7.1
-                run: ~/.composer/vendor/rector/rector-prefixed/bin/rector process layers/ vendor/ --config=rector-downgrade-code.php --ansi
+            # Use a PHP Linter. If PHP is not valid, it will throw an error
+            # Also test all the migrate-* packages, but migrate-everythingelse that
+            # should not be part of any project, and DOES contain PHP 8.0 (it's not being downgraded)
+            -   name: Run PHP Parallel Lint on PHP 7.1
+                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude layers/Schema/packages/migrate-everythingelse/ --exclude vendor/symfony/polyfill-ctype/bootstrap80.php --exclude vendor/symfony/polyfill-intl-grapheme/bootstrap80.php --exclude vendor/symfony/polyfill-intl-idn/bootstrap80.php --exclude vendor/symfony/polyfill-intl-normalizer/bootstrap80.php --exclude vendor/symfony/polyfill-mbstring/bootstrap80.php
+
 

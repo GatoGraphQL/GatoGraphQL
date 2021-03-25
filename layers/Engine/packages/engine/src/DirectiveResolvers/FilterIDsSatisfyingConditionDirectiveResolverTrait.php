@@ -41,7 +41,12 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         // Calculate the $idsDataFields that must be removed from all the upcoming stages of the pipeline
         $idsDataFieldsToRemove = array_filter(
             $idsDataFields,
-            function (int | string $id) use ($idsToRemove) {
+            /**
+             * Commented temporarily until Rector can downgrade union types on anonymous functions
+             * @see https://github.com/rectorphp/rector/issues/5989
+             */
+            // function (int | string $id) use ($idsToRemove) {
+            function ($id) use ($idsToRemove) {
                 return in_array($id, $idsToRemove);
             },
             ARRAY_FILTER_USE_KEY
