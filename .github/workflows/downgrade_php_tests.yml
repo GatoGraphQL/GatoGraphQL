@@ -59,10 +59,11 @@ jobs:
                 run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi
 
             # Only PROD dependencies must be tested
+            # --ignore-platform-reqs to avoid Composer checking the PHP 8.0 requirement
             -   name: Keep dependencies for PROD only (for testing)
                 uses: "ramsey/composer-install@v1"
                 with:
-                    composer-options: "--no-dev"
+                    composer-options: "--no-dev --ignore-platform-reqs"
 
             # Upload artifact with downgraded code, for debugging
             -   name: Create build folder
@@ -88,7 +89,7 @@ jobs:
 
             # Test everything, including Composer dependencies which (supposedly)
             # do not require downgrading
-            # Use a PHP linter. If PHP is not valid, it will throw an error
+            # Use a PHP Linter. If PHP is not valid, it will throw an error
             # Also test all the migrate-* packages, but migrate-everythingelse that
             # should not be part of any project, and DOES contain PHP 8.0 (it's not being downgraded)
             -   name: Run PHP Parallel Lint on PHP 7.1
