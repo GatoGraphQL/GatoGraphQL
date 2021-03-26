@@ -20,10 +20,14 @@
 # - Upload the .zip file as an artifact to the action (this step is possibly optional)
 # - Upload the .zip file as a release, for download
 ####################################################################################
-name: Generate Installable Plugin and Upload as Release Asset
+name: Generate Installable Plugin, Upload as Artifact, and (maybe) Upload as Release Asset
 on:
     release:
         types: [published]
+    push:
+        branches:
+            - master
+    pull_request: null
 
 env:
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
@@ -117,50 +121,13 @@ jobs:
                 with:
                     name: generated-plugin
                     path: build/graphql-api.zip
+                    retention-days: 1
 
-    test:
-        name: Test downgraded code
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout code
-                uses: actions/checkout@v2
-
-            -   name: Create build folder
-                run: mkdir build
-
-            -   name: Download artifact
-                uses: actions/download-artifact@v2
-                with:
-                    name: generated-plugin
-                    path: build
-
-            -   name: Uncompress artifact
-                uses: montudor/action-zip@v0.1.0
-                with:
-                    args: unzip -qq build/graphql-api.zip -d build/downgraded-graphql-api-for-wp
-
-                # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
-            -   name: Use PHP 7.1
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: 7.1
-                    coverage: none
-                    ini-values: pcre.jit=0
-                env:
-                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            -   name: Avoid Composer v2 platform checks
-                run: composer config platform-check false --no-interaction --ansi
-
-            -   name: Install Composer dependencies
-                uses: "ramsey/composer-install@v1"
-                with:
-                    composer-options: "--ignore-platform-reqs"
-
+    # Only execute when doing a release
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
-        needs: test
+        needs: build
+        if: github.event_name == 'release'
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
