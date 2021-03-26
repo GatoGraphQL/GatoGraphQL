@@ -117,6 +117,7 @@ jobs:
                 with:
                     name: generated-plugin
                     path: build/graphql-api.zip
+                    retention-days: 1
 
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
