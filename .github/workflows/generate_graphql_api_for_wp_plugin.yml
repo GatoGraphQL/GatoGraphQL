@@ -120,7 +120,7 @@ jobs:
 
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
-        needs: test
+        needs: build
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
