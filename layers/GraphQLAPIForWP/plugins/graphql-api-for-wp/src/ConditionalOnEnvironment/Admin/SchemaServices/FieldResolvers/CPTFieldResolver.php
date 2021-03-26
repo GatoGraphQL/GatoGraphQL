@@ -217,6 +217,9 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
                 return CustomPostTypeResolver::class;
         }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+        return parent::resolveFieldTypeResolverClass(
+            $typeResolver,
+            $fieldName,
+        );
     }
 }
