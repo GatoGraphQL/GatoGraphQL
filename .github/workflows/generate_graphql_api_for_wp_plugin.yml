@@ -24,6 +24,9 @@ name: Generate Installable Plugin, Upload as Artifact, and (maybe) Upload as Rel
 on:
     release:
         types: [published]
+    push:
+        branches:
+            - master
     pull_request: null
 
 env:
