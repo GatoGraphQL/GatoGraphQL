@@ -24,6 +24,7 @@ name: Generate Installable Plugin and Upload as Release Asset
 on:
     release:
         types: [published]
+    pull_request: null
 
 env:
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
@@ -119,9 +120,11 @@ jobs:
                     path: build/graphql-api.zip
                     retention-days: 1
 
+    # Only execute when doing a release
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
         needs: build
+        if: github.event_name == 'release'
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
