@@ -72,7 +72,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $this->namespacedTypeNameClasses = [];
         foreach ($typeResolvers as $typeResolver) {
             $typeResolverNamespacedName = $typeResolver->getNamespacedTypeName();
-            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = get_class($typeResolver);
+            $this->namespacedTypeNameClasses[$typeResolverNamespacedName] = $typeResolver::class;
         }
     }
 
@@ -87,7 +87,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $this->namespacedFieldInterfaceNameClasses = [];
         foreach ($fieldInterfaceResolvers as $fieldInterfaceResolver) {
             $fieldInterfaceResolverNamespacedName = $fieldInterfaceResolver->getNamespacedInterfaceName();
-            $this->namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = get_class($fieldInterfaceResolver);
+            $this->namespacedFieldInterfaceNameClasses[$fieldInterfaceResolverNamespacedName] = $fieldInterfaceResolver::class;
         }
     }
 
@@ -116,7 +116,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $this->directiveNameClasses = [];
         foreach ($directiveResolvers as $directiveResolver) {
             $directiveResolverName = $directiveResolver->getDirectiveName();
-            $this->directiveNameClasses[$directiveResolverName][] = get_class($directiveResolver);
+            $this->directiveNameClasses[$directiveResolverName][] = $directiveResolver::class;
         }
     }
 
