@@ -44,6 +44,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // Even when downgrading all packages, skip Symfony's polyfills
         __DIR__ . '/vendor/symfony/polyfill-*',
 
+        // Skip since they are not needed and they fail
+        __DIR__ . '/vendor/composer/*',
+        __DIR__ . '/vendor/lkwdwrd/wp-muplugin-loader/*',
+
         // These are skipped in the .sh since it's faster
         // // All the "migrate" folders
         // __DIR__ . '/vendor/getpop/migrate-*/*',
