@@ -41,8 +41,10 @@ target_php_version="$1"
 rector_config="$2"
 rector_options="$3"
 local_owners="$4"
+downgrade_all_packages="$5"
 
 default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
+default_downgrade_all_packages="true"
 
 ########################################################################
 # Validate inputs
@@ -60,6 +62,7 @@ fi
 # ----------------------------------------------------------------------
 
 local_package_owners=(${local_owners:=$default_local_owners})
+downgrade_all=(${downgrade_all_packages:=$default_downgrade_all_packages})
 
 ########################################################################
 # Logic
@@ -74,9 +77,12 @@ composer install --no-dev --no-progress --ansi
 rootPackage=$(composer info -s -N)
 why_not_version="${target_php_version}.*"
 
-# Obtain the list of packages for production that need a higher version that the input one.
-# Those must be downgraded
-PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
+# Either downgrade all packages, or only those that need a higher version that the input one.
+if [ "$downgrade_all" = "true" ]; then
+    PACKAGES=$(composer info --name-only)
+else
+    PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
+fi
 
 # Ignore all the "migrate" packages
 for local_package_owner in ${local_package_owners[@]}
