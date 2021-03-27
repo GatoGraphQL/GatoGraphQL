@@ -510,10 +510,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
     {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
-            return $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($typeResolver);
-        }
-        return null;
+        return $this->getSchemaDefinitionResolver($typeResolver)?->getSchemaDirectiveDeprecationDescription($typeResolver);
     }
 
     public function resolveSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs = []): ?string

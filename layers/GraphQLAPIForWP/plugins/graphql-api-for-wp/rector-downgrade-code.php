@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    $parameters->set(Option::AUTOLOAD_PATHS, [
+    $parameters->set(Option::BOOTSTRAP_FILES, [
         __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
     ]);
 
@@ -35,6 +35,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         //   "vendor/pop-schema/pages/src/Conditional/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
         //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
         '*/Conditional/RESTAPI/*',
+
+        // Skip tests
+        '*/tests/*',
+        '*/test/*',
+        '*/Test/*',
+
+        // Even when downgrading all packages, skip Symfony's polyfills
+        __DIR__ . '/vendor/symfony/polyfill-*',
+
+        // Skip since they are not needed and they fail
+        __DIR__ . '/vendor/composer/*',
+        __DIR__ . '/vendor/lkwdwrd/wp-muplugin-loader/*',
 
         // These are skipped in the .sh since it's faster
         // // All the "migrate" folders
