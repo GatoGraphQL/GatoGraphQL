@@ -38,6 +38,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::SKIP, [
         // Ignore downgrading the monorepo source
         __DIR__ . '/src/*',
+
+        // Skip tests
+        '*/tests/*',
+        '*/test/*',
+        '*/Test/*',
+
+        // Even when downgrading all packages, skip Symfony's polyfills
+        __DIR__ . '/vendor/symfony/polyfill-*',
+
         // Ignore errors from classes we don't have in our environment,
         // or that come from referencing a class present in DEV, not PROD
         __DIR__ . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',

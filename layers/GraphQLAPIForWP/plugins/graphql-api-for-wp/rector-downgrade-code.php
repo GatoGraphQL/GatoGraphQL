@@ -36,6 +36,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
         '*/Conditional/RESTAPI/*',
 
+        // Skip tests
+        '*/tests/*',
+        '*/test/*',
+        '*/Test/*',
+
+        // Even when downgrading all packages, skip Symfony's polyfills
+        __DIR__ . '/vendor/symfony/polyfill-*',
+
         // These are skipped in the .sh since it's faster
         // // All the "migrate" folders
         // __DIR__ . '/vendor/getpop/migrate-*/*',
