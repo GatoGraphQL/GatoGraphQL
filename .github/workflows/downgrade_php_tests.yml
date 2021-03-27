@@ -66,7 +66,7 @@ jobs:
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi --dry-run
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
-                run: layers/Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php "--dry-run"
+                run: layers/Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php "--dry-run"
 
             # Prepare for testing on PHP 7.1
             -   name: Install PHP Parallel Lint
