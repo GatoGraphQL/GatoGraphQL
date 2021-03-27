@@ -99,15 +99,11 @@ if [ -n "$PACKAGES" ]; then
             path=$(composer info $package --path | cut -d' ' -f2-)
         fi
 
-        # For local dependencies, only analyze src/ (i.e. skip tests/)
-        # Ignore all the "migrate" packages
-        for local_package_owner in ${local_package_owners[@]}
-        do
-            if  [[ $package == ${local_package_owner}/* ]] ;
-            then
-                path="$path/src"
-            fi
-        done
+        # Optmization: For local dependencies, only analyze src/
+        package_owner=$(echo "$package" | grep -o "\S*\/" | rev | cut -c2- | rev )
+        if [[ " ${local_package_owners[@]} " =~ " ${package_owner} " ]]; then
+            path="$path/src"
+        fi
 
         packages_to_downgrade+=($package)
         package_paths+=($path)
