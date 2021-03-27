@@ -71,7 +71,7 @@ jobs:
                     composer install --no-progress --no-interaction --ansi
 
             -   name: Downgrade code for production (to PHP 7.1)
-                run: ../../../Engine/packages/root/ci/downgrade_code.sh 7.1 rector-downgrade-code.php
+                run: ../../../Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php
 
             # Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: (Hack) Dependencies - Downgrade PHP code via Rector - CacheItem

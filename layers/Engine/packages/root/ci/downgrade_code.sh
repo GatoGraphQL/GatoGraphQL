@@ -37,22 +37,17 @@ set -e
 # Inputs
 # ----------------------------------------------------------------------
 
-target_php_version="$1"
-rector_config="$2"
-rector_options="$3"
+rector_config="$1"
+rector_options="$2"
+target_php_version="$3"
 local_owners="$4"
-downgrade_all_packages="$5"
 
 default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
-default_downgrade_all_packages="true"
 
 ########################################################################
 # Validate inputs
 # ----------------------------------------------------------------------
 
-if [ -z "$target_php_version" ]; then
-    fail "Please provide to which PHP version to downgrade to"
-fi
 if [ -z "$rector_config" ]; then
     fail "Please provide to path to the Rector config file"
 fi
@@ -62,7 +57,6 @@ fi
 # ----------------------------------------------------------------------
 
 local_package_owners=(${local_owners:=$default_local_owners})
-downgrade_all=(${downgrade_all_packages:=$default_downgrade_all_packages})
 
 ########################################################################
 # Logic
@@ -70,18 +64,18 @@ downgrade_all=(${downgrade_all_packages:=$default_downgrade_all_packages})
 
 packages_to_downgrade=()
 package_paths=()
-
-# Switch to production
-composer install --no-dev --no-progress --ansi
-
 rootPackage=$(composer info -s -N)
-why_not_version="${target_php_version}.*"
 
-# Either downgrade all packages, or only those that need a higher version that the input one.
-if [ "$downgrade_all" = "true" ]; then
-    PACKAGES=$(composer info --name-only)
-else
+# Downgrade only packages that need a higher version that the input one, or all of them
+if [ -n "$target_php_version" ]; then
+    why_not_version="${target_php_version}.*"
+    # Switch to production, to calculate the packages
+    composer install --no-dev --no-progress --ansi
     PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
+    # Switch to dev again
+    composer install --no-progress --ansi
+else
+    PACKAGES=$(composer info --name-only --no-dev)
 fi
 
 # Ignore all the "migrate" packages
@@ -123,9 +117,6 @@ else
     note "No packages to downgrade"
     exit 0
 fi
-
-# Switch to dev again
-composer install --no-progress --ansi
 
 # Execute the downgrade
 packages=$(join_by " " ${packages_to_downgrade[@]})
