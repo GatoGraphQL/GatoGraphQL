@@ -83,12 +83,7 @@
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",
         "analyse": "phpstan analyse",
-        "preview-src-downgrade": "rector process src --config=rector-downgrade-code.php --ansi --dry-run || true",
-        "preview-vendor-downgrade": "../../../../layers/Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php --dry-run || true",
-        "preview-code-downgrade": [
-            "@preview-src-downgrade",
-            "@preview-vendor-downgrade"
-        ]
+        "preview-code-downgrade": "../../../../layers/Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php --dry-run || true"
     },
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",

@@ -75,7 +75,8 @@ if [ -n "$target_php_version" ]; then
     # Switch to dev again
     composer install --no-progress --ansi
 else
-    PACKAGES=$(composer info --name-only --no-dev)
+    # Also add the root package
+    PACKAGES="$rootPackage $(composer info --name-only --no-dev)"
 fi
 
 # Ignore all the "migrate" packages
