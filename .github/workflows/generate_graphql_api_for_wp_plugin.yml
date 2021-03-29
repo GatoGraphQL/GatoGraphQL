@@ -71,7 +71,7 @@ jobs:
             plugin_config: ${{ steps.output_data.outputs.plugin_config }}
 
     build_and_downgrade:
-        name: Build plugin and Downgrade its code
+        name: Build plugin and Downgrade its code (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
         needs: [provide_data, matrix]
         runs-on: ubuntu-latest
         defaults:
@@ -141,7 +141,7 @@ jobs:
 
     # Only execute when enabled by configuration
     scope:
-        name: Scope plugin
+        name: Scope plugin (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
         needs: [build_and_downgrade, matrix]
         runs-on: ubuntu-latest
         steps:
@@ -201,7 +201,7 @@ jobs:
 
     # Only execute when doing a release
     upload_plugin_as_artifact:
-        name: Rename the artifact to the plugin name
+        name: Rename the artifact to the plugin name (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
         needs: [scope, matrix]
         runs-on: ubuntu-latest
         steps:
@@ -223,7 +223,7 @@ jobs:
 
     # Only execute when doing a release
     upload_and_deploy:
-        name: Upload release, and deploy to DIST repo
+        name: Upload release, and deploy to DIST repo (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
         needs: [upload_plugin_as_artifact, matrix]
         if: github.event_name == 'release'
         runs-on: ubuntu-latest
