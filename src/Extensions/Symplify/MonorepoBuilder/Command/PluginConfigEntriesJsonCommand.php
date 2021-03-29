@@ -13,11 +13,6 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
 {
-    public function __construct(private PluginConfigEntriesJsonProvider $pluginConfigEntriesJsonProvider)
-    {
-        parent::__construct();
-    }
-
     protected function configure(): void
     {
         $this->setDescription('Provides plugin configuration entries in json format. Useful for GitHub Actions Workflow');
