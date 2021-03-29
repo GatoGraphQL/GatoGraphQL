@@ -117,7 +117,7 @@ jobs:
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/downgraded-code.zip -d build/generated-plugin
+                    args: unzip -qq build/downgraded-code.zip -d build/downgraded-plugin
 
             -   name: Install PHP-Scoper
                 run: |
@@ -125,18 +125,18 @@ jobs:
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
 
-            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-code/vendor"
+            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-plugin/vendor"
             -   name: Scope plugin into separate folder
-                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-code --ansi --no-interaction
-                working-directory: build/generated-plugin
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-plugin --ansi --no-interaction
+                working-directory: build/downgraded-plugin
 
             # Can't override original files, so also copy them to new folder
             # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
             -   name: Merge scoped + non-scoped plugin code
                 run: |
                     mkdir build/scoped-plugin
-                    rsync -av build/generated-plugin/ build/scoped-plugin/ --quiet
-                    rsync -av build/prefixed-code/ build/scoped-plugin/ --quiet
+                    rsync -av build/downgraded-plugin/ build/scoped-plugin/ --quiet
+                    rsync -av build/prefixed-plugin/ build/scoped-plugin/ --quiet
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
