@@ -45,6 +45,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * Plugins to generate
      */
     $parameters->set(CustomOption::PLUGIN_CONFIG_ENTRIES, [
+        // GraphQL API for WordPress
         [
             'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
             'zip_file' => 'graphql-api.zip',
@@ -57,6 +58,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'rector-downgrade-code-hacks-CacheItem.php',
             ],
             'rector_config' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php',
+        ],
+        // GraphQL API - Convert Case Directives
+        [
+            'path' => 'layers/GraphQLAPIForWP/plugins/convert-case-directives',
+            'zip_file' => 'graphql-api-convert-case-directives.zip',
+            'main_file' => 'graphql-api-convert-case-directives.php',
+            'dist_repo_organization' => 'GraphQLAPI',
+            'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
         ],
     ]);
 

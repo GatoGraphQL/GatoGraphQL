@@ -27,8 +27,8 @@ final class CustomDependencyUpdater
             $json = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
 
             $json = $this->processSectionWithPackages($json, $packageNames, $version, ComposerJsonSection::REQUIRE);
-
             $json = $this->processSectionWithPackages($json, $packageNames, $version, ComposerJsonSection::REQUIRE_DEV);
+            $json = $this->processSectionWithPackages($json, $packageNames, $version, ComposerJsonSection::REPLACE);
 
             $this->jsonFileManager->printJsonToFileInfo($json, $packageComposerFileInfo);
         }
@@ -48,6 +48,7 @@ final class CustomDependencyUpdater
 
             $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REQUIRE);
             $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REQUIRE_DEV);
+            $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REPLACE);
 
             $this->jsonFileManager->printJsonToFileInfo($json, $packageComposerFileInfo);
         }
