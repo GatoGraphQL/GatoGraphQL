@@ -42,20 +42,22 @@ rector_options="$2"
 target_php_version="$3"
 local_owners="$4"
 
+default_rector_config="rector-downgrade-code.php"
 default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
-########################################################################
-# Validate inputs
-# ----------------------------------------------------------------------
+# ########################################################################
+# # Validate inputs
+# # ----------------------------------------------------------------------
 
-if [ -z "$rector_config" ]; then
-    fail "Please provide to path to the Rector config file"
-fi
+# if [ -z "$rector_config" ]; then
+#     fail "Please provide to path to the Rector config file"
+# fi
 
 ########################################################################
 # Initialize defaults
 # ----------------------------------------------------------------------
 
+rector_config=(${rector_config:=$default_rector_config})
 local_package_owners=(${local_owners:=$default_local_owners})
 
 ########################################################################
