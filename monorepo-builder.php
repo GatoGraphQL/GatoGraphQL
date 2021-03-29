@@ -55,7 +55,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'scope' => true,
             'additional_rector_configs' => [
                 'rector-downgrade-code-hacks-CacheItem.php',
-            ]
+            ],
+            'rector_config' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php',
         ],
     ]);
 

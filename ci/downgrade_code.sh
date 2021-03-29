@@ -39,8 +39,8 @@ set -e
 
 rector_options="$1"
 composer_working_dir="$2"
-additional_rector_configs="$3"
-rector_config="$4"
+rector_config="$3"
+additional_rector_configs="$4"
 target_php_version="$5"
 local_owners="$6"
 
