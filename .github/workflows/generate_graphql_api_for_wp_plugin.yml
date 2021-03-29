@@ -93,13 +93,13 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/graphql-api.zip .
+                run: zip -X -r ../../../../build/downgraded-plugin.zip .
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: job-assets
-                    path: build/graphql-api.zip
+                    path: build/downgraded-plugin.zip
                     retention-days: 1
 
     # Only execute when enabled by configuration
@@ -117,7 +117,7 @@ jobs:
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/graphql-api.zip -d build/downgraded-plugin
+                    args: unzip -qq build/downgraded-plugin.zip -d build/downgraded-plugin
 
             -   name: Install PHP-Scoper
                 run: |
@@ -152,14 +152,14 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                run: zip -X -r ../scoped-plugin.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
                 working-directory: build/scoped-plugin
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: job-assets
-                    path: build/graphql-api.zip
+                    path: build/scoped-plugin.zip
                     retention-days: 1
 
     # Only execute when doing a release
@@ -174,6 +174,9 @@ jobs:
                 with:
                     name: job-assets
                     path: build
+
+            -   name: Rename artifact to plugin name
+                run: mv build/scoped-plugin.zip build/graphql-api.zip
 
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
