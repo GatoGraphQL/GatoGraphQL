@@ -134,6 +134,7 @@ jobs:
             # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
             -   name: Merge scoped + non-scoped plugin code
                 run: |
+                    mkdir build/generated-code
                     rsync -av build/generated-code/ build/scoped-plugin/ --quiet
                     rsync -av build/prefixed-code/ build/scoped-plugin/ --quiet
 
