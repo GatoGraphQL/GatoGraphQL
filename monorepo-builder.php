@@ -52,6 +52,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'exclude_files' => 'dev-helpers/\* lando/\* docs/images/\*',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-for-wp-dist',
+            'scope' => true,
         ],
     ]);
 

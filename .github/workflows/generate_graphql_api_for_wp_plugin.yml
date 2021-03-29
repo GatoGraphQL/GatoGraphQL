@@ -144,6 +144,7 @@ jobs:
         name: Scope plugin (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
         needs: [build_and_downgrade, matrix]
         runs-on: ubuntu-latest
+        if: ${{ fromJson(needs.matrix.outputs.plugin_config).scope }}
         steps:
             -   name: Download artifact
                 uses: actions/download-artifact@v2
