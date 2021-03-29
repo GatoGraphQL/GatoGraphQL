@@ -189,7 +189,7 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../scoped-plugin.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                run: zip -X -r ../scoped-plugin.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ fromJson(needs.matrix.outputs.plugin_config).exclude_files }}
                 working-directory: build/scoped-plugin
 
             -   name: Upload job output zip as artifact
