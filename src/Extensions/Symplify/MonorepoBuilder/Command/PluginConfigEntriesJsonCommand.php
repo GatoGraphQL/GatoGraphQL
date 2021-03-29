@@ -5,25 +5,17 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
 use Nette\Utils\Json;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\PluginConfigEntriesJsonProvider;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
 {
-    /**
-     * @var array<string, string>
-     */
-    private array $pluginConfigEntries = [];
-
-    public function __construct(
-        ParameterProvider $parameterProvider
-    ) {
+    public function __construct(private PluginConfigEntriesJsonProvider $pluginConfigEntriesJsonProvider)
+    {
         parent::__construct();
-        $this->pluginConfigEntries = $parameterProvider->provideArrayParameter(Option::PLUGIN_CONFIG_ENTRIES);
     }
 
     protected function configure(): void
@@ -33,8 +25,10 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $pluginConfigEntries = $this->pluginConfigEntriesJsonProvider->providePluginConfigEntries();
+
         // must be without spaces, otherwise it breaks GitHub Actions json
-        $json = Json::encode($this->pluginConfigEntries);
+        $json = Json::encode($pluginConfigEntries);
         $this->symfonyStyle->writeln($json);
 
         return ShellCode::SUCCESS;
