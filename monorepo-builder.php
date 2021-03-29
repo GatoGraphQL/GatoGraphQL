@@ -59,6 +59,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
     ]);
 
+    /**
+     * Additional downgrade Rector configs:
+     * Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
+     */
+    $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
+        'rector-downgrade-code-hacks-CacheItem.php',
+    ]);
+
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::DATA_TO_REMOVE, [
         'require-dev' => [
