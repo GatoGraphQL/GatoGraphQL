@@ -41,6 +41,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'graphql-api-for-wp/wordpress',
     ]);
 
+    /**
+     * Plugins to generate
+     */
+    $parameters->set(CustomOption::PLUGIN_CONFIG_ENTRIES, [
+        [
+            'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
+            'zip_file' => 'graphql-api.zip',
+        ],
+    ]);
+
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::DATA_TO_REMOVE, [
         'require-dev' => [
