@@ -132,12 +132,11 @@ jobs:
 
             # Can't override original files, so also copy them to new folder
             # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
-            -   name: Create folder
-                run: mkdir build/generated-code
-            -   name: Copy plugin code to new folder
-                run: rsync -av build/generated-code/ build/scoped-plugin/ --quiet
             -   name: Merge scoped + non-scoped plugin code
-                run: rsync -av build/prefixed-code/ build/scoped-plugin/ --quiet
+                run: |
+                    mkdir build/scoped-plugin
+                    rsync -av build/generated-code/ build/scoped-plugin/ --quiet
+                    rsync -av build/prefixed-code/ build/scoped-plugin/ --quiet
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
