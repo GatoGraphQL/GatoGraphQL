@@ -180,7 +180,7 @@ jobs:
             -   name: Upload final plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
-                    name: job-assets
+                    name: plugins
                     path: build/graphql-api.zip
                     retention-days: 1
 
@@ -194,7 +194,7 @@ jobs:
             -   name: Download artifact
                 uses: actions/download-artifact@v2
                 with:
-                    name: job-assets
+                    name: plugins
                     path: build
 
             -   name: Upload to release
