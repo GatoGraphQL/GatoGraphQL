@@ -131,8 +131,7 @@ jobs:
                 working-directory: build/generated-plugin
 
             -   name: Copy scoped code back into plugin
-                run: rsync -av . ../generated-plugin/ --quiet
-                working-directory: build/prefixed-code
+                run: rsync -av build/prefixed-code/ build/generated-plugin/ --quiet
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
