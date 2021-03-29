@@ -56,7 +56,6 @@ jobs:
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 
-jobs:
     build:
         name: Build plugin and Downgrade its code
         needs: provide_data
