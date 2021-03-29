@@ -56,7 +56,7 @@ jobs:
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 
-    build:
+    build_and_downgrade:
         name: Build plugin and Downgrade its code
         needs: provide_data
         runs-on: ubuntu-latest
@@ -132,7 +132,7 @@ jobs:
     # Only execute when enabled by configuration
     scope:
         name: Scope plugin
-        needs: build
+        needs: build_and_downgrade
         runs-on: ubuntu-latest
         steps:
             -   name: Download artifact
