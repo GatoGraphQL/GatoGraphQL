@@ -13,6 +13,10 @@ final class Option
     /**
      * @var string
      */
+    public const PLUGIN_CONFIG_ENTRIES = 'plugin_config_entries';
+    /**
+     * @var string
+     */
     public const JSON = 'json';
     /**
      * @var string

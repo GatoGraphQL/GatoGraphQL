@@ -34,15 +34,45 @@ env:
     COMPOSER_ROOT_VERSION: "dev-master"
 
 jobs:
-    build:
-        defaults:
-            run:
-                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
-        name: Build plugin and Downgrade its code
+    provide_data:
+        name: Provide configuration to generate plugins
         runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.0
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: "ramsey/composer-install@v1"
+
+            -   id: output_data
+                run: |
+                    echo "::set-output name=plugin_config_entries::$(vendor/bin/monorepo-builder plugin-config-entries-json)"
+        outputs:
+            plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
+
+    # Build plugin => downgrade => (maybe) scope => (maybe) upload to release and deploy to dist repo
+    process:
+        name: Generate plugin ${{ matrix.pluginConfig.zip_file }}
+        needs: provide_data
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
+
+            -   name: Create build folder
+                run: mkdir build
+
+            -   name: Install zip
+                uses: montudor/action-zip@v0.1.1
 
             # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
             -   name: Use PHP 8.0
@@ -57,171 +87,123 @@ jobs:
             -   name: Install root dependencies
                 uses: "ramsey/composer-install@v1"
 
+    ###########################################################################
+    # Downgrade plugin
+    ###########################################################################
+
             # "custom-bump-interdependency" temporarily needed because of bug:
             # https://github.com/symplify/symplify/issues/2773
             -   name: Localize package paths
                 run: |
                     vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
-                    vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
-                working-directory: .
+                    vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
             -   name: Install plugin dependencies, avoiding v2 platform check
                 run: |
                     composer config platform-check false --no-interaction --ansi
                     composer install --no-progress --no-interaction --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Downgrade code for production (to PHP 7.1)
-                run: ../../../Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php
+                run: $GITHUB_WORKSPACE/layers/Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             # Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: (Hack) Dependencies - Downgrade PHP code via Rector - CacheItem
-                run: ../../../../vendor/bin/rector process --config=../../../../rector-downgrade-code-hacks-CacheItem.php --ansi
+                run: $GITHUB_WORKSPACE/vendor/bin/rector process --config=$GITHUB_WORKSPACE/rector-downgrade-code-hacks-CacheItem.php --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Replace PHP version in plugin main file
                 run: |
-                    sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' graphql-api.php
+                    sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
 
-            -   name: Create build folder
-                run: mkdir build
-                working-directory: .
-
-            # Zipping a folder from a different work dir
-            -   name: Install zip
-                uses: montudor/action-zip@v0.1.1
-
-            -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/downgraded-plugin.zip .
-
-            -   name: Upload job output zip as artifact
-                uses: actions/upload-artifact@v2
-                with:
-                    name: job-assets
-                    path: build/downgraded-plugin.zip
-                    retention-days: 1
-
-    # Only execute when enabled by configuration
-    scope:
-        name: Scope plugin
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Download artifact
-                uses: actions/download-artifact@v2
-                with:
-                    name: job-assets
-                    path: build
-
-            -   name: Uncompress artifact
-                uses: montudor/action-zip@v0.1.0
-                with:
-                    args: unzip -qq build/downgraded-plugin.zip -d build/downgraded-plugin
+    ###########################################################################
+    # Scope plugin
+    #   Only execute when enabled by configuration
+    ###########################################################################
 
             -   name: Install PHP-Scoper
                 run: |
                     composer global config minimum-stability dev
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
+                if: ${{ matrix.pluginConfig.scope }}
 
             # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-plugin/vendor"
             -   name: Scope plugin into separate folder
-                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-plugin --ansi --no-interaction
-                working-directory: build/downgraded-plugin
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin --ansi --no-interaction
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.scope }}
 
-            # Can't override original files, so also copy them to new folder
-            # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
-            -   name: Merge scoped + non-scoped plugin code
-                run: |
-                    mkdir build/scoped-plugin
-                    rsync -av build/downgraded-plugin/ build/scoped-plugin/ --quiet
-                    rsync -av build/prefixed-plugin/ build/scoped-plugin/ --quiet
+            -   name: Copy scoped code back to source folder
+                run: rsync -av build/prefixed-plugin/ ${{ matrix.pluginConfig.path }} --quiet
+                if: ${{ matrix.pluginConfig.scope }}
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
-                working-directory: build/scoped-plugin
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.scope }}
 
             -   name: Use Scoper autoload in plugin main file
                 run: |
-                    sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
-                working-directory: build/scoped-plugin
+                    sed -i 's/autoload.php/scoper-autoload.php/' ${{ matrix.pluginConfig.main_file }}
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.scope }}
 
-            # Zipping a folder from a different work dir
-            -   name: Install zip
-                uses: montudor/action-zip@v0.1.1
+    ###########################################################################
+    # Generate plugin, and Upload as artifact
+    ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r ../scoped-plugin.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
-                working-directory: build/scoped-plugin
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                working-directory: ${{ matrix.pluginConfig.path }}
 
-            -   name: Upload job output zip as artifact
-                uses: actions/upload-artifact@v2
-                with:
-                    name: job-assets
-                    path: build/scoped-plugin.zip
-                    retention-days: 1
-
-    # Only execute when doing a release
-    upload_final_plugin_as_artifact:
-        name: Rename the artifact to the plugin name
-        needs: scope
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Download artifact
-                uses: actions/download-artifact@v2
-                with:
-                    name: job-assets
-                    path: build
-
-            -   name: Rename artifact to plugin name
-                run: mv build/scoped-plugin.zip build/graphql-api.zip
-
-            -   name: Upload final plugin zip as artifact
+            -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: generated-plugins
-                    path: build/graphql-api.zip
+                    path: build/${{ matrix.pluginConfig.zip_file }}
                     retention-days: 1
 
-    # Only execute when doing a release
-    upload_and_deploy:
-        name: Upload release, and deploy to DIST repo
-        needs: upload_final_plugin_as_artifact
-        if: github.event_name == 'release'
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Download artifact
-                uses: actions/download-artifact@v2
-                with:
-                    name: generated-plugins
-                    path: build
+    ###########################################################################
+    # Upload and Deploy
+    #   Only when doing a release
+    ###########################################################################
 
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
                 with:
-                    args: build/graphql-api.zip application/zip
+                    args: build/${{ matrix.pluginConfig.zip_file }} application/zip
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                if: github.event_name == 'release'
 
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/graphql-api.zip -d build/downgraded-graphql-api-for-wp
-            -
-                id: previous_tag
+                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }} -d build/dist-plugin
+                if: github.event_name == 'release'
+
+            -   id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
+                if: github.event_name == 'release'
 
             -   name: Publish to DIST repo
                 uses: symplify/monorepo-split-github-action@1.1
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    branch: 'master'
-                    package-directory: 'build/downgraded-graphql-api-for-wp'
-                    split-repository-organization: 'GraphQLAPI'
-                    split-repository-name: 'graphql-api-for-wp-dist'
+                    branch: ${{ matrix.pluginConfig.dist_repo_branch }}
+                    package-directory: 'build/dist-plugin'
+                    split-repository-organization: ${{ matrix.pluginConfig.dist_repo_organization }}
+                    split-repository-name: ${{ matrix.pluginConfig.dist_repo_name }}
                     tag: ${{ steps.previous_tag.outputs.tag }}
                     user-name: "leoloso"
                     user-email: "leo@getpop.org"
+                if: github.event_name == 'release'
 
