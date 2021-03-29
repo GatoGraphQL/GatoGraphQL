@@ -110,7 +110,7 @@ jobs:
 
             # Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: (Hack) Dependencies - Downgrade PHP code via Rector - CacheItem
-                run: ../../../../vendor/bin/rector process --config=../../../../rector-downgrade-code-hacks-CacheItem.php --ansi
+                run: $GITHUB_WORKSPACE/vendor/bin/rector process --config=$GITHUB_WORKSPACE/rector-downgrade-code-hacks-CacheItem.php --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Replace PHP version in plugin main file
@@ -159,7 +159,7 @@ jobs:
 
             # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-plugin/vendor"
             -   name: Scope plugin into separate folder
-                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-plugin --ansi --no-interaction
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir $GITHUB_WORKSPACE/prefixed-plugin --ansi --no-interaction
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.scope }}
 
@@ -201,7 +201,7 @@ jobs:
     ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             # -   name: Download artifact
