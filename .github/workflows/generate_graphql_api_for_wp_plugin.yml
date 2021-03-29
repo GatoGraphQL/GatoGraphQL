@@ -86,7 +86,6 @@ jobs:
 
             -   name: Install root dependencies
                 uses: "ramsey/composer-install@v1"
-                working-directory: ${{ matrix.pluginConfig.path }}
 
     ###########################################################################
     # Downgrade plugin
