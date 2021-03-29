@@ -102,13 +102,12 @@ jobs:
                     path: build/downgraded-code.zip
                     retention-days: 1
 
-    # Only execute when doing a release
+    # Only execute when enabled by configuration
     scope:
         name: Scope plugin
         needs: build
         runs-on: ubuntu-latest
         steps:
-
             -   name: Download artifact
                 uses: actions/download-artifact@v2
                 with:
@@ -118,7 +117,7 @@ jobs:
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/downgraded-code.zip
+                    args: unzip -qq build/downgraded-code.zip -d build/generated-plugin
 
             -   name: Install PHP-Scoper
                 run: |
@@ -126,22 +125,23 @@ jobs:
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
 
-            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../../../../build-prefixed/vendor"
+            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-code/vendor"
             -   name: Scope plugin into separate folder
-                run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi --no-interaction
-                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+                run: php-scoper add-prefix --output-dir ../prefixed-code --ansi --no-interaction
+                working-directory: build/generated-plugin
 
             -   name: Copy scoped code back into plugin
-                run: rsync -av build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ --quiet
+                run: rsync -av . ../generated-plugin/ --quiet
+                working-directory: build/prefixed-code
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
-                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+                working-directory: build/generated-plugin
 
             -   name: Use Scoper autoload in plugin main file
                 run: |
                     sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
-                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+                working-directory: build/generated-plugin
 
             # -   name: Create build folder
             #     run: mkdir build
@@ -152,8 +152,8 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
-                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
+                run: zip -X -r ../graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                working-directory: build/generated-plugin
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
