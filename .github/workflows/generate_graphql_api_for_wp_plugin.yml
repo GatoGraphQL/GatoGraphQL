@@ -95,7 +95,7 @@ jobs:
             -   name: Create plugin as zip
                 run: zip -X -r ../../../../build/downgraded-plugin.zip .
 
-            -   name: Upload plugin zip as artifact
+            -   name: Upload job output zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: job-assets
@@ -155,7 +155,7 @@ jobs:
                 run: zip -X -r ../scoped-plugin.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
                 working-directory: build/scoped-plugin
 
-            -   name: Upload plugin zip as artifact
+            -   name: Upload job output zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: job-assets
@@ -163,10 +163,9 @@ jobs:
                     retention-days: 1
 
     # Only execute when doing a release
-    upload_and_deploy:
-        name: Upload release, and deploy to DIST repo
+    upload_final_plugin_as_artifact:
+        name: Rename the artifact to the plugin name
         needs: scope
-        if: github.event_name == 'release'
         runs-on: ubuntu-latest
         steps:
             -   name: Download artifact
@@ -177,6 +176,26 @@ jobs:
 
             -   name: Rename artifact to plugin name
                 run: mv build/scoped-plugin.zip build/graphql-api.zip
+
+            -   name: Upload final plugin zip as artifact
+                uses: actions/upload-artifact@v2
+                with:
+                    name: job-assets
+                    path: build/graphql-api.zip
+                    retention-days: 1
+
+    # Only execute when doing a release
+    upload_and_deploy:
+        name: Upload release, and deploy to DIST repo
+        needs: upload_final_plugin_as_artifact
+        if: github.event_name == 'release'
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Download artifact
+                uses: actions/download-artifact@v2
+                with:
+                    name: job-assets
+                    path: build
 
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
