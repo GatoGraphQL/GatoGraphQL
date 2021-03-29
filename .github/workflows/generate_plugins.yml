@@ -105,7 +105,7 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Downgrade code for production (to PHP 7.1)
-                run: $GITHUB_WORKSPACE/layers/Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php
+                run: $GITHUB_WORKSPACE/layers/Engine/packages/root/ci/downgrade_code.sh
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             # Hack to fix bug: https://github.com/rectorphp/rector/issues/5962

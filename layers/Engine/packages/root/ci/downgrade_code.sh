@@ -37,8 +37,8 @@ set -e
 # Inputs
 # ----------------------------------------------------------------------
 
-rector_config="$1"
-rector_options="$2"
+rector_options="$1"
+rector_config="$2"
 target_php_version="$3"
 local_owners="$4"
 
