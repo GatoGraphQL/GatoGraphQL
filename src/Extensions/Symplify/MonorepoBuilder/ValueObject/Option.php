@@ -17,6 +17,10 @@ final class Option
     /**
      * @var string
      */
+    public const ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS = 'additional_downgrade_rector_configs';
+    /**
+     * @var string
+     */
     public const JSON = 'json';
     /**
      * @var string

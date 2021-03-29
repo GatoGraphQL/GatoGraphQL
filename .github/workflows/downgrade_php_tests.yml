@@ -51,12 +51,9 @@ jobs:
             -   name: Local packages - Downgrade PHP code via Rector
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi
 
+            # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Dependencies - Downgrade PHP code via Rector
-                run: layers/Engine/packages/root/ci/downgrade_code.sh rector-downgrade-code.php
-
-            # Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
-            -   name: (Hack) Dependencies - Downgrade PHP code via Rector - CacheItem
-                run: vendor/bin/rector process --config=rector-downgrade-code-hacks-CacheItem.php --ansi
+                run: ci/downgrade_code.sh "" "" "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
 
             # Prepare for testing on PHP 7.1
             -   name: Install PHP Parallel Lint

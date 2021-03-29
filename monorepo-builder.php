@@ -53,7 +53,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-for-wp-dist',
             'scope' => true,
+            'additional_rector_configs' => [
+                'rector-downgrade-code-hacks-CacheItem.php',
+            ],
+            'rector_config' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php',
         ],
+    ]);
+
+    /**
+     * Additional downgrade Rector configs:
+     * Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
+     */
+    $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
+        'rector-downgrade-code-hacks-CacheItem.php',
     ]);
 
     $parameters = $containerConfigurator->parameters();
