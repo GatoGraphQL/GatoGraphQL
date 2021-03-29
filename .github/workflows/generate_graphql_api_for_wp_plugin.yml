@@ -122,33 +122,10 @@ jobs:
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            # -   name: Create plugin as zip
-            #     run: zip -X -r ../../../../build/downgraded-plugin.zip .
-            #     working-directory: ${{ matrix.pluginConfig.path }}
-
-            # -   name: Upload job output zip as artifact
-            #     uses: actions/upload-artifact@v2
-            #     with:
-            #         name: job-assets
-            #         path: build/downgraded-plugin.zip
-            #         retention-days: 1
-
-
     ###########################################################################
     # Scope plugin
     #   Only execute when enabled by configuration
     ###########################################################################
-
-            # -   name: Download artifact
-            #     uses: actions/download-artifact@v2
-            #     with:
-            #         name: job-assets
-            #         path: build
-
-            # -   name: Uncompress artifact
-            #     uses: montudor/action-zip@v0.1.0
-            #     with:
-            #         args: unzip -qq build/downgraded-plugin.zip -d build/downgraded-plugin
 
             -   name: Install PHP-Scoper
                 run: |
@@ -163,17 +140,6 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.scope }}
 
-            # # Can't override original files, so also copy them to new folder
-            # # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
-            # -   name: Merge scoped + non-scoped plugin code
-            #     run: |
-            #         mkdir build/scoped-plugin
-            #         rsync -av ${{ matrix.pluginConfig.path }}/ build/scoped-plugin/ --quiet
-            #         rsync -av build/prefixed-plugin/ build/scoped-plugin/ --quiet
-            #     if: ${{ matrix.pluginConfig.scope }}
-
-            # Can't override original files, so also copy them to new folder
-            # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
             -   name: Copy scoped code back to source folder
                 run: rsync -av build/prefixed-plugin/ ${{ matrix.pluginConfig.path }} --quiet
                 if: ${{ matrix.pluginConfig.scope }}
@@ -189,13 +155,6 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.scope }}
 
-            # -   name: Upload job output zip as artifact
-            #     uses: actions/upload-artifact@v2
-            #     with:
-            #         name: job-assets
-            #         path: build/scoped-plugin.zip
-            #         retention-days: 1
-
     ###########################################################################
     # Generate plugin, and Upload as artifact
     ###########################################################################
@@ -203,15 +162,6 @@ jobs:
             -   name: Create plugin as zip
                 run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
-
-            # -   name: Download artifact
-            #     uses: actions/download-artifact@v2
-            #     with:
-            #         name: job-assets
-            #         path: build
-
-            # -   name: Rename artifact to plugin name
-            #     run: mv build/scoped-plugin.zip build/${{ matrix.pluginConfig.zip_file }}
 
             -   name: Upload final plugin zip as artifact
                 uses: actions/upload-artifact@v2
@@ -224,12 +174,6 @@ jobs:
     # Upload and Deploy
     #   Only when doing a release
     ###########################################################################
-
-            # -   name: Download artifact
-            #     uses: actions/download-artifact@v2
-            #     with:
-            #         name: generated-plugins
-            #         path: build
 
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
