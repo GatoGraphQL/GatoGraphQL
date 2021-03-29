@@ -93,13 +93,13 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/downgraded-code.zip .
+                run: zip -X -r ../../../../build/graphql-api.zip .
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: job-asset
-                    path: build/downgraded-code.zip
+                    path: build/graphql-api.zip
                     retention-days: 1
 
     # Only execute when enabled by configuration
@@ -117,7 +117,7 @@ jobs:
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/downgraded-code.zip -d build/downgraded-plugin
+                    args: unzip -qq build/graphql-api.zip -d build/downgraded-plugin
 
             -   name: Install PHP-Scoper
                 run: |
