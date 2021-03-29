@@ -142,10 +142,6 @@ jobs:
                     sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
                 working-directory: build/generated-plugin
 
-            # -   name: Create build folder
-            #     run: mkdir build
-            #     working-directory: .
-
             # Zipping a folder from a different work dir
             -   name: Install zip
                 uses: montudor/action-zip@v0.1.1
