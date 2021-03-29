@@ -76,7 +76,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: ${{ needs.matrix.outputs.plugin_config.path }}
+                working-directory: ${{ fromJson(needs.matrix.outputs.plugin_config).path }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -99,7 +99,7 @@ jobs:
             -   name: Localize package paths
                 run: |
                     vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
-                    vendor/bin/monorepo-builder localize-composer-paths ${{ needs.matrix.outputs.plugin_config.path }}/composer.json --ansi
+                    vendor/bin/monorepo-builder localize-composer-paths ${{ fromJson(needs.matrix.outputs.plugin_config).path }}/composer.json --ansi
                 working-directory: .
 
             -   name: Install plugin dependencies, avoiding v2 platform check
@@ -212,13 +212,13 @@ jobs:
                     path: build
 
             -   name: Rename artifact to plugin name
-                run: mv build/scoped-plugin.zip build/${{ needs.matrix.outputs.plugin_config.zip_file }}
+                run: mv build/scoped-plugin.zip build/${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }}
 
             -   name: Upload final plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: generated-plugins
-                    path: build/${{ needs.matrix.outputs.plugin_config.zip_file }}
+                    path: build/${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }}
                     retention-days: 1
 
     # Only execute when doing a release
@@ -237,14 +237,14 @@ jobs:
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
                 with:
-                    args: build/${{ needs.matrix.outputs.plugin_config.zip_file }} application/zip
+                    args: build/${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }} application/zip
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/${{ needs.matrix.outputs.plugin_config.zip_file }} -d build/downgraded-graphql-api-for-wp
+                    args: unzip -qq build/${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }} -d build/downgraded-graphql-api-for-wp
             -
                 id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
