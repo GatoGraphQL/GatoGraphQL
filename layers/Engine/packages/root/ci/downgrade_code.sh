@@ -38,9 +38,10 @@ set -e
 # ----------------------------------------------------------------------
 
 rector_options="$1"
-rector_config="$2"
-target_php_version="$3"
-local_owners="$4"
+additional_rector_configs="$2"
+rector_config="$3"
+target_php_version="$4"
+local_owners="$5"
 
 default_rector_config="rector-downgrade-code.php"
 default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
@@ -113,3 +114,12 @@ fi
 packages=$(join_by " " ${packages_to_downgrade[@]})
 paths=$(join_by " " ${package_paths[@]})
 vendor/bin/rector process $paths --config=$rector_config --ansi $rector_options
+
+# Execute additional rector configs
+# They must be self contained, already including all the src/ folders to downgrade
+if [ -n "$additional_rector_configs" ]; then
+    for rector_config in $additional_rector_configs
+    do
+        vendor/bin/rector process --config=$rector_config --ansi $rector_options
+    done
+fi
