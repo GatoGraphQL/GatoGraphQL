@@ -254,7 +254,7 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    branch: 'master'
+                    branch: ${{ fromJson(needs.matrix.outputs.plugin_config).dist_repo_branch
                     package-directory: 'build/dist-plugin'
                     split-repository-organization: ${{ fromJson(needs.matrix.outputs.plugin_config).dist_repo_organization
                     split-repository-name: ${{ fromJson(needs.matrix.outputs.plugin_config).dist_repo_name

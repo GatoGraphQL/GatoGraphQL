@@ -39,6 +39,7 @@ final class PluginConfigEntriesJsonProvider
             'dist_repo_organization',
             'dist_repo_name',
         ];
+        $pluginConfigEntries = [];
         foreach ($this->pluginConfigEntries as $entryConfig) {
             $unprovidedEntries = array_diff(
                 $requiredEntries,
@@ -50,8 +51,13 @@ final class PluginConfigEntriesJsonProvider
                     implode("', '", $unprovidedEntries)
                 ));
             }
+
+            // If it doens't specify a branch, use "master" by default
+            $entryConfig['dist_repo_branch'] ??= 'master';
+
+            $pluginConfigEntries[] = $entryConfig;
         }
 
-        return $this->pluginConfigEntries;
+        return $pluginConfigEntries;
     }
 }
