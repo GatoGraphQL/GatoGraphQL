@@ -36,6 +36,8 @@ final class PluginConfigEntriesJsonProvider
             'path',
             'zip_file',
             'main_file',
+            'dist_repo_organization',
+            'dist_repo_name',
         ];
         foreach ($this->pluginConfigEntries as $entryConfig) {
             $unprovidedEntries = array_diff(

@@ -256,8 +256,8 @@ jobs:
                 with:
                     branch: 'master'
                     package-directory: 'build/dist-plugin'
-                    split-repository-organization: 'GraphQLAPI'
-                    split-repository-name: 'graphql-api-for-wp-dist'
+                    split-repository-organization: ${{ fromJson(needs.matrix.outputs.plugin_config).dist_repo_organization
+                    split-repository-name: ${{ fromJson(needs.matrix.outputs.plugin_config).dist_repo_name
                     tag: ${{ steps.previous_tag.outputs.tag }}
                     user-name: "leoloso"
                     user-email: "leo@getpop.org"
