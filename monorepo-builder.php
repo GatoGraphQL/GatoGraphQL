@@ -48,6 +48,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         [
             'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
             'zip_file' => 'graphql-api.zip',
+            'main_file' => 'graphql-api.php',
         ],
     ]);
 

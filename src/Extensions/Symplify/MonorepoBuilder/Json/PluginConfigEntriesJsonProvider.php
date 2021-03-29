@@ -32,7 +32,11 @@ final class PluginConfigEntriesJsonProvider
         /**
          * Validate that all required entries have been provided
          */
-        $requiredEntries = ['path', 'zip_file'];
+        $requiredEntries = [
+            'path',
+            'zip_file',
+            'main_file',
+        ];
         foreach ($this->pluginConfigEntries as $entryConfig) {
             $unprovidedEntries = array_diff(
                 $requiredEntries,

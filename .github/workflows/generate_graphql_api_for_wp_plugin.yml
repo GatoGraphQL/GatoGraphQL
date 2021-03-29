@@ -116,7 +116,7 @@ jobs:
 
             -   name: Replace PHP version in plugin main file
                 run: |
-                    sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' graphql-api.php
+                    sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' ${{ fromJson(needs.matrix.outputs.plugin_config).main_file }}
 
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
@@ -181,7 +181,7 @@ jobs:
 
             -   name: Use Scoper autoload in plugin main file
                 run: |
-                    sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
+                    sed -i 's/autoload.php/scoper-autoload.php/' ${{ fromJson(needs.matrix.outputs.plugin_config).main_file }}
                 working-directory: build/scoped-plugin
 
             # Zipping a folder from a different work dir
