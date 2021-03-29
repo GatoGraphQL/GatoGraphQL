@@ -90,7 +90,7 @@ if [ -n "$PACKAGES" ]; then
         if [ $package = "$rootPackage" ]
         then
             # downgrade the src/ folder only (i.e. make sure to avoid vendors/)
-            path=$(pwd)
+            path=$composer_working_dir
         else
             # Obtain the package's path from Composer
             # Format is "package path", so extract everything
