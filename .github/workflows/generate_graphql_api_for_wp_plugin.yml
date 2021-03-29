@@ -108,9 +108,6 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout code
-                uses: actions/checkout@v2
-
             -   name: Download artifact
                 uses: actions/download-artifact@v2
                 with:
@@ -133,17 +130,21 @@ jobs:
                 run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-code --ansi --no-interaction
                 working-directory: build/generated-plugin
 
-            -   name: Copy scoped code back into plugin
-                run: rsync -av build/prefixed-code/ build/generated-plugin/ --quiet
+            # Can't override original files, so also copy them to new folder
+            # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
+            -   name: Merge scoped + non-scoped plugin code
+                run: |
+                    rsync -av build/generated-code/ build/scoped-plugin/ --quiet
+                    rsync -av build/prefixed-code/ build/scoped-plugin/ --quiet
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
-                working-directory: build/generated-plugin
+                working-directory: build/scoped-plugin
 
             -   name: Use Scoper autoload in plugin main file
                 run: |
                     sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
-                working-directory: build/generated-plugin
+                working-directory: build/scoped-plugin
 
             # Zipping a folder from a different work dir
             -   name: Install zip
@@ -151,12 +152,12 @@ jobs:
 
             -   name: Create plugin as zip
                 run: zip -X -r ../graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
-                working-directory: build/generated-plugin
+                working-directory: build/scoped-plugin
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
-                    name: generated-plugin
+                    name: scoped-plugin
                     path: build/graphql-api.zip
                     retention-days: 1
 
