@@ -135,7 +135,7 @@ jobs:
             -   name: Merge scoped + non-scoped plugin code
                 run: |
                     mkdir build/scoped-plugin
-                    rsync -av build/generated-code/ build/scoped-plugin/ --quiet
+                    rsync -av build/generated-plugin/ build/scoped-plugin/ --quiet
                     rsync -av build/prefixed-code/ build/scoped-plugin/ --quiet
 
             -   name: Regenerate autoloader
