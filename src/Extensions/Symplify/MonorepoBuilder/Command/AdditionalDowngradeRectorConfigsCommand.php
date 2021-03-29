@@ -36,9 +36,7 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
     {
         $additionalDowngradeRectorConfigs = implode(' ', $this->additionalDowngradeRectorConfigs);
 
-        // must be without spaces, otherwise it breaks GitHub Actions json
-        $json = Json::encode($additionalDowngradeRectorConfigs);
-        $this->symfonyStyle->writeln($json);
+        $this->symfonyStyle->writeln($additionalDowngradeRectorConfigs);
 
         return ShellCode::SUCCESS;
     }
