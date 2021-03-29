@@ -163,7 +163,7 @@ jobs:
                 run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            -   name: Upload final plugin zip as artifact
+            -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: generated-plugins
