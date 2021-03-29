@@ -174,7 +174,7 @@ jobs:
 
             # Can't override original files, so also copy them to new folder
             # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
-            -   name: Merge scoped + non-scoped plugin code
+            -   name: Copy scoped code back to source folder
                 run: rsync -av build/prefixed-plugin/ ${{ matrix.pluginConfig.path }} --quiet
                 if: ${{ matrix.pluginConfig.scope }}
 
