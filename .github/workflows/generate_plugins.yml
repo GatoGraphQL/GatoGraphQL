@@ -104,13 +104,9 @@ jobs:
                     composer install --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+            # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.1)
-                run: $GITHUB_WORKSPACE/layers/Engine/packages/root/ci/downgrade_code.sh
-                working-directory: ${{ matrix.pluginConfig.path }}
-
-            # Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
-            -   name: (Hack) Dependencies - Downgrade PHP code via Rector - CacheItem
-                run: $GITHUB_WORKSPACE/vendor/bin/rector process --config=$GITHUB_WORKSPACE/rector-downgrade-code-hacks-CacheItem.php --ansi
+                run: $GITHUB_WORKSPACE/layers/Engine/packages/root/ci/downgrade_code.sh "" "${{ matrix.pluginConfig.additional_rector_configs }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Replace PHP version in plugin main file
