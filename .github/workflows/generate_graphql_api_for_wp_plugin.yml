@@ -38,7 +38,7 @@ jobs:
         defaults:
             run:
                 working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
-        name: Downgrade code, Build plugin, and Upload as artifact
+        name: Build plugin and Downgrade its code
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
@@ -84,27 +84,6 @@ jobs:
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
 
-            -   name: Install PHP-Scoper
-                run: |
-                    composer global config minimum-stability dev
-                    composer global config prefer-stable true
-                    composer global require humbug/php-scoper
-
-            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../../../../build-prefixed/vendor"
-            -   name: Scope plugin into separate folder
-                run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi --no-interaction
-
-            -   name: Copy scoped code back into plugin
-                run: rsync -av build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ --quiet
-                working-directory: .
-
-            -   name: Regenerate autoloader
-                run: composer dumpautoload --optimize --classmap-authoritative --ansi
-
-            -   name: Use Scoper autoload in plugin main file
-                run: |
-                    sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
-
             -   name: Create build folder
                 run: mkdir build
                 working-directory: .
@@ -114,32 +93,108 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             -   name: Create plugin as zip
-                run: zip -X -r ../../../../build/graphql-api.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                run: zip -X -r ../../../../build/downgraded-plugin.zip .
 
-            -   name: Upload plugin zip as artifact
+            -   name: Upload job output zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
-                    name: generated-plugin
+                    name: job-assets
+                    path: build/downgraded-plugin.zip
+                    retention-days: 1
+
+    # Only execute when enabled by configuration
+    scope:
+        name: Scope plugin
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Download artifact
+                uses: actions/download-artifact@v2
+                with:
+                    name: job-assets
+                    path: build
+
+            -   name: Uncompress artifact
+                uses: montudor/action-zip@v0.1.0
+                with:
+                    args: unzip -qq build/downgraded-plugin.zip -d build/downgraded-plugin
+
+            -   name: Install PHP-Scoper
+                run: |
+                    composer global config minimum-stability dev
+                    composer global config prefer-stable true
+                    composer global require humbug/php-scoper
+
+            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-plugin/vendor"
+            -   name: Scope plugin into separate folder
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-plugin --ansi --no-interaction
+                working-directory: build/downgraded-plugin
+
+            # Can't override original files, so also copy them to new folder
+            # @see https://github.community/t/how-to-run-actions-checkout-v1-with-sudo-privileges/17436/11
+            -   name: Merge scoped + non-scoped plugin code
+                run: |
+                    mkdir build/scoped-plugin
+                    rsync -av build/downgraded-plugin/ build/scoped-plugin/ --quiet
+                    rsync -av build/prefixed-plugin/ build/scoped-plugin/ --quiet
+
+            -   name: Regenerate autoloader
+                run: composer dumpautoload --optimize --classmap-authoritative --ansi
+                working-directory: build/scoped-plugin
+
+            -   name: Use Scoper autoload in plugin main file
+                run: |
+                    sed -i 's/autoload.php/scoper-autoload.php/' graphql-api.php
+                working-directory: build/scoped-plugin
+
+            # Zipping a folder from a different work dir
+            -   name: Install zip
+                uses: montudor/action-zip@v0.1.1
+
+            -   name: Create plugin as zip
+                run: zip -X -r ../scoped-plugin.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json dev-helpers/\* lando/\* docs/images/\* tests/\* **/tests/\*
+                working-directory: build/scoped-plugin
+
+            -   name: Upload job output zip as artifact
+                uses: actions/upload-artifact@v2
+                with:
+                    name: job-assets
+                    path: build/scoped-plugin.zip
+                    retention-days: 1
+
+    # Only execute when doing a release
+    upload_final_plugin_as_artifact:
+        name: Rename the artifact to the plugin name
+        needs: scope
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Download artifact
+                uses: actions/download-artifact@v2
+                with:
+                    name: job-assets
+                    path: build
+
+            -   name: Rename artifact to plugin name
+                run: mv build/scoped-plugin.zip build/graphql-api.zip
+
+            -   name: Upload final plugin zip as artifact
+                uses: actions/upload-artifact@v2
+                with:
+                    name: generated-plugins
                     path: build/graphql-api.zip
                     retention-days: 1
 
     # Only execute when doing a release
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
-        needs: build
+        needs: upload_final_plugin_as_artifact
         if: github.event_name == 'release'
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout code
-                uses: actions/checkout@v2
-
-            -   name: Create build folder
-                run: mkdir build
-
             -   name: Download artifact
                 uses: actions/download-artifact@v2
                 with:
-                    name: generated-plugin
+                    name: generated-plugins
                     path: build
 
             -   name: Upload to release
