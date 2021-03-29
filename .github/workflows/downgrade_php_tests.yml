@@ -53,7 +53,7 @@ jobs:
 
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Dependencies - Downgrade PHP code via Rector
-                run: layers/Engine/packages/root/ci/downgrade_code.sh "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
+                run: ci/downgrade_code.sh "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
 
             # Prepare for testing on PHP 7.1
             -   name: Install PHP Parallel Lint
