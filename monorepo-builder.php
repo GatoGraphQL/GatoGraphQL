@@ -65,7 +65,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'zip_file' => 'graphql-api-convert-case-directives.zip',
             'main_file' => 'graphql-api-convert-case-directives.php',
             'dist_repo_organization' => 'GraphQLAPI',
-            'dist_repo_name' => 'convert-case-directives-dist',
+            'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
         ],
     ]);
 
