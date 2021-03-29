@@ -127,7 +127,7 @@ jobs:
 
             # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-code/vendor"
             -   name: Scope plugin into separate folder
-                run: php-scoper add-prefix --output-dir ../prefixed-code --ansi --no-interaction
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir ../prefixed-code --ansi --no-interaction
                 working-directory: build/generated-plugin
 
             -   name: Copy scoped code back into plugin
