@@ -38,12 +38,14 @@ set -e
 # ----------------------------------------------------------------------
 
 rector_options="$1"
-additional_rector_configs="$2"
-rector_config="$3"
-target_php_version="$4"
-local_owners="$5"
+composer_working_dir="$2"
+additional_rector_configs="$3"
+rector_config="$4"
+target_php_version="$5"
+local_owners="$6"
 
 default_rector_config="rector-downgrade-code.php"
+default_composer_working_dir="."
 default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
 ########################################################################
@@ -51,6 +53,7 @@ default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-s
 # ----------------------------------------------------------------------
 
 rector_config=(${rector_config:=$default_rector_config})
+composer_working_dir=(${composer_working_dir:=$default_composer_working_dir})
 local_package_owners=(${local_owners:=$default_local_owners})
 
 ########################################################################
@@ -59,19 +62,19 @@ local_package_owners=(${local_owners:=$default_local_owners})
 
 packages_to_downgrade=()
 package_paths=()
-rootPackage=$(composer info -s -N)
+rootPackage=$(composer info -s -N --working-dir=$composer_working_dir)
 
 # Downgrade only packages that need a higher version that the input one, or all of them
 if [ -n "$target_php_version" ]; then
     why_not_version="${target_php_version}.*"
     # Switch to production, to calculate the packages
-    composer install --no-dev --no-progress --ansi
-    PACKAGES=$(composer why-not php "$why_not_version" --no-interaction | grep -o "\S*\/\S*")
+    composer install --no-dev --no-progress --ansi --working-dir=$composer_working_dir
+    PACKAGES=$(composer why-not php "$why_not_version" --no-interaction --working-dir=$composer_working_dir | grep -o "\S*\/\S*")
     # Switch to dev again
-    composer install --no-progress --ansi
+    composer install --no-progress --ansi --working-dir=$composer_working_dir
 else
     # Also add the root package
-    PACKAGES="$rootPackage $(composer info --name-only --no-dev)"
+    PACKAGES="$rootPackage $(composer info --name-only --no-dev --working-dir=$composer_working_dir)"
 fi
 
 # Ignore all the "migrate" packages
@@ -92,7 +95,7 @@ if [ -n "$PACKAGES" ]; then
             # Obtain the package's path from Composer
             # Format is "package path", so extract everything
             # after the 1st word with cut to obtain the path
-            path=$(composer info $package --path | cut -d' ' -f2-)
+            path=$(composer info $package --path --working-dir=$composer_working_dir | cut -d' ' -f2-)
         fi
 
         # Optmization: For local dependencies, only analyze src/
