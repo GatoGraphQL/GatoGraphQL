@@ -71,7 +71,7 @@ jobs:
             plugin_config: ${{ steps.output_data.outputs.plugin_config }}
 
     build_and_downgrade:
-        name: Build plugin and Downgrade its code (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
+        name: Build plugin and Downgrade code (${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }})
         needs: [provide_data, matrix]
         runs-on: ubuntu-latest
         defaults:
