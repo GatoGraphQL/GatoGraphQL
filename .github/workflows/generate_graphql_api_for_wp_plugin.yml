@@ -244,7 +244,7 @@ jobs:
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }} -d build/downgraded-graphql-api-for-wp
+                    args: unzip -qq build/${{ fromJson(needs.matrix.outputs.plugin_config).zip_file }} -d build/dist-plugin
             -
                 id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
@@ -255,7 +255,7 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
                     branch: 'master'
-                    package-directory: 'build/downgraded-graphql-api-for-wp'
+                    package-directory: 'build/dist-plugin'
                     split-repository-organization: 'GraphQLAPI'
                     split-repository-name: 'graphql-api-for-wp-dist'
                     tag: ${{ steps.previous_tag.outputs.tag }}
