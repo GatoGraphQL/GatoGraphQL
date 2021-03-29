@@ -98,7 +98,7 @@ jobs:
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
-                    name: downgraded-plugin
+                    name: job-asset
                     path: build/downgraded-code.zip
                     retention-days: 1
 
@@ -111,7 +111,7 @@ jobs:
             -   name: Download artifact
                 uses: actions/download-artifact@v2
                 with:
-                    name: downgraded-plugin
+                    name: job-asset
                     path: build
 
             -   name: Uncompress artifact
@@ -158,7 +158,7 @@ jobs:
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
-                    name: scoped-plugin
+                    name: job-asset
                     path: build/graphql-api.zip
                     retention-days: 1
 
@@ -178,7 +178,7 @@ jobs:
             -   name: Download artifact
                 uses: actions/download-artifact@v2
                 with:
-                    name: generated-plugin
+                    name: job-asset
                     path: build
 
             -   name: Upload to release
