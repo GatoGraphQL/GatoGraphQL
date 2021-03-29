@@ -52,21 +52,31 @@ jobs:
             -   id: output_data
                 run: |
                     echo "::set-output name=plugin_config_entries::$(vendor/bin/monorepo-builder plugin-config-entries-json)"
-
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 
-    build_and_downgrade:
-        name: Build plugin and Downgrade its code
+    matrix:
+        name: Initialize Matrix
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
                 pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
+        steps:
+            -   id: output_data
+                run: |
+                    echo "::set-output name=plugin_config::${{ toJson(matrix.pluginConfig) }}"
+        outputs:
+            plugin_config: ${{ steps.output_data.outputs.plugin_config }}
+
+    build_and_downgrade:
+        name: Build plugin and Downgrade its code
+        needs: [provide_data, matrix]
+        runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: ${{ matrix.pluginConfig.path }}
+                working-directory: ${{ needs.matrix.outputs.plugin_config.path }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -89,7 +99,7 @@ jobs:
             -   name: Localize package paths
                 run: |
                     vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
-                    vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
+                    vendor/bin/monorepo-builder localize-composer-paths ${{ needs.matrix.outputs.plugin_config.path }}/composer.json --ansi
                 working-directory: .
 
             -   name: Install plugin dependencies, avoiding v2 platform check
@@ -132,7 +142,7 @@ jobs:
     # Only execute when enabled by configuration
     scope:
         name: Scope plugin
-        needs: build_and_downgrade
+        needs: [build_and_downgrade, matrix]
         runs-on: ubuntu-latest
         steps:
             -   name: Download artifact
@@ -190,9 +200,9 @@ jobs:
                     retention-days: 1
 
     # Only execute when doing a release
-    upload_final_plugin_as_artifact:
+    upload_plugin_as_artifact:
         name: Rename the artifact to the plugin name
-        needs: scope
+        needs: [scope, matrix]
         runs-on: ubuntu-latest
         steps:
             -   name: Download artifact
@@ -202,19 +212,19 @@ jobs:
                     path: build
 
             -   name: Rename artifact to plugin name
-                run: mv build/scoped-plugin.zip build/${{ matrix.pluginConfig.zip_file }}
+                run: mv build/scoped-plugin.zip build/${{ needs.matrix.outputs.plugin_config.zip_file }}
 
             -   name: Upload final plugin zip as artifact
                 uses: actions/upload-artifact@v2
                 with:
                     name: generated-plugins
-                    path: build/${{ matrix.pluginConfig.zip_file }}
+                    path: build/${{ needs.matrix.outputs.plugin_config.zip_file }}
                     retention-days: 1
 
     # Only execute when doing a release
     upload_and_deploy:
         name: Upload release, and deploy to DIST repo
-        needs: upload_final_plugin_as_artifact
+        needs: [upload_plugin_as_artifact, matrix]
         if: github.event_name == 'release'
         runs-on: ubuntu-latest
         steps:
@@ -227,14 +237,14 @@ jobs:
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
                 with:
-                    args: build/${{ matrix.pluginConfig.zip_file }} application/zip
+                    args: build/${{ needs.matrix.outputs.plugin_config.zip_file }} application/zip
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Uncompress artifact
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }} -d build/downgraded-graphql-api-for-wp
+                    args: unzip -qq build/${{ needs.matrix.outputs.plugin_config.zip_file }} -d build/downgraded-graphql-api-for-wp
             -
                 id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
