@@ -67,6 +67,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
         ],
+        // GraphQL API - Events Manager
+        [
+            'path' => 'layers/GraphQLAPIForWP/plugins/events-manager',
+            'zip_file' => 'graphql-api-events-manager.zip',
+            'main_file' => 'graphql-api-events-manager.php',
+            'dist_repo_organization' => 'GraphQLAPI',
+            'dist_repo_name' => 'graphql-api-events-manager-dist',
+        ],
     ]);
 
     /**
