@@ -31,10 +31,10 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     {
         switch ($module[1]) {
             case self::MODULE_EM_BUTTON_GOOGLECALENDAR:
-                return 'googlecalendar';
-        
+                return 'googleCalendarURL';
+
             case self::MODULE_EM_BUTTON_ICAL:
-                return 'ical';
+                return 'icalURL';
         }
 
         return parent::getUrlField($module);
@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             case self::MODULE_EM_BUTTON_ICAL:
                 return '_blank';
         }
-        
+
         return parent::getLinktarget($module, $props);
     }
 
@@ -60,7 +60,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
             case self::MODULE_EM_BUTTON_ICAL:
                 return TranslationAPIFacade::getInstance()->__('iCal', 'em-popprocessors');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 }

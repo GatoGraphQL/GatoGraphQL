@@ -26,8 +26,8 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'startDate',
             'endDate',
             'isAllDay',
-            'googlecalendar',
-            'ical',
+            'googleCalendarURL',
+            'icalURL',
         ];
     }
 
@@ -38,8 +38,8 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'startDate' => SchemaDefinition::TYPE_STRING,
             'endDate' => SchemaDefinition::TYPE_STRING,
             'isAllDay' => SchemaDefinition::TYPE_BOOL,
-            'googlecalendar' => SchemaDefinition::TYPE_URL,
-            'ical' => SchemaDefinition::TYPE_URL,
+            'googleCalendarURL' => SchemaDefinition::TYPE_URL,
+            'icalURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -63,8 +63,8 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'startDate' => $translationAPI->__('Event\'s start ate', 'events'),
             'endDate' => $translationAPI->__('Event\'s end date', 'events'),
             'isAllDay' => $translationAPI->__('Is the event all day long?', 'events'),
-            'googlecalendar' => $translationAPI->__('Event\'s Google calendar URL', 'events'),
-            'ical' => $translationAPI->__('Event\'s Ical URL', 'events'),
+            'googleCalendarURL' => $translationAPI->__('Event\'s Google calendar URL', 'events'),
+            'icalURL' => $translationAPI->__('Event\'s Ical URL', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -100,10 +100,10 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             case 'isAllDay':
                 return $eventTypeAPI->isAllDay($event);
 
-            case 'googlecalendar':
+            case 'googleCalendarURL':
                 return $eventTypeAPI->getGooglecalendarUrl($event);
 
-            case 'ical':
+            case 'icalURL':
                 return $eventTypeAPI->getIcalUrl($event);
         }
 
