@@ -19,6 +19,7 @@
         "pop-schema/events": "^0.8"
     },
     "require-dev": {
+        "wpackagist-plugin/events-manager":"^5.9",
         "graphql-api/graphql-api-for-wp": "^0.8",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
