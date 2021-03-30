@@ -19,7 +19,7 @@ class PlaceholderHooks extends AbstractHookSet
         );
     }
 
-    public function getEventOutputEventDates(string $attString, EM_Event $event, string $format): string
+    public function getEventOutputEventDates(?string $attString, EM_Event $event, string $format): ?string
     {
         preg_match_all("/(#@?_?[A-Za-z0-9]+)({([a-zA-Z0-9_,]+)})?/", $format, $placeholders);
         foreach ($placeholders[1] as $key => $result) {
