@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\TypeDataLoaders;
 
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\Locations\Facades\LocationTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class LocationTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
     public function getObjects(array $ids): array
     {
-        $pluginapi = \PoP_Locations_APIFactory::getInstance();
-        $query = array(
+        $locationTypeAPI = LocationTypeAPIFacade::getInstance();
+        $query = [
             'include' => $ids,
             'limit' => -1,
-        );
-        return $pluginapi->getLocations($query);
+        ];
+        return $locationTypeAPI->getLocations($query);
     }
 
     public function executeQueryIds($query): array
@@ -46,7 +47,7 @@ class LocationTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = [])
     {
-        $pluginapi = \PoP_Locations_APIFactory::getInstance();
-        return $pluginapi->getLocations($query, $options);
+        $locationTypeAPI = LocationTypeAPIFacade::getInstance();
+        return $locationTypeAPI->getLocations($query, $options);
     }
 }

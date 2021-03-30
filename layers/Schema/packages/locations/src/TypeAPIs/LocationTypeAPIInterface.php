@@ -17,4 +17,11 @@ interface LocationTypeAPIInterface
      * Indicates if the passed object is of type Location
      */
     public function isInstanceOfLocationType(object $object): bool;
+    public function getLocation(string | int $location_id): object;
+    public function getLocations($args = array(), array $options = []): array;
+    public function getLatitude(object $location): string;
+    public function getLongitude(object $location): string;
+    public function getName(object $location): string;
+    public function getAddress(object $location): string;
+    public function getCity(object $location): string;
 }
