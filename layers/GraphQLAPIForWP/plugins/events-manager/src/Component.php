@@ -14,7 +14,7 @@ class Component extends AbstractExtensionComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Events\Component::class,
+            \PoPSchema\EventsWPEM\Component::class,
         ];
     }
 }
