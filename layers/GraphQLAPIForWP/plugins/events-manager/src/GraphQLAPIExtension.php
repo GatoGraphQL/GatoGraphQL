@@ -36,6 +36,7 @@ class GraphQLAPIExtension extends AbstractExtension
     {
         return [
             SchemaModuleResolver::SCHEMA_EVENTS => [
+                \PoPSchema\Locations\Component::class,
                 \PoPSchema\Events\Component::class,
             ],
         ];
