@@ -1,6 +1,5 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 
 // Extension: adding more conditionals: has_attendees and no_attendees
 HooksAPIFacade::getInstance()->addFilter('em_event_output_show_condition', 'gdEmEventOutputShowCondition', 10, 4);
@@ -88,36 +87,4 @@ function gdEmEventOutputEventAuthor($output, $event, $format, $target)
     }
 
     return $output;
-}
-
-/*
- * For the FullCalendar
- */
-HooksAPIFacade::getInstance()->addFilter('em_event_output_placeholder', 'gdEmEventOutputEventDates', 10, 4);
-function gdEmEventOutputEventDates($attString, $event, $format, $target)
-{
-    preg_match_all("/(#@?_?[A-Za-z0-9]+)({([a-zA-Z0-9_,]+)})?/", $format, $placeholders);
-    foreach ($placeholders[1] as $key => $result) {
-        switch ($result) {
-            case '#_EVENTDATESTART':
-            case '#_EVENTDATEEND':
-                // Possible Formats required: http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
-                // WP Formats: http://codex.wordpress.org/Formatting_Date_and_Time
-                $date_format = 'c'; // ISO8601
-
-                if ($result == '#_EVENTDATESTART') {
-                    $date = $event->start;
-                } else {
-                    $date = $event->end;
-                }
-                $attString = date_i18n($date_format, $date);
-                break;
-
-            case '#_EVENTALLDAY':
-                $attString = $event->event_all_day;
-                break;
-        }
-    }
-
-    return $attString;
 }

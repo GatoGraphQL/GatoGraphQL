@@ -136,6 +136,11 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
             unset($query['categories']);
         }
 
+        // Order
+        if (($query['orderby'] ?? null) === 'title') {
+            $query['orderby'] = 'event_name';
+        }
+
         // Profile
         $query['owner'] = false;
         if (isset($query['authors'])) {

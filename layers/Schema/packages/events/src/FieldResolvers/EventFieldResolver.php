@@ -8,10 +8,8 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class EventFieldResolver extends AbstractDBDataFieldResolver
@@ -25,18 +23,11 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'location',
-            'locations',
-            'categories',
-            'dates',
-            'times',
             'startDate',
-            'startDateReadable',
             'endDate',
-            'allDay',
-            'googlecalendar',
-            'ical',
-            'daterange',
-            'daterangetime',
+            'isAllDay',
+            'googleCalendarURL',
+            'icalURL',
         ];
     }
 
@@ -44,18 +35,11 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'location' => SchemaDefinition::TYPE_ID,
-            'locations' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'dates' => SchemaDefinition::TYPE_STRING,
-            'times' => SchemaDefinition::TYPE_STRING,
             'startDate' => SchemaDefinition::TYPE_STRING,
-            'startDateReadable' => SchemaDefinition::TYPE_STRING,
             'endDate' => SchemaDefinition::TYPE_STRING,
-            'allDay' => SchemaDefinition::TYPE_BOOL,
-            'googlecalendar' => SchemaDefinition::TYPE_URL,
-            'ical' => SchemaDefinition::TYPE_URL,
-            'daterange' => SchemaDefinition::TYPE_OBJECT,
-            'daterangetime' => SchemaDefinition::TYPE_OBJECT,
+            'isAllDay' => SchemaDefinition::TYPE_BOOL,
+            'googleCalendarURL' => SchemaDefinition::TYPE_URL,
+            'icalURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -63,15 +47,9 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         switch ($fieldName) {
-            case 'categories':
-            case 'dates':
-            case 'times':
             case 'startDate':
-            case 'startDateReadable':
             case 'endDate':
-            case 'allDay':
-            case 'daterange':
-            case 'daterangetime':
+            case 'isAllDay':
                 return true;
         }
         return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
@@ -81,19 +59,12 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'location' => $translationAPI->__('', ''),
-            'locations' => $translationAPI->__('', ''),
-            'categories' => $translationAPI->__('', ''),
-            'dates' => $translationAPI->__('', ''),
-            'times' => $translationAPI->__('', ''),
-            'startDate' => $translationAPI->__('', ''),
-            'startDateReadable' => $translationAPI->__('', ''),
-            'endDate' => $translationAPI->__('', ''),
-            'allDay' => $translationAPI->__('', ''),
-            'googlecalendar' => $translationAPI->__('', ''),
-            'ical' => $translationAPI->__('', ''),
-            'daterange' => $translationAPI->__('', ''),
-            'daterangetime' => $translationAPI->__('', ''),
+            'location' => $translationAPI->__('Event\'s location', 'events'),
+            'startDate' => $translationAPI->__('Event\'s start ate', 'events'),
+            'endDate' => $translationAPI->__('Event\'s end date', 'events'),
+            'isAllDay' => $translationAPI->__('Is the event all day long?', 'events'),
+            'googleCalendarURL' => $translationAPI->__('Event\'s Google calendar URL', 'events'),
+            'icalURL' => $translationAPI->__('Event\'s Ical URL', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -114,69 +85,26 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $cmstagsresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
              // Override the url param to point to the original file
             case 'location':
                 return $eventTypeAPI->getLocation($event);
 
-             // Override 'locations' field
-            case 'locations':
-                // Events can have no location
-                $value = array();
-                $location = $typeResolver->resolveValue($event, 'location', $variables, $expressions, $options);
-                if (GeneralUtils::isError($location)) {
-                    return $location;
-                } elseif ($location) {
-                    $value[] = $location;
-                }
-                return $value;
-
-             // Override
-            case 'categories':
-                return array_keys($eventTypeAPI->getCategories($event));
-
-            case 'dates':
-                return $eventTypeAPI->getDates($event);
-
-            case 'times':
-                return $eventTypeAPI->getTimes($event);
-
             case 'startDate':
                 return $eventTypeAPI->getStartDate($event);
-
-            case 'startDateReadable':
-                return $eventTypeAPI->getFormattedStartDate($event, 'd/m');
 
             case 'endDate':
                 return $eventTypeAPI->getEndDate($event);
 
-            case 'allDay':
+            case 'isAllDay':
                 return $eventTypeAPI->isAllDay($event);
 
-            case 'googlecalendar':
+            case 'googleCalendarURL':
                 return $eventTypeAPI->getGooglecalendarUrl($event);
 
-            case 'ical':
+            case 'icalURL':
                 return $eventTypeAPI->getIcalUrl($event);
-
-            case 'daterange':
-                return array(
-                    'from' => $eventTypeAPI->getFormattedStartDate($event, 'Y-m-d'),
-                    'to' => $eventTypeAPI->getFormattedEndDate($event, 'Y-m-d'),
-                    'readable' => $eventTypeAPI->getFormattedStartDate($event, 'd/m/Y') . ' - ' . $eventTypeAPI->getFormattedEndDate($event, 'd/m/Y'),
-                );
-
-            case 'daterangetime':
-                return array(
-                    'from' => $eventTypeAPI->getFormattedStartDate($event, 'Y-m-d'),
-                    'to' => $eventTypeAPI->getFormattedEndDate($event, 'Y-m-d'),
-                    'fromtime' => $eventTypeAPI->getFormattedStartDate($event, 'H:i'),
-                    'totime' => $eventTypeAPI->getFormattedEndDate($event, 'H:i'),
-                    'readable' => $eventTypeAPI->getFormattedStartDate($event, 'd/m/Y h:i A') . ' - ' . $eventTypeAPI->getFormattedEndDate($event, 'd/m/Y h:i A'),
-                );
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -186,7 +114,6 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'location':
-            case 'locations':
                 return LocationTypeResolver::class;
         }
 

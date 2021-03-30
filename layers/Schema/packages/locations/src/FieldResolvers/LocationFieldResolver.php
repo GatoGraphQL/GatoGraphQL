@@ -8,6 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\Locations\Facades\LocationTypeAPIFacade;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 
 class LocationFieldResolver extends AbstractDBDataFieldResolver
@@ -65,23 +66,23 @@ class LocationFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $pluginapi = \PoP_Locations_APIFactory::getInstance();
+        $locationTypeAPI = LocationTypeAPIFacade::getInstance();
         $location = $resultItem;
         switch ($fieldName) {
             case 'coordinates':
                 return array(
-                    'lat' => $pluginapi->getLatitude($location),
-                    'lng' => $pluginapi->getLongitude($location),
+                    'lat' => $locationTypeAPI->getLatitude($location),
+                    'lng' => $locationTypeAPI->getLongitude($location),
                 );
 
             case 'name':
-                return $pluginapi->getName($location);
+                return $locationTypeAPI->getName($location);
 
             case 'address':
-                return $pluginapi->getAddress($location);
+                return $locationTypeAPI->getAddress($location);
 
             case 'city':
-                return $pluginapi->getCity($location);
+                return $locationTypeAPI->getCity($location);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

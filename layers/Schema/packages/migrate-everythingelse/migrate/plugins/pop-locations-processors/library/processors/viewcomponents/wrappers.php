@@ -63,7 +63,7 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS:
-                return 'hasLocations';
+                return 'hasLocation';
         }
 
         return null;

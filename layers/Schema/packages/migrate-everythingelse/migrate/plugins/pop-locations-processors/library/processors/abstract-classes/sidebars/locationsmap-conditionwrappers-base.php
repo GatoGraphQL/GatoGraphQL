@@ -28,7 +28,7 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
 
     public function getConditionField(array $module): ?string
     {
-        return 'hasLocations';
+        return 'hasLocation';
     }
 
     public function getConditionFailedSubmodules(array $module)

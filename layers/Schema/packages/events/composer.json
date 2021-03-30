@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/customposts": "^0.8",
-        "pop-schema/locations": "^0.8",
-        "pop-schema/migrate-events": "^0.8"
+        "pop-schema/locations": "^0.8"
     },
     "require-dev": {
         "pop-schema/users": "^0.8",

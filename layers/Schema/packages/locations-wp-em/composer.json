@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/locations": "^0.8",
-        "getpop/engine-wp": "^0.8",
-        "pop-schema/migrate-locations-wp-em": "^0.8"
+        "getpop/engine-wp": "^0.8"
     },
     "require-dev": {
         "wpackagist-plugin/events-manager": "^5.9",

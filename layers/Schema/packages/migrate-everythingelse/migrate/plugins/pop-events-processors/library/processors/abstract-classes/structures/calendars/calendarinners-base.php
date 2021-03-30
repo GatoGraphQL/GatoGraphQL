@@ -10,12 +10,12 @@ abstract class PoP_Module_Processor_CalendarInnersBase extends PoP_Module_Proces
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);
-    
+
         $ret = array_merge(
             $ret,
-            array('author', 'title', 'startDate', 'endDate', 'allDay')
+            array('author', 'title', 'startDate', 'endDate', 'isAllDay')
         );
-        
+
         return $ret;
     }
 }

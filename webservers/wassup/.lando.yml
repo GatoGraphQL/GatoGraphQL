@@ -200,8 +200,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-customposts-wp:/app/vendor/pop-schema/migrate-customposts-wp
         - >-
-          ../../layers/Schema/packages/migrate-events:/app/vendor/pop-schema/migrate-events
-        - >-
           ../../layers/Schema/packages/migrate-events-wp-em:/app/vendor/pop-schema/migrate-events-wp-em
         - >-
           ../../layers/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse

@@ -15,6 +15,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoPSchema\Events\Constants\Scopes;
 
 class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -29,8 +30,6 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         return [
             'scope',
-            'multilayoutKeys',
-            'latestcountsTriggerValues',
         ];
     }
 
@@ -38,8 +37,6 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         $types = [
             'scope' => SchemaDefinition::TYPE_ENUM,
-            'multilayoutKeys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'latestcountsTriggerValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -48,9 +45,7 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'scope' => $translationAPI->__('', ''),
-            'multilayoutKeys' => $translationAPI->__('', ''),
-            'latestcountsTriggerValues' => $translationAPI->__('', ''),
+            'scope' => $translationAPI->__('Event\'s scope (future, current, past)', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -103,33 +98,11 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         switch ($fieldName) {
             case 'scope':
                 if ($eventTypeAPI->isFutureEvent($typeResolver->getID($event))) {
-                    return \POP_EVENTS_SCOPE_FUTURE;
+                    return Scopes::FUTURE;
                 } elseif ($eventTypeAPI->isCurrentEvent($typeResolver->getID($event))) {
-                    return \POP_EVENTS_SCOPE_CURRENT;
+                    return Scopes::CURRENT;
                 }
-                return \POP_EVENTS_SCOPE_PAST;
-
-            case 'multilayoutKeys':
-                // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
-                $scope = $typeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
-                if (GeneralUtils::isError($scope)) {
-                    return $scope;
-                }
-                $type = strtolower($typeResolver->getTypeName());
-                return array(
-                    $type . '-' . $scope,
-                    $type,
-                );
-
-            case 'latestcountsTriggerValues':
-                $scope = $typeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
-                if (GeneralUtils::isError($scope)) {
-                    return $scope;
-                }
-                $type = strtolower($typeResolver->getTypeName());
-                return array(
-                    $type . '-' . $scope,
-                );
+                return Scopes::PAST;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
