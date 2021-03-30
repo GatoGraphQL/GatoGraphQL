@@ -23,9 +23,8 @@ register_activation_hook(__FILE__, function (): void {
     \update_option('graphql-api-extension', true);
 });
 
-// If the GraphQL API plugin is active => Create and set-up the extension
 add_action('plugins_loaded', function (): void {
-    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin') || !defined('EM_VERSION')) {
         return;
     }
 
