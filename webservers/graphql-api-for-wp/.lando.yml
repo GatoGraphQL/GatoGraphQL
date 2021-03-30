@@ -277,7 +277,11 @@ services:
         - >-
           ../../layers/Schema/packages/events:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/events
         - >-
+          ../../layers/Schema/packages/events-wp-em:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/events-wp-em
+        - >-
           ../../layers/Schema/packages/locations:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/locations
+        - >-
+          ../../layers/Schema/packages/locations-wp-em:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/locations-wp-em
     run:
       - >-
         wp config create --dbname=wordpress --dbuser=wordpress
