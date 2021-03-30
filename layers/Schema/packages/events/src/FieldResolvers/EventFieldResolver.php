@@ -32,7 +32,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'startDate',
             'startDateReadable',
             'endDate',
-            'allDay',
+            'isAllDay',
             'googlecalendar',
             'ical',
             'daterange',
@@ -51,7 +51,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'startDate' => SchemaDefinition::TYPE_STRING,
             'startDateReadable' => SchemaDefinition::TYPE_STRING,
             'endDate' => SchemaDefinition::TYPE_STRING,
-            'allDay' => SchemaDefinition::TYPE_BOOL,
+            'isAllDay' => SchemaDefinition::TYPE_BOOL,
             'googlecalendar' => SchemaDefinition::TYPE_URL,
             'ical' => SchemaDefinition::TYPE_URL,
             'daterange' => SchemaDefinition::TYPE_OBJECT,
@@ -69,7 +69,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             case 'startDate':
             case 'startDateReadable':
             case 'endDate':
-            case 'allDay':
+            case 'isAllDay':
             case 'daterange':
             case 'daterangetime':
                 return true;
@@ -89,7 +89,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             'startDate' => $translationAPI->__('Event\'s start ate', 'events'),
             'startDateReadable' => $translationAPI->__('Event\'s start date in human-readable format', 'events'),
             'endDate' => $translationAPI->__('Event\'s end date', 'events'),
-            'allDay' => $translationAPI->__('Is the event all day long?', 'events'),
+            'isAllDay' => $translationAPI->__('Is the event all day long?', 'events'),
             'googlecalendar' => $translationAPI->__('Event\'s Google calendar URL', 'events'),
             'ical' => $translationAPI->__('Event\'s Ical URL', 'events'),
             'daterange' => $translationAPI->__('Event\'s date range', 'events'),
@@ -151,7 +151,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             case 'endDate':
                 return $eventTypeAPI->getEndDate($event);
 
-            case 'allDay':
+            case 'isAllDay':
                 return $eventTypeAPI->isAllDay($event);
 
             case 'googlecalendar':
