@@ -66,7 +66,7 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
     public function getName(string $module): string
     {
         $names = [
-            self::CONVERT_CASE_DIRECTIVES => \__('Directive Set: Convert Lower/Title/Upper case', 'graphql-api'),
+            self::CONVERT_CASE_DIRECTIVES => \__('Directive Set: Convert Lower/Title/Upper case', 'graphql-api-convert-case-directives'),
         ];
         return $names[$module] ?? $module;
     }
@@ -76,7 +76,7 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         switch ($module) {
             case self::CONVERT_CASE_DIRECTIVES:
                 return sprintf(
-                    \__('Set of directives to manipulate strings: <code>@%s</code>, <code>@%s</code> and <code>@%s</code>', 'graphql-api'),
+                    \__('Set of directives to manipulate strings: <code>@%s</code>, <code>@%s</code> and <code>@%s</code>', 'graphql-api-convert-case-directives'),
                     $this->upperCaseStringDirectiveResolver->getDirectiveName(),
                     $this->lowerCaseStringDirectiveResolver->getDirectiveName(),
                     $this->titleCaseStringDirectiveResolver->getDirectiveName()
