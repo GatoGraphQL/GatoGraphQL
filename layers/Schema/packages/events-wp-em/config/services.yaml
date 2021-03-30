@@ -8,3 +8,6 @@ services:
 
     PoPSchema\EventsWPEM\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPSchema\EventsWPEM\Hooks\:
+        resource: '../src/Hooks/*'

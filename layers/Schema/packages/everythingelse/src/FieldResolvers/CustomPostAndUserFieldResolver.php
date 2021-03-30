@@ -26,7 +26,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'hasLocations',
+            'hasLocation',
             'location',
         ];
     }
@@ -34,7 +34,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'hasLocations' => SchemaDefinition::TYPE_BOOL,
+            'hasLocation' => SchemaDefinition::TYPE_BOOL,
             'location' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -43,7 +43,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
-            'hasLocations',
+            'hasLocation',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -55,7 +55,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'hasLocations' => $translationAPI->__('Does the object have locations?', 'pop-locations'),
+            'hasLocation' => $translationAPI->__('Does the object have location?', 'pop-locations'),
             'location' => $translationAPI->__('Object\'s location', 'pop-locations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -77,7 +77,7 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         switch ($fieldName) {
-            case 'hasLocations':
+            case 'hasLocation':
                 $locations = $typeResolver->resolveValue($resultItem, 'locations', $variables, $expressions, $options);
                 if (GeneralUtils::isError($locations)) {
                     return $locations;

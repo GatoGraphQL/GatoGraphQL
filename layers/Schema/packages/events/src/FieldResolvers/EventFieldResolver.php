@@ -81,19 +81,19 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'location' => $translationAPI->__('', ''),
-            'locations' => $translationAPI->__('', ''),
-            'categories' => $translationAPI->__('', ''),
-            'dates' => $translationAPI->__('', ''),
-            'times' => $translationAPI->__('', ''),
-            'startDate' => $translationAPI->__('', ''),
-            'startDateReadable' => $translationAPI->__('', ''),
-            'endDate' => $translationAPI->__('', ''),
-            'allDay' => $translationAPI->__('', ''),
-            'googlecalendar' => $translationAPI->__('', ''),
-            'ical' => $translationAPI->__('', ''),
-            'daterange' => $translationAPI->__('', ''),
-            'daterangetime' => $translationAPI->__('', ''),
+            'location' => $translationAPI->__('Event\'s location', 'events'),
+            'locations' => $translationAPI->__('Event\'s locations', 'events'),
+            'categories' => $translationAPI->__('Event\'s categories', 'events'),
+            'dates' => $translationAPI->__('Event\'s dates', 'events'),
+            'times' => $translationAPI->__('Event\'s times', 'events'),
+            'startDate' => $translationAPI->__('Event\'s start ate', 'events'),
+            'startDateReadable' => $translationAPI->__('Event\'s start date in human-readable format', 'events'),
+            'endDate' => $translationAPI->__('Event\'s end date', 'events'),
+            'allDay' => $translationAPI->__('Is the event all day long?', 'events'),
+            'googlecalendar' => $translationAPI->__('Event\'s Google calendar URL', 'events'),
+            'ical' => $translationAPI->__('Event\'s Ical URL', 'events'),
+            'daterange' => $translationAPI->__('Event\'s date range', 'events'),
+            'daterangetime' => $translationAPI->__('Event\'s date range and time', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -114,8 +114,6 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $cmstagsresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
              // Override the url param to point to the original file

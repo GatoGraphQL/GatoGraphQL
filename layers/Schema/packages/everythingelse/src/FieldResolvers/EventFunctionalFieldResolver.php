@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers;
 
-use PoPSchema\Events\Enums\EventScopeEnum;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -12,10 +11,8 @@ use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
-use PoPSchema\Events\Constants\Scopes;
 
 class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -29,14 +26,16 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'scope',
+            'multilayoutKeys',
+            'latestcountsTriggerValues',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'scope' => SchemaDefinition::TYPE_ENUM,
+            'multilayoutKeys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'latestcountsTriggerValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -45,37 +44,10 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'scope' => $translationAPI->__('Event\'s scope (future, current, past)', 'events'),
+            'multilayoutKeys' => $translationAPI->__('', ''),
+            'latestcountsTriggerValues' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
-    }
-
-    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        switch ($fieldName) {
-            case 'scope':
-                /**
-                 * @var EventScopeEnum
-                 */
-                $eventScopeEnum = $instanceManager->getInstance(EventScopeEnum::class);
-                return $eventScopeEnum->getName();
-        }
-        return null;
-    }
-
-    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        switch ($fieldName) {
-            case 'scope':
-                /**
-                 * @var EventScopeEnum
-                 */
-                $eventScopeEnum = $instanceManager->getInstance(EventScopeEnum::class);
-                return $eventScopeEnum->getValues();
-        }
-        return null;
     }
 
     /**
@@ -96,13 +68,27 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
-            case 'scope':
-                if ($eventTypeAPI->isFutureEvent($typeResolver->getID($event))) {
-                    return Scopes::FUTURE;
-                } elseif ($eventTypeAPI->isCurrentEvent($typeResolver->getID($event))) {
-                    return Scopes::CURRENT;
+            case 'multilayoutKeys':
+                // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
+                $scope = $typeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
+                if (GeneralUtils::isError($scope)) {
+                    return $scope;
                 }
-                return Scopes::PAST;
+                $type = strtolower($typeResolver->getTypeName());
+                return array(
+                    $type . '-' . $scope,
+                    $type,
+                );
+
+            case 'latestcountsTriggerValues':
+                $scope = $typeResolver->resolveValue($event, 'scope', $variables, $expressions, $options);
+                if (GeneralUtils::isError($scope)) {
+                    return $scope;
+                }
+                $type = strtolower($typeResolver->getTypeName());
+                return array(
+                    $type . '-' . $scope,
+                );
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

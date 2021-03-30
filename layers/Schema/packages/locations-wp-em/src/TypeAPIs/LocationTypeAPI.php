@@ -66,12 +66,12 @@ class LocationTypeAPI implements LocationTypeAPIInterface
         return $results;
     }
 
-    public function getLatitude(object $EM_Location): string
+    public function getLatitude(object $EM_Location): int
     {
         return $EM_Location->location_latitude;
     }
 
-    public function getLongitude(object $EM_Location): string
+    public function getLongitude(object $EM_Location): int
     {
         return $EM_Location->location_longitude;
     }
