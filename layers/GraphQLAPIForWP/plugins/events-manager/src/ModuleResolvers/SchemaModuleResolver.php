@@ -21,6 +21,18 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         ];
     }
 
+    public function areRequirementsSatisfied(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_EVENTS:
+                /**
+                 * Events Manager plugin must be installed and active
+                 */
+                return defined('EM_VERSION');
+        }
+        return parent::areRequirementsSatisfied($module);
+    }
+
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {

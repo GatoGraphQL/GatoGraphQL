@@ -24,7 +24,7 @@ register_activation_hook(__FILE__, function (): void {
 });
 
 add_action('plugins_loaded', function (): void {
-    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin') || !defined('EM_VERSION')) {
+    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
         return;
     }
 
