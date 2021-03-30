@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\Constants\Scopes;
 
 class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
@@ -67,14 +68,14 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
             case self::MODULE_LATESTCOUNT_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
             case self::MODULE_LATESTCOUNT_TAG_EVENTS:
-                $ret[] = $event_post_type.'-'.POP_EVENTS_SCOPE_FUTURE;
-                $ret[] = $event_post_type.'-'.POP_EVENTS_SCOPE_CURRENT;
+                $ret[] = $event_post_type . '-' . Scopes::FUTURE;
+                $ret[] = $event_post_type . '-' . Scopes::CURRENT;
                 break;
 
             case self::MODULE_LATESTCOUNT_PASTEVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
             case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
-                $ret[] = $event_post_type.'-'.POP_EVENTS_SCOPE_PAST;
+                $ret[] = $event_post_type . '-' . Scopes::PAST;
                 break;
         }
 

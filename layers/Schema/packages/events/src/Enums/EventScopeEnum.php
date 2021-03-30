@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Events\Enums;
 
 use PoP\ComponentModel\Enums\AbstractEnum;
+use PoPSchema\Events\Constants\Scopes;
 
 class EventScopeEnum extends AbstractEnum
 {
@@ -15,9 +16,9 @@ class EventScopeEnum extends AbstractEnum
     public function getValues(): array
     {
         return [
-            \POP_EVENTS_SCOPE_FUTURE,
-            \POP_EVENTS_SCOPE_CURRENT,
-            \POP_EVENTS_SCOPE_PAST,
+            Scopes::FUTURE,
+            Scopes::CURRENT,
+            Scopes::PAST,
         ];
     }
 }

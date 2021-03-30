@@ -15,6 +15,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoPSchema\Events\Constants\Scopes;
 
 class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -103,11 +104,11 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         switch ($fieldName) {
             case 'scope':
                 if ($eventTypeAPI->isFutureEvent($typeResolver->getID($event))) {
-                    return \POP_EVENTS_SCOPE_FUTURE;
+                    return Scopes::FUTURE;
                 } elseif ($eventTypeAPI->isCurrentEvent($typeResolver->getID($event))) {
-                    return \POP_EVENTS_SCOPE_CURRENT;
+                    return Scopes::CURRENT;
                 }
-                return \POP_EVENTS_SCOPE_PAST;
+                return Scopes::PAST;
 
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)

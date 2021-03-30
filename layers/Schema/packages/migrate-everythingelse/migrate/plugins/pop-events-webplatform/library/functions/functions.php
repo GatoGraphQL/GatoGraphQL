@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\Constants\Scopes;
 
 HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'gdEmCustomMultilayoutLabels');
 function gdEmCustomMultilayoutLabels($labels)
@@ -11,20 +12,20 @@ function gdEmCustomMultilayoutLabels($labels)
     $label = '<span class="label label-%s">%s</span>';
     return array_merge(
         array(
-            $event_post_type.'-'.POP_EVENTS_SCOPE_FUTURE => sprintf(
+            $event_post_type . '-' . Scopes::FUTURE => sprintf(
                 $label,
                 'future-events',
-                getRouteIcon(POP_EVENTS_ROUTE_EVENTS, true).TranslationAPIFacade::getInstance()->__('Upcoming Event', 'poptheme-wassup')
+                getRouteIcon(POP_EVENTS_ROUTE_EVENTS, true) . TranslationAPIFacade::getInstance()->__('Upcoming Event', 'poptheme-wassup')
             ),
-            $event_post_type.'-'.POP_EVENTS_SCOPE_CURRENT => sprintf(
+            $event_post_type . '-' . Scopes::CURRENT => sprintf(
                 $label,
                 'current-events',
-                getRouteIcon(POP_EVENTS_ROUTE_EVENTS, true).TranslationAPIFacade::getInstance()->__('Current Event', 'poptheme-wassup')
+                getRouteIcon(POP_EVENTS_ROUTE_EVENTS, true) . TranslationAPIFacade::getInstance()->__('Current Event', 'poptheme-wassup')
             ),
-            $event_post_type.'-'.POP_EVENTS_SCOPE_PAST => sprintf(
+            $event_post_type . '-' . Scopes::PAST => sprintf(
                 $label,
                 'past-events',
-                getRouteIcon(POP_EVENTS_ROUTE_PASTEVENTS, true).TranslationAPIFacade::getInstance()->__('Past Event', 'poptheme-wassup')
+                getRouteIcon(POP_EVENTS_ROUTE_PASTEVENTS, true) . TranslationAPIFacade::getInstance()->__('Past Event', 'poptheme-wassup')
             )
         ),
         $labels

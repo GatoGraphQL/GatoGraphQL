@@ -10,11 +10,6 @@ class PoP_Events_Initialization
          */
         include_once 'config/load.php';
 
-        /**
-         * Load the Library
-         */
-        include_once 'library/load.php';
-
         // /**
         //  * Load the Plugins Library
         //  */
