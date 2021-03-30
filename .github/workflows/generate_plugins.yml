@@ -98,11 +98,13 @@ jobs:
                     vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
                     vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
-            -   name: Install plugin dependencies, avoiding v2 platform check
-                run: |
-                    composer config platform-check false --no-interaction --ansi
-                    composer install --no-progress --no-interaction --ansi
-                working-directory: ${{ matrix.pluginConfig.path }}
+            -   name: Avoid Composer v2 platform check
+                run: composer config platform-check false --no-interaction --ansi --working-dir=${{ matrix.pluginConfig.path }}
+
+            -   name: Build plugin for production
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: " --no-dev --optimize-autoloader --no-progress --no-interaction --ansi --working-dir=${{ matrix.pluginConfig.path }}"
 
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.1)
@@ -111,10 +113,6 @@ jobs:
             -   name: Replace PHP version in plugin main file
                 run: |
                     sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
-                working-directory: ${{ matrix.pluginConfig.path }}
-
-            -   name: Build project for production
-                run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
     ###########################################################################
