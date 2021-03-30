@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\EventsManager\ModuleResolvers;
 
 use GraphQLAPI\EventsManager\GraphQLAPIExtension;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 
 class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
@@ -39,9 +39,7 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_EVENTS:
                 return [
                     [
-                        EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
+                        SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                     ],
                 ];
         }
@@ -60,7 +58,7 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
     {
         switch ($module) {
             case self::SCHEMA_EVENTS:
-                return \__('Fetch event data from the Events Manager plugin', 'graphql-api-events-manager');
+                return \__('Fetch event data from the Events Manager plugin. It requires this plugin to be activated', 'graphql-api-events-manager');
         }
         return parent::getDescription($module);
     }
