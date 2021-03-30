@@ -104,7 +104,7 @@ jobs:
             -   name: Build plugin for production
                 uses: "ramsey/composer-install@v1"
                 with:
-                    composer-options: " --no-dev --optimize-autoloader --no-progress --no-interaction --ansi --working-dir=${{ matrix.pluginConfig.path }}"
+                    composer-options: "--no-dev --optimize-autoloader --working-dir=${{ matrix.pluginConfig.path }}"
 
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.1)
