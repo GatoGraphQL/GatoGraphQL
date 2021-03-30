@@ -63,6 +63,7 @@ final class SourcePackagesProvider
                 'layers/Wassup/packages/contactus-mutations',
                 'layers/Wassup/packages/contactuser-mutations',
                 'layers/GraphQLAPIForWP/plugins/convert-case-directives',
+                'layers/GraphQLAPIForWP/plugins/events-manager',
                 'layers/Wassup/packages/custompost-mutations',
                 'layers/Wassup/packages/custompostlink-mutations',
                 'layers/Schema/packages/custompostmedia',
