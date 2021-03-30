@@ -74,6 +74,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'main_file' => 'graphql-api-events-manager.php',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-events-manager-dist',
+            'exclude_files' => 'wp-content/\* vendor/wpackagist-plugin/\*',
         ],
     ]);
 
