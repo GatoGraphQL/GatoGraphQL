@@ -175,6 +175,10 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-post-tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-post-tags-wp
         - >-
+          ../../layers/Schema/packages/migrate-post-categories:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-post-categories
+        - >-
+          ../../layers/Schema/packages/migrate-post-categories-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-post-categories-wp
+        - >-
           ../../layers/Schema/packages/migrate-posts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-posts
         - >-
           ../../layers/Schema/packages/migrate-posts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-posts-wp
@@ -186,6 +190,10 @@ services:
           ../../layers/Schema/packages/migrate-tags:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-tags
         - >-
           ../../layers/Schema/packages/migrate-tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-tags-wp
+        - >-
+          ../../layers/Schema/packages/migrate-categories:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-categories
+        - >-
+          ../../layers/Schema/packages/migrate-categories-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-categories-wp
         - >-
           ../../layers/Schema/packages/migrate-taxonomies:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-taxonomies
         - >-
@@ -217,6 +225,10 @@ services:
         - >-
           ../../layers/Schema/packages/post-tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-tags-wp
         - >-
+          ../../layers/Schema/packages/post-categories:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-categories
+        - >-
+          ../../layers/Schema/packages/post-categories-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-categories-wp
+        - >-
           ../../layers/Schema/packages/posts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/posts
         - >-
           ../../layers/Schema/packages/posts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/posts-wp
@@ -230,6 +242,10 @@ services:
           ../../layers/Schema/packages/tags:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/tags
         - >-
           ../../layers/Schema/packages/tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/tags-wp
+        - >-
+          ../../layers/Schema/packages/categories:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/categories
+        - >-
+          ../../layers/Schema/packages/categories-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/categories-wp
         - >-
           ../../layers/Schema/packages/taxonomies:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomies
         - >-

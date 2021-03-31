@@ -164,6 +164,10 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-post-tags-wp:/app/vendor/pop-schema/migrate-post-tags-wp
         - >-
+          ../../layers/Schema/packages/migrate-post-categories:/app/vendor/pop-schema/migrate-post-categories
+        - >-
+          ../../layers/Schema/packages/migrate-post-categories-wp:/app/vendor/pop-schema/migrate-post-categories-wp
+        - >-
           ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
         - >-
           ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
@@ -175,6 +179,10 @@ services:
           ../../layers/Schema/packages/migrate-tags:/app/vendor/pop-schema/migrate-tags
         - >-
           ../../layers/Schema/packages/migrate-tags-wp:/app/vendor/pop-schema/migrate-tags-wp
+        - >-
+          ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
+        - >-
+          ../../layers/Schema/packages/migrate-categories-wp:/app/vendor/pop-schema/migrate-categories-wp
         - >-
           ../../layers/Schema/packages/migrate-taxonomies:/app/vendor/pop-schema/migrate-taxonomies
         - >-
@@ -203,6 +211,10 @@ services:
           ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
         - >-
           ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
+        - >-
+          ../../layers/Schema/packages/post-categories:/app/vendor/pop-schema/post-categories
+        - >-
+          ../../layers/Schema/packages/post-categories-wp:/app/vendor/pop-schema/post-categories-wp
         - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
         - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
         - >-
@@ -213,6 +225,8 @@ services:
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - '../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags'
         - '../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp'
+        - '../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories'
+        - '../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp'
         - >-
           ../../layers/Schema/packages/taxonomies:/app/vendor/pop-schema/taxonomies
         - >-

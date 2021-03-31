@@ -226,6 +226,10 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-post-tags-wp:/app/vendor/pop-schema/migrate-post-tags-wp
         - >-
+          ../../layers/Schema/packages/migrate-post-categories:/app/vendor/pop-schema/migrate-post-categories
+        - >-
+          ../../layers/Schema/packages/migrate-post-categories-wp:/app/vendor/pop-schema/migrate-post-categories-wp
+        - >-
           ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
         - >-
           ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
@@ -269,6 +273,10 @@ services:
           ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
         - >-
           ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
+        - >-
+          ../../layers/Schema/packages/post-categories:/app/vendor/pop-schema/post-categories
+        - >-
+          ../../layers/Schema/packages/post-categories-wp:/app/vendor/pop-schema/post-categories-wp
         - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
         - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
         - >-
