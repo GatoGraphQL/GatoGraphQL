@@ -59,6 +59,16 @@ class FunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSc
         }
         return (array) wp_get_post_categories($post_id, $query);
     }
+    public function getCustomPostCategoryCount($query, $options = []): int
+    {
+        $options['return-type'] = ReturnTypes::IDS;
+
+        // All results, no offset
+        $query['number'] = 0;
+        unset($query['offset']);
+
+        return count($this->getCustomPostCategories($query, $options));
+    }
     public function getCategoryName($cat_id)
     {
         return get_cat_name($cat_id);
@@ -94,6 +104,10 @@ class FunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSc
     public function hasCategory($cat_id, $post_id)
     {
         return has_category($cat_id, $post_id);
+    }
+    public function getCategoryURL($cat)
+    {
+        return get_term_link($cat->term_id, 'category');
     }
 }
 

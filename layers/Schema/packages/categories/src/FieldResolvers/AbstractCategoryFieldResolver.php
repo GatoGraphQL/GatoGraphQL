@@ -56,7 +56,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
             'slug' => $translationAPI->__('Category slug', 'pop-categories'),
             'description' => $translationAPI->__('Category description', 'pop-categories'),
             'parent' => $translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
-            'count' => $translationAPI->__('Number of custom posts containing this tag', 'pop-categories'),
+            'count' => $translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -78,25 +78,25 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
     ): mixed {
         $cmscategoriesresolver = $this->getObjectPropertyAPI();
         $categoryapi = $this->getTypeAPI();
-        $tag = $resultItem;
+        $category = $resultItem;
         switch ($fieldName) {
             case 'url':
-                return $categoryapi->getCategoryLink($typeResolver->getID($tag));
+                return $categoryapi->getCategoryURL($typeResolver->getID($category));
 
             case 'name':
-                return $cmscategoriesresolver->getCategoryName($tag);
+                return $categoryapi->getCategoryName($typeResolver->getID($category));
 
             case 'slug':
-                return $cmscategoriesresolver->getCategorySlug($tag);
+                return $cmscategoriesresolver->getCategorySlug($category);
 
             case 'description':
-                return $cmscategoriesresolver->getCategoryDescription($tag);
+                return $cmscategoriesresolver->getCategoryDescription($category);
 
             case 'parent':
-                return $cmscategoriesresolver->getCategoryParent($tag);
+                return $categoryapi->getCategoryParent($typeResolver->getID($category));
 
             case 'count':
-                return $cmscategoriesresolver->getCategoryCount($tag);
+                return $categoryapi->getCategoryCount($typeResolver->getID($category));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

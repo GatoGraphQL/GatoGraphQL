@@ -24,8 +24,8 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
         $query = array(
             'include' => $ids
         );
-        $tagapi = $this->getTypeAPI();
-        return $tagapi->getCategories($query);
+        $categoryapi = $this->getTypeAPI();
+        return $categoryapi->getCategories($query);
     }
 
     public function getDataFromIdsQuery(array $ids): array
@@ -48,8 +48,8 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
 
     public function executeQuery($query, array $options = [])
     {
-        $tagapi = $this->getTypeAPI();
-        return $tagapi->getCategories($query, $options);
+        $categoryapi = $this->getTypeAPI();
+        return $categoryapi->getCategories($query, $options);
     }
 
     public function executeQueryIds($query): array
