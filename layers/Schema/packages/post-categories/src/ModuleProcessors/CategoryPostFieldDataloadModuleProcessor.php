@@ -15,7 +15,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
 {
     use QueriedDBObjectModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-tagpostlist';
+    public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-categorypostlist';
 
     public function getModulesToProcess(): array
     {
@@ -51,7 +51,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
                 $vars = ApplicationState::getVars();
-                $ret['tag-ids'] = [$vars['routing-state']['queried-object-id']];
+                $ret['category-ids'] = [$vars['routing-state']['queried-object-id']];
                 break;
         }
 

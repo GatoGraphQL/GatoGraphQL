@@ -10,8 +10,8 @@ trait PostCategoryAPISatisfiedContractTrait
 {
     protected function getTypeAPI(): \PoPSchema\Categories\FunctionAPI
     {
-        $cmstagsapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
-        return $cmstagsapi;
+        $cmscategoriesapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+        return $cmscategoriesapi;
     }
 
     protected function getTypeResolverClass(): string

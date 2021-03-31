@@ -21,10 +21,10 @@ class PostCategoryTypeAPI extends CategoryTypeAPI implements PostCategoryTypeAPI
     }
 
     /**
-     * The taxonomy name representing a post tag ("post_tag")
+     * The taxonomy name representing a post category ("category")
      */
     public function getPostCategoryTaxonomyName(): string
     {
-        return 'post_tag';
+        return 'category';
     }
 }

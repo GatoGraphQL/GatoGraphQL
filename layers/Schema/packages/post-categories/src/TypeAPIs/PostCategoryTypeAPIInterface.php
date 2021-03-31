@@ -17,7 +17,7 @@ interface PostCategoryTypeAPIInterface extends CategoryTypeAPIInterface
     public function isInstanceOfPostCategoryType(object $object): bool;
 
     /**
-     * The taxonomy name representing a post tag ("post_tag")
+     * The taxonomy name representing a post category ("category")
      */
     public function getPostCategoryTaxonomyName(): string;
 }

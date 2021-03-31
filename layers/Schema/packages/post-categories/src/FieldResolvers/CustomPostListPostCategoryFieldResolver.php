@@ -19,6 +19,6 @@ class CustomPostListPostCategoryFieldResolver extends AbstractCustomPostListCate
 
     protected function getQueryProperty(): string
     {
-        return 'tag-ids';
+        return 'category-ids';
     }
 }

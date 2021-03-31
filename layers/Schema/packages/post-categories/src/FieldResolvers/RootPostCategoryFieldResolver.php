@@ -76,7 +76,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The tag ID', 'post-categories'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The category ID', 'post-categories'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -125,7 +125,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmstagsapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+        $cmscategoriesapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'postCategory':
                 $query = [
@@ -134,8 +134,8 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                if ($tags = $cmstagsapi->getCategories($query, $options)) {
-                    return $tags[0];
+                if ($categories = $cmscategoriesapi->getCategories($query, $options)) {
+                    return $categories[0];
                 }
                 return null;
             case 'postCategories':
@@ -146,11 +146,11 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmstagsapi->getCategories($query, $options);
+                return $cmscategoriesapi->getCategories($query, $options);
             case 'postCategoryCount':
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmstagsapi->getCategoryCount([], $options);
+                return $cmscategoriesapi->getCategoryCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
