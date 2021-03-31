@@ -36,6 +36,16 @@ class FunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSc
         }
         return $this->returnCategoryObjectsOrIDs((array) get_categories($query));
     }
+    public function getCategoryCount($query, $options = []): int
+    {
+        $options['return-type'] = ReturnTypes::IDS;
+
+        // All results, no offset
+        $query['number'] = 0;
+        unset($query['offset']);
+
+        return count($this->getCategories($query, $options));
+    }
 
     public function getCustomPostCategories($post_id, array $options = []): array
     {
