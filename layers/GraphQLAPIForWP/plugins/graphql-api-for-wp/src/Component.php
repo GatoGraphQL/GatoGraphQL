@@ -34,6 +34,7 @@ class Component extends AbstractPluginComponent
             \PoPSchema\CustomPostMetaWP\Component::class,
             \PoPSchema\TaxonomyQueryWP\Component::class,
             \PoPSchema\PostTagsWP\Component::class,
+            \PoPSchema\PostCategoriesWP\Component::class,
             \PoPSchema\UserRolesAccessControl\Component::class,
             \PoPSchema\UserRolesWP\Component::class,
             \PoPSchema\UserStateWP\Component::class,

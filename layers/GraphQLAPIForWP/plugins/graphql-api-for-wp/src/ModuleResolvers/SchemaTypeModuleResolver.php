@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
@@ -42,6 +43,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const SCHEMA_MEDIA = Plugin::NAMESPACE . '\schema-media';
     public const SCHEMA_TAGS = Plugin::NAMESPACE . '\schema-tags';
     public const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
+    public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
+    public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
     public const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
     public const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
     public const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
@@ -77,6 +80,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         protected ?MediaTypeResolver $mediaTypeResolver,
         protected ?PageTypeResolver $pageTypeResolver,
         protected ?PostTagTypeResolver $postTagTypeResolver,
+        protected ?PostCategoryTypeResolver $postCategoryTypeResolver,
         protected ?PostTypeResolver $postTypeResolver,
         protected ?UserRoleTypeResolver $userRoleTypeResolver,
         protected ?UserTypeResolver $userTypeResolver
@@ -98,6 +102,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_COMMENTS,
             self::SCHEMA_TAGS,
             self::SCHEMA_POST_TAGS,
+            self::SCHEMA_CATEGORIES,
+            self::SCHEMA_POST_CATEGORIES,
             self::SCHEMA_MEDIA,
             self::SCHEMA_USER_STATE_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
@@ -143,6 +149,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_PAGES:
             case self::SCHEMA_COMMENTS:
             case self::SCHEMA_TAGS:
+            case self::SCHEMA_CATEGORIES:
                 return [
                     [
                         self::SCHEMA_CUSTOMPOSTS,
@@ -155,6 +162,15 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     ],
                     [
                         self::SCHEMA_TAGS,
+                    ],
+                ];
+            case self::SCHEMA_POST_CATEGORIES:
+                return [
+                    [
+                        self::SCHEMA_POSTS,
+                    ],
+                    [
+                        self::SCHEMA_CATEGORIES,
                     ],
                 ];
             case self::SCHEMA_USER_STATE_MUTATIONS:
@@ -215,6 +231,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_MEDIA => \__('Schema Media', 'graphql-api'),
             self::SCHEMA_TAGS => \__('Schema Tags', 'graphql-api'),
             self::SCHEMA_POST_TAGS => \__('Schema Post Tags', 'graphql-api'),
+            self::SCHEMA_CATEGORIES => \__('Schema Categories', 'graphql-api'),
+            self::SCHEMA_POST_CATEGORIES => \__('Schema Post Categories', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTS => \__('Schema Custom Posts', 'graphql-api'),
             self::SCHEMA_USER_STATE_MUTATIONS => \__('Schema User State Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Schema Custom Post Mutations', 'graphql-api'),
@@ -275,10 +293,18 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     \__('post tags', 'graphql-api'),
                     $this->postTagTypeResolver->getTypeName()
                 );
+            case self::SCHEMA_POST_CATEGORIES:
+                return sprintf(
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
+                    \__('post categories', 'graphql-api'),
+                    $this->postCategoryTypeResolver->getTypeName()
+                );
             case self::SCHEMA_CUSTOMPOSTS:
                 return \__('Base functionality for all custom posts', 'graphql-api');
             case self::SCHEMA_TAGS:
                 return \__('Base functionality for all tags', 'graphql-api');
+            case self::SCHEMA_CATEGORIES:
+                return \__('Base functionality for all categories', 'graphql-api');
             case self::SCHEMA_USER_STATE_MUTATIONS:
                 return \__('Have the user log-in, and be able to perform mutations', 'graphql-api');
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
@@ -309,6 +335,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_COMMENTS:
             case self::SCHEMA_TAGS:
             case self::SCHEMA_POST_TAGS:
+            case self::SCHEMA_CATEGORIES:
+            case self::SCHEMA_POST_CATEGORIES:
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
@@ -333,6 +361,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     // self::SCHEMA_POSTS,
                     self::SCHEMA_USERS,
                     self::SCHEMA_TAGS,
+                    self::SCHEMA_CATEGORIES,
                     // self::SCHEMA_PAGES,
                 ]
             ) && in_array(
@@ -385,6 +414,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 self::OPTION_LIST_DEFAULT_LIMIT => 20,
                 self::OPTION_LIST_MAX_LIMIT => 200,
             ],
+            self::SCHEMA_CATEGORIES => [
+                self::OPTION_LIST_DEFAULT_LIMIT => 20,
+                self::OPTION_LIST_MAX_LIMIT => 200,
+            ],
         ];
         return $defaultValues[$module][$option];
     }
@@ -410,6 +443,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 // self::SCHEMA_POSTS,
                 self::SCHEMA_USERS,
                 self::SCHEMA_TAGS,
+                self::SCHEMA_CATEGORIES,
                 // self::SCHEMA_PAGES,
             ])
         ) {
@@ -428,6 +462,9 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ],
                 self::SCHEMA_TAGS => [
                     'entities' => \__('tags', 'graphql-api'),
+                ],
+                self::SCHEMA_CATEGORIES => [
+                    'entities' => \__('categories', 'graphql-api'),
                 ],
                 // self::SCHEMA_PAGES => [
                 //     'pages' => null,
