@@ -164,10 +164,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-post-tags-wp:/app/vendor/pop-schema/migrate-post-tags-wp
         - >-
-          ../../layers/Schema/packages/migrate-post-categories:/app/vendor/pop-schema/migrate-post-categories
-        - >-
-          ../../layers/Schema/packages/migrate-post-categories-wp:/app/vendor/pop-schema/migrate-post-categories-wp
-        - >-
           ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
         - >-
           ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
