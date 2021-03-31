@@ -1,9 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\Categories\ModuleProcessors;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
-class PoP_Categories_Module_Processor_CustomFilterInners extends AbstractModuleProcessor
+class FilterInnerModuleProcessor extends AbstractModuleProcessor
 {
     public const MODULE_FILTERINNER_CATEGORIES = 'filterinner-categories';
     public const MODULE_FILTERINNER_CATEGORYCOUNT = 'filterinner-categorycount';
@@ -35,11 +40,13 @@ class PoP_Categories_Module_Processor_CustomFilterInners extends AbstractModuleP
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
         ];
-        if ($modules = HooksAPIFacade::getInstance()->applyFilters(
-            'Categories:FilterInnerModuleProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
-        )) {
+        if (
+            $modules = HooksAPIFacade::getInstance()->applyFilters(
+                'Categories:FilterInnerModuleProcessor:inputmodules',
+                $inputmodules[$module[1]],
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules

@@ -7,22 +7,16 @@ namespace PoPSchema\Categories\FieldResolvers;
 use PoPSchema\Categories\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Categories\TypeResolvers\CategoryTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
 
-class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
+abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
-    public function getClassesToAttachTo(): array
-    {
-        return [
-            IsCustomPostFieldInterfaceResolver::class,
-        ];
-    }
+    use CategoryAPIRequestedContractTrait;
 
     public function getFieldNamesToResolve(): array
     {
@@ -57,8 +51,8 @@ class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'categories' => $translationAPI->__('Categories added to this post', 'pop-categories'),
-            'categoryCount' => $translationAPI->__('Number of categories added to this post', 'pop-categories'),
+            'categories' => $translationAPI->__('Categories added to this custom post', 'pop-categories'),
+            'categoryCount' => $translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -91,7 +85,7 @@ class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'categoryCount':
-                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
@@ -111,7 +105,7 @@ class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = $this->getTypeAPI();
         $post = $resultItem;
         switch ($fieldName) {
             case 'categories':
@@ -144,7 +138,7 @@ class CustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'categories':
-                return CategoryTypeResolver::class;
+                return $this->getTypeResolverClass();
         }
 
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);

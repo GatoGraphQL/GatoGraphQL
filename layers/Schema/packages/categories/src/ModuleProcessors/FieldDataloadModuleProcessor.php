@@ -61,9 +61,9 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return [PoP_Categories_Module_Processor_CustomFilterInners::class, PoP_Categories_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_CATEGORIES];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORIES];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
-                return [PoP_Categories_Module_Processor_CustomFilterInners::class, PoP_Categories_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_CATEGORYCOUNT];
+                return [FilterInnerModuleProcessor::class, FilterInnerModuleProcessor::MODULE_FILTERINNER_CATEGORYCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

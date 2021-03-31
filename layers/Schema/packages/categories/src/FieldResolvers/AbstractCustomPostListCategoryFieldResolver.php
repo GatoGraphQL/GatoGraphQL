@@ -7,14 +7,11 @@ namespace PoPSchema\Categories\FieldResolvers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\AbstractCustomPostListFieldResolver;
-use PoPSchema\Categories\TypeResolvers\CategoryTypeResolver;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 
-class CustomPostListCategoryFieldResolver extends AbstractCustomPostListFieldResolver
+abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCustomPostListFieldResolver
 {
-    public function getClassesToAttachTo(): array
-    {
-        return array(CategoryTypeResolver::class);
-    }
+    use CategoryAPIRequestedContractTrait;
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
@@ -25,6 +22,8 @@ class CustomPostListCategoryFieldResolver extends AbstractCustomPostListFieldRes
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
+
+    abstract protected function getQueryProperty(): string;
 
     /**
      * @param array<string, mixed> $fieldArgs
@@ -42,7 +41,7 @@ class CustomPostListCategoryFieldResolver extends AbstractCustomPostListFieldRes
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-                $query['category-ids'] = [$typeResolver->getID($category)];
+                $query[$this->getQueryProperty()] = [$typeResolver->getID($category)];
                 break;
         }
 
