@@ -15,14 +15,6 @@ class ObjectPropertyResolver extends \PoPSchema\Tags\ObjectPropertyResolver_Base
     {
         return $tag->description;
     }
-    public function getTagParent($tag)
-    {
-        // If it has no parent, it is assigned 0. In that case, return null
-        if ($parent = $tag->parent) {
-            return $parent;
-        }
-        return null;
-    }
     public function getTagCount($tag)
     {
         return $tag->count;
