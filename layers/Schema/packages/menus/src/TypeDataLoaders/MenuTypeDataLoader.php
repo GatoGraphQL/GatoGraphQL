@@ -13,7 +13,14 @@ class MenuTypeDataLoader extends AbstractTypeDataLoader
     {
         $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         // If the menu doesn't exist, remove the `null` entry
-        $ret = array_filter(array_map(array($menuTypeAPI, 'getNavigationMenuObjectById'), $ids));
-        return $ret;
+        return array_filter(array_map(
+            /**
+             * Commented temporarily until Rector can downgrade union types on anonymous functions
+             * @see https://github.com/rectorphp/rector/issues/5989
+             */
+            // fn (string | int $id) => $menuTypeAPI->getMenu($id),
+            fn ($id) => $menuTypeAPI->getMenu($id),
+            $ids
+        ));
     }
 }

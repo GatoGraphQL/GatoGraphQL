@@ -80,7 +80,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             case 'menu':
                 // Validate the ID exists
                 $menuID = $fieldArgs['id'];
-                if ($menuTypeAPI->getNavigationMenuObjectById($menuID) !== null) {
+                if ($menuTypeAPI->getMenu($menuID) !== null) {
                     return $menuID;
                 }
                 return null;

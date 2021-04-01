@@ -17,9 +17,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     {
         return $object instanceof WP_Menu;
     }
-    public function getNavigationMenuObjectById($menu_object_id)
+    public function getMenu(string | int $menuID): ?object
     {
-        $object = wp_get_nav_menu_object($menu_object_id);
+        $object = wp_get_nav_menu_object($menuID);
         // If the object is not found, it returns `false`. Return `null` instead
         if ($object === false) {
             return null;
@@ -44,14 +44,10 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         return null;
     }
 
-    protected function getNavigationMenuObject(int $menuID): ?WP_Term
+    protected function getNavigationMenuObject(string $menuName): ?WP_Term
     {
         $locations = get_nav_menu_locations();
-        $menu_object_id = $locations[$menuID];
-        $menuObject = $this->getNavigationMenuObjectById($menu_object_id);
-        if ($menuObject === false) {
-            return null;
-        }
-        return $menuObject;
+        $menuID = $locations[$menuName];
+        return $this->getMenu($menuID);
     }
 }
