@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
-use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
 class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -79,46 +79,46 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
+        $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
         $menu_item = $resultItem;
         switch ($fieldName) {
             case 'title':
-                return $menuTypeAPI->getMenuItemTitle($menu_item);
+                return $menuItemTypeAPI->getMenuItemTitle($menu_item);
 
             case 'alt':
-                return $menuTypeAPI->getMenuItemTitle($menu_item);
+                return $menuItemTypeAPI->getMenuItemTitle($menu_item);
 
             case 'url':
-                return $menuTypeAPI->getMenuItemUrl($menu_item);
+                return $menuItemTypeAPI->getMenuItemUrl($menu_item);
 
             case 'classes':
                 // Copied from nav-menu-template.php function start_el
-                $classes = $menuTypeAPI->getMenuItemClasses($menu_item);
+                $classes = $menuItemTypeAPI->getMenuItemClasses($menu_item);
                 $classes = empty($classes) ? array() : (array) $classes;
                 $classes[] = 'menu-item';
-                $classes[] = 'menu-item-' . $menuTypeAPI->getMenuItemId($menu_item);
-                if ($parent = $menuTypeAPI->getMenuItemParent($menu_item)) {
+                $classes[] = 'menu-item-' . $menuItemTypeAPI->getMenuItemId($menu_item);
+                if ($parent = $menuItemTypeAPI->getMenuItemParent($menu_item)) {
                     $classes[] = 'menuItemParent';
                     $classes[] = 'menu-item-parent-' . $parent;
                 }
-                if ($object_id = $menuTypeAPI->getMenuItemObjectId($menu_item)) {
+                if ($object_id = $menuItemTypeAPI->getMenuItemObjectId($menu_item)) {
                     $classes[] = 'menu-item-object-id-' . $object_id;
                 }
                 return join(' ', HooksAPIFacade::getInstance()->applyFilters('menuitem:classes', array_filter($classes), $menu_item, array()));
 
             case 'target':
-                return $menuTypeAPI->getMenuItemTarget($menu_item);
+                return $menuItemTypeAPI->getMenuItemTarget($menu_item);
 
             case 'additionalAttrs':
                 // Using the description, because WP does not give a field for extra attributes when creating a menu,
                 // and this is needed to add target="addons" for the Add ContentPost link
-                return $menuTypeAPI->getMenuItemDescription($menu_item);
+                return $menuItemTypeAPI->getMenuItemDescription($menu_item);
 
             case 'objectID':
-                return $menuTypeAPI->getMenuItemObjectId($menu_item);
+                return $menuItemTypeAPI->getMenuItemObjectId($menu_item);
 
             case 'menuItemParent':
-                return $menuTypeAPI->getMenuItemParent($menu_item);
+                return $menuItemTypeAPI->getMenuItemParent($menu_item);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
