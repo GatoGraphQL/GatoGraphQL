@@ -13,6 +13,8 @@ use PoP\Root\Component\ApplicationEvents;
  */
 abstract class AbstractAutomaticallyInstantiatedService implements AutomaticallyInstantiatedServiceInterface
 {
+    use ServiceTrait;
+
     public function initialize(): void
     {
         // By default, do nothing
@@ -21,10 +23,5 @@ abstract class AbstractAutomaticallyInstantiatedService implements Automatically
     public function getInstantiationEvent(): string
     {
         return ApplicationEvents::BEFORE_BOOT;
-    }
-
-    public function isServiceEnabled(): bool
-    {
-        return true;
     }
 }

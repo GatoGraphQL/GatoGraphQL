@@ -9,9 +9,8 @@ namespace PoP\Root\Services;
  * so it's done automatically by the application.
  * Eg: hooks.
  */
-interface AutomaticallyInstantiatedServiceInterface
+interface AutomaticallyInstantiatedServiceInterface extends ServiceInterface
 {
     public function initialize(): void;
     public function getInstantiationEvent(): string;
-    public function isServiceEnabled(): bool;
 }
