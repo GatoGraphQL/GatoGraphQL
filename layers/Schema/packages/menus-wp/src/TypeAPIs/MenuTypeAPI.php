@@ -6,6 +6,7 @@ namespace PoPSchema\MenusWP\TypeAPIs;
 
 use WP_Menu;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
@@ -15,13 +16,6 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     public function isInstanceOfMenuType(object $object): bool
     {
         return $object instanceof WP_Menu;
-    }
-
-    public function getNavigationMenuObject($menu_id)
-    {
-        $locations = get_nav_menu_locations();
-        $menu_object_id = $locations[$menu_id];
-        return $this->getNavigationMenuObjectById($menu_object_id);
     }
     public function getNavigationMenuObjectById($menu_object_id)
     {
@@ -37,10 +31,6 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         return wp_get_nav_menu_items($menu);
     }
 
-    public function getMenuObjectTermId($menu_object)
-    {
-        return $menu_object->term_id;
-    }
     public function getMenuTermId($menu)
     {
         return $menu->term_id;
@@ -48,9 +38,20 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     public function getMenuIDFromMenuName(string $menuName): string | int | null
     {
-        if ($menu_object = $this->getNavigationMenuObject($menuName)) {
-            return $this->getMenuObjectTermId($menu_object);
+        if ($menuObject = $this->getNavigationMenuObject($menuName)) {
+            return $menuObject->term_id;
         }
         return null;
+    }
+
+    protected function getNavigationMenuObject(int $menuID): ?WP_Term
+    {
+        $locations = get_nav_menu_locations();
+        $menu_object_id = $locations[$menuID];
+        $menuObject = $this->getNavigationMenuObjectById($menu_object_id);
+        if ($menuObject === false) {
+            return null;
+        }
+        return $menuObject;
     }
 }
