@@ -44,7 +44,7 @@ class MenuItemTypeAPI implements MenuItemTypeAPIInterface
         /**
          * If it has no parent, it has ID "0"
          */
-        if ($menuItem->menu_item_parent === 0) {
+        if ($menuItem->menu_item_parent === "0") {
             return null;
         }
         return $menuItem->menu_item_parent;
