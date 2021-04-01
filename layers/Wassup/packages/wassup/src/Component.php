@@ -57,8 +57,8 @@ class Component extends AbstractComponent
                 \PoPSchema\CustomPostMediaMutationsWP\Component::class,
                 \PoPSchema\CommentMutationsWP\Component::class,
                 \PoPSchema\UserStateMutationsWP\Component::class,
+                \PoPSchema\PostCategoriesWP\Component::class,
 
-                \PoPSchema\CategoriesWP\Component::class,
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\MenusWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,

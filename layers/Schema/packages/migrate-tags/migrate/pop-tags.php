@@ -20,7 +20,8 @@ class Plugins
     public function __construct()
     {
         // Priority: new section, after PoP Posts
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888205);
+        // Important: priority => After initializing migrate-categories! (Its code depends on this one)
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888215);
     }
     public function init()
     {

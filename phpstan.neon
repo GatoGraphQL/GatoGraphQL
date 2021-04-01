@@ -1,7 +1,7 @@
 includes:
-    - vendor/szepeviktor/phpstan-wordpress/extension.neon
     - layers/API/packages/api-clients/phpstan.neon.dist
     - layers/API/packages/api-endpoints/phpstan.neon.dist
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
     - layers/API/packages/api-endpoints-for-wp/phpstan.neon.dist
     - layers/API/packages/api-graphql/phpstan.neon.dist
     - layers/API/packages/api-rest/phpstan.neon.dist
@@ -38,6 +38,7 @@ includes:
     - layers/Engine/packages/hooks-wp/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
+    - layers/GraphQLAPIForWP/packages/markdown-convertor/phpstan.neon.dist
     - layers/Schema/packages/media-wp/phpstan.neon.dist
     - layers/Schema/packages/meta/phpstan.neon.dist
     - layers/Schema/packages/metaquery/phpstan.neon.dist
@@ -45,6 +46,7 @@ includes:
     - layers/Engine/packages/modulerouting/phpstan.neon.dist
     - layers/Schema/packages/notifications-wp/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
+    - layers/Schema/packages/post-categories-wp/phpstan.neon.dist
     - layers/Schema/packages/post-mutations/phpstan.neon.dist
     - layers/Schema/packages/post-tags-wp/phpstan.neon.dist
     - layers/Schema/packages/queriedobject/phpstan.neon.dist

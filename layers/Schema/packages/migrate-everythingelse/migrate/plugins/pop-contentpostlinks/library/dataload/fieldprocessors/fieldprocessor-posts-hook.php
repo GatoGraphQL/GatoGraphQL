@@ -123,7 +123,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             )
         ) {
             $post = $resultItem;
-            $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
+            $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
             return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $categoryapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getID($post));
         }
         return true;

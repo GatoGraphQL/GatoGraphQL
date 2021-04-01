@@ -260,6 +260,8 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td>Schema Comments</td><td>Query comments, through type <code>Comment</code> added to the schema</td></tr>
 <tr><td>Schema Tags</td><td>Base functionality for all tags</td></tr>
 <tr><td>Schema Post Tags</td><td>Query post tags, through type <code>PostTag</code> added to the schema</td></tr>
+<tr><td>Schema Categories</td><td>Base functionality for all categories</td></tr>
+<tr><td>Schema Post Categories</td><td>Query post categories, through type <code>PostCategory</code> added to the schema</td></tr>
 <tr><td>Schema Media</td><td>Query media elements, through type <code>Media</code> added to the schema</td></tr>
 <tr><td><a href="docs/en/modules/schema-user-state-mutations.md">Schema User State Mutations</a></td><td>Have the user log-in, and be able to perform mutations</td></tr>
 <tr><td>Schema Custom Post Mutations</td><td>Base functionality to mutate custom posts</td></tr>

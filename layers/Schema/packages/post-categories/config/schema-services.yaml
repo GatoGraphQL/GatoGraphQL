@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\PostCategories\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPSchema\PostCategories\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPSchema\PostCategories\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'

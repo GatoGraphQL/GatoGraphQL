@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface:
+        class: \PoPSchema\PostCategoriesWP\TypeAPIs\PostCategoryTypeAPI

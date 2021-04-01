@@ -23,17 +23,6 @@ class Component extends AbstractComponent
         ];
     }
 
-    /**
-     * All conditional component classes that this component depends upon, to initialize them
-     */
-    public static function getDependedConditionalComponentClasses(): array
-    {
-        return [
-            \PoP\API\Component::class,
-            \PoP\RESTAPI\Component::class,
-        ];
-    }
-
     public static function getDependedMigrationPlugins(): array
     {
         $packageName = basename(dirname(__DIR__));
@@ -56,12 +45,5 @@ class Component extends AbstractComponent
     ): void {
         ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/Conditional/API');
-        }
-        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
-        }
     }
 }

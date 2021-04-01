@@ -4,88 +4,61 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoPSchema\Categories\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Categories\TypeResolvers\CategoryTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 
-abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResolver
+abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
 {
+    use CategoryAPIRequestedContractTrait;
+
+    public function getImplementedFieldInterfaceResolverClasses(): array
+    {
+        return [
+            QueryableFieldInterfaceResolver::class,
+        ];
+    }
+
     public function getFieldNamesToResolve(): array
     {
         return [
-            'categories',
-            'categoryCount',
+            'url',
+            'name',
+            'slug',
+            'description',
+            'parent',
+            'count',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'categoryCount' => SchemaDefinition::TYPE_INT,
+            'url' => SchemaDefinition::TYPE_URL,
+            'name' => SchemaDefinition::TYPE_STRING,
+            'slug' => SchemaDefinition::TYPE_STRING,
+            'description' => SchemaDefinition::TYPE_STRING,
+            'parent' => SchemaDefinition::TYPE_ID,
+            'count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
-    }
-
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        $nonNullableFieldNames = [
-            'categories',
-            'categoryCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
-        }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'categories' => $translationAPI->__('Categories', 'pop-categories'),
-            'categoryCount' => $translationAPI->__('Number of categories', 'pop-categories'),
+            'url' => $translationAPI->__('Category URL', 'pop-categories'),
+            'name' => $translationAPI->__('Category', 'pop-categories'),
+            'slug' => $translationAPI->__('Category slug', 'pop-categories'),
+            'description' => $translationAPI->__('Category description', 'pop-categories'),
+            'parent' => $translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'count' => $translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'categories':
-            case 'categoryCount':
-                return array_merge(
-                    $schemaFieldArgs,
-                    $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
-                );
-        }
-        return $schemaFieldArgs;
-    }
-
-    public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        switch ($fieldName) {
-            case 'categories':
-            case 'categoryCount':
-                return false;
-        }
-        return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
-    protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
-    {
-        switch ($fieldName) {
-            case 'categoryCount':
-                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
-        }
-        return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**
@@ -103,21 +76,27 @@ abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResol
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscategoriesapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
+        $cmscategoriesresolver = $this->getObjectPropertyAPI();
+        $categoryapi = $this->getTypeAPI();
+        $category = $resultItem;
         switch ($fieldName) {
-            case 'categories':
-                $query = [
-                    'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
-                ];
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscategoriesapi->getCategories($query, $options);
-            case 'categoryCount':
-                $options = [];
-                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscategoriesapi->getCategoryCount([], $options);
+            case 'url':
+                return $categoryapi->getCategoryURL($typeResolver->getID($category));
+
+            case 'name':
+                return $categoryapi->getCategoryName($typeResolver->getID($category));
+
+            case 'slug':
+                return $cmscategoriesresolver->getCategorySlug($category);
+
+            case 'description':
+                return $cmscategoriesresolver->getCategoryDescription($category);
+
+            case 'parent':
+                return $categoryapi->getCategoryParent($typeResolver->getID($category));
+
+            case 'count':
+                return $cmscategoriesresolver->getCategoryCount($category);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -126,8 +105,8 @@ abstract class AbstractCategoryFieldResolver extends AbstractQueryableFieldResol
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
-            case 'categories':
-                return CategoryTypeResolver::class;
+            case 'parent':
+                return $this->getTypeResolverClass();
         }
 
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);

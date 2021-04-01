@@ -11,6 +11,14 @@ class ObjectPropertyResolver extends \PoPSchema\Categories\ObjectPropertyResolve
     {
         return $cat->slug;
     }
+    public function getCategoryDescription($cat)
+    {
+        return $cat->description;
+    }
+    public function getCategoryCount($cat)
+    {
+        return $cat->count;
+    }
 }
 
 /**

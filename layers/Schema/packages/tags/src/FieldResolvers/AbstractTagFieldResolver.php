@@ -29,7 +29,6 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'name',
             'slug',
             'description',
-            'parent',
             'count',
         ];
     }
@@ -41,7 +40,6 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'name' => SchemaDefinition::TYPE_STRING,
             'slug' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'parent' => SchemaDefinition::TYPE_ID,
             'count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -55,7 +53,6 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             'name' => $translationAPI->__('Tag', 'pop-tags'),
             'slug' => $translationAPI->__('Tag slug', 'pop-tags'),
             'description' => $translationAPI->__('Tag description', 'pop-tags'),
-            'parent' => $translationAPI->__('Parent category (if this category is a child of another one)', 'pop-tags'),
             'count' => $translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -92,23 +89,10 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
             case 'description':
                 return $cmstagsresolver->getTagDescription($tag);
 
-            case 'parent':
-                return $cmstagsresolver->getTagParent($tag);
-
             case 'count':
                 return $cmstagsresolver->getTagCount($tag);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'parent':
-                return $this->getTypeResolverClass();
-        }
-
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
     }
 }

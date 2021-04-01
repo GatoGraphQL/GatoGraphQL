@@ -70,6 +70,7 @@
         "pop-schema/pages-wp": "dev-master",
         "pop-schema/post-mutations": "dev-master",
         "pop-schema/post-tags-wp": "dev-master",
+        "pop-schema/post-categories-wp": "dev-master",
         "pop-schema/posts-wp": "dev-master",
         "pop-schema/taxonomyquery-wp": "dev-master",
         "pop-schema/user-roles-acl": "dev-master",

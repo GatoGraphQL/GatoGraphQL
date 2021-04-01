@@ -32,6 +32,7 @@
         "pop-schema/google-translate-directive-for-customposts": "^0.8",
         "pop-schema/pages-wp": "^0.8",
         "pop-schema/post-tags-wp": "^0.8",
+        "pop-schema/post-categories-wp": "^0.8",
         "pop-schema/posts-wp": "^0.8",
         "pop-schema/taxonomyquery-wp": "^0.8",
         "pop-schema/user-roles-acl": "^0.8",

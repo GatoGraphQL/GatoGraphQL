@@ -11,6 +11,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Environment as EngineEnvironment;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
+use PoPSchema\Categories\Environment as CategoriesEnvironment;
 use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\Users\Environment as UsersEnvironment;
@@ -28,6 +29,7 @@ use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
+use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
 use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
@@ -369,6 +371,19 @@ class PluginConfiguration
                 'class' => TagsComponentConfiguration::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
+                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+            ],
+            // Categories default/max limits
+            [
+                'class' => CategoriesComponentConfiguration::class,
+                'envVariable' => CategoriesEnvironment::CATEGORY_LIST_DEFAULT_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
+                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+            ],
+            [
+                'class' => CategoriesComponentConfiguration::class,
+                'envVariable' => CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                 'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
             ],
             // Page default/max limits, add to CustomPostUnion
@@ -720,6 +735,12 @@ class PluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_TAGS => [
                 \PoPSchema\PostTags\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_CATEGORIES => [
+                \PoPSchema\Categories\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
+                \PoPSchema\PostCategories\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
                 \PoPSchema\UserStateMutations\Component::class,
