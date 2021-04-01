@@ -17,7 +17,8 @@ class SchemaHelpers
         return array_values(array_filter(
             $fieldArgProps,
             function ($fieldArgProp) use ($fieldArgs) {
-                return !array_key_exists($fieldArgProp, $fieldArgs);
+                // Do not use `empty` to avoid "0" failing
+                return !array_key_exists($fieldArgProp, $fieldArgs) || $fieldArgs[$fieldArgProp] === null || $fieldArgs[$fieldArgProp] === '' || $fieldArgs[$fieldArgProp] === [];
             }
         ));
     }
