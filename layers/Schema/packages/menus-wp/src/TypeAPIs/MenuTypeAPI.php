@@ -31,7 +31,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         return wp_get_nav_menu_items($menuObjectOrID);
     }
 
-    public function getMenuTermId($menu)
+    public function getMenuID(object $menu): string | int
     {
         return $menu->term_id;
     }

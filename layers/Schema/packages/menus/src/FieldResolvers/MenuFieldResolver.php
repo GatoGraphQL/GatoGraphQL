@@ -79,8 +79,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
             case 'items':
                 // Load needed values for the menu-items
                 $instanceManager = InstanceManagerFacade::getInstance();
-                $menuID = $menuTypeAPI->getMenuTermId($menu);
-                $itemsData = $menuTypeAPI->getMenuItemsData($menuID);
+                $itemsData = $menuTypeAPI->getMenuItemsData($menu);
                 $value = array();
                 if ($itemsData) {
                     // Load these item data-fields. If other set needed, create another $field
