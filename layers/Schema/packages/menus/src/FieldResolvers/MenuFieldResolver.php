@@ -25,7 +25,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'items',
+            'itemDataEntries',
         ];
     }
 
@@ -33,7 +33,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             // 'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+            'itemDataEntries' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -41,7 +41,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
-            'items',
+            'itemDataEntries',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -53,7 +53,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'items' => $translationAPI->__('The menu items', 'menus'),
+            'itemDataEntries' => $translationAPI->__('The menu items', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -76,7 +76,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         $menu = $resultItem;
         switch ($fieldName) {
-            case 'items':
+            case 'itemDataEntries':
                 // Load needed values for the menu-items
                 $instanceManager = InstanceManagerFacade::getInstance();
                 $itemsData = $menuTypeAPI->getMenuItemsData($menu);

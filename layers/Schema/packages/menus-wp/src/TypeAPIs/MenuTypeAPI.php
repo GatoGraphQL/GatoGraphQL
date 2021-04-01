@@ -38,13 +38,13 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     public function getMenuIDFromMenuName(string $menuName): string | int | null
     {
-        if ($menuObject = $this->getNavigationMenuObject($menuName)) {
+        if ($menuObject = $this->getMenuObject($menuName)) {
             return $menuObject->term_id;
         }
         return null;
     }
 
-    protected function getNavigationMenuObject(string $menuName): ?WP_Term
+    protected function getMenuObject(string $menuName): ?WP_Term
     {
         $locations = get_nav_menu_locations();
         $menuID = $locations[$menuName];
