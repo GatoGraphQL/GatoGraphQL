@@ -4,6 +4,10 @@ namespace PoPSchema\Categories\WP;
 
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Categories\ComponentConfiguration;
+use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSchema\Categories\FunctionAPI
 {
@@ -14,28 +18,96 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
         \PoPSchema\PostCategories\FunctionAPIFactory::setInstance($this);
     }
 
-    protected function returnCategoryObjectsOrIDs($categories, $options = []): array
-    {
-        $return_type = $options['return-type'] ?? null;
-        if ($return_type == ReturnTypes::IDS) {
-            return array_map(
-                function ($category) {
-                    return $category->term_id;
-                },
-                $categories
-            );
-        }
+    // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
+    // {
+    //     $return_type = $options['return-type'] ?? null;
+    //     if ($return_type == ReturnTypes::IDS) {
+    //         return array_map(
+    //             function ($category) {
+    //                 return $category->term_id;
+    //             },
+    //             $categories
+    //         );
+    //     }
 
-        return $categories;
-    }
+    //     return $categories;
+    // }
+    // public function getCategories($query, $options = []): array
+    // {
+    //     if (isset($query['hide-empty'])) {
+    //         $query['hide_empty'] = $query['hide-empty'];
+    //         unset($query['hide-empty']);
+    //     }
+    //     return $this->returnCategoryObjectsOrIDs((array) get_categories($query));
+    // }
+
+
     public function getCategories($query, $options = []): array
     {
-        if (isset($query['hide-empty'])) {
-            $query['hide_empty'] = $query['hide-empty'];
-            unset($query['hide-empty']);
-        }
-        return $this->returnCategoryObjectsOrIDs((array) get_categories($query));
+        $query = $this->convertCategoriesQuery($query, $options);
+        return get_categories($query, ['taxonomy' => $this->getTaxonomyName()]);
     }
+
+    public function convertCategoriesQuery($query, array $options = [])
+    {
+        if ($return_type = $options['return-type'] ?? null) {
+            if ($return_type == ReturnTypes::IDS) {
+                $query['fields'] = 'ids';
+            } elseif ($return_type == ReturnTypes::NAMES) {
+                $query['fields'] = 'names';
+            }
+        }
+
+        // Accept field atts to filter the API fields
+        $this->maybeFilterDataloadQueryArgs($query, $options);
+
+        // Convert the parameters
+        if (isset($query['include'])) {
+            // Transform from array to string
+            $query['include'] = implode(',', $query['include']);
+        }
+        if (isset($query['order'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['orderby'])) {
+            // Same param name, so do nothing
+            // This param can either be a string or an array. Eg:
+            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+        }
+        if (isset($query['offset'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['limit'])) {
+            // Maybe restrict the limit, if higher than the max limit
+            // Allow to not limit by max when querying from within the application
+            $limit = (int) $query['limit'];
+            if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
+                $limit = TypeAPIUtils::getLimitOrMaxLimit(
+                    $limit,
+                    ComponentConfiguration::getCategoryListMaxLimit()
+                );
+            }
+
+            // Assign the limit as the required attribute
+            // To bring all results, get_categories needs "number => 0" instead of -1
+            $query['number'] = ($limit == -1) ? 0 : $limit;
+            unset($query['limit']);
+        }
+        if (isset($query['search'])) {
+            // Same param name, so do nothing
+        }
+        if (isset($query['slugs'])) {
+            $query['slug'] = $query['slugs'];
+            unset($query['slugs']);
+        }
+
+        return HooksAPIFacade::getInstance()->applyFilters(
+            'CMSAPI:categories:query',
+            $query,
+            $options
+        );
+    }
+
     public function getCategoryCount($query, $options = []): int
     {
         $options['return-type'] = ReturnTypes::IDS;
