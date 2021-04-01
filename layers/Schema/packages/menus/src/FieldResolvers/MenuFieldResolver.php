@@ -80,19 +80,19 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 // Load needed values for the menu-items
                 $instanceManager = InstanceManagerFacade::getInstance();
                 $menuID = $menuTypeAPI->getMenuTermId($menu);
-                $items = $menuTypeAPI->getMenuItems($menuID);
+                $itemsData = $menuTypeAPI->getMenuItemsData($menuID);
                 $value = array();
-                if ($items) {
+                if ($itemsData) {
                     // Load these item data-fields. If other set needed, create another $field
                     $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParent', 'objectID', 'additionalAttrs');
                     /**
                      * @var MenuItemTypeResolver
                      */
                     $menuItemTypeResolver = $instanceManager->getInstance(MenuItemTypeResolver::class);
-                    foreach ($items as $item) {
+                    foreach ($itemsData as $itemData) {
                         $item_value = array();
                         foreach ($item_data_fields as $item_data_field) {
-                            $menuItemValue = $menuItemTypeResolver->resolveValue($item, $item_data_field, $variables, $expressions, $options);
+                            $menuItemValue = $menuItemTypeResolver->resolveValue($itemData, $item_data_field, $variables, $expressions, $options);
                             if (GeneralUtils::isError($menuItemValue)) {
                                 return $menuItemValue;
                             }

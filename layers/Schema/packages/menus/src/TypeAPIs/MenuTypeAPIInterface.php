@@ -15,7 +15,7 @@ interface MenuTypeAPIInterface
     public function isInstanceOfMenuType(object $object): bool;
 
     public function getMenu(string | int $menuID): ?object;
-    public function getMenuItems($menu, $options = []);
+    public function getMenuItemsData(string | int | object $menuObjectOrID): array;
     public function getMenuTermId($menu);
     public function getMenuIDFromMenuName(string $menuName);
 }
