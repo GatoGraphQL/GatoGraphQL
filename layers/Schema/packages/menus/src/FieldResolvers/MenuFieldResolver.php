@@ -83,7 +83,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 $value = array();
                 if ($itemsData) {
                     // Load these item data-fields. If other set needed, create another $field
-                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParent', 'objectID', 'additionalAttrs');
+                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParentID', 'objectID', 'additionalAttrs');
                     /**
                      * @var MenuItemTypeResolver
                      */

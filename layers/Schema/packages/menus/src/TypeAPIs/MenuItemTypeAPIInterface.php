@@ -7,12 +7,15 @@ namespace PoPSchema\Menus\TypeAPIs;
 interface MenuItemTypeAPIInterface
 {
     public function getMenuItem(string | int $id): ?object;
-    public function getMenuItemTitle($menu_item);
-    public function getMenuItemObjectId($menu_item);
-    public function getMenuItemUrl($menu_item);
-    public function getMenuItemClasses($menu_item);
-    public function getMenuItemId($menu_item);
-    public function getMenuItemParent($menu_item);
-    public function getMenuItemTarget($menu_item);
-    public function getMenuItemDescription($menu_item);
+    public function getMenuItemID(object $menuItem): string | int;
+    public function getMenuItemTitle(object $menuItem): string;
+    public function getMenuItemObjectID(object $menuItem): string | int;
+    public function getMenuItemURL(object $menuItem): string;
+    /**
+     * @return string[]
+     */
+    public function getMenuItemClasses(object $menuItem): array;
+    public function getMenuItemParentID(object $menuItem): string | int | null;
+    public function getMenuItemTarget(object $menuItem): string;
+    public function getMenuItemDescription(object $menuItem): string;
 }

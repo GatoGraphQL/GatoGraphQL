@@ -26,7 +26,7 @@ class MenuItemTypeResolver extends AbstractTypeResolver
     {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
         $menuItem = $resultItem;
-        return $menuItemTypeAPI->getMenuItemId($menuItem);
+        return $menuItemTypeAPI->getMenuItemID($menuItem);
     }
 
     public function getTypeDataLoaderClass(): string

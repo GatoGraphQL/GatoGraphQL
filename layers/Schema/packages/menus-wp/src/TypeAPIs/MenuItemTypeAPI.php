@@ -16,41 +16,45 @@ class MenuItemTypeAPI implements MenuItemTypeAPIInterface
     {
         return get_post($id, ARRAY_A);
     }
-
-    public function getMenuItemTitle($menu_item) {
-
-        return apply_filters('the_title', $menu_item->title, $menu_item->object_id);
-    }
-    // public function getMenuItemTitle($menu_item)
-    // {
-    //     return $menu_item->title;
-    // }
-    public function getMenuItemObjectId($menu_item)
+    public function getMenuItemID(object $menuItem): string | int
     {
-        return $menu_item->object_id;
+        return $menuItem->ID;
     }
-    public function getMenuItemUrl($menu_item)
+    public function getMenuItemTitle(object $menuItem): string
     {
-        return $menu_item->url;
+        return apply_filters('the_title', $menuItem->title, $menuItem->object_id);
     }
-    public function getMenuItemClasses($menu_item)
+    public function getMenuItemObjectID(object $menuItem): string | int
     {
-        return $menu_item->classes;
+        return $menuItem->object_id;
     }
-    public function getMenuItemId($menu_item)
+    public function getMenuItemURL(object $menuItem): string
     {
-        return $menu_item->ID;
+        return $menuItem->url;
     }
-    public function getMenuItemParent($menu_item)
+    /**
+     * @return string[]
+     */
+    public function getMenuItemClasses(object $menuItem): array
     {
-        return $menu_item->menu_item_parent;
+        return $menuItem->classes;
     }
-    public function getMenuItemTarget($menu_item)
+    public function getMenuItemParentID(object $menuItem): string | int | null
     {
-        return $menu_item->target;
+        /**
+         * If it has no parent, it has ID "0"
+         */
+        if ($menuItem->menu_item_parent === 0) {
+            return null;
+        }
+        return $menuItem->menu_item_parent;
     }
-    public function getMenuItemDescription($menu_item)
+    public function getMenuItemTarget(object $menuItem): string
     {
-        return $menu_item->description;
+        return $menuItem->target;
+    }
+    public function getMenuItemDescription(object $menuItem): string
+    {
+        return $menuItem->description;
     }
 }
