@@ -8,7 +8,7 @@ use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 
 class MenuHelpers
 {
-    public static function getMenuIDFromMenuName($menu): ?string
+    public static function getMenuIDFromMenuName(string $menu): string | int | null
     {
         $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         if ($menu_object = $menuTypeAPI->getNavigationMenuObject($menu)) {
