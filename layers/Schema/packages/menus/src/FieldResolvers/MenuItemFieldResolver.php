@@ -29,7 +29,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'target',
             'additionalAttrs',
             'objectID',
-            'menuItemParentID',
+            'parentID',
         ];
     }
 
@@ -43,7 +43,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'target' => SchemaDefinition::TYPE_STRING,
             'additionalAttrs' => SchemaDefinition::TYPE_STRING,
             'objectID' => SchemaDefinition::TYPE_ID,
-            'menuItemParentID' => SchemaDefinition::TYPE_ID,
+            'parentID' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -59,7 +59,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'target' => $translationAPI->__('Menu item target', 'menus'),
             'additionalAttrs' => $translationAPI->__('Menu item additional attributes', 'menus'),
             'objectID' => $translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
-            'menuItemParentID' => $translationAPI->__('Menu item\'s parent ID', 'menus'),
+            'parentID' => $translationAPI->__('Menu item\'s parent ID', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -115,7 +115,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             case 'objectID':
                 return $menuItemTypeAPI->getMenuItemObjectID($menuItem);
 
-            case 'menuItemParentID':
+            case 'parentID':
                 return $menuItemTypeAPI->getMenuItemParentID($menuItem);
         }
 
