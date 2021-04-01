@@ -9,8 +9,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-use function strpos;
-
 class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
     public function getFieldNamesToResolve(): array
