@@ -45,6 +45,7 @@ class Component extends AbstractPluginComponent
             \PoPSchema\CommentMutationsWP\Component::class,
             \PoPSchema\UserStateMutationsWP\Component::class,
             \PoPSchema\BasicDirectives\Component::class,
+            \PoPSchema\MenusWP\Component::class,
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
             \GraphQLAPI\MarkdownConvertor\Component::class,
