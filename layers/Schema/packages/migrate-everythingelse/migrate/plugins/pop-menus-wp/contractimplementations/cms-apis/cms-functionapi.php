@@ -1,6 +1,8 @@
 <?php
 namespace PoPSchema\Menus\WP;
 
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+
 class FunctionAPI extends \PoPSchema\Menus\FunctionAPI_Base
 {
     public function getNavigationMenuObject($menu_id)
@@ -18,9 +20,13 @@ class FunctionAPI extends \PoPSchema\Menus\FunctionAPI_Base
         }
         return $object;
     }
-    public function getNavigationMenuItems($menu)
+    public function getNavigationMenuItems($menu, $options = [])
     {
-        return wp_get_nav_menu_items($menu);
+        $args = [];
+        if ($options['return-type'] == ReturnTypes::IDS) {
+            $args['fields'] = 'ids';
+        }
+        return wp_get_nav_menu_items($menu, $args);
     }
     public function getMenuItemTitle($menu_item) {
 
