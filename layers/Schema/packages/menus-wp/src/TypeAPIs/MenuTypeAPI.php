@@ -7,6 +7,7 @@ namespace PoPSchema\MenusWP\TypeAPIs;
 use WP_Menu;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -38,11 +39,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     }
     public function getNavigationMenuItems($menu, $options = [])
     {
-        $args = [];
-        if ($options['return-type'] == ReturnTypes::IDS) {
-            $args['fields'] = 'ids';
-        }
-        return wp_get_nav_menu_items($menu, $args);
+        return wp_get_nav_menu_items($menu);
     }
     public function getMenuItemTitle($menu_item) {
 

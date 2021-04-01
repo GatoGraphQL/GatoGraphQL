@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+use PoPSchema\Menus\TypeDataLoaders\MenuItemTypeDataLoader;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -31,7 +33,8 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            // 'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -75,19 +78,48 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         $menu = $resultItem;
         switch ($fieldName) {
             case 'items':
-                return $menuTypeAPI->getNavigationMenuItems($menu, ['return-type' => ReturnTypes::IDS]);
+                // Load needed values for the menu-items
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /**
+                 * @var MenuItemTypeDataLoader
+                 */
+                $menuItemTypeDataLoader = $instanceManager->getInstance(MenuItemTypeDataLoader::class);
+                $menuID = $menuTypeAPI->getMenuTermId($menu);
+                $items = $menuItemTypeDataLoader->getObjects([$menuID])[0];
+
+                // Load these item data-fields. If other set needed, create another $field
+                $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParent', 'objectID', 'additionalAttrs');
+                $value = array();
+                if ($items) {
+                    /**
+                     * @var MenuItemTypeResolver
+                     */
+                    $menuItemTypeResolver = $instanceManager->getInstance(MenuItemTypeResolver::class);
+                    foreach ($items as $item) {
+                        $item_value = array();
+                        foreach ($item_data_fields as $item_data_field) {
+                            $menuItemValue = $menuItemTypeResolver->resolveValue($item, $item_data_field, $variables, $expressions, $options);
+                            if (GeneralUtils::isError($menuItemValue)) {
+                                return $menuItemValue;
+                            }
+                            $item_value[$item_data_field] = $menuItemValue;
+                        }
+                        $value[] = $item_value;
+                    }
+                }
+                return $value;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'items':
-                return MenuItemTypeResolver::class;
-        }
+    // public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    // {
+    //     switch ($fieldName) {
+    //         case 'items':
+    //             return MenuItemTypeResolver::class;
+    //     }
 
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
-    }
+    //     return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+    // }
 }
