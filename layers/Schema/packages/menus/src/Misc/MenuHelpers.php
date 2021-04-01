@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\Misc;
 
+use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+
 class MenuHelpers
 {
     public static function getMenuIDFromMenuName($menu): ?string
     {
-        $cmsmenusresolver = \PoPSchema\Menus\ObjectPropertyResolverFactory::getInstance();
-        $cmsmenusapi = \PoPSchema\Menus\FunctionAPIFactory::getInstance();
-        if ($menu_object = $cmsmenusapi->getNavigationMenuObject($menu)) {
-            return $cmsmenusresolver->getMenuObjectTermId($menu_object);
+        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
+        if ($menu_object = $menuTypeAPI->getNavigationMenuObject($menu)) {
+            return $menuTypeAPI->getMenuObjectTermId($menu_object);
         }
         return null;
     }

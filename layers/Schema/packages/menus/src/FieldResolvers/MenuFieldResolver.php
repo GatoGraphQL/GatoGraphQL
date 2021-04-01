@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Menus\TypeDataLoaders\MenuItemTypeDataLoader;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -73,11 +71,11 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsmenusapi = \PoPSchema\Menus\FunctionAPIFactory::getInstance();
+        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         $menu = $resultItem;
         switch ($fieldName) {
             case 'items':
-                return $cmsmenusapi->getNavigationMenuItems($menu, ['return-type' => ReturnTypes::IDS]);
+                return $menuTypeAPI->getNavigationMenuItems($menu, ['return-type' => ReturnTypes::IDS]);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

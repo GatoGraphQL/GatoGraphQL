@@ -10,6 +10,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -74,12 +75,12 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsmenusapi = \PoPSchema\Menus\FunctionAPIFactory::getInstance();
+        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'menu':
                 // Validate the ID exists
                 $menuID = $fieldArgs['id'];
-                if ($cmsmenusapi->getNavigationMenuObjectById($menuID) !== null) {
+                if ($menuTypeAPI->getNavigationMenuObjectById($menuID) !== null) {
                     return $menuID;
                 }
                 return null;
