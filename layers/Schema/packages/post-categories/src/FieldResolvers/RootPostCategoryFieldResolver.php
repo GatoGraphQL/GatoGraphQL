@@ -148,9 +148,10 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $cmscategoriesapi->getCategories($query, $options);
             case 'postCategoryCount':
+                $query = [];
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscategoriesapi->getCategoryCount([], $options);
+                return $cmscategoriesapi->getCategoryCount($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

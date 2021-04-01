@@ -123,10 +123,11 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                 );
             case 'categoryCount':
                 $options = [];
+                $query = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $categoryapi->getCustomPostCategoryCount(
                     $typeResolver->getID($post),
-                    [],
+                    $query,
                     $options
                 );
         }

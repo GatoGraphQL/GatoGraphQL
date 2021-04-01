@@ -46,7 +46,7 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
 
         return \wp_get_post_terms($post_id, $this->getTaxonomyName(), $query);
     }
-    public function getCustomPostCategoryCount($post_id, array $query = [], array $options = []): int
+    public function getCustomPostCategoryCount($post_id, $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
@@ -102,6 +102,9 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
         if (isset($query['hide-empty'])) {
             $query['hide_empty'] = $query['hide-empty'];
             unset($query['hide-empty']);
+        } else {
+            // By default: do not hide empty categories
+            $query['hide_empty'] = false;
         }
 
         // Convert the parameters

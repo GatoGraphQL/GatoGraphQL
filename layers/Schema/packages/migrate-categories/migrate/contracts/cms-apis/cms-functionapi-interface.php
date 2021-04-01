@@ -6,7 +6,7 @@ interface FunctionAPI extends \PoPSchema\Taxonomies\FunctionAPI
     public function getCategories($query, $options = []): array;
     public function getCategoryCount($query, $options = []): int;
     public function getCustomPostCategories($post_id, array $options = []): array;
-    public function getCustomPostCategoryCount($post_id, array $options = []): int;
+    public function getCustomPostCategoryCount($post_id, $query, array $options = []): int;
     public function getCategoryName($cat_id);
     public function getCategoryParent($cat_id);
     public function getCategorySlug($cat_id);
