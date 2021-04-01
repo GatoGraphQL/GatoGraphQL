@@ -26,7 +26,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         }
         return $object;
     }
-    public function getNavigationMenuItems($menu, $options = [])
+    public function getMenuItems($menu, $options = [])
     {
         return wp_get_nav_menu_items($menu);
     }

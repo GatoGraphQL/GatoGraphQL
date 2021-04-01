@@ -12,7 +12,6 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
-use PoPSchema\Menus\TypeDataLoaders\MenuItemTypeDataLoader;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 
@@ -80,17 +79,12 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
             case 'items':
                 // Load needed values for the menu-items
                 $instanceManager = InstanceManagerFacade::getInstance();
-                /**
-                 * @var MenuItemTypeDataLoader
-                 */
-                $menuItemTypeDataLoader = $instanceManager->getInstance(MenuItemTypeDataLoader::class);
                 $menuID = $menuTypeAPI->getMenuTermId($menu);
-                $items = $menuItemTypeDataLoader->getObjects([$menuID])[0];
-
-                // Load these item data-fields. If other set needed, create another $field
-                $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParent', 'objectID', 'additionalAttrs');
+                $items = $menuTypeAPI->getMenuItems($menuID);
                 $value = array();
                 if ($items) {
+                    // Load these item data-fields. If other set needed, create another $field
+                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParent', 'objectID', 'additionalAttrs');
                     /**
                      * @var MenuItemTypeResolver
                      */

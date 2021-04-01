@@ -8,6 +8,15 @@ use PoPSchema\Menus\TypeAPIs\MenuItemTypeAPIInterface;
 
 class MenuItemTypeAPI implements MenuItemTypeAPIInterface
 {
+    /**
+     * MenuItem is the CPT 'nav_menu_item'
+     * @see https://developer.wordpress.org/reference/functions/wp_get_nav_menu_items/#source
+     */
+    public function getMenuItem(string | int $id): ?object
+    {
+        return get_post($id, ARRAY_A);
+    }
+
     public function getMenuItemTitle($menu_item) {
 
         return apply_filters('the_title', $menu_item->title, $menu_item->object_id);
