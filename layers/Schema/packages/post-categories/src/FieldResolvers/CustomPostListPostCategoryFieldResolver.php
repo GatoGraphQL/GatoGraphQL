@@ -12,6 +12,14 @@ class CustomPostListPostCategoryFieldResolver extends AbstractCustomPostListCate
 {
     use PostCategoryAPISatisfiedContractTrait;
 
+    public function isServiceEnabled(): bool
+    {
+        /**
+         * @todo Enable if the post category (i.e. taxonomy "category") can have other custom post types use it (eg: page, event, etc)
+         */
+        return false;
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(PostCategoryTypeResolver::class);
