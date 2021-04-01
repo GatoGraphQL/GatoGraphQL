@@ -80,7 +80,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 // Load needed values for the menu-items
                 $instanceManager = InstanceManagerFacade::getInstance();
                 $itemsData = $menuTypeAPI->getMenuItemsData($menu);
-                $value = array();
+                $entries = array();
                 if ($itemsData) {
                     // Load these item data-fields. If other set needed, create another $field
                     $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'parentID', 'objectID', 'additionalAttrs');
@@ -97,10 +97,30 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                             }
                             $item_value[$item_data_field] = $menuItemValue;
                         }
-                        $value[] = $item_value;
+                        $entries[$item_value['id']] = $item_value;
+                        $entries[$item_value['id']]['children'] = [];
                     }
                 }
-                return $value;
+                /**
+                 * Reproduce the menu layout in the array
+                 */
+                $arrangedEntries = [];
+                foreach ($entries as $menuItemID => $menuItemData) {
+                    // Reproduce the list of parents
+                    $menuItemAncestorIDs = [];
+                    $menuItemParentID = $menuItemData['parentID'];
+                    while ($menuItemParentID !== null) {
+                        array_unshift($menuItemAncestorIDs, $menuItemParentID);
+                        $menuItemParentID = $entries[$menuItemParentID]['parentID'];
+                    }
+                    // Navigate to that position, and attach the menuItem
+                    $arrangedEntriesPointer = &$arrangedEntries;
+                    foreach ($menuItemAncestorIDs as $menuItemAncestorID) {
+                        $arrangedEntriesPointer = &$arrangedEntriesPointer[$menuItemAncestorID]['children'];
+                    }
+                    $arrangedEntriesPointer[$menuItemID] = $menuItemData;
+                }
+                return $arrangedEntries;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
