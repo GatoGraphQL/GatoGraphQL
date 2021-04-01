@@ -29,7 +29,11 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
         if ($menuName = $query_args['menu']) {
             $menuTypeAPI = MenuTypeAPIFacade::getInstance();
-            return $menuTypeAPI->getMenuIDFromMenuName($menuName);
+            $menuID = $menuTypeAPI->getMenuIDFromMenuName($menuName);
+            if ($menuID === null) {
+                return [];
+            }
+            return $menuID;
         }
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
