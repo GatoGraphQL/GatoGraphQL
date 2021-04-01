@@ -21,7 +21,7 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'posts' => $translationAPI->__('Posts which contain this category', 'post-categories'),
-            'postCount' => $translationAPI->__('Number of posts which contain this category', 'post-categories'),
+            // 'postCount' => $translationAPI->__('Number of posts which contain this category', 'post-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -41,7 +41,7 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
         $category = $resultItem;
         switch ($fieldName) {
             case 'posts':
-            case 'postCount':
+            // case 'postCount':
                 $query['category-ids'] = [$typeResolver->getID($category)];
                 break;
         }
