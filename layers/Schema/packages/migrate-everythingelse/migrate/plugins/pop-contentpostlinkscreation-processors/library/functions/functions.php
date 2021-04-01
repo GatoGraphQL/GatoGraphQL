@@ -9,7 +9,7 @@ HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'cplcC
 function cplcCreateupdateutilsEditUrl($url, $post_id)
 {
     if (defined('POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK') && POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK && defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS) {
-        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
         if ($categoryapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $post_id)) {
             return RouteUtils::getRouteURL(POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK);
         }

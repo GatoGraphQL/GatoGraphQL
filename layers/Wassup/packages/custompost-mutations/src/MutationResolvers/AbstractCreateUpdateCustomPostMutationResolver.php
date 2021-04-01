@@ -162,7 +162,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         if (!$categories) {
             return $categories;
         }
-        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself

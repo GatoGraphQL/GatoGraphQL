@@ -9,7 +9,7 @@ HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\Model
 function popTaxonomyModuleInstanceComponents($components)
 {
     $vars = ApplicationState::getVars();
-    $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
+    $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
     $nature = $vars['nature'];
 
     // Properties specific to each nature

@@ -11,7 +11,7 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
 
     public function __construct()
     {
-        \PoPSchema\Categories\FunctionAPIFactory::setInstance($this);
+        \PoPSchema\PostCategories\FunctionAPIFactory::setInstance($this);
     }
 
     protected function returnCategoryObjectsOrIDs($categories, $options = []): array
