@@ -5,7 +5,7 @@ namespace PoPSchema\Categories\WP;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class FunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSchema\Categories\FunctionAPI
+abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSchema\Categories\FunctionAPI
 {
     use APITypeDataResolverTrait;
 
@@ -111,7 +111,3 @@ class FunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSc
     }
 }
 
-/**
- * Initialize
- */
-new FunctionAPI();

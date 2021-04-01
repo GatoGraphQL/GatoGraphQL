@@ -26,7 +26,8 @@ class Plugin
         );
 
         // Priority: mid section, after PoP Posts WP
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888255);
+        // Important: priority => After initializing migrate-categories! (Its code depends on this one)
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888265);
     }
     public function getProviderValidationClass($class)
     {
