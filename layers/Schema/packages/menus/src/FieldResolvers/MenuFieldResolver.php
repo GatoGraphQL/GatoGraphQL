@@ -97,33 +97,48 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                             }
                             $item_value[$item_data_field] = $menuItemValue;
                         }
-                        $entries[$item_value['id']] = $item_value;
-                        $entries[$item_value['id']]['children'] = [];
+                        $item_value['children'] = [];
+                        $entries[] = $item_value;
                     }
                 }
                 /**
                  * Reproduce the menu layout in the array
                  */
                 $arrangedEntries = [];
-                foreach ($entries as $menuItemID => $menuItemData) {
-                    // Reproduce the list of parents
-                    $menuItemAncestorIDs = [];
-                    $menuItemParentID = $menuItemData['parentID'];
-                    while ($menuItemParentID !== null) {
-                        array_unshift($menuItemAncestorIDs, $menuItemParentID);
-                        $menuItemParentID = $entries[$menuItemParentID]['parentID'];
-                    }
-                    // Navigate to that position, and attach the menuItem
+                foreach ($entries as $menuItemData) {
                     $arrangedEntriesPointer = &$arrangedEntries;
-                    foreach ($menuItemAncestorIDs as $menuItemAncestorID) {
-                        $arrangedEntriesPointer = &$arrangedEntriesPointer[$menuItemAncestorID]['children'];
+                    // Reproduce the list of parents
+                    if ($menuItemParentID = $menuItemData['parentID']) {
+                        $menuItemAncestorIDs = [];
+                        while ($menuItemParentID !== null) {
+                            $menuItemAncestorIDs[] = $menuItemParentID;
+                            $menuItemParentPos = $this->findEntryPosition($menuItemParentID, $entries);
+                            $menuItemParentID = $entries[$menuItemParentPos]['parentID'];
+                        }
+                        // Navigate to that position, and attach the menuItem
+                        foreach (array_reverse($menuItemAncestorIDs) as $menuItemAncestorID) {
+                            $menuItemAncestorPos = $this->findEntryPosition($menuItemAncestorID, $arrangedEntriesPointer);
+                            $arrangedEntriesPointer = &$arrangedEntriesPointer[$menuItemAncestorPos]['children'];
+                        }
                     }
-                    $arrangedEntriesPointer[$menuItemID] = $menuItemData;
+                    $arrangedEntriesPointer[] = $menuItemData;
                 }
                 return $arrangedEntries;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+    }
+
+    protected function findEntryPosition(string | int $menuItemID, array $entries): int
+    {
+        $entriesCount = count($entries);
+        for ($pos = 0; $pos < $entriesCount; $pos++) {
+            if ($entries[$pos]['id'] == $menuItemID) {
+                return $pos;
+            }
+        }
+        // It will never reach here, so return anything
+        return 0;
     }
 
     // public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
