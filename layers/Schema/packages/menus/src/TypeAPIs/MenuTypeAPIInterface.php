@@ -19,4 +19,5 @@ interface MenuTypeAPIInterface
     public function getNavigationMenuItems($menu, $options = []);
     public function getMenuObjectTermId($menu_object);
     public function getMenuTermId($menu);
+    public function getMenuIDFromMenuName(string $menuName);
 }

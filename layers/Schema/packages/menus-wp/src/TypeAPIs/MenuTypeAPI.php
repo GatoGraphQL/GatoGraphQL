@@ -45,4 +45,12 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     {
         return $menu->term_id;
     }
+
+    public function getMenuIDFromMenuName(string $menuName): string | int | null
+    {
+        if ($menu_object = $this->getNavigationMenuObject($menuName)) {
+            return $this->getMenuObjectTermId($menu_object);
+        }
+        return null;
+    }
 }
