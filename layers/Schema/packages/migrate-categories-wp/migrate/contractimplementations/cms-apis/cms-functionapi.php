@@ -231,7 +231,11 @@ abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI 
     public function getCategoryParent($cat_id)
     {
         $category = get_category($cat_id);
-        return $category->parent;
+        // If it has no parent, it is assigned 0. In that case, return null
+        if ($parent = $category->parent) {
+            return $parent;
+        }
+        return null;
     }
     public function getCategorySlug($cat_id)
     {
