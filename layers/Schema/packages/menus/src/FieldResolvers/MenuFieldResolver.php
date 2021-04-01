@@ -51,7 +51,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'items' => $translationAPI->__('', ''),
+            'items' => $translationAPI->__('The menu items', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
