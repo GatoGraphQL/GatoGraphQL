@@ -77,7 +77,8 @@
         "pop-schema/user-roles-wp": "dev-master",
         "pop-schema/user-state-mutations-wp": "dev-master",
         "pop-schema/user-state-wp": "dev-master",
-        "pop-schema/usermeta-wp": "dev-master"
+        "pop-schema/usermeta-wp": "dev-master",
+        "pop-schema/menus-wp": "dev-master"
     },
     "extra": {
         "branch-alias": {
