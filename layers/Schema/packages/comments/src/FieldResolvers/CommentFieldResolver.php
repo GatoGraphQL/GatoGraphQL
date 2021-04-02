@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class CommentFieldResolver extends AbstractDBDataFieldResolver
+class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
@@ -34,6 +37,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             'type',
             'parent',
             'date',
+            'responses',
         ];
     }
 
@@ -50,6 +54,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             'type' => SchemaDefinition::TYPE_STRING,
             'parent' => SchemaDefinition::TYPE_ID,
             'date' => SchemaDefinition::TYPE_DATE,
+            'responses' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -63,6 +68,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             case 'approved':
             case 'type':
             case 'date':
+            case 'responses':
                 return true;
         }
         return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
@@ -82,6 +88,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             'type' => $translationAPI->__('Type of comment', 'pop-comments'),
             'parent' => $translationAPI->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
             'date' => $translationAPI->__('Date when the comment was added', 'pop-comments'),
+            'responses' => $translationAPI->__('Responses to the comment', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -133,6 +140,21 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
 
             case 'date':
                 return $cmsengineapi->getDate($fieldArgs['format'], $cmscommentsresolver->getCommentDateGmt($comment));
+
+            case 'responses':
+                $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+                $query = array(
+                    'status' => Status::APPROVED,
+                    // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
+                    'order' =>  'ASC',
+                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
+                    'parentID' => $typeResolver->getID($comment),
+                );
+                $options = [
+                    'return-type' => ReturnTypes::IDS,
+                ];
+                $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
+                return $cmscommentsapi->getComments($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -171,6 +193,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'parent':
+            case 'responses':
                 return CommentTypeResolver::class;
         }
 
