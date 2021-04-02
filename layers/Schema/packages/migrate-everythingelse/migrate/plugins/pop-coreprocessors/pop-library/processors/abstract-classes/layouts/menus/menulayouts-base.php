@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_MenuLayoutsBase extends PoPEngine_QueryDataM
 {
     public function getDataFields(array $module, array &$props): array
     {
-        return array('id', 'itemDataEntries');
+        return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
     }
 
     public function getItemClass(array $module, array &$props)
