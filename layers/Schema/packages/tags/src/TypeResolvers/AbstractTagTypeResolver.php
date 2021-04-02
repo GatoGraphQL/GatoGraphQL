@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\Tags\TypeResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
+use PoPSchema\Taxonomies\TypeResolvers\AbstractTaxonomyTypeResolver;
 
-abstract class AbstractTagTypeResolver extends AbstractTypeResolver
+abstract class AbstractTagTypeResolver extends AbstractTaxonomyTypeResolver
 {
     use TagAPIRequestedContractTrait;
 

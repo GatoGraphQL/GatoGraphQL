@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/usermeta": "^0.8",
-        "pop-schema/users-wp": "^0.8",
-        "pop-schema/migrate-usermeta-wp": "^0.8"
+        "pop-schema/users-wp": "^0.8"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
