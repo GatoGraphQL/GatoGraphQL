@@ -63,7 +63,8 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             case 'meta':
                 return $customPostMetaAPI->getCustomPostMeta(
                     $typeResolver->getID($customPost),
-                    $fieldArgs['key']
+                    $fieldArgs['key'],
+                    $fieldArgs['single']
                 );
         }
 

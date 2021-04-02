@@ -6,5 +6,5 @@ namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
 interface CustomPostMetaTypeAPIInterface
 {
-    public function getCustomPostMeta(string | int $customPostID, string $key): mixed;
+    public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed;
 }

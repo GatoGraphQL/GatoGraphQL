@@ -51,6 +51,12 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
                             SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The meta key', 'meta'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'single',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Whether to bring a single value', 'meta'),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
+                        ],
                     ]
                 );
         }

@@ -11,8 +11,8 @@ use PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
  */
 class CustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
-    public function getCustomPostMeta(string | int $customPostID, string $key): mixed
+    public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
-        return \get_post_meta($customPostID, $key);
+        return \get_post_meta($customPostID, $key, $single);
     }
 }
