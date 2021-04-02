@@ -273,6 +273,8 @@ class Plugins
         require_once (dirname(__DIR__, 2) . '/migrate-usermeta-wp/migrate/pop-usermeta-wp.php');
         require_once (dirname(__DIR__, 2) . '/migrate-commentmeta/migrate/pop-commentmeta.php');
         require_once (dirname(__DIR__, 2) . '/migrate-commentmeta-wp/migrate/pop-commentmeta-wp.php');
+        require_once (dirname(__DIR__, 2) . '/migrate-taxonomymeta/migrate/pop-taxonomymeta.php');
+        require_once (dirname(__DIR__, 2) . '/migrate-taxonomymeta-wp/migrate/pop-taxonomymeta-wp.php');
         require_once (dirname(__DIR__, 2) . '/migrate-events-wp-em/migrate/pop-events-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations-wp-em/migrate/pop-locations-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations/migrate/pop-locations.php');
