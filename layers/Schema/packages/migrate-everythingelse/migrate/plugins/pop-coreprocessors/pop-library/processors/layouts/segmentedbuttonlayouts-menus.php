@@ -32,7 +32,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_LAYOUT_MENU_SEGMENTEDBUTTON:
             case self::MODULE_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON:
-                return array('id', 'itemDataEntries');
+                return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
         }
 
         return parent::getDataFields($module, $props);

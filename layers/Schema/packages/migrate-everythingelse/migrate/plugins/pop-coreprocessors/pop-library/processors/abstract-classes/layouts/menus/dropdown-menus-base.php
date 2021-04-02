@@ -9,6 +9,6 @@ abstract class PoP_Module_Processor_DropdownMenuLayoutsBase extends PoPEngine_Qu
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('id', 'itemDataEntries');
+        return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
     }
 }
