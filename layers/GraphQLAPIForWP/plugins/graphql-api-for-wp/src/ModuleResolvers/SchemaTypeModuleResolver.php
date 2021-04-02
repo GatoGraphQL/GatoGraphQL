@@ -4,28 +4,29 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
-use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
-use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
+use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 {
@@ -45,6 +46,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
     public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
     public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
+    public const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
     public const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
     public const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
     public const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
@@ -81,6 +83,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         protected ?PageTypeResolver $pageTypeResolver,
         protected ?PostTagTypeResolver $postTagTypeResolver,
         protected ?PostCategoryTypeResolver $postCategoryTypeResolver,
+        protected ?MenuTypeResolver $menuTypeResolver,
         protected ?PostTypeResolver $postTypeResolver,
         protected ?UserRoleTypeResolver $userRoleTypeResolver,
         protected ?UserTypeResolver $userTypeResolver
@@ -104,6 +107,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_TAGS,
             self::SCHEMA_CATEGORIES,
             self::SCHEMA_POST_CATEGORIES,
+            self::SCHEMA_MENUS,
             self::SCHEMA_MEDIA,
             self::SCHEMA_USER_STATE_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
@@ -131,6 +135,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_USERS:
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOSTS:
+            case self::SCHEMA_MENUS:
                 return [
                     [
                         EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
@@ -233,6 +238,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_TAGS => \__('Schema Post Tags', 'graphql-api'),
             self::SCHEMA_CATEGORIES => \__('Schema Categories', 'graphql-api'),
             self::SCHEMA_POST_CATEGORIES => \__('Schema Post Categories', 'graphql-api'),
+            self::SCHEMA_MENUS => \__('Schema Menus', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTS => \__('Schema Custom Posts', 'graphql-api'),
             self::SCHEMA_USER_STATE_MUTATIONS => \__('Schema User State Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Schema Custom Post Mutations', 'graphql-api'),
@@ -299,6 +305,12 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     \__('post categories', 'graphql-api'),
                     $this->postCategoryTypeResolver->getTypeName()
                 );
+            case self::SCHEMA_MENUS:
+                return sprintf(
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
+                    \__('menus', 'graphql-api'),
+                    $this->menuTypeResolver->getTypeName()
+                );
             case self::SCHEMA_CUSTOMPOSTS:
                 return \__('Base functionality for all custom posts', 'graphql-api');
             case self::SCHEMA_TAGS:
@@ -337,6 +349,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_POST_TAGS:
             case self::SCHEMA_CATEGORIES:
             case self::SCHEMA_POST_CATEGORIES:
+            case self::SCHEMA_MENUS:
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:

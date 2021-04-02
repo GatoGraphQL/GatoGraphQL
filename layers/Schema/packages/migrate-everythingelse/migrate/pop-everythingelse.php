@@ -160,8 +160,6 @@ class Plugins
             'pop-mastercollection-processors',
             'pop-mastercollection-webplatform',
             'pop-mediahostthumbs',
-            'pop-menus',
-            'pop-menus-wp',
             'pop-multidomain',
             'pop-multidomain-processors',
             'pop-multidomain-sparesourceloader',

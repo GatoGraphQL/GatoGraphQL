@@ -260,6 +260,8 @@ services:
           ../../layers/Schema/packages/usermeta-wp:/app/vendor/pop-schema/usermeta-wp
         - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
         - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
+        - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
+        - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
         - >-
           ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
     build_as_root:

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
-use PoPSchema\Menus\Misc\MenuHelpers;
 
 abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -27,8 +27,13 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
-        if ($menu = $query_args['menu']) {
-            return MenuHelpers::getMenuIDFromMenuName($menu);
+        if ($menuName = $query_args['menu']) {
+            $menuTypeAPI = MenuTypeAPIFacade::getInstance();
+            $menuID = $menuTypeAPI->getMenuIDFromMenuName($menuName);
+            if ($menuID === null) {
+                return [];
+            }
+            return $menuID;
         }
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }

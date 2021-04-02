@@ -1,5 +1,5 @@
 <ul class="nav {{class}}" style="{{style}}" role="menu" {{#generateId}}{{id}}{{/generateId}}>
-	{{#each dbObject.items}}
+	{{#each dbObject.itemDataEntries}}
 		<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{classes}}'>
 			{{#compare title "divider"}}
 				<hr />

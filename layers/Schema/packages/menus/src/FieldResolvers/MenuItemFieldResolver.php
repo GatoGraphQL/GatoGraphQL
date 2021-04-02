@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
+use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
 
 class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -28,7 +29,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'target',
             'additionalAttrs',
             'objectID',
-            'menuItemParent',
+            'parentID',
         ];
     }
 
@@ -42,7 +43,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'target' => SchemaDefinition::TYPE_STRING,
             'additionalAttrs' => SchemaDefinition::TYPE_STRING,
             'objectID' => SchemaDefinition::TYPE_ID,
-            'menuItemParent' => SchemaDefinition::TYPE_ID,
+            'parentID' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -51,14 +52,14 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'title' => $translationAPI->__('', ''),
-            'alt' => $translationAPI->__('', ''),
-            'url' => $translationAPI->__('', ''),
-            'classes' => $translationAPI->__('', ''),
-            'target' => $translationAPI->__('', ''),
-            'additionalAttrs' => $translationAPI->__('', ''),
-            'objectID' => $translationAPI->__('', ''),
-            'menuItemParent' => $translationAPI->__('', ''),
+            'title' => $translationAPI->__('Menu item title', 'menus'),
+            'alt' => $translationAPI->__('Menu item alt', 'menus'),
+            'url' => $translationAPI->__('Menu item URL', 'menus'),
+            'classes' => $translationAPI->__('Menu item classes', 'menus'),
+            'target' => $translationAPI->__('Menu item target', 'menus'),
+            'additionalAttrs' => $translationAPI->__('Menu item additional attributes', 'menus'),
+            'objectID' => $translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
+            'parentID' => $translationAPI->__('Menu item\'s parent ID', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -78,47 +79,44 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsmenusresolver = \PoPSchema\Menus\ObjectPropertyResolverFactory::getInstance();
-        $cmsmenusapi = \PoPSchema\Menus\FunctionAPIFactory::getInstance();
-        $menu_item = $resultItem;
+        $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
+        $menuItem = $resultItem;
         switch ($fieldName) {
             case 'title':
-                return $cmsmenusapi->getMenuItemTitle($menu_item);
-
             case 'alt':
-                return $cmsmenusresolver->getMenuItemTitle($menu_item);
+                return $menuItemTypeAPI->getMenuItemTitle($menuItem);
 
             case 'url':
-                return $cmsmenusresolver->getMenuItemUrl($menu_item);
+                return $menuItemTypeAPI->getMenuItemURL($menuItem);
 
             case 'classes':
                 // Copied from nav-menu-template.php function start_el
-                $classes = $cmsmenusresolver->getMenuItemClasses($menu_item);
+                $classes = $menuItemTypeAPI->getMenuItemClasses($menuItem);
                 $classes = empty($classes) ? array() : (array) $classes;
                 $classes[] = 'menu-item';
-                $classes[] = 'menu-item-' . $cmsmenusresolver->getMenuItemId($menu_item);
-                if ($parent = $cmsmenusresolver->getMenuItemParent($menu_item)) {
-                    $classes[] = 'menuItemParent';
-                    $classes[] = 'menu-item-parent-' . $parent;
+                $classes[] = 'menu-item-' . $menuItemTypeAPI->getMenuItemID($menuItem);
+                if ($parentID = $menuItemTypeAPI->getMenuItemParentID($menuItem)) {
+                    $classes[] = 'menu-item-parent';
+                    $classes[] = 'menu-item-parent-' . $parentID;
                 }
-                if ($object_id = $cmsmenusresolver->getMenuItemObjectId($menu_item)) {
-                    $classes[] = 'menu-item-object-id-' . $object_id;
+                if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
+                    $classes[] = 'menu-item-object-id-' . $objectID;
                 }
-                return join(' ', HooksAPIFacade::getInstance()->applyFilters('menuitem:classes', array_filter($classes), $menu_item, array()));
+                return join(' ', HooksAPIFacade::getInstance()->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array()));
 
             case 'target':
-                return $cmsmenusresolver->getMenuItemTarget($menu_item);
+                return $menuItemTypeAPI->getMenuItemTarget($menuItem);
 
             case 'additionalAttrs':
                 // Using the description, because WP does not give a field for extra attributes when creating a menu,
                 // and this is needed to add target="addons" for the Add ContentPost link
-                return $cmsmenusresolver->getMenuItemDescription($menu_item);
+                return $menuItemTypeAPI->getMenuItemDescription($menuItem);
 
             case 'objectID':
-                return $cmsmenusresolver->getMenuItemObjectId($menu_item);
+                return $menuItemTypeAPI->getMenuItemObjectID($menuItem);
 
-            case 'menuItemParent':
-                return $cmsmenusresolver->getMenuItemParent($menu_item);
+            case 'parentID':
+                return $menuItemTypeAPI->getMenuItemParentID($menuItem);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

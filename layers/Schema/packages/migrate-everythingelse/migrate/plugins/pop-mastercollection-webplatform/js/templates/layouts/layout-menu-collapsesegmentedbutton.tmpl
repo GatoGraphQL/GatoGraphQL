@@ -5,10 +5,10 @@
 (function($){
 
 	var item = '', submenus = {};
-	{{#each dbObject.items}}
-		
+	{{#each dbObject.itemDataEntries}}
+
 		{{!Check if the menu item has a parent, if so add below it, if not, add under the menu}}
-		{{#compare menu-item-parent 0 operator=">"}}		
+		{{#compare menu-item-parent 0 operator=">"}}
 			if (!submenus['menu-item-{{menu-item-parent}}']) {
 				submenus['menu-item-{{menu-item-parent}}'] = [];
 			}

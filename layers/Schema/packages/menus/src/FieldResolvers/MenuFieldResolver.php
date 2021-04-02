@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers;
 
-use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Menus\TypeDataLoaders\MenuItemTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
+use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
+use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 
 class MenuFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -25,14 +25,15 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'items',
+            'itemDataEntries',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            // 'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'itemDataEntries' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -40,7 +41,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
-            'items',
+            'itemDataEntries',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -52,7 +53,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'items' => $translationAPI->__('', ''),
+            'itemDataEntries' => $translationAPI->__('The menu items', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -72,42 +73,85 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsmenusresolver = \PoPSchema\Menus\ObjectPropertyResolverFactory::getInstance();
+        $menuTypeAPI = MenuTypeAPIFacade::getInstance();
         $menu = $resultItem;
         switch ($fieldName) {
-            case 'items':
+            case 'itemDataEntries':
                 // Load needed values for the menu-items
                 $instanceManager = InstanceManagerFacade::getInstance();
-                /**
-                 * @var MenuItemTypeDataLoader
-                 */
-                $menuItemTypeDataLoader = $instanceManager->getInstance(MenuItemTypeDataLoader::class);
-                $menuID = $cmsmenusresolver->getMenuTermId($menu);
-                $items = $menuItemTypeDataLoader->getObjects([$menuID])[0];
-
-                // Load these item data-fields. If other set needed, create another $field
-                $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'menuItemParent', 'objectID', 'additionalAttrs');
-                $value = array();
-                if ($items) {
+                $itemsData = $menuTypeAPI->getMenuItemsData($menu);
+                $entries = array();
+                if ($itemsData) {
+                    // Load these item data-fields. If other set needed, create another $field
+                    $item_data_fields = array('id', 'title', 'alt', 'classes', 'url', 'target', 'parentID', 'objectID', 'additionalAttrs');
                     /**
                      * @var MenuItemTypeResolver
                      */
                     $menuItemTypeResolver = $instanceManager->getInstance(MenuItemTypeResolver::class);
-                    foreach ($items as $item) {
+                    foreach ($itemsData as $itemData) {
                         $item_value = array();
                         foreach ($item_data_fields as $item_data_field) {
-                            $menuItemValue = $menuItemTypeResolver->resolveValue($item, $item_data_field, $variables, $expressions, $options);
+                            $menuItemValue = $menuItemTypeResolver->resolveValue($itemData, $item_data_field, $variables, $expressions, $options);
                             if (GeneralUtils::isError($menuItemValue)) {
                                 return $menuItemValue;
                             }
                             $item_value[$item_data_field] = $menuItemValue;
                         }
-                        $value[] = $item_value;
+                        $item_value['children'] = [];
+                        $entries[] = $item_value;
                     }
                 }
-                return $value;
+                /**
+                 * Reproduce the menu layout in the array
+                 */
+                $arrangedEntries = [];
+                foreach ($entries as $menuItemData) {
+                    $arrangedEntriesPointer = &$arrangedEntries;
+                    // Reproduce the list of parents
+                    if ($menuItemParentID = $menuItemData['parentID']) {
+                        $menuItemAncestorIDs = [];
+                        while ($menuItemParentID !== null) {
+                            $menuItemAncestorIDs[] = $menuItemParentID;
+                            $menuItemParentPos = $this->findEntryPosition($menuItemParentID, $entries);
+                            $menuItemParentID = $entries[$menuItemParentPos]['parentID'];
+                        }
+                        // Navigate to that position, and attach the menuItem
+                        foreach (array_reverse($menuItemAncestorIDs) as $menuItemAncestorID) {
+                            $menuItemAncestorPos = $this->findEntryPosition($menuItemAncestorID, $arrangedEntriesPointer);
+                            $arrangedEntriesPointer = &$arrangedEntriesPointer[$menuItemAncestorPos]['children'];
+                        }
+                    }
+                    $arrangedEntriesPointer[] = $menuItemData;
+                }
+                return $arrangedEntries;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
+
+    protected function findEntryPosition(string | int $menuItemID, array $entries): int
+    {
+        $entriesCount = count($entries);
+        for ($pos = 0; $pos < $entriesCount; $pos++) {
+            /**
+             * Watch out! Can't use `===` because (for some reason) the same value
+             * could be passed as int or string!
+             */
+            if ($entries[$pos]['id'] == $menuItemID) {
+                return $pos;
+            }
+        }
+        // It will never reach here, so return anything
+        return 0;
+    }
+
+    // public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    // {
+    //     switch ($fieldName) {
+    //         case 'items':
+    //             return MenuItemTypeResolver::class;
+    //     }
+
+    //     return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+    // }
 }

@@ -43,7 +43,8 @@
         "pop-schema/custompostmedia-mutations-wp": "^0.8",
         "pop-schema/post-mutations": "^0.8",
         "pop-schema/comment-mutations-wp": "^0.8",
-        "pop-schema/user-state-mutations-wp": "^0.8"
+        "pop-schema/user-state-mutations-wp": "^0.8",
+        "pop-schema/menus-wp": "^0.8"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",

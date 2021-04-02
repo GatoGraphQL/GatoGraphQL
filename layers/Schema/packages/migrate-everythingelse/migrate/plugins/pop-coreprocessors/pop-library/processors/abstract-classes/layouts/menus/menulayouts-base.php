@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_MenuLayoutsBase extends PoPEngine_QueryDataM
 {
     public function getDataFields(array $module, array &$props): array
     {
-        return array('id', 'items');
+        return array('id', 'itemDataEntries');
     }
 
     public function getItemClass(array $module, array &$props)
@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_MenuLayoutsBase extends PoPEngine_QueryDataM
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $ret[GD_JS_CLASSES]['item'] = $this->getItemClass($module, $props);
-        
+
         return $ret;
     }
 }

@@ -742,6 +742,9 @@ class PluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
                 \PoPSchema\PostCategories\Component::class,
             ],
+            SchemaTypeModuleResolver::SCHEMA_MENUS => [
+                \PoPSchema\Menus\Component::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
                 \PoPSchema\UserStateMutations\Component::class,
             ],

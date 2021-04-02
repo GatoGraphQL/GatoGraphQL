@@ -7,7 +7,7 @@
 	{{else}}
 		<ul class="dropdown-menu {{classes.dropdown-menu}}" style="{{styles.dropdown-menu}}" role="menu">
 	{{/if}}
-		{{#each dbObject.items}}
+		{{#each dbObject.itemDataEntries}}
 			<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class='{{../classes.item}} {{classes}}' style="{{../styles.item}}">
 				{{#compare title "divider"}}
 					<hr />

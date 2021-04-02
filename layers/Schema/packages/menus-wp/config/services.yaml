@@ -5,3 +5,6 @@ services:
 
     PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface:
         class: \PoPSchema\MenusWP\TypeAPIs\MenuTypeAPI
+
+    PoPSchema\Menus\TypeAPIs\MenuItemTypeAPIInterface:
+        class: \PoPSchema\MenusWP\TypeAPIs\MenuItemTypeAPI
