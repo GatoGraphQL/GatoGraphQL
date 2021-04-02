@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\Categories\TypeResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
+use PoPSchema\Taxonomies\TypeResolvers\AbstractTaxonomyTypeResolver;
 
-abstract class AbstractCategoryTypeResolver extends AbstractTypeResolver
+abstract class AbstractCategoryTypeResolver extends AbstractTaxonomyTypeResolver
 {
     use CategoryAPIRequestedContractTrait;
 
