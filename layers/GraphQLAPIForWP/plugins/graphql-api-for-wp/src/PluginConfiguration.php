@@ -38,6 +38,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoPSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
+use GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguration;
@@ -621,9 +622,8 @@ class PluginConfiguration
 
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLQuery\Component::class] = [
-            // Temporarily disabled
-            // // Enable Composable Directives?
-            // GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
+            // Enable Composable Directives?
+            GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
         ];
     }
 
