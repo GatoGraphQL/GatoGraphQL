@@ -133,6 +133,10 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     {
         $entriesCount = count($entries);
         for ($pos = 0; $pos < $entriesCount; $pos++) {
+            /**
+             * Watch out! Can't use `===` because (for some reason) the same value
+             * could be passed as int or string!
+             */
             if ($entries[$pos]['id'] == $menuItemID) {
                 return $pos;
             }
