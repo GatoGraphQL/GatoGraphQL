@@ -38,6 +38,22 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        switch ($fieldName) {
+            case 'itemDataEntries':
+                return [
+                    [
+                        SchemaDefinition::ARGNAME_NAME => 'flat',
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Flatten the items', 'menus'),
+                    ],
+                ];
+        }
+        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+    }
+
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
@@ -77,7 +93,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         $menu = $resultItem;
         switch ($fieldName) {
             case 'itemDataEntries':
-                // Load needed values for the menu-items
+                $isFlat = $fieldArgs['flat'] ?? false;
                 $instanceManager = InstanceManagerFacade::getInstance();
                 $itemsData = $menuTypeAPI->getMenuItemsData($menu);
                 $entries = array();
@@ -97,9 +113,15 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                             }
                             $item_value[$item_data_field] = $menuItemValue;
                         }
-                        $item_value['children'] = [];
+                        // Prepare array where to append the children items
+                        if (!$isFlat) {
+                            $item_value['children'] = [];
+                        }
                         $entries[] = $item_value;
                     }
+                }
+                if ($isFlat) {
+                    return $entries;
                 }
                 /**
                  * Reproduce the menu layout in the array
