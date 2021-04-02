@@ -58,6 +58,13 @@ class FunctionAPI extends \PoPSchema\Comments\FunctionAPI_Base
             $query['post_id'] = $query['customPostID'];
             unset($query['customPostID']);
         }
+        // Comment parent ID
+        // Pass "0" to retrieve 1st layer of comments added to the post
+        if (isset($query['parentID'])) {
+            $query['parent'] = $query['parentID'];
+            unset($query['parentID']);
+        }
+
         if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
             if (isset($query['userID'])) {
 
