@@ -1,45 +1,40 @@
 <?php
 
-namespace PoPSchema\PostCategories\WP;
+declare(strict_types=1);
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPSchema\PostTagsWP\Hooks;
 
-class FunctionAPIHooks {
+use PoP\Hooks\AbstractHookSet;
 
-	public function __construct() {
-
-		HooksAPIFacade::getInstance()->addFilter(
-		    'CMSAPI:customposts:query',
-		    [$this, 'convertPostsQuery'],
-		    10,
-		    2
-		);
-	}
-
-	public function convertPostsQuery($query, array $options): array
+class QueryHookSet extends AbstractHookSet
+{
+    protected function init(): void
     {
-        if (isset($query['category-ids'])) {
+        $this->hooksAPI->addFilter(
+            'CMSAPI:posts:query',
+            [$this, 'convertPostsQuery'],
+            10,
+            2
+        );
+    }
 
+    public function convertPostsQuery($query, array $options): array
+    {
+        if (isset($query['tag-ids'])) {
             // Watch out! In WordPress it is a string (either tag ID or comma-separated tag IDs), but in PoP it is an array of IDs!
-            $query['category__in'] = $query['category-ids'];
-            unset($query['category-ids']);
+            $query['tag_id'] = implode(',', $query['tag-ids']);
+            unset($query['tag-ids']);
         }
-        if (isset($query['category-id']) ){
-
-            $query['cat'] = $query['category-id'];
-            unset($query['category-id']);
+        if (isset($query['tags'])) {
+            // Watch out! In WordPress it is a string (either tag slug or comma-separated tag slugs), but in PoP it is an array of slugs!
+            $query['tag'] = implode(',', $query['tags']);
+            unset($query['tags']);
         }
 
-        /**
-         * @todo Check and adapt this function for categories
-         */
-        // $this->convertPostQuerySpecialCases($query);
+        $this->convertPostQuerySpecialCases($query);
 
         return $query;
     }
-    /**
-     * @todo Check and adapt this function for categories
-     */
     private function convertPostQuerySpecialCases(&$query)
     {
         // If both "tag" and "tax_query" were set, then the filter will not work for tags
@@ -88,8 +83,3 @@ class FunctionAPIHooks {
         }
     }
 }
-
-/**
- * Initialize
- */
-new FunctionAPIHooks();

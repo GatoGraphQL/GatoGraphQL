@@ -11,10 +11,5 @@ class Initialization
          * Load the Contract Implementations
          */
         include_once 'contractimplementations/load.php';
-
-        /**
-         * Load the Plugins library
-         */
-        include_once 'plugins/load.php';
     }
 }

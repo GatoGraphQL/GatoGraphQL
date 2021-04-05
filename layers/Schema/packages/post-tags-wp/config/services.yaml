@@ -5,3 +5,6 @@ services:
 
     PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface:
         class: \PoPSchema\PostTagsWP\TypeAPIs\PostTagTypeAPI
+
+    PoPSchema\PostTagsWP\Hooks\:
+        resource: '../src/Hooks/*'
