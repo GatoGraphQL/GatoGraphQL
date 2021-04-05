@@ -176,8 +176,6 @@ services:
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
         - >-
-          ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
-        - >-
           ../../layers/Schema/packages/migrate-commentmeta:/app/vendor/pop-schema/migrate-commentmeta
         - >-
           ../../layers/Schema/packages/migrate-commentmeta-wp:/app/vendor/pop-schema/migrate-commentmeta-wp

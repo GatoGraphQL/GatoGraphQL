@@ -486,7 +486,6 @@
         "pop-schema/meta": "0.7.13",
         "pop-schema/metaquery": "0.7.13",
         "pop-schema/metaquery-wp": "0.7.13",
-        "pop-schema/migrate-categories": "0.7.13",
         "pop-schema/migrate-commentmeta": "0.7.13",
         "pop-schema/migrate-commentmeta-wp": "0.7.13",
         "pop-schema/migrate-comments": "0.7.13",
