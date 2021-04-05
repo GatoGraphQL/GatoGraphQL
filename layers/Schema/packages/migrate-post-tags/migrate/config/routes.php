@@ -1,8 +1,9 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Routing\RouteHookNames;
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

@@ -23,7 +23,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         if (is_null($this->routes)) {
             $this->routes = array_filter(
                 (array)HooksAPIFacade::getInstance()->applyFilters(
-                    'routes',
+                    RouteHookNames::ROUTES,
                     []
                 )
             );

@@ -2,6 +2,8 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
+use PoP\Routing\RouteHookNames;
+
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 // Routes
@@ -14,7 +16,7 @@ if (!defined('POP_LOCATIONS_ROUTE_LOCATIONSMAP')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,
