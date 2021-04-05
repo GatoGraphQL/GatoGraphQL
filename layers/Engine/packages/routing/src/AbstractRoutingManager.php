@@ -73,7 +73,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
 
         // Allow to change it
         return (string)HooksAPIFacade::getInstance()->applyFilters(
-            'ApplicationState:route',
+            RouteHookNames::CURRENT_ROUTE,
             $route,
             $nature
         );
