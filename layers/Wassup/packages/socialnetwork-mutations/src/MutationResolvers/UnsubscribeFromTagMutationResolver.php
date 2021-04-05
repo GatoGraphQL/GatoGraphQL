@@ -7,6 +7,7 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {
@@ -21,9 +22,9 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
             // Check that the logged in user is currently subscribed to that tag
             $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (!in_array($target_id, $value)) {
-                $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+                $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
                 $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-                $tag = $posttagapi->getTag($target_id);
+                $tag = $postTagTypeAPI->getTag($target_id);
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)

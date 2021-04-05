@@ -278,6 +278,7 @@ class Plugins
         require_once (dirname(__DIR__, 2) . '/migrate-events-wp-em/migrate/pop-events-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations-wp-em/migrate/pop-locations-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations/migrate/pop-locations.php');
+        require_once (dirname(__DIR__, 2) . '/migrate-post-tags/migrate/pop-post-tags.php');
     }
 }
 

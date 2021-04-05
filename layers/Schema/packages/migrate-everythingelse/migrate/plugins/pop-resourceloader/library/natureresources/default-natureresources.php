@@ -9,6 +9,8 @@ use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -71,8 +73,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             'limit' => 1,
             // 'fields' => 'ids',
         );
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        if ($ids = $posttagapi->getTags($query, ['return-type' => ReturnTypes::IDS])) {
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        if ($ids = $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS])) {
             $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
@@ -148,8 +150,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-            $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
-            $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
+            $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+            $all_categories = $postCategoryTypeAPI->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
             // Allow to filter the categories.
             // This is needed so that Articles/Announcements/etc similar-configuration categories

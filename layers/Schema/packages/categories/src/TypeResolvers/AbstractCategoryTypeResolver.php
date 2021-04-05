@@ -20,8 +20,8 @@ abstract class AbstractCategoryTypeResolver extends AbstractTaxonomyTypeResolver
 
     public function getID(object $resultItem): string | int
     {
-        $cmscategoriesresolver = $this->getObjectPropertyAPI();
+        $categoryTypeAPI = $this->getTypeAPI();
         $category = $resultItem;
-        return $cmscategoriesresolver->getCategoryID($category);
+        return $categoryTypeAPI->getCategoryID($category);
     }
 }

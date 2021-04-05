@@ -1,5 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+// use PoP\Hooks\Facades\HooksAPIFacade;
+// use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+
 
 // function gdGetDocumentTitle()
 // {
@@ -9,7 +11,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 //     $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 //     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-//     $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+//     $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
 
 //     $site_name = $cmsapplicationapi->getSiteName();
 //     $separator = '|';

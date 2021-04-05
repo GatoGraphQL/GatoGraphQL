@@ -4,6 +4,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
 {
@@ -20,7 +21,7 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
     public function addMultilayoutKeys($keys, $post_id)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         if ($customPostTypeAPI->getCustomPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
             // Add the layout if the post has any of the defined categories for the Map Layout
             $add_layout = false;

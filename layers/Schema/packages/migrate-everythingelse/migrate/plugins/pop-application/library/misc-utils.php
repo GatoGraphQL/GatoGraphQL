@@ -2,6 +2,7 @@
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 function getExcerptMore()
 {
@@ -76,8 +77,8 @@ function gdGetPostname($post_id, $format = 'title')
 
 function gdGetCategoryname($cat_id, $format = 'title')
 {
-    $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
-    $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $categoryapi->getCategoryName($cat_id), $cat_id, $format);
+    $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+    $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $postCategoryTypeAPI->getCategoryName($cat_id), $cat_id, $format);
 
     // Lowercase
     if ($format == 'lc' || $format == 'plural-lc') {

@@ -1,6 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 function getAllcontentExcludedTaxonomies()
 {
@@ -16,8 +18,8 @@ function gdDataloadAllcontentCategories()
 {
     if (useAllcontentCategories()) {
 
-        $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
-        $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+        $all_categories = $postCategoryTypeAPI->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
         // All Post Categories but the excluded ones
         $excluded_taxonomies = getAllcontentExcludedTaxonomies();
@@ -42,7 +44,7 @@ function gdDataloadAllcontentComponents()
     // Calculate all the terms automatically, by querying the category-like taxonomies from all searchable post types,
     // and getting all the terms (categories) within
     $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-    $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+    $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
     $excluded_terms = getAllcontentExcludedTaxonomies();
     $components = array();
     foreach ($cmsapplicationpostsapi->getAllcontentPostTypes() as $post_type) {

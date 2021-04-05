@@ -160,10 +160,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp
         - >-
-          ../../layers/Schema/packages/migrate-post-tags:/app/vendor/pop-schema/migrate-post-tags
-        - >-
-          ../../layers/Schema/packages/migrate-post-tags-wp:/app/vendor/pop-schema/migrate-post-tags-wp
-        - >-
           ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
         - >-
           ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
@@ -171,18 +167,6 @@ services:
           ../../layers/Schema/packages/migrate-queriedobject:/app/vendor/pop-schema/migrate-queriedobject
         - >-
           ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
-        - >-
-          ../../layers/Schema/packages/migrate-tags:/app/vendor/pop-schema/migrate-tags
-        - >-
-          ../../layers/Schema/packages/migrate-tags-wp:/app/vendor/pop-schema/migrate-tags-wp
-        - >-
-          ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
-        - >-
-          ../../layers/Schema/packages/migrate-categories-wp:/app/vendor/pop-schema/migrate-categories-wp
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomies:/app/vendor/pop-schema/migrate-taxonomies
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomies-wp:/app/vendor/pop-schema/migrate-taxonomies-wp
         - >-
           ../../layers/Schema/packages/migrate-taxonomymeta:/app/vendor/pop-schema/migrate-taxonomymeta
         - >-

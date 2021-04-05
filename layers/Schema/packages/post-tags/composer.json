@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/posts": "^0.8",
-        "pop-schema/tags": "^0.8",
-        "pop-schema/migrate-post-tags": "^0.8"
+        "pop-schema/tags": "^0.8"
     },
     "require-dev": {
         "getpop/api": "^0.8",

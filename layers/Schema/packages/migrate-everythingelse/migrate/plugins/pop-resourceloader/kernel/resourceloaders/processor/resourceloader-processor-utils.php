@@ -5,7 +5,6 @@ use PoPSchema\Pages\Routing\PathUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -14,9 +13,9 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -274,7 +273,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
 
         // Comment Leo 11/11/2017: we can only do $merge = true when doing "fetching-json",
         // because we need to bundle all resources for all different cases for the same URL
@@ -528,7 +527,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $tag_id);
 
                 $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $posttagapi->getTag($tag_id);
+                $vars['routing-state']['queried-object'] = $postTagTypeAPI->getTag($tag_id);
                 $vars['routing-state']['queried-object-id'] = $tag_id;
                 ApplicationState::augmentVarsProperties();
 

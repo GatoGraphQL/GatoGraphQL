@@ -16,6 +16,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -190,7 +191,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         switch ($fieldName) {
             case 'action':

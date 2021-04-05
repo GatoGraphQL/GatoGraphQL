@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 {
@@ -20,7 +21,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($notification->object_id);
@@ -36,7 +37,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
             if ($intersected_tags = array_values(array_intersect($comment_tags, $user_hashtags))) {
                 $tags = array();
                 foreach ($intersected_tags as $tag_id) {
-                    $tag = $posttagapi->getTag($tag_id);
+                    $tag = $postTagTypeAPI->getTag($tag_id);
                     $tags[] = $applicationtaxonomyapi->getTagSymbolName($tag);
                 }
                 $message = sprintf(

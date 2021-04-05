@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -32,9 +33,9 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
     public function subscribedtounsubscribedfromTag($tag_id, $action)
     {
         $vars = ApplicationState::getVars();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        $tag = $posttagapi->getTag($tag_id);
+        $tag = $postTagTypeAPI->getTag($tag_id);
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => $action,

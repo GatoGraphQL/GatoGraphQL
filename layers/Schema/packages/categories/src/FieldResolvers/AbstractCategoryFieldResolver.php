@@ -76,27 +76,26 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscategoriesresolver = $this->getObjectPropertyAPI();
-        $categoryapi = $this->getTypeAPI();
+        $categoryTypeAPI = $this->getTypeAPI();
         $category = $resultItem;
         switch ($fieldName) {
             case 'url':
-                return $categoryapi->getCategoryURL($typeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryURL($typeResolver->getID($category));
 
             case 'name':
-                return $categoryapi->getCategoryName($typeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryName($typeResolver->getID($category));
 
             case 'slug':
-                return $cmscategoriesresolver->getCategorySlug($category);
+                return $categoryTypeAPI->getCategorySlug($category);
 
             case 'description':
-                return $cmscategoriesresolver->getCategoryDescription($category);
+                return $categoryTypeAPI->getCategoryDescription($category);
 
             case 'parent':
-                return $categoryapi->getCategoryParent($typeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryParent($typeResolver->getID($category));
 
             case 'count':
-                return $cmscategoriesresolver->getCategoryCount($category);
+                return $categoryTypeAPI->getCategoryCount($category);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

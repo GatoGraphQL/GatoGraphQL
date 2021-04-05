@@ -5,6 +5,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -101,7 +102,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
     ): mixed {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -179,7 +180,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                 switch ($notification->action) {
                                     case AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG:
                                     case AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG:
-                                        return $posttagapi->getTagLink($notification->object_id);
+                                        return $postTagTypeAPI->getTagLink($notification->object_id);
                                 }
                                 return null;
                         }
@@ -244,7 +245,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                             AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG => TranslationAPIFacade::getInstance()->__('<strong>%s</strong> subscribed to <strong>%s</strong>', 'pop-notifications'),
                                             AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG => TranslationAPIFacade::getInstance()->__('<strong>%s</strong> unsubscribed from <strong>%s</strong>', 'pop-notifications'),
                                         );
-                                        $tag = $posttagapi->getTag($notification->object_id);
+                                        $tag = $postTagTypeAPI->getTag($notification->object_id);
                                         return sprintf(
                                             $messages[$notification->action],
                                             $cmsusersapi->getUserDisplayName($notification->user_id),

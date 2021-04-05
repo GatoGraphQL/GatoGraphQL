@@ -1,6 +1,7 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 define('POP_CDN_THUMBPRINT_TAG', 'tag');
 
@@ -23,9 +24,9 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $options['return-type'] = ReturnTypes::IDS;
-        return $posttagapi->getTags($query, $options);
+        return $postTagTypeAPI->getTags($query, $options);
     }
 
     public function getTimestamp($tag_id)

@@ -1,3 +1,0 @@
-<?php
-
-const POP_MODELINSTANCECOMPONENTTYPE_SINGLE_CATEGORIES = 'single-categories';

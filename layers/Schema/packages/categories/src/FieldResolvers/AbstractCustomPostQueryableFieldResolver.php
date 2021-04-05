@@ -105,7 +105,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $categoryapi = $this->getTypeAPI();
+        $categoryTypeAPI = $this->getTypeAPI();
         $post = $resultItem;
         switch ($fieldName) {
             case 'categories':
@@ -116,7 +116,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $categoryapi->getCustomPostCategories(
+                return $categoryTypeAPI->getCustomPostCategories(
                     $typeResolver->getID($post),
                     $query,
                     $options
@@ -125,7 +125,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                 $options = [];
                 $query = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $categoryapi->getCustomPostCategoryCount(
+                return $categoryTypeAPI->getCustomPostCategoryCount(
                     $typeResolver->getID($post),
                     $query,
                     $options

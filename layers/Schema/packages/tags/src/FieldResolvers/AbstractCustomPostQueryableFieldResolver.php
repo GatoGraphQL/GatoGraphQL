@@ -105,7 +105,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $tagapi = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTypeAPI();
         $post = $resultItem;
         switch ($fieldName) {
             case 'tags':
@@ -116,7 +116,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $tagapi->getCustomPostTags(
+                return $tagTypeAPI->getCustomPostTags(
                     $typeResolver->getID($post),
                     $query,
                     $options
@@ -124,7 +124,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
             case 'tagCount':
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $tagapi->getCustomPostTagCount(
+                return $tagTypeAPI->getCustomPostTagCount(
                     $typeResolver->getID($post),
                     [],
                     $options

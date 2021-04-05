@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -61,7 +62,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_EVENTS:
                 return RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS);
@@ -75,7 +76,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 return RequestUtils::addRoute($url, $routes[$module[1]] ?? null);
 
             case self::MODULE_CAROUSELCONTROLS_TAGEVENTS:
-                $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );

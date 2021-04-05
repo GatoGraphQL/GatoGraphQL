@@ -24,8 +24,8 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
         $query = array(
             'include' => $ids
         );
-        $tagapi = $this->getTypeAPI();
-        return $tagapi->getTags($query);
+        $tagTypeAPI = $this->getTypeAPI();
+        return $tagTypeAPI->getTags($query);
     }
 
     public function getDataFromIdsQuery(array $ids): array
@@ -48,8 +48,8 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = [])
     {
-        $tagapi = $this->getTypeAPI();
-        return $tagapi->getTags($query, $options);
+        $tagTypeAPI = $this->getTypeAPI();
+        return $tagTypeAPI->getTags($query, $options);
     }
 
     public function executeQueryIds($query): array
