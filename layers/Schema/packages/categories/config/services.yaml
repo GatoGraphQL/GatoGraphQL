@@ -8,3 +8,6 @@ services:
 
     PoPSchema\Categories\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\Categories\Hooks\:
+        resource: '../src/Hooks/*'
