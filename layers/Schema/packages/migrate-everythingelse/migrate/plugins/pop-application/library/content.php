@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+// use PoP\Hooks\Facades\HooksAPIFacade;
+// use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 
 // function gdGetDocumentTitle()
