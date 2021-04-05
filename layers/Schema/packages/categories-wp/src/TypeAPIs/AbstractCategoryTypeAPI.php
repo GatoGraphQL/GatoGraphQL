@@ -248,9 +248,13 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         }
         return null;
     }
-    public function getCategorySlug($cat_id)
+    public function getCategorySlug($catObjectOrID)
     {
-        $category = get_category($cat_id);
+        if (!is_object($catObjectOrID)) {
+            $category = get_category($catObjectOrID);
+        } else {
+            $category = $catObjectOrID;
+        }
         return $category->slug;
     }
 
@@ -285,15 +289,11 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     {
         return $cat->term_id;
     }
-    public function getCategorySlug($cat)
-    {
-        return $cat->slug;
-    }
     public function getCategoryDescription($cat)
     {
         return $cat->description;
     }
-    public function getCategoryCount($cat)
+    public function getCategoryItemCount($cat)
     {
         return $cat->count;
     }

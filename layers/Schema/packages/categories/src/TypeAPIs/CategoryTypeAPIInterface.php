@@ -22,14 +22,13 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getCustomPostCategoryCount($post_id, $query, array $options = []): int;
     public function getCategoryName($cat_id);
     public function getCategoryParent($cat_id);
-    public function getCategorySlug($cat_id);
+    public function getCategorySlug($catObjectOrID);
     public function getCategoryPath($category_id);
     public function hasCategory($cat_id, $post_id);
     public function getCategoryURL($category_id);
 
 
     public function getCategoryID($cat);
-    public function getCategorySlug($cat);
     public function getCategoryDescription($cat);
-    public function getCategoryCount($cat);
+    public function getCategoryItemCount($cat);
 }

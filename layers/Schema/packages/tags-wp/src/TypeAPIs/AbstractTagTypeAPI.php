@@ -42,6 +42,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         if (!is_object($tagObjectOrID)) {
             $tag = get_term($tagObjectOrID, $this->getTaxonomyName());
+        } else {
+            $tag = $tagObjectOrID;
         }
         return $tag->name;
     }
