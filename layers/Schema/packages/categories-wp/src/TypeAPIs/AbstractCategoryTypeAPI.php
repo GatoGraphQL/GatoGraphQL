@@ -255,7 +255,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryPath($category_id)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $taxonomy = 'category';
 
         // Convert it to int, otherwise it thinks it's a string and the method below fails
@@ -265,7 +264,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         global $wp_rewrite;
         $termlink = $wp_rewrite->get_extra_permastruct($taxonomy);
         $termlink = str_replace("%$taxonomy%", '', $termlink);
-        $termlink = $cmsengineapi->getHomeURL(user_trailingslashit($termlink, $taxonomy));
+        $termlink = home_url(user_trailingslashit($termlink, $taxonomy));
 
         return substr($category_path, strlen($termlink));
     }
