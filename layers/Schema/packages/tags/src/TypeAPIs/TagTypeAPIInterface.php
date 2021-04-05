@@ -16,12 +16,6 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      */
     public function isInstanceOfTagType(object $object): bool;
 
-    /**
-     * Implement this function by the actual service
-     */
-    public function getTaxonomyName(): string;
-
-
     public function getCustomPostTags($post_id, array $query = [], array $options = []): array;
     public function getCustomPostTagCount($post_id, array $query = [], array $options = []): int;
     public function getTag($tag_id);

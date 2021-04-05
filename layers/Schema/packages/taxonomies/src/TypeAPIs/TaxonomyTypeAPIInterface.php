@@ -9,6 +9,7 @@ namespace PoPSchema\Taxonomies\TypeAPIs;
  */
 interface TaxonomyTypeAPIInterface
 {
+    public function getTaxonomyName(): string;
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
