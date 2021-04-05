@@ -173,8 +173,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-post-tags:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-post-tags
         - >-
-          ../../layers/Schema/packages/migrate-post-tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-post-tags-wp
-        - >-
           ../../layers/Schema/packages/migrate-posts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-posts
         - >-
           ../../layers/Schema/packages/migrate-posts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-posts-wp

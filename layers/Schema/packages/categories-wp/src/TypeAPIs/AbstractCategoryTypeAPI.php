@@ -29,13 +29,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return ($object instanceof WP_Taxonomy) && $object->hierarchical == true;
     }
 
-    /**
-     * Implement this function by the actual service
-     */
-    abstract protected function getTaxonomyName(): string;
-    /**
-     * Implement this function by the actual service
-     */
     abstract protected function getCategoryBaseOption(): string;
 
     public function getCategoryName($category_id)
