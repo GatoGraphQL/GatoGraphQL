@@ -56,7 +56,7 @@ if (!defined('POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

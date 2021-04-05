@@ -14,7 +14,7 @@ if (!defined('POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

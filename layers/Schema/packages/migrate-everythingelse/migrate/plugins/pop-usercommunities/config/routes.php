@@ -29,7 +29,7 @@ if (!defined('POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

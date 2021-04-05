@@ -11,7 +11,7 @@ if (!defined('POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

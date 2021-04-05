@@ -20,7 +20,7 @@ if (!defined('POP_EVENTSCREATION_ROUTE_EDITEVENT')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

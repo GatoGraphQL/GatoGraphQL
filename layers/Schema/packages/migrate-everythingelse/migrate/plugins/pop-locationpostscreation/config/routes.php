@@ -17,7 +17,7 @@ if (!defined('POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

@@ -20,7 +20,7 @@ if (!defined('POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

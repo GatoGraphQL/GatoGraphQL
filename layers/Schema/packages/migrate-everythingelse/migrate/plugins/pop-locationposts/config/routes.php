@@ -11,7 +11,7 @@ if (!defined('POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

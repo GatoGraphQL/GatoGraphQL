@@ -11,7 +11,7 @@ if (!defined('POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

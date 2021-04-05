@@ -26,7 +26,7 @@ if (!defined('POP_COMMONUSERROLES_ROUTE_INDIVIDUALS')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

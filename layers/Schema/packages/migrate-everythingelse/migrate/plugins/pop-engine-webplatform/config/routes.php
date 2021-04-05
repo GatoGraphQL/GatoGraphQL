@@ -11,7 +11,7 @@ if (!defined('POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

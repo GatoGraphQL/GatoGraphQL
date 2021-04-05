@@ -65,7 +65,7 @@ if (!defined('POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

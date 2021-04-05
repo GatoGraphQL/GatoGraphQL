@@ -11,7 +11,7 @@ if (!defined('POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,
