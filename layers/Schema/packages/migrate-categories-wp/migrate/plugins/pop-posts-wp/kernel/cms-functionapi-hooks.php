@@ -9,7 +9,7 @@ class FunctionAPIHooks {
 	public function __construct() {
 
 		HooksAPIFacade::getInstance()->addFilter(
-		    'CMSAPI:customposts:query',
+		    'CMSAPI:posts:query',
 		    [$this, 'convertPostsQuery'],
 		    10,
 		    2
