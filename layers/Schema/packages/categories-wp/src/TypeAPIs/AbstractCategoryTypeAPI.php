@@ -1,22 +1,32 @@
 <?php
 
-namespace PoPSchema\Categories\WP;
+declare(strict_types=1);
 
+namespace PoPSchema\CategoriesWP\TypeAPIs;
+
+use WP_Taxonomy;
+use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 
-abstract class AbstractFunctionAPI extends TaxonomyTypeAPI implements \PoPSchema\Categories\FunctionAPI
+/**
+ * Methods to interact with the Type, to be implemented by the underlying CMS
+ */
+abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
     use APITypeDataResolverTrait;
 
-    public function __construct()
+    /**
+     * Indicates if the passed object is of type Category
+     */
+    public function isInstanceOfCategoryType(object $object): bool
     {
-        \PoPSchema\PostCategories\FunctionAPIFactory::setInstance($this);
+        return ($object instanceof WP_Taxonomy) && $object->hierarchical == true;
     }
 
     /**
@@ -269,5 +279,22 @@ abstract class AbstractFunctionAPI extends TaxonomyTypeAPI implements \PoPSchema
     // {
     //     return get_term_link($cat->term_id, 'category');
     // }
-}
 
+
+    public function getCategoryID($cat)
+    {
+        return $cat->term_id;
+    }
+    public function getCategorySlug($cat)
+    {
+        return $cat->slug;
+    }
+    public function getCategoryDescription($cat)
+    {
+        return $cat->description;
+    }
+    public function getCategoryCount($cat)
+    {
+        return $cat->count;
+    }
+}

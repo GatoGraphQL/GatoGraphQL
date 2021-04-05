@@ -1,7 +1,9 @@
 <?php
 namespace PoPSchema\PostCategories;
 
-interface FunctionAPI extends \PoPSchema\Categories\FunctionAPI
+use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+
+interface FunctionAPI extends CategoryTypeAPIInterface
 {
 
 }

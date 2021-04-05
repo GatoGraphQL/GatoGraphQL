@@ -2,9 +2,10 @@
 
 namespace PoPSchema\PostCategories\WP;
 
+use PoPSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
-class FunctionAPI extends \PoPSchema\Categories\WP\AbstractFunctionAPI implements \PoPSchema\PostCategories\FunctionAPI
+class FunctionAPI extends AbstractCategoryTypeAPI implements \PoPSchema\PostCategories\FunctionAPI
 {
     public function __construct()
     {

@@ -1,8 +1,9 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Categories\Facades\CategoryTypeAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popTaxonomyModuleInstanceComponents');
@@ -26,9 +27,9 @@ function popTaxonomyModuleInstanceComponents($components)
             if (in_array(POP_MODELINSTANCECOMPONENTTYPE_SINGLE_CATEGORIES, $component_types)) {
                 $post_id = $vars['routing-state']['queried-object-id'];
                 $categories = array();
-                $cmstaxonomiesresolver = \PoPSchema\Categories\ObjectPropertyResolverFactory::getInstance();
+                $cmscategoriesresolver = CategoryTypeAPIFacade::getInstance();
                 foreach ($categoryapi->getCustomPostCategories($post_id) as $cat) {
-                    $categories[] = $cmstaxonomiesresolver->getCategorySlug($cat) . $cmstaxonomiesresolver->getCategoryID($cat);
+                    $categories[] = $cmscategoriesresolver->getCategorySlug($cat) . $cmscategoriesresolver->getCategoryID($cat);
                 }
 
                 // Allow for plug-ins to add their own categories. Eg: Events

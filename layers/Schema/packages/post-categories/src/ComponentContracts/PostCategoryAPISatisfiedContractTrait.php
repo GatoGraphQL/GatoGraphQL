@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategories\ComponentContracts;
 
+use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 
 trait PostCategoryAPISatisfiedContractTrait
 {
-    protected function getTypeAPI(): \PoPSchema\Categories\FunctionAPI
+    protected function getTypeAPI(): CategoryTypeAPIInterface
     {
         $cmscategoriesapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
         return $cmscategoriesapi;
