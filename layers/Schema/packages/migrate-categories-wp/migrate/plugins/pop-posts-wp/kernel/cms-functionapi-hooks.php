@@ -10,7 +10,7 @@ class FunctionAPIHooks {
 
 		HooksAPIFacade::getInstance()->addFilter(
 		    'CMSAPI:customposts:query',
-		    [$this, 'convertCustomPostsQuery'],
+		    [$this, 'convertPostsQuery'],
 		    10,
 		    2
 		);
@@ -21,7 +21,7 @@ class FunctionAPIHooks {
      * @param array<string, mixed> $options
      * @return array<string, mixed>
      */
-    public function convertCustomPostsQuery(array $query, array $options): array
+    public function convertPostsQuery(array $query, array $options): array
     {
         if (isset($query['categories'])) {
 
