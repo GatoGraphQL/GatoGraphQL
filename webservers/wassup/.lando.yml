@@ -192,8 +192,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-custompostmeta-wp:/app/vendor/pop-schema/migrate-custompostmeta-wp
         - >-
-          ../../layers/Schema/packages/migrate-customposts:/app/vendor/pop-schema/migrate-customposts
-        - >-
           ../../layers/Schema/packages/migrate-events-wp-em:/app/vendor/pop-schema/migrate-events-wp-em
         - >-
           ../../layers/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse

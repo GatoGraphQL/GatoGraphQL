@@ -11,6 +11,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class VarsHooks extends AbstractHookSet
 {
@@ -19,6 +20,12 @@ class VarsHooks extends AbstractHookSet
         $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
+        );
+        $this->hooksAPI->addAction(
+            'augmentVarsProperties',
+            [$this, 'augmentVarsProperties'],
+            10,
+            1
         );
     }
 
@@ -49,5 +56,23 @@ class VarsHooks extends AbstractHookSet
                 break;
         }
         return $components;
+    }
+
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public function augmentVarsProperties(array $vars_in_array): void
+    {
+        // Set additional properties based on the nature
+        [&$vars] = $vars_in_array;
+        $nature = $vars['nature'];
+        $vars['routing-state']['is-custompost'] = $nature == RouteNatures::CUSTOMPOST;
+
+        // Attributes needed to match the RouteModuleProcessor vars conditions
+        if ($nature == RouteNatures::CUSTOMPOST) {
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $customPostID = $vars['routing-state']['queried-object-id'];
+            $vars['routing-state']['queried-object-post-type'] = $customPostTypeAPI->getCustomPostType($customPostID);
+        }
     }
 }

@@ -78,7 +78,6 @@
         "getpop/translation": "^0.8",
         "pop-schema/customposts-wp": "^0.8",
         "pop-schema/customposts": "^0.8",
-        "pop-schema/migrate-customposts": "^0.8",
         "pop-schema/migrate-queriedobject-wp": "^0.8",
         "pop-schema/migrate-queriedobject": "^0.8",
         "pop-schema/queriedobject-wp": "^0.8",
