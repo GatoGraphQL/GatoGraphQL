@@ -12,6 +12,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Tags\Facades\TagTypeAPIFacade;
 
 class CatEventFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -73,7 +74,7 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $cmstagsresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
+        $cmstagsresolver = TagTypeAPIFacade::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
              // Override

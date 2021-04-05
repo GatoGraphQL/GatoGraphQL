@@ -25,4 +25,10 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getTagName($tag_id);
     public function getTagBase();
     public function setPostTags($post_id, array $tags, bool $append = false);
+
+    public function getTagName($tag);
+    public function getTagSlug($tag);
+    public function getTagDescription($tag);
+    public function getTagCount($tag);
+    public function getTagID($tag);
 }

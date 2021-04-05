@@ -1,7 +1,9 @@
 <?php
 namespace PoPSchema\PostTags;
 
-interface FunctionAPI extends \PoPSchema\Tags\FunctionAPI
+use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+
+interface FunctionAPI extends TagTypeAPIInterface
 {
 
 }

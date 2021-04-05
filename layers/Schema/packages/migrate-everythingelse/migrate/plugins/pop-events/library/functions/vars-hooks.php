@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Tags\Facades\TagTypeAPIFacade;
 
 // Event and Past Event have different configurations, so we must differentiate among them
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popEmModuleInstanceComponents');
@@ -28,7 +29,7 @@ function gdEmModelinstanceGetCategories($cats, $post_id)
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
     if ($eventTypeAPI->isEvent($post_id)) {
         $event = $eventTypeAPI->getEvent($post_id);
-        $cmscategoryresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
+        $cmscategoryresolver = TagTypeAPIFacade::getInstance();
         foreach ($eventTypeAPI->getCategories($event) as $cat) {
             // Watch out: $cat is of type EM_TAXONOMY_CATEGORY, so to query the slug and ID we may need to use its own function "output",
             // on which case we should place it under the $eventTypeAPI.

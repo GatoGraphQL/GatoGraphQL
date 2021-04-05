@@ -170,4 +170,27 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return wp_set_post_terms($post_id, $tags, $this->getTaxonomyName(), $append);
     }
+
+
+
+    public function getTagName($tag)
+    {
+        return $tag->name;
+    }
+    public function getTagSlug($tag)
+    {
+        return $tag->slug;
+    }
+    public function getTagDescription($tag)
+    {
+        return $tag->description;
+    }
+    public function getTagCount($tag)
+    {
+        return $tag->count;
+    }
+    public function getTagID($tag)
+    {
+        return $tag->term_id;
+    }
 }

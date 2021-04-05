@@ -6,6 +6,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Tags\Facades\TagTypeAPIFacade;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
@@ -223,7 +224,7 @@ class PoP_Mentions
     private function makeLink($match)
     {
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $cmstagresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
+        $cmstagresolver = TagTypeAPIFacade::getInstance();
         $tag = $posttagapi->getTagByName($match[1]);
         if (!$tag) {
             $content = $match[0];
