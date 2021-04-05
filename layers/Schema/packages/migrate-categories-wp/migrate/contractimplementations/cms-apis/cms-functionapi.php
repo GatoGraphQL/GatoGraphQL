@@ -8,8 +8,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 
-abstract class AbstractFunctionAPI extends \PoPSchema\Taxonomies\WP\FunctionAPI implements \PoPSchema\Categories\FunctionAPI
+abstract class AbstractFunctionAPI extends TaxonomyTypeAPI implements \PoPSchema\Categories\FunctionAPI
 {
     use APITypeDataResolverTrait;
 

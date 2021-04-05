@@ -518,7 +518,6 @@
         "pop-schema/migrate-tags": "0.7.13",
         "pop-schema/migrate-tags-wp": "0.7.13",
         "pop-schema/migrate-taxonomies": "0.7.13",
-        "pop-schema/migrate-taxonomies-wp": "0.7.13",
         "pop-schema/migrate-taxonomymeta": "0.7.13",
         "pop-schema/migrate-taxonomymeta-wp": "0.7.13",
         "pop-schema/migrate-taxonomyquery": "0.7.13",
