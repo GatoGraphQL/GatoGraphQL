@@ -5,3 +5,6 @@ services:
 
     PoPSchema\PostCategories\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
+
+    PoPSchema\PostCategories\Hooks\:
+        resource: '../src/Hooks/*'
