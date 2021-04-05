@@ -19,6 +19,8 @@ AppLoader::addComponentClassesToInitialize([
     \PoPSchema\UserRolesWP\Component::class,
     \PoPSchema\UserRolesACL\Component::class,
     \PoPSchema\PostTagsWP\Component::class,
+    \PoPSchema\PostCategoriesWP\Component::class,
+    \PoPSchema\MenusWP\Component::class,
     \PoPSchema\BlockMetadataWP\Component::class,
     \PoPSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
     \PoPSchema\PostMutations\Component::class,
