@@ -24,7 +24,7 @@ class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
             $limit = $configuredLimit;
         }
         $query_args[Params::LIMIT] = intval($limit);
-        $query_args[Params::PAGE_NUMBER] = $query_args[Params::PAGE_NUMBER] ? intval($query_args[Params::PAGE_NUMBER]) : 1;
+        $query_args[Params::PAGE_NUMBER] = isset($query_args[Params::PAGE_NUMBER]) ? intval($query_args[Params::PAGE_NUMBER]) : 1;
     }
 
     protected function getLimit()

@@ -13,7 +13,7 @@ function gdUreMaybeProfileRole($query)
 {
 
     // Only if no $role set yet
-    if (!$query['role']) {
+    if (!isset($query['role'])) {
         $query['role'] = GD_ROLE_PROFILE;
     }
 

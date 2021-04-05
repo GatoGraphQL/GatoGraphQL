@@ -133,7 +133,7 @@ trait QueryDataModuleProcessorTrait
 
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
-        if ($datasource == DataSources::MUTABLEONREQUEST && !$data_properties[DataloadingConstants::IGNOREREQUESTPARAMS]) {
+        if ($datasource == DataSources::MUTABLEONREQUEST && !($data_properties[DataloadingConstants::IGNOREREQUESTPARAMS] ?? null)) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)HooksAPIFacade::getInstance()->applyFilters(

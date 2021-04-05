@@ -11,3 +11,6 @@ services:
 
     PoP\Application\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoP\Application\QueryInputOutputHandlers\:
+        resource: '../src/QueryInputOutputHandlers/*'

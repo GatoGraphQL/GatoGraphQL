@@ -130,7 +130,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
             //     $query['include'] = self::NON_EXISTING_ID; // Non-existing ID
             // }
             unset($query['custompost-types']);
-        } elseif ($unionTypeResolverClass = $query['types-from-union-resolver-class']) {
+        } elseif ($unionTypeResolverClass = $query['types-from-union-resolver-class'] ?? null) {
             $query['post_type'] = CustomPostUnionTypeHelpers::getTargetTypeResolverCustomPostTypes(
                 $unionTypeResolverClass
             );

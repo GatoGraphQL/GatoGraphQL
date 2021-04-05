@@ -36,7 +36,7 @@ function gdUserEventPostIds($authors = null)
 // {
 
 //     // Always use no owner. If needed to filter by author, it's done getting the post_ids below (because of interaction with CoAuthor Plus plugin)
-//     if ($profiles = $query['owner']) {
+//     if ($profiles = $query['owner'] ?? null) {
 //         $query['owner'] = false;
 
 //         $post_ids = gdUserEventPostIds($profiles);
@@ -55,7 +55,7 @@ function gdCapEmFilterChangeOwnerWithPostIds($query)
 {
 
     // Remove the author, use owner post_id instead
-    if ($profiles = $query['owner']) {
+    if ($profiles = $query['owner'] ?? null) {
         $post_ids = gdUserEventPostIds($profiles);
 
         // If empty, then force it to bring no results with a -1 id (otherwise, it brings all results)
