@@ -38,9 +38,11 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      */
     abstract protected function getTagBaseOption(): string;
 
-    public function getTagName($tag_id)
+    public function getTagName($tagObjectOrID)
     {
-        $tag = get_term($tag_id, $this->getTaxonomyName());
+        if (!is_object($tagObjectOrID)) {
+            $tag = get_term($tagObjectOrID, $this->getTaxonomyName());
+        }
         return $tag->name;
     }
     public function getTag($tag_id)
@@ -173,10 +175,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 
 
 
-    public function getTagName($tag)
-    {
-        return $tag->name;
-    }
     public function getTagSlug($tag)
     {
         return $tag->slug;
@@ -185,7 +183,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return $tag->description;
     }
-    public function getTagCount($tag)
+    public function getTagItemCount($tag)
     {
         return $tag->count;
     }

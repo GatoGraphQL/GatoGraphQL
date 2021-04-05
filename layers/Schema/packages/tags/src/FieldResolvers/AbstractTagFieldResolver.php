@@ -90,7 +90,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
                 return $cmstagsresolver->getTagDescription($tag);
 
             case 'count':
-                return $cmstagsresolver->getTagCount($tag);
+                return $cmstagsresolver->getTagItemCount($tag);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
