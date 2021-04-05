@@ -31,24 +31,26 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     abstract protected function getCategoryBaseOption(): string;
 
+    abstract protected function getCategoryTaxonomyName(): string;
+
     public function getCategoryName($category_id)
     {
-        $category = get_term($category_id, $this->getTaxonomyName());
+        $category = get_term($category_id, $this->getCategoryTaxonomyName());
         return $category->name;
     }
     public function getCategory($category_id)
     {
-        return get_category($category_id, $this->getTaxonomyName());
+        return get_category($category_id, $this->getCategoryTaxonomyName());
     }
     public function getCategoryByName($category_name)
     {
-        return get_term_by('name', $category_name, $this->getTaxonomyName());
+        return get_term_by('name', $category_name, $this->getCategoryTaxonomyName());
     }
     public function getCustomPostCategories($post_id, array $query = [], array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
 
-        return \wp_get_post_terms($post_id, $this->getTaxonomyName(), $query);
+        return \wp_get_post_terms($post_id, $this->getCategoryTaxonomyName(), $query);
     }
     public function getCustomPostCategoryCount($post_id, $query = [], array $options = []): int
     {
@@ -64,7 +66,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = \wp_get_post_terms($post_id, $this->getTaxonomyName(), $query);
+        $categories = \wp_get_post_terms($post_id, $this->getCategoryTaxonomyName(), $query);
         return count($categories);
     }
     public function getCategoryCount($query = [], $options = []): int
@@ -81,13 +83,13 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = get_categories($query, ['taxonomy' => $this->getTaxonomyName()]);
+        $categories = get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
         return count($categories);
     }
     public function getCategories($query, $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
-        return get_categories($query, ['taxonomy' => $this->getTaxonomyName()]);
+        return get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
     }
 
     public function convertCategoriesQuery($query, array $options = [])
@@ -159,7 +161,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     }
     public function getCategoryURL($category_id)
     {
-        return get_term_link($category_id, $this->getTaxonomyName());
+        return get_term_link($category_id, $this->getCategoryTaxonomyName());
     }
     public function getCategoryBase()
     {
@@ -169,7 +171,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function setPostCategories($post_id, array $categories, bool $append = false)
     {
-        return wp_set_post_terms($post_id, $categories, $this->getTaxonomyName(), $append);
+        return wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
     }
 
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
