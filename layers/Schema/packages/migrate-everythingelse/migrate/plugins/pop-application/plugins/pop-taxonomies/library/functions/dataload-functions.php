@@ -17,7 +17,7 @@ function gdDataloadAllcontentCategories()
 {
     if (useAllcontentCategories()) {
 
-        $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
         $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
         // All Post Categories but the excluded ones

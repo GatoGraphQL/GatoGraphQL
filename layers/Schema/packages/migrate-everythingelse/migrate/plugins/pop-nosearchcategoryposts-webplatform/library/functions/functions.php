@@ -1,12 +1,13 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+// use PoP\Hooks\Facades\HooksAPIFacade;
+// use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'nosearchcategorypostsMultilayoutLabels');
 // function nosearchcategorypostsMultilayoutLabels($labels) {
 
 //     $label = '<span class="label label-%s">%s</span>';
 
-//     $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+//     $categoryapi = PostCategoryTypeAPIFacade::getInstance();
 //     foreach (PoP_NoSearchCategoryPosts_Utils::getCatRoutes() as $cat => $route) {
 
 //         $category = get_category($cat);

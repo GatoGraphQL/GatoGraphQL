@@ -14,6 +14,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -125,7 +126,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscategoriesapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+        $cmscategoriesapi = PostCategoryTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postCategory':
                 $query = [

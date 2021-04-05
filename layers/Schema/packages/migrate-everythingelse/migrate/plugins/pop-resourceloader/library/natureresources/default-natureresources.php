@@ -10,6 +10,7 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -149,7 +150,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-            $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+            $categoryapi = PostCategoryTypeAPIFacade::getInstance();
             $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
             // Allow to filter the categories.

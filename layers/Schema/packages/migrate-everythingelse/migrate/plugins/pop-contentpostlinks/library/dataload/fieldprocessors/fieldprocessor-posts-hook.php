@@ -6,6 +6,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -123,7 +124,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             )
         ) {
             $post = $resultItem;
-            $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+            $categoryapi = PostCategoryTypeAPIFacade::getInstance();
             return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $categoryapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getID($post));
         }
         return true;

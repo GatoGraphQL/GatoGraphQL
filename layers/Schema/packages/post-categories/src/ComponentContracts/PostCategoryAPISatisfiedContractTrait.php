@@ -6,13 +6,13 @@ namespace PoPSchema\PostCategories\ComponentContracts;
 
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 trait PostCategoryAPISatisfiedContractTrait
 {
     protected function getTypeAPI(): CategoryTypeAPIInterface
     {
-        $cmscategoriesapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
-        return $cmscategoriesapi;
+        return PostCategoryTypeAPIFacade::getInstance();
     }
 
     protected function getTypeResolverClass(): string

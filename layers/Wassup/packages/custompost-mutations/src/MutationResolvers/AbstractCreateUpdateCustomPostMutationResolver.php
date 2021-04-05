@@ -9,6 +9,7 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver
 {
@@ -162,7 +163,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         if (!$categories) {
             return $categories;
         }
-        $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself

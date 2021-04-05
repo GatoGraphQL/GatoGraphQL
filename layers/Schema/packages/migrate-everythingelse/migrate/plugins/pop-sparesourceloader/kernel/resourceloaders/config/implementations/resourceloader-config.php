@@ -4,6 +4,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -27,7 +28,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
+        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
 
         // Domain
