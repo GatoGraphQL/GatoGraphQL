@@ -160,8 +160,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp
         - >-
-          ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
-        - >-
           ../../layers/Schema/packages/migrate-queriedobject:/app/vendor/pop-schema/migrate-queriedobject
         - >-
           ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
