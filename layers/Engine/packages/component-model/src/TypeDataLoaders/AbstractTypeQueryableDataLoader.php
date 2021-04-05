@@ -44,7 +44,7 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
 
         // If already indicating the ids to get back, then already return them
-        if ($include = $query_args['include']) {
+        if ($include = $query_args['include'] ?? null) {
             return $include;
         }
 
@@ -110,10 +110,10 @@ abstract class AbstractTypeQueryableDataLoader extends AbstractTypeDataLoader im
             $query['offset'] = ($pagenumber - 1) * $limit;
         }
         // Params and values by default
-        if (!$query['orderby']) {
+        if (!isset($query['orderby'])) {
             $query['orderby'] = $this->getOrderbyDefault();
         }
-        if (!$query['order']) {
+        if (!isset($query['order'])) {
             $query['order'] = $this->getOrderDefault();
         }
 
