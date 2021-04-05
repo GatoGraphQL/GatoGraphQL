@@ -23,12 +23,12 @@ class PoPTheme_LocationPostLinks_ContentHooks
             $vars = ApplicationState::getVars();
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $categoryapi = PostCategoryTypeAPIFacade::getInstance();
+            $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
             if (
                 $customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()
                 && defined('POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS') && POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS
-                && $categoryapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $post_id)
+                && $postCategoryTypeAPI->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $post_id)
             ) {
                 return [PoP_ContentPostLinks_Module_Processor_SingleContentInners::class, PoP_ContentPostLinks_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_LINKSINGLE];
             }

@@ -6,11 +6,11 @@ HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels',
 function categorypostsMultilayoutLabels($labels)
 {
     $label = '<span class="label label-%s">%s</span>';
-    $categoryapi = PostCategoryTypeAPIFacade::getInstance();
+    $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
     foreach (PoP_CategoryPosts_Utils::getCatRoutes() as $cat => $route) {
         $labels['post-'.$cat] = sprintf(
             $label,
-            $categoryapi->getCategorySlug($cat),
+            $postCategoryTypeAPI->getCategorySlug($cat),
             getRouteIcon($route, true).gdGetCategoryname($cat)
         );
     }

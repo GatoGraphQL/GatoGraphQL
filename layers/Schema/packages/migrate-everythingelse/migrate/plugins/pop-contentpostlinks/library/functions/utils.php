@@ -101,11 +101,11 @@ class PoP_ContentPostLinks_Utils
 
     public static function isLink($post_id)
     {
-        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $link_cats = self::getLinkCategories();
         // $post_cats = gdGetCategories($post_id);
         // return !empty(array_intersect($link_cats, $post_cats));
-        return !empty(array_intersect($link_cats, $categoryapi->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS])));
+        return !empty(array_intersect($link_cats, $postCategoryTypeAPI->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS])));
     }
 
     public static function getLinkUrl($post)

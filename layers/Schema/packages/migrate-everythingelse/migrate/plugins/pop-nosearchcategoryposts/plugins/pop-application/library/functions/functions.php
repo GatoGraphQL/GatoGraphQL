@@ -12,8 +12,8 @@ function nosearchcategorypostsPostname($name, $post_id, $format)
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
-        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
-        $post_cats = $categoryapi->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS]);
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+        $post_cats = $postCategoryTypeAPI->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS]);
         if ($intersected = array_values(array_intersect($cats, $post_cats))) {
             return gdGetCategoryname($intersected[0], $format);
         }
@@ -30,8 +30,8 @@ function nosearchcategorypostsPosticon($icon, $post_id)
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
-        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
-        $post_cats = $categoryapi->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS]);
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+        $post_cats = $postCategoryTypeAPI->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS]);
         if ($intersected = array_values(array_intersect($cats, $post_cats))) {
             $cat_routes = PoP_NoSearchCategoryPosts_Utils::getCatRoutes();
             return getRouteIcon($cat_routes[$intersected[0]], false);

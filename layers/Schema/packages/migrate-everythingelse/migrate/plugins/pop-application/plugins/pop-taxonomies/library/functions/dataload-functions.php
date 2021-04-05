@@ -17,8 +17,8 @@ function gdDataloadAllcontentCategories()
 {
     if (useAllcontentCategories()) {
 
-        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
-        $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+        $all_categories = $postCategoryTypeAPI->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
         // All Post Categories but the excluded ones
         $excluded_taxonomies = getAllcontentExcludedTaxonomies();

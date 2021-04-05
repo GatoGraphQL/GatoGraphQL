@@ -163,7 +163,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         if (!$categories) {
             return $categories;
         }
-        $categoryapi = PostCategoryTypeAPIFacade::getInstance();
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself
@@ -172,7 +172,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
                 $cat = $categories[$i];
                 $i++;
 
-                if ($parent_cat = $categoryapi->getCategoryParent($cat)) {
+                if ($parent_cat = $postCategoryTypeAPI->getCategoryParent($cat)) {
                     $categories[] = $parent_cat;
                 }
             }

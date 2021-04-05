@@ -65,8 +65,8 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
             'content',
         ])) {
             $locationpost = $resultItem;
-            $categoryapi = PostCategoryTypeAPIFacade::getInstance();
-            return POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && $categoryapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $typeResolver->getID($locationpost));
+            $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+            return POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && $postCategoryTypeAPI->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $typeResolver->getID($locationpost));
         }
         return true;
     }

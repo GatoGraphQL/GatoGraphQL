@@ -126,7 +126,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmstagsapi = PostTagTypeAPIFacade::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postTag':
                 $query = [
@@ -135,7 +135,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                if ($tags = $cmstagsapi->getTags($query, $options)) {
+                if ($tags = $postTagTypeAPI->getTags($query, $options)) {
                     return $tags[0];
                 }
                 return null;
@@ -147,11 +147,11 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmstagsapi->getTags($query, $options);
+                return $postTagTypeAPI->getTags($query, $options);
             case 'postTagCount':
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmstagsapi->getTagCount([], $options);
+                return $postTagTypeAPI->getTagCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

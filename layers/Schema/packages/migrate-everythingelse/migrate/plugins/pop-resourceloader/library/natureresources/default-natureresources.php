@@ -150,8 +150,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-            $categoryapi = PostCategoryTypeAPIFacade::getInstance();
-            $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
+            $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
+            $all_categories = $postCategoryTypeAPI->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
             // Allow to filter the categories.
             // This is needed so that Articles/Announcements/etc similar-configuration categories

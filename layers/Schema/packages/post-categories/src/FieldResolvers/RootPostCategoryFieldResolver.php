@@ -126,7 +126,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscategoriesapi = PostCategoryTypeAPIFacade::getInstance();
+        $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postCategory':
                 $query = [
@@ -135,7 +135,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                if ($categories = $cmscategoriesapi->getCategories($query, $options)) {
+                if ($categories = $postCategoryTypeAPI->getCategories($query, $options)) {
                     return $categories[0];
                 }
                 return null;
@@ -147,12 +147,12 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscategoriesapi->getCategories($query, $options);
+                return $postCategoryTypeAPI->getCategories($query, $options);
             case 'postCategoryCount':
                 $query = [];
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscategoriesapi->getCategoryCount($query, $options);
+                return $postCategoryTypeAPI->getCategoryCount($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
