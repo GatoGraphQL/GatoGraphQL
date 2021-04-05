@@ -23,7 +23,7 @@ if (!defined('POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

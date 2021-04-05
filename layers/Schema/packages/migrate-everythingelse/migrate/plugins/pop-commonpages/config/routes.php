@@ -20,7 +20,7 @@ if (!defined('POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS')) {
 // }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

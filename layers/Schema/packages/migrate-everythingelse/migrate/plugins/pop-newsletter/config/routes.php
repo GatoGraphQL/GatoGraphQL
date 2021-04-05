@@ -14,7 +14,7 @@ if (!defined('POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,

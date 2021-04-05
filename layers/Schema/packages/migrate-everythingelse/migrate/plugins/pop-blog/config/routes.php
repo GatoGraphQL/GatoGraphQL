@@ -20,7 +20,7 @@ if (!defined('POP_BLOG_ROUTE_COMMENTS')) {
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    'routes',
+    \PoP\Routing\RouteHookNames::ROUTES,
     function($routes) {
     	return array_merge(
     		$routes,
