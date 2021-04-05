@@ -1,18 +1,33 @@
 <?php
 
-namespace PoPSchema\Tags\WP;
+declare(strict_types=1);
 
+namespace PoPSchema\TagsWP\TypeAPIs;
+
+use WP_Taxonomy;
+use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 
-abstract class AbstractFunctionAPI extends TaxonomyTypeAPI implements \PoPSchema\Tags\FunctionAPI
+/**
+ * Methods to interact with the Type, to be implemented by the underlying CMS
+ */
+abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
     use APITypeDataResolverTrait;
+
+    /**
+     * Indicates if the passed object is of type Tag
+     */
+    public function isInstanceOfTagType(object $object): bool
+    {
+        return ($object instanceof WP_Taxonomy) && $object->hierarchical == false;
+    }
 
     /**
      * Implement this function by the actual service
@@ -156,4 +171,3 @@ abstract class AbstractFunctionAPI extends TaxonomyTypeAPI implements \PoPSchema
         return wp_set_post_terms($post_id, $tags, $this->getTaxonomyName(), $append);
     }
 }
-

@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface:
-        class: \PoPSchema\TagsWP\TypeAPIs\TagTypeAPI
+    # PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface:
+    #     class: \PoPSchema\TagsWP\TypeAPIs\TagTypeAPI
 
     PoPSchema\TagsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'

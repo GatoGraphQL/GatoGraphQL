@@ -3,8 +3,9 @@
 namespace PoPSchema\PostTags\WP;
 
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
 
-class FunctionAPI extends \PoPSchema\Tags\WP\AbstractFunctionAPI implements \PoPSchema\PostTags\FunctionAPI
+class FunctionAPI extends AbstractTagTypeAPI implements \PoPSchema\PostTags\FunctionAPI
 {
     public function __construct()
     {
