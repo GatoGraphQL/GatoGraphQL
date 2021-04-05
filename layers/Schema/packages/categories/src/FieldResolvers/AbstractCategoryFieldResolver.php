@@ -76,7 +76,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscategoriesresolver = $this->getObjectPropertyAPI();
+        $cmscategoriesresolver = $this->getTypeAPI();
         $categoryapi = $this->getTypeAPI();
         $category = $resultItem;
         switch ($fieldName) {

@@ -73,7 +73,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmstagsresolver = $this->getObjectPropertyAPI();
+        $cmstagsresolver = $this->getTypeAPI();
         $tagapi = $this->getTypeAPI();
         $tag = $resultItem;
         switch ($fieldName) {
