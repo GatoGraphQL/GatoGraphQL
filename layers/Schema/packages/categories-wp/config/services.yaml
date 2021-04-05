@@ -9,3 +9,6 @@ services:
     PoPSchema\CategoriesWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
+    PoPSchema\CategoriesWP\Hooks\:
+        resource: '../src/Hooks/*'
+
