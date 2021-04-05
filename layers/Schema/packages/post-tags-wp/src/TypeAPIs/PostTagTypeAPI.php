@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagsWP\TypeAPIs;
 
-use PoPSchema\TagsWP\TypeAPIs\TagTypeAPI;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class PostTagTypeAPI extends TagTypeAPI implements PostTagTypeAPIInterface
+class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Tag
@@ -33,7 +33,7 @@ class PostTagTypeAPI extends TagTypeAPI implements PostTagTypeAPIInterface
         return $this->getPostTagTaxonomyName();
     }
 
-    public function getTagBaseOption(): string
+    protected function getTagBaseOption(): string
     {
         return 'tag_base';
     }

@@ -20,10 +20,6 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      * Implement this function by the actual service
      */
     public function getTaxonomyName(): string;
-    /**
-     * Implement this function by the actual service
-     */
-    public function getTagBaseOption(): string;
 
 
     public function getCustomPostTags($post_id, array $query = [], array $options = []): array;

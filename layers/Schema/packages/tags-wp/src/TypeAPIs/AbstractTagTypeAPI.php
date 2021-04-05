@@ -21,6 +21,14 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 {
     use APITypeDataResolverTrait;
 
+    public function getTagBase()
+    {
+        $cmsService = CMSServiceFacade::getInstance();
+        return $cmsService->getOption($this->getTagBaseOption());
+    }
+
+    abstract protected function getTagBaseOption(): string;
+
     /**
      * Indicates if the passed object is of type Tag
      */
@@ -154,11 +162,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTagLink($tag_id)
     {
         return get_term_link($tag_id, $this->getTaxonomyName());
-    }
-    public function getTagBase()
-    {
-        $cmsService = CMSServiceFacade::getInstance();
-        return $cmsService->getOption($this->getTagBaseOption());
     }
 
     public function setPostTags($post_id, array $tags, bool $append = false)
