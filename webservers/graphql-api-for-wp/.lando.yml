@@ -153,10 +153,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-custompostmeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-custompostmeta-wp
         - >-
-          ../../layers/Schema/packages/migrate-customposts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-customposts
-        - >-
-          ../../layers/Schema/packages/migrate-customposts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-customposts-wp
-        - >-
           ../../layers/Schema/packages/migrate-media:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-media
         - >-
           ../../layers/Schema/packages/migrate-media-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-media-wp
@@ -170,10 +166,6 @@ services:
           ../../layers/Schema/packages/migrate-pages:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-pages
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-pages-wp
-        - >-
-          ../../layers/Schema/packages/migrate-posts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-posts
-        - >-
-          ../../layers/Schema/packages/migrate-posts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-posts-wp
         - >-
           ../../layers/Schema/packages/migrate-queriedobject:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-queriedobject
         - >-
