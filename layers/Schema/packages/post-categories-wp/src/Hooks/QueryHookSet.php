@@ -1,22 +1,24 @@
 <?php
 
-namespace PoPSchema\Categories\WP;
+declare(strict_types=1);
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+namespace PoPSchema\PostCategoriesWP\Hooks;
 
-class FunctionAPIHooks {
+use PoP\Hooks\AbstractHookSet;
 
-	public function __construct() {
+class QueryHookSet extends AbstractHookSet
+{
+    protected function init(): void
+    {
+        $this->hooksAPI->addFilter(
+            'CMSAPI:posts:query',
+            [$this, 'convertPostsQuery'],
+            10,
+            2
+        );
+    }
 
-		HooksAPIFacade::getInstance()->addFilter(
-		    'CMSAPI:posts:query',
-		    [$this, 'convertPostsQuery'],
-		    10,
-		    2
-		);
-	}
-
-	/**
+    /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
      * @return array<string, mixed>
@@ -24,18 +26,15 @@ class FunctionAPIHooks {
     public function convertPostsQuery(array $query, array $options): array
     {
         if (isset($query['categories'])) {
-
             // Watch out! In WordPress it is a string (either category id or comma-separated category ids), but in PoP it is an array of category ids!
             $query['cat'] = implode(',', $query['categories']);
             unset($query['categories']);
         }
         if (isset($query['category-in'])) {
-
             $query['category__in'] = $query['category-in'];
             unset($query['category-in']);
         }
         if (isset($query['category-not-in'])) {
-
             $query['category__not_in'] = $query['category-not-in'];
             unset($query['category-not-in']);
         }
@@ -43,8 +42,3 @@ class FunctionAPIHooks {
         return $query;
     }
 }
-
-/**
- * Initialize
- */
-new FunctionAPIHooks();

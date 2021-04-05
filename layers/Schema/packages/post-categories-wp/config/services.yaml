@@ -5,3 +5,6 @@ services:
 
     PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface:
         class: \PoPSchema\PostCategoriesWP\TypeAPIs\PostCategoryTypeAPI
+
+    PoPSchema\PostCategoriesWP\Hooks\:
+        resource: '../src/Hooks/*'
