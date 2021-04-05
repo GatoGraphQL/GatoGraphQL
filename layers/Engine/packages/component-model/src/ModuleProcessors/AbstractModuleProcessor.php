@@ -637,7 +637,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return null;
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void
     {
         // Do nothing
     }

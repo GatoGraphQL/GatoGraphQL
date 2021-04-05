@@ -46,9 +46,9 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         return parent::getComponentMutationResolverBridgeClass($module);
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void
     {
-        parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
+        parent::prepareDataPropertiesAfterMutationExecution($module, $props, $data_properties);
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
