@@ -515,8 +515,6 @@
         "pop-schema/migrate-posts-wp": "0.7.13",
         "pop-schema/migrate-queriedobject": "0.7.13",
         "pop-schema/migrate-queriedobject-wp": "0.7.13",
-        "pop-schema/migrate-tags": "0.7.13",
-        "pop-schema/migrate-tags-wp": "0.7.13",
         "pop-schema/migrate-taxonomymeta": "0.7.13",
         "pop-schema/migrate-taxonomymeta-wp": "0.7.13",
         "pop-schema/migrate-taxonomyquery": "0.7.13",

@@ -172,10 +172,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
         - >-
-          ../../layers/Schema/packages/migrate-tags:/app/vendor/pop-schema/migrate-tags
-        - >-
-          ../../layers/Schema/packages/migrate-tags-wp:/app/vendor/pop-schema/migrate-tags-wp
-        - >-
           ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
         - >-
           ../../layers/Schema/packages/migrate-categories-wp:/app/vendor/pop-schema/migrate-categories-wp
