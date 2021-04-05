@@ -6,13 +6,13 @@ namespace PoPSchema\PostTags\ComponentContracts;
 
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 trait PostTagAPISatisfiedContractTrait
 {
     protected function getTypeAPI(): TagTypeAPIInterface
     {
-        $cmstagsapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        return $cmstagsapi;
+        return PostTagTypeAPIFacade::getInstance();
     }
 
     protected function getTypeResolverClass(): string

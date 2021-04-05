@@ -9,6 +9,7 @@ use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -71,8 +72,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             'limit' => 1,
             // 'fields' => 'ids',
         );
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        if ($ids = $posttagapi->getTags($query, ['return-type' => ReturnTypes::IDS])) {
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        if ($ids = $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS])) {
             $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 

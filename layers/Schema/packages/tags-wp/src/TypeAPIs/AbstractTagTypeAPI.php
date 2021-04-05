@@ -29,15 +29,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         return ($object instanceof WP_Taxonomy) && $object->hierarchical == false;
     }
 
-    /**
-     * Implement this function by the actual service
-     */
-    abstract protected function getTaxonomyName(): string;
-    /**
-     * Implement this function by the actual service
-     */
-    abstract protected function getTagBaseOption(): string;
-
     public function getTagName($tagObjectOrID)
     {
         if (!is_object($tagObjectOrID)) {

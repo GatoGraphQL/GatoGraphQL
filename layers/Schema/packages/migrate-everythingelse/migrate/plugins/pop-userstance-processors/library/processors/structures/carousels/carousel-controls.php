@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -92,7 +93,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);
@@ -111,7 +112,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
-                $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );

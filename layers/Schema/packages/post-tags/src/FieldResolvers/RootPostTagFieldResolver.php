@@ -14,6 +14,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -125,7 +126,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmstagsapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $cmstagsapi = PostTagTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postTag':
                 $query = [

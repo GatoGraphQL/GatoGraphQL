@@ -11,6 +11,7 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
@@ -74,14 +75,14 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+            $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
             switch ($vars['nature']) {
                 case UserRouteNatures::USER:
                     $url = $cmsusersapi->getUserURL($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case TagRouteNatures::TAG:
-                    $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
+                    $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case PageRouteNatures::PAGE:

@@ -6,6 +6,7 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\SubscribeToTagMutationResolver;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
@@ -22,8 +23,8 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     public function getSuccessString(string | int $result_id): ?string
     {
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $tag = $posttagapi->getTag($result_id);
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        $tag = $postTagTypeAPI->getTag($result_id);
         return sprintf(
             TranslationAPIFacade::getInstance()->__('You have subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $applicationtaxonomyapi->getTagSymbolName($tag)

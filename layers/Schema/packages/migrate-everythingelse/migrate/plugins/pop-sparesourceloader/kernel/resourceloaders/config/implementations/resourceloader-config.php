@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -25,7 +26,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $categoryapi = \PoPSchema\PostCategories\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
 
@@ -46,7 +47,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         // Path slugs
         $configuration['$paths'] = array(
             'author' => $cmsusersapi->getAuthorBase().'/',
-            'tag' => $posttagapi->getTagBase().'/',
+            'tag' => $postTagTypeAPI->getTagBase().'/',
             'single' => $single_paths,
         );
 

@@ -27,4 +27,14 @@ class PostTagTypeAPI extends TagTypeAPI implements PostTagTypeAPIInterface
     {
         return 'post_tag';
     }
+
+    public function getTaxonomyName(): string
+    {
+        return $this->getPostTagTaxonomyName();
+    }
+
+    public function getTagBaseOption(): string
+    {
+        return 'tag_base';
+    }
 }

@@ -4,6 +4,7 @@ use PoP\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusBase
 {
@@ -117,7 +118,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
@@ -128,7 +129,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
-                $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:

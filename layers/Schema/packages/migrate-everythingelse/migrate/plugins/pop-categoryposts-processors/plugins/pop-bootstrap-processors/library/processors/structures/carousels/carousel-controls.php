@@ -2,6 +2,7 @@
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -343,7 +344,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routes = array(
             self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
@@ -417,7 +418,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             $url = $cmsusersapi->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]] ?? null) {
-            $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
+            $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }
 

@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
@@ -57,8 +58,8 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
     }
     protected function executeThumbprint($query)
     {
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        return $posttagapi->getTags($query, ['return-type' => ReturnTypes::IDS]);
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        return $postTagTypeAPI->getTags($query, ['return-type' => ReturnTypes::IDS]);
     }
 
     protected function getPendingMsg(array $module)

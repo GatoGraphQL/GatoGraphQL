@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_TinyMCEHashtags
 {
@@ -54,10 +55,10 @@ class PoP_TinyMCEHashtags
 
         // Add the 'hashtags' settings
         // Get the name and description from all defined values
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $values = array();
         foreach (POP_COREPROCESSORS_HASHTAGS_EDITORACCESS as $tag_id) {
-            $values[] = TagHelpers::getTagSymbolNameDescription($posttagapi->getTag($tag_id));
+            $values[] = TagHelpers::getTagSymbolNameDescription($postTagTypeAPI->getTag($tag_id));
         }
         $title = HooksAPIFacade::getInstance()->applyFilters('PoP_TinyMCEHashtags:title', TranslationAPIFacade::getInstance()->__('#Hashtags', 'pop-coreprocessors'));
         $options = array(

@@ -10,6 +10,7 @@ use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -179,9 +180,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getTaghtml($tag_id)
     {
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $tag = $posttagapi->getTag($tag_id);
-        $tag_url = $posttagapi->getTagLink($tag_id);
+        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        $tag = $postTagTypeAPI->getTag($tag_id);
+        $tag_url = $postTagTypeAPI->getTagLink($tag_id);
         $tagname_html = sprintf(
             '<h3 style="display: block;"><a href="%s">%s</a></h3>',
             $tag_url,
