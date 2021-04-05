@@ -174,8 +174,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-categories:/app/vendor/pop-schema/migrate-categories
         - >-
-          ../../layers/Schema/packages/migrate-categories-wp:/app/vendor/pop-schema/migrate-categories-wp
-        - >-
           ../../layers/Schema/packages/migrate-taxonomymeta:/app/vendor/pop-schema/migrate-taxonomymeta
         - >-
           ../../layers/Schema/packages/migrate-taxonomymeta-wp:/app/vendor/pop-schema/migrate-taxonomymeta-wp
