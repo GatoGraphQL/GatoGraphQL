@@ -1832,12 +1832,12 @@ function execute(&$data_properties)
 }
 ```
 
-A ModuleProcessor can modify what data it will fetch from the database through function `prepareDataPropertiesAfterActionexecution`, which is invoked after executing the module's corresponding ActionExecuter. For instance, after creating a comment, we can load it immediately or, if the creation was not successful, state to skip loading any database object:
+A ModuleProcessor can modify what data it will fetch from the database through function `prepareDataPropertiesAfterMutationExecution`, which is invoked after executing the module's corresponding ActionExecuter. For instance, after creating a comment, we can load it immediately or, if the creation was not successful, state to skip loading any database object:
 
 ```php
-function prepareDataPropertiesAfterActionexecution($module, &$props, &$data_properties) {
+function prepareDataPropertiesAfterMutationExecution($module, &$props, &$data_properties) {
     
-  parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
+  parent::prepareDataPropertiesAfterMutationExecution($module, $props, $data_properties);
 
   switch ($module[1]) {
     case self::MODULE_ADDCOMMENT:

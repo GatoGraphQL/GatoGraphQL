@@ -976,9 +976,9 @@ class Engine implements EngineInterface
                 }
 
                 // Allow modules to change their data_properties based on the actionexecution of previous modules.
-                $processor->prepareDataPropertiesAfterActionexecution($module, $module_props, $data_properties);
+                $processor->prepareDataPropertiesAfterMutationExecution($module, $module_props, $data_properties);
 
-                // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterActionexecution`
+                // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
                 if ($load_data) {
                     $typeResolver_class = $processor->getTypeResolverClass($module);

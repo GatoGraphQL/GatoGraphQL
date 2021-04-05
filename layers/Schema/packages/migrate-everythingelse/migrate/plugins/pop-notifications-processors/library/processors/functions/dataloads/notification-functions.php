@@ -31,9 +31,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
-    public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void
     {
-        parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
+        parent::prepareDataPropertiesAfterMutationExecution($module, $props, $data_properties);
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
