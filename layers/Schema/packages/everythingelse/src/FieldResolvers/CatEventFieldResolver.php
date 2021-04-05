@@ -12,7 +12,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoPSchema\Tags\Facades\TagTypeAPIFacade;
+use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
 
 class CatEventFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -73,8 +73,7 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
-        $cmstagsresolver = TagTypeAPIFacade::getInstance();
+        $eventTagTypeAPI = EventTagTypeAPIFacade::getInstance();
         $event = $resultItem;
         switch ($fieldName) {
              // Override
@@ -82,7 +81,7 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
                 $value = array();
                 $cats = $eventTypeAPI->getCategories($event);
                 foreach ($cats as $cat) {
-                    $value[] = $cmstagsresolver->getCategorySlug($cat);
+                    $value[] = $eventTagTypeAPI->getCategorySlug($cat);
                 }
                 return $value;
 
@@ -91,7 +90,7 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
                 if (GeneralUtils::isError($cat)) {
                     return $cat;
                 } elseif ($cat) {
-                    return $posttagapi->getTermName($cat, $eventTypeAPI->getEventCategoryTaxonomy());
+                    return $eventTagTypeAPI->getTermName($cat, $eventTypeAPI->getEventCategoryTaxonomy());
                 }
                 return null;
         }
