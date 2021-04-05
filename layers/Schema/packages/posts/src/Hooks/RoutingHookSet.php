@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\Hooks;
+namespace PoPSchema\Posts\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
@@ -21,7 +21,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         return [
             ...$routes,
-            \POP_USERS_ROUTE_USERS,
+            \POP_POSTS_ROUTE_POSTS,
         ];
     }
 }
