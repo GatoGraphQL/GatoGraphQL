@@ -73,24 +73,23 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmstagsresolver = $this->getTypeAPI();
-        $tagapi = $this->getTypeAPI();
+        $tagTypeAPI = $this->getTypeAPI();
         $tag = $resultItem;
         switch ($fieldName) {
             case 'url':
-                return $tagapi->getTagLink($typeResolver->getID($tag));
+                return $tagTypeAPI->getTagLink($typeResolver->getID($tag));
 
             case 'name':
-                return $cmstagsresolver->getTagName($tag);
+                return $tagTypeAPI->getTagName($tag);
 
             case 'slug':
-                return $cmstagsresolver->getTagSlug($tag);
+                return $tagTypeAPI->getTagSlug($tag);
 
             case 'description':
-                return $cmstagsresolver->getTagDescription($tag);
+                return $tagTypeAPI->getTagDescription($tag);
 
             case 'count':
-                return $cmstagsresolver->getTagItemCount($tag);
+                return $tagTypeAPI->getTagItemCount($tag);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
