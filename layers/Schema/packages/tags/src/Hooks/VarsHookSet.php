@@ -1,14 +1,17 @@
 <?php
-namespace PoPSchema\Tags;
-use PoPSchema\Tags\Routing\RouteNatures;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
-class Engine_Hooks
+declare(strict_types=1);
+
+namespace PoPSchema\Tags\Hooks;
+
+use PoP\Hooks\AbstractHookSet;
+use PoPSchema\Tags\Routing\RouteNatures;
+
+class VarsHookSet extends AbstractHookSet
 {
-    public function __construct()
+    protected function init(): void
     {
-        HooksAPIFacade::getInstance()->addAction(
+        $this->hooksAPI->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
@@ -16,13 +19,9 @@ class Engine_Hooks
         );
     }
 
-    /**
-     * @param array<array> $vars_in_array
-     */
     public function augmentVarsProperties(array $vars_in_array): void
     {
-        // Set additional properties based on the nature: the global $post, $author, or $queried_object
-        $vars = &$vars_in_array[0];
+        [&$vars] = $vars_in_array;
         $nature = $vars['nature'];
         $vars['routing-state']['is-tag'] = $nature == RouteNatures::TAG;
 
@@ -33,8 +32,3 @@ class Engine_Hooks
         }
     }
 }
-
-/**
- * Initialization
- */
-new Engine_Hooks();
