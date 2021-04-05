@@ -8,11 +8,6 @@ class Initialization
         load_plugin_textdomain('pop-taxonomies', false, dirname(plugin_basename(__FILE__)).'/languages');
 
         /**
-         * Load the Contracts
-         */
-        include_once 'contracts/load.php';
-
-        /**
          * Load the Library
          */
         include_once 'library/load.php';

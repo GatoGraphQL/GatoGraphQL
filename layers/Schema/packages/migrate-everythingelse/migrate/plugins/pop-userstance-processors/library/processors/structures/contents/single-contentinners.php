@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
@@ -68,7 +69,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
 
     public function initRequestProps(array $module, array &$props): void
     {
-        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CONTENTINNER_STANCESINGLE:
                 $vars = ApplicationState::getVars();

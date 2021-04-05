@@ -1,7 +1,9 @@
 <?php
 namespace PoPSchema\Tags;
 
-interface FunctionAPI extends \PoPSchema\Taxonomies\FunctionAPI
+use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+
+interface FunctionAPI extends TaxonomyTypeAPIInterface
 {
     public function getCustomPostTags($post_id, array $query = [], array $options = []): array;
     public function getCustomPostTagCount($post_id, array $query = [], array $options = []): int;

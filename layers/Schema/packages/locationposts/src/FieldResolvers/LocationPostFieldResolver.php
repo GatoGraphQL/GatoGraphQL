@@ -12,6 +12,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class LocationPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -77,7 +78,7 @@ class LocationPostFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $locationpost = $resultItem;
         switch ($fieldName) {
             case 'categories':

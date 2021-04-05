@@ -1,7 +1,9 @@
 <?php
 namespace PoPSchema\Categories;
 
-interface FunctionAPI extends \PoPSchema\Taxonomies\FunctionAPI
+use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+
+interface FunctionAPI extends TaxonomyTypeAPIInterface
 {
     public function getCategories($query, $options = []): array;
     public function getCategoryCount($query, $options = []): int;

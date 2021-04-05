@@ -19,6 +19,7 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 use PoPSchema\CustomPostMutations\Facades\CustomPostTypeAPIFacade as MutationCustomPostTypeAPIFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
@@ -268,7 +269,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // @TODO: Migrate when package "Categories" is completed
         // // Set categories for any taxonomy (not only for "category")
         // if ($cats = $this->getCategories($form_data)) {
-        //     $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+        //     $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         //     $taxonomy = $this->getCategoryTaxonomy();
         //     $taxonomyapi->setPostTerms($customPostID, $cats, $taxonomy);
         // }

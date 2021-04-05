@@ -14,6 +14,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class StanceFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -99,7 +100,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $stance = $resultItem;
         switch ($fieldName) {
             case 'categories':
