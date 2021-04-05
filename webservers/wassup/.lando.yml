@@ -222,8 +222,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
         - >-
-          ../../layers/Schema/packages/migrate-posts-wp:/app/vendor/pop-schema/migrate-posts-wp
-        - >-
           ../../layers/Schema/packages/migrate-queriedobject:/app/vendor/pop-schema/migrate-queriedobject
         - >-
           ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
