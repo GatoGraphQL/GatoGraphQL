@@ -1,15 +1,18 @@
 <?php
-namespace PoPSchema\CustomPosts\WP;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+declare(strict_types=1);
+
+namespace PoPSchema\CustomPostsWP\Hooks;
+
+use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use WP_Query;
 
-class WPCMSRoutingStateHooks
+class RoutingStateHookSet extends AbstractHookSet
 {
-    public function __construct() {
-
-        HooksAPIFacade::getInstance()->addFilter(
+    protected function init(): void
+    {
+        $this->hooksAPI->addFilter(
             'WPCMSRoutingState:nature',
             [$this, 'getNature'],
             10,
@@ -29,8 +32,3 @@ class WPCMSRoutingStateHooks
         return $nature;
     }
 }
-
-/**
- * Initialize
- */
-new WPCMSRoutingStateHooks();
