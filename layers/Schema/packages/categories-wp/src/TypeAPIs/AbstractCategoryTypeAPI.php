@@ -86,13 +86,13 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         $categories = get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
         return count($categories);
     }
-    public function getCategories($query, $options = []): array
+    public function getCategories(array $query, $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
         return get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
     }
 
-    public function convertCategoriesQuery($query, array $options = [])
+    public function convertCategoriesQuery(array $query, array $options = []): array
     {
         if ($return_type = $options['return-type'] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
@@ -187,14 +187,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     //     }
 
     //     return $categories;
-    // }
-    // public function getCategories($query, $options = []): array
-    // {
-    //     if (isset($query['hide-empty'])) {
-    //         $query['hide_empty'] = $query['hide-empty'];
-    //         unset($query['hide-empty']);
-    //     }
-    //     return $this->returnCategoryObjectsOrIDs((array) get_categories($query));
     // }
 
     // public function getCategoryCount($query, $options = []): int
