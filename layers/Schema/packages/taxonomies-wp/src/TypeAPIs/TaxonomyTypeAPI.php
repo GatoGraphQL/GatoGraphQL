@@ -16,7 +16,17 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 
     protected function getTermObjectAndID(string | int | object $termObjectOrID): array
     {
-        return TaxonomyTypeAPIHelpers::getTermObjectAndID($termObjectOrID);
+        if (is_object($termObjectOrID)) {
+            $termObject = $termObjectOrID;
+            $termObjectID = $termObject->ID;
+        } else {
+            $termObjectID = $termObjectOrID;
+            $termObject = \get_term($termObjectID);
+        }
+        return [
+            $termObject,
+            $termObjectID,
+        ];
     }
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
