@@ -12,13 +12,18 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class SchemaHelpers
 {
+    /**
+     * Only validate that if the key is missing, and not if the value is empty,
+     * because empty values could be allowed.
+     *
+     * Eg: `setTagsOnPost(tagIDs:[])` where `tagIDs` is mandatory
+     */
     public static function getMissingFieldArgs(array $fieldArgProps, array $fieldArgs): array
     {
         return array_values(array_filter(
             $fieldArgProps,
             function ($fieldArgProp) use ($fieldArgs) {
-                // Do not use `empty` to avoid "0" failing
-                return !array_key_exists($fieldArgProp, $fieldArgs) || $fieldArgs[$fieldArgProp] === null || $fieldArgs[$fieldArgProp] === '' || $fieldArgs[$fieldArgProp] === [];
+                return !array_key_exists($fieldArgProp, $fieldArgs);
             }
         ));
     }
