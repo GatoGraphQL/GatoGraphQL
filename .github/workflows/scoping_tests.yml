@@ -1,0 +1,93 @@
+####################################################################################
+# GitHub Action:
+# Test that scoping the plugins works well
+####################################################################################
+name: Scoping tests
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+
+env:
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-master"
+
+jobs:
+    provide_data:
+        name: Provide configuration of scoped releases
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.0
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: "ramsey/composer-install@v1"
+
+            -   id: output_data
+                run: |
+                    echo "::set-output name=plugin_config_entries::$(vendor/bin/monorepo-builder plugin-config-entries-json --scoped-only)"
+        outputs:
+            plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
+
+    main:
+        name: Scope the code from ${{ matrix.pluginConfig.zip_file }} (via PHP-Scoper), and execute tests
+        needs: provide_data
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+                # see https://github.com/shivammathur/setup-php
+            -   name: Set-up PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.0
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Install root dependencies
+                uses: "ramsey/composer-install@v1"
+
+            # "custom-bump-interdependency" temporarily needed because of bug:
+            # https://github.com/symplify/symplify/issues/2773
+            -   name: Localize package paths
+                run: |
+                    vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
+                    vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
+
+            -   name: Install release dependencies for PROD
+                run: composer install --no-dev --no-progress --no-interaction --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
+
+            -   name: Install PHP-Scoper (globally)
+                run: |
+                    composer global config minimum-stability dev
+                    composer global config prefer-stable true
+                    composer global require humbug/php-scoper
+
+            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../../../../build-prefixed/vendor"
+            -   name: Scope code into separate folder
+                run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
+
+            -   name: Copy scoped code back into original location
+                run: rsync -av build-prefixed/ ${{ matrix.pluginConfig.path }} --quiet
+
+            -   name: Regenerate autoloader for PROD
+                run: composer dumpautoload --optimize --classmap-authoritative --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
+
+            -   name: Run Rector on the scoped code
+                run: vendor/bin/rector process --config=${{ matrix.pluginConfig.path }}/rector-test-scoping.php --ansi
+

@@ -42,4 +42,8 @@ final class Option
      * @var string
      */
     public const OUTPUT_FILE = 'output-file';
+    /**
+     * @var string
+     */
+    public const SCOPED_ONLY = 'scoped-only';
 }
