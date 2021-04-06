@@ -112,7 +112,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
-                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );

@@ -16,19 +16,15 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
      */
     public function isInstanceOfCategoryType(object $object): bool;
 
-    public function getCategories($query, $options = []): array;
-    public function getCategoryCount($query, $options = []): int;
-    public function getCustomPostCategories($post_id, array $options = []): array;
-    public function getCustomPostCategoryCount($post_id, $query, array $options = []): int;
-    public function getCategoryName($cat_id);
-    public function getCategoryParent($cat_id);
-    public function getCategorySlug($catObjectOrID);
-    public function getCategoryPath($category_id);
-    public function hasCategory($cat_id, $post_id);
-    public function getCategoryURL($category_id);
-
-
-    public function getCategoryID($cat);
-    public function getCategoryDescription($cat);
-    public function getCategoryItemCount($cat);
+    public function getCategoryID(object $cat): string | int;
+    public function getCategories(array $query, array $options = []): array;
+    public function getCategoryCount(array $query, array $options = []): int;
+    public function getCustomPostCategories(string | int $customPostID, array $options = []): array;
+    public function getCustomPostCategoryCount(string | int $customPostID, array $query, array $options = []): int;
+    public function getCategorySlug(string | int | object $catObjectOrID): string;
+    public function getCategoryName(string | int | object $catObjectOrID): string;
+    public function getCategoryParentID(string | int | object $catObjectOrID): string | int;
+    public function getCategoryURL(string | int | object $catObjectOrID): string;
+    public function getCategoryDescription(string | int | object $catObjectOrID): string;
+    public function getCategoryItemCount(string | int | object $catObjectOrID): int;
 }

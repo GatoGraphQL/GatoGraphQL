@@ -82,7 +82,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     return RequestUtils::addRoute($url, $route);
 
                 case TagRouteNatures::TAG:
-                    $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
+                    $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case PageRouteNatures::PAGE:

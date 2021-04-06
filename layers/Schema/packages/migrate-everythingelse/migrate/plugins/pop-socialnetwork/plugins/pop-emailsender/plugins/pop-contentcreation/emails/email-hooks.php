@@ -206,7 +206,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                             }
 
                             $tag = $postTagTypeAPI->getTag($tag_id);
-                            $tag_url = $postTagTypeAPI->getTagLink($tag_id);
+                            $tag_url = $postTagTypeAPI->getTagURL($tag_id);
                             $tag_name = $applicationtaxonomyapi->getTagSymbolName($tag);
                             $subject = sprintf(
                                 TranslationAPIFacade::getInstance()->__('There is a new %s tagged with “%s”: “%s”', 'pop-emailsender'),
@@ -337,7 +337,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                             }
 
                             $tag = $postTagTypeAPI->getTag($tag_id);
-                            $tag_url = $postTagTypeAPI->getTagLink($tag_id);
+                            $tag_url = $postTagTypeAPI->getTagURL($tag_id);
                             $tag_name = $applicationtaxonomyapi->getTagSymbolName($tag);
                             $subject = sprintf(
                                 TranslationAPIFacade::getInstance()->__('New comment added under %s with topic “%s”', 'pop-emailsender'),

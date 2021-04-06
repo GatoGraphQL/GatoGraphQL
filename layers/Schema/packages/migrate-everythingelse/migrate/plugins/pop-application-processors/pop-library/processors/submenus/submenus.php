@@ -129,7 +129,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
-                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:

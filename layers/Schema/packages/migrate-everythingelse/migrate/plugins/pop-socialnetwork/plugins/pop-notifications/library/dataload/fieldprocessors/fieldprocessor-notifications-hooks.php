@@ -180,7 +180,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                 switch ($notification->action) {
                                     case AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG:
                                     case AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG:
-                                        return $postTagTypeAPI->getTagLink($notification->object_id);
+                                        return $postTagTypeAPI->getTagURL($notification->object_id);
                                 }
                                 return null;
                         }

@@ -418,7 +418,7 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
             $url = $cmsusersapi->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]] ?? null) {
-            $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
+            $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }
 

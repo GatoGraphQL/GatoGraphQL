@@ -76,7 +76,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 return RequestUtils::addRoute($url, $routes[$module[1]] ?? null);
 
             case self::MODULE_CAROUSELCONTROLS_TAGEVENTS:
-                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );

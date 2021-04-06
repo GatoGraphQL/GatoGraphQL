@@ -77,7 +77,7 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
         $tag = $resultItem;
         switch ($fieldName) {
             case 'url':
-                return $tagTypeAPI->getTagLink($typeResolver->getID($tag));
+                return $tagTypeAPI->getTagURL($typeResolver->getID($tag));
 
             case 'name':
                 return $tagTypeAPI->getTagName($tag);

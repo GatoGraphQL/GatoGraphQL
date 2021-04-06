@@ -92,7 +92,7 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
                 return $categoryTypeAPI->getCategoryDescription($category);
 
             case 'parent':
-                return $categoryTypeAPI->getCategoryParent($typeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryParentID($typeResolver->getID($category));
 
             case 'count':
                 return $categoryTypeAPI->getCategoryItemCount($category);

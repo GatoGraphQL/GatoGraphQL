@@ -169,11 +169,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
             // Use a while, to also check if the parent category has a parent itself
             $i = 0;
             while ($i < count($categories)) {
-                $cat = $categories[$i];
+                $catID = $categories[$i];
                 $i++;
 
-                if ($parent_cat = $postCategoryTypeAPI->getCategoryParent($cat)) {
-                    $categories[] = $parent_cat;
+                if ($parentCatID = $postCategoryTypeAPI->getCategoryParentID($catID)) {
+                    $categories[] = $parentCatID;
                 }
             }
         }
