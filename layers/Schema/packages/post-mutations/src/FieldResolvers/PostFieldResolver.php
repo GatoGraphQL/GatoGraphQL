@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver;
+use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoPSchema\PostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver
 {
@@ -24,6 +25,15 @@ class PostFieldResolver extends AbstractCustomPostFieldResolver
             'update' => $translationAPI->__('Update the post', 'post-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        switch ($fieldName) {
+            case 'update':
+                return SchemaDefinitionHelpers::getCreateUpdatePostSchemaFieldArgs($typeResolver, $fieldName, false);
+        }
+        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
     public function resolveFieldMutationResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
