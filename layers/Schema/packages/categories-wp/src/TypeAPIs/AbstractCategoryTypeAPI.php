@@ -159,10 +159,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             $options
         );
     }
-    public function getCategoryURL($category_id)
+
+    public function getCategoryURL(string | int | object $catObjectOrID): string
     {
-        return get_term_link($category_id, $this->getCategoryTaxonomyName());
+        return \get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
     }
+
     public function getCategoryBase()
     {
         $cmsService = CMSServiceFacade::getInstance();
@@ -256,17 +258,14 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return null;
     }
 
-    // public function getCategoryURL($cat)
-    // {
-    //     return get_term_link($cat->term_id, 'category');
-    // }
-
-    public function getCategoryDescription($cat)
+    public function getCategoryDescription(string | int | object $catObjectOrID): string
     {
-        return $cat->description;
+        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        return $category->description;
     }
-    public function getCategoryItemCount($cat)
+    public function getCategoryItemCount(string | int | object $catObjectOrID): int
     {
-        return $cat->count;
+        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        return $category->count;
     }
 }
