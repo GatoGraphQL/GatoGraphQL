@@ -25,7 +25,7 @@ final class PluginConfigEntriesJsonProvider
      * @param string[] $fileListFilter
      * @return array<array<string,string>>
      */
-    public function providePluginConfigEntries(array $fileListFilter = []): array
+    public function providePluginConfigEntries(bool $scopedOnly = false): array
     {
         /**
          * Validate that all required entries have been provided
@@ -38,7 +38,14 @@ final class PluginConfigEntriesJsonProvider
             'dist_repo_name',
         ];
         $pluginConfigEntries = [];
-        foreach ($this->pluginConfigEntries as $entryConfig) {
+        $sourcePluginConfigEntries = $this->pluginConfigEntries;
+        if ($scopedOnly) {
+            $sourcePluginConfigEntries = array_filter(
+                $sourcePluginConfigEntries,
+                fn (array $entry) => $entry['scope'] ?? false
+            );
+        }
+        foreach ($sourcePluginConfigEntries as $entryConfig) {
             $unprovidedEntries = array_diff(
                 $requiredEntries,
                 array_keys((array) $entryConfig)
