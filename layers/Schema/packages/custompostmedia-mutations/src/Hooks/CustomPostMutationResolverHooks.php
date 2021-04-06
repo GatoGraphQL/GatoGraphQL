@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeAPIFacade;
+use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
@@ -62,12 +62,12 @@ class CustomPostMutationResolverHooks extends AbstractHookSet
      */
     public function setOrRemoveFeaturedImage(int | string $customPostID, array $form_data): void
     {
-        $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();
+        $customPostMediaTypeMutationAPI = CustomPostMediaTypeMutationAPIFacade::getInstance();
         if (isset($form_data[MutationInputProperties::FEATUREDIMAGE_ID])) {
             if ($featuredImageID = $form_data[MutationInputProperties::FEATUREDIMAGE_ID]) {
-                $customPostMediaTypeAPI->setFeaturedImage($customPostID, $featuredImageID);
+                $customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $featuredImageID);
             } else {
-                $customPostMediaTypeAPI->removeFeaturedImage($customPostID);
+                $customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
             }
         }
     }

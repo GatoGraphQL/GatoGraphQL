@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeAPIInterface:
-        class: \PoPSchema\CustomPostMediaMutationsWP\TypeAPIs\CustomPostMediaTypeAPI
+    PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface:
+        class: \PoPSchema\CustomPostMediaMutationsWP\TypeAPIs\CustomPostMediaTypeMutationAPI

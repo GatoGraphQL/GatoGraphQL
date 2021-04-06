@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeAPIFacade;
+use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
@@ -17,8 +16,8 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
     public function execute(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
-        $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();
-        $customPostMediaTypeAPI->removeFeaturedImage($customPostID);
+        $customPostMediaTypeMutationAPI = CustomPostMediaTypeMutationAPIFacade::getInstance();
+        $customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
         return $customPostID;
     }
 
