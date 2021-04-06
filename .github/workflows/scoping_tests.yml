@@ -31,16 +31,18 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=plugin_config_entries::$(vendor/bin/monorepo-builder plugin-config-entries-json)"
+                    echo "::set-output name=plugin_config_entries::$(vendor/bin/monorepo-builder plugin-config-entries-json --scoped-only)"
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 
     main:
-        defaults:
-            run:
-                working-directory: layers/GraphQLAPIForWP/plugins/graphql-api-for-wp
-        name: Scope the plugin code via PHP-Scoper, and execute tests
+        name: Scope the release code via PHP-Scoper, and execute tests
+        needs: provide_data
         runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -62,11 +64,11 @@ jobs:
             -   name: Localize package paths
                 run: |
                     vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
-                    vendor/bin/monorepo-builder localize-composer-paths layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json --ansi
-                working-directory: .
+                    vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
             -   name: Install plugin dependencies for PROD
                 run: composer install --no-dev --no-progress --no-interaction --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Install PHP-Scoper
                 run: |
@@ -77,15 +79,15 @@ jobs:
             # If the scoped results correspond to vendor/ only, we should do "--output-dir ../../../../build-prefixed/vendor"
             -   name: Scope plugin into separate folder
                 run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Copy scoped code back into plugin
-                run: rsync -av build-prefixed/ layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/ --quiet
-                working-directory: .
+                run: rsync -av build-prefixed/ ${{ matrix.pluginConfig.path }} --quiet
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Run Rector on the scoped code
-                run: vendor/bin/rector process --config=layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-test-scoping.php --ansi
-                working-directory: .
+                run: vendor/bin/rector process --config=${{ matrix.pluginConfig.path }}/rector-test-scoping.php --ansi
 
