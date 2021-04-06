@@ -9,7 +9,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface CustomPostTypeAPIInterface
+interface CustomPostTypeMutationAPIInterface
 {
     /**
      * @param array<string, mixed> $data

@@ -16,7 +16,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
-use PoPSchema\CustomPostMutations\Facades\CustomPostTypeAPIFacade as MutationCustomPostTypeAPIFacade;
+use PoPSchema\CustomPostMutations\Facades\CustomPostTypeMutationAPIFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\CustomPosts\Types\Status;
 
@@ -186,10 +186,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check that the user has access to the edited custom post
-        $mutationCustomPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
+        $customPostTypeMutationAPI = CustomPostTypeMutationAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         $userID = $vars['global-userstate']['current-user-id'];
-        if (!$mutationCustomPostTypeAPI->canUserEditCustomPost($userID, $customPostID)) {
+        if (!$customPostTypeMutationAPI->canUserEditCustomPost($userID, $customPostID)) {
             $errors[] = sprintf(
                 $translationAPI->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
                 $customPostID
@@ -253,8 +253,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function executeUpdateCustomPost(array $data): string | int | null | Error
     {
-        $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->updateCustomPost($data);
+        $customPostTypeMutationAPI = CustomPostTypeMutationAPIFacade::getInstance();
+        return $customPostTypeMutationAPI->updateCustomPost($data);
     }
 
     // @TODO: Migrate when package "Categories" is completed
@@ -328,8 +328,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function executeCreateCustomPost(array $data): string | int | null | Error
     {
-        $customPostTypeAPI = MutationCustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->createCustomPost($data);
+        $customPostTypeMutationAPI = CustomPostTypeMutationAPIFacade::getInstance();
+        return $customPostTypeMutationAPI->createCustomPost($data);
     }
 
     /**
