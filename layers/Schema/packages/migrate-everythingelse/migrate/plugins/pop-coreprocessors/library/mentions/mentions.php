@@ -232,7 +232,7 @@ class PoP_Mentions
         } else {
             $content = sprintf(
                 '<a class="hashtagger-tag" href="%s">%s</a>',
-                $postTagTypeAPI->getTagLink($cmstagresolver->getTagID($tag)),
+                $postTagTypeAPI->getTagURL($cmstagresolver->getTagID($tag)),
                 $match[0]
             );
         }

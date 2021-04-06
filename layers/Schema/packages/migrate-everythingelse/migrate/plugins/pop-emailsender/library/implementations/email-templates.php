@@ -182,7 +182,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $tag = $postTagTypeAPI->getTag($tag_id);
-        $tag_url = $postTagTypeAPI->getTagLink($tag_id);
+        $tag_url = $postTagTypeAPI->getTagURL($tag_id);
         $tagname_html = sprintf(
             '<h3 style="display: block;"><a href="%s">%s</a></h3>',
             $tag_url,

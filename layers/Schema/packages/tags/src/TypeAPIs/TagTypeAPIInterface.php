@@ -16,19 +16,19 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      */
     public function isInstanceOfTagType(object $object): bool;
 
-    public function getCustomPostTags($post_id, array $query = [], array $options = []): array;
-    public function getCustomPostTagCount($post_id, array $query = [], array $options = []): int;
-    public function getTag($tag_id);
-    public function getTagByName($tag_name);
-    public function getTags($query, array $options = []): array;
+    public function getCustomPostTags(string | int $customPostID, array $query = [], array $options = []): array;
+    public function getCustomPostTagCount(string | int $customPostID, array $query = [], array $options = []): int;
+    public function getTag(string | int $tagID): object;
+    public function getTagByName(string $tagName): object;
+    public function getTags(array $query, array $options = []): array;
     public function getTagCount(array $query = [], array $options = []): int;
-    public function getTagLink($tag_id);
-    public function getTagName($tagObjectOrID);
-    public function getTagBase();
-    public function setPostTags($post_id, array $tags, bool $append = false);
+    public function getTagURL(string | int $tagID): string;
+    public function getTagName(string | int | object $tagObjectOrID): string;
+    public function getTagBase(): string;
+    public function setPostTags(string | int $customPostID, array $tags, bool $append = false);
 
-    public function getTagSlug($tag);
-    public function getTagDescription($tag);
-    public function getTagItemCount($tag);
-    public function getTagID($tag);
+    public function getTagSlug(string | int | object $tagObjectOrID): string;
+    public function getTagDescription(string | int | object $tagObjectOrID): string;
+    public function getTagItemCount(string | int | object $tagObjectOrID): int;
+    public function getTagID(object $tag): string | int;
 }

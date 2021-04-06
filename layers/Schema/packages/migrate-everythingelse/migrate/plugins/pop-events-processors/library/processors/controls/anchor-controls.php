@@ -78,7 +78,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 );
 
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $url = $postTagTypeAPI->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $postTagTypeAPI->getTagURL($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 
