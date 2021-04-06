@@ -754,6 +754,9 @@ class PluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
                 \PoPSchema\CustomPostMediaMutations\Component::class,
             ],
+            SchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
+                \PoPSchema\PostTagMutations\Component::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPSchema\CommentMutations\Component::class,
             ],
