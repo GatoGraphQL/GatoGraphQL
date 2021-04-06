@@ -12,4 +12,5 @@ use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     public function hasCategory($catObjectOrID, $post_id);
+    public function getCategoryPath($category_id);
 }
