@@ -14,7 +14,7 @@ use PoPSchema\PostTagMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
-class CustomPostFieldResolver extends AbstractDBDataFieldResolver
+class PostFieldResolver extends AbstractDBDataFieldResolver
 {
     function __construct(protected PostTagTypeResolver $postTagTypeResolver)
     {
