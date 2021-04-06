@@ -12,9 +12,12 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 use PoPSchema\PostTagMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
 class PostMutationResolverHooks extends AbstractHookSet
@@ -66,11 +69,17 @@ class PostMutationResolverHooks extends AbstractHookSet
 
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
-        $postTagTypeAPI = PostTagTypeMutationAPIFacade::getInstance();
-        if (isset($form_data[MutationInputProperties::TAG_IDS])) {
-            $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
-            $append = $form_data[MutationInputProperties::APPEND] ?? false;
-            $postTagTypeAPI->setTags($customPostID, $postTagIDs, $append);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($customPostID) !== $postTypeAPI->getPostCustomPostType()) {
+            return;
         }
+        if (!isset($form_data[MutationInputProperties::TAG_IDS])) {
+            return;
+        }
+        $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
+        $append = $form_data[MutationInputProperties::APPEND] ?? false;
+        $postTagTypeMutationAPI = PostTagTypeMutationAPIFacade::getInstance();
+        $postTagTypeMutationAPI->setTags($customPostID, $postTagIDs, $append);
     }
 }
