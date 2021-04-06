@@ -29,15 +29,15 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return ($object instanceof WP_Taxonomy) && $object->hierarchical == true;
     }
 
+    public function getCategoryID(object $cat): string | int
+    {
+        return $cat->term_id;
+    }
+
     abstract protected function getCategoryBaseOption(): string;
 
     abstract protected function getCategoryTaxonomyName(): string;
 
-    public function getCategoryName($category_id)
-    {
-        $category = get_term($category_id, $this->getCategoryTaxonomyName());
-        return $category->name;
-    }
     public function getCategory($category_id)
     {
         return get_category($category_id, $this->getCategoryTaxonomyName());
@@ -46,13 +46,13 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     {
         return get_term_by('name', $category_name, $this->getCategoryTaxonomyName());
     }
-    public function getCustomPostCategories($post_id, array $query = [], array $options = []): array
+    public function getCustomPostCategories(string | int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
 
-        return \wp_get_post_terms($post_id, $this->getCategoryTaxonomyName(), $query);
+        return \wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
     }
-    public function getCustomPostCategoryCount($post_id, $query = [], array $options = []): int
+    public function getCustomPostCategoryCount(string | int $customPostID, array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
@@ -66,7 +66,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = \wp_get_post_terms($post_id, $this->getCategoryTaxonomyName(), $query);
+        $categories = \wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         return count($categories);
     }
     public function getCategoryCount(array $query = [], array $options = []): int
@@ -226,23 +226,34 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // {
     //     return get_cat_name($cat_id);
     // }
-    public function getCategoryParent($cat_id)
+
+    protected function getCategoryFromObjectOrID(string | int | object $catObjectOrID): object
     {
-        $category = get_category($cat_id);
+        return is_object($catObjectOrID) ?
+            $catObjectOrID
+            : \get_term($catObjectOrID, $this->getCategoryTaxonomyName());
+    }
+
+    public function getCategorySlug(string | int | object $catObjectOrID): string
+    {
+        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        return $category->slug;
+    }
+
+    public function getCategoryName(string | int | object $catObjectOrID): string
+    {
+        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        return $category->name;
+    }
+
+    public function getCategoryParentID(string | int | object $catObjectOrID): string | int
+    {
+        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         // If it has no parent, it is assigned 0. In that case, return null
         if ($parent = $category->parent) {
             return $parent;
         }
         return null;
-    }
-    public function getCategorySlug($catObjectOrID)
-    {
-        if (!is_object($catObjectOrID)) {
-            $category = get_category($catObjectOrID);
-        } else {
-            $category = $catObjectOrID;
-        }
-        return $category->slug;
     }
 
     public function getCategoryPath($category_id)
@@ -270,11 +281,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     //     return get_term_link($cat->term_id, 'category');
     // }
 
-
-    public function getCategoryID($cat)
-    {
-        return $cat->term_id;
-    }
     public function getCategoryDescription($cat)
     {
         return $cat->description;
