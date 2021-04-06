@@ -272,10 +272,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return substr($category_path, strlen($termlink));
     }
 
-    public function hasCategory($cat_id, $post_id)
-    {
-        return has_category($cat_id, $post_id);
-    }
     // public function getCategoryURL($cat)
     // {
     //     return get_term_link($cat->term_id, 'category');
