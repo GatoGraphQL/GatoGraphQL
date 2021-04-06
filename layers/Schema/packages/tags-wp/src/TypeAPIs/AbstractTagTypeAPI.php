@@ -111,6 +111,14 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // Accept field atts to filter the API fields
         $this->maybeFilterDataloadQueryArgs($query, $options);
 
+        if (isset($query['hide-empty'])) {
+            $query['hide_empty'] = $query['hide-empty'];
+            unset($query['hide-empty']);
+        } else {
+            // By default: do not hide empty tags
+            $query['hide_empty'] = false;
+        }
+
         // Convert the parameters
         if (isset($query['include'])) {
             // Transform from array to string
