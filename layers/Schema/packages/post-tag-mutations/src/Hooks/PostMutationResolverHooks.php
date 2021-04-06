@@ -52,7 +52,7 @@ class PostMutationResolverHooks extends AbstractHookSet
             return $fieldArgs;
         }
         $fieldArgs[] = [
-            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::POST_TAG_IDS,
+            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAG_IDS,
             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                 $this->translationAPI->__('The IDs of the tags (of type %s)', 'custompost-mutations'),
@@ -65,9 +65,9 @@ class PostMutationResolverHooks extends AbstractHookSet
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        if (isset($form_data[MutationInputProperties::POST_TAG_IDS])) {
-            $postTagIDs = $form_data[MutationInputProperties::POST_TAG_IDS];
-            $append = $form_data[MutationInputProperties::APPEND_POST_TAGS] ?? false;
+        if (isset($form_data[MutationInputProperties::TAG_IDS])) {
+            $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
+            $append = $form_data[MutationInputProperties::APPEND] ?? false;
             $postTagTypeAPI->setTags($customPostID, $postTagIDs, $append);
         }
     }

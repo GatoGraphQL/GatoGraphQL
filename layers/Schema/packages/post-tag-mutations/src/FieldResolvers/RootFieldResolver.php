@@ -67,7 +67,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::POST_TAG_IDS,
+                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAG_IDS,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                             $translationAPI->__('The IDs of the tags, of type \'%s\'', 'post-tag-mutations'),
@@ -76,7 +76,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::APPEND_POST_TAGS,
+                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::APPEND,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Append the tags to the post?', 'post-tag-mutations'),
                         SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,

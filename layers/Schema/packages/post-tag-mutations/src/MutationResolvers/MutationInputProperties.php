@@ -7,6 +7,6 @@ namespace PoPSchema\PostTagMutations\MutationResolvers;
 class MutationInputProperties
 {
     public const POST_ID = 'postID';
-    public const POST_TAG_IDS = 'postTagIDs';
-    public const APPEND_POST_TAGS = 'appendPostTags';
+    public const TAG_IDS = 'tagIDs';
+    public const APPEND = 'append';
 }
