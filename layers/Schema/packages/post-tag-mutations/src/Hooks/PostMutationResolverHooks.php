@@ -78,8 +78,7 @@ class PostMutationResolverHooks extends AbstractHookSet
             return;
         }
         $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
-        $append = $form_data[MutationInputProperties::APPEND] ?? false;
         $postTagTypeMutationAPI = PostTagTypeMutationAPIFacade::getInstance();
-        $postTagTypeMutationAPI->setTags($customPostID, $postTagIDs, $append);
+        $postTagTypeMutationAPI->setTags($customPostID, $postTagIDs, false);
     }
 }
