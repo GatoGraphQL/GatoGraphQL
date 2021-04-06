@@ -6,7 +6,7 @@ namespace PoPSchema\PostTagMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\PostTagMutations\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 class SetTagsOnPostMutationResolver extends AbstractMutationResolver
@@ -18,7 +18,7 @@ class SetTagsOnPostMutationResolver extends AbstractMutationResolver
         $postID = $form_data[MutationInputProperties::POST_ID];
         $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
         $append = $form_data[MutationInputProperties::APPEND];
-        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        $postTagTypeAPI = PostTagTypeMutationAPIFacade::getInstance();
         $postTagTypeAPI->setTags($postID, $postTagIDs, $append);
         return $postID;
     }

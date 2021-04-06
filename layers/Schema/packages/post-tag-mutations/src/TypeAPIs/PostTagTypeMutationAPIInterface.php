@@ -7,7 +7,7 @@ namespace PoPSchema\PostTagMutations\TypeAPIs;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface PostTagTypeAPIInterface
+interface PostTagTypeMutationAPIInterface
 {
     public function setTags(int | string $postID, array $tagIDs, bool $append = false): void;
 }

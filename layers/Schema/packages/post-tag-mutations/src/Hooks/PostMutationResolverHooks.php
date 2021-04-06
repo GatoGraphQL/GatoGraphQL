@@ -13,7 +13,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\PostTagMutations\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 use PoPSchema\PostTagMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
@@ -66,7 +66,7 @@ class PostMutationResolverHooks extends AbstractHookSet
 
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
-        $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
+        $postTagTypeAPI = PostTagTypeMutationAPIFacade::getInstance();
         if (isset($form_data[MutationInputProperties::TAG_IDS])) {
             $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
             $append = $form_data[MutationInputProperties::APPEND] ?? false;
