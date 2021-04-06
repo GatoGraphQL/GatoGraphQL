@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/post-tag-mutations": "^0.8",
-        "pop-schema/post-mutations-wp": "^0.8",
+        "pop-schema/custompost-mutations-wp": "^0.8",
         "pop-schema/post-tags-wp": "^0.8",
         "pop-schema/user-state-wp": "^0.8"
     },
