@@ -8,12 +8,12 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeAPIInterface;
+use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class UserStateTypeAPI implements UserStateTypeAPIInterface
+class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     /**
      * @return mixed Result or Error

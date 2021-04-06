@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeAPIFacade;
+use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
@@ -18,8 +17,8 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $mediaItemID = $form_data[MutationInputProperties::MEDIA_ITEM_ID];
-        $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();
-        $customPostMediaTypeAPI->setFeaturedImage($customPostID, $mediaItemID);
+        $customPostMediaTypeMutationAPI = CustomPostMediaTypeMutationAPIFacade::getInstance();
+        $customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 

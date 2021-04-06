@@ -6,13 +6,13 @@ namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
-use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CustomPostTypeAPI implements CustomPostTypeAPIInterface
+class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {

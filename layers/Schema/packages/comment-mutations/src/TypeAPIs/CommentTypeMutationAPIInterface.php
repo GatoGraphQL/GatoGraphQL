@@ -9,7 +9,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface CommentTypeAPIInterface
+interface CommentTypeMutationAPIInterface
 {
     public function insertComment(array $comment_data): string | int | Error;
 }

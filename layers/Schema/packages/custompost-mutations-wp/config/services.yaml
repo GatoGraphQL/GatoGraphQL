@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeAPIInterface:
-        class: \PoPSchema\CustomPostMutationsWP\TypeAPIs\CustomPostTypeAPI
+    PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface:
+        class: \PoPSchema\CustomPostMutationsWP\TypeAPIs\CustomPostTypeMutationAPI
 
     PoPSchema\CustomPostMutationsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'

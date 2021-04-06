@@ -10,7 +10,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoPSchema\UserStateMutations\Facades\UserStateTypeAPIFacade;
+use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 
 class LoginMutationResolver extends AbstractMutationResolver
@@ -46,7 +46,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         // If the user is already logged in, then return the error
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
-        $userStateTypeAPI = UserStateTypeAPIFacade::getInstance();
+        $userStateTypeMutationAPI = UserStateTypeMutationAPIFacade::getInstance();
 
         $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
         $pwd = $form_data[MutationInputProperties::PASSWORD];
@@ -71,7 +71,7 @@ class LoginMutationResolver extends AbstractMutationResolver
             'password' => $pwd,
             'remember' => true,
         );
-        $loginResult = $userStateTypeAPI->login($credentials);
+        $loginResult = $userStateTypeMutationAPI->login($credentials);
 
         if (GeneralUtils::isError($loginResult)) {
             return $loginResult;

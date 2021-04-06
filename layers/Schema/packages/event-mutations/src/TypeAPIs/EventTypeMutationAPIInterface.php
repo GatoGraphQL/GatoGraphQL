@@ -7,7 +7,7 @@ namespace PoPSchema\EventMutations\TypeAPIs;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface EventMutationTypeAPIInterface
+interface EventTypeMutationAPIInterface
 {
     public function populate(object &$event, array $post_data): void;
 }
