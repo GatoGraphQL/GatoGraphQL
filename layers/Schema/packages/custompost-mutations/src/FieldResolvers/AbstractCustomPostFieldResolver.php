@@ -41,7 +41,12 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     {
         switch ($fieldName) {
             case 'update':
-                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs($typeResolver, $fieldName, false);
+                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs(
+                    $typeResolver,
+                    $fieldName,
+                    false,
+                    $this->resolveFieldTypeResolverClass($typeResolver, $fieldName)
+                );
         }
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }

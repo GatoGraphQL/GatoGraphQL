@@ -22,7 +22,8 @@ class SchemaDefinitionHelpers
     public static function getCreateUpdateCustomPostSchemaFieldArgs(
         TypeResolverInterface $typeResolver,
         string $fieldName,
-        bool $addCustomPostID
+        bool $addCustomPostID,
+        ?string $entityTypeResolverClass = null
     ): array {
         $key = get_class($typeResolver) . '-' . $fieldName;
         if (!isset(self::$schemaFieldArgsCache[$key])) {
@@ -77,7 +78,8 @@ class SchemaDefinitionHelpers
                 self::HOOK_UPDATE_SCHEMA_FIELD_ARGS,
                 $schemaFieldDefinition,
                 $typeResolver,
-                $fieldName
+                $fieldName,
+                $entityTypeResolverClass
             );
         }
         return self::$schemaFieldArgsCache[$key];

@@ -12,6 +12,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTagMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
@@ -32,7 +33,7 @@ class PostMutationResolverHooks extends AbstractHookSet
             SchemaDefinitionHelpers::HOOK_UPDATE_SCHEMA_FIELD_ARGS,
             array($this, 'maybeAddSchemaFieldArgs'),
             10,
-            3
+            4
         );
         $this->hooksAPI->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
@@ -45,10 +46,11 @@ class PostMutationResolverHooks extends AbstractHookSet
     public function maybeAddSchemaFieldArgs(
         array $fieldArgs,
         TypeResolverInterface $typeResolver,
-        string $fieldName
+        string $fieldName,
+        ?string $entityTypeResolverClass
     ): array {
         // Only for Posts, not for other CPTs
-        if ($this->postTagTypeResolver !== $typeResolver) {
+        if ($entityTypeResolverClass !== PostTypeResolver::class) {
             return $fieldArgs;
         }
         $fieldArgs[] = [
