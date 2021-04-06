@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\UserState\State\ApplicationStateUtils;
-use PoPSchema\UserStateMutations\Facades\UserStateTypeAPIFacade;
+use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
 
 class LogoutMutationResolver extends AbstractMutationResolver
 {
@@ -26,8 +25,8 @@ class LogoutMutationResolver extends AbstractMutationResolver
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
-        $userStateTypeAPI = UserStateTypeAPIFacade::getInstance();
-        $userStateTypeAPI->logout();
+        $userStateTypeMutationAPI = UserStateTypeMutationAPIFacade::getInstance();
+        $userStateTypeMutationAPI->logout();
 
         // Modify the routing-state with the newly logged in user info
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);

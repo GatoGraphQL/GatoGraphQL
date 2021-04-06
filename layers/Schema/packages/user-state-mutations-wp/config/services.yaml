@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeAPIInterface:
-        class: \PoPSchema\UserStateMutationsWP\TypeAPIs\UserStateTypeAPI
+    PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface:
+        class: \PoPSchema\UserStateMutationsWP\TypeAPIs\UserStateTypeMutationAPI

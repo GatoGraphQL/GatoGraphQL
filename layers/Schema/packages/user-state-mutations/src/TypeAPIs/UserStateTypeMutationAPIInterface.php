@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateMutations\TypeAPIs;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface UserStateTypeAPIInterface
+interface UserStateTypeMutationAPIInterface
 {
     /**
      * @return mixed Result or Error
