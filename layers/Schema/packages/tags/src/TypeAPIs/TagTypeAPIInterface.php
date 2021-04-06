@@ -29,6 +29,4 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
 
     public function getCustomPostTags(string | int $customPostID, array $query = [], array $options = []): array;
     public function getCustomPostTagCount(string | int $customPostID, array $query = [], array $options = []): int;
-
-    public function setPostTags(string | int $customPostID, array $tags, bool $append = false);
 }

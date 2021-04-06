@@ -12,7 +12,6 @@ use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -160,13 +159,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return get_term_link($tagID, $this->getTagTaxonomyName());
     }
-
-    public function setPostTags(string | int $customPostID, array $tags, bool $append = false)
-    {
-        return wp_set_post_terms($customPostID, $tags, $this->getTagTaxonomyName(), $append);
-    }
-
-
 
     public function getTagSlug(string | int | object $tagObjectOrID): string
     {
