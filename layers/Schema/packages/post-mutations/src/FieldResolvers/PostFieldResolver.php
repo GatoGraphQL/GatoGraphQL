@@ -8,7 +8,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPSchema\PostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver
