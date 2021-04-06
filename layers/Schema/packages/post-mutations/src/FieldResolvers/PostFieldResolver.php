@@ -27,15 +27,6 @@ class PostFieldResolver extends AbstractCustomPostFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        switch ($fieldName) {
-            case 'update':
-                return SchemaDefinitionHelpers::getCreateUpdatePostSchemaFieldArgs($typeResolver, $fieldName, false);
-        }
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
-    }
-
     public function resolveFieldMutationResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {
