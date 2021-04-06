@@ -15,7 +15,7 @@ env:
 
 jobs:
     provide_data:
-        name: Provide configuration to generate plugins
+        name: Provide configuration of scoped releases
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 
     main:
-        name: Scope the release code via PHP-Scoper, and execute tests
+        name: Scope the release via PHP-Scoper, and execute tests
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:
@@ -66,25 +66,25 @@ jobs:
                     vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
                     vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
-            -   name: Install plugin dependencies for PROD
+            -   name: Install release dependencies for PROD
                 run: composer install --no-dev --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            -   name: Install PHP-Scoper
+            -   name: Install PHP-Scoper (globally)
                 run: |
                     composer global config minimum-stability dev
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
 
             # If the scoped results correspond to vendor/ only, we should do "--output-dir ../../../../build-prefixed/vendor"
-            -   name: Scope plugin into separate folder
+            -   name: Scope code into separate folder
                 run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            -   name: Copy scoped code back into plugin
+            -   name: Copy scoped code back into original location
                 run: rsync -av build-prefixed/ ${{ matrix.pluginConfig.path }} --quiet
 
-            -   name: Regenerate autoloader
+            -   name: Regenerate autoloader for PROD
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
