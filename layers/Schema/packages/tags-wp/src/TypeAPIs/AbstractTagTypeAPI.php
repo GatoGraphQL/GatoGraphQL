@@ -87,17 +87,19 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         unset($query['offset']);
 
         // Resolve and count
-        $tags = get_tags($query, ['taxonomy' => $this->getTagTaxonomyName()]);
+        $tags = get_tags($query);
         return count($tags);
     }
     public function getTags(array $query, array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
-        return get_tags($query, ['taxonomy' => $this->getTagTaxonomyName()]);
+        return get_tags($query);
     }
 
     public function convertTagsQuery(array $query, array $options = []): array
     {
+        $query['taxonomy'] = $this->getTagTaxonomyName();
+
         if ($return_type = $options['return-type'] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';
