@@ -10,7 +10,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CommentMutations\Facades\CommentTypeAPIFacade;
+use PoPSchema\CommentMutations\Facades\CommentTypeMutationAPIFacade;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
@@ -79,8 +79,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function insertComment(array $comment_data): string | int | Error
     {
-        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        return $commentTypeAPI->insertComment($comment_data);
+        $commentTypeMutationAPI = CommentTypeMutationAPIFacade::getInstance();
+        return $commentTypeMutationAPI->insertComment($comment_data);
     }
 
     public function execute(array $form_data): mixed

@@ -6,12 +6,12 @@ namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CommentMutations\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CommentTypeAPI implements CommentTypeAPIInterface
+class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
 {
     public function insertComment(array $comment_data): string | int | Error
     {
