@@ -69,7 +69,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         $categories = \wp_get_post_terms($post_id, $this->getCategoryTaxonomyName(), $query);
         return count($categories);
     }
-    public function getCategoryCount($query = [], $options = []): int
+    public function getCategoryCount(array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `get_categories`,
@@ -86,7 +86,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         $categories = get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
         return count($categories);
     }
-    public function getCategories(array $query, $options = []): array
+    public function getCategories(array $query, array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
         return get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
