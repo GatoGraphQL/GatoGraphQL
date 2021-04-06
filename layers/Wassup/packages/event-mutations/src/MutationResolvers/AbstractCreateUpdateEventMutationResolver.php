@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EventMutations\MutationResolvers;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
+use PoPSchema\EventMutations\Facades\EventTypeMutationAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
@@ -57,8 +56,8 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
 
     protected function populate(\EM_Event &$EM_Event, array $post_data): void
     {
-        $eventMutationTypeAPI = EventMutationTypeAPIFacade::getInstance();
-        $eventMutationTypeAPI->populate($EM_Event, $post_data);
+        $eventTypeMutationAPI = EventTypeMutationAPIFacade::getInstance();
+        $eventTypeMutationAPI->populate($EM_Event, $post_data);
     }
 
     protected function save(\EM_Event &$EM_Event, array $post_data): string | int
