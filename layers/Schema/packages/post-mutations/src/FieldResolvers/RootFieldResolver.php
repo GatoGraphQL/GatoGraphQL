@@ -58,9 +58,17 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'createPost':
-                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs($typeResolver, $fieldName, false);
             case 'updatePost':
-                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs($typeResolver, $fieldName, true);
+                $addCustomPostIDConfig = [
+                    'createPost' => false,
+                    'updatePost' => true,
+                ];
+                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs(
+                    $typeResolver,
+                    $fieldName,
+                    $addCustomPostIDConfig[$fieldName],
+                    PostTypeResolver::class
+                );
         }
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }

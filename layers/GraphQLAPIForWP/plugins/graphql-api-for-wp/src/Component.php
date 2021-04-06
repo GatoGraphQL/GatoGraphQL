@@ -42,6 +42,7 @@ class Component extends AbstractPluginComponent
             \PoPSchema\CustomPostMutationsWP\Component::class,
             \PoPSchema\PostMutations\Component::class,
             \PoPSchema\CustomPostMediaMutationsWP\Component::class,
+            \PoPSchema\PostTagMutationsWP\Component::class,
             \PoPSchema\CommentMutationsWP\Component::class,
             \PoPSchema\UserStateMutationsWP\Component::class,
             \PoPSchema\BasicDirectives\Component::class,

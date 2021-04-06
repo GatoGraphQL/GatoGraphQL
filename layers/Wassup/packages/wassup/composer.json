@@ -41,6 +41,7 @@
         "pop-schema/usermeta-wp": "^0.8",
         "pop-schema/post-mutations": "^0.8",
         "pop-schema/custompostmedia-mutations-wp": "^0.8",
+        "pop-schema/post-tag-mutations-wp": "^0.8",
         "pop-schema/comment-mutations-wp": "^0.8",
         "pop-schema/user-state-mutations-wp": "^0.8",
         "pop-schema/categories-wp": "^0.8",

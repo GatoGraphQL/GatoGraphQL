@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface:
+        class: \PoPSchema\PostTagMutationsWP\TypeAPIs\PostTagTypeMutationAPI

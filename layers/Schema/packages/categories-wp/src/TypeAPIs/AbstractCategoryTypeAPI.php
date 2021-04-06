@@ -83,17 +83,19 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
+        $categories = get_categories($query);
         return count($categories);
     }
     public function getCategories(array $query, array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
-        return get_categories($query, ['taxonomy' => $this->getCategoryTaxonomyName()]);
+        return get_categories($query);
     }
 
     public function convertCategoriesQuery(array $query, array $options = []): array
     {
+        $query['taxonomy'] = $this->getCategoryTaxonomyName();
+
         if ($return_type = $options['return-type'] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
                 $query['fields'] = 'ids';

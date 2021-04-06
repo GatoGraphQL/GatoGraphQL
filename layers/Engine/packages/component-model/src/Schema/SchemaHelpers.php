@@ -16,7 +16,7 @@ class SchemaHelpers
      * Only validate that if the key is missing, and not if the value is empty,
      * because empty values could be allowed.
      *
-     * Eg: `setTagsOnPost(tagIDs:[])` where `tagIDs` is mandatory
+     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
      */
     public static function getMissingFieldArgs(array $fieldArgProps, array $fieldArgs): array
     {

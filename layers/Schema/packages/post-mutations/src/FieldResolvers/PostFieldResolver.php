@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver;
+use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver
 {

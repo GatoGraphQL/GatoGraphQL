@@ -48,6 +48,8 @@ includes:
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
     - layers/Schema/packages/post-categories-wp/phpstan.neon.dist
     - layers/Schema/packages/post-mutations/phpstan.neon.dist
+    - layers/Schema/packages/post-tag-mutations/phpstan.neon.dist
+    - layers/Schema/packages/post-tag-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/post-tags-wp/phpstan.neon.dist
     - layers/Schema/packages/queriedobject/phpstan.neon.dist
     - layers/Schema/packages/queriedobject-wp/phpstan.neon.dist

@@ -99,11 +99,15 @@ services:
         - >-
           ../../layers/Schema/packages/custompostmedia:/app/vendor/pop-schema/custompostmedia
         - >-
+          ../../layers/Schema/packages/custompostmedia-wp:/app/vendor/pop-schema/custompostmedia-wp
+        - >-
           ../../layers/Schema/packages/custompostmedia-mutations:/app/vendor/pop-schema/custompostmedia-mutations
         - >-
           ../../layers/Schema/packages/custompostmedia-mutations-wp:/app/vendor/pop-schema/custompostmedia-mutations-wp
         - >-
-          ../../layers/Schema/packages/custompostmedia-wp:/app/vendor/pop-schema/custompostmedia-wp
+          ../../layers/Schema/packages/post-tag-mutations:/app/vendor/pop-schema/post-tag-mutations
+        - >-
+          ../../layers/Schema/packages/post-tag-mutations-wp:/app/vendor/pop-schema/post-tag-mutations-wp
         - >-
           ../../layers/Schema/packages/custompostmeta:/app/vendor/pop-schema/custompostmeta
         - >-

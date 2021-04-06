@@ -19,7 +19,6 @@ use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationR
 use PoPSchema\CustomPostMutations\Facades\CustomPostTypeAPIFacade as MutationCustomPostTypeAPIFacade;
 use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {

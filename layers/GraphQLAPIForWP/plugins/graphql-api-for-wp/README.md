@@ -268,6 +268,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td>Schema Custom Post Mutations</td><td>Base functionality to mutate custom posts</td></tr>
 <tr><td>Schema Post Mutations</td><td>Execute mutations on podyd</td></tr>
 <tr><td>Schema Custom Post Media Mutations</td><td>Execute mutations concerning media items on custom posts</td></tr>
+<tr><td>Schema Post Tag Mutations</td><td>Add tags to posts</td></tr>
 <tr><td>Schema Comment Mutations</td><td>Create comments</td></tr>
 </tbody>
 </table>
