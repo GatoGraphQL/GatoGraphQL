@@ -14,14 +14,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTagMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(protected PostTagTypeResolver $postTagTypeResolver)
-    {
-    }
-
     public function getClassesToAttachTo(): array
     {
         return array(RootTypeResolver::class);
@@ -67,12 +62,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAG_IDS,
-                        SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The IDs of the tags, of type \'%s\'', 'post-tag-mutations'),
-                            $this->postTagTypeResolver->getTypeName()
-                        ),
+                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
+                        SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The tags to set', 'post-tag-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [

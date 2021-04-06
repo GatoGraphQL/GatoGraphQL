@@ -8,8 +8,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -17,19 +15,9 @@ use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 use PoPSchema\PostTagMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
 class PostMutationResolverHooks extends AbstractHookSet
 {
-    public function __construct(
-        HooksAPIInterface $hooksAPI,
-        TranslationAPIInterface $translationAPI,
-        protected PostTagTypeResolver $postTagTypeResolver
-    ) {
-        parent::__construct($hooksAPI, $translationAPI);
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -57,12 +45,9 @@ class PostMutationResolverHooks extends AbstractHookSet
             return $fieldArgs;
         }
         $fieldArgs[] = [
-            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAG_IDS,
-            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                $this->translationAPI->__('The IDs of the tags (of type %s)', 'custompost-mutations'),
-                $this->postTagTypeResolver->getTypeName()
-            ),
+            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
+            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-mutations'),
         ];
         return $fieldArgs;
     }
@@ -74,11 +59,11 @@ class PostMutationResolverHooks extends AbstractHookSet
         if ($customPostTypeAPI->getCustomPostType($customPostID) !== $postTypeAPI->getPostCustomPostType()) {
             return;
         }
-        if (!isset($form_data[MutationInputProperties::TAG_IDS])) {
+        if (!isset($form_data[MutationInputProperties::TAGS])) {
             return;
         }
-        $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
+        $postTags = $form_data[MutationInputProperties::TAGS];
         $postTagTypeMutationAPI = PostTagTypeMutationAPIFacade::getInstance();
-        $postTagTypeMutationAPI->setTags($customPostID, $postTagIDs, false);
+        $postTagTypeMutationAPI->setTags($customPostID, $postTags, false);
     }
 }

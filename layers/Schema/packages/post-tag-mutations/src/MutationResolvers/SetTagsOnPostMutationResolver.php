@@ -16,10 +16,10 @@ class SetTagsOnPostMutationResolver extends AbstractMutationResolver
     public function execute(array $form_data): mixed
     {
         $postID = $form_data[MutationInputProperties::POST_ID];
-        $postTagIDs = $form_data[MutationInputProperties::TAG_IDS];
+        $postTags = $form_data[MutationInputProperties::TAGS];
         $append = $form_data[MutationInputProperties::APPEND];
         $postTagTypeAPI = PostTagTypeMutationAPIFacade::getInstance();
-        $postTagTypeAPI->setTags($postID, $postTagIDs, $append);
+        $postTagTypeAPI->setTags($postID, $postTags, $append);
         return $postID;
     }
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\TypeAPIs;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
 interface PostTagTypeMutationAPIInterface
 {
-    public function setTags(int | string $postID, array $tagIDs, bool $append = false): void;
+    /**
+     * @param $tags string[]
+     */
+    public function setTags(int | string $postID, array $tags, bool $append = false): void;
 }

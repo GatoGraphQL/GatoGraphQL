@@ -11,8 +11,14 @@ use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
  */
 class PostTagTypeMutationAPI implements PostTagTypeMutationAPIInterface
 {
-    public function setTags(int | string $postID, array $tagIDs, bool $append = false): void
+    /**
+     * Watch out! $tags must be the array of tags as string, not their IDs
+     * Passing the IDs will create a tag with that ID as the name!
+     *
+     * @param $tags string[]
+     */
+    public function setTags(int | string $postID, array $tags, bool $append = false): void
     {
-        \wp_set_post_terms($postID, $tagIDs, 'post_tag', $append);
+        \wp_set_post_terms($postID, $tags, 'post_tag', $append);
     }
 }
