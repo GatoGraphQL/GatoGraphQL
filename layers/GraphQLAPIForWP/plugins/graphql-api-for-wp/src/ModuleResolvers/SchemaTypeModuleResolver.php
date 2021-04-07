@@ -64,6 +64,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_CUSTOMPOST_TYPES = 'custompost-types';
+    public const OPTION_ENTRIES = 'entries';
+    public const OPTION_IS_BLACKLIST = 'is-blacklist';
 
     /**
      * Hooks
@@ -467,6 +469,15 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 self::OPTION_LIST_DEFAULT_LIMIT => 20,
                 self::OPTION_LIST_MAX_LIMIT => 200,
             ],
+            self::SCHEMA_SETTINGS => [
+                self::OPTION_ENTRIES => [
+                    'siteurl',
+                    'home',
+                    'blogname',
+                    'blogdescription',
+                ],
+                self::OPTION_IS_BLACKLIST => false,
+            ],
         ];
         return $defaultValues[$module][$option];
     }
@@ -691,6 +702,36 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 // Fetch all Schema Configurations from the DB
                 Properties::POSSIBLE_VALUES => $possibleValues,
                 Properties::IS_MULTIPLE => true,
+            ];
+        } elseif ($module == self::SCHEMA_SETTINGS) {
+            $option = self::OPTION_ENTRIES;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Settings entries', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('List of all the option names, to either whitelist or blacklist for querying field <code>%s</code>', 'graphql-api'),
+                    'getOption',
+                ),
+                Properties::TYPE => Properties::TYPE_ARRAY,
+            ];
+
+            $option = self::OPTION_IS_BLACKLIST;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Is it a Blacklist?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Are the entries being blacklisted? Otherwise, they are whitelisted.<br/>👉🏽 Blacklist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.<br/>👉🏽 Whitelist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.', 'graphql-api'),
+                    'getOption'
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
 
