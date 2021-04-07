@@ -37,12 +37,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         }
     }
 
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function getCategoryTaxonomy(): ?string
-    // {
-    //     return POP_USERSTANCE_TAXONOMY_STANCE;
-    // }
-
     public function getCustomPostType(): string
     {
         return \POP_USERSTANCE_POSTTYPE_USERSTANCE;

@@ -11,8 +11,8 @@ class MutationInputProperties extends \PoPSchema\CustomPostMutations\MutationRes
     public const VOLUNTEERSNEEDED = 'volunteersneeded';
     public const APPLIESTO = 'appliesto';
 
-    // Watch out! This might be a duplicate with the parent class!
-    // Related message:
-    // @TODO: Migrate when package "Categories" is completed
+    // Watch out! This functionality is duplicated!
+    // Adding categories is handled by custompost-category-mutations
+    // via some hook. Check!
     public const CATEGORIES = 'categories';
 }
