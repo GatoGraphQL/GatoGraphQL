@@ -47,6 +47,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
     public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
     public const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
+    public const SCHEMA_SETTINGS = Plugin::NAMESPACE . '\schema-settings';
     public const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
     public const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
     public const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
@@ -110,6 +111,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_CATEGORIES,
             self::SCHEMA_POST_CATEGORIES,
             self::SCHEMA_MENUS,
+            self::SCHEMA_SETTINGS,
             self::SCHEMA_MEDIA,
             self::SCHEMA_USER_STATE_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
@@ -140,6 +142,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOSTS:
             case self::SCHEMA_MENUS:
+            case self::SCHEMA_SETTINGS:
                 return [
                     [
                         EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
@@ -261,6 +264,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_CATEGORIES => \__('Schema Categories', 'graphql-api'),
             self::SCHEMA_POST_CATEGORIES => \__('Schema Post Categories', 'graphql-api'),
             self::SCHEMA_MENUS => \__('Schema Menus', 'graphql-api'),
+            self::SCHEMA_SETTINGS => \__('Schema Settings', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTS => \__('Schema Custom Posts', 'graphql-api'),
             self::SCHEMA_USER_STATE_MUTATIONS => \__('Schema User State Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Schema Custom Post Mutations', 'graphql-api'),
@@ -335,6 +339,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     \__('menus', 'graphql-api'),
                     $this->menuTypeResolver->getTypeName()
                 );
+            case self::SCHEMA_SETTINGS:
+                return \__('Fetch settings from the site', 'graphql-api');
             case self::SCHEMA_CUSTOMPOSTS:
                 return \__('Base functionality for all custom posts', 'graphql-api');
             case self::SCHEMA_TAGS:
@@ -378,6 +384,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_CATEGORIES:
             case self::SCHEMA_POST_CATEGORIES:
             case self::SCHEMA_MENUS:
+            case self::SCHEMA_SETTINGS:
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
