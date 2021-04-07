@@ -21,31 +21,31 @@ class AppLoader
      *
      * @var string[]
      */
-    protected static $initializedClasses = [];
+    protected static array $initializedClasses = [];
     /**
      * Component in their initialization order
      *
      * @var string[]
      */
-    protected static $orderedComponentClasses = [];
+    protected static array $orderedComponentClasses = [];
     /**
      * Component classes to be initialized
      *
      * @var string[]
      */
-    protected static $componentClassesToInitialize = [];
+    protected static array $componentClassesToInitialize = [];
     /**
      * [key]: Component class, [value]: Configuration
      *
      * @var string[]
      */
-    protected static $componentClassConfiguration = [];
+    protected static array $componentClassConfiguration = [];
     /**
      * List of `Component` class which must not initialize their Schema services
      *
      * @var string[]
      */
-    protected static $skipSchemaComponentClasses = [];
+    protected static array $skipSchemaComponentClasses = [];
 
     /**
      * Add Component classes to be initialized

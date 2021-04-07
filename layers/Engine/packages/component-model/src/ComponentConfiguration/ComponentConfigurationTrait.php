@@ -11,8 +11,8 @@ use PoP\Hooks\Facades\SystemHooksAPIFacade;
  */
 trait ComponentConfigurationTrait
 {
-    protected static $configuration = [];
-    protected static $initialized = [];
+    protected static array $configuration = [];
+    protected static array $initialized = [];
 
     public static function setConfiguration(array $configuration): void
     {

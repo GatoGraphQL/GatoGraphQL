@@ -6,7 +6,7 @@ namespace PoP\Root\Component;
 
 trait CanDisableComponentTrait
 {
-    protected static $enabled;
+    protected static ?bool $enabled = null;
 
     protected static function resolveEnabled(): bool
     {

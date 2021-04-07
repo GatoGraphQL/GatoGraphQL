@@ -8,13 +8,13 @@ use PoPSchema\CustomPosts\Types\Status;
 
 class CustomPostTypeAPIUtils
 {
-    protected static $cmsToPoPPostStatusConversion = [
+    protected static array $cmsToPoPPostStatusConversion = [
         'publish' => Status::PUBLISHED,
         'pending' => Status::PENDING,
         'draft' => Status::DRAFT,
         'trash' => Status::TRASH,
     ];
-    protected static $popToCMSPostStatusConversion;
+    protected static ?array $popToCMSPostStatusConversion = null;
 
     public static function init(): void
     {
