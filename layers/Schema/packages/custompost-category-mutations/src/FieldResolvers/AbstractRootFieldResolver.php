@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -59,6 +60,10 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case $this->getSetCategoriesFieldName():
+                $instanceManager = InstanceManagerFacade::getInstance();
+                $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
+                /** @var TypeResolverInterface */
+                $categoryTypeResolver = $instanceManager->getInstance($categoryTypeResolverClass);
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CUSTOMPOST_ID,
@@ -72,7 +77,10 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The IDs of the categories to set', 'custompost-category-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+                            $translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+                            $categoryTypeResolver->getTypeName()
+                        ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [

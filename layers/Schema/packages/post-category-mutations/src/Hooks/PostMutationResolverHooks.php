@@ -6,6 +6,7 @@ namespace PoPSchema\PostCategoryMutations\Hooks;
 
 use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHooks;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
+use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
@@ -21,6 +22,11 @@ class PostMutationResolverHooks extends AbstractCustomPostMutationResolverHooks
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         return $postTypeAPI->getPostCustomPostType();
+    }
+
+    protected function getCategoryTypeResolverClass(): string
+    {
+        return PostCategoryTypeResolver::class;
     }
 
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface

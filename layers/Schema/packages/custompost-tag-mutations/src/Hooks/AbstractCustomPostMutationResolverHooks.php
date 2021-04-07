@@ -45,7 +45,7 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-mutations'),
+            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
         ];
         return $fieldArgs;
     }
