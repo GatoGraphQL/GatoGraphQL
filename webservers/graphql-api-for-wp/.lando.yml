@@ -123,6 +123,12 @@ services:
         - >-
           ../../layers/Schema/packages/post-tag-mutations-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-tag-mutations-wp
         - >-
+          ../../layers/Schema/packages/custompost-category-mutations:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompost-category-mutations
+        - >-
+          ../../layers/Schema/packages/post-category-mutations:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-category-mutations
+        - >-
+          ../../layers/Schema/packages/post-category-mutations-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-category-mutations-wp
+        - >-
           ../../layers/Schema/packages/custompostmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta
         - >-
           ../../layers/Schema/packages/custompostmeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta-wp

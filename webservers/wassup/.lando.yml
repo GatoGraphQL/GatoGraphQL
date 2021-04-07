@@ -138,6 +138,12 @@ services:
         - >-
           ../../layers/Schema/packages/post-tag-mutations-wp:/app/vendor/pop-schema/post-tag-mutations-wp
         - >-
+          ../../layers/Schema/packages/custompost-category-mutations:/app/vendor/pop-schema/custompost-category-mutations
+        - >-
+          ../../layers/Schema/packages/post-category-mutations:/app/vendor/pop-schema/post-category-mutations
+        - >-
+          ../../layers/Schema/packages/post-category-mutations-wp:/app/vendor/pop-schema/post-category-mutations-wp
+        - >-
           ../../layers/Schema/packages/custompostmeta:/app/vendor/pop-schema/custompostmeta
         - >-
           ../../layers/Schema/packages/custompostmeta-wp:/app/vendor/pop-schema/custompostmeta-wp
