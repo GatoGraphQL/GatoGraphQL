@@ -1,9 +1,9 @@
 {
-    "name": "pop-schema/post-tag-mutations",
+    "name": "pop-schema/custompost-tag-mutations",
     "type": "library",
-    "description": "Add tags to posts",
-    "keywords": ["PoP", "post-tag-mutations"],
-    "homepage": "https://github.com/PoPSchema/post-tag-mutations",
+    "description": "Base functionality to add tags to custom posts",
+    "keywords": ["PoP", "custompost-tag-mutations"],
+    "homepage": "https://github.com/PoPSchema/custompost-tag-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -16,9 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/custompost-tag-mutations": "^0.8",
-        "pop-schema/post-mutations": "^0.8",
-        "pop-schema/post-tags": "^0.8"
+        "pop-schema/custompost-mutations": "^0.8",
+        "pop-schema/tags": "^0.8"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",
@@ -28,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostTagMutations\\": "src"
+            "PoPSchema\\CustomPostTagMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostTagMutations\\": "tests"
+            "PoPSchema\\CustomPostTagMutations\\": "tests"
         }
     },
     "scripts": {
