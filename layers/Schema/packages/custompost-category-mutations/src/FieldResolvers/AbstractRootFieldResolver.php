@@ -70,9 +70,9 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORIES,
+                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The categories to set', 'custompost-category-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The IDs of the categories to set', 'custompost-category-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [

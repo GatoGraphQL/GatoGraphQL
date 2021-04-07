@@ -12,13 +12,10 @@ use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterfac
 class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterface
 {
     /**
-     * Watch out! $categories must be the array of categories as string, not their IDs
-     * Passing the IDs will create a category with that ID as the name!
-     *
-     * @param $categories string[]
+     * @param $categories array<string|int>
      */
-    public function setCategories(int | string $postID, array $categories, bool $append = false): void
+    public function setCategories(int | string $postID, array $categoryIDs, bool $append = false): void
     {
-        \wp_set_post_terms($postID, $categories, 'post_category', $append);
+        \wp_set_post_terms($postID, $categoryIDs, 'category', $append);
     }
 }
