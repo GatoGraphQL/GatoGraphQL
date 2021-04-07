@@ -67,7 +67,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             case 'setCategories':
                 return [
                     [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
+                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORIES,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The categories to set', 'custompost-category-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,

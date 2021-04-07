@@ -12,6 +12,6 @@ class MutationInputProperties
      * (post, event, etc)
      */
     public const CUSTOMPOST_ID = 'id';
-    public const TAGS = 'categories';
+    public const CATEGORIES = 'categories';
     public const APPEND = 'append';
 }

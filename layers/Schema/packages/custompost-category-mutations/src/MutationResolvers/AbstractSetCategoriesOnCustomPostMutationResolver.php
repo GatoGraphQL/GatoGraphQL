@@ -16,7 +16,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     public function execute(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
-        $postCategories = $form_data[MutationInputProperties::TAGS];
+        $postCategories = $form_data[MutationInputProperties::CATEGORIES];
         $append = $form_data[MutationInputProperties::APPEND];
         $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeAPI->setCategories($customPostID, $postCategories, $append);

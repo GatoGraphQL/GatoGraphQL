@@ -43,7 +43,7 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
             return $fieldArgs;
         }
         $fieldArgs[] = [
-            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
+            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORIES,
             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The categories to set', 'custompost-mutations'),
         ];
@@ -59,10 +59,10 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
         if ($customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!isset($form_data[MutationInputProperties::TAGS])) {
+        if (!isset($form_data[MutationInputProperties::CATEGORIES])) {
             return;
         }
-        $postCategories = $form_data[MutationInputProperties::TAGS];
+        $postCategories = $form_data[MutationInputProperties::CATEGORIES];
         $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeMutationAPI->setCategories($customPostID, $postCategories, false);
     }
