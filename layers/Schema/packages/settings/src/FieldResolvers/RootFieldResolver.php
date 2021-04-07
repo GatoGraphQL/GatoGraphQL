@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers;
 
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\Settings\FieldResolvers\AbstractUserFieldResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Settings\TypeResolvers\UserTypeResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Settings\Facades\SettingsTypeAPIFacade;
 
-class RootUserFieldResolver extends AbstractUserFieldResolver
+class RootFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
@@ -24,7 +23,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         return array_merge(
             parent::getFieldNamesToResolve(),
             [
-                'user',
+                'option',
             ]
         );
     }
@@ -33,8 +32,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'user' => $translationAPI->__('User with a specific ID', 'pop-settings'),
-            'settings' => $translationAPI->__('Settings in the current site', 'pop-settings'),
+            'option' => $translationAPI->__('Option saved in the DB', 'pop-settings'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,7 +40,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'user' => SchemaDefinition::TYPE_ID,
+            'option' => SchemaDefinition::TYPE_MIXED,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -52,14 +50,14 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
-            case 'user':
+            case 'option':
                 return array_merge(
                     $schemaFieldArgs,
                     [
                         [
-                            SchemaDefinition::ARGNAME_NAME => 'id',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The user ID', 'pop-settings'),
+                            SchemaDefinition::ARGNAME_NAME => 'name',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The option name', 'pop-settings'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -83,31 +81,16 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmssettingsapi = \PoPSchema\Settings\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
-            case 'user':
-                $query = [
-                    'include' => [$fieldArgs['id']],
-                ];
-                $options = [
-                    'return-type' => ReturnTypes::IDS,
-                ];
-                if ($settings = $cmssettingsapi->getSettings($query, $options)) {
-                    return $settings[0];
+            case 'option':
+                $settingsTypeAPI = SettingsTypeAPIFacade::getInstance();
+                $name = $fieldArgs['name'];
+                if ($value = $settingsTypeAPI->getOption($name)) {
+                    return $value;
                 }
                 return null;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
-
-    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    {
-        switch ($fieldName) {
-            case 'user':
-                return UserTypeResolver::class;
-        }
-
-        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
     }
 }

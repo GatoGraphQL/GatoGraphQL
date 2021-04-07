@@ -11,14 +11,14 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getUserListDefaultLimit;
-    private static $getUserListMaxLimit;
+    private static $getSettingsListDefaultLimit;
+    private static $getSettingsListMaxLimit;
 
-    public static function getUserListDefaultLimit(): ?int
+    public static function getSettingsListDefaultLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::USER_LIST_DEFAULT_LIMIT;
-        $selfProperty = &self::$getUserListDefaultLimit;
+        $selfProperty = &self::$getSettingsListDefaultLimit;
         $defaultValue = 10;
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
@@ -32,11 +32,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getUserListMaxLimit(): ?int
+    public static function getSettingsListMaxLimit(): ?int
     {
         // Define properties
         $envVariable = Environment::USER_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getUserListMaxLimit;
+        $selfProperty = &self::$getSettingsListMaxLimit;
         $defaultValue = -1; // Unlimited
         $callback = [EnvironmentValueHelpers::class, 'toInt'];
 
