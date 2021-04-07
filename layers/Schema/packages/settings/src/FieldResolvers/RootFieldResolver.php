@@ -20,12 +20,9 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getFieldNamesToResolve(): array
     {
-        return array_merge(
-            parent::getFieldNamesToResolve(),
-            [
-                'option',
-            ]
-        );
+        return [
+            'option',
+        ];
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
