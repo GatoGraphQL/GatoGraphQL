@@ -61,6 +61,7 @@ class Component extends AbstractComponent
                 \PoPSchema\UserStateMutationsWP\Component::class,
                 \PoPSchema\PostCategoriesWP\Component::class,
                 \PoPSchema\MenusWP\Component::class,
+                \PoPSchema\SettingsWP\Component::class,
 
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,
