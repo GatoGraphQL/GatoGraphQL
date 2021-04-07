@@ -10,8 +10,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getFromURLSection;
-    private static $getToURLSection;
+    private static ?string $getFromURLSection = null;
+    private static ?string $getToURLSection = null;
 
     public static function getFromURLSection(): ?string
     {

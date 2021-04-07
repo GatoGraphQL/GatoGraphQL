@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getUserListDefaultLimit;
-    private static $getUserListMaxLimit;
+    private static ?int $getUserListDefaultLimit = 10;
+    private static ?int $getUserListMaxLimit = -1;
 
     public static function getUserListDefaultLimit(): ?int
     {

@@ -11,7 +11,7 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $disableRedundantRootTypeMutationFields;
+    private static bool $disableRedundantRootTypeMutationFields = false;
 
     public static function disableRedundantRootTypeMutationFields(): bool
     {

@@ -19,8 +19,8 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
     public const HOOK_REST_FIELDS = __CLASS__ . ':RESTFields';
 
-    private static $restFieldsQuery;
-    private static $restFields;
+    private static ?string $restFieldsQuery = null;
+    private static ?array $restFields = null;
     public static function getRESTFields(): array
     {
         if (is_null(self::$restFields)) {

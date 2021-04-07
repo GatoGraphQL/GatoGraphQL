@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $disableGraphQLAPIForPoP;
-    private static $enableMultipleQueryExecution;
+    private static bool $disableGraphQLAPIForPoP = false;
+    private static bool $enableMultipleQueryExecution = false;
 
     public static function disableGraphQLAPIForPoP(): bool
     {

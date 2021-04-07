@@ -11,7 +11,7 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getDefaultCacheControlMaxAge;
+    private static int $getDefaultCacheControlMaxAge = 3600;
 
     public static function getDefaultCacheControlMaxAge(): int
     {

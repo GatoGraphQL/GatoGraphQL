@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $usePrivateSchemaMode;
-    private static $enableIndividualControlForPublicPrivateSchemaMode;
+    private static bool $usePrivateSchemaMode = false;
+    private static bool $enableIndividualControlForPublicPrivateSchemaMode = true;
 
     public static function usePrivateSchemaMode(): bool
     {

@@ -16,8 +16,8 @@ class VersioningHelpers
      */
     const TYPE_FIELD_SEPARATOR = '.';
 
-    private static $versionConstraintsForFields;
-    private static $versionConstraintsForDirectives;
+    private static ?array $versionConstraintsForFields = null;
+    private static ?array $versionConstraintsForDirectives = null;
 
     /**
      * Initialize the dictionary with the version constraints for specific fields in the schema

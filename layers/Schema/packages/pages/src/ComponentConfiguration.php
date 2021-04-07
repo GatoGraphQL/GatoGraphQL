@@ -11,9 +11,9 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getPageListDefaultLimit;
-    private static $getPageListMaxLimit;
-    private static $addPageTypeToCustomPostUnionTypes;
+    private static ?int $getPageListDefaultLimit = 10;
+    private static ?int $getPageListMaxLimit = -1;
+    private static bool $addPageTypeToCustomPostUnionTypes = false;
 
     public static function getPageListDefaultLimit(): ?int
     {

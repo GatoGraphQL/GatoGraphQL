@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $enableVariablesAsExpressions;
-    private static $enableComposableDirectives;
+    private static bool $enableVariablesAsExpressions = false;
+    private static bool $enableComposableDirectives = false;
 
     public static function enableVariablesAsExpressions(): bool
     {

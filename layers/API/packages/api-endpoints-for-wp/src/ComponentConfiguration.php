@@ -12,8 +12,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $isNativeAPIEndpointDisabled;
-    private static $getNativeAPIEndpoint;
+    private static bool $isNativeAPIEndpointDisabled = false;
+    private static string $getNativeAPIEndpoint = '/api/';
 
     public static function isNativeAPIEndpointDisabled(): bool
     {

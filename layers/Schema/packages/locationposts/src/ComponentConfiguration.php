@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getLocationPostListDefaultLimit;
-    private static $getLocationPostListMaxLimit;
+    private static ?int $getLocationPostListDefaultLimit = 10;
+    private static ?int $getLocationPostListMaxLimit = -1;
 
     public static function getLocationPostListDefaultLimit(): ?int
     {

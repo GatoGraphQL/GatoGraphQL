@@ -11,9 +11,9 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getGenericCustomPostListDefaultLimit;
-    // private static $getGenericCustomPostListMaxLimit;
-    private static $getGenericCustomPostTypes;
+    private static ?int $getGenericCustomPostListDefaultLimit = 10;
+    // private static ?int $getGenericCustomPostListMaxLimit = -1;
+    private static array $getGenericCustomPostTypes = ['post'];
 
     public static function getGenericCustomPostListDefaultLimit(): ?int
     {

@@ -11,12 +11,12 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $addSelfFieldForRootTypeToSchema;
-    private static $sortSchemaAlphabetically;
-    private static $enableRemoveIfNullDirective;
-    private static $enableProactiveFeedback;
-    private static $enableNestedMutations;
-    private static $enableGraphQLIntrospection;
+    private static bool $addSelfFieldForRootTypeToSchema = false;
+    private static bool $sortSchemaAlphabetically = true;
+    private static bool $enableRemoveIfNullDirective = true;
+    private static bool $enableProactiveFeedback = true;
+    private static bool $enableNestedMutations = false;
+    private static ?bool $enableGraphQLIntrospection = null;
 
     public static function addSelfFieldForRootTypeToSchema(): bool
     {
