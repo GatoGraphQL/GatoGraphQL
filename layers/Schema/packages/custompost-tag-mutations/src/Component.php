@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\CustomPostMutations\Component::class,
-            \PoPSchema\CustomPostTags\Component::class,
+            \PoPSchema\Tags\Component::class,
         ];
     }
 }
