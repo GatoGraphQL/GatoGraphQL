@@ -134,8 +134,6 @@ services:
         - >-
           ../../layers/Schema/packages/custompost-tag-mutations:/app/vendor/pop-schema/custompost-tag-mutations
         - >-
-          ../../layers/Schema/packages/custompost-tag-mutations-wp:/app/vendor/pop-schema/custompost-tag-mutations-wp
-        - >-
           ../../layers/Schema/packages/post-tag-mutations:/app/vendor/pop-schema/post-tag-mutations
         - >-
           ../../layers/Schema/packages/post-tag-mutations-wp:/app/vendor/pop-schema/post-tag-mutations-wp
