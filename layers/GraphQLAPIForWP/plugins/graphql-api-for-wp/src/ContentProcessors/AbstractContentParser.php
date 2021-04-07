@@ -173,6 +173,7 @@ abstract class AbstractContentParser implements ContentParserInterface
             // the GitHub repo and avoid including them in the plugin
             $imagePathURL = $options[self::PATH_URL_TO_DOCS] ?? $pathURL;
             $htmlContent = $this->appendPathURLToImages($imagePathURL, $htmlContent);
+            $htmlContent = $this->appendPathURLToAnchors($imagePathURL, $htmlContent);
         }
         // Convert Markdown links: execute before appending path to anchors
         if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
