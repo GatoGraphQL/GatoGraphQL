@@ -62,9 +62,9 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
         if (!isset($form_data[MutationInputProperties::TAGS])) {
             return;
         }
-        $postTags = $form_data[MutationInputProperties::TAGS];
+        $customPostTags = $form_data[MutationInputProperties::TAGS];
         $customPostTagTypeMutationAPI = $this->getCustomPostTagTypeMutationAPI();
-        $customPostTagTypeMutationAPI->setTags($customPostID, $postTags, false);
+        $customPostTagTypeMutationAPI->setTags($customPostID, $customPostTags, false);
     }
 
     abstract protected function getCustomPostType(): string;
