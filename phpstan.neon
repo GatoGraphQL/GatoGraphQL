@@ -62,6 +62,8 @@ includes:
     - layers/Engine/packages/routing/phpstan.neon.dist
     - layers/Engine/packages/routing-wp/phpstan.neon.dist
     - layers/Schema/packages/schema-commons/phpstan.neon.dist
+    - layers/Schema/packages/settings/phpstan.neon.dist
+    - layers/Schema/packages/settings-wp/phpstan.neon.dist
     - layers/Schema/packages/tags-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomies/phpstan.neon.dist
     - layers/Schema/packages/taxonomies-wp/phpstan.neon.dist
