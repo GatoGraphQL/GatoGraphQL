@@ -384,7 +384,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_CATEGORIES:
             case self::SCHEMA_POST_CATEGORIES:
             case self::SCHEMA_MENUS:
-            case self::SCHEMA_SETTINGS:
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
