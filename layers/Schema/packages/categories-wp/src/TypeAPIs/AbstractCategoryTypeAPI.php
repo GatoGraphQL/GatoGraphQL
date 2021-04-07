@@ -250,7 +250,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $category->name;
     }
 
-    public function getCategoryParentID(string | int | object $catObjectOrID): string | int
+    public function getCategoryParentID(string | int | object $catObjectOrID): string | int | null
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         // If it has no parent, it is assigned 0. In that case, return null
