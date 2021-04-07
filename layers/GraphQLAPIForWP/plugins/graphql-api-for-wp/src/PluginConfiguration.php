@@ -757,6 +757,9 @@ class PluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
                 \PoPSchema\PostTagMutations\Component::class,
             ],
+            SchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
+                \PoPSchema\PostCategoryMutations\Component::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPSchema\CommentMutations\Component::class,
             ],

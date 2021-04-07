@@ -29,12 +29,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
 
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function getCategoryTaxonomy(): ?string
-    // {
-    //     return null;
-    // }
-
     protected function validateCreateErrors(array $form_data): ?array
     {
         $errors = [];
@@ -257,21 +251,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $customPostTypeMutationAPI->updateCustomPost($data);
     }
 
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function getCategories(array $form_data): ?array
-    // {
-    //     return $form_data[MutationInputProperties::CATEGORIES];
-    // }
-
     protected function createUpdateCustomPost(array $form_data, int | string $customPostID): void
     {
-        // @TODO: Migrate when package "Categories" is completed
-        // // Set categories for any taxonomy (not only for "category")
-        // if ($cats = $this->getCategories($form_data)) {
-        //     $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        //     $taxonomy = $this->getCategoryTaxonomy();
-        //     $taxonomyapi->setPostTerms($customPostID, $cats, $taxonomy);
-        // }
     }
 
     protected function getUpdateCustomPostDataLog(int | string $customPostID, array $form_data): array

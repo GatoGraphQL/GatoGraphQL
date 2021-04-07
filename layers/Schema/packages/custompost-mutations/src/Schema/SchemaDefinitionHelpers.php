@@ -63,15 +63,6 @@ class SchemaDefinitionHelpers
                             $customPostStatusEnum->getValues()
                         ),
                     ],
-                    // @TODO: Migrate when package "Categories" is completed
-                    // [
-                    //     SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORIES,
-                    //     SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-                    //     SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    //         $translationAPI->__('The IDs of the categories (of type %s)', 'custompost-mutations'),
-                    //         'PostCategory'// PostCategory::class
-                    //     ),
-                    // ]
                 ]
             );
             self::$schemaFieldArgsCache[$key] = $hooksAPI->applyFilters(

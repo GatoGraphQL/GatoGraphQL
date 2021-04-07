@@ -9,12 +9,6 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function getCategoryTaxonomy(): ?string
-    // {
-    //     return 'category';
-    // }
-
     public function getCustomPostType(): string
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();

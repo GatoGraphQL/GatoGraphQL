@@ -1,4 +1,4 @@
-# Post Tag Mutations
+# Custom Post Tag Mutations
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for media mutations on custom posts
+Base functionality to add tags to custom posts
 
 ## Install
 
