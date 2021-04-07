@@ -21,3 +21,11 @@ There are 2 behaviors, "Whitelist" and "Blacklist":
 👉🏽 <strong>Blacklist:</strong> the configured entries cannot be accessed by `getOption`, all other entries can
 
 <a href="../../images/schema-configuration-settings.jpg" target="_blank">![White/Blacklist option names, in the Settings page](../../images/schema-configuration-settings.jpg "White/Blacklist option names, in the Settings page")</a>
+
+Execute the following query, passing the required option name (in this case, `siteurl`):
+
+```graphql
+{
+  option(name: "siteurl")
+}
+```
