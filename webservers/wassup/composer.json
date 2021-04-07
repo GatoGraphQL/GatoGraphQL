@@ -62,6 +62,7 @@
             "lando start"
         ],
         "rebuild-server": [
+            "@symlink-vendor",
             "lando rebuild appserver -y"
         ],
         "symlink-vendor": [

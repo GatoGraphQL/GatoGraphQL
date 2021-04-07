@@ -47,6 +47,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
     public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
     public const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
+    public const SCHEMA_SETTINGS = Plugin::NAMESPACE . '\schema-settings';
     public const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
     public const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
     public const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
@@ -63,6 +64,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_CUSTOMPOST_TYPES = 'custompost-types';
+    public const OPTION_ENTRIES = 'entries';
+    public const OPTION_IS_BLACKLIST = 'is-blacklist';
 
     /**
      * Hooks
@@ -110,6 +113,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_CATEGORIES,
             self::SCHEMA_POST_CATEGORIES,
             self::SCHEMA_MENUS,
+            self::SCHEMA_SETTINGS,
             self::SCHEMA_MEDIA,
             self::SCHEMA_USER_STATE_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
@@ -140,6 +144,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_CUSTOMPOSTS:
             case self::SCHEMA_MENUS:
+            case self::SCHEMA_SETTINGS:
                 return [
                     [
                         EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
@@ -261,6 +266,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_CATEGORIES => \__('Schema Categories', 'graphql-api'),
             self::SCHEMA_POST_CATEGORIES => \__('Schema Post Categories', 'graphql-api'),
             self::SCHEMA_MENUS => \__('Schema Menus', 'graphql-api'),
+            self::SCHEMA_SETTINGS => \__('Schema Settings', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTS => \__('Schema Custom Posts', 'graphql-api'),
             self::SCHEMA_USER_STATE_MUTATIONS => \__('Schema User State Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Schema Custom Post Mutations', 'graphql-api'),
@@ -335,6 +341,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     \__('menus', 'graphql-api'),
                     $this->menuTypeResolver->getTypeName()
                 );
+            case self::SCHEMA_SETTINGS:
+                return \__('Fetch settings from the site', 'graphql-api');
             case self::SCHEMA_CUSTOMPOSTS:
                 return \__('Base functionality for all custom posts', 'graphql-api');
             case self::SCHEMA_TAGS:
@@ -460,6 +468,15 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_CATEGORIES => [
                 self::OPTION_LIST_DEFAULT_LIMIT => 20,
                 self::OPTION_LIST_MAX_LIMIT => 200,
+            ],
+            self::SCHEMA_SETTINGS => [
+                self::OPTION_ENTRIES => [
+                    'siteurl',
+                    'home',
+                    'blogname',
+                    'blogdescription',
+                ],
+                self::OPTION_IS_BLACKLIST => false,
             ],
         ];
         return $defaultValues[$module][$option];
@@ -685,6 +702,36 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 // Fetch all Schema Configurations from the DB
                 Properties::POSSIBLE_VALUES => $possibleValues,
                 Properties::IS_MULTIPLE => true,
+            ];
+        } elseif ($module == self::SCHEMA_SETTINGS) {
+            $option = self::OPTION_ENTRIES;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Settings entries', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('List of all the option names, to either whitelist or blacklist for querying field <code>%s</code>', 'graphql-api'),
+                    'getOption',
+                ),
+                Properties::TYPE => Properties::TYPE_ARRAY,
+            ];
+
+            $option = self::OPTION_IS_BLACKLIST;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Is it a Blacklist?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Are the entries being blacklisted? Otherwise, they are whitelisted.<br/>👉🏽 Blacklist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.<br/>👉🏽 Whitelist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.', 'graphql-api'),
+                    'getOption'
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
 

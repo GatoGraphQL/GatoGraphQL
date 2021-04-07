@@ -47,23 +47,28 @@
             "@symlink-vendor-for-graphql-api-events-manager-plugin",
             "lando start"
         ],
-        "rebuild-server": "lando rebuild appserver -y",
+        "rebuild-server": [
+            "@symlink-vendor-for-graphql-api-for-wp-plugin",
+            "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
+            "@symlink-vendor-for-graphql-api-events-manager-plugin",
+            "lando rebuild appserver -y"
+        ],
         "symlink-vendor-for-graphql-api-for-wp-plugin": [
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json",
-            "composer install --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json');\""
         ],
         "symlink-vendor-for-graphql-api-convert-case-directives-plugin": [
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json', '../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json",
-            "composer install --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/convert-case-directives",
+            "composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/convert-case-directives",
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/convert-case-directives/composer.json');\""
         ],
         "symlink-vendor-for-graphql-api-events-manager-plugin": [
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json', '../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json.tmp');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package layers/GraphQLAPIForWP/plugins/events-manager/composer.json",
-            "composer install --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/events-manager",
+            "composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/events-manager",
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json');\""
         ],
         "log-server-errors": "lando logs -t -f | grep \"error\""

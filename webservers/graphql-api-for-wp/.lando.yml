@@ -271,6 +271,10 @@ services:
         - >-
           ../../layers/Schema/packages/menus-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/menus-wp
         - >-
+          ../../layers/Schema/packages/settings:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/settings
+        - >-
+          ../../layers/Schema/packages/settings-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/settings-wp
+        - >-
           ../../layers/GraphQLAPIForWP/plugins/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api-convert-case-directives
         - >-
           ../../layers/Schema/packages/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api-convert-case-directives/vendor/pop-schema/convert-case-directives

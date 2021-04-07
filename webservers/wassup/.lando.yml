@@ -182,6 +182,8 @@ services:
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
         - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
         - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
+        - '../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings'
+        - '../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp'
         - '../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta'
         - >-
           ../../layers/Schema/packages/metaquery:/app/vendor/pop-schema/metaquery

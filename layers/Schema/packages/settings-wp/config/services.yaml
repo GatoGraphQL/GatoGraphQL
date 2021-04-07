@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface:
+        class: \PoPSchema\SettingsWP\TypeAPIs\SettingsTypeAPI

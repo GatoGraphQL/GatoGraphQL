@@ -23,6 +23,6 @@ trait ModuleResolverTrait
      */
     protected function getBaseURL(): string
     {
-        return constant('GRAPHQL_API_DIR');
+        return constant('GRAPHQL_API_URL');
     }
 }

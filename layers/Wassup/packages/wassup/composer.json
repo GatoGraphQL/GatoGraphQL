@@ -48,6 +48,7 @@
         "pop-schema/categories-wp": "^0.8",
         "pop-schema/notifications-wp": "^0.8",
         "pop-schema/menus-wp": "^0.8",
+        "pop-schema/settings-wp": "^0.8",
         "pop-schema/event-mutations-wp-em": "^0.8",
         "pop-schema/everythingelse-wp": "^0.8",
         "pop-schema/highlights-wp": "^0.8",

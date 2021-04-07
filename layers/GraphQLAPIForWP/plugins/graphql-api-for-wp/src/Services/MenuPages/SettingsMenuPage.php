@@ -98,9 +98,13 @@ class SettingsMenuPage extends AbstractMenuPage
                             $itemSetting[Properties::TITLE] ?? '',
                             function () use ($module, $itemSetting) {
                                 $type = $itemSetting[Properties::TYPE] ?? null;
-                                $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
-                                if (!empty($possibleValues)) {
-                                    $this->printSelectField($module, $itemSetting);
+                                if ($type == Properties::TYPE_ARRAY) {
+                                    $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                                    if (!empty($possibleValues)) {
+                                        $this->printSelectField($module, $itemSetting);
+                                    } else {
+                                        $this->printTextareaField($module, $itemSetting);
+                                    }
                                 } elseif ($type == Properties::TYPE_BOOL) {
                                     $this->printCheckboxField($module, $itemSetting);
                                 } else {
@@ -180,6 +184,15 @@ class SettingsMenuPage extends AbstractMenuPage
                     $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
                     if (!is_null($minNumber) && $value[$name] < $minNumber) {
                         $value[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
+                    }
+                } elseif (
+                    $type == Properties::TYPE_ARRAY
+                    && is_string($value[$name])
+                ) {
+                    // Check if the type is array, but it's delivered as a string via a textarea
+                    $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                    if (empty($possibleValues)) {
+                        $value[$name] = explode("\n", $value[$name]);
                     }
                 }
 
@@ -406,6 +419,26 @@ class SettingsMenuPage extends AbstractMenuPage
                     </option>
                 <?php endforeach ?>
                 </select>
+                <?php echo $label; ?>
+            </label>
+        <?php
+    }
+
+    /**
+     * Display a textarea field.
+     *
+     * @param array<string, mixed> $itemSetting
+     */
+    protected function printTextareaField(string $module, array $itemSetting): void
+    {
+        $name = $itemSetting[Properties::NAME];
+        $input = $itemSetting[Properties::INPUT];
+        // This must be an array
+        $value = $this->getOptionValue($module, $input);
+        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        ?>
+            <label for="<?php echo $name; ?>">
+                <textarea name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10"><?php echo implode("\n", $value) ?></textarea>
                 <?php echo $label; ?>
             </label>
         <?php
