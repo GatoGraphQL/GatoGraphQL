@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for settings
+Fetch settings from the site
 
 ## Install
 

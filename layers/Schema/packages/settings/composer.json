@@ -1,7 +1,7 @@
 {
     "name": "pop-schema/settings",
     "type": "library",
-    "description": "Adds support for settings",
+    "description": "Fetch settings from the site",
     "keywords": ["PoP", "settings"],
     "homepage": "https://github.com/PoPSchema/settings",
     "license": "GPL-2.0-or-later",
