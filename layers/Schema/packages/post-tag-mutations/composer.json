@@ -16,6 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
+        "pop-schema/custompost-tag-mutations": "^0.8",
         "pop-schema/post-mutations": "^0.8",
         "pop-schema/post-tags": "^0.8"
     },
