@@ -15,7 +15,7 @@ use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
 {
-    use SetTagsFieldResolverTrait;
+    use SetTagsOnCustomPostFieldResolverTrait;
 
     public function getClassesToAttachTo(): array
     {

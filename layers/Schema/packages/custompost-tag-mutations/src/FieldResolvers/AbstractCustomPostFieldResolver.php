@@ -13,7 +13,7 @@ use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    use SetTagsFieldResolverTrait;
+    use SetTagsOnCustomPostFieldResolverTrait;
 
     public function getClassesToAttachTo(): array
     {

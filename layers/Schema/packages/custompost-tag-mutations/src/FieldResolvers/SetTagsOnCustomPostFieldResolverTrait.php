@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostTagMutations\FieldResolvers;
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-trait SetTagsFieldResolverTrait
+trait SetTagsOnCustomPostFieldResolverTrait
 {
     abstract protected function getTypeResolverClass(): string;
     abstract protected function getTypeMutationResolverClass(): string;
