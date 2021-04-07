@@ -18,13 +18,13 @@ class ComponentConfiguration
      *
      * @var array
      */
-    private static $overrideConfiguration;
+    private static array $overrideConfiguration = [];
 
-    private static $enableConfigByParams;
-    private static $useComponentModelCache;
-    private static $enableSchemaEntityRegistries;
-    private static $namespaceTypesAndInterfaces;
-    private static $useSingleTypeInsteadOfUnionType;
+    private static bool $enableConfigByParams = false;
+    private static bool $useComponentModelCache = false;
+    private static bool $enableSchemaEntityRegistries = false;
+    private static bool $namespaceTypesAndInterfaces = false;
+    private static bool $useSingleTypeInsteadOfUnionType = false;
 
     /**
      * Initialize component configuration

@@ -12,13 +12,13 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getGraphQLClientsComponentURL;
+    private static string $getGraphQLClientsComponentURL = '';
 
-    private static $isGraphiQLClientEndpointDisabled;
-    private static $graphiQLClientEndpoint;
-    private static $useGraphiQLExplorer;
-    private static $isGoyagerClientEndpointDisabled;
-    private static $voyagerClientEndpoint;
+    private static bool $isGraphiQLClientEndpointDisabled = false;
+    private static string $graphiQLClientEndpoint = '/graphiql/';
+    private static bool $useGraphiQLExplorer = true;
+    private static bool $isGoyagerClientEndpointDisabled = false;
+    private static string $voyagerClientEndpoint = '/schema/';
 
 
     /**

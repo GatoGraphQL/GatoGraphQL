@@ -10,8 +10,8 @@ use PoP\API\Facades\FieldQueryConvertorFacade;
 class EntryRouteModuleProcessorHelpers
 {
     public const HOOK_REST_FIELDS = __CLASS__ . ':RESTFields';
-    private static $restFieldsQuery;
-    private static $restFields;
+    private static ?string $restFieldsQuery = null;
+    private static ?array $restFields = null;
 
     public static function getRESTFields(): array
     {

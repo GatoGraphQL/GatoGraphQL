@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getCategoryListDefaultLimit;
-    private static $getCategoryListMaxLimit;
+    private static ?int $getCategoryListDefaultLimit = 10;
+    private static ?int $getCategoryListMaxLimit = -1;
 
     public static function getCategoryListDefaultLimit(): ?int
     {

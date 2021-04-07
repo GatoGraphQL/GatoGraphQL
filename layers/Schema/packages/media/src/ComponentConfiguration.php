@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getMediaListDefaultLimit;
-    private static $getMediaListMaxLimit;
+    private static ?int $getMediaListDefaultLimit = 10;
+    private static ?int $getMediaListMaxLimit = -1;
 
     public static function getMediaListDefaultLimit(): ?int
     {

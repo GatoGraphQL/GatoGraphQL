@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getStanceListDefaultLimit;
-    private static $getStanceListMaxLimit;
+    private static ?int $getStanceListDefaultLimit = 10;
+    private static ?int $getStanceListMaxLimit = -1;
 
     public static function getStanceListDefaultLimit(): ?int
     {

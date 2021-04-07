@@ -11,7 +11,7 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $sendTracesToLog;
+    private static bool $sendTracesToLog = true;
 
     public static function sendTracesToLog(): bool
     {

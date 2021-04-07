@@ -11,7 +11,7 @@ use PoPSchema\LocationPosts\TypeDataLoaders\LocationPostTypeDataLoader;
 
 class LocationPostTypeResolver extends PostTypeResolver
 {
-    protected static $name;
+    protected static ?string $name = null;
 
     public function getTypeName(): string
     {

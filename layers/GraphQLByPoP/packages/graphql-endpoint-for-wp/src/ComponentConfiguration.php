@@ -12,8 +12,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $isGraphQLAPIEndpointDisabled;
-    private static $getGraphQLAPIEndpoint;
+    private static bool $isGraphQLAPIEndpointDisabled = false;
+    private static string $getGraphQLAPIEndpoint = '/api/graphql/';
 
     public static function isGraphQLAPIEndpointDisabled(): bool
     {

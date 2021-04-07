@@ -11,9 +11,9 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getPostListDefaultLimit;
-    private static $getPostListMaxLimit;
-    private static $addPostTypeToCustomPostUnionTypes;
+    private static ?int $getPostListDefaultLimit = 10;
+    private static ?int $getPostListMaxLimit = -1;
+    private static bool $addPostTypeToCustomPostUnionTypes = true;
 
     public static function getPostListDefaultLimit(): ?int
     {

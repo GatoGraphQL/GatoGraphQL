@@ -15,7 +15,7 @@ use PoP\Routing\URLParams;
 
 class RequestUtils
 {
-    public static $errors = array();
+    public static array $errors = [];
 
     public static function getDomainId($domain)
     {

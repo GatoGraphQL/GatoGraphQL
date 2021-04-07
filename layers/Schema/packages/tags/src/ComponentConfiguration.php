@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getTagListDefaultLimit;
-    private static $getTagListMaxLimit;
+    private static ?int $getTagListDefaultLimit = 10;
+    private static ?int $getTagListMaxLimit = -1;
 
     public static function getTagListDefaultLimit(): ?int
     {

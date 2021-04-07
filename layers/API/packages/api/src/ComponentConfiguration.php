@@ -12,11 +12,11 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $useSchemaDefinitionCache;
-    private static $executeQueryBatchInStrictOrder;
-    private static $enableEmbeddableFields;
-    private static $enableMutations;
-    private static $overrideRequestURI;
+    private static bool $useSchemaDefinitionCache = false;
+    private static bool $executeQueryBatchInStrictOrder = true;
+    private static bool $enableEmbeddableFields = false;
+    private static bool $enableMutations = true;
+    private static bool $overrideRequestURI = false;
 
     public static function useSchemaDefinitionCache(): bool
     {

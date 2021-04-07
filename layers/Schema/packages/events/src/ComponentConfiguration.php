@@ -11,8 +11,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getEventListDefaultLimit;
-    private static $getEventListMaxLimit;
+    private static ?int $getEventListDefaultLimit = 10;
+    private static ?int $getEventListMaxLimit = -1;
 
     public static function getEventListDefaultLimit(): ?int
     {
