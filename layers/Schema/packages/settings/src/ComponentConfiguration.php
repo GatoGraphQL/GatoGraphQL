@@ -11,16 +11,16 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static $getSettingsListDefaultLimit;
-    private static $getSettingsListMaxLimit;
+    private static array $getSettingsEntries = [];
+    private static bool $areSettingsEntriesBlacklisted = false;
 
-    public static function getSettingsListDefaultLimit(): ?int
+    public static function getSettingsEntries(): array
     {
         // Define properties
-        $envVariable = Environment::USER_LIST_DEFAULT_LIMIT;
-        $selfProperty = &self::$getSettingsListDefaultLimit;
-        $defaultValue = 10;
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $envVariable = Environment::SETTINGS_ENTRIES;
+        $selfProperty = &self::$getSettingsEntries;
+        $defaultValue = [];
+        $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(
@@ -32,13 +32,13 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getSettingsListMaxLimit(): ?int
+    public static function areSettingsEntriesBlacklisted(): bool
     {
         // Define properties
-        $envVariable = Environment::USER_LIST_MAX_LIMIT;
-        $selfProperty = &self::$getSettingsListMaxLimit;
-        $defaultValue = -1; // Unlimited
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $envVariable = Environment::ARE_SETTINGS_ENTRIES_BLACKLISTED;
+        $selfProperty = &self::$areSettingsEntriesBlacklisted;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\SettingsWP\TypeAPIs;
 
-use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
+use PoPSchema\Settings\TypeAPIs\AbstractSettingsTypeAPI;
 
-class SettingsTypeAPI implements SettingsTypeAPIInterface
+class SettingsTypeAPI extends AbstractSettingsTypeAPI
 {
-    public function getOption(string $name): mixed
+    protected function doGetOption(string $name): mixed
     {
         return \get_option($name);
     }

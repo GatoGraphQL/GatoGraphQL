@@ -6,6 +6,6 @@ namespace PoPSchema\Settings;
 
 class Environment
 {
-    public const USER_LIST_DEFAULT_LIMIT = 'USER_LIST_DEFAULT_LIMIT';
-    public const USER_LIST_MAX_LIMIT = 'USER_LIST_MAX_LIMIT';
+    public const SETTINGS_ENTRIES = 'SETTINGS_ENTRIES';
+    public const ARE_SETTINGS_ENTRIES_BLACKLISTED = 'ARE_SETTINGS_ENTRIES_BLACKLISTED';
 }
