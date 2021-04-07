@@ -14,6 +14,7 @@ includes:
     - layers/Schema/packages/comments-wp/phpstan.neon.dist
     - layers/Engine/packages/configurable-schema-feedback/phpstan.neon.dist
     - layers/Schema/packages/convert-case-directives/phpstan.neon.dist
+    - layers/Schema/packages/custompost-category-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompost-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompost-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompost-tag-mutations/phpstan.neon.dist
@@ -48,6 +49,8 @@ includes:
     - layers/Schema/packages/notifications-wp/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
     - layers/Schema/packages/post-categories-wp/phpstan.neon.dist
+    - layers/Schema/packages/post-category-mutations/phpstan.neon.dist
+    - layers/Schema/packages/post-category-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/post-mutations/phpstan.neon.dist
     - layers/Schema/packages/post-tag-mutations/phpstan.neon.dist
     - layers/Schema/packages/post-tag-mutations-wp/phpstan.neon.dist
