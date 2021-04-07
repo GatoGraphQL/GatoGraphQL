@@ -1,0 +1,52 @@
+{
+    "name": "pop-schema/custompost-tag-mutations",
+    "type": "library",
+    "description": "Base functionality to add tags to custom posts",
+    "keywords": ["PoP", "custompost-tag-mutations"],
+    "homepage": "https://github.com/PoPSchema/custompost-tag-mutations",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.0",
+        "pop-schema/custompost-mutations": "^0.8",
+        "pop-schema/custompost-tags": "^0.8"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.76",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.10",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPSchema\\CustomPostTagMutations\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPSchema\\CustomPostTagMutations\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.8-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
