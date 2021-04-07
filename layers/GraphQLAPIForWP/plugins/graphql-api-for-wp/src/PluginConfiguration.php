@@ -49,6 +49,8 @@ use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnviron
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
+use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
+use PoPSchema\Settings\Environment as SettingsEnvironment;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -427,6 +429,19 @@ class PluginConfiguration
                 'envVariable' => CustomPostsEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
+            ],
+            // White/Blacklisted entries to Root.getOption
+            [
+                'class' => SettingsComponentConfiguration::class,
+                'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+            ],
+            [
+                'class' => SettingsComponentConfiguration::class,
+                'envVariable' => SettingsEnvironment::ARE_SETTINGS_ENTRIES_BLACKLISTED,
+                'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
+                'option' => SchemaTypeModuleResolver::OPTION_IS_BLACKLIST,
             ],
         ];
         // For each environment variable, see if its value has been saved in the settings
