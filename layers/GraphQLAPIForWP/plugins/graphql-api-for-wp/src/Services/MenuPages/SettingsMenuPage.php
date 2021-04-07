@@ -185,6 +185,15 @@ class SettingsMenuPage extends AbstractMenuPage
                     if (!is_null($minNumber) && $value[$name] < $minNumber) {
                         $value[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                     }
+                } elseif (
+                    $type == Properties::TYPE_ARRAY
+                    && is_string($value[$name])
+                ) {
+                    // Check if the type is array, but it's delivered as a string via a textarea
+                    $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                    if (empty($possibleValues)) {
+                        $value[$name] = explode("\n", $value[$name]);
+                    }
                 }
 
                 // Validate it is a valid value, or reset
