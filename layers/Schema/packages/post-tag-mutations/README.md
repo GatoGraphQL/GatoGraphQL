@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for media mutations on custom posts
+Add tags to posts
 
 ## Install
 

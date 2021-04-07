@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\PostCategoryMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPSchema\PostCategoryMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

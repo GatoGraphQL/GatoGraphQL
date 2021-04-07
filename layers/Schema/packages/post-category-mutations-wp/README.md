@@ -1,4 +1,4 @@
-# Custom Post Tag Mutations
+# Custom Posts Media Mutations for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,19 +9,19 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Base functionality to add tags to custom posts
+Implementation for WordPress of contracts from package "Custom Posts Media Mutations"
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require pop-schema/custompost-tag-mutations
+composer require pop-schema/post-category-mutations-wp
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/custompost-tag-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/custompost-tag-mutations).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/post-category-mutations-wp`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/post-category-mutations-wp).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\AppLoader::addComponentClassesToInitialize([
-    \PoPSchema\CustomPostTagMutations\Component::class,
+    \PoPSchema\PostCategoryMutationsWP\Component::class,
 ]);
 ```
 
@@ -80,14 +80,6 @@ To execute [PHPUnit](https://phpunit.de/), run:
 composer test
 ```
 
-## Static Analysis
-
-To execute [PHPStan](https://github.com/phpstan/phpstan), run:
-
-``` bash
-composer analyse
-```
-
 ## Report issues
 
 To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
@@ -111,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema/custompost-tag-mutations.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-schema/post-category-mutations-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema/custompost-tag-mutations/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/custompost-tag-mutations.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/custompost-tag-mutations.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/custompost-tag-mutations.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-schema/post-category-mutations-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/post-category-mutations-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/post-category-mutations-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/post-category-mutations-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema/custompost-tag-mutations
-[link-travis]: https://travis-ci.org/pop-schema/custompost-tag-mutations
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/custompost-tag-mutations/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/custompost-tag-mutations
-[link-downloads]: https://packagist.org/packages/pop-schema/custompost-tag-mutations
+[link-packagist]: https://packagist.org/packages/pop-schema/post-category-mutations-wp
+[link-travis]: https://travis-ci.org/pop-schema/post-category-mutations-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/post-category-mutations-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/post-category-mutations-wp
+[link-downloads]: https://packagist.org/packages/pop-schema/post-category-mutations-wp
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

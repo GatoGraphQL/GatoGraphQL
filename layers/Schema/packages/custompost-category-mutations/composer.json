@@ -1,0 +1,52 @@
+{
+    "name": "pop-schema/custompost-category-mutations",
+    "type": "library",
+    "description": "Base functionality to add categories to custom posts",
+    "keywords": ["PoP", "custompost-category-mutations"],
+    "homepage": "https://github.com/PoPSchema/custompost-category-mutations",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.0",
+        "pop-schema/custompost-mutations": "^0.8",
+        "pop-schema/categories": "^0.8"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.76",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.10",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPSchema\\CustomPostCategoryMutations\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPSchema\\CustomPostCategoryMutations\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.8-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
