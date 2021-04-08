@@ -54,6 +54,7 @@
         "ssh-server": "lando ssh",
         "build-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name wassup",
+            "@symlink-vendor",
             "@start-server"
         ],
         "init-server": "@start-server",
