@@ -126,7 +126,7 @@ class RequestUtils
     public static function isRoute($route_or_routes)
     {
         $vars = ApplicationState::getVars();
-        $route = $vars['route'];
+        $route = $vars['route'] ?? null;
         if (is_array($route_or_routes)) {
             return in_array($route, $route_or_routes);
         }
