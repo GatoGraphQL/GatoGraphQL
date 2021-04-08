@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
@@ -13,9 +14,8 @@ use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\UserState\FieldResolvers\AbstractUserStateFieldResolver;
 
-class RootFieldResolver extends AbstractUserStateFieldResolver
+class RootFieldResolver extends AbstractDBDataFieldResolver
 {
     public function getClassesToAttachTo(): array
     {
