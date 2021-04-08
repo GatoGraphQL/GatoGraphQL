@@ -24,12 +24,10 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public static function getRESTFields(): array
     {
         if (is_null(self::$restFields)) {
-            self::$restFields = self::getRESTFieldsQuery();
-            if (is_string(self::$restFields)) {
-                $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-                $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery(self::$restFields);
-                self::$restFields = $fieldQuerySet->getRequestedFieldQuery();
-            }
+            $restFields = self::getRESTFieldsQuery();
+            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
+            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($restFields);
+            self::$restFields = $fieldQuerySet->getRequestedFieldQuery();
         }
         return self::$restFields;
     }
