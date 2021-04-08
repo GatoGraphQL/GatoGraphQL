@@ -14,7 +14,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\PostMutations\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
@@ -110,10 +110,15 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
+            case 'myPosts':
+                return [
+                    FieldDataloadModuleProcessor::class,
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST
+                ];
             case 'myPostCount':
                 return [
                     FieldDataloadModuleProcessor::class,
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT
                 ];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
