@@ -42,6 +42,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
                 ];
                 break;
             case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT:
@@ -51,14 +52,15 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                    [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
                 ];
                 break;
         }
         // Fields "customPosts" and "customPostCount" also have the "postTypes" filter
         if (
             in_array($module[1], [
-            self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST,
-            self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
+                self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST,
+                self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
             ])
         ) {
             $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES];

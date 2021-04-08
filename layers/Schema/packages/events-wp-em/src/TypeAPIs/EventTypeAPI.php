@@ -115,10 +115,21 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
             unset($query['include']);
         }
 
-        // if (isset($query['status'])) {
-        //     $query['status'] = $query['status'];
-        //     unset($query['status']);
-        // }
+        // The status is treated differently than for CPTs
+        // @see https://wp-events-plugin.com/documentation/event-search-attributes/
+        if (isset($query['status'])) {
+            $status = null;
+            if (is_array($query['status']) && count($query['status']) == 1) {
+                $status = $query['status'][0];
+            } elseif (is_string($query['status'])) {
+                $status = $query['status'];
+            }
+            if ($status !== null) {
+                $query['status'] = $status == 'publish' ? 1 : 0;
+            } else {
+                unset($query['status']);
+            }
+        }
 
         // Tags
         if (isset($query['tag-ids'])) {
