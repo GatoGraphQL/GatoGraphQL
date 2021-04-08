@@ -30,7 +30,7 @@ trait ComponentConfigurationTrait
     protected static function maybeInitializeConfigurationValue(
         string $envVariable,
         &$selfProperty,
-        $defaultValue = null,
+        mixed $defaultValue = null,
         ?callable $callback = null,
         bool $useHook = true
     ): void {
