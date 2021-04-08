@@ -714,7 +714,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 Properties::TITLE => \__('Settings entries', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('List of all the option names, to either whitelist or blacklist for querying field <code>%s</code>', 'graphql-api'),
-                    'getOption',
+                    'option',
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
@@ -729,7 +729,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 Properties::TITLE => \__('Is it a Blacklist?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Are the entries being blacklisted? Otherwise, they are whitelisted.<br/>👉🏽 Blacklist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.<br/>👉🏽 Whitelist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.', 'graphql-api'),
-                    'getOption'
+                    'option'
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];

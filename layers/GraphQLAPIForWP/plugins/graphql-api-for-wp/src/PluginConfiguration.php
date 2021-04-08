@@ -430,7 +430,7 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
             ],
-            // White/Blacklisted entries to Root.getOption
+            // White/Blacklisted entries to Root.option
             [
                 'class' => SettingsComponentConfiguration::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
