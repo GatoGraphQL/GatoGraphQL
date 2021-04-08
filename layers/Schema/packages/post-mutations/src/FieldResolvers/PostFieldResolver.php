@@ -9,9 +9,12 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMutations\FieldResolvers\AbstractCustomPostFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\UserState\FieldResolvers\UserStateFieldResolverTrait;
 
 class PostFieldResolver extends AbstractCustomPostFieldResolver
 {
+    use UserStateFieldResolverTrait;
+
     public function getClassesToAttachTo(): array
     {
         return array(PostTypeResolver::class);
