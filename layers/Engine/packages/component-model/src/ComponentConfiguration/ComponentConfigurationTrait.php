@@ -37,7 +37,11 @@ trait ComponentConfigurationTrait
         if (!isset(self::$initialized[$envVariable])) {
             self::$initialized[$envVariable] = true;
 
-            $selfProperty = $defaultValue;
+            // Only set default value if passing the param,
+            // to avoid overriding a value already set in the param definition
+            if ($defaultValue !== null) {
+                $selfProperty = $defaultValue;
+            }
             // Initialize from configuration, environment or hook
             if (self::hasConfigurationValue($envVariable)) {
                 // Priority: option has been set in the $configuration
