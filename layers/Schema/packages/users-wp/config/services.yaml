@@ -8,3 +8,6 @@ services:
 
     PoPSchema\UsersWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
+
+    PoPSchema\UsersWP\Hooks\:
+        resource: '../src/Hooks/*'
