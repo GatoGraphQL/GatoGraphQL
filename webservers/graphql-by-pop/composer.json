@@ -122,7 +122,6 @@
         ],
         "init-server": "@start-server",
         "start-server": [
-            "@symlink-vendor",
             "lando start"
         ],
         "rebuild-server": [

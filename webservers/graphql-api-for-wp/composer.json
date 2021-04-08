@@ -43,7 +43,6 @@
         ],
         "init-server": "@start-server",
         "start-server": [
-            "@update-deps",
             "lando start"
         ],
         "update-deps": [
