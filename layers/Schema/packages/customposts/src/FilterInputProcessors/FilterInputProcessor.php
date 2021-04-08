@@ -15,6 +15,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
 
     public const FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
+    public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
@@ -23,6 +24,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         return array(
             [self::class, self::FILTERINPUT_CUSTOMPOSTDATES],
             [self::class, self::FILTERINPUT_CUSTOMPOSTTYPES],
+            [self::class, self::FILTERINPUT_CUSTOMPOSTSTATUS],
             [self::class, self::FILTERINPUT_GENERICCUSTOMPOSTTYPES],
             [self::class, self::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
         );
@@ -37,6 +39,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 break;
             case self::FILTERINPUT_CUSTOMPOSTTYPES:
                 $query['custompost-types'] = $value;
+                break;
+            case self::FILTERINPUT_CUSTOMPOSTSTATUS:
+                $query['status'] = $value;
                 break;
             case self::FILTERINPUT_GENERICCUSTOMPOSTTYPES:
                 // Make sure the provided postTypes have been whitelisted
