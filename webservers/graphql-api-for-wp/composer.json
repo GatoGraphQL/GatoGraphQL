@@ -38,19 +38,20 @@
         "ssh-server": "lando ssh",
         "build-server": [
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api",
+            "@update-deps",
             "@start-server"
         ],
         "init-server": "@start-server",
         "start-server": [
-            "@symlink-vendor-for-graphql-api-for-wp-plugin",
-            "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
-            "@symlink-vendor-for-graphql-api-events-manager-plugin",
             "lando start"
         ],
-        "rebuild-server": [
+        "update-deps": [
             "@symlink-vendor-for-graphql-api-for-wp-plugin",
             "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
             "@symlink-vendor-for-graphql-api-events-manager-plugin",
+        ],
+        "rebuild-server": [
+            "@update-deps",
             "lando rebuild appserver -y"
         ],
         "symlink-vendor-for-graphql-api-for-wp-plugin": [
