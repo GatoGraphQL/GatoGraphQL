@@ -44,12 +44,10 @@ trait ComponentConfigurationTrait
                 $selfProperty = self::getConfigurationValue($envVariable);
             } else {
                 // Get the value from the environment function
-                if (getenv($envVariable) !== false) {
-                    $selfProperty = getenv($envVariable);
+                $envValue = getenv($envVariable);
+                if ($envValue !== false) {
                     // Modify the type of the variable, from string to bool/int/array
-                    if ($callback) {
-                        $selfProperty = $callback($selfProperty);
-                    }
+                    $selfProperty = $callback ? $callback($envValue) : $envValue;
                 }
                 // Allow to override the value with a hook
                 if ($useHook) {
