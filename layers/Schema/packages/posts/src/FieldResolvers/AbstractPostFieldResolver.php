@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
@@ -86,8 +86,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postCount':
                 return [
-                    CustomPostRelationalFieldDataloadModuleProcessor::class,
-                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT
+                    FieldDataloadModuleProcessor::class,
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT
                 ];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
