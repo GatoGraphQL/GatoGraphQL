@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
@@ -41,7 +43,22 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 $query['custompost-types'] = $value;
                 break;
             case self::FILTERINPUT_CUSTOMPOSTSTATUS:
-                $query['status'] = $value;
+                // Remove any status that is not in the Enum
+                if ($value) {
+                    $instanceManager = InstanceManagerFacade::getInstance();
+                    /**
+                     * @var CustomPostStatusEnum
+                     */
+                    $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                    $value = array_intersect(
+                        $value,
+                        $customPostStatusEnum->getValues()
+                    );
+                    // If no status is valid, do not set, as to not override the default value
+                    if ($value) {
+                        $query['status'] = $value;
+                    }
+                }
                 break;
             case self::FILTERINPUT_GENERICCUSTOMPOSTTYPES:
                 // Make sure the provided postTypes have been whitelisted
