@@ -8,3 +8,6 @@ services:
 
     PoPSchema\Users\Conditional\CustomPosts\ModuleProcessors\:
         resource: '../../../src/Conditional/CustomPosts/ModuleProcessors/*'
+
+    PoPSchema\Users\Conditional\CustomPosts\Hooks\:
+        resource: '../../../src/Conditional/CustomPosts/Hooks/*'
