@@ -714,7 +714,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ),
                 Properties::TITLE => \__('Settings entries', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('List of all the option names, to either whitelist or blacklist for querying field <code>%s</code>', 'graphql-api'),
+                    \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.<hr/><strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex expressions.<br/>Eg: Both entries <code>siteurl</code> and <code>/site.*/</code> match option name <code>"siteurl"</code>.', 'graphql-api'),
                     'option',
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
@@ -729,15 +729,13 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ),
                 Properties::TITLE => \__('Behavior', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Are the entries being allowed or denied? Compare by full match or using a regex?<ul><li>👉🏽 Allowlist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.</li><li>👉🏽 Regex allowlist: similar, but entries are regex expressions.</li><li>👉🏽 Denylist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.</li><li>👉🏽 Regex denylist: similar, but entries are regex expressions.</li></ul>', 'graphql-api'),
+                    \__('Are the entries being allowed or denied?<ul><li>👉🏽 Allowlist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.</li><li>👉🏽 Denylist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.</li></ul>', 'graphql-api'),
                     'option'
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     Behaviors::ALLOWLIST => \__('Allowlist', 'graphql-api'),
-                    Behaviors::REGEX_ALLOWLIST => \__('Regex allowlist', 'graphql-api'),
                     Behaviors::DENYLIST => \__('Denylist', 'graphql-api'),
-                    Behaviors::REGEX_DENYLIST => \__('Regex denylist', 'graphql-api'),
                 ],
             ];
         }

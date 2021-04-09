@@ -14,34 +14,26 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     {
         /**
          * Check if the allow/denylist validation fails
+         * Compare for full match or regex
          */
         $settingsEntries = ComponentConfiguration::getSettingsEntries();
         $settingsBehavior = ComponentConfiguration::getSettingsBehavior();
+        $matchResults = array_filter(array_map(
+            function (string $termOrRegex) use ($name): bool {
+                // Check if it is a regex expression
+                if (str_starts_with($termOrRegex, '/') && str_ends_with($termOrRegex, '/')) {
+                    return preg_match($termOrRegex, $name) === 1;
+                }
+                // Check it's a full match
+                return $termOrRegex === $name;
+            },
+            $settingsEntries
+        ));
         if (
-            ($settingsBehavior == Behaviors::ALLOWLIST && !in_array($name, $settingsEntries))
-            || ($settingsBehavior == Behaviors::DENYLIST && in_array($name, $settingsEntries))
+            ($settingsBehavior == Behaviors::ALLOWLIST && count($matchResults) === 0)
+            || ($settingsBehavior == Behaviors::DENYLIST && count($matchResults) > 0)
         ) {
             return null;
-        }
-        /**
-         * Check if the allow/denylist validation by regex fails
-         */
-        if (
-            in_array($settingsBehavior, [
-                Behaviors::REGEX_ALLOWLIST,
-                Behaviors::REGEX_DENYLIST,
-            ])
-        ) {
-            $matchResults = array_filter(array_map(
-                fn (string $regex): int | false => preg_match('/' . $regex . '/', $name),
-                $settingsEntries
-            ));
-            if (
-                ($settingsBehavior == Behaviors::REGEX_ALLOWLIST && count($matchResults) === 0)
-                || ($settingsBehavior == Behaviors::REGEX_DENYLIST && count($matchResults) > 0)
-            ) {
-                return null;
-            }
         }
         return $this->doGetOption($name);
     }
