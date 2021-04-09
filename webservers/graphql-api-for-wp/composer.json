@@ -48,7 +48,7 @@
         "update-deps": [
             "@symlink-vendor-for-graphql-api-for-wp-plugin",
             "@symlink-vendor-for-graphql-api-convert-case-directives-plugin",
-            "@symlink-vendor-for-graphql-api-events-manager-plugin",
+            "@symlink-vendor-for-graphql-api-events-manager-plugin"
         ],
         "rebuild-server": [
             "@update-deps",
