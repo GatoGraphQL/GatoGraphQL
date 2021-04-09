@@ -98,13 +98,16 @@ class SettingsMenuPage extends AbstractMenuPage
                             $itemSetting[Properties::TITLE] ?? '',
                             function () use ($module, $itemSetting) {
                                 $type = $itemSetting[Properties::TYPE] ?? null;
-                                if ($type == Properties::TYPE_ARRAY) {
-                                    $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
-                                    if (!empty($possibleValues)) {
-                                        $this->printSelectField($module, $itemSetting);
-                                    } else {
-                                        $this->printTextareaField($module, $itemSetting);
-                                    }
+                                $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                                if (
+                                    in_array($type, [
+                                        Properties::TYPE_STRING,
+                                        Properties::TYPE_ARRAY,
+                                    ]) && !empty($possibleValues)
+                                ) {
+                                    $this->printSelectField($module, $itemSetting);
+                                } elseif ($type == Properties::TYPE_ARRAY && empty($possibleValues)) {
+                                    $this->printTextareaField($module, $itemSetting);
                                 } elseif ($type == Properties::TYPE_BOOL) {
                                     $this->printCheckboxField($module, $itemSetting);
                                 } else {

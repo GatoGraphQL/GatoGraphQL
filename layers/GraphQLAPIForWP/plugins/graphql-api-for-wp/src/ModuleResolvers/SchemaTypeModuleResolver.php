@@ -25,6 +25,7 @@ use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\Settings\Constants\Behaviors;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -65,7 +66,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_CUSTOMPOST_TYPES = 'custompost-types';
     public const OPTION_ENTRIES = 'entries';
-    public const OPTION_IS_BLACKLIST = 'is-blacklist';
+    public const OPTION_BEHAVIOR = 'behavior';
 
     /**
      * Hooks
@@ -476,7 +477,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     'blogname',
                     'blogdescription',
                 ],
-                self::OPTION_IS_BLACKLIST => false,
+                self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
             ],
         ];
         return $defaultValues[$module][$option];
@@ -713,25 +714,26 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ),
                 Properties::TITLE => \__('Settings entries', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('List of all the option names, to either whitelist or blacklist for querying field <code>%s</code>', 'graphql-api'),
+                    \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.<hr/><strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).<br/>Eg: Both entries <code>siteurl</code> and <code>/site.*/</code> match option name <code>"siteurl"</code>.', 'graphql-api'),
                     'option',
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
 
-            $option = self::OPTION_IS_BLACKLIST;
+            $option = self::OPTION_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Is it a Blacklist?', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Are the entries being blacklisted? Otherwise, they are whitelisted.<br/>👉🏽 Blacklist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.<br/>👉🏽 Whitelist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.', 'graphql-api'),
-                    'option'
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::TITLE => \__('Behavior', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Are the entries being allowed or denied?<ul><li>👉🏽 Allow access: only the configured entries can be accessed, and no other can.</li><li>👉🏽 Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => [
+                    Behaviors::ALLOWLIST => \__('Allow access', 'graphql-api'),
+                    Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
+                ],
             ];
         }
 

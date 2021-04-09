@@ -436,12 +436,14 @@ class PluginConfiguration
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
             ],
             [
                 'class' => SettingsComponentConfiguration::class,
-                'envVariable' => SettingsEnvironment::ARE_SETTINGS_ENTRIES_BLACKLISTED,
+                'envVariable' => SettingsEnvironment::SETTINGS_BEHAVIOR,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
-                'option' => SchemaTypeModuleResolver::OPTION_IS_BLACKLIST,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
         ];
         // For each environment variable, see if its value has been saved in the settings
