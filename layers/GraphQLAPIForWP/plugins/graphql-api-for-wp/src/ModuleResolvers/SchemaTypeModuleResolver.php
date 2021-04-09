@@ -25,6 +25,7 @@ use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\Settings\Constants\Behaviors;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -65,7 +66,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
     public const OPTION_CUSTOMPOST_TYPES = 'custompost-types';
     public const OPTION_ENTRIES = 'entries';
-    public const OPTION_IS_BLACKLIST = 'is-blacklist';
+    public const OPTION_BEHAVIOR = 'behavior';
 
     /**
      * Hooks
@@ -476,7 +477,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     'blogname',
                     'blogdescription',
                 ],
-                self::OPTION_IS_BLACKLIST => false,
+                self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
             ],
         ];
         return $defaultValues[$module][$option];
@@ -719,19 +720,25 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
 
-            $option = self::OPTION_IS_BLACKLIST;
+            $option = self::OPTION_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Is it a Blacklist?', 'graphql-api'),
+                Properties::TITLE => \__('Behavior', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Are the entries being blacklisted? Otherwise, they are whitelisted.<br/>👉🏽 Blacklist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.<br/>👉🏽 Whitelist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.', 'graphql-api'),
+                    \__('Are the entries being allowed or denied? Compare by full match or using a regex?<ul><li>👉🏽 Allowlist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.</li><li>👉🏽 Regex allowlist: similar, but entries are regex expressions.</li><li>👉🏽 Denylist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.</li><li>👉🏽 Regex denylist: similar, but entries are regex expressions.</li></ul>', 'graphql-api'),
                     'option'
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => [
+                    Behaviors::ALLOWLIST => \__('Allowlist', 'graphql-api'),
+                    Behaviors::REGEX_ALLOWLIST => \__('Regex allowlist', 'graphql-api'),
+                    Behaviors::DENYLIST => \__('Denylist', 'graphql-api'),
+                    Behaviors::REGEX_DENYLIST => \__('Regex denylist', 'graphql-api'),
+                ],
             ];
         }
 

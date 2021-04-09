@@ -6,13 +6,14 @@ namespace PoPSchema\Settings;
 
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoPSchema\Settings\Constants\Behaviors;
 
 class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
     private static array $getSettingsEntries = [];
-    private static bool $areSettingsEntriesBlacklisted = false;
+    private static string $getSettingsBehavior = Behaviors::ALLOWLIST;
 
     public static function getSettingsEntries(): array
     {
@@ -32,20 +33,18 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function areSettingsEntriesBlacklisted(): bool
+    public static function getSettingsBehavior(): string
     {
         // Define properties
-        $envVariable = Environment::ARE_SETTINGS_ENTRIES_BLACKLISTED;
-        $selfProperty = &self::$areSettingsEntriesBlacklisted;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $envVariable = Environment::SETTINGS_BEHAVIOR;
+        $selfProperty = &self::$getSettingsBehavior;
+        $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
-            $defaultValue,
-            $callback
+            $defaultValue
         );
         return $selfProperty;
     }
