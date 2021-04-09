@@ -714,7 +714,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ),
                 Properties::TITLE => \__('Settings entries', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.<hr/><strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex expressions.<br/>Eg: Both entries <code>siteurl</code> and <code>/site.*/</code> match option name <code>"siteurl"</code>.', 'graphql-api'),
+                    \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.<hr/><strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).<br/>Eg: Both entries <code>siteurl</code> and <code>/site.*/</code> match option name <code>"siteurl"</code>.', 'graphql-api'),
                     'option',
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,

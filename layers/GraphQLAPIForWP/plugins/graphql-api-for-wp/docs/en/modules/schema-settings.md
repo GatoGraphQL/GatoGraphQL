@@ -13,19 +13,32 @@ By default, only the following options can be queried:
 
 ## How to use
 
-In the "Schema Settings" tab from the Settings, we can configure the list of options that can be queried via `option`.
+Query field `Root.option`, passing the required option as field argument `name`.
 
-There are 2 behaviors, "Whitelist" and "Blacklist":
-
-👉🏽 <strong>Whitelist:</strong> only the configured entries can be accessed by `option`, and no other can<br/>
-👉🏽 <strong>Blacklist:</strong> the configured entries cannot be accessed by `option`, all other entries can
-
-<a href="../../images/schema-configuration-settings.jpg" target="_blank">![White/Blacklist option names, in the Settings page](../../images/schema-configuration-settings.jpg "White/Blacklist option names, in the Settings page")</a>
-
-Execute the following query, passing the required option name (in this case, `siteurl`):
+For instance, this query retrieves the site's URL:
 
 ```graphql
 {
   option(name: "siteurl")
 }
 ```
+
+## Configure queryable options
+
+In the "Schema Settings" tab from the Settings, we must configure the list of options that can be queried via `option`.
+
+Each entry can either be:
+
+- A regex (regular expression), if it's surrounded by `/`, or
+- The full option name, otherwise
+
+For instance, both entries `siteurl` and `/site.*/` match option name `"siteurl"`.
+
+<a href="../../images/schema-configuration-settings-entries.jpg" target="_blank">![White/Blacklist option names, in the Settings page](../../images/schema-configuration-settings-entries.jpg "White/Blacklist option names, in the Settings page")</a>
+
+There are 2 behaviors, "Allow access" and "Deny access":
+
+👉🏽 <strong>Allow access:</strong> only the configured entries can be accessed, and no other can<br/>
+👉🏽 <strong>Deny access:</strong> the configured entries cannot be accessed, all other entries can
+
+<a href="../../images/schema-configuration-settings-behavior.jpg" target="_blank">![White/Blacklist option names, in the Settings page](../../images/schema-configuration-settings-behavior.jpg "White/Blacklist option names, in the Settings page")</a>
