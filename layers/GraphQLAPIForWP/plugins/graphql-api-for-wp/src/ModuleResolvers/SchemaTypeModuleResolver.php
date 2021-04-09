@@ -728,14 +728,11 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Behavior', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Are the entries being allowed or denied?<ul><li>👉🏽 Allowlist: only the configured entries can be accessed by <code>%1$s</code>, and no other can.</li><li>👉🏽 Denylist: the configured entries cannot be accessed by <code>%1$s</code>, all other entries can.</li></ul>', 'graphql-api'),
-                    'option'
-                ),
+                Properties::DESCRIPTION => \__('Are the entries being allowed or denied?<ul><li>👉🏽 Allow access: only the configured entries can be accessed, and no other can.</li><li>👉🏽 Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOWLIST => \__('Allowlist', 'graphql-api'),
-                    Behaviors::DENYLIST => \__('Denylist', 'graphql-api'),
+                    Behaviors::ALLOWLIST => \__('Allow access', 'graphql-api'),
+                    Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
                 ],
             ];
         }
