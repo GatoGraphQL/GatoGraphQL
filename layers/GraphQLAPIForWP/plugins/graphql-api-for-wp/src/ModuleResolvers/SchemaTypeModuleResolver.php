@@ -472,7 +472,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             ],
             self::SCHEMA_SETTINGS => [
                 self::OPTION_ENTRIES => [
-                    'siteurl',
                     'home',
                     'blogname',
                     'blogdescription',
