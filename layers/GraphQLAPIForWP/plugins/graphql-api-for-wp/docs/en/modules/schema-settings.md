@@ -6,7 +6,6 @@ For security reasons, which options can be queried must be explicitly configured
 
 By default, only the following options can be queried:
 
-- siteurl
 - home
 - blogname
 - blogdescription
@@ -19,7 +18,7 @@ For instance, this query retrieves the site's URL:
 
 ```graphql
 {
-  option(name: "siteurl")
+  option(name: "home")
 }
 ```
 
