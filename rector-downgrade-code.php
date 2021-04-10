@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\DowngradePhp72\Rector\FuncCall\DowngradePregUnmatchedAsNullConstantRector;
+use Rector\DowngradePhp72\Rector\FunctionLike\DowngradeObjectTypeDeclarationRector;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -16,8 +18,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         DowngradeSetList::PHP_80,
         DowngradeSetList::PHP_74,
         DowngradeSetList::PHP_73,
-        DowngradeSetList::PHP_72,
+        // DowngradeSetList::PHP_72,
     ]);
+
+    /**
+     * Downgrade PHP 7.2:
+     * Run all rules except DowngradeParameterTypeWideningRector, which is buggy
+     *
+     * @see https://github.com/leoloso/PoP/pull/596/checks?check_run_id=2311651884
+     *
+     * Source code from: vendor/rector/rector/config/set/downgrade-php72.php
+     */
+    $services = $containerConfigurator->services();
+    $services->set(DowngradeObjectTypeDeclarationRector::class);
+    // $services->set(DowngradeParameterTypeWideningRector::class);
+    $services->set(DowngradePregUnmatchedAsNullConstantRector::class);
 
     // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
