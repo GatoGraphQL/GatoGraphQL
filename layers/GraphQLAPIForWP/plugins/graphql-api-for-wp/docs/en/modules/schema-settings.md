@@ -6,9 +6,9 @@ For security reasons, which options can be queried must be explicitly configured
 
 By default, only the following options can be queried:
 
-- home
-- blogname
-- blogdescription
+- `"home"`
+- `"blogname"`
+- `"blogdescription"`
 
 ## How to use
 
