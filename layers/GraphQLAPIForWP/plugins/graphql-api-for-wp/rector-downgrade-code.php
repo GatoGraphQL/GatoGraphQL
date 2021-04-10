@@ -25,7 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * Downgrade PHP 7.2:
      * Run all rules except DowngradeParameterTypeWideningRector, which is buggy
      *
-     * @see https://github.com/leoloso/PoP/pull/596/checks?check_run_id=2311651884
+     * @see https://github.com/leoloso/PoP/issues/597
      *
      * Source code from: vendor/rector/rector/config/set/downgrade-php72.php
      */
