@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     /**
      * Downgrade PHP 7.2 - Temporarily skip buggy rules:
      * - DowngradeParameterTypeWideningRector
-     *   @see https://github.com/leoloso/PoP/issues/597)
+     *   @see https://github.com/leoloso/PoP/issues/597
      * - DowngradePregUnmatchedAsNullConstantRector
      *   @see https://github.com/leoloso/PoP/issues/598
      *
