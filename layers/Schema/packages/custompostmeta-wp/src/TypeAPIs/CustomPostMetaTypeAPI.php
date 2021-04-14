@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMetaWP\TypeAPIs;
 
-use PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
+use PoPSchema\CustomPostMeta\TypeAPIs\AbstractCustomPostMetaTypeAPI;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-class CustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
+class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
 {
-    public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
+    protected function doGetCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
         return \get_post_meta($customPostID, $key, $single);
     }
