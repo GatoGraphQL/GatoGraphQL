@@ -10,7 +10,7 @@ use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {
-    final public function getUserMeta(string | int $customPostID, string $key, bool $single = false): mixed
+    final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
         /**
          * Check if the allow/denylist validation fails
@@ -22,8 +22,8 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
         if (!$allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
-        return $this->doGetUserMeta($customPostID, $key, $single);
+        return $this->doGetUserMeta($userID, $key, $single);
     }
 
-    abstract protected function doGetUserMeta(string | int $customPostID, string $key, bool $single = false): mixed;
+    abstract protected function doGetUserMeta(string | int $userID, string $key, bool $single = false): mixed;
 }
