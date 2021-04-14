@@ -468,6 +468,21 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
+            // White/Blacklisted entries to User.meta
+            [
+                'class' => UserMetaComponentConfiguration::class,
+                'envVariable' => UserMetaEnvironment::USER_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => UserMetaComponentConfiguration::class,
+                'envVariable' => UserMetaEnvironment::USER_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_META,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
         ];
         // For each environment variable, see if its value has been saved in the settings
         $userSettingsManager = UserSettingsManagerFacade::getInstance();

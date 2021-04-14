@@ -10,7 +10,7 @@ use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
-    public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
+    final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
         /**
          * Check if the allow/denylist validation fails
