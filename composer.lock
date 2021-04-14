@@ -4895,16 +4895,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.10.4",
+            "version": "0.10.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "3e4e9387c6de66f532b41800dceed697380fd85a"
+                "reference": "9c147eb846eb28f66adb38683825dbc990fa17ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/3e4e9387c6de66f532b41800dceed697380fd85a",
-                "reference": "3e4e9387c6de66f532b41800dceed697380fd85a",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/9c147eb846eb28f66adb38683825dbc990fa17ea",
+                "reference": "9c147eb846eb28f66adb38683825dbc990fa17ea",
                 "shasum": ""
             },
             "require": {
@@ -5013,7 +5013,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.10.4"
+                "source": "https://github.com/rectorphp/rector/tree/0.10.6"
             },
             "funding": [
                 {
@@ -5021,7 +5021,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-09T16:27:12+00:00"
+            "time": "2021-04-14T02:35:28+00:00"
         },
         {
             "name": "rector/rector-cakephp",
