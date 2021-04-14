@@ -262,9 +262,13 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td>Schema Post Tags</td><td>Query post tags, through type <code>PostTag</code> added to the schema</td></tr>
 <tr><td>Schema Categories</td><td>Base functionality for all categories</td></tr>
 <tr><td>Schema Post Categories</td><td>Query post categories, through type <code>PostCategory</code> added to the schema</td></tr>
+<tr><td><a href="docs/en/modules/schema-custompost-meta.md">Schema Custom Post Meta</a></td><td>Add the <code>option</code> field to custom posts, such as type <code>Post</code></td></tr>
+<tr><td><a href="docs/en/modules/schema-user-meta.md">Schema User Meta</a></td><td>Add the <code>option</code> field to type <code>User</code></td></tr>
+<tr><td><a href="docs/en/modules/schema-comment-meta.md">Schema Comment Meta</a></td><td>Add the <code>option</code> field to type <code>Comment</code></td></tr>
+<tr><td><a href="docs/en/modules/schema-taxonomy-meta.md">Schema Taxonomy Meta</a></td><td>Add the <code>option</code> field to taxonomies, such as types <code>PostTag</code> and <code>PostCategory</code></td></tr>
 <tr><td>Schema Media</td><td>Query media elements, through type <code>Media</code> added to the schema</td></tr>
 <tr><td>Schema Menus</td><td>Query menus, through type <code>Menu</code> added to the schema</td></tr>
-<tr><td>Schema Settings</td><td>Fetch settings from the site</td></tr>
+<tr><td><a href="docs/en/modules/schema-settings.md">Schema Settings</a></td><td>Fetch settings from the site</td></tr>
 <tr><td><a href="docs/en/modules/schema-user-state-mutations.md">Schema User State Mutations</a></td><td>Have the user log-in, and be able to perform mutations</td></tr>
 <tr><td>Schema Custom Post Mutations</td><td>Base functionality to mutate custom posts</td></tr>
 <tr><td>Schema Post Mutations</td><td>Execute mutations on podyd</td></tr>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings;
+namespace PoPSchema\UserMeta;
 
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
@@ -12,14 +12,14 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static array $getSettingsEntries = [];
-    private static string $getSettingsBehavior = Behaviors::ALLOWLIST;
+    private static array $getUserMetaEntries = [];
+    private static string $getUserMetaBehavior = Behaviors::ALLOWLIST;
 
-    public static function getSettingsEntries(): array
+    public static function getUserMetaEntries(): array
     {
         // Define properties
-        $envVariable = Environment::SETTINGS_ENTRIES;
-        $selfProperty = &self::$getSettingsEntries;
+        $envVariable = Environment::USER_META_ENTRIES;
+        $selfProperty = &self::$getUserMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
@@ -33,11 +33,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getSettingsBehavior(): string
+    public static function getUserMetaBehavior(): string
     {
         // Define properties
-        $envVariable = Environment::SETTINGS_BEHAVIOR;
-        $selfProperty = &self::$getSettingsBehavior;
+        $envVariable = Environment::USER_META_BEHAVIOR;
+        $selfProperty = &self::$getUserMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook

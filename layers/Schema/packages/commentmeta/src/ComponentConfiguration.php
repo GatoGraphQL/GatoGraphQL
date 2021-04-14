@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings;
+namespace PoPSchema\CommentMeta;
 
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
@@ -12,14 +12,14 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static array $getSettingsEntries = [];
-    private static string $getSettingsBehavior = Behaviors::ALLOWLIST;
+    private static array $getCommentMetaEntries = [];
+    private static string $getCommentMetaBehavior = Behaviors::ALLOWLIST;
 
-    public static function getSettingsEntries(): array
+    public static function getCommentMetaEntries(): array
     {
         // Define properties
-        $envVariable = Environment::SETTINGS_ENTRIES;
-        $selfProperty = &self::$getSettingsEntries;
+        $envVariable = Environment::COMMENT_META_ENTRIES;
+        $selfProperty = &self::$getCommentMetaEntries;
         $defaultValue = [];
         $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
 
@@ -33,11 +33,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function getSettingsBehavior(): string
+    public static function getCommentMetaBehavior(): string
     {
         // Define properties
-        $envVariable = Environment::SETTINGS_BEHAVIOR;
-        $selfProperty = &self::$getSettingsBehavior;
+        $envVariable = Environment::COMMENT_META_BEHAVIOR;
+        $selfProperty = &self::$getCommentMetaBehavior;
         $defaultValue = Behaviors::ALLOWLIST;
 
         // Initialize property from the environment/hook

@@ -25,7 +25,7 @@ use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
-use PoPSchema\Settings\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -47,6 +47,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
     public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
     public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
+    public const SCHEMA_CUSTOMPOST_META = Plugin::NAMESPACE . '\schema-custompost-meta';
+    public const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
+    public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
+    public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
     public const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
     public const SCHEMA_SETTINGS = Plugin::NAMESPACE . '\schema-settings';
     public const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
@@ -113,6 +117,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_TAGS,
             self::SCHEMA_CATEGORIES,
             self::SCHEMA_POST_CATEGORIES,
+            self::SCHEMA_CUSTOMPOST_META,
+            self::SCHEMA_USER_META,
+            self::SCHEMA_COMMENT_META,
+            self::SCHEMA_TAXONOMY_META,
             self::SCHEMA_MENUS,
             self::SCHEMA_SETTINGS,
             self::SCHEMA_MEDIA,
@@ -185,6 +193,31 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                         self::SCHEMA_POSTS,
                     ],
                     [
+                        self::SCHEMA_CATEGORIES,
+                    ],
+                ];
+            case self::SCHEMA_CUSTOMPOST_META:
+                return [
+                    [
+                        self::SCHEMA_CUSTOMPOSTS,
+                    ],
+                ];
+            case self::SCHEMA_USER_META:
+                return [
+                    [
+                        self::SCHEMA_USERS,
+                    ],
+                ];
+            case self::SCHEMA_COMMENT_META:
+                return [
+                    [
+                        self::SCHEMA_COMMENTS,
+                    ],
+                ];
+            case self::SCHEMA_TAXONOMY_META:
+                return [
+                    [
+                        self::SCHEMA_TAGS,
                         self::SCHEMA_CATEGORIES,
                     ],
                 ];
@@ -266,6 +299,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_TAGS => \__('Schema Post Tags', 'graphql-api'),
             self::SCHEMA_CATEGORIES => \__('Schema Categories', 'graphql-api'),
             self::SCHEMA_POST_CATEGORIES => \__('Schema Post Categories', 'graphql-api'),
+            self::SCHEMA_CUSTOMPOST_META => \__('Schema Custom Post Meta', 'graphql-api'),
+            self::SCHEMA_USER_META => \__('Schema User Meta', 'graphql-api'),
+            self::SCHEMA_COMMENT_META => \__('Schema Comment Meta', 'graphql-api'),
+            self::SCHEMA_TAXONOMY_META => \__('Schema Taxonomy Meta', 'graphql-api'),
             self::SCHEMA_MENUS => \__('Schema Menus', 'graphql-api'),
             self::SCHEMA_SETTINGS => \__('Schema Settings', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTS => \__('Schema Custom Posts', 'graphql-api'),
@@ -336,6 +373,31 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     \__('post categories', 'graphql-api'),
                     $this->postCategoryTypeResolver->getTypeName()
                 );
+            case self::SCHEMA_CUSTOMPOST_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->postTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_USER_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->userTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_COMMENT_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->commentTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_TAXONOMY_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->postTagTypeResolver->getTypeName(),
+                    $this->postCategoryTypeResolver->getTypeName()
+                );
             case self::SCHEMA_MENUS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
@@ -369,6 +431,18 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 return \__('Create comments', 'graphql-api');
         }
         return parent::getDescription($module);
+    }
+
+    public function isEnabledByDefault(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_CUSTOMPOST_META:
+            case self::SCHEMA_USER_META:
+            case self::SCHEMA_COMMENT_META:
+            case self::SCHEMA_TAXONOMY_META:
+                return false;
+        }
+        return parent::isEnabledByDefault($module);
     }
 
     /**
@@ -437,6 +511,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        $defaultMetaValues = [
+            self::OPTION_ENTRIES => [],
+            self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
+        ];
         $defaultValues = [
             self::SCHEMA_CUSTOMPOSTS => [
                 self::OPTION_LIST_DEFAULT_LIMIT => 10,
@@ -478,6 +556,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ],
                 self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
             ],
+            self::SCHEMA_CUSTOMPOST_META => $defaultMetaValues,
+            self::SCHEMA_USER_META => $defaultMetaValues,
+            self::SCHEMA_COMMENT_META => $defaultMetaValues,
+            self::SCHEMA_TAXONOMY_META => $defaultMetaValues,
         ];
         return $defaultValues[$module][$option];
     }
@@ -703,7 +785,91 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 Properties::POSSIBLE_VALUES => $possibleValues,
                 Properties::IS_MULTIPLE => true,
             ];
-        } elseif ($module == self::SCHEMA_SETTINGS) {
+        } elseif (
+            in_array($module, [
+                self::SCHEMA_SETTINGS,
+                self::SCHEMA_CUSTOMPOST_META,
+                self::SCHEMA_USER_META,
+                self::SCHEMA_COMMENT_META,
+                self::SCHEMA_TAXONOMY_META,
+            ])
+        ) {
+            $entriesTitle = $module === self::SCHEMA_SETTINGS ?
+                \__('Settings entries', 'graphql-api')
+                : \__('Meta keys', 'graphql-api');
+            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying field <code>meta</code> on %s.', 'graphql-api');
+            $headsUpDesc = sprintf(
+                \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).', 'graphql-api'),
+                'option',
+            );
+            $entryDesc = \__('Eg: Both entries <code>%1$s</code> and <code>/%2$s.*/</code> match option name <code>"%1$s"</code>.', 'graphql-api');
+            $moduleDescriptions = [
+                self::SCHEMA_SETTINGS => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.', 'graphql-api'),
+                        'option'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'siteurl',
+                        'site'
+                    )
+                ),
+                self::SCHEMA_CUSTOMPOST_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'custom posts'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        '_edit_last',
+                        '_edit_'
+                    )
+                ),
+                self::SCHEMA_USER_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'users'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'last_name',
+                        'last_'
+                    )
+                ),
+                self::SCHEMA_COMMENT_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'comments'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'description',
+                        'desc'
+                    )
+                ),
+                self::SCHEMA_TAXONOMY_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'taxonomies (tags and categories)'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'description',
+                        'desc'
+                    )
+                ),
+            ];
             $option = self::OPTION_ENTRIES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -711,11 +877,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Settings entries', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.<hr/><strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).<br/>Eg: Both entries <code>siteurl</code> and <code>/site.*/</code> match option name <code>"siteurl"</code>.', 'graphql-api'),
-                    'option',
-                ),
+                Properties::TITLE => $entriesTitle,
+                Properties::DESCRIPTION => $moduleDescriptions[$module],
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
 

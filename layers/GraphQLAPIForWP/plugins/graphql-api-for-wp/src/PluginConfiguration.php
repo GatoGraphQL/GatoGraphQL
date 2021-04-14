@@ -51,6 +51,14 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
 use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
 use PoPSchema\Settings\Environment as SettingsEnvironment;
+use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
+use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
+use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
+use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
+use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
+use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
+use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
+use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -445,6 +453,66 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
+            // White/Blacklisted entries to CustomPost.meta
+            [
+                'class' => CustomPostMetaComponentConfiguration::class,
+                'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => CustomPostMetaComponentConfiguration::class,
+                'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
+            // White/Blacklisted entries to User.meta
+            [
+                'class' => UserMetaComponentConfiguration::class,
+                'envVariable' => UserMetaEnvironment::USER_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => UserMetaComponentConfiguration::class,
+                'envVariable' => UserMetaEnvironment::USER_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_META,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
+            // White/Blacklisted entries to Comment.meta
+            [
+                'class' => CommentMetaComponentConfiguration::class,
+                'envVariable' => CommentMetaEnvironment::COMMENT_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENT_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => CommentMetaComponentConfiguration::class,
+                'envVariable' => CommentMetaEnvironment::COMMENT_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENT_META,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
+            // White/Blacklisted entries to PostTag.meta and PostCategory.meta
+            [
+                'class' => TaxonomyMetaComponentConfiguration::class,
+                'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => TaxonomyMetaComponentConfiguration::class,
+                'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
         ];
         // For each environment variable, see if its value has been saved in the settings
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -758,6 +826,18 @@ class PluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
                 \PoPSchema\PostCategories\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
+                \PoPSchema\CustomPostMeta\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_USER_META => [
+                \PoPSchema\UserMeta\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
+                \PoPSchema\CommentMeta\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
+                \PoPSchema\TaxonomyMeta\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
                 \PoPSchema\Menus\Component::class,
