@@ -56,15 +56,24 @@ jobs:
             -   name: Dependencies - Downgrade PHP code via Rector
                 run: ci/downgrade_code.sh "" "" "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
 
+            ################################################################################
             # Run Rector again with --dry-run, check no further downgrades are executed
             # This serves 2 purposes:
             # 1. Make sure that all downgrades were executed, i.e. chained downgrades were executed successfully
             # 2. Check that no buggy code has been produced from running a buggy Rector rule
+            #
+            # Running Rector a second time takes several minutes, making the CI slow for testing PRs
+            # Then, only execute it in the "push" event
+            # (it this will seldom throw an error, and only after upgrading the dependencies, mostly Rector itself)
+            ################################################################################
             -   name: (Again) Local packages - Downgrade PHP code via Rector
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi --dry-run
+                if: github.event_name == 'push'
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
                 run: ci/downgrade_code.sh --dry-run "" "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
+                if: github.event_name == 'push'
+            ################################################################################
 
             # Prepare for testing on PHP 7.1
             -   name: Install PHP Parallel Lint
