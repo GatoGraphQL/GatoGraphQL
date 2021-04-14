@@ -768,7 +768,7 @@ class PluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
                 \PoPSchema\CommentMeta\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_TAG_META => [
+            SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
                 \PoPSchema\TaxonomyMeta\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
