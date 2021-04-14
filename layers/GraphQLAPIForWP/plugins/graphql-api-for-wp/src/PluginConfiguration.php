@@ -498,6 +498,21 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENT_META,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
+            // White/Blacklisted entries to PostTag.meta and PostCategory.meta
+            [
+                'class' => TaxonomyMetaComponentConfiguration::class,
+                'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => TaxonomyMetaComponentConfiguration::class,
+                'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
         ];
         // For each environment variable, see if its value has been saved in the settings
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
