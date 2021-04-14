@@ -8,7 +8,21 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Further completed the WordPress schema
+  - Categories
+  - Menus
+  - Meta values
+  - Settings
+  - User posts
 - Composable directives
+
+### Backwards-breaking changes:
+
+- Simplified the codebase, using container services everywhere
+
+### Fixed:
+
+- Improved support for PHP 8.0 (fixed several issues)
 
 ## 0.7.12/13 - 2021-02-23
 
