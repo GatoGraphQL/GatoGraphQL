@@ -759,6 +759,18 @@ class PluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
                 \PoPSchema\PostCategories\Component::class,
             ],
+            SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
+                \PoPSchema\CustomPostMeta\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_USER_META => [
+                \PoPSchema\UserMeta\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
+                \PoPSchema\CommentMeta\Component::class,
+            ],
+            SchemaTypeModuleResolver::SCHEMA_TAG_META => [
+                \PoPSchema\TaxonomyMeta\Component::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
                 \PoPSchema\Menus\Component::class,
             ],

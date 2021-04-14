@@ -47,6 +47,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
     public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
     public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
+    public const SCHEMA_CUSTOMPOST_META = Plugin::NAMESPACE . '\schema-custompost-meta';
+    public const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
+    public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
+    public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
     public const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
     public const SCHEMA_SETTINGS = Plugin::NAMESPACE . '\schema-settings';
     public const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
@@ -113,6 +117,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_TAGS,
             self::SCHEMA_CATEGORIES,
             self::SCHEMA_POST_CATEGORIES,
+            self::SCHEMA_CUSTOMPOST_META,
+            self::SCHEMA_USER_META,
+            self::SCHEMA_COMMENT_META,
+            self::SCHEMA_TAXONOMY_META,
             self::SCHEMA_MENUS,
             self::SCHEMA_SETTINGS,
             self::SCHEMA_MEDIA,
@@ -185,6 +193,31 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                         self::SCHEMA_POSTS,
                     ],
                     [
+                        self::SCHEMA_CATEGORIES,
+                    ],
+                ];
+            case self::SCHEMA_CUSTOMPOST_META:
+                return [
+                    [
+                        self::SCHEMA_CUSTOMPOSTS,
+                    ],
+                ];
+            case self::SCHEMA_USER_META:
+                return [
+                    [
+                        self::SCHEMA_USERS,
+                    ],
+                ];
+            case self::SCHEMA_COMMENT_META:
+                return [
+                    [
+                        self::SCHEMA_COMMENTS,
+                    ],
+                ];
+            case self::SCHEMA_TAXONOMY_META:
+                return [
+                    [
+                        self::SCHEMA_TAGS,
                         self::SCHEMA_CATEGORIES,
                     ],
                 ];
@@ -266,6 +299,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_TAGS => \__('Schema Post Tags', 'graphql-api'),
             self::SCHEMA_CATEGORIES => \__('Schema Categories', 'graphql-api'),
             self::SCHEMA_POST_CATEGORIES => \__('Schema Post Categories', 'graphql-api'),
+            self::SCHEMA_CUSTOMPOST_META => \__('Schema Custom Post Meta', 'graphql-api'),
+            self::SCHEMA_USER_META => \__('Schema User Meta', 'graphql-api'),
+            self::SCHEMA_COMMENT_META => \__('Schema Comment Meta', 'graphql-api'),
+            self::SCHEMA_TAXONOMY_META => \__('Schema Taxonomy Meta', 'graphql-api'),
             self::SCHEMA_MENUS => \__('Schema Menus', 'graphql-api'),
             self::SCHEMA_SETTINGS => \__('Schema Settings', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTS => \__('Schema Custom Posts', 'graphql-api'),
@@ -334,6 +371,31 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('post categories', 'graphql-api'),
+                    $this->postCategoryTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_CUSTOMPOST_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->postTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_USER_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->userTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_COMMENT_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->commentTypeResolver->getTypeName()
+                );
+            case self::SCHEMA_TAXONOMY_META:
+                return sprintf(
+                    \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
+                    'meta',
+                    $this->postTagTypeResolver->getTypeName(),
                     $this->postCategoryTypeResolver->getTypeName()
                 );
             case self::SCHEMA_MENUS:
