@@ -3,6 +3,9 @@ services:
         public: true
         autowire: true
 
+    PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface:
+        class: \PoPSchema\SchemaCommons\Services\AllowOrDenySettingsService
+
     PoPSchema\SchemaCommons\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 

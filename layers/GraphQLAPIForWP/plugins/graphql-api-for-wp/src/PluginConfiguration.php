@@ -51,6 +51,14 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
 use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
 use PoPSchema\Settings\Environment as SettingsEnvironment;
+use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
+use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
+use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
+use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
+use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
+use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
+use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
+use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -443,6 +451,21 @@ class PluginConfiguration
                 'class' => SettingsComponentConfiguration::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_BEHAVIOR,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
+                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+            ],
+            // White/Blacklisted entries to CustomPost.meta
+            [
+                'class' => CustomPostMetaComponentConfiguration::class,
+                'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
+                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                // Remove whitespaces, and empty entries (they mess up with regex)
+                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+            ],
+            [
+                'class' => CustomPostMetaComponentConfiguration::class,
+                'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
         ];
