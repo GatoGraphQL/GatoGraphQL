@@ -511,6 +511,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        $defaultMetaValues = [
+            self::OPTION_ENTRIES => [],
+            self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
+        ];
         $defaultValues = [
             self::SCHEMA_CUSTOMPOSTS => [
                 self::OPTION_LIST_DEFAULT_LIMIT => 10,
@@ -552,6 +556,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 ],
                 self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
             ],
+            self::SCHEMA_CUSTOMPOST_META => $defaultMetaValues,
+            self::SCHEMA_USER_META => $defaultMetaValues,
+            self::SCHEMA_COMMENT_META => $defaultMetaValues,
+            self::SCHEMA_TAXONOMY_META => $defaultMetaValues,
         ];
         return $defaultValues[$module][$option];
     }
@@ -777,7 +785,91 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 Properties::POSSIBLE_VALUES => $possibleValues,
                 Properties::IS_MULTIPLE => true,
             ];
-        } elseif ($module == self::SCHEMA_SETTINGS) {
+        } elseif (
+            in_array($module, [
+                self::SCHEMA_SETTINGS,
+                self::SCHEMA_CUSTOMPOST_META,
+                self::SCHEMA_USER_META,
+                self::SCHEMA_COMMENT_META,
+                self::SCHEMA_TAXONOMY_META,
+            ])
+        ) {
+            $entriesTitle = $module === self::SCHEMA_SETTINGS ?
+                \__('Settings entries', 'graphql-api')
+                : \__('Meta keys', 'graphql-api');
+            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying field <code>meta</code> on %s.', 'graphql-api');
+            $headsUpDesc = sprintf(
+                \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).', 'graphql-api'),
+                'option',
+            );
+            $entryDesc = \__('Eg: Both entries <code>%1$s</code> and <code>/%2$s.*/</code> match option name <code>"%1$s"</code>.', 'graphql-api');
+            $moduleDescriptions = [
+                self::SCHEMA_SETTINGS => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.', 'graphql-api'),
+                        'option'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'siteurl',
+                        'site'
+                    )
+                ),
+                self::SCHEMA_CUSTOMPOST_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'custom posts'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        '_edit_last',
+                        '_edit_'
+                    )
+                ),
+                self::SCHEMA_USER_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'users'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'last_name',
+                        'last_'
+                    )
+                ),
+                self::SCHEMA_COMMENT_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'comments'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'description',
+                        'desc'
+                    )
+                ),
+                self::SCHEMA_TAXONOMY_META => sprintf(
+                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    sprintf(
+                        $metaKeyDesc,
+                        'taxonomies (tags and categories)'
+                    ),
+                    $headsUpDesc,
+                    sprintf(
+                        $entryDesc,
+                        'description',
+                        'desc'
+                    )
+                ),
+            ];
             $option = self::OPTION_ENTRIES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -785,11 +877,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Settings entries', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.<hr/><strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).<br/>Eg: Both entries <code>siteurl</code> and <code>/site.*/</code> match option name <code>"siteurl"</code>.', 'graphql-api'),
-                    'option',
-                ),
+                Properties::TITLE => $entriesTitle,
+                Properties::DESCRIPTION => $moduleDescriptions[$module],
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
 
