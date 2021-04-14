@@ -16,6 +16,9 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
      */
     public function isEntryAllowed(string $name, array $entries, string $behavior): bool
     {
+        if ($entries === []) {
+            return $behavior === Behaviors::DENYLIST;
+        }
         $matchResults = array_filter(array_map(
             function (string $termOrRegex) use ($name): bool {
                 // Check if it is a regex expression
