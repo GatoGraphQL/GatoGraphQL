@@ -15,7 +15,7 @@ trait PluginInfoTrait
      */
     public static function init(array $container): void
     {
-        if (isset(self::$initialized)) {
+        if (self::$initialized) {
             return;
         }
 
