@@ -614,7 +614,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Enable "Admin" schema?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Add super-powered "admin" fields to the GraphQL schema (such as <code>Root.adminPosts</code>, <code>Root.roles</code>, and others).<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).<br/><br/><strong>Heads up!</strong><br/>If you need some fields but not others, then click the checkbox to enable all the "admin" fields, and then remove the unneeded fields via an Access Control List.', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>Root.roles</code>, and others), to be used by the admin only.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).<br/><br/><strong>Heads up!</strong><br/>If you need some fields but not others, then click the checkbox to enable all the "admin" fields, and then remove the unneeded fields via an Access Control List.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif (

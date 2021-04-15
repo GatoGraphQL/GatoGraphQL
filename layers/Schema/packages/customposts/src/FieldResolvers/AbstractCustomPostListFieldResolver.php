@@ -24,16 +24,16 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         return [
             'customPosts',
             'customPostCount',
-            'adminCustomPosts',
-            'adminCustomPostCount',
+            'unrestrictedCustomPosts',
+            'unrestrictedCustomPostCount',
         ];
     }
 
     public function getAdminFieldNames(): array
     {
         return [
-            'adminCustomPosts',
-            'adminCustomPostCount',
+            'unrestrictedCustomPosts',
+            'unrestrictedCustomPostCount',
         ];
     }
 
@@ -42,8 +42,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         $types = [
             'customPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'customPostCount' => SchemaDefinition::TYPE_INT,
-            'adminCustomPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'adminCustomPostCount' => SchemaDefinition::TYPE_INT,
+            'unrestrictedCustomPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'unrestrictedCustomPostCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -53,8 +53,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-            case 'adminCustomPosts':
-            case 'adminCustomPostCount':
+            case 'unrestrictedCustomPosts':
+            case 'unrestrictedCustomPostCount':
                 return true;
         }
         return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
@@ -66,8 +66,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         $descriptions = [
             'customPosts' => $translationAPI->__('Custom posts', 'pop-posts'),
             'customPostCount' => $translationAPI->__('Number of custom posts', 'pop-posts'),
-            'adminCustomPosts' => $translationAPI->__('[Admin] Custom posts', 'pop-posts'),
-            'adminCustomPostCount' => $translationAPI->__('[Admin] Number of custom posts', 'pop-posts'),
+            'unrestrictedCustomPosts' => $translationAPI->__('[Admin] Custom posts', 'pop-posts'),
+            'unrestrictedCustomPostCount' => $translationAPI->__('[Admin] Number of custom posts', 'pop-posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -78,8 +78,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-            case 'adminCustomPosts':
-            case 'adminCustomPostCount':
+            case 'unrestrictedCustomPosts':
+            case 'unrestrictedCustomPostCount':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -93,8 +93,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-            case 'adminCustomPosts':
-            case 'adminCustomPostCount':
+            case 'unrestrictedCustomPosts':
+            case 'unrestrictedCustomPostCount':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -103,7 +103,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
     protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         switch ($fieldName) {
-            case 'adminCustomPosts':
+            case 'unrestrictedCustomPosts':
                 return [
                     CustomPostRelationalFieldDataloadModuleProcessor::class,
                     CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST
@@ -113,7 +113,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                     CustomPostRelationalFieldDataloadModuleProcessor::class,
                     CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT
                 ];
-            case 'adminCustomPostCount':
+            case 'unrestrictedCustomPostCount':
                 return [
                     CustomPostRelationalFieldDataloadModuleProcessor::class,
                     CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT
@@ -136,8 +136,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             Status::PUBLISHED,
         ];
         $statuses = in_array($fieldName, [
-            'adminCustomPosts',
-            'adminCustomPostCount',
+            'unrestrictedCustomPosts',
+            'unrestrictedCustomPostCount',
         ]) ? [
             Status::PUBLISHED,
             Status::PENDING,
@@ -151,7 +151,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         ];
         switch ($fieldName) {
             case 'customPosts':
-            case 'adminCustomPosts':
+            case 'unrestrictedCustomPosts':
                 return array_merge(
                     $sharedQuery,
                     [
@@ -159,7 +159,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                     ]
                 );
             case 'customPostCount':
-            case 'adminCustomPostCount':
+            case 'unrestrictedCustomPostCount':
                 return $sharedQuery;
         }
         return [];
@@ -183,7 +183,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'customPosts':
-            case 'adminCustomPosts':
+            case 'unrestrictedCustomPosts':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -191,7 +191,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $customPostTypeAPI->getCustomPosts($query, $options);
             case 'customPostCount':
-            case 'adminCustomPostCount':
+            case 'unrestrictedCustomPostCount':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
@@ -205,7 +205,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
     {
         switch ($fieldName) {
             case 'customPosts':
-            case 'adminCustomPosts':
+            case 'unrestrictedCustomPosts':
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
