@@ -77,6 +77,7 @@ add_action('plugins_loaded', function (): void {
         'version' => '0.7.13',
         'file' => __FILE__,
         'baseName' => plugin_basename(__FILE__),
+        'slug' => 'graphql-api-events-manager',
         'dir' => dirname(__FILE__),
         'url' => plugin_dir_url(__FILE__),
     ]);
