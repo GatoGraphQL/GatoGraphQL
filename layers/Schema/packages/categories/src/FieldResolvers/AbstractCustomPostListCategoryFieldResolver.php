@@ -19,6 +19,8 @@ abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCusto
         $descriptions = [
             'customPosts' => $translationAPI->__('Custom posts which contain this category', 'pop-categories'),
             'customPostCount' => $translationAPI->__('Number of custom posts which contain this category', 'pop-categories'),
+            'adminCustomPosts' => $translationAPI->__('[Admin] Custom posts which contain this category', 'pop-categories'),
+            'adminCustomPostCount' => $translationAPI->__('[Admin] Number of custom posts which contain this category', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -41,6 +43,8 @@ abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCusto
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
+            case 'adminCustomPosts':
+            case 'adminCustomPostCount':
                 $query[$this->getQueryProperty()] = [$typeResolver->getID($category)];
                 break;
         }

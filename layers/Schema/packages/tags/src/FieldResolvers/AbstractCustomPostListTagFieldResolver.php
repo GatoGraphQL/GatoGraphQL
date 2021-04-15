@@ -19,6 +19,8 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
         $descriptions = [
             'customPosts' => $translationAPI->__('Custom posts which contain this tag', 'pop-tags'),
             'customPostCount' => $translationAPI->__('Number of custom posts which contain this tag', 'pop-tags'),
+            'adminCustomPosts' => $translationAPI->__('[Admin] Custom posts which contain this tag', 'pop-tags'),
+            'adminCustomPostCount' => $translationAPI->__('[Admin] Number of custom posts which contain this tag', 'pop-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -41,6 +43,8 @@ abstract class AbstractCustomPostListTagFieldResolver extends AbstractCustomPost
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
+            case 'adminCustomPosts':
+            case 'adminCustomPostCount':
                 $query[$this->getQueryProperty()] = [$typeResolver->getID($tag)];
                 break;
         }

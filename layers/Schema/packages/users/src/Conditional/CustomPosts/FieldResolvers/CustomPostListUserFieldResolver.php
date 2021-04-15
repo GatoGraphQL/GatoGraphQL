@@ -22,6 +22,8 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
         $descriptions = [
             'customPosts' => $translationAPI->__('Custom posts by the user', 'pop-users'),
             'customPostCount' => $translationAPI->__('Number of custom posts by the user', 'pop-users'),
+            'adminCustomPosts' => $translationAPI->__('[Admin] Custom posts by the user', 'pop-users'),
+            'adminCustomPostCount' => $translationAPI->__('[Admin] Number of custom posts by the user', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,6 +44,8 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
+            case 'adminCustomPosts':
+            case 'adminCustomPostCount':
                 $query['authors'] = [$typeResolver->getID($user)];
                 break;
         }
