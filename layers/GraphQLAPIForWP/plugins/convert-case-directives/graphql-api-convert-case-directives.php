@@ -26,9 +26,26 @@ register_activation_hook(__FILE__, function (): void {
     \update_option('graphql-api-extension', true);
 });
 
-// If the GraphQL API plugin is active => Create and set-up the extension
+/**
+ * Create and set-up the extension
+ */
 add_action('plugins_loaded', function (): void {
+    /**
+     * Validate the GraphQL API plugin is active
+     */
     if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+        \add_action('admin_notices', function () {
+            _e(sprintf(
+                '<div class="notice notice-error">' .
+                    '<p>%s</p>' .
+                '</div>',
+                sprintf(
+                    __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-events-manager'),
+                    __('GraphQL API for WordPress', 'graphql-api-convert-case-directives'),
+                    __('GraphQL API - Convert Case Directives', 'graphql-api-convert-case-directives')
+                )
+            ));
+        });
         return;
     }
 
