@@ -14,13 +14,13 @@ Text Domain: graphql-api-events-manager
 Domain Path: /languages
 */
 
+use GraphQLAPI\EventsManager\PluginInfo;
+use GraphQLAPI\EventsManager\GraphQLAPIExtension;
+
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
-
-use GraphQLAPI\EventsManager\PluginInfo;
-use GraphQLAPI\EventsManager\GraphQLAPIExtension;
 
 register_activation_hook(__FILE__, function (): void {
     \update_option('graphql-api-extension', true);
@@ -28,6 +28,26 @@ register_activation_hook(__FILE__, function (): void {
 
 add_action('plugins_loaded', function (): void {
     if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+        return;
+    }
+
+    /**
+     * Make sure this plugin is not duplicated.
+     */
+    if (class_exists('\GraphQLAPI\EventsManager\PluginInfo')) {
+        \add_action('admin_notices', function () {
+            _e(sprintf(
+                '<div class="notice notice-error">' .
+                    '<p>%s</p>' .
+                '</div>',
+                sprintf(
+                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    __('GraphQL API - Events Manager', 'graphql-api-events-manager'),
+                    PluginInfo::get('version'),
+                    '0.7.13'
+                )
+            ));
+        });
         return;
     }
 

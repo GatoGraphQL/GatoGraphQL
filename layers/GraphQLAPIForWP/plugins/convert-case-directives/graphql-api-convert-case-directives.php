@@ -32,6 +32,26 @@ add_action('plugins_loaded', function (): void {
         return;
     }
 
+    /**
+     * Make sure this plugin is not duplicated.
+     */
+    if (class_exists('\GraphQLAPI\ConvertCaseDirectives\PluginInfo')) {
+        \add_action('admin_notices', function () {
+            _e(sprintf(
+                '<div class="notice notice-error">' .
+                    '<p>%s</p>' .
+                '</div>',
+                sprintf(
+                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    __('GraphQL API - Convert Case Directives', 'graphql-api-events-manager'),
+                    PluginInfo::get('version'),
+                    '0.7.13'
+                )
+            ));
+        });
+        return;
+    }
+
     // Load Composer’s autoloader
     require_once(__DIR__ . '/vendor/autoload.php');
 

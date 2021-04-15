@@ -15,13 +15,13 @@ Domain Path: /languages
 GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
+use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
+
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
-
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Make sure this plugin is not duplicated.
@@ -36,7 +36,8 @@ if (class_exists('\GraphQLAPI\GraphQLAPI\PluginInfo')) {
                 '<p>%s</p>' .
             '</div>',
             sprintf(
-                __('Plugin <strong>GraphQL API for WordPress</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                __('GraphQL API for WordPress', 'graphql-api'),
                 PluginInfo::get('version'),
                 '0.7.13'
             )
