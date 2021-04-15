@@ -137,7 +137,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $dbKey,
                 $dbObjectID
             ) = UnionTypeHelpers::extractDBObjectTypeAndID(
-                $dbObjectID
+                // If the object could not be loaded, $dbObjectID will be all ID, with no $dbKey
+                // Since that could be an int, the strict typing would throw an error,
+                // so make sure to type it as a string
+                (string) $dbObjectID
             );
         } else {
             // Add all properties requested from the object
