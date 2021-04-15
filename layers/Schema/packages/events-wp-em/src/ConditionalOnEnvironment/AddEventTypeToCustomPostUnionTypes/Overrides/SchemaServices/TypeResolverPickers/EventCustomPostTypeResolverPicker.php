@@ -24,6 +24,7 @@ class EventCustomPostTypeResolverPicker extends UpstreamEventCustomPostTypeResol
         $customPostIDs = array_keys($customPosts);
         $query = [
             'include' => $customPostIDs,
+            'scope' => 'all',
         ];
         $events = $eventTypeAPI->getEvents($query);
         // The response must be ordered by ID
