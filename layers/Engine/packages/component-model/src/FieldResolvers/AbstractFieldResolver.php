@@ -47,6 +47,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return [];
     }
 
+    public function getAdminFieldNamesToResolve(): array
+    {
+        return [];
+    }
+
     /**
      * Implement all the fieldNames defined in the interfaces
      *
@@ -248,7 +253,13 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             // Find which is the $schemaDefinitionResolver that will satisfy this schema definition
             // First try the one declared by the fieldResolver
             $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver);
-            if (!is_null($maybeSchemaDefinitionResolver) && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())) {
+            if (
+                $maybeSchemaDefinitionResolver !== null
+                && (
+                    in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
+                    || in_array($fieldName, $maybeSchemaDefinitionResolver->getAdminFieldNamesToResolve())
+                )
+            ) {
                 $schemaDefinitionResolver = $maybeSchemaDefinitionResolver;
             } else {
                 // Otherwise, try through all of its interfaces
