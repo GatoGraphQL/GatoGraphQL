@@ -47,7 +47,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'post' => $translationAPI->__('Post with a specific ID', 'posts'),
-            'unrestrictedPost' => $translationAPI->__('[Admin] Post with a specific ID', 'posts'),
+            'unrestrictedPost' => $translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

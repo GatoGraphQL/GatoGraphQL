@@ -22,8 +22,8 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
         $descriptions = [
             'posts' => $translationAPI->__('Posts which contain this category', 'post-categories'),
             'postCount' => $translationAPI->__('Number of posts which contain this category', 'post-categories'),
-            'unrestrictedPosts' => $translationAPI->__('[Admin] Posts which contain this category', 'post-categories'),
-            'unrestrictedPostCount' => $translationAPI->__('[Admin] Number of posts which contain this category', 'post-categories'),
+            'unrestrictedPosts' => $translationAPI->__('[Unrestricted] Posts which contain this category', 'post-categories'),
+            'unrestrictedPostCount' => $translationAPI->__('[Unrestricted] Number of posts which contain this category', 'post-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

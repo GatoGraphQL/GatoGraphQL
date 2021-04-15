@@ -52,7 +52,7 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'customPost' => $translationAPI->__('Custom post with a specific ID', 'customposts'),
-            'unrestrictedCustomPost' => $translationAPI->__('[Admin] Custom post with a specific ID', 'customposts'),
+            'unrestrictedCustomPost' => $translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

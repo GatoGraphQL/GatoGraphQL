@@ -66,8 +66,8 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         $descriptions = [
             'customPosts' => $translationAPI->__('Custom posts', 'pop-posts'),
             'customPostCount' => $translationAPI->__('Number of custom posts', 'pop-posts'),
-            'unrestrictedCustomPosts' => $translationAPI->__('[Admin] Custom posts', 'pop-posts'),
-            'unrestrictedCustomPostCount' => $translationAPI->__('[Admin] Number of custom posts', 'pop-posts'),
+            'unrestrictedCustomPosts' => $translationAPI->__('[Unrestricted] Custom posts', 'pop-posts'),
+            'unrestrictedCustomPostCount' => $translationAPI->__('[Unrestricted] Number of custom posts', 'pop-posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

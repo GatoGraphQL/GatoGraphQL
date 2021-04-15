@@ -52,9 +52,9 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'page' => $translationAPI->__('Page with a specific ID', 'pages'),
             'pages' => $translationAPI->__('Pages', 'pages'),
             'pageCount' => $translationAPI->__('Number of pages', 'pages'),
-            'unrestrictedPage' => $translationAPI->__('[Admin] Page with a specific ID', 'pages'),
-            'unrestrictedPages' => $translationAPI->__('[Admin] Pages', 'pages'),
-            'unrestrictedPageCount' => $translationAPI->__('[Admin] Number of pages', 'pages'),
+            'unrestrictedPage' => $translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
+            'unrestrictedPages' => $translationAPI->__('[Unrestricted] Pages', 'pages'),
+            'unrestrictedPageCount' => $translationAPI->__('[Unrestricted] Number of pages', 'pages'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
