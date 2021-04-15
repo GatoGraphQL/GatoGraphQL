@@ -1756,7 +1756,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             if (!ComponentConfiguration::enableAdminSchema()) {
                 $fieldNames = array_values(array_diff(
                     $fieldNames,
-                    $fieldResolver->getAdminFieldNamesToResolve()
+                    $fieldResolver->getAdminFieldNames()
                 ));
             }
 

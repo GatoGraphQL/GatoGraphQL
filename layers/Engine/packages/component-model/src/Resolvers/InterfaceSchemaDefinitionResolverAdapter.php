@@ -34,7 +34,7 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
      * This function will never be called for the Adapter,
      * but must be implemented to satisfy the interface
      */
-    public function getAdminFieldNamesToResolve(): array
+    public function getAdminFieldNames(): array
     {
         return [];
     }

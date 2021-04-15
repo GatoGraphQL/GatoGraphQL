@@ -47,7 +47,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         return [];
     }
 
-    public function getAdminFieldNamesToResolve(): array
+    public function getAdminFieldNames(): array
     {
         return [];
     }
