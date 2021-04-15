@@ -19,6 +19,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use GraphQLAPI\EventsManager\PluginInfo;
+use GraphQLAPI\EventsManager\GraphQLAPIExtension;
+
 register_activation_hook(__FILE__, function (): void {
     \update_option('graphql-api-extension', true);
 });
@@ -28,13 +31,15 @@ add_action('plugins_loaded', function (): void {
         return;
     }
 
-    define('GRAPHQL_API_EVENTS_MANAGER_PLUGIN_FILE', __FILE__);
-    define('GRAPHQL_API_EVENTS_MANAGER_VERSION', '0.7.13');
-    define('GRAPHQL_API_EVENTS_MANAGER_DIR', dirname(__FILE__));
-    define('GRAPHQL_API_EVENTS_MANAGER_URL', plugin_dir_url(__FILE__));
-
     // Load Composer’s autoloader
     require_once(__DIR__ . '/vendor/autoload.php');
 
-    (new \GraphQLAPI\EventsManager\GraphQLAPIExtension(__FILE__))->setup();
+    // Initialize the Plugin information
+    PluginInfo::init([
+        'version' => '0.7.13',
+        'dir' => dirname(__FILE__),
+        'url' => plugin_dir_url(__FILE__),
+    ]);
+
+    (new GraphQLAPIExtension(__FILE__))->setup();
 });
