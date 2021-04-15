@@ -18,6 +18,8 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
     public const MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT = 'filterinner-adminunioncustompostcount';
     public const MODULE_FILTERINNER_CUSTOMPOSTLISTLIST = 'filterinner-custompostlist';
     public const MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT = 'filterinner-custompostcount';
+    public const MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST = 'filterinner-admincustompostlist';
+    public const MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT = 'filterinner-admincustompostcount';
 
     public function getModulesToProcess(): array
     {
@@ -28,6 +30,8 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             [self::class, self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT],
             [self::class, self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST],
             [self::class, self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT],
+            [self::class, self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST],
+            [self::class, self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT],
         );
     }
 
@@ -39,6 +43,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST:
             case self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST:
+            case self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST:
                 $inputmodules = [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
@@ -52,6 +57,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT:
             case self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT:
             case self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT:
+            case self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT:
                 $inputmodules = [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
@@ -74,6 +80,8 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             in_array($module[1], [
                 self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST,
                 self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT,
+                self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST,
+                self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT,
             ])
         ) {
             $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
