@@ -31,25 +31,6 @@ register_activation_hook(__FILE__, function (): void {
  */
 add_action('plugins_loaded', function (): void {
     /**
-     * Validate the GraphQL API plugin is active
-     */
-    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
-        \add_action('admin_notices', function () {
-            _e(sprintf(
-                '<div class="notice notice-error">' .
-                    '<p>%s</p>' .
-                '</div>',
-                sprintf(
-                    __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-events-manager'),
-                    __('GraphQL API for WordPress', 'graphql-api-convert-case-directives'),
-                    __('GraphQL API - Convert Case Directives', 'graphql-api-convert-case-directives')
-                )
-            ));
-        });
-        return;
-    }
-
-    /**
      * Make sure this plugin is not duplicated.
      */
     if (class_exists('\GraphQLAPI\ConvertCaseDirectives\PluginInfo')) {
@@ -60,9 +41,35 @@ add_action('plugins_loaded', function (): void {
                 '</div>',
                 sprintf(
                     __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    __('GraphQL API - Convert Case Directives', 'graphql-api-events-manager'),
+                    __('GraphQL API - Convert Case Directives', 'graphql-api-convert-case-directives'),
                     PluginInfo::get('version'),
                     '0.7.13'
+                )
+            ));
+        });
+        return;
+    }
+
+    /**
+     * Load translations
+     */
+    \add_action('init', function (): void {
+        load_plugin_textdomain('graphql-api-convert-case-directives', false, plugin_basename(__FILE__) . '/languages');
+    });
+
+    /**
+     * Validate the GraphQL API plugin is active
+     */
+    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+        \add_action('admin_notices', function () {
+            _e(sprintf(
+                '<div class="notice notice-error">' .
+                    '<p>%s</p>' .
+                '</div>',
+                sprintf(
+                    __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-convert-case-directives'),
+                    __('GraphQL API for WordPress', 'graphql-api-convert-case-directives'),
+                    __('GraphQL API - Convert Case Directives', 'graphql-api-convert-case-directives')
                 )
             ));
         });
@@ -75,6 +82,9 @@ add_action('plugins_loaded', function (): void {
     // Initialize the Plugin information
     PluginInfo::init([
         'version' => '0.7.13',
+        'file' => __FILE__,
+        'baseName' => plugin_basename(__FILE__),
+        'slug' => 'graphql-api-convert-case-directives',
         'dir' => dirname(__FILE__),
         'url' => plugin_dir_url(__FILE__),
     ]);

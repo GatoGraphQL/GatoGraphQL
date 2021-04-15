@@ -46,6 +46,13 @@ if (class_exists('\GraphQLAPI\GraphQLAPI\PluginInfo')) {
     return;
 }
 
+/**
+ * Load translations
+ */
+\add_action('init', function (): void {
+    load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
+});
+
 // Check Composer's autoload has been generated
 $autoloadFile = __DIR__ . '/vendor/autoload.php';
 if (!file_exists($autoloadFile)) {
@@ -66,6 +73,9 @@ require_once($autoloadFile);
 // Initialize the Plugin information
 PluginInfo::init([
     'version' => '0.7.13',
+    'file' => __FILE__,
+    'baseName' => plugin_basename(__FILE__),
+    'slug' => 'graphql-api',
     'dir' => dirname(__FILE__),
     'url' => plugin_dir_url(__FILE__),
 ]);
