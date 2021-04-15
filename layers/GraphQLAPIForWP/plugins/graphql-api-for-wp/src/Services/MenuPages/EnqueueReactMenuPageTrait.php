@@ -16,14 +16,14 @@ trait EnqueueReactMenuPageTrait
     {
         \wp_enqueue_script(
             'graphql-api-react',
-            \GRAPHQL_API_URL . 'assets/js/vendors/react.min.js',
+            PluginInfo::get('url') . 'assets/js/vendors/react.min.js',
             array(),
             PluginInfo::get('version'),
             $addInFooter
         );
         \wp_enqueue_script(
             'graphql-api-react-dom',
-            \GRAPHQL_API_URL . 'assets/js/vendors/react-dom.min.js',
+            PluginInfo::get('url') . 'assets/js/vendors/react-dom.min.js',
             array('graphql-api-react'),
             PluginInfo::get('version'),
             $addInFooter

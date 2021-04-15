@@ -66,6 +66,7 @@ use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointF
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use PoP\Root\Environment as RootEnvironment;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -673,7 +674,7 @@ class PluginConfiguration
             \PoP\ComponentModel\Environment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
-            \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => \GRAPHQL_API_URL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
+            \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => PluginInfo::get('url') . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
         $componentClassConfiguration[\PoP\APIEndpointsForWP\Component::class] = [
             // Disable the Native endpoint

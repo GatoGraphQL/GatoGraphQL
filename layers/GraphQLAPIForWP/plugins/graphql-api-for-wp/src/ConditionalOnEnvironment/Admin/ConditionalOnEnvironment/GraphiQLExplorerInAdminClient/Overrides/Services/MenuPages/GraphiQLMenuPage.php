@@ -83,7 +83,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         // Override styles for the admin, so load last
         \wp_enqueue_style(
             'graphql-api-graphiql-with-explorer-client',
-            \GRAPHQL_API_URL . 'assets/css/graphiql-with-explorer-client.css',
+            PluginInfo::get('url') . 'assets/css/graphiql-with-explorer-client.css',
             array(),
             PluginInfo::get('version')
         );

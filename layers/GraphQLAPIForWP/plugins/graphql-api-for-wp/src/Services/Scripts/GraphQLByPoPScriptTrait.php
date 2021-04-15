@@ -19,6 +19,6 @@ trait GraphQLByPoPScriptTrait
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim(\GRAPHQL_API_URL, '/');
+        return trim(PluginInfo::get('url'), '/');
     }
 }

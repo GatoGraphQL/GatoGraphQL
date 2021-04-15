@@ -45,7 +45,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseURL(?string $baseURL = null): void
     {
-        $this->baseURL = $baseURL ?? constant('GRAPHQL_API_URL');
+        $this->baseURL = $baseURL ?? PluginInfo::get('url');
     }
 
     /**

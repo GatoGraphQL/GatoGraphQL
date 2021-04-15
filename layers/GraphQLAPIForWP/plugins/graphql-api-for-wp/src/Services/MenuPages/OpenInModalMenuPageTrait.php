@@ -21,7 +21,7 @@ trait OpenInModalMenuPageTrait
          */
         \wp_enqueue_style(
             'graphql-api-hide-admin-bar',
-            \GRAPHQL_API_URL . 'assets/css/hide-admin-bar.css',
+            PluginInfo::get('url') . 'assets/css/hide-admin-bar.css',
             array(),
             PluginInfo::get('version')
         );
@@ -30,7 +30,7 @@ trait OpenInModalMenuPageTrait
          */
         \wp_enqueue_style(
             'graphql-api-modal-window-content',
-            \GRAPHQL_API_URL . 'assets/css/modal-window-content.css',
+            PluginInfo::get('url') . 'assets/css/modal-window-content.css',
             array(),
             PluginInfo::get('version')
         );

@@ -533,7 +533,7 @@ class ModuleListTable extends AbstractItemListTable
          */
         \wp_enqueue_style(
             'graphql-api-module-list-table',
-            \GRAPHQL_API_URL . 'assets/css/module-list-table.css',
+            PluginInfo::get('url') . 'assets/css/module-list-table.css',
             array(),
             PluginInfo::get('version')
         );

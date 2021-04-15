@@ -24,6 +24,6 @@ trait ModuleResolverTrait
      */
     protected function getBaseURL(): string
     {
-        return constant('GRAPHQL_API_URL');
+        return PluginInfo::get('url');
     }
 }
