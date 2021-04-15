@@ -15,6 +15,10 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      */
     public function getFieldNamesToResolve(): array;
     /**
+     * Those fieldNames to be enabled for the "Admin" schema only
+     */
+    public function getAdminFieldNames(): array;
+    /**
      * A list of classes of all the (GraphQL-style) interfaces the fieldResolver implements
      */
     public function getImplementedFieldInterfaceResolverClasses(): array;

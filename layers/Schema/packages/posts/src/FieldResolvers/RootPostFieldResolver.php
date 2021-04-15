@@ -27,6 +27,17 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
             parent::getFieldNamesToResolve(),
             [
                 'post',
+                'unrestrictedPost',
+            ]
+        );
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        return array_merge(
+            parent::getAdminFieldNames(),
+            [
+                'unrestrictedPost',
             ]
         );
     }
@@ -36,6 +47,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'post' => $translationAPI->__('Post with a specific ID', 'posts'),
+            'unrestrictedPost' => $translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,6 +56,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     {
         $types = [
             'post' => SchemaDefinition::TYPE_ID,
+            'unrestrictedPost' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -54,6 +67,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'post':
+            case 'unrestrictedPost':
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -87,11 +101,20 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'post':
+            case 'unrestrictedPost':
                 $query = [
                     'include' => [$fieldArgs['id']],
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
+                    'status' => array_merge(
+                        [
+                            Status::PUBLISHED,
+                        ],
+                        $fieldName === 'unrestrictedPost' ?
+                            [
+                                Status::DRAFT,
+                                Status::PENDING,
+                                Status::TRASH,
+                            ] : []
+                    ),
                 ];
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -109,6 +132,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     {
         switch ($fieldName) {
             case 'post':
+            case 'unrestrictedPost':
                 return PostTypeResolver::class;
         }
 

@@ -35,6 +35,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         ModuleResolverTrait::hasDocumentation as upstreamHasDocumentation;
     }
 
+    public const SCHEMA_ADMIN_SCHEMA = Plugin::NAMESPACE . '\schema-admin-schema';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
     public const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
@@ -64,6 +65,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     /**
      * Setting options
      */
+    public const OPTION_ENABLE_ADMIN_SCHEMA = 'enable-admin-schema';
     public const OPTION_LIST_DEFAULT_LIMIT = 'list-default-limit';
     public const OPTION_LIST_MAX_LIMIT = 'list-max-limit';
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
@@ -106,6 +108,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public function getModulesToResolve(): array
     {
         return [
+            self::SCHEMA_ADMIN_SCHEMA,
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_GENERIC_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
@@ -288,6 +291,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public function getName(string $module): string
     {
         $names = [
+            self::SCHEMA_ADMIN_SCHEMA => \__('Schema for the Admin', 'graphql-api'),
             self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Schema Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Schema Posts', 'graphql-api'),
             self::SCHEMA_COMMENTS => \__('Schema Comments', 'graphql-api'),
@@ -320,6 +324,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public function getDescription(string $module): string
     {
         switch ($module) {
+            case self::SCHEMA_ADMIN_SCHEMA:
+                return \__('Add "admin" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
@@ -433,6 +439,24 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         return parent::getDescription($module);
     }
 
+    public function canBeDisabled(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_ADMIN_SCHEMA:
+                return false;
+        }
+        return parent::canBeDisabled($module);
+    }
+
+    public function isHidden(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_ADMIN_SCHEMA:
+                return true;
+        }
+        return parent::isHidden($module);
+    }
+
     public function isEnabledByDefault(string $module): bool
     {
         switch ($module) {
@@ -516,6 +540,9 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
         ];
         $defaultValues = [
+            self::SCHEMA_ADMIN_SCHEMA => [
+                self::OPTION_ENABLE_ADMIN_SCHEMA => false,
+            ],
             self::SCHEMA_CUSTOMPOSTS => [
                 self::OPTION_LIST_DEFAULT_LIMIT => 10,
                 self::OPTION_LIST_MAX_LIMIT => 100,
@@ -578,7 +605,19 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited', 'graphql-api');
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if (
+        if ($module == self::SCHEMA_ADMIN_SCHEMA) {
+            $option = self::OPTION_ENABLE_ADMIN_SCHEMA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable "Admin" schema?', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>Root.roles</code>, and others), to be used by the admin only.<hr/><strong>Watch out: Enable only if needed!</strong><br/>These fields can expose sensitive information, so they should be enabled only when the API is not publicly exposed (such as when using a local WordPress instance, to build a static site).<br/><br/><strong>Heads up!</strong><br/>If you need some fields but not others, then click the checkbox to enable all the "admin" fields, and then remove the unneeded fields via an Access Control List.', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif (
             in_array($module, [
                 self::SCHEMA_CUSTOMPOSTS,
                 // self::SCHEMA_GENERIC_CUSTOMPOSTS,

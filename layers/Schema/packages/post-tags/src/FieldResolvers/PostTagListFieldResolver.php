@@ -22,6 +22,8 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
         $descriptions = [
             'posts' => $translationAPI->__('Posts which contain this tag', 'pop-taxonomies'),
             'postCount' => $translationAPI->__('Number of posts which contain this tag', 'pop-taxonomies'),
+            'unrestrictedPosts' => $translationAPI->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
+            'unrestrictedPostCount' => $translationAPI->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,6 +44,8 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
+            case 'unrestrictedPosts':
+            case 'unrestrictedPostCount':
                 $query['tag-ids'] = [$typeResolver->getID($tag)];
                 break;
         }

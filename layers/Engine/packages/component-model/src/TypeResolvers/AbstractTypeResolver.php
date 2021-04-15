@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use League\Pipeline\PipelineBuilder;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Environment;
@@ -1750,6 +1751,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldResolver->getFieldNamesToResolve(),
                 $fieldResolver->getFieldNamesFromInterfaces()
             );
+
+            // If "Admin" Schema is disabled: Remove fields for the admin only
+            if (!ComponentConfiguration::enableAdminSchema()) {
+                $fieldNames = array_values(array_diff(
+                    $fieldNames,
+                    $fieldResolver->getAdminFieldNames()
+                ));
+            }
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
             // Also pass the implemented interfaces defining the field

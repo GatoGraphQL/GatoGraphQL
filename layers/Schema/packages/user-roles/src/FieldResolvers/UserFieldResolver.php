@@ -29,6 +29,14 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
+    public function getAdminFieldNames(): array
+    {
+        return [
+            'roles',
+            'capabilities',
+        ];
+    }
+
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [

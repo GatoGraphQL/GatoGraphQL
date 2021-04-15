@@ -30,6 +30,15 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         return [];
     }
 
+    /**
+     * This function will never be called for the Adapter,
+     * but must be implemented to satisfy the interface
+     */
+    public function getAdminFieldNames(): array
+    {
+        return [];
+    }
+
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         return $this->fieldInterfaceResolver->getSchemaFieldType($fieldName);

@@ -514,6 +514,13 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
+            // Enable "admin" schema
+            [
+                'class' => ComponentModelComponentConfiguration::class,
+                'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
+                'option' => SchemaTypeModuleResolver::OPTION_ENABLE_ADMIN_SCHEMA,
+            ],
         ];
         // For each environment variable, see if its value has been saved in the settings
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
