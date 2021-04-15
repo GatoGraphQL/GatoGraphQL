@@ -44,6 +44,8 @@ class PostUserFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
+            case 'adminPosts':
+            case 'adminPostCount':
                 $query['authors'] = [$typeResolver->getID($user)];
                 break;
         }

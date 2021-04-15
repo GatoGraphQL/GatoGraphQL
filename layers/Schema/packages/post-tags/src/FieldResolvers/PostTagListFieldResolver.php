@@ -44,6 +44,8 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
+            case 'adminPosts':
+            case 'adminPostCount':
                 $query['tag-ids'] = [$typeResolver->getID($tag)];
                 break;
         }

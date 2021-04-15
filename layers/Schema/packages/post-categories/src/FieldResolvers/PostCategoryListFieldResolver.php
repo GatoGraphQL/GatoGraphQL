@@ -44,6 +44,8 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
+            case 'adminPosts':
+            case 'adminPostCount':
                 $query['category-ids'] = [$typeResolver->getID($category)];
                 break;
         }
