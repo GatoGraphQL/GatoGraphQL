@@ -23,6 +23,12 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         return [
             'posts',
             'postCount',
+        ];
+    }
+
+    public function getAdminFieldNamesToResolve(): array
+    {
+        return [
             'adminPosts',
             'adminPostCount',
         ];
