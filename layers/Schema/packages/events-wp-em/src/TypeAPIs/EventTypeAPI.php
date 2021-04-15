@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\EventsWPEM\TypeAPIs;
 
-use WP_Post;
 use EM_Event;
 use EM_Events;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
-use PoPSchema\Events\TypeAPIs\EventTypeAPIInterface;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-
 use function date_i18n;
 use function em_get_event;
+use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
+
+use PoPSchema\Events\TypeAPIs\EventTypeAPIInterface;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -124,10 +125,18 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
             } elseif (is_string($query['status'])) {
                 $status = $query['status'];
             }
-            if ($status !== null) {
-                $query['status'] = $status == 'publish' ? 1 : 0;
-            } else {
-                unset($query['status']);
+
+            // Convert from WP to EM's way of handling the status
+            if ($status === Status::PUBLISHED) {
+                $query['status'] = 1;
+            } elseif (
+                in_array($status, [
+                    Status::PENDING,
+                    Status::DRAFT,
+                    Status::TRASH,
+                ])
+            ) {
+                $query['status'] = 0;
             }
         }
 
