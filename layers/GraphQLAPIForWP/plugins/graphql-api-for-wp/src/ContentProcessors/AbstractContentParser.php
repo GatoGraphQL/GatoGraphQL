@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Root\Environment as RootEnvironment;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -35,7 +36,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseDir(?string $baseDir = null): void
     {
-        $this->baseDir = $baseDir ?? constant('GRAPHQL_API_DIR');
+        $this->baseDir = $baseDir ?? PluginInfo::get('dir');
     }
 
     /**
@@ -44,7 +45,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseURL(?string $baseURL = null): void
     {
-        $this->baseURL = $baseURL ?? constant('GRAPHQL_API_URL');
+        $this->baseURL = $baseURL ?? PluginInfo::get('url');
     }
 
     /**

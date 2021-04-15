@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\EnqueueReactMenuPageTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Voyager page
@@ -37,31 +37,31 @@ class GraphQLVoyagerMenuPage extends AbstractMenuPage
         // CSS
         \wp_enqueue_style(
             'graphql-api-voyager-client',
-            \GRAPHQL_API_URL . 'assets/css/voyager-client.css',
+            PluginInfo::get('url') . 'assets/css/voyager-client.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
         \wp_enqueue_style(
             'graphql-api-voyager',
-            \GRAPHQL_API_URL . 'assets/css/vendors/voyager.css',
+            PluginInfo::get('url') . 'assets/css/vendors/voyager.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
 
         // JS: execute them all in the footer
         $this->enqueueReactAssets(true);
         \wp_enqueue_script(
             'graphql-api-voyager',
-            \GRAPHQL_API_URL . 'assets/js/vendors/voyager.min.js',
+            PluginInfo::get('url') . 'assets/js/vendors/voyager.min.js',
             array('graphql-api-react-dom'),
-            \GRAPHQL_API_VERSION,
+            PluginInfo::get('version'),
             true
         );
         \wp_enqueue_script(
             'graphql-api-voyager-client',
-            \GRAPHQL_API_URL . 'assets/js/voyager-client.js',
+            PluginInfo::get('url') . 'assets/js/voyager-client.js',
             array('graphql-api-voyager'),
-            \GRAPHQL_API_VERSION,
+            PluginInfo::get('version'),
             true
         );
 

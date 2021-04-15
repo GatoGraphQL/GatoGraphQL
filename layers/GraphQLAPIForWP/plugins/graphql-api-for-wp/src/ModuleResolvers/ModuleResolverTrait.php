@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\HasMarkdownDocumentationModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 trait ModuleResolverTrait
 {
@@ -15,7 +16,7 @@ trait ModuleResolverTrait
      */
     protected function getBaseDir(): string
     {
-        return constant('GRAPHQL_API_DIR');
+        return PluginInfo::get('dir');
     }
 
     /**
@@ -23,6 +24,6 @@ trait ModuleResolverTrait
      */
     protected function getBaseURL(): string
     {
-        return constant('GRAPHQL_API_URL');
+        return PluginInfo::get('url');
     }
 }
