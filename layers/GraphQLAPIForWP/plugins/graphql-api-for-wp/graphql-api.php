@@ -65,8 +65,8 @@ require_once($autoloadFile);
 // Initialize the Plugin information
 PluginInfo::init([
     'version' => '0.7.13',
+    'dir' => dirname(__FILE__),
 ]);
-define('GRAPHQL_API_DIR', dirname(__FILE__));
 define('GRAPHQL_API_URL', plugin_dir_url(__FILE__));
 
 // Create and set-up the plugin instance
