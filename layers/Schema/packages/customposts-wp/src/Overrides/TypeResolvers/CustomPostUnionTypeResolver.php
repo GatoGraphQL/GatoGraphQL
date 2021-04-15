@@ -19,10 +19,11 @@ class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\C
         $resultItemIDTargetTypeResolvers = [];
         $instanceManager = InstanceManagerFacade::getInstance();
         $customPostUnionTypeDataLoader = $instanceManager->getInstance($this->getTypeDataLoaderClass());
-        if ($customPosts = $customPostUnionTypeDataLoader->getObjects($ids)) {
+        // If any ID cannot be resolved, the resultItem will be null
+        if ($customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids))) {
             foreach ($customPosts as $customPost) {
                 $targetTypeResolver = $this->getTargetTypeResolver($customPost);
-                if (!is_null($targetTypeResolver)) {
+                if ($targetTypeResolver !== null) {
                     $resultItemIDTargetTypeResolvers[$targetTypeResolver->getID($customPost)] = $targetTypeResolver;
                 }
             }

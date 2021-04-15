@@ -39,10 +39,15 @@ class UnionTypeHelpers
      */
     public static function extractDBObjectTypeAndID(string $composedDBKeyResultItemID): array
     {
-        return explode(
+        $parts = explode(
             UnionTypeSymbols::DBOBJECT_COMPOSED_TYPE_ID_SEPARATOR,
             $composedDBKeyResultItemID
         );
+        // If the object could not be loaded, $composedDBKeyResultItemID will be all ID, with no $dbKey
+        if (count($parts) === 1) {
+            return ['', $parts[0]];
+        }
+        return $parts;
     }
 
     /**
