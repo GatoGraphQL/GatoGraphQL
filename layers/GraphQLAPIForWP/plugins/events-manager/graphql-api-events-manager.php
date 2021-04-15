@@ -51,6 +51,13 @@ add_action('plugins_loaded', function (): void {
     }
 
     /**
+     * Load translations
+     */
+    \add_action('init', function (): void {
+        load_plugin_textdomain('graphql-api-events-manager', false, plugin_basename(__FILE__) . '/languages');
+    });
+
+    /**
      * Validate the GraphQL API plugin is active
      */
     if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {

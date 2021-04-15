@@ -46,6 +46,13 @@ if (class_exists('\GraphQLAPI\GraphQLAPI\PluginInfo')) {
     return;
 }
 
+/**
+ * Load translations
+ */
+\add_action('init', function (): void {
+    load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
+});
+
 // Check Composer's autoload has been generated
 $autoloadFile = __DIR__ . '/vendor/autoload.php';
 if (!file_exists($autoloadFile)) {
