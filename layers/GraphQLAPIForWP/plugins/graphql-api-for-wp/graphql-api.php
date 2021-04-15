@@ -69,7 +69,6 @@ PluginInfo::init([
 define('GRAPHQL_API_PLUGIN_FILE', __FILE__);
 define('GRAPHQL_API_DIR', dirname(__FILE__));
 define('GRAPHQL_API_URL', plugin_dir_url(__FILE__));
-define('GRAPHQL_API_BASE_NAME', plugin_basename(__FILE__)); // "graphql-api/graphql-api.php"
 
 // Create and set-up the plugin instance
 (new Plugin(__FILE__))->setup();
