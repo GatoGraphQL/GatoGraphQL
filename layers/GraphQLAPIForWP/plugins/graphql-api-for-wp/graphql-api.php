@@ -66,6 +66,8 @@ require_once($autoloadFile);
 // Initialize the Plugin information
 PluginInfo::init([
     'version' => '0.7.13',
+    'file' => __FILE__,
+    'baseName' => plugin_basename(__FILE__),
     'dir' => dirname(__FILE__),
     'url' => plugin_dir_url(__FILE__),
 ]);
