@@ -15,6 +15,7 @@ Domain Path: /languages
 */
 
 use GraphQLAPI\ConvertCaseDirectives\PluginInfo;
+use GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -31,6 +32,9 @@ add_action('plugins_loaded', function (): void {
         return;
     }
 
+    // Load Composer’s autoloader
+    require_once(__DIR__ . '/vendor/autoload.php');
+
     // Initialize the Plugin information
     PluginInfo::init([
         'version' => '0.7.13',
@@ -38,12 +42,5 @@ add_action('plugins_loaded', function (): void {
         'url' => plugin_dir_url(__FILE__),
     ]);
 
-    define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_VERSION', '0.7.13');
-    define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_DIR', dirname(__FILE__));
-    define('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_URL', plugin_dir_url(__FILE__));
-
-    // Load Composer’s autoloader
-    require_once(__DIR__ . '/vendor/autoload.php');
-
-    (new \GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension(__FILE__))->setup();
+    (new GraphQLAPIExtension(__FILE__))->setup();
 });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives\ModuleResolvers;
 
+use GraphQLAPI\ConvertCaseDirectives\PluginInfo;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\HasMarkdownDocumentationModuleResolverTrait;
 
 trait ModuleResolverTrait
@@ -15,7 +16,7 @@ trait ModuleResolverTrait
      */
     protected function getBaseDir(): string
     {
-        return constant('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_DIR');
+        return PluginInfo::get('dir');
     }
 
     /**
@@ -23,6 +24,6 @@ trait ModuleResolverTrait
      */
     protected function getBaseURL(): string
     {
-        return constant('GRAPHQL_API_CONVERT_CASE_DIRECTIVES_URL');
+        return PluginInfo::get('url');
     }
 }
