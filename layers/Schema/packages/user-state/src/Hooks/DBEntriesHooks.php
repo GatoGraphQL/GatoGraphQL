@@ -36,10 +36,7 @@ class DBEntriesHooks extends AbstractHookSet
     {
         $dbname_datafields['userstate'] = $this->hooksAPI->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',
-            array_merge(
-                $this->globalFieldResolver->getFieldNamesToResolve(),
-                $this->globalFieldResolver->getAdminFieldNamesToResolve()
-            )
+            $this->globalFieldResolver->getFieldNamesToResolve()
         );
         return $dbname_datafields;
     }

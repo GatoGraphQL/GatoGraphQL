@@ -255,10 +255,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $maybeSchemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver);
             if (
                 $maybeSchemaDefinitionResolver !== null
-                && (
-                    in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
-                    || in_array($fieldName, $maybeSchemaDefinitionResolver->getAdminFieldNamesToResolve())
-                )
+                && in_array($fieldName, $maybeSchemaDefinitionResolver->getFieldNamesToResolve())
             ) {
                 $schemaDefinitionResolver = $maybeSchemaDefinitionResolver;
             } else {

@@ -23,6 +23,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         return [
             'posts',
             'postCount',
+            'adminPosts',
+            'adminPostCount',
         ];
     }
 

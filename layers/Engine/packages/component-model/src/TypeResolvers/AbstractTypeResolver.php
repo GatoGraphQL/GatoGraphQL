@@ -1752,12 +1752,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldResolver->getFieldNamesFromInterfaces()
             );
 
-            // If "Admin" Schema is enabled: Add fields enabled for the admin only
-            if (ComponentConfiguration::enableAdminSchema()) {
-                $fieldNames = array_merge(
-                    $fieldResolver->getAdminFieldNamesToResolve(),
-                    $fieldNames
-                );
+            // If "Admin" Schema is disabled: Remove fields for the admin only
+            if (!ComponentConfiguration::enableAdminSchema()) {
+                $fieldNames = array_values(array_diff(
+                    $fieldNames,
+                    $fieldResolver->getAdminFieldNamesToResolve()
+                ));
             }
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)

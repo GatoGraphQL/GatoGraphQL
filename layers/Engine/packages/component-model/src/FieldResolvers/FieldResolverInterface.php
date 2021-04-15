@@ -15,8 +15,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      */
     public function getFieldNamesToResolve(): array;
     /**
-     * Get an array with the fieldNames that this fieldResolver resolves,
-     * for the "Admin" schema
+     * Those fieldNames to be enabled for the "Admin" schema only
      */
     public function getAdminFieldNamesToResolve(): array;
     /**
