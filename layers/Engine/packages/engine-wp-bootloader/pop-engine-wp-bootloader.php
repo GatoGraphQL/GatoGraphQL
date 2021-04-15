@@ -9,7 +9,7 @@ Author: Leonardo Losoviz
 
 use PoP\Engine\AppLoader;
 
-if (!class_exists('\PoP\Engine\AppLoader')) {
+if (!class_exists(AppLoader::class)) {
     return;
 }
 

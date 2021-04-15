@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Comments;
 
 use PoP\Root\Component\AbstractComponent;
+use PoP\RESTAPI\Component as RESTAPIComponent;
+use PoPSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -56,14 +58,14 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+        if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
             self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
         }
 
-        if (class_exists('\PoPSchema\Users\Component')) {
+        if (class_exists(UsersComponent::class)) {
             self::initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
                 '/Conditional/Users'
             );
         }

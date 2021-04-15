@@ -16,6 +16,7 @@ Domain Path: /languages
 
 use GraphQLAPI\EventsManager\PluginInfo;
 use GraphQLAPI\EventsManager\GraphQLAPIExtension;
+use GraphQLAPI\GraphQLAPI\Plugin;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -33,7 +34,7 @@ add_action('plugins_loaded', function (): void {
     /**
      * Make sure this plugin is not duplicated.
      */
-    if (class_exists('\GraphQLAPI\EventsManager\PluginInfo')) {
+    if (class_exists(PluginInfo::class)) {
         \add_action('admin_notices', function () {
             _e(sprintf(
                 '<div class="notice notice-error">' .
@@ -60,7 +61,7 @@ add_action('plugins_loaded', function (): void {
     /**
      * Validate the GraphQL API plugin is active
      */
-    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+    if (!class_exists(Plugin::class)) {
         \add_action('admin_notices', function () {
             _e(sprintf(
                 '<div class="notice notice-error">' .

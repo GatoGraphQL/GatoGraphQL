@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UsersWP;
 
 use PoP\Root\Component\AbstractComponent;
+use PoPSchema\CustomPosts\Component as CustomPostsComponent;
 
 /**
  * Initialize component
@@ -55,7 +56,7 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         self::initServices(dirname(__DIR__));
-        if (class_exists('\PoPSchema\CustomPosts\Component')) {
+        if (class_exists(CustomPostsComponent::class)) {
             self::initServices(dirname(__DIR__), '/Conditional/CustomPosts');
         }
     }
