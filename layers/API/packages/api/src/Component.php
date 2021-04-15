@@ -8,6 +8,8 @@ use PoP\API\Configuration\Request;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\CacheControl\Component as CacheControlComponent;
 
 /**
  * Initialize component
@@ -82,12 +84,12 @@ class Component extends AbstractComponent
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages
-            if (class_exists('\PoP\AccessControl\Component')) {
+            if (class_exists(AccessControlComponent::class)) {
                 self::initServices(dirname(__DIR__), '/Conditional/AccessControl');
             }
             if (
-                class_exists('\PoP\CacheControl\Component')
-                && class_exists('\PoP\AccessControl\Component')
+                class_exists(CacheControlComponent::class)
+                && class_exists(AccessControlComponent::class)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
                 self::initSchemaServices(

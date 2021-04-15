@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) {
  * the newly downloaded file will be renamed (eg: graphql-api(2).zip)
  * and the plugin will exist twice, as graphql-api/... and graphql-api2/...
  */
-if (class_exists('\GraphQLAPI\GraphQLAPI\PluginInfo')) {
+if (class_exists(PluginInfo::class)) {
     \add_action('admin_notices', function () {
         _e(sprintf(
             '<div class="notice notice-error">' .

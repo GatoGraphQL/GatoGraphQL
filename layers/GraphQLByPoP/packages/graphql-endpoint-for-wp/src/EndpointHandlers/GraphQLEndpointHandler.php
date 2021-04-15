@@ -40,7 +40,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     protected function isGraphQLAPIEnabled(): bool
     {
         return
-            class_exists('\PoP\GraphQLAPI\Component')
+            class_exists(Component::class)
             && Component::isEnabled()
             && !ComponentConfiguration::isGraphQLAPIEndpointDisabled();
     }
