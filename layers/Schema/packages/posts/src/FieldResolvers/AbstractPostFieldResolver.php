@@ -102,12 +102,12 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
             case 'adminPosts':
                 return [
                     FieldDataloadModuleProcessor::class,
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
                 ];
             case 'adminPostCount':
                 return [
                     FieldDataloadModuleProcessor::class,
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT
                 ];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
