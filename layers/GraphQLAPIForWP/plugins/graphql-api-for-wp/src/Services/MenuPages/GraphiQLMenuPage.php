@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * GraphiQL page
@@ -49,7 +50,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             'graphql-api-graphiql-client',
             \GRAPHQL_API_URL . 'assets/css/graphiql-client.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
     }
 
@@ -68,7 +69,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             'graphql-api-graphiql',
             \GRAPHQL_API_URL . 'assets/css/vendors/graphiql.min.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
 
         // JS: execute them all in the footer
@@ -78,14 +79,14 @@ class GraphiQLMenuPage extends AbstractMenuPage
             'graphql-api-graphiql',
             \GRAPHQL_API_URL . 'assets/js/vendors/graphiql.min.js',
             array('graphql-api-react-dom'),
-            \GRAPHQL_API_VERSION,
+            PluginInfo::get('version'),
             true
         );
         \wp_enqueue_script(
             'graphql-api-graphiql-client',
             \GRAPHQL_API_URL . 'assets/js/graphiql-client.js',
             array('graphql-api-graphiql'),
-            \GRAPHQL_API_VERSION,
+            PluginInfo::get('version'),
             true
         );
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\PluginInfo;
+
 trait EnqueueReactMenuPageTrait
 {
 
@@ -16,14 +18,14 @@ trait EnqueueReactMenuPageTrait
             'graphql-api-react',
             \GRAPHQL_API_URL . 'assets/js/vendors/react.min.js',
             array(),
-            \GRAPHQL_API_VERSION,
+            PluginInfo::get('version'),
             $addInFooter
         );
         \wp_enqueue_script(
             'graphql-api-react-dom',
             \GRAPHQL_API_URL . 'assets/js/vendors/react-dom.min.js',
             array('graphql-api-react'),
-            \GRAPHQL_API_VERSION,
+            PluginInfo::get('version'),
             $addInFooter
         );
     }

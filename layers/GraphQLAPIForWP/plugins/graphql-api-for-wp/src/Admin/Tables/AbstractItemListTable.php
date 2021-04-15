@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
 
 use WP_List_Table;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Module Table
@@ -81,7 +82,7 @@ abstract class AbstractItemListTable extends WP_List_Table
             'graphql-api-wp-list-table-fix',
             \GRAPHQL_API_URL . 'assets/css/wp-list-table-fix.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
     }
 

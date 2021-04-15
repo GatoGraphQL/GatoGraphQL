@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\ConditionalOnEnvi
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -64,7 +65,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
                 'graphql-api-graphiql-with-explorer-' . $index,
                 $cssFileURL,
                 array(),
-                \GRAPHQL_API_VERSION
+                PluginInfo::get('version')
             );
         }
         preg_match_all('/<script[^>]+src="([^">]+)"/s', $htmlContent, $matches);
@@ -74,7 +75,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
                 'graphql-api-graphiql-with-explorer-' . $index,
                 $jsFileURL,
                 array(),
-                \GRAPHQL_API_VERSION,
+                PluginInfo::get('version'),
                 true
             );
         }
@@ -84,7 +85,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
             'graphql-api-graphiql-with-explorer-client',
             \GRAPHQL_API_URL . 'assets/css/graphiql-with-explorer-client.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
 
         // Load data into the script. Because no script is enqueued since it is
