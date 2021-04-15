@@ -132,22 +132,11 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        $statuses = [
-            Status::PUBLISHED,
-        ];
-        $statuses = in_array($fieldName, [
-            'unrestrictedCustomPosts',
-            'unrestrictedCustomPostCount',
-        ]) ? [
-            Status::PUBLISHED,
-            Status::PENDING,
-            Status::DRAFT,
-        ] : [
-            Status::PUBLISHED,
-        ];
         $sharedQuery = [
             'types-from-union-resolver-class' => CustomPostUnionTypeResolver::class,
-            'status' => $statuses,
+            'status' => [
+                Status::PUBLISHED,
+            ],
         ];
         switch ($fieldName) {
             case 'customPosts':

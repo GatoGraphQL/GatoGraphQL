@@ -136,28 +136,16 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
             case 'unrestrictedPosts':
                 return [
                     'limit' => ComponentConfiguration::getPostListDefaultLimit(),
-                    'status' => array_merge(
-                        [
-                            Status::PUBLISHED,
-                        ],
-                        $fieldName === 'unrestrictedPosts' ? [
-                            Status::PENDING,
-                            Status::DRAFT,
-                        ] : []
-                    ),
+                    'status' => [
+                        Status::PUBLISHED,
+                    ],
                 ];
             case 'postCount':
             case 'unrestrictedPostCount':
                 return [
-                    'status' => array_merge(
-                        [
-                            Status::PUBLISHED,
-                        ],
-                        $fieldName === 'unrestrictedPostCount' ? [
-                            Status::PENDING,
-                            Status::DRAFT,
-                        ] : []
-                    ),
+                    'status' => [
+                        Status::PUBLISHED,
+                    ],
                 ];
         }
         return [];
