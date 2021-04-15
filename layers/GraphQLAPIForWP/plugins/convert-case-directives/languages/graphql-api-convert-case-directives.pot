@@ -1,5 +1,5 @@
-# Copyright (C) 2020 GraphQL API
-# This file is distributed under the same license as the GraphQL API package.
+# Copyright (C) 2020 GraphQL API - Convert Case Directives
+# This file is distributed under the same license as the GraphQL API - Convert Case Directives package.
 #, fuzzy
 msgid ""
 msgstr ""
