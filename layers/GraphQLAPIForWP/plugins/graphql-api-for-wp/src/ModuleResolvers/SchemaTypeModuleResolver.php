@@ -325,7 +325,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     {
         switch ($module) {
             case self::SCHEMA_ADMIN_SCHEMA:
-                return \__('Add "admin" fields to the schema', 'graphql-api');
+                return \__('Add "unrestricted" admin fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
@@ -439,27 +439,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         return parent::getDescription($module);
     }
 
-    public function canBeDisabled(string $module): bool
-    {
-        switch ($module) {
-            case self::SCHEMA_ADMIN_SCHEMA:
-                return false;
-        }
-        return parent::canBeDisabled($module);
-    }
-
-    public function isHidden(string $module): bool
-    {
-        switch ($module) {
-            case self::SCHEMA_ADMIN_SCHEMA:
-                return true;
-        }
-        return parent::isHidden($module);
-    }
-
     public function isEnabledByDefault(string $module): bool
     {
         switch ($module) {
+            case self::SCHEMA_ADMIN_SCHEMA:
             case self::SCHEMA_CUSTOMPOST_META:
             case self::SCHEMA_USER_META:
             case self::SCHEMA_COMMENT_META:
