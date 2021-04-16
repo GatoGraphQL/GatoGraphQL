@@ -23,6 +23,16 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         return [
             'posts',
             'postCount',
+            'unrestrictedPosts',
+            'unrestrictedPostCount',
+        ];
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        return [
+            'unrestrictedPosts',
+            'unrestrictedPostCount',
         ];
     }
 
@@ -31,6 +41,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         $types = [
             'posts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'postCount' => SchemaDefinition::TYPE_INT,
+            'unrestrictedPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'unrestrictedPostCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -40,6 +52,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         $nonNullableFieldNames = [
             'posts',
             'postCount',
+            'unrestrictedPosts',
+            'unrestrictedPostCount',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -53,6 +67,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         $descriptions = [
             'posts' => $translationAPI->__('Posts', 'pop-posts'),
             'postCount' => $translationAPI->__('Number of posts', 'pop-posts'),
+            'unrestrictedPosts' => $translationAPI->__('[Unrestricted] Posts', 'pop-posts'),
+            'unrestrictedPostCount' => $translationAPI->__('[Unrestricted] Number of posts', 'pop-posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -63,6 +79,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
+            case 'unrestrictedPosts':
+            case 'unrestrictedPostCount':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -74,8 +92,8 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         switch ($fieldName) {
-            case 'posts':
-            case 'postCount':
+            case 'unrestrictedPosts':
+            case 'unrestrictedPostCount':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -88,6 +106,16 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
                 return [
                     FieldDataloadModuleProcessor::class,
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT
+                ];
+            case 'unrestrictedPosts':
+                return [
+                    FieldDataloadModuleProcessor::class,
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
+                ];
+            case 'unrestrictedPostCount':
+                return [
+                    FieldDataloadModuleProcessor::class,
+                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT
                 ];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
@@ -105,6 +133,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     ): array {
         switch ($fieldName) {
             case 'posts':
+            case 'unrestrictedPosts':
                 return [
                     'limit' => ComponentConfiguration::getPostListDefaultLimit(),
                     'status' => [
@@ -112,6 +141,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
                     ],
                 ];
             case 'postCount':
+            case 'unrestrictedPostCount':
                 return [
                     'status' => [
                         Status::PUBLISHED,
@@ -139,6 +169,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'posts':
+            case 'unrestrictedPosts':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -146,6 +177,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $postTypeAPI->getPosts($query, $options);
             case 'postCount':
+            case 'unrestrictedPostCount':
                 $query = $this->getQuery($typeResolver, $resultItem, $fieldName, $fieldArgs);
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
@@ -159,6 +191,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     {
         switch ($fieldName) {
             case 'posts':
+            case 'unrestrictedPosts':
                 return PostTypeResolver::class;
         }
 

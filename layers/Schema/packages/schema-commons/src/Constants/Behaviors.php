@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Settings\Constants;
+namespace PoPSchema\SchemaCommons\Constants;
 
 class Behaviors
 {

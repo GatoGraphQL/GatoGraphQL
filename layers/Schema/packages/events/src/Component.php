@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Events;
 
 use PoP\Root\Component\AbstractComponent;
+use PoPSchema\Users\Component as UsersComponent;
+use PoPSchema\Tags\Component as TagsComponent;
 
 /**
  * Initialize component
@@ -50,7 +52,7 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists('\PoPSchema\Tags\Component')) {
+        if (class_exists(TagsComponent::class)) {
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses),
@@ -58,10 +60,10 @@ class Component extends AbstractComponent
             );
         }
 
-        if (class_exists('\PoPSchema\Users\Component')) {
+        if (class_exists(UsersComponent::class)) {
             self::initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoPSchema\Users\Component::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
                 '/Conditional/Users'
             );
         }

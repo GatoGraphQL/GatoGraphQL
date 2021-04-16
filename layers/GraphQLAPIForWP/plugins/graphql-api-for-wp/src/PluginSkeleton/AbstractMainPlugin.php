@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
@@ -100,14 +101,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     return;
                 }
                 // If there is no version stored, it's the first screen after activating the plugin
-                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, PluginInfo::get('version'));
                 $isPluginJustActivated = $storedVersion === false;
-                $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== \GRAPHQL_API_VERSION;
+                $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== PluginInfo::get('version');
                 if (!$isPluginJustActivated || !$isPluginJustUpdated) {
                     return;
                 }
                 // Update to the current version
-                \update_option(PluginOptions::PLUGIN_VERSION, \GRAPHQL_API_VERSION);
+                \update_option(PluginOptions::PLUGIN_VERSION, PluginInfo::get('version'));
                 // If new CPTs have rewrite rules, these must be flushed
                 \flush_rewrite_rules();
                 // Regenerate the timestamp, to generate the service container

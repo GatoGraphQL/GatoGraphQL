@@ -7,6 +7,7 @@ namespace PoPSchema\UserStateAccessControl;
 use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
+use PoP\CacheControl\Component as CacheControlComponent;
 
 /**
  * Initialize component
@@ -54,7 +55,7 @@ class Component extends AbstractComponent
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Init conditional on API package being installed
-            if (class_exists('\PoP\CacheControl\Component')) {
+            if (class_exists(CacheControlComponent::class)) {
                 self::initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses),

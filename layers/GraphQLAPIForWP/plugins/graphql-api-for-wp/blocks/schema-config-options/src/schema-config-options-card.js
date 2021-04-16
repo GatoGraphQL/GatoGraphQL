@@ -14,10 +14,10 @@ import {
 	SETTINGS_VALUE_LABEL,
 } from '@graphqlapi/components';
 import {
-	ATTRIBUTE_VALUE_USE_NAMESPACING_DEFAULT,
-	ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED,
-	ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED,
-} from './namespacing-values';
+	ATTRIBUTE_VALUE_DEFAULT,
+	ATTRIBUTE_VALUE_ENABLED,
+	ATTRIBUTE_VALUE_DISABLED,
+} from './enabled-disabled-values';
 import {
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_STANDARD,
@@ -31,26 +31,43 @@ const SchemaConfigOptionsCard = ( props ) => {
 		className,
 		setAttributes,
 		attributes: {
+			enableAdminSchema,
 			useNamespacing,
 			mutationScheme,
 		},
 		isPublicPrivateSchemaEnabled = true,
+		isAdminSchemaEnabled = true,
 		isSchemaNamespacingEnabled = true,
 		isNestedMutationsEnabled = true,
 	} = props;
 	const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
+	const adminSchemaOptions = [
+		{
+			label: SETTINGS_VALUE_LABEL,
+			value: ATTRIBUTE_VALUE_DEFAULT,
+		},
+		{
+			label: __('Add "unrestricted" admin fields to the schema', 'graphql-api'),
+			value: ATTRIBUTE_VALUE_ENABLED,
+		},
+		{
+			label: __('Do not add admin fields', 'graphql-api'),
+			value: ATTRIBUTE_VALUE_DISABLED,
+		},
+	];
+	const adminSchemaOptionValues = adminSchemaOptions.map( option => option.value );
 	const namespacingOptions = [
 		{
 			label: SETTINGS_VALUE_LABEL,
-			value: ATTRIBUTE_VALUE_USE_NAMESPACING_DEFAULT,
+			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
 			label: __('Use namespacing', 'graphql-api'),
-			value: ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED,
+			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
 			label: __('Do not use namespacing', 'graphql-api'),
-			value: ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED,
+			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const namespacingOptionValues = namespacingOptions.map( option => option.value );
@@ -80,7 +97,7 @@ const SchemaConfigOptionsCard = ( props ) => {
 					{ __('Options', 'graphql-api') }
 				</CardHeader>
 				<CardBody>
-					{ ! isPublicPrivateSchemaEnabled && ! isSchemaNamespacingEnabled && ! isNestedMutationsEnabled && (
+					{ ! isPublicPrivateSchemaEnabled && ! isAdminSchemaEnabled && ! isSchemaNamespacingEnabled && ! isNestedMutationsEnabled && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __('All options for the Schema Configuration are disabled', 'graphql-api') }
 						</Notice>
@@ -98,7 +115,45 @@ const SchemaConfigOptionsCard = ( props ) => {
 							/>
 						</div>
 					) }
-					{ isPublicPrivateSchemaEnabled && ( isSchemaNamespacingEnabled || isNestedMutationsEnabled ) && (
+					{ isPublicPrivateSchemaEnabled && ( isAdminSchemaEnabled || isSchemaNamespacingEnabled || isNestedMutationsEnabled ) && (
+						<hr />
+					) }
+					{ isAdminSchemaEnabled && (
+						<div className={ `${ className }__admin_schema` }>
+							<em>{ __('Add admin fields to the schema?', 'graphql-api') }</em>
+							<InfoTooltip
+								{ ...props }
+								text={ __('Add "unrestricted" fields to the GraphQL schema (such as "Root.unrestrictedPosts", "User.roles", and others), to be used by the admin only', 'graphql-api') }
+							/>
+							{ !isSelected && (
+								<>
+									<br />
+									{ ( enableAdminSchema == ATTRIBUTE_VALUE_DEFAULT || !adminSchemaOptionValues.includes(enableAdminSchema) ) &&
+										<span>⭕️ { __('Default', 'graphql-api') }</span>
+									}
+									{ enableAdminSchema == ATTRIBUTE_VALUE_ENABLED &&
+										<span>✅ { __('Add "unrestricted" admin fields', 'graphql-api') }</span>
+									}
+									{ enableAdminSchema == ATTRIBUTE_VALUE_DISABLED &&
+										<span>❌ { __('Do not add fields', 'graphql-api') }</span>
+									}
+								</>
+							) }
+							{ isSelected &&
+								<RadioControl
+									{ ...props }
+									options={ adminSchemaOptions }
+									selected={ enableAdminSchema }
+									onChange={ newValue => (
+										setAttributes( {
+											enableAdminSchema: newValue
+										} )
+									)}
+								/>
+							}
+						</div>
+					) }
+					{ isAdminSchemaEnabled && ( isSchemaNamespacingEnabled || isNestedMutationsEnabled ) && (
 						<hr />
 					) }
 					{ isSchemaNamespacingEnabled && (
@@ -111,13 +166,13 @@ const SchemaConfigOptionsCard = ( props ) => {
 							{ !isSelected && (
 								<>
 									<br />
-									{ ( useNamespacing == ATTRIBUTE_VALUE_USE_NAMESPACING_DEFAULT || !namespacingOptionValues.includes(useNamespacing) ) &&
+									{ ( useNamespacing == ATTRIBUTE_VALUE_DEFAULT || !namespacingOptionValues.includes(useNamespacing) ) &&
 										<span>⭕️ { __('Default', 'graphql-api') }</span>
 									}
-									{ useNamespacing == ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED &&
+									{ useNamespacing == ATTRIBUTE_VALUE_ENABLED &&
 										<span>✅ { __('Use namespacing', 'graphql-api') }</span>
 									}
-									{ useNamespacing == ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED &&
+									{ useNamespacing == ATTRIBUTE_VALUE_DISABLED &&
 										<span>❌ { __('Do not use namespacing', 'graphql-api') }</span>
 									}
 								</>

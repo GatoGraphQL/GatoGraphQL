@@ -6,7 +6,7 @@ namespace PoPSchema\Settings;
 
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
-use PoPSchema\Settings\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration
 {

@@ -17,6 +17,8 @@ use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
+use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\CacheControl\Component as CacheControlComponent;
 
 /**
  * Initialize component
@@ -109,8 +111,8 @@ class Component extends AbstractComponent
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
             }
             if (
-                class_exists('\PoP\CacheControl\Component')
-                && class_exists('\PoP\AccessControl\Component')
+                class_exists(CacheControlComponent::class)
+                && class_exists(AccessControlComponent::class)
                 && AccessControlComponentConfiguration::canSchemaBePrivate()
             ) {
                 self::initSchemaServices(

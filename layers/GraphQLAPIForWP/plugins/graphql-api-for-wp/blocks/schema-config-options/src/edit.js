@@ -11,6 +11,7 @@
 import SchemaConfigOptionsCard from './schema-config-options-card';
 
 const isPublicPrivateSchemaEnabled = window.graphqlApiSchemaConfigOptions ? window.graphqlApiSchemaConfigOptions.isPublicPrivateSchemaEnabled : true;
+const isAdminSchemaEnabled = window.graphqlApiSchemaConfigOptions ? window.graphqlApiSchemaConfigOptions.isAdminSchemaEnabled : true;
 const isSchemaNamespacingEnabled = window.graphqlApiSchemaConfigOptions ? window.graphqlApiSchemaConfigOptions.isSchemaNamespacingEnabled : true;
 const isNestedMutationsEnabled = window.graphqlApiSchemaConfigOptions ? window.graphqlApiSchemaConfigOptions.isNestedMutationsEnabled : true;
 
@@ -20,6 +21,7 @@ const EditBlock = ( props ) => {
 		<div class={ className }>
 			<SchemaConfigOptionsCard
 				isPublicPrivateSchemaEnabled={ isPublicPrivateSchemaEnabled }
+				isAdminSchemaEnabled={ isAdminSchemaEnabled }
 				isSchemaNamespacingEnabled={ isSchemaNamespacingEnabled }
 				isNestedMutationsEnabled={ isNestedMutationsEnabled }
 				{ ...props }

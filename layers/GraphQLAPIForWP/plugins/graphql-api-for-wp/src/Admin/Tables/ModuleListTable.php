@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\Admin\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Module Table
@@ -532,9 +533,9 @@ class ModuleListTable extends AbstractItemListTable
          */
         \wp_enqueue_style(
             'graphql-api-module-list-table',
-            \GRAPHQL_API_URL . 'assets/css/module-list-table.css',
+            PluginInfo::get('url') . 'assets/css/module-list-table.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
     }
 

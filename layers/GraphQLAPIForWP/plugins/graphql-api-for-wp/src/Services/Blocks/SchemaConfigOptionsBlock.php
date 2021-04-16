@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use PoP\AccessControl\Schema\SchemaModes;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Schema Config Options block
@@ -22,13 +22,14 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
 {
     use GraphQLByPoPBlockTrait;
 
+    public const ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA = 'enableAdminSchema';
     public const ATTRIBUTE_NAME_USE_NAMESPACING = 'useNamespacing';
     public const ATTRIBUTE_NAME_MUTATION_SCHEME = 'mutationScheme';
     public const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
 
-    // public const ATTRIBUTE_VALUE_USE_NAMESPACING_DEFAULT = 'default';
-    public const ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED = 'enabled';
-    public const ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED = 'disabled';
+    // public const ATTRIBUTE_VALUE_DEFAULT = 'default';
+    public const ATTRIBUTE_VALUE_ENABLED = 'enabled';
+    public const ATTRIBUTE_VALUE_DISABLED = 'disabled';
 
     protected function getBlockName(): string
     {
@@ -73,15 +74,23 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
             );
         }
 
-        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
-            $useNamespacingLabels = [
-                self::ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED => \__('✅ Yes', 'graphql-api'),
-                self::ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED => \__('❌ No', 'graphql-api'),
+        if ($this->moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA)) {
+            $enabledDisabledLabels = [
+                self::ATTRIBUTE_VALUE_ENABLED => \__('✅ Yes', 'graphql-api'),
+                self::ATTRIBUTE_VALUE_DISABLED => \__('❌ No', 'graphql-api'),
             ];
             $blockContent .= sprintf(
                 $blockContentPlaceholder,
+                \__('Add admin fields to schema?', 'graphql-api'),
+                $enabledDisabledLabels[$attributes[self::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
+            );
+        }
+
+        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
+            $blockContent .= sprintf(
+                $blockContentPlaceholder,
                 \__('Use namespacing?', 'graphql-api'),
-                $useNamespacingLabels[$attributes[self::ATTRIBUTE_NAME_USE_NAMESPACING] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
+                $enabledDisabledLabels[$attributes[self::ATTRIBUTE_NAME_USE_NAMESPACING] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
             );
         }
 
@@ -132,6 +141,7 @@ EOT;
             parent::getLocalizedData(),
             [
                 'isPublicPrivateSchemaEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA),
+                'isAdminSchemaEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA),
                 'isSchemaNamespacingEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING),
                 'isNestedMutationsEnabled' => $this->moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS),
             ]

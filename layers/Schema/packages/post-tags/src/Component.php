@@ -7,6 +7,8 @@ namespace PoPSchema\PostTags;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Routing\DefinitionGroups;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
+use PoP\RESTAPI\Component as RESTAPIComponent;
+use PoP\API\Component as APIComponent;
 
 /**
  * Initialize component
@@ -51,10 +53,10 @@ class Component extends AbstractComponent
         ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (class_exists('\PoP\API\Component') && \PoP\API\Component::isEnabled()) {
+        if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
             self::initServices(dirname(__DIR__), '/Conditional/API');
         }
-        if (class_exists('\PoP\RESTAPI\Component') && \PoP\RESTAPI\Component::isEnabled()) {
+        if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
             self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
         }
     }

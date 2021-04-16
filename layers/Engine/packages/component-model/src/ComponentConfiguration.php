@@ -25,6 +25,7 @@ class ComponentConfiguration
     private static bool $enableSchemaEntityRegistries = false;
     private static bool $namespaceTypesAndInterfaces = false;
     private static bool $useSingleTypeInsteadOfUnionType = false;
+    private static bool $enableAdminSchema = false;
 
     /**
      * Initialize component configuration
@@ -169,6 +170,24 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
         $selfProperty = &self::$useSingleTypeInsteadOfUnionType;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function enableAdminSchema(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
+        $selfProperty = &self::$enableAdminSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

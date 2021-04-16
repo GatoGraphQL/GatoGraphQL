@@ -30,6 +30,18 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'page',
             'pages',
             'pageCount',
+            'unrestrictedPage',
+            'unrestrictedPages',
+            'unrestrictedPageCount',
+        ];
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        return [
+            'unrestrictedPage',
+            'unrestrictedPages',
+            'unrestrictedPageCount',
         ];
     }
 
@@ -40,6 +52,9 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'page' => $translationAPI->__('Page with a specific ID', 'pages'),
             'pages' => $translationAPI->__('Pages', 'pages'),
             'pageCount' => $translationAPI->__('Number of pages', 'pages'),
+            'unrestrictedPage' => $translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
+            'unrestrictedPages' => $translationAPI->__('[Unrestricted] Pages', 'pages'),
+            'unrestrictedPageCount' => $translationAPI->__('[Unrestricted] Number of pages', 'pages'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -50,6 +65,9 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'page' => SchemaDefinition::TYPE_ID,
             'pages' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'pageCount' => SchemaDefinition::TYPE_INT,
+            'unrestrictedPage' => SchemaDefinition::TYPE_ID,
+            'unrestrictedPages' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'unrestrictedPageCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -59,6 +77,8 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $nonNullableFieldNames = [
             'pages',
             'pageCount',
+            'unrestrictedPages',
+            'unrestrictedPageCount',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -72,6 +92,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'page':
+            case 'unrestrictedPage':
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -85,6 +106,8 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 );
             case 'pages':
             case 'pageCount':
+            case 'unrestrictedPages':
+            case 'unrestrictedPageCount':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -98,6 +121,8 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'pages':
             case 'pageCount':
+            case 'unrestrictedPages':
+            case 'unrestrictedPageCount':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -110,6 +135,16 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 return [
                     CustomPostRelationalFieldDataloadModuleProcessor::class,
                     CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT
+                ];
+            case 'unrestrictedPages':
+                return [
+                    CustomPostRelationalFieldDataloadModuleProcessor::class,
+                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST
+                ];
+            case 'unrestrictedPageCount':
+                return [
+                    CustomPostRelationalFieldDataloadModuleProcessor::class,
+                    CustomPostRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT
                 ];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
@@ -133,11 +168,19 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'page':
+            case 'unrestrictedPage':
                 $query = [
                     'include' => [$fieldArgs['id']],
-                    'status' => [
-                        Status::PUBLISHED,
-                    ],
+                    'status' => array_merge(
+                        [
+                            Status::PUBLISHED,
+                        ],
+                        $fieldName === 'unrestrictedPage' ? [
+                            Status::PENDING,
+                            Status::DRAFT,
+                            Status::TRASH,
+                        ] : []
+                    ),
                 ];
                 $options = [
                     'return-type' => ReturnTypes::IDS,
@@ -147,6 +190,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return null;
             case 'pages':
+            case 'unrestrictedPages':
                 $query = [
                     'limit' => ComponentConfiguration::getPageListDefaultLimit(),
                     'status' => [
@@ -159,6 +203,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $pageTypeAPI->getPages($query, $options);
             case 'pageCount':
+            case 'unrestrictedPageCount':
                 $query = [
                     'status' => [
                         Status::PUBLISHED,
@@ -177,6 +222,8 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'page':
             case 'pages':
+            case 'unrestrictedPage':
+            case 'unrestrictedPages':
                 return PageTypeResolver::class;
         }
 

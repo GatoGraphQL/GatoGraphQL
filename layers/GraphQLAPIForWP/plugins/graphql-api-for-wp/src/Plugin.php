@@ -19,6 +19,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\AppLoader;
 
@@ -51,7 +52,7 @@ class Plugin extends AbstractMainPlugin
             return;
         }
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
-        $currentMinorReleaseVersion = $this->getMinorReleaseVersion(\GRAPHQL_API_VERSION);
+        $currentMinorReleaseVersion = $this->getMinorReleaseVersion(PluginInfo::get('version'));
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
         if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
             return;
@@ -87,7 +88,7 @@ class Plugin extends AbstractMainPlugin
             $aboutMenuPage = $instanceManager->getInstance(AboutMenuPage::class);
             // Calculate the minor release version.
             // Eg: if current version is 0.6.3, minor version is 0.6
-            $minorReleaseVersion = $this->getMinorReleaseVersion(\GRAPHQL_API_VERSION);
+            $minorReleaseVersion = $this->getMinorReleaseVersion(PluginInfo::get('version'));
             $releaseNotesURL = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true',
                 $aboutMenuPage->getScreenID(),
@@ -117,7 +118,7 @@ class Plugin extends AbstractMainPlugin
                 '</div>',
                 sprintf(
                     __('Plugin <strong>GraphQL API for WordPress</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'graphql-api'),
-                    \GRAPHQL_API_VERSION,
+                    PluginInfo::get('version'),
                     $releaseNotesURL,
                     'thickbox open-plugin-details-modal',
                     $generalSettingsURL

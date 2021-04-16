@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\PluginInfo;
+
 /**
  * Menu page that uses tabpanels to organize its content
  */
@@ -19,15 +21,15 @@ trait UseTabpanelMenuPageTrait
          */
         \wp_enqueue_style(
             'graphql-api-tabpanel',
-            \GRAPHQL_API_URL . 'assets/css/tabpanel.css',
+            PluginInfo::get('url') . 'assets/css/tabpanel.css',
             array(),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
         \wp_enqueue_script(
             'graphql-api-tabpanel',
-            \GRAPHQL_API_URL . 'assets/js/tabpanel.js',
+            PluginInfo::get('url') . 'assets/js/tabpanel.js',
             array('jquery'),
-            \GRAPHQL_API_VERSION
+            PluginInfo::get('version')
         );
     }
 }

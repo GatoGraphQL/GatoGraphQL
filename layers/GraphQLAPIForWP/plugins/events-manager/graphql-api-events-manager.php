@@ -14,6 +14,10 @@ Text Domain: graphql-api-events-manager
 Domain Path: /languages
 */
 
+use GraphQLAPI\EventsManager\PluginInfo;
+use GraphQLAPI\EventsManager\GraphQLAPIExtension;
+use GraphQLAPI\GraphQLAPI\Plugin;
+
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
@@ -23,18 +27,68 @@ register_activation_hook(__FILE__, function (): void {
     \update_option('graphql-api-extension', true);
 });
 
+/**
+ * Create and set-up the extension
+ */
 add_action('plugins_loaded', function (): void {
-    if (!class_exists('\GraphQLAPI\GraphQLAPI\Plugin')) {
+    /**
+     * Make sure this plugin is not duplicated.
+     */
+    if (class_exists(PluginInfo::class)) {
+        \add_action('admin_notices', function () {
+            _e(sprintf(
+                '<div class="notice notice-error">' .
+                    '<p>%s</p>' .
+                '</div>',
+                sprintf(
+                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    __('GraphQL API - Events Manager', 'graphql-api-events-manager'),
+                    PluginInfo::get('version'),
+                    '0.7.13'
+                )
+            ));
+        });
         return;
     }
 
-    define('GRAPHQL_API_EVENTS_MANAGER_PLUGIN_FILE', __FILE__);
-    define('GRAPHQL_API_EVENTS_MANAGER_VERSION', '0.7.13');
-    define('GRAPHQL_API_EVENTS_MANAGER_DIR', dirname(__FILE__));
-    define('GRAPHQL_API_EVENTS_MANAGER_URL', plugin_dir_url(__FILE__));
+    /**
+     * Load translations
+     */
+    \add_action('init', function (): void {
+        load_plugin_textdomain('graphql-api-events-manager', false, plugin_basename(__FILE__) . '/languages');
+    });
+
+    /**
+     * Validate the GraphQL API plugin is active
+     */
+    if (!class_exists(Plugin::class)) {
+        \add_action('admin_notices', function () {
+            _e(sprintf(
+                '<div class="notice notice-error">' .
+                    '<p>%s</p>' .
+                '</div>',
+                sprintf(
+                    __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-events-manager'),
+                    __('GraphQL API for WordPress', 'graphql-api-events-manager'),
+                    __('GraphQL API - Events Manager', 'graphql-api-events-manager')
+                )
+            ));
+        });
+        return;
+    }
 
     // Load Composer’s autoloader
     require_once(__DIR__ . '/vendor/autoload.php');
 
-    (new \GraphQLAPI\EventsManager\GraphQLAPIExtension(__FILE__))->setup();
+    // Initialize the Plugin information
+    PluginInfo::init([
+        'version' => '0.7.13',
+        'file' => __FILE__,
+        'baseName' => plugin_basename(__FILE__),
+        'slug' => 'graphql-api-events-manager',
+        'dir' => dirname(__FILE__),
+        'url' => plugin_dir_url(__FILE__),
+    ]);
+
+    (new GraphQLAPIExtension(__FILE__))->setup();
 });

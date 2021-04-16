@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use League\Pipeline\PipelineBuilder;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Environment;
@@ -752,10 +753,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $ids = $this->getIDsToQuery($ids_data_fields);
         $typeDataLoaderClass = $this->getTypeDataLoaderClass();
         $typeDataLoader = $instanceManager->getInstance($typeDataLoaderClass);
-        foreach ($typeDataLoader->getObjects($ids) as $resultItem) {
+        // If any ID cannot be resolved, the resultItem will be null
+        $resultItems = array_filter($typeDataLoader->getObjects($ids));
+        foreach ($resultItems as $resultItem) {
             $resultItemID = $this->getID($resultItem);
             // If the UnionTypeResolver doesn't have a TypeResolver to process this element, the ID will be null, and an error will be show below
-            if (is_null($resultItemID)) {
+            if ($resultItemID === null) {
                 continue;
             }
             $resultIDItems[$resultItemID] = $resultItem;
@@ -1750,6 +1753,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldResolver->getFieldNamesToResolve(),
                 $fieldResolver->getFieldNamesFromInterfaces()
             );
+
+            // If "Admin" Schema is disabled: Remove fields for the admin only
+            if (!ComponentConfiguration::enableAdminSchema()) {
+                $fieldNames = array_values(array_diff(
+                    $fieldNames,
+                    $fieldResolver->getAdminFieldNames()
+                ));
+            }
 
             // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
             // Also pass the implemented interfaces defining the field

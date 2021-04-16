@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Inject configuration to the cache
@@ -24,7 +25,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
     public function getNamespace(): string
     {
         // (Needed for development) Don't share cache among plugin versions
-        $timestamp = '_v' . \GRAPHQL_API_VERSION;
+        $timestamp = '_v' . PluginInfo::get('version');
         // The timestamp from when last saving settings/modules to the DB
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $timestamp .= '_' . $userSettingsManager->getTimestamp();
