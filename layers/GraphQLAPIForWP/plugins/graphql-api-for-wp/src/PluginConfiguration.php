@@ -598,6 +598,10 @@ class PluginConfiguration
                 'class' => CacheControlComponentConfiguration::class,
                 'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
             ],
+            [
+                'class' => ComponentModelComponentConfiguration::class,
+                'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
+            ],
         ];
         // For each environment variable, see if it has been defined as a wp-config.php constant
         foreach ($mappings as $mapping) {
