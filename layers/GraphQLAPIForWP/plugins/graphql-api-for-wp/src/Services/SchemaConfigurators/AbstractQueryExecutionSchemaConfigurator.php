@@ -173,6 +173,34 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         );
         if (!is_null($schemaConfigOptionsBlockDataItem)) {
             /**
+             * "Admin" schema
+             * Default value (if not defined in DB): `default`. Then do nothing
+             */
+            $enableAdminSchema = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigOptionsBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA] ?? null;
+            // Only execute if it has value "enabled" or "disabled".
+            // If "default", then the general settings will already take effect, so do nothing
+            // (And if any other unsupported value, also do nothing)
+            if (
+                !in_array($enableAdminSchema, [
+                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
+                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DISABLED,
+                ])
+            ) {
+                return;
+            }
+            // Define the settings value through a hook. Execute last so it overrides the default settings
+            $hookName = ComponentConfigurationHelpers::getHookName(
+                ComponentModelComponentConfiguration::class,
+                ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA
+            );
+            \add_filter(
+                $hookName,
+                fn () => $enableAdminSchema == SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
+                PHP_INT_MAX
+            );
+
+            /**
+             * Namespace Types and Interfaces
              * Default value (if not defined in DB): `default`. Then do nothing
              */
             $useNamespacing = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING] ?? null;
@@ -181,8 +209,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             // (And if any other unsupported value, also do nothing)
             if (
                 !in_array($useNamespacing, [
-                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED,
-                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_USE_NAMESPACING_DISABLED,
+                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
+                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DISABLED,
                 ])
             ) {
                 return;
@@ -194,7 +222,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             );
             \add_filter(
                 $hookName,
-                fn () => $useNamespacing == SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_USE_NAMESPACING_ENABLED,
+                fn () => $useNamespacing == SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
                 PHP_INT_MAX
             );
         }
