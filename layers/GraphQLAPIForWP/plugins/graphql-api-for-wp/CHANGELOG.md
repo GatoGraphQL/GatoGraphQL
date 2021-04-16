@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Meta values
   - Settings
   - User posts
+- "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
 - Composable directives
 
 ### Backwards-breaking changes:
