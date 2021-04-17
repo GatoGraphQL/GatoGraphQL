@@ -101,6 +101,7 @@ class SettingsMenuPage extends AbstractMenuPage
                                 $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                 if (
                                     in_array($type, [
+                                        Properties::TYPE_INT,
                                         Properties::TYPE_STRING,
                                         Properties::TYPE_ARRAY,
                                     ]) && !empty($possibleValues)
