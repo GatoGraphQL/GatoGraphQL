@@ -3,7 +3,7 @@
 Plugin Name: GraphQL API - Schema Feedback
 Plugin URI: https://github.com/GraphQLAPI/schema-feedback
 Description: Make the GraphQL API provide feedback in the response of the GraphQL query
-Version: 0.7.13
+Version: 0.8.0
 Requires at least: 5.4
 Requires PHP: 8.0
 Author: Leonardo Losoviz
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 define('GRAPHQL_API_SCHEMA_FEEDBACK_PLUGIN_FILE', __FILE__);
-define('GRAPHQL_API_SCHEMA_FEEDBACK_VERSION', '0.7.13');
+define('GRAPHQL_API_SCHEMA_FEEDBACK_VERSION', '0.8.0');
 
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
