@@ -101,7 +101,7 @@ class SettingsMenuPage extends AbstractMenuPage
                                 $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                 if (!empty($possibleValues)) {
                                     $this->printSelectField($module, $itemSetting);
-                                } elseif ($type == Properties::TYPE_ARRAY && empty($possibleValues)) {
+                                } elseif ($type == Properties::TYPE_ARRAY) {
                                     $this->printTextareaField($module, $itemSetting);
                                 } elseif ($type == Properties::TYPE_BOOL) {
                                     $this->printCheckboxField($module, $itemSetting);
