@@ -225,7 +225,15 @@ const DEFAULT_QUERY = `# Welcome to GraphiQL
 `
 
 var defaultQuery = (window.graphiQLWithExplorerClientForWP && window.graphiQLWithExplorerClientForWP.defaultQuery) ? window.graphiQLWithExplorerClientForWP.defaultQuery : DEFAULT_QUERY;
-var query = parameters.query || defaultQuery;
+// Watch out! Use `decodeURIComponent` because the wp-admin encodes the query,
+// as in: https://graphql-api.lndo.site/wp-admin/admin.php?page=graphql_api&operationName=MyQuery&query=query+MyQuery+%7B++me%7D
+// which then would print a query like this: query+MyQuery+{++me}
+var queryDecodeURIComponent = (window.graphiQLWithExplorerClientForWP && window.graphiQLWithExplorerClientForWP.queryDecodeURIComponent) ? window.graphiQLWithExplorerClientForWP.queryDecodeURIComponent : false;
+// Function taken from: https://gist.github.com/robinbb/10687275
+function formURLDecodeComponent(s) {
+    return decodeURIComponent((s + '').replace(/\+/g, ' '));
+}
+var query = (queryDecodeURIComponent ? formURLDecodeComponent(parameters.query || "") : parameters.query) || defaultQuery;
 
 class App extends Component<{}, State> {
   _graphiql: GraphiQL;
