@@ -66,14 +66,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::MULTIPLE_QUERY_EXECUTION:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                        EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ],
-                ];
             case self::REMOVE_IF_NULL_DIRECTIVE:
             case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
