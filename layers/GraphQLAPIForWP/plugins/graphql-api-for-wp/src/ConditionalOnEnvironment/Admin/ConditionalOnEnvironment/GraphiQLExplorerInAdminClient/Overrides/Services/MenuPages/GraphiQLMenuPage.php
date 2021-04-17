@@ -52,6 +52,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         $scriptSettings = array(
             'nonce' => \wp_create_nonce('wp_rest'),
             'response' => $this->getResponse(),
+            'queryDecodeURIComponent' => true,
         );
 
         // Print the HTML from the Client
