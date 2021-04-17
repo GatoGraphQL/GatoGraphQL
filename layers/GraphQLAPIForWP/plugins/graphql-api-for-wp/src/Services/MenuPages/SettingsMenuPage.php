@@ -99,13 +99,7 @@ class SettingsMenuPage extends AbstractMenuPage
                             function () use ($module, $itemSetting) {
                                 $type = $itemSetting[Properties::TYPE] ?? null;
                                 $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
-                                if (
-                                    in_array($type, [
-                                        Properties::TYPE_INT,
-                                        Properties::TYPE_STRING,
-                                        Properties::TYPE_ARRAY,
-                                    ]) && !empty($possibleValues)
-                                ) {
+                                if (!empty($possibleValues)) {
                                     $this->printSelectField($module, $itemSetting);
                                 } elseif ($type == Properties::TYPE_ARRAY && empty($possibleValues)) {
                                     $this->printTextareaField($module, $itemSetting);
