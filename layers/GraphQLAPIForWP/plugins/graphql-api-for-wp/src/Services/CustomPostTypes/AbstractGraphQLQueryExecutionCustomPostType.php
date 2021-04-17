@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use WP_Post;
-use PoP\ComponentModel\State\ApplicationState;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
+use WP_Post;
 use WP_Query;
 
 abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCustomPostType
@@ -21,6 +25,19 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     use EndpointResolverTrait {
         EndpointResolverTrait::getNature as getUpstreamNature;
         EndpointResolverTrait::addGraphQLVars as upstreamAddGraphQLVars;
+    }
+
+    function __construct(
+        Menu $menu,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        protected HooksAPIInterface $hooksAPI
+    ) {
+        parent::__construct(
+            $menu,
+            $moduleRegistry,
+            $userAuthorization
+        );
     }
 
     /**
@@ -129,6 +146,13 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     {
         parent::initialize();
 
+        // Execute at the beginning
+        \add_action('init', function(): void {
+            if ($this->isAccessForbidden()) {
+                $this->forbidAccess();
+            }
+        }, 0);
+
         /**
          * Two outputs:
          * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
@@ -139,6 +163,25 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
         } else {
             $this->doSomethingElse();
         }
+    }
+
+    /**
+     * Hook to forbid access to the API
+     */
+    protected function isAccessForbidden(): bool
+    {
+        return $this->hooksAPI->applyFilters(
+            Hooks::FORBID_ACCESS,
+            false
+        );
+    }
+
+    /**
+     * Print an error message, and exit
+     */
+    protected function forbidAccess(): void
+    {
+        wp_die(\__('Access forbidden', 'graphql-api'));
     }
 
     /**
@@ -160,7 +203,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
         /**
-         * Check if it is this CPT...
+         * Check if it is this CPT, and hasn't forbid access to executing the API
          */
         if (\is_singular($this->getCustomPostType())) {
             $vars = ApplicationState::getVars();
@@ -250,7 +293,9 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     }
 
     /**
-     * Check if requesting the single post of this CPT and, in this case, set the request with the needed API params
+     * Check if requesting the single post of this CPT,
+     * and that access to the API has not been forbidden.
+     * Then, set the request with the needed API params
      *
      * @param array<array> $vars_in_array
      */
