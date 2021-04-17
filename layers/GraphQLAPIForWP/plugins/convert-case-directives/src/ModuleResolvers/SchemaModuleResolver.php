@@ -48,21 +48,6 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
         return 90;
     }
 
-    public function getDependedModuleLists(string $module): array
-    {
-        switch ($module) {
-            case self::CONVERT_CASE_DIRECTIVES:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ],
-                ];
-        }
-        return parent::getDependedModuleLists($module);
-    }
-
     public function getName(string $module): string
     {
         $names = [

@@ -1754,11 +1754,25 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldResolver->getFieldNamesFromInterfaces()
             );
 
-            // If "Admin" Schema is disabled: Remove fields for the admin only
+            // Enable to exclude fieldNames, so they are not added to the schema.
+            $excludedFieldNames = [];
+            // Whenever:
+            // 1. Exclude the admin fields, if "Admin" Schema is not enabled
             if (!ComponentConfiguration::enableAdminSchema()) {
+                $excludedFieldNames = $fieldResolver->getAdminFieldNames();
+            }
+            // 2. By filter hook
+            $hooksAPI = HooksAPIFacade::getInstance();
+            $excludedFieldNames = $hooksAPI->applyFilters(
+                Hooks::EXCLUDE_FIELDNAMES,
+                $excludedFieldNames,
+                $fieldResolver,
+                $fieldNames
+            );
+            if ($excludedFieldNames !== []) {
                 $fieldNames = array_values(array_diff(
                     $fieldNames,
-                    $fieldResolver->getAdminFieldNames()
+                    $excludedFieldNames
                 ));
             }
 

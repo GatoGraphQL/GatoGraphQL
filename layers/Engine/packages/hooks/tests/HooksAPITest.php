@@ -7,7 +7,7 @@ namespace PoP\Hooks;
 use PHPUnit\Framework\TestCase;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Hooks\ContractImplementations\HooksAPI;
+use PoP\Hooks\Services\HooksAPI;
 use PoP\Root\Container\ContainerBuilderFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
