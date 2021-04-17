@@ -27,10 +27,18 @@ The following fields will be added to the GraphQL schema:
 - `Root.unrestrictedPage`
 - `Root.unrestrictedPages`
 - `Root.unrestrictedPageCount`
+- `User.unrestrictedPosts`
+- `User.unrestrictedPostCount`
+- `User.unrestrictedCustomPosts`
+- `User.unrestrictedCustomPostCount`
 - `User.roles`
 - `Root.roles`
 - `User.capabilities`
 - `Root.capabilities`
+- `PostCategory.unrestrictedPosts`
+- `PostCategory.unrestrictedPostCount`
+- `PostTag.unrestrictedPosts`
+- `PostTag.unrestrictedPostCount`
 
 ---
 
