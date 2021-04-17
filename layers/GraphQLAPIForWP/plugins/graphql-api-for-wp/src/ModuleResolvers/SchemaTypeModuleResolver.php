@@ -152,18 +152,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::SCHEMA_USERS:
-            case self::SCHEMA_MEDIA:
-            case self::SCHEMA_CUSTOMPOSTS:
-            case self::SCHEMA_MENUS:
-            case self::SCHEMA_SETTINGS:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ],
-                ];
             case self::SCHEMA_USER_ROLES:
                 return [
                     [
