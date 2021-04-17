@@ -11,13 +11,14 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks as GraphQLRequestVarsHooks;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
@@ -26,13 +27,15 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
+        HooksAPIInterface $hooksAPI,
         protected BlockContentHelpers $blockContentHelpers,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
     ) {
         parent::__construct(
             $menu,
             $moduleRegistry,
-            $userAuthorization
+            $userAuthorization,
+            $hooksAPI
         );
     }
 
