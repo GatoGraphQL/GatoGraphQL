@@ -10,13 +10,18 @@ This is a monorepo containing all layers from the PoP project:
 
 [API](layers/API):<br/>Packages to access the schema data through an API, including REST and GraphQL.
 
-[GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP, living in [graphql-by-pop.com](https://graphql-by-pop.com).
+[GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP [[🔗 graphql-by-pop.com](https://graphql-by-pop.com)].
 
-[GraphQL API for WordPress](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress, involving [the main plugin](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) and extensions, and living in [graphql-api.com](https://graphql-api.com).
+[The "GraphQL API for WordPress" ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
 
-[Site Builder](layers/SiteBuilder):<br/>Packages to build a website using the component-model architecture.
+- The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) [[graphql-api.com](https://graphql-api.com)].
+- Its extensions:
+  - [Convert Case Directives](layers/GraphQLAPIForWP/plugins/convert-case-directives)
+  - [Events Manager](layers/GraphQLAPIForWP/plugins/events-manager)
 
-[Wassup](layers/Wassup):<br/>Implementation of a PoP website for WordPress (powering [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)).
+[Site Builder](layers/SiteBuilder):<br/>Packages to build a website using the component-model architecture (WIP).
+
+[Wassup](layers/Wassup):<br/>Implementation of a PoP website for WordPress (powering [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org) - WIP).
 
 [Misc](layers/Misc):<br/>Collection of packages, clients, and others, related to PoP or any of its layers.
 
