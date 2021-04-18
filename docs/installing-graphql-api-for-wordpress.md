@@ -1,6 +1,6 @@
 # Installing the GraphQL API for WordPress
 
-These are the several ways to install the [../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp](GraphQL API for WordPress) plugin.
+These are the several ways to install the [GraphQL API for WordPress](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) plugin.
 
 ## Plugin
 
