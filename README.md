@@ -12,7 +12,7 @@ This is a monorepo containing all layers from the PoP project:
 
 [GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP [[🔗 graphql-by-pop.com](https://graphql-by-pop.com)].
 
-[The "GraphQL API for WordPress" ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
+[GraphQL API for WordPress ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
 
 - The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) [[graphql-api.com](https://graphql-api.com)].
 - Its extensions:
