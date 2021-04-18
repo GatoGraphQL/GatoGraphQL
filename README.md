@@ -47,9 +47,9 @@ $ composer install
 
 ## Table of Contents
 
-1. [Layer dependency graph](docs/layer-dependency-graph.md)
-2. [Supported PHP features](docs/supported-php-features.md)
-3. [Setting-up the development environment](docs/development-environment.md)
+1. [Setting-up the development environment](docs/development-environment.md)
+2. [Layer dependency graph](docs/layer-dependency-graph.md)
+3. [Supported PHP features](docs/supported-php-features.md)
 4. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
 5. [Why are there so many packages in the repo](docs/splitting-packages.md)
 6. [Why a monorepo](docs/why-monorepo.md)
