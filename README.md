@@ -30,7 +30,7 @@ This is a monorepo containing all layers from the PoP project:
 Clone the monorepo:
 
 ```bash
-git clone https://github.com/leoloso/PoP.git #git@github.com:leoloso/PoP.git
+git clone https://github.com/leoloso/PoP.git
 ```
 
 And then install the dependencies, via Composer
