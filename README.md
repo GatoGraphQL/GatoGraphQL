@@ -55,7 +55,7 @@ $ composer install
 6. [Why a monorepo](docs/why-monorepo.md)
 7. [How transpiling works](docs/how-transpiling-works.md)
 8. [How scoping works](docs/how-scoping-works.md)
-9. [Installing the GraphQL API for WordPress](docs/installing-graphql-api-for-wordpress.md)
+9. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
 
 ## Resources
 
