@@ -1,4 +1,4 @@
-# Supporting CMS-agnosticism
+# How is the GraphQL server CMS-agnostic
 
 [GraphQL by PoP](../layers/GraphQLByPoP) is a CMS-agnostic GraphQL server. What does that mean? For that matter, [`webonyx/graphql-php`](https://github.com/webonyx/graphql-php) also is CMS-agnostic. So how are they different?
 
