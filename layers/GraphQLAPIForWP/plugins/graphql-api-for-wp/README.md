@@ -120,7 +120,7 @@ cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install
 
 Launch a development server, with WordPress installed and the GraphQL API plugin activated, through [Lando](https://lando.dev/).
 
-Please make sure you have Lando installed, with version `3.0.26` or upwards (or install it from [here](https://github.com/lando/lando/releases/tag/v3.0.26)).
+Please make sure you have Lando installed, with version `3.0.26` or upwards (install the latest version from [here](https://github.com/lando/lando/releases/)).
 
 The first time, to install the server, execute:
 
