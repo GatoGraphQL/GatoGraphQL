@@ -31,15 +31,7 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 
 ## Install
 
-_Ready for production?_
-
-This plugin requires 3rd party dependencies, but they have not been scoped yet (see [issue #9](https://github.com/GraphQLAPI/graphql-api/issues/9)). So please install this plugin in a development environment first, to make sure there are no conflicts with the other plugins installed in the site.
-
-<!-- If any problem arises, either installing or running the plugin, please [create a new issue](https://github.com/GraphQLAPI/graphql-api/issues/new). -->
-
-<!-- After installed, there will be a new "GraphQL API" section on the menu: -->
-
-### Upload
+### Plugin
 
 Download [the latest release of the plugin][latest-release-url] as a .zip file.
 
@@ -128,7 +120,7 @@ cd layers/GraphQLAPIForWP/plugins/graphql-api-for-wp && composer install
 
 Launch a development server, with WordPress installed and the GraphQL API plugin activated, through [Lando](https://lando.dev/).
 
-Please make sure you have Lando installed, with version `3.0.26` or upwards (or install it from [here](https://github.com/lando/lando/releases/tag/v3.0.26)).
+Please make sure you have Lando installed, with version `3.0.26` or upwards (install the latest version from [here](https://github.com/lando/lando/releases/)).
 
 The first time, to install the server, execute:
 
