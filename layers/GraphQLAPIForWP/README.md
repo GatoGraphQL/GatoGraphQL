@@ -8,7 +8,7 @@ Transform your WordPress site into a modern GraphQL server: [graphql-api.com](ht
 
 This layer provides the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/). It comprises:
 
-- The main plugin, [GraphQL API for WordPress](plugins/graphql-api-for-wp) [[graphql-api.com](https://graphql-api.com)].
+- The main plugin, [GraphQL API for WordPress](plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
 - Its extensions:
   - [Convert Case Directives](plugins/convert-case-directives)
   - [Events Manager](plugins/events-manager)

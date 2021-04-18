@@ -10,11 +10,11 @@ This is a monorepo containing all layers from the PoP project:
 
 [API](layers/API):<br/>Packages to access the schema data through an API, including REST and GraphQL.
 
-[GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP [[🔗 graphql-by-pop.com](https://graphql-by-pop.com)].
+[GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP ([graphql-by-pop.com](https://graphql-by-pop.com)).
 
 [GraphQL API for WordPress ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
 
-- The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) [[graphql-api.com](https://graphql-api.com)].
+- The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
 - Its extensions:
   - [Convert Case Directives](layers/GraphQLAPIForWP/plugins/convert-case-directives)
   - [Events Manager](layers/GraphQLAPIForWP/plugins/events-manager)
