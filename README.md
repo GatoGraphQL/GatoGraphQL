@@ -42,15 +42,15 @@ $ composer install
 
 ## Table of Contents
 
-1. [Layer dependency graph](docs/layer-dependency-graph)
-2. [Supported PHP features](docs/supported-php-features)
-3. [Setting-up the development environment](docs/development-environment)
-4. [Supporting CMS-agnosticism](docs/cms-agnosticism)
-5. [Why are there so many packages in the repo](docs/splitting-packages)
-6. [Why a monorepo](docs/why-monorepo)
-7. [How transpiling works](docs/how-transpiling-works)
-8. [How scoping works](docs/how-scoping-works)
-9. [Installing the GraphQL API for WordPress](docs/installing-graphql-api-for-wordpress)
+1. [Layer dependency graph](docs/layer-dependency-graph.md)
+2. [Supported PHP features](docs/supported-php-features.md)
+3. [Setting-up the development environment](docs/development-environment.md)
+4. [Supporting CMS-agnosticism](docs/cms-agnosticism.md)
+5. [Why are there so many packages in the repo](docs/splitting-packages.md)
+6. [Why a monorepo](docs/why-monorepo.md)
+7. [How transpiling works](docs/how-transpiling-works.md)
+8. [How scoping works](docs/how-scoping-works.md)
+9. [Installing the GraphQL API for WordPress](docs/installing-graphql-api-for-wordpress.md)
 
 ## Resources
 
