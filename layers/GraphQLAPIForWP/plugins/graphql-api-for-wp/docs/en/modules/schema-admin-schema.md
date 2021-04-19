@@ -18,27 +18,38 @@ Due to security reasons, this module is disabled by default.
 
 The following fields will be added to the GraphQL schema:
 
-- `Root.unrestrictedPost`
-- `Root.unrestrictedPosts`
-- `Root.unrestrictedPostCount`
-- `Root.unrestrictedCustomPost`
-- `Root.unrestrictedCustomPosts`
-- `Root.unrestrictedCustomPostCount`
-- `Root.unrestrictedPage`
-- `Root.unrestrictedPages`
-- `Root.unrestrictedPageCount`
-- `User.unrestrictedPosts`
-- `User.unrestrictedPostCount`
-- `User.unrestrictedCustomPosts`
-- `User.unrestrictedCustomPostCount`
-- `User.roles`
-- `Root.roles`
-- `User.capabilities`
-- `Root.capabilities`
-- `PostCategory.unrestrictedPosts`
-- `PostCategory.unrestrictedPostCount`
-- `PostTag.unrestrictedPosts`
-- `PostTag.unrestrictedPostCount`
+**Root:**
+
+- `unrestrictedPost`
+- `unrestrictedPosts`
+- `unrestrictedPostCount`
+- `unrestrictedCustomPost`
+- `unrestrictedCustomPosts`
+- `unrestrictedCustomPostCount`
+- `unrestrictedPage`
+- `unrestrictedPages`
+- `unrestrictedPageCount`
+- `roles`
+- `capabilities`
+
+**User:**
+
+- `unrestrictedPosts`
+- `unrestrictedPostCount`
+- `unrestrictedCustomPosts`
+- `unrestrictedCustomPostCount`
+- `roles`
+- `capabilities`
+
+**PostCategory:**
+
+- `unrestrictedPosts`
+- `unrestrictedPostCount`
+
+**PostTag:**
+
+- `unrestrictedPosts`
+- `unrestrictedPostCount`
 
 ---
 
