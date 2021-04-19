@@ -41,6 +41,7 @@ use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Settings\SiteConfigurationProcessorManagerFactory;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class Engine implements EngineInterface
 {
@@ -124,7 +125,7 @@ class Engine implements EngineInterface
             // The same page will have different hashs only because of those random elements added each time,
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
-                POP_CONSTANT_UNIQUE_ID,
+                ComponentModelComponentInfo::get('unique-id'),
                 POP_CONSTANT_RAND,
                 POP_CONSTANT_TIME,
             );
@@ -482,7 +483,7 @@ class Engine implements EngineInterface
     {
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
-            Response::UNIQUE_ID => POP_CONSTANT_UNIQUE_ID,
+            Response::UNIQUE_ID => ComponentModelComponentInfo::get('unique-id'),
             Response::URL => RequestUtils::getCurrentUrl(),
             'modelinstanceid' => ModelInstanceFacade::getInstance()->getModelInstanceId(),
         );
