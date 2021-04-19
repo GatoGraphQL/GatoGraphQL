@@ -57,7 +57,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'additional_rector_configs' => [
                 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code-hacks-CacheItem.php',
             ],
-            'rector_config' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php',
+            'rector_config' => 'rector-downgrade-code-graphql-api.php',
         ],
         // GraphQL API - Convert Case Directives
         [
