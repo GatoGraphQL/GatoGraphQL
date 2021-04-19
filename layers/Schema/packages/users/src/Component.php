@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Routing\DefinitionGroups;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\API\Component as APIComponent;
 use PoPSchema\CustomPosts\Component as CustomPostsComponent;
@@ -81,20 +79,6 @@ class Component extends AbstractComponent
             if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
                 self::initServices(dirname(__DIR__), '/Conditional/CustomPosts/Conditional/RESTAPI');
             }
-        }
-    }
-
-    /**
-     * Define runtime constants
-     */
-    protected static function defineRuntimeConstants(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        if (!defined('POP_USERS_ROUTE_USERS')) {
-            $definitionManager = DefinitionManagerFacade::getInstance();
-            define('POP_USERS_ROUTE_USERS', $definitionManager->getUniqueDefinition('users', DefinitionGroups::ROUTES));
         }
     }
 }

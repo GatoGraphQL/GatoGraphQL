@@ -6,6 +6,7 @@ namespace PoPSchema\PostTags\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
+use PoPSchema\PostTags\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -21,7 +22,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         return [
             ...$routes,
-            \POP_POSTTAGS_ROUTE_POSTTAGS,
+            ComponentConfiguration::getPostTagsRoute(),
         ];
     }
 }

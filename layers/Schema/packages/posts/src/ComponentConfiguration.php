@@ -14,6 +14,7 @@ class ComponentConfiguration
     private static ?int $getPostListDefaultLimit = 10;
     private static ?int $getPostListMaxLimit = -1;
     private static bool $addPostTypeToCustomPostUnionTypes = true;
+    private static string $getPostsRoute = '';
 
     public static function getPostListDefaultLimit(): ?int
     {
@@ -65,6 +66,22 @@ class ComponentConfiguration
             $selfProperty,
             $defaultValue,
             $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function getPostsRoute(): string
+    {
+        // Define properties
+        $envVariable = Environment::POSTS_ROUTE;
+        $selfProperty = &self::$getPostsRoute;
+        $defaultValue = 'posts';
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue
         );
         return $selfProperty;
     }

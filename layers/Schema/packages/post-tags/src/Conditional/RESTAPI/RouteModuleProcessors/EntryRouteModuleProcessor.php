@@ -14,6 +14,8 @@ use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\PostTags\ComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -82,7 +84,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $routemodules = array(
-            POP_POSTTAGS_ROUTE_POSTTAGS => [
+            ComponentConfiguration::getPostTagsRoute() => [
                 PostTagFieldDataloadModuleProcessor::class,
                 PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
@@ -102,7 +104,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             ];
         }
         $routemodules = array(
-            POP_POSTS_ROUTE_POSTS => [
+            PostsComponentConfiguration::getPostsRoute() => [
                 TagPostFieldDataloadModuleProcessor::class,
                 TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [

@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -37,7 +38,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
-                return getRouteIcon(POP_USERS_ROUTE_USERS, true).TranslationAPIFacade::getInstance()->__('Members', 'poptheme-wassup');
+                return getRouteIcon(UsersComponentConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Members', 'poptheme-wassup');
         }
 
         return parent::getTitle($module, $props);

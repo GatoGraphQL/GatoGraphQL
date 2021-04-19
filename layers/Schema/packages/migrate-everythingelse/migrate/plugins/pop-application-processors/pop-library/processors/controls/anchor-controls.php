@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 
 class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -47,7 +48,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
             case self::MODULE_ANCHORCONTROL_TAGSLINK:
                 $routes = array(
                     self::MODULE_ANCHORCONTROL_ADDPOST => POP_POSTSCREATION_ROUTE_ADDPOST,
-                    self::MODULE_ANCHORCONTROL_TAGSLINK => POP_POSTTAGS_ROUTE_POSTTAGS,
+                    self::MODULE_ANCHORCONTROL_TAGSLINK => PostTagsComponentConfiguration::getPostTagsRoute(),
                 );
                 $route = $routes[$module[1]];
 

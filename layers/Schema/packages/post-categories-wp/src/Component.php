@@ -20,8 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\PostCategories\Component::class,
-            \PoPSchema\PostsWP\Component::class,
-            \PoPSchema\CategoriesWP\Component::class,
+            \PoPSchema\CustomPostCategoriesWP\Component::class,
         ];
     }
 

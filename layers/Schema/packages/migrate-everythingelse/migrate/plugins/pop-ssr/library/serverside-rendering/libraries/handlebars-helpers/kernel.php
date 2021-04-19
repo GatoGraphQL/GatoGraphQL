@@ -1,5 +1,8 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+
 /**
  * Helper functions, they have the same logic as the original javascript
  * helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
@@ -235,12 +238,12 @@ class PoP_ServerSide_KernelHelpers
         $moduleOutputName = $context[GD_JS_SUBMODULEOUTPUTNAMES][$moduleName];
 
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
-        if (!isset($context[POP_RESPONSE_PROP_SUBMODULES]) || !isset($context[POP_RESPONSE_PROP_SUBMODULES][$moduleOutputName])) {
+        if (!isset($context[ComponentModelComponentInfo::get('response-prop-submodules')]) || !isset($context[ComponentModelComponentInfo::get('response-prop-submodules')][$moduleOutputName])) {
             return;
         }
 
         // Go down to the module
-        $context = $context[POP_RESPONSE_PROP_SUBMODULES][$moduleOutputName];
+        $context = $context[ComponentModelComponentInfo::get('response-prop-submodules')][$moduleOutputName];
 
         // Expand the JS Keys
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();

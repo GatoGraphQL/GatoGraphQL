@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_Notifications_API
 {
@@ -92,7 +93,7 @@ class PoP_Notifications_API
                 'array' => false,
                 'fields' => '*',
                 'user_id' => '',
-                'hist_time' => POP_CONSTANT_TIME,
+                'hist_time' => ComponentModelComponentInfo::get('time'),
                 'hist_time_compare' => '<',
                 'order' => 'ASC',
                 'orderby' => '',

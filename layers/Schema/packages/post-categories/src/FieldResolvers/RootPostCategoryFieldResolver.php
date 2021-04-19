@@ -30,6 +30,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
             'postCategory' => $translationAPI->__('Post category with a specific ID', 'post-categories'),
             'postCategories' => $translationAPI->__('Post categories', 'post-categories'),
             'postCategoryCount' => $translationAPI->__('Number of post categories', 'post-categories'),
+            'postCategoryNames' => $translationAPI->__('Names of the post categories', 'post-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -40,6 +41,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
             'postCategory',
             'postCategories',
             'postCategoryCount',
+            'postCategoryNames',
         ];
     }
 
@@ -49,6 +51,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
             'postCategory' => SchemaDefinition::TYPE_ID,
             'postCategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'postCategoryCount' => SchemaDefinition::TYPE_INT,
+            'postCategoryNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -58,6 +61,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         $nonNullableFieldNames = [
             'postCategories',
             'postCategoryCount',
+            'postCategoryNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -84,6 +88,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 );
             case 'postCategories':
             case 'postCategoryCount':
+            case 'postCategoryNames':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -97,6 +102,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postCategories':
             case 'postCategoryCount':
+            case 'postCategoryNames':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -107,6 +113,8 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postCategoryCount':
                 return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+            case 'postCategoryNames':
+                return [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
@@ -140,11 +148,12 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return null;
             case 'postCategories':
+            case 'postCategoryNames':
                 $query = [
                     'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
                 ];
                 $options = [
-                    'return-type' => ReturnTypes::IDS,
+                    'return-type' => $fieldName === 'postCategories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $postCategoryTypeAPI->getCategories($query, $options);

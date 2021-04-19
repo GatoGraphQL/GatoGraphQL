@@ -27,6 +27,7 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
         $descriptions = [
             'categories' => $translationAPI->__('Categories added to this post', 'post-categories'),
             'categoryCount' => $translationAPI->__('Number of categories added to this post', 'post-categories'),
+            'categoryNames' => $translationAPI->__('Names of the categories added to this post', 'post-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

@@ -2,6 +2,8 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 use Aws\Common\Aws;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_Mailer_AWS_Engine
 {
@@ -100,7 +102,7 @@ class PoP_Mailer_AWS_Engine
                         'emails' => $chunks[$chunk_count],
                     );
 
-                    $filename = POP_CONSTANT_TIME.'_'.POP_CONSTANT_RAND.($header_count ? '_h'.$header_count : '').($chunk_count ? '_c'.$chunk_count : '').'.json';
+                    $filename = ComponentModelComponentInfo::get('time') . '_' . ComponentModelComponentInfo::get('rand') . ($header_count ? '_h'.$header_count : '').($chunk_count ? '_c'.$chunk_count : '').'.json';
                     $result = $this->s3->putObject(
                         array(
                             'ACL'        => 'private',

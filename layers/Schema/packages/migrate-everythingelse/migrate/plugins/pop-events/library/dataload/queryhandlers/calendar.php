@@ -2,6 +2,7 @@
 
 use PoP\ComponentModel\QueryInputOutputHandlers\AbstractQueryInputOutputHandler;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOutputHandler
 {
@@ -9,7 +10,7 @@ class GD_DataLoad_QueryInputOutputHandler_Calendar extends AbstractQueryInputOut
     {
         parent::prepareQueryArgs($query_args);
 
-        $today = POP_CONSTANT_TIME;
+        $today = ComponentModelComponentInfo::get('time');
         $year = $query_args[GD_URLPARAM_YEAR] ? intval($query_args[GD_URLPARAM_YEAR]) : date('Y', $today);
         // Format 'n': do not include leading zeros
         $month = $query_args[GD_URLPARAM_MONTH] ? intval($query_args[GD_URLPARAM_MONTH]) : date('n', $today);

@@ -7,7 +7,7 @@ namespace PoPSchema\PostCategories\ModuleProcessors;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 
@@ -28,7 +28,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
-                return CustomPostTypeResolver::class;
+                return PostTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

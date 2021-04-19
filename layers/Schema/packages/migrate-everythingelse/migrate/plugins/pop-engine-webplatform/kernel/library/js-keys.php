@@ -1,6 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+
 $compact = \PoP\ComponentModel\Environment::compactResponseJsonKeys();
 define('GD_JS_MODULE', $compact ? 'm' : 'module');
 define('GD_JS_MODULEOUTPUTNAME', $compact ? 's' : 'moduleoutputname');
@@ -20,7 +22,7 @@ function gdJqueryConstantsJsparams($jqueryConstants)
 
     // From PoP Engine
     $jqueryConstants['JS_MODULE'] = GD_JS_MODULE;
-    $jqueryConstants['JS_SUBMODULES'] = POP_RESPONSE_PROP_SUBMODULES;
+    $jqueryConstants['JS_SUBMODULES'] = ComponentModelComponentInfo::get('response-prop-submodules');
     $jqueryConstants['JS_MODULEOUTPUTNAME'] = GD_JS_MODULEOUTPUTNAME;
 
     // From Web Platform PoP Engine

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 // Add the 3-days and 4-days scope
 // Taken from http://wp-events-plugin.com/tutorials/create-your-own-event-scope/
@@ -16,8 +17,8 @@ function popEmRssEventsBuildSqlConditions($conditions, $args)
             $days = $matches[1];
 
             // $end_date: if doing 2 days, then must produce +1 day, etc
-            $start_date = date('Y-m-d', POP_CONSTANT_TIME);
-            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), POP_CONSTANT_TIME));
+            $start_date = date('Y-m-d', ComponentModelComponentInfo::get('time'));
+            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), ComponentModelComponentInfo::get('time')));
             $conditions['scope'] = " ((event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)))";
         }
     }

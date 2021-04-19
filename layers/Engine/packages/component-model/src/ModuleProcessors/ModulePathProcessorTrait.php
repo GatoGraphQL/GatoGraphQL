@@ -8,6 +8,7 @@ use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\ComponentInfo;
 
 trait ModulePathProcessorTrait
 {
@@ -47,7 +48,7 @@ trait ModulePathProcessorTrait
             );
         }
         if ($submodules_ret) {
-            $ret[$key][POP_RESPONSE_PROP_SUBMODULES] = $submodules_ret;
+            $ret[$key][ComponentInfo::get('response-prop-submodules')] = $submodules_ret;
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
 
@@ -117,7 +118,7 @@ trait ModulePathProcessorTrait
             );
         }
         if ($submodules_ret) {
-            $ret[$key][POP_RESPONSE_PROP_SUBMODULES] = $submodules_ret;
+            $ret[$key][ComponentInfo::get('response-prop-submodules')] = $submodules_ret;
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);
 

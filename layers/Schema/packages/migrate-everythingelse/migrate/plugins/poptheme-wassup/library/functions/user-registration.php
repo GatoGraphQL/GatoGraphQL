@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 HooksAPIFacade::getInstance()->addAction('show_user_profile', 'extraUserProfileFields', 1);
 HooksAPIFacade::getInstance()->addAction('edit_user_profile', 'extraUserProfileFields', 1);
@@ -183,7 +184,7 @@ function saveExtraUserInfo($user_id)
 
     if (defined('POP_USERPLATFORM_INITIALIZED')) {
         // Last Edited: needed for the user thumbprint
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, POP_CONSTANT_TIME);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelComponentInfo::get('time'));
     }
 }
 

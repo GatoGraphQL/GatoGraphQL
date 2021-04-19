@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputsBase
 {
@@ -18,7 +19,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
     {
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
-                return getRouteIcon(POP_USERS_ROUTE_USERS, true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
+                return getRouteIcon(UsersComponentConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
         }
 
         return parent::getLabelText($module, $props);
@@ -44,9 +45,9 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
     protected function getRemoteUrl(array $module, array &$props)
     {
         $url = parent::getRemoteUrl($module, $props);
-        
+
         return \PoP\ComponentModel\DataloadUtils::addFilterParams(
-            $url, 
+            $url,
             [
                 [
                     'module' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
@@ -61,7 +62,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
-                return RouteUtils::getRouteURL(POP_USERS_ROUTE_USERS);
+                return RouteUtils::getRouteURL(UsersComponentConfiguration::getUsersRoute());
         }
 
         return parent::getTypeaheadDataloadSource($module, $props);

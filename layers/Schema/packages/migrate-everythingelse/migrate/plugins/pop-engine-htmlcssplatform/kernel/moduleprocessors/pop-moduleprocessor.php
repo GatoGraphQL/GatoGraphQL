@@ -5,6 +5,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
 {
@@ -42,12 +43,12 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
         $id = $this->getID($module, $props);
 
-        // If the ID in the htmlcssplatform is not unique, then we gotta make it unique by adding POP_CONSTANT_UNIQUE_ID at the end
-        // Since POP_CONSTANT_UNIQUE_ID will change its value when fetching pageSection, this allows to add an HTML element
+        // If the ID in the htmlcssplatform is not unique, then we gotta make it unique by adding ComponentModelComponentInfo::get('unique-id') at the end
+        // Since ComponentModelComponentInfo::get('unique-id') will change its value when fetching pageSection, this allows to add an HTML element
         // similar to an existing one but with a different ID
         // pageSections themselves only get drawn at the beginning and are never re-generated. So for them, their ID is already unique
         if (!$this->isFrontendIdUnique($module, $props)) {
-            return $id.POP_CONSTANT_UNIQUE_ID;
+            return $id.ComponentModelComponentInfo::get('unique-id');
         }
 
         return $id;
@@ -201,7 +202,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 	if ($module_path = $this->getModulePath($module, $props)) {
 
     // 		// Key: module / Value: path to arrive to this module
-    // 		$ret[$module[1]] = array(POP_RESPONSE_PROP_SUBMODULES, $moduleOutputName);
+    // 		$ret[$module[1]] = array(ComponentModelComponentInfo::get('response-prop-submodules'), $moduleOutputName);
     // 	}
 
     // 	// Add the path from this module to its components
@@ -214,7 +215,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 			foreach ($submodule_ret as $submodule_module => $submodule_module_path) {
 
     // 				$ret[$submodule_module] = array_merge(
-    // 					array(POP_RESPONSE_PROP_SUBMODULES, $moduleOutputName),
+    // 					array(ComponentModelComponentInfo::get('response-prop-submodules'), $moduleOutputName),
     // 					$submodule_module_path
     // 				);
     // 			}

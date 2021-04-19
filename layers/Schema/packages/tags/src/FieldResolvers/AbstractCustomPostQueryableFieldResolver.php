@@ -23,6 +23,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return [
             'tags',
             'tagCount',
+            'tagNames',
         ];
     }
 
@@ -31,6 +32,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $types = [
             'tags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'tagCount' => SchemaDefinition::TYPE_INT,
+            'tagNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -40,6 +42,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $nonNullableFieldNames = [
             'tags',
             'tagCount',
+            'tagNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -53,6 +56,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $descriptions = [
             'tags' => $translationAPI->__('Tags added to this custom post', 'pop-tags'),
             'tagCount' => $translationAPI->__('Number of tags added to this custom post', 'pop-tags'),
+            'tagNames' => $translationAPI->__('Names of the tags added to this custom post', 'pop-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -63,6 +67,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'tags':
             case 'tagCount':
+            case 'tagNames':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -76,6 +81,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'tags':
             case 'tagCount':
+            case 'tagNames':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -86,6 +92,8 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'tagCount':
                 return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
+            case 'tagNames':
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
@@ -109,11 +117,12 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $customPost = $resultItem;
         switch ($fieldName) {
             case 'tags':
+            case 'tagNames':
                 $query = [
                     'limit' => ComponentConfiguration::getTagListDefaultLimit(),
                 ];
                 $options = [
-                    'return-type' => ReturnTypes::IDS,
+                    'return-type' => $fieldName === 'tags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $tagTypeAPI->getCustomPostTags(

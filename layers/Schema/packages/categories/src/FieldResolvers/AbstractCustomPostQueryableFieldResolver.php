@@ -23,6 +23,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return [
             'categories',
             'categoryCount',
+            'categoryNames',
         ];
     }
 
@@ -31,6 +32,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $types = [
             'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'categoryCount' => SchemaDefinition::TYPE_INT,
+            'categoryNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -40,6 +42,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $nonNullableFieldNames = [
             'categories',
             'categoryCount',
+            'categoryNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -53,6 +56,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $descriptions = [
             'categories' => $translationAPI->__('Categories added to this custom post', 'pop-categories'),
             'categoryCount' => $translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
+            'categoryNames' => $translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -63,6 +67,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'categories':
             case 'categoryCount':
+            case 'categoryNames':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -76,6 +81,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'categories':
             case 'categoryCount':
+            case 'categoryNames':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -86,6 +92,8 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         switch ($fieldName) {
             case 'categoryCount':
                 return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT];
+            case 'categoryNames':
+                return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
@@ -109,11 +117,12 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         $post = $resultItem;
         switch ($fieldName) {
             case 'categories':
+            case 'categoryNames':
                 $query = [
                     'limit' => ComponentConfiguration::getCategoryListDefaultLimit(),
                 ];
                 $options = [
-                    'return-type' => ReturnTypes::IDS,
+                    'return-type' => $fieldName === 'categories' ? ReturnTypes::IDS : ReturnTypes::NAMES,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $categoryTypeAPI->getCustomPostCategories(

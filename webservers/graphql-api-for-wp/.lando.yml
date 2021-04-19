@@ -205,9 +205,13 @@ services:
         - >-
           ../../layers/Schema/packages/post-mutations:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-mutations
         - >-
+          ../../layers/Schema/packages/custompost-tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompost-tags-wp
+        - >-
           ../../layers/Schema/packages/post-tags:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-tags
         - >-
           ../../layers/Schema/packages/post-tags-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-tags-wp
+        - >-
+          ../../layers/Schema/packages/custompost-categories-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompost-categories-wp
         - >-
           ../../layers/Schema/packages/post-categories:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-categories
         - >-
