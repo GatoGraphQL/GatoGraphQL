@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 
 /**
  * Implementation of the icons
@@ -29,7 +30,7 @@ function popblogRouteIcon($icon, $route, $html = true)
             $fontawesome = 'fa-comments';
             break;
 
-        case POP_POSTTAGS_ROUTE_POSTTAGS:
+        case PostTagsComponentConfiguration::getPostTagsRoute():
             $fontawesome = 'fa-hashtag';
             break;
 
@@ -59,7 +60,7 @@ function popblogNavigationRouteTitle($title, $route)
         UsersComponentConfiguration::getUsersRoute() => TranslationAPIFacade::getInstance()->__('Users', 'pop-blog'),
         POP_BLOG_ROUTE_COMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-blog'),
         POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => TranslationAPIFacade::getInstance()->__('Add Comment', 'pop-addcomments'),
-        POP_POSTTAGS_ROUTE_POSTTAGS => TranslationAPIFacade::getInstance()->__('Tags', 'pop-blog'),
+        PostTagsComponentConfiguration::getPostTagsRoute() => TranslationAPIFacade::getInstance()->__('Tags', 'pop-blog'),
         POP_USERPLATFORM_ROUTE_EDITPROFILE => TranslationAPIFacade::getInstance()->__('Edit Profile', 'pop-userplatform'),
         POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => TranslationAPIFacade::getInstance()->__('Change Password', 'pop-userplatform'),
         PostsComponentConfiguration::getPostsRoute() => TranslationAPIFacade::getInstance()->__('Posts', 'pop-application-processors'),

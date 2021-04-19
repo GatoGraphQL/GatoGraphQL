@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 
 class PoP_CDN_Blog_CDNHooks
 {
@@ -54,7 +55,7 @@ class PoP_CDN_Blog_CDNHooks
         } elseif ($thumbprint == POP_CDN_THUMBPRINT_TAG) {
             $routes = array_filter(
                 array(
-                    POP_POSTTAGS_ROUTE_POSTTAGS,
+                    PostTagsComponentConfiguration::getPostTagsRoute(),
                 )
             );
         }

@@ -4,6 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 
 class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
@@ -176,8 +177,8 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => POP_POSTTAGS_ROUTE_POSTTAGS ,
-            self::MODULE_BLOCK_TAGS_SCROLL_LIST => POP_POSTTAGS_ROUTE_POSTTAGS ,
+            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => PostTagsComponentConfiguration::getPostTagsRoute() ,
+            self::MODULE_BLOCK_TAGS_SCROLL_LIST => PostTagsComponentConfiguration::getPostTagsRoute() ,
             self::MODULE_BLOCK_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLL_ADDONS => UsersComponentConfiguration::getUsersRoute(),

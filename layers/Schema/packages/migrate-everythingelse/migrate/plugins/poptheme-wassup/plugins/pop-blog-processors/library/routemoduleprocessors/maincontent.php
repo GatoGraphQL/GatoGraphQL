@@ -5,6 +5,7 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 
 class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -153,7 +154,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
         }
 
         $routemodules_mentions = array(
-            POP_POSTTAGS_ROUTE_POSTTAGS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGS_MENTIONS],
+            PostTagsComponentConfiguration::getPostTagsRoute() => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGS_MENTIONS],
         );
         foreach ($routemodules_mentions as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -214,7 +215,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_tagdetails = array(
-            POP_POSTTAGS_ROUTE_POSTTAGS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGS_SCROLL_DETAILS],
+            PostTagsComponentConfiguration::getPostTagsRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGS_SCROLL_DETAILS],
         );
         foreach ($routemodules_tagdetails as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -305,7 +306,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_taglist = array(
-            POP_POSTTAGS_ROUTE_POSTTAGS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGS_SCROLL_LIST],
+            PostTagsComponentConfiguration::getPostTagsRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGS_SCROLL_LIST],
         );
         foreach ($routemodules_taglist as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
