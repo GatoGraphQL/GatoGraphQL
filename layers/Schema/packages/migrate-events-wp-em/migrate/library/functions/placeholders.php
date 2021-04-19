@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 // Extension: adding more conditionals: has_attendees and no_attendees
 HooksAPIFacade::getInstance()->addFilter('em_event_output_show_condition', 'gdEmEventOutputShowCondition', 10, 4);
@@ -45,10 +46,10 @@ HooksAPIFacade::getInstance()->addFilter('em_event_output_show_condition', 'gdEm
 function gdEmEventOutputShowConditionAddDateCondition($show_condition = false, $condition, $conditional_value, $event)
 {
     if ($condition == 'is_today') {
-        $today = date('Y-m-d', POP_CONSTANT_TIME);
+        $today = date('Y-m-d', ComponentModelComponentInfo::get('time'));
         $show_condition = gdEmEventEventOnGivenDay($today, $event);
     } elseif ($condition == 'is_tomorrow') {
-        $tomorrow = date('Y-m-d', POP_CONSTANT_TIME + 86400);    // add a day
+        $tomorrow = date('Y-m-d', ComponentModelComponentInfo::get('time') + 86400);    // add a day
         $show_condition = gdEmEventEventOnGivenDay($tomorrow, $event);
     }
 

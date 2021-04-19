@@ -1,7 +1,7 @@
 <?php
-/**
-Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
- */
+
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+
 class PoP_ServerSide_MultiLayoutHelpers
 {
     public function withConditionalOnDataFieldModule($dbKey, $dbObjectID, $conditionDataFieldModules, $defaultModule, $context, $options)
@@ -31,7 +31,7 @@ class PoP_ServerSide_MultiLayoutHelpers
         }
 
         // Render the content from this layout
-        $layoutContext = $context[POP_RESPONSE_PROP_SUBMODULES][$layout];
+        $layoutContext = $context[ComponentModelComponentInfo::get('response-prop-submodules')][$layout];
 
         // Add dbKey and dbObjectID back into the context
         $layoutContext = array_merge(

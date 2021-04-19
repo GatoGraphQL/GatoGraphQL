@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace PoP\ComponentModel;
 
 use PoP\Root\Component\ComponentInfoTrait;
 
-trait PluginInfoTrait
+final class ComponentInfo
 {
     use ComponentInfoTrait;
 }

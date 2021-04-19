@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
@@ -103,7 +104,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         $quicktags = $this->addQuicktags($module, $props);
 
         // Generate a random id, needed to be able to load more than 1 wpEditor using Template Manager
-        $editor_id = $name.'_'.POP_CONSTANT_UNIQUE_ID;
+        $editor_id = $name.'_'.ComponentModelComponentInfo::get('unique-id');
         $options = array(
             'editor_class' => 'pop-editor ' . $class,
             'textarea_name' => $name,
@@ -113,11 +114,11 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
             $options['textarea_rows'] = $rows;
         }
 
-        // For the replicate functionality, we need to replace the POP_CONSTANT_UNIQUE_ID bit from the IDs (generated on html load) with the newly
+        // For the replicate functionality, we need to replace the ComponentModelComponentInfo::get('unique-id') bit from the IDs (generated on html load) with the newly
         // generated unique-id from the feedback
         // In addition, allow others to also add their own replacements. Eg: in forms we can add the dbObject value to edit in the wp-editor
         // This replacement below must be done always
-        $ret['unique-id'] = POP_CONSTANT_UNIQUE_ID;
+        $ret['unique-id'] = ComponentModelComponentInfo::get('unique-id');
 
         $initialtext = $this->getInitialtext($module, $props);
         $ret['initial-text'] = $initialtext;

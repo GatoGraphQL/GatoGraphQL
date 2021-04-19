@@ -10,6 +10,7 @@ use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler
 {
@@ -26,7 +27,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
 
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
-            $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_TIME;
+            $ret[GD_URLPARAM_TIMESTAMP] = ComponentModelComponentInfo::get('time');
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
@@ -76,7 +77,7 @@ class ListQueryInputOutputHandler extends \PoP\ComponentModel\QueryInputOutputHa
     //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     // Needed to loadLatest, to know from what time to get results
-    //     $ret[GD_URLPARAM_TIMESTAMP] = POP_CONSTANT_TIME;
+    //     $ret[GD_URLPARAM_TIMESTAMP] = ComponentModelComponentInfo::get('time');
 
     //     // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
     //     if ($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) {

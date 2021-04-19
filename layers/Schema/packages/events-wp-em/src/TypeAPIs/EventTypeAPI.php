@@ -13,10 +13,10 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
-
 use PoPSchema\Events\TypeAPIs\EventTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -79,19 +79,19 @@ class EventTypeAPI extends CustomPostTypeAPI implements EventTypeAPIInterface
     public function isFutureEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
-        return \POP_CONSTANT_TIME < $EM_Event->start;
+        return ComponentModelComponentInfo::get('time') < $EM_Event->start;
     }
 
     public function isCurrentEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
-        return $EM_Event->start <= \POP_CONSTANT_TIME && \POP_CONSTANT_TIME < $EM_Event->end;
+        return $EM_Event->start <= ComponentModelComponentInfo::get('time') && ComponentModelComponentInfo::get('time') < $EM_Event->end;
     }
 
     public function isPastEvent(string | int | object $post_or_post_id): bool
     {
         $EM_Event = $this->getEventFromObjectOrId($post_or_post_id);
-        return $EM_Event->end < \POP_CONSTANT_TIME;
+        return $EM_Event->end < ComponentModelComponentInfo::get('time');
     }
 
     public function getEvents($query = array(), array $options = []): array
