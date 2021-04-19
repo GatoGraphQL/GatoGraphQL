@@ -3,6 +3,7 @@
 use PoP\Routing\RouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -30,7 +31,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
         $routemodules_navigator = array(
             POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR],
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_POSTS_SCROLL_NAVIGATOR],
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR],
         );
         foreach ($routemodules_navigator as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -56,7 +57,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
         $routemodules_addons = array(
             POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_CONTENT_SCROLL_ADDONS],
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_POSTS_SCROLL_ADDONS],
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_ADDONS],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_ADDONS],
         );
         foreach ($routemodules_addons as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -71,7 +72,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
         }
 
         $routemodules_carousels = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_CAROUSEL],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
@@ -135,7 +136,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
         }
 
         $routemodules_usertypeahead = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_TYPEAHEAD],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_TYPEAHEAD],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_TYPEAHEAD],
         );
         foreach ($routemodules_usertypeahead as $route => $module) {
@@ -165,7 +166,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_usermentions = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_MENTIONS],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_USERS_MENTIONS],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_MENTIONS],
         );
         foreach ($routemodules_usermentions as $route => $module) {
@@ -197,7 +198,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_userdetails = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_DETAILS],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_DETAILS],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SEARCHUSERS_SCROLL_DETAILS],
         );
         foreach ($routemodules_userdetails as $route => $module) {
@@ -258,7 +259,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_userfullview = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_FULLVIEW],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_FULLVIEW],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_userfullview as $route => $module) {
@@ -273,7 +274,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_userthumbnail = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
@@ -288,7 +289,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_userlist = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_LIST],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_SCROLL_LIST],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SEARCHUSERS_SCROLL_LIST],
         );
         foreach ($routemodules_userlist as $route => $module) {
@@ -317,7 +318,7 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             }
         }
         $routemodules_carousels_home = array(
-            POP_USERS_ROUTE_USERS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_CAROUSEL],
+            UsersComponentConfiguration::getUsersRoute() => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_USERS_CAROUSEL],
         );
         foreach ($routemodules_carousels_home as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [

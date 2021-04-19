@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
@@ -176,14 +177,14 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => POP_POSTS_ROUTE_POSTS,
             self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => POP_POSTTAGS_ROUTE_POSTTAGS ,
             self::MODULE_BLOCK_TAGS_SCROLL_LIST => POP_POSTTAGS_ROUTE_POSTTAGS ,
-            self::MODULE_BLOCK_USERS_CAROUSEL => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_CAROUSEL => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLL_ADDONS => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLL_DETAILS => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLL_LIST => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => POP_USERS_ROUTE_USERS,
+            self::MODULE_BLOCK_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_ADDONS => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_DETAILS => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_LIST => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => UsersComponentConfiguration::getUsersRoute(),
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }

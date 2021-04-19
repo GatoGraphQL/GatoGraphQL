@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_CDN_Blog_CDNHooks
 {
@@ -33,7 +34,7 @@ class PoP_CDN_Blog_CDNHooks
                     POP_BLOG_ROUTE_SEARCHCONTENT,
                     POP_BLOG_ROUTE_SEARCHUSERS,
                     POP_BLOG_ROUTE_CONTENT,
-                    POP_USERS_ROUTE_USERS,
+                    UsersComponentConfiguration::getUsersRoute(),
                     POP_BLOG_ROUTE_COMMENTS,
                 )
             );

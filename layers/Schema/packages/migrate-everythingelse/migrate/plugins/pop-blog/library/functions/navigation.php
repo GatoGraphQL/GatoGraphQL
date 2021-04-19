@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 /**
  * Implementation of the icons
@@ -18,7 +19,7 @@ function popblogRouteIcon($icon, $route, $html = true)
             $fontawesome = 'fa-asterisk';
             break;
 
-        case POP_USERS_ROUTE_USERS:
+        case UsersComponentConfiguration::getUsersRoute():
             $fontawesome = 'fa-users';
             break;
 
@@ -54,7 +55,7 @@ function popblogNavigationRouteTitle($title, $route)
         POP_BLOG_ROUTE_SEARCHCONTENT => TranslationAPIFacade::getInstance()->__('Search content', 'pop-blog'),
         POP_BLOG_ROUTE_SEARCHUSERS => TranslationAPIFacade::getInstance()->__('Search users', 'pop-blog'),
         POP_BLOG_ROUTE_CONTENT => TranslationAPIFacade::getInstance()->__('Content', 'pop-blog'),
-        POP_USERS_ROUTE_USERS => TranslationAPIFacade::getInstance()->__('Users', 'pop-blog'),
+        UsersComponentConfiguration::getUsersRoute() => TranslationAPIFacade::getInstance()->__('Users', 'pop-blog'),
         POP_BLOG_ROUTE_COMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-blog'),
         POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => TranslationAPIFacade::getInstance()->__('Add Comment', 'pop-addcomments'),
         POP_POSTTAGS_ROUTE_POSTTAGS => TranslationAPIFacade::getInstance()->__('Tags', 'pop-blog'),

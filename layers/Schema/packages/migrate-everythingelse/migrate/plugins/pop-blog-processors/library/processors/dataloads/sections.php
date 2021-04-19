@@ -6,6 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -207,16 +208,16 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_TAGS_MENTIONS => POP_POSTTAGS_ROUTE_POSTTAGS ,
             self::MODULE_DATALOAD_TAGS_SCROLL_DETAILS => POP_POSTTAGS_ROUTE_POSTTAGS ,
             self::MODULE_DATALOAD_TAGS_SCROLL_LIST => POP_POSTTAGS_ROUTE_POSTTAGS ,
-            self::MODULE_DATALOAD_USERS_CAROUSEL => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_CAROUSEL => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_MENTIONS => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLL_ADDONS => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLL_DETAILS => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLL_FULLVIEW => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLL_LIST => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLL_NAVIGATOR => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLL_THUMBNAIL => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_TYPEAHEAD => POP_USERS_ROUTE_USERS,
+            self::MODULE_DATALOAD_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_MENTIONS => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_ADDONS => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_DETAILS => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_FULLVIEW => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_LIST => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_NAVIGATOR => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_THUMBNAIL => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_TYPEAHEAD => UsersComponentConfiguration::getUsersRoute(),
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
