@@ -2,42 +2,58 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagsWP\Hooks;
+namespace PoPSchema\CustomPostCategoriesWP\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 
-class QueryHookSet extends AbstractHookSet
+abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
-            'CMSAPI:posts:query',
-            [$this, 'convertPostsQuery'],
+            'CMSAPI:customposts:query',
+            [$this, 'convertCustomPostsQuery'],
             10,
             2
         );
     }
 
-    public function convertPostsQuery($query, array $options): array
+    public function convertCustomPostsQuery($query, array $options): array
     {
-        if (isset($query['tag-ids'])) {
-            // Watch out! In WordPress it is a string (either tag ID or comma-separated tag IDs), but in PoP it is an array of IDs!
-            $query['tag_id'] = implode(',', $query['tag-ids']);
-            unset($query['tag-ids']);
+        if (isset($query['categories'])) {
+            // Watch out! In WordPress it is a string (either category id or comma-separated category ids), but in PoP it is an array of category ids!
+            $query['cat'] = implode(',', $query['categories']);
+            unset($query['categories']);
         }
-        if (isset($query['tags'])) {
-            // Watch out! In WordPress it is a string (either tag slug or comma-separated tag slugs), but in PoP it is an array of slugs!
-            $query['tag'] = implode(',', $query['tags']);
-            unset($query['tags']);
+        if (isset($query['category-in'])) {
+            $query['category__in'] = $query['category-in'];
+            unset($query['category-in']);
+        }
+        if (isset($query['category-not-in'])) {
+            $query['category__not_in'] = $query['category-not-in'];
+            unset($query['category-not-in']);
         }
 
-        $this->convertPostQuerySpecialCases($query);
+        if (isset($query['category-ids'])) {
+            // Watch out! In WordPress it is a string (either tag ID or comma-separated tag IDs), but in PoP it is an array of IDs!
+            $query['category__in'] = $query['category-ids'];
+            unset($query['category-ids']);
+        }
+        if (isset($query['category-id'])) {
+            $query['cat'] = $query['category-id'];
+            unset($query['category-id']);
+        }
+
+        /**
+         * @todo Check and adapt this function for categories
+         */
+        // $this->convertPostQuerySpecialCases($query);
 
         return $query;
     }
     private function convertPostQuerySpecialCases(&$query)
     {
-        // If both "tag" and "tax_query" were set, then the filter will not work for tags
+        // If both "tag" and "tax_query" were set, then the filter will not work for categories
         // Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
         // including both the tag and the already existing taxonomy filtering (eg: categories)
         // So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
@@ -57,7 +73,7 @@ class QueryHookSet extends AbstractHookSet
                 );
             }
             $tag_item = array(
-                'taxonomy' => 'post_tag',
+                'taxonomy' => $this->getCategoryTaxonomy(),
                 'terms' => $tag_slugs,
                 'field' => 'slug'
             );
@@ -82,4 +98,6 @@ class QueryHookSet extends AbstractHookSet
             unset($query['tag']);
         }
     }
+
+    abstract protected function getCategoryTaxonomy(): string;
 }

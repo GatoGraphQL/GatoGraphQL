@@ -1,9 +1,9 @@
 {
-    "name": "pop-schema/post-tags-wp",
+    "name": "pop-schema/custompost-tags-wp",
     "type": "library",
-    "description": "Implementation for WordPress of contracts from package \"Post Tags\"",
-    "keywords": ["PoP", "post-tags-wp"],
-    "homepage": "https://github.com/PoPSchema/post-tags-wp",
+    "description": "Implementation for WordPress of contracts from package \"Custom Post Tags\"",
+    "keywords": ["PoP", "custompost-tags-wp"],
+    "homepage": "https://github.com/PoPSchema/custompost-tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/post-tags": "^0.8",
-        "pop-schema/custompost-tags-wp": "^0.8"
+        "pop-schema/customposts-wp": "^0.8",
+        "pop-schema/tags-wp": "^0.8"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPSchema\\PostTagsWP\\": "src"
+            "PoPSchema\\CustomPostTagsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPSchema\\PostTagsWP\\": "tests"
+            "PoPSchema\\CustomPostTagsWP\\": "tests"
         }
     },
     "scripts": {

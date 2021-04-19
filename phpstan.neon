@@ -14,10 +14,12 @@ includes:
     - layers/Schema/packages/comments-wp/phpstan.neon.dist
     - layers/Engine/packages/configurable-schema-feedback/phpstan.neon.dist
     - layers/Schema/packages/convert-case-directives/phpstan.neon.dist
+    - layers/Schema/packages/custompost-categories-wp/phpstan.neon.dist
     - layers/Schema/packages/custompost-category-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompost-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompost-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompost-tag-mutations/phpstan.neon.dist
+    - layers/Schema/packages/custompost-tags-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-wp/phpstan.neon.dist

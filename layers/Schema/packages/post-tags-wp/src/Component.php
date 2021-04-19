@@ -20,8 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\PostTags\Component::class,
-            \PoPSchema\PostsWP\Component::class,
-            \PoPSchema\TagsWP\Component::class,
+            \PoPSchema\CustomPostTagsWP\Component::class,
         ];
     }
 
