@@ -55,7 +55,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_name' => 'graphql-api-for-wp-dist',
             'scope' => true,
             'additional_rector_configs' => [
-                'rector-downgrade-code-hacks-AbstractAdapterTrait.php',
                 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code-hacks-CacheItem.php',
             ],
             'rector_config' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php',
@@ -86,7 +85,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
     $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
-        'rector-downgrade-code-hacks-AbstractAdapterTrait.php',
         'rector-downgrade-code-hacks-CacheItem.php',
     ]);
 

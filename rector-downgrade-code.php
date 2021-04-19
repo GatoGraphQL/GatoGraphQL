@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
+use PHPStan\Type\NullType;
+use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
+use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
@@ -18,6 +22,29 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         DowngradeSetList::PHP_73,
         DowngradeSetList::PHP_72,
     ]);
+
+    /**
+     * Hack to fix bug.
+     *
+     * DowngradeParameterTypeWideningRector is modifying function `clear` from vendor/symfony/cache/Adapter/AdapterInterface.php:
+     * from:
+     *     public function clear(string $prefix = '');
+     * to:
+     *     public function clear($prefix = '');
+     * But the same modification is not being done in vendor/symfony/cache/Traits/AbstractAdapterTrait.php
+     * So apply this change manually
+     *
+     * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
+     */
+    $services = $containerConfigurator->services();
+    $services->set(AddParamTypeDeclarationRector::class)
+        ->call('configure', [[
+            AddParamTypeDeclarationRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
+                new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
+                new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
+                new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),
+            ]),
+        ]]);
 
     // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
