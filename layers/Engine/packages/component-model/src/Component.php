@@ -95,7 +95,6 @@ class Component extends AbstractComponent
                 'submodules' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
             ],
         ]);
-        define('POP_CONSTANT_RAND', rand());
         define('POP_CONSTANT_TIME', time());
         define('POP_RESPONSE_PROP_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
     }

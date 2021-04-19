@@ -126,7 +126,7 @@ class Engine implements EngineInterface
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
                 ComponentInfo::get('unique-id'),
-                POP_CONSTANT_RAND,
+                ComponentInfo::get('rand'),
                 POP_CONSTANT_TIME,
             );
             $commoncode = str_replace($differentiators, '', json_encode($this->data));
