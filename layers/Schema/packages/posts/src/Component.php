@@ -84,18 +84,4 @@ class Component extends AbstractComponent
             self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
         }
     }
-
-    /**
-     * Define runtime constants
-     */
-    protected static function defineRuntimeConstants(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        if (!defined('POP_POSTS_ROUTE_POSTS')) {
-            $definitionManager = DefinitionManagerFacade::getInstance();
-            define('POP_POSTS_ROUTE_POSTS', $definitionManager->getUniqueDefinition('posts', DefinitionGroups::ROUTES));
-        }
-    }
 }

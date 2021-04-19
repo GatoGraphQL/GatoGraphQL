@@ -6,6 +6,7 @@ namespace PoPSchema\Posts\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
+use PoPSchema\Posts\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -21,7 +22,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         return [
             ...$routes,
-            \POP_POSTS_ROUTE_POSTS,
+            ComponentConfiguration::getPostsRoute(),
         ];
     }
 }
