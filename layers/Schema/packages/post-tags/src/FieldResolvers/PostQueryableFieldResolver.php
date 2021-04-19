@@ -27,6 +27,7 @@ class PostQueryableFieldResolver extends AbstractCustomPostQueryableFieldResolve
         $descriptions = [
             'tags' => $translationAPI->__('Tags added to this post', 'pop-post-tags'),
             'tagCount' => $translationAPI->__('Number of tags added to this post', 'pop-post-tags'),
+            'tagNames' => $translationAPI->__('Names of the tags added to this post', 'pop-post-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
