@@ -2,6 +2,7 @@
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_ServerSideRendering
 {
@@ -240,7 +241,7 @@ class PoP_ServerSideRendering
         $renderModule = $pagesection_module;
         $render_context = $pagesection_configuration;
         if ($block) {
-            $render_context = $render_context[POP_RESPONSE_PROP_SUBMODULES][$block];
+            $render_context = $render_context[ComponentModelComponentInfo::get('response-prop-submodules')][$block];
             $renderModule = $render_context[GD_JS_MODULE];
         }
 

@@ -759,12 +759,12 @@ class Engine implements EngineInterface
             $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
 
             // If the path doesn't exist, create it
-            if (!isset($array_pointer[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES])) {
-                $array_pointer[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] = array();
+            if (!isset($array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')])) {
+                $array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = array();
             }
 
             // The pointer is the location in the array where the value will be set
-            $array_pointer = &$array_pointer[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES];
+            $array_pointer = &$array_pointer[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')];
         }
 
         $moduleOutputName = ModuleUtils::getModuleOutputName($module);
@@ -894,7 +894,7 @@ class Engine implements EngineInterface
             $data_properties = &$root_data_properties;
             foreach ($module_path as $submodule) {
                 $submoduleFullName = ModuleUtils::getModuleFullName($submodule);
-                $data_properties = &$data_properties[$submoduleFullName][POP_RESPONSE_PROP_SUBMODULES];
+                $data_properties = &$data_properties[$submoduleFullName][ComponentInfo::get('response-prop-submodules')];
             }
             $data_properties = &$data_properties[$moduleFullName][DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -1796,8 +1796,8 @@ class Engine implements EngineInterface
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
-                    $moduledata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] = $moduledata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES] ?? array();
-                    $moduledata = &$moduledata[$submoduleOutputName][POP_RESPONSE_PROP_SUBMODULES];
+                    $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] = $moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')] ?? array();
+                    $moduledata = &$moduledata[$submoduleOutputName][ComponentInfo::get('response-prop-submodules')];
                 }
                 // Merge the feedback in
                 $moduledata = array_merge_recursive(

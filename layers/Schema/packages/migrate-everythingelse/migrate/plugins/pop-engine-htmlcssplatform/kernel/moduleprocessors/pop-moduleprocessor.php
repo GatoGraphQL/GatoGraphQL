@@ -202,7 +202,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 	if ($module_path = $this->getModulePath($module, $props)) {
 
     // 		// Key: module / Value: path to arrive to this module
-    // 		$ret[$module[1]] = array(POP_RESPONSE_PROP_SUBMODULES, $moduleOutputName);
+    // 		$ret[$module[1]] = array(ComponentModelComponentInfo::get('response-prop-submodules'), $moduleOutputName);
     // 	}
 
     // 	// Add the path from this module to its components
@@ -215,7 +215,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 			foreach ($submodule_ret as $submodule_module => $submodule_module_path) {
 
     // 				$ret[$submodule_module] = array_merge(
-    // 					array(POP_RESPONSE_PROP_SUBMODULES, $moduleOutputName),
+    // 					array(ComponentModelComponentInfo::get('response-prop-submodules'), $moduleOutputName),
     // 					$submodule_module_path
     // 				);
     // 			}

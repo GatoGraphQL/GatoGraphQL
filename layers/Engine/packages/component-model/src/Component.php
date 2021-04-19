@@ -90,11 +90,8 @@ class Component extends AbstractComponent
             'unique-id' => GeneralUtils::generateRandomString(),
             'rand' => rand(),
             'time' => time(),
-            'response-property' => [
-                // This value will be used in the response. If compact, make sure each JS Key is unique
-                'submodules' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
-            ],
+            // This value will be used in the response. If compact, make sure each JS Key is unique
+            'response-prop-submodules' => Environment::compactResponseJsonKeys() ? 'ms' : 'submodules',
         ]);
-        define('POP_RESPONSE_PROP_SUBMODULES', Environment::compactResponseJsonKeys() ? 'ms' : 'submodules');
     }
 }
