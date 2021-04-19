@@ -30,6 +30,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
             'postTag' => $translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
             'postTags' => $translationAPI->__('Post tags', 'pop-post-tags'),
             'postTagCount' => $translationAPI->__('Number of post tags', 'pop-post-tags'),
+            'postTagNames' => $translationAPI->__('Names of the post tags', 'pop-post-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -40,6 +41,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
             'postTag',
             'postTags',
             'postTagCount',
+            'postTagNames',
         ];
     }
 
@@ -49,6 +51,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
             'postTag' => SchemaDefinition::TYPE_ID,
             'postTags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'postTagCount' => SchemaDefinition::TYPE_INT,
+            'postTagNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -58,6 +61,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         $nonNullableFieldNames = [
             'postTags',
             'postTagCount',
+            'postTagNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
@@ -84,6 +88,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                 );
             case 'postTags':
             case 'postTagCount':
+            case 'postTagNames':
                 return array_merge(
                     $schemaFieldArgs,
                     $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
@@ -97,6 +102,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postTags':
             case 'postTagCount':
+            case 'postTagNames':
                 return false;
         }
         return parent::enableOrderedSchemaFieldArgs($typeResolver, $fieldName);
@@ -107,6 +113,8 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'postTagCount':
                 return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT];
+            case 'postTagNames':
+                return [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST];
         }
         return parent::getFieldDefaultFilterDataloadingModule($typeResolver, $fieldName, $fieldArgs);
     }
@@ -140,11 +148,12 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return null;
             case 'postTags':
+            case 'postTagNames':
                 $query = [
                     'limit' => ComponentConfiguration::getTagListDefaultLimit(),
                 ];
                 $options = [
-                    'return-type' => ReturnTypes::IDS,
+                    'return-type' => $fieldName === 'postTags' ? ReturnTypes::IDS : ReturnTypes::NAMES,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
                 return $postTagTypeAPI->getTags($query, $options);
