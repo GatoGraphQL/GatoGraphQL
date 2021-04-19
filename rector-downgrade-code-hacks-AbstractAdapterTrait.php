@@ -9,6 +9,7 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 use Symfony\Component\Cache\Traits\AbstractAdapterTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Contracts\Service\ServiceLocatorTrait;
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 /**
@@ -33,11 +34,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('configure', [[
             AddParamTypeDeclarationRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
                 new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
+                new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
+                new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),
             ]),
         ]]);
 
     $parameters->set(Option::PATHS, [
         __DIR__ . '/vendor/symfony/cache/Traits/AbstractAdapterTrait.php',
+        __DIR__ . '/vendor/symfony/service-contracts/ServiceLocatorTrait.php',
     ]);
 
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
