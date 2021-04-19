@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/post-categories": "^0.8",
-        "pop-schema/posts-wp": "^0.8",
-        "pop-schema/categories-wp": "^0.8"
+        "pop-schema/custompost-categories-wp": "^0.8"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
