@@ -6,6 +6,7 @@ namespace PoPSchema\Users\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoP\Routing\RouteHookNames;
+use PoPSchema\Users\ComponentConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -21,7 +22,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         return [
             ...$routes,
-            \POP_USERS_ROUTE_USERS,
+            ComponentConfiguration::getUsersRoute(),
         ];
     }
 }

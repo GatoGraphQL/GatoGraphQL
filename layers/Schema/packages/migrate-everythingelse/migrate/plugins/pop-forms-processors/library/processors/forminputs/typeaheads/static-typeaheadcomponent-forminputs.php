@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module_Processor_StaticTypeaheadComponentFormInputsBase
 {
@@ -35,7 +36,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
                     'url' => GD_StaticSearchUtils::getContentSearchUrl($props, $query_wildcard),
                 );
                 $ret[] = array(
-                    'title' => getRouteIcon(POP_USERS_ROUTE_USERS, true).TranslationAPIFacade::getInstance()->__('Users with ', 'pop-coreprocessors').'"'.GD_JSPLACEHOLDER_QUERY.'"',
+                    'title' => getRouteIcon(UsersComponentConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users with ', 'pop-coreprocessors').'"'.GD_JSPLACEHOLDER_QUERY.'"',
                     'value' => $query_wildcard,
                     'url' => GD_StaticSearchUtils::getUsersSearchUrl($props, $query_wildcard),
                 );

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Routing\DefinitionGroups;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\API\Component as APIComponent;
 
@@ -58,20 +56,6 @@ class Component extends AbstractComponent
         }
         if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
             self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
-        }
-    }
-
-    /**
-     * Define runtime constants
-     */
-    protected static function defineRuntimeConstants(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        if (!defined('POP_POSTTAGS_ROUTE_POSTTAGS')) {
-            $definitionManager = DefinitionManagerFacade::getInstance();
-            define('POP_POSTTAGS_ROUTE_POSTTAGS', $definitionManager->getUniqueDefinition('post-tags', DefinitionGroups::ROUTES));
         }
     }
 }

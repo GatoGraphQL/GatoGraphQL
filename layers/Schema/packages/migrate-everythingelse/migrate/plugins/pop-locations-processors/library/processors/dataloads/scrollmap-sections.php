@@ -6,6 +6,7 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -46,8 +47,8 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     {
         $routes = array(
             self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => POP_USERS_ROUTE_USERS,
-            self::MODULE_DATALOAD_USERS_SCROLLMAP => POP_USERS_ROUTE_USERS,
+            self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }

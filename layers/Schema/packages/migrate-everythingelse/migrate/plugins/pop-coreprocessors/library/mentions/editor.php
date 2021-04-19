@@ -4,6 +4,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 
 HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
 function gdMentionsExternalPlugins($plugins)
@@ -63,9 +65,9 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
     $query_wildcard = urlencode(GD_JSPLACEHOLDER_QUERY);
 
     // $filter_wildcardusers = $filter_manager->getFilter(POP_FILTER_USERS);
-    $users_url = RouteUtils::getRouteURL(POP_USERS_ROUTE_USERS);
+    $users_url = RouteUtils::getRouteURL(UsersComponentConfiguration::getUsersRoute());
     // $filter_wildcardtags = $filter_manager->getFilter(POP_FILTER_TAGS);
-    $tags_url = RouteUtils::getRouteURL(POP_POSTTAGS_ROUTE_POSTTAGS);
+    $tags_url = RouteUtils::getRouteURL(PostTagsComponentConfiguration::getPostTagsRoute());
 
     // // Add a hook, so we can use the content CDN
     // $users_url = HooksAPIFacade::getInstance()->applyFilters(

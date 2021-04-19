@@ -1,4 +1,5 @@
 <?php
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {
@@ -37,8 +38,8 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
     {
         $routes = array(
             self::MODULE_BLOCK_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP => POP_USERS_ROUTE_USERS,
-            self::MODULE_BLOCK_USERS_SCROLLMAP => POP_USERS_ROUTE_USERS,
+            self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }

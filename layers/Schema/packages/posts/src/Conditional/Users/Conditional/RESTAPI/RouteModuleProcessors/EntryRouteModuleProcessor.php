@@ -13,6 +13,7 @@ use PoPSchema\CustomPosts\Conditional\RESTAPI\RouteModuleProcessorHelpers\EntryR
 use PoPSchema\Users\Conditional\CustomPosts\Conditional\RESTAPI\Hooks\CustomPostHooks;
 use PoPSchema\Users\Routing\RouteNatures;
 use PoPSchema\Posts\Conditional\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Posts\ComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -53,7 +54,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $vars = ApplicationState::getVars();
         // Author's posts
         $routemodules = array(
-            POP_POSTS_ROUTE_POSTS => [
+            ComponentConfiguration::getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [

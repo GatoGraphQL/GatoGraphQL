@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Routing\DefinitionGroups;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\API\Component as APIComponent;
 use PoPSchema\Users\Component as UsersComponent;
@@ -82,20 +80,6 @@ class Component extends AbstractComponent
 
         if (ComponentConfiguration::addPostTypeToCustomPostUnionTypes()) {
             self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPostTypeToCustomPostUnionTypes');
-        }
-    }
-
-    /**
-     * Define runtime constants
-     */
-    protected static function defineRuntimeConstants(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        if (!defined('POP_POSTS_ROUTE_POSTS')) {
-            $definitionManager = DefinitionManagerFacade::getInstance();
-            define('POP_POSTS_ROUTE_POSTS', $definitionManager->getUniqueDefinition('posts', DefinitionGroups::ROUTES));
         }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 class PoP_Blog_SubmenuHooks
 {
@@ -20,18 +21,18 @@ class PoP_Blog_SubmenuHooks
     {
 
         // Events
-        if (defined('POP_POSTS_ROUTE_POSTS') && POP_POSTS_ROUTE_POSTS) {
-            $routes[POP_POSTS_ROUTE_POSTS] = HooksAPIFacade::getInstance()->applyFilters(
+        if (defined('PostsComponentConfiguration::getPostsRoute()') && PostsComponentConfiguration::getPostsRoute()) {
+            $routes[PostsComponentConfiguration::getPostsRoute()] = HooksAPIFacade::getInstance()->applyFilters(
                 'PoP_Blog_SubmenuHooks:mainsubheaders',
                 array()
             );
             $vars = ApplicationState::getVars();
             $route = $vars['route'];
-            if (in_array($route, $routes[POP_POSTS_ROUTE_POSTS])) {
+            if (in_array($route, $routes[PostsComponentConfiguration::getPostsRoute()])) {
                 $routes[$route] = array();
             }
         }
-        
+
         return $routes;
     }
 }
