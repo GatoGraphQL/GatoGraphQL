@@ -7,7 +7,7 @@ namespace PoPSchema\PostTags\ModuleProcessors;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor;
 
@@ -28,7 +28,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return CustomPostTypeResolver::class;
+                return PostTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);
