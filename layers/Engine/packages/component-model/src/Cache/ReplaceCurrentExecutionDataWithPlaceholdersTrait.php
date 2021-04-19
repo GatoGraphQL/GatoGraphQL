@@ -14,7 +14,7 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
         return [
             ComponentInfo::get('unique-id') => CachePlaceholders::UNIQUE_ID,
             ComponentInfo::get('rand') => CachePlaceholders::RAND,
-            POP_CONSTANT_TIME => CachePlaceholders::TIME,
+            ComponentInfo::get('time') => CachePlaceholders::TIME,
         ];
     }
 

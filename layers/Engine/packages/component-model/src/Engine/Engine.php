@@ -127,7 +127,7 @@ class Engine implements EngineInterface
             $differentiators = array(
                 ComponentInfo::get('unique-id'),
                 ComponentInfo::get('rand'),
-                POP_CONSTANT_TIME,
+                ComponentInfo::get('time'),
             );
             $commoncode = str_replace($differentiators, '', json_encode($this->data));
 

@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -108,14 +109,14 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         if (in_array($eventTypeAPI->getID($event), $this->future_events)) {
             // Modify start and end dates
-            $event->start = POP_CONSTANT_TIME + 1000;
-            $event->end = POP_CONSTANT_TIME + 2000;
+            $event->start = ComponentModelComponentInfo::get('time') + 1000;
+            $event->end = ComponentModelComponentInfo::get('time') + 2000;
         }
         // Force it to be past
         else {
             // Modify start and end dates
-            $event->start = POP_CONSTANT_TIME - 2000;
-            $event->end = POP_CONSTANT_TIME - 1000;
+            $event->start = ComponentModelComponentInfo::get('time') - 2000;
+            $event->end = ComponentModelComponentInfo::get('time') - 1000;
         }
 
         // Modify the categories, needed to get a different configuration for future/past events

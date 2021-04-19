@@ -4,6 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
@@ -95,7 +96,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Return the notifications from within the last 24 hs
-                $yesterday = strtotime("-1 day", POP_CONSTANT_TIME);
+                $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
                 $ret['hist_time'] = $yesterday;
                 break;
         }

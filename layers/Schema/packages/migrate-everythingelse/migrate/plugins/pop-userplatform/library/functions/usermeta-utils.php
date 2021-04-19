@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_ModuleManager_UserMetaUtils
 {
@@ -20,7 +21,7 @@ class PoP_ModuleManager_UserMetaUtils
         if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
             $vars = ApplicationState::getVars();
             if ($vars['global-userstate']['is-user-logged-in']) {
-                PoP_UserPlatform_UserUtils::saveUserLastAccess($vars['global-userstate']['current-user-id'], POP_CONSTANT_TIME);
+                PoP_UserPlatform_UserUtils::saveUserLastAccess($vars['global-userstate']['current-user-id'], ComponentModelComponentInfo::get('time'));
             }
         }
     }

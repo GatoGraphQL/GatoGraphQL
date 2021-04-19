@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolver
 {
@@ -45,7 +46,7 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         parent::createupdateuser($user_id, $form_data);
 
         // Last Edited: needed for the user thumbprint
-        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, POP_CONSTANT_TIME);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelComponentInfo::get('time'));
 
         \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $form_data['display_email'], true, true);
         \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $form_data['short_description'], true);

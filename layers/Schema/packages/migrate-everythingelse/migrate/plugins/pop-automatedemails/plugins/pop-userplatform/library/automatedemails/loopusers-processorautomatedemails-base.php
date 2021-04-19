@@ -4,6 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 
 class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEmailsBase
 {
@@ -46,7 +47,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             // Then, can start to modify the global state
             $vars['global-userstate']['is-user-logged-in'] = true;
 
-            $yesterday = strtotime("-1 day", POP_CONSTANT_TIME);
+            $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
                 $vars['global-userstate']['current-user'] = $cmsusersapi->getUserById($user_id)/*new WP_User($user_id, '')*/;
