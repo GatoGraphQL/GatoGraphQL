@@ -83,18 +83,4 @@ class Component extends AbstractComponent
             }
         }
     }
-
-    /**
-     * Define runtime constants
-     */
-    protected static function defineRuntimeConstants(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        if (!defined('POP_USERS_ROUTE_USERS')) {
-            $definitionManager = DefinitionManagerFacade::getInstance();
-            define('POP_USERS_ROUTE_USERS', $definitionManager->getUniqueDefinition('users', DefinitionGroups::ROUTES));
-        }
-    }
 }

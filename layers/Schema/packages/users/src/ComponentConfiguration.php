@@ -13,6 +13,7 @@ class ComponentConfiguration
 
     private static ?int $getUserListDefaultLimit = 10;
     private static ?int $getUserListMaxLimit = -1;
+    private static string $getUsersRoute = '';
 
     public static function getUserListDefaultLimit(): ?int
     {
@@ -46,6 +47,22 @@ class ComponentConfiguration
             $selfProperty,
             $defaultValue,
             $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function getUsersRoute(): string
+    {
+        // Define properties
+        $envVariable = Environment::USER_LIST_MAX_LIMIT;
+        $selfProperty = &self::$getUsersRoute;
+        $defaultValue = 'users';
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue
         );
         return $selfProperty;
     }
