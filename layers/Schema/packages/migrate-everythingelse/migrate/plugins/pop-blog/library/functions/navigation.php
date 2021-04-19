@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 /**
  * Implementation of the icons
@@ -40,7 +41,7 @@ function popblogRouteIcon($icon, $route, $html = true)
             $fontawesome = 'fa-pencil-square';
             break;
 
-        case POP_POSTS_ROUTE_POSTS:
+        case PostsComponentConfiguration::getPostsRoute():
             $fontawesome = 'fa-circle';
             break;
     }
@@ -61,7 +62,7 @@ function popblogNavigationRouteTitle($title, $route)
         POP_POSTTAGS_ROUTE_POSTTAGS => TranslationAPIFacade::getInstance()->__('Tags', 'pop-blog'),
         POP_USERPLATFORM_ROUTE_EDITPROFILE => TranslationAPIFacade::getInstance()->__('Edit Profile', 'pop-userplatform'),
         POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => TranslationAPIFacade::getInstance()->__('Change Password', 'pop-userplatform'),
-        POP_POSTS_ROUTE_POSTS => TranslationAPIFacade::getInstance()->__('Posts', 'pop-application-processors'),
+        PostsComponentConfiguration::getPostsRoute() => TranslationAPIFacade::getInstance()->__('Posts', 'pop-application-processors'),
     ];
     return $titles[$route] ?? $title;
 }

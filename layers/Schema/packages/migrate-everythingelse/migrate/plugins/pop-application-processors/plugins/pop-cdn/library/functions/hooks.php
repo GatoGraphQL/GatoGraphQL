@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 
 class PoPThemeWassup_CDN_Hooks
@@ -21,7 +22,7 @@ class PoPThemeWassup_CDN_Hooks
             $routes = array_filter(
                 array(
                     POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
-                    POP_POSTS_ROUTE_POSTS,
+                    PostsComponentConfiguration::getPostsRoute(),
                 )
             );
         }
