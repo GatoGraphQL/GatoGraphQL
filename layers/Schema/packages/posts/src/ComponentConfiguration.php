@@ -14,7 +14,7 @@ class ComponentConfiguration
     private static ?int $getPostListDefaultLimit = 10;
     private static ?int $getPostListMaxLimit = -1;
     private static bool $addPostTypeToCustomPostUnionTypes = true;
-    private static string $getPostsRoute = 'posts';
+    private static string $getPostsRoute = '';
 
     public static function getPostListDefaultLimit(): ?int
     {

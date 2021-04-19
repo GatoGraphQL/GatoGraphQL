@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts;
 
 use PoP\Root\Component\AbstractComponent;
-use PoP\Routing\DefinitionGroups;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\RESTAPI\Component as RESTAPIComponent;
 use PoP\API\Component as APIComponent;
 use PoPSchema\Users\Component as UsersComponent;
