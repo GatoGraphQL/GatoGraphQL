@@ -54,7 +54,7 @@ class ComponentConfiguration
     public static function getUsersRoute(): string
     {
         // Define properties
-        $envVariable = Environment::USER_LIST_MAX_LIMIT;
+        $envVariable = Environment::USERS_ROUTE;
         $selfProperty = &self::$getUsersRoute;
         $defaultValue = 'users';
 
