@@ -12,6 +12,7 @@ use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFieldDataloadModulePro
 use PoPSchema\PostCategories\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\PostCategories\ComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
@@ -42,7 +43,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         $ret = array();
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $routemodules = array(
-            POP_POSTCATEGORIES_ROUTE_POSTCATEGORIES => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
+            ComponentConfiguration::getPostCategoriesRoute() => [PostCategoryFieldDataloadModuleProcessor::class, PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = [
