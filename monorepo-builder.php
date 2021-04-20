@@ -53,11 +53,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'exclude_files' => 'dev-helpers/\* lando/\* docs/images/\*',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-for-wp-dist',
-            'scope' => true,
             'additional_rector_configs' => [
                 __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
             ],
             'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
+            'scope' => true,
+            'phpscoper_scoping_config' => __DIR__ . '/ci/scoping/scoper.inc.php',
+            'rector_scoping_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping.php',
         ],
         // GraphQL API - Convert Case Directives
         [
