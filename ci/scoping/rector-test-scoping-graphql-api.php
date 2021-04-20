@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\LogicalAnd\AndAssignsToSeparateLinesRector;
 use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+require_once __DIR__ . '/rector-test-scoping-shared.php';
 
 /**
  * This Rector configuration imports the fully qualified classnames
@@ -13,17 +14,14 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
  * to run at least 1 rule.
  */
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::SETS, []);
-
-    $services = $containerConfigurator->services();
-    $services->set(AndAssignsToSeparateLinesRector::class);
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+    // Shared configuration
+    doCommonContainerConfiguration($containerConfigurator);
 
     $monorepoDir = dirname(__DIR__, 2);
     $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+
+    // get parameters
+    $parameters = $containerConfigurator->parameters();
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::BOOTSTRAP_FILES, [
