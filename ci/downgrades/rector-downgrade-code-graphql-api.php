@@ -17,11 +17,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
-    // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    $parameters->set(Option::BOOTSTRAP_FILES, [
-        $pluginDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-    ]);
-
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
         // Skip tests

@@ -63,4 +63,11 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
     // Do not change the code, other than the required rules
     $parameters->set(Option::AUTO_IMPORT_NAMES, false);
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+
+    $monorepoDir = dirname(__DIR__, 2);
+
+    // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
+    $parameters->set(Option::BOOTSTRAP_FILES, [
+        $monorepoDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+    ]);
 };
