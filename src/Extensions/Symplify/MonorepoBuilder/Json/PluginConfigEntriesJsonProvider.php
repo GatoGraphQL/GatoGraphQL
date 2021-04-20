@@ -36,7 +36,7 @@ final class PluginConfigEntriesJsonProvider
             'main_file',
             'dist_repo_organization',
             'dist_repo_name',
-            'rector_config',
+            'rector_downgrade_config',
         ];
         /**
          * Validate that all scoping required entries have been provided

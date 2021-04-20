@@ -106,7 +106,7 @@ jobs:
 
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.1)
-                run: ci/downgrades/downgrade_code.sh "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.rector_config }}" "${{ matrix.pluginConfig.additional_rector_configs }}"
+                run: ci/downgrades/downgrade_code.sh "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.rector_downgrade_config }}" "${{ matrix.pluginConfig.additional_rector_configs }}"
 
             -   name: Replace PHP version in plugin main file
                 run: |

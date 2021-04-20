@@ -56,7 +56,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'additional_rector_configs' => [
                 __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
             ],
-            'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
             'scoping' => [
                 'phpscoper_config' => __DIR__ . '/ci/scoping/scoper-graphql-api.inc.php',
                 'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping-graphql-api.php',
@@ -69,7 +69,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'main_file' => 'graphql-api-convert-case-directives.php',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
-            'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-convert-case-directives.php',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-convert-case-directives.php',
         ],
         // GraphQL API - Events Manager
         [
@@ -79,7 +79,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-events-manager-dist',
             'exclude_files' => 'wp-content/\* vendor/wpackagist-plugin/\*',
-            'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-events-manager.php',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-events-manager.php',
         ],
     ]);
 
