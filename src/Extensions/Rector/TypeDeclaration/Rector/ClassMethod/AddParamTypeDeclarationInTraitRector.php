@@ -107,11 +107,17 @@ CODE_SAMPLE
             return null;
         }
 
+        /** @var Trait_ */
+        $trait = $node->getAttribute(AttributeKey::CLASS_NODE);
+        /** @var string $traitName */
+        $traitName = $trait->getAttribute(AttributeKey::CLASS_NAME);
         foreach ($this->parameterTypehints as $parameterTypehint) {
-            if (! $this->traitTypeAnalyzer->isTraitType($parameterTypehint->getObjectType())) {
+            // Check this is the right trait
+            if ($traitName !== $parameterTypehint->getObjectType()->getClassName()) {
                 continue;
             }
 
+            // Check this is the right method
             if (! $this->isName($node, $parameterTypehint->getMethodName())) {
                 continue;
             }
