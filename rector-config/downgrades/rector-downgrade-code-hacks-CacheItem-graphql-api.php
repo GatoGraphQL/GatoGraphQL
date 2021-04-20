@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
-use Rector\Core\ValueObject\PhpVersion;
-use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeSelfTypeDeclarationRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+require_once __DIR__ . '/rector-downgrade-code-hacks-CacheItem-shared.php';
 
 /**
  * Hack to fix bug.
@@ -18,17 +18,13 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
  * @see https://github.com/rectorphp/rector/issues/5962
  */
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Shared configuration
+    doCommonContainerConfiguration($containerConfigurator);
+
     // get parameters
     $parameters = $containerConfigurator->parameters();
-
-    $services = $containerConfigurator->services();
-    $services->set(DowngradeSelfTypeDeclarationRector::class);
 
     $parameters->set(Option::PATHS, [
         __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/cache/CacheItem.php',
     ]);
-
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
-    $parameters->set(Option::AUTO_IMPORT_NAMES, false);
-    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 };
