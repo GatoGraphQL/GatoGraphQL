@@ -3,12 +3,16 @@
 declare(strict_types=1);
 
 use PHPStan\Type\NullType;
+use PHPStan\Type\StringType;
 use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationInTraitRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
+use Symfony\Component\Cache\Traits\AbstractAdapterTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Contracts\Cache\CacheTrait;
+use Symfony\Contracts\Service\ServiceLocatorTrait;
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -43,6 +47,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),
+                new AddParamTypeDeclaration(CacheTrait::class, 'get', 0, new StringType()),
+                new AddParamTypeDeclaration(CacheTrait::class, 'get', 2, new NullType()),
+                new AddParamTypeDeclaration(CacheTrait::class, 'get', 3, new NullType()),
             ]),
         ]]);
 
