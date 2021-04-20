@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 use PHPStan\Type\NullType;
+use PHPStan\Type\StringType;
 use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationInTraitRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Contracts\Cache\CacheTrait;
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -27,12 +29,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * Hack to fix bug.
      *
      * DowngradeParameterTypeWideningRector is modifying function `clear` from vendor/symfony/cache/Adapter/AdapterInterface.php:
+     *
      * from:
      *     public function clear(string $prefix = '');
      * to:
      *     public function clear($prefix = '');
+     *
      * But the same modification is not being done in vendor/symfony/cache/Traits/AbstractAdapterTrait.php
-     * So apply this change manually
+     * So apply this change (and several similar others) manually
      *
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
@@ -43,6 +47,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),
+                new AddParamTypeDeclaration(CacheTrait::class, 'get', 0, new StringType()),
+                new AddParamTypeDeclaration(CacheTrait::class, 'get', 2, new NullType()),
+                new AddParamTypeDeclaration(CacheTrait::class, 'get', 3, new NullType()),
             ]),
         ]]);
 
