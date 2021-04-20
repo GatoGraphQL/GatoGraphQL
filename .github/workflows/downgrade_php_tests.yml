@@ -49,12 +49,12 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Local packages - Downgrade PHP code via Rector
-                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi
+                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=ci/downgrades/rector-downgrade-code.php --ansi
 
             # Pass param "additional_rector_configs" to fix bug
             # @see https://github.com/rectorphp/rector/issues/5962
             -   name: Dependencies - Downgrade PHP code via Rector
-                run: ci/downgrade_code.sh "" "" "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
+                run: ci/downgrades/downgrade_code.sh ci/downgrades/rector-downgrade-code.php "" "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
 
             ################################################################################
             # Run Rector again with --dry-run, check no further downgrades are executed
@@ -67,11 +67,11 @@ jobs:
             # (it this will seldom throw an error, and only after upgrading the dependencies, mostly Rector itself)
             ################################################################################
             -   name: (Again) Local packages - Downgrade PHP code via Rector
-                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-downgrade-code.php --ansi --dry-run
+                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=ci/downgrades/rector-downgrade-code.php --ansi --dry-run
                 if: github.event_name == 'push'
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
-                run: ci/downgrade_code.sh --dry-run "" "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
+                run: ci/downgrades/downgrade_code.sh ci/downgrades/rector-downgrade-code.php --dry-run "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
                 if: github.event_name == 'push'
             ################################################################################
 

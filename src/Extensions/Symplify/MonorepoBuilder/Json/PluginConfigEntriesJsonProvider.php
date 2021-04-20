@@ -36,13 +36,21 @@ final class PluginConfigEntriesJsonProvider
             'main_file',
             'dist_repo_organization',
             'dist_repo_name',
+            'rector_downgrade_config',
+        ];
+        /**
+         * Validate that all scoping required entries have been provided
+         */
+        $scopingRequiredEntries = [
+            'phpscoper_config',
+            'rector_test_config',
         ];
         $pluginConfigEntries = [];
         $sourcePluginConfigEntries = $this->pluginConfigEntries;
         if ($scopedOnly) {
             $sourcePluginConfigEntries = array_filter(
                 $sourcePluginConfigEntries,
-                fn (array $entry) => $entry['scope'] ?? false
+                fn (array $entry) => isset($entry['scoping'])
             );
         }
         foreach ($sourcePluginConfigEntries as $entryConfig) {
@@ -57,14 +65,28 @@ final class PluginConfigEntriesJsonProvider
                 ));
             }
 
+            // If it is scoping, check that all required entries are provided
+            if (isset($entryConfig['scoping'])) {
+                $unprovidedScopingEntries = array_diff(
+                    $scopingRequiredEntries,
+                    array_keys((array) $entryConfig['scoping'])
+                );
+                if ($unprovidedScopingEntries !== []) {
+                    throw new ShouldNotHappenException(sprintf(
+                        "The following entries must be provided for scoping the plugin: '%s'",
+                        implode("', '", $unprovidedScopingEntries)
+                    ));
+                }
+            }
+
             // If it doens't specify a branch, use "master" by default
             $entryConfig['dist_repo_branch'] ??= 'master';
 
             // Merge all rector configs as a string
             $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);
 
-            // Default Rector config file
-            $entryConfig['rector_config'] ??= 'rector-downgrade-code.php';
+            // Automatically set the entries for conditional checks in GitHub Actions
+            $entryConfig['scope'] = isset($entryConfig['scoping']);
 
             $pluginConfigEntries[] = $entryConfig;
         }

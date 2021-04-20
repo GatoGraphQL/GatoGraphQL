@@ -53,11 +53,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'exclude_files' => 'dev-helpers/\* lando/\* docs/images/\*',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-for-wp-dist',
-            'scope' => true,
             'additional_rector_configs' => [
-                'rector-downgrade-code-hacks-CacheItem.php',
+                __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
             ],
-            'rector_config' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code.php',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
+            'scoping' => [
+                'phpscoper_config' => __DIR__ . '/ci/scoping/scoper-graphql-api.inc.php',
+                'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping-graphql-api.php',
+            ],
         ],
         // GraphQL API - Convert Case Directives
         [
@@ -66,6 +69,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'main_file' => 'graphql-api-convert-case-directives.php',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-convert-case-directives.php',
         ],
         // GraphQL API - Events Manager
         [
@@ -75,15 +79,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-events-manager-dist',
             'exclude_files' => 'wp-content/\* vendor/wpackagist-plugin/\*',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-events-manager.php',
         ],
     ]);
 
     /**
      * Additional downgrade Rector configs:
-     * Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
+     * Hack to fix bugs
+     * @see https://github.com/rectorphp/rector/issues/5962
+     * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
     $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
-        'rector-downgrade-code-hacks-CacheItem.php',
+        __DIR__ . '/ci/downgrades/rector-downgrade-code-hacks-CacheItem.php',
     ]);
 
     $parameters = $containerConfigurator->parameters();

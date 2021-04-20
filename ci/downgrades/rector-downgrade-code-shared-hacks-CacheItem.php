@@ -17,16 +17,13 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
  *
  * @see https://github.com/rectorphp/rector/issues/5962
  */
-return static function (ContainerConfigurator $containerConfigurator): void {
+function doCommonContainerConfiguration(ContainerConfigurator $containerConfigurator): void
+{
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
     $services = $containerConfigurator->services();
     $services->set(DowngradeSelfTypeDeclarationRector::class);
-
-    $parameters->set(Option::PATHS, [
-        __DIR__ . '/vendor/symfony/cache/CacheItem.php',
-    ]);
 
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
     $parameters->set(Option::AUTO_IMPORT_NAMES, false);

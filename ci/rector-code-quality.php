@@ -25,18 +25,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
+    $monorepoDir = dirname(__DIR__);
+
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::BOOTSTRAP_FILES, [
         // full directory
-        __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+        $monorepoDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
         // Avoid error: "Class EM_Event not found"
-        __DIR__ . '/stubs/wpackagist-plugin/events-manager/em-stubs.php',
+        $monorepoDir . '/stubs/wpackagist-plugin/events-manager/em-stubs.php',
     ]);
 
     // files to skip downgrading
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/src/*',
-        __DIR__ . '/layers/*',
+        $monorepoDir . '/src/*',
+        $monorepoDir . '/layers/*',
     ]);
 
     // files to skip downgrading
@@ -57,6 +59,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //  */
     // /** Define ABSPATH as this file's directory */
     // if (!defined('ABSPATH')) {
-    //     define('ABSPATH', __DIR__ . '/vendor/wordpress/wordpress/');
+    //     define('ABSPATH', $monorepoDir . '/vendor/wordpress/wordpress/');
     // }
 };

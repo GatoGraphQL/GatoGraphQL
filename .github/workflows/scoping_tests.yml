@@ -76,9 +76,10 @@ jobs:
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
 
-            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../../../../build-prefixed/vendor"
+            # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
+            # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
             -   name: Scope code into separate folder
-                run: php-scoper add-prefix --output-dir ../../../../build-prefixed --ansi
+                run: php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config }} --output-dir $GITHUB_WORKSPACE/build-prefixed/vendor --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Copy scoped code back into original location
@@ -89,5 +90,5 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Run Rector on the scoped code
-                run: vendor/bin/rector process --config=${{ matrix.pluginConfig.path }}/rector-test-scoping.php --ansi
+                run: vendor/bin/rector process --config=${{ matrix.pluginConfig.scoping.rector_test_config }} --ansi
 
