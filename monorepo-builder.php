@@ -55,7 +55,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_name' => 'graphql-api-for-wp-dist',
             'scope' => true,
             'additional_rector_configs' => [
-                'rector-config/downgrades/rector-downgrade-code-hacks-CacheItem-graphql-api.php',
+                'rector-config/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
             ],
             'rector_config' => 'rector-config/downgrades/rector-downgrade-code-graphql-api.php',
         ],
