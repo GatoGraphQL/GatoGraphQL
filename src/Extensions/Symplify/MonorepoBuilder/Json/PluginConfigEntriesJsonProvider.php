@@ -36,6 +36,7 @@ final class PluginConfigEntriesJsonProvider
             'main_file',
             'dist_repo_organization',
             'dist_repo_name',
+            'rector_config',
         ];
         /**
          * Validate that all scoping required entries have been provided
@@ -83,9 +84,6 @@ final class PluginConfigEntriesJsonProvider
 
             // Merge all rector configs as a string
             $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);
-
-            // Default Rector config file
-            $entryConfig['rector_config'] ??= 'ci/downgrades/rector-downgrade-code.php';
 
             $pluginConfigEntries[] = $entryConfig;
         }
