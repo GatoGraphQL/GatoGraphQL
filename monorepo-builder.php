@@ -55,9 +55,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_name' => 'graphql-api-for-wp-dist',
             'scope' => true,
             'additional_rector_configs' => [
-                'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/rector-downgrade-code-hacks-CacheItem.php',
+                'rector-config/downgrades/rector-downgrade-code-hacks-CacheItem-graphql-api.php',
             ],
-            'rector_config' => 'rector-downgrade-code-graphql-api.php',
+            'rector_config' => 'rector-config/downgrades/rector-downgrade-code-graphql-api.php',
         ],
         // GraphQL API - Convert Case Directives
         [
@@ -85,7 +85,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
     $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
-        'rector-downgrade-code-hacks-CacheItem.php',
+        'rector-config/downgrades/rector-downgrade-code-hacks-CacheItem.php',
     ]);
 
     $parameters = $containerConfigurator->parameters();

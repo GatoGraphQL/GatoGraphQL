@@ -640,7 +640,7 @@
         "check-style": "phpcs -n src $(monorepo-builder source-packages --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --psr4-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --ansi",
-        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --psr4-only --subfolder=src) --config=rector-downgrade-code.php --ansi --dry-run || true",
+        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --psr4-only --subfolder=src) --config=rector-config/downgrades/rector-downgrade-code.php --ansi --dry-run || true",
         "preview-vendor-downgrade": "ci/downgrade_code.sh --dry-run || true",
         "preview-code-downgrade": [
             "@preview-src-downgrade",
@@ -658,7 +658,7 @@
         "validate-monorepo": "monorepo-builder validate --ansi",
         "release": "monorepo-builder release patch --ansi",
         "merge-phpstan": "monorepo-builder merge-phpstan --skip-unmigrated --ansi",
-        "improve-code-quality": "rector process --config=rector-code-quality.php --ansi"
+        "improve-code-quality": "rector process --config=rector-config/rector-code-quality.php --ansi"
     },
     "scripts-descriptions": {
         "test": "Execute PHPUnit tests",

@@ -64,7 +64,7 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);
 
             // Default Rector config file
-            $entryConfig['rector_config'] ??= 'rector-downgrade-code.php';
+            $entryConfig['rector_config'] ??= 'rector-config/downgrades/rector-downgrade-code.php';
 
             $pluginConfigEntries[] = $entryConfig;
         }
