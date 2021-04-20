@@ -26,6 +26,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
+        // Skip tests
+        '*/tests/*',
+        '*/test/*',
+        '*/Test/*',
+
         // Ignore downgrading the monorepo source
         $monorepoDir . '/src/*',
 

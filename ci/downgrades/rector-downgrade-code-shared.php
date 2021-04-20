@@ -63,12 +63,4 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
     // Do not change the code, other than the required rules
     $parameters->set(Option::AUTO_IMPORT_NAMES, false);
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
-
-    // files to skip downgrading
-    $parameters->set(Option::SKIP, [
-        // Skip tests
-        '*/tests/*',
-        '*/test/*',
-        '*/Test/*',
-    ]);
 };

@@ -24,6 +24,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
+        // Skip tests
+        '*/tests/*',
+        '*/test/*',
+        '*/Test/*',
+
         // The GraphQL API plugin does not require the REST package
         // So ignore all code depending on it, or it throws error:
         //   "Could not process
