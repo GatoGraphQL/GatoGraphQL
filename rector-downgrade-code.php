@@ -9,8 +9,10 @@ use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
+use Symfony\Component\Cache\Traits\AbstractAdapterTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Contracts\Cache\CacheTrait;
+use Symfony\Contracts\Service\ServiceLocatorTrait;
 use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
