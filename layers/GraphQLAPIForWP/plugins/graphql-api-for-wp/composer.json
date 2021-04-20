@@ -87,8 +87,7 @@
         "test": "phpunit",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",
-        "analyse": "phpstan analyse",
-        "preview-code-downgrade": "../../../../ci/downgrade_code.sh --dry-run || true"
+        "analyse": "phpstan analyse"
     },
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
