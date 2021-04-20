@@ -840,7 +840,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         // If any casting can't be done, show an error
         if (
-            $failedCastingFieldArgs = array_filter($castedFieldArgs, function (mixed $fieldArgValue) {
+            // Temporarily commented out until Rector can downgrade `mixed` in anonymous functions
+            // @see https://github.com/leoloso/PoP/issues/626
+            // $failedCastingFieldArgs = array_filter($castedFieldArgs, function (mixed $fieldArgValue) {
+            $failedCastingFieldArgs = array_filter($castedFieldArgs, function ($fieldArgValue) {
                 return is_null($fieldArgValue);
             })
         ) {
