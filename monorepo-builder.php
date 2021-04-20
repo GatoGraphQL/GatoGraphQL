@@ -69,6 +69,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'main_file' => 'graphql-api-convert-case-directives.php',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
+            'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-convert-case-directives.php',
         ],
         // GraphQL API - Events Manager
         [
@@ -78,6 +79,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-events-manager-dist',
             'exclude_files' => 'wp-content/\* vendor/wpackagist-plugin/\*',
+            'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-events-manager.php',
         ],
     ]);
 
