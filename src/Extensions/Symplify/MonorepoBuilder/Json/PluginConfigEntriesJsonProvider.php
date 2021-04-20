@@ -42,7 +42,7 @@ final class PluginConfigEntriesJsonProvider
         if ($scopedOnly) {
             $sourcePluginConfigEntries = array_filter(
                 $sourcePluginConfigEntries,
-                fn (array $entry) => $entry['scope'] ?? false
+                fn (array $entry) => isset($entry['scoping'])
             );
         }
         foreach ($sourcePluginConfigEntries as $entryConfig) {

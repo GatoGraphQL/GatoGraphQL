@@ -57,9 +57,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
             ],
             'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
-            'scope' => true,
-            'phpscoper_scoping_config' => __DIR__ . '/ci/scoping/scoper.inc.php',
-            'rector_scoping_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping.php',
+            'scoping' => [
+                'phpscoper_config' => __DIR__ . '/ci/scoping/scoper.inc.php',
+                'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping.php',
+            ],
         ],
         // GraphQL API - Convert Case Directives
         [
