@@ -64,7 +64,7 @@ return [
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
             ])
-            ->in(convertRelativeToFullPath(('vendor')),
+            ->in(convertRelativeToFullPath('vendor')),
         Finder::create()->append([
             convertRelativeToFullPath('src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php'),
             convertRelativeToFullPath('vendor/getpop/routing-wp/src/Component.php'),
