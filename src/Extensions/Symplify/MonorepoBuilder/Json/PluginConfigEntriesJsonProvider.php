@@ -37,6 +37,13 @@ final class PluginConfigEntriesJsonProvider
             'dist_repo_organization',
             'dist_repo_name',
         ];
+        /**
+         * Validate that all scoping required entries have been provided
+         */
+        $scopingRequiredEntries = [
+            'phpscoper_config',
+            'rector_test_config',
+        ];
         $pluginConfigEntries = [];
         $sourcePluginConfigEntries = $this->pluginConfigEntries;
         if ($scopedOnly) {
@@ -55,6 +62,20 @@ final class PluginConfigEntriesJsonProvider
                     "The following entries must be provided for generating the plugin: '%s'",
                     implode("', '", $unprovidedEntries)
                 ));
+            }
+
+            // If it is scoping, check that all required entries are provided
+            if (isset($entryConfig['scoping'])) {
+                $unprovidedScopingEntries = array_diff(
+                    $scopingRequiredEntries,
+                    array_keys((array) $entryConfig['scoping'])
+                );
+                if ($unprovidedScopingEntries !== []) {
+                    throw new ShouldNotHappenException(sprintf(
+                        "The following entries must be provided for scoping the plugin: '%s'",
+                        implode("', '", $unprovidedScopingEntries)
+                    ));
+                }
             }
 
             // If it doens't specify a branch, use "master" by default
