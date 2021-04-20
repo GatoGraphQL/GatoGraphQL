@@ -20,10 +20,13 @@ require_once __DIR__ . '/rector-downgrade-code-hacks-CacheItem-shared.php';
 return static function (ContainerConfigurator $containerConfigurator): void {
     // Shared configuration
     doCommonContainerConfiguration($containerConfigurator);
+
+    $monorepoDir = dirname(__DIR__, 2);
+
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/../../vendor/symfony/cache/CacheItem.php',
+        $monorepoDir . '/vendor/symfony/cache/CacheItem.php',
     ]);
 };

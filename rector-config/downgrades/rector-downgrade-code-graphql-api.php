@@ -11,12 +11,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Shared configuration
     doCommonContainerConfiguration($containerConfigurator);
 
+    $monorepoDir = dirname(__DIR__, 2);
+    $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::BOOTSTRAP_FILES, [
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+        $pluginDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
     ]);
 
     // files to skip downgrading
@@ -29,28 +32,28 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         '*/Conditional/RESTAPI/*',
 
         // Even when downgrading all packages, skip Symfony's polyfills
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/polyfill-*',
+        $pluginDir . '/vendor/symfony/polyfill-*',
 
         // Skip since they are not needed and they fail
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/composer/*',
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/lkwdwrd/wp-muplugin-loader/*',
+        $pluginDir . '/vendor/composer/*',
+        $pluginDir . '/vendor/lkwdwrd/wp-muplugin-loader/*',
 
         // These are skipped in the .sh since it's faster
         // // All the "migrate" folders
-        // __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/getpop/migrate-*/*',
-        // __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/pop-schema/migrate-*/*',
-        // __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/graphql-by-pop/migrate-*/*',
+        // $pluginDir . '/vendor/getpop/migrate-*/*',
+        // $pluginDir . '/vendor/pop-schema/migrate-*/*',
+        // $pluginDir . '/vendor/graphql-by-pop/migrate-*/*',
         // // For local dependencies, skip the tests
-        // __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/getpop/*/tests/*',
-        // __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/pop-schema/*/tests/*',
-        // __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/graphql-by-pop/*/tests/*',
+        // $pluginDir . '/vendor/getpop/*/tests/*',
+        // $pluginDir . '/vendor/pop-schema/*/tests/*',
+        // $pluginDir . '/vendor/graphql-by-pop/*/tests/*',
 
         // Ignore errors from classes we don't have in our environment,
         // or that come from referencing a class present in DEV, not PROD
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/cache/DoctrineProvider.php',
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/string/Slugger/AsciiSlugger.php',
+        $pluginDir . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+        $pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
+        $pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+        $pluginDir . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
     ]);
 
     /**
@@ -65,6 +68,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      */
     /** Define ABSPATH as this file's directory */
     if (!defined('ABSPATH')) {
-        define('ABSPATH', __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/wordpress/wordpress/');
+        define('ABSPATH', $pluginDir . '/vendor/wordpress/wordpress/');
     }
 };

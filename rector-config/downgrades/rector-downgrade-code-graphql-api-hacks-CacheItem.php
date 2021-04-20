@@ -21,10 +21,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Shared configuration
     doCommonContainerConfiguration($containerConfigurator);
 
+    $monorepoDir = dirname(__DIR__, 2);
+    $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+
     // get parameters
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/vendor/symfony/cache/CacheItem.php',
+        $pluginDir . '/vendor/symfony/cache/CacheItem.php',
     ]);
 };
