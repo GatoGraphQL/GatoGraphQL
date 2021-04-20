@@ -66,7 +66,6 @@ return [
             ])
             ->in(convertRelativeToFullPath('vendor')),
         Finder::create()->append([
-            convertRelativeToFullPath('src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php'),
             convertRelativeToFullPath('vendor/getpop/routing-wp/src/Component.php'),
             convertRelativeToFullPath('vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php'),
         ])
