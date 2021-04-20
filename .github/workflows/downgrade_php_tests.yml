@@ -49,7 +49,7 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Local packages - Downgrade PHP code via Rector
-                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-config/downgrades/rector-downgrade-code.php --ansi
+                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=ci/downgrades/rector-downgrade-code.php --ansi
 
             # Pass param "additional_rector_configs" to fix bug
             # @see https://github.com/rectorphp/rector/issues/5962
@@ -67,7 +67,7 @@ jobs:
             # (it this will seldom throw an error, and only after upgrading the dependencies, mostly Rector itself)
             ################################################################################
             -   name: (Again) Local packages - Downgrade PHP code via Rector
-                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=rector-config/downgrades/rector-downgrade-code.php --ansi --dry-run
+                run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=ci/downgrades/rector-downgrade-code.php --ansi --dry-run
                 if: github.event_name == 'push'
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
