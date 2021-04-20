@@ -64,11 +64,11 @@ return [
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
             ])
-            ->in('vendor'),
+            ->in(convertRelativeToFullPath(('vendor')),
         Finder::create()->append([
-            'src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php',
-            'vendor/getpop/routing-wp/src/Component.php',
-            'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
+            convertRelativeToFullPath('src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php'),
+            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Component.php'),
+            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php'),
         ])
     ],
     'whitelist' => array_values(array_unique([
@@ -91,7 +91,7 @@ return [
     'files-whitelist' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
         // doing `composer dumpautoload`, so skip it
-        'vendor/composer/InstalledVersions.php',
+        convertRelativeToFullPath('vendor/composer/InstalledVersions.php'),
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
@@ -103,7 +103,7 @@ return [
              *
              * Fix it
              */
-            if ($filePath === __DIR__ . DIRECTORY_SEPARATOR . 'vendor/nikic/fast-route/src/bootstrap.php') {
+            if ($filePath === convertRelativeToFullPath('vendor/nikic/fast-route/src/bootstrap.php')) {
                 return str_replace(
                     ["'FastRoute\\\\'", "'FastRoute'"],
                     ["'${prefix}\\\\FastRoute\\\\'", "'${prefix}\\\\FastRoute'"],
@@ -114,7 +114,7 @@ return [
              * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
              * Avoid it!
              */
-            if (str_starts_with($filePath, __DIR__ . DIRECTORY_SEPARATOR . 'vendor/brain/cortex/')) {
+            if (str_starts_with($filePath, convertRelativeToFullPath('vendor/brain/cortex/'))) {
                 return str_replace(
                     "\\${prefix}\\WP",
                     "\\WP",
@@ -132,7 +132,7 @@ return [
             // - vendor/symfony/polyfill-mbstring/bootstrap80.php
             // - vendor/symfony/polyfill-php72/bootstrap.php
             // - etc
-            $pattern = '#' . __DIR__ . '/vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
+            $pattern = '#' . convertRelativeToFullPath('vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php') . '#';
             $symfonyPolyfillFilesWithGlobalClass = array_map(
                 'convertRelativeToFullPath',
                 [
