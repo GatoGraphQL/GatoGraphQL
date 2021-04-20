@@ -58,7 +58,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ],
             'rector_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
             'scoping' => [
-                'phpscoper_config' => __DIR__ . '/ci/scoping/scoper.inc.php',
+                'phpscoper_config' => __DIR__ . '/ci/scoping/scoper-graphql-api.inc.php',
                 'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping-graphql-api.php',
             ],
         ],
