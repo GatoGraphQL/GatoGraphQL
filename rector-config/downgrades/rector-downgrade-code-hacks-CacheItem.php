@@ -24,6 +24,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/vendor/symfony/cache/CacheItem.php',
+        __DIR__ . '/../../vendor/symfony/cache/CacheItem.php',
     ]);
 };
