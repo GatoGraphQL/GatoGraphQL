@@ -50,6 +50,7 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
                 new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),
+                // The type for this param is being removed, add it again
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 0, new StringType()),
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 2, new NullType()),
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 3, new NullType()),
