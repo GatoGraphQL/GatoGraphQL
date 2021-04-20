@@ -31,8 +31,11 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
-function convertRelativeToFullPath(string $relativePath): string {
-    return __DIR__ . '/vendor/' . $relativePath;
+function convertRelativeToFullPath(string $relativePath): string
+{
+    $monorepoDir = dirname(__DIR__, 2);
+    $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+    return $pluginDir . '/' . $relativePath;
 }
 return [
     'prefix' => 'PrefixedByPoP',
@@ -133,12 +136,12 @@ return [
             $symfonyPolyfillFilesWithGlobalClass = array_map(
                 'convertRelativeToFullPath',
                 [
-                    'symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-                    'symfony/polyfill-php73/Resources/stubs/JsonException.php',
-                    'symfony/polyfill-php80/Resources/stubs/Attribute.php',
-                    'symfony/polyfill-php80/Resources/stubs/Stringable.php',
-                    'symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-                    'symfony/polyfill-php80/Resources/stubs/ValueError.php',
+                    'vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+                    'vendor/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php',
                 ]
             );
             $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass);
@@ -171,9 +174,9 @@ return [
             $symfonyPolyfillFilesWithParentReturnType = array_map(
                 'convertRelativeToFullPath',
                 [
-                    'symfony/string/AbstractUnicodeString.php',
-                    'symfony/string/ByteString.php',
-                    'symfony/string/UnicodeString.php',
+                    'vendor/symfony/string/AbstractUnicodeString.php',
+                    'vendor/symfony/string/ByteString.php',
+                    'vendor/symfony/string/UnicodeString.php',
                 ]
             );
             if (in_array($filePath, $symfonyPolyfillFilesWithParentReturnType)) {
