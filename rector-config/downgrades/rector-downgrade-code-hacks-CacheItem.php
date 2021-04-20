@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-require_once __DIR__ . '/rector-downgrade-code-hacks-CacheItem-shared.php';
+require_once __DIR__ . '/rector-downgrade-code-shared-hacks-CacheItem.php';
 
 /**
  * Hack to fix bug.
