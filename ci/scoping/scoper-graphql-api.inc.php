@@ -31,8 +31,11 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
-function convertRelativeToFullPath(string $relativePath): string {
-    return __DIR__ . '/vendor/' . $relativePath;
+function convertRelativeToFullPath(string $relativePath): string
+{
+    $monorepoDir = dirname(__DIR__, 2);
+    $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+    return $pluginDir . '/' . $relativePath;
 }
 return [
     'prefix' => 'PrefixedByPoP',
@@ -61,11 +64,10 @@ return [
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
             ])
-            ->in('vendor'),
+            ->in(convertRelativeToFullPath('vendor')),
         Finder::create()->append([
-            'src/Container/CompilerPasses/ConfigureAccessControlCompilerPass.php',
-            'vendor/getpop/routing-wp/src/Component.php',
-            'vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php',
+            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Component.php'),
+            convertRelativeToFullPath('vendor/getpop/routing-wp/src/Hooks/SetupCortexHookSet.php'),
         ])
     ],
     'whitelist' => array_values(array_unique([
@@ -88,7 +90,7 @@ return [
     'files-whitelist' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
         // doing `composer dumpautoload`, so skip it
-        'vendor/composer/InstalledVersions.php',
+        convertRelativeToFullPath('vendor/composer/InstalledVersions.php'),
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
@@ -100,7 +102,7 @@ return [
              *
              * Fix it
              */
-            if ($filePath === __DIR__ . DIRECTORY_SEPARATOR . 'vendor/nikic/fast-route/src/bootstrap.php') {
+            if ($filePath === convertRelativeToFullPath('vendor/nikic/fast-route/src/bootstrap.php')) {
                 return str_replace(
                     ["'FastRoute\\\\'", "'FastRoute'"],
                     ["'${prefix}\\\\FastRoute\\\\'", "'${prefix}\\\\FastRoute'"],
@@ -111,7 +113,7 @@ return [
              * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
              * Avoid it!
              */
-            if (str_starts_with($filePath, __DIR__ . DIRECTORY_SEPARATOR . 'vendor/brain/cortex/')) {
+            if (str_starts_with($filePath, convertRelativeToFullPath('vendor/brain/cortex/'))) {
                 return str_replace(
                     "\\${prefix}\\WP",
                     "\\WP",
@@ -129,16 +131,16 @@ return [
             // - vendor/symfony/polyfill-mbstring/bootstrap80.php
             // - vendor/symfony/polyfill-php72/bootstrap.php
             // - etc
-            $pattern = '#' . __DIR__ . '/vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php#';
+            $pattern = '#' . convertRelativeToFullPath('vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php') . '#';
             $symfonyPolyfillFilesWithGlobalClass = array_map(
                 'convertRelativeToFullPath',
                 [
-                    'symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-                    'symfony/polyfill-php73/Resources/stubs/JsonException.php',
-                    'symfony/polyfill-php80/Resources/stubs/Attribute.php',
-                    'symfony/polyfill-php80/Resources/stubs/Stringable.php',
-                    'symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-                    'symfony/polyfill-php80/Resources/stubs/ValueError.php',
+                    'vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+                    'vendor/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+                    'vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php',
                 ]
             );
             $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass);
@@ -171,9 +173,9 @@ return [
             $symfonyPolyfillFilesWithParentReturnType = array_map(
                 'convertRelativeToFullPath',
                 [
-                    'symfony/string/AbstractUnicodeString.php',
-                    'symfony/string/ByteString.php',
-                    'symfony/string/UnicodeString.php',
+                    'vendor/symfony/string/AbstractUnicodeString.php',
+                    'vendor/symfony/string/ByteString.php',
+                    'vendor/symfony/string/UnicodeString.php',
                 ]
             );
             if (in_array($filePath, $symfonyPolyfillFilesWithParentReturnType)) {

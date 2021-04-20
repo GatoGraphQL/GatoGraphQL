@@ -37,14 +37,13 @@ set -e
 # Inputs
 # ----------------------------------------------------------------------
 
-rector_options="$1"
-composer_working_dir="$2"
-rector_config="$3"
+rector_config="$1"
+rector_options="$2"
+composer_working_dir="$3"
 additional_rector_configs="$4"
 target_php_version="$5"
 local_owners="$6"
 
-default_rector_config="rector-downgrade-code.php"
 default_composer_working_dir="."
 default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-sites-wassup"
 
@@ -52,9 +51,16 @@ default_local_owners="leoloso getpop pop-schema graphql-by-pop graphql-api pop-s
 # Initialize defaults
 # ----------------------------------------------------------------------
 
-rector_config=(${rector_config:=$default_rector_config})
 composer_working_dir=(${composer_working_dir:=$default_composer_working_dir})
 local_package_owners=(${local_owners:=$default_local_owners})
+
+########################################################################
+# Validate inputs
+# ----------------------------------------------------------------------
+
+if [ -z "$rector_config" ]; then
+    fail "Please provide the Rector config"
+fi
 
 ########################################################################
 # Logic

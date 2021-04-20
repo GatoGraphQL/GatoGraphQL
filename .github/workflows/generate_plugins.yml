@@ -106,7 +106,7 @@ jobs:
 
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.1)
-                run: ci/downgrade_code.sh "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.rector_config }}" "${{ matrix.pluginConfig.additional_rector_configs }}"
+                run: ci/downgrades/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_configs }}"
 
             -   name: Replace PHP version in plugin main file
                 run: |
@@ -129,9 +129,10 @@ jobs:
                     composer global require humbug/php-scoper
                 if: ${{ matrix.pluginConfig.scope }}
 
-            # If the scoped results correspond to vendor/ only, we should do "--output-dir ../prefixed-plugin/vendor"
+            # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
+            # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
             -   name: Scope plugin into separate folder
-                run: ~/.composer/vendor/bin/php-scoper add-prefix --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin --ansi --no-interaction
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config }} --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin/vendor --ansi --no-interaction
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.scope }}
 
@@ -155,7 +156,7 @@ jobs:
     ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon rector-downgrade-code.php rector-test-scoping.php scoper.inc.php *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }} . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Upload plugin zip as artifact

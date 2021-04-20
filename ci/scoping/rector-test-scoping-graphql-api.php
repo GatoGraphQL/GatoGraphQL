@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\LogicalAnd\AndAssignsToSeparateLinesRector;
 use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+require_once __DIR__ . '/rector-test-scoping-shared.php';
 
 /**
  * This Rector configuration imports the fully qualified classnames
@@ -13,25 +14,25 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
  * to run at least 1 rule.
  */
 return static function (ContainerConfigurator $containerConfigurator): void {
+    // Shared configuration
+    doCommonContainerConfiguration($containerConfigurator);
+
+    $monorepoDir = dirname(__DIR__, 2);
+    $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+
     // get parameters
     $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::SETS, []);
-
-    $services = $containerConfigurator->services();
-    $services->set(AndAssignsToSeparateLinesRector::class);
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::BOOTSTRAP_FILES, [
-        __DIR__ . '/vendor/scoper-autoload.php',
-        __DIR__ . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
-        __DIR__ . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
+        $pluginDir . '/vendor/scoper-autoload.php',
+        $pluginDir . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
+        $pluginDir . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
 
     // files to rector
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/vendor',
+        $pluginDir . '/vendor',
     ]);
 
     // files to skip
@@ -46,21 +47,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         '*/Conditional/RESTAPI/*',
 
         // Exclude migrate libraries
-        __DIR__ . '/vendor/getpop/migrate-*',
-        __DIR__ . '/vendor/pop-schema/migrate-*',
+        $pluginDir . '/vendor/getpop/migrate-*',
+        $pluginDir . '/vendor/pop-schema/migrate-*',
         // Exclude tests from libraries
-        __DIR__ . '/vendor/nikic/fast-route/test/*',
-        __DIR__ . '/vendor/psr/log/Psr/Log/Test/*',
-        __DIR__ . '/vendor/symfony/service-contracts/Test/*',
-        __DIR__ . '/vendor/michelf/php-markdown/test/*',
+        $pluginDir . '/vendor/nikic/fast-route/test/*',
+        $pluginDir . '/vendor/psr/log/Psr/Log/Test/*',
+        $pluginDir . '/vendor/symfony/service-contracts/Test/*',
+        $pluginDir . '/vendor/michelf/php-markdown/test/*',
         // Ignore errors from classes we don't have in our environment,
         // or that come from referencing a class present in DEV, not PROD
-        __DIR__ . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
-        __DIR__ . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
-        __DIR__ . '/vendor/symfony/cache/DoctrineProvider.php',
-        __DIR__ . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
-        __DIR__ . '/vendor/symfony/cache/Psr16Cache.php',
-        __DIR__ . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
-        __DIR__ . '/vendor/symfony/yaml/Command/LintCommand.php',
+        $pluginDir . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
+        $pluginDir . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
+        $pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
+        $pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+        $pluginDir . '/vendor/symfony/cache/Psr16Cache.php',
+        $pluginDir . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
+        $pluginDir . '/vendor/symfony/yaml/Command/LintCommand.php',
     ]);
 };
