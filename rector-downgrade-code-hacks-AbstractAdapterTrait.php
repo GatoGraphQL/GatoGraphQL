@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use PHPStan\Type\NullType;
-use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
+use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationInTraitRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
@@ -30,9 +30,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $services = $containerConfigurator->services();
-    $services->set(AddParamTypeDeclarationRector::class)
+    $services->set(AddParamTypeDeclarationInTraitRector::class)
         ->call('configure', [[
-            AddParamTypeDeclarationRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
+            AddParamTypeDeclarationInTraitRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
                 new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
                 new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),

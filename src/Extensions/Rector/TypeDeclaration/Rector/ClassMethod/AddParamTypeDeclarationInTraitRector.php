@@ -6,10 +6,7 @@ namespace PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod;
 
 use PhpParser\Node;
 use PhpParser\Node\Param;
-use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\StringType;
@@ -17,15 +14,14 @@ use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\NodeTypeResolver\TypeComparator\TypeComparator;
+use Rector\TypeDeclaration\NodeTypeAnalyzer\TraitTypeAnalyzer;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
 /**
- * Modifying original rule AddParamTypeDeclarationRector as to enable traits also.
- * All modifications are documented below as:
- *   // @important: Different than original
+ * Based on AddParamTypeDeclarationRector.
  *
  * Hack to fix bug.
  *
@@ -39,7 +35,7 @@ use Webmozart\Assert\Assert;
  *
  * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
  */
-final class AddParamTypeDeclarationRector extends AbstractRector implements ConfigurableRectorInterface
+final class AddParamTypeDeclarationInTraitRector extends AbstractRector implements ConfigurableRectorInterface
 {
     /**
      * @var string
@@ -49,28 +45,30 @@ final class AddParamTypeDeclarationRector extends AbstractRector implements Conf
     /**
      * @var AddParamTypeDeclaration[]
      */
-    private $parameterTypehints = [];
+    private array $parameterTypehints = [];
 
-    /**
-     * @var TypeComparator
-     */
-    private $typeComparator;
+    private TypeComparator $typeComparator;
 
-    public function __construct(TypeComparator $typeComparator)
-    {
+    private TraitTypeAnalyzer $traitTypeAnalyzer;
+
+    public function __construct(
+        TypeComparator $typeComparator,
+        TraitTypeAnalyzer $traitTypeAnalyzer
+    ) {
         $this->typeComparator = $typeComparator;
+        $this->traitTypeAnalyzer = $traitTypeAnalyzer;
     }
 
     public function getRuleDefinition(): RuleDefinition
     {
         $configuration = [
-            self::PARAMETER_TYPEHINTS => [new AddParamTypeDeclaration('SomeClass', 'process', 0, new StringType())],
+            self::PARAMETER_TYPEHINTS => [new AddParamTypeDeclaration('SomeTrait', 'process', 0, new StringType())],
         ];
 
         return new RuleDefinition('Add param types where needed', [
             new ConfiguredCodeSample(
                 <<<'CODE_SAMPLE'
-class SomeClass
+trait SomeTrait
 {
     public function process($name)
     {
@@ -79,7 +77,7 @@ class SomeClass
 CODE_SAMPLE
 ,
                 <<<'CODE_SAMPLE'
-class SomeClass
+trait SomeTrait
 {
     public function process(string $name)
     {
@@ -109,13 +107,8 @@ CODE_SAMPLE
             return null;
         }
 
-        /** @var ClassLike $classLike */
-        $classLike = $node->getAttribute(AttributeKey::CLASS_NODE);
-
         foreach ($this->parameterTypehints as $parameterTypehint) {
-            // @important: Different than original
-            // if (! $this->isObjectType($classLike, $parameterTypehint->getObjectType())) {
-            if (! $this->isObjectType($classLike, $parameterTypehint->getObjectType()) && !($classLike instanceof Trait_)) {
+            if (! $this->traitTypeAnalyzer->isTraitType($parameterTypehint->getObjectType())) {
                 continue;
             }
 
@@ -146,34 +139,9 @@ CODE_SAMPLE
             return true;
         }
 
+        // only traits
         $classLike = $classMethod->getAttribute(AttributeKey::CLASS_NODE);
-        if (! $classLike instanceof ClassLike) {
-            return true;
-        }
-
-        // skip traits
-        if ($classLike instanceof Trait_) {
-            // @important: Different than original
-            // return true;
-            return false;
-        }
-
-        // skip class without parents/interfaces
-        if ($classLike instanceof Class_) {
-            if ($classLike->implements !== []) {
-                return false;
-            }
-
-            if ($classLike->extends !== null) {
-                return false;
-            }
-
-            return true;
-        }
-
-        // skip interface without parents
-        /** @var Interface_ $classLike */
-        return ! (bool) $classLike->extends;
+        return !($classLike instanceof Trait_);
     }
 
     private function refactorClassMethodWithTypehintByParameterPosition(
