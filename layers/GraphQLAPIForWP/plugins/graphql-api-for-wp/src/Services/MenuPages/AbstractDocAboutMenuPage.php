@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use InvalidArgumentException;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentRetrieverTrait;
 
 /**
  * Open documentation within the About page
  */
 abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
 {
+    use MarkdownContentRetrieverTrait;
+
     protected function openInModalWindow(): bool
     {
         return true;
@@ -52,17 +53,14 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
             'sanitize_file_name_chars',
             [$this, 'enableSpecialCharsForSanitization']
         );
-        $markdownContentParser = MarkdownContentParserFacade::getInstance();
-        try {
-            return $markdownContentParser->getContent($doc, $this->getRelativePathDir());
-        } catch (InvalidArgumentException) {
-            return sprintf(
-                '<p>%s</p>',
-                sprintf(
-                    \__('Page \'%s\' does not exist', 'graphql-api'),
-                    $doc
-                )
-            );
-        }
+        return $this->getMarkdownContent(
+            $doc,
+            $this->getRelativePathDir(),
+            [],
+            sprintf(
+                \__('Page \'%s\' does not exist', 'graphql-api'),
+                $doc
+            )
+        );
     }
 }
