@@ -13,7 +13,9 @@ The schema can be configured with the following elements (more items can also pr
 Modules can define their own configuration to be applied in the schema through the `Options` box, including:
 
 - Setting the schema as public or private
+- Enabling "unrestricted" fields for the admin
 - Namespacing the schema
+- Using nested mutations
 
 <a href="../../images/schema-configuration.png" target="_blank">![Creating a new schema configuration](../../images/schema-configuration.png "Creating a new schema configuration")</a>
 
