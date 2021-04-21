@@ -143,7 +143,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
      * - Admin Schema
      * - Namespacing
      * - Mutation Scheme
-     * - Options
+     * - Public/Private mode
      */
     protected function executeSchemaConfigurationOptions(int $schemaConfigurationID): void
     {
@@ -163,18 +163,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigOptionsBlock
-         */
-        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-        if (!is_null($schemaConfigOptionsBlockDataItem)) {
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * "Admin" schema
              * Default value (if not defined in DB): `default`. Then do nothing
@@ -205,6 +195,24 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     }
 
     /**
+     * Apply the Mutation Scheme settings
+     */
+    protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        /**
+         * @var SchemaConfigOptionsBlock
+         */
+        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+            $schemaConfigurationID,
+            $block
+        );
+    }
+
+    /**
      * Apply the Namespacing settings
      */
     protected function executeSchemaConfigurationOptionsNamespacing(int $schemaConfigurationID): void
@@ -214,18 +222,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigOptionsBlock
-         */
-        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-        if (!is_null($schemaConfigOptionsBlockDataItem)) {
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Namespace Types and Interfaces
              * Default value (if not defined in DB): `default`. Then do nothing
@@ -265,18 +263,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigOptionsBlock
-         */
-        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-        if (!is_null($schemaConfigOptionsBlockDataItem)) {
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
              */
@@ -325,18 +313,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigOptionsBlock
-         */
-        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-        if (!is_null($schemaConfigOptionsBlockDataItem)) {
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
              */
@@ -375,6 +353,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         if (!$this->moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
             return;
         }
+
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
         $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
@@ -405,6 +384,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         if (!$this->moduleRegistry->isModuleEnabled(VersioningFunctionalityModuleResolver::FIELD_DEPRECATION)) {
             return;
         }
+
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
         $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
