@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
@@ -139,12 +140,14 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
 
     /**
      * Apply all the settings defined in the Schema Configuration for:
+     * - Admin Schema
      * - Namespacing
      * - Mutation Scheme
      * - Options
      */
     protected function executeSchemaConfigurationOptions(int $schemaConfigurationID): void
     {
+        $this->executeSchemaConfigurationOptionsAdminSchema($schemaConfigurationID);
         $this->executeSchemaConfigurationOptionsNamespacing($schemaConfigurationID);
         $this->executeSchemaConfigurationOptionsMutationScheme($schemaConfigurationID);
         $this->executeSchemaConfigurationOptionsDefaultSchemaMode($schemaConfigurationID);
@@ -153,10 +156,10 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     /**
      * Apply the Namespacing settings
      */
-    protected function executeSchemaConfigurationOptionsNamespacing(int $schemaConfigurationID): void
+    protected function executeSchemaConfigurationOptionsAdminSchema(int $schemaConfigurationID): void
     {
         // Check if it enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
+        if (!$this->moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA)) {
             return;
         }
 
@@ -198,7 +201,31 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
                 fn () => $enableAdminSchema == SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
                 PHP_INT_MAX
             );
+        }
+    }
 
+    /**
+     * Apply the Namespacing settings
+     */
+    protected function executeSchemaConfigurationOptionsNamespacing(int $schemaConfigurationID): void
+    {
+        // Check if it enabled by module
+        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
+            return;
+        }
+
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var BlockHelpers */
+        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        /**
+         * @var SchemaConfigOptionsBlock
+         */
+        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        $schemaConfigOptionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+            $schemaConfigurationID,
+            $block
+        );
+        if (!is_null($schemaConfigOptionsBlockDataItem)) {
             /**
              * Namespace Types and Interfaces
              * Default value (if not defined in DB): `default`. Then do nothing
