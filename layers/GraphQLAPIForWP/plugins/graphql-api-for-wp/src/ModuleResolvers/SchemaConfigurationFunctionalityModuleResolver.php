@@ -70,12 +70,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         switch ($module) {
             case self::SCHEMA_CONFIGURATION:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ],
-                ];
+                return [];
             case self::SCHEMA_NAMESPACING:
                 return [
                     [

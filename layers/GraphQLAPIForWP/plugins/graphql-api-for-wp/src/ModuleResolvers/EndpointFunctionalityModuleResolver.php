@@ -60,10 +60,15 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::PERSISTED_QUERIES:
             case self::SINGLE_ENDPOINT:
-            case self::CUSTOM_ENDPOINTS:
                 return [];
+            case self::PERSISTED_QUERIES:
+            case self::CUSTOM_ENDPOINTS:
+                return [
+                    [
+                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+                    ],
+                ];
             case self::API_HIERARCHY:
                 return [
                     [
