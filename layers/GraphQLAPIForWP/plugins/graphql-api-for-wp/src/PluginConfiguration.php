@@ -715,8 +715,7 @@ class PluginConfiguration
             // Enable Embeddable Fields?
             \PoP\API\Environment::ENABLE_EMBEDDABLE_FIELDS => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::EMBEDDABLE_FIELDS),
             // Enable Mutations?
-            \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::MUTATIONS),
-
+            \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLQuery\Component::class] = [
             // Enable Composable Directives?
