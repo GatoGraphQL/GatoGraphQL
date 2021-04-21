@@ -6,13 +6,13 @@ We provide support to use and extend the GraphQL API.
 
 ## Build a GraphQL integration
 
-We build custom extensions to integrate the GraphQL API with any WordPress website, theme or plugin.
+We build custom extensions to integrate the GraphQL API with WordPress sites, themes and plugins.
 
 Contact us at [graphql-api.com/contact](https://graphql-api.com/contact), or send an email to [contact@graphql-api.com](mailto:contact@graphql-api.com).
 
 ---
 
-## Personal support (for sponsors)
+## Personal support (paid plan)
 
 Support concerning the plugin and GraphQL is available for all [sponsors](https://github.com/sponsors/leoloso/).
 

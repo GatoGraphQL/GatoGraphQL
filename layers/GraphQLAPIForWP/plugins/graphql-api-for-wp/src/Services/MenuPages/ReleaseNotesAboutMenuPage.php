@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -11,6 +12,8 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
+    use PluginMarkdownContentRetrieverTrait;
+
     public function getMenuPageSlug(): string
     {
         $instanceManager = InstanceManagerFacade::getInstance();

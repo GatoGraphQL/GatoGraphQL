@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use InvalidArgumentException;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
-use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
+use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 
 /**
  * Support menu page
@@ -14,6 +13,7 @@ use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
 class SupportMenuPage extends AbstractDocsMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
+    use PluginMarkdownContentRetrieverTrait;
 
     public function getMenuPageSlug(): string
     {
@@ -27,14 +27,16 @@ class SupportMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        $markdownContentParser = MarkdownContentParserFacade::getInstance();
-        try {
-            return $markdownContentParser->getContent('support.md', '', [ContentParserOptions::TAB_CONTENT => false]);
-        } catch (InvalidArgumentException) {
-            return sprintf(
+        return $this->getMarkdownContent(
+            'support.md',
+            '',
+            [
+                ContentParserOptions::TAB_CONTENT => false,
+            ],
+            sprintf(
                 '<p>%s</p>',
                 \__('Oops, there was a problem loading the page', 'graphql-api')
-            );
-        }
+            )
+        );
     }
 }
