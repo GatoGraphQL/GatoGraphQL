@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
@@ -36,6 +34,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     }
 
     public const SCHEMA_ADMIN_SCHEMA = Plugin::NAMESPACE . '\schema-admin-schema';
+    public const SCHEMA_MUTATIONS = Plugin::NAMESPACE . '\schema-mutations';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
     public const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
@@ -109,6 +108,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     {
         return [
             self::SCHEMA_ADMIN_SCHEMA,
+            self::SCHEMA_MUTATIONS,
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_GENERIC_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
@@ -215,7 +215,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_USER_STATE_MUTATIONS:
                 return [
                     [
-                        OperationalFunctionalityModuleResolver::MUTATIONS,
+                        self::SCHEMA_MUTATIONS,
                     ],
                 ];
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
@@ -280,6 +280,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     {
         $names = [
             self::SCHEMA_ADMIN_SCHEMA => \__('Schema for the Admin', 'graphql-api'),
+            self::SCHEMA_MUTATIONS => \__('Schema Mutations', 'graphql-api'),
             self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Schema Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Schema Posts', 'graphql-api'),
             self::SCHEMA_COMMENTS => \__('Schema Comments', 'graphql-api'),
@@ -314,6 +315,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         switch ($module) {
             case self::SCHEMA_ADMIN_SCHEMA:
                 return \__('Add "unrestricted" admin fields to the schema', 'graphql-api');
+            case self::SCHEMA_MUTATIONS:
+                return \__('Modify data by executing mutations', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),

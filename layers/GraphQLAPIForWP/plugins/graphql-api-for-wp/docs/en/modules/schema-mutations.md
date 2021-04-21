@@ -1,4 +1,4 @@
-# Mutations
+# Schema Mutations
 
 GraphQL mutations enable to modify data (i.e. perform side-effect) through the query.
 
