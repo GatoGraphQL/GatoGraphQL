@@ -193,7 +193,7 @@ class Menu extends AbstractMenu
                     $this->getName(),
                     __('About', 'graphql-api'),
                     __('About', 'graphql-api'),
-                    'read',
+                    'manage_options',
                     $aboutMenuPage->getScreenID(),
                     [$aboutMenuPage, 'print']
                 )
@@ -211,7 +211,7 @@ class Menu extends AbstractMenu
                 $this->getName(),
                 __('Support', 'graphql-api'),
                 __('Support', 'graphql-api'),
-                'read',
+                'manage_options',
                 $supportMenuPage->getScreenID(),
                 [$supportMenuPage, 'print']
             )
