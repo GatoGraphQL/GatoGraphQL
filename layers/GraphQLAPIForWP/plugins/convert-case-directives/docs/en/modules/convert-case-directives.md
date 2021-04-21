@@ -6,7 +6,7 @@ Set of directives to manipulate strings:
 - `@lowerCase`: converts the text to lowercase => `"hello friends"`
 - `@titleCase`: converts the text to title case => `"Hello Friends"`
 
-## Usage
+## How to use it
 
 For instance, if these query produces the results below:
 
