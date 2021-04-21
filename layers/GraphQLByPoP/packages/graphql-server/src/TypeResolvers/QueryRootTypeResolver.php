@@ -40,8 +40,8 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
     protected function isFieldNameConditionSatisfiedForSchema(FieldResolverInterface $fieldResolver, string $fieldName): bool
     {
         return
-            // Field "mutationRoot" is a helper, must not be ported to QueryRoot
-            !in_array($fieldName, ['mutationRoot'])
+            // Fields "queryRoot" and "mutationRoot" are helpers, must not be ported to QueryRoot
+            !in_array($fieldName, ['queryRoot', 'mutationRoot'])
             && $fieldResolver->resolveFieldMutationResolverClass($this, $fieldName) === null;
     }
 }
