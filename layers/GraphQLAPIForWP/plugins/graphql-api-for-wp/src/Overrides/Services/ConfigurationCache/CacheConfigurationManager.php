@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
 
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
+use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**
  * Inject configuration to the cache
@@ -31,7 +32,10 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         $timestamp .= '_' . $userSettingsManager->getTimestamp();
         // admin/non-admin screens have different services enabled
         if (\is_admin()) {
-            $timestamp .= '_admin';
+            // The WordPress editor can access the full GraphQL schema,
+            // including "unrestricted" admin fields, so cache it individually
+            $isSchemaForEditor = ($_REQUEST[RequestParams::SCHEMA_TARGET] ?? null) === RequestParams::SCHEMA_TARGET_EDITOR;
+            $timestamp .= '_' . ($isSchemaForEditor ? 'editor' : 'admin');
         }
         return $timestamp;
     }
