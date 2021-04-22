@@ -33,6 +33,17 @@ class EndpointHelpers
     }
 
     /**
+     * Indicate if we are requesting
+     * /wp-admin/edit.php?page=graphql_api&action=execute_query&schema_target=editor
+     */
+    public function isRequestingWordPressEditorGraphQLEndpoint(): bool
+    {
+        return $this->isRequestingAdminGraphQLEndpoint()
+            && isset($_GET[RequestParams::SCHEMA_TARGET])
+            && $_GET[RequestParams::SCHEMA_TARGET] == RequestParams::SCHEMA_TARGET_EDITOR;
+    }
+
+    /**
      * GraphQL single endpoint to be used in wp-admin
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
