@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SchemaServices\FieldResolvers;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\ConditionalOnEnvironment\Editor\SchemaServices\FieldResolvers;
 
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
@@ -50,15 +50,6 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
             'fieldDeprecationLists',
             'schemaConfigurations',
         ];
-    }
-
-    /**
-     * These fields are used only by the application, so no need to
-     * expose them to the user
-     */
-    public function skipAddingToSchemaDefinition(TypeResolverInterface $typeResolver, string $fieldName): bool
-    {
-        return true;
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string

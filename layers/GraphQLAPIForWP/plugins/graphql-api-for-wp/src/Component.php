@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -91,7 +92,11 @@ class Component extends AbstractPluginComponent
          */
         if (\is_admin()) {
             self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
-            self::initSchemaServices(dirname(__DIR__), false, '/ConditionalOnEnvironment/Admin', 'schema-services.yaml');
+
+            // The WordPress editor can access the full GraphQL schema,
+            // including "unrestricted" admin fields, so cache it individually
+            $isSchemaForEditor = ($_REQUEST[RequestParams::SCHEMA_TARGET] ?? null) === RequestParams::SCHEMA_TARGET_EDITOR;
+            self::initSchemaServices(dirname(__DIR__), !$isSchemaForEditor, '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/Editor');
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
