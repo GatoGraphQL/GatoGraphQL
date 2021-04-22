@@ -57,4 +57,17 @@ class EndpointHelpers
         // }
         return $endpoint;
     }
+
+    /**
+     * GraphQL endpoint to be used in the WordPress editor.
+     * It has the full schema, including "unrestricted" admin fields.
+     */
+    public function getWordPressEditorGraphQLEndpoint(): string
+    {
+        return \add_query_arg(
+            RequestParams::SCHEMA_TARGET,
+            RequestParams::SCHEMA_TARGET_EDITOR,
+            $this->getAdminGraphQLEndpoint()
+        );
+    }
 }
