@@ -204,6 +204,18 @@ class AppLoader
             self::getSystemContainerCompilerPasses()
         );
         SystemContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
+
+        // Finally boot the components
+        static::bootSystemForComponents();
+    }
+
+    /**
+     * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
+     * for them to execute any custom extra logic
+     */
+    protected static function bootSystemForComponents(): void
+    {
+        ComponentManager::bootSystem();
     }
 
     /**
@@ -284,14 +296,14 @@ class AppLoader
         ContainerBuilderFactory::maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Finally boot the components
-        static::bootComponents();
+        static::bootApplicationForComponents();
     }
 
     /**
      * Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic
      */
-    protected static function bootComponents(): void
+    protected static function bootApplicationForComponents(): void
     {
         ComponentManager::beforeBoot();
         ComponentManager::boot();

@@ -10,7 +10,8 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\Services\Admin\TableActions\ModuleListTableAction;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
@@ -498,12 +499,16 @@ class ModuleListTable extends AbstractItemListTable
     {
         $this->_column_headers = $this->get_column_info();
 
+        /**
+         * Watch out! ModuleListTableAction is registered in the SystemContainer,
+         * not in the ApplicationContainer
+         */
         /** Process bulk or single action */
-        $instanceManager = InstanceManagerFacade::getInstance();
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /**
          * @var ModuleListTableAction
          */
-        $tableAction = $instanceManager->getInstance(ModuleListTableAction::class);
+        $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
         $tableAction->maybeProcessAction();
 
         $per_page = $this->get_items_per_page(

@@ -6,7 +6,9 @@ namespace PoP\Root;
 
 use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
 
@@ -34,6 +36,8 @@ class Component extends AbstractComponent
     {
         return [
             RegisterSystemCompilerPassServiceCompilerPass::class,
+            // Needed to initialize ModuleListTableAction
+            AutomaticallyInstantiatedServiceCompilerPass::class,
         ];
     }
 
@@ -42,6 +46,7 @@ class Component extends AbstractComponent
      */
     protected static function initializeSystemContainerServices(): void
     {
+        self::initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
         self::initSystemServices(dirname(__DIR__));
     }
 
@@ -56,7 +61,20 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
+        self::initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+    }
+
+    /**
+     * Function called by the Bootloader after initializing the SystemContainer
+     */
+    public static function bootSystem(): void
+    {
+        // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
+        /**
+         * @var ServiceInstantiatorInterface
+         */
+        $serviceInstantiator = SystemContainerBuilderFactory::getInstance()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator->initializeServices();
     }
 
     /**
