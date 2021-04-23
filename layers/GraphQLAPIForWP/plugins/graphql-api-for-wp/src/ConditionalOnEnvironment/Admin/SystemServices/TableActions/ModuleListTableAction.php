@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Admin\TableActions;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 
@@ -23,18 +23,13 @@ class ModuleListTableAction extends AbstractListTableAction
     private bool $mutatedEnabled = false;
 
     /**
-     * Please notice that creatin a new instance carries side effects
+     * If executing an operation, print a success message
      */
-    public function __construct(bool $allowSideEffects = true)
+    public function initialize(): void
     {
-        if ($allowSideEffects) {
-            /**
-             * If executing an operation, print a success message
-             */
-            \add_action('admin_notices', function () {
-                $this->maybeAddAdminNotice();
-            });
-        }
+        \add_action('admin_notices', function () {
+            $this->maybeAddAdminNotice();
+        });
     }
 
     /**

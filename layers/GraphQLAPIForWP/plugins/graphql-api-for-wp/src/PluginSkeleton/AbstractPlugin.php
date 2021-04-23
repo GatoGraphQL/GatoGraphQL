@@ -34,7 +34,7 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Inititalize Plugin's components
+     * Initialize Plugin's components
      */
     protected function initializeComponentClasses(): void
     {

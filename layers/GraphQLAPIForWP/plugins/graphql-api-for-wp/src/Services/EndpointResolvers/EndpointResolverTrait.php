@@ -64,7 +64,7 @@ trait EndpointResolverTrait
     /**
      * Indicate if the GraphQL variables must override the URL params
      */
-    protected function doURLParamsOverrideGraphQLVariables(WP_Post|int $postOrID): bool
+    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
     {
         return false;
     }
@@ -113,7 +113,8 @@ trait EndpointResolverTrait
             // Normally, GraphQL variables must not override the variables from the request
             // But this behavior can be overriden for the persisted query,
             // by setting "Accept Variables as URL Params" => false
-            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables($vars['routing-state']['queried-object-id']) ?
+            // When editing in the editor, 'queried-object' will be null, and that's OK
+            $vars['variables'] = $this->doURLParamsOverrideGraphQLVariables($vars['routing-state']['queried-object']) ?
                 array_merge(
                     $graphQLVariables,
                     $vars['variables'] ?? []

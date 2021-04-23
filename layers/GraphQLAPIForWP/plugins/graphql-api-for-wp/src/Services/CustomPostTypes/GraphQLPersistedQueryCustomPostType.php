@@ -293,11 +293,14 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
     /**
      * Indicate if the GraphQL variables must override the URL params
      */
-    protected function doURLParamsOverrideGraphQLVariables(WP_Post|int $postOrID): bool
+    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
     {
+        if ($customPost === null) {
+            return parent::doURLParamsOverrideGraphQLVariables($customPost);
+        }
         $default = true;
-        $optionsBlockDataItem = $this->getOptionsBlockDataItem($postOrID);
-        if (is_null($optionsBlockDataItem)) {
+        $optionsBlockDataItem = $this->getOptionsBlockDataItem($customPost);
+        if ($optionsBlockDataItem === null) {
             return $default;
         }
 

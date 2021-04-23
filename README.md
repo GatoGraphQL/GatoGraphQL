@@ -61,6 +61,7 @@ $ composer install
 
 - [GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
+- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 
 ## Standards
 

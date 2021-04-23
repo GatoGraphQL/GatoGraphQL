@@ -19,7 +19,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public const PROACTIVE_FEEDBACK = Plugin::NAMESPACE . '\proactive-feedback';
     public const EMBEDDABLE_FIELDS = Plugin::NAMESPACE . '\embeddable-fields';
     public const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
-    public const MUTATIONS = Plugin::NAMESPACE . '\mutations';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
     /**
@@ -38,7 +37,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
             self::PROACTIVE_FEEDBACK,
             self::EMBEDDABLE_FIELDS,
             self::COMPOSABLE_DIRECTIVES,
-            self::MUTATIONS,
             self::NESTED_MUTATIONS,
         ];
     }
@@ -70,14 +68,8 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
             case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
-            case self::MUTATIONS:
-                return [];
             case self::NESTED_MUTATIONS:
-                return [
-                    [
-                        self::MUTATIONS,
-                    ]
-                ];
+                return [];
         }
         return parent::getDependedModuleLists($module);
     }
@@ -90,7 +82,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
             self::PROACTIVE_FEEDBACK => \__('Proactive Feedback', 'graphql-api'),
             self::EMBEDDABLE_FIELDS => \__('Embeddable Fields', 'graphql-api'),
             self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api'),
-            self::MUTATIONS => \__('Mutations', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
@@ -109,8 +100,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
                 return \__('Embed the value of field into the argument of another field, via notation <code>{{ field }}</code>', 'graphql-api');
             case self::COMPOSABLE_DIRECTIVES:
                 return \__('Have directives modify the behavior of other directives', 'graphql-api');
-            case self::MUTATIONS:
-                return \__('Modify data by executing mutations', 'graphql-api');
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
         }
@@ -122,6 +111,7 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
         switch ($module) {
             case self::MULTIPLE_QUERY_EXECUTION:
             case self::REMOVE_IF_NULL_DIRECTIVE:
+            case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
             case self::NESTED_MUTATIONS:

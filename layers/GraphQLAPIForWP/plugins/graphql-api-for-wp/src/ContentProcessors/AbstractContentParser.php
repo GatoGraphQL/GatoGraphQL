@@ -17,8 +17,8 @@ abstract class AbstractContentParser implements ContentParserInterface
 {
     public const PATH_URL_TO_DOCS = 'pathURLToDocs';
 
-    protected string $baseDir;
-    protected string $baseURL;
+    protected string $baseDir = '';
+    protected string $baseURL = '';
 
     /**
      * @param string|null $baseDir Where to look for the documentation

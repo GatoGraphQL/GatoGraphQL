@@ -15,8 +15,5 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry'
 
-    GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface:
-        class: '\GraphQLAPI\GraphQLAPI\Security\UserAuthorization'
-
     GraphQLAPI\GraphQLAPI\Services\:
         resource: '../src/Services/*'

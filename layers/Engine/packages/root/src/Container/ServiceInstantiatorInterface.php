@@ -14,5 +14,9 @@ use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 interface ServiceInstantiatorInterface
 {
     public function addService(AutomaticallyInstantiatedServiceInterface $service): void;
-    public function initializeServices(string $event): void;
+    /**
+     * The SystemContainer requires no events => pass null
+     * The ApplicationContainer has 3 events (beforeBoot, boot, afterBoot)
+     */
+    public function initializeServices(?string $event = null): void;
 }

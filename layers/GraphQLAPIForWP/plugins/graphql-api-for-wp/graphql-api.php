@@ -78,6 +78,9 @@ PluginInfo::init([
     'slug' => 'graphql-api',
     'dir' => dirname(__FILE__),
     'url' => plugin_dir_url(__FILE__),
+    // Use the plugin's "cache/" subfolder to store the config cache,
+    // for both /pop-cache (container) and /symfony-cache (config persistent cache)
+    'cache-dir' => dirname(__FILE__) . \DIRECTORY_SEPARATOR . 'cache',
 ]);
 
 // Create and set-up the plugin instance

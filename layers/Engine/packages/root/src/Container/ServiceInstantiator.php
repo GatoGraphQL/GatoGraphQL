@@ -22,15 +22,23 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     {
         $this->services[] = $service;
     }
-    public function initializeServices(string $event): void
+    /**
+     * The SystemContainer requires no events => pass null
+     * The ApplicationContainer has 3 events (beforeBoot, boot, afterBoot)
+     */
+    public function initializeServices(?string $event = null): void
     {
+        $servicesForEvent = $this->services;
         /**
+         * For ApplicationContainer:
          * Filter all the services that must be instantiated during the passed event
          */
-        $servicesForEvent = array_filter(
-            $this->services,
-            fn ($service) => $service->getInstantiationEvent() == $event
-        );
+        if ($event !== null) {
+            $servicesForEvent = array_filter(
+                $this->services,
+                fn ($service) => $service->getInstantiationEvent() == $event
+            );
+        }
         foreach ($servicesForEvent as $service) {
             if ($service->isServiceEnabled()) {
                 $service->initialize();

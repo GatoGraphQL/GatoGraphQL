@@ -232,7 +232,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/proactive-feedback.md">Proactive Feedback</a></td><td>Usage of the top-level entry <code>extensions</code> to send deprecations, warnings, logs, notices and traces in the response to the query</td></tr>
 <tr><td><a href="docs/en/modules/embeddable-fields.md">Embeddable Fields</a></td><td>Resolve a field within an argument for another field from the same type, using syntax <code>{{ fieldName }}</code></td></tr>
 <tr><td><a href="docs/en/modules/composable-directives.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
-<tr><td><a href="docs/en/modules/mutations.md">Mutations</a></td><td>Modify data by executing mutations</td></tr>
 <tr><td><a href="docs/en/modules/nested-mutations.md">Nested Mutations</a></td><td>Execute mutations from any type in the schema, not only from the root</td></tr>
 <tr><th colspan="2"><br/>Plugin Management</th></tr>
 <tr><td><a href="docs/en/modules/schema-editing-access.md">Schema Editing Access</a></td><td>Grant access to users other than admins to edit the GraphQL schema</td></tr>
@@ -244,6 +243,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/graphiql-explorer.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/en/modules/schema-admin-schema.md">Admin for the Schema</a></td><td>Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>Root.roles</code>, and others), to be used by the admin only</td></tr>
+<tr><td><a href="docs/en/modules/schema-mutations.md">Schema Mutations</a></td><td>Modify data by executing mutations</td></tr>
 <tr><td><a href="docs/en/modules/schema-customposts.md">Schema Custom Posts</a></td><td>Base functionality for all custom posts</td></tr>
 <tr><td><a href="docs/en/modules/schema-generic-customposts.md">Schema Generic Custom Posts</a></td><td>Query any custom post type (added to the schema or not), through a generic type <code>GenericCustomPost</code></td></tr>
 <tr><td>Schema Posts</td><td>Query posts, through type <code>Post</code> added to the schema</td></tr>

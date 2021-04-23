@@ -33,6 +33,16 @@ class ComponentManager
     /**
      * Boot all components
      */
+    public static function bootSystem(): void
+    {
+        foreach (self::$components as $component) {
+            $component::bootSystem();
+        }
+    }
+
+    /**
+     * Boot all components
+     */
     public static function beforeBoot(): void
     {
         foreach (self::$components as $component) {

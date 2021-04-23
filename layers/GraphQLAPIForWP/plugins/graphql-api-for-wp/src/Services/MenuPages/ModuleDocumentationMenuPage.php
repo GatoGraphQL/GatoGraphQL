@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
@@ -19,6 +20,8 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
+    use PluginMarkdownContentRetrieverTrait;
+
     function __construct(
         Menu $menu,
         MenuPageHelper $menuPageHelper,
