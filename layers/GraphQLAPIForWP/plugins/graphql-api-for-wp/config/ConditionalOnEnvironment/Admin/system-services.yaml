@@ -4,5 +4,5 @@ services:
         autowire: true
 
     # These classes are invoked after `bootSystem` and before `bootApplication`
-    GraphQLAPI\GraphQLAPI\Services\Admin\TableActions\ModuleListTableAction:
-        class: ~
+    GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\:
+        resource: '../../../src/ConditionalOnEnvironment/Admin/SystemServices/*'
