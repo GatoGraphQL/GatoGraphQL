@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**
@@ -16,6 +16,10 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
  */
 class CacheConfigurationManager implements CacheConfigurationManagerInterface
 {
+    function __construct(private EndpointHelpers $endpointHelpers)
+    {
+    }
+
     /**
      * Save into the DB, and inject to the FilesystemAdapter:
      * A string used as the subdirectory of the root cache directory, where cache
@@ -34,8 +38,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         if (\is_admin()) {
             // The WordPress editor can access the full GraphQL schema,
             // including "unrestricted" admin fields, so cache it individually
-            $isSchemaForEditor = ($_REQUEST[RequestParams::SCHEMA_TARGET] ?? null) === RequestParams::SCHEMA_TARGET_EDITOR;
-            $timestamp .= '_' . ($isSchemaForEditor ? 'editor' : 'admin');
+            $timestamp .= '_' . ($this->endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint() ? 'editor' : 'admin');
         }
         return $timestamp;
     }
