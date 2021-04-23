@@ -23,18 +23,13 @@ class ModuleListTableAction extends AbstractListTableAction
     private bool $mutatedEnabled = false;
 
     /**
-     * Please notice that creating a new instance carries side effects
+     * If executing an operation, print a success message
      */
-    public function __construct(bool $allowSideEffects = true)
+    public function initialize(): void
     {
-        if ($allowSideEffects) {
-            /**
-             * If executing an operation, print a success message
-             */
-            \add_action('admin_notices', function () {
-                $this->maybeAddAdminNotice();
-            });
-        }
+        \add_action('admin_notices', function () {
+            $this->maybeAddAdminNotice();
+        });
     }
 
     /**

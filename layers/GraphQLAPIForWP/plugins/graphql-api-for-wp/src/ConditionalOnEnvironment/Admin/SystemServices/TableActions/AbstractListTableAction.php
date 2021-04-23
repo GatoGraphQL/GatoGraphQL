@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions;
 
+use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+
 /**
  * Table Action
  */
-abstract class AbstractListTableAction
+abstract class AbstractListTableAction extends AbstractAutomaticallyInstantiatedService
 {
     /**
      * Get the current action selected from the bulk actions dropdown.
