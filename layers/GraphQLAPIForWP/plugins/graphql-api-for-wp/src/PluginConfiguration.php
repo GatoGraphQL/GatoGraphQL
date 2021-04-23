@@ -732,7 +732,7 @@ class PluginConfiguration
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint()) {
+        if ($endpointHelpers->isRequestingAdminEditorGraphQLEndpoint()) {
             // Enable the "unrestricted" admin fields
             $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
             // Enable Nested mutations
@@ -831,7 +831,7 @@ class PluginConfiguration
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint()) {
+        if ($endpointHelpers->isRequestingAdminEditorGraphQLEndpoint()) {
             return [];
         }
 

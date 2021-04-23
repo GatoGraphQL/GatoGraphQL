@@ -36,7 +36,7 @@ class EndpointHelpers
      * Indicate if we are requesting
      * /wp-admin/edit.php?page=graphql_api&action=execute_query&schema_target=editor
      */
-    public function isRequestingWordPressEditorGraphQLEndpoint(): bool
+    public function isRequestingAdminEditorGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
             && isset($_GET[RequestParams::SCHEMA_TARGET])
