@@ -42,4 +42,12 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         }
         return $timestamp;
     }
+
+    /**
+     * Cache under the plugin's cache/ subfolder
+     */
+    public function getDirectory(): ?string
+    {
+        return PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'symfony-cache';
+    }
 }
