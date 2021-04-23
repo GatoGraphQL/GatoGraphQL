@@ -23,7 +23,7 @@ class ModuleListTableAction extends AbstractListTableAction
     private bool $mutatedEnabled = false;
 
     /**
-     * Please notice that creatin a new instance carries side effects
+     * Please notice that creating a new instance carries side effects
      */
     public function __construct(bool $allowSideEffects = true)
     {
