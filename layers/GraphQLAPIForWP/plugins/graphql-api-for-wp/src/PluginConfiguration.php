@@ -21,6 +21,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
@@ -40,6 +41,7 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
@@ -686,9 +688,12 @@ class PluginConfiguration
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
         ];
-        // Check if to enable the "admin" schema: only when doing ?schema_target=editor
-        $isSchemaForEditor = \is_admin() && ($_REQUEST[RequestParams::SCHEMA_TARGET] ?? null) === RequestParams::SCHEMA_TARGET_EDITOR;
-        if ($isSchemaForEditor) {
+        // If doing ?schema_target=editor, enable the "unrestricted" admin fields
+        // Retrieve this service from the SystemContainer
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint()) {
             $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
         }
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [

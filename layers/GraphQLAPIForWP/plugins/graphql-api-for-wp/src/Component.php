@@ -11,6 +11,8 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 
 /**
  * Initialize component
@@ -106,9 +108,16 @@ class Component extends AbstractPluginComponent
             self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
 
             // The WordPress editor can access the full GraphQL schema,
-            // including "unrestricted" admin fields, so cache it individually
-            $isSchemaForEditor = ($_REQUEST[RequestParams::SCHEMA_TARGET] ?? null) === RequestParams::SCHEMA_TARGET_EDITOR;
-            self::initSchemaServices(dirname(__DIR__), !$isSchemaForEditor, '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/Editor');
+            // including "unrestricted" admin fields, so cache it individually.
+            // Retrieve this service from the SystemContainer
+            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+            /** @var EndpointHelpers */
+            $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+            self::initSchemaServices(
+                dirname(__DIR__),
+                !$endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint(),
+                '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/Editor'
+            );
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
