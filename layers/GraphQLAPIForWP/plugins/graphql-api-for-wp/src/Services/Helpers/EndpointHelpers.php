@@ -44,6 +44,16 @@ class EndpointHelpers
     }
 
     /**
+     * Indicate if we are requesting
+     * /wp-admin/edit.php?page=graphql_api&action=execute_query&persisted_query_id=...
+     */
+    public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
+    {
+        return $this->isRequestingAdminGraphQLEndpoint()
+            && isset($_GET[RequestParams::PERSISTED_QUERY_ID]);
+    }
+
+    /**
      * GraphQL single endpoint to be used in wp-admin
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
@@ -79,6 +89,20 @@ class EndpointHelpers
             RequestParams::SCHEMA_TARGET,
             RequestParams::SCHEMA_TARGET_EDITOR,
             $this->getAdminGraphQLEndpoint()
+        );
+    }
+
+    /**
+     * GraphQL endpoint to be used in the admin, when editing Persisted Queries
+     *
+     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
+     */
+    public function getAdminPersistedQueryGraphQLEndpoint(string | int $persistedQueryCustomPostID, bool $enableLowLevelQueryEditing = false): string
+    {
+        return \add_query_arg(
+            RequestParams::PERSISTED_QUERY_ID,
+            $persistedQueryCustomPostID,
+            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
 }

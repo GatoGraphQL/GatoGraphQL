@@ -22,7 +22,7 @@ class EditingPersistedQuerySchemaConfiguratorExecuter extends AbstractSchemaConf
      */
     protected function getCustomPostID(): ?int
     {
-        if ($this->endpointHelpers->isRequestingAdminGraphQLEndpoint() && isset($_REQUEST[RequestParams::PERSISTED_QUERY_ID])) {
+        if ($this->endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
             return (int) $_REQUEST[RequestParams::PERSISTED_QUERY_ID];
         }
         return null;
