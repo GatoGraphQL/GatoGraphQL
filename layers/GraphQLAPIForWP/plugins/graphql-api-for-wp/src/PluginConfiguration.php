@@ -654,7 +654,7 @@ class PluginConfiguration
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
                 // Store under the plugin's "cache/" subfolder
-                $containerConfigurationCacheDirectory = PluginInfo::get('dir') . 'cache';
+                $containerConfigurationCacheDirectory = PluginInfo::get('dir') . \DIRECTORY_SEPARATOR . 'cache';
             }
             self::$containerCacheConfigurationCache = [
                 $cacheContainerConfiguration,
