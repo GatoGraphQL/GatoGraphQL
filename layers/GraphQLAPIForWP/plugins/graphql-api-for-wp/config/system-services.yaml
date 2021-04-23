@@ -9,3 +9,14 @@ services:
     GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\:
         resource: '../src/Container/HybridCompilerPasses/*'
 
+    # All these services are required to maybe execute ModuleListTableAction in Plugin.php
+    # Hence, they are defined both in the Application and System containers
+    GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper:
+        class: ~
+    GraphQLAPI\GraphQLAPI\Services\Menus\Menu:
+        class: ~
+    GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers:
+        class: ~
+    GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
+        class: ~
+

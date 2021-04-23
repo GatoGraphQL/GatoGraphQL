@@ -195,25 +195,20 @@ class Plugin extends AbstractMainPlugin
          * For that, all the classes below have also been registered in system-services.yaml
          */
         if (\is_admin()) {
-            // We can't use the InstanceManager, since at this stage it hasn't
-            // been initialized yet
-            // We can create a new instance of MenuPageHelper and ModulesMenuPage
-            // because their instantiation produces no side-effects
-            // (maybe that happens under `initialize`)
-            $menuPageHelper = new MenuPageHelper();
-            $moduleRegistry = new ModuleRegistry();
-            $userAuthorization = new UserAuthorization();
-            $menu = new Menu($menuPageHelper, $moduleRegistry, $userAuthorization);
-            $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
-            $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper, $endpointHelpers);
+            // Obtain these services from the SystemContainer
+            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+            /**
+             * @var MenuPageHelper
+             */
+            $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
+            /**
+             * @var ModulesMenuPage
+             */
+            $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
             if (
                 (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
                 && !$menuPageHelper->isDocumentationScreen()
             ) {
-                // Instantiating ModuleListTableAction DOES have side-effects,
-                // but they are needed, and won't be repeated when instantiating
-                // the class through the Container Builder
-                $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
                 /**
                  * @var ModuleListTableAction
                  */
