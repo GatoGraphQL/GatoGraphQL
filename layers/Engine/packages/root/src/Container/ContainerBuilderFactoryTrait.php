@@ -42,8 +42,10 @@ trait ContainerBuilderFactoryTrait
              * @see https://github.com/symfony/cache/blob/master/Traits/FilesystemCommonTrait.php
              */
             if (!$directory) {
-                $directory = sys_get_temp_dir() . \DIRECTORY_SEPARATOR . 'pop' . \DIRECTORY_SEPARATOR . 'container-cache';
+                $directory = sys_get_temp_dir();
             }
+            $directory = rtrim($directory, \DIRECTORY_SEPARATOR);
+            $directory .= \DIRECTORY_SEPARATOR . 'pop' . \DIRECTORY_SEPARATOR . 'container-cache';
             if ($namespace) {
                 if (preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
                     if ($throwExceptionIfCacheSetupError) {
