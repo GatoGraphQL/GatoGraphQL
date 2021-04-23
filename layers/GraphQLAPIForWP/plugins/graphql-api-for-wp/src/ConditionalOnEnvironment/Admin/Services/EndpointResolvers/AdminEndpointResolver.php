@@ -79,11 +79,13 @@ class AdminEndpointResolver extends AbstractEndpointResolver
             // Make sure the user has access to the editor
             if ($this->userAuthorization->canAccessSchemaEditor()) {
                 /**
-                 * The endpoint against which to execute GraphQL queries while on the WordPress admin
+                 * The endpoint against which to execute GraphQL queries while on the WordPress editor
+                 * Watch out! This endpoint has ?schema_target=editor as to retrieve the full schema,
+                 * including the "unrestricted" admin fields. It is to be used by Gutenberg blocks
                  */
                 \printf(
                     '<script type="text/javascript">var GRAPHQL_API_ADMIN_ENDPOINT = "%s"</script>',
-                    $this->endpointHelpers->getAdminGraphQLEndpoint()
+                    $this->endpointHelpers->getAdminEditorGraphQLEndpoint()
                 );
             }
         });

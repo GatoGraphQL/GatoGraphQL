@@ -197,21 +197,15 @@ class Plugin extends AbstractMainPlugin
         if (\is_admin()) {
             // Obtain these services from the SystemContainer
             $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-            /**
-             * @var MenuPageHelper
-             */
+            /** @var MenuPageHelper */
             $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
-            /**
-             * @var ModulesMenuPage
-             */
+            /** @var ModulesMenuPage */
             $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
             if (
                 (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
                 && !$menuPageHelper->isDocumentationScreen()
             ) {
-                /**
-                 * @var ModuleListTableAction
-                 */
+                /** @var ModuleListTableAction */
                 $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
                 $tableAction->maybeProcessAction();
             }

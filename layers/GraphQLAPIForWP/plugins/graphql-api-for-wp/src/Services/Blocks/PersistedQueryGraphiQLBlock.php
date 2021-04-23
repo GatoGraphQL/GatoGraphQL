@@ -19,17 +19,15 @@ class PersistedQueryGraphiQLBlock extends AbstractGraphiQLBlock
      */
     protected function getAdminGraphQLEndpoint(): string
     {
-        $endpoint = parent::getAdminGraphQLEndpoint();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var EditorHelpers */
         $editorHelpers = $instanceManager->getInstance(EditorHelpers::class);
-        if ($persistedQueryID = $editorHelpers->getEditingPostID()) {
-            $endpoint = \add_query_arg(
-                RequestParams::PERSISTED_QUERY_ID,
-                $persistedQueryID,
-                $endpoint
+        if ($persistedQueryCustomPostID = $editorHelpers->getEditingPostID()) {
+            return $this->endpointHelpers->getAdminPersistedQueryGraphQLEndpoint(
+                $persistedQueryCustomPostID,
+                true
             );
         }
-        return $endpoint;
+        return $this->endpointHelpers->getAdminGraphQLEndpoint(true);
     }
 }

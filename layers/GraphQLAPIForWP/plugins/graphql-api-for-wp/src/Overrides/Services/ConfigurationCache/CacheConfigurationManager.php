@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**
  * Inject configuration to the cache
@@ -15,6 +16,10 @@ use GraphQLAPI\GraphQLAPI\PluginInfo;
  */
 class CacheConfigurationManager implements CacheConfigurationManagerInterface
 {
+    function __construct(private EndpointHelpers $endpointHelpers)
+    {
+    }
+
     /**
      * Save into the DB, and inject to the FilesystemAdapter:
      * A string used as the subdirectory of the root cache directory, where cache
@@ -31,7 +36,9 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         $timestamp .= '_' . $userSettingsManager->getTimestamp();
         // admin/non-admin screens have different services enabled
         if (\is_admin()) {
-            $timestamp .= '_admin';
+            // The WordPress editor can access the full GraphQL schema,
+            // including "unrestricted" admin fields, so cache it individually
+            $timestamp .= '_' . ($this->endpointHelpers->isRequestingAdminEditorGraphQLEndpoint() ? 'editor' : 'admin');
         }
         return $timestamp;
     }

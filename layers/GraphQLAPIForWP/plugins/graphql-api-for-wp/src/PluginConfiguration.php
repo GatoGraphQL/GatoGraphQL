@@ -4,69 +4,72 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\APIEndpoints\EndpointUtils;
-use GraphQLAPI\GraphQLAPI\Environment;
-use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Environment as EngineEnvironment;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use PoPSchema\Tags\Environment as TagsEnvironment;
-use PoPSchema\Categories\Environment as CategoriesEnvironment;
-use PoPSchema\Pages\Environment as PagesEnvironment;
-use PoPSchema\Posts\Environment as PostsEnvironment;
-use PoPSchema\Users\Environment as UsersEnvironment;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use PoP\CacheControl\Environment as CacheControlEnvironment;
-use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PoP\AccessControl\Environment as AccessControlEnvironment;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoPSchema\CustomPosts\Environment as CustomPostsEnvironment;
+use GraphQLAPI\GraphQLAPI\Environment;
 use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
-use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
-use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
-use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use PoPSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
+use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
+use GraphQLByPoP\GraphQLQuery\Environment as GraphQLQueryEnvironment;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\Environment as AccessControlEnvironment;
+use PoP\AccessControl\Schema\SchemaModes;
+use PoP\APIEndpoints\EndpointUtils;
+use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguration;
+use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
-use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
-use PoPSchema\Settings\Environment as SettingsEnvironment;
-use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
-use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
-use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
-use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Engine\Environment as EngineEnvironment;
+use PoP\Root\Environment as RootEnvironment;
+use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
+use PoPSchema\Categories\Environment as CategoriesEnvironment;
 use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
 use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
+use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
+use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
+use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
+use PoPSchema\CustomPosts\Environment as CustomPostsEnvironment;
+use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
+use PoPSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
+use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
+use PoPSchema\Pages\Environment as PagesEnvironment;
+use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPSchema\Posts\Environment as PostsEnvironment;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
+use PoPSchema\Settings\Environment as SettingsEnvironment;
+use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
+use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
 use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
-use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
-use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
-use PoP\Root\Environment as RootEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
+use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPSchema\Users\Environment as UsersEnvironment;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -514,7 +517,8 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
-            // Enable "admin" schema
+            // Enable the "admin" schema: if doing ?schema_target=editor, it will already,
+            // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
@@ -682,7 +686,7 @@ class PluginConfiguration
          * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
          */
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
-            \PoP\ComponentModel\Environment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
+            ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => PluginInfo::get('url') . 'vendor/graphql-by-pop/graphql-clients-for-wp',
@@ -721,6 +725,32 @@ class PluginConfiguration
             // Enable Composable Directives?
             GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
         ];
+
+        // If doing ?schema_target=editor, always enable certain features
+        // Retrieve this service from the SystemContainer
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingAdminEditorGraphQLEndpoint()) {
+            // Enable the "unrestricted" admin fields
+            $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            // Enable Nested mutations
+            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
+            // Do not disable redundant mutation fields in the root type
+            $componentClassConfiguration[\PoP\Engine\Component::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
+            // Allow access to all entries for Root.option
+            $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
+            // Allow access to all meta values
+            $componentClassConfiguration[\PoPSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $componentClassConfiguration[\PoPSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $componentClassConfiguration[\PoPSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
+        }
     }
 
     /**
@@ -767,7 +797,7 @@ class PluginConfiguration
             [
                 'module' => CacheFunctionalityModuleResolver::CONFIGURATION_CACHE,
                 'class' => \PoP\ComponentModel\Component::class,
-                'envVariable' => \PoP\ComponentModel\Environment::USE_COMPONENT_MODEL_CACHE,
+                'envVariable' => ComponentModelEnvironment::USE_COMPONENT_MODEL_CACHE,
             ],
             // Cache the schema
             [
@@ -796,7 +826,13 @@ class PluginConfiguration
      */
     public static function getSkippingSchemaComponentClasses(): array
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        // If doing ?schema_target=editor, always enable all schema-type modules
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingAdminEditorGraphQLEndpoint()) {
+            return [];
+        }
 
         // Component classes enabled/disabled by module
         $maybeSkipSchemaModuleComponentClasses = [
@@ -875,6 +911,7 @@ class PluginConfiguration
                 \PoPSchema\CommentMutations\Component::class,
             ],
         ];
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleComponentClasses = array_filter(
             $maybeSkipSchemaModuleComponentClasses,
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
