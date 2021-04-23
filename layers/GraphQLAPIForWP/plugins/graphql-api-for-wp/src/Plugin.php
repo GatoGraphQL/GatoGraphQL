@@ -170,23 +170,28 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Plugin initialization, executed on hook "plugins_loaded"
-     * to wait for all extensions to be loaded
+     * Boot the system
      */
-    public function initialize(): void
+    public function bootSystem(): void
     {
-        parent::initialize();
+        // Boot all PoP components, from this plugin and all extensions
+        AppLoader::bootSystem(
+            ...PluginConfiguration::getContainerCacheConfiguration()
+        );
 
         /**
          * Watch out! If we are in the Modules page and enabling/disabling
          * a module, then already take that new state!
+         *
          * This is because `maybeProcessAction`, which is where modules are
          * enabled/disabled, must be executed before PluginConfiguration::initialize(),
          * which is where the plugin reads if a module is enabled/disabled as to
          * set the environment constants.
          *
          * This is mandatory, because only when it is enabled, can a module
-         * have its state persisted when calling `flush_rewrite`
+         * have its state persisted when calling `flush_rewrite`.
+         *
+         * For that, all the classes below have also been registered in system-services.yaml
          */
         if (\is_admin()) {
             // We can't use the InstanceManager, since at this stage it hasn't
@@ -211,17 +216,6 @@ class Plugin extends AbstractMainPlugin
                 $moduleListTable->maybeProcessAction();
             }
         }
-    }
-
-    /**
-     * Boot the system
-     */
-    public function bootSystem(): void
-    {
-        // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootSystem(
-            ...PluginConfiguration::getContainerCacheConfiguration()
-        );
     }
 
     /**
