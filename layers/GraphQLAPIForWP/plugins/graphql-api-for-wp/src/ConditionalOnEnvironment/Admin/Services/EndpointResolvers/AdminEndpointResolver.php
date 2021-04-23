@@ -85,7 +85,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                  */
                 \printf(
                     '<script type="text/javascript">var GRAPHQL_API_ADMIN_ENDPOINT = "%s"</script>',
-                    $this->endpointHelpers->getWordPressEditorGraphQLEndpoint()
+                    $this->endpointHelpers->getAdminEditorGraphQLEndpoint()
                 );
             }
         });
