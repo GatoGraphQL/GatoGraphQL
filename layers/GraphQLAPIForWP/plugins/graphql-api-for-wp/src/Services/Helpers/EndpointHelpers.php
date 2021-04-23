@@ -105,4 +105,9 @@ class EndpointHelpers
             $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
+
+    public function getAdminPersistedQueryCustomPostID(): string | int
+    {
+        return $_REQUEST[RequestParams::PERSISTED_QUERY_ID];
+    }
 }
