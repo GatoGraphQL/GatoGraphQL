@@ -158,11 +158,13 @@ class AppLoader
      * 5. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
     public static function bootSystem(
         ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null
+        ?string $containerNamespace = null,
+        ?string $containerDirectory = null
     ): void {
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)
         DotenvBuilderFactory::init();
@@ -187,7 +189,8 @@ class AppLoader
          */
         SystemContainerBuilderFactory::init(
             $cacheContainerConfiguration,
-            $containerNamespace
+            $containerNamespace,
+            $containerDirectory
         );
 
         /**
@@ -241,11 +244,13 @@ class AppLoader
      * 2. Trigger "beforeBoot", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param boolean|null $namespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
     public static function bootApplication(
         ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null
+        ?string $containerNamespace = null,
+        ?string $containerDirectory = null
     ): void {
         /**
          * Allow each component to customize the configuration for itself,
@@ -272,7 +277,8 @@ class AppLoader
          */
         ContainerBuilderFactory::init(
             $cacheContainerConfiguration,
-            $containerNamespace
+            $containerNamespace,
+            $containerDirectory
         );
 
         /**

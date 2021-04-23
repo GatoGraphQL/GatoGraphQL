@@ -640,19 +640,25 @@ class PluginConfiguration
     /**
      * Provide the configuration to cache the container
      *
-     * @return array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
+     * @return array<mixed> Array with args to pass to `AppLoader::initializeContainers`:
+     *                      [0]: cache container? (bool)
+     *                      [1]: container namespace (string|null)
+     *                      [2]: container directory (string|null)
      */
     public static function getContainerCacheConfiguration(): array
     {
         if (is_null(self::$containerCacheConfigurationCache)) {
             $containerConfigurationCacheNamespace = null;
+            $containerConfigurationCacheDirectory = null;
             if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
+                $containerConfigurationCacheDirectory = PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'pop-cache';
             }
             self::$containerCacheConfigurationCache = [
                 $cacheContainerConfiguration,
-                $containerConfigurationCacheNamespace
+                $containerConfigurationCacheNamespace,
+                $containerConfigurationCacheDirectory
             ];
         }
         return self::$containerCacheConfigurationCache;

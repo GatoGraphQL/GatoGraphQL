@@ -28,4 +28,15 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         }
         return '';
     }
+
+    /**
+     * Inject to the FilesystemAdapter:
+     * The directory where to store the cache. If null, it uses the default /tmp system folder
+     *
+     * @see https://symfony.com/doc/current/components/cache/adapters/filesystem_adapter.html
+     */
+    public function getDirectory(): ?string
+    {
+        return null;
+    }
 }
