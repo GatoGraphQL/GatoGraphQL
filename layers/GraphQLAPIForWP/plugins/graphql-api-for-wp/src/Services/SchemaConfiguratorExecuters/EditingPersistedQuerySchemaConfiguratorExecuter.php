@@ -20,7 +20,7 @@ class EditingPersistedQuerySchemaConfiguratorExecuter extends AbstractSchemaConf
     /**
      * Initialize the configuration if editing a persisted query
      */
-    protected function getCustomPostID(): ?int
+    protected function getCustomPostID(): string | int | null
     {
         if ($this->endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
             return $this->endpointHelpers->getAdminPersistedQueryCustomPostID();
