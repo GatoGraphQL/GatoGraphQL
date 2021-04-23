@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Instances;
 
-use PoP\Root\Container\ContainerBuilderFactory;
+use PoP\Root\Container\SystemContainerBuilderFactory;
 
-class InstanceManager implements InstanceManagerInterface
+class SystemInstanceManager implements InstanceManagerInterface
 {
     use InstanceManagerTrait;
 
     public function getInstance(string $class): object
     {
-        $containerBuilder = ContainerBuilderFactory::getInstance();
+        $containerBuilder = SystemContainerBuilderFactory::getInstance();
         return $containerBuilder->get($class);
     }
 }

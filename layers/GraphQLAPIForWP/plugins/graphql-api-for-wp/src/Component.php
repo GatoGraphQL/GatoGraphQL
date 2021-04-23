@@ -69,6 +69,18 @@ class Component extends AbstractPluginComponent
     }
 
     /**
+     * Initialize services for the system container.
+     */
+    protected static function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
+
+        if (\is_admin()) {
+            self::initSystemServices(dirname(__DIR__), '/ConditionalOnEnvironment/Admin');
+        }
+    }
+
+    /**
      * Initialize services
      *
      * @param array<string, mixed> $configuration

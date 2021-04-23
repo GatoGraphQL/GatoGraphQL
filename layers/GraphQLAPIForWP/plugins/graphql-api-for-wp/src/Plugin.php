@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Services\Admin\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -21,6 +21,7 @@ use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\AppLoader;
 
 class Plugin extends AbstractMainPlugin
@@ -170,50 +171,6 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Plugin initialization, executed on hook "plugins_loaded"
-     * to wait for all extensions to be loaded
-     */
-    public function initialize(): void
-    {
-        parent::initialize();
-
-        /**
-         * Watch out! If we are in the Modules page and enabling/disabling
-         * a module, then already take that new state!
-         * This is because `maybeProcessAction`, which is where modules are
-         * enabled/disabled, must be executed before PluginConfiguration::initialize(),
-         * which is where the plugin reads if a module is enabled/disabled as to
-         * set the environment constants.
-         *
-         * This is mandatory, because only when it is enabled, can a module
-         * have its state persisted when calling `flush_rewrite`
-         */
-        if (\is_admin()) {
-            // We can't use the InstanceManager, since at this stage it hasn't
-            // been initialized yet
-            // We can create a new instance of MenuPageHelper and ModulesMenuPage
-            // because their instantiation produces no side-effects
-            // (maybe that happens under `initialize`)
-            $menuPageHelper = new MenuPageHelper();
-            $moduleRegistry = new ModuleRegistry();
-            $userAuthorization = new UserAuthorization();
-            $menu = new Menu($menuPageHelper, $moduleRegistry, $userAuthorization);
-            $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
-            $modulesMenuPage = new ModulesMenuPage($menu, $menuPageHelper, $endpointHelpers);
-            if (
-                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
-                && !$menuPageHelper->isDocumentationScreen()
-            ) {
-                // Instantiating ModuleListTableAction DOES have side-effects,
-                // but they are needed, and won't be repeated when instantiating
-                // the class through the Container Builder
-                $moduleListTable = new ModuleListTableAction();
-                $moduleListTable->maybeProcessAction();
-            }
-        }
-    }
-
-    /**
      * Boot the system
      */
     public function bootSystem(): void
@@ -222,6 +179,43 @@ class Plugin extends AbstractMainPlugin
         AppLoader::bootSystem(
             ...PluginConfiguration::getContainerCacheConfiguration()
         );
+
+        /**
+         * Watch out! If we are in the Modules page and enabling/disabling
+         * a module, then already take that new state!
+         *
+         * This is because `maybeProcessAction`, which is where modules are
+         * enabled/disabled, must be executed before PluginConfiguration::initialize(),
+         * which is where the plugin reads if a module is enabled/disabled as to
+         * set the environment constants.
+         *
+         * This is mandatory, because only when it is enabled, can a module
+         * have its state persisted when calling `flush_rewrite`.
+         *
+         * For that, all the classes below have also been registered in system-services.yaml
+         */
+        if (\is_admin()) {
+            // Obtain these services from the SystemContainer
+            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+            /**
+             * @var MenuPageHelper
+             */
+            $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
+            /**
+             * @var ModulesMenuPage
+             */
+            $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
+            if (
+                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
+                && !$menuPageHelper->isDocumentationScreen()
+            ) {
+                /**
+                 * @var ModuleListTableAction
+                 */
+                $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
+                $tableAction->maybeProcessAction();
+            }
+        }
     }
 
     /**
