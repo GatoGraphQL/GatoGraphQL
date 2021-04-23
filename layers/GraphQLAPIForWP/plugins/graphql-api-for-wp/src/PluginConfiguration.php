@@ -60,6 +60,7 @@ use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
 use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\Posts\Environment as PostsEnvironment;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
 use PoPSchema\Settings\Environment as SettingsEnvironment;
 use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
@@ -688,14 +689,6 @@ class PluginConfiguration
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
         ];
-        // If doing ?schema_target=editor, enable the "unrestricted" admin fields
-        // Retrieve this service from the SystemContainer
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint()) {
-            $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
-        }
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => PluginInfo::get('url') . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
@@ -733,6 +726,32 @@ class PluginConfiguration
             // Enable Composable Directives?
             GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
         ];
+
+        // If doing ?schema_target=editor, always enable certain features
+        // Retrieve this service from the SystemContainer
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint()) {
+            // Enable the "unrestricted" admin fields
+            $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            // Enable Nested mutations
+            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
+            // Do not disable redundant mutation fields in the root type
+            $componentClassConfiguration[\PoP\Engine\Component::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
+            // Allow access to all entries for Root.option
+            $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
+            // Allow access to all meta values
+            $componentClassConfiguration[\PoPSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $componentClassConfiguration[\PoPSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $componentClassConfiguration[\PoPSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
+            $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
+        }
     }
 
     /**
@@ -808,7 +827,13 @@ class PluginConfiguration
      */
     public static function getSkippingSchemaComponentClasses(): array
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        // If doing ?schema_target=editor, always enable all schema-type modules
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingWordPressEditorGraphQLEndpoint()) {
+            return [];
+        }
 
         // Component classes enabled/disabled by module
         $maybeSkipSchemaModuleComponentClasses = [
@@ -887,6 +912,7 @@ class PluginConfiguration
                 \PoPSchema\CommentMutations\Component::class,
             ],
         ];
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleComponentClasses = array_filter(
             $maybeSkipSchemaModuleComponentClasses,
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
