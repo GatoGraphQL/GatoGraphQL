@@ -6,5 +6,5 @@ services:
     PoP\Root\Registries\CompilerPassRegistryInterface:
         class: \PoP\Root\Registries\CompilerPassRegistry
 
-    PoP\Root\Container\CompilerPasses\:
-        resource: '../src/Container/CompilerPasses/*'
+    PoP\Root\Container\HybridCompilerPasses\:
+        resource: '../src/Container/HybridCompilerPasses/*'
