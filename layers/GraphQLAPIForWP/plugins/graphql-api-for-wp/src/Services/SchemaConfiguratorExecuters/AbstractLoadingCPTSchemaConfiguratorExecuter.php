@@ -9,7 +9,7 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
     /**
      * Initialize the configuration if visiting the corresponding CPT
      */
-    protected function getCustomPostID(): string | int | null
+    protected function getCustomPostID(): ?int
     {
         if (\is_singular($this->getCustomPostType())) {
             // Watch out! If accessing $vars it triggers setting ComponentConfiguration vars,

@@ -29,7 +29,7 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
     /**
      * Provide the ID of the custom post containing the Schema Configuration block
      */
-    abstract protected function getCustomPostID(): string | int | null;
+    abstract protected function getCustomPostID(): ?int;
 
     /**
      * Initialize the configuration of services before the execution of the GraphQL query

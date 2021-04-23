@@ -106,8 +106,8 @@ class EndpointHelpers
         );
     }
 
-    public function getAdminPersistedQueryCustomPostID(): string | int
+    public function getAdminPersistedQueryCustomPostID(): ?int
     {
-        return $_REQUEST[RequestParams::PERSISTED_QUERY_ID];
+        return (int) $_REQUEST[RequestParams::PERSISTED_QUERY_ID] ?? null;
     }
 }
