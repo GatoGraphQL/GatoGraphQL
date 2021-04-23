@@ -21,6 +21,7 @@ use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\AppLoader;
 
 class Plugin extends AbstractMainPlugin
@@ -212,8 +213,12 @@ class Plugin extends AbstractMainPlugin
                 // Instantiating ModuleListTableAction DOES have side-effects,
                 // but they are needed, and won't be repeated when instantiating
                 // the class through the Container Builder
-                $moduleListTable = new ModuleListTableAction();
-                $moduleListTable->maybeProcessAction();
+                $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+                /**
+                 * @var ModuleListTableAction
+                 */
+                $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
+                $tableAction->maybeProcessAction();
             }
         }
     }

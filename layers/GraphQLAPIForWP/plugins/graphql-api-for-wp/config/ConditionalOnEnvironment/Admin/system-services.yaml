@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    # These classes are invoked after `bootSystem` and before `bootApplication`
+    GraphQLAPI\GraphQLAPI\Services\Admin\TableActions\ModuleListTableAction:
+        class: ~
