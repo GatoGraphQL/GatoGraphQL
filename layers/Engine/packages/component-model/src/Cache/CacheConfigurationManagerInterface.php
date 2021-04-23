@@ -13,10 +13,16 @@ interface CacheConfigurationManagerInterface
 {
     /**
      * Inject to the FilesystemAdapter:
-     * A string used as the subdirectory of the root cache directory, where cache
-     * items will be stored
+     * The namespace for caching items
      *
      * @see https://symfony.com/doc/current/components/cache/adapters/filesystem_adapter.html
      */
     public function getNamespace(): string;
+    /**
+     * Inject to the FilesystemAdapter:
+     * The directory where to store the cache. If null, it uses the default /tmp system folder
+     *
+     * @see https://symfony.com/doc/current/components/cache/adapters/filesystem_adapter.html
+     */
+    public function getDirectory(): ?string;
 }
