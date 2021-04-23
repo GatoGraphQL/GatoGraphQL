@@ -23,7 +23,7 @@ class PersistedQueryGraphiQLBlock extends AbstractGraphiQLBlock
         /** @var EditorHelpers */
         $editorHelpers = $instanceManager->getInstance(EditorHelpers::class);
         if ($persistedQueryCustomPostID = $editorHelpers->getEditingPostID()) {
-            $this->endpointHelpers->getAdminPersistedQueryGraphQLEndpoint(
+            return $this->endpointHelpers->getAdminPersistedQueryGraphQLEndpoint(
                 $persistedQueryCustomPostID,
                 true
             );
