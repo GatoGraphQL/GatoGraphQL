@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     # Make sure the GraphiQL client is used, without the Explorer
     # Because if isGraphiQLExplorerEnabled might be true, the explorer is enabled

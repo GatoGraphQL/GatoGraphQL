@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     file_store:
         class: \PoP\FileStore\Store\FileStore

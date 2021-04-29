@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     Leoloso\ExamplesForPoP\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'

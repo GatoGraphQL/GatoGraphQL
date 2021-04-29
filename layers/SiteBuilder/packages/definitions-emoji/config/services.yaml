@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     emoji_definition_resolver:
         class: \PoP\EmojiDefinitions\DefinitionResolver

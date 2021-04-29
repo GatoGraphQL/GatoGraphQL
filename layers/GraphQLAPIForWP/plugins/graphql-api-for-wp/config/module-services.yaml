@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\ModuleResolvers\:
         resource: '../src/ModuleResolvers/*'

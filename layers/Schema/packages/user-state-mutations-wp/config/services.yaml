@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface:
         class: \PoPSchema\UserStateMutationsWP\TypeAPIs\UserStateTypeMutationAPI

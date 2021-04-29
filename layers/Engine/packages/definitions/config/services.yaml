@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoP\Definitions\DefinitionManagerInterface:
         class: \PoP\Definitions\DefinitionManager

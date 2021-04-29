@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface:
         class: \PoPSchema\MenusWP\TypeAPIs\MenuTypeAPI

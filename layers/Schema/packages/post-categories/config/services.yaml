@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoPSchema\PostCategories\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

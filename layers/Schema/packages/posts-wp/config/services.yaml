@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface:
         class: \PoPSchema\PostsWP\TypeAPIs\PostTypeAPI

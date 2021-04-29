@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\Services\:
         resource: '../../../src/ConditionalOnEnvironment/Admin/Services/*'

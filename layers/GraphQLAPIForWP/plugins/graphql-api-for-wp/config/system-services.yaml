@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
@@ -11,12 +12,19 @@ services:
 
     # All these services are required to maybe execute ModuleListTableAction in Plugin.php
     # Hence, they are defined both in the Application and System containers
+    # Please notice: they must NOT be autoconfigured!
+    # Otherwise, they will also be inititalized twice.
+    # @see https://github.com/leoloso/PoP/issues/636
     GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper:
         class: ~
+        autoconfigure: false
     GraphQLAPI\GraphQLAPI\Services\Menus\Menu:
         class: ~
+        autoconfigure: false
     GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers:
         class: ~
+        autoconfigure: false
     GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
         class: ~
+        autoconfigure: false
 
