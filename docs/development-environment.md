@@ -23,7 +23,38 @@ To access the [wp-admin](http://graphql-api.lndo.site/wp-admin/):
 - User: `admin`
 - Password: `admin`
 
-### Debugging
+## Disable caching/purge the cache, during development
+
+By default, the DEV webserver will have caching enabled. Cached elements include:
+
+- The service containers (from Symfony's Dependency Injection)
+- The generated configuration (mapping the component model to queries)
+- The calculated GraphQL schema (only when module [Schema Cache](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/en/modules/schema-cache.md) is enabled)
+
+When developing, we must either disable the caching, or purge the cache, to test our changes.
+
+### Enable/disable caching
+
+Caching is set via constant `GRAPHQL_API_CACHE_CONTAINERS` in `wp-config.php`, with either values `true` or `false`.
+
+To define this constant, we can execute the following Composer scripts:
+
+```bash
+$ composer disable-cache
+$ composer enable-cache
+```
+
+### Purge the cache
+
+Cached files are stored under the plugin's `cache` subfolder.
+
+To purge them, simply delete this folder, or execute the following Composer script:
+
+```bash
+composer purge-cache
+```
+
+## Debugging
 
 XDebug is disabled by default. To enable it, create Lando config file `.lando.local.yml` with this content:
 

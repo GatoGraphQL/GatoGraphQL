@@ -13,13 +13,21 @@ class PluginEnvironment
     public const CACHE_DIR = 'CACHE_DIR';
 
     /**
-     * By default, do not cache for DEV, cache otherwise
+     * If the information is provided by either environment variable
+     * or constant in wp-config.php, use it.
+     * By default, do cache (also for DEV)
      */
     public static function cacheContainers(): bool
     {
-        return getenv(self::CACHE_CONTAINERS) !== false ?
-            strtolower(getenv(self::CACHE_CONTAINERS)) == "true"
-            : !Environment::isApplicationEnvironmentDev();
+        if (getenv(self::CACHE_CONTAINERS) !== false) {
+            return strtolower(getenv(self::CACHE_CONTAINERS)) == "true";
+        }
+
+        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::CACHE_CONTAINERS)) {
+            return PluginConfigurationHelpers::getWPConfigConstantValue(self::CACHE_CONTAINERS);
+        }
+
+        return true;
     }
 
     /**
