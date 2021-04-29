@@ -82,7 +82,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 /**
                  * The endpoint against which to execute GraphQL queries on the admin.
                  * This GraphQL schema is modified by user preferences
-                 * (eg: Nested mutations enabled or not, etc)
+                 * (eg: Nested mutations enabled or not, Schema namespaced or not, etc)
                  */
                 \printf(
                     $scriptTag,
@@ -92,8 +92,8 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 /**
                  * The endpoint against which to execute GraphQL queries on the WordPress editor,
                  * for Gutenberg blocks which require some field that must always be enabled.
-                 * This GraphQL schema is fixed
-                 * (eg: it contains the "unrestricted" admin fields)
+                 * This GraphQL schema is not modified by user preferences,
+                 * and it contains the "unrestricted" admin fields
                  */
                 \printf(
                     $scriptTag,
