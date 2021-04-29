@@ -44,7 +44,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function isGraphQLQueryExecution(): bool
     {
-        return $this->endpointHelpers->isRequestingAdminGraphQLEndpoint();
+        return $this->endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**
@@ -78,14 +78,33 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         \add_action('admin_print_scripts', function () {
             // Make sure the user has access to the editor
             if ($this->userAuthorization->canAccessSchemaEditor()) {
+                $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
                 /**
-                 * The endpoint against which to execute GraphQL queries while on the WordPress editor
-                 * Watch out! This endpoint has ?schema_target=editor as to retrieve the full schema,
-                 * including the "unrestricted" admin fields. It is to be used by Gutenberg blocks
+                 * The endpoint against which to execute GraphQL queries on the admin.
+                 * This GraphQL schema is modified by user preferences:
+                 * - Disabled types/directives are not in the schema
+                 * - Nested mutations enabled or not
+                 * - Schema namespaced or not
+                 * - etc
                  */
                 \printf(
-                    '<script type="text/javascript">var GRAPHQL_API_ADMIN_ENDPOINT = "%s"</script>',
-                    $this->endpointHelpers->getAdminEditorGraphQLEndpoint()
+                    $scriptTag,
+                    'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
+                    $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint()
+                );
+                /**
+                 * The endpoint against which to execute GraphQL queries on the WordPress editor,
+                 * for Gutenberg blocks which require some field that must necessarily be enabled.
+                 * This GraphQL schema is not modified by user preferences:
+                 * - All types/directives are always in the schema
+                 * - The "unrestricted" admin fields are in the schema
+                 * - Nested mutations enabled, without removing the redundant fields in the Root
+                 * - No namespacing
+                 */
+                \printf(
+                    $scriptTag,
+                    'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
+                    $this->endpointHelpers->getAdminFixedSchemaGraphQLEndpoint()
                 );
             }
         });

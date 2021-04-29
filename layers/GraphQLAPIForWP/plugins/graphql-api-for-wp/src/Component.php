@@ -115,7 +115,7 @@ class Component extends AbstractPluginComponent
             $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
             self::initSchemaServices(
                 dirname(__DIR__),
-                !$endpointHelpers->isRequestingAdminEditorGraphQLEndpoint(),
+                !$endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint(),
                 '/ConditionalOnEnvironment/Admin/ConditionalOnEnvironment/Editor'
             );
         }

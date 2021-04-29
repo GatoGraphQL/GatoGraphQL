@@ -8,19 +8,34 @@ import { fetchGraphQLQuery } from '@graphqlapi/api-fetch';
  */
 const controls = {
 	RECEIVE_TYPE_FIELDS( action ) {
-		return fetchGraphQLQuery( action.query );
+		return fetchGraphQLQuery(
+			GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT,
+			action.query
+		);
 	},
 	RECEIVE_DIRECTIVES( action ) {
-		return fetchGraphQLQuery( action.query );
+		return fetchGraphQLQuery(
+			GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT,
+			action.query
+		);
 	},
 	RECEIVE_ACCESS_CONTROL_LISTS( action ) {
-		return fetchGraphQLQuery( action.query );
+		return fetchGraphQLQuery(
+			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
+			action.query
+		);
 	},
 	RECEIVE_CACHE_CONTROL_LISTS( action ) {
-		return fetchGraphQLQuery( action.query );
+		return fetchGraphQLQuery(
+			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
+			action.query
+		);
 	},
 	RECEIVE_FIELD_DEPRECATION_LISTS( action ) {
-		return fetchGraphQLQuery( action.query );
+		return fetchGraphQLQuery(
+			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
+			action.query
+		);
 	},
 };
 

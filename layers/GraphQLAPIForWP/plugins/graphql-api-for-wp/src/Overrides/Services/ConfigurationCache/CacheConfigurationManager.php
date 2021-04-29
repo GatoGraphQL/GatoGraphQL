@@ -38,7 +38,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         if (\is_admin()) {
             // The WordPress editor can access the full GraphQL schema,
             // including "unrestricted" admin fields, so cache it individually
-            $timestamp .= '_' . ($this->endpointHelpers->isRequestingAdminEditorGraphQLEndpoint() ? 'editor' : 'admin');
+            $timestamp .= '_' . ($this->endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'editor' : 'admin');
         }
         return $timestamp;
     }

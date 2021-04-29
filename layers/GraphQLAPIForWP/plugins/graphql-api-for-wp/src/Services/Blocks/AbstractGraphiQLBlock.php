@@ -53,7 +53,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getAdminGraphQLEndpoint(): string
     {
-        return $this->endpointHelpers->getAdminGraphQLEndpoint();
+        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**

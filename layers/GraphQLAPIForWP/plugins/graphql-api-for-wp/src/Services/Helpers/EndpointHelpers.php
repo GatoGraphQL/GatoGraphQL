@@ -22,7 +22,7 @@ class EndpointHelpers
      * Indicate if we are requesting
      * /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
-    public function isRequestingAdminGraphQLEndpoint(): bool
+    public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
     {
         return \is_admin()
             && 'POST' == $_SERVER['REQUEST_METHOD']
@@ -36,9 +36,9 @@ class EndpointHelpers
      * Indicate if we are requesting
      * /wp-admin/edit.php?page=graphql_api&action=execute_query&schema_target=editor
      */
-    public function isRequestingAdminEditorGraphQLEndpoint(): bool
+    public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminGraphQLEndpoint()
+        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
             && isset($_GET[RequestParams::SCHEMA_TARGET])
             && $_GET[RequestParams::SCHEMA_TARGET] == RequestParams::SCHEMA_TARGET_EDITOR;
     }
@@ -49,7 +49,7 @@ class EndpointHelpers
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminGraphQLEndpoint()
+        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
             && isset($_GET[RequestParams::PERSISTED_QUERY_ID]);
     }
 
@@ -58,7 +58,7 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
+    public function getAdminConfigurableSchemaGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
     {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
@@ -83,12 +83,12 @@ class EndpointHelpers
      * GraphQL endpoint to be used in the WordPress editor.
      * It has the full schema, including "unrestricted" admin fields.
      */
-    public function getAdminEditorGraphQLEndpoint(): string
+    public function getAdminFixedSchemaGraphQLEndpoint(): string
     {
         return \add_query_arg(
             RequestParams::SCHEMA_TARGET,
             RequestParams::SCHEMA_TARGET_EDITOR,
-            $this->getAdminGraphQLEndpoint()
+            $this->getAdminConfigurableSchemaGraphQLEndpoint()
         );
     }
 
@@ -102,7 +102,7 @@ class EndpointHelpers
         return \add_query_arg(
             RequestParams::PERSISTED_QUERY_ID,
             $persistedQueryCustomPostID,
-            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
+            $this->getAdminConfigurableSchemaGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
 

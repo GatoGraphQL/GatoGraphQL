@@ -33,10 +33,6 @@
     "@wordpress/edit-post": "^3.21.0",
     "@wordpress/scripts": "^12.1.0",
     "prettier": "npm:wp-prettier@2.0.5",
-    "puppeteer": "^2.1.1",
-    "react": "^16.13.1",
-    "react-native": "^0.62.2",
-    "react-select": "^3.0.8",
-    "typescript": "^3.9.5"
+    "react-select": "^3.0.8"
   }
 }

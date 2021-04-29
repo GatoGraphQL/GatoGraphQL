@@ -18,7 +18,6 @@ const guideName = __('Creating Custom Endpoints', 'graphql-api');
 const pageFilenames = [
     'welcome-guide',
     'schema-config-options',
-    'lorem-ipsum',
 ]
 /**
  * Component

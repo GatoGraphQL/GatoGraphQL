@@ -17,14 +17,16 @@ buildScripts(){
         if [ -d "$file" ]; then
             echo "In subfolder '$file'"
             cd "$file"
+            # Install node_modules/ dependencies
+            npm install --legacy-peer-deps
             npm run build
             cd ..
         fi
     done
 }
 
-# First create the symlinks to node_modules/ everywhere
-bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
+# # First create the symlinks to node_modules/ everywhere
+# bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
 
 # Packages: used by Blocks/Editor Scripts
 cd "$DIR/../../packages/"
