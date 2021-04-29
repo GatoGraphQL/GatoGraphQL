@@ -6,7 +6,7 @@ namespace PoP\Root\Container\CompilerPasses;
 
 trait AutoconfigurableServicesCompilerPassTrait
 {
-    protected function onlyAddAutoconfigurableServices(): bool
+    protected function onlyProcessAutoconfiguredServices(): bool
     {
         return false;
     }
