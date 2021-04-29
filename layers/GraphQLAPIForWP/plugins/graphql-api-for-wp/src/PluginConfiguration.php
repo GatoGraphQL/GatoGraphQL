@@ -517,7 +517,7 @@ class PluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
-            // Enable the "admin" schema: if doing ?schema_target=editor, it will already,
+            // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelComponentConfiguration::class,
@@ -732,7 +732,7 @@ class PluginConfiguration
             GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
         ];
 
-        // If doing ?schema_target=editor, always enable certain features
+        // If doing ?behavior=unrestricted, always enable certain features
         // Retrieve this service from the SystemContainer
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
@@ -832,7 +832,7 @@ class PluginConfiguration
      */
     public static function getSkippingSchemaComponentClasses(): array
     {
-        // If doing ?schema_target=editor, always enable all schema-type modules
+        // If doing ?behavior=unrestricted, always enable all schema-type modules
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);

@@ -34,13 +34,13 @@ class EndpointHelpers
 
     /**
      * Indicate if we are requesting
-     * /wp-admin/edit.php?page=graphql_api&action=execute_query&schema_target=editor
+     * /wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted
      */
     public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-            && isset($_GET[RequestParams::SCHEMA_TARGET])
-            && $_GET[RequestParams::SCHEMA_TARGET] == RequestParams::SCHEMA_TARGET_EDITOR;
+            && isset($_GET[RequestParams::BEHAVIOR])
+            && $_GET[RequestParams::BEHAVIOR] == RequestParams::BEHAVIOR_UNRESTRICTED;
     }
 
     /**
@@ -86,8 +86,8 @@ class EndpointHelpers
     public function getAdminFixedSchemaGraphQLEndpoint(): string
     {
         return \add_query_arg(
-            RequestParams::SCHEMA_TARGET,
-            RequestParams::SCHEMA_TARGET_EDITOR,
+            RequestParams::BEHAVIOR,
+            RequestParams::BEHAVIOR_UNRESTRICTED,
             $this->getAdminConfigurableSchemaGraphQLEndpoint()
         );
     }
