@@ -51,9 +51,9 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         return true;
     }
 
-    protected function getAdminGraphQLEndpoint(): string
+    protected function getAdminConfigurableSchemaGraphQLEndpoint(): string
     {
-        return $this->endpointHelpers->getAdminGraphQLEndpoint();
+        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
             parent::getLocalizedData(),
             [
                 'nonce' => \wp_create_nonce('wp_rest'),
-                'endpoint' => $this->getAdminGraphQLEndpoint(),
+                'endpoint' => $this->getAdminConfigurableSchemaGraphQLEndpoint(),
                 'defaultQuery' => $this->getDefaultQuery(),
             ]
         );

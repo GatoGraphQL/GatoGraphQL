@@ -90,7 +90,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 \printf(
                     $scriptTag,
                     'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
-                    $this->endpointHelpers->getAdminGraphQLEndpoint()
+                    $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint()
                 );
                 /**
                  * The endpoint against which to execute GraphQL queries on the WordPress editor,
