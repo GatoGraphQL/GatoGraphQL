@@ -15,7 +15,7 @@ class PluginEnvironment
     /**
      * If the information is provided by either environment variable
      * or constant in wp-config.php, use it.
-     * By default, do not cache for DEV, cache otherwise
+     * By default, do cache (also for DEV)
      */
     public static function cacheContainers(): bool
     {
@@ -27,7 +27,7 @@ class PluginEnvironment
             return PluginConfigurationHelpers::getWPConfigConstantValue(self::CACHE_CONTAINERS);
         }
 
-        return !Environment::isApplicationEnvironmentDev();
+        return true;
     }
 
     /**
