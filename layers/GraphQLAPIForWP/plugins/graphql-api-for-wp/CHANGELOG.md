@@ -4,7 +4,7 @@ All notable changes to `graphql-api` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 0.8.0 - 2021-04-20
+## 0.8.0 - DATE
 
 ### Added
 
@@ -16,6 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - User posts
 - "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
 - Composable directives
+- Cache is saved under the plugin folder
 
 ### Backwards-breaking changes:
 
