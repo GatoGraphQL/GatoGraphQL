@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 
 class PluginEnvironment
 {
-    public const ENABLE_GLOBAL_CACHING = 'ENABLE_GLOBAL_CACHING';
+    public const ENABLE_CACHING = 'ENABLE_CACHING';
     public const CACHE_DIR = 'CACHE_DIR';
 
     /**
@@ -18,12 +18,12 @@ class PluginEnvironment
      */
     public static function enableGlobalCaching(): bool
     {
-        if (getenv(self::ENABLE_GLOBAL_CACHING) !== false) {
-            return strtolower(getenv(self::ENABLE_GLOBAL_CACHING)) == "true";
+        if (getenv(self::ENABLE_CACHING) !== false) {
+            return strtolower(getenv(self::ENABLE_CACHING)) == "true";
         }
 
-        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::ENABLE_GLOBAL_CACHING)) {
-            return PluginConfigurationHelpers::getWPConfigConstantValue(self::ENABLE_GLOBAL_CACHING);
+        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::ENABLE_CACHING)) {
+            return PluginConfigurationHelpers::getWPConfigConstantValue(self::ENABLE_CACHING);
         }
 
         return true;
