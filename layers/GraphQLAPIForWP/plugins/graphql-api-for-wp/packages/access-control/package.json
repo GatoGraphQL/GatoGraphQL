@@ -27,7 +27,7 @@
     "packages-update": "wp-scripts packages-update"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^12.1.0",
-    "@wordpress/compose": "^3.19.0"
+    "@wordpress/compose": "^3.19.0",
+    "@wordpress/scripts": "^12.1.0"
   }
 }
