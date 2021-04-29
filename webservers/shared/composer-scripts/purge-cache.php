@@ -6,6 +6,7 @@ class ComposerScripts
 {
     /**
      * @see https://stackoverflow.com/a/3349792
+     * @see https://stackoverflow.com/a/33059445
      */
     public static function deleteDir(string $dirPath): void
     {
@@ -15,7 +16,7 @@ class ComposerScripts
         if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
             $dirPath .= '/';
         }
-        $files = glob($dirPath . '*', GLOB_MARK);
+        $files = glob($dirPath . '{,.}[!.,!..]*', GLOB_MARK|GLOB_BRACE);
         foreach ($files as $file) {
             if (is_dir($file)) {
                 self::deleteDir($file);
