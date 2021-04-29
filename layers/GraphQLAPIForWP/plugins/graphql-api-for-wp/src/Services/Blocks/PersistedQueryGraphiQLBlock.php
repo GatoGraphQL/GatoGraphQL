@@ -17,7 +17,7 @@ class PersistedQueryGraphiQLBlock extends AbstractGraphiQLBlock
      * If we are editing a Persisted Query, pass its ID to the endpoint,
      * so it can set-up the Schema Configuration for the schema
      */
-    protected function getAdminConfigurableSchemaGraphQLEndpoint(): string
+    protected function getAdminGraphQLEndpoint(): string
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var EditorHelpers */
