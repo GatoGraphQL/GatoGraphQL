@@ -35,7 +35,11 @@ When developing, we must either disable the caching, or purge the cache after do
 
 ### Enable/disable caching
 
-Caching is set via constant `GRAPHQL_API_ENABLE_CACHING` in `wp-config.php`, with either values `true` or `false`.
+Caching is disabled by setting constant `GRAPHQL_API_DISABLE_CACHING` in `wp-config.php` to `true`:
+
+```php
+define( 'GRAPHQL_API_DISABLE_CACHING', 'true' );
+```
 
 To define this constant, we can execute the following Composer scripts:
 
