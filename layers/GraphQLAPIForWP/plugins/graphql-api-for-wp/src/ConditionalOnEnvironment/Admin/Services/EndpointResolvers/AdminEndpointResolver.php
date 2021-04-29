@@ -44,7 +44,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function isGraphQLQueryExecution(): bool
     {
-        return $this->endpointHelpers->isRequestingAdminGraphQLEndpoint();
+        return $this->endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**

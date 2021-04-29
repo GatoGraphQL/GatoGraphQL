@@ -22,7 +22,7 @@ class EndpointHelpers
      * Indicate if we are requesting
      * /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
-    public function isRequestingAdminGraphQLEndpoint(): bool
+    public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
     {
         return \is_admin()
             && 'POST' == $_SERVER['REQUEST_METHOD']
@@ -36,9 +36,9 @@ class EndpointHelpers
      * Indicate if we are requesting
      * /wp-admin/edit.php?page=graphql_api&action=execute_query&schema_target=editor
      */
-    public function isRequestingAdminEditorGraphQLEndpoint(): bool
+    public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminGraphQLEndpoint()
+        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
             && isset($_GET[RequestParams::SCHEMA_TARGET])
             && $_GET[RequestParams::SCHEMA_TARGET] == RequestParams::SCHEMA_TARGET_EDITOR;
     }
@@ -49,7 +49,7 @@ class EndpointHelpers
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminGraphQLEndpoint()
+        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
             && isset($_GET[RequestParams::PERSISTED_QUERY_ID]);
     }
 
