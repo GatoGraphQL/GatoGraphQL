@@ -8,7 +8,10 @@ class ComposerScripts
      * @see https://stackoverflow.com/a/3349792
      * @see https://stackoverflow.com/a/33059445
      */
-    public static function deleteDir(string $dirPath): void
+    public static function deleteDir(
+        string $dirPath,
+        bool $removeDir = true
+    ): void
     {
         if (!is_dir($dirPath)) {
             throw new InvalidArgumentException("$dirPath must be a directory");
@@ -24,7 +27,12 @@ class ComposerScripts
                 unlink($file);
             }
         }
-        rmdir($dirPath);
+        // Do not remove the root /cache folder,
+        // as to avoid throwing an exception when running this script twice,
+        // i.e. before the cache/ folder was regenerated
+        if ($removeDir) {
+            rmdir($dirPath);
+        }
     }
 }
 
@@ -33,4 +41,4 @@ class ComposerScripts
  * "@php purge-cache.php $dir"
  */
 $dir = $argv[1];
-ComposerScripts::deleteDir($dir);
+ComposerScripts::deleteDir($dir, false);
