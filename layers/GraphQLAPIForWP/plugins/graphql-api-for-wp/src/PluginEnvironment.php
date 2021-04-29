@@ -16,7 +16,7 @@ class PluginEnvironment
      * or constant in wp-config.php, use it.
      * By default, do cache (also for DEV)
      */
-    public static function enableGlobalCaching(): bool
+    public static function isCachingEnabled(): bool
     {
         if (getenv(self::ENABLE_CACHING) !== false) {
             return strtolower(getenv(self::ENABLE_CACHING)) == "true";

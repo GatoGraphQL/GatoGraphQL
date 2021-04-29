@@ -59,7 +59,7 @@ class CacheFunctionalityModuleResolver extends AbstractCacheFunctionalityModuleR
                 /**
                  * Caching is enabled only if global caching is enabled
                  */
-                return PluginEnvironment::enableGlobalCaching();
+                return PluginEnvironment::isCachingEnabled();
         }
         return parent::areRequirementsSatisfied($module);
     }
