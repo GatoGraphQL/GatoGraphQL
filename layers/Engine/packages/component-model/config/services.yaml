@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     memory_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\ArrayAdapter

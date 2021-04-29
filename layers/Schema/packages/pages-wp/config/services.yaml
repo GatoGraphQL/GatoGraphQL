@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface:
         class: \PoPSchema\PagesWP\TypeAPIs\PageTypeAPI

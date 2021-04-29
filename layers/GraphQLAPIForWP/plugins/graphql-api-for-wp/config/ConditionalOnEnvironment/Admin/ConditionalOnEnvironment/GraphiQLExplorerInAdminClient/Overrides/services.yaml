@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage:
         class: '\GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\ConditionalOnEnvironment\GraphiQLExplorerInAdminClient\Overrides\Services\MenuPages\GraphiQLMenuPage'

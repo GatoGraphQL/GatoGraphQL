@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoP\API\Conditional\AccessControl\Hooks\:
         resource: '../../../src/Conditional/AccessControl/Hooks/*'

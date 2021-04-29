@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoP\API\Schema\FieldQueryConvertorInterface:
         class: \PoP\API\Schema\FieldQueryConvertor

@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface:
         class: '\GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParser'
