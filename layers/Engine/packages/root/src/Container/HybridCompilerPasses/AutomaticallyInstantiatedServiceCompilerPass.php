@@ -9,6 +9,11 @@ use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 
 class AutomaticallyInstantiatedServiceCompilerPass extends AbstractInstantiateServiceCompilerPass
 {
+    protected function onlyAddAutoconfigurableServices(): bool
+    {
+        return true;
+    }
+    
     protected function getServiceClass(): string
     {
         return AutomaticallyInstantiatedServiceInterface::class;

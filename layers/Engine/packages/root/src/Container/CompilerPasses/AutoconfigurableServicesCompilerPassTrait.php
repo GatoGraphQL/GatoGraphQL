@@ -8,6 +8,6 @@ trait AutoconfigurableServicesCompilerPassTrait
 {
     protected function onlyAddAutoconfigurableServices(): bool
     {
-        return true;
+        return false;
     }
 }
