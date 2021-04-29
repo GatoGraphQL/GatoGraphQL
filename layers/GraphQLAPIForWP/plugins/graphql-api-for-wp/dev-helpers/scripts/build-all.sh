@@ -17,8 +17,8 @@ buildScripts(){
         if [ -d "$file" ]; then
             echo "In subfolder '$file'"
             cd "$file"
-            # Install latest version of dependencies (Should be Optional)
-            npm update --legacy-peer-deps
+            # Install node_modules/ dependencies
+            npm install --legacy-peer-deps
             npm run build
             cd ..
         fi
