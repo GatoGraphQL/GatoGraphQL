@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
-use PoP\Root\Environment;
 
 class PluginEnvironment
 {

@@ -1,9 +1,9 @@
 # Configuration Cache
 
-Cache the component hierarchy used by the GraphQL server to represent the graph
+Internal configuration cache, for the mapping between the GraphQL query, and the component model that resolves it
 
 ---
 
-It is advised to have this module enabled, because it lessens the amount of work required by the server to resolve a query, speeding up its execution.
+This module improves performance, by storing to disk the component model required by the GraphQL server to resolve a query.
 
-This module must be disabled for development.
+The first time a query is requested, the component model is calculated and stored. From the second time onwards, it is directly retrieved from disk, thus speeding up the resolution of the query.
