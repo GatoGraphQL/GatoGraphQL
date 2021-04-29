@@ -653,7 +653,7 @@ class PluginConfiguration
             if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
-                $containerConfigurationCacheDirectory = PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'pop-cache';
+                $containerConfigurationCacheDirectory = PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'service-containers';
             }
             self::$containerCacheConfigurationCache = [
                 $cacheContainerConfiguration,
