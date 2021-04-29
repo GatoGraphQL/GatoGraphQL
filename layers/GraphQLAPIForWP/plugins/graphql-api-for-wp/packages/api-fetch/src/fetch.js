@@ -17,11 +17,7 @@ import { __ } from '@wordpress/i18n';
  * 
  * @return {Object} The response from the GraphQL server
  */
-const fetchGraphQLQuery = (query, variables, endpoint) => {
-	/**
-	 * If the endpoint is not provided, use the admin endpoint GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT
-	 */
-	const endpointURL = endpoint || GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT;
+const fetchGraphQLQuery = (endpointURL, query, variables) => {
 	/**
 	 * If there is no endpoint (eg: not passing param endpoint,
 	 * and running component outside context of WordPress, so GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT is not set)
