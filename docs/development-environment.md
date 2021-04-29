@@ -40,8 +40,8 @@ Caching is set via constant `GRAPHQL_API_CACHE_CONTAINERS` in `wp-config.php`, w
 To define this constant, we can execute the following Composer scripts:
 
 ```bash
-$ composer disable-caching
-$ composer enable-caching
+$ composer disable-cache
+$ composer enable-cache
 ```
 
 ### Purge the cache
