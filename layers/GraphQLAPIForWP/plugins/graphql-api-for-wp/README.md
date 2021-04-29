@@ -67,7 +67,7 @@ Requirements:
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/#supported-php-features)
+Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
 
 ## Modules
 
