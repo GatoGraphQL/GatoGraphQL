@@ -35,7 +35,7 @@ When developing, we must either disable the caching, or purge the cache, to test
 
 ### Enable/disable caching
 
-Caching is set via constant `GRAPHQL_API_CACHE_CONTAINERS` in `wp-config.php`, with either values `true` or `false`.
+Caching is set via constant `GRAPHQL_API_ENABLE_GLOBAL_CACHING` in `wp-config.php`, with either values `true` or `false`.
 
 To define this constant, we can execute the following Composer scripts:
 
