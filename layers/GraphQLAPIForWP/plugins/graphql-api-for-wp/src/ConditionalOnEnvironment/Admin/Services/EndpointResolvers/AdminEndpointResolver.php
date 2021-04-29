@@ -104,7 +104,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 \printf(
                     $scriptTag,
                     'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
-                    $this->endpointHelpers->getAdminEditorGraphQLEndpoint()
+                    $this->endpointHelpers->getAdminFixedSchemaGraphQLEndpoint()
                 );
             }
         });
