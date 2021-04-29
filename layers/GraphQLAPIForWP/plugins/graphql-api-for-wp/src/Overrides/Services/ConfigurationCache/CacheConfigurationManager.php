@@ -35,11 +35,12 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $timestamp .= '_' . $userSettingsManager->getTimestamp();
         // admin/non-admin screens have different services enabled
-        if (\is_admin()) {
+        $suffix = \is_admin() ?
             // The WordPress editor can access the full GraphQL schema,
             // including "unrestricted" admin fields, so cache it individually
-            $timestamp .= '_' . ($this->endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'editor' : 'admin');
-        }
+            'a' . ($this->endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
+            : 'c';
+        $timestamp .= '_' . $suffix;
         return $timestamp;
     }
 
