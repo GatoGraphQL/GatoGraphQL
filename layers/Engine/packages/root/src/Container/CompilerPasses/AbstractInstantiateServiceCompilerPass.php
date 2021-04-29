@@ -9,6 +9,8 @@ use PoP\Root\Container\ServiceInstantiatorInterface;
 
 abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPass
 {
+    use AutoconfigurableServicesCompilerPassTrait;
+
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         $serviceInstantiatorDefinition = $containerBuilderWrapper->getDefinition(ServiceInstantiatorInterface::class);
@@ -20,10 +22,15 @@ abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPa
                 continue;
             }
 
-            $serviceInstantiatorDefinition->addMethodCall(
-                'addService',
-                [$this->createReference($definitionID)]
-            );
+            $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
+            if (!$onlyProcessAutoconfiguredServices
+                || ($onlyProcessAutoconfiguredServices && $definition->isAutoconfigured())
+            ) {
+                $serviceInstantiatorDefinition->addMethodCall(
+                    'addService',
+                    [$this->createReference($definitionID)]
+                );
+            }
         }
     }
 

@@ -8,6 +8,8 @@ use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
 abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCompilerPass
 {
+    use AutoconfigurableServicesCompilerPassTrait;
+
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         $registryDefinition = $containerBuilderWrapper->getDefinition($this->getRegistryServiceDefinition());
@@ -26,14 +28,19 @@ abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCom
                 continue;
             }
 
-            // Register the service in the corresponding registry
-            $registryDefinition->addMethodCall(
-                $this->getRegistryMethodCallName(),
-                [
-                    $this->createReference($definitionID),
-                    $definitionID
-                ]
-            );
+            $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
+            if (!$onlyProcessAutoconfiguredServices
+                || ($onlyProcessAutoconfiguredServices && $definition->isAutoconfigured())
+            ) {
+                // Register the service in the corresponding registry
+                $registryDefinition->addMethodCall(
+                    $this->getRegistryMethodCallName(),
+                    [
+                        $this->createReference($definitionID),
+                        $definitionID
+                    ]
+                );
+            }
         }
     }
 

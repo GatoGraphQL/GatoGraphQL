@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface:
         class: \GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManager

@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     persistent_cache:
         class: \PoP\Engine\Cache\Cache

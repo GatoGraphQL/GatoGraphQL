@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoP\Engine\ErrorHandling\ErrorManagerInterface:
         class: \PoP\EngineWP\ErrorHandling\ErrorManager

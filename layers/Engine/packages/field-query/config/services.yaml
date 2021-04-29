@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoP\ComponentModel\Schema\FeedbackMessageStoreInterface:
         class: \PoP\FieldQuery\FeedbackMessageStore

@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     # Change the properties printed for the standard GraphQL response:
     PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter:

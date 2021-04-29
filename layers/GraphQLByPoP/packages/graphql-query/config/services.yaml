@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface:
         class: \GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertor

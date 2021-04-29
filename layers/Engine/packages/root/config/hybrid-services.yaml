@@ -2,6 +2,7 @@ services:
     _defaults:
         public: true
         autowire: true
+        autoconfigure: true
 
     PoP\Root\Container\ServiceInstantiatorInterface:
         class: \PoP\Root\Container\ServiceInstantiator
