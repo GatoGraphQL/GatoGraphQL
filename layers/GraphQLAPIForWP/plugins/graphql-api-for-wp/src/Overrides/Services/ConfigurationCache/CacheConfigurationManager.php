@@ -48,6 +48,6 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
      */
     public function getDirectory(): ?string
     {
-        return PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'symfony-cache';
+        return PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'config-via-symfony-cache';
     }
 }

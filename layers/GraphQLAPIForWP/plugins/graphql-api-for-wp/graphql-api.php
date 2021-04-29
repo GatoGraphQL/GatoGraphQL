@@ -81,7 +81,7 @@ PluginInfo::init([
     'url' => plugin_dir_url(__FILE__),
     /**
      * Where to store the config cache,
-     * for both /service-containers and /symfony-cache
+     * for both /service-containers and /config-via-symfony-cache
      * (config persistent cache: component model configuration + schema)
      */
     'cache-dir' => PluginEnvironment::getCacheDir(),
