@@ -650,7 +650,7 @@ class PluginConfiguration
         if (is_null(self::$containerCacheConfigurationCache)) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
-            if ($cacheContainerConfiguration = PluginEnvironment::cacheContainers()) {
+            if ($cacheContainerConfiguration = PluginEnvironment::isCachingEnabled()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
                 $containerConfigurationCacheDirectory = PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'service-containers';

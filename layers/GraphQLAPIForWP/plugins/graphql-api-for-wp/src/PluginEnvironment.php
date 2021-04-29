@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 
 class PluginEnvironment
 {
-    public const CACHE_CONTAINERS = 'CACHE_CONTAINERS';
+    public const ENABLE_CACHING = 'ENABLE_CACHING';
     public const CACHE_DIR = 'CACHE_DIR';
 
     /**
@@ -16,14 +16,14 @@ class PluginEnvironment
      * or constant in wp-config.php, use it.
      * By default, do cache (also for DEV)
      */
-    public static function cacheContainers(): bool
+    public static function isCachingEnabled(): bool
     {
-        if (getenv(self::CACHE_CONTAINERS) !== false) {
-            return strtolower(getenv(self::CACHE_CONTAINERS)) == "true";
+        if (getenv(self::ENABLE_CACHING) !== false) {
+            return strtolower(getenv(self::ENABLE_CACHING)) == "true";
         }
 
-        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::CACHE_CONTAINERS)) {
-            return PluginConfigurationHelpers::getWPConfigConstantValue(self::CACHE_CONTAINERS);
+        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::ENABLE_CACHING)) {
+            return PluginConfigurationHelpers::getWPConfigConstantValue(self::ENABLE_CACHING);
         }
 
         return true;
