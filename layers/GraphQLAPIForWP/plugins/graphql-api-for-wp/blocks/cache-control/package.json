@@ -20,9 +20,6 @@
 		"@wordpress/i18n": "^3.14.0",
 		"@wordpress/scripts": "^12.1.0",
 		"html-loader": "^1.1.0",
-		"markdown-loader": "^5.1.0",
-		"puppeteer": "^2.1.1",
-		"react-native": "^0.62.2",
-		"typescript": "^3.9.5"
+		"markdown-loader": "^5.1.0"
 	}
 }

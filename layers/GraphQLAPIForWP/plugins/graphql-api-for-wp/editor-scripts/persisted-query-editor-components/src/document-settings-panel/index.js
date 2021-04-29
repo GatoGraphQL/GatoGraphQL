@@ -19,7 +19,6 @@ const guideName = __('Creating Persisted Queries', 'graphql-api');
 const pageFilenames = [
     'welcome-guide',
     'schema-config-options',
-    'lorem-ipsum',
 ]
 /**
  * Component

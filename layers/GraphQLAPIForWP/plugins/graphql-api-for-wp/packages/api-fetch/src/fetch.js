@@ -17,20 +17,17 @@ import { __ } from '@wordpress/i18n';
  * 
  * @return {Object} The response from the GraphQL server
  */
-const fetchGraphQLQuery = (query, variables, endpoint) => {
+const fetchGraphQLQuery = (endpointURL, query, variables) => {
 	/**
-	 * If the endpoint is not provided, use the admin endpoint GRAPHQL_API_ADMIN_ENDPOINT
+	 * Validate the needed data has been provided
 	 */
-	const endpointURL = endpoint || GRAPHQL_API_ADMIN_ENDPOINT;
-	/**
-	 * If there is no endpoint (eg: not passing param endpoint,
-	 * and running component outside context of WordPress, so GRAPHQL_API_ADMIN_ENDPOINT is not set)
-	 * then return an error message
-	 */
-	if (!endpointURL) {
+	if (!endpointURL || !query) {
+		const errorMessage = !endpointURL ?
+			__('No endpoint provided to execute the GraphQL query', 'graphql-api')
+			: __('No GraphQL query provided', 'graphql-api');
 		return  {
 			errors: [ {
-				message: __('No endpoint provided to execute the GraphQL query', 'graphql-api')
+				message: errorMessage
 			} ]
 		};
 	}

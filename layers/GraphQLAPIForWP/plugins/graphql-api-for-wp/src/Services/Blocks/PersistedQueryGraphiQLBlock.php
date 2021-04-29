@@ -28,6 +28,6 @@ class PersistedQueryGraphiQLBlock extends AbstractGraphiQLBlock
                 true
             );
         }
-        return $this->endpointHelpers->getAdminGraphQLEndpoint(true);
+        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint(true);
     }
 }

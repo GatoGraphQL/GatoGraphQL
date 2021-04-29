@@ -8,7 +8,10 @@ import { fetchGraphQLQuery } from '@graphqlapi/api-fetch';
  */
 const controls = {
 	RECEIVE_ROLES( action ) {
-		return fetchGraphQLQuery( action.query );
+		return fetchGraphQLQuery(
+			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
+			action.query
+		);
 	},
 };
 
