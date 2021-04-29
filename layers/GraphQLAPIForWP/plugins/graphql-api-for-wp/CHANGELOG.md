@@ -17,6 +17,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
 - Composable directives
 - Cache is saved under the plugin folder
+- Split the GraphQL endpoint for accessing data for the WordPress editor into two:
+  1. `GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
+  2. `GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT`
 
 ### Backwards-breaking changes:
 
