@@ -57,9 +57,9 @@ class CacheFunctionalityModuleResolver extends AbstractCacheFunctionalityModuleR
         switch ($module) {
             case self::CONFIGURATION_CACHE:
                 /**
-                 * Caching is enabled
+                 * Caching is enabled only if global caching is enabled
                  */
-                return PluginEnvironment::cacheContainers();
+                return PluginEnvironment::enableGlobalCaching();
         }
         return parent::areRequirementsSatisfied($module);
     }
