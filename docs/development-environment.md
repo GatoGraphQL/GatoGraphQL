@@ -31,7 +31,7 @@ By default, the DEV webserver will have global caching enabled. Cached elements 
 2. The generated configuration, which maps the component model to queries (when module [Configuration Cache](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/en/modules/configuration-cache.md) is enabled)
 3. The calculated GraphQL schema (when module [Schema Cache](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/en/modules/schema-cache.md) is enabled)
 
-When developing, we must either disable the global caching, or purge the cache after doing some change, to test the updated code.
+When developing, we must either disable the caching, or purge the cache after doing some change, to test the updated code.
 
 ### Enable/disable caching
 
@@ -40,8 +40,8 @@ Caching is set via constant `GRAPHQL_API_ENABLE_CACHING` in `wp-config.php`, wit
 To define this constant, we can execute the following Composer scripts:
 
 ```bash
-$ composer disable-global-caching
-$ composer enable-global-caching
+$ composer disable-caching
+$ composer enable-caching
 ```
 
 ### Purge the cache

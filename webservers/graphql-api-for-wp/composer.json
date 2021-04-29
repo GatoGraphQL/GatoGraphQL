@@ -73,8 +73,8 @@
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json');\""
         ],
         "log-server-errors": "lando logs -t -f | grep \"error\"",
-        "enable-global-caching": "lando wp config set GRAPHQL_API_ENABLE_CACHING true --raw --path=wordpress",
-        "disable-global-caching": "lando wp config set GRAPHQL_API_ENABLE_CACHING false --raw --path=wordpress",
+        "enable-caching": "lando wp config set GRAPHQL_API_ENABLE_CACHING true --raw --path=wordpress",
+        "disable-caching": "lando wp config set GRAPHQL_API_ENABLE_CACHING false --raw --path=wordpress",
         "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/cache\""
     }
 }
