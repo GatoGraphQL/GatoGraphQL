@@ -81,23 +81,29 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
                 /**
                  * The endpoint against which to execute GraphQL queries on the admin.
-                 * This GraphQL schema is modified by user preferences
-                 * (eg: Nested mutations enabled or not, Schema namespaced or not, etc)
+                 * This GraphQL schema is modified by user preferences:
+                 * - Disabled types/directives are not in the schema
+                 * - Nested mutations enabled or not
+                 * - Schema namespaced or not
+                 * - etc
                  */
                 \printf(
                     $scriptTag,
-                    'GRAPHQL_API_ADMIN_ENDPOINT',
+                    'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
                     $this->endpointHelpers->getAdminGraphQLEndpoint()
                 );
                 /**
                  * The endpoint against which to execute GraphQL queries on the WordPress editor,
-                 * for Gutenberg blocks which require some field that must always be enabled.
-                 * This GraphQL schema is not modified by user preferences,
-                 * and it contains the "unrestricted" admin fields
+                 * for Gutenberg blocks which require some field that must necessarily be enabled.
+                 * This GraphQL schema is not modified by user preferences:
+                 * - All types/directives are always in the schema
+                 * - The "unrestricted" admin fields are in the schema
+                 * - Nested mutations enabled, without removing the redundant fields in the Root
+                 * - No namespacing
                  */
                 \printf(
                     $scriptTag,
-                    'GRAPHQL_API_ADMINEDITOR_ENDPOINT',
+                    'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
                     $this->endpointHelpers->getAdminEditorGraphQLEndpoint()
                 );
             }
