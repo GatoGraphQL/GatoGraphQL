@@ -26,7 +26,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
@@ -1042,7 +1041,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         // By default, execute only if the module is targeted for execution and doing POST
         $vars = ApplicationState::getVars();
-        return doingPost() && $vars['actionpath'] == ModulePathHelpersFacade::getInstance()->getStringifiedModulePropagationCurrentPath($module);
+        return doingPost() && $vars['actionpath'] == $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getDataloadSource(array $module, array &$props): string
@@ -1051,7 +1050,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $modulePaths = $this->instanceManager->getInstance(ModulePaths::class);
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
-        $stringified_module_propagation_current_path = ModulePathHelpersFacade::getInstance()->getStringifiedModulePropagationCurrentPath($module);
+        $stringified_module_propagation_current_path = $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
         $ret = GeneralUtils::addQueryArgs([
             ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
             ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
@@ -1069,7 +1068,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
             foreach ($extra_module_paths as $modulepath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => ModulePathHelpersFacade::getInstance()->stringifyModulePath($modulepath),
+                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => $this->modulePathHelpers->stringifyModulePath($modulepath),
                 ], $ret);
             }
         }
