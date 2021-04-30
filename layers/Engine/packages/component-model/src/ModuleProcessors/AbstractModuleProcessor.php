@@ -28,7 +28,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
@@ -124,12 +123,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         );
 
         // Propagate
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $submodules = $this->getAllSubmodules($module);
-        $submodules = $modulefilter_manager->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->moduleFilterManager->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $modulefilter_manager->prepareForPropagation($module, $props);
+        $this->moduleFilterManager->prepareForPropagation($module, $props);
         if ($submodules) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
             foreach ($submodules as $submodule) {
@@ -147,7 +145,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
     public function initModelPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
@@ -574,8 +572,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter_manager->prepareForPropagation($module, $props);
+        $this->moduleFilterManager->prepareForPropagation($module, $props);
         foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
             // Only modules which do not load data
@@ -606,7 +603,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         foreach ($submodules as $submodule) {
             $moduleprocessor_manager->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
     public function getDatasetDatabaseKeys(array $module, array &$props): array
@@ -1116,8 +1113,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // Exclude the subcomponent modules here
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter_manager->prepareForPropagation($module, $props);
+        $this->moduleFilterManager->prepareForPropagation($module, $props);
         if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-submodules must have their data-fields added under entry "conditional-data-fields"
@@ -1198,7 +1194,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
             }
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props)
@@ -1218,8 +1214,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter_manager->prepareForPropagation($module, $props);
+        $this->moduleFilterManager->prepareForPropagation($module, $props);
         foreach ($domainSwitchingSubmodules as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_modules_data_properties = array(
                 'data-fields' => array(),
@@ -1262,7 +1257,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 );
             }
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
 
