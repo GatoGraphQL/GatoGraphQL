@@ -59,9 +59,8 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
     // protected function executeForm(array &$data_properties): array
     // {
     //     $mutationResolverClass = $this->getMutationResolverClass();
-    //     $instanceManager = InstanceManagerFacade::getInstance();
     //     /** @var MutationResolverInterface */
-    //     $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+    //     $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
     //     $form_data = $this->getFormData();
     //     $errorType = $mutationResolver->getErrorType();
     //     $errorTypeKeys = [

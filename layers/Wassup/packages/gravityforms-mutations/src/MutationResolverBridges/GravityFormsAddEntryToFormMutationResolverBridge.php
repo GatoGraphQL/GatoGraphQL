@@ -9,7 +9,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 
@@ -60,9 +59,8 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     public function execute(array &$data_properties): ?array
     {
         // $mutationResolverClass = $this->getMutationResolverClass();
-        // $instanceManager = InstanceManagerFacade::getInstance();
         // /** @var MutationResolverInterface */
-        // $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+        // $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
         // $form_data = $this->getFormData();
         // $errorstrings = $errorcodes = array();
         // if ($errors = $mutationResolver->validateErrors($form_data)) {
@@ -75,9 +73,8 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // }
         // $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
         $executed = parent::execute($data_properties);
-
-        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-        $execution_response = $gd_dataload_actionexecution_manager->getResult(get_called_class());
+        
+        $execution_response = $this->mutationResolutionManager->getResult(get_called_class());
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
