@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldInterfaceResolvers;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverTrait;
@@ -19,6 +20,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,
+        protected NameResolverInterface $nameResolver,
     ) {
     }
 

@@ -8,7 +8,6 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoP\ComponentModel\FieldInterfaceResolvers\EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
@@ -115,7 +114,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                                 $this->translationAPI->__('Date format, as defined in %s', 'customposts'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );
