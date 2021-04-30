@@ -4,8 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DataStructure;
 
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {
+    function __construct(
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+    ) {
+    }
+
     public function getFormattedData($data)
     {
         return $data;
