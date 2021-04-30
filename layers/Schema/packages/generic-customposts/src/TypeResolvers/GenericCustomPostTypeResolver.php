@@ -17,8 +17,7 @@ class GenericCustomPostTypeResolver extends AbstractCustomPostTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Any custom post, with or without its own type for the schema', 'customposts');
+        return $this->translationAPI->__('Any custom post, with or without its own type for the schema', 'customposts');
     }
 
     public function getTypeDataLoaderClass(): string

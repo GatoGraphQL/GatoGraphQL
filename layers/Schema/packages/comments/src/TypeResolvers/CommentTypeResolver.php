@@ -17,8 +17,7 @@ class CommentTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Comments added to posts', 'comments');
+        return $this->translationAPI->__('Comments added to posts', 'comments');
     }
 
     public function getID(object $resultItem): string | int

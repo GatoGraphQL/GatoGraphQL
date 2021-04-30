@@ -18,8 +18,7 @@ class LocationTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a location entity, with a name, address and coordinates', 'locations');
+        return $this->translationAPI->__('Representation of a location entity, with a name, address and coordinates', 'locations');
     }
 
     public function getID(object $resultItem): string | int

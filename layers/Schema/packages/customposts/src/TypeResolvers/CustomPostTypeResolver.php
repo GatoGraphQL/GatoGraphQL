@@ -23,8 +23,7 @@ class CustomPostTypeResolver extends AbstractCustomPostTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a custom post', 'customposts');
+        return $this->translationAPI->__('Representation of a custom post', 'customposts');
     }
 
     public function getTypeDataLoaderClass(): string

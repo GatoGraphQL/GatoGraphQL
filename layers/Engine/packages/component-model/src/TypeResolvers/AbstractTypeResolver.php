@@ -225,7 +225,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        $translationAPI = TranslationAPIFacade::getInstance();
         /**
         * All directives are placed somewhere in the pipeline. There are 5 positions:
         * 1. At the beginning
@@ -261,7 +260,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             foreach ($directiveSchemaErrors as $directiveSchemaError) {
                 $directive = $directiveSchemaError[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    $fields = implode($translationAPI->__(', '), $directiveFields);
+                    $fields = implode($this->translationAPI->__(', '), $directiveFields);
                     $schemaErrors[] = [
                         Tokens::PATH => array_merge([$fields], $directiveSchemaError[Tokens::PATH]),
                         Tokens::MESSAGE => $directiveSchemaError[Tokens::MESSAGE],
@@ -273,7 +272,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             foreach ($directiveSchemaWarnings as $directiveSchemaWarning) {
                 $directive = $directiveSchemaWarning[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    $fields = implode($translationAPI->__(', '), $directiveFields);
+                    $fields = implode($this->translationAPI->__(', '), $directiveFields);
                     $schemaWarnings[] = [
                         Tokens::PATH => array_merge([$fields], $directiveSchemaWarning[Tokens::PATH]),
                         Tokens::MESSAGE => $directiveSchemaWarning[Tokens::MESSAGE],
@@ -285,7 +284,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             foreach ($directiveSchemaDeprecations as $directiveSchemaDeprecation) {
                 $directive = $directiveSchemaDeprecation[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    $fields = implode($translationAPI->__(', '), $directiveFields);
+                    $fields = implode($this->translationAPI->__(', '), $directiveFields);
                     $schemaDeprecations[] = [
                         Tokens::PATH => array_merge([$fields], $directiveSchemaDeprecation[Tokens::PATH]),
                         Tokens::MESSAGE => $directiveSchemaDeprecation[Tokens::MESSAGE],
@@ -297,7 +296,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             foreach ($directiveSchemaNotices as $directiveSchemaNotice) {
                 $directive = $directiveSchemaNotice[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    $fields = implode($translationAPI->__(', '), $directiveFields);
+                    $fields = implode($this->translationAPI->__(', '), $directiveFields);
                     $schemaNotices[] = [
                         Tokens::PATH => array_merge([$fields], $directiveSchemaNotice[Tokens::PATH]),
                         Tokens::MESSAGE => $directiveSchemaNotice[Tokens::MESSAGE],
@@ -309,7 +308,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             foreach ($directiveSchemaTraces as $directiveSchemaTrace) {
                 $directive = $directiveSchemaTrace[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
-                    $fields = implode($translationAPI->__(', '), $directiveFields);
+                    $fields = implode($this->translationAPI->__(', '), $directiveFields);
                     $schemaTraces[] = [
                         Tokens::PATH => array_merge([$fields], $directiveSchemaTrace[Tokens::PATH]),
                         Tokens::MESSAGE => $directiveSchemaTrace[Tokens::MESSAGE],
@@ -386,13 +385,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
 
         // Check if, once a directive fails, the continuing directives must execute or not
         $stopDirectivePipelineExecutionIfDirectiveFailed = Environment::stopDirectivePipelineExecutionIfDirectiveFailed();
         if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-            $stopDirectivePipelineExecutionPlaceholder = $translationAPI->__('Because directive \'%s\' failed, the succeeding directives in the pipeline have not been executed', 'pop-component-model');
+            $stopDirectivePipelineExecutionPlaceholder = $this->translationAPI->__('Because directive \'%s\' failed, the succeeding directives in the pipeline have not been executed', 'pop-component-model');
         }
 
         $instances = [];
@@ -431,7 +429,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $translationAPI->__('No DirectiveResolver resolves directive with name \'%s\'', 'pop-component-model'),
+                        $this->translationAPI->__('No DirectiveResolver resolves directive with name \'%s\'', 'pop-component-model'),
                         $directiveName
                     ),
                 ];
@@ -453,11 +451,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
+                        $this->translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
                         $directiveName,
                         json_encode($directiveArgs),
                         implode(
-                            $translationAPI->__('\', \'', 'pop-component-model'),
+                            $this->translationAPI->__('\', \'', 'pop-component-model'),
                             $fieldDirectiveFields[$fieldDirective]
                         )
                     ),
@@ -481,7 +479,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
+                            $this->translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
                             $directiveName,
                             json_encode($directiveArgs),
                             $field
@@ -628,7 +626,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
+                            $this->translationAPI->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
                             $fieldDirective,
                             implode('\', \'', $alreadyProcessingFields)
                         ),
@@ -718,11 +716,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function getUnresolvedResultItemIDError(string | int $resultItemID)
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
-                $translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
+                $this->translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getTypeOutputName(),
                 $resultItemID
             )
@@ -748,7 +745,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaTraces
     ): array {
         $instanceManager = InstanceManagerFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
 
         // Obtain the data for the required object IDs
         $resultIDItems = [];
@@ -774,7 +770,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $failedFields = $ids_data_fields[$unresolvedResultItemID]['direct'] ?? [];
             // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             $schemaErrors[] = [
-                Tokens::PATH => [implode($translationAPI->__('\', \''), $failedFields)],
+                Tokens::PATH => [implode($this->translationAPI->__('\', \''), $failedFields)],
                 Tokens::MESSAGE => $error->getErrorMessage(),
             ];
 
@@ -1180,14 +1176,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
 
         // If we reach here, no fieldResolver processes this field, which is an error
-        $translationAPI = TranslationAPIFacade::getInstance();
         /**
          * If the error happened from requesting a version that doesn't exist, show an appropriate error message
          */
         if (Environment::enableSemanticVersionConstraints()) {
             if ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null) {
                 $errorMessage = sprintf(
-                    $translationAPI->__(
+                    $this->translationAPI->__(
                         'No FieldResolver resolves field \'%s\' and version constraint \'%s\' for type \'%s\'',
                         'pop-component-model'
                     ),
@@ -1199,7 +1194,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
         if (!isset($errorMessage)) {
             $errorMessage = sprintf(
-                $translationAPI->__(
+                $this->translationAPI->__(
                     'No FieldResolver resolves field \'%s\' for type \'%s\'',
                     'pop-component-model'
                 ),

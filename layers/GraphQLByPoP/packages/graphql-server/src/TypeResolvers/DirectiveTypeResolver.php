@@ -17,8 +17,7 @@ class DirectiveTypeResolver extends AbstractIntrospectionTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('A GraphQL directive in the data graph', 'graphql-server');
+        return $this->translationAPI->__('A GraphQL directive in the data graph', 'graphql-server');
     }
 
     public function getID(object $resultItem): string | int

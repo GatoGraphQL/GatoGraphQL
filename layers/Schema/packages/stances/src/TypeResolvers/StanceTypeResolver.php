@@ -18,8 +18,7 @@ class StanceTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('A stance by the user (from among “positive”, “neutral” or “negative”) and why', 'stances');
+        return $this->translationAPI->__('A stance by the user (from among “positive”, “neutral” or “negative”) and why', 'stances');
     }
 
     public function getID(object $resultItem): string | int
