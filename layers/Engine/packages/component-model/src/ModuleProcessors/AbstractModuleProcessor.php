@@ -8,6 +8,7 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\DataloadUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Constants\Props;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
@@ -54,6 +55,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         protected ModulePathHelpersInterface $modulePathHelpers,
         protected ModuleFilterManagerInterface $moduleFilterManager,
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected CMSServiceInterface $cmsService,
     ) {
     }
 
