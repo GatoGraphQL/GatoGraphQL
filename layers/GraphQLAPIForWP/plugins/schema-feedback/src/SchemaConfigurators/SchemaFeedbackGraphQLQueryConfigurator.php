@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
-use PoP\SchemaFeedbackByDirective\Facades\SchemaFeedbackManagerFacade;
+use PoP\ConfigurableSchemaFeedback\Facades\SchemaFeedbackManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 
 class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
