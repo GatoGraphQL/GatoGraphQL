@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Facades\ErrorHandling\ErrorHelperFacade;
-use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -47,6 +48,14 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
         $postIDOrError = \wp_insert_post($data);
+        // If the returned ID is 0, the creation failed
+        if ($postIDOrError === 0) {
+            $translationAPI = TranslationAPIFacade::getInstance();
+            return new Error(
+                'add-custompost-error',
+                $translationAPI->__('Could not create the custom post', 'custompost-mutations-wp')
+            );
+        }
         $errorHelper = ErrorHelperFacade::getInstance();
         return $errorHelper->returnResultOrConvertError($postIDOrError);
     }
