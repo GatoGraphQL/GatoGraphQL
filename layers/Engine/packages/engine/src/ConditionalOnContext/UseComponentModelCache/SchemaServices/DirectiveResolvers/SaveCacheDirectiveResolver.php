@@ -72,7 +72,6 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
     ): void {
         $persistentCache = PersistentCacheFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
         $cacheType = CacheTypes::CACHE_DIRECTIVE;
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
@@ -82,7 +81,7 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $dbWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be cached'),
+                            $this->translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be cached'),
                             $fieldOutputKey,
                             $id
                         ),
@@ -100,17 +99,15 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Cache the field value, and retrive from the cache if available', 'engine');
+        return $this->translationAPI->__('Cache the field value, and retrive from the cache if available', 'engine');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'time',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Amount of time, in seconds, that the cache is valid. If not defining this value, the cache has no expiry date', 'engine'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Amount of time, in seconds, that the cache is valid. If not defining this value, the cache has no expiry date', 'engine'),
             ],
         ];
     }

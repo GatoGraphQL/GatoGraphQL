@@ -33,7 +33,6 @@ class UpperCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Convert a string to upper case', 'convert-case-directives');
+        return $this->translationAPI->__('Convert a string to upper case', 'convert-case-directives');
     }
 }

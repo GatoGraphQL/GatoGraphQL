@@ -91,16 +91,14 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $defaultValue = $this->getDefaultValue();
         if (is_null($defaultValue)) {
-            return $translationAPI->__('If the value of the field is `NULL` (or empty), replace it with the value provided under argument \'value\'', 'basic-directives');
+            return $this->translationAPI->__('If the value of the field is `NULL` (or empty), replace it with the value provided under argument \'value\'', 'basic-directives');
         }
-        return $translationAPI->__('If the value of the field is `NULL` (or empty), replace it with either the value provided under argument \'value\', or with a default value configured in the directive resolver', 'basic-directives');
+        return $this->translationAPI->__('If the value of the field is `NULL` (or empty), replace it with either the value provided under argument \'value\', or with a default value configured in the directive resolver', 'basic-directives');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var DefaultConditionEnum
@@ -109,7 +107,7 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
         $schemaDirectiveArg = [
             SchemaDefinition::ARGNAME_NAME => 'value',
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('If the value of the field is `NULL`, replace it with the value from this argument', 'basic-directives'),
+            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('If the value of the field is `NULL`, replace it with the value from this argument', 'basic-directives'),
         ];
         $defaultValue = $this->getDefaultValue();
         if (is_null($defaultValue)) {
@@ -122,7 +120,7 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
             [
                 SchemaDefinition::ARGNAME_NAME => 'condition',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Condition under which using the default value kicks in', 'basic-directives'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Condition under which using the default value kicks in', 'basic-directives'),
                 SchemaDefinition::ARGNAME_ENUM_NAME => $defaultConditionEnum->getName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $defaultConditionEnum->getValues()

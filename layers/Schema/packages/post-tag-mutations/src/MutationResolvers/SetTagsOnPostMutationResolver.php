@@ -18,7 +18,6 @@ class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationR
 
     protected function getEntityName(): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('post', 'post-tag-mutations');
+        return $this->translationAPI->__('post', 'post-tag-mutations');
     }
 }

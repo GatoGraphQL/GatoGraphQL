@@ -33,7 +33,6 @@ class TitleCaseStringDirectiveResolver extends AbstractTransformFieldStringValue
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Convert a string to title case', 'convert-case-directives');
+        return $this->translationAPI->__('Convert a string to title case', 'convert-case-directives');
     }
 }

@@ -283,25 +283,24 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
                 }
             );
             if ($notImplementingInterfaceTypeResolverClasses) {
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $typeInterfaceResolver = $instanceManager->getInstance($typeInterfaceClass);
                 throw new Exception(
                     sprintf(
-                        $translationAPI->__('UnionTypeResolver \'%s\' (\'%s\') must return results implementing interface \'%s\' (\'%s\'), however its following member TypeResolvers do not: \'%s\'', 'component-model'),
+                        $this->translationAPI->__('UnionTypeResolver \'%s\' (\'%s\') must return results implementing interface \'%s\' (\'%s\'), however its following member TypeResolvers do not: \'%s\'', 'component-model'),
                         $this->getMaybeNamespacedTypeName(),
                         get_called_class(),
                         $typeInterfaceResolver->getMaybeNamespacedInterfaceName(),
                         $typeInterfaceClass,
                         implode(
-                            $translationAPI->__('\', \''),
+                            $this->translationAPI->__('\', \''),
                             array_map(
-                                function ($typeResolverClass) use ($instanceManager, $translationAPI) {
+                                function ($typeResolverClass) use ($instanceManager) {
                                     /**
                                      * @var TypeResolverInterface
                                      */
                                     $typeResolver = $instanceManager->getInstance($typeResolverClass);
                                     return sprintf(
-                                        $translationAPI->__('%s (%s)'),
+                                        $this->translationAPI->__('%s (%s)'),
                                         $typeResolver->getMaybeNamespacedTypeName(),
                                         $typeResolverClass
                                     );
@@ -370,11 +369,10 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
 
     protected function getUnresolvedResultItemIDError(string | int $resultItemID)
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
-                $translationAPI->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
+                $this->translationAPI->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
                 (string) $resultItemID
             )
         );
@@ -382,11 +380,10 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
 
     protected function getUnresolvedResultItemError(object $resultItem): Error
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return new Error(
             'unresolved-resultitem',
             sprintf(
-                $translationAPI->__('No TypeResolver resolves object \'%s\'', 'pop-component-model'),
+                $this->translationAPI->__('No TypeResolver resolves object \'%s\'', 'pop-component-model'),
                 json_encode($resultItem)
             )
         );

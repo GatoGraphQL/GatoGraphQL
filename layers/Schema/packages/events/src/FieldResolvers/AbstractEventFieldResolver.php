@@ -47,10 +47,9 @@ abstract class AbstractEventFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'events' => $translationAPI->__('Events', 'events'),
-            'eventCount' => $translationAPI->__('Number of events', 'events'),
+            'events' => $this->translationAPI->__('Events', 'events'),
+            'eventCount' => $this->translationAPI->__('Number of events', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

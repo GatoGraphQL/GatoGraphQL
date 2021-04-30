@@ -35,9 +35,8 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'multilayoutKeys' => $translationAPI->__('', ''),
+            'multilayoutKeys' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

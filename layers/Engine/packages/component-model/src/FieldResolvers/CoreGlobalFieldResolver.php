@@ -49,13 +49,12 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'typeName' => $translationAPI->__('The object\'s type', 'pop-component-model'),
-            'namespace' => $translationAPI->__('The object\'s namespace', 'pop-component-model'),
-            'qualifiedTypeName' => $translationAPI->__('The object\'s namespace + type', 'pop-component-model'),
-            'isType' => $translationAPI->__('Indicate if the object is of a given type', 'pop-component-model'),
-            'implements' => $translationAPI->__('Indicate if the object implements a given interface', 'pop-component-model'),
+            'typeName' => $this->translationAPI->__('The object\'s type', 'pop-component-model'),
+            'namespace' => $this->translationAPI->__('The object\'s namespace', 'pop-component-model'),
+            'qualifiedTypeName' => $this->translationAPI->__('The object\'s namespace + type', 'pop-component-model'),
+            'isType' => $this->translationAPI->__('Indicate if the object is of a given type', 'pop-component-model'),
+            'implements' => $this->translationAPI->__('Indicate if the object implements a given interface', 'pop-component-model'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -63,7 +62,6 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'isType':
                 return array_merge(
@@ -72,7 +70,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'type',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The type name to compare against', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The type name to compare against', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -85,7 +83,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'interface',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The interface name to compare against', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The interface name to compare against', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

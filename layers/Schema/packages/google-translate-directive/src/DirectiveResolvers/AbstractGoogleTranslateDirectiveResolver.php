@@ -92,8 +92,7 @@ abstract class AbstractGoogleTranslateDirectiveResolver extends AbstractTranslat
             case self::PROVIDERS_GOOGLE:
                 // An array with the translations is found under data/translations
                 if (!$response['data']) {
-                    $translationAPI = TranslationAPIFacade::getInstance();
-                    return $translationAPI->__('There was an unidentified error when fetching data from the Google Translate API', 'google-translate-directive');
+                    return $this->translationAPI->__('There was an unidentified error when fetching data from the Google Translate API', 'google-translate-directive');
                 }
         }
         return parent::getErrorMessageFromResponse($provider, $response);

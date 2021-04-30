@@ -54,18 +54,16 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return sprintf(
-            $translationAPI->__('Place the current object\'s data under expression `%s`, making it accessible to fields and directives through helper function `getPropertyFromSelf`', 'component-model'),
+            $this->translationAPI->__('Place the current object\'s data under expression `%s`, making it accessible to fields and directives through helper function `getPropertyFromSelf`', 'component-model'),
             QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
         );
     }
 
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
-            Expressions::NAME_SELF => $translationAPI->__('Object containing all properties for the current object, fetched either in the current or a previous iteration. These properties can be accessed through helper function `getSelfProp`', 'component-model'),
+            Expressions::NAME_SELF => $this->translationAPI->__('Object containing all properties for the current object, fetched either in the current or a previous iteration. These properties can be accessed through helper function `getSelfProp`', 'component-model'),
         ];
     }
 

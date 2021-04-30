@@ -53,11 +53,10 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'src' => $translationAPI->__('Media element URL source', 'pop-media'),
-            'width' => $translationAPI->__('Media element\'s width', 'pop-media'),
-            'height' => $translationAPI->__('Media element\'s height', 'pop-media'),
+            'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
+            'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),
+            'height' => $this->translationAPI->__('Media element\'s height', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -129,7 +128,6 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'src':
@@ -145,12 +143,12 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'size',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Size of the image', 'pop-media'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'device',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Device where to show the image', 'pop-media'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Device where to show the image', 'pop-media'),
                             SchemaDefinition::ARGNAME_ENUM_NAME => $mediaDeviceEnum->getName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 $mediaDeviceEnum->getValues()

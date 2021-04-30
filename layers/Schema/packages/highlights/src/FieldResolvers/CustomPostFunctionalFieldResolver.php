@@ -49,9 +49,8 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'addhighlightURL' => $translationAPI->__('', ''),
+            'addhighlightURL' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

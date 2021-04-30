@@ -30,9 +30,8 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'addComment' => $translationAPI->__('Add a comment to the custom post', 'comment-mutations'),
+            'addComment' => $this->translationAPI->__('Add a comment to the custom post', 'comment-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

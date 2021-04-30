@@ -49,10 +49,9 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'catSlugs' => $translationAPI->__('', ''),
-            'catName' => $translationAPI->__('', ''),
+            'catSlugs' => $this->translationAPI->__('', ''),
+            'catName' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

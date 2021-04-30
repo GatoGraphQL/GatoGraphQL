@@ -40,11 +40,10 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'genericCustomPost' => $translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
-            'genericCustomPosts' => $translationAPI->__('Custom posts', 'generic-customposts'),
-            'genericCustomPostCount' => $translationAPI->__('Number of custom posts', 'generic-customposts'),
+            'genericCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
+            'genericCustomPostCount' => $this->translationAPI->__('Number of custom posts', 'generic-customposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -74,7 +73,6 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'genericCustomPost':
                 return array_merge(
@@ -83,7 +81,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The page ID', 'generic-customposts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page ID', 'generic-customposts'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

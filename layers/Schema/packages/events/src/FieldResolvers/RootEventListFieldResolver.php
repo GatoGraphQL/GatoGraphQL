@@ -18,9 +18,8 @@ class RootEventListFieldResolver extends AbstractEventFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'events' => $translationAPI->__('Events in the site', 'events'),
+            'events' => $this->translationAPI->__('Events in the site', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

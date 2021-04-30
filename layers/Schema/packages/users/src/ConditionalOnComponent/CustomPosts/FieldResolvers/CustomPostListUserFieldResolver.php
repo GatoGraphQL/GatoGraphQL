@@ -18,12 +18,11 @@ class CustomPostListUserFieldResolver extends AbstractCustomPostListFieldResolve
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'customPosts' => $translationAPI->__('Custom posts by the user', 'pop-users'),
-            'customPostCount' => $translationAPI->__('Number of custom posts by the user', 'pop-users'),
-            'unrestrictedCustomPosts' => $translationAPI->__('[Unrestricted] Custom posts by the user', 'pop-users'),
-            'unrestrictedCustomPostCount' => $translationAPI->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
+            'customPosts' => $this->translationAPI->__('Custom posts by the user', 'pop-users'),
+            'customPostCount' => $this->translationAPI->__('Number of custom posts by the user', 'pop-users'),
+            'unrestrictedCustomPosts' => $this->translationAPI->__('[Unrestricted] Custom posts by the user', 'pop-users'),
+            'unrestrictedCustomPostCount' => $this->translationAPI->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

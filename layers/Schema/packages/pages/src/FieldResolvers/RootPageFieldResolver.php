@@ -47,14 +47,13 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'page' => $translationAPI->__('Page with a specific ID', 'pages'),
-            'pages' => $translationAPI->__('Pages', 'pages'),
-            'pageCount' => $translationAPI->__('Number of pages', 'pages'),
-            'unrestrictedPage' => $translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
-            'unrestrictedPages' => $translationAPI->__('[Unrestricted] Pages', 'pages'),
-            'unrestrictedPageCount' => $translationAPI->__('[Unrestricted] Number of pages', 'pages'),
+            'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
+            'pages' => $this->translationAPI->__('Pages', 'pages'),
+            'pageCount' => $this->translationAPI->__('Number of pages', 'pages'),
+            'unrestrictedPage' => $this->translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
+            'unrestrictedPages' => $this->translationAPI->__('[Unrestricted] Pages', 'pages'),
+            'unrestrictedPageCount' => $this->translationAPI->__('[Unrestricted] Number of pages', 'pages'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -89,7 +88,6 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'page':
             case 'unrestrictedPage':
@@ -99,7 +97,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The page ID', 'pages'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The page ID', 'pages'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

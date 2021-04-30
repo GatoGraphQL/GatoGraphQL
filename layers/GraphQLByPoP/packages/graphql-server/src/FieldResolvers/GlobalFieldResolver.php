@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use PoP\API\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 
@@ -39,9 +38,8 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            '__typename' => $translationAPI->__('The object\'s type', 'graphql-server'),
+            '__typename' => $this->translationAPI->__('The object\'s type', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

@@ -18,8 +18,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Fields concerning an entity\'s featured image', 'custompostmedia');
+        return $this->translationAPI->__('Fields concerning an entity\'s featured image', 'custompostmedia');
     }
 
     public function getFieldNamesToImplement(): array
@@ -52,10 +51,9 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'hasFeaturedImage' => $translationAPI->__('Does the custom post have a featured image?', 'custompostmedia'),
-            'featuredImage' => $translationAPI->__('Featured image from the custom post', 'custompostmedia'),
+            'hasFeaturedImage' => $this->translationAPI->__('Does the custom post have a featured image?', 'custompostmedia'),
+            'featuredImage' => $this->translationAPI->__('Featured image from the custom post', 'custompostmedia'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }

@@ -117,34 +117,33 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'action' => $translationAPI->__('', ''),
-            'objectType' => $translationAPI->__('', ''),
-            'objectSubtype' => $translationAPI->__('', ''),
-            'objectName' => $translationAPI->__('', ''),
-            'objectID' => $translationAPI->__('', ''),
-            'userID' => $translationAPI->__('', ''),
-            'websiteURL' => $translationAPI->__('', ''),
-            'userCaps' => $translationAPI->__('', ''),
-            'histIp' => $translationAPI->__('', ''),
-            'histTime' => $translationAPI->__('', ''),
-            'histTimeNogmt' => $translationAPI->__('', ''),
-            'histTimeReadable' => $translationAPI->__('', ''),
-            'status' => $translationAPI->__('', ''),
-            'isStatusRead' => $translationAPI->__('', ''),
-            'isStatusNotRead' => $translationAPI->__('', ''),
-            'markAsReadURL' => $translationAPI->__('', ''),
-            'markAsUnreadURL' => $translationAPI->__('', ''),
-            'icon' => $translationAPI->__('', ''),
-            'url' => $translationAPI->__('', ''),
-            'target' => $translationAPI->__('', ''),
-            'message' => $translationAPI->__('', ''),
-            'isPostNotification' => $translationAPI->__('', ''),
-            'isUserNotification' => $translationAPI->__('', ''),
-            'isCommentNotification' => $translationAPI->__('', ''),
-            'isTaxonomyNotification' => $translationAPI->__('', ''),
-            'isAction' => $translationAPI->__('', ''),
+            'action' => $this->translationAPI->__('', ''),
+            'objectType' => $this->translationAPI->__('', ''),
+            'objectSubtype' => $this->translationAPI->__('', ''),
+            'objectName' => $this->translationAPI->__('', ''),
+            'objectID' => $this->translationAPI->__('', ''),
+            'userID' => $this->translationAPI->__('', ''),
+            'websiteURL' => $this->translationAPI->__('', ''),
+            'userCaps' => $this->translationAPI->__('', ''),
+            'histIp' => $this->translationAPI->__('', ''),
+            'histTime' => $this->translationAPI->__('', ''),
+            'histTimeNogmt' => $this->translationAPI->__('', ''),
+            'histTimeReadable' => $this->translationAPI->__('', ''),
+            'status' => $this->translationAPI->__('', ''),
+            'isStatusRead' => $this->translationAPI->__('', ''),
+            'isStatusNotRead' => $this->translationAPI->__('', ''),
+            'markAsReadURL' => $this->translationAPI->__('', ''),
+            'markAsUnreadURL' => $this->translationAPI->__('', ''),
+            'icon' => $this->translationAPI->__('', ''),
+            'url' => $this->translationAPI->__('', ''),
+            'target' => $this->translationAPI->__('', ''),
+            'message' => $this->translationAPI->__('', ''),
+            'isPostNotification' => $this->translationAPI->__('', ''),
+            'isUserNotification' => $this->translationAPI->__('', ''),
+            'isCommentNotification' => $this->translationAPI->__('', ''),
+            'isTaxonomyNotification' => $this->translationAPI->__('', ''),
+            'isAction' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -152,7 +151,6 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'isAction':
                 return array_merge(
@@ -161,7 +159,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'action',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The action to check against the notification', 'pop-posts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The action to check against the notification', 'pop-posts'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -221,7 +219,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
-                    TranslationAPIFacade::getInstance()->__('%s ago', 'pop-notifications'),
+                    $this->translationAPI->__('%s ago', 'pop-notifications'),
                     \humanTiming($notification->hist_time - ($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600))
                 );
 

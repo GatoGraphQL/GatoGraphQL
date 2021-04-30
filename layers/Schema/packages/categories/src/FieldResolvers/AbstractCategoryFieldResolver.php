@@ -49,14 +49,13 @@ abstract class AbstractCategoryFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'url' => $translationAPI->__('Category URL', 'pop-categories'),
-            'name' => $translationAPI->__('Category', 'pop-categories'),
-            'slug' => $translationAPI->__('Category slug', 'pop-categories'),
-            'description' => $translationAPI->__('Category description', 'pop-categories'),
-            'parent' => $translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
-            'count' => $translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
+            'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
+            'name' => $this->translationAPI->__('Category', 'pop-categories'),
+            'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
+            'description' => $this->translationAPI->__('Category description', 'pop-categories'),
+            'parent' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

@@ -37,18 +37,16 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Duplicate a property in the current object', 'component-model');
+        return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
     }
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'to',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The new property name', 'component-model'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The new property name', 'component-model'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
         ];
@@ -79,7 +77,6 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $copyTo = $this->directiveArgsForSchema['to'];
         foreach ($idsDataFields as $id => $dataFields) {
@@ -89,7 +86,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $dbWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),
+                            $this->translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),
                             $fieldOutputKey,
                             $id,
                             $copyTo

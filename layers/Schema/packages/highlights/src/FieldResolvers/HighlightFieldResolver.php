@@ -59,14 +59,13 @@ class HighlightFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'title' => $translationAPI->__('', ''),
-            'excerpt' => $translationAPI->__('', ''),
-            'content' => $translationAPI->__('', ''),
-            'highlightedpost' => $translationAPI->__('', ''),
-            'highlightedPostURL' => $translationAPI->__('', ''),
-            'highlightedpost' => $translationAPI->__('', ''),
+            'title' => $this->translationAPI->__('', ''),
+            'excerpt' => $this->translationAPI->__('', ''),
+            'content' => $this->translationAPI->__('', ''),
+            'highlightedpost' => $this->translationAPI->__('', ''),
+            'highlightedPostURL' => $this->translationAPI->__('', ''),
+            'highlightedpost' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

@@ -91,13 +91,12 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'name' => $translationAPI->__('Directive\'s name', 'graphql-server'),
-            'description' => $translationAPI->__('Directive\'s description', 'graphql-server'),
-            'args' => $translationAPI->__('Directive\'s arguments', 'graphql-server'),
-            'locations' => $translationAPI->__('The locations where the directive may be placed', 'graphql-server'),
-            'isRepeatable' => $translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
+            'name' => $this->translationAPI->__('Directive\'s name', 'graphql-server'),
+            'description' => $this->translationAPI->__('Directive\'s description', 'graphql-server'),
+            'args' => $this->translationAPI->__('Directive\'s arguments', 'graphql-server'),
+            'locations' => $this->translationAPI->__('The locations where the directive may be placed', 'graphql-server'),
+            'isRepeatable' => $this->translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

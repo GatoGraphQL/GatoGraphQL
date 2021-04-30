@@ -18,8 +18,7 @@ class MenuItemTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
+        return $this->translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
     }
 
     public function getID(object $resultItem): string | int

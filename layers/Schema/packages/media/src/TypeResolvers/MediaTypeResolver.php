@@ -17,8 +17,7 @@ class MediaTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
+        return $this->translationAPI->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
     }
 
     public function getID(object $resultItem): string | int

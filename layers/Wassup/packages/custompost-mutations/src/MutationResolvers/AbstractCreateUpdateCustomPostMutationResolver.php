@@ -24,7 +24,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
 
     protected function addParentCategories()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_Post:add-parent-categories',
             false,
             $this
@@ -51,12 +51,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
 
     protected function getCategoriesErrorMessages()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_Post:categories-validation:error',
             array(
-                'empty-categories' => TranslationAPIFacade::getInstance()->__('The categories have not been set', 'pop-application'),
-                'empty-category' => TranslationAPIFacade::getInstance()->__('The category has not been set', 'pop-application'),
-                'only-one' => TranslationAPIFacade::getInstance()->__('Only one category can be selected', 'pop-application'),
+                'empty-categories' => $this->translationAPI->__('The categories have not been set', 'pop-application'),
+                'empty-category' => $this->translationAPI->__('The category has not been set', 'pop-application'),
+                'only-one' => $this->translationAPI->__('Only one category can be selected', 'pop-application'),
             )
         );
     }
@@ -67,7 +67,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         parent::validateContent($errors, $form_data);
 
         if ($this->supportsTitle() && empty($form_data[MutationInputProperties::TITLE])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The title cannot be empty', 'pop-application');
+            $errors[] = $this->translationAPI->__('The title cannot be empty', 'pop-application');
         }
 
         // Validate the following conditions only if status = pending/publish
@@ -76,11 +76,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         }
 
         if (empty($form_data[MutationInputProperties::CONTENT])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The content cannot be empty', 'pop-application');
+            $errors[] = $this->translationAPI->__('The content cannot be empty', 'pop-application');
         }
 
         if ($this->isFeaturedImageMandatory() && empty($form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The featured image has not been set', 'pop-application');
+            $errors[] = $this->translationAPI->__('The featured image has not been set', 'pop-application');
         }
 
         if ($validateCategories = $this->validateCategories($form_data)) {
@@ -102,7 +102,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         parent::validateUpdateContent($errors, $form_data);
 
         if (isset($form_data[MutationInputProperties::REFERENCES]) && in_array($form_data[MutationInputProperties::ID], $form_data[MutationInputProperties::REFERENCES])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The post cannot be a response to itself', 'pop-postscreation');
+            $errors[] = $this->translationAPI->__('The post cannot be a response to itself', 'pop-postscreation');
         }
     }
 
@@ -116,20 +116,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         if (!in_array($customPostTypeAPI->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
+            $errors[] = $this->translationAPI->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
 
         // Validation below not needed, since this is done in the Checkpoint already
         // // Validate user permission
         // if (!gdCurrentUserCanEdit($customPostID)) {
-        //     $errors[] = TranslationAPIFacade::getInstance()->__('Your user doesn\'t have permission for editing.', 'pop-application');
+        //     $errors[] = $this->translationAPI->__('Your user doesn\'t have permission for editing.', 'pop-application');
         // }
 
         // // The nonce comes directly as a parameter in the request, it's not a form field
         // $nonce = $_REQUEST[POP_INPUTNAME_NONCE];
         // if (!gdVerifyNonce($nonce, GD_NONCE_EDITURL, $customPostID)) {
-        //     $errors[] = TranslationAPIFacade::getInstance()->__('Incorrect URL', 'pop-application');
+        //     $errors[] = $this->translationAPI->__('Incorrect URL', 'pop-application');
         //     return;
         // }
     }

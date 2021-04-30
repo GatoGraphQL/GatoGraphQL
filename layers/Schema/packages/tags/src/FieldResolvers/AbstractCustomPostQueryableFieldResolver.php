@@ -52,11 +52,10 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'tags' => $translationAPI->__('Tags added to this custom post', 'pop-tags'),
-            'tagCount' => $translationAPI->__('Number of tags added to this custom post', 'pop-tags'),
-            'tagNames' => $translationAPI->__('Names of the tags added to this custom post', 'pop-tags'),
+            'tags' => $this->translationAPI->__('Tags added to this custom post', 'pop-tags'),
+            'tagCount' => $this->translationAPI->__('Number of tags added to this custom post', 'pop-tags'),
+            'tagNames' => $this->translationAPI->__('Names of the tags added to this custom post', 'pop-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

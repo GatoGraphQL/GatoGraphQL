@@ -4,25 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use Composer\Semver\Semver;
 use Exception;
+use Composer\Semver\Semver;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\Hooks\HooksAPIInterface;
 use League\Pipeline\StageInterface;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
+use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
 {
@@ -33,6 +36,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
     protected string $directive;
+    protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
     /**
      * @var array<string, array>
      */
@@ -45,7 +50,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * @var array[]
      */
     protected array $nestedDirectivePipelineData = [];
-
+    
     /**
      * The directiveResolvers are NOT instantiated through the service container!
      * Instead, the directive will be instantiated in AbstractTypeResolver:
@@ -66,6 +71,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // If the directive is not provided, then it directly the directive name
         // This allows to instantiate the directive through the DependencyInjection component
         $this->directive = $directive ?? $this->getDirectiveName();
+        // Obtain these services directly from the container, instead of using autowiring
+        $this->translationAPI = TranslationAPIFacade::getInstance();
+        $this->hooksAPI = HooksAPIFacade::getInstance();
     }
 
     /**
@@ -98,7 +106,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
 
         // If it has nestedDirectives, extract them and validate them
@@ -172,7 +179,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 }
                 $schemaErrors[] = [
                     Tokens::PATH => [$this->directive],
-                    Tokens::MESSAGE => $translationAPI->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
+                    Tokens::MESSAGE => $this->translationAPI->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
                 ];
                 return [
                     null, // $validDirective
@@ -553,9 +560,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($typeResolver)) {
-                    $translationAPI = TranslationAPIFacade::getInstance();
                     return sprintf(
-                        $translationAPI->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->translationAPI->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $this->getDirectiveName(),
                         $this->getSchemaDirectiveVersion($typeResolver) ?? '',
                         $versionConstraint
@@ -744,22 +750,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     //     }
     //     // Give an error message for all failed fields
     //     if ($failedFields) {
-    //         $translationAPI = TranslationAPIFacade::getInstance();
     //         $directiveName = $this->getDirectiveName();
     //         $failedFieldNames = array_map(
     //             [$fieldQueryInterpreter, 'getFieldName'],
     //             $failedFields
     //         );
     //         if (count($failedFields) == 1) {
-    //             $message = $translationAPI->__('Directive \'%s\' doesn\'t support field \'%s\' (the only supported field names are: \'%s\')', 'component-model');
+    //             $message = $this->translationAPI->__('Directive \'%s\' doesn\'t support field \'%s\' (the only supported field names are: \'%s\')', 'component-model');
     //         } else {
-    //             $message = $translationAPI->__('Directive \'%s\' doesn\'t support fields \'%s\' (the only supported field names are: \'%s\')', 'component-model');
+    //             $message = $this->translationAPI->__('Directive \'%s\' doesn\'t support fields \'%s\' (the only supported field names are: \'%s\')', 'component-model');
     //         }
     //         $failureMessage = sprintf(
     //             $message,
     //             $directiveName,
-    //             implode($translationAPI->__('\', \''), $failedFieldNames),
-    //             implode($translationAPI->__('\', \''), $directiveSupportedFieldNames)
+    //             implode($this->translationAPI->__('\', \''), $failedFieldNames),
+    //             implode($this->translationAPI->__('\', \''), $directiveSupportedFieldNames)
     //         );
     //         $this->processFailure($failureMessage, $failedFields, $idsDataFields, $schemaErrors, $schemaWarnings);
     //     }
@@ -800,7 +805,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // Show the failureMessage either as error or as warning
         // $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
         $directiveName = $this->getDirectiveName();
         // $failedFieldNames = array_map(
         //     [$fieldQueryInterpreter, 'getFieldName'],
@@ -808,31 +812,31 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // );
         if ($removeFieldIfDirectiveFailed) {
             if (count($failedFields) == 1) {
-                $message = $translationAPI->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
+                $message = $this->translationAPI->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
             } else {
-                $message = $translationAPI->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
+                $message = $this->translationAPI->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             }
             $schemaErrors[] = [
-                Tokens::PATH => [implode($translationAPI->__('\', \''), $failedFields), $this->directive],
+                Tokens::PATH => [implode($this->translationAPI->__('\', \''), $failedFields), $this->directive],
                 Tokens::MESSAGE => sprintf(
                     $message,
                     $failureMessage,
-                    implode($translationAPI->__('\', \''), $failedFields)
+                    implode($this->translationAPI->__('\', \''), $failedFields)
                 ),
             ];
         } else {
             if (count($failedFields) == 1) {
-                $message = $translationAPI->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
+                $message = $this->translationAPI->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
             } else {
-                $message = $translationAPI->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
+                $message = $this->translationAPI->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
             }
             $schemaWarnings[] = [
-                Tokens::PATH => [implode($translationAPI->__('\', \''), $failedFields), $this->directive],
+                Tokens::PATH => [implode($this->translationAPI->__('\', \''), $failedFields), $this->directive],
                 Tokens::MESSAGE => sprintf(
                     $message,
                     $failureMessage,
                     $directiveName,
-                    implode($translationAPI->__('\', \''), $failedFields)
+                    implode($this->translationAPI->__('\', \''), $failedFields)
                 ),
             ];
         }

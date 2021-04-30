@@ -35,10 +35,9 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             return $errors;
         }
 
-        $translationAPI = TranslationAPIFacade::getInstance();
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
             $errors[] = sprintf(
-                $translationAPI->__('The %s ID is missing.', 'custompost-tag-mutations'),
+                $this->translationAPI->__('The %s ID is missing.', 'custompost-tag-mutations'),
                 $this->getEntityName()
             );
         }
@@ -47,7 +46,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     protected function getEntityName(): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('custom post', 'custompost-tag-mutations');
+        return $this->translationAPI->__('custom post', 'custompost-tag-mutations');
     }
 }

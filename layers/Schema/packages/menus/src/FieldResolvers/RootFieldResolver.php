@@ -28,9 +28,8 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'menu' => $translationAPI->__('Get a menu', 'menus'),
+            'menu' => $this->translationAPI->__('Get a menu', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,14 +44,13 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'menu':
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => 'id',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The ID of the menu', 'menus'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The ID of the menu', 'menus'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                 ];

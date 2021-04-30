@@ -29,7 +29,7 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
 
         // Validate for any status (even "draft"), since without date EM doesn't create the Event
         if (empty(array_filter(array_values($form_data['when'])))) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The dates/time cannot be empty', 'poptheme-wassup');
+            $errors[] = $this->translationAPI->__('The dates/time cannot be empty', 'poptheme-wassup');
         }
     }
 
@@ -72,10 +72,9 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
         $EM_Event = new \EM_Event($post_data['id'], 'post_id');
         $eventPostID = $this->save($EM_Event, $post_data);
         if ($eventPostID === 0) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             return new Error(
                 'update-event',
-                $translationAPI->__('There was an error updating the event', 'event-mutations')
+                $this->translationAPI->__('There was an error updating the event', 'event-mutations')
             );
         }
         return $eventPostID;
@@ -86,10 +85,9 @@ abstract class AbstractCreateUpdateEventMutationResolver extends AbstractCreateU
         $EM_Event = new \EM_Event();
         $eventPostID = $this->save($EM_Event, $post_data);
         if ($eventPostID === 0) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             return new Error(
                 'create-event',
-                $translationAPI->__('There was an error creating the event', 'event-mutations')
+                $this->translationAPI->__('There was an error creating the event', 'event-mutations')
             );
         }
         return $eventPostID;

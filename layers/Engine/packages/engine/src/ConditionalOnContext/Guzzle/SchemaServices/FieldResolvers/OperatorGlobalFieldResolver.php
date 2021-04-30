@@ -32,10 +32,9 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'getJSON' => $translationAPI->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
-            'getAsyncJSON' => $translationAPI->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
+            'getJSON' => $this->translationAPI->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
+            'getAsyncJSON' => $this->translationAPI->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -43,7 +42,6 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'getJSON':
                 return array_merge(
@@ -52,7 +50,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'url',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_URL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The URL to request', 'pop-component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The URL to request', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -64,7 +62,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'urls',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_URL),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

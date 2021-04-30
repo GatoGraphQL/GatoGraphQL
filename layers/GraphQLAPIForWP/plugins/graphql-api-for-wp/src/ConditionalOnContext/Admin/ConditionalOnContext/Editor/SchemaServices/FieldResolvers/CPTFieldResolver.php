@@ -66,12 +66,11 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $ret = match($fieldName) {
-            'accessControlLists' => $translationAPI->__('Access Control Lists', 'graphql-api'),
-            'cacheControlLists' => $translationAPI->__('Cache Control Lists', 'graphql-api'),
-            'fieldDeprecationLists' => $translationAPI->__('Field Deprecation Lists', 'graphql-api'),
-            'schemaConfigurations' => $translationAPI->__('Schema Configurations', 'graphql-api'),
+            'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
+            'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
+            'fieldDeprecationLists' => $this->translationAPI->__('Field Deprecation Lists', 'graphql-api'),
+            'schemaConfigurations' => $this->translationAPI->__('Schema Configurations', 'graphql-api'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
         return $ret;

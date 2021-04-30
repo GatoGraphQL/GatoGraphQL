@@ -18,9 +18,8 @@ class LocationPostUserFieldResolver extends AbstractLocationPostFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'locationposts' => $translationAPI->__('Location Posts by the user', 'locationposts'),
+            'locationposts' => $this->translationAPI->__('Location Posts by the user', 'locationposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

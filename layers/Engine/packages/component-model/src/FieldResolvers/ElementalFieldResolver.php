@@ -56,10 +56,9 @@ class ElementalFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'id' => $translationAPI->__('The object ID', 'pop-component-model'),
-            'self' => $translationAPI->__('The same object', 'pop-component-model'),
+            'id' => $this->translationAPI->__('The object ID', 'pop-component-model'),
+            'self' => $this->translationAPI->__('The same object', 'pop-component-model'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

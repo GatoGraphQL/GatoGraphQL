@@ -33,17 +33,17 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
         // Either provide the customPostID, or retrieve it from the parent comment
         if ((!isset($form_data[MutationInputProperties::CUSTOMPOST_ID]) || !$form_data[MutationInputProperties::CUSTOMPOST_ID]) && (!isset($form_data[MutationInputProperties::PARENT_COMMENT_ID]) || !$form_data[MutationInputProperties::PARENT_COMMENT_ID])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The custom post ID is missing.', 'comment-mutations');
+            $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'comment-mutations');
         }
         if (!isset($form_data[MutationInputProperties::COMMENT]) || !$form_data[MutationInputProperties::COMMENT]) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The comment is empty.', 'comment-mutations');
+            $errors[] = $this->translationAPI->__('The comment is empty.', 'comment-mutations');
         }
         return $errors;
     }
 
     protected function additionals(string | int $comment_id, array $form_data): void
     {
-        HooksAPIFacade::getInstance()->doAction('gd_addcomment', $comment_id, $form_data);
+        $this->hooksAPI->doAction('gd_addcomment', $comment_id, $form_data);
     }
 
     protected function getCommentData(array $form_data): array

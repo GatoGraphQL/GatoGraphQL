@@ -25,10 +25,9 @@ abstract class EventTagFieldResolver extends AbstractEventFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'events' => $translationAPI->__('Events which contain this tag', 'events'),
-            'eventCount' => $translationAPI->__('Number of events which contain this tag', 'events'),
+            'events' => $this->translationAPI->__('Events which contain this tag', 'events'),
+            'eventCount' => $this->translationAPI->__('Number of events which contain this tag', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

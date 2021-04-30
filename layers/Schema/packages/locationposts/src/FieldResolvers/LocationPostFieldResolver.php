@@ -54,11 +54,10 @@ class LocationPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'categories' => $translationAPI->__('', ''),
-            'catSlugs' => $translationAPI->__('', ''),
-            'catName' => $translationAPI->__('', ''),
+            'categories' => $this->translationAPI->__('', ''),
+            'catSlugs' => $this->translationAPI->__('', ''),
+            'catName' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

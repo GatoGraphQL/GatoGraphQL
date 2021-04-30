@@ -18,12 +18,11 @@ class PostTagListFieldResolver extends AbstractPostFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'posts' => $translationAPI->__('Posts which contain this tag', 'pop-taxonomies'),
-            'postCount' => $translationAPI->__('Number of posts which contain this tag', 'pop-taxonomies'),
-            'unrestrictedPosts' => $translationAPI->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
-            'unrestrictedPostCount' => $translationAPI->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
+            'posts' => $this->translationAPI->__('Posts which contain this tag', 'pop-taxonomies'),
+            'postCount' => $this->translationAPI->__('Number of posts which contain this tag', 'pop-taxonomies'),
+            'unrestrictedPosts' => $this->translationAPI->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
+            'unrestrictedPostCount' => $this->translationAPI->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

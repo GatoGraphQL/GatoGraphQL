@@ -25,9 +25,8 @@ abstract class LocationPostTagFieldResolver extends AbstractLocationPostFieldRes
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'locationposts' => $translationAPI->__('Location Posts which contain this tag', 'locationposts'),
+            'locationposts' => $this->translationAPI->__('Location Posts which contain this tag', 'locationposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

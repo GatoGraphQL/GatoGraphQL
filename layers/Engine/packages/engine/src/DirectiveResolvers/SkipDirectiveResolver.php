@@ -55,17 +55,15 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
+        return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'if',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Argument that must evaluate to `false` to include the field value in the output', 'engine'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Argument that must evaluate to `false` to include the field value in the output', 'engine'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
         ];

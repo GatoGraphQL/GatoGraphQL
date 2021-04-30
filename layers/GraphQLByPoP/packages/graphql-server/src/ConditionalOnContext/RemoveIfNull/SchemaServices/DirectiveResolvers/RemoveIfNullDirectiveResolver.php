@@ -234,7 +234,6 @@ class RemoveIfNullDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Remove the field from the response if it is `null`', 'engine');
+        return $this->translationAPI->__('Remove the field from the response if it is `null`', 'engine');
     }
 }

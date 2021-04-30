@@ -14,8 +14,7 @@ abstract class AbstractTagTypeResolver extends AbstractTaxonomyTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a tag, added to a custom post', 'tags');
+        return $this->translationAPI->__('Representation of a tag, added to a custom post', 'tags');
     }
 
     public function getID(object $resultItem): string | int

@@ -17,8 +17,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a page', 'pages');
+        return $this->translationAPI->__('Representation of a page', 'pages');
     }
 
     public function getID(object $resultItem): string | int

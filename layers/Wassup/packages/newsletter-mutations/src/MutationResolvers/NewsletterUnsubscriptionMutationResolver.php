@@ -14,17 +14,17 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         if (empty($form_data['email'])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Email cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Email format is incorrect.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        $placeholder_string = TranslationAPIFacade::getInstance()->__('%s %s', 'pop-genericforms');
-        $makesure_string = TranslationAPIFacade::getInstance()->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
+        $placeholder_string = $this->translationAPI->__('%s %s', 'pop-genericforms');
+        $makesure_string = $this->translationAPI->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
         if (empty($form_data['verificationcode'])) {
             $errors[] = sprintf(
                 $placeholder_string,
-                TranslationAPIFacade::getInstance()->__('The verification code is missing.', 'pop-genericforms'),
+                $this->translationAPI->__('The verification code is missing.', 'pop-genericforms'),
                 $makesure_string
             );
         }
@@ -38,7 +38,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         if ($verificationcode != $form_data['verificationcode']) {
             $errors[] = sprintf(
                 $placeholder_string,
-                TranslationAPIFacade::getInstance()->__('The verification code does not match the email.', 'pop-genericforms'),
+                $this->translationAPI->__('The verification code does not match the email.', 'pop-genericforms'),
                 $makesure_string
             );
         }
@@ -56,7 +56,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('pop_unsubscribe_from_newsletter', $form_data);
+        $this->hooksAPI->doAction('pop_unsubscribe_from_newsletter', $form_data);
     }
 
     /**
@@ -78,16 +78,16 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
-            TranslationAPIFacade::getInstance()->__('[%s]: Newsletter unsubscription', 'pop-genericforms'),
+            $this->translationAPI->__('[%s]: Newsletter unsubscription', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName()
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
         $msg = sprintf(
             '<p>%s</p>',
-            TranslationAPIFacade::getInstance()->__('User unsubscribed from newsletter', 'pop-genericforms')
+            $this->translationAPI->__('User unsubscribed from newsletter', 'pop-genericforms')
         ) . sprintf(
             $placeholder,
-            TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
+            $this->translationAPI->__('Email', 'pop-genericforms'),
             $newsletter_data['email']
         );
 

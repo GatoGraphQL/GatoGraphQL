@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverTrait;
 
 abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface
 {
     use FieldInterfaceSchemaDefinitionResolverTrait;
+
+    function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI
+    ) {
+    }
 
     public function getFieldNamesToResolve(): array
     {

@@ -50,9 +50,8 @@ class TagsCustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'tagNames' => $translationAPI->__('Names of the tags added to this post', 'pop-tags'),
+            'tagNames' => $this->translationAPI->__('Names of the tags added to this post', 'pop-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

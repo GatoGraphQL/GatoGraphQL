@@ -25,7 +25,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
             $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    TranslationAPIFacade::getInstance()->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->translationAPI->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $customPostTypeAPI->getTitle($target_id)
                 );
             }
@@ -39,7 +39,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     protected function additionals($target_id, $form_data)
     {
         parent::additionals($target_id, $form_data);
-        HooksAPIFacade::getInstance()->doAction('gd_downvotepost', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_downvotepost', $target_id, $form_data);
     }
 
     protected function getOppositeInstance()

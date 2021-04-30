@@ -15,7 +15,7 @@ class CreateLocationMutationResolver extends AbstractMutationResolver
     {
         // Allow EM PoP to initialize the field names as it needs them to populate the object in function getPost($validate = true),
         // in file plugins/events-manager/classes/em-location.php
-        HooksAPIFacade::getInstance()->doAction('create_location');
+        $this->hooksAPI->doAction('create_location');
 
         $pluginapi = \PoP_Locations_APIFactory::getInstance();
         $location = $pluginapi->getNewLocationObject();

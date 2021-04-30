@@ -36,10 +36,9 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             $this->getSetTagsFieldName() => sprintf(
-                $translationAPI->__('Set tags on a %s', 'custompost-tag-mutations'),
+                $this->translationAPI->__('Set tags on a %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
         ];
@@ -56,7 +55,6 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case $this->getSetTagsFieldName():
                 return [
@@ -64,7 +62,7 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CUSTOMPOST_ID,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The ID of the %s', 'custompost-tag-mutations'),
+                            $this->translationAPI->__('The ID of the %s', 'custompost-tag-mutations'),
                             $this->getEntityName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
@@ -72,13 +70,13 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The tags to set', 'custompost-tag-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::APPEND,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
                         SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                     ],
                 ];

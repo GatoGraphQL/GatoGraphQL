@@ -60,10 +60,9 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'roles' => $translationAPI->__('User roles', 'user-roles'),
-            'capabilities' => $translationAPI->__('User capabilities', 'user-roles'),
+            'roles' => $this->translationAPI->__('User roles', 'user-roles'),
+            'capabilities' => $this->translationAPI->__('User capabilities', 'user-roles'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

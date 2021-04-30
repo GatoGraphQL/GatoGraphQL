@@ -65,14 +65,13 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
 
     protected function getValidationFailedMessage(TypeResolverInterface $typeResolver, array $failedDataFields): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $errorMessage = $this->isValidatingDirective() ?
-            $translationAPI->__('Validation failed for directives in fields \'%s\'', 'component-model') :
-            $translationAPI->__('Validation failed for fields \'%s\'', 'component-model');
+            $this->translationAPI->__('Validation failed for directives in fields \'%s\'', 'component-model') :
+            $this->translationAPI->__('Validation failed for fields \'%s\'', 'component-model');
         return sprintf(
             $errorMessage,
             implode(
-                $translationAPI->__('\', \''),
+                $this->translationAPI->__('\', \''),
                 $failedDataFields
             )
         );

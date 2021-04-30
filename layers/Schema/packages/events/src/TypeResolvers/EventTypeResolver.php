@@ -18,8 +18,7 @@ class EventTypeResolver extends AbstractCustomPostTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of an event', 'events');
+        return $this->translationAPI->__('Representation of an event', 'events');
     }
 
     // public function getID(object $resultItem): string | int

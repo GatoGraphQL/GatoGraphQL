@@ -17,8 +17,7 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
+        return $this->translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
     }
 
     public function getFieldNamesToImplement(): array
@@ -47,9 +46,8 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'id' => $translationAPI->__('The object\'s unique identifier for its type', 'component-model'),
+            'id' => $this->translationAPI->__('The object\'s unique identifier for its type', 'component-model'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }

@@ -18,12 +18,11 @@ class PostCategoryListFieldResolver extends AbstractPostFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'posts' => $translationAPI->__('Posts which contain this category', 'post-categories'),
-            'postCount' => $translationAPI->__('Number of posts which contain this category', 'post-categories'),
-            'unrestrictedPosts' => $translationAPI->__('[Unrestricted] Posts which contain this category', 'post-categories'),
-            'unrestrictedPostCount' => $translationAPI->__('[Unrestricted] Number of posts which contain this category', 'post-categories'),
+            'posts' => $this->translationAPI->__('Posts which contain this category', 'post-categories'),
+            'postCount' => $this->translationAPI->__('Number of posts which contain this category', 'post-categories'),
+            'unrestrictedPosts' => $this->translationAPI->__('[Unrestricted] Posts which contain this category', 'post-categories'),
+            'unrestrictedPostCount' => $this->translationAPI->__('[Unrestricted] Number of posts which contain this category', 'post-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

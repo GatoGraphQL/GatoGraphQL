@@ -56,17 +56,15 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
+        return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'if',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
         ];

@@ -31,10 +31,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'loginUser' => $translationAPI->__('Log the user in', 'user-state-mutations'),
-            'logoutUser' => $translationAPI->__('Log the user out', 'user-state-mutations'),
+            'loginUser' => $this->translationAPI->__('Log the user in', 'user-state-mutations'),
+            'logoutUser' => $this->translationAPI->__('Log the user out', 'user-state-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -50,20 +49,19 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'loginUser':
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::USERNAME_OR_EMAIL,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The username or email', 'user-state-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The username or email', 'user-state-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::PASSWORD,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The password', 'user-state-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The password', 'user-state-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                 ];

@@ -22,9 +22,8 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'update' => $translationAPI->__('Update the custom post', 'custompost-mutations'),
+            'update' => $this->translationAPI->__('Update the custom post', 'custompost-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

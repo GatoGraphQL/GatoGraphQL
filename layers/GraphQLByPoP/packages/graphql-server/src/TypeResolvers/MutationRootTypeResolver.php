@@ -21,8 +21,7 @@ class MutationRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResol
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Mutation type, starting from which mutations are executed', 'graphql-server');
+        return $this->translationAPI->__('Mutation type, starting from which mutations are executed', 'graphql-server');
     }
 
     public function getID(object $resultItem): string | int

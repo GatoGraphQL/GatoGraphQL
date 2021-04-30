@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use Composer\Semver\Semver;
 use Exception;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use Composer\Semver\Semver;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\HookHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Resolvers\ResolverTypes;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
@@ -41,6 +41,12 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @var array<string, array>
      */
     protected array $schemaDefinitionForFieldCache = [];
+
+    function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI
+    ) {
+    }
 
     public function getImplementedFieldInterfaceResolverClasses(): array
     {
@@ -318,12 +324,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
             // Hook to override the values, eg: by the Field Deprecation List
             // 1. Applied on the type
-            $hooksAPI = HooksAPIFacade::getInstance();
             $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
                 get_class($typeResolver),
                 $fieldName
             );
-            $schemaDefinition = $hooksAPI->applyFilters(
+            $schemaDefinition = $this->hooksAPI->applyFilters(
                 $hookName,
                 $schemaDefinition,
                 $typeResolver,
@@ -337,7 +342,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                         get_class($fieldInterfaceResolver),
                         $fieldName
                     );
-                    $schemaDefinition = $hooksAPI->applyFilters(
+                    $schemaDefinition = $this->hooksAPI->applyFilters(
                         $hookName,
                         $schemaDefinition,
                         $typeResolver,
@@ -369,7 +374,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveSchemaValidationWarningDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $warnings = [];
-        $translationAPI = TranslationAPIFacade::getInstance();
         if (Environment::enableSemanticVersionConstraints()) {
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
@@ -380,7 +384,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($typeResolver)) {
                     $warnings[] = sprintf(
-                        $translationAPI->__('The FieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->translationAPI->__('The FieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
                         $this->getSchemaFieldVersion($typeResolver, $fieldName) ?? '',
                         $versionConstraint
@@ -461,11 +465,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $validation = $engine->validateCheckpoints($checkpoints);
             if (GeneralUtils::isError($validation)) {
                 $error = $validation;
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $errorMessage = $error->getErrorMessage();
                 if (!$errorMessage) {
                     $errorMessage = sprintf(
-                        $translationAPI->__('Validation with code \'%s\' failed', 'component-model'),
+                        $this->translationAPI->__('Validation with code \'%s\' failed', 'component-model'),
                         $error->getErrorCode()
                     );
                 }

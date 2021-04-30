@@ -17,8 +17,7 @@ class SiteTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
+        return $this->translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
     public function getID(object $resultItem): string | int

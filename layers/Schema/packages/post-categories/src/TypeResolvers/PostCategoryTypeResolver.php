@@ -20,8 +20,7 @@ class PostCategoryTypeResolver extends AbstractCategoryTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a category, added to a post', 'post-categories');
+        return $this->translationAPI->__('Representation of a category, added to a post', 'post-categories');
     }
 
     public function getTypeDataLoaderClass(): string

@@ -22,9 +22,8 @@ class PostFieldResolver extends AbstractCustomPostFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'update' => $translationAPI->__('Update the post', 'post-mutations'),
+            'update' => $this->translationAPI->__('Update the post', 'post-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

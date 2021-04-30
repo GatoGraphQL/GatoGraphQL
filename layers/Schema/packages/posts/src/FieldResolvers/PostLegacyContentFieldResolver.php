@@ -49,17 +49,15 @@ class PostLegacyContentFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'isPublished' => $translationAPI->__('Has the post been published?', 'content'),
+            'isPublished' => $this->translationAPI->__('Has the post been published?', 'content'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        $placeholder_status = $translationAPI->__('Use \'isStatus(status:%s)\' instead of \'%s\'', 'content');
+        $placeholder_status = $this->translationAPI->__('Use \'isStatus(status:%s)\' instead of \'%s\'', 'content');
         $descriptions = [
             'isPublished' => sprintf(
                 $placeholder_status,

@@ -6,7 +6,6 @@ namespace PoPSchema\UserState\FieldResolvers;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 
@@ -40,9 +39,8 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'isUserLoggedIn' => $translationAPI->__('Is the user logged-in?', 'user-state'),
+            'isUserLoggedIn' => $this->translationAPI->__('Is the user logged-in?', 'user-state'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

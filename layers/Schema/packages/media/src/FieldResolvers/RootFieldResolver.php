@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -16,8 +18,12 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(protected CustomPostTypeResolver $customPostTypeResolver)
-    {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected CustomPostTypeResolver $customPostTypeResolver
+    ) {
+        parent::__construct($translationAPI, $hooksAPI);
     }
 
     public function getClassesToAttachTo(): array
@@ -35,10 +41,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'mediaItems' => $translationAPI->__('Get the media items', 'media'),
-            'mediaItem' => $translationAPI->__('Get a media item', 'media'),
+            'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
+            'mediaItem' => $this->translationAPI->__('Get a media item', 'media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -54,7 +59,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'mediaItem':
                 return [
@@ -62,7 +66,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_NAME => 'id',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The ID of the media element, of type \'%s\'', 'media'),
+                            $this->translationAPI->__('The ID of the media element, of type \'%s\'', 'media'),
                             $this->customPostTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,

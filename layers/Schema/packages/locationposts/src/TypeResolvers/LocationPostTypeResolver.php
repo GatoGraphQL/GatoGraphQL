@@ -23,8 +23,7 @@ class LocationPostTypeResolver extends PostTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('A post which has locations', 'locationposts');
+        return $this->translationAPI->__('A post which has locations', 'locationposts');
     }
 
     public function getTypeDataLoaderClass(): string

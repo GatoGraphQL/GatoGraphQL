@@ -54,21 +54,20 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $exportDirectiveResolver = $instanceManager->getInstance(ExportDirectiveResolver::class);
         $exportDirectiveName = $exportDirectiveResolver->getDirectiveName();
         $descriptions = [
             'exportedVariables' => sprintf(
-                $translationAPI->__('Returns a dictionary with the values for all variables exported through the `%s` directive', 'graphql-server'),
+                $this->translationAPI->__('Returns a dictionary with the values for all variables exported through the `%s` directive', 'graphql-server'),
                 $exportDirectiveName
             ),
             // 'exportedVariable' => sprintf(
-            //     $translationAPI->__('Returns the value for a variable exported through the `%s` directive', 'graphql-server'),
+            //     $this->translationAPI->__('Returns the value for a variable exported through the `%s` directive', 'graphql-server'),
             //     $exportDirectiveName
             // ),
-            'echoVar' => $translationAPI->__('Returns the variable value', 'graphql-server'),
+            'echoVar' => $this->translationAPI->__('Returns the variable value', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -76,7 +75,6 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             // case 'exportedVariable':
             //     return array_merge(
@@ -86,7 +84,7 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
             //                 SchemaDefinition::ARGNAME_NAME => 'name',
             //                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
             //                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-            //                     $translationAPI->__('Exported variable name. It must start with \'%s\'', 'graphql-server'),
+            //                     $this->translationAPI->__('Exported variable name. It must start with \'%s\'', 'graphql-server'),
             //                     QuerySymbols::VARIABLE_AS_EXPRESSION_NAME_PREFIX
             //                 ),
             //                 SchemaDefinition::ARGNAME_MANDATORY => true,
@@ -100,7 +98,7 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
                         [
                             SchemaDefinition::ARGNAME_NAME => 'variable',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The variable to echo back, of any type', 'graphql-server'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The variable to echo back, of any type', 'graphql-server'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

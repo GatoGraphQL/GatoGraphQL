@@ -29,14 +29,14 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $message = sprintf(
             '<p>%s</p><br/>',
             sprintf(
-                TranslationAPIFacade::getInstance()->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
+                $this->translationAPI->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
                 GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );
         $message .= sprintf(
             '<p>%s</p>',
-            TranslationAPIFacade::getInstance()->__('To reset your password, please click on the following link:</p>', 'pop-application')
+            $this->translationAPI->__('To reset your password, please click on the following link:</p>', 'pop-application')
         );
         $message .= sprintf(
             '<p>%s</p><br/>',
@@ -47,7 +47,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         );
         $message .= sprintf(
             '<p>%s</p>',
-            TranslationAPIFacade::getInstance()->__('Alternatively, please paste the following code in the "Code" input:', 'pop-application')
+            $this->translationAPI->__('Alternatively, please paste the following code in the "Code" input:', 'pop-application')
         );
         $message .= sprintf(
             // '<p><pre style="%s">%s</pre></p><br/>',
@@ -67,11 +67,11 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
 
         // Code copied from file wp-login.php (We can't invoke it directly, since wp-login.php has not been loaded, and we can't do it since it executes a lot of unwanted code producing and output)
         if (empty($user_login)) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Enter a username or e-mail address.');
+            $errors[] = $this->translationAPI->__('Enter a username or e-mail address.');
         } elseif (strpos($user_login, '@')) {
             $user = $cmsusersapi->getUserByEmail(trim($user_login));
             if (empty($user)) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('There is no user registered with that email address.');
+                $errors[] = $this->translationAPI->__('There is no user registered with that email address.');
             }
         } else {
             $login = trim($user_login);
@@ -79,7 +79,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         }
 
         if (!$user) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Invalid username or e-mail.');
+            $errors[] = $this->translationAPI->__('Invalid username or e-mail.');
         }
 
         return $errors;
@@ -111,13 +111,13 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         * in sanitize_option we want to reverse this for the plain text arena of emails.
         */
         // $site_name = wp_specialchars_decode($cmsapplicationapi->getSiteName(), ENT_QUOTES);
-        // $title = sprintf(TranslationAPIFacade::getInstance()->__('[%s] Password Reset'), $site_name);
+        // $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $site_name);
         $user_id = $cmsusersresolver->getUserId($user);
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $title = sprintf(TranslationAPIFacade::getInstance()->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
-        $title = HooksAPIFacade::getInstance()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
+        $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
+        $title = $this->hooksAPI->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
-        $message = HooksAPIFacade::getInstance()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
+        $message = $this->hooksAPI->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $cmsusersresolver->getUserEmail($user);
         return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);

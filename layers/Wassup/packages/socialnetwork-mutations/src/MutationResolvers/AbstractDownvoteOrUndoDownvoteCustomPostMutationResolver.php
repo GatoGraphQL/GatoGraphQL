@@ -13,7 +13,7 @@ abstract class AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver extends 
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $eligible = in_array($customPostTypeAPI->getCustomPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
-        return HooksAPIFacade::getInstance()->applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
+        return $this->hooksAPI->applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
     }
 
     /**
@@ -22,6 +22,6 @@ abstract class AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver extends 
     protected function additionals($target_id, $form_data)
     {
         parent::additionals($target_id, $form_data);
-        HooksAPIFacade::getInstance()->doAction('gd_downvoteundodownvote_post', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_downvoteundodownvote_post', $target_id, $form_data);
     }
 }
