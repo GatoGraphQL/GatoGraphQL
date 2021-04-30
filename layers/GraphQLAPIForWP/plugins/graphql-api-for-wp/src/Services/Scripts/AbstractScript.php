@@ -8,7 +8,6 @@ use Error;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
@@ -79,9 +78,8 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getScriptLocalizationName(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GeneralUtils */
-        $generalUtils = $instanceManager->getInstance(GeneralUtils::class);
+        $generalUtils = $this->instanceManager->getInstance(GeneralUtils::class);
         return $generalUtils->dashesToCamelCase($this->getScriptName());
     }
 
