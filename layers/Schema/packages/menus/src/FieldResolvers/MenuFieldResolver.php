@@ -91,7 +91,6 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'itemDataEntries':
                 $isFlat = $fieldArgs['flat'] ?? false;
-                $instanceManager = InstanceManagerFacade::getInstance();
                 $itemsData = $menuTypeAPI->getMenuItemsData($menu);
                 $entries = array();
                 if ($itemsData) {
@@ -100,7 +99,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     /**
                      * @var MenuItemTypeResolver
                      */
-                    $menuItemTypeResolver = $instanceManager->getInstance(MenuItemTypeResolver::class);
+                    $menuItemTypeResolver = $this->instanceManager->getInstance(MenuItemTypeResolver::class);
                     foreach ($itemsData as $itemData) {
                         $item_value = array();
                         foreach ($item_data_fields as $item_data_field) {

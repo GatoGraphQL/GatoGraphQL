@@ -77,13 +77,12 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'kind':
                 /**
                  * @var TypeKindEnum
                  */
-                $typeKindEnum = $instanceManager->getInstance(TypeKindEnum::class);
+                $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
                 return $typeKindEnum->getName();
         }
         return null;
@@ -91,13 +90,12 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'kind':
                 /**
                  * @var TypeKindEnum
                  */
-                $typeKindEnum = $instanceManager->getInstance(TypeKindEnum::class);
+                $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
                 return $typeKindEnum->getValues();
         }
         return null;

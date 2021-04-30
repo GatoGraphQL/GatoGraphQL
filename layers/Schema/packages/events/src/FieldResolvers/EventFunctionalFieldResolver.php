@@ -50,13 +50,12 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'scope':
                 /**
                  * @var EventScopeEnum
                  */
-                $eventScopeEnum = $instanceManager->getInstance(EventScopeEnum::class);
+                $eventScopeEnum = $this->instanceManager->getInstance(EventScopeEnum::class);
                 return $eventScopeEnum->getName();
         }
         return null;
@@ -64,13 +63,12 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'scope':
                 /**
                  * @var EventScopeEnum
                  */
-                $eventScopeEnum = $instanceManager->getInstance(EventScopeEnum::class);
+                $eventScopeEnum = $this->instanceManager->getInstance(EventScopeEnum::class);
                 return $eventScopeEnum->getValues();
         }
         return null;

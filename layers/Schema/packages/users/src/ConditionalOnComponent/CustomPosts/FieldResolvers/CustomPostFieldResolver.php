@@ -37,11 +37,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getWithAuthorFieldInterfaceResolverInstance(): FieldInterfaceResolverInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var WithAuthorFieldInterfaceResolver
          */
-        $resolver = $instanceManager->getInstance(WithAuthorFieldInterfaceResolver::class);
+        $resolver = $this->instanceManager->getInstance(WithAuthorFieldInterfaceResolver::class);
         return $resolver;
     }
 

@@ -127,7 +127,6 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'src':
             case 'width':
@@ -135,7 +134,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 /**
                  * @var MediaDeviceEnum
                  */
-                $mediaDeviceEnum = $instanceManager->getInstance(MediaDeviceEnum::class);
+                $mediaDeviceEnum = $this->instanceManager->getInstance(MediaDeviceEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [

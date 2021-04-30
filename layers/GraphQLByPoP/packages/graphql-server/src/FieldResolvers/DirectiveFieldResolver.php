@@ -62,13 +62,12 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'locations':
                 /**
                  * @var DirectiveLocationEnum
                  */
-                $directiveLocationEnum = $instanceManager->getInstance(DirectiveLocationEnum::class);
+                $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
                 return $directiveLocationEnum->getName();
         }
         return null;
@@ -76,13 +75,12 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'locations':
                 /**
                  * @var DirectiveLocationEnum
                  */
-                $directiveLocationEnum = $instanceManager->getInstance(DirectiveLocationEnum::class);
+                $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
                 return $directiveLocationEnum->getValues();
         }
         return null;

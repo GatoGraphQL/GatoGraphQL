@@ -63,10 +63,9 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     {
         switch ($fieldName) {
             case 'setCategories':
-                $instanceManager = InstanceManagerFacade::getInstance();
                 $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
                 /** @var TypeResolverInterface */
-                $categoryTypeResolver = $instanceManager->getInstance($categoryTypeResolverClass);
+                $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,

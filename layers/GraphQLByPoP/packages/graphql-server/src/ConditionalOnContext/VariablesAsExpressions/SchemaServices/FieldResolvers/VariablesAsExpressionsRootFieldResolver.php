@@ -53,9 +53,8 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
-        $exportDirectiveResolver = $instanceManager->getInstance(ExportDirectiveResolver::class);
+        $exportDirectiveResolver = $this->instanceManager->getInstance(ExportDirectiveResolver::class);
         $exportDirectiveName = $exportDirectiveResolver->getDirectiveName();
         $descriptions = [
             'exportedVariables' => sprintf(
