@@ -17,6 +17,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
@@ -56,6 +57,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         protected ModuleFilterManagerInterface $moduleFilterManager,
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CMSServiceInterface $cmsService,
+        protected NameResolverInterface $nameResolver,
     ) {
     }
 
