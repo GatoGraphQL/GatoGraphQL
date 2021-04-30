@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Schema\HookHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -36,7 +35,6 @@ class FieldDeprecationGraphQLQueryConfigurator extends AbstractGraphQLQueryConfi
             $fdlPostID,
             $block
         );
-        $hooksAPI = HooksAPIFacade::getInstance();
         foreach ($fdlBlockItems as $fdlBlockItem) {
             if ($deprecationReason = $fdlBlockItem['attrs'][FieldDeprecationBlock::ATTRIBUTE_NAME_DEPRECATION_REASON] ?? null) {
                 if ($typeFields = $fdlBlockItem['attrs'][AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS] ?? null) {
@@ -57,7 +55,7 @@ class FieldDeprecationGraphQLQueryConfigurator extends AbstractGraphQLQueryConfi
                                 $typeOrFieldInterfaceResolverClass,
                                 $fieldName
                             );
-                            $hooksAPI->addFilter(
+                            $this->hooksAPI->addFilter(
                                 $hookName,
                                 function (array $schemaDefinition) use ($deprecationReason): array {
                                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
