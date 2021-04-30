@@ -168,14 +168,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ) {
         $value = $typeResolver->resolveValue($resultItem, $field, $variables, $expressions);
         // Merge the dbWarnings and dbDeprecations, if any
-        $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-        if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+        if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
             $dbWarnings[$id] = array_merge(
                 $dbWarnings[$id] ?? [],
                 $resultItemDBWarnings
             );
         }
-        if ($resultItemDBDeprecations = $feedbackMessageStore->retrieveAndClearResultItemDBDeprecations($id)) {
+        if ($resultItemDBDeprecations = $this->feedbackMessageStore->retrieveAndClearResultItemDBDeprecations($id)) {
             $dbDeprecations[$id] = array_merge(
                 $dbDeprecations[$id] ?? [],
                 $resultItemDBDeprecations

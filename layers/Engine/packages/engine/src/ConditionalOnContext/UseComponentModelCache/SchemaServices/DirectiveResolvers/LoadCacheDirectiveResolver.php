@@ -117,7 +117,6 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             }
 
             // Log the cached items
-            $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
             $logCachedIDFields = [];
             foreach ($idsDataFieldsToRemove as $id => $dataFieldsToRemove) {
                 $logCachedIDFields[] = sprintf(
@@ -126,7 +125,7 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
                     implode('\', \'', $dataFieldsToRemove['direct'])
                 );
             }
-            $feedbackMessageStore->addLogEntry(
+            $this->feedbackMessageStore->addLogEntry(
                 sprintf(
                     $this->translationAPI->__('The following fields of type \'%s\' were resolved from the cache - %s', 'engine'),
                     $typeResolver->getTypeName(),

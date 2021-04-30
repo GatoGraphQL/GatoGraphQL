@@ -389,8 +389,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-                    if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
                             $resultItemDBWarnings
@@ -421,8 +420,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $value, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-                    if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
                             $resultItemDBWarnings

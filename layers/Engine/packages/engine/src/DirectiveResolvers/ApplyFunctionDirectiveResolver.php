@@ -210,8 +210,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the dbWarnings, if any
-                $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-                if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                     $dbWarnings[$id] = array_merge(
                         $dbWarnings[$id] ?? [],
                         $resultItemDBWarnings

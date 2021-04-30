@@ -23,12 +23,14 @@ use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
 {
@@ -43,6 +45,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
     /**
      * @var array<string, array>
      */
@@ -81,6 +84,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->hooksAPI = HooksAPIFacade::getInstance();
         $this->instanceManager = InstanceManagerFacade::getInstance();
         $this->fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $this->feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
     }
 
     /**
