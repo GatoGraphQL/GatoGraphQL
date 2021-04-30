@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoP\API\Response\Schemes as APISchemes;
 use PoPSchema\Posts\ComponentConfiguration;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 
-class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
 {
-    protected function getInitialRESTFields(): string
-    {
-        return \PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers::getRESTFieldsQuery();
-    }
-
     /**
      * @return array<string, array<array>>
      */
