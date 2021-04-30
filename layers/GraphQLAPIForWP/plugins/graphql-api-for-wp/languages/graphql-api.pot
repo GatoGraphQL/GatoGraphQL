@@ -3435,7 +3435,7 @@ msgstr ""
 msgid "The ID of the custom post"
 msgstr ""
 
-#: vendor/pop-schema/custompostmedia-mutations/src/Hooks/CustomPostMutationResolverHooks.php:53
+#: vendor/pop-schema/custompostmedia-mutations/src/Hooks/CustomPostMutationResolverHookSet.php:53
 #, php-format
 msgid "The ID of the featured image (of type %s)"
 msgstr ""

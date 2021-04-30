@@ -16,7 +16,7 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties
 use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
-class CustomPostMutationResolverHooks extends AbstractHookSet
+class CustomPostMutationResolverHookSet extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
