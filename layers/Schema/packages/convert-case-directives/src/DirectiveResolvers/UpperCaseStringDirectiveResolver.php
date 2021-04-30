@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\ConvertCaseDirectives\DirectiveResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\GlobalDirectiveResolverTrait;
 use PoPSchema\BasicDirectives\DirectiveResolvers\AbstractTransformFieldStringValueDirectiveResolver;

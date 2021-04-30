@@ -17,7 +17,6 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;

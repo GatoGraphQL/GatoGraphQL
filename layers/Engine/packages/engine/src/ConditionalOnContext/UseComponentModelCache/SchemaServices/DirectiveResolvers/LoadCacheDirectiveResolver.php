@@ -14,7 +14,6 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Cache\CacheTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 /**
  * Load the field value from the cache. This directive is executed before `@resolveAndMerge`,

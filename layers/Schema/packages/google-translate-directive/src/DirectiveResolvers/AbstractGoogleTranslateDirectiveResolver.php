@@ -6,7 +6,6 @@ namespace PoPSchema\GoogleTranslateDirective\DirectiveResolvers;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoPSchema\GoogleTranslateDirective\Environment;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\TranslateDirective\DirectiveResolvers\AbstractTranslateDirectiveResolver;
 
 abstract class AbstractGoogleTranslateDirectiveResolver extends AbstractTranslateDirectiveResolver

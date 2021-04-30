@@ -8,7 +8,6 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\GuzzleHelpers\GuzzleHelpers;
 use PoPSchema\TranslateDirective\Environment;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\TranslateDirective\Schema\SchemaDefinition;
 use PoPSchema\TranslateDirective\Facades\TranslationServiceFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
