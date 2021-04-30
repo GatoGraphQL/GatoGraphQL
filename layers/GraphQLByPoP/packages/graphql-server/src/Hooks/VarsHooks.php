@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\Hooks;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -62,9 +61,8 @@ class VarsHooks extends AbstractHookSet
     public function addVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDataStructureFormatter */
-        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
         if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $graphQLDataStructureFormatter->getName()) {
             $vars['edit-schema'] = Request::editSchema();
         }

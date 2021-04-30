@@ -4,23 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\API\Response\Schemes as APISchemes;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 
 class VarsHooks extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry
     ) {
-        parent::__construct($hooksAPI, $translationAPI);
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
     }
 
     protected function init(): void
@@ -53,9 +58,8 @@ class VarsHooks extends AbstractHookSet
             // By setting explicit allowed datastructures, we avoid the empty one
             // being processed /?scheme=api <= native API
             // If ever need to support REST or another format, add a hook here
-            $instanceManager = InstanceManagerFacade::getInstance();
             /** @var GraphQLDataStructureFormatter */
-            $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+            $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
             $allowedDataStructures = [
                 $graphQLDataStructureFormatter->getName(),
             ];

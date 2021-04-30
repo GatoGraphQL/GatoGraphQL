@@ -9,7 +9,6 @@ use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
@@ -72,9 +71,8 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
      */
     protected function getDirectiveResolvers(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         return array_map(
-            fn (string $directiveResolverClass) => $instanceManager->getInstance($directiveResolverClass),
+            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
             $this->getDirectiveResolverClasses()
         );
     }

@@ -4,25 +4,31 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
-use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 class CustomPostMutationResolverHooks extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
         protected MediaTypeResolver $mediaTypeResolver
     ) {
-        parent::__construct($hooksAPI, $translationAPI);
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
     }
 
     protected function init(): void

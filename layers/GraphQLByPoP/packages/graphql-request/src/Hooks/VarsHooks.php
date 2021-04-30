@@ -13,7 +13,6 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
 use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -68,9 +67,8 @@ class VarsHooks extends AbstractHookSet
         // Set always. It will be overriden below
         $vars['standard-graphql'] = false;
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDataStructureFormatter */
-        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
         if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $graphQLDataStructureFormatter->getName()) {
             $this->processURLParamVars($vars);
         }

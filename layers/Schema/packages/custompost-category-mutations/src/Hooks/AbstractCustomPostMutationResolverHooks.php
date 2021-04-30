@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -43,10 +42,9 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
         if ($entityTypeResolverClass !== $this->getTypeResolverClass()) {
             return $fieldArgs;
         }
-        $instanceManager = InstanceManagerFacade::getInstance();
         $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
         /** @var TypeResolverInterface */
-        $categoryTypeResolver = $instanceManager->getInstance($categoryTypeResolverClass);
+        $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
