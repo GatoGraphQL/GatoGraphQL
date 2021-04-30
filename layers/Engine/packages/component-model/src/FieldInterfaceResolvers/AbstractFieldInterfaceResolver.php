@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -14,7 +15,8 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
     use FieldInterfaceSchemaDefinitionResolverTrait;
 
     function __construct(
-        protected TranslationAPIInterface $translationAPI
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI
     ) {
     }
 

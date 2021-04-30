@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -20,9 +21,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
     function __construct(
         TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
         protected MediaTypeResolver $mediaTypeResolver
     ) {
-        parent::__construct($translationAPI);
+        parent::__construct($translationAPI, $hooksAPI);
     }
 
     public function getClassesToAttachTo(): array

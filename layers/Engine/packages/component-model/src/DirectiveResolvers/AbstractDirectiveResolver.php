@@ -7,8 +7,10 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use Exception;
 use Composer\Semver\Semver;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\Hooks\HooksAPIInterface;
 use League\Pipeline\StageInterface;
 use PoP\ComponentModel\Environment;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -35,6 +37,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     protected string $directive;
     protected TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
     /**
      * @var array<string, array>
      */
@@ -70,6 +73,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->directive = $directive ?? $this->getDirectiveName();
         // Obtain these services directly from the container, instead of using autowiring
         $this->translationAPI = TranslationAPIFacade::getInstance();
+        $this->hooksAPI = HooksAPIFacade::getInstance();
     }
 
     /**

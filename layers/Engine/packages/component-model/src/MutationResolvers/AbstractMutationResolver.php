@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractMutationResolver implements MutationResolverInterface
 {
     function __construct(
-        protected TranslationAPIInterface $translationAPI
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI
     ) {
     }
 

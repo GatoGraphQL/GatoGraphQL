@@ -4,29 +4,30 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers;
 
-use Composer\Semver\Semver;
 use Exception;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use Composer\Semver\Semver;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
-use PoP\ComponentModel\Schema\HookHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\HookHelpers;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Resolvers\ResolverTypes;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
+use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
@@ -43,7 +44,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     protected array $schemaDefinitionForFieldCache = [];
 
     function __construct(
-        protected TranslationAPIInterface $translationAPI
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI
     ) {
     }
 
