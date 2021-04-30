@@ -17,6 +17,7 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Constants\Response;
 use PoP\Definitions\Configuration\Request;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
@@ -28,20 +29,19 @@ use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\CheckpointProcessorManagerFactory;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
-use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
-use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Settings\SiteConfigurationProcessorManagerFactory;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class Engine implements EngineInterface
 {
@@ -95,7 +95,16 @@ class Engine implements EngineInterface
     function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
-        protected DataStructureManagerInterface $dataStructureManager
+        protected DataStructureManagerInterface $dataStructureManager,
+        protected InstanceManagerInterface $instanceManager,
+        protected ModelInstanceInterface $modelInstance,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected ModulePathHelpersInterface $modulePathHelpers,
+        protected ModulePathManagerInterface $modulePathManager,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ModuleFilterManagerInterface $moduleFilterManager,
+        protected ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected ?CacheInterface $persistentCache = null
     ) {
     }
 
@@ -184,7 +193,7 @@ class Engine implements EngineInterface
     {
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = !empty($this->getExtraRoutes())) {
-            $model_instance_id = ModelInstanceFacade::getInstance()->getModelInstanceId();
+            $model_instance_id = $this->modelInstance->getModelInstanceId();
             $current_uri = removeDomain(RequestUtils::getCurrentUrl());
         }
 
@@ -258,19 +267,17 @@ class Engine implements EngineInterface
     public function getModelPropsModuletree(array $module)
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
-            $cachemanager = PersistentCacheFacade::getInstance();
-            $useCache = !is_null($cachemanager);
+            $useCache = $this->persistentCache !== null;
         }
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        
+        $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
         // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
         // First check if there's a cache stored
         $model_props = null;
         if ($useCache) {
-            $model_props = $cachemanager->getCacheByModelInstance(self::CACHETYPE_PROPS);
+            $model_props = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_PROPS);
         }
 
         // If there is no cached one, or not using the cache, generate the props and cache it
@@ -279,7 +286,7 @@ class Engine implements EngineInterface
             $processor->initModelPropsModuletree($module, $model_props, array(), array());
 
             if ($useCache) {
-                $cachemanager->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
+                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
             }
         }
 
@@ -289,8 +296,7 @@ class Engine implements EngineInterface
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
     public function addRequestPropsModuletree(array $module, array $props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
         $processor->initRequestPropsModuletree($module, $props, array(), array());
@@ -437,14 +443,12 @@ class Engine implements EngineInterface
     public function getModuleDatasetSettings(array $module, $model_props, array &$props)
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
-            $cachemanager = PersistentCacheFacade::getInstance();
-            $useCache = !is_null($cachemanager);
+            $useCache = $this->persistentCache !== null;
         }
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
+        
         $ret = array();
 
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
@@ -453,7 +457,7 @@ class Engine implements EngineInterface
         // First check if there's a cache stored
         $immutable_datasetsettings = null;
         if ($useCache) {
-            $immutable_datasetsettings = $cachemanager->getCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS);
+            $immutable_datasetsettings = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS);
         }
 
         // If there is no cached one, generate the configuration and cache it
@@ -464,7 +468,7 @@ class Engine implements EngineInterface
             $immutable_datasetsettings = $processor->getImmutableSettingsDatasetmoduletree($module, $model_props);
 
             if ($useCache) {
-                $cachemanager->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings);
+                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings);
             }
         }
 
@@ -491,7 +495,7 @@ class Engine implements EngineInterface
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
             Response::UNIQUE_ID => ComponentInfo::get('unique-id'),
             Response::URL => RequestUtils::getCurrentUrl(),
-            'modelinstanceid' => ModelInstanceFacade::getInstance()->getModelInstanceId(),
+            'modelinstanceid' => $this->modelInstance->getModelInstanceId(),
         );
 
         if ($this->backgroundload_urls) {
@@ -499,8 +503,7 @@ class Engine implements EngineInterface
         };
 
         // Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $not_excluded_module_sets = $modulefilter_manager->getNotExcludedModuleSets();
+        $not_excluded_module_sets = $this->moduleFilterManager->getNotExcludedModuleSets();
         if (!is_null($not_excluded_module_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = array();
@@ -620,7 +623,6 @@ class Engine implements EngineInterface
 
         $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
-            $instanceManager = InstanceManagerFacade::getInstance();
             // Get the actual type for each entity, and add the entry there
             $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
             $noTypeResolverDataItems = [];
@@ -648,7 +650,7 @@ class Engine implements EngineInterface
                 }
             }
             foreach ($convertedTypeResolverClassDataItems as $convertedTypeResolverClass => $convertedDataItems) {
-                $convertedTypeResolver = $instanceManager->getInstance($convertedTypeResolverClass);
+                $convertedTypeResolver = $this->instanceManager->getInstance($convertedTypeResolverClass);
                 $convertedDBKey = $convertedTypeResolverClassDBKeys[$convertedTypeResolverClass];
                 $this->addDatasetToDatabase($database, $convertedTypeResolver, $convertedDBKey, $convertedDataItems, $resultIDItems, $addEntryIfError);
             }
@@ -670,17 +672,14 @@ class Engine implements EngineInterface
 
     private function addInterreferencedModuleFullpaths(&$paths, $module_path, array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $processor = $this->moduleProcessorManager->getProcessor($module);
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$modulefilter_manager->excludeModule($module, $props)) {
+        if (!$this->moduleFilterManager->excludeModule($module, $props)) {
             // If the current module loads data, then add its path to the list
             if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedModulepath($module, $props)) {
-                $referenced_modulepath = ModulePathHelpersFacade::getInstance()->stringifyModulePath($interreferenced_modulepath);
+                $referenced_modulepath = $this->modulePathHelpers->stringifyModulePath($interreferenced_modulepath);
                 $paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? array();
                 $paths[$referenced_modulepath][] = array_merge(
                     $module_path,
@@ -700,14 +699,14 @@ class Engine implements EngineInterface
 
         // Propagate to its inner modules
         $submodules = $processor->getAllSubmodules($module);
-        $submodules = $modulefilter_manager->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->moduleFilterManager->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $modulefilter_manager->prepareForPropagation($module, $props);
+        $this->moduleFilterManager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
     protected function getDataloadingModuleFullpaths(array $module, array &$props)
@@ -719,14 +718,11 @@ class Engine implements EngineInterface
 
     private function addDataloadingModuleFullpaths(&$paths, $module_path, array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $processor = $this->moduleProcessorManager->getProcessor($module);
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$modulefilter_manager->excludeModule($module, $props)) {
+        if (!$this->moduleFilterManager->excludeModule($module, $props)) {
             // If the current module loads data, then add its path to the list
             if ($processor->moduleLoadsData($module)) {
                 $paths[] = array_merge(
@@ -747,14 +743,14 @@ class Engine implements EngineInterface
 
         // Propagate to its inner modules
         $submodules = $processor->getAllSubmodules($module);
-        $submodules = $modulefilter_manager->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->moduleFilterManager->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $modulefilter_manager->prepareForPropagation($module, $props);
+        $this->moduleFilterManager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $modulefilter_manager->restoreFromPropagation($module, $props);
+        $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
 
     protected function assignValueForModule(&$array, $module_path, array $module, $key, $value)
@@ -801,14 +797,11 @@ class Engine implements EngineInterface
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
     public function getModuleData($root_module, $root_model_props, $root_props)
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
-            $cachemanager = PersistentCacheFacade::getInstance();
-            $useCache = !is_null($cachemanager);
+            $useCache = $this->persistentCache !== null;
         }
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $root_processor = $moduleprocessor_manager->getProcessor($root_module);
+        
+        $root_processor = $this->moduleProcessorManager->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
@@ -843,21 +836,21 @@ class Engine implements EngineInterface
         // First check if there's a cache stored
         $immutable_data_properties = $mutableonmodel_data_properties = null;
         if ($useCache) {
-            $immutable_data_properties = $cachemanager->getCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES);
-            $mutableonmodel_data_properties = $cachemanager->getCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES);
+            $immutable_data_properties = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES);
+            $mutableonmodel_data_properties = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES);
         }
 
         // If there is no cached one, generate the props and cache it
         if ($immutable_data_properties === null) {
             $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_module, $root_model_props);
             if ($useCache) {
-                $cachemanager->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
+                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
             }
         }
         if ($mutableonmodel_data_properties === null) {
             $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_module, $root_model_props);
             if ($useCache) {
-                $cachemanager->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
+                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
             }
         }
 
@@ -882,11 +875,8 @@ class Engine implements EngineInterface
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
-        $module_path_manager = ModulePathManagerFacade::getInstance();
-
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
-        $modulefilter_manager->neverExclude(true);
+        $this->moduleFilterManager->neverExclude(true);
         foreach ($module_fullpaths as $module_path) {
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
@@ -894,7 +884,7 @@ class Engine implements EngineInterface
             $moduleFullName = ModuleUtils::getModuleFullName($module);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
-            $module_path_manager->setPropagationCurrentPath($module_path);
+            $this->modulePathManager->setPropagationCurrentPath($module_path);
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
@@ -947,7 +937,7 @@ class Engine implements EngineInterface
                 $module_props = &$props;
             }
 
-            $processor = $moduleprocessor_manager->getProcessor($module);
+            $processor = $this->moduleProcessorManager->getProcessor($module);
 
             // The module path key is used for storing temporary results for later retrieval
             $module_path_key = $this->getModulePathKey($module_path, $module);
@@ -975,8 +965,7 @@ class Engine implements EngineInterface
                         }
 
                         if ($execute) {
-                            $instanceManager = InstanceManagerFacade::getInstance();
-                            $componentMutationResolverBridge = $instanceManager->getInstance($componentMutationResolverBridgeClass);
+                            $componentMutationResolverBridge = $this->instanceManager->getInstance($componentMutationResolverBridgeClass);
                             $executed = $componentMutationResolverBridge->execute($data_properties);
                         }
                     }
@@ -990,7 +979,7 @@ class Engine implements EngineInterface
                 if ($load_data) {
                     $typeResolver_class = $processor->getTypeResolverClass($module);
                     /** @var TypeResolverInterface */
-                    $typeResolver = $instanceManager->getInstance((string)$typeResolver_class);
+                    $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
                     $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
@@ -1091,7 +1080,7 @@ class Engine implements EngineInterface
             $this->processAndAddModuleData($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
-            if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[ModulePathHelpersFacade::getInstance()->stringifyModulePath(array_merge($module_path, array($module)))] ?? null) {
+            if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->modulePathHelpers->stringifyModulePath(array_merge($module_path, array($module)))] ?? null) {
                 foreach ($referencer_modulefullpaths as $referencer_modulepath) {
                     $referencer_module = array_pop($referencer_modulepath);
 
@@ -1142,8 +1131,8 @@ class Engine implements EngineInterface
         }
 
         // Reset the filtermanager state and the pathmanager current path
-        $modulefilter_manager->neverExclude(false);
-        $module_path_manager->setPropagationCurrentPath();
+        $this->moduleFilterManager->neverExclude(false);
+        $this->modulePathManager->setPropagationCurrentPath();
 
         $ret = array();
 
@@ -1274,8 +1263,6 @@ class Engine implements EngineInterface
 
     public function getDatabases()
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
         $vars = ApplicationState::getVars();
 
         // Save all database elements here, under typeResolver
@@ -1320,7 +1307,7 @@ class Engine implements EngineInterface
             }
 
             /** @var TypeResolverInterface */
-            $typeResolver = $instanceManager->getInstance((string)$typeResolver_class);
+            $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
             $database_key = $typeResolver->getTypeOutputName();
 
             // Execute the typeResolver for all combined ids
@@ -1419,8 +1406,7 @@ class Engine implements EngineInterface
                 }
             }
 
-            $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-            $storeSchemaErrors = $feedbackMessageStore->retrieveAndClearSchemaErrors();
+            $storeSchemaErrors = $this->feedbackMessageStore->retrieveAndClearSchemaErrors();
             if (!empty($iterationSchemaErrors) || !empty($storeSchemaErrors)) {
                 $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $typeResolver);
                 foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
@@ -1435,7 +1421,7 @@ class Engine implements EngineInterface
                     $dbNameStoreSchemaErrors
                 );
             }
-            if ($storeSchemaWarnings = $feedbackMessageStore->retrieveAndClearSchemaWarnings()) {
+            if ($storeSchemaWarnings = $this->feedbackMessageStore->retrieveAndClearSchemaWarnings()) {
                 $iterationSchemaWarnings = array_merge(
                     $iterationSchemaWarnings ?? [],
                     $storeSchemaWarnings
@@ -1524,7 +1510,7 @@ class Engine implements EngineInterface
                             }
                         }
                         foreach ($iterationTypeResolverIDs as $targetTypeResolverClass => $targetIDs) {
-                            $targetTypeResolver = $instanceManager->getInstance($targetTypeResolverClass);
+                            $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
                             $this->processSubcomponentData($typeResolver, $targetTypeResolver, $targetIDs, $module_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs);
                         }
                     } else {
@@ -1552,11 +1538,10 @@ class Engine implements EngineInterface
         }
 
         // Add the feedback (errors, warnings, deprecations) into the output
-        $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-        if ($queryErrors = $feedbackMessageStore->getQueryErrors()) {
+        if ($queryErrors = $this->feedbackMessageStore->getQueryErrors()) {
             $ret['queryErrors'] = $queryErrors;
         }
-        if ($queryWarnings = $feedbackMessageStore->getQueryWarnings()) {
+        if ($queryWarnings = $this->feedbackMessageStore->getQueryWarnings()) {
             $ret['queryWarnings'] = $queryWarnings;
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbErrors', $dbErrors);
@@ -1585,7 +1570,7 @@ class Engine implements EngineInterface
         // Show logs only if both enabled, and passing the action in the URL
         if (Environment::enableShowLogs()) {
             if (in_array(Actions::SHOW_LOGS, $vars['actions'])) {
-                $ret['logEntries'] = $feedbackMessageStore->getLogEntries();
+                $ret['logEntries'] = $this->feedbackMessageStore->getLogEntries();
             }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
@@ -1596,7 +1581,6 @@ class Engine implements EngineInterface
 
     protected function processSubcomponentData($typeResolver, $targetTypeResolver, $typeResolver_ids, $module_path_key, array &$databases, array &$subcomponents_data_properties, array &$already_loaded_ids_data_fields, array &$unionDBKeyIDs, array &$combinedUnionDBKeyIDs)
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $database_key = $targetTypeResolver->getTypeOutputName();
         foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_data_properties) {
             // Retrieve the subcomponent typeResolver from the current typeResolver
@@ -1609,12 +1593,12 @@ class Engine implements EngineInterface
                 $subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
-                $subcomponent_data_field_outputkey = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
                 if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
-                    $subcomponentTypeResolver = $instanceManager->getInstance($subcomponent_typeResolver_class);
+                    $subcomponentTypeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
                     $subcomponent_already_loaded_ids_data_fields = array();
@@ -1790,8 +1774,7 @@ class Engine implements EngineInterface
 
     protected function processAndAddModuleData($module_path, array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDs)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($module);
+        $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // Integrate the feedback into $moduledata
         if (!is_null($this->moduledata)) {

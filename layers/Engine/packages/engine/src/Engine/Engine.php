@@ -6,12 +6,21 @@ namespace PoP\Engine\Engine;
 
 use Exception;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
@@ -19,10 +28,32 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,
+        InstanceManagerInterface $instanceManager,
+        ModelInstanceInterface $modelInstance,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        ModulePathHelpersInterface $modulePathHelpers,
+        ModulePathManagerInterface $modulePathManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ModuleFilterManagerInterface $moduleFilterManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
         protected LooseContractManagerInterface $looseContractManager,
-        protected CacheControlEngineInterface $cacheControlEngine
+        protected CacheControlEngineInterface $cacheControlEngine,
+        ?CacheInterface $persistentCache = null
     ) {
-        parent::__construct($translationAPI, $hooksAPI, $dataStructureManager);
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $dataStructureManager,
+            $instanceManager,
+            $modelInstance,
+            $feedbackMessageStore,
+            $modulePathHelpers,
+            $modulePathManager,
+            $fieldQueryInterpreter,
+            $moduleFilterManager,
+            $moduleProcessorManager,
+            $persistentCache,
+        );
     }
 
     public function generateData()
