@@ -72,7 +72,8 @@
             "composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/events-manager",
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json.tmp', '../../layers/GraphQLAPIForWP/plugins/events-manager/composer.json');\""
         ],
-        "log-server-errors": "lando logs -t -f | grep \"error\"",
+        "log-server-errors": "lando logs -t -f | grep \"php:error\"",
+        "log-server-warnings": "lando logs -t -f | grep \"php:warn\"",
         "enable-caching": "lando wp config set GRAPHQL_API_DISABLE_CACHING false --raw --path=wordpress",
         "disable-caching": [
             "lando wp config set GRAPHQL_API_DISABLE_CACHING true --raw --path=wordpress",
