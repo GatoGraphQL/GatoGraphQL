@@ -12,7 +12,6 @@ use PoPSchema\TranslateDirective\Schema\SchemaDefinition;
 use PoPSchema\TranslateDirective\Facades\TranslationServiceFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractSchemaDirectiveResolver;
 use PoP\ComponentModel\Feedback\Tokens;
 
@@ -74,8 +73,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-
         // Retrieve the provider from the directiveArgs. The provider is passed as a 'static' attribute (to decide the DirectiveResolver), so it can't be taken from the resultItem schema (as is the case with the from/to lang params)
         $provider = $this->getProvider($this->directiveArgsForSchema);
         // Make sure that there is an endpoint
@@ -147,7 +144,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
                     }
                     // Get the fieldOutputKey from the cache, or calculate it
                     if (!isset($fieldOutputKeyCache[$field])) {
-                        $fieldOutputKeyCache[$field] = $fieldQueryInterpreter->getFieldOutputKey($field);
+                        $fieldOutputKeyCache[$field] = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                     }
                     $fieldOutputKey = $fieldOutputKeyCache[$field];
                     // Add the text to be translated, and keep the position from where it will be retrieved
@@ -163,7 +160,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
                     foreach ($dataFields['direct'] as $field) {
                         // Get the fieldOutputKey from the cache, or calculate it
                         if (!isset($fieldOutputKeyCache[$field])) {
-                            $fieldOutputKeyCache[$field] = $fieldQueryInterpreter->getFieldOutputKey($field);
+                            $fieldOutputKeyCache[$field] = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                         }
                         $fieldOutputKey = $fieldOutputKeyCache[$field];
                         // Add the text to be translated, and keep the position from where it will be retrieved

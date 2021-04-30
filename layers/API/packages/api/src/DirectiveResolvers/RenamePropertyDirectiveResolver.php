@@ -6,7 +6,6 @@ namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
 {
@@ -76,10 +75,9 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
             $schemaNotices,
             $schemaTraces
         );
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 unset($dbItems[(string)$id][$fieldOutputKey]);
             }
         }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ConditionalOnContext\RemoveIfNull\SchemaServices\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 
@@ -207,11 +206,10 @@ class RemoveIfNullDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $idsDataFieldsToRemove = [];
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 // If the value is null, then remove it from the dbItems object, which contains the data for all retrieved objects
                 // Please notice that this object contains the data for all fields for all types in the query!
                 // Then, make sure that the affected field has a unique alias to avoid side-effects

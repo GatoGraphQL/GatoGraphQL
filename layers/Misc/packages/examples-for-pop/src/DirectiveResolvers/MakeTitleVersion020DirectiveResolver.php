@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Leoloso\ExamplesForPoP\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class MakeTitleVersion020DirectiveResolver extends MakeTitleVersion010DirectiveResolver
 {
@@ -47,10 +46,9 @@ class MakeTitleVersion020DirectiveResolver extends MakeTitleVersion010DirectiveR
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $dbItems[$id][$fieldOutputKey] = strtoupper($dbItems[$id][$fieldOutputKey]);
             }
         }

@@ -8,7 +8,6 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 // use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
@@ -39,8 +38,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
      */
     public function resolveCanProcess(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        if ($fieldArgs = $fieldQueryInterpreter->getFieldArgs($field)) {
+        if ($fieldArgs = $this->fieldQueryInterpreter->getFieldArgs($field)) {
             $fieldArgElems = QueryHelpers::getFieldArgElements($fieldArgs);
             return $this->isFieldArgumentValueAFieldOrAnArrayWithAField($fieldArgElems, $variables);
         }
@@ -49,8 +47,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 
     protected function isFieldArgumentValueAFieldOrAnArrayWithAField($fieldArgValue, array &$variables): bool
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $fieldArgValue = $fieldQueryInterpreter->maybeConvertFieldArgumentValue($fieldArgValue, $variables);
+        $fieldArgValue = $this->fieldQueryInterpreter->maybeConvertFieldArgumentValue($fieldArgValue, $variables);
         // If it is an array, we must evaluate if any of its items is a field
         if (is_array($fieldArgValue)) {
             return array_reduce(
@@ -61,7 +58,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 false
             );
         }
-        return $fieldQueryInterpreter->isFieldArgumentValueAField($fieldArgValue);
+        return $this->fieldQueryInterpreter->isFieldArgumentValueAField($fieldArgValue);
     }
 
     public function getMaxAge(): ?int
@@ -96,7 +93,6 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         array &$schemaTraces
     ): void {
         if ($idsDataFields) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
             // Iterate through all the arguments, calculate the maxAge for each of them,
             // and then return the minimum value from all of them and the directiveName for this field
             $fields = [];
@@ -109,8 +105,8 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             $fields = array_values(array_unique($fields));
             // Extract all the field arguments which are fields or have fields themselves
             $fieldArgElems = array_unique(GeneralUtils::arrayFlatten(array_map(
-                function ($field) use ($fieldQueryInterpreter) {
-                    if ($fieldArgs = $fieldQueryInterpreter->getFieldArgs($field)) {
+                function ($field) {
+                    if ($fieldArgs = $this->fieldQueryInterpreter->getFieldArgs($field)) {
                         return QueryHelpers::getFieldArgElements($fieldArgs);
                     }
                     return [];
@@ -120,7 +116,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             // If any element is an array represented as a string, like "[time()]"
             // when doing /?query=extract(echo([time()]),0), then extract it and merge it into the main array
             $nestedFields = array_unique(GeneralUtils::arrayFlatten(
-                (array)$fieldQueryInterpreter->maybeConvertFieldArgumentArrayValue($fieldArgElems),
+                (array)$this->fieldQueryInterpreter->maybeConvertFieldArgumentArrayValue($fieldArgElems),
                 true
             ));
             // Extract the composed fields which are either a field, or an array which contain a field
@@ -134,7 +130,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 $nestedFields,
                 array_map(
                     // To evaluate on the root fields, we must remove the fieldArgs, to avoid a loop
-                    [$fieldQueryInterpreter, 'getFieldName'],
+                    [$this->fieldQueryInterpreter, 'getFieldName'],
                     $fields
                 )
             ));

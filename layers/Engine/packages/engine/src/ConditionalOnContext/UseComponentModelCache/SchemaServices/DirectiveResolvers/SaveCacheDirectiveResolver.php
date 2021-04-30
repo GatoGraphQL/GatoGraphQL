@@ -9,7 +9,6 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 /**
@@ -70,12 +69,11 @@ class SaveCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaTraces
     ): void {
         $persistentCache = PersistentCacheFacade::getInstance();
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $cacheType = CacheTypes::CACHE_DIRECTIVE;
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
                 $cacheID = $this->getCacheID($typeResolver, $id, $field);
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
                     $dbWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

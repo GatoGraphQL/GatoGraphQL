@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Leoloso\ExamplesForPoP\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class MakeTitleVersion010DirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -53,10 +52,9 @@ class MakeTitleVersion010DirectiveResolver extends AbstractGlobalDirectiveResolv
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $dbItems[$id][$fieldOutputKey] = ucwords($dbItems[$id][$fieldOutputKey]);
             }
         }
