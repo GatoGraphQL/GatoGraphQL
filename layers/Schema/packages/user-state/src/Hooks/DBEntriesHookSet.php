@@ -10,7 +10,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoPSchema\UserState\FieldResolvers\GlobalFieldResolver;
 
-class DBEntriesHooks extends AbstractHookSet
+class DBEntriesHookSet extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
