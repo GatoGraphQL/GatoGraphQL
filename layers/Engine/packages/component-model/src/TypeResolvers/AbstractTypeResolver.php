@@ -9,7 +9,6 @@ use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Environment;
 use League\Pipeline\PipelineBuilder;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\SchemaHelpers;
@@ -876,15 +875,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function filterDirectiveNameResolvers(array $directiveNameResolvers): array
     {
         // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
-        $hooksAPI = HooksAPIFacade::getInstance();
         return array_filter(
             $directiveNameResolvers,
-            function ($directiveName) use ($hooksAPI, $directiveNameResolvers) {
+            function ($directiveName) use ($directiveNameResolvers) {
                 $directiveResolvers = $directiveNameResolvers[$directiveName];
                 foreach ($directiveResolvers as $directiveResolver) {
                     // Execute 2 filters: a generic one, and a specific one
                     if (
-                        $hooksAPI->applyFilters(
+                        $this->hooksAPI->applyFilters(
                             HookHelpers::getHookNameToFilterDirective(),
                             true,
                             $this,
@@ -892,7 +890,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $directiveName
                         )
                     ) {
-                        return $hooksAPI->applyFilters(
+                        return $this->hooksAPI->applyFilters(
                             HookHelpers::getHookNameToFilterDirective($directiveName),
                             true,
                             $this,
@@ -1712,9 +1710,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
         ));
         // Execute 2 filters: a generic one, and a specific one
-        $hooksAPI = HooksAPIFacade::getInstance();
         if (
-            $hooksAPI->applyFilters(
+            $this->hooksAPI->applyFilters(
                 HookHelpers::getHookNameToFilterField(),
                 true,
                 $this,
@@ -1723,7 +1720,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldName
             )
         ) {
-            return $hooksAPI->applyFilters(
+            return $this->hooksAPI->applyFilters(
                 HookHelpers::getHookNameToFilterField($fieldName),
                 true,
                 $this,
@@ -1758,8 +1755,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $excludedFieldNames = $fieldResolver->getAdminFieldNames();
             }
             // 2. By filter hook
-            $hooksAPI = HooksAPIFacade::getInstance();
-            $excludedFieldNames = $hooksAPI->applyFilters(
+            $excludedFieldNames = $this->hooksAPI->applyFilters(
                 Hooks::EXCLUDE_FIELDNAMES,
                 $excludedFieldNames,
                 $fieldResolver,

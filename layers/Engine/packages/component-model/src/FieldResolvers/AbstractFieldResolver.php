@@ -8,7 +8,6 @@ use Exception;
 use Composer\Semver\Semver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Environment;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\HookHelpers;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -325,12 +324,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
             // Hook to override the values, eg: by the Field Deprecation List
             // 1. Applied on the type
-            $hooksAPI = HooksAPIFacade::getInstance();
             $hookName = HookHelpers::getSchemaDefinitionForFieldHookName(
                 get_class($typeResolver),
                 $fieldName
             );
-            $schemaDefinition = $hooksAPI->applyFilters(
+            $schemaDefinition = $this->hooksAPI->applyFilters(
                 $hookName,
                 $schemaDefinition,
                 $typeResolver,
@@ -344,7 +342,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                         get_class($fieldInterfaceResolver),
                         $fieldName
                     );
-                    $schemaDefinition = $hooksAPI->applyFilters(
+                    $schemaDefinition = $this->hooksAPI->applyFilters(
                         $hookName,
                         $schemaDefinition,
                         $typeResolver,

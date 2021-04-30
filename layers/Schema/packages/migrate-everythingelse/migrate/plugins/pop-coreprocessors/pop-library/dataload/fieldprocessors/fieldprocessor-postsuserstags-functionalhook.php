@@ -6,6 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -76,4 +77,5 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
 
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
-(new GD_DataLoad_FunctionalFieldResolver($translationAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+$hooksAPI = HooksAPIFacade::getInstance();
+(new GD_DataLoad_FunctionalFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

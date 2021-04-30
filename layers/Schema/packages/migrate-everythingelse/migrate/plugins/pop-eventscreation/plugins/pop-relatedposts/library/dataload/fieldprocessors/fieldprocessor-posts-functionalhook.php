@@ -1,11 +1,12 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 
 class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -77,4 +78,5 @@ class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractFuncti
 
 // Static Initialization: Attach
 $translationAPI = TranslationAPIFacade::getInstance();
-(new PoP_EventsCreation_DataLoad_FunctionalFieldResolver($translationAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+$hooksAPI = HooksAPIFacade::getInstance();
+(new PoP_EventsCreation_DataLoad_FunctionalFieldResolver($translationAPI, $hooksAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
