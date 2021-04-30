@@ -28,7 +28,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -78,7 +77,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_modules_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $module, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the module to its string representation to access it in the array
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // Initialize. If this module had been added props, then use them already
@@ -131,7 +129,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($submodules) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
             foreach ($submodules as $submodule) {
-                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+                $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
                 $submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
                 // If the submodule belongs to the same dataset, then set the shared attributies for the same-dataset modules
@@ -569,39 +567,38 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Propagate to all submodules which have no typeResolver
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         $this->moduleFilterManager->prepareForPropagation($module, $props);
         foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
             // Only modules which do not load data
-            $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) use ($moduleprocessor_manager) {
-                return !$moduleprocessor_manager->getProcessor($submodule)->startDataloadingSection($submodule);
+            $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) use ($this->moduleProcessorManager) {
+                return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
             });
             foreach ($subcomponent_modules as $subcomponent_module) {
-                $moduleprocessor_manager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
             }
         }
         foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
             foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $subcomponent_modules) {
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionalDataField);
                 // Only modules which do not load data
-                $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) use ($moduleprocessor_manager) {
-                    return !$moduleprocessor_manager->getProcessor($submodule)->startDataloadingSection($submodule);
+                $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) use ($this->moduleProcessorManager) {
+                    return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
                 });
                 foreach ($subcomponent_modules as $subcomponent_module) {
-                    $moduleprocessor_manager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
         }
 
         // Only modules which do not load data
-        $submodules = array_filter($this->getSubmodules($module), function ($submodule) use ($moduleprocessor_manager) {
-            return !$moduleprocessor_manager->getProcessor($submodule)->startDataloadingSection($submodule);
+        $submodules = array_filter($this->getSubmodules($module), function ($submodule) use ($this->moduleProcessorManager) {
+            return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
         });
         foreach ($submodules as $submodule) {
-            $moduleprocessor_manager->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
+            $this->moduleProcessorManager->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
         }
         $this->moduleFilterManager->restoreFromPropagation($module, $props);
     }
@@ -755,9 +752,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // $this->flattenDatasetmoduletreeModules(__FUNCTION__, $ret, $module);
         // Exclude the subcomponent modules here
         if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             foreach ($submodules as $submodule) {
-                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+                $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->startDataloadingSection($submodule)) {
@@ -771,9 +767,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // {
     //     // Exclude the subcomponent modules here
     //     if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
-    //         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
     //         foreach ($submodules as $submodule) {
-    //             $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+    //             $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
 
     //             // Propagate only if the submodule doesn't have a typeResolver. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
     //             if (!$submodule_processor->startDataloadingSection($submodule)) {
@@ -1109,7 +1104,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // Exclude the subcomponent modules here
@@ -1130,7 +1124,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                         }
                     }
                     foreach ($conditionalSubmodules as $submodule) {
-                        $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+                        $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
 
                         // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                         if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
@@ -1175,7 +1169,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
             // Second step: all the other submodules can be calculated directly
             foreach ($submodules as $submodule) {
-                $submodule_processor = $moduleprocessor_manager->getProcessor($submodule);
+                $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
@@ -1199,7 +1193,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // Combine the direct and conditionalOnDataField modules all together to iterate below
@@ -1222,7 +1215,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 'subcomponents' => array()
             );
             foreach ($subcomponent_modules as $subcomponent_module) {
-                $subcomponent_processor = $moduleprocessor_manager->getProcessor($subcomponent_module);
+                $subcomponent_processor = $this->moduleProcessorManager->getProcessor($subcomponent_module);
                 if ($subcomponent_module_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES])) {
                     $subcomponent_modules_data_properties = array_merge_recursive(
                         $subcomponent_modules_data_properties,
