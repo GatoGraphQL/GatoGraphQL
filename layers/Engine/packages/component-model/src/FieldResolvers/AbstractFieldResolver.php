@@ -27,6 +27,7 @@ use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
@@ -45,7 +46,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
-        protected InstanceManagerInterface $instanceManager
+        protected InstanceManagerInterface $instanceManager,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter
     ) {
     }
 

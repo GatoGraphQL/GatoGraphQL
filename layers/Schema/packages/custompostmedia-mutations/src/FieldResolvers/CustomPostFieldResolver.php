@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostMediaMutations\FieldResolvers;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -23,9 +24,15 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected MediaTypeResolver $mediaTypeResolver
     ) {
-        parent::__construct($translationAPI, $hooksAPI, $instanceManager);
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+        );
     }
 
     public function getClassesToAttachTo(): array

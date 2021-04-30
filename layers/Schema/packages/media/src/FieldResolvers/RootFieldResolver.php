@@ -9,6 +9,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -22,9 +23,15 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected CustomPostTypeResolver $customPostTypeResolver
     ) {
-        parent::__construct($translationAPI, $hooksAPI, $instanceManager);
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+        );
     }
 
     public function getClassesToAttachTo(): array
