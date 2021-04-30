@@ -5,36 +5,17 @@ declare(strict_types=1);
 namespace PoP\RESTAPI\RouteModuleProcessors;
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\API\Facades\FieldQueryConvertorFacade;
 use PoP\Routing\RouteNatures;
 use PoP\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoP\API\Response\Schemes as APISchemes;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
-    private static ?string $restFieldsQuery = null;
-    private static array $restFields = [];
-    public static function getRESTFields(): array
+    protected function getInitialRESTFields(): string
     {
-        if (is_null(self::$restFields)) {
-            $restFields = self::getRESTFieldsQuery();
-            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($restFields);
-            self::$restFields = $fieldQuerySet->getRequestedFieldQuery();
-        }
-        return self::$restFields;
+        return 'fullSchema';
     }
-    public static function getRESTFieldsQuery(): string
-    {
-        if (is_null(self::$restFieldsQuery)) {
-            self::$restFieldsQuery = (string) HooksAPIFacade::getInstance()->applyFilters(
-                'Root:RESTFields',
-                'fullSchema'
-            );
-        }
-        return self::$restFieldsQuery;
-    }
+
     /**
      * @return array<string, array<array>>
      */
@@ -44,7 +25,15 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 
         $vars = ApplicationState::getVars();
         $ret[RouteNatures::HOME][] = [
-            'module' => [RootRelationalFieldDataloadModuleProcessor::class, RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT, ['fields' => isset($vars['query']) ? $vars['query'] : self::getRESTFields()]],
+            'module' => [
+                RootRelationalFieldDataloadModuleProcessor::class,
+                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT,
+                [
+                    'fields' => isset($vars['query']) ?
+                        $vars['query']
+                        : $this->getRESTFields()
+                    ]
+                ],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->restDataStructureFormatter->getName(),
