@@ -214,12 +214,12 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             case 'histTimeNogmt':
                 // In the DB, the time is saved without GMT. However, in the front-end we need the GMT factored in,
                 // because moment.js will
-                return $notification->hist_time - ($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600);
+                return $notification->hist_time - ($cmsService->getOption($this->nameResolver->getName('popcms:option:gmtOffset')) * 3600);
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
                     $this->translationAPI->__('%s ago', 'pop-notifications'),
-                    \humanTiming($notification->hist_time - ($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:gmtOffset')) * 3600))
+                    \humanTiming($notification->hist_time - ($cmsService->getOption($this->nameResolver->getName('popcms:option:gmtOffset')) * 3600))
                 );
 
             case 'status':

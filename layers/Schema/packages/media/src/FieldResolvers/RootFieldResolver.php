@@ -6,14 +6,15 @@ namespace PoPSchema\Media\FieldResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 
@@ -24,6 +25,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
         protected CustomPostTypeResolver $customPostTypeResolver
     ) {
         parent::__construct(
@@ -31,6 +33,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             $hooksAPI,
             $instanceManager,
             $fieldQueryInterpreter,
+            $nameResolver,
         );
     }
 

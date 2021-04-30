@@ -145,7 +145,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     'status' => Status::APPROVED,
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
-                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
+                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => $typeResolver->getID($comment),
                 );
                 $options = [
@@ -174,7 +174,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                                 $this->translationAPI->__('Date format, as defined in %s', 'pop-comments'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );

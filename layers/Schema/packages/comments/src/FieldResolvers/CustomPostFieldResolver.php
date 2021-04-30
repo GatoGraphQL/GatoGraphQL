@@ -82,7 +82,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     'customPostID' => $typeResolver->getID($post),
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
-                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
+                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => 0, // Bring 1st layer of comments, those added to the custom post
                 );
                 $options = [
