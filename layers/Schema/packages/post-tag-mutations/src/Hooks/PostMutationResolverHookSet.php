@@ -10,7 +10,7 @@ use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 
-class PostMutationResolverHooks extends AbstractCustomPostMutationResolverHookSet
+class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     protected function getTypeResolverClass(): string
     {
