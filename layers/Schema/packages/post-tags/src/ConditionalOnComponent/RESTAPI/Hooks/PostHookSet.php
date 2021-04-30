@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\RESTAPI\Helpers\HookHelpers;
 use PoPSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
 
-class PostHooks extends AbstractHookSet
+class PostHookSet extends AbstractHookSet
 {
     const TAG_RESTFIELDS = 'tags.id|name|url';
 
