@@ -11,7 +11,6 @@ use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoP\ComponentModel\FieldInterfaceResolvers\EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 {
@@ -101,7 +100,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        $cmsService = CMSServiceFacade::getInstance();
         switch ($fieldName) {
             case 'date':
                 return array_merge(
@@ -114,7 +112,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                                 $this->translationAPI->__('Date format, as defined in %s', 'customposts'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );
@@ -212,7 +210,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     protected function getSchemaDefinitionEnumName(string $fieldName): ?string
     {
-        $this->instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'status':
                 /**
@@ -226,7 +223,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     protected function getSchemaDefinitionEnumValues(string $fieldName): ?array
     {
-        $this->instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'status':
                 /**

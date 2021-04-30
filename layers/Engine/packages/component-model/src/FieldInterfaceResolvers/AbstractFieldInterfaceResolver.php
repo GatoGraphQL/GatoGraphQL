@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -21,6 +22,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,
         protected NameResolverInterface $nameResolver,
+        protected CMSServiceInterface $cmsService,
     ) {
     }
 
