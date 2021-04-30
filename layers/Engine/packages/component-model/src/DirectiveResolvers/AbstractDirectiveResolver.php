@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use Composer\Semver\Semver;
 use Exception;
+use Composer\Semver\Semver;
+use PoP\FieldQuery\QueryHelpers;
 use League\Pipeline\StageInterface;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
+use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
 {
@@ -33,6 +34,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
     protected string $directive;
+    protected TranslationAPIInterface $translationAPI;
     /**
      * @var array<string, array>
      */
@@ -45,7 +47,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * @var array[]
      */
     protected array $nestedDirectivePipelineData = [];
-
+    
     /**
      * The directiveResolvers are NOT instantiated through the service container!
      * Instead, the directive will be instantiated in AbstractTypeResolver:
@@ -66,6 +68,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // If the directive is not provided, then it directly the directive name
         // This allows to instantiate the directive through the DependencyInjection component
         $this->directive = $directive ?? $this->getDirectiveName();
+        // Obtain these services directly from the container, instead of using autowiring
+        $this->translationAPI = TranslationAPIFacade::getInstance();
     }
 
     /**
