@@ -6,7 +6,6 @@ namespace Leoloso\ExamplesForPoP\TypeResolverDecorators;
 
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CDNDirective\ComponentConfiguration as CDNComponentConfiguration;
@@ -35,9 +34,8 @@ class CDNTypeResolverDecorator extends AbstractPublicSchemaTypeResolverDecorator
         ) {
             // Add the mapping
             $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-            $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DirectiveResolverInterface */
-            $cdnDirectiveResolver = $instanceManager->getInstance(CDNDirectiveResolver::class);
+            $cdnDirectiveResolver = $this->instanceManager->getInstance(CDNDirectiveResolver::class);
             $cdnDirective = $fieldQueryInterpreter->getDirective(
                 $cdnDirectiveResolver->getDirectiveName()
             );

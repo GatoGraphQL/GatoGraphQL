@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ConfigurableSchemaFeedback\TypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ConfigurableSchemaFeedback\Facades\SchemaFeedbackManagerFacade;
 use PoP\Engine\DirectiveResolvers\AddFeedbackForFieldDirectiveResolver;
@@ -25,9 +24,8 @@ class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractM
     {
         $message = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
-        $addFeedbackForFieldDirectiveResolver = $instanceManager->getInstance(AddFeedbackForFieldDirectiveResolver::class);
+        $addFeedbackForFieldDirectiveResolver = $this->instanceManager->getInstance(AddFeedbackForFieldDirectiveResolver::class);
         $directiveName = $addFeedbackForFieldDirectiveResolver->getDirectiveName();
         $schemaFeedbackDirective = $fieldQueryInterpreter->getDirective(
             $directiveName,
