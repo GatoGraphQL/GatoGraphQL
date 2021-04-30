@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\ConditionalOnContext\UseComponentModelCache\SchemaServices\TypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -26,12 +25,11 @@ class CacheTypeResolverDecorator extends AbstractTypeResolverDecorator
      */
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $loadCacheDirectiveResolver = $this->instanceManager->getInstance(LoadCacheDirectiveResolver::class);
         /** @var DirectiveResolverInterface */
         $saveCacheDirectiveResolver = $this->instanceManager->getInstance(SaveCacheDirectiveResolver::class);
-        $loadCacheDirective = $fieldQueryInterpreter->getDirective(
+        $loadCacheDirective = $this->fieldQueryInterpreter->getDirective(
             $loadCacheDirectiveResolver->getDirectiveName()
         );
         return [

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\TraceTools\TypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolverDecorators\AbstractTypeResolverDecorator;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -27,12 +26,11 @@ class TraceTypeResolverDecorator extends AbstractTypeResolverDecorator
      */
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $startTraceExecutionTimeDirectiveResolver = $this->instanceManager->getInstance(StartTraceExecutionTimeDirectiveResolver::class);
         /** @var DirectiveResolverInterface */
         $endTraceExecutionTimeDirectiveResolver = $this->instanceManager->getInstance(EndTraceExecutionTimeDirectiveResolver::class);
-        $startTraceExecutionTimeDirective = $fieldQueryInterpreter->getDirective(
+        $startTraceExecutionTimeDirective = $this->fieldQueryInterpreter->getDirective(
             $startTraceExecutionTimeDirectiveResolver->getDirectiveName()
         );
         return [

@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateAccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 
@@ -18,11 +17,10 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaTypeResolv
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $validateIsUserLoggedInForDirectivesDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
         // This is the required "validateIsUserLoggedIn" directive
-        $validateIsUserLoggedInDirective = $fieldQueryInterpreter->getDirective(
+        $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
             $validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
         );
         // Add the mapping

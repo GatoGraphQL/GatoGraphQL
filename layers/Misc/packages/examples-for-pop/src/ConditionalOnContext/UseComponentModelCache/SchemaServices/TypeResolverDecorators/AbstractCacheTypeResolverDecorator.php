@@ -6,7 +6,6 @@ namespace Leoloso\ExamplesForPoP\ConditionalOnContext\UseComponentModelCache\Sch
 
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\ConditionalOnContext\UseComponentModelCache\SchemaServices\DirectiveResolvers\SaveCacheDirectiveResolver;
 
@@ -46,10 +45,9 @@ abstract class AbstractCacheTypeResolverDecorator extends AbstractPublicSchemaTy
      */
     protected function getCacheDirective(): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $saveCacheDirectiveResolver = $this->instanceManager->getInstance(SaveCacheDirectiveResolver::class);
-        return $fieldQueryInterpreter->getDirective(
+        return $this->fieldQueryInterpreter->getDirective(
             $saveCacheDirectiveResolver->getDirectiveName(),
             [
                 'time' => $this->getTime(),

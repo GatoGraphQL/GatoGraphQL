@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateAccessControl\TypeResolverDecorators;
 
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 
@@ -19,11 +18,10 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     {
         $mandatoryDirectivesForDirectives = [];
         if ($directiveResolverClasses = $this->getDirectiveResolverClasses()) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
             /** @var DirectiveResolverInterface */
             $validateIsUserLoggedInDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
             // This is the required "validateIsUserLoggedIn" directive
-            $validateIsUserLoggedInDirective = $fieldQueryInterpreter->getDirective(
+            $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
                 $validateIsUserLoggedInDirectiveResolver->getDirectiveName()
             );
             // Add the mapping
@@ -52,11 +50,10 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaTypeResolverDe
     {
         $mandatoryDirectivesForFields = [];
         if ($fieldNames = $this->getFieldNames()) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
             /** @var DirectiveResolverInterface */
             $validateIsUserLoggedInDirectiveResolver = $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
             // This is the required "validateIsUserLoggedIn" directive
-            $validateIsUserLoggedInDirective = $fieldQueryInterpreter->getDirective(
+            $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
                 $validateIsUserLoggedInDirectiveResolver->getDirectiveName()
             );
             // Add the mapping

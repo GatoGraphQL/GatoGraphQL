@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ConfigurableSchemaFeedback\TypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ConfigurableSchemaFeedback\Facades\SchemaFeedbackManagerFacade;
 use PoP\Engine\DirectiveResolvers\AddFeedbackForFieldDirectiveResolver;
 use PoP\Engine\Enums\FieldFeedbackTargetEnum;
@@ -23,11 +22,10 @@ class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractM
     protected function getMandatoryDirectives($entryValue = null): array
     {
         $message = $entryValue;
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $addFeedbackForFieldDirectiveResolver = $this->instanceManager->getInstance(AddFeedbackForFieldDirectiveResolver::class);
         $directiveName = $addFeedbackForFieldDirectiveResolver->getDirectiveName();
-        $schemaFeedbackDirective = $fieldQueryInterpreter->getDirective(
+        $schemaFeedbackDirective = $this->fieldQueryInterpreter->getDirective(
             $directiveName,
             [
                 'message' => $message,
