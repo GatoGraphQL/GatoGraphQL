@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use WP_Post;
+use WP_Query;
+use PoP\Hooks\HooksAPIInterface;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\HooksAPIInterface;
-use WP_Post;
-use WP_Query;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCustomPostType
 {
@@ -28,15 +29,17 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     }
 
     function __construct(
+        InstanceManagerInterface $instanceManager,
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         protected HooksAPIInterface $hooksAPI
     ) {
         parent::__construct(
+            $instanceManager,
             $menu,
             $moduleRegistry,
-            $userAuthorization
+            $userAuthorization,
         );
     }
 
