@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 
 /**
  * Settings menu page
@@ -230,12 +231,17 @@ class SettingsMenuPage extends AbstractMenuPage
     }
 
     /**
+     * The user can define this behavior through the Settings.
      * If `true`, print the sections using tabs
      * If `false`, print the sections one below the other
      */
     protected function printWithTabs(): bool
     {
-        return true;
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        return $userSettingsManager->getSetting(
+            PluginManagementFunctionalityModuleResolver::GENERAL,
+            PluginManagementFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
+        );
     }
 
     /**
@@ -301,7 +307,8 @@ class SettingsMenuPage extends AbstractMenuPage
                 foreach ($items as $item) {
                     $sectionStyle = '';
                     $maybeTitle = $printWithTabs ? '' : sprintf(
-                        '<hr/><h3>%s</h3>',
+                        '<hr/><h3 id="%s">%s</h3>',
+                        $item['id'],
                         $item['name']
                     );
                     if ($printWithTabs) {
