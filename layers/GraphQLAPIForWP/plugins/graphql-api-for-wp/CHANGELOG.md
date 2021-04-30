@@ -20,6 +20,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Split the GraphQL endpoint for accessing data for the WordPress editor into two:
   1. `GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
   2. `GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT`
+- Option to display the Settings page in long form, or using tabs
 
 ### Backwards-breaking changes:
 
