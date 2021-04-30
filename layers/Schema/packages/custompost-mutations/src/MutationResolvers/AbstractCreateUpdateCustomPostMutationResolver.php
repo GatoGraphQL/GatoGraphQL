@@ -151,6 +151,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function validateCreate(array &$errors, array $form_data): void
     {
+        // Either the title or the content must be set
+        if (
+            !isset($form_data[MutationInputProperties::TITLE])
+            && !isset($form_data[MutationInputProperties::CONTENT])
+        ) {
+            $errors[] = $this->translationAPI->__('Either the title, or the content, must be provided', 'custompost-mutations');
+        }
     }
 
     protected function validateUpdate(array &$errors, array $form_data): void
