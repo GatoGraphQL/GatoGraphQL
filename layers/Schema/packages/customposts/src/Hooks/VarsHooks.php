@@ -7,8 +7,6 @@ namespace PoPSchema\CustomPosts\Hooks;
 use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -41,7 +39,7 @@ class VarsHooks extends AbstractHookSet
                 // Post and Event may be different
                 // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
                 // By default, we check for post type but not for categories
-                $component_types = (array)HooksAPIFacade::getInstance()->applyFilters(
+                $component_types = (array) $this->hooksAPI->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
                         ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
@@ -49,9 +47,7 @@ class VarsHooks extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
-                    $components[] =
-                        TranslationAPIFacade::getInstance()->__('post type:', 'pop-engine')
-                        . $customPostType;
+                    $components[] = $this->translationAPI->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;
         }

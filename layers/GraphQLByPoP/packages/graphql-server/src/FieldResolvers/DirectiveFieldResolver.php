@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\DirectiveTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 
@@ -62,13 +61,12 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'locations':
                 /**
                  * @var DirectiveLocationEnum
                  */
-                $directiveLocationEnum = $instanceManager->getInstance(DirectiveLocationEnum::class);
+                $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
                 return $directiveLocationEnum->getName();
         }
         return null;
@@ -76,13 +74,12 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'locations':
                 /**
                  * @var DirectiveLocationEnum
                  */
-                $directiveLocationEnum = $instanceManager->getInstance(DirectiveLocationEnum::class);
+                $directiveLocationEnum = $this->instanceManager->getInstance(DirectiveLocationEnum::class);
                 return $directiveLocationEnum->getValues();
         }
         return null;

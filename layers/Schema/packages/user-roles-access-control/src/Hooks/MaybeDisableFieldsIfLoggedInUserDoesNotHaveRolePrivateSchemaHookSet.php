@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesAccessControl\Hooks;
 
 use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
@@ -35,8 +34,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet extend
      */
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
+        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
     }
 
     /**

@@ -17,7 +17,6 @@ use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\API\PersistedQueries\PersistedQueryUtils;
 use PoP\API\State\ApplicationStateUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\API\Response\Schemes as APISchemes;
 
@@ -118,7 +117,7 @@ class VarsHooks extends AbstractHookSet
         }
 
         // Namespaces change the configuration
-        $components[] = TranslationAPIFacade::getInstance()->__('namespaced:', 'pop-engine') . ($vars['namespace-types-and-interfaces'] ?? false);
+        $components[] = $this->translationAPI->__('namespaced:', 'pop-engine') . ($vars['namespace-types-and-interfaces'] ?? false);
 
         return $components;
     }
@@ -128,7 +127,7 @@ class VarsHooks extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if ($fields = $vars['query'] ?? null) {
             // Serialize instead of implode, because $fields can contain $key => $value
-            $components[] = TranslationAPIFacade::getInstance()->__('fields:', 'pop-engine') . serialize($fields);
+            $components[] = $this->translationAPI->__('fields:', 'pop-engine') . serialize($fields);
         }
     }
 }

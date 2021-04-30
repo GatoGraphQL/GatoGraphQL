@@ -21,11 +21,16 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
 {
@@ -38,6 +43,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected string $directive;
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected FeedbackMessageStoreInterface $feedbackMessageStore;
     /**
      * @var array<string, array>
      */
@@ -74,6 +82,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // Obtain these services directly from the container, instead of using autowiring
         $this->translationAPI = TranslationAPIFacade::getInstance();
         $this->hooksAPI = HooksAPIFacade::getInstance();
+        $this->instanceManager = InstanceManagerFacade::getInstance();
+        $this->fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        $this->feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
     }
 
     /**
@@ -106,10 +117,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-
         // If it has nestedDirectives, extract them and validate them
-        $nestedFieldDirectives = $fieldQueryInterpreter->getFieldDirectives($this->directive, false);
+        $nestedFieldDirectives = $this->fieldQueryInterpreter->getFieldDirectives($this->directive, false);
         if ($nestedFieldDirectives) {
             $nestedDirectiveSchemaErrors = $nestedDirectiveSchemaWarnings = $nestedDirectiveSchemaDeprecations = $nestedDirectiveSchemaNotices = $nestedDirectiveSchemaTraces = [];
             $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
@@ -197,7 +206,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveSchemaErrors,
             $directiveSchemaWarnings,
             $directiveSchemaDeprecations
-        ) = $fieldQueryInterpreter->extractDirectiveArgumentsForSchema(
+        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForSchema(
             $this,
             $typeResolver,
             $this->directive,
@@ -275,14 +284,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$dbWarnings,
         array &$dbDeprecations
     ): array {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         list(
             $validDirective,
             $directiveName,
             $directiveArgs,
             $nestedDBErrors,
             $nestedDBWarnings
-        ) = $fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $typeResolver, $resultItem, $this->directive, $variables, $expressions);
+        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForResultItem($this, $typeResolver, $resultItem, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
         $this->directiveArgsForResultItems[$typeResolver->getID($resultItem)] = $directiveArgs;
@@ -726,13 +734,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     //         return;
     //     }
     //     // Check if all fields are supported by this directive
-    //     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
     //     $failedFields = [];
     //     foreach ($idsDataFields as $id => &$data_fields) {
     //         // Get the fieldName for each field
     //         $nameFields = [];
     //         foreach ($data_fields['direct'] as $field) {
-    //             $nameFields[$fieldQueryInterpreter->getFieldName($field)] = $field;
+    //             $nameFields[$this->fieldQueryInterpreter->getFieldName($field)] = $field;
     //         }
     //         // If any fieldName failed, remove it from the list of fields to execute for this directive
     //         if ($unsupportedFieldNames = array_diff(array_keys($nameFields), $directiveSupportedFieldNames)) {
@@ -752,7 +759,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     //     if ($failedFields) {
     //         $directiveName = $this->getDirectiveName();
     //         $failedFieldNames = array_map(
-    //             [$fieldQueryInterpreter, 'getFieldName'],
+    //             [$this->fieldQueryInterpreter, 'getFieldName'],
     //             $failedFields
     //         );
     //         if (count($failedFields) == 1) {
@@ -804,10 +811,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         }
 
         // Show the failureMessage either as error or as warning
-        // $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $directiveName = $this->getDirectiveName();
         // $failedFieldNames = array_map(
-        //     [$fieldQueryInterpreter, 'getFieldName'],
+        //     [$this->fieldQueryInterpreter, 'getFieldName'],
         //     $failedFields
         // );
         if ($removeFieldIfDirectiveFailed) {

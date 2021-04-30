@@ -6,8 +6,6 @@ namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -36,19 +34,17 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
      */
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
-        $forEachDirectiveResolver = $instanceManager->getInstance(ForEachDirectiveResolver::class);
+        $forEachDirectiveResolver = $this->instanceManager->getInstance(ForEachDirectiveResolver::class);
         /** @var DirectiveResolverInterface */
-        $applyFunctionDirectiveResolver = $instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
+        $applyFunctionDirectiveResolver = $this->instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
         return sprintf(
             $this->translationAPI->__('Use %s instead', 'component-model'),
-            $fieldQueryInterpreter->getFieldDirectivesAsString([
+            $this->fieldQueryInterpreter->getFieldDirectivesAsString([
                 [
                     $forEachDirectiveResolver->getDirectiveName(),
                     '',
-                    $fieldQueryInterpreter->getFieldDirectivesAsString([
+                    $this->fieldQueryInterpreter->getFieldDirectivesAsString([
                         [
                             $applyFunctionDirectiveResolver->getDirectiveName(),
                         ],
@@ -87,9 +83,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $dbKey = $typeResolver->getTypeOutputName();
-
         /**
          * Collect all ID => dataFields for the arrayItems
          */
@@ -99,7 +93,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         // By making the property "propertyName:key", the "key" can be extracted and passed under expression `%key%` to the function
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -162,7 +156,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 }
 
                 // Obtain the elements composing the field, to re-create a new field for each arrayItem
-                $fieldParts = $fieldQueryInterpreter->listField($field);
+                $fieldParts = $this->fieldQueryInterpreter->listField($field);
                 $fieldName = $fieldParts[0];
                 $fieldArgs = $fieldParts[1];
                 $fieldAlias = $fieldParts[2];
@@ -176,14 +170,14 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                     // Watch out: function `regenerateAndExecuteFunction` receives `$idsDataFields` and not `$idsDataFieldOutputKeys`, so then re-create the "field" assigning a new alias
                     // If it has an alias, use it. If not, use the fieldName
                     $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
-                    $arrayItemProperty = $fieldQueryInterpreter->composeField(
+                    $arrayItemProperty = $this->fieldQueryInterpreter->composeField(
                         $fieldName,
                         $fieldArgs,
                         $arrayItemAlias,
                         $fieldSkipOutputIfNull,
                         $fieldDirectives
                     );
-                    $arrayItemPropertyOutputKey = $fieldQueryInterpreter->getFieldOutputKey($arrayItemProperty);
+                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($arrayItemProperty);
                     // Place into the current object
                     $dbItems[(string)$id][$arrayItemPropertyOutputKey] = $value;
                     // Place it into list of fields to process
@@ -196,7 +190,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         // 3. Composer the array from the results for each array item
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
                 $value = $isValueInDBItems ?
                     $dbItems[(string)$id][$fieldOutputKey] :
@@ -211,7 +205,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 }
 
                 // Obtain the elements composing the field, to re-create a new field for each arrayItem
-                $fieldParts = $fieldQueryInterpreter->listField($field);
+                $fieldParts = $this->fieldQueryInterpreter->listField($field);
                 $fieldName = $fieldParts[0];
                 $fieldArgs = $fieldParts[1];
                 $fieldAlias = $fieldParts[2];
@@ -223,7 +217,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 $array = $value;
                 foreach ($array as $key => $value) {
                     $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
-                    $arrayItemProperty = $fieldQueryInterpreter->composeField(
+                    $arrayItemProperty = $this->fieldQueryInterpreter->composeField(
                         $fieldName,
                         $fieldArgs,
                         $arrayItemAlias,
@@ -231,7 +225,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $fieldDirectives
                     );
                     // Place the result of executing the function on the array item
-                    $arrayItemPropertyOutputKey = $fieldQueryInterpreter->getFieldOutputKey($arrayItemProperty);
+                    $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($arrayItemProperty);
                     $arrayItemValue = $dbItems[(string)$id][$arrayItemPropertyOutputKey];
                     // Remove this temporary property from $dbItems
                     unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
@@ -292,8 +286,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         // First let the parent add $value, then also add $key, which can be deduced from the fieldOutputKey
         parent::addExpressionsForResultItem($typeResolver, $id, $field, $resultIDItems, $dbItems, $previousDBItems, $variables, $messages, $dbErrors, $dbWarnings, $dbDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $arrayItemPropertyOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+        $arrayItemPropertyOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
         $arrayItemPropertyElems = $this->extractElementsFromArrayItemProperty($arrayItemPropertyOutputKey);
         $key = $arrayItemPropertyElems[1];
         $this->addExpressionForResultItem($id, 'key', $key, $messages);

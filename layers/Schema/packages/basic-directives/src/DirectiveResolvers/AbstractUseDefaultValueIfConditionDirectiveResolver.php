@@ -8,8 +8,6 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\BasicDirectives\Enums\DefaultConditionEnum;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractSchemaDirectiveResolver;
 
 abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends AbstractSchemaDirectiveResolver
@@ -42,7 +40,6 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
         array &$schemaTraces
     ): void {
         // Replace all the NULL results with the default value
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $fieldOutputKeyCache = [];
         foreach ($idsDataFields as $id => $dataFields) {
             // Use either the default value passed under param "value" or, if this is NULL, use a predefined value
@@ -64,7 +61,7 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
                 foreach ($dataFields['direct'] as $field) {
                     // Get the fieldOutputKey from the cache, or calculate it
                     if (!isset($fieldOutputKeyCache[$field])) {
-                        $fieldOutputKeyCache[$field] = $fieldQueryInterpreter->getFieldOutputKey($field);
+                        $fieldOutputKeyCache[$field] = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                     }
                     $fieldOutputKey = $fieldOutputKeyCache[$field];
                     // If it is null, replace it with the default value
@@ -98,11 +95,10 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var DefaultConditionEnum
          */
-        $defaultConditionEnum = $instanceManager->getInstance(DefaultConditionEnum::class);
+        $defaultConditionEnum = $this->instanceManager->getInstance(DefaultConditionEnum::class);
         $schemaDirectiveArg = [
             SchemaDefinition::ARGNAME_NAME => 'value',
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,

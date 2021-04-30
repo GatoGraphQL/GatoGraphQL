@@ -10,11 +10,9 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\SchemaFieldResolver;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
 {
@@ -56,13 +54,12 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'directives':
                 /**
                  * @var DirectiveTypeEnum
                  */
-                $directiveTypeEnum = $instanceManager->getInstance(DirectiveTypeEnum::class);
+                $directiveTypeEnum = $this->instanceManager->getInstance(DirectiveTypeEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -106,11 +103,10 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
-                    $instanceManager = InstanceManagerFacade::getInstance();
                     /**
                      * @var DirectiveTypeEnum
                      */
-                    $directiveTypeEnum = $instanceManager->getInstance(DirectiveTypeEnum::class);
+                    $directiveTypeEnum = $this->instanceManager->getInstance(DirectiveTypeEnum::class);
                     // Convert the enum from uppercase (as exposed in the API) to lowercase (as is its real value)
                     $ofTypes = array_map(
                         [$directiveTypeEnum, 'getCoreValue'],

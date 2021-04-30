@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
@@ -11,6 +12,11 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
 {
+    function __construct(
+        protected InstanceManagerInterface $instanceManager,
+    ) {
+    }
+
     abstract public function getName(): string;
 
     /**

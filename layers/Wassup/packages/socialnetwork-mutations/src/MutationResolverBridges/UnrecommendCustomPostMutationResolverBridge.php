@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnrecommendCustomPostMutationResolver;
 
@@ -24,7 +23,7 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         return sprintf(
-            TranslationAPIFacade::getInstance()->__('You have stopped recommending <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->translationAPI->__('You have stopped recommending <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $customPostTypeAPI->getTitle($result_id)
         );
     }

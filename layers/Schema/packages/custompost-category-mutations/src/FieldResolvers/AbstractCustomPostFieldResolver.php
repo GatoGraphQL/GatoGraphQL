@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -63,10 +62,9 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
     {
         switch ($fieldName) {
             case 'setCategories':
-                $instanceManager = InstanceManagerFacade::getInstance();
                 $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
                 /** @var TypeResolverInterface */
-                $categoryTypeResolver = $instanceManager->getInstance($categoryTypeResolverClass);
+                $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,

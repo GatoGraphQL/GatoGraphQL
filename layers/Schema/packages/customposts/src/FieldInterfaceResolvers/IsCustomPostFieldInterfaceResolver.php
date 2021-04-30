@@ -8,12 +8,9 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 {
@@ -103,8 +100,6 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        $cmsService = CMSServiceFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'date':
                 return array_merge(
@@ -117,7 +112,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                                 $this->translationAPI->__('Date format, as defined in %s', 'customposts'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );
@@ -143,7 +138,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                 /**
                  * @var CustomPostStatusEnum
                  */
-                $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -187,7 +182,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                 /**
                  * @var CustomPostContentFormatEnum
                  */
-                $customPostContentFormatEnum = $instanceManager->getInstance(CustomPostContentFormatEnum::class);
+                $customPostContentFormatEnum = $this->instanceManager->getInstance(CustomPostContentFormatEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [
@@ -215,13 +210,12 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     protected function getSchemaDefinitionEnumName(string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'status':
                 /**
                  * @var CustomPostStatusEnum
                  */
-                $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                 return $customPostStatusEnum->getName();
         }
         return null;
@@ -229,13 +223,12 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     protected function getSchemaDefinitionEnumValues(string $fieldName): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'status':
                 /**
                  * @var CustomPostStatusEnum
                  */
-                $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                 return array_merge(
                     $customPostStatusEnum->getValues(),
                     [

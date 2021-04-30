@@ -14,7 +14,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -96,18 +95,17 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            self::MODULE_FILTERINPUT_ORDER => $translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'pop-engine'),
-            self::MODULE_FILTERINPUT_LIMIT => $translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'pop-engine'),
-            self::MODULE_FILTERINPUT_OFFSET => $translationAPI->__('Offset the results by how many places (required for pagination)', 'pop-engine'),
-            self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('Search for elements containing the given string', 'pop-engine'),
+            self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'pop-engine'),
+            self::MODULE_FILTERINPUT_LIMIT => $this->translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'pop-engine'),
+            self::MODULE_FILTERINPUT_OFFSET => $this->translationAPI->__('Offset the results by how many places (required for pagination)', 'pop-engine'),
+            self::MODULE_FILTERINPUT_SEARCH => $this->translationAPI->__('Search for elements containing the given string', 'pop-engine'),
             self::MODULE_FILTERINPUT_IDS => sprintf(
-                $translationAPI->__('Limit results to elements with the given IDs', 'pop-engine'),
+                $this->translationAPI->__('Limit results to elements with the given IDs', 'pop-engine'),
                 Param::VALUE_SEPARATOR
             ),
             self::MODULE_FILTERINPUT_ID => sprintf(
-                $translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'pop-engine'),
+                $this->translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'pop-engine'),
                 Param::VALUE_SEPARATOR
             ),
         ];

@@ -13,7 +13,6 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCateg
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Schema Config Options block
@@ -38,11 +37,10 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var SchemaConfigurationBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
         return $blockCategory;
     }
 

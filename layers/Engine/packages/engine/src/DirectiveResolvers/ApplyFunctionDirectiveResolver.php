@@ -14,7 +14,6 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -98,23 +97,21 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
         $target = $this->directiveArgsForSchema['target'] ?? null;
 
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
         if ($addArguments) {
-            $functionName = $fieldQueryInterpreter->getFieldName($function);
+            $functionName = $this->fieldQueryInterpreter->getFieldName($function);
             $functionArgElems = array_merge(
-                $fieldQueryInterpreter->extractFieldArguments($typeResolver, $function),
+                $this->fieldQueryInterpreter->extractFieldArguments($typeResolver, $function),
                 $addArguments
             );
-            $function = $fieldQueryInterpreter->getField($functionName, $functionArgElems);
+            $function = $this->fieldQueryInterpreter->getField($functionName, $functionArgElems);
         }
         $dbKey = $typeResolver->getTypeOutputName();
 
         // Get the value from the object
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -153,7 +150,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldArgs,
                     $schemaDBErrors,
                     $schemaDBWarnings
-                ) = $fieldQueryInterpreter->extractFieldArgumentsForSchema($typeResolver, $function, $variables);
+                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($typeResolver, $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a resultItem by resultItem basis
                 if ($schemaDBWarnings) {
@@ -213,8 +210,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the dbWarnings, if any
-                $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-                if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                     $dbWarnings[$id] = array_merge(
                         $dbWarnings[$id] ?? [],
                         $resultItemDBWarnings
@@ -267,8 +263,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaWarnings,
         array &$schemaDeprecations
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+        $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
         $dbKey = $typeResolver->getTypeOutputName();
         $value = $isValueInDBItems ?

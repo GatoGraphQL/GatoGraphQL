@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\Users\FieldInterfaceResolvers\WithAuthorFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -37,11 +36,10 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getWithAuthorFieldInterfaceResolverInstance(): FieldInterfaceResolverInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var WithAuthorFieldInterfaceResolver
          */
-        $resolver = $instanceManager->getInstance(WithAuthorFieldInterfaceResolver::class);
+        $resolver = $this->instanceManager->getInstance(WithAuthorFieldInterfaceResolver::class);
         return $resolver;
     }
 

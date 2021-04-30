@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPostsWP\Overrides\TypeDataLoaders;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeDataLoaders\CustomPostTypeDataLoader;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPostsWP\TypeResolverPickers\CustomPostTypeResolverPickerInterface;
 
@@ -45,8 +44,7 @@ class CustomPostUnionTypeDataLoader extends CustomPostTypeDataLoader
         // without converting the object to its own post type (eg: EM_Event for an "event" custom post type)
         // Cast the custom posts to their own classes
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $customPostUnionTypeResolver =  $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        $customPostUnionTypeResolver =  $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         // Group all the customPosts by targetResolverPicker,
         // so that their casting can be executed in a single query per type
         $customPostTypeTypeResolverPickers = [];

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -13,7 +12,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
@@ -87,11 +85,10 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /**
                  * @var CustomPostStatusEnum
                  */
-                $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostStatusEnum->getName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $customPostStatusEnum->getValues()
@@ -102,11 +99,10 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $translationAPI->__('Custom Post Status', 'customposts'),
-            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => $translationAPI->__('Return results from Custom Post Types', 'customposts'),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->translationAPI->__('Custom Post Status', 'customposts'),
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
         ];
         return $descriptions[$module[1]] ?? null;
     }

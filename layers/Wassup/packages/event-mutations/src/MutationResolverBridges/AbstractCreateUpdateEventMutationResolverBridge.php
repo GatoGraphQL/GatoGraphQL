@@ -6,7 +6,6 @@ namespace PoPSitesWassup\EventMutations\MutationResolverBridges;
 
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class AbstractCreateUpdateEventMutationResolverBridge extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
@@ -14,10 +13,8 @@ abstract class AbstractCreateUpdateEventMutationResolverBridge extends AbstractC
     {
         $form_data = parent::getFormData();
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $form_data['location'] = $moduleprocessor_manager->getProcessor([\PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, \PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP])->getValue([\PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, \PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP]);
-        $form_data['when'] = $moduleprocessor_manager->getProcessor([\PoP_Module_Processor_DateRangeComponentInputs::class, \PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER])->getValue([\PoP_Module_Processor_DateRangeComponentInputs::class, \PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER]);
+        $form_data['location'] = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, \PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP])->getValue([\PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, \PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP]);
+        $form_data['when'] = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_DateRangeComponentInputs::class, \PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER])->getValue([\PoP_Module_Processor_DateRangeComponentInputs::class, \PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER]);
 
         return $form_data;
     }

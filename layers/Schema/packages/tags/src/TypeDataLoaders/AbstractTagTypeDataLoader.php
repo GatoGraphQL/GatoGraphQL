@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Tags\TypeDataLoaders;
 
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractTrait;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\ModuleProcessors\FieldDataloadModuleProcessor;
@@ -38,7 +37,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     protected function getOrderbyDefault()
     {
-        return NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:tags:count');
+        return $this->nameResolver->getName('popcms:dbcolumn:orderby:tags:count');
     }
 
     protected function getOrderDefault()

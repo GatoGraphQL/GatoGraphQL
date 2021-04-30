@@ -8,7 +8,6 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 
 /**
@@ -62,12 +61,11 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         }
         // Two fields: it may be a directive
         if (count($fields) == 2) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
             $maybeField = $fields[0];
             $maybeDirective = $fields[1];
             $maybeFieldDirectives = array_map(
-                [$fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
-                $fieldQueryInterpreter->getDirectives($maybeField)
+                [$this->fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
+                $this->fieldQueryInterpreter->getDirectives($maybeField)
             );
             // Find out if the directive is contained in the field
             if (in_array($maybeDirective, $maybeFieldDirectives)) {

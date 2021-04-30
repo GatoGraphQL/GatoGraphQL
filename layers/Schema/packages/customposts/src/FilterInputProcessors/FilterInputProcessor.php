@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FilterInputProcessors;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -45,11 +44,10 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             case self::FILTERINPUT_CUSTOMPOSTSTATUS:
                 // Remove any status that is not in the Enum
                 if ($value) {
-                    $instanceManager = InstanceManagerFacade::getInstance();
                     /**
                      * @var CustomPostStatusEnum
                      */
-                    $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                    $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                     $value = array_intersect(
                         $value,
                         $customPostStatusEnum->getValues()

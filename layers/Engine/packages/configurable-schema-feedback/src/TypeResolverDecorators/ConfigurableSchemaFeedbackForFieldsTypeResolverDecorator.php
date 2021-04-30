@@ -4,32 +4,40 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurableSchemaFeedback\TypeResolverDecorators;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ConfigurableSchemaFeedback\Facades\SchemaFeedbackManagerFacade;
-use PoP\Engine\DirectiveResolvers\AddFeedbackForFieldDirectiveResolver;
-use PoP\Engine\Enums\FieldFeedbackTargetEnum;
 use PoP\Engine\Enums\FieldFeedbackTypeEnum;
+use PoP\Engine\Enums\FieldFeedbackTargetEnum;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\Engine\DirectiveResolvers\AddFeedbackForFieldDirectiveResolver;
+use PoP\ConfigurableSchemaFeedback\Managers\SchemaFeedbackManagerInterface;
 use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\AbstractMandatoryDirectivesForFieldsTypeResolverDecorator;
 
 class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractMandatoryDirectivesForFieldsTypeResolverDecorator
 {
+    function __construct(
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected SchemaFeedbackManagerInterface $schemaFeedbackManager,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $fieldQueryInterpreter,
+        );
+    }
+    
     protected function getConfigurationEntries(): array
     {
-        $schemaFeedbackManager = SchemaFeedbackManagerFacade::getInstance();
-        return $schemaFeedbackManager->getEntriesForFields();
+        return $this->schemaFeedbackManager->getEntriesForFields();
     }
 
     protected function getMandatoryDirectives($entryValue = null): array
     {
         $message = $entryValue;
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
-        $addFeedbackForFieldDirectiveResolver = $instanceManager->getInstance(AddFeedbackForFieldDirectiveResolver::class);
+        $addFeedbackForFieldDirectiveResolver = $this->instanceManager->getInstance(AddFeedbackForFieldDirectiveResolver::class);
         $directiveName = $addFeedbackForFieldDirectiveResolver->getDirectiveName();
-        $schemaFeedbackDirective = $fieldQueryInterpreter->getDirective(
+        $schemaFeedbackDirective = $this->fieldQueryInterpreter->getDirective(
             $directiveName,
             [
                 'message' => $message,

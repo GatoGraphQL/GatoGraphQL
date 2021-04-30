@@ -6,7 +6,6 @@ namespace GraphQLAPI\SchemaFeedback\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\SchemaFeedback\BlockCategories\SchemaFeedbackBlockCategory;
 
@@ -30,11 +29,10 @@ class SchemaFeedbackBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var SchemaFeedbackBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(SchemaFeedbackBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(SchemaFeedbackBlockCategory::class);
         return $blockCategory;
     }
 

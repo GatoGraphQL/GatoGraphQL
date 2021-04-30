@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
@@ -23,11 +22,10 @@ abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var SchemaConfigurationBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
         return $blockCategory;
     }
 
@@ -53,11 +51,10 @@ abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
 EOF;
         $postContentElems = $foundPostListIDs = [];
         if ($postListIDs = $attributes[$this->getAttributeName()] ?? []) {
-            $instanceManager = InstanceManagerFacade::getInstance();
             /** @var BlockRenderingHelpers */
-            $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
+            $blockRenderingHelpers = $this->instanceManager->getInstance(BlockRenderingHelpers::class);
             /** @var CPTUtils */
-            $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+            $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
             /**
              * @var WP_Post[]
              */

@@ -8,8 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -145,7 +143,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     'status' => Status::APPROVED,
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
                     'order' =>  'ASC',
-                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:comments:date'),
+                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date'),
                     'parentID' => $typeResolver->getID($comment),
                 );
                 $options = [
@@ -161,7 +159,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $cmsService = CMSServiceFacade::getInstance();
         switch ($fieldName) {
             case 'date':
                 return array_merge(
@@ -174,7 +171,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                                 $this->translationAPI->__('Date format, as defined in %s', 'pop-comments'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
                         ],
                     ]
                 );

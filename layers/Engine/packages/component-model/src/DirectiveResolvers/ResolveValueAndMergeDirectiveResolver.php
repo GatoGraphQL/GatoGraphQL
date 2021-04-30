@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -66,7 +65,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     protected function resolveValueForResultItems(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $enqueueFillingResultItemsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
             // Obtain its ID and the required data-fields for that ID
@@ -95,7 +93,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             foreach (array_filter($idsDataFields[$id]['conditional']) as $conditionDataField => $conditionalDataFields) {
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($conditionDataField);
+                $conditionFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionDataField);
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
@@ -170,14 +168,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ) {
         $value = $typeResolver->resolveValue($resultItem, $field, $variables, $expressions);
         // Merge the dbWarnings and dbDeprecations, if any
-        $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-        if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+        if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
             $dbWarnings[$id] = array_merge(
                 $dbWarnings[$id] ?? [],
                 $resultItemDBWarnings
             );
         }
-        if ($resultItemDBDeprecations = $feedbackMessageStore->retrieveAndClearResultItemDBDeprecations($id)) {
+        if ($resultItemDBDeprecations = $this->feedbackMessageStore->retrieveAndClearResultItemDBDeprecations($id)) {
             $dbDeprecations[$id] = array_merge(
                 $dbDeprecations[$id] ?? [],
                 $resultItemDBDeprecations
@@ -202,7 +199,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
         } else {
             // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-            $fieldOutputKey = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($field);
+            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
             $dbItems[(string)$id][$fieldOutputKey] = $value;
         }
     }

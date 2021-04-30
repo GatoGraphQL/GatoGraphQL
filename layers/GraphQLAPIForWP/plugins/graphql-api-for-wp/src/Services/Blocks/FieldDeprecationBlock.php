@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\FieldDeprecationBlockCategory;
 
@@ -26,11 +25,10 @@ class FieldDeprecationBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var FieldDeprecationBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(FieldDeprecationBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(FieldDeprecationBlockCategory::class);
         return $blockCategory;
     }
 

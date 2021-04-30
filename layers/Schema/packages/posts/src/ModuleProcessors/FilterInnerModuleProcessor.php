@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
@@ -60,7 +59,7 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
             ],
         ];
         if (
-            $modules = HooksAPIFacade::getInstance()->applyFilters(
+            $modules = $this->hooksAPI->applyFilters(
                 'Posts:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module

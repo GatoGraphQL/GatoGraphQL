@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\FieldDeprecationBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
 {
@@ -82,11 +81,10 @@ class GraphQLFieldDeprecationListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var FieldDeprecationBlock
          */
-        $fieldDeprecationBlock = $instanceManager->getInstance(FieldDeprecationBlock::class);
+        $fieldDeprecationBlock = $this->instanceManager->getInstance(FieldDeprecationBlock::class);
         return [
             [$fieldDeprecationBlock->getBlockFullName()],
         ];

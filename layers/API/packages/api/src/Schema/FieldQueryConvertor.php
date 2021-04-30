@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use function count;
+use function strlen;
+use function substr;
 use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
-use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\API\Schema\FieldQuerySet;
 use PoP\API\ComponentConfiguration;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
-use function count;
-use function strlen;
-use function substr;
+use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
 class FieldQueryConvertor implements FieldQueryConvertorInterface
 {
@@ -41,7 +41,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
-        protected QueryParserInterface $queryParser
+        protected QueryParserInterface $queryParser,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ) {
     }
 
@@ -270,15 +271,14 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected function maybeReplaceEmbeddableFields(string $field): string
     {
         if (ComponentConfiguration::enableEmbeddableFields()) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
             /**
              * Identify all the fieldArgValues from the string, because
              * embeddable fields can only appear in field/directive arguments
              */
-            if ($fieldArgValues = $fieldQueryInterpreter->extractFieldArgumentValues($field)) {
+            if ($fieldArgValues = $this->fieldQueryInterpreter->extractFieldArgumentValues($field)) {
                 $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $fieldArgValues);
             }
-            if ($directiveArgValues = $fieldQueryInterpreter->extractDirectiveArgumentValues($field)) {
+            if ($directiveArgValues = $this->fieldQueryInterpreter->extractDirectiveArgumentValues($field)) {
                 $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $directiveArgValues);
             }
         }
@@ -293,7 +293,6 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      */
     protected function maybeReplaceEmbeddableFieldOrDirectiveArguments(string $field, array $fieldOrDirectiveArgValues): string
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         /**
          * Inside the string, everything of pattern "{{field}}" is a field from the same type
          * The field can include arguments:
@@ -335,7 +334,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                     $embeddedField = $matches[0][0];
                     if (
                         $embeddedField == $fieldOrDirectiveArgValue
-                        || $fieldQueryInterpreter->wrapStringInQuotes($embeddedField) == $fieldOrDirectiveArgValue
+                        || $this->fieldQueryInterpreter->wrapStringInQuotes($embeddedField) == $fieldOrDirectiveArgValue
                     ) {
                         $isSingleWholeEmbed = true;
                     }
@@ -364,9 +363,9 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                      * If the field has no fieldArgs, then add "()" at the end, to make it resolvable
                      */
                     if (!str_ends_with($fieldNames[$i], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING)) {
-                        $fieldNames[$i] = $fieldQueryInterpreter->composeField(
+                        $fieldNames[$i] = $this->fieldQueryInterpreter->composeField(
                             $fieldNames[$i],
-                            $fieldQueryInterpreter->getFieldArgsAsString([], true)
+                            $this->fieldQueryInterpreter->getFieldArgsAsString([], true)
                         );
                     }
                     $fields[] = $fieldNames[$i];
@@ -375,7 +374,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 // Otherwise concatenate the different parts as a string, use "sprintf"
                 $replacedFieldArgValue = $isSingleWholeEmbed ?
                     $fields[0]
-                    : $fieldQueryInterpreter->getField(
+                    : $this->fieldQueryInterpreter->getField(
                         'sprintf',
                         [
                             'string' => $replacedFieldArgValue,

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
@@ -19,32 +18,30 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
     {
         $form_data = parent::getFormData();
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         $inputs = $this->getFormInputs();
         $form_data = array_merge(
             $form_data,
             array(
-                'short_description' => trim($moduleprocessor_manager->getProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
-                'display_email' => $moduleprocessor_manager->getProcessor($inputs['display_email'])->getValue($inputs['display_email']),
-                'facebook' => trim($moduleprocessor_manager->getProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
-                'twitter' => trim($moduleprocessor_manager->getProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
-                'linkedin' => trim($moduleprocessor_manager->getProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
-                'youtube' => trim($moduleprocessor_manager->getProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
-                'instagram' => trim($moduleprocessor_manager->getProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
-                // 'blog' => trim($moduleprocessor_manager->getProcessor($inputs['blog'])->getValue($inputs['blog'])),
+                'short_description' => trim($this->moduleProcessorManager->getProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
+                'display_email' => $this->moduleProcessorManager->getProcessor($inputs['display_email'])->getValue($inputs['display_email']),
+                'facebook' => trim($this->moduleProcessorManager->getProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
+                'twitter' => trim($this->moduleProcessorManager->getProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
+                'linkedin' => trim($this->moduleProcessorManager->getProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
+                'youtube' => trim($this->moduleProcessorManager->getProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
+                'instagram' => trim($this->moduleProcessorManager->getProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
+                // 'blog' => trim($this->moduleProcessorManager->getProcessor($inputs['blog'])->getValue($inputs['blog'])),
             )
         );
 
         // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_profile:form_data', $form_data);
+        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_profile:form_data', $form_data);
 
         return $form_data;
     }
 
     private function getFormInputs()
     {
-        $inputs = HooksAPIFacade::getInstance()->applyFilters(
+        $inputs = $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_Profile:form-inputs',
             array(
                 'short_description' => null,

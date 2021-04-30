@@ -7,6 +7,7 @@ namespace PoPSchema\UserState\Hooks;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoPSchema\UserState\FieldResolvers\GlobalFieldResolver;
 
 class DBEntriesHooks extends AbstractHookSet
@@ -14,11 +15,13 @@ class DBEntriesHooks extends AbstractHookSet
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
         protected GlobalFieldResolver $globalFieldResolver
     ) {
         parent::__construct(
             $hooksAPI,
-            $translationAPI
+            $translationAPI,
+            $instanceManager,
         );
     }
 

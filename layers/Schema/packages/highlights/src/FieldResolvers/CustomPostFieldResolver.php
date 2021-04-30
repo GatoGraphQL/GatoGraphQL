@@ -8,7 +8,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -95,7 +94,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                         ],
                     ],
                     'custompost-types' => [POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT],
-                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:date'),
+                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );
 

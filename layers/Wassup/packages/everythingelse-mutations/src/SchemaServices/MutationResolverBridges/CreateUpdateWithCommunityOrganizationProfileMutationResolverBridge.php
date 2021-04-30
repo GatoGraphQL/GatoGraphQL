@@ -22,7 +22,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     }
     protected function getProfileorganizationFormInputs()
     {
-        $inputs = HooksAPIFacade::getInstance()->applyFilters(
+        $inputs = $this->hooksAPI->applyFilters(
             'GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization:form-inputs',
             array(
                 'is_community' => null,
@@ -45,13 +45,12 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
 
     public function getFormData(): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $inputs = $this->getFormInputs();
         return array_merge(
             parent::getFormData(),
             $this->getCommonuserrolesFormData(),
             array(
-                'is_community' => (bool)$moduleprocessor_manager->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
+                'is_community' => (bool)$this->moduleProcessorManager->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
             )
         );
     }

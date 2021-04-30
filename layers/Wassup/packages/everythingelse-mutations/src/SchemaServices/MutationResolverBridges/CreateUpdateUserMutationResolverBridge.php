@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
 
@@ -27,18 +24,16 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         if ($vars['global-userstate']['is-user-logged-in']) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
-                TranslationAPIFacade::getInstance()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
+                $this->translationAPI->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
                 PoP_Application_Utils::getPreviewTarget(),
-                HooksAPIFacade::getInstance()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
+                $this->hooksAPI->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
         }
     }
 
     public function getFormData(): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         $cmseditusershelpers = \PoP\EditUsers\HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
@@ -46,21 +41,21 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,
-            'username' => $cmseditusershelpers->sanitizeUsername($moduleprocessor_manager->getProcessor($inputs['username'])->getValue($inputs['username'])),
-            'password' => $moduleprocessor_manager->getProcessor($inputs['password'])->getValue($inputs['password']),
-            'repeat_password' => $moduleprocessor_manager->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
-            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($moduleprocessor_manager->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
-            'user_email' => trim($moduleprocessor_manager->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
-            'description' => trim($moduleprocessor_manager->getProcessor($inputs['description'])->getValue($inputs['description'])),
-            'user_url' => trim($moduleprocessor_manager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
+            'username' => $cmseditusershelpers->sanitizeUsername($this->moduleProcessorManager->getProcessor($inputs['username'])->getValue($inputs['username'])),
+            'password' => $this->moduleProcessorManager->getProcessor($inputs['password'])->getValue($inputs['password']),
+            'repeat_password' => $this->moduleProcessorManager->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
+            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
+            'user_email' => trim($this->moduleProcessorManager->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
+            'description' => trim($this->moduleProcessorManager->getProcessor($inputs['description'])->getValue($inputs['description'])),
+            'user_url' => trim($this->moduleProcessorManager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $form_data['captcha'] = $moduleprocessor_manager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
+            $form_data['captcha'] = $this->moduleProcessorManager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
         // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data', $form_data);
+        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_user:form_data', $form_data);
 
         if ($user_id) {
             $form_data = $this->getUpdateuserFormData($form_data);
@@ -74,7 +69,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getCreateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
+        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_user:form_data:create', $form_data);
 
         return $form_data;
     }
@@ -82,7 +77,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getUpdateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
+        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_user:form_data:update', $form_data);
 
         return $form_data;
     }
@@ -103,7 +98,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             $form_inputs['captcha'] = null;
         }
 
-        $inputs = HooksAPIFacade::getInstance()->applyFilters(
+        $inputs = $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_User:form-inputs',
             $form_inputs
         );

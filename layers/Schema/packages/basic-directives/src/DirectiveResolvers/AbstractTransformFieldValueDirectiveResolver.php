@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\BasicDirectives\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractSchemaDirectiveResolver;
 
 /**
@@ -35,10 +34,9 @@ abstract class AbstractTransformFieldValueDirectiveResolver extends AbstractSche
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $dbItems[(string)$id][$fieldOutputKey] = $this->transformValue(
                     $dbItems[(string)$id][$fieldOutputKey],
                     $id,

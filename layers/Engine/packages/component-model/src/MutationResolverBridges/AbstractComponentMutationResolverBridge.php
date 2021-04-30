@@ -4,18 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
-{
+{ 
+    public function __construct(
+        protected HooksAPIInterface $hooksAPI,
+        protected TranslationAPIInterface $translationAPI,
+        protected InstanceManagerInterface $instanceManager,
+        protected MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+    }
+
     public function getSuccessString(string | int $result_id): ?string
     {
         return null;
@@ -49,9 +59,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolverClass = $this->getMutationResolverClass();
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MutationResolverInterface */
-        $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+        $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
         $form_data = $this->getFormData();
         $return = [];
         // Validate errors
@@ -97,8 +106,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $this->modifyDataProperties($data_properties, $result_id);
 
         // Save the result for some module to incorporate it into the query args
-        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-        $gd_dataload_actionexecution_manager->setResult(get_called_class(), $result_id);
+        $this->mutationResolutionManager->setResult(get_called_class(), $result_id);
 
         $return[ResponseConstants::SUCCESS] = true;
         if ($success_strings = $this->getSuccessStrings($result_id)) {

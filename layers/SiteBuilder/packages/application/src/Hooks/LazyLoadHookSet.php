@@ -10,7 +10,6 @@ use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Targets;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
@@ -59,9 +58,8 @@ class LazyLoadHookSet extends AbstractHookSet
     public function end($root_module, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var Lazy */
-        $lazy = $instanceManager->getInstance(Lazy::class);
+        $lazy = $this->instanceManager->getInstance(Lazy::class);
 
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {

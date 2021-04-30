@@ -13,12 +13,10 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
 use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VarsHooks extends AbstractHookSet
 {
@@ -49,9 +47,8 @@ class VarsHooks extends AbstractHookSet
     {
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             return sprintf(
-                $translationAPI->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
+                $this->translationAPI->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
                 OperationTypes::MUTATION
             );
         }
@@ -68,9 +65,8 @@ class VarsHooks extends AbstractHookSet
         // Set always. It will be overriden below
         $vars['standard-graphql'] = false;
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDataStructureFormatter */
-        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
         if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $graphQLDataStructureFormatter->getName()) {
             $this->processURLParamVars($vars);
         }
@@ -134,11 +130,10 @@ class VarsHooks extends AbstractHookSet
                 // since the "field ... does not exist" already takes care of it,
                 // here for GraphQL and also for PoP.
                 // Show error only for the other cases
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
                 $errorMessage = $disablePoPQuery ?
-                    $translationAPI->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
-                    : $translationAPI->__('The query in the body is empty', 'graphql-request');
+                    $this->translationAPI->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
+                    : $this->translationAPI->__('The query in the body is empty', 'graphql-request');
                 $feedbackMessageStore->addQueryError($errorMessage);
             }
         }

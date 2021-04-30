@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSitesWassup\SystemMutations\MutationResolvers\GenerateThemeMutationResolver;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemComponentMutationResolverBridge;
 
@@ -16,6 +15,6 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return TranslationAPIFacade::getInstance()->__('System action "generate theme" executed successfully.', 'pop-system');
+        return $this->translationAPI->__('System action "generate theme" executed successfully.', 'pop-system');
     }
 }

@@ -15,7 +15,6 @@ use PoP\API\Facades\PersistedQueryManagerFacade;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 
@@ -61,13 +60,12 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'fullSchema':
                 /**
                  * @var SchemaFieldShapeEnum
                  */
-                $schemaOutputShapeEnum = $instanceManager->getInstance(SchemaFieldShapeEnum::class);
+                $schemaOutputShapeEnum = $this->instanceManager->getInstance(SchemaFieldShapeEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [

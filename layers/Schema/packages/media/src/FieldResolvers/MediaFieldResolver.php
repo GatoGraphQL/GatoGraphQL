@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class MediaFieldResolver extends AbstractDBDataFieldResolver
@@ -127,7 +126,6 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'src':
             case 'width':
@@ -135,7 +133,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
                 /**
                  * @var MediaDeviceEnum
                  */
-                $mediaDeviceEnum = $instanceManager->getInstance(MediaDeviceEnum::class);
+                $mediaDeviceEnum = $this->instanceManager->getInstance(MediaDeviceEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
                     [

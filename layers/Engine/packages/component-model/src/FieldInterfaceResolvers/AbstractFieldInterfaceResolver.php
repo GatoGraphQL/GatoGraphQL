@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverTrait;
 
 abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverInterface
@@ -16,7 +19,10 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 
     function __construct(
         protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI
+        protected HooksAPIInterface $hooksAPI,
+        protected InstanceManagerInterface $instanceManager,
+        protected NameResolverInterface $nameResolver,
+        protected CMSServiceInterface $cmsService,
     ) {
     }
 

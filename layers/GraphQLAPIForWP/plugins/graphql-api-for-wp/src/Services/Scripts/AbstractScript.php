@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**
@@ -19,8 +19,10 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    function __construct(protected ModuleRegistryInterface $moduleRegistry)
-    {
+    function __construct(
+        protected InstanceManagerInterface $instanceManager,
+        protected ModuleRegistryInterface $moduleRegistry,
+    ) {
     }
 
     /**
@@ -76,9 +78,8 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getScriptLocalizationName(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GeneralUtils */
-        $generalUtils = $instanceManager->getInstance(GeneralUtils::class);
+        $generalUtils = $this->instanceManager->getInstance(GeneralUtils::class);
         return $generalUtils->dashesToCamelCase($this->getScriptName());
     }
 

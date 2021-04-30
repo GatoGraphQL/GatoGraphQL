@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\ModuleProcessors;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 use PoPSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as UpstreamFilterInnerModuleProcessor;
 
@@ -39,7 +38,7 @@ class FilterInnerModuleProcessor extends UpstreamFilterInnerModuleProcessor
             ]
         );
         if (
-            $modules = HooksAPIFacade::getInstance()->applyFilters(
+            $modules = $this->hooksAPI->applyFilters(
                 'PostMutations:FilterInnerModuleProcessor:inputmodules',
                 $modules,
                 $module

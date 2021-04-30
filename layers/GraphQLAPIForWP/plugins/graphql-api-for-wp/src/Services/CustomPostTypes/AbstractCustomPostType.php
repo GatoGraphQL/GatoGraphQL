@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use WP_Post;
+use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use PoP\ComponentModel\State\ApplicationState;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use WP_Post;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     function __construct(
+        protected InstanceManagerInterface $instanceManager,
         protected Menu $menu,
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization
@@ -180,9 +181,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    $instanceManager = InstanceManagerFacade::getInstance();
                     /** @var CPTUtils */
-                    $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                    $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
                     echo $cptUtils->getCustomPostDescription($post);
                 }
                 break;
@@ -256,9 +256,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var CPTUtils */
-                $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
                 if ($excerpt = $cptUtils->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),

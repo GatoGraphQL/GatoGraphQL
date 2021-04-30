@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
@@ -74,11 +73,10 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var AccessControlBlock
          */
-        $aclBlock = $instanceManager->getInstance(AccessControlBlock::class);
+        $aclBlock = $this->instanceManager->getInstance(AccessControlBlock::class);
         return [
             [$aclBlock->getBlockFullName()],
         ];
@@ -91,11 +89,10 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergBlocksForCustomPostType(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var AccessControlBlock
          */
-        $aclBlock = $instanceManager->getInstance(AccessControlBlock::class);
+        $aclBlock = $this->instanceManager->getInstance(AccessControlBlock::class);
         $accessControlRuleBlockRegistry = AccessControlRuleBlockRegistryFacade::getInstance();
         $aclNestedBlocks = $accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
         return array_merge(

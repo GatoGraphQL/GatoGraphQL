@@ -7,12 +7,10 @@ namespace GraphQLByPoP\GraphQLServer\Hooks;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class VarsHooks extends AbstractHookSet
 {
@@ -62,9 +60,8 @@ class VarsHooks extends AbstractHookSet
     public function addVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDataStructureFormatter */
-        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
         if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $graphQLDataStructureFormatter->getName()) {
             $vars['edit-schema'] = Request::editSchema();
         }
@@ -72,16 +69,15 @@ class VarsHooks extends AbstractHookSet
 
     public function getModelInstanceComponentsFromVars($components)
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         if (isset($vars['edit-schema'])) {
-            $components[] = $translationAPI->__('edit schema:', 'graphql-server') . $vars['edit-schema'];
+            $components[] = $this->translationAPI->__('edit schema:', 'graphql-server') . $vars['edit-schema'];
         }
         if ($graphQLOperationType = $vars['graphql-operation-type'] ?? null) {
-            $components[] = $translationAPI->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
+            $components[] = $this->translationAPI->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
         }
-        $components[] = $translationAPI->__('enable nested mutations:', 'graphql-server') . $vars['nested-mutations-enabled'];
-        $components[] = $translationAPI->__('enable GraphQL introspection:', 'graphql-server') . $vars['graphql-introspection-enabled'];
+        $components[] = $this->translationAPI->__('enable nested mutations:', 'graphql-server') . $vars['nested-mutations-enabled'];
+        $components[] = $this->translationAPI->__('enable GraphQL introspection:', 'graphql-server') . $vars['graphql-introspection-enabled'];
 
         return $components;
     }

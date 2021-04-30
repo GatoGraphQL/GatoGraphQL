@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeDataLoaders\TypeQueryableDataLoaderInterface;
 
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
@@ -29,11 +28,10 @@ abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolve
 
     protected function getFieldDefaultFilterDataloadingModule(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         if ($fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($typeResolver, $fieldName)) {
-            $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
+            $fieldTypeResolver = $this->instanceManager->getInstance((string)$fieldTypeResolverClass);
             $fieldTypeDataLoaderClass = $fieldTypeResolver->getTypeDataLoaderClass();
-            $fieldTypeDataLoader = $instanceManager->getInstance((string)$fieldTypeDataLoaderClass);
+            $fieldTypeDataLoader = $this->instanceManager->getInstance((string)$fieldTypeDataLoaderClass);
             if ($fieldTypeDataLoader instanceof TypeQueryableDataLoaderInterface) {
                 return $fieldTypeDataLoader->getFilterDataloadingModule();
             }
