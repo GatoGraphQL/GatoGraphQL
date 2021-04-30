@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ConvertCaseDirectives\ModuleResolvers;
 
+use PoP\Translation\TranslationAPIInterface;
 use GraphQLAPI\ConvertCaseDirectives\GraphQLAPIExtension;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\LowerCaseStringDirectiveResolver;
 use PoPSchema\ConvertCaseDirectives\DirectiveResolvers\TitleCaseStringDirectiveResolver;
@@ -26,10 +27,13 @@ class SchemaModuleResolver extends AbstractSchemaTypeModuleResolver
      * so the properties will not be null in that situation.
      */
     public function __construct(
+        TranslationAPIInterface $translationAPI,
+        ModuleRegistryInterface $moduleRegistry,
         protected ?UpperCaseStringDirectiveResolver $upperCaseStringDirectiveResolver,
         protected ?LowerCaseStringDirectiveResolver $lowerCaseStringDirectiveResolver,
         protected ?TitleCaseStringDirectiveResolver $titleCaseStringDirectiveResolver
     ) {
+        parent::__construct($translationAPI, $moduleRegistry);
     }
 
     public function getModulesToResolve(): array
