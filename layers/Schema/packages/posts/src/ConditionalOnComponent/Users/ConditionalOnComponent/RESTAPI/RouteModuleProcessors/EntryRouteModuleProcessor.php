@@ -14,13 +14,19 @@ use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\A
 
 class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
 {
-    protected function getInitialRESTFields(): string
+    /**
+     * Remove the author data, added by hook to CustomPosts
+     */
+    public function getRESTFieldsQuery(): string
     {
-        return str_replace(
-            ',' . CustomPostHooks::AUTHOR_RESTFIELDS,
-            '',
-            parent::getInitialRESTFields()
-        );
+        if (is_null($this->restFieldsQuery)) {
+            $this->restFieldsQuery = str_replace(
+                ',' . CustomPostHooks::AUTHOR_RESTFIELDS,
+                '',
+                parent::getRESTFieldsQuery()
+            );
+        }
+        return $this->restFieldsQuery;
     }
 
     /**
