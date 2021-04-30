@@ -6,7 +6,6 @@ namespace PoPSchema\Posts\FieldResolvers;
 
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Posts\FieldResolvers\AbstractPostFieldResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;

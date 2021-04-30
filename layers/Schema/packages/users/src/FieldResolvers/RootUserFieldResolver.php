@@ -6,7 +6,6 @@ namespace PoPSchema\Users\FieldResolvers;
 
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Users\FieldResolvers\AbstractUserFieldResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;

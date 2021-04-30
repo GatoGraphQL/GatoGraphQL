@@ -12,7 +12,6 @@ use PoP\API\Enums\SchemaFieldShapeEnum;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\API\Facades\PersistedQueryManagerFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;

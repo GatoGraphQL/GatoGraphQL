@@ -7,7 +7,6 @@ namespace PoPSchema\Media\ConditionalOnComponent\Users\FieldResolvers;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
