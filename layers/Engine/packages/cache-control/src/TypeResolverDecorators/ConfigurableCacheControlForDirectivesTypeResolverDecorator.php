@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\TypeResolverDecorators;
 
-use PoP\CacheControl\Facades\CacheControlManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\CacheControl\Managers\CacheControlManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\CacheControl\TypeResolverDecorators\ConfigurableCacheControlTypeResolverDecoratorTrait;
 use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\AbstractMandatoryDirectivesForDirectivesTypeResolverDecorator;
 
@@ -12,9 +14,19 @@ class ConfigurableCacheControlForDirectivesTypeResolverDecorator extends Abstrac
 {
     use ConfigurableCacheControlTypeResolverDecoratorTrait;
 
+    function __construct(
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected CacheControlManagerInterface $cacheControlManager,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $fieldQueryInterpreter,
+        );
+    }
+
     protected function getConfigurationEntries(): array
     {
-        $cacheControlManager = CacheControlManagerFacade::getInstance();
-        return $cacheControlManager->getEntriesForDirectives();
+        return $this->cacheControlManager->getEntriesForDirectives();
     }
 }
