@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
 
 /**
  * Base class for a Gutenberg script.
@@ -83,9 +82,8 @@ abstract class AbstractEditorScript extends AbstractScript
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var EditorHelpers */
-                $editorHelpers = $instanceManager->getInstance(EditorHelpers::class);
+                $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
                 if (!in_array($editorHelpers->getEditingPostType(), $postTypes)) {
                     return;
                 }
