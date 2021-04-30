@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -86,11 +85,10 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /**
                  * @var CustomPostStatusEnum
                  */
-                $customPostStatusEnum = $instanceManager->getInstance(CustomPostStatusEnum::class);
+                $customPostStatusEnum = $this->instanceManager->getInstance(CustomPostStatusEnum::class);
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostStatusEnum->getName();
                 $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $customPostStatusEnum->getValues()

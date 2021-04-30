@@ -26,7 +26,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -196,11 +195,10 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($this->getSubmodules($module) as $submodule) {
                 $this->setProp($submodule, $props, 'succeeding-typeResolver', $typeResolver_class);
             }
-            $instanceManager = InstanceManagerFacade::getInstance();
             /**
              * @var TypeResolverInterface
              */
-            $typeResolver = $instanceManager->getInstance($typeResolver_class);
+            $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
                 if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                     foreach ($subcomponent_modules as $subcomponent_module) {
@@ -500,13 +498,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public function getDatabaseKeys(array $module, array &$props): array
     {
         $ret = array();
-
-        $instanceManager = InstanceManagerFacade::getInstance();
         if ($typeResolver_class = $this->getTypeResolverClass($module)) {
             /**
              * @var TypeResolverInterface
              */
-            $typeResolver = $instanceManager->getInstance((string)$typeResolver_class);
+            $typeResolver = $this->instanceManager->getInstance((string)$typeResolver_class);
             if ($dbkey = $typeResolver->getTypeOutputName()) {
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
                 $ret['id'] = $dbkey;
@@ -518,11 +514,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             /**
              * @var TypeResolverInterface
              */
-            $typeResolver = $instanceManager->getInstance($typeResolver_class);
+            $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
                 if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
-                    $subcomponent_typeResolver = $instanceManager->getInstance($subcomponent_typeResolver_class);
+                    $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     $subcomponent_data_field_outputkey = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($subcomponent_data_field);
                     $ret[$subcomponent_data_field_outputkey] = $subcomponent_typeResolver->getTypeOutputName();
@@ -532,7 +528,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 foreach (array_keys($dataFieldTypeResolverOptionsConditionalSubmodules) as $conditionalDataField) {
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
                     if ($subcomponentTypeResolverClass = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
-                        $subcomponent_typeResolver = $instanceManager->getInstance($subcomponentTypeResolverClass);
+                        $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         $subcomponent_data_field_outputkey = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($conditionalDataField);
                         $ret[$subcomponent_data_field_outputkey] = $subcomponent_typeResolver->getTypeOutputName();
@@ -1052,9 +1048,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getDataloadSource(array $module, array &$props): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var ModulePaths */
-        $modulePaths = $instanceManager->getInstance(ModulePaths::class);
+        $modulePaths = $this->instanceManager->getInstance(ModulePaths::class);
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = ModulePathHelpersFacade::getInstance()->getStringifiedModulePropagationCurrentPath($module);
