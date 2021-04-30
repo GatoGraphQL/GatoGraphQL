@@ -111,7 +111,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 // Get an instance of the schema and then execute function `getType` there
                 $schemaID = $typeResolver->resolveValue(
                     $resultItem,
-                    FieldQueryInterpreterFacade::getInstance()->getField(
+                    $this->fieldQueryInterpreter->getField(
                         '__schema',
                         []
                     ),

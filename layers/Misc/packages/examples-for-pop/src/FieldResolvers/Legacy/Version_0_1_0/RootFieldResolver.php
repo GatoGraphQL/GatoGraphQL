@@ -98,7 +98,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         switch ($fieldName) {
             case 'userServiceURLs':
                 return [
@@ -110,7 +109,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
             case 'userServiceData':
                 $userServiceURLs = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'userServiceURLs',
                         $fieldArgs
                     ),
@@ -124,7 +123,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 $userServiceURLs = (array)$userServiceURLs;
                 return $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'getAsyncJSON',
                         [
                             'urls' => $userServiceURLs,
