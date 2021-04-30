@@ -13,7 +13,7 @@ use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     protected ?string $restFieldsQuery = null;
-    protected array $restFields = [];
+    protected ?array $restFields = null;
     
     function __construct(
         protected RESTDataStructureFormatter $restDataStructureFormatter,
