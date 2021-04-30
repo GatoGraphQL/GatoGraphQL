@@ -20,7 +20,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             // Make sure the user exists
             $target = $cmsusersapi->getUserById($target_id);
             if (!$target) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('The requested user does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-coreprocessors');
             }
         }
         return $errors;

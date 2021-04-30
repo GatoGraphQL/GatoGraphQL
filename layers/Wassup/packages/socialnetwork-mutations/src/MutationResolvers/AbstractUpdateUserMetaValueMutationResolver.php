@@ -15,7 +15,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         $errors = [];
         $target_id = $form_data['target_id'];
         if (!$target_id) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('This URL is incorrect.', 'pop-coreprocessors');
+            $errors[] = $this->translationAPI->__('This URL is incorrect.', 'pop-coreprocessors');
         }
         return $errors;
     }

@@ -26,12 +26,12 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $target = $customPostTypeAPI->getCustomPost($target_id);
             if (!$target) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->translationAPI->__('The requested post does not exist.', 'pop-coreprocessors');
             } else {
                 // Make sure this target accepts this functionality. Eg: Not all posts can be Recommended or Up/Down-voted.
                 // Discussion can be recommended only, Highlight up/down-voted only
                 if (!$this->eligible($target)) {
-                    $errors[] = TranslationAPIFacade::getInstance()->__('The requested functionality does not apply on this post.', 'pop-coreprocessors');
+                    $errors[] = $this->translationAPI->__('The requested functionality does not apply on this post.', 'pop-coreprocessors');
                 }
             }
         }

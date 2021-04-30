@@ -23,7 +23,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
             $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    TranslationAPIFacade::getInstance()->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->translationAPI->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $cmsusersapi->getUserDisplayName($target_id)
                 );
             }

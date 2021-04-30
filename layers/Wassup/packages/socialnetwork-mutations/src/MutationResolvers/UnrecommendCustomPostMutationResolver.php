@@ -24,7 +24,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
             $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    TranslationAPIFacade::getInstance()->__('You had not recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->translationAPI->__('You had not recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $customPostTypeAPI->getTitle($target_id)
                 );
             }
