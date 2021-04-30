@@ -37,7 +37,7 @@ class Component extends AbstractComponent
     ): void {
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (Environment::addHighlightTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddHighlightTypeToCustomPostUnionTypes');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddHighlightTypeToCustomPostUnionTypes');
         }
     }
 }

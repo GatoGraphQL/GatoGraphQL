@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLByPoP\GraphQLServer\ConditionalOnContext\EmbeddableFields\SchemaServices\:
+        resource: '../../../src/ConditionalOnContext/EmbeddableFields/SchemaServices/*'

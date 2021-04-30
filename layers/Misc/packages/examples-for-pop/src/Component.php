@@ -40,7 +40,7 @@ class Component extends AbstractComponent
     ): void {
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/UseComponentModelCache');
         }
     }
 

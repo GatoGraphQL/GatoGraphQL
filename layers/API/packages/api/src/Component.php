@@ -85,7 +85,7 @@ class Component extends AbstractComponent
 
             // Conditional packages
             if (class_exists(AccessControlComponent::class)) {
-                self::initServices(dirname(__DIR__), '/Conditional/AccessControl');
+                self::initServices(dirname(__DIR__), '/ConditionalOnComponent/AccessControl');
             }
             if (
                 class_exists(CacheControlComponent::class)
@@ -95,7 +95,7 @@ class Component extends AbstractComponent
                 self::initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
-                    '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema'
+                    '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
                 );
             }
         }

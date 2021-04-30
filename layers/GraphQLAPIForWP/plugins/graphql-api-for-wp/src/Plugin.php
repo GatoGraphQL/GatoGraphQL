@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;

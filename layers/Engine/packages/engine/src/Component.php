@@ -56,10 +56,10 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__), '/Overrides');
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (!Environment::disableGuzzleOperators()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/Guzzle');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/Guzzle');
         }
         if (ComponentModelComponentConfiguration::useComponentModelCache()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/UseComponentModelCache');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/UseComponentModelCache');
         }
     }
 }

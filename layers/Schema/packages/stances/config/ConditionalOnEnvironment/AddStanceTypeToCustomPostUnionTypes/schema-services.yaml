@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\Stances\ConditionalOnEnvironment\AddStanceTypeToCustomPostUnionTypes\SchemaServices\:
-        resource: '../../../src/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes/SchemaServices/*'

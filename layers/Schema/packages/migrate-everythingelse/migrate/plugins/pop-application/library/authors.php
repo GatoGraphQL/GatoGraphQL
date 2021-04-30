@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 /**
  * Return the author of the post (to be overriden by Co-Authors plus)

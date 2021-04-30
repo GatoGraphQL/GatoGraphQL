@@ -51,14 +51,14 @@ class Component extends AbstractComponent
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (Environment::addLocationPostTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddLocationPostTypeToCustomPostUnionTypes');
         }
 
         if (class_exists(TagsComponent::class)) {
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses),
-                '/Conditional/Tags'
+                '/ConditionalOnComponent/Tags'
             );
         }
 
@@ -66,7 +66,7 @@ class Component extends AbstractComponent
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
-                '/Conditional/Users'
+                '/ConditionalOnComponent/Users'
             );
         }
     }

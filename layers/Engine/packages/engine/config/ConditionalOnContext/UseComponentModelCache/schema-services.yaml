@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\Engine\ConditionalOnContext\UseComponentModelCache\SchemaServices\:
+        resource: '../../../src/ConditionalOnContext/UseComponentModelCache/SchemaServices/*'

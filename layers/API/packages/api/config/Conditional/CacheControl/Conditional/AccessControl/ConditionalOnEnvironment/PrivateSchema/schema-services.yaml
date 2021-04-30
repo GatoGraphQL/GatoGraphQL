@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoP\API\Conditional\CacheControl\Conditional\AccessControl\ConditionalOnEnvironment\PrivateSchema\SchemaServices\:
-        resource: '../../../../../../../src/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema/SchemaServices/*'

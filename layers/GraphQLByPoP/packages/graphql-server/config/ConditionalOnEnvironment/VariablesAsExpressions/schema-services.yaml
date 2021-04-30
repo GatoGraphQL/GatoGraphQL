@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    GraphQLByPoP\GraphQLServer\ConditionalOnEnvironment\VariablesAsExpressions\SchemaServices\:
-        resource: '../../../src/ConditionalOnEnvironment/VariablesAsExpressions/SchemaServices/*'
