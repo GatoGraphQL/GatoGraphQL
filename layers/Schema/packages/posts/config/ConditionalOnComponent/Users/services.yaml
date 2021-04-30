@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\:
+        resource: '../../../src/ConditionalOnComponent/Users/ModuleProcessors/*'

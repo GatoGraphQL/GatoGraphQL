@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\TypeResolverDecorators\:
+        resource: '../../../src/ConditionalOnComponent/CacheControl/TypeResolverDecorators/*'

@@ -57,7 +57,7 @@ class Component extends AbstractComponent
     ): void {
         self::initServices(dirname(__DIR__));
         if (class_exists(CustomPostsComponent::class)) {
-            self::initServices(dirname(__DIR__), '/Conditional/CustomPosts');
+            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
         }
     }
 }

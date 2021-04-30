@@ -118,7 +118,7 @@ class Component extends AbstractComponent
                 self::initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
-                    '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnContext/PrivateSchema'
+                    '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
                 );
             }
         }

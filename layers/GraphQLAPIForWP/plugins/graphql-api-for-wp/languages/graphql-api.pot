@@ -3213,7 +3213,7 @@ msgstr ""
 msgid "The ID of the parent comment"
 msgstr ""
 
-#: vendor/pop-schema/comments/src/Conditional/Users/FieldResolvers/CommentUserFieldResolver.php:40
+#: vendor/pop-schema/comments/src/ConditionalOnComponent/Users/FieldResolvers/CommentUserFieldResolver.php:40
 msgid "Comment's author"
 msgstr ""
 
@@ -3579,7 +3579,7 @@ msgstr ""
 msgid "Any custom post, with or without its own type for the schema"
 msgstr ""
 
-#: vendor/pop-schema/media/src/Conditional/Users/FieldResolvers/MediaUserFieldResolver.php:40
+#: vendor/pop-schema/media/src/ConditionalOnComponent/Users/FieldResolvers/MediaUserFieldResolver.php:40
 msgid "Media element's author"
 msgstr ""
 
@@ -4156,11 +4156,11 @@ msgstr ""
 msgid "Representation of a tag, added to a post"
 msgstr ""
 
-#: vendor/pop-schema/posts/src/Conditional/Users/FieldResolvers/PostUserFieldResolver.php:23
+#: vendor/pop-schema/posts/src/ConditionalOnComponent/Users/FieldResolvers/PostUserFieldResolver.php:23
 msgid "Posts by the user"
 msgstr ""
 
-#: vendor/pop-schema/posts/src/Conditional/Users/FieldResolvers/PostUserFieldResolver.php:24
+#: vendor/pop-schema/posts/src/ConditionalOnComponent/Users/FieldResolvers/PostUserFieldResolver.php:24
 msgid "Number of posts by the user"
 msgstr ""
 
@@ -4468,17 +4468,17 @@ msgstr ""
 msgid "You must be logged in to access field '%s' for type '%s'"
 msgstr ""
 
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostFieldResolver.php:63
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostFieldResolver.php:63
 msgid "The post's author"
 msgstr ""
 
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:23
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:23
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:23
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:23
 msgid "Custom posts by the user"
 msgstr ""
 
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:24
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:24
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:24
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:24
 msgid "Number of custom posts by the user"
 msgstr ""
 
