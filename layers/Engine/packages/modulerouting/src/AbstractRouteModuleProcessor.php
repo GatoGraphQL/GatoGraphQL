@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
+use PoP\Hooks\HooksAPIInterface;
+
 abstract class AbstractRouteModuleProcessor
 {
+    function __construct(
+        protected HooksAPIInterface $hooksAPI
+    ) {
+    }
+
     /**
      * @return string[]
      */
