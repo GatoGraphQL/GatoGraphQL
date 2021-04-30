@@ -12,7 +12,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
@@ -66,7 +65,6 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 $dateFormat = 'Y-m-d';
@@ -83,7 +81,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
                     $schemaDefinition,
                     [
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
+                            $this->translationAPI->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
                             $dateFormat
                         ),
                     ]
@@ -95,7 +93,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
                     $schemaDefinition,
                     [
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
+                            $this->translationAPI->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
                             $dateFormat
                         ),
                     ]
@@ -114,7 +112,6 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:
@@ -122,7 +119,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
                 $subnames = $this->getInputOptions($module)['subnames'];
                 $cmsService = CMSServiceFacade::getInstance();
                 return sprintf(
-                    $translationAPI->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
+                    $this->translationAPI->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
                     $formInputHelperService->getMultipleInputName($name, $subnames[0]),
                     $formInputHelperService->getMultipleInputName($name, $subnames[1]),
                     $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat'))

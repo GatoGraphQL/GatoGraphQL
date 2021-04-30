@@ -13,7 +13,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
@@ -102,11 +101,10 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $translationAPI->__('Custom Post Status', 'customposts'),
-            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => $translationAPI->__('Return results from Custom Post Types', 'customposts'),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->translationAPI->__('Custom Post Status', 'customposts'),
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
         ];
         return $descriptions[$module[1]] ?? null;
     }

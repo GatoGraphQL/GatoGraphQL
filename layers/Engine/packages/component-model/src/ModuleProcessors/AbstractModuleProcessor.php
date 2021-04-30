@@ -4,25 +4,32 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Constants\Props;
-use PoP\ComponentModel\Constants\DataSources;
-use PoP\ComponentModel\Constants\DataLoading;
-use PoP\ComponentModel\Constants\Params;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\DataloadUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Definitions\Configuration\Request;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Constants\DataLoading;
+use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
@@ -38,6 +45,17 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected const MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES = 'domain-switching-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
+
+    function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI,
+        protected InstanceManagerInterface $instanceManager,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected ModulePathHelpersInterface $modulePathHelpers,
+        protected ModuleFilterManagerInterface $moduleFilterManager,
+        protected ModuleProcessorManagerInterface $moduleProcessorManager,
+    ) {
+    }
 
     public function getSubmodules(array $module): array
     {
