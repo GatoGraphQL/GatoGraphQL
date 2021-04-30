@@ -126,7 +126,6 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
 
         $copyFromFields = $this->directiveArgsForSchema['copyFromFields'];
@@ -191,7 +190,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
 
                     // Obtain the DBKey under which the relationalField is stored in the database
                     $relationalTypeResolverClass = $typeResolver->resolveFieldTypeResolverClass($relationalField);
-                    $relationalTypeResolver = $instanceManager->getInstance((string)$relationalTypeResolverClass);
+                    $relationalTypeResolver = $this->instanceManager->getInstance((string)$relationalTypeResolverClass);
                     $relationalDBKey = $relationalTypeResolver->getTypeOutputName();
                     $isUnionRelationalDBKey = UnionTypeHelpers::isUnionType($relationalDBKey);
                     if ($isUnionRelationalDBKey) {

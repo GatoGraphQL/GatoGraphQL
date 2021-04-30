@@ -96,9 +96,8 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             // Find the position of the @cache directive. Compare by name and not by class, just in case the directive class was overriden
             $pos = 0;
             $found = false;
-            $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DirectiveResolverInterface */
-            $saveCacheDirectiveResolver = $instanceManager->getInstance(SaveCacheDirectiveResolver::class);
+            $saveCacheDirectiveResolver = $this->instanceManager->getInstance(SaveCacheDirectiveResolver::class);
             $directiveName = $saveCacheDirectiveResolver->getDirectiveName();
             while (!$found && $pos < count($succeedingPipelineDirectiveResolverInstances)) {
                 $directiveResolverInstance = $succeedingPipelineDirectiveResolverInstances[$pos];

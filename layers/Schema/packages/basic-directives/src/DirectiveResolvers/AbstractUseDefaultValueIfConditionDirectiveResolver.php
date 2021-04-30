@@ -98,11 +98,10 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var DefaultConditionEnum
          */
-        $defaultConditionEnum = $instanceManager->getInstance(DefaultConditionEnum::class);
+        $defaultConditionEnum = $this->instanceManager->getInstance(DefaultConditionEnum::class);
         $schemaDirectiveArg = [
             SchemaDefinition::ARGNAME_NAME => 'value',
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,

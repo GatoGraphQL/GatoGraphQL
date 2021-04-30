@@ -134,15 +134,14 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var FieldFeedbackTypeEnum
          */
-        $fieldFeedbackTypeEnum = $instanceManager->getInstance(FieldFeedbackTypeEnum::class);
+        $fieldFeedbackTypeEnum = $this->instanceManager->getInstance(FieldFeedbackTypeEnum::class);
         /**
          * @var FieldFeedbackTargetEnum
          */
-        $fieldFeedbackTargetEnum = $instanceManager->getInstance(FieldFeedbackTargetEnum::class);
+        $fieldFeedbackTargetEnum = $this->instanceManager->getInstance(FieldFeedbackTargetEnum::class);
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'message',

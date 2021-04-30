@@ -21,7 +21,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
@@ -38,6 +40,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected string $directive;
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
+    protected InstanceManagerInterface $instanceManager;
     /**
      * @var array<string, array>
      */
@@ -74,6 +77,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // Obtain these services directly from the container, instead of using autowiring
         $this->translationAPI = TranslationAPIFacade::getInstance();
         $this->hooksAPI = HooksAPIFacade::getInstance();
+        $this->instanceManager = InstanceManagerFacade::getInstance();
     }
 
     /**

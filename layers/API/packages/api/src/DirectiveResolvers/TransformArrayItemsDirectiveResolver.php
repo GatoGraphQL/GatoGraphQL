@@ -37,11 +37,10 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
-        $forEachDirectiveResolver = $instanceManager->getInstance(ForEachDirectiveResolver::class);
+        $forEachDirectiveResolver = $this->instanceManager->getInstance(ForEachDirectiveResolver::class);
         /** @var DirectiveResolverInterface */
-        $applyFunctionDirectiveResolver = $instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
+        $applyFunctionDirectiveResolver = $this->instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
         return sprintf(
             $this->translationAPI->__('Use %s instead', 'component-model'),
             $fieldQueryInterpreter->getFieldDirectivesAsString([
