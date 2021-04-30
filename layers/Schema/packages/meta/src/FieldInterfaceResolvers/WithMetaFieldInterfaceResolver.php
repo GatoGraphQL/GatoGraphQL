@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Meta\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
 
 class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
