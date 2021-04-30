@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
 use PoP\RESTAPI\Helpers\HookHelpers;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 
 class AbstractCustomPostRESTEntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
@@ -21,7 +20,7 @@ class AbstractCustomPostRESTEntryRouteModuleProcessor extends AbstractRESTEntryR
     public function getRESTFieldsQuery(): string
     {
         if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) HooksAPIFacade::getInstance()->applyFilters(
+            $this->restFieldsQuery = (string) $this->hooksAPI->applyFilters(
                 HookHelpers::getHookName(__CLASS__),
                 parent::getRESTFieldsQuery()
             );
