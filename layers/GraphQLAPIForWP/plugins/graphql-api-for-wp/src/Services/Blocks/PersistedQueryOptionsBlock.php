@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
@@ -44,11 +43,10 @@ class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var PersistedQueryBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(PersistedQueryBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(PersistedQueryBlockCategory::class);
         return $blockCategory;
     }
 

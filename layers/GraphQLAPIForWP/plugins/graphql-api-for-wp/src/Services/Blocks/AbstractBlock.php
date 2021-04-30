@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
@@ -144,9 +143,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getBlockLocalizationName(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GeneralUtils */
-        $generalUtils = $instanceManager->getInstance(GeneralUtils::class);
+        $generalUtils = $this->instanceManager->getInstance(GeneralUtils::class);
         return $generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
@@ -254,9 +252,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var EditorHelpers */
-                $editorHelpers = $instanceManager->getInstance(EditorHelpers::class);
+                $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
                 if (!in_array($editorHelpers->getEditingPostType(), $postTypes)) {
                     return;
                 }

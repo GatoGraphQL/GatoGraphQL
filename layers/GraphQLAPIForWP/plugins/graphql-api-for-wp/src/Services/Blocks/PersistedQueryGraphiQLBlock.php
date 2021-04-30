@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * GraphiQL block for Persisted Queries
@@ -19,9 +17,8 @@ class PersistedQueryGraphiQLBlock extends AbstractGraphiQLBlock
      */
     protected function getAdminGraphQLEndpoint(): string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var EditorHelpers */
-        $editorHelpers = $instanceManager->getInstance(EditorHelpers::class);
+        $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
         if ($persistedQueryCustomPostID = $editorHelpers->getEditingPostID()) {
             return $this->endpointHelpers->getAdminPersistedQueryGraphQLEndpoint(
                 $persistedQueryCustomPostID,

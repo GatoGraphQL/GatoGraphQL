@@ -8,7 +8,6 @@ use PoP\AccessControl\Schema\SchemaModes;
 use PoP\AccessControl\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 
@@ -28,11 +27,10 @@ class AccessControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var AccessControlBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(AccessControlBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(AccessControlBlockCategory::class);
         return $blockCategory;
     }
 
