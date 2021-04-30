@@ -27,6 +27,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
 {
@@ -41,6 +42,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      * @var array<string, array>
      */
     protected array $schemaDefinitionForFieldCache = [];
+
+    function __construct(
+        protected TranslationAPIInterface $translationAPI
+    ) {
+    }
 
     public function getImplementedFieldInterfaceResolverClasses(): array
     {

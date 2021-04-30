@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers;
 
+use PoP\Translation\TranslationAPIInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -11,15 +12,18 @@ use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
-use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(protected MediaTypeResolver $mediaTypeResolver)
-    {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        protected MediaTypeResolver $mediaTypeResolver
+    ) {
+        parent::__construct($translationAPI);
     }
 
     public function getClassesToAttachTo(): array

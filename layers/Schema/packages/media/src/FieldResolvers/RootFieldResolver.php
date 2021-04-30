@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers;
 
+use PoP\Translation\TranslationAPIInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -16,8 +17,11 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(protected CustomPostTypeResolver $customPostTypeResolver)
-    {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        protected CustomPostTypeResolver $customPostTypeResolver
+    ) {
+        parent::__construct($translationAPI);
     }
 
     public function getClassesToAttachTo(): array

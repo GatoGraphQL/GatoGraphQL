@@ -76,4 +76,5 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
 }
 
 // Static Initialization: Attach
-(new PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+$translationAPI = TranslationAPIFacade::getInstance();
+(new PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver($translationAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

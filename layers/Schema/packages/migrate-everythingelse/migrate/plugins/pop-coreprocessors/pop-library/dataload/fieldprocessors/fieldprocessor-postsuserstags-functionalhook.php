@@ -75,4 +75,5 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
 }
 
 // Static Initialization: Attach
-(new GD_DataLoad_FunctionalFieldResolver())->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
+$translationAPI = TranslationAPIFacade::getInstance();
+(new GD_DataLoad_FunctionalFieldResolver($translationAPI))->attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
