@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Engine\Engine;
 
 use Exception;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\CacheControl\Facades\CacheControlEngineFacade;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
@@ -19,20 +18,19 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
         $looseContractManager = LooseContractManagerFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
         if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
             throw new Exception(
                 sprintf(
-                    $translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($translationAPI->__('", "'), $notImplementedHooks)
+                    $this->translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->translationAPI->__('", "'), $notImplementedHooks)
                 )
             );
         }
         if ($notImplementedNames = $looseContractManager->getNotImplementedRequiredNames()) {
             throw new Exception(
                 sprintf(
-                    $translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($translationAPI->__('", "'), $notImplementedNames)
+                    $this->translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->translationAPI->__('", "'), $notImplementedNames)
                 )
             );
         }

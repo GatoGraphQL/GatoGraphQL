@@ -4,44 +4,44 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\Constants\Response;
-use PoP\ComponentModel\Constants\DataOutputModes;
+use Exception;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\DataloadUtils;
 use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\Actions;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Constants\Response;
+use PoP\Definitions\Configuration\Request;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
-use PoP\ComponentModel\Constants\Actions;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use Exception;
-use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\DataloadUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Definitions\Configuration\Request;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Constants\DataOutputItems;
+use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataSourceSelectors;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\CheckpointProcessorManagerFactory;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
+use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Settings\SiteConfigurationProcessorManagerFactory;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\ComponentInfo;
 
 class Engine implements EngineInterface
 {
@@ -91,6 +91,12 @@ class Engine implements EngineInterface
      * @var array<string, mixed>
      */
     protected array $outputData;
+    
+    function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI
+    ) {
+    }
 
     public function getOutputData()
     {
@@ -121,7 +127,7 @@ class Engine implements EngineInterface
     {
         // ETag is needed for the Service Workers
         // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
-        if (HooksAPIFacade::getInstance()->applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true)) {
+        if ($this->hooksAPI->applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true)) {
             // The same page will have different hashs only because of those random elements added each time,
             // such as the unique_id and the current_time. So remove these to generate the hash
             $differentiators = array(
@@ -145,7 +151,7 @@ class Engine implements EngineInterface
             }
 
             // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
-            $commoncode = HooksAPIFacade::getInstance()->applyFilters('\PoP\ComponentModel\Engine:etag_header:commoncode', $commoncode);
+            $commoncode = $this->hooksAPI->applyFilters('\PoP\ComponentModel\Engine:etag_header:commoncode', $commoncode);
             header("ETag: " . hash('md5', $commoncode));
         }
     }
@@ -165,7 +171,7 @@ class Engine implements EngineInterface
         }
 
         // Enable to add extra URLs in a fixed manner
-        $this->extra_routes = HooksAPIFacade::getInstance()->applyFilters(
+        $this->extra_routes = $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:getExtraRoutes',
             $this->extra_routes
         );
@@ -186,7 +192,7 @@ class Engine implements EngineInterface
 
     public function generateData()
     {
-        HooksAPIFacade::getInstance()->doAction('\PoP\ComponentModel\Engine:beginning');
+        $this->hooksAPI->doAction('\PoP\ComponentModel\Engine:beginning');
 
         // Process the request and obtain the results
         $this->data = $this->helperCalculations = array();
@@ -317,7 +323,7 @@ class Engine implements EngineInterface
         }
 
         // Allow for extra operations (eg: calculate resources)
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:helperCalculations',
             array(&$this->helperCalculations),
             $module,
@@ -511,11 +517,11 @@ class Engine implements EngineInterface
         // Any errors? Send them back
         if (RequestUtils::$errors) {
             $meta[Response::ERROR] = count(RequestUtils::$errors) > 1 ?
-                TranslationAPIFacade::getInstance()->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
-                : TranslationAPIFacade::getInstance()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
+                $this->translationAPI->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
+                : $this->translationAPI->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:request-meta',
             $meta
         );
@@ -523,7 +529,7 @@ class Engine implements EngineInterface
 
     public function getSessionMeta()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:session-meta',
             array()
         );
@@ -556,7 +562,7 @@ class Engine implements EngineInterface
                 $meta['cachedsettings'] = $this->cachedsettings;
             };
         }
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:site-meta',
             $meta
         );
@@ -825,7 +831,7 @@ class Engine implements EngineInterface
         $this->typeResolverClass_ids_data_fields = array();
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
             $root_module,
             array(&$root_model_props),
@@ -1121,7 +1127,7 @@ class Engine implements EngineInterface
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
-            HooksAPIFacade::getInstance()->doAction(
+            $this->hooksAPI->doAction(
                 '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
                 $module,
                 array(&$module_props),
@@ -1211,7 +1217,7 @@ class Engine implements EngineInterface
         }
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
             $root_module,
             array(&$root_model_props),
@@ -1232,7 +1238,7 @@ class Engine implements EngineInterface
 
             // Allow to inject what data fields must be placed under what dbNames
             // Array of key: dbName, values: data-fields
-            $dbname_datafields = HooksAPIFacade::getInstance()->applyFilters(
+            $dbname_datafields = $this->hooksAPI->applyFilters(
                 'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
                 [],
                 $typeResolver
@@ -1563,11 +1569,11 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddSchemaEntries($ret, 'schemaNotices', $schemaNotices);
 
         // Execute a hook to process the traces (in advance, we don't do anything with them)
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:traces:schema',
             $schemaTraces
         );
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             '\PoP\ComponentModel\Engine:traces:db',
             $dbTraces
         );
