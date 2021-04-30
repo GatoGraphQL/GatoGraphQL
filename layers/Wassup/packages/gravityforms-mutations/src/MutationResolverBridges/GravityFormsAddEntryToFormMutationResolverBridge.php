@@ -4,42 +4,54 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
+use PoP\Hooks\HooksAPIInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
+use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
 
 class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
 
-    public function __construct()
-    {
-        $hooksAPI = HooksAPIFacade::getInstance();
-
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+        );
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if (doingPost()) {
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'setup'),
                 5
             );
 
             // The 2 functions below must be executed in this order, otherwise 'renameFields' may remove the value filled by 'maybeFillFields'
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'renameFields'),
                 6
             );
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'maybeFillFields'),
                 7
             );
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'maybeValidateCaptcha'),
                 8
@@ -73,7 +85,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // }
         // $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
         $executed = parent::execute($data_properties);
-        
+
         $execution_response = $this->mutationResolutionManager->getResult(get_called_class());
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
