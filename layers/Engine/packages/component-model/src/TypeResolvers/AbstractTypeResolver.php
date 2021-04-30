@@ -4,36 +4,37 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use League\Pipeline\PipelineBuilder;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\FieldQuery\QueryUtils;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Environment;
+use League\Pipeline\PipelineBuilder;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Schema\FieldQueryUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\TypeResolvers\FieldHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
-use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
-use PoP\ComponentModel\TypeResolvers\FieldHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
@@ -104,6 +105,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     private array $fieldNamesResolvedByFieldResolver = [];
 
     public function __construct(
+        protected TranslationAPIInterface $translationAPI,
         protected ErrorProviderInterface $errorProvider
     ) {
     }
