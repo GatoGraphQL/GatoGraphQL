@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Leoloso\ExamplesForPoP\DirectiveResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;

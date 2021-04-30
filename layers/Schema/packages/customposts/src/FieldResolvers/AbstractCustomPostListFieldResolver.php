@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPosts\FieldResolvers;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;

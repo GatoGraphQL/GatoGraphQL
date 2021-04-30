@@ -8,7 +8,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Feedback\Tokens;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;

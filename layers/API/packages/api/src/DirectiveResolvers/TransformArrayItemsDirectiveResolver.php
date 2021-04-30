@@ -14,7 +14,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\DirectiveResolvers\ApplyFunctionDirectiveResolver;
 use PoP\Engine\DirectiveResolvers\ForEachDirectiveResolver;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolver
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\DirectiveResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;

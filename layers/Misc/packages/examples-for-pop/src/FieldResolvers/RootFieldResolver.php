@@ -6,7 +6,6 @@ namespace Leoloso\ExamplesForPoP\FieldResolvers;
 
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class RootFieldResolver extends \Leoloso\ExamplesForPoP\FieldResolvers\Legacy\Version_0_1_0\RootFieldResolver

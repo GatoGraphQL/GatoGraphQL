@@ -7,7 +7,6 @@ namespace PoPSchema\Comments\ConditionalOnComponent\Users\FieldResolvers;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 

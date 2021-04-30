@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;

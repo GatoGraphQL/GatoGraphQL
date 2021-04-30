@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\TypeResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoPSchema\Taxonomies\TypeResolvers\AbstractTaxonomyTypeResolver;
 

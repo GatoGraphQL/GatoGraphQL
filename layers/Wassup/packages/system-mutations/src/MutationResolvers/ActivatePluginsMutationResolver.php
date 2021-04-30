@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;

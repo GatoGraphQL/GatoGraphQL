@@ -8,7 +8,6 @@ use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

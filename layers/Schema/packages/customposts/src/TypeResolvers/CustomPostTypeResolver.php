@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers;
 
 use PoPSchema\CustomPosts\TypeDataLoaders\CustomPostTypeDataLoader;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
 
 /**

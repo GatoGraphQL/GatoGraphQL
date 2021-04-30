@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ChangeUserPasswordMutationResolver extends AbstractMutationResolver

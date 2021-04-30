@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\ConditionalOnComponent\Tags\FieldResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Events\FieldResolvers\AbstractEventFieldResolver;
 

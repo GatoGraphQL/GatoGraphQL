@@ -11,7 +11,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\FieldTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumValueTypeResolver;

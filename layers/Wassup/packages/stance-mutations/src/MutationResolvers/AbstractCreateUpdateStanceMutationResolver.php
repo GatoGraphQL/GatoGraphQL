@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;

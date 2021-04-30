@@ -8,7 +8,6 @@ use PoP\API\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\DirectiveTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CDNDirective\DirectiveResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\GlobalDirectiveResolverTrait;
 use PoPSchema\BasicDirectives\DirectiveResolvers\AbstractTransformFieldStringValueDirectiveResolver;

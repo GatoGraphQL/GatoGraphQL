@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\FieldResolvers;
 
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\FieldResolvers\AbstractCustomPostQueryableFieldResolver;
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;

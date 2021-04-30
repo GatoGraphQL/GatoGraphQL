@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 

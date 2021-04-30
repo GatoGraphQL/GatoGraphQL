@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ConditionalOnContext\EmbeddableFields\SchemaServices\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 

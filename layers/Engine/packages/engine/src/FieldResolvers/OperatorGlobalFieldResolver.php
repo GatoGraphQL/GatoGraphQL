@@ -7,10 +7,8 @@ namespace PoP\Engine\FieldResolvers;
 use PoP\Engine\Misc\Extract;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 

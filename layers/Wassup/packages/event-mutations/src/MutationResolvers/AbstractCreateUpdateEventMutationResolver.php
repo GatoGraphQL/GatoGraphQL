@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EventMutations\MutationResolvers;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EventMutations\Facades\EventTypeMutationAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;

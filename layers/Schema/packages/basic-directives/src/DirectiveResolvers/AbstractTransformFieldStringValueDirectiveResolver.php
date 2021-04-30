@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\BasicDirectives\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 /**
  * Apply a transformation to the string

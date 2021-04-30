@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveLocationEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\DirectiveTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;

@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\Extensions;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\Enums\DirectiveTypeEnum;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;

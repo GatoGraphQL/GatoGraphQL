@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\MutationResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\AbstractSetTagsOnCustomPostMutationResolver;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;

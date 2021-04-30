@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\TypeResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Media\TypeDataLoaders\MediaTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 

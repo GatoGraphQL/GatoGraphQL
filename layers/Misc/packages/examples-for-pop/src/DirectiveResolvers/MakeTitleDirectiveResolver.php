@@ -6,7 +6,6 @@ namespace Leoloso\ExamplesForPoP\DirectiveResolvers;
 
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class MakeTitleDirectiveResolver extends MakeTitleVersion010DirectiveResolver

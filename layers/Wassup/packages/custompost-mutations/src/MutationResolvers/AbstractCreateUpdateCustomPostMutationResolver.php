@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;

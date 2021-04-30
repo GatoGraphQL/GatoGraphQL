@@ -8,7 +8,6 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

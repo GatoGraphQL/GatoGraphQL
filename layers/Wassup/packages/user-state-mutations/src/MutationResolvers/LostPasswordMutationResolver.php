@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
