@@ -1,14 +1,13 @@
 <?php
 
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
-class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     // /**
     //  * @return array<string, array<array>>
@@ -40,8 +39,6 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractREST
 
         // API
         if (!\PoP\API\Environment::disableAPI()) {
-
-            $vars = ApplicationState::getVars();
 
             // Page
             $routemodules = array(

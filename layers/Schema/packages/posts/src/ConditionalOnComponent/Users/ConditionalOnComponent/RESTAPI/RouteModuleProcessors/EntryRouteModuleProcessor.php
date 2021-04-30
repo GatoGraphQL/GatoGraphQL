@@ -4,45 +4,29 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
-use PoP\API\Facades\FieldQueryConvertorFacade;
-use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
-use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHooks;
 use PoPSchema\Users\Routing\RouteNatures;
-use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoP\API\Response\Schemes as APISchemes;
 use PoPSchema\Posts\ComponentConfiguration;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHooks;
+use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 
-class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
 {
-    private static ?string $restFieldsQuery = null;
-    private static ?array $restFields = null;
-    public static function getRESTFields(): array
+    /**
+     * Remove the author data, added by hook to CustomPosts
+     */
+    public function getRESTFieldsQuery(): string
     {
-        if (is_null(self::$restFields)) {
-            $restFields = self::getRESTFieldsQuery();
-            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($restFields);
-            self::$restFields = $fieldQuerySet->getRequestedFieldQuery();
-        }
-        return self::$restFields;
-    }
-    public static function getRESTFieldsQuery(): string
-    {
-        if (is_null(self::$restFieldsQuery)) {
-            // Same as for posts, but removing the user data
-            self::$restFieldsQuery = (string) HooksAPIFacade::getInstance()->applyFilters(
-                'Users:Posts:RESTFields',
-                str_replace(
-                    ',' . CustomPostHooks::AUTHOR_RESTFIELDS,
-                    '',
-                    EntryRouteModuleProcessorHelpers::getRESTFieldsQuery()
-                )
+        if (is_null($this->restFieldsQuery)) {
+            $this->restFieldsQuery = str_replace(
+                ',' . CustomPostHooks::AUTHOR_RESTFIELDS,
+                '',
+                parent::getRESTFieldsQuery()
             );
         }
-        return self::$restFieldsQuery;
+        return $this->restFieldsQuery;
     }
 
     /**
@@ -60,7 +44,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
-                        self::getRESTFields()
+                        $this->getRESTFields()
                     ]
                 ],
         );
