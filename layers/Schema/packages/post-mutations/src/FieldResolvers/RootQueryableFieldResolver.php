@@ -61,11 +61,10 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'myPosts' => $translationAPI->__('Posts by the logged-in user', 'post-mutations'),
-            'myPostCount' => $translationAPI->__('Number of posts by the logged-in user', 'post-mutations'),
-            'myPost' => $translationAPI->__('Post with a specific ID', 'post-mutations'),
+            'myPosts' => $this->translationAPI->__('Posts by the logged-in user', 'post-mutations'),
+            'myPostCount' => $this->translationAPI->__('Number of posts by the logged-in user', 'post-mutations'),
+            'myPost' => $this->translationAPI->__('Post with a specific ID', 'post-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -73,7 +72,6 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'myPosts':
             case 'myPostCount':
@@ -88,7 +86,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The post ID', 'post-mutations'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post ID', 'post-mutations'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

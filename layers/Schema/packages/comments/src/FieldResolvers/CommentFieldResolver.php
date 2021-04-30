@@ -76,19 +76,18 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'content' => $translationAPI->__('Comment\'s content', 'pop-comments'),
-            'authorName' => $translationAPI->__('Comment author\'s name', 'pop-comments'),
-            'authorURL' => $translationAPI->__('Comment author\'s URL', 'pop-comments'),
-            'authorEmail' => $translationAPI->__('Comment author\'s email', 'pop-comments'),
-            'customPost' => $translationAPI->__('Custom post to which the comment was added', 'pop-comments'),
-            'customPostID' => $translationAPI->__('ID of the custom post to which the comment was added', 'pop-comments'),
-            'approved' => $translationAPI->__('Is the comment approved?', 'pop-comments'),
-            'type' => $translationAPI->__('Type of comment', 'pop-comments'),
-            'parent' => $translationAPI->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
-            'date' => $translationAPI->__('Date when the comment was added', 'pop-comments'),
-            'responses' => $translationAPI->__('Responses to the comment', 'pop-comments'),
+            'content' => $this->translationAPI->__('Comment\'s content', 'pop-comments'),
+            'authorName' => $this->translationAPI->__('Comment author\'s name', 'pop-comments'),
+            'authorURL' => $this->translationAPI->__('Comment author\'s URL', 'pop-comments'),
+            'authorEmail' => $this->translationAPI->__('Comment author\'s email', 'pop-comments'),
+            'customPost' => $this->translationAPI->__('Custom post to which the comment was added', 'pop-comments'),
+            'customPostID' => $this->translationAPI->__('ID of the custom post to which the comment was added', 'pop-comments'),
+            'approved' => $this->translationAPI->__('Is the comment approved?', 'pop-comments'),
+            'type' => $this->translationAPI->__('Type of comment', 'pop-comments'),
+            'parent' => $this->translationAPI->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
+            'date' => $this->translationAPI->__('Date when the comment was added', 'pop-comments'),
+            'responses' => $this->translationAPI->__('Responses to the comment', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -163,7 +162,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
         switch ($fieldName) {
             case 'date':
@@ -174,7 +172,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'format',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('Date format, as defined in %s', 'pop-comments'),
+                                $this->translationAPI->__('Date format, as defined in %s', 'pop-comments'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),

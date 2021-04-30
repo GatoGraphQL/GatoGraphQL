@@ -25,12 +25,11 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'postTag' => $translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
-            'postTags' => $translationAPI->__('Post tags', 'pop-post-tags'),
-            'postTagCount' => $translationAPI->__('Number of post tags', 'pop-post-tags'),
-            'postTagNames' => $translationAPI->__('Names of the post tags', 'pop-post-tags'),
+            'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
+            'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),
+            'postTagCount' => $this->translationAPI->__('Number of post tags', 'pop-post-tags'),
+            'postTagNames' => $this->translationAPI->__('Names of the post tags', 'pop-post-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -72,7 +71,6 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postTag':
                 return array_merge(
@@ -81,7 +79,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The tag ID', 'pop-post-tags'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tag ID', 'pop-post-tags'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

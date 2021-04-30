@@ -29,9 +29,8 @@ class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'loggedInUserID' => $translationAPI->__('The logged-in user\'s ID', 'user-state'),
+            'loggedInUserID' => $this->translationAPI->__('The logged-in user\'s ID', 'user-state'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

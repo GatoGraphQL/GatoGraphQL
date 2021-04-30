@@ -31,10 +31,9 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'user' => $translationAPI->__('User with a specific ID', 'pop-users'),
-            'users' => $translationAPI->__('Users in the current site', 'pop-users'),
+            'user' => $this->translationAPI->__('User with a specific ID', 'pop-users'),
+            'users' => $this->translationAPI->__('Users in the current site', 'pop-users'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -50,7 +49,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'user':
                 return array_merge(
@@ -59,7 +57,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The user ID', 'pop-users'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The user ID', 'pop-users'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

@@ -35,9 +35,8 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'locationsmapURL' => $translationAPI->__('Locations map URL', 'pop-locations'),
+            'locationsmapURL' => $this->translationAPI->__('Locations map URL', 'pop-locations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

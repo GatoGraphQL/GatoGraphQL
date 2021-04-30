@@ -43,9 +43,8 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'scope' => $translationAPI->__('Event\'s scope (future, current, past)', 'events'),
+            'scope' => $this->translationAPI->__('Event\'s scope (future, current, past)', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

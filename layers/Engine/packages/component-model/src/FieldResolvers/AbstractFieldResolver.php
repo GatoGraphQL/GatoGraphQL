@@ -375,7 +375,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveSchemaValidationWarningDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $warnings = [];
-        $translationAPI = TranslationAPIFacade::getInstance();
         if (Environment::enableSemanticVersionConstraints()) {
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
@@ -386,7 +385,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($typeResolver)) {
                     $warnings[] = sprintf(
-                        $translationAPI->__('The FieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->translationAPI->__('The FieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
                         $this->getSchemaFieldVersion($typeResolver, $fieldName) ?? '',
                         $versionConstraint
@@ -467,11 +466,10 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $validation = $engine->validateCheckpoints($checkpoints);
             if (GeneralUtils::isError($validation)) {
                 $error = $validation;
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $errorMessage = $error->getErrorMessage();
                 if (!$errorMessage) {
                     $errorMessage = sprintf(
-                        $translationAPI->__('Validation with code \'%s\' failed', 'component-model'),
+                        $this->translationAPI->__('Validation with code \'%s\' failed', 'component-model'),
                         $error->getErrorCode()
                     );
                 }

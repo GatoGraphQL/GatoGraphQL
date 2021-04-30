@@ -61,10 +61,9 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      */
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'name' => $translationAPI->__('The role name', 'user-roles-wp'),
-            'capabilities' => $translationAPI->__('Capabilities granted by the role', 'user-roles-wp'),
+            'name' => $this->translationAPI->__('The role name', 'user-roles-wp'),
+            'capabilities' => $this->translationAPI->__('Capabilities granted by the role', 'user-roles-wp'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

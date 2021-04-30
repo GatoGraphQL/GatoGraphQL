@@ -45,9 +45,8 @@ abstract class AbstractLocationPostFieldResolver extends AbstractQueryableFieldR
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'locationposts' => $translationAPI->__('Location Posts', 'locationposts'),
+            'locationposts' => $this->translationAPI->__('Location Posts', 'locationposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

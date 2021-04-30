@@ -36,9 +36,8 @@ class CommentsCustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'commentsURL' => $translationAPI->__('URL of the comments section in the post page', 'pop-comments'),
+            'commentsURL' => $this->translationAPI->__('URL of the comments section in the post page', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

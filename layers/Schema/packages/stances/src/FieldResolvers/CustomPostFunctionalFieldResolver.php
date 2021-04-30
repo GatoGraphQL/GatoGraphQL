@@ -63,19 +63,18 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'addStanceURL' => $translationAPI->__('', ''),
-            'loggedInUserStances' => $translationAPI->__('', ''),
-            'hasLoggedInUserStances' => $translationAPI->__('', ''),
-            'editStanceURL' => $translationAPI->__('', ''),
-            'postStancesProURL' => $translationAPI->__('', ''),
-            'postStancesNeutralURL' => $translationAPI->__('', ''),
-            'postStancesAgainstURL' => $translationAPI->__('', ''),
-            'createStanceButtonLazy' => $translationAPI->__('', ''),
-            'stancesLazy' => $translationAPI->__('', ''),
-            'stanceName' => $translationAPI->__('', ''),
-            'catName' => $translationAPI->__('', ''),
+            'addStanceURL' => $this->translationAPI->__('', ''),
+            'loggedInUserStances' => $this->translationAPI->__('', ''),
+            'hasLoggedInUserStances' => $this->translationAPI->__('', ''),
+            'editStanceURL' => $this->translationAPI->__('', ''),
+            'postStancesProURL' => $this->translationAPI->__('', ''),
+            'postStancesNeutralURL' => $this->translationAPI->__('', ''),
+            'postStancesAgainstURL' => $this->translationAPI->__('', ''),
+            'createStanceButtonLazy' => $this->translationAPI->__('', ''),
+            'stancesLazy' => $this->translationAPI->__('', ''),
+            'stanceName' => $this->translationAPI->__('', ''),
+            'catName' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

@@ -40,10 +40,9 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'setFeaturedImage' => $translationAPI->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImage' => $translationAPI->__('Remove the featured image on the custom post', 'custompostmedia-mutations'),
+            'setFeaturedImage' => $this->translationAPI->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
+            'removeFeaturedImage' => $this->translationAPI->__('Remove the featured image on the custom post', 'custompostmedia-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -71,7 +70,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'setFeaturedImage':
                 return [
@@ -79,7 +77,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::MEDIA_ITEM_ID,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
+                            $this->translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
                             $this->mediaTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,

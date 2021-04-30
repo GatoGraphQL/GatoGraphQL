@@ -53,10 +53,9 @@ class CustomPostAndUserFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'hasLocation' => $translationAPI->__('Does the object have location?', 'pop-locations'),
-            'location' => $translationAPI->__('Object\'s location', 'pop-locations'),
+            'hasLocation' => $this->translationAPI->__('Does the object have location?', 'pop-locations'),
+            'location' => $this->translationAPI->__('Object\'s location', 'pop-locations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

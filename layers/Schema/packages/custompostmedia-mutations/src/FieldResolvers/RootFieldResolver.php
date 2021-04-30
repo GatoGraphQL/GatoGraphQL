@@ -44,10 +44,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'setFeaturedImageOnCustomPost' => $translationAPI->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPost' => $translationAPI->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
+            'setFeaturedImageOnCustomPost' => $this->translationAPI->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
+            'removeFeaturedImageFromCustomPost' => $this->translationAPI->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -63,12 +62,11 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $setRemoveFeaturedImageSchemaFieldArgs = [
             [
                 SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CUSTOMPOST_ID,
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The ID of the custom post', 'custompostmedia-mutations'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The ID of the custom post', 'custompostmedia-mutations'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
         ];
@@ -81,7 +79,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::MEDIA_ITEM_ID,
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
+                                $this->translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
                                 $this->mediaTypeResolver->getTypeName()
                             ),
                             SchemaDefinition::ARGNAME_MANDATORY => true,

@@ -43,7 +43,6 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'meshServices':
             case 'meshServiceData':
@@ -54,19 +53,19 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'githubRepo',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('GitHub repository for which to fetch data, in format \'account/repo\' (eg: \'leoloso/PoP\')', 'examples-for-pop'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('GitHub repository for which to fetch data, in format \'account/repo\' (eg: \'leoloso/PoP\')', 'examples-for-pop'),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => 'leoloso/PoP',
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'weatherZone',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Zone from which to retrieve weather data, as listed in https://api.weather.gov/zones/forecast', 'examples-for-pop'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Zone from which to retrieve weather data, as listed in https://api.weather.gov/zones/forecast', 'examples-for-pop'),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => 'MOZ028',
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'photoPage',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Page from which to fetch photo data. Default value: A random number between 1 and 20', 'examples-for-pop'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Page from which to fetch photo data. Default value: A random number between 1 and 20', 'examples-for-pop'),
                         ],
                     ]
                 );
@@ -77,11 +76,10 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'meshServices' => $translationAPI->__('Services required to create a \'content mesh\' for the application: GitHub data for a specific repository, weather data from the National Weather Service for a specific zone, and random photo data from Unsplash', 'examples-for-pop'),
-            'meshServiceData' => $translationAPI->__('Retrieve data from the mesh services', 'examples-for-pop'),
-            'contentMesh' => $translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'', 'examples-for-pop'),
+            'meshServices' => $this->translationAPI->__('Services required to create a \'content mesh\' for the application: GitHub data for a specific repository, weather data from the National Weather Service for a specific zone, and random photo data from Unsplash', 'examples-for-pop'),
+            'meshServiceData' => $this->translationAPI->__('Retrieve data from the mesh services', 'examples-for-pop'),
+            'contentMesh' => $this->translationAPI->__('Retrieve data from the mesh services and create a \'content mesh\'', 'examples-for-pop'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

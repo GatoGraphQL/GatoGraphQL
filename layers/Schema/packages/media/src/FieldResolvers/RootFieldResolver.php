@@ -39,10 +39,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'mediaItems' => $translationAPI->__('Get the media items', 'media'),
-            'mediaItem' => $translationAPI->__('Get a media item', 'media'),
+            'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
+            'mediaItem' => $this->translationAPI->__('Get a media item', 'media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -58,7 +57,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'mediaItem':
                 return [
@@ -66,7 +64,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                         SchemaDefinition::ARGNAME_NAME => 'id',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The ID of the media element, of type \'%s\'', 'media'),
+                            $this->translationAPI->__('The ID of the media element, of type \'%s\'', 'media'),
                             $this->customPostTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,

@@ -65,13 +65,12 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'stances' => $translationAPI->__('', ''),
-            'hasStances' => $translationAPI->__('', ''),
-            'stanceProCount' => $translationAPI->__('', ''),
-            'stanceNeutralCount' => $translationAPI->__('', ''),
-            'stanceAgainstCount' => $translationAPI->__('', ''),
+            'stances' => $this->translationAPI->__('', ''),
+            'hasStances' => $this->translationAPI->__('', ''),
+            'stanceProCount' => $this->translationAPI->__('', ''),
+            'stanceNeutralCount' => $this->translationAPI->__('', ''),
+            'stanceAgainstCount' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

@@ -39,9 +39,8 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            '__typename' => $translationAPI->__('The object\'s type', 'graphql-server'),
+            '__typename' => $this->translationAPI->__('The object\'s type', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

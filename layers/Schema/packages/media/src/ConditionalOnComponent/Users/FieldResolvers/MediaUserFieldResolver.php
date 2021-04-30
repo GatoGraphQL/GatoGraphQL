@@ -35,9 +35,8 @@ class MediaUserFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'author' => $translationAPI->__('Media element\'s author', 'pop-media'),
+            'author' => $this->translationAPI->__('Media element\'s author', 'pop-media'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

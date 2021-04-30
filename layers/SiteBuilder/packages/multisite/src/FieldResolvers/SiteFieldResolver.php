@@ -48,10 +48,9 @@ class SiteFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'domain' => $translationAPI->__('The site\'s domain', ''),
-            'host' => $translationAPI->__('The site\'s host', ''),
+            'domain' => $this->translationAPI->__('The site\'s domain', ''),
+            'host' => $this->translationAPI->__('The site\'s host', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

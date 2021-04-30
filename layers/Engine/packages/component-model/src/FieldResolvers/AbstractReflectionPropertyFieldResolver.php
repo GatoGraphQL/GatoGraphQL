@@ -72,8 +72,7 @@ abstract class AbstractReflectionPropertyFieldResolver extends AbstractDBDataFie
             // The line is added to the description
             $docCommentDescLines[] = $docCommentLines[$count];
         }
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return implode($translationAPI->__('. '), $docCommentDescLines);
+        return implode($this->translationAPI->__('. '), $docCommentDescLines);
     }
 
     public function getTypePropertyDocComments(): array

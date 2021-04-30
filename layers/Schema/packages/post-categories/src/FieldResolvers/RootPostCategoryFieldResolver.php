@@ -25,12 +25,11 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'postCategory' => $translationAPI->__('Post category with a specific ID', 'post-categories'),
-            'postCategories' => $translationAPI->__('Post categories', 'post-categories'),
-            'postCategoryCount' => $translationAPI->__('Number of post categories', 'post-categories'),
-            'postCategoryNames' => $translationAPI->__('Names of the post categories', 'post-categories'),
+            'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
+            'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
+            'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
+            'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -72,7 +71,6 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'postCategory':
                 return array_merge(
@@ -81,7 +79,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The category ID', 'post-categories'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The category ID', 'post-categories'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

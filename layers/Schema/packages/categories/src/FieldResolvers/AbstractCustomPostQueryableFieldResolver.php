@@ -52,11 +52,10 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'categories' => $translationAPI->__('Categories added to this custom post', 'pop-categories'),
-            'categoryCount' => $translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
-            'categoryNames' => $translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),
+            'categories' => $this->translationAPI->__('Categories added to this custom post', 'pop-categories'),
+            'categoryCount' => $this->translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
+            'categoryNames' => $this->translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

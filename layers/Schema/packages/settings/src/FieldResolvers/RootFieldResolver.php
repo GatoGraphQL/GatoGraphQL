@@ -27,9 +27,8 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'option' => $translationAPI->__('Option saved in the DB', 'pop-settings'),
+            'option' => $this->translationAPI->__('Option saved in the DB', 'pop-settings'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,7 +44,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'option':
                 return array_merge(
@@ -54,7 +52,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'name',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The option name', 'pop-settings'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The option name', 'pop-settings'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

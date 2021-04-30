@@ -47,13 +47,12 @@ abstract class AbstractTagFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'url' => $translationAPI->__('Tag URL', 'pop-tags'),
-            'name' => $translationAPI->__('Tag', 'pop-tags'),
-            'slug' => $translationAPI->__('Tag slug', 'pop-tags'),
-            'description' => $translationAPI->__('Tag description', 'pop-tags'),
-            'count' => $translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
+            'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
+            'name' => $this->translationAPI->__('Tag', 'pop-tags'),
+            'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
+            'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
+            'count' => $this->translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

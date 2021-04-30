@@ -29,9 +29,8 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'reply' => $translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
+            'reply' => $this->translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

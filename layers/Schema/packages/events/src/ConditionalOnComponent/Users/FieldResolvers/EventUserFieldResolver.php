@@ -18,10 +18,9 @@ class EventUserFieldResolver extends AbstractEventFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'events' => $translationAPI->__('Events by the user', 'events'),
-            'eventCount' => $translationAPI->__('Number of events by the user', 'events'),
+            'events' => $this->translationAPI->__('Events by the user', 'events'),
+            'eventCount' => $this->translationAPI->__('Number of events by the user', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

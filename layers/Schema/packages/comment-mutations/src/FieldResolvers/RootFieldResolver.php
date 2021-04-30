@@ -34,10 +34,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'addCommentToCustomPost' => $translationAPI->__('Add a comment to a custom post', 'comment-mutations'),
-            'replyComment' => $translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
+            'addCommentToCustomPost' => $this->translationAPI->__('Add a comment to a custom post', 'comment-mutations'),
+            'replyComment' => $this->translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

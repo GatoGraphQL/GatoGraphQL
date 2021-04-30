@@ -31,10 +31,9 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'setTags' => sprintf(
-                $translationAPI->__('Set tags on the %s', 'custompost-tag-mutations'),
+                $this->translationAPI->__('Set tags on the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             )
         ];
@@ -62,20 +61,19 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'setTags':
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The tags to set', 'custompost-tag-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::APPEND,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
                         SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                     ],
                 ];

@@ -32,9 +32,8 @@ class RootEventFieldResolver extends AbstractPostFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'event' => $translationAPI->__('Event with a specific ID', 'events'),
+            'event' => $this->translationAPI->__('Event with a specific ID', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -50,7 +49,6 @@ class RootEventFieldResolver extends AbstractPostFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'event':
                 return array_merge(
@@ -59,7 +57,7 @@ class RootEventFieldResolver extends AbstractPostFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The event ID', 'events'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The event ID', 'events'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
