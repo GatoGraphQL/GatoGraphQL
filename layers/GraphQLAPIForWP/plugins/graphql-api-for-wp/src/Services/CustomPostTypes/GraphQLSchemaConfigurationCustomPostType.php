@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
@@ -87,7 +86,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $template = [];
         // Add blocks depending on being enabled by module
         $blockClassModules = [
@@ -99,7 +97,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
             /**
              * @var AbstractBlock
              */
-            $block = $instanceManager->getInstance($blockClass);
+            $block = $this->instanceManager->getInstance($blockClass);
             if ($block->isServiceEnabled()) {
                 $template[] = [$block->getBlockFullName()];
             }
@@ -108,7 +106,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         /**
          * @var SchemaConfigOptionsBlock
          */
-        $schemaConfigOptionsBlock = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        $schemaConfigOptionsBlock = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
         $template[] = [$schemaConfigOptionsBlock->getBlockFullName()];
         return $template;
     }

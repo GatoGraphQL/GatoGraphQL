@@ -14,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
@@ -278,9 +277,8 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
      */
     protected function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getQueryExecutionOptionsBlock()
@@ -335,11 +333,10 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
     protected function maybeAddSchemaConfigurationBlock(array &$template): void
     {
         if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
-            $instanceManager = InstanceManagerFacade::getInstance();
             /**
              * @var SchemaConfigurationBlock
              */
-            $schemaConfigurationBlock = $instanceManager->getInstance(SchemaConfigurationBlock::class);
+            $schemaConfigurationBlock = $this->instanceManager->getInstance(SchemaConfigurationBlock::class);
             $template[] = [$schemaConfigurationBlock->getBlockFullName()];
         }
     }

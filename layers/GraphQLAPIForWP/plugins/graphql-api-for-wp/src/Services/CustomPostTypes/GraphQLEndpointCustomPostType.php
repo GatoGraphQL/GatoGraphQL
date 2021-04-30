@@ -16,7 +16,6 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecution
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use WP_Post;
 
@@ -135,11 +134,10 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
     {
         $template = parent::getGutenbergTemplate();
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var EndpointOptionsBlock
          */
-        $endpointOptionsBlock = $instanceManager->getInstance(EndpointOptionsBlock::class);
+        $endpointOptionsBlock = $this->instanceManager->getInstance(EndpointOptionsBlock::class);
         $template[] = [$endpointOptionsBlock->getBlockFullName()];
         return $template;
     }
@@ -183,11 +181,10 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
 
     protected function getQueryExecutionOptionsBlock(): AbstractQueryExecutionOptionsBlock
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var EndpointOptionsBlock
          */
-        $block = $instanceManager->getInstance(EndpointOptionsBlock::class);
+        $block = $this->instanceManager->getInstance(EndpointOptionsBlock::class);
         return $block;
     }
 
@@ -254,11 +251,10 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
                 RequestParams::VIEW_GRAPHIQL => CustomEndpointGraphiQLClient::class,
                 RequestParams::VIEW_SCHEMA => CustomEndpointVoyagerClient::class,
             ];
-            $instanceManager = InstanceManagerFacade::getInstance();
             /**
              * @var AbstractClient
              */
-            $client = $instanceManager->getInstance($clientClasses[$view]);
+            $client = $this->instanceManager->getInstance($clientClasses[$view]);
             echo $client->getClientHTML();
             die;
         }

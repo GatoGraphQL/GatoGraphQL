@@ -12,7 +12,6 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
@@ -182,9 +181,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    $instanceManager = InstanceManagerFacade::getInstance();
                     /** @var CPTUtils */
-                    $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                    $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
                     echo $cptUtils->getCustomPostDescription($post);
                 }
                 break;
@@ -258,9 +256,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var CPTUtils */
-                $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
                 if ($excerpt = $cptUtils->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
