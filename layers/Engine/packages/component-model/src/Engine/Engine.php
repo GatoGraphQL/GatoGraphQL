@@ -623,6 +623,8 @@ class Engine implements EngineInterface
 
         $isUnionTypeResolver = $typeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
+            /** @var UnionTypeResolverInterface */
+            $typeResolver = $typeResolver;
             // Get the actual type for each entity, and add the entry there
             $convertedTypeResolverClassDataItems = $convertedTypeResolverClassDBKeys = [];
             $noTypeResolverDataItems = [];
@@ -1500,6 +1502,8 @@ class Engine implements EngineInterface
 
                         // If it's a unionTypeResolver, get the typeResolver for each resultItem
                         // to obtain the subcomponent typeResolver
+                        /** @var UnionTypeResolverInterface */
+                        $typeResolver = $typeResolver;
                         $resultItemTypeResolvers = $typeResolver->getResultItemIDTargetTypeResolvers($typeResolver_ids);
                         $iterationTypeResolverIDs = [];
                         foreach ($typeResolver_ids as $id) {
