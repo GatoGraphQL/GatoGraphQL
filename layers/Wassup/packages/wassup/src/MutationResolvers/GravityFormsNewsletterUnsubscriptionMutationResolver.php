@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptionMutationResolver;
 
 class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUnsubscriptionMutationResolver

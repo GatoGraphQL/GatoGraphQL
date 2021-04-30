@@ -6,8 +6,6 @@ namespace PoPSitesWassup\ContactUsMutations\MutationResolvers;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class ContactUsMutationResolver extends AbstractMutationResolver
 {
