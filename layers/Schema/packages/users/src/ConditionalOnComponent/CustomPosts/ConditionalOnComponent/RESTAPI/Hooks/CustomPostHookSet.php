@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Comments\ConditionalOnComponent\RESTAPI\Hooks\RESTFields;
+namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoP\RESTAPI\Helpers\HookHelpers;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 
-class CustomPostHooks extends AbstractHookSet
+class CustomPostHookSet extends AbstractHookSet
 {
-    const COMMENT_RESTFIELDS = 'comments.id|content';
+    const AUTHOR_RESTFIELDS = 'author.id|name|url';
 
     protected function init(): void
     {
@@ -22,6 +22,6 @@ class CustomPostHooks extends AbstractHookSet
 
     public function getRESTFields($restFields): string
     {
-        return $restFields . ',' . self::COMMENT_RESTFIELDS;
+        return $restFields . ',' . self::AUTHOR_RESTFIELDS;
     }
 }
