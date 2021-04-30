@@ -5,20 +5,29 @@ declare(strict_types=1);
 namespace PoP\Engine\Engine;
 
 use Exception;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\CacheControl\Facades\CacheControlEngineFacade;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected LooseContractManagerInterface $looseContractManager
+    ) {
+        parent::__construct($translationAPI, $hooksAPI);
+    }
+
     public function generateData()
     {
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
-        $looseContractManager = LooseContractManagerFacade::getInstance();
-        if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
+        if ($notImplementedHooks = $this->looseContractManager->getNotImplementedRequiredHooks()) {
             throw new Exception(
                 sprintf(
                     $this->translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
@@ -26,7 +35,7 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
                 )
             );
         }
-        if ($notImplementedNames = $looseContractManager->getNotImplementedRequiredNames()) {
+        if ($notImplementedNames = $this->looseContractManager->getNotImplementedRequiredNames()) {
             throw new Exception(
                 sprintf(
                     $this->translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
