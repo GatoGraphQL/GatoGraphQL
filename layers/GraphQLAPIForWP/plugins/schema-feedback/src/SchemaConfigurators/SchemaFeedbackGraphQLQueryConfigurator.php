@@ -8,7 +8,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
 use PoP\SchemaFeedbackByDirective\Facades\SchemaFeedbackManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
@@ -27,15 +26,13 @@ class SchemaFeedbackGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         $fdlBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $fdlPostID,
-            $instanceManager->getInstance(SchemaFeedbackBlock::class)
+            $this->instanceManager->getInstance(SchemaFeedbackBlock::class)
         );
         $schemaFeedbackManager = SchemaFeedbackManagerFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         foreach ($fdlBlockItems as $fdlBlockItem) {
             if ($feedbackMessage = $fdlBlockItem['attrs'][SchemaFeedbackBlock::ATTRIBUTE_NAME_FEEDBACK_MESSAGE] ?? null) {
                 if ($typeFields = $fdlBlockItem['attrs'][AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS] ?? null) {
