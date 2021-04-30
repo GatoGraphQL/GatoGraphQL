@@ -7,7 +7,7 @@ namespace PoPSitesWassup\Wassup\Hooks;
 use PoP\Hooks\AbstractHookSet;
 use PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsAddEntryToFormMutationResolverBridge;
 
-class MutationResolverBridgeHooks extends AbstractHookSet
+class MutationResolverBridgeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
