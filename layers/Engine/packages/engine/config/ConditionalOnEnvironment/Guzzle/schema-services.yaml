@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoP\Engine\ConditionalOnEnvironment\Guzzle\SchemaServices\:
-        resource: '../../../src/ConditionalOnEnvironment/Guzzle/SchemaServices/*'

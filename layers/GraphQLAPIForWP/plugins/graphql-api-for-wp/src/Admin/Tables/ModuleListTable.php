@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**

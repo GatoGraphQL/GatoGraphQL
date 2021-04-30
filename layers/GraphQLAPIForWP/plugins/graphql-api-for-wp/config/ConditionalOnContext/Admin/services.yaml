@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\:
+        resource: '../../../src/ConditionalOnContext/Admin/Services/*'

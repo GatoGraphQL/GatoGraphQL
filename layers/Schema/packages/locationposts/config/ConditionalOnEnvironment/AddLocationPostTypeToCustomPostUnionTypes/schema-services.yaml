@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\LocationPosts\ConditionalOnEnvironment\AddLocationPostTypeToCustomPostUnionTypes\SchemaServices\:
-        resource: '../../../src/ConditionalOnEnvironment/AddLocationPostTypeToCustomPostUnionTypes/SchemaServices/*'

@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLByPoP\GraphQLServer\ConditionalOnContext\MultipleQueryExecution\SchemaServices\:
+        resource: '../../../src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/*'

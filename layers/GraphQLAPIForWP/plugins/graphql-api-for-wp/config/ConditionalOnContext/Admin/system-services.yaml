@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    # These classes are invoked after `bootSystem` and before `bootApplication`
+    GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\:
+        resource: '../../../src/ConditionalOnContext/Admin/SystemServices/*'

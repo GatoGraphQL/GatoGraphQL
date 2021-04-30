@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\:
+        resource: '../../../../../src/ConditionalOnContext/Admin/ConditionalOnContext/Editor/SchemaServices/*'

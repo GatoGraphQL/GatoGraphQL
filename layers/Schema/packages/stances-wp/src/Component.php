@@ -38,7 +38,7 @@ class Component extends AbstractComponent
     ): void {
         self::initServices(dirname(__DIR__));
         if (Environment::addStanceTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddStanceTypeToCustomPostUnionTypes/Overrides');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddStanceTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

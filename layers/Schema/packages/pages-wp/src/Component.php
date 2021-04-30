@@ -47,7 +47,7 @@ class Component extends AbstractComponent
     ): void {
         self::initServices(dirname(__DIR__));
         if (ComponentConfiguration::addPageTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddPageTypeToCustomPostUnionTypes/Overrides');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
         }
     }
 }

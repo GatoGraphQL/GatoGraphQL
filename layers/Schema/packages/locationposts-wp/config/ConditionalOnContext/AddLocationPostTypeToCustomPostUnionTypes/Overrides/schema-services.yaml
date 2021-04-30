@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\LocationPosts\ConditionalOnContext\AddLocationPostTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\LocationPostCustomPostTypeResolverPicker:
+        class: '\PoPSchema\LocationPostsWP\ConditionalOnContext\AddLocationPostTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\LocationPostCustomPostTypeResolverPicker'

@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\Pages\ConditionalOnEnvironment\AddPageTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\PageCustomPostTypeResolverPicker:
-        class: '\PoPSchema\PagesWP\ConditionalOnEnvironment\AddPageTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\PageCustomPostTypeResolverPicker'

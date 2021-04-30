@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\Stances\ConditionalOnEnvironment\AddStanceTypeToCustomPostUnionTypes\SchemaServices\TypeResolverPickers\StanceCustomPostTypeResolverPicker:
-        class: '\PoPSchema\StancesWP\ConditionalOnEnvironment\AddStanceTypeToCustomPostUnionTypes\Overrides\SchemaServices\TypeResolverPickers\StanceCustomPostTypeResolverPicker'

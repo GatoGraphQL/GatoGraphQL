@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    GraphQLByPoP\GraphQLServer\Conditional\CacheControl\Conditional\AccessControl\ConditionalOnEnvironment\PrivateSchema\SchemaServices\:
-        resource: '../../../../../../../src/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema/SchemaServices/*'
