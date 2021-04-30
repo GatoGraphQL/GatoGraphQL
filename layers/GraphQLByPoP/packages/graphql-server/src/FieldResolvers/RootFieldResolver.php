@@ -10,9 +10,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaTypeDataLoader;
 

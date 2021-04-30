@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoPSchema\Comments\Constants\Status;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;

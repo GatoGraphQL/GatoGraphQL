@@ -15,7 +15,6 @@ use PoP\API\Facades\PersistedQueryManagerFacade;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 

@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class MediaFieldResolver extends AbstractDBDataFieldResolver

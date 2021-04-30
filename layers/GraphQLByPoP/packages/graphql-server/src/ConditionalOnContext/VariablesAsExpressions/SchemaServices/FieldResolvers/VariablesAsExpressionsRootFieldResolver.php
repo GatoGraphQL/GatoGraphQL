@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\ConditionalOnContext\VariablesAsExpressions
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLServer\ConditionalOnContext\MultipleQueryExecution\SchemaServices\DirectiveResolvers\ExportDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;

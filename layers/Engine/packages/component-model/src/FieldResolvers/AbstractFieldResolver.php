@@ -28,6 +28,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSchemaDefinitionResolverInterface
@@ -50,6 +51,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         protected InstanceManagerInterface $instanceManager,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected NameResolverInterface $nameResolver,
+        protected CMSServiceInterface $cmsService,
     ) {
     }
 

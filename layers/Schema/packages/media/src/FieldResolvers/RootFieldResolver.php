@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Media\FieldResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
@@ -26,6 +27,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
         protected CustomPostTypeResolver $customPostTypeResolver
     ) {
         parent::__construct(
@@ -34,6 +36,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
             $instanceManager,
             $fieldQueryInterpreter,
             $nameResolver,
+            $cmsService,
         );
     }
 

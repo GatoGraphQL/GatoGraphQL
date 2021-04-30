@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\Events\FieldResolvers;
 
 use PoPSchema\Events\Enums\EventScopeEnum;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoPSchema\Events\Constants\Scopes;

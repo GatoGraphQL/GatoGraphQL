@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\DirectiveTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 

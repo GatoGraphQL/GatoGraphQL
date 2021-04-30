@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -27,6 +28,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
         protected MediaTypeResolver $mediaTypeResolver
     ) {
         parent::__construct(
@@ -35,6 +37,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             $instanceManager,
             $fieldQueryInterpreter,
             $nameResolver,
+            $cmsService,
         );
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Leoloso\ExamplesForPoP\FieldResolvers;
 
 use PoP\ComponentModel\Facades\ErrorHandling\ErrorProviderFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;

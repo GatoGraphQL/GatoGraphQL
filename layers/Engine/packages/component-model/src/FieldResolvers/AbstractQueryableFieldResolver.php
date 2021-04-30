@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeDataLoaders\TypeQueryableDataLoaderInterface;
 
 abstract class AbstractQueryableFieldResolver extends AbstractDBDataFieldResolver
