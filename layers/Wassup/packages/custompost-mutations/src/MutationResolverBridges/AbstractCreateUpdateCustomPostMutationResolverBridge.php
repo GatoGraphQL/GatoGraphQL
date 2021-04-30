@@ -7,7 +7,6 @@ namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 use PoPSchema\Posts\Constants\InputNames;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
@@ -166,14 +165,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         $status = $customPostTypeAPI->getStatus($result_id);
         if ($status == Status::PUBLISHED) {
             $success_string = sprintf(
-                TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
+                $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
                 $customPostTypeAPI->getPermalink($result_id),
                 getReloadurlLinkattrs()
             );
         } elseif ($status == Status::DRAFT) {
-            $success_string = TranslationAPIFacade::getInstance()->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
+            $success_string = $this->translationAPI->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
         } elseif ($status == Status::PENDING) {
-            $success_string = TranslationAPIFacade::getInstance()->__('Now waiting for approval from the admins.', 'pop-application');
+            $success_string = $this->translationAPI->__('Now waiting for approval from the admins.', 'pop-application');
         }
 
         return HooksAPIFacade::getInstance()->applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);

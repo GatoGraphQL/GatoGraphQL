@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver;
@@ -74,7 +73,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         if ($referenced) {
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             return sprintf(
-                TranslationAPIFacade::getInstance()->__('%1$s after reading “%2$s”', 'pop-userstance'),
+                $this->translationAPI->__('%1$s after reading “%2$s”', 'pop-userstance'),
                 $feedback_title,
                 $customPostTypeAPI->getTitle($referenced)
             );

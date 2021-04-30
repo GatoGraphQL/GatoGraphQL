@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
@@ -14,7 +13,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
     {
         $emails = (array) $result_id;
         return sprintf(
-            TranslationAPIFacade::getInstance()->__('Invitation sent to the following emails: <strong>%s</strong>'),
+            $this->translationAPI->__('Invitation sent to the following emails: <strong>%s</strong>'),
             implode(', ', $emails)
         );
     }

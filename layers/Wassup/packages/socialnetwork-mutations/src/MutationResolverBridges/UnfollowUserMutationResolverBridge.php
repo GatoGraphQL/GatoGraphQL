@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UnfollowUserMutationResolver;
 
 class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
@@ -23,7 +22,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         return sprintf(
-            TranslationAPIFacade::getInstance()->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->translationAPI->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $cmsusersapi->getUserDisplayName($result_id)
         );
     }
