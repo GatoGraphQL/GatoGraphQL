@@ -6,7 +6,6 @@ namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\ErrorHandling\Error;
 
@@ -37,8 +36,7 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
     {
         // Check if Captcha validation is needed
         if ($data_properties[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA]) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            $captcha = $moduleprocessor_manager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+            $captcha = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
             return \GD_Captcha::validate($captcha);
         }
 

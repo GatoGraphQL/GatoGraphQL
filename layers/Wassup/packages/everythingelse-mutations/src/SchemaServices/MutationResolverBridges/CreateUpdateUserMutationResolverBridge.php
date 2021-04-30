@@ -6,7 +6,6 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateUserMutationResolver;
 
@@ -36,8 +35,6 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
 
     public function getFormData(): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         $cmseditusershelpers = \PoP\EditUsers\HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
@@ -45,17 +42,17 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,
-            'username' => $cmseditusershelpers->sanitizeUsername($moduleprocessor_manager->getProcessor($inputs['username'])->getValue($inputs['username'])),
-            'password' => $moduleprocessor_manager->getProcessor($inputs['password'])->getValue($inputs['password']),
-            'repeat_password' => $moduleprocessor_manager->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
-            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($moduleprocessor_manager->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
-            'user_email' => trim($moduleprocessor_manager->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
-            'description' => trim($moduleprocessor_manager->getProcessor($inputs['description'])->getValue($inputs['description'])),
-            'user_url' => trim($moduleprocessor_manager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
+            'username' => $cmseditusershelpers->sanitizeUsername($this->moduleProcessorManager->getProcessor($inputs['username'])->getValue($inputs['username'])),
+            'password' => $this->moduleProcessorManager->getProcessor($inputs['password'])->getValue($inputs['password']),
+            'repeat_password' => $this->moduleProcessorManager->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
+            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
+            'user_email' => trim($this->moduleProcessorManager->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
+            'description' => trim($this->moduleProcessorManager->getProcessor($inputs['description'])->getValue($inputs['description'])),
+            'user_url' => trim($this->moduleProcessorManager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $form_data['captcha'] = $moduleprocessor_manager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
+            $form_data['captcha'] = $this->moduleProcessorManager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
         // Allow to add extra inputs

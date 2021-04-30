@@ -51,11 +51,10 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     protected function getCommonuserrolesFormData()
     {
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $inputs = $this->getFormInputs();
-        $individualinterests = $moduleprocessor_manager->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
+        $individualinterests = $this->moduleProcessorManager->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
         return array(
-            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($moduleprocessor_manager->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
+            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
             'individualinterests' => $individualinterests ?? array(),
         );
     }
