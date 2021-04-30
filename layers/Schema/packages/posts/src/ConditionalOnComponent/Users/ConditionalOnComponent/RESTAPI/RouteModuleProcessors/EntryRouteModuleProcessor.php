@@ -9,7 +9,7 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHooks;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHookSet;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
@@ -21,7 +21,7 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     {
         if (is_null($this->restFieldsQuery)) {
             $this->restFieldsQuery = str_replace(
-                ',' . CustomPostHooks::AUTHOR_RESTFIELDS,
+                ',' . CustomPostHookSet::AUTHOR_RESTFIELDS,
                 '',
                 parent::getRESTFieldsQuery()
             );

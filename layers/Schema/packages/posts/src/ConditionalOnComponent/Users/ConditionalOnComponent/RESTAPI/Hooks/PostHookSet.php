@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\Hooks;
+namespace PoPSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\RESTAPI\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoP\RESTAPI\Helpers\HookHelpers;
-use PoPSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
+use PoPSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
 
-class PostHooks extends AbstractHookSet
+class PostHookSet extends AbstractHookSet
 {
-    const CATEGORY_RESTFIELDS = 'categories.id|name|url';
+    public const USER_RESTFIELDS = 'posts.id|title|date|url';
 
     protected function init(): void
     {
@@ -22,6 +22,6 @@ class PostHooks extends AbstractHookSet
 
     public function getRESTFields($restFields): string
     {
-        return $restFields . ',' . self::CATEGORY_RESTFIELDS;
+        return $restFields . ',' . self::USER_RESTFIELDS;
     }
 }

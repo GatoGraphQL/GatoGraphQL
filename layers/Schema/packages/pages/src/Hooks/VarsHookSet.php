@@ -10,7 +10,7 @@ use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Pages\Routing\RouteNatures;
 
-class VarsHooks extends AbstractHookSet
+class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

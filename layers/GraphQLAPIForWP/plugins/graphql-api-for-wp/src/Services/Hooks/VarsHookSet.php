@@ -13,7 +13,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 
-class VarsHooks extends AbstractHookSet
+class VarsHookSet extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
@@ -30,7 +30,7 @@ class VarsHooks extends AbstractHookSet
 
     protected function init(): void
     {
-        // Implement immediately, before VarsHooks in API adds output=json
+        // Implement immediately, before VarsHookSet in API adds output=json
         $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             array($this, 'maybeRemoveVars'),

@@ -12,7 +12,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
 
-class VarsHooks extends AbstractHookSet
+class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

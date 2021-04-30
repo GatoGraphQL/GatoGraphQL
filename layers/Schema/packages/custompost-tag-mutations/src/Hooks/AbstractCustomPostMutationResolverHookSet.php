@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostCategoryMutations\Hooks;
+namespace PoPSchema\CustomPostTagMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -11,10 +11,10 @@ use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
+use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
-abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
+abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
@@ -26,7 +26,7 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
         );
         $this->hooksAPI->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            array($this, 'maybeSetCategories'),
+            array($this, 'maybeSetTags'),
             10,
             2
         );
@@ -42,38 +42,31 @@ abstract class AbstractCustomPostMutationResolverHooks extends AbstractHookSet
         if ($entityTypeResolverClass !== $this->getTypeResolverClass()) {
             return $fieldArgs;
         }
-        $categoryTypeResolverClass = $this->getCategoryTypeResolverClass();
-        /** @var TypeResolverInterface */
-        $categoryTypeResolver = $this->instanceManager->getInstance($categoryTypeResolverClass);
         $fieldArgs[] = [
-            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
-            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
-                $categoryTypeResolver->getTypeName()
-            )
+            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
+            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
         ];
         return $fieldArgs;
     }
 
     abstract protected function getTypeResolverClass(): string;
-    abstract protected function getCategoryTypeResolverClass(): string;
 
-    public function maybeSetCategories(int | string $customPostID, array $form_data): void
+    public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
         // Only for that specific CPT
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if ($customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!isset($form_data[MutationInputProperties::CATEGORY_IDS])) {
+        if (!isset($form_data[MutationInputProperties::TAGS])) {
             return;
         }
-        $customPostCategoryIDs = $form_data[MutationInputProperties::CATEGORY_IDS];
-        $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
-        $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
+        $customPostTags = $form_data[MutationInputProperties::TAGS];
+        $customPostTagTypeMutationAPI = $this->getCustomPostTagTypeMutationAPI();
+        $customPostTagTypeMutationAPI->setTags($customPostID, $customPostTags, false);
     }
 
     abstract protected function getCustomPostType(): string;
-    abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
+    abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 }

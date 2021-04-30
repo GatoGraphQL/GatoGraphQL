@@ -11,7 +11,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\Routing\RouteNatures;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 
-class VarsHooks extends AbstractHookSet
+class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

@@ -7,7 +7,7 @@ namespace PoPSchema\EventsWPEM\Hooks;
 use PoP\Hooks\AbstractHookSet;
 use EM_Event;
 
-class PlaceholderHooks extends AbstractHookSet
+class PlaceholderHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

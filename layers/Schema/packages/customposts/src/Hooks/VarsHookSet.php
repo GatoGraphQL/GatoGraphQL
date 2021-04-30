@@ -11,7 +11,7 @@ use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-class VarsHooks extends AbstractHookSet
+class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

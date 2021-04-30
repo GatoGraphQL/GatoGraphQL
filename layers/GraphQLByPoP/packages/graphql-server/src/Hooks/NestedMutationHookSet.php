@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 
-class NestedMutationHooks extends AbstractHookSet
+class NestedMutationHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

@@ -8,7 +8,7 @@ use PoP\Application\Constants\Response;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModuleProcessors\Constants;
 
-class WhitelistParamHooks extends AbstractHookSet
+class WhitelistParamHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

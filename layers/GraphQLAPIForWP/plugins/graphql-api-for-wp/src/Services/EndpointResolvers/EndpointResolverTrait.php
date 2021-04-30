@@ -8,7 +8,7 @@ use WP_Post;
 use WP_Query;
 use PoP\Routing\RouteNatures;
 use PoP\API\Schema\QueryInputs;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -22,7 +22,7 @@ trait EndpointResolverTrait
     protected function executeGraphQLQuery(): void
     {
         /**
-         * Priority 1: Execute before VarsHooks in the API package, to set-up the variables
+         * Priority 1: Execute before VarsHookSet in the API package, to set-up the variables
          * in $vars as soon as we knows if it's a singular post of this type.
          * But after setting $vars['routing-state']['queried-object-id'], to get the current
          * post ID from $vars instead of the global context
@@ -90,7 +90,7 @@ trait EndpointResolverTrait
         $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
 
         // Indicate it is an API, of type GraphQL. Just by doing is, class
-        // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks will process the GraphQL request
+        // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet will process the GraphQL request
         [&$vars] = $vars_in_array;
         $vars['scheme'] = APISchemes::API;
         $vars['datastructure'] = $graphQLDataStructureFormatter->getName();
@@ -133,9 +133,9 @@ trait EndpointResolverTrait
         // Add the query into $vars
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
-         * @var VarsHooks
+         * @var VarsHookSet
          */
-        $graphQLAPIRequestHookSet = $instanceManager->getInstance(VarsHooks::class);
+        $graphQLAPIRequestHookSet = $instanceManager->getInstance(VarsHookSet::class);
         $graphQLAPIRequestHookSet->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
     }
 }

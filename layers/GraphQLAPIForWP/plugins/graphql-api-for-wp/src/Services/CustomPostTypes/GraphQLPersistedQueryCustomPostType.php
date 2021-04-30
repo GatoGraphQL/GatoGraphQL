@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHooks as GraphQLRequestVarsHooks;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHooks;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
@@ -327,7 +327,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
             // The Persisted Query is also standard GraphQL
             $graphQLAPIRequestHookSet->setStandardGraphQLVars($vars);
 
-            // Remove the VarsHooks from the GraphQLRequest, so it doesn't process the GraphQL query
+            // Remove the VarsHookSet from the GraphQLRequest, so it doesn't process the GraphQL query
             // Otherwise it will add error "The query in the body is empty"
             /**
              * @var callable

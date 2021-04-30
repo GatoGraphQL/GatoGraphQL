@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 
-class VarsHooks extends AbstractHookSet
+class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

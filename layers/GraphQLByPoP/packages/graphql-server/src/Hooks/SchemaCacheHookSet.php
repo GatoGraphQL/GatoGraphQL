@@ -8,7 +8,7 @@ use PoP\API\Cache\CacheUtils;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\State\ApplicationState;
 
-class SchemaCacheHooks extends AbstractHookSet
+class SchemaCacheHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

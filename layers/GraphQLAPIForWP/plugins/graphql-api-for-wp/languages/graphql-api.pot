@@ -1325,7 +1325,7 @@ msgstr ""
 msgid "(%s) %s"
 msgstr ""
 
-#: src/Services/Hooks/ApplicationStateHooks.php:31
+#: src/Services/Hooks/ApplicationStateHookSet.php:31
 msgid "is admin:"
 msgstr ""
 
@@ -1669,11 +1669,11 @@ msgstr ""
 msgid "Replace type '%s' with the actual type name (such as 'Post')"
 msgstr ""
 
-#: vendor/getpop/api/src/Hooks/VarsHooks.php:121
+#: vendor/getpop/api/src/Hooks/VarsHookSet.php:121
 msgid "namespaced:"
 msgstr ""
 
-#: vendor/getpop/api/src/Hooks/VarsHooks.php:131
+#: vendor/getpop/api/src/Hooks/VarsHookSet.php:131
 msgid "fields:"
 msgstr ""
 
@@ -2518,7 +2518,7 @@ msgstr ""
 msgid "module paths:"
 msgstr ""
 
-#: vendor/getpop/engine/src/Hooks/VarsHooks.php:25
+#: vendor/getpop/engine/src/Hooks/VarsHookSet.php:25
 msgid "disable redundant root fields:"
 msgstr ""
 
@@ -2800,16 +2800,16 @@ msgstr ""
 msgid "No operation with name '%s' was submitted."
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-request/src/Hooks/VarsHooks.php:54
+#: vendor/graphql-by-pop/graphql-request/src/Hooks/VarsHookSet.php:54
 #, php-format
 msgid "Use the operation type '%s' to execute mutations"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-request/src/Hooks/VarsHooks.php:140
+#: vendor/graphql-by-pop/graphql-request/src/Hooks/VarsHookSet.php:140
 msgid "No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-request/src/Hooks/VarsHooks.php:141
+#: vendor/graphql-by-pop/graphql-request/src/Hooks/VarsHookSet.php:141
 msgid "The query in the body is empty"
 msgstr ""
 
@@ -3027,19 +3027,19 @@ msgstr ""
 msgid "Include deprecated fields?"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHooks.php:78
+#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHookSet.php:78
 msgid "edit schema:"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHooks.php:81
+#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHookSet.php:81
 msgid "GraphQL operation type:"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHooks.php:83
+#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHookSet.php:83
 msgid "enable nested mutations:"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHooks.php:84
+#: vendor/graphql-by-pop/graphql-server/src/Hooks/VarsHookSet.php:84
 msgid "enable GraphQL introspection:"
 msgstr ""
 
@@ -3298,7 +3298,7 @@ msgstr ""
 
 #: vendor/pop-schema/custompost-category-mutations/src/FieldResolvers/AbstractCustomPostFieldResolver.php:78
 #: vendor/pop-schema/custompost-category-mutations/src/FieldResolvers/AbstractRootFieldResolver.php:81
-#: vendor/pop-schema/custompost-category-mutations/src/Hooks/AbstractCustomPostMutationResolverHooks.php:54
+#: vendor/pop-schema/custompost-category-mutations/src/Hooks/AbstractCustomPostMutationResolverHookSet.php:54
 #, php-format
 msgid "The IDs of the categories to set, of type '%s'"
 msgstr ""
@@ -3395,7 +3395,7 @@ msgstr ""
 
 #: vendor/pop-schema/custompost-tag-mutations/src/FieldResolvers/AbstractCustomPostFieldResolver.php:72
 #: vendor/pop-schema/custompost-tag-mutations/src/FieldResolvers/AbstractRootFieldResolver.php:75
-#: vendor/pop-schema/custompost-tag-mutations/src/Hooks/AbstractCustomPostMutationResolverHooks.php:48
+#: vendor/pop-schema/custompost-tag-mutations/src/Hooks/AbstractCustomPostMutationResolverHookSet.php:48
 msgid "The tags to set"
 msgstr ""
 
@@ -3435,7 +3435,7 @@ msgstr ""
 msgid "The ID of the custom post"
 msgstr ""
 
-#: vendor/pop-schema/custompostmedia-mutations/src/Hooks/CustomPostMutationResolverHooks.php:53
+#: vendor/pop-schema/custompostmedia-mutations/src/Hooks/CustomPostMutationResolverHookSet.php:53
 #, php-format
 msgid "The ID of the featured image (of type %s)"
 msgstr ""
@@ -3540,7 +3540,7 @@ msgstr ""
 msgid "The custom post ID"
 msgstr ""
 
-#: vendor/pop-schema/customposts/src/Hooks/VarsHooks.php:53
+#: vendor/pop-schema/customposts/src/Hooks/VarsHookSet.php:53
 msgid "post type:"
 msgstr ""
 
@@ -4035,7 +4035,7 @@ msgstr ""
 msgid "Number of pages"
 msgstr ""
 
-#: vendor/pop-schema/pages/src/Hooks/VarsHooks.php:36
+#: vendor/pop-schema/pages/src/Hooks/VarsHookSet.php:36
 msgid "page id:"
 msgstr ""
 
@@ -4378,7 +4378,7 @@ msgstr ""
 msgid "User capabilities"
 msgstr ""
 
-#: vendor/pop-schema/user-roles/src/Hooks/VarsHooks.php:42
+#: vendor/pop-schema/user-roles/src/Hooks/VarsHookSet.php:42
 msgid "user role:"
 msgstr ""
 

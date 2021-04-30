@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\Hooks;
 
-use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHooks;
+use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\PostTagMutations\Facades\PostTagTypeMutationAPIFacade;
 
-class PostMutationResolverHooks extends AbstractCustomPostMutationResolverHooks
+class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     protected function getTypeResolverClass(): string
     {
