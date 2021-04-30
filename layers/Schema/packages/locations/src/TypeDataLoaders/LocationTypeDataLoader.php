@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Locations\TypeDataLoaders;
 
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\Locations\Facades\LocationTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -28,7 +27,7 @@ class LocationTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     protected function getOrderbyDefault()
     {
-        return NameResolverFacade::getInstance()->getName('popcomponent:locations:dbcolumn:orderby:locations:name');
+        return $this->nameResolver->getName('popcomponent:locations:dbcolumn:orderby:locations:name');
     }
 
     protected function getOrderDefault()

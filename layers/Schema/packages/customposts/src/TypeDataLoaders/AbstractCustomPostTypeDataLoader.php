@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeDataLoaders;
 
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
@@ -63,7 +61,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
 
     protected function getOrderbyDefault()
     {
-        return NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:date');
+        return $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date');
     }
 
     protected function getOrderDefault()
@@ -81,7 +79,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractTypeQueryableDat
 
     protected function getLimitParam($query_args)
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'CustomPostTypeDataLoader:query:limit',
             parent::getLimitParam($query_args)
         );

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Categories\TypeDataLoaders;
 
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
@@ -38,7 +37,7 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataL
 
     protected function getOrderbyDefault()
     {
-        return NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:categories:count');
+        return $this->nameResolver->getName('popcms:dbcolumn:orderby:categories:count');
     }
 
     protected function getOrderDefault()

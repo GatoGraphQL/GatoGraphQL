@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Notifications\TypeDataLoaders;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP_Notifications_API;
@@ -40,7 +39,7 @@ class NotificationTypeDataLoader extends AbstractTypeQueryableDataLoader
             }
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             $this->getQueryHookName(),
             $query,
             $query_args

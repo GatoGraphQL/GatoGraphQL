@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Events\TypeDataLoaders;
 
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\Events\ModuleProcessors\RelationalFieldDataloadModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -35,7 +34,7 @@ class EventTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     protected function getOrderbyDefault()
     {
-        return NameResolverFacade::getInstance()->getName('popcomponent:events:dbcolumn:orderby:events:startdate');
+        return $this->nameResolver->getName('popcomponent:events:dbcolumn:orderby:events:startdate');
     }
 
     protected function getOrderDefault()
