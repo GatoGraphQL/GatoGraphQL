@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
 use PoP\Hooks\HooksAPIInterface;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -150,7 +149,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     protected function getFormFieldnames($form_id)
     {
-        $hooksAPI = HooksAPIFacade::getInstance();
+        $hooksAPI = $this->hooksAPI;
         return $hooksAPI->applyFilters(
             self::HOOK_FORM_FIELDNAMES,
             array(),

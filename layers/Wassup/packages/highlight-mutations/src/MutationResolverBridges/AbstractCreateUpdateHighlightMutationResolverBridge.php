@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
@@ -52,7 +51,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
                 getReloadurlLinkattrs()
             );
 
-            return HooksAPIFacade::getInstance()->applyFilters('gd-createupdate-uniquereference:execute:successstring', $success_string, $result_id, $status);
+            return $this->hooksAPI->applyFilters('gd-createupdate-uniquereference:execute:successstring', $success_string, $result_id, $status);
         }
 
         return parent::getSuccessString($result_id);
