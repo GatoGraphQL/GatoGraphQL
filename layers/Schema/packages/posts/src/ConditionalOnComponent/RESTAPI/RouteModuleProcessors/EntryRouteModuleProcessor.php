@@ -9,12 +9,16 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers;
 use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
+    protected function getInitialRESTFields(): string
+    {
+        return \PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessorHelpers\EntryRouteModuleProcessorHelpers::getRESTFieldsQuery();
+    }
+
     /**
      * @return array<string, array<array>>
      */
@@ -29,7 +33,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
-                        EntryRouteModuleProcessorHelpers::getRESTFields()
+                        $this->getRESTFields()
                     ]
                 ],
             'conditions' => [
@@ -55,7 +59,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
-                        EntryRouteModuleProcessorHelpers::getRESTFields()
+                        $this->getRESTFields()
                     ]
                 ],
         );
