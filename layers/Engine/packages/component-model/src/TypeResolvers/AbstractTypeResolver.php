@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Environment;
 use League\Pipeline\PipelineBuilder;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -104,6 +105,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
+        protected HooksAPIInterface $hooksAPI,
         protected ErrorProviderInterface $errorProvider
     ) {
     }
