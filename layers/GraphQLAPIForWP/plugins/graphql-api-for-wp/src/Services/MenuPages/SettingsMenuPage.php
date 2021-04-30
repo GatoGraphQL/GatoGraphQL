@@ -307,7 +307,8 @@ class SettingsMenuPage extends AbstractMenuPage
                 foreach ($items as $item) {
                     $sectionStyle = '';
                     $maybeTitle = $printWithTabs ? '' : sprintf(
-                        '<hr/><h3>%s</h3>',
+                        '<hr/><h3 id="%s">%s</h3>',
+                        $item['id'],
                         $item['name']
                     );
                     if ($printWithTabs) {
