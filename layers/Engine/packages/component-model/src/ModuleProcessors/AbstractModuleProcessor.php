@@ -573,7 +573,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
             // Only modules which do not load data
-            $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) use ($this->moduleProcessorManager) {
+            $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
                 return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
             });
             foreach ($subcomponent_modules as $subcomponent_module) {
@@ -584,7 +584,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $subcomponent_modules) {
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionalDataField);
                 // Only modules which do not load data
-                $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) use ($this->moduleProcessorManager) {
+                $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
                     return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
                 });
                 foreach ($subcomponent_modules as $subcomponent_module) {
@@ -594,7 +594,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // Only modules which do not load data
-        $submodules = array_filter($this->getSubmodules($module), function ($submodule) use ($this->moduleProcessorManager) {
+        $submodules = array_filter($this->getSubmodules($module), function ($submodule) {
             return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
         });
         foreach ($submodules as $submodule) {
