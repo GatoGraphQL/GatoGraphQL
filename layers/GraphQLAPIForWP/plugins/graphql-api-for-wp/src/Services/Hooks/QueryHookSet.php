@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCus
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class QueryHooks extends AbstractHookSet
+class QueryHookSet extends AbstractHookSet
 {
     public const NON_EXISTING_ID = "non-existing";
 

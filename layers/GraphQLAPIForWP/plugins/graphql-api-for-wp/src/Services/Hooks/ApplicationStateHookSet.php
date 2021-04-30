@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 
-class ApplicationStateHooks extends AbstractHookSet
+class ApplicationStateHookSet extends AbstractHookSet
 {
     protected function init(): void
     {

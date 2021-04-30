@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 
-class QueryHooks extends AbstractHookSet
+class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
