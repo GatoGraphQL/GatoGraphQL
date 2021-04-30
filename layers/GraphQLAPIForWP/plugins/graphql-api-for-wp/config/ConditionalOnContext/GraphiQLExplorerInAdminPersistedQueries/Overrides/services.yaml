@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock:
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks\PersistedQueryGraphiQLWithExplorerBlock'

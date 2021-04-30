@@ -56,7 +56,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'userServiceURLs':
             case 'userServiceData':
@@ -66,7 +65,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'githubRepo',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('GitHub repository for which to fetch data, in format \'account/repo\' (eg: \'leoloso/PoP\')', 'examples-for-pop'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('GitHub repository for which to fetch data, in format \'account/repo\' (eg: \'leoloso/PoP\')', 'examples-for-pop'),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => 'leoloso/PoP',
                         ],
                     ]
@@ -78,10 +77,9 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'userServiceURLs' => $translationAPI->__('Services used in the application: GitHub data for a specific repository', 'examples-for-pop'),
-            'userServiceData' => $translationAPI->__('Retrieve data from the services', 'examples-for-pop'),
+            'userServiceURLs' => $this->translationAPI->__('Services used in the application: GitHub data for a specific repository', 'examples-for-pop'),
+            'userServiceData' => $this->translationAPI->__('Retrieve data from the services', 'examples-for-pop'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

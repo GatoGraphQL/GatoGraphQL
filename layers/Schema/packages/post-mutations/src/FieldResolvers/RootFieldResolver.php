@@ -37,10 +37,9 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'createPost' => $translationAPI->__('Create a post', 'post-mutations'),
-            'updatePost' => $translationAPI->__('Update a post', 'post-mutations'),
+            'createPost' => $this->translationAPI->__('Create a post', 'post-mutations'),
+            'updatePost' => $this->translationAPI->__('Update a post', 'post-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

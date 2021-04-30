@@ -60,14 +60,13 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'queryType' => $translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
-            'mutationType' => $translationAPI->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
-            'subscriptionType' => $translationAPI->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
-            'types' => $translationAPI->__('All types registered in the data graph', 'graphql-server'),
-            'directives' => $translationAPI->__('All directives registered in the data graph', 'graphql-server'),
-            'type' => $translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
+            'queryType' => $this->translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
+            'mutationType' => $this->translationAPI->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
+            'subscriptionType' => $this->translationAPI->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
+            'types' => $this->translationAPI->__('All types registered in the data graph', 'graphql-server'),
+            'directives' => $this->translationAPI->__('All directives registered in the data graph', 'graphql-server'),
+            'type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -75,7 +74,6 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'type':
                 return array_merge(
@@ -84,7 +82,7 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'name',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The name of the type', 'graphql-server'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The name of the type', 'graphql-server'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

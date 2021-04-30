@@ -49,10 +49,9 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'customPost' => $translationAPI->__('Custom post with a specific ID', 'customposts'),
-            'unrestrictedCustomPost' => $translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
+            'customPost' => $this->translationAPI->__('Custom post with a specific ID', 'customposts'),
+            'unrestrictedCustomPost' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -69,7 +68,6 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'customPost':
             case 'unrestrictedCustomPost':
@@ -79,7 +77,7 @@ class RootCustomPostListFieldResolver extends AbstractCustomPostListFieldResolve
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The custom post ID', 'customposts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The custom post ID', 'customposts'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

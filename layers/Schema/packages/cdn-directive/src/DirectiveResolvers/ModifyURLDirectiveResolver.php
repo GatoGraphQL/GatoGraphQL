@@ -51,23 +51,21 @@ class ModifyURLDirectiveResolver extends AbstractTransformFieldStringValueDirect
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Replace the beginning path from the URL with another URL', 'basic-directives');
+        return $this->translationAPI->__('Replace the beginning path from the URL with another URL', 'basic-directives');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'from',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The domain to be replaced, including the protocol', 'basic-directives'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The domain to be replaced, including the protocol', 'basic-directives'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'to',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The domain to use as replacement, including the protocol', 'basic-directives'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The domain to use as replacement, including the protocol', 'basic-directives'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
         ];

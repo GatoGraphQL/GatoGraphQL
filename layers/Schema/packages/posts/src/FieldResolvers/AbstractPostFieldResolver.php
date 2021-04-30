@@ -63,12 +63,11 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'posts' => $translationAPI->__('Posts', 'pop-posts'),
-            'postCount' => $translationAPI->__('Number of posts', 'pop-posts'),
-            'unrestrictedPosts' => $translationAPI->__('[Unrestricted] Posts', 'pop-posts'),
-            'unrestrictedPostCount' => $translationAPI->__('[Unrestricted] Number of posts', 'pop-posts'),
+            'posts' => $this->translationAPI->__('Posts', 'pop-posts'),
+            'postCount' => $this->translationAPI->__('Number of posts', 'pop-posts'),
+            'unrestrictedPosts' => $this->translationAPI->__('[Unrestricted] Posts', 'pop-posts'),
+            'unrestrictedPostCount' => $this->translationAPI->__('[Unrestricted] Number of posts', 'pop-posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

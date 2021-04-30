@@ -15,11 +15,10 @@ abstract class AbstractTransformFieldStringValueDirectiveResolver extends Abstra
     protected function validateTypeIsString($value, $id, string $field, string $fieldOutputKey, array &$dbErrors, array &$dbWarnings)
     {
         if (!is_string($value)) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             $dbWarnings[(string)$id][] = [
                 Tokens::PATH => [$this->directive],
                 Tokens::MESSAGE => sprintf(
-                    $translationAPI->__('Directive \'%s\' from field \'%s\' cannot be applied on object with ID \'%s\' because it is not a string', 'practical-directives'),
+                    $this->translationAPI->__('Directive \'%s\' from field \'%s\' cannot be applied on object with ID \'%s\' because it is not a string', 'practical-directives'),
                     $this->getDirectiveName(),
                     $fieldOutputKey,
                     $id

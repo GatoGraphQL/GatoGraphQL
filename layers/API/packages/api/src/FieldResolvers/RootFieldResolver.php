@@ -53,9 +53,8 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'fullSchema' => $translationAPI->__('The whole API schema, exposing what fields can be queried', ''),
+            'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -63,7 +62,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'fullSchema':
@@ -77,14 +75,14 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'deep',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Make a deep introspection of the fields, for all nested objects', ''),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', ''),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'shape',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', ''),
+                                $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', ''),
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
                                 SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
                             ),
@@ -97,14 +95,14 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'compressed',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', ''),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', ''),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'useTypeName',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', ''),
+                                $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', ''),
                                 SchemaDefinition::TYPE_ID
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,

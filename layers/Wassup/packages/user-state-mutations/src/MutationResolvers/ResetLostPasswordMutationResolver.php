@@ -72,7 +72,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $userID = $cmsusersresolver->getUserId($user);
-        HooksAPIFacade::getInstance()->doAction('gd_lostpasswordreset', $userID);
+        $this->hooksAPI->doAction('gd_lostpasswordreset', $userID);
         return $userID;
     }
 }

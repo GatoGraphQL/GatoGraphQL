@@ -16,25 +16,25 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         $errors = [];
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         if (empty($form_data['name'])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Your name cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['email'])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Email cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Email format is incorrect.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         if (empty($form_data['message'])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Message cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('Message cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['target-id'])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The requested user cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->translationAPI->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
             $target = $cmsusersapi->getUserById($form_data['target-id']);
             if (!$target) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('The requested user does not exist.', 'pop-genericforms');
+                $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-genericforms');
             }
         }
         return $errors;
@@ -45,7 +45,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('pop_contactuser', $form_data);
+        $this->hooksAPI->doAction('pop_contactuser', $form_data);
     }
 
     protected function doExecute($form_data)
@@ -53,10 +53,10 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $websitename = $cmsapplicationapi->getSiteName();
         $subject = sprintf(
-            TranslationAPIFacade::getInstance()->__('[%s]: %s', 'pop-genericforms'),
+            $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),
             $websitename,
             $form_data['subject'] ? $form_data['subject'] : sprintf(
-                TranslationAPIFacade::getInstance()->__('%s sends you a message', 'pop-genericforms'),
+                $this->translationAPI->__('%s sends you a message', 'pop-genericforms'),
                 $form_data['name']
             )
         );
@@ -64,27 +64,27 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         $msg = sprintf(
             '<p>%s</p>',
             sprintf(
-                TranslationAPIFacade::getInstance()->__('You have been sent a message from a user in %s', 'pop-genericforms'),
+                $this->translationAPI->__('You have been sent a message from a user in %s', 'pop-genericforms'),
                 $websitename
             )
         ) . sprintf(
             $placeholder,
-            TranslationAPIFacade::getInstance()->__('Name', 'pop-genericforms'),
+            $this->translationAPI->__('Name', 'pop-genericforms'),
             $form_data['name']
         ) . sprintf(
             $placeholder,
-            TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
+            $this->translationAPI->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
         ) . sprintf(
             $placeholder,
-            TranslationAPIFacade::getInstance()->__('Subject', 'pop-genericforms'),
+            $this->translationAPI->__('Subject', 'pop-genericforms'),
             $form_data['subject']
         ) . sprintf(
             $placeholder,
-            TranslationAPIFacade::getInstance()->__('Message', 'pop-genericforms'),
+            $this->translationAPI->__('Message', 'pop-genericforms'),
             $form_data['message']
         );
 

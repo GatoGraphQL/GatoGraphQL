@@ -17,8 +17,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Entities that can be queried through an URL', 'queriedobject');
+        return $this->translationAPI->__('Entities that can be queried through an URL', 'queriedobject');
     }
 
     public function getFieldNamesToImplement(): array
@@ -40,10 +39,9 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'url' => $translationAPI->__('URL to query the object', 'queriedobject'),
-            'slug' => $translationAPI->__('URL\'s slug', 'queriedobject'),
+            'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
+            'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }

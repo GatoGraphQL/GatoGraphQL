@@ -61,7 +61,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 } elseif ($format == CustomPostContentFormatEnum::PLAIN_TEXT) {
                     $value = $customPostTypeAPI->getPlainTextContent($customPost);
                 }
-                return HooksAPIFacade::getInstance()->applyFilters(
+                return $this->hooksAPI->applyFilters(
                     'pop_content',
                     $value,
                     $typeResolver->getID($customPost)

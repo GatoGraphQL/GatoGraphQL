@@ -56,7 +56,7 @@ class Component extends AbstractComponent
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoPSchema\Tags\Component::class, $skipSchemaComponentClasses),
-                '/Conditional/Tags'
+                '/ConditionalOnComponent/Tags'
             );
         }
 
@@ -64,12 +64,12 @@ class Component extends AbstractComponent
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
-                '/Conditional/Users'
+                '/ConditionalOnComponent/Users'
             );
         }
 
         if (Environment::addEventTypeToCustomPostUnionTypes()) {
-            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/AddEventTypeToCustomPostUnionTypes');
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddEventTypeToCustomPostUnionTypes');
         }
     }
 }

@@ -70,16 +70,15 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'categories' => $translationAPI->__('', ''),
-            'catSlugs' => $translationAPI->__('', ''),
-            'stance' => $translationAPI->__('', ''),
-            'title' => $translationAPI->__('', ''),
-            'excerpt' => $translationAPI->__('', ''),
-            'content' => $translationAPI->__('', ''),
-            'stancetarget' => $translationAPI->__('', ''),
-            'hasStanceTarget' => $translationAPI->__('', ''),
+            'categories' => $this->translationAPI->__('', ''),
+            'catSlugs' => $this->translationAPI->__('', ''),
+            'stance' => $this->translationAPI->__('', ''),
+            'title' => $this->translationAPI->__('', ''),
+            'excerpt' => $this->translationAPI->__('', ''),
+            'content' => $this->translationAPI->__('', ''),
+            'stancetarget' => $this->translationAPI->__('', ''),
+            'hasStanceTarget' => $this->translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

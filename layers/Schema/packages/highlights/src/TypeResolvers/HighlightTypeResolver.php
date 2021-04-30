@@ -18,8 +18,7 @@ class HighlightTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('A highlighted piece of text, extracted from a post', 'highlights');
+        return $this->translationAPI->__('A highlighted piece of text, extracted from a post', 'highlights');
     }
 
     public function getID(object $resultItem): string | int

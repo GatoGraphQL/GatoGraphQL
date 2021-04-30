@@ -18,8 +18,7 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Entities that have an author', 'queriedobject');
+        return $this->translationAPI->__('Entities that have an author', 'queriedobject');
     }
 
     public function getFieldNamesToImplement(): array
@@ -48,9 +47,8 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'author' => $translationAPI->__('The entity\'s author', 'queriedobject'),
+            'author' => $this->translationAPI->__('The entity\'s author', 'queriedobject'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }

@@ -39,10 +39,9 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'getSelfProp' => sprintf(
-                $translationAPI->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
+                $this->translationAPI->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
             ),
         ];
@@ -52,7 +51,6 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'getSelfProp':
                 return array_merge(
@@ -61,13 +59,13 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'self',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'property',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The property to access from the current object', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The property to access from the current object', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

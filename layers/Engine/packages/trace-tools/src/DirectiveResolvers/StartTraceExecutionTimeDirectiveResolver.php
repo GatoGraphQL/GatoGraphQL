@@ -69,7 +69,6 @@ class StartTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveRe
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Start measuring the time for the execution of the field(s)', 'trace-tools');
+        return $this->translationAPI->__('Start measuring the time for the execution of the field(s)', 'trace-tools');
     }
 }

@@ -41,12 +41,11 @@ class TagFunctionalFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'symbol' => $translationAPI->__('Tag symbol', 'pop-everythingelse'),
-            'symbolnamedescription' => $translationAPI->__('Tag symbol and description', 'pop-everythingelse'),
-            'namedescription' => $translationAPI->__('Tag and description', 'pop-everythingelse'),
-            'symbolname' => $translationAPI->__('Symbol and tag', 'pop-everythingelse'),
+            'symbol' => $this->translationAPI->__('Tag symbol', 'pop-everythingelse'),
+            'symbolnamedescription' => $this->translationAPI->__('Tag symbol and description', 'pop-everythingelse'),
+            'namedescription' => $this->translationAPI->__('Tag and description', 'pop-everythingelse'),
+            'symbolname' => $this->translationAPI->__('Symbol and tag', 'pop-everythingelse'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

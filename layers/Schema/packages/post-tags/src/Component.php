@@ -52,10 +52,10 @@ class Component extends AbstractComponent
         self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         if (class_exists(APIComponent::class) && APIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/Conditional/API');
+            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
         if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
+            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
     }
 }

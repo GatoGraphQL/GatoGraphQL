@@ -32,20 +32,18 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
+        return $this->translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return array_merge(
             parent::getSchemaDirectiveArgs($typeResolver),
             [
                 [
                     SchemaDefinition::ARGNAME_NAME => 'if',
                     SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                    SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
+                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
                 ],
             ]
         );
@@ -53,10 +51,9 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
 
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
-            Expressions::NAME_KEY => $translationAPI->__('Key of the array element from the current iteration', 'component-model'),
-            Expressions::NAME_VALUE => $translationAPI->__('Value of the array element from the current iteration', 'component-model'),
+            Expressions::NAME_KEY => $this->translationAPI->__('Key of the array element from the current iteration', 'component-model'),
+            Expressions::NAME_VALUE => $this->translationAPI->__('Value of the array element from the current iteration', 'component-model'),
         ];
     }
 
@@ -66,7 +63,6 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     protected function getArrayItems(array &$array, int | string $id, string $field, TypeResolverInterface $typeResolver, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations): ?array
     {
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out
             // We must add each item in the array as expression `%value%`, over which the if function can be evaluated
@@ -95,7 +91,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
+                                $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $value,
                                 $id,
                                 $error->getErrorMessage(),

@@ -17,8 +17,7 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Fields with meta values', 'custompostmeta');
+        return $this->translationAPI->__('Fields with meta values', 'custompostmeta');
     }
 
     public function getFieldNamesToImplement(): array
@@ -39,7 +38,6 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'meta':
                 return array_merge(
@@ -48,13 +46,13 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
                         [
                             SchemaDefinition::ARGNAME_NAME => 'key',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The meta key', 'meta'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The meta key', 'meta'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'single',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Whether to bring a single value', 'meta'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Whether to bring a single value', 'meta'),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                         ],
                     ]
@@ -66,9 +64,8 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'meta' => $translationAPI->__('Meta value', 'custompostmeta'),
+            'meta' => $this->translationAPI->__('Meta value', 'custompostmeta'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }

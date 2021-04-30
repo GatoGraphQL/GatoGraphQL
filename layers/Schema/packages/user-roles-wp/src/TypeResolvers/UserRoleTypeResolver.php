@@ -17,8 +17,7 @@ class UserRoleTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('User roles', 'user-roles');
+        return $this->translationAPI->__('User roles', 'user-roles');
     }
 
     public function getID(object $resultItem): string | int

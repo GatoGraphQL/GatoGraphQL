@@ -44,10 +44,9 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'post' => $translationAPI->__('Post with a specific ID', 'posts'),
-            'unrestrictedPost' => $translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
+            'post' => $this->translationAPI->__('Post with a specific ID', 'posts'),
+            'unrestrictedPost' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -64,7 +63,6 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'post':
             case 'unrestrictedPost':
@@ -74,7 +72,7 @@ class RootPostFieldResolver extends AbstractPostFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'id',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The post ID', 'pop-posts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The post ID', 'pop-posts'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]

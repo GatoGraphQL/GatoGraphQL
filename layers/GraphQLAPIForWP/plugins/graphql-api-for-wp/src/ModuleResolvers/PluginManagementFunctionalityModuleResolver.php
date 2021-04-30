@@ -22,6 +22,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
     public const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
+    public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
 
     /**
      * @return string[]
@@ -100,6 +101,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             ],
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
+                self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
             ],
         ];
         return $defaultValues[$module][$option];
@@ -146,6 +148,18 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Display admin notice with release notes?', 'graphql-api'),
                 Properties::DESCRIPTION => \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_PRINT_SETTINGS_WITH_TABS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Organize these settings under tabs?', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

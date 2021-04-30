@@ -50,16 +50,15 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'title' => $translationAPI->__('Menu item title', 'menus'),
-            'alt' => $translationAPI->__('Menu item alt', 'menus'),
-            'url' => $translationAPI->__('Menu item URL', 'menus'),
-            'classes' => $translationAPI->__('Menu item classes', 'menus'),
-            'target' => $translationAPI->__('Menu item target', 'menus'),
-            'additionalAttrs' => $translationAPI->__('Menu item additional attributes', 'menus'),
-            'objectID' => $translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
-            'parentID' => $translationAPI->__('Menu item\'s parent ID', 'menus'),
+            'title' => $this->translationAPI->__('Menu item title', 'menus'),
+            'alt' => $this->translationAPI->__('Menu item alt', 'menus'),
+            'url' => $this->translationAPI->__('Menu item URL', 'menus'),
+            'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
+            'target' => $this->translationAPI->__('Menu item target', 'menus'),
+            'additionalAttrs' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
+            'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
+            'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -102,7 +101,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
                     $classes[] = 'menu-item-object-id-' . $objectID;
                 }
-                return join(' ', HooksAPIFacade::getInstance()->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array()));
+                return join(' ', $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array()));
 
             case 'target':
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);

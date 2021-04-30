@@ -36,9 +36,8 @@ class RootMeFieldResolver extends AbstractUserStateFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'me' => $translationAPI->__('The logged-in user', 'user-state'),
+            'me' => $this->translationAPI->__('The logged-in user', 'user-state'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

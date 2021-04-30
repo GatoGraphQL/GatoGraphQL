@@ -76,7 +76,6 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
         array &$schemaTraces
     ): void {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
 
         // Retrieve the provider from the directiveArgs. The provider is passed as a 'static' attribute (to decide the DirectiveResolver), so it can't be taken from the resultItem schema (as is the case with the from/to lang params)
         $provider = $this->getProvider($this->directiveArgsForSchema);
@@ -85,7 +84,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
         if (!$endpointURL) {
             // Give an error message for all failed fields
             $failureMessage = sprintf(
-                $translationAPI->__('Provider \'%s\' doesn\'t have an endpoint URL configured, so it can\'t proceed to do the translation', 'component-model'),
+                $this->translationAPI->__('Provider \'%s\' doesn\'t have an endpoint URL configured, so it can\'t proceed to do the translation', 'component-model'),
                 $provider
             );
             $this->processFailure($failureMessage, [], $idsDataFields, $succeedingPipelineIDsDataFields, $schemaErrors, $schemaWarnings);
@@ -123,7 +122,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('The target language for object with ID \'%s\' is missing, so can\'t continue', 'component-model'),
+                            $this->translationAPI->__('The target language for object with ID \'%s\' is missing, so can\'t continue', 'component-model'),
                             $id
                         ),
                     ];
@@ -232,7 +231,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
                                 $dbErrors[(string)$id][] = [
                                     Tokens::PATH => [$this->directive],
                                     Tokens::MESSAGE => sprintf(
-                                        $translationAPI->__('Due to some previous error, this directive has not been executed on property \'%s\' for object with ID \'%s\'', 'component-model'),
+                                        $this->translationAPI->__('Due to some previous error, this directive has not been executed on property \'%s\' for object with ID \'%s\'', 'component-model'),
                                         $fieldOutputKey,
                                         $id
                                     ),
@@ -241,7 +240,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
                                 $dbWarnings[(string)$id][] = [
                                     Tokens::PATH => [$this->directive],
                                     Tokens::MESSAGE => sprintf(
-                                        $translationAPI->__('Due to some previous warning, property \'%s\' for object with ID \'%s\' has not been translated', 'component-model'),
+                                        $this->translationAPI->__('Due to some previous warning, property \'%s\' for object with ID \'%s\' has not been translated', 'component-model'),
                                         $fieldOutputKey,
                                         $id
                                     ),
@@ -256,7 +255,7 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
                 // Validate if the response is the translation, or some error from the service provider
                 if ($errorMessage = $this->getErrorMessageFromResponse($provider, $response)) {
                     $failureMessage = sprintf(
-                        $translationAPI->__('There was an error processing the response from the Provider API: %s', 'component-model'),
+                        $this->translationAPI->__('There was an error processing the response from the Provider API: %s', 'component-model'),
                         $errorMessage
                     );
                     $this->processFailure($failureMessage, [], $idsDataFields, $succeedingPipelineIDsDataFields, $schemaErrors, $schemaWarnings);
@@ -283,9 +282,8 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
      */
     protected function getClientFailureMessage(Error $error, string $provider): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return sprintf(
-            $translationAPI->__('There was an error requesting data from the Provider API: %s', 'component-model'),
+            $this->translationAPI->__('There was an error requesting data from the Provider API: %s', 'component-model'),
             $error->getErrorMessage()
         );
     }
@@ -308,42 +306,40 @@ abstract class AbstractTranslateDirectiveResolver extends AbstractSchemaDirectiv
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Translate a string using the API from a certain provider', 'translate-directive');
+        return $this->translationAPI->__('Translate a string using the API from a certain provider', 'translate-directive');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $translationService = TranslationServiceFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'from',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Source language code', 'translate-directive'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Source language code', 'translate-directive'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'to',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Target language code (as a string) or codes (as an array) to translate to multiple languages', 'translate-directive'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Target language code (as a string) or codes (as an array) to translate to multiple languages', 'translate-directive'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'override',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Indicates if to override the field with the translation (valid only when argument \'to\' contains a single language code). If `false`, the translation is placed under the same entry plus adding \'-\' and the language code', 'translate-directive'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Indicates if to override the field with the translation (valid only when argument \'to\' contains a single language code). If `false`, the translation is placed under the same entry plus adding \'-\' and the language code', 'translate-directive'),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'oneLanguagePerField',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Indicates if each field to translate receives its own \'to\' language. In this case, the \'to\' field must receive an array with the same amount of items as the fields, in the same order to be used', 'translate-directive'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Indicates if each field to translate receives its own \'to\' language. In this case, the \'to\' field must receive an array with the same amount of items as the fields, in the same order to be used', 'translate-directive'),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'provider',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The name of the provider whose API to use for the translation', 'translate-directive'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The name of the provider whose API to use for the translation', 'translate-directive'),
                 SchemaDefinition::ARGNAME_DEFAULT_VALUE => $translationService->getDefaultProvider(),
             ],
         ];

@@ -32,10 +32,9 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'setCategories' => sprintf(
-                $translationAPI->__('Set categories on the %s', 'custompost-category-mutations'),
+                $this->translationAPI->__('Set categories on the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             )
         ];
@@ -63,7 +62,6 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'setCategories':
                 $instanceManager = InstanceManagerFacade::getInstance();
@@ -75,7 +73,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
                         SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+                            $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                             $categoryTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
@@ -83,7 +81,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::APPEND,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
                         SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                     ],
                 ];

@@ -22,20 +22,20 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         $repeatpassword =  $form_data['repeat_password'];
 
         if (!$current_password) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Please provide the current password.', 'pop-application');
+            $errors[] = $this->translationAPI->__('Please provide the current password.', 'pop-application');
         } elseif (!$cmsuseraccountapi->checkPassword($form_data['user_id'], $current_password)) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Current password is incorrect.', 'pop-application');
+            $errors[] = $this->translationAPI->__('Current password is incorrect.', 'pop-application');
         }
 
         if (!$password) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The password cannot be emtpy.', 'pop-application');
+            $errors[] = $this->translationAPI->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The password must be at least 8 characters long.', 'pop-application');
+            $errors[] = $this->translationAPI->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('Please confirm the password.', 'pop-application');
+                $errors[] = $this->translationAPI->__('Please confirm the password.', 'pop-application');
             } elseif ($password !== $repeatpassword) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('Passwords do not match.', 'pop-application');
+                $errors[] = $this->translationAPI->__('Passwords do not match.', 'pop-application');
             }
         }
         return $errors;
@@ -68,7 +68,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 
         $user_id = $user_data['ID'];
 
-        HooksAPIFacade::getInstance()->doAction('gd_changepassword_user', $user_id, $form_data);
+        $this->hooksAPI->doAction('gd_changepassword_user', $user_id, $form_data);
 
         return $user_id;
     }

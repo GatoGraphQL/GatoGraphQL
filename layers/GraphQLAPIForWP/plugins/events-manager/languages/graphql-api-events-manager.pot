@@ -45,19 +45,19 @@ msgstr ""
 msgid "Fetch event data from the Events Manager plugin. It requires this plugin to be activated"
 msgstr ""
 
-#: vendor/pop-schema/events/src/Conditional/Tags/FieldResolvers/EventTagFieldResolver.php:30
+#: vendor/pop-schema/events/src/ConditionalOnComponent/Tags/FieldResolvers/EventTagFieldResolver.php:30
 msgid "Events which contain this tag"
 msgstr ""
 
-#: vendor/pop-schema/events/src/Conditional/Tags/FieldResolvers/EventTagFieldResolver.php:31
+#: vendor/pop-schema/events/src/ConditionalOnComponent/Tags/FieldResolvers/EventTagFieldResolver.php:31
 msgid "Number of events which contain this tag"
 msgstr ""
 
-#: vendor/pop-schema/events/src/Conditional/Users/FieldResolvers/EventUserFieldResolver.php:23
+#: vendor/pop-schema/events/src/ConditionalOnComponent/Users/FieldResolvers/EventUserFieldResolver.php:23
 msgid "Events by the user"
 msgstr ""
 
-#: vendor/pop-schema/events/src/Conditional/Users/FieldResolvers/EventUserFieldResolver.php:24
+#: vendor/pop-schema/events/src/ConditionalOnComponent/Users/FieldResolvers/EventUserFieldResolver.php:24
 msgid "Number of events by the user"
 msgstr ""
 

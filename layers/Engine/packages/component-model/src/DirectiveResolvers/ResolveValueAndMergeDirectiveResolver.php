@@ -67,7 +67,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     protected function resolveValueForResultItems(TypeResolverInterface $typeResolver, array &$resultIDItems, array &$idsDataFields, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $enqueueFillingResultItemsFromIDs = [];
         foreach (array_keys($idsDataFields) as $id) {
@@ -79,7 +78,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $dbErrors[(string)$id][] = [
                     Tokens::PATH => ['id'],
                     Tokens::MESSAGE => sprintf(
-                        $translationAPI->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
+                        $this->translationAPI->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
                         $id
                     ),
                 ];
@@ -211,7 +210,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->translationAPI->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }
 }

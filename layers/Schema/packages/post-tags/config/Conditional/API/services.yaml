@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\PostTags\Conditional\API\RouteModuleProcessors\:
-        resource: '../../../src/Conditional/API/RouteModuleProcessors/*'

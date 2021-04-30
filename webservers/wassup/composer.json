@@ -73,6 +73,7 @@
             "composer update --no-dev",
             "php -r \"copy('composer.json.tmp', 'composer.json');\""
         ],
-        "log-server-errors": "lando logs -t -f | grep \"error\""
+        "log-server-errors": "lando logs -t -f | grep \"php:error\"",
+        "log-server-warnings": "lando logs -t -f | grep \"php:warn\""
     }
 }

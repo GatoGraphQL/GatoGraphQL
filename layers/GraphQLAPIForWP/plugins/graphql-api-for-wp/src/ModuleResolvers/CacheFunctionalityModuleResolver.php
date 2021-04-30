@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
@@ -51,6 +52,18 @@ class CacheFunctionalityModuleResolver extends AbstractCacheFunctionalityModuleR
         return ModuleTypeResolver::PERFORMANCE;
     }
 
+    public function areRequirementsSatisfied(string $module): bool
+    {
+        switch ($module) {
+            case self::CONFIGURATION_CACHE:
+                /**
+                 * Caching is enabled only if global caching is enabled
+                 */
+                return PluginEnvironment::isCachingEnabled();
+        }
+        return parent::areRequirementsSatisfied($module);
+    }
+
     /**
      * @return array<array> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
      */
@@ -85,7 +98,7 @@ class CacheFunctionalityModuleResolver extends AbstractCacheFunctionalityModuleR
     {
         switch ($module) {
             case self::CONFIGURATION_CACHE:
-                return \__('Cache the generated application configuration to disk', 'graphql-api');
+                return \__('Cache the generated application configuration to disk. Available unless global caching is disabled (via environment variable, or constant in wp-config.php)', 'graphql-api');
             case self::SCHEMA_CACHE:
                 return \__('Cache the generated schema to disk', 'graphql-api');
         }

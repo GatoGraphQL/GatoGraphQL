@@ -20,8 +20,7 @@ class PostTagTypeResolver extends AbstractTagTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a tag, added to a post', 'post-tags');
+        return $this->translationAPI->__('Representation of a tag, added to a post', 'post-tags');
     }
 
     public function getTypeDataLoaderClass(): string

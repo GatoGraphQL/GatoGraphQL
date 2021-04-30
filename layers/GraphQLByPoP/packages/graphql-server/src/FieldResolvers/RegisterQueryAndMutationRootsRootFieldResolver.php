@@ -48,10 +48,9 @@ class RegisterQueryAndMutationRootsRootFieldResolver extends AbstractDBDataField
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'queryRoot' => $translationAPI->__('Get the Query Root type', 'graphql-server'),
-            'mutationRoot' => $translationAPI->__('Get the Mutation Root type', 'graphql-server'),
+            'queryRoot' => $this->translationAPI->__('Get the Query Root type', 'graphql-server'),
+            'mutationRoot' => $this->translationAPI->__('Get the Mutation Root type', 'graphql-server'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

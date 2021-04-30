@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\ConditionalOnEnvironment\Admin\SystemServices\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
@@ -335,7 +335,7 @@ class ModuleListTable extends AbstractItemListTable
                     '<a href="%s">%s</a>',
                     sprintf(
                         \admin_url(sprintf(
-                            'admin.php?page=%s&tab=%s',
+                            'admin.php?page=%1$s&tab=%2$s#%2$s',
                             $settingsMenuPage->getScreenID(),
                             $item['id']
                         ))

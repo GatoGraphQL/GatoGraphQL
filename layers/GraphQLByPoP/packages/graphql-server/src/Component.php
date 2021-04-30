@@ -96,19 +96,19 @@ class Component extends AbstractComponent
 
             // Boot conditional on having variables treated as expressions for @export directive
             if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/VariablesAsExpressions');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/VariablesAsExpressions');
             }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/EmbeddableFields');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/EmbeddableFields');
             }
             // The @export directive depends on the Multiple Query Execution being enabled
             if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/MultipleQueryExecution');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/MultipleQueryExecution');
             }
             // Attach @removeIfNull?
             if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnEnvironment/RemoveIfNull');
+                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/RemoveIfNull');
             }
             if (
                 class_exists(CacheControlComponent::class)
@@ -118,7 +118,7 @@ class Component extends AbstractComponent
                 self::initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
-                    '/Conditional/CacheControl/Conditional/AccessControl/ConditionalOnEnvironment/PrivateSchema'
+                    '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
                 );
             }
         }

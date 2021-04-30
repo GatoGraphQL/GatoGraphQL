@@ -44,7 +44,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         );
 
         // Allow to send an email before the update: get the current communities, so we know which ones are new
-        HooksAPIFacade::getInstance()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
+        $this->hooksAPI->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
 
         return $user_id;
         // Update: either updated or no banned communities (even if nothing changed, tell the user update was successful)
@@ -58,7 +58,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 
         // Validate the Community doesn't belong to itself as a member
         if (in_array($user_id, $form_data['communities'])) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('You are not allowed to be a member of yourself!', 'ure-pop');
+            $errors[] = $this->translationAPI->__('You are not allowed to be a member of yourself!', 'ure-pop');
         }
         return $errors;
     }
@@ -92,7 +92,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
                 );
             }
             $warnings[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('The following Community(ies) will not be active, since they claim you are not their member: %s.', 'ure-pop'),
+                $this->translationAPI->__('The following Community(ies) will not be active, since they claim you are not their member: %s.', 'ure-pop'),
                 implode(', ', $banned_communities_html)
             );
         }

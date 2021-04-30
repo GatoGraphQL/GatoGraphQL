@@ -59,14 +59,14 @@ class Component extends AbstractComponent
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists(RESTAPIComponent::class) && RESTAPIComponent::isEnabled()) {
-            self::initServices(dirname(__DIR__), '/Conditional/RESTAPI');
+            self::initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
 
         if (class_exists(UsersComponent::class)) {
             self::initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
-                '/Conditional/Users'
+                '/ConditionalOnComponent/Users'
             );
         }
     }

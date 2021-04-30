@@ -22,10 +22,10 @@ class LoginMutationResolver extends AbstractMutationResolver
         $pwd = $form_data[MutationInputProperties::PASSWORD];
 
         if (!$username_or_email) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Please supply your username or email', 'user-state-mutations');
+            $errors[] = $this->translationAPI->__('Please supply your username or email', 'user-state-mutations');
         }
         if (!$pwd) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Please supply your password', 'user-state-mutations');
+            $errors[] = $this->translationAPI->__('Please supply your password', 'user-state-mutations');
         }
 
         $vars = ApplicationState::getVars();
@@ -37,8 +37,7 @@ class LoginMutationResolver extends AbstractMutationResolver
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('You are already logged in', 'user-state-mutations');
+        return $this->translationAPI->__('You are already logged in', 'user-state-mutations');
     }
 
     public function execute(array $form_data): mixed
@@ -58,7 +57,7 @@ class LoginMutationResolver extends AbstractMutationResolver
             if (!$user) {
                 return new Error(
                     'no-user',
-                    TranslationAPIFacade::getInstance()->__('There is no user registered with that email address.')
+                    $this->translationAPI->__('There is no user registered with that email address.')
                 );
             }
             $username = $cmsusersresolver->getUserLogin($user);
@@ -83,7 +82,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
 
         $userID = $cmsusersresolver->getUserId($user);
-        HooksAPIFacade::getInstance()->doAction('gd:user:loggedin', $userID);
+        $this->hooksAPI->doAction('gd:user:loggedin', $userID);
         return $userID;
     }
 }

@@ -17,6 +17,6 @@ class RequestParams
     public const MODULE = 'module';
     public const DOC = 'doc';
     public const PERSISTED_QUERY_ID = 'persisted_query_id';
-    public const SCHEMA_TARGET = 'schema_target';
-    public const SCHEMA_TARGET_EDITOR = 'editor';
+    public const BEHAVIOR = 'behavior';
+    public const BEHAVIOR_UNRESTRICTED = 'unrestricted';
 }

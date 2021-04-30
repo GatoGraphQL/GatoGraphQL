@@ -25,10 +25,10 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         if (!in_array($plugin, $current)) {
             $current[] = $plugin;
             sort($current);
-            HooksAPIFacade::getInstance()->doAction('activate_plugin', trim($plugin));
+            $this->hooksAPI->doAction('activate_plugin', trim($plugin));
             update_option('active_plugins', $current);
-            HooksAPIFacade::getInstance()->doAction('activate_' . trim($plugin));
-            HooksAPIFacade::getInstance()->doAction('activated_plugin', trim($plugin));
+            $this->hooksAPI->doAction('activate_' . trim($plugin));
+            $this->hooksAPI->doAction('activated_plugin', trim($plugin));
             return true;
         }
 
@@ -39,7 +39,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin
-        $plugin_version = HooksAPIFacade::getInstance()->applyFilters(
+        $plugin_version = $this->hooksAPI->applyFilters(
             'PoP:system-activateplugins:plugins',
             array()
         );

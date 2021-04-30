@@ -21,8 +21,7 @@ class QueryRootTypeResolver extends AbstractUseRootAsSourceForSchemaTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Query type, starting from which the query is executed', 'graphql-server');
+        return $this->translationAPI->__('Query type, starting from which the query is executed', 'graphql-server');
     }
 
     public function getID(object $resultItem): string | int

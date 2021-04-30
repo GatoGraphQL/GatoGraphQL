@@ -57,14 +57,13 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'location' => $translationAPI->__('Event\'s location', 'events'),
-            'startDate' => $translationAPI->__('Event\'s start ate', 'events'),
-            'endDate' => $translationAPI->__('Event\'s end date', 'events'),
-            'isAllDay' => $translationAPI->__('Is the event all day long?', 'events'),
-            'googleCalendarURL' => $translationAPI->__('Event\'s Google calendar URL', 'events'),
-            'icalURL' => $translationAPI->__('Event\'s Ical URL', 'events'),
+            'location' => $this->translationAPI->__('Event\'s location', 'events'),
+            'startDate' => $this->translationAPI->__('Event\'s start ate', 'events'),
+            'endDate' => $this->translationAPI->__('Event\'s end date', 'events'),
+            'isAllDay' => $this->translationAPI->__('Is the event all day long?', 'events'),
+            'googleCalendarURL' => $this->translationAPI->__('Event\'s Google calendar URL', 'events'),
+            'icalURL' => $this->translationAPI->__('Event\'s Ical URL', 'events'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

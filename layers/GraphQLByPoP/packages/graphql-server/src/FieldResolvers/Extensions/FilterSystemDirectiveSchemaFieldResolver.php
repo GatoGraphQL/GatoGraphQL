@@ -48,9 +48,8 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
 
     // public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     // {
-    //     $translationAPI = TranslationAPIFacade::getInstance();
     //     $descriptions = [
-    //         'directives' => $translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
+    //         'directives' => $this->translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
     //     ];
     //     return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     // }
@@ -58,7 +57,6 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'directives':
@@ -72,7 +70,7 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'ofTypes',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Include only directives of provided types', 'graphql-api'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
                             // SchemaDefinition::ARGNAME_MANDATORY => true,
                             // SchemaDefinition::ARGNAME_DEFAULT_VALUE => [
                             //     DirectiveTypes::QUERY,

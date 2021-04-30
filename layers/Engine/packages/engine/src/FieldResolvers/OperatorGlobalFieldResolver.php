@@ -80,21 +80,20 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'if' => $translationAPI->__('If a boolean property is true, execute a field, else, execute another field', 'component-model'),
-            'not' => $translationAPI->__('Return the opposite value of a boolean property', 'component-model'),
-            'and' => $translationAPI->__('Return an `AND` operation among several boolean properties', 'component-model'),
-            'or' => $translationAPI->__('Return an `OR` operation among several boolean properties', 'component-model'),
-            'equals' => $translationAPI->__('Indicate if the result from a field equals a certain value', 'component-model'),
-            'empty' => $translationAPI->__('Indicate if a value is empty', 'component-model'),
-            'isNull' => $translationAPI->__('Indicate if a value is null', 'component-model'),
-            'var' => $translationAPI->__('Retrieve the value of a certain property from the `$vars` context object', 'component-model'),
-            'context' => $translationAPI->__('Retrieve the `$vars` context object', 'component-model'),
-            'extract' => $translationAPI->__('Given an object, it retrieves the data under a certain path', 'pop-component-model'),
-            'time' => $translationAPI->__('Return the time now (https://php.net/manual/en/function.time.php)', 'component-model'),
-            'echo' => $translationAPI->__('Repeat back the input, whatever it is', 'function-fields'),
-            'sprintf' => $translationAPI->__('Replace placeholders inside a string with provided values', 'function-fields'),
+            'if' => $this->translationAPI->__('If a boolean property is true, execute a field, else, execute another field', 'component-model'),
+            'not' => $this->translationAPI->__('Return the opposite value of a boolean property', 'component-model'),
+            'and' => $this->translationAPI->__('Return an `AND` operation among several boolean properties', 'component-model'),
+            'or' => $this->translationAPI->__('Return an `OR` operation among several boolean properties', 'component-model'),
+            'equals' => $this->translationAPI->__('Indicate if the result from a field equals a certain value', 'component-model'),
+            'empty' => $this->translationAPI->__('Indicate if a value is empty', 'component-model'),
+            'isNull' => $this->translationAPI->__('Indicate if a value is null', 'component-model'),
+            'var' => $this->translationAPI->__('Retrieve the value of a certain property from the `$vars` context object', 'component-model'),
+            'context' => $this->translationAPI->__('Retrieve the `$vars` context object', 'component-model'),
+            'extract' => $this->translationAPI->__('Given an object, it retrieves the data under a certain path', 'pop-component-model'),
+            'time' => $this->translationAPI->__('Return the time now (https://php.net/manual/en/function.time.php)', 'component-model'),
+            'echo' => $this->translationAPI->__('Repeat back the input, whatever it is', 'function-fields'),
+            'sprintf' => $this->translationAPI->__('Replace placeholders inside a string with provided values', 'function-fields'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -102,7 +101,6 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'if':
                 return array_merge(
@@ -111,19 +109,19 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'condition',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The condition to check if its value is `true` or `false`', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The condition to check if its value is `true` or `false`', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'then',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The value to return if the condition evals to `true`', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to return if the condition evals to `true`', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'else',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The value to return if the condition evals to `false`', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to return if the condition evals to `false`', 'component-model'),
                         ],
                     ]
                 );
@@ -135,7 +133,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The value from which to return its opposite value', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value from which to return its opposite value', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -150,7 +148,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'values',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_BOOL),
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('The array of values on which to execute the `%s` operation', 'component-model'),
+                                $this->translationAPI->__('The array of values on which to execute the `%s` operation', 'component-model'),
                                 strtoupper($fieldName)
                             ),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
@@ -165,13 +163,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value1',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The first value to compare', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The first value to compare', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value2',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The second value to compare', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The second value to compare', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -184,7 +182,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The value to check if it is empty', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to check if it is empty', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -197,7 +195,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The value to check if it is null', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to check if it is null', 'component-model'),
                         ],
                     ]
                 );
@@ -209,7 +207,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'name',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The name of the variable to retrieve from the `$vars` context object', 'component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The name of the variable to retrieve from the `$vars` context object', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -222,13 +220,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'object',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The object to retrieve the data from', 'pop-component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The object to retrieve the data from', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'path',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'pop-component-model'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -241,7 +239,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The input to be echoed back', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The input to be echoed back', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -254,13 +252,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'string',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The string containing the placeholders', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The string containing the placeholders', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'values',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The values to replace the placeholders with inside the string', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The values to replace the placeholders with inside the string', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -281,14 +279,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
         // For instance, this doesn't work: /?query=arrayItem(posts(),3)
         // In that case, the validation will be done inside ->resolveValue(), and will be treated as a $dbError, not a $schemaError
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             switch ($fieldName) {
                 case 'var':
                     $safeVars = $this->getSafeVars();
                     if (!isset($safeVars[$fieldArgs['name']])) {
                         return [
                             sprintf(
-                                $translationAPI->__('Var \'%s\' does not exist in `$vars`', 'component-model'),
+                                $this->translationAPI->__('Var \'%s\' does not exist in `$vars`', 'component-model'),
                                 $fieldArgs['name']
                             )
                         ];
@@ -304,7 +301,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     {
         if (is_null($this->safeVars)) {
             $this->safeVars = ApplicationState::getVars();
-            HooksAPIFacade::getInstance()->doAction(
+            $this->hooksAPI->doAction(
                 self::HOOK_SAFEVARS,
                 array(&$this->safeVars)
             );

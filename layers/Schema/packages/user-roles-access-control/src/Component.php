@@ -58,7 +58,7 @@ class Component extends AbstractComponent
                 self::initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses),
-                    '/Conditional/CacheControl'
+                    '/ConditionalOnComponent/CacheControl'
                 );
             }
         }

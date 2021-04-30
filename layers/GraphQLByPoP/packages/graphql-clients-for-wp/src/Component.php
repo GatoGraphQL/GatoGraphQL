@@ -44,7 +44,7 @@ class Component extends AbstractComponent
             ComponentConfiguration::setConfiguration($configuration);
             self::initServices(dirname(__DIR__));
             if (ComponentConfiguration::useGraphiQLExplorer()) {
-                self::initServices(dirname(__DIR__), '/ConditionalOnEnvironment/UseGraphiQLExplorer/Overrides');
+                self::initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
             }
         }
     }

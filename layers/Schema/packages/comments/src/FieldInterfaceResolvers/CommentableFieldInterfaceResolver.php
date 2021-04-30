@@ -20,8 +20,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('The entity can receive comments', 'comments');
+        return $this->translationAPI->__('The entity can receive comments', 'comments');
     }
 
     public function getFieldNamesToImplement(): array
@@ -59,12 +58,11 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'areCommentsOpen' => $translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
-            'commentCount' => $translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
-            'hasComments' => $translationAPI->__('Does the custom post have comments?', 'pop-comments'),
-            'comments' => $translationAPI->__('Comments added to the custom post', 'pop-comments'),
+            'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
+            'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
+            'hasComments' => $this->translationAPI->__('Does the custom post have comments?', 'pop-comments'),
+            'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }

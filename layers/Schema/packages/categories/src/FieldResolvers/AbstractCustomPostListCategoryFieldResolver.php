@@ -15,12 +15,11 @@ abstract class AbstractCustomPostListCategoryFieldResolver extends AbstractCusto
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'customPosts' => $translationAPI->__('Custom posts which contain this category', 'pop-categories'),
-            'customPostCount' => $translationAPI->__('Number of custom posts which contain this category', 'pop-categories'),
-            'unrestrictedCustomPosts' => $translationAPI->__('[Unrestricted] Custom posts which contain this category', 'pop-categories'),
-            'unrestrictedCustomPostCount' => $translationAPI->__('[Unrestricted] Number of custom posts which contain this category', 'pop-categories'),
+            'customPosts' => $this->translationAPI->__('Custom posts which contain this category', 'pop-categories'),
+            'customPostCount' => $this->translationAPI->__('Number of custom posts which contain this category', 'pop-categories'),
+            'unrestrictedCustomPosts' => $this->translationAPI->__('[Unrestricted] Custom posts which contain this category', 'pop-categories'),
+            'unrestrictedCustomPostCount' => $this->translationAPI->__('[Unrestricted] Number of custom posts which contain this category', 'pop-categories'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

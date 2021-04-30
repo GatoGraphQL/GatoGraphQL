@@ -22,8 +22,7 @@ class RootTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Root type, starting from which the query is executed', 'api');
+        return $this->translationAPI->__('Root type, starting from which the query is executed', 'api');
     }
 
     public function getID(object $resultItem): string | int

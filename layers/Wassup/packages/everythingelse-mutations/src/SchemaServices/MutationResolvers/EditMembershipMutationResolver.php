@@ -76,7 +76,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
         // Allow ACF to also save the value in the DB
-        HooksAPIFacade::getInstance()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
+        $this->hooksAPI->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
 
         return $user_id;
     }
@@ -86,19 +86,19 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         $errors = [];
         $user_id = $form_data['user_id'];
         if (!$user_id) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The user is missing', 'ure-pop');
+            $errors[] = $this->translationAPI->__('The user is missing', 'ure-pop');
             return $errors;
         }
 
         // $nonce = $form_data['nonce'];
         // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
-        //     $errors[] = TranslationAPIFacade::getInstance()->__('Incorrect URL', 'ure-pop');
+        //     $errors[] = $this->translationAPI->__('Incorrect URL', 'ure-pop');
         //     return;
         // }
 
         $status = $form_data['status'];
         if (!$status) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The status has not been set', 'ure-pop');
+            $errors[] = $this->translationAPI->__('The status has not been set', 'ure-pop');
         }
         return $errors;
     }

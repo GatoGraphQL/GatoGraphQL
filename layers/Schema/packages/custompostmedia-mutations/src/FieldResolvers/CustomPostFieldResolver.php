@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\FieldResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
@@ -17,8 +19,12 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCu
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
-    function __construct(protected MediaTypeResolver $mediaTypeResolver)
-    {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected MediaTypeResolver $mediaTypeResolver
+    ) {
+        parent::__construct($translationAPI, $hooksAPI);
     }
 
     public function getClassesToAttachTo(): array
@@ -36,10 +42,9 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'setFeaturedImage' => $translationAPI->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImage' => $translationAPI->__('Remove the featured image on the custom post', 'custompostmedia-mutations'),
+            'setFeaturedImage' => $this->translationAPI->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
+            'removeFeaturedImage' => $this->translationAPI->__('Remove the featured image on the custom post', 'custompostmedia-mutations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -67,7 +72,6 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'setFeaturedImage':
                 return [
@@ -75,7 +79,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::MEDIA_ITEM_ID,
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
+                            $this->translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
                             $this->mediaTypeResolver->getTypeName()
                         ),
                         SchemaDefinition::ARGNAME_MANDATORY => true,

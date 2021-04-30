@@ -14,8 +14,7 @@ abstract class AbstractCategoryTypeResolver extends AbstractTaxonomyTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Representation of a category, added to a custom post', 'categories');
+        return $this->translationAPI->__('Representation of a category, added to a custom post', 'categories');
     }
 
     public function getID(object $resultItem): string | int

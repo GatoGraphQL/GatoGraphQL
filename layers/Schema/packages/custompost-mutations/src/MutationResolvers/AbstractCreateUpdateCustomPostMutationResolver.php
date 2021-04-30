@@ -82,7 +82,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         $nameResolver = NameResolverFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
 
         // Validate user permission
         $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
@@ -95,7 +94,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                 $editCustomPostsCapability
             )
         ) {
-            $errors[] = $translationAPI->__('Your user doesn\'t have permission for editing custom posts.', 'custompost-mutations');
+            $errors[] = $this->translationAPI->__('Your user doesn\'t have permission for editing custom posts.', 'custompost-mutations');
             return;
         }
 
@@ -108,7 +107,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                     $publishCustomPostsCapability
                 )
             ) {
-                $errors[] = $translationAPI->__('Your user doesn\'t have permission for publishing custom posts.', 'custompost-mutations');
+                $errors[] = $this->translationAPI->__('Your user doesn\'t have permission for publishing custom posts.', 'custompost-mutations');
                 return;
             }
         }
@@ -116,13 +115,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function getUserNotLoggedInErrorMessage(): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('You must be logged in to create or update custom posts', 'custompost-mutations');
+        return $this->translationAPI->__('You must be logged in to create or update custom posts', 'custompost-mutations');
     }
 
     protected function validateContent(array &$errors, array $form_data): void
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         // Validate that the status is valid
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
@@ -133,15 +130,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             $status = $form_data[MutationInputProperties::STATUS];
             if (!in_array($status, $customPostStatusEnum->getValues())) {
                 $errors[] = sprintf(
-                    $translationAPI->__('Status \'%s\' is not supported', 'custompost-mutations'),
+                    $this->translationAPI->__('Status \'%s\' is not supported', 'custompost-mutations'),
                     $status
                 );
             }
         }
 
         // Allow plugins to add validation for their fields
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $hooksAPI->doAction(
+        $this->hooksAPI->doAction(
             self::HOOK_VALIDATE_CONTENT,
             array(&$errors),
             $form_data
@@ -161,11 +157,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function validateUpdate(array &$errors, array $form_data): void
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
 
         $customPostID = $form_data[MutationInputProperties::ID] ?? null;
         if (!$customPostID) {
-            $errors[] = $translationAPI->__('The ID is missing', 'custompost-mutations');
+            $errors[] = $this->translationAPI->__('The ID is missing', 'custompost-mutations');
             return;
         }
 
@@ -173,7 +168,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $post = $customPostTypeAPI->getCustomPost($customPostID);
         if (!$post) {
             $errors[] = sprintf(
-                $translationAPI->__('There is no entity with ID \'%s\'', 'custompost-mutations'),
+                $this->translationAPI->__('There is no entity with ID \'%s\'', 'custompost-mutations'),
                 $customPostID
             );
             return;
@@ -185,7 +180,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $userID = $vars['global-userstate']['current-user-id'];
         if (!$customPostTypeMutationAPI->canUserEditCustomPost($userID, $customPostID)) {
             $errors[] = sprintf(
-                $translationAPI->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
+                $this->translationAPI->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
                 $customPostID
             );
             return;
@@ -270,7 +265,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function update(array $form_data): string | int | Error
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getUpdateCustomPostData($form_data);
         $customPostID = $post_data['id'];
 
@@ -286,7 +280,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         } elseif ($result === null) {
             return new Error(
                 'update-error',
-                $translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
+                $this->translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
             );
         }
 
@@ -297,9 +291,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->updateAdditionals($customPostID, $form_data, $log);
 
         // Inject Share profiles here
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $hooksAPI->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
-        $hooksAPI->doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $form_data);
+        $this->hooksAPI->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
+        $this->hooksAPI->doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $form_data);
         return $customPostID;
     }
 
@@ -318,7 +311,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function create(array $form_data): string | int | Error
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $post_data = $this->getCreateCustomPostData($form_data);
         $customPostID = $this->executeCreateCustomPost($post_data);
 
@@ -327,7 +319,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         } elseif ($customPostID === null) {
             return new Error(
                 'create-error',
-                $translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
+                $this->translationAPI->__('Oops, there was a problem... this is embarrassing, huh?', 'custompost-mutations')
             );
         }
 
@@ -338,9 +330,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->createAdditionals($customPostID, $form_data);
 
         // Inject Share profiles here
-        $hooksAPI = HooksAPIFacade::getInstance();
-        $hooksAPI->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
-        $hooksAPI->doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $form_data);
+        $this->hooksAPI->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
+        $this->hooksAPI->doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $form_data);
 
         return $customPostID;
     }

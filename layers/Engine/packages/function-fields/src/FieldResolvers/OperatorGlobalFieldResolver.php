@@ -84,23 +84,22 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'concat' => $translationAPI->__('Concatenate two or more strings', 'function-fields'),
-            'divide' => $translationAPI->__('Divide a number by another number', 'function-fields'),
-            'arrayRandom' => $translationAPI->__('Randomly select one element from the provided ones', 'function-fields'),
-            'arrayJoin' => $translationAPI->__('Join all the strings in an array, using a provided separator', 'function-fields'),
-            'arrayItem' => $translationAPI->__('Access the element on the given position in the array', 'function-fields'),
-            'arraySearch' => $translationAPI->__('Search in what position is an element placed in the array. If found, it returns its position (integer), otherwise it returns `false` (boolean)', 'function-fields'),
-            'arrayFill' => $translationAPI->__('Fill a target array with elements from a source array, where a certain property is the same', 'function-fields'),
-            'arrayValues' => $translationAPI->__('Return the values from a two-dimensional array', 'function-fields'),
-            'arrayUnique' => $translationAPI->__('Filters out all duplicated elements in the array', 'function-fields'),
-            'arrayDiff' => $translationAPI->__('Return an array containing all the elements from the first array which are not present on any of the other arrays', 'function-fields'),
-            'arrayAddItem' => $translationAPI->__('Adds an element to the array', 'function-fields'),
-            'arrayAsQueryStr' => $translationAPI->__('Represent an array as a string', 'function-fields'),
-            'upperCase' => $translationAPI->__('Transform a string to upper case', 'function-fields'),
-            'lowerCase' => $translationAPI->__('Transform a string to lower case', 'function-fields'),
-            'titleCase' => $translationAPI->__('Transform a string to title case', 'function-fields'),
+            'concat' => $this->translationAPI->__('Concatenate two or more strings', 'function-fields'),
+            'divide' => $this->translationAPI->__('Divide a number by another number', 'function-fields'),
+            'arrayRandom' => $this->translationAPI->__('Randomly select one element from the provided ones', 'function-fields'),
+            'arrayJoin' => $this->translationAPI->__('Join all the strings in an array, using a provided separator', 'function-fields'),
+            'arrayItem' => $this->translationAPI->__('Access the element on the given position in the array', 'function-fields'),
+            'arraySearch' => $this->translationAPI->__('Search in what position is an element placed in the array. If found, it returns its position (integer), otherwise it returns `false` (boolean)', 'function-fields'),
+            'arrayFill' => $this->translationAPI->__('Fill a target array with elements from a source array, where a certain property is the same', 'function-fields'),
+            'arrayValues' => $this->translationAPI->__('Return the values from a two-dimensional array', 'function-fields'),
+            'arrayUnique' => $this->translationAPI->__('Filters out all duplicated elements in the array', 'function-fields'),
+            'arrayDiff' => $this->translationAPI->__('Return an array containing all the elements from the first array which are not present on any of the other arrays', 'function-fields'),
+            'arrayAddItem' => $this->translationAPI->__('Adds an element to the array', 'function-fields'),
+            'arrayAsQueryStr' => $this->translationAPI->__('Represent an array as a string', 'function-fields'),
+            'upperCase' => $this->translationAPI->__('Transform a string to upper case', 'function-fields'),
+            'lowerCase' => $this->translationAPI->__('Transform a string to lower case', 'function-fields'),
+            'titleCase' => $this->translationAPI->__('Transform a string to title case', 'function-fields'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -108,7 +107,6 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'concat':
                 return array_merge(
@@ -117,7 +115,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'values',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Strings to concatenate', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Strings to concatenate', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -130,13 +128,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'number',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_FLOAT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Number to divide', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Number to divide', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'by',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_FLOAT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The division operandum', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The division operandum', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -149,7 +147,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Array of elements from which to randomly select one', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array of elements from which to randomly select one', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ]
                     ]
@@ -162,13 +160,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Array of strings to be joined all together', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array of strings to be joined all together', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'separator',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Separator with which to join all strings in the array', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Separator with which to join all strings in the array', 'function-fields'),
                         ],
                     ]
                 );
@@ -180,13 +178,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Array containing the element to retrieve', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array containing the element to retrieve', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'position',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Position where the element is placed in the array, starting from 0', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Position where the element is placed in the array, starting from 0', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -199,13 +197,13 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Array containing the element to search', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array containing the element to search', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'element',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Element to search in the array and retrieve its position', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Element to search in the array and retrieve its position', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -218,25 +216,25 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'target',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Array to be added elements coming from the source array', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array to be added elements coming from the source array', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'source',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Array whose elements will be added to the target array', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array whose elements will be added to the target array', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'index',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Property whose value must be the same on both arrays', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Property whose value must be the same on both arrays', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'properties',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
                         ],
                     ]
                 );
@@ -248,7 +246,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The array from which to retrieve the values', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array from which to retrieve the values', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -261,7 +259,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The array to operate on', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to operate on', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -274,7 +272,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'arrays',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -287,19 +285,19 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The array to add an item on', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to add an item on', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The value to add to the array', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to add to the array', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'key',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
                         ],
                     ]
                 );
@@ -311,7 +309,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The array to represented as a string', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to represented as a string', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -325,7 +323,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'text',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The string to be transformed', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The string to be transformed', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
@@ -346,13 +344,12 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
         // For instance, this doesn't work: /?query=arrayItem(posts(),3)
         // In that case, the validation will be done inside ->resolveValue(), and will be treated as a $dbError, not a $schemaError
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             switch ($fieldName) {
                 case 'arrayItem':
                     if (count($fieldArgs['array']) < $fieldArgs['position']) {
                         return [
                             sprintf(
-                                $translationAPI->__('The array contains no element at position \'%s\'', 'function-fields'),
+                                $this->translationAPI->__('The array contains no element at position \'%s\'', 'function-fields'),
                                 $fieldArgs['position']
                             ),
                         ];
@@ -362,7 +359,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     if (count($fieldArgs['arrays']) < 2) {
                         return [
                             sprintf(
-                                $translationAPI->__('The array must contain at least 2 elements: \'%s\'', 'function-fields'),
+                                $this->translationAPI->__('The array must contain at least 2 elements: \'%s\'', 'function-fields'),
                                 json_encode($fieldArgs['arrays'])
                             ),
                         ];
@@ -371,7 +368,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                 case 'divide':
                     if ($fieldArgs['by'] === (float)0) {
                         return [
-                            $translationAPI->__('Cannot divide by 0', 'function-fields'),
+                            $this->translationAPI->__('Cannot divide by 0', 'function-fields'),
                         ];
                     }
                     // Check that all items are arrays
@@ -381,7 +378,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     // }, true);
                     // if (!$allArrays) {
                     //     return sprintf(
-                    //         $translationAPI->__('The array must contain only arrays as elements: \'%s\'', 'function-fields'),
+                    //         $this->translationAPI->__('The array must contain only arrays as elements: \'%s\'', 'function-fields'),
                     //         json_encode($fieldArgs['arrays'])
                     //     );
                     // }

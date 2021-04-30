@@ -34,8 +34,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     public function getSchemaInterfaceDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Entities representing a custom post', 'customposts');
+        return $this->translationAPI->__('Entities representing a custom post', 'customposts');
     }
 
     public function getFieldNamesToImplement(): array
@@ -90,23 +89,21 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'content' => $translationAPI->__('Custom post content', 'customposts'),
-            'status' => $translationAPI->__('Custom post status', 'customposts'),
-            'isStatus' => $translationAPI->__('Is the custom post in the given status?', 'customposts'),
-            'date' => $translationAPI->__('Custom post published date', 'customposts'),
-            'datetime' => $translationAPI->__('Custom post published date and time', 'customposts'),
-            'title' => $translationAPI->__('Custom post title', 'customposts'),
-            'excerpt' => $translationAPI->__('Custom post excerpt', 'customposts'),
-            'customPostType' => $translationAPI->__('Custom post type', 'customposts'),
+            'content' => $this->translationAPI->__('Custom post content', 'customposts'),
+            'status' => $this->translationAPI->__('Custom post status', 'customposts'),
+            'isStatus' => $this->translationAPI->__('Is the custom post in the given status?', 'customposts'),
+            'date' => $this->translationAPI->__('Custom post published date', 'customposts'),
+            'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
+            'title' => $this->translationAPI->__('Custom post title', 'customposts'),
+            'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
+            'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
     }
     public function getSchemaFieldArgs(string $fieldName): array
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
@@ -118,7 +115,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                             SchemaDefinition::ARGNAME_NAME => 'format',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('Date format, as defined in %s', 'customposts'),
+                                $this->translationAPI->__('Date format, as defined in %s', 'customposts'),
                                 'https://www.php.net/manual/en/function.date.php'
                             ),
                             SchemaDefinition::ARGNAME_DEFAULT_VALUE => $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')),
@@ -134,7 +131,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                             SchemaDefinition::ARGNAME_NAME => 'format',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
+                                $this->translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
                                 'https://www.php.net/manual/en/function.date.php',
                                 'j M, H:i',
                                 'j M Y, H:i'
@@ -154,7 +151,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'status',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The status to check if the post has', 'customposts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The status to check if the post has', 'customposts'),
                             SchemaDefinition::ARGNAME_ENUM_NAME => $customPostStatusEnum->getName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => [
                                 Status::PUBLISHED => [
@@ -174,10 +171,10 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                                  */
                                 // 'trashed' => [
                                 //     SchemaDefinition::ARGNAME_NAME => 'trashed',
-                                //     SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Published content', 'customposts'),
+                                //     SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Published content', 'customposts'),
                                 //     SchemaDefinition::ARGNAME_DEPRECATED => true,
                                 //     SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION => sprintf(
-                                //         $translationAPI->__('Use \'%s\' instead', 'customposts'),
+                                //         $this->translationAPI->__('Use \'%s\' instead', 'customposts'),
                                 //         Status::TRASH
                                 //     ),
                                 // ],
@@ -198,7 +195,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'format',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The format of the content', 'customposts'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The format of the content', 'customposts'),
                             SchemaDefinition::ARGNAME_ENUM_NAME => $customPostContentFormatEnum->getName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 $customPostContentFormatEnum->getValues()
@@ -258,12 +255,11 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
      */
     // protected function getSchemaDefinitionEnumValueDeprecationDescriptions(string $fieldName): ?array
     // {
-    //     $translationAPI = TranslationAPIFacade::getInstance();
     //     switch ($fieldName) {
     //         case 'status':
     //             return [
     //                 'trashed' => sprintf(
-    //                     $translationAPI->__('Using \'%s\' instead', 'customposts'),
+    //                     $this->translationAPI->__('Using \'%s\' instead', 'customposts'),
     //                     Status::TRASH
     //                 ),
     //             ];
@@ -273,18 +269,17 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
 
     protected function getSchemaDefinitionEnumValueDescriptions(string $fieldName): ?array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'status':
                 return [
-                    Status::PUBLISHED => $translationAPI->__('Published content', 'customposts'),
-                    Status::PENDING => $translationAPI->__('Pending content', 'customposts'),
-                    Status::DRAFT => $translationAPI->__('Draft content', 'customposts'),
-                    Status::TRASH => $translationAPI->__('Trashed content', 'customposts'),
+                    Status::PUBLISHED => $this->translationAPI->__('Published content', 'customposts'),
+                    Status::PENDING => $this->translationAPI->__('Pending content', 'customposts'),
+                    Status::DRAFT => $this->translationAPI->__('Draft content', 'customposts'),
+                    Status::TRASH => $this->translationAPI->__('Trashed content', 'customposts'),
                     /**
                      * @todo Extract to documentation before deleting this code
                      */
-                    // 'trashed' => $translationAPI->__('Trashed content', 'customposts'),
+                    // 'trashed' => $this->translationAPI->__('Trashed content', 'customposts'),
                 ];
         }
         return null;

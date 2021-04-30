@@ -49,9 +49,8 @@ class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'mapURL' => $translationAPI->__('Location map URL', 'pop-locations'),
+            'mapURL' => $this->translationAPI->__('Location map URL', 'pop-locations'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }

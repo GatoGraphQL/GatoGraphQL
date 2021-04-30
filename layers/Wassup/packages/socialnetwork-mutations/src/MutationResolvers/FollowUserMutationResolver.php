@@ -20,13 +20,13 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
             $target_id = $form_data['target_id'];
 
             if ($user_id == $target_id) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('You can\'t follow yourself!', 'pop-coreprocessors');
+                $errors[] = $this->translationAPI->__('You can\'t follow yourself!', 'pop-coreprocessors');
             } else {
                 // Check that the logged in user does not currently follow that user
                 $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
                 if (in_array($target_id, $value)) {
                     $errors[] = sprintf(
-                        TranslationAPIFacade::getInstance()->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                        $this->translationAPI->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                         $cmsusersapi->getUserDisplayName($target_id)
                     );
                 }
@@ -41,7 +41,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
     protected function additionals($target_id, $form_data)
     {
         parent::additionals($target_id, $form_data);
-        HooksAPIFacade::getInstance()->doAction('gd_followuser', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_followuser', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {

@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\API\ConditionalOnComponent\AccessControl\Hooks\:
+        resource: '../../../src/ConditionalOnComponent/AccessControl/Hooks/*'

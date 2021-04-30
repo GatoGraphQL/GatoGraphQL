@@ -67,14 +67,13 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $translationAPI = TranslationAPIFacade::getInstance();
         // Get the time set by @startTraceExecutionTime
         $startTime = $messages[EndTraceExecutionTimeDirectiveResolver::MESSAGE_EXECUTION_TIME];
         if (is_null($startTime)) {
             $schemaWarnings[] = [
                 Tokens::PATH => [$this->directive],
                 Tokens::MESSAGE => sprintf(
-                    $translationAPI->__('Something went wrong when executing directive \'%s\'', 'trace-tools'),
+                    $this->translationAPI->__('Something went wrong when executing directive \'%s\'', 'trace-tools'),
                     $this->getDirectiveName()
                 ),
             ];
@@ -105,23 +104,22 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
             $traceIDFields = [];
             foreach ($idsDataFields as $id => $dataFields) {
                 $traceIDFields[] = sprintf(
-                    $translationAPI->__('%s/%s', 'engine'),
+                    $this->translationAPI->__('%s/%s', 'engine'),
                     $id,
-                    implode($translationAPI->__('|'), $dataFields['direct'])
+                    implode($this->translationAPI->__('|'), $dataFields['direct'])
                 );
             }
             $traceMessage = sprintf(
-                $translationAPI->__('Execution time: %s milliseconds [type: \'%s\'; affected IDs/field(s): %s]', 'trace-tools'),
+                $this->translationAPI->__('Execution time: %s milliseconds [type: \'%s\'; affected IDs/field(s): %s]', 'trace-tools'),
                 $executionTime / 1_000_000, // Convert from nanoseconds to milliseconds
                 $typeResolver->getTypeName(),
-                implode($translationAPI->__(', '), $traceIDFields)
+                implode($this->translationAPI->__(', '), $traceIDFields)
             );
             $feedbackMessageStore->addLogEntry($traceMessage);
         }
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Trace the execution time of the resolution of the fields, and log the result', 'trace-tools');
+        return $this->translationAPI->__('Trace the execution time of the resolution of the fields, and log the result', 'trace-tools');
     }
 }

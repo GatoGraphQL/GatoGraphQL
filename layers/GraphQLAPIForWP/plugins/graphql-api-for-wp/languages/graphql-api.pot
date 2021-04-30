@@ -130,22 +130,22 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: src/ConditionalOnEnvironment/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:80
+#: src/ConditionalOnContext/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:80
 #: src/Services/CustomPostTypes/GraphQLAccessControlListCustomPostType.php:59
 msgid "Access Control Lists"
 msgstr ""
 
-#: src/ConditionalOnEnvironment/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:81
+#: src/ConditionalOnContext/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:81
 #: src/Services/CustomPostTypes/GraphQLCacheControlListCustomPostType.php:58
 msgid "Cache Control Lists"
 msgstr ""
 
-#: src/ConditionalOnEnvironment/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:82
+#: src/ConditionalOnContext/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:82
 #: src/Services/CustomPostTypes/GraphQLFieldDeprecationListCustomPostType.php:58
 msgid "Field Deprecation Lists"
 msgstr ""
 
-#: src/ConditionalOnEnvironment/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:83
+#: src/ConditionalOnContext/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:83
 #: src/Services/CustomPostTypes/GraphQLSchemaConfigurationCustomPostType.php:62
 msgid "Schema Configurations"
 msgstr ""
@@ -2173,50 +2173,50 @@ msgstr ""
 msgid "URL param 'fieldVersionConstraints' expects the type and field name separated by '%s' (eg: '%s'), so the following value has been ignored: '%s'"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:37
+#: vendor/getpop/engine/src/ConditionalOnContext/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:37
 msgid "Retrieve data from URL and decode it as a JSON object"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:38
+#: vendor/getpop/engine/src/ConditionalOnContext/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:38
 msgid "Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:55
+#: vendor/getpop/engine/src/ConditionalOnContext/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:55
 msgid "The URL to request"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:67
+#: vendor/getpop/engine/src/ConditionalOnContext/Guzzle/SchemaServices/FieldResolvers/OperatorGlobalFieldResolver.php:67
 msgid "The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:130
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:130
 #, php-format
 msgid "ID: %s, Field(s): '%s'"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:137
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:137
 #, php-format
 msgid "The following fields of type '%s' were resolved from the cache - %s"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:140
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:140
 msgid "; "
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:150
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/LoadCacheDirectiveResolver.php:150
 msgid "Load the cached value for a field"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/SaveCacheDirectiveResolver.php:85
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/SaveCacheDirectiveResolver.php:85
 #, php-format
 msgid "Property '%s' doesn't exist in object with ID '%s', so it can't be cached"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/SaveCacheDirectiveResolver.php:104
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/SaveCacheDirectiveResolver.php:104
 msgid "Cache the field value, and retrive from the cache if available"
 msgstr ""
 
-#: vendor/getpop/engine/src/ConditionalOnEnvironment/UseComponentModelCache/SchemaServices/DirectiveResolvers/SaveCacheDirectiveResolver.php:113
+#: vendor/getpop/engine/src/ConditionalOnContext/UseComponentModelCache/SchemaServices/DirectiveResolvers/SaveCacheDirectiveResolver.php:113
 msgid "Amount of time, in seconds, that the cache is valid. If not defining this value, the cache has no expiry date"
 msgstr ""
 
@@ -2813,42 +2813,42 @@ msgstr ""
 msgid "The query in the body is empty"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/EmbeddableFields/SchemaServices/FieldResolvers/EchoOperatorGlobalFieldResolver.php:74
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/EmbeddableFields/SchemaServices/FieldResolvers/EchoOperatorGlobalFieldResolver.php:74
 msgid "The input string to be echoed back"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/EmbeddableFields/SchemaServices/FieldResolvers/EchoOperatorGlobalFieldResolver.php:91
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/EmbeddableFields/SchemaServices/FieldResolvers/EchoOperatorGlobalFieldResolver.php:91
 msgid "Repeat back the input string"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:268
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:268
 #, php-format
 msgid "Cannot export variable with name '%s' because this variable has already been set"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:280
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:280
 msgid "Exports a field value as a variable"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:290
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:290
 #, php-format
 msgid "Name of the variable. It must start with '%s', or the directive will not work"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/RemoveIfNull/SchemaServices/DirectiveResolvers/RemoveIfNullDirectiveResolver.php:238
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/RemoveIfNull/SchemaServices/DirectiveResolvers/RemoveIfNullDirectiveResolver.php:238
 msgid "Remove the field from the response if it is `null`"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:64
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:64
 #, php-format
 msgid "Returns a dictionary with the values for all variables exported through the `%s` directive"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:71
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:71
 msgid "Returns the variable value"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnEnvironment/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:103
+#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:103
 msgid "The variable to echo back, of any type"
 msgstr ""
 
@@ -3213,7 +3213,7 @@ msgstr ""
 msgid "The ID of the parent comment"
 msgstr ""
 
-#: vendor/pop-schema/comments/src/Conditional/Users/FieldResolvers/CommentUserFieldResolver.php:40
+#: vendor/pop-schema/comments/src/ConditionalOnComponent/Users/FieldResolvers/CommentUserFieldResolver.php:40
 msgid "Comment's author"
 msgstr ""
 
@@ -3579,7 +3579,7 @@ msgstr ""
 msgid "Any custom post, with or without its own type for the schema"
 msgstr ""
 
-#: vendor/pop-schema/media/src/Conditional/Users/FieldResolvers/MediaUserFieldResolver.php:40
+#: vendor/pop-schema/media/src/ConditionalOnComponent/Users/FieldResolvers/MediaUserFieldResolver.php:40
 msgid "Media element's author"
 msgstr ""
 
@@ -4156,11 +4156,11 @@ msgstr ""
 msgid "Representation of a tag, added to a post"
 msgstr ""
 
-#: vendor/pop-schema/posts/src/Conditional/Users/FieldResolvers/PostUserFieldResolver.php:23
+#: vendor/pop-schema/posts/src/ConditionalOnComponent/Users/FieldResolvers/PostUserFieldResolver.php:23
 msgid "Posts by the user"
 msgstr ""
 
-#: vendor/pop-schema/posts/src/Conditional/Users/FieldResolvers/PostUserFieldResolver.php:24
+#: vendor/pop-schema/posts/src/ConditionalOnComponent/Users/FieldResolvers/PostUserFieldResolver.php:24
 msgid "Number of posts by the user"
 msgstr ""
 
@@ -4468,17 +4468,17 @@ msgstr ""
 msgid "You must be logged in to access field '%s' for type '%s'"
 msgstr ""
 
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostFieldResolver.php:63
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostFieldResolver.php:63
 msgid "The post's author"
 msgstr ""
 
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:23
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:23
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:23
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:23
 msgid "Custom posts by the user"
 msgstr ""
 
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:24
-#: vendor/pop-schema/users/src/Conditional/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:24
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostListUserFieldResolver.php:24
+#: vendor/pop-schema/users/src/ConditionalOnComponent/CustomPosts/FieldResolvers/CustomPostUserListFieldResolver.php:24
 msgid "Number of custom posts by the user"
 msgstr ""
 

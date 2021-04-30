@@ -17,8 +17,7 @@ class NotificationTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Notifications for the user', 'notifications');
+        return $this->translationAPI->__('Notifications for the user', 'notifications');
     }
 
     public function getID(object $resultItem): string | int

@@ -13,7 +13,7 @@ class LoginMutationResolver extends \PoPSchema\UserStateMutations\MutationResolv
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         return sprintf(
-            TranslationAPIFacade::getInstance()->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),
+            $this->translationAPI->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),
             $cmsusersapi->getUserURL($user_id),
             $cmsusersapi->getUserDisplayName($user_id),
             $cmsuseraccountapi->getLogoutURL()

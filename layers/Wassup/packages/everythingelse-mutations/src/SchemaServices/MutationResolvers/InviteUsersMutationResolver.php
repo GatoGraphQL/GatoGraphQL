@@ -23,19 +23,19 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
                 $sender_html = $sender_name;
             }
             $content = sprintf(
-                TranslationAPIFacade::getInstance()->__('<p>%s is inviting you to join %s!</p>', 'pop-coreprocessors'),
+                $this->translationAPI->__('<p>%s is inviting you to join %s!</p>', 'pop-coreprocessors'),
                 $sender_html,
                 $website_html
             );
         } else {
             $content = sprintf(
-                TranslationAPIFacade::getInstance()->__('<p>You have been invited to join %s!</p>', 'pop-coreprocessors'),
+                $this->translationAPI->__('<p>You have been invited to join %s!</p>', 'pop-coreprocessors'),
                 $website_html
             );
         }
 
         // Allow Organik Fundraising to override the content
-        $content = HooksAPIFacade::getInstance()->applyFilters(
+        $content = $this->hooksAPI->applyFilters(
             'GD_InviteUsers:emailcontent',
             $content,
             $sender_html,
@@ -55,14 +55,14 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         $content .= sprintf(
             '<h3>%s</h3>',
             sprintf(
-                TranslationAPIFacade::getInstance()->__('What is %s?', 'pop-coreprocessors'),
+                $this->translationAPI->__('What is %s?', 'pop-coreprocessors'),
                 $cmsapplicationapi->getSiteName()
             )
         );
         $content .= gdGetWebsiteDescription();
         $content .= '<br/><br/>';
 
-        $btn_title = TranslationAPIFacade::getInstance()->__('Check it out here', 'pop-coreprocessors');
+        $btn_title = $this->translationAPI->__('Check it out here', 'pop-coreprocessors');
         $content .= \PoP_EmailTemplatesFactory::getInstance()->getButtonhtml($btn_title, $cmsengineapi->getSiteURL());
 
         return $content;
@@ -76,19 +76,19 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         // Maybe the user is logged in, maybe not
         if ($sender_name = $form_data['sender-name']) {
             $subject = sprintf(
-                TranslationAPIFacade::getInstance()->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
+                $this->translationAPI->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
                 $sender_name,
                 $cmsapplicationapi->getSiteName()
             );
         } else {
             $subject = sprintf(
-                TranslationAPIFacade::getInstance()->__('You have been invited to join %s!', 'pop-coreprocessors'),
+                $this->translationAPI->__('You have been invited to join %s!', 'pop-coreprocessors'),
                 $cmsapplicationapi->getSiteName()
             );
         }
 
         // Allow Organik Fundraising to override the message
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_InviteUsers:emailsubject',
             $subject,
             $sender_name

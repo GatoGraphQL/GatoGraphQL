@@ -20,7 +20,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
             $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
             $target = $postTagTypeAPI->getTag($target_id);
             if (!$target) {
-                $errors[] = TranslationAPIFacade::getInstance()->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->translationAPI->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }
         }
         return $errors;
@@ -28,7 +28,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
 
     protected function additionals($target_id, $form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }
