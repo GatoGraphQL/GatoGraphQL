@@ -46,7 +46,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('pop_volunteer', $form_data);
+        $this->hooksAPI->doAction('pop_volunteer', $form_data);
     }
 
     protected function doExecute($form_data)

@@ -11,7 +11,7 @@ class GenerateSystemMutationResolver extends AbstractMutationResolver
 {
     public function execute(array $form_data): mixed
     {
-        HooksAPIFacade::getInstance()->doAction('PoP:system-generate');
+        $this->hooksAPI->doAction('PoP:system-generate');
         return true;
     }
 }

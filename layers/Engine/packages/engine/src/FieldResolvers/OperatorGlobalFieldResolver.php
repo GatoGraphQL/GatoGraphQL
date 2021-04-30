@@ -301,7 +301,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     {
         if (is_null($this->safeVars)) {
             $this->safeVars = ApplicationState::getVars();
-            HooksAPIFacade::getInstance()->doAction(
+            $this->hooksAPI->doAction(
                 self::HOOK_SAFEVARS,
                 array(&$this->safeVars)
             );

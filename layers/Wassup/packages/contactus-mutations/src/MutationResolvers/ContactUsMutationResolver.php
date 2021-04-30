@@ -33,7 +33,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('pop_contactus', $form_data);
+        $this->hooksAPI->doAction('pop_contactus', $form_data);
     }
 
     protected function doExecute($form_data)

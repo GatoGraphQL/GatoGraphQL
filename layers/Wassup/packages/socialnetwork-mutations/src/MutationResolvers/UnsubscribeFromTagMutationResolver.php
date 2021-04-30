@@ -40,7 +40,7 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
     protected function additionals($target_id, $form_data)
     {
         parent::additionals($target_id, $form_data);
-        HooksAPIFacade::getInstance()->doAction('gd_unsubscribefromtag', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_unsubscribefromtag', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

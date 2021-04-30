@@ -115,9 +115,9 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $user_id = $cmsusersresolver->getUserId($user);
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
-        $title = HooksAPIFacade::getInstance()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
+        $title = $this->hooksAPI->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
-        $message = HooksAPIFacade::getInstance()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
+        $message = $this->hooksAPI->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $cmsusersresolver->getUserEmail($user);
         return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);

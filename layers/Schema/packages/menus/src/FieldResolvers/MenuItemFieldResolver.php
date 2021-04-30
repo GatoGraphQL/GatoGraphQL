@@ -101,7 +101,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
                     $classes[] = 'menu-item-object-id-' . $objectID;
                 }
-                return join(' ', HooksAPIFacade::getInstance()->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array()));
+                return join(' ', $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array()));
 
             case 'target':
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);

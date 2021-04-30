@@ -26,7 +26,7 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('pop_subscribetonewsletter', $form_data);
+        $this->hooksAPI->doAction('pop_subscribetonewsletter', $form_data);
     }
 
     protected function doExecute($form_data)

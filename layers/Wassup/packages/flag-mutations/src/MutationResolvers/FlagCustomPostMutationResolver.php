@@ -46,7 +46,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data)
     {
-        HooksAPIFacade::getInstance()->doAction('pop_flag', $form_data);
+        $this->hooksAPI->doAction('pop_flag', $form_data);
     }
 
     protected function doExecute($form_data)

@@ -24,7 +24,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
 
     protected function addParentCategories()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_Post:add-parent-categories',
             false,
             $this
@@ -51,7 +51,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends \PoPSchema
 
     protected function getCategoriesErrorMessages()
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_Post:categories-validation:error',
             array(
                 'empty-categories' => $this->translationAPI->__('The categories have not been set', 'pop-application'),

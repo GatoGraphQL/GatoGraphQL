@@ -43,7 +43,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function additionals(string | int $comment_id, array $form_data): void
     {
-        HooksAPIFacade::getInstance()->doAction('gd_addcomment', $comment_id, $form_data);
+        $this->hooksAPI->doAction('gd_addcomment', $comment_id, $form_data);
     }
 
     protected function getCommentData(array $form_data): array

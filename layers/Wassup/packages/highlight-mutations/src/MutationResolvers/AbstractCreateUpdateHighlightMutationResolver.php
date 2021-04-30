@@ -50,7 +50,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
 
         // Allow to create a Notification
-        HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
+        $this->hooksAPI->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
     }
 
     protected function updateAdditionals(string | int $post_id, array $form_data, array $log): void
@@ -58,6 +58,6 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow to create a Notification
-        HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $form_data, $log);
+        $this->hooksAPI->doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $form_data, $log);
     }
 }

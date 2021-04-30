@@ -41,7 +41,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
     protected function additionals($target_id, $form_data)
     {
         parent::additionals($target_id, $form_data);
-        HooksAPIFacade::getInstance()->doAction('gd_followuser', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_followuser', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {
