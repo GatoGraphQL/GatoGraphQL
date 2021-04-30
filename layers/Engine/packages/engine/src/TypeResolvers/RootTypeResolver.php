@@ -7,7 +7,6 @@ namespace PoP\Engine\TypeResolvers;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\TypeDataLoaders\RootTypeDataLoader;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 

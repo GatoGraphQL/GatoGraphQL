@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;

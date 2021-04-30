@@ -8,7 +8,6 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use Exception;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;

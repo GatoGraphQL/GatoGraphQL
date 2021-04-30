@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Stances\TypeResolvers;
 
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Stances\TypeDataLoaders\StanceTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 

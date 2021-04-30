@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Events\TypeResolvers;
 
 // use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\TypeDataLoaders\EventTypeDataLoader;
 use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
 

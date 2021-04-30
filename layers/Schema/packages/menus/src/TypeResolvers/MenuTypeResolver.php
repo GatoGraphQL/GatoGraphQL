@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Menus\TypeResolvers;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\TypeDataLoaders\MenuTypeDataLoader;
 

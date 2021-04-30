@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Pages\TypeResolvers;
 
 use PoPSchema\Pages\TypeDataLoaders\PageTypeDataLoader;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
 
 class PageTypeResolver extends AbstractCustomPostTypeResolver

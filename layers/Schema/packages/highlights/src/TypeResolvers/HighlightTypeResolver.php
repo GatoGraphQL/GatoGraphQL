@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\TypeResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeDataLoaders\HighlightTypeDataLoader;
