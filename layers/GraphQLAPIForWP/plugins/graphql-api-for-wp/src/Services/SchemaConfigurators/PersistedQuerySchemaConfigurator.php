@@ -4,25 +4,31 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
     function __construct(
+        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
         FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator,
         protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator
     ) {
-        parent::__construct($moduleRegistry, $accessControlGraphQLQueryConfigurator, $fieldDeprecationGraphQLQueryConfigurator);
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $accessControlGraphQLQueryConfigurator,
+            $fieldDeprecationGraphQLQueryConfigurator,
+        );
     }
 
     /**
@@ -53,13 +59,12 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
         if (!$this->moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
             return;
         }
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigCacheControlListBlock
          */
-        $block = $instanceManager->getInstance(SchemaConfigCacheControlListBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigCacheControlListBlock::class);
         $schemaConfigCCLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
