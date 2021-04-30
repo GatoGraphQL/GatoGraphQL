@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
@@ -87,7 +86,7 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
             $inputmodules[] = [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         }
         if (
-            $modules = HooksAPIFacade::getInstance()->applyFilters(
+            $modules = $this->hooksAPI->applyFilters(
                 'CustomPosts:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules,
                 $module

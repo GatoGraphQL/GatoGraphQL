@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\DataloadUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Constants\Props;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\ComponentModel\Constants\Params;
@@ -228,7 +227,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             self::HOOK_INIT_MODEL_PROPS,
             array(&$props),
             $module,
@@ -256,7 +255,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             self::HOOK_INIT_REQUEST_PROPS,
             array(&$props),
             $module,
@@ -820,7 +819,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        HooksAPIFacade::getInstance()->doAction(
+        $this->hooksAPI->doAction(
             self::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array(&$ret),
             $module,
@@ -1011,9 +1010,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected function maybeOverrideCheckpoints($checkpoints)
     {
-
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'ModuleProcessor:checkpoints',
             $checkpoints
         );
