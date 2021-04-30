@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\RoutingWP;
 
 use WP_Query;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
 use PoP\Routing\AbstractRoutingManager;
 
@@ -27,7 +26,7 @@ class RoutingManager extends AbstractRoutingManager
         }
 
         // Allow plugins to implement their own natures
-        return (string)HooksAPIFacade::getInstance()->applyFilters(
+        return (string) $this->hooksAPI->applyFilters(
             'WPCMSRoutingState:nature',
             parent::getCurrentNature(),
             $this->query
