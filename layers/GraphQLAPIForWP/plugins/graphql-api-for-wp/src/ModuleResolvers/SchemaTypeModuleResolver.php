@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
@@ -89,7 +88,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      * so the properties will not be null in that situation.
      */
     public function __construct(
-        TranslationAPIInterface $translationAPI,
         ModuleRegistryInterface $moduleRegistry,
         protected ?CommentTypeResolver $commentTypeResolver,
         protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
@@ -103,7 +101,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         protected ?UserRoleTypeResolver $userRoleTypeResolver,
         protected ?UserTypeResolver $userTypeResolver
     ) {
-        parent::__construct($translationAPI, $moduleRegistry);
+        parent::__construct($moduleRegistry);
     }
 
     /**
