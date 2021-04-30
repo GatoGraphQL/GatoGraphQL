@@ -8,19 +8,21 @@ use Exception;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
-use PoP\CacheControl\Facades\CacheControlEngineFacade;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
+use PoP\CacheControl\Managers\CacheControlEngineInterface;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
     function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        protected LooseContractManagerInterface $looseContractManager
+        DataStructureManagerInterface $dataStructureManager,
+        protected LooseContractManagerInterface $looseContractManager,
+        protected CacheControlEngineInterface $cacheControlEngine
     ) {
-        parent::__construct($translationAPI, $hooksAPI);
+        parent::__construct($translationAPI, $hooksAPI, $dataStructureManager);
     }
 
     public function generateData()
@@ -69,14 +71,12 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         $this->generateData();
 
         // 2. Get the data, and ask the formatter to output it
-        $dataStructureManager = DataStructureManagerFacade::getInstance();
-        $formatter = $dataStructureManager->getDataStructureFormatter();
+        $formatter = $this->dataStructureManager->getDataStructureFormatter();
 
         // If CacheControl is enabled, add it to the headers
         $headers = [];
         if (CacheControlComponent::isEnabled()) {
-            $cacheControlEngine = CacheControlEngineFacade::getInstance();
-            if ($cacheControlHeader = $cacheControlEngine->getCacheControlHeader()) {
+            if ($cacheControlHeader = $this->cacheControlEngine->getCacheControlHeader()) {
                 $headers[] = $cacheControlHeader;
             }
         }

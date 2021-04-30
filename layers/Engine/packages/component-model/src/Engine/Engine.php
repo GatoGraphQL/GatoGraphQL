@@ -28,6 +28,7 @@ use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\CheckpointProcessorManagerFactory;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
@@ -38,7 +39,6 @@ use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\Settings\SiteConfigurationProcessorManagerFactory;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -94,7 +94,8 @@ class Engine implements EngineInterface
     
     function __construct(
         protected TranslationAPIInterface $translationAPI,
-        protected HooksAPIInterface $hooksAPI
+        protected HooksAPIInterface $hooksAPI,
+        protected DataStructureManagerInterface $dataStructureManager
     ) {
     }
 
@@ -235,8 +236,7 @@ class Engine implements EngineInterface
 
     protected function formatData()
     {
-        $dataStructureManager = DataStructureManagerFacade::getInstance();
-        $formatter = $dataStructureManager->getDataStructureFormatter();
+        $formatter = $this->dataStructureManager->getDataStructureFormatter();
         $this->data = $formatter->getFormattedData($this->data);
     }
 
