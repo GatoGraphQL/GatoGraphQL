@@ -15,18 +15,16 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 {
     // public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     // {
-    //     $translationAPI = TranslationAPIFacade::getInstance();
     //     return sprintf(
-    //         $translationAPI->__('%1$s %2$s'),
-    //         $translationAPI->__('Helper directive to calculate the Cache Control header when the field composes other fields.', 'cache-control'),
+    //         $this->translationAPI->__('%1$s %2$s'),
+    //         $this->translationAPI->__('Helper directive to calculate the Cache Control header when the field composes other fields.', 'cache-control'),
     //         parent::getSchemaDirectiveDescription($typeResolver)
     //     );
     // }
 
     // protected function addSchemaDefinitionForDirective(array &$schemaDefinition)
     // {
-    //     $translationAPI = TranslationAPIFacade::getInstance();
-    //     $schemaDefinition[SchemaDefinition::ARGNAME_MAX_AGE] = $translationAPI->__('The minimum max-age calculated among the affected fields and all their composed fields.', 'cache-control');
+    //     $schemaDefinition[SchemaDefinition::ARGNAME_MAX_AGE] = $this->translationAPI->__('The minimum max-age calculated among the affected fields and all their composed fields.', 'cache-control');
     // }
 
     /**

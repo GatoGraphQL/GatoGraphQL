@@ -35,35 +35,33 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'function',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Function to execute on the affected fields', 'component-model'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Function to execute on the affected fields', 'component-model'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'addArguments',
                 SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    $translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
+                    $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                     QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
                 ),
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'target',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
             ],
         ];
     }
 
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
-            Expressions::NAME_VALUE => $translationAPI->__('Element being transformed', 'component-model'),
+            Expressions::NAME_VALUE => $this->translationAPI->__('Element being transformed', 'component-model'),
         ];
     }
 
@@ -101,7 +99,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         $addArguments = $this->directiveArgsForSchema['addArguments'] ?? [];
         $target = $this->directiveArgsForSchema['target'] ?? null;
 
-        $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
 
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
@@ -127,7 +124,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -137,7 +134,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -165,7 +162,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbWarnings[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Warning validating function \'%s\' on object with ID \'%s\' and field under property \'%s\': %s)', 'component-model'),
+                                $this->translationAPI->__('Warning validating function \'%s\' on object with ID \'%s\' and field under property \'%s\': %s)', 'component-model'),
                                 $function,
                                 $id,
                                 $fieldOutputKey,
@@ -179,7 +176,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Error validating function \'%s\' on object with ID \'%s\' and field under property \'%s\': %s)', 'component-model'),
+                                $this->translationAPI->__('Error validating function \'%s\' on object with ID \'%s\' and field under property \'%s\': %s)', 'component-model'),
                                 $function,
                                 $id,
                                 $fieldOutputKey,
@@ -191,7 +188,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
+                                $this->translationAPI->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -201,7 +198,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Applying function on field \'%s\' on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
+                                $this->translationAPI->__('Applying function on field \'%s\' on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -231,7 +228,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
+                            $this->translationAPI->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
                             $fieldOutputKey,
                             $id,
                             $error->getErrorMessage()

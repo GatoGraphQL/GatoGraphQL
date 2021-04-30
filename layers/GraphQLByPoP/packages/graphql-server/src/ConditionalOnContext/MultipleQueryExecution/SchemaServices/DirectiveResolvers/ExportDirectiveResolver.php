@@ -258,14 +258,13 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     protected function setVariable(array &$variables, $value, array &$schemaWarnings): void
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $variableName = $this->directiveArgsForSchema['as'];
         // If the variable already exists, then throw a warning and do nothing
         if (isset($variables[$variableName])) {
             $schemaWarnings[] = [
                 Tokens::PATH => [$this->directive],
                 Tokens::MESSAGE => sprintf(
-                    $translationAPI->__('Cannot export variable with name \'%s\' because this variable has already been set', 'component-model'),
+                    $this->translationAPI->__('Cannot export variable with name \'%s\' because this variable has already been set', 'component-model'),
                     $variableName
                 ),
             ];
@@ -276,18 +275,16 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Exports a field value as a variable', 'graphql-server');
+        return $this->translationAPI->__('Exports a field value as a variable', 'graphql-server');
     }
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'as',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    $translationAPI->__('Name of the variable. It must start with \'%s\', or the directive will not work', 'graphql-server'),
+                    $this->translationAPI->__('Name of the variable. It must start with \'%s\', or the directive will not work', 'graphql-server'),
                     QuerySymbols::VARIABLE_AS_EXPRESSION_NAME_PREFIX
                 ),
                 SchemaDefinition::ARGNAME_MANDATORY => true,

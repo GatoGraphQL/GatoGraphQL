@@ -19,23 +19,22 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     // public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     // {
-    //     $translationAPI = TranslationAPIFacade::getInstance();
     //     return [
     //         [
     //             SchemaDefinition::ARGNAME_NAME => 'to',
     //             SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_EMAIL),
-    //             SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Emails to send the email to', 'component-model'),
+    //             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Emails to send the email to', 'component-model'),
     //             SchemaDefinition::ARGNAME_MANDATORY => true,
     //         ],
     //         [
     //             SchemaDefinition::ARGNAME_NAME => 'subject',
     //             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-    //             SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Email subject', 'component-model'),,
+    //             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Email subject', 'component-model'),,
     //         ],
     //         [
     //             SchemaDefinition::ARGNAME_NAME => 'content',
     //             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-    //             SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Email content', 'component-model'),
+    //             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Email content', 'component-model'),
     //         ],
     //     ];
     // }
@@ -63,7 +62,6 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaTraces
     ): void {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
         $dbKey = $typeResolver->getTypeOutputName();
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
@@ -75,7 +73,7 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -85,7 +83,7 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             )
@@ -104,7 +102,7 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
+                                $this->translationAPI->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -114,7 +112,7 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
+                                $this->translationAPI->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             )
@@ -129,7 +127,7 @@ class SendByEmailDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $translationAPI->__('The \'to\' item in the array in field \'%s\' (under property \'%s\') is empty, so the emails can\'t be sent', 'component-model'),
+                            $this->translationAPI->__('The \'to\' item in the array in field \'%s\' (under property \'%s\') is empty, so the emails can\'t be sent', 'component-model'),
                             $field,
                             $fieldOutputKey,
                             $id

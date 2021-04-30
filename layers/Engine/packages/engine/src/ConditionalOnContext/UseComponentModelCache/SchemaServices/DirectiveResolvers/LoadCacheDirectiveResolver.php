@@ -123,21 +123,20 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
 
             // Log the cached items
             $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-            $translationAPI = TranslationAPIFacade::getInstance();
             $logCachedIDFields = [];
             foreach ($idsDataFieldsToRemove as $id => $dataFieldsToRemove) {
                 $logCachedIDFields[] = sprintf(
-                    $translationAPI->__('ID: %s, Field(s): \'%s\'', 'engine'),
+                    $this->translationAPI->__('ID: %s, Field(s): \'%s\'', 'engine'),
                     $id,
                     implode('\', \'', $dataFieldsToRemove['direct'])
                 );
             }
             $feedbackMessageStore->addLogEntry(
                 sprintf(
-                    $translationAPI->__('The following fields of type \'%s\' were resolved from the cache - %s', 'engine'),
+                    $this->translationAPI->__('The following fields of type \'%s\' were resolved from the cache - %s', 'engine'),
                     $typeResolver->getTypeName(),
                     implode(
-                        $translationAPI->__('; ', 'engine'),
+                        $this->translationAPI->__('; ', 'engine'),
                         $logCachedIDFields
                     )
                 )
@@ -146,7 +145,6 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Load the cached value for a field', 'engine');
+        return $this->translationAPI->__('Load the cached value for a field', 'engine');
     }
 }

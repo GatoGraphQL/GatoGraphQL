@@ -38,14 +38,13 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $forEachDirectiveResolver = $instanceManager->getInstance(ForEachDirectiveResolver::class);
         /** @var DirectiveResolverInterface */
         $applyFunctionDirectiveResolver = $instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
         return sprintf(
-            $translationAPI->__('Use %s instead', 'component-model'),
+            $this->translationAPI->__('Use %s instead', 'component-model'),
             $fieldQueryInterpreter->getFieldDirectivesAsString([
                 [
                     $forEachDirectiveResolver->getDirectiveName(),
@@ -89,7 +88,6 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $dbKey = $typeResolver->getTypeOutputName();
 
@@ -111,7 +109,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -121,7 +119,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -145,7 +143,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
+                                $this->translationAPI->__('The value for field \'%s\' (under property \'%s\') is not an array, so execution of this directive can\'t continue', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -155,7 +153,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
+                                $this->translationAPI->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -244,7 +242,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $translationAPI->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
+                                $this->translationAPI->__('Transformation of element with key \'%s\' on array from property \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
                                 $key,
                                 $fieldOutputKey,
                                 $id,

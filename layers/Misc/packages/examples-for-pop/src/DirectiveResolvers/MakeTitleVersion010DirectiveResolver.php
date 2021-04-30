@@ -64,7 +64,6 @@ class MakeTitleVersion010DirectiveResolver extends AbstractGlobalDirectiveResolv
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Convert a string to Title Case', 'examples-for-pop');
+        return $this->translationAPI->__('Convert a string to Title Case', 'examples-for-pop');
     }
 }

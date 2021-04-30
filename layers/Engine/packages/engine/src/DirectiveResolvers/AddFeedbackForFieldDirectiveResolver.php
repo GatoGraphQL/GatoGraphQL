@@ -71,7 +71,6 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
         $type = $this->directiveArgsForSchema['type'];
         $target = $this->directiveArgsForSchema['target'];
         if ($target == FieldFeedbackTargetEnum::DB) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             foreach (array_keys($idsDataFields) as $id) {
                 // Use either the default value passed under param "value" or, if this is NULL, use a predefined value
                 $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
@@ -92,7 +91,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
                 if (is_null($message)) {
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
-                        Tokens::MESSAGE => $translationAPI->__(
+                        Tokens::MESSAGE => $this->translationAPI->__(
                             'The message could not be composed. Check previous errors',
                             'engine'
                         ),
@@ -131,13 +130,11 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('Whenever a field is queried, add a feedback message to the response, of either type "warning", "deprecation" or "log"', 'engine');
+        return $this->translationAPI->__('Whenever a field is queried, add a feedback message to the response, of either type "warning", "deprecation" or "log"', 'engine');
     }
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var FieldFeedbackTypeEnum
@@ -151,13 +148,13 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
             [
                 SchemaDefinition::ARGNAME_NAME => 'message',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The feedback message', 'engine'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The feedback message', 'engine'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'type',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The type of feedback', 'engine'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The type of feedback', 'engine'),
                 SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTypeEnum->getName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $fieldFeedbackTypeEnum->getValues()
@@ -167,7 +164,7 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
             [
                 SchemaDefinition::ARGNAME_NAME => 'target',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The target for the feedback', 'engine'),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The target for the feedback', 'engine'),
                 SchemaDefinition::ARGNAME_ENUM_NAME => $fieldFeedbackTargetEnum->getName(),
                 SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $fieldFeedbackTargetEnum->getValues()
