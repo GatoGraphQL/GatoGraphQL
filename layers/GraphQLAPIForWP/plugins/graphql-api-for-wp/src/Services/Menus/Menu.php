@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\SupportMenuPage;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SupportMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Admin menu class
@@ -26,10 +26,14 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 class Menu extends AbstractMenu
 {
     function __construct(
+        InstanceManagerInterface $instanceManager,
         protected MenuPageHelper $menuPageHelper,
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization
     ) {
+        parent::__construct(
+            $instanceManager,
+        );
     }
 
     public function getName(): string
@@ -40,8 +44,6 @@ class Menu extends AbstractMenu
     public function addMenuPagesTop(): void
     {
         parent::addMenuPagesTop();
-
-        $instanceManager = InstanceManagerFacade::getInstance();
 
         $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
         \add_menu_page(
@@ -57,7 +59,7 @@ class Menu extends AbstractMenu
         /**
          * @var GraphiQLMenuPage
          */
-        $graphiQLMenuPage = $instanceManager->getInstance(GraphiQLMenuPage::class);
+        $graphiQLMenuPage = $this->instanceManager->getInstance(GraphiQLMenuPage::class);
         if (
             $hookName = \add_submenu_page(
                 $this->getName(),
@@ -74,7 +76,7 @@ class Menu extends AbstractMenu
         /**
          * @var GraphQLVoyagerMenuPage
          */
-        $graphQLVoyagerMenuPage = $instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+        $graphQLVoyagerMenuPage = $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
         if (
             $hookName = \add_submenu_page(
                 $this->getName(),
@@ -117,12 +119,11 @@ class Menu extends AbstractMenu
     {
         parent::addMenuPagesBottom();
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         $menuPageClass = $this->getModuleMenuPageClass();
         /**
          * @var AbstractMenuPage
          */
-        $modulesMenuPage = $instanceManager->getInstance($menuPageClass);
+        $modulesMenuPage = $this->instanceManager->getInstance($menuPageClass);
         /**
          * @var callable
          */
@@ -143,7 +144,7 @@ class Menu extends AbstractMenu
         /**
          * @var SettingsMenuPage
          */
-        $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+        $settingsMenuPage = $this->instanceManager->getInstance(SettingsMenuPage::class);
         if (
             $hookName = \add_submenu_page(
                 $this->getName(),
@@ -186,7 +187,7 @@ class Menu extends AbstractMenu
         /**
          * @var AbstractMenuPage
          */
-        $aboutMenuPage = $instanceManager->getInstance($aboutPageClass);
+        $aboutMenuPage = $this->instanceManager->getInstance($aboutPageClass);
         if (isset($_GET['page']) && $_GET['page'] == $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = \add_submenu_page(
@@ -205,7 +206,7 @@ class Menu extends AbstractMenu
         /**
          * @var SupportMenuPage
          */
-        $supportMenuPage = $instanceManager->getInstance(SupportMenuPage::class);
+        $supportMenuPage = $this->instanceManager->getInstance(SupportMenuPage::class);
         if (
             $hookName = \add_submenu_page(
                 $this->getName(),
