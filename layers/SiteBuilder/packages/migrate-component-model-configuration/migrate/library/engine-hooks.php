@@ -3,7 +3,7 @@ namespace PoP\ConfigurationComponentModel;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class VarsHooks
+class VarsHookSet
 {
     public function __construct()
     {
@@ -46,4 +46,4 @@ class VarsHooks
 /**
  * Initialization
  */
-new VarsHooks();
+new VarsHookSet();
