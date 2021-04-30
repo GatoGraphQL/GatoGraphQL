@@ -7,7 +7,6 @@ namespace PoPSchema\PostCategories\Hooks;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
@@ -52,7 +51,7 @@ class ModelInstanceHookSet extends AbstractHookSet
                 foreach ($postCategoryTypeAPI->getCustomPostCategories($postID) as $cat) {
                     $categories[] = $postCategoryTypeAPI->getCategorySlug($cat) . $postCategoryTypeAPI->getCategoryID($cat);
                 }
-                $components[] = TranslationAPIFacade::getInstance()->__('categories:', 'post-categories') . implode('.', $categories);
+                $components[] = $this->translationAPI->__('categories:', 'post-categories') . implode('.', $categories);
             }
         }
         return $components;

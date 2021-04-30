@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPosts\Hooks;
 use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
@@ -49,9 +48,7 @@ class VarsHooks extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
-                    $components[] =
-                        TranslationAPIFacade::getInstance()->__('post type:', 'pop-engine')
-                        . $customPostType;
+                    $components[] = $this->translationAPI->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;
         }

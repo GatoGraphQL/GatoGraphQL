@@ -7,7 +7,6 @@ namespace PoPSchema\Pages\Hooks;
 use PoPSchema\Pages\Constants\ModelInstanceComponentTypes;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Pages\Routing\RouteNatures;
@@ -33,7 +32,7 @@ class VarsHooks extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {
                     $page_id = $vars['routing-state']['queried-object-id'];
-                    $components[] = TranslationAPIFacade::getInstance()->__('page id:', 'pop-engine').$page_id;
+                    $components[] = $this->translationAPI->__('page id:', 'pop-engine') . $page_id;
                 }
                 break;
         }
