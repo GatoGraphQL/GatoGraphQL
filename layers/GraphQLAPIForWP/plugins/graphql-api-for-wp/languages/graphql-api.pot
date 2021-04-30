@@ -3298,7 +3298,7 @@ msgstr ""
 
 #: vendor/pop-schema/custompost-category-mutations/src/FieldResolvers/AbstractCustomPostFieldResolver.php:78
 #: vendor/pop-schema/custompost-category-mutations/src/FieldResolvers/AbstractRootFieldResolver.php:81
-#: vendor/pop-schema/custompost-category-mutations/src/Hooks/AbstractCustomPostMutationResolverHooks.php:54
+#: vendor/pop-schema/custompost-category-mutations/src/Hooks/AbstractCustomPostMutationResolverHookSet.php:54
 #, php-format
 msgid "The IDs of the categories to set, of type '%s'"
 msgstr ""
@@ -3395,7 +3395,7 @@ msgstr ""
 
 #: vendor/pop-schema/custompost-tag-mutations/src/FieldResolvers/AbstractCustomPostFieldResolver.php:72
 #: vendor/pop-schema/custompost-tag-mutations/src/FieldResolvers/AbstractRootFieldResolver.php:75
-#: vendor/pop-schema/custompost-tag-mutations/src/Hooks/AbstractCustomPostMutationResolverHooks.php:48
+#: vendor/pop-schema/custompost-tag-mutations/src/Hooks/AbstractCustomPostMutationResolverHookSet.php:48
 msgid "The tags to set"
 msgstr ""
 
