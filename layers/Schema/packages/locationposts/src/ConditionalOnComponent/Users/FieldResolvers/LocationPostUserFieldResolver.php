@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\LocationPosts\ConditionalOnComponent\Users\FieldResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\LocationPosts\FieldResolvers\AbstractLocationPostFieldResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;

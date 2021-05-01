@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class LoginMutationResolver extends \PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver
 {

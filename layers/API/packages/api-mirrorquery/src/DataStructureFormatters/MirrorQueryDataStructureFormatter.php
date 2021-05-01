@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoP\APIMirrorQuery\DataStructureFormatters;
 
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DataStructure\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -154,7 +152,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         $dbObject = $databases[$dbKey][$dbObjectID] ?? [];
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
-            $propertyFieldOutputKey = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($propertyField);
+            $propertyFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($propertyField);
             if (array_key_exists($propertyFieldOutputKey, $dbObject)) {
                 $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$propertyFieldOutputKey];
             }
@@ -162,7 +160,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
         // Add the nested levels
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
-            $nestedFieldOutputKey = FieldQueryInterpreterFacade::getInstance()->getFieldOutputKey($nestedField);
+            $nestedFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($nestedField);
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
             if (array_key_exists($nestedFieldOutputKey, $dbObject)) {
                 // If it's null, directly assign the null to the result
@@ -172,7 +170,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     // Watch out! If the property has already been loaded from a previous iteration, in some cases it can create trouble!
                     // But make sure that there truly are subproperties! It could also be a schemaError.
                     // Eg: ?query=posts.title.id, then no need to transform "title" from string to {"id" => ...}
-                    if (FeedbackMessageStoreFacade::getInstance()->getSchemaErrorsForField($dbKey, $nestedField)) {
+                    if ($this->feedbackMessageStore->getSchemaErrorsForField($dbKey, $nestedField)) {
                         $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$nestedFieldOutputKey];
                     } else {
                         // The first field, "id", needs not be concatenated. All the others do need

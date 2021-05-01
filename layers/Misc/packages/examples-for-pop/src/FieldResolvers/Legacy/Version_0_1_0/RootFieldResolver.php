@@ -8,9 +8,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
@@ -99,7 +97,6 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         switch ($fieldName) {
             case 'userServiceURLs':
                 return [
@@ -111,7 +108,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
             case 'userServiceData':
                 $userServiceURLs = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'userServiceURLs',
                         $fieldArgs
                     ),
@@ -125,7 +122,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 $userServiceURLs = (array)$userServiceURLs;
                 return $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'getAsyncJSON',
                         [
                             'urls' => $userServiceURLs,

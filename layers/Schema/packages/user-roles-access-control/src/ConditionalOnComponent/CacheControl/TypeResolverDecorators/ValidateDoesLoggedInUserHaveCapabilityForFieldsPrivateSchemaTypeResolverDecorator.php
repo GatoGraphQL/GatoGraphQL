@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\TypeResolverDecorators;
 
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoPSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\TypeResolverDecorators\AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaTypeResolverDecorator;
 
@@ -12,7 +11,6 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPrivateSchemaTypeResolverDe
 {
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
+        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
     }
 }

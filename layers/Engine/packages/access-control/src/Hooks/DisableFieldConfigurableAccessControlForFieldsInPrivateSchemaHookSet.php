@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\AccessControl\Services\AccessControlGroups;
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet;
 
 class DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet extends AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet
@@ -15,7 +14,6 @@ class DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet exten
      */
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForFields(AccessControlGroups::DISABLED);
+        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::DISABLED);
     }
 }

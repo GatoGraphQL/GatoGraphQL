@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeDataLoaders;
 
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
@@ -36,7 +35,7 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     protected function getOrderbyDefault()
     {
-        return NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:name');
+        return $this->nameResolver->getName('popcms:dbcolumn:orderby:users:name');
     }
 
     protected function getOrderDefault()

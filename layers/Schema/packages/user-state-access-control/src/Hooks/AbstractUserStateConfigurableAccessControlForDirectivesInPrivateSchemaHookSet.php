@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
 
@@ -25,7 +24,6 @@ abstract class AbstractUserStateConfigurableAccessControlForDirectivesInPrivateS
      */
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForDirectives(AccessControlGroups::STATE);
+        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::STATE);
     }
 }

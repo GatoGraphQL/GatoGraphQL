@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Leoloso\ExamplesForPoP\FieldResolvers;
 
 use PoP\ComponentModel\Facades\ErrorHandling\ErrorProviderFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class MeshRootFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -99,7 +97,6 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         switch ($fieldName) {
             case 'meshServices':
                 return [
@@ -119,7 +116,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
             case 'meshServiceData':
                 $meshServices = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'meshServices',
                         $fieldArgs
                     ),
@@ -133,7 +130,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                 $meshServices = (array)$meshServices;
                 return $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'getAsyncJSON',
                         [
                             'urls' => $meshServices,
@@ -146,7 +143,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
             case 'contentMesh':
                 $meshServiceData = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'meshServiceData',
                         $fieldArgs
                     ),
@@ -160,7 +157,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                 $meshServiceData = (array)$meshServiceData;
                 $weatherForecast = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'extract',
                         [
                             'object' => $meshServiceData,
@@ -173,7 +170,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                 );
                 $photoGalleryURLs = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'extract',
                         [
                             'object' => $meshServiceData,
@@ -186,7 +183,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                 );
                 $githubMetaDescription = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'extract',
                         [
                             'object' => $meshServiceData,
@@ -199,7 +196,7 @@ class MeshRootFieldResolver extends AbstractDBDataFieldResolver
                 );
                 $githubMetaStarCount = $typeResolver->resolveValue(
                     $resultItem,
-                    $fieldQueryInterpreter->getField(
+                    $this->fieldQueryInterpreter->getField(
                         'extract',
                         [
                             'object' => $meshServiceData,

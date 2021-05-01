@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Multisite\TypeResolvers;
 
 use PoP\Multisite\TypeDataLoaders\SiteTypeDataLoader;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class SiteTypeResolver extends AbstractTypeResolver

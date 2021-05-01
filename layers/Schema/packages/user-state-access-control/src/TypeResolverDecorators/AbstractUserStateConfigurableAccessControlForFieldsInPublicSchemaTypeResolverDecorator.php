@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\TypeResolverDecorators;
 
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups;
 use PoP\AccessControl\TypeResolverDecorators\AbstractConfigurableAccessControlForFieldsInPublicSchemaTypeResolverDecorator;
 use PoPSchema\UserStateAccessControl\TypeResolverDecorators\UserStateConfigurableAccessControlInPublicSchemaTypeResolverDecoratorTrait;
@@ -15,7 +14,6 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPublicSchema
 
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForFields(AccessControlGroups::STATE);
+        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::STATE);
     }
 }

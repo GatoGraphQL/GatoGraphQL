@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
-
 trait CreateCustomPostMutationResolverTrait
 {
     public function execute(array $form_data): mixed

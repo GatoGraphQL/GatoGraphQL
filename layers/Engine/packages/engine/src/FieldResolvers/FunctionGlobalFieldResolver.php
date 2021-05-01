@@ -7,7 +7,6 @@ namespace PoP\Engine\FieldResolvers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Engine\Dataloading\Expressions;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 

@@ -4,15 +4,31 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Hooks;
 
+use PoP\Hooks\HooksAPIInterface;
 use PoP\Engine\Hooks\AbstractCMSBootHookSet;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected AccessControlManagerInterface $accessControlManager
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     public function cmsBoot(): void
     {
         if (!$this->enabled()) {
@@ -72,9 +88,8 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
      */
     protected function getDirectiveResolvers(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         return array_map(
-            fn (string $directiveResolverClass) => $instanceManager->getInstance($directiveResolverClass),
+            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
             $this->getDirectiveResolverClasses()
         );
     }

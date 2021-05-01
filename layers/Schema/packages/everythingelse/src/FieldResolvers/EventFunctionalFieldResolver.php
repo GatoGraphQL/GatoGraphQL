@@ -9,7 +9,6 @@ use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;

@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use PoP\Hooks\HooksAPIInterface;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\DirectiveRegistryFacade;
 use PoP\ComponentModel\Facades\Registries\FieldInterfaceRegistryFacade;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
-    function __construct(protected ModuleRegistryInterface $moduleRegistry)
-    {
+    function __construct(
+        protected HooksAPIInterface $hooksAPI,
+        protected InstanceManagerInterface $instanceManager,
+        protected ModuleRegistryInterface $moduleRegistry
+    ) {
     }
 
     /**

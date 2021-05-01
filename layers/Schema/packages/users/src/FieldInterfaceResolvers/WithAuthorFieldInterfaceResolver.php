@@ -6,7 +6,6 @@ namespace PoPSchema\Users\FieldInterfaceResolvers;
 
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
 
 class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver

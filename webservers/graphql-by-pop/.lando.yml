@@ -213,8 +213,10 @@ services:
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - '../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags'
         - '../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp'
-        - '../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories'
-        - '../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp'
+        - >-
+          ../../layers/Schema/packages/categories:/app/vendor/pop-schema/categories
+        - >-
+          ../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp
         - >-
           ../../layers/Schema/packages/taxonomies:/app/vendor/pop-schema/taxonomies
         - >-
@@ -255,7 +257,8 @@ services:
         - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
         - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
         - '../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings'
-        - '../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp'
+        - >-
+          ../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp
         - >-
           ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
     build_as_root:

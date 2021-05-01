@@ -7,7 +7,6 @@ namespace GraphQLAPI\SchemaFeedback\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\SchemaFeedback\Blocks\SchemaFeedbackBlock;
 use GraphQLAPI\SchemaFeedback\ModuleResolvers\FunctionalityModuleResolver;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
 {
@@ -80,11 +79,10 @@ class GraphQLSchemaFeedbackListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var SchemaFeedbackBlock
          */
-        $schemaFeedbackBlock = $instanceManager->getInstance(SchemaFeedbackBlock::class);
+        $schemaFeedbackBlock = $this->instanceManager->getInstance(SchemaFeedbackBlock::class);
         return [
             [$schemaFeedbackBlock->getBlockFullName()],
         ];

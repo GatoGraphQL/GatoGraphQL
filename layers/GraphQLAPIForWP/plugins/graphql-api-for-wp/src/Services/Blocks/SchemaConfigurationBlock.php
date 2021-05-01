@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\QueryExecutionBlockCategory;
 
@@ -33,11 +32,10 @@ class SchemaConfigurationBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var QueryExecutionBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(QueryExecutionBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(QueryExecutionBlockCategory::class);
         return $blockCategory;
     }
 
@@ -86,11 +84,10 @@ EOF;
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var BlockRenderingHelpers */
-                $blockRenderingHelpers = $instanceManager->getInstance(BlockRenderingHelpers::class);
+                $blockRenderingHelpers = $this->instanceManager->getInstance(BlockRenderingHelpers::class);
                 /** @var CPTUtils */
-                $cptUtils = $instanceManager->getInstance(CPTUtils::class);
+                $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
                 $schemaConfigurationDescription = $cptUtils->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?

@@ -9,7 +9,6 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractValidateDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {

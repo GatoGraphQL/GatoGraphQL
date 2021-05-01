@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMediaMutations\Facades\CustomPostMediaTypeMutationAPIFacade;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 

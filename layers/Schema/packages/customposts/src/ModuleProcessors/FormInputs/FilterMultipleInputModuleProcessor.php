@@ -11,7 +11,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
 class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -73,14 +72,13 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
-                    $translationAPI->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
+                    $this->translationAPI->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
                     $formInputHelperService->getMultipleInputName($name, $subnames[0]),
                     $formInputHelperService->getMultipleInputName($name, $subnames[1])
                 );

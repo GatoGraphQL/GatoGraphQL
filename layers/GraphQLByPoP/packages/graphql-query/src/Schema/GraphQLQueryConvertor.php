@@ -24,8 +24,8 @@ use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use InvalidArgumentException;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -35,7 +35,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
-        protected FeedbackMessageStoreInterface $feedbackMessageStore
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ) {
     }
 
@@ -188,8 +189,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     protected function convertField(FieldInterface $field): string
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-
         // Convert the arguments and directives into an array
         $arguments = $this->convertArguments($field->getArguments());
         $directives = [];
@@ -237,14 +236,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     $directiveComposableDirectives = QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING . implode(
                         QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                         array_map(
-                            [$fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
+                            [$this->fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
                             $composableDirectivesByPosition[$counter]
                         )
                     ) . QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING;
                 }
             }
             $directiveName = $directive->getName();
-            $convertedDirective = $fieldQueryInterpreter->getDirective(
+            $convertedDirective = $this->fieldQueryInterpreter->getDirective(
                 $directiveName,
                 $directiveArgs,
                 $directiveComposableDirectives
@@ -290,7 +289,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $rootDirective = $rootAndComposableDirectives[$pos];
             $directives[] = $rootDirective;
         }
-        return $fieldQueryInterpreter->getField(
+        return $this->fieldQueryInterpreter->getField(
             $field->getName(),
             $arguments,
             $field->getAlias(),
@@ -304,25 +303,24 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function restrainFieldsByTypeOrInterface(array $fragmentFieldPaths, string $fragmentModel): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var DirectiveResolverInterface */
         $includeDirectiveResolver = $instanceManager->getInstance(IncludeDirectiveResolver::class);
         // Create the <include> directive, if the fragment references the type or interface
-        $includeDirective = $fieldQueryInterpreter->composeFieldDirective(
+        $includeDirective = $this->fieldQueryInterpreter->composeFieldDirective(
             $includeDirectiveResolver->getDirectiveName(),
-            $fieldQueryInterpreter->getFieldArgsAsString([
-                'if' => $fieldQueryInterpreter->getField(
+            $this->fieldQueryInterpreter->getFieldArgsAsString([
+                'if' => $this->fieldQueryInterpreter->getField(
                     'or',
                     [
                         'values' => [
-                            $fieldQueryInterpreter->getField(
+                            $this->fieldQueryInterpreter->getField(
                                 'isType',
                                 [
                                     'type' => $fragmentModel
                                 ]
                             ),
-                            $fieldQueryInterpreter->getField(
+                            $this->fieldQueryInterpreter->getField(
                                 'implements',
                                 [
                                     'interface' => $fragmentModel
@@ -334,13 +332,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             ])
         );
         $fragmentFieldPaths = array_map(
-            function (array $fragmentFieldPath) use ($includeDirective, $fieldQueryInterpreter): array {
+            function (array $fragmentFieldPath) use ($includeDirective): array {
                 // The field can itself compose other fields. Get the 1st element
                 // to apply the directive to the root property only
                 $fragmentRootField = $fragmentFieldPath[0];
 
                 // Add the directive to the current directives from the field
-                $rootFieldDirectives = $fieldQueryInterpreter->getFieldDirectives((string)$fragmentRootField);
+                $rootFieldDirectives = $this->fieldQueryInterpreter->getFieldDirectives((string)$fragmentRootField);
                 if ($rootFieldDirectives) {
                     // The include directive comes first,
                     // so if it evals to false the upcoming directives are not executed

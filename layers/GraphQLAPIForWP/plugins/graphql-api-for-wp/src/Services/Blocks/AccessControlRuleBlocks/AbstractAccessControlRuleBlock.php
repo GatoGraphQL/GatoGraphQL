@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 
@@ -19,11 +18,10 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var AccessControlBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(AccessControlBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(AccessControlBlockCategory::class);
         return $blockCategory;
     }
 }

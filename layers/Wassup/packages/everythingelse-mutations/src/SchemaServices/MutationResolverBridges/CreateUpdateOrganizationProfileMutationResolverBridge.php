@@ -22,7 +22,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     }
     protected function getCommonuserrolesFormInputs()
     {
-        $inputs = HooksAPIFacade::getInstance()->applyFilters(
+        $inputs = $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_ProfileOrganization_Trait:form-inputs',
             array(
                 'organizationtypes' => null,
@@ -57,15 +57,14 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     protected function getCommonuserrolesFormData()
     {
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $inputs = $this->getFormInputs();
-        $organizationtypes = $moduleprocessor_manager->getProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
-        $organizationcategories = $moduleprocessor_manager->getProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
+        $organizationtypes = $this->moduleProcessorManager->getProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
+        $organizationcategories = $this->moduleProcessorManager->getProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
         return array(
             'organizationtypes' => $organizationtypes ?? array(),
             'organizationcategories' => $organizationcategories ?? array(),
-            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($moduleprocessor_manager->getProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
-            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($moduleprocessor_manager->getProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
+            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
+            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
         );
     }
 }

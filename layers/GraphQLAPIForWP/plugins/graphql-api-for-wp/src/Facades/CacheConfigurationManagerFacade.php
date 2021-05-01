@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
+use PoP\ComponentModel\Instances\InstanceManager;
 
 /**
  * Obtain an instance of the CacheConfigurationManager.
@@ -31,10 +32,16 @@ class CacheConfigurationManagerFacade
             // We can create a new instance of these classes
             // because their instantiation produces no side-effects
             // (maybe that happens under `initialize`)
+            $instanceManager = new InstanceManager();
             $menuPageHelper = new MenuPageHelper();
             $moduleRegistry = new ModuleRegistry();
             $userAuthorization = new UserAuthorization();
-            $menu = new Menu($menuPageHelper, $moduleRegistry, $userAuthorization);
+            $menu = new Menu(
+                $instanceManager,
+                $menuPageHelper,
+                $moduleRegistry,
+                $userAuthorization,
+            );
             $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
             self::$instance = new CacheConfigurationManager($endpointHelpers);
         }

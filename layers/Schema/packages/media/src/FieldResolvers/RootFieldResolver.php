@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace PoPSchema\Media\FieldResolvers;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 
@@ -21,9 +24,20 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
     function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
         protected CustomPostTypeResolver $customPostTypeResolver
     ) {
-        parent::__construct($translationAPI, $hooksAPI);
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
     }
 
     public function getClassesToAttachTo(): array

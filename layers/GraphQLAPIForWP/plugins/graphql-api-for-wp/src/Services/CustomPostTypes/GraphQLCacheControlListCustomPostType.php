@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
@@ -73,11 +72,10 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergTemplate(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var CacheControlBlock
          */
-        $cacheControlBlock = $instanceManager->getInstance(CacheControlBlock::class);
+        $cacheControlBlock = $this->instanceManager->getInstance(CacheControlBlock::class);
         return [
             [$cacheControlBlock->getBlockFullName()],
         ];

@@ -8,13 +8,10 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Cache\CacheTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 /**
  * Load the field value from the cache. This directive is executed before `@resolveAndMerge`,
@@ -74,13 +71,12 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaTraces
     ): void {
         $persistentCache = PersistentCacheFacade::getInstance();
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $idsDataFieldsToRemove = [];
         $cacheType = CacheTypes::CACHE_DIRECTIVE;
         foreach ($idsDataFields as $id => $dataFields) {
             foreach ($dataFields['direct'] as $field) {
                 $cacheID = $this->getCacheID($typeResolver, $id, $field);
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 if ($persistentCache->hasCache($cacheID, $cacheType)) {
                     $dbItems[(string)$id][$fieldOutputKey] = $persistentCache->getCache($cacheID, $cacheType);
                     $idsDataFieldsToRemove[(string)$id]['direct'][] = $field;
@@ -97,9 +93,8 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             // Find the position of the @cache directive. Compare by name and not by class, just in case the directive class was overriden
             $pos = 0;
             $found = false;
-            $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DirectiveResolverInterface */
-            $saveCacheDirectiveResolver = $instanceManager->getInstance(SaveCacheDirectiveResolver::class);
+            $saveCacheDirectiveResolver = $this->instanceManager->getInstance(SaveCacheDirectiveResolver::class);
             $directiveName = $saveCacheDirectiveResolver->getDirectiveName();
             while (!$found && $pos < count($succeedingPipelineDirectiveResolverInstances)) {
                 $directiveResolverInstance = $succeedingPipelineDirectiveResolverInstances[$pos];
@@ -122,7 +117,6 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
             }
 
             // Log the cached items
-            $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
             $logCachedIDFields = [];
             foreach ($idsDataFieldsToRemove as $id => $dataFieldsToRemove) {
                 $logCachedIDFields[] = sprintf(
@@ -131,7 +125,7 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
                     implode('\', \'', $dataFieldsToRemove['direct'])
                 );
             }
-            $feedbackMessageStore->addLogEntry(
+            $this->feedbackMessageStore->addLogEntry(
                 sprintf(
                     $this->translationAPI->__('The following fields of type \'%s\' were resolved from the cache - %s', 'engine'),
                     $typeResolver->getTypeName(),

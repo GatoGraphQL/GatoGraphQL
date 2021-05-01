@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\Hooks;
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
 use PoPSchema\UserStateAccessControl\Services\AccessControlGroups;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet;
 
@@ -16,8 +15,7 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchem
      */
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForFields(AccessControlGroups::STATE);
+        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::STATE);
     }
 
     protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool

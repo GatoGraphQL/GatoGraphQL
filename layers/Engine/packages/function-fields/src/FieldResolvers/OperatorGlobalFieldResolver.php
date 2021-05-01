@@ -7,9 +7,7 @@ namespace PoP\FunctionFields\FieldResolvers;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
@@ -457,8 +455,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                 }
                 return $array;
             case 'arrayAsQueryStr':
-                $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                return $fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
+                return $this->fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
             case 'arrayUnique':
                 return array_unique($fieldArgs['array']);
             case 'upperCase':

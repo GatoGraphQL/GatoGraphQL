@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver

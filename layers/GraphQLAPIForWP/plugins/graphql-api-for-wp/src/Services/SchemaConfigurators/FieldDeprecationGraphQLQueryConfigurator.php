@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Schema\HookHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\FieldDeprecationBlock;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
 
@@ -27,18 +25,16 @@ class FieldDeprecationGraphQLQueryConfigurator extends AbstractGraphQLQueryConfi
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var FieldDeprecationBlock
          */
-        $block = $instanceManager->getInstance(FieldDeprecationBlock::class);
+        $block = $this->instanceManager->getInstance(FieldDeprecationBlock::class);
         $fdlBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $fdlPostID,
             $block
         );
-        $hooksAPI = HooksAPIFacade::getInstance();
         foreach ($fdlBlockItems as $fdlBlockItem) {
             if ($deprecationReason = $fdlBlockItem['attrs'][FieldDeprecationBlock::ATTRIBUTE_NAME_DEPRECATION_REASON] ?? null) {
                 if ($typeFields = $fdlBlockItem['attrs'][AbstractControlBlock::ATTRIBUTE_NAME_TYPE_FIELDS] ?? null) {
@@ -59,7 +55,7 @@ class FieldDeprecationGraphQLQueryConfigurator extends AbstractGraphQLQueryConfi
                                 $typeOrFieldInterfaceResolverClass,
                                 $fieldName
                             );
-                            $hooksAPI->addFilter(
+                            $this->hooksAPI->addFilter(
                                 $hookName,
                                 function (array $schemaDefinition) use ($deprecationReason): array {
                                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;

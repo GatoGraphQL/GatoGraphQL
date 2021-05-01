@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeDataLoaders;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-
 abstract class AbstractUnionTypeDataLoader extends AbstractTypeDataLoader
 {
     abstract protected function getUnionTypeResolverClass(): string;
@@ -15,9 +13,8 @@ abstract class AbstractUnionTypeDataLoader extends AbstractTypeDataLoader
      */
     public function getObjects(array $ids): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolverClass = $this->getUnionTypeResolverClass();
-        $unionTypeResolver = $instanceManager->getInstance($unionTypeResolverClass);
+        $unionTypeResolver = $this->instanceManager->getInstance($unionTypeResolverClass);
         $resultItemIDTargetTypeResolvers = $unionTypeResolver->getResultItemIDTargetTypeResolvers($ids);
         // Organize all IDs by same resolverClass
         $typeResolverClassResultItemIDs = [];
@@ -27,9 +24,9 @@ abstract class AbstractUnionTypeDataLoader extends AbstractTypeDataLoader
         // Load all objects by each corresponding typeResolver
         $resultItems = [];
         foreach ($typeResolverClassResultItemIDs as $targetTypeResolverClass => $resultItemIDs) {
-            $targetTypeResolver = $instanceManager->getInstance($targetTypeResolverClass);
+            $targetTypeResolver = $this->instanceManager->getInstance($targetTypeResolverClass);
             $targetTypeDataLoaderClass = $targetTypeResolver->getTypeDataLoaderClass();
-            $targetTypeDataLoader = $instanceManager->getInstance($targetTypeDataLoaderClass);
+            $targetTypeDataLoader = $this->instanceManager->getInstance($targetTypeDataLoaderClass);
             $resultItems = array_merge(
                 $resultItems,
                 $targetTypeDataLoader->getObjects($resultItemIDs)

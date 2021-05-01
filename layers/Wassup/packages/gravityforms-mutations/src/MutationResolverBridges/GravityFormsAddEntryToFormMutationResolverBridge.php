@@ -4,43 +4,52 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
-use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
+use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
+use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
 
 class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
 
-    public function __construct()
-    {
-        $hooksAPI = HooksAPIFacade::getInstance();
-
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        MutationResolutionManagerInterface $mutationResolutionManager,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+            $mutationResolutionManager,
+        );
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if (doingPost()) {
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'setup'),
                 5
             );
 
             // The 2 functions below must be executed in this order, otherwise 'renameFields' may remove the value filled by 'maybeFillFields'
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'renameFields'),
                 6
             );
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'maybeFillFields'),
                 7
             );
-            $hooksAPI->addAction(
+            $this->hooksAPI->addAction(
                 'popcms:boot',
                 array($this, 'maybeValidateCaptcha'),
                 8
@@ -60,9 +69,8 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     public function execute(array &$data_properties): ?array
     {
         // $mutationResolverClass = $this->getMutationResolverClass();
-        // $instanceManager = InstanceManagerFacade::getInstance();
         // /** @var MutationResolverInterface */
-        // $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+        // $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
         // $form_data = $this->getFormData();
         // $errorstrings = $errorcodes = array();
         // if ($errors = $mutationResolver->validateErrors($form_data)) {
@@ -76,8 +84,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         // $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
         $executed = parent::execute($data_properties);
 
-        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-        $execution_response = $gd_dataload_actionexecution_manager->getResult(get_called_class());
+        $execution_response = $this->mutationResolutionManager->getResult(get_called_class());
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
@@ -122,9 +129,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     public function getFormData(): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $formid_processor = $moduleprocessor_manager->getProcessor([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
+        $formid_processor = $this->moduleProcessorManager->getProcessor([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
         $form_data = array(
             'form_id' => $formid_processor->getValue([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]),
         );
@@ -144,7 +149,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     protected function getFormFieldnames($form_id)
     {
-        $hooksAPI = HooksAPIFacade::getInstance();
+        $hooksAPI = $this->hooksAPI;
         return $hooksAPI->applyFilters(
             self::HOOK_FORM_FIELDNAMES,
             array(),
@@ -166,16 +171,14 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                     $user_id = $vars['global-userstate']['current-user-id'];
                     $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 
-                    $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
                     // Fill the user name
-                    $name = $moduleprocessor_manager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
+                    $name = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {
                         $_POST[$fieldnames[$name]] = $cmsusersapi->getUserDisplayName($user_id);
                     }
 
                     // Fill the user email
-                    $email = $moduleprocessor_manager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
+                    $email = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
                     if (isset($fieldnames[$email])) {
                         $_POST[$fieldnames[$email]] = $cmsusersapi->getUserEmail($user_id);
                     }
@@ -208,8 +211,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
             if (!(PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in'])) {
                 if ($form_id = $_POST["gform_submit"] ?? null) {
                     // Check if there's a captcha sent along
-                    $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                    $captcha_name = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getName([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+                    $captcha_name = $this->moduleProcessorManager->getProcessor([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getName([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
                     if ($captcha = $_POST[$captcha_name] ?? null) {
                         // Validate the captcha. If it fails, remove the attr "gform_submit" from $_POST
                         $captcha_validation = GD_Captcha::validate($captcha);

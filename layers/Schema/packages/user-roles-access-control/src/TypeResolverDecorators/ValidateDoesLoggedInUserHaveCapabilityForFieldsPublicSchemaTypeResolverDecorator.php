@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\TypeResolverDecorators;
 
-use PoP\AccessControl\Facades\AccessControlManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\AccessControl\Services\AccessControlManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoP\AccessControl\TypeResolverDecorators\AbstractPublicSchemaTypeResolverDecorator;
 use PoP\AccessControl\TypeResolverDecorators\ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
@@ -15,10 +17,20 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaTypeResolverDec
     use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
     use ValidateDoesLoggedInUserHaveCapabilityPublicSchemaTypeResolverDecoratorTrait;
 
+    function __construct(
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        protected AccessControlManagerInterface $accessControlManager,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $fieldQueryInterpreter,
+        );
+    }
+
     protected function getConfigurationEntries(): array
     {
-        $accessControlManager = AccessControlManagerFacade::getInstance();
-        return $accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
+        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
     }
 
     protected function getValidateCapabilityDirectiveResolverClass(): string

@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use PoP\Engine\ModuleFilters\MainContentModule;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
         protected MainContentModule $mainContentModule
     ) {
         parent::__construct(
             $hooksAPI,
-            $translationAPI
+            $translationAPI,
+            $instanceManager,
         );
     }
 

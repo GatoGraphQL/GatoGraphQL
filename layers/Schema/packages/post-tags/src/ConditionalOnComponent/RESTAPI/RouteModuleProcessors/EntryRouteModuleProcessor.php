@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
-use PoP\API\Facades\FieldQueryConvertorFacade;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
@@ -19,30 +17,9 @@ use PoPSchema\PostTags\ComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
-    public const HOOK_REST_FIELDS = __CLASS__ . ':RESTFields';
-
-    private static ?string $restFieldsQuery = null;
-    private static ?array $restFields = null;
-    public static function getRESTFields(): array
+    protected function getInitialRESTFields(): string
     {
-        if (is_null(self::$restFields)) {
-            $restFields = self::getRESTFieldsQuery();
-            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($restFields);
-            self::$restFields = $fieldQuerySet->getRequestedFieldQuery();
-        }
-        return self::$restFields;
-    }
-    public static function getRESTFieldsQuery(): string
-    {
-        if (is_null(self::$restFieldsQuery)) {
-            $restFieldsQuery = 'id|name|count|url';
-            self::$restFieldsQuery = (string) HooksAPIFacade::getInstance()->applyFilters(
-                self::HOOK_REST_FIELDS,
-                $restFieldsQuery
-            );
-        }
-        return self::$restFieldsQuery;
+        return 'id|name|count|url';
     }
 
     /**
@@ -60,7 +37,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
-                        self::getRESTFields()
+                        $this->getRESTFields()
                 ]
             ],
             'conditions' => [
@@ -90,7 +67,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
-                        self::getRESTFields()
+                        $this->getRESTFields()
                 ]
             ],
         );
@@ -110,7 +87,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 [
                     'fields' => isset($vars['query']) ?
                         $vars['query'] :
-                        self::getRESTFields()
+                        $this->getRESTFields()
                     ]
                 ],
         );

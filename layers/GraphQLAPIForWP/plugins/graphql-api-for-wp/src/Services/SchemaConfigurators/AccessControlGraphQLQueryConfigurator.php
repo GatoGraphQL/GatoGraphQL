@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccessControlRuleBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\Facades\AccessControlManagerFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
@@ -66,13 +65,12 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var AccessControlBlock
          */
-        $block = $instanceManager->getInstance(AccessControlBlock::class);
+        $block = $this->instanceManager->getInstance(AccessControlBlock::class);
         $aclBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $aclPostID,
             $block

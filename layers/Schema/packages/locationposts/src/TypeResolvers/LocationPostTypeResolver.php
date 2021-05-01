@@ -6,7 +6,6 @@ namespace PoPSchema\LocationPosts\TypeResolvers;
 
 use PoPSchema\LocationPosts\Environment;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\LocationPosts\TypeDataLoaders\LocationPostTypeDataLoader;
 
 class LocationPostTypeResolver extends PostTypeResolver

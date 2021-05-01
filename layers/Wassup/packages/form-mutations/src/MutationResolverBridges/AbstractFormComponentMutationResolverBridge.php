@@ -6,7 +6,6 @@ namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\ErrorHandling\Error;
 
@@ -37,8 +36,7 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
     {
         // Check if Captcha validation is needed
         if ($data_properties[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA]) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-            $captcha = $moduleprocessor_manager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+            $captcha = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
             return \GD_Captcha::validate($captcha);
         }
 
@@ -59,9 +57,8 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
     // protected function executeForm(array &$data_properties): array
     // {
     //     $mutationResolverClass = $this->getMutationResolverClass();
-    //     $instanceManager = InstanceManagerFacade::getInstance();
     //     /** @var MutationResolverInterface */
-    //     $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+    //     $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
     //     $form_data = $this->getFormData();
     //     $errorType = $mutationResolver->getErrorType();
     //     $errorTypeKeys = [

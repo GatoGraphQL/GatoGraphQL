@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\TypeResolvers;
 
 use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\PostCategories\TypeDataLoaders\PostCategoryTypeDataLoader;
 use PoPSchema\Categories\TypeResolvers\AbstractCategoryTypeResolver;
 

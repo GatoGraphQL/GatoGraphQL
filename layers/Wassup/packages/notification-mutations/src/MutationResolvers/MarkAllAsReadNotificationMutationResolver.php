@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeDataLoaders\CommentTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 

@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
     public function __construct(
         HooksAPIInterface $hooksAPI,
         TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
         protected HeadModule $headModule
     ) {
         parent::__construct(
             $hooksAPI,
-            $translationAPI
+            $translationAPI,
+            $instanceManager,
         );
     }
 

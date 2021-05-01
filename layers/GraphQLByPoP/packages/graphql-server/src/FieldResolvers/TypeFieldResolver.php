@@ -11,7 +11,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\FieldTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumValueTypeResolver;
@@ -19,7 +18,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 
@@ -78,13 +76,12 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'kind':
                 /**
                  * @var TypeKindEnum
                  */
-                $typeKindEnum = $instanceManager->getInstance(TypeKindEnum::class);
+                $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
                 return $typeKindEnum->getName();
         }
         return null;
@@ -92,13 +89,12 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
 
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'kind':
                 /**
                  * @var TypeKindEnum
                  */
-                $typeKindEnum = $instanceManager->getInstance(TypeKindEnum::class);
+                $typeKindEnum = $this->instanceManager->getInstance(TypeKindEnum::class);
                 return $typeKindEnum->getValues();
         }
         return null;

@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use PoP\CacheControl\Facades\CacheControlManagerFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 
@@ -31,13 +30,12 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var CacheControlBlock
          */
-        $block = $instanceManager->getInstance(CacheControlBlock::class);
+        $block = $this->instanceManager->getInstance(CacheControlBlock::class);
         $cclBlockItems = $blockHelpers->getBlocksOfTypeFromCustomPost(
             $cclPostID,
             $block

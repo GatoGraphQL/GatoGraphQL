@@ -9,11 +9,9 @@ use PoP\Engine\Dataloading\Expressions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
@@ -66,8 +64,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out
             // We must add each item in the array as expression `%value%`, over which the if function can be evaluated
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-            if ($fieldQueryInterpreter->isFieldArgumentValueAField($if)) {
+            if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($if)) {
                 $options = [
                     AbstractTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
@@ -78,8 +75,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     $expressions = $this->getExpressionsForResultItem($id, $variables, $messages);
                     $resolvedValue = $typeResolver->resolveValue($resultIDItems[(string)$id], $if, $variables, $expressions, $options);
                     // Merge the dbWarnings, if any
-                    $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
-                    if ($resultItemDBWarnings = $feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
+                    if ($resultItemDBWarnings = $this->feedbackMessageStore->retrieveAndClearResultItemDBWarnings($id)) {
                         $dbWarnings[$id] = array_merge(
                             $dbWarnings[$id] ?? [],
                             $resultItemDBWarnings

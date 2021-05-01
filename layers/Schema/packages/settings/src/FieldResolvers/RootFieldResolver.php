@@ -8,7 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Settings\Facades\SettingsTypeAPIFacade;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver

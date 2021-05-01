@@ -7,7 +7,6 @@ namespace PoPSchema\Locations\FieldResolvers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;

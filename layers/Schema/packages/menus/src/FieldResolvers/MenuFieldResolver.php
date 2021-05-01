@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
@@ -92,7 +90,6 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'itemDataEntries':
                 $isFlat = $fieldArgs['flat'] ?? false;
-                $instanceManager = InstanceManagerFacade::getInstance();
                 $itemsData = $menuTypeAPI->getMenuItemsData($menu);
                 $entries = array();
                 if ($itemsData) {
@@ -101,7 +98,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     /**
                      * @var MenuItemTypeResolver
                      */
-                    $menuItemTypeResolver = $instanceManager->getInstance(MenuItemTypeResolver::class);
+                    $menuItemTypeResolver = $this->instanceManager->getInstance(MenuItemTypeResolver::class);
                     foreach ($itemsData as $itemData) {
                         $item_value = array();
                         foreach ($item_data_fields as $item_data_field) {

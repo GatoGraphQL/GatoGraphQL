@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Engine\Enums\FieldFeedbackTargetEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
@@ -135,15 +134,14 @@ class AddFeedbackForFieldDirectiveResolver extends AbstractGlobalDirectiveResolv
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var FieldFeedbackTypeEnum
          */
-        $fieldFeedbackTypeEnum = $instanceManager->getInstance(FieldFeedbackTypeEnum::class);
+        $fieldFeedbackTypeEnum = $this->instanceManager->getInstance(FieldFeedbackTypeEnum::class);
         /**
          * @var FieldFeedbackTargetEnum
          */
-        $fieldFeedbackTargetEnum = $instanceManager->getInstance(FieldFeedbackTargetEnum::class);
+        $fieldFeedbackTargetEnum = $this->instanceManager->getInstance(FieldFeedbackTargetEnum::class);
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'message',

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\LocationMutations\MutationResolvers;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Locations\Facades\LocationTypeAPIFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\ErrorHandling\Error;

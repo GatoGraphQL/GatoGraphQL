@@ -8,9 +8,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Feedback\Tokens;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
 /**
@@ -145,7 +143,6 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $ids = array_keys($idsDataFields);
 
         /**
@@ -170,7 +167,7 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
              */
             if (count($fields) == 1) {
                 $field = $fields[0];
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $value = $dbItems[(string)$id][$fieldOutputKey];
                 $this->setVariable($variables, $value, $schemaWarnings);
                 return;
@@ -190,7 +187,7 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
              */
             $value = [];
             foreach ($fields as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $value[$fieldOutputKey] = $dbItems[(string)$id][$fieldOutputKey];
             }
             $this->setVariable($variables, $value, $schemaWarnings);
@@ -224,7 +221,7 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
          */
         if (count($allFields) == 1) {
             $field = $allFields[0];
-            $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
             foreach ($ids as $id) {
                 $value[] = $dbItems[(string)$id][$fieldOutputKey];
             }
@@ -247,7 +244,7 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
         foreach ($idsDataFields as $id => $dataFields) {
             $dictionary = [];
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $dictionary[$fieldOutputKey] = $dbItems[(string)$id][$fieldOutputKey];
             }
             $value[] = $dictionary;

@@ -5,34 +5,74 @@ declare(strict_types=1);
 namespace PoP\Engine\Engine;
 
 use Exception;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CacheControl\Facades\CacheControlEngineFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\LooseContracts\Facades\LooseContractManagerFacade;
-use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
+use PoP\CacheControl\Managers\CacheControlEngineInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
+use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        DataStructureManagerInterface $dataStructureManager,
+        InstanceManagerInterface $instanceManager,
+        ModelInstanceInterface $modelInstance,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        ModulePathHelpersInterface $modulePathHelpers,
+        ModulePathManagerInterface $modulePathManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ModuleFilterManagerInterface $moduleFilterManager,
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected LooseContractManagerInterface $looseContractManager,
+        protected CacheControlEngineInterface $cacheControlEngine,
+        ?CacheInterface $persistentCache = null
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $dataStructureManager,
+            $instanceManager,
+            $modelInstance,
+            $feedbackMessageStore,
+            $modulePathHelpers,
+            $modulePathManager,
+            $fieldQueryInterpreter,
+            $moduleFilterManager,
+            $moduleProcessorManager,
+            $persistentCache,
+        );
+    }
+
     public function generateData()
     {
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
-        $looseContractManager = LooseContractManagerFacade::getInstance();
-        $translationAPI = TranslationAPIFacade::getInstance();
-        if ($notImplementedHooks = $looseContractManager->getNotImplementedRequiredHooks()) {
+        if ($notImplementedHooks = $this->looseContractManager->getNotImplementedRequiredHooks()) {
             throw new Exception(
                 sprintf(
-                    $translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($translationAPI->__('", "'), $notImplementedHooks)
+                    $this->translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->translationAPI->__('", "'), $notImplementedHooks)
                 )
             );
         }
-        if ($notImplementedNames = $looseContractManager->getNotImplementedRequiredNames()) {
+        if ($notImplementedNames = $this->looseContractManager->getNotImplementedRequiredNames()) {
             throw new Exception(
                 sprintf(
-                    $translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($translationAPI->__('", "'), $notImplementedNames)
+                    $this->translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->translationAPI->__('", "'), $notImplementedNames)
                 )
             );
         }
@@ -62,14 +102,12 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         $this->generateData();
 
         // 2. Get the data, and ask the formatter to output it
-        $dataStructureManager = DataStructureManagerFacade::getInstance();
-        $formatter = $dataStructureManager->getDataStructureFormatter();
+        $formatter = $this->dataStructureManager->getDataStructureFormatter();
 
         // If CacheControl is enabled, add it to the headers
         $headers = [];
         if (CacheControlComponent::isEnabled()) {
-            $cacheControlEngine = CacheControlEngineFacade::getInstance();
-            if ($cacheControlHeader = $cacheControlEngine->getCacheControlHeader()) {
+            if ($cacheControlHeader = $this->cacheControlEngine->getCacheControlHeader()) {
                 $headers[] = $cacheControlHeader;
             }
         }

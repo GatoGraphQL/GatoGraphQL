@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterMultipleInputModuleProcessor;
@@ -36,7 +35,7 @@ class CommentFilterInnerModuleProcessor extends AbstractModuleProcessor
             ],
         ];
         if (
-            $modules = HooksAPIFacade::getInstance()->applyFilters(
+            $modules = $this->hooksAPI->applyFilters(
                 'Comments:FilterInnerModuleProcessor:inputmodules',
                 $inputmodules[$module[1]],
                 $module

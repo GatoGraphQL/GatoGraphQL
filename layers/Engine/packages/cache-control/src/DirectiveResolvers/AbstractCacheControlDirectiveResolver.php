@@ -6,7 +6,6 @@ namespace PoP\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\CacheControl\Facades\CacheControlEngineFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\TypeResolvers;
 
 use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\PostTags\TypeDataLoaders\PostTagTypeDataLoader;
 use PoPSchema\Tags\TypeResolvers\AbstractTagTypeResolver;
 

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\BlockMetadataWP\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
@@ -76,7 +74,13 @@ class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
             case 'content':
                 unset($fieldArgs['branch']);
                 unset($fieldArgs['project']);
-                return $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('blockMetadata', $fieldArgs), $variables, $expressions, $options);
+                return $typeResolver->resolveValue(
+                    $resultItem,
+                    $this->fieldQueryInterpreter->getField('blockMetadata', $fieldArgs),
+                    $variables,
+                    $expressions,
+                    $options
+                );
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

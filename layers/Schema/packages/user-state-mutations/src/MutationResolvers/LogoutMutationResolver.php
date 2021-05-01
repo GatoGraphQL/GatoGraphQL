@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
 

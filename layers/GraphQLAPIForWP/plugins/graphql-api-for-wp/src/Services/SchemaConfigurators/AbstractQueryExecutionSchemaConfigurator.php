@@ -4,38 +4,39 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use WP_Post;
+use PoP\AccessControl\Schema\SchemaModes;
+use PoP\Engine\Environment as EngineEnvironment;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use PoP\AccessControl\Environment as AccessControlEnvironment;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\AccessControl\Environment as AccessControlEnvironment;
-use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use PoP\Engine\Environment as EngineEnvironment;
-use WP_Post;
+use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
 
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
     function __construct(
+        protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
         protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
@@ -81,13 +82,12 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
      */
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigurationBlock
          */
-        $block = $instanceManager->getInstance(SchemaConfigurationBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigurationBlock::class);
         $schemaConfigurationBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
             $block
@@ -199,13 +199,12 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
      */
     protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigOptionsBlock
          */
-        $block = $instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
         return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
@@ -354,13 +353,12 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigAccessControlListBlock
          */
-        $block = $instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
         $schemaConfigACLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
@@ -385,13 +383,12 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var SchemaConfigFieldDeprecationListBlock
          */
-        $block = $instanceManager->getInstance(SchemaConfigFieldDeprecationListBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigFieldDeprecationListBlock::class);
         $schemaConfigFDLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block

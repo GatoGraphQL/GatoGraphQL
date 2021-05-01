@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\Overrides\TypeResolvers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-
 class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver
 {
     /**
@@ -17,8 +15,7 @@ class CustomPostUnionTypeResolver extends \PoPSchema\CustomPosts\TypeResolvers\C
     public function getResultItemIDTargetTypeResolvers(array $ids): array
     {
         $resultItemIDTargetTypeResolvers = [];
-        $instanceManager = InstanceManagerFacade::getInstance();
-        $customPostUnionTypeDataLoader = $instanceManager->getInstance($this->getTypeDataLoaderClass());
+        $customPostUnionTypeDataLoader = $this->instanceManager->getInstance($this->getTypeDataLoaderClass());
         // If any ID cannot be resolved, the resultItem will be null
         if ($customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids))) {
             foreach ($customPosts as $customPost) {

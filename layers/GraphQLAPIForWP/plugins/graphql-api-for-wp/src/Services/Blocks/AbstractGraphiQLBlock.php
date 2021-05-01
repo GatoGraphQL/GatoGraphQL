@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
  * GraphiQL block
@@ -24,11 +24,16 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
     function __construct(
+        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
-        protected EndpointHelpers $endpointHelpers
+        protected EndpointHelpers $endpointHelpers,
     ) {
-        parent::__construct($moduleRegistry, $userAuthorization);
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+        );
     }
 
     protected function getBlockName(): string
@@ -38,11 +43,10 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         /**
          * @var PersistedQueryBlockCategory
          */
-        $blockCategory = $instanceManager->getInstance(PersistedQueryBlockCategory::class);
+        $blockCategory = $this->instanceManager->getInstance(PersistedQueryBlockCategory::class);
         return $blockCategory;
     }
 

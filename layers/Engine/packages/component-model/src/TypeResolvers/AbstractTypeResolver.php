@@ -20,13 +20,13 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\FieldHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -106,6 +106,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
+        protected InstanceManagerInterface $instanceManager,
+        protected FeedbackMessageStoreInterface $feedbackMessageStore,
+        protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ErrorProviderInterface $errorProvider
     ) {
     }
@@ -198,11 +201,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     */
     protected function getMandatoryDirectives()
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $dataloadingEngine = DataloadingEngineFacade::getInstance();
         return array_map(
-            function ($directiveResolver) use ($fieldQueryInterpreter) {
-                return $fieldQueryInterpreter->listFieldDirective($directiveResolver->getDirectiveName());
+            function ($directiveResolver) {
+                return $this->fieldQueryInterpreter->listFieldDirective($directiveResolver->getDirectiveName());
             },
             $dataloadingEngine->getMandatoryDirectiveResolvers()
         );
@@ -385,8 +387,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-
         // Check if, once a directive fails, the continuing directives must execute or not
         $stopDirectivePipelineExecutionIfDirectiveFailed = Environment::stopDirectivePipelineExecutionIfDirectiveFailed();
         if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
@@ -423,7 +423,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
 
             $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstanceForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
-            $directiveName = $fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
+            $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
             if (is_null($fieldDirectiveResolverInstances)) {
                 $schemaErrors[] = [
@@ -445,7 +445,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 }
                 continue;
             }
-            $directiveArgs = $fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
+            $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
 
             if (empty($fieldDirectiveResolverInstances)) {
                 $schemaErrors[] = [
@@ -608,7 +608,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Validate if the directive can be executed multiple times on each field
             if (!$directiveResolverInstance->isRepeatable()) {
                 // Check if the directive is already processing any of the fields
-                $directiveName = $fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
+                $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
                 $alreadyProcessingFields = array_intersect(
                     $directiveFieldTrack[$directiveName] ?? [],
                     $directiveResolverFields
@@ -659,9 +659,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     public function getDirectiveResolverInstanceForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $directiveName = $fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
-        $directiveArgs = $fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
+        $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
+        $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
 
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
         $directiveResolvers = $directiveNameResolvers[$directiveName];
@@ -673,7 +672,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $fieldDirectiveResolverInstances = [];
         foreach ($fieldDirectiveFields as $field) {
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
-            $fieldName = $fieldQueryInterpreter->getFieldName($field);
+            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
@@ -744,13 +743,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
         // Obtain the data for the required object IDs
         $resultIDItems = [];
         $ids = $this->getIDsToQuery($ids_data_fields);
         $typeDataLoaderClass = $this->getTypeDataLoaderClass();
-        $typeDataLoader = $instanceManager->getInstance($typeDataLoaderClass);
+        $typeDataLoader = $this->instanceManager->getInstance($typeDataLoaderClass);
         // If any ID cannot be resolved, the resultItem will be null
         $resultItems = array_filter($typeDataLoader->getObjects($ids));
         foreach ($resultItems as $resultItem) {
@@ -831,12 +828,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     protected function addMandatoryDirectivesForDirectives(array $directives): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $precedingMandatoryDirectivesForDirectives = $this->getAllPrecedingMandatoryDirectivesForDirectives();
         $succeedingMandatoryDirectivesForDirectives = $this->getAllSucceedingMandatoryDirectivesForDirectives();
         $allDirectives = [];
         foreach ($directives as $directive) {
-            $directiveName = $fieldQueryInterpreter->getDirectiveName($directive);
+            $directiveName = $this->fieldQueryInterpreter->getDirectiveName($directive);
             // Add preceding mandatory directives
             if (
                 $mandatoryDirectivesForDirective = array_merge(
@@ -946,15 +942,14 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     public function doEnqueueFillingResultItemsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, $id, array $data_fields)
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
             if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
                 // Get the directives from the field
-                $directives = $fieldQueryInterpreter->getDirectives($field);
+                $directives = $this->fieldQueryInterpreter->getDirectives($field);
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
-                $fieldName = $fieldQueryInterpreter->getFieldName($field);
+                $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
                 if (
                     $mandatoryDirectivesForField = array_merge(
                         $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
@@ -980,7 +975,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldDirectives = implode(
                     QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                     array_map(
-                        [$fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
+                        [$this->fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
                         $directives
                     )
                 );
@@ -1149,8 +1144,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function doDissectFieldForSchema(string $field): ?array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        return $fieldQueryInterpreter->extractFieldArgumentsForSchema($this, $field);
+        return $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($this, $field);
     }
 
     public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array
@@ -1221,8 +1215,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
             if ($maybeWarnings = $fieldResolvers[0]->resolveSchemaValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
-                // $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                // $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                // $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 foreach ($maybeWarnings as $warning) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$field],
@@ -1250,8 +1243,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             ) = $this->dissectFieldForSchema($field);
             $fieldSchemaDefinition = $fieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
             if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
-                // $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                // $fieldOutputKey = $fieldQueryInterpreter->getFieldOutputKey($field);
+                // $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
                 $schemaDeprecations[] = [
                     Tokens::PATH => [$field],
                     Tokens::MESSAGE => $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION],
@@ -1276,9 +1268,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-            $fieldName = $fieldQueryInterpreter->getFieldName($field);
-            $fieldArgs = $fieldQueryInterpreter->extractStaticFieldArguments($field);
+            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
+            $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
             $fieldSchemaDefinition = $fieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
             return $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
         }
@@ -1290,8 +1281,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-            $fieldName = $fieldQueryInterpreter->getFieldName($field);
+            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             return $fieldResolvers[0]->enableOrderedSchemaFieldArgs($this, $fieldName);
         }
 
@@ -1324,11 +1314,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $resultItem)
         if ($fieldResolvers = $this->getFieldResolversForField($field)) {
-            $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
             // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
             list(
                 $field,
@@ -1340,7 +1328,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
             // // Store the warnings to be read if needed
             // if ($schemaWarnings) {
-            //     $feedbackMessageStore->addSchemaWarnings($schemaWarnings);
+            //     $this->feedbackMessageStore->addSchemaWarnings($schemaWarnings);
             // }
             if ($schemaErrors) {
                 return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
@@ -1360,7 +1348,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
                 FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                     array_values(
-                        $fieldQueryInterpreter->extractFieldArguments($this, $field)
+                        $this->fieldQueryInterpreter->extractFieldArguments($this, $field)
                     )
                 );
 
@@ -1371,11 +1359,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldArgs,
                 $dbErrors,
                 $dbWarnings
-            ) = $fieldQueryInterpreter->extractFieldArgumentsForResultItem($this, $resultItem, $field, $variables, $expressions);
+            ) = $this->fieldQueryInterpreter->extractFieldArgumentsForResultItem($this, $resultItem, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
             if ($dbWarnings) {
-                $feedbackMessageStore->addDBWarnings($dbWarnings);
+                $this->feedbackMessageStore->addDBWarnings($dbWarnings);
             }
             if ($dbErrors) {
                 return $this->errorProvider->getNestedDBErrorsFieldError($dbErrors, $fieldName);
@@ -1396,7 +1384,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                     Tokens::MESSAGE => $deprecation,
                                 ];
                             }
-                            $feedbackMessageStore->addDBDeprecations($dbDeprecations);
+                            $this->feedbackMessageStore->addDBDeprecations($dbDeprecations);
                         }
                     }
                     if ($validationErrorDescriptions = $fieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
@@ -1420,7 +1408,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
-        $fieldName = $fieldQueryInterpreter->getFieldName($field);
+        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
         return $this->errorProvider->getNoFieldError($fieldName);
     }
 
@@ -1520,7 +1508,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
 
         // Add all the implemented interfaces
-        $instanceManager = InstanceManagerFacade::getInstance();
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         $typeInterfaceDefinitions = [];
         foreach ($this->getAllImplementedInterfaceResolverInstances() as $interfaceInstance) {
@@ -1570,7 +1557,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $interfaceImplementedInterfaceNames = [];
             if ($interfaceImplementedInterfaceClasses = $interfaceInstance->getImplementedFieldInterfaceResolverClasses()) {
                 foreach ($interfaceImplementedInterfaceClasses as $interfaceImplementedInterfaceClass) {
-                    $interfaceImplementedInterfaceInstance = $instanceManager->getInstance($interfaceImplementedInterfaceClass);
+                    $interfaceImplementedInterfaceInstance = $this->instanceManager->getInstance($interfaceImplementedInterfaceClass);
                     $interfaceImplementedInterfaceNames[] = $interfaceImplementedInterfaceInstance->getMaybeNamespacedInterfaceName();
                 }
             }
@@ -1647,15 +1634,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             return;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-
         // Watch out! We are passing empty $fieldArgs to generate the schema!
         $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, []);
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
             if ($fieldTypeResolverClass = $this->resolveFieldTypeResolverClass($fieldName)) {
-                $fieldTypeResolver = $instanceManager->getInstance($fieldTypeResolverClass);
+                $fieldTypeResolver = $this->instanceManager->getInstance($fieldTypeResolverClass);
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             }
         }
@@ -1701,13 +1686,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function isFieldNameResolvedByFieldResolver(FieldResolverInterface $fieldResolver, string $fieldName, array $fieldInterfaceResolverClasses): bool
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         // Calculate all the interfaces that define this fieldName
         $fieldInterfaceResolverClassesForField = array_values(array_filter(
             $fieldInterfaceResolverClasses,
-            function ($fieldInterfaceResolverClass) use ($fieldName, $instanceManager): bool {
+            function ($fieldInterfaceResolverClass) use ($fieldName): bool {
                 /** @var FieldInterfaceResolverInterface */
-                $fieldInterfaceResolver = $instanceManager->getInstance($fieldInterfaceResolverClass);
+                $fieldInterfaceResolver = $this->instanceManager->getInstance($fieldInterfaceResolverClass);
                 return in_array($fieldName, $fieldInterfaceResolver->getFieldNamesToImplement());
             }
         ));
@@ -1982,10 +1966,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function calculateAllImplementedInterfaceResolverInstances(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         return array_map(
-            function ($interfaceClass) use ($instanceManager) {
-                return $instanceManager->getInstance($interfaceClass);
+            function ($interfaceClass) {
+                return $this->instanceManager->getInstance($interfaceClass);
             },
             $this->getAllImplementedInterfaceClasses()
         );
@@ -2047,9 +2030,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         //     $fieldName,
         //     $fieldArgs,
         // ) = $this->dissectFieldForSchema($field);
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $fieldName = $fieldQueryInterpreter->getFieldName($field);
-        $fieldArgs = $fieldQueryInterpreter->extractStaticFieldArguments($field);
+        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
+        $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
 
         $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         $fieldResolvers = [];

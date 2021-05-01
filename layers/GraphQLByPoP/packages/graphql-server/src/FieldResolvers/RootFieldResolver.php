@@ -8,12 +8,9 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaTypeDataLoader;
 
@@ -112,7 +109,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                 // Get an instance of the schema and then execute function `getType` there
                 $schemaID = $typeResolver->resolveValue(
                     $resultItem,
-                    FieldQueryInterpreterFacade::getInstance()->getField(
+                    $this->fieldQueryInterpreter->getField(
                         '__schema',
                         []
                     ),
@@ -124,11 +121,10 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
                     return $schemaID;
                 }
                 // Obtain the instance of the schema
-                $instanceManager = InstanceManagerFacade::getInstance();
                 /**
                  * @var SchemaTypeDataLoader
                  */
-                $schemaTypeDataLoader = $instanceManager->getInstance(SchemaTypeDataLoader::class);
+                $schemaTypeDataLoader = $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
                 $schemaInstances = $schemaTypeDataLoader->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
                 return $schema->getTypeID($fieldArgs['name']);

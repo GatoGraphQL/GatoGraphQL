@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\TraceTools\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
@@ -100,7 +99,6 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
         ];
         // Log the trace, if enabled
         if (ComponentConfiguration::sendTracesToLog()) {
-            $feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
             $traceIDFields = [];
             foreach ($idsDataFields as $id => $dataFields) {
                 $traceIDFields[] = sprintf(
@@ -115,7 +113,7 @@ class EndTraceExecutionTimeDirectiveResolver extends AbstractGlobalDirectiveReso
                 $typeResolver->getTypeName(),
                 implode($this->translationAPI->__(', '), $traceIDFields)
             );
-            $feedbackMessageStore->addLogEntry($traceMessage);
+            $this->feedbackMessageStore->addLogEntry($traceMessage);
         }
     }
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string

@@ -9,7 +9,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\FieldTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
