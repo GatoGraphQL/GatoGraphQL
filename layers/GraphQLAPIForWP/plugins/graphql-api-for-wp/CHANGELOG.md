@@ -8,7 +8,27 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Further completed the WordPress schema
+  - Categories
+  - Menus
+  - Meta values
+  - Settings
+  - User posts
+- "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
 - Composable directives
+- Cache is saved under the plugin folder
+- Split the GraphQL endpoint for accessing data for the WordPress editor into two:
+  1. `GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
+  2. `GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT`
+- Option to display the Settings page in long form, or using tabs
+
+### Backwards-breaking changes:
+
+- Simplified the codebase, using container services everywhere
+
+### Fixed:
+
+- Improved support for PHP 8.0 (fixed several issues)
 
 ## 0.7.12/13 - 2021-02-23
 
