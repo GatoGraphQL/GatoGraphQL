@@ -95,7 +95,7 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
                 // or 'previousDBItems' (loaded during a previous iteration)
                 $self = $fieldArgs['self'];
                 $property = $fieldArgs['property'];
-                return array_key_exists($property, $self['dbItems']) ? $self['dbItems'][$property] : $self['previousDBItems'][$property];
+                return array_key_exists($property, $self['dbItems']) ? $self['dbItems'][$property] : ($self['previousDBItems'][$property] ?? null);
         }
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
