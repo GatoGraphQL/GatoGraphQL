@@ -572,6 +572,8 @@ Fragments enable to re-use query sections. Similar to variables, their resolutio
 
 The fragment name must be prepended with `--`, and the query they resolve to can be defined either directly under the fragment name, or under entry `fragments` and then the fragment name. 
 
+A fragment can further contain `|` (to split fields), but it cannot contain `,` (to split queries). See issue [#255](https://github.com/leoloso/PoP/issues/255).
+
 _**In GraphQL**:_
 
 ```graphql
