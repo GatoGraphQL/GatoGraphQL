@@ -400,10 +400,54 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected function doGetFragments(): array
     {
         // Request overrides catalogue
-        return array_merge(
+        $fragments = array_merge(
             $this->getFragmentsFromCatalogue(),
             $this->getFragmentsFromRequest()
         );
+
+        // Since it's getting values from $_REQUEST, filter out whichever value is not a string
+        // Eg: ?someParam['foo'] = 'bar' => $fragments['someParam'] is an array
+        $fragments = array_filter(
+            $fragments,
+            fn (mixed $fragment) => is_string($fragment)
+        );
+
+        // Validate that no fragment contains the `;` or `,` symbols
+        $this->validateFragments($fragments);
+
+        return $fragments;
+    }
+
+    /**
+     * Validate that no fragment contains the `;` or `,` symbols
+     * @see https://github.com/leoloso/PoP/issues/255
+     */
+    protected function validateFragments(array &$fragments): void
+    {
+        $errorMessage = $this->translationAPI->__('Fragment \'%s\' (which resolves to \'%s\'), cannot contain %s, so it has been ignored', 'api');
+        foreach ($fragments as $fragmentName => $fragment) {
+            $fragmentDotNotations = $this->queryParser->splitElements($fragment, FieldQueryQuerySyntax::SYMBOL_OPERATIONS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+            if (count($fragmentDotNotations) >= 2) {
+                $this->feedbackMessageStore->addQueryError(sprintf(
+                    $errorMessage,
+                    $fragmentName,
+                    $fragment,
+                    $this->translationAPI->__('the `;` symbol (to split operations)', 'api'),
+                ));
+                unset($fragments[$fragmentName]);
+                continue;
+            }
+            $fragmentCommaFields = $this->queryParser->splitElements($fragment, FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+            if (count($fragmentCommaFields) >= 2) {
+                $this->feedbackMessageStore->addQueryError(sprintf(
+                    $errorMessage,
+                    $fragmentName,
+                    $fragment,
+                    $this->translationAPI->__('the `,` symbol (to split queries)', 'api'),
+                ));
+                unset($fragments[$fragmentName]);
+            }
+        }
     }
 
     protected function getFragmentsFromCatalogue(): array
@@ -432,6 +476,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected function getForbiddenFragmentNames(): array
     {
         return [
+            'fragments',
+            'variables',
             QueryInputs::QUERY,
             Params::SCHEME,
             Params::DATASTRUCTURE,
