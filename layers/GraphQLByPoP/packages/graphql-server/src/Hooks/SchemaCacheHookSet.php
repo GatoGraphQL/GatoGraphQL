@@ -21,7 +21,7 @@ class SchemaCacheHookSet extends AbstractHookSet
     public function getSchemaCacheKeyComponents(array $components): array
     {
         $vars = ApplicationState::getVars();
-        if ($graphQLOperationType = $vars['graphql-operation-type']) {
+        if ($graphQLOperationType = $vars['graphql-operation-type'] ?? null) {
             $components['graphql-operation-type'] = $graphQLOperationType;
         }
         $components['nested-mutations-enabled'] = $vars['nested-mutations-enabled'];
