@@ -22,7 +22,7 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
     }
     public function getDescription(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION];
+        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] ?? null;
     }
     /**
      * Undocumented function

@@ -38,7 +38,7 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
     }
     public function getDescription(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION];
+        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] ?? null;
     }
     /**
      * There are no extensions currently implemented for the Type
