@@ -25,8 +25,6 @@ class FilterInnerModuleProcessor extends UpstreamFilterInnerModuleProcessor
      */
     public function getSubmodules(array $module): array
     {
-        $ret = parent::getSubmodules($module);
-
         $targetModules = [
             self::MODULE_FILTERINNER_MYPOSTS => [self::class, self::MODULE_FILTERINNER_POSTS],
             self::MODULE_FILTERINNER_MYPOSTCOUNT => [self::class, self::MODULE_FILTERINNER_POSTCOUNT],
@@ -37,18 +35,10 @@ class FilterInnerModuleProcessor extends UpstreamFilterInnerModuleProcessor
                 [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
             ]
         );
-        if (
-            $modules = $this->hooksAPI->applyFilters(
-                'PostMutations:FilterInnerModuleProcessor:inputmodules',
-                $modules,
-                $module
-            )
-        ) {
-            $ret = array_merge(
-                $ret,
-                $modules
-            );
-        }
-        return $ret;
+        return $this->hooksAPI->applyFilters(
+            'PostMutations:FilterInnerModuleProcessor:inputmodules',
+            $modules,
+            $module
+        );
     }
 }
