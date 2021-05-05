@@ -54,6 +54,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         $requestedFields = [];
         $executableFields = [];
         $executeQueryBatchInStrictOrder = ComponentConfiguration::executeQueryBatchInStrictOrder();
+        $operationMaxLevels = 0;
         $maxDepth = 0;
         $dotNotations = $this->queryParser->splitElements($operationDotNotation, FieldQueryQuerySyntax::SYMBOL_OPERATIONS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
         foreach ($dotNotations as $dotNotation) {
