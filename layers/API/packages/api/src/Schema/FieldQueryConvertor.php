@@ -15,7 +15,7 @@ use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
-
+use PoP\ComponentModel\Constants\Params;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -420,13 +420,45 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         return $this->fragmentsFromRequestCache;
     }
 
+    /**
+     * Fragments cannot have the same name as expected query params,
+     * or they could clash.
+     *
+     * Eg: this query would lead to an infinite recursion:
+     * 
+     *   ?query=--query
+     *
+     */
+    protected function getForbiddenFragmentNames(): array
+    {
+        return [
+            QueryInputs::QUERY,
+            Params::SCHEME,
+            Params::DATASTRUCTURE,
+            Params::OUTPUT,
+            Params::STRATUM,
+            Params::DATAOUTPUTMODE,
+            Params::DATABASESOUTPUTMODE,
+            Params::ACTIONS,
+            Params::ACTION_PATH,
+            Params::DATA_OUTPUT_ITEMS,
+            Params::DATA_SOURCE,
+            Params::TARGET,
+        ];
+    }
+
     protected function doGetFragmentsFromRequest(): array
     {
         // Each fragment is provided through $_REQUEST[fragments][fragmentName] or directly $_REQUEST[fragmentName]
-        return array_merge(
+        $fragments = array_merge(
             $_REQUEST,
             $_REQUEST['fragments'] ?? []
         );
+        // Remove those query args which, we already know, are not fragments
+        foreach ($this->getForbiddenFragmentNames() as $queryParam) {
+            unset($fragments[$queryParam]);
+        }
+        return $fragments;
     }
 
     protected function expandRelationalProperties(string $dotNotation): string
@@ -539,6 +571,19 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     {
         // Replace with the actual fragment
         $fragmentName = substr($fragment, strlen(FieldQueryQuerySyntax::SYMBOL_FRAGMENT_PREFIX));
+        // Validate the fragment name is not forbidden
+        $forbiddenFragmentNames = $this->getForbiddenFragmentNames();
+        if (in_array($fragmentName, $forbiddenFragmentNames)) {
+            $this->feedbackMessageStore->addQueryError(sprintf(
+                $this->translationAPI->__('Fragment name \'%s\' is forbidden, please use another one. (All forbidden fragment names are: \'%s\'.)', 'api'),
+                $fragmentName,
+                implode(
+                    $this->translationAPI->__('\', \'', 'api'),
+                    $forbiddenFragmentNames
+                )
+            ));
+            return null;
+        }
         $aliasSymbolPos = QueryHelpers::findFieldAliasSymbolPosition($fragmentName);
         $skipOutputIfNullSymbolPos = QueryHelpers::findSkipOutputIfNullSymbolPosition($fragmentName);
         list(
