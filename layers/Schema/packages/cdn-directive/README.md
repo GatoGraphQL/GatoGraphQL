@@ -33,6 +33,24 @@ Initialize the component:
 ]);
 ```
 
+## Example
+
+Example using the `@cdn` directive:
+
+```graphql
+{
+  posts {
+    id
+    featuredImage {
+      src @cdn(
+        from: "https://newapi.getpop.org",
+        to: "https://nextapi.getpop.org"
+      )
+    }
+  }
+}
+```
+
 ## PHP versions
 
 Requirements:
