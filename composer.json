@@ -621,6 +621,7 @@
         }
     ],
     "description": "Monorepo for all the PoP packages",
+    "homepage": "https://github.com/leoloso/PoP",
     "license": "GPL-2.0-or-later",
     "config": {
         "sort-packages": true
