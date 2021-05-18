@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\Events\ConditionalOnComponent\Users\FieldResolvers\:
-        resource: '../../../src/ConditionalOnComponent/Users/FieldResolvers/*'

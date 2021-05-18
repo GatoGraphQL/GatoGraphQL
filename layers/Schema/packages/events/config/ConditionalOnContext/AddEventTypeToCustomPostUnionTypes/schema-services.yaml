@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\Events\ConditionalOnContext\AddEventTypeToCustomPostUnionTypes\SchemaServices\:
-        resource: '../../../src/ConditionalOnContext/AddEventTypeToCustomPostUnionTypes/SchemaServices/*'
