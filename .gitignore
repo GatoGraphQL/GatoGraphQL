@@ -8,4 +8,5 @@ composer.lock
 # to make sure the CI doesn't fail
 !/composer.lock
 .lando.local.yml
-composer.json.tmp
+composer.local.json
+composer.local.lock

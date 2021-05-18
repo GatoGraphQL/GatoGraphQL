@@ -66,12 +66,10 @@
             "lando rebuild appserver -y"
         ],
         "symlink-vendor": [
-            "php -r \"copy('composer.json', 'composer.json.tmp');\"",
-            "php -r \"copy('composer.json', 'localized-composer.json.tmp');\"",
-            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package webservers/wassup/localized-composer.json.tmp",
-            "sed -e 's#../../../../layers/#../../layers/#g' localized-composer.json.tmp > composer.json",
-            "composer update --no-dev",
-            "php -r \"copy('composer.json.tmp', 'composer.json');\""
+            "php -r \"copy('composer.json', 'composer.local.json.tmp');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package webservers/wassup/composer.local.json.tmp",
+            "sed -e 's#../../../../layers/#../../layers/#g' composer.local.json.tmp > composer.local.json",
+            "COMPOSER=composer.local.json composer update --no-dev"
         ],
         "log-server-errors": "lando logs -t -f | grep \"php:error\"",
         "log-server-warnings": "lando logs -t -f | grep \"php:warn\""
