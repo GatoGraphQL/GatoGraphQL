@@ -1,7 +1,0 @@
-parameters:
-    bootstrapFiles:
-        - graphql-api-convert-case-directives.php
-    level: 0
-    paths:
-        - src/
-        - tests/

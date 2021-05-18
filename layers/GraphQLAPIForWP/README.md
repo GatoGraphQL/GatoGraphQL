@@ -10,5 +10,4 @@ This layer provides the implementation for WordPress of [GraphQL by PoP](https:/
 
 - The main plugin, [GraphQL API for WordPress](plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
 - Its extensions:
-  - [Convert Case Directives](plugins/convert-case-directives)
-  - [Events Manager](plugins/events-manager)
+  - TODO
