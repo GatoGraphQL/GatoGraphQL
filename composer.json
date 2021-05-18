@@ -38,11 +38,8 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/plugins/convert-case-directives/src",
-            "GraphQLAPI\\EventsManager\\": "layers/GraphQLAPIForWP/plugins/events-manager/src",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/src",
-            "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/plugins/schema-feedback/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/src",
             "GraphQLByPoP\\GraphQLParser\\": "layers/GraphQLByPoP/packages/graphql-parser/src",
@@ -217,11 +214,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\ConvertCaseDirectives\\": "layers/GraphQLAPIForWP/plugins/convert-case-directives/tests",
-            "GraphQLAPI\\EventsManager\\": "layers/GraphQLAPIForWP/plugins/events-manager/tests",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/tests",
-            "GraphQLAPI\\SchemaFeedback\\": "layers/GraphQLAPIForWP/plugins/schema-feedback/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/tests",
             "GraphQLByPoP\\GraphQLParser\\": "layers/GraphQLByPoP/packages/graphql-parser/tests",
@@ -448,11 +442,8 @@
         "getpop/trace-tools": "0.7.13",
         "getpop/translation": "0.7.13",
         "getpop/translation-wp": "0.7.13",
-        "graphql-api/convert-case-directives": "0.7.13",
-        "graphql-api/events-manager": "0.7.13",
         "graphql-api/graphql-api-for-wp": "0.7.13",
         "graphql-api/markdown-convertor": "0.7.13",
-        "graphql-api/schema-feedback": "0.7.13",
         "graphql-by-pop/graphql-clients-for-wp": "0.7.13",
         "graphql-by-pop/graphql-endpoint-for-wp": "0.7.13",
         "graphql-by-pop/graphql-parser": "0.7.13",
@@ -679,7 +670,6 @@
         "start-server": "Start the Lando webserver with the 'GraphQL API for WordPress' demo site, for development",
         "update-deps": "Update the Composer dependencies for the 'GraphQL API for WordPress' demo site",
         "symlink-vendor-for-graphql-api-for-wp-plugin": "Install vendor dependencies for the \"GraphQL API\" plugin, symlinking them to local folders in the monorepo",
-        "symlink-vendor-for-graphql-api-convert-case-directives-plugin": "Install vendor dependencies for the \"Convert Case Directives\" plugin, symlinking them to local folders in the monorepo",
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "log-server-warnings": "Show (on real time) the warnings from the Lando webserver",
         "rebuild-server": "Rebuild the Lando webserver",

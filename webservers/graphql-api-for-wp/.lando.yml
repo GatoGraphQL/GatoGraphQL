@@ -278,20 +278,6 @@ services:
           ../../layers/Schema/packages/settings:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/settings
         - >-
           ../../layers/Schema/packages/settings-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/settings-wp
-        - >-
-          ../../layers/GraphQLAPIForWP/plugins/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api-convert-case-directives
-        - >-
-          ../../layers/Schema/packages/convert-case-directives:/app/wordpress/wp-content/plugins/graphql-api-convert-case-directives/vendor/pop-schema/convert-case-directives
-        - >-
-          ../../layers/GraphQLAPIForWP/plugins/events-manager:/app/wordpress/wp-content/plugins/graphql-api-events-manager
-        - >-
-          ../../layers/Schema/packages/events:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/events
-        - >-
-          ../../layers/Schema/packages/events-wp-em:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/events-wp-em
-        - >-
-          ../../layers/Schema/packages/locations:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/locations
-        - >-
-          ../../layers/Schema/packages/locations-wp-em:/app/wordpress/wp-content/plugins/graphql-api-events-manager/vendor/pop-schema/locations-wp-em
     run:
       - >-
         wp config create --dbname=wordpress --dbuser=wordpress

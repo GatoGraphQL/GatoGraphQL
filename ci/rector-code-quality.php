@@ -31,8 +31,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::BOOTSTRAP_FILES, [
         // full directory
         $monorepoDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-        // Avoid error: "Class EM_Event not found"
-        $monorepoDir . '/stubs/wpackagist-plugin/events-manager/em-stubs.php',
     ]);
 
     // files to skip downgrading

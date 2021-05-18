@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    GraphQLAPI\EventsManager\ModuleResolvers\:
-        resource: '../src/ModuleResolvers/*'

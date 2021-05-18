@@ -1,7 +1,0 @@
-parameters:
-    bootstrapFiles:
-        - graphql-api-events-manager.php
-    level: 0
-    paths:
-        - src/
-        - tests/

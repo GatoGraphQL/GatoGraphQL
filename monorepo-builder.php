@@ -25,7 +25,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
         'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
         'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
-        // 'layers/GraphQLAPIForWP/subplugins' => 'GraphQLAPI',
         'layers/SiteBuilder/packages' => 'getpop',
         'layers/Wassup/packages' => 'PoPSites-Wassup',
         'layers/Misc/packages' => 'leoloso',
@@ -62,25 +61,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping-graphql-api.php',
             ],
         ],
-        // GraphQL API - Convert Case Directives
-        [
-            'path' => 'layers/GraphQLAPIForWP/plugins/convert-case-directives',
-            'zip_file' => 'graphql-api-convert-case-directives.zip',
-            'main_file' => 'graphql-api-convert-case-directives.php',
-            'dist_repo_organization' => 'GraphQLAPI',
-            'dist_repo_name' => 'graphql-api-convert-case-directives-dist',
-            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-convert-case-directives.php',
-        ],
-        // GraphQL API - Events Manager
-        [
-            'path' => 'layers/GraphQLAPIForWP/plugins/events-manager',
-            'zip_file' => 'graphql-api-events-manager.zip',
-            'main_file' => 'graphql-api-events-manager.php',
-            'dist_repo_organization' => 'GraphQLAPI',
-            'dist_repo_name' => 'graphql-api-events-manager-dist',
-            'exclude_files' => 'wp-content/\* vendor/wpackagist-plugin/\*',
-            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-events-manager.php',
-        ],
     ]);
 
     /**
@@ -98,7 +78,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'require-dev' => [
             // 'phpunit/phpunit' => '*',
             'wpackagist-plugin/block-metadata' => '*',
-            'wpackagist-plugin/events-manager' => '*',
         ],
         // 'minimum-stability' => 'dev',
         // 'prefer-stable' => true,
