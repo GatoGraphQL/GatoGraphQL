@@ -27,7 +27,6 @@ includes:
     - layers/Schema/packages/custompostmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/customposts-wp/phpstan.neon.dist
     - layers/Engine/packages/definitions/phpstan.neon.dist
-    - layers/Schema/packages/event-mutations/phpstan.neon.dist
     - layers/Engine/packages/field-query/phpstan.neon.dist
     - layers/Engine/packages/filestore/phpstan.neon.dist
     - layers/Engine/packages/function-fields/phpstan.neon.dist

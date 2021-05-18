@@ -152,13 +152,6 @@ services:
         - >-
           ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
         - >-
-          ../../layers/Schema/packages/event-mutations:/app/vendor/pop-schema/event-mutations
-        - >-
-          ../../layers/Schema/packages/event-mutations-wp-em:/app/vendor/pop-schema/event-mutations-wp-em
-        - '../../layers/Schema/packages/events:/app/vendor/pop-schema/events'
-        - >-
-          ../../layers/Schema/packages/events-wp-em:/app/vendor/pop-schema/events-wp-em
-        - >-
           ../../layers/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
         - >-
           ../../layers/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
@@ -174,10 +167,6 @@ services:
           ../../layers/Schema/packages/locationposts:/app/vendor/pop-schema/locationposts
         - >-
           ../../layers/Schema/packages/locationposts-wp:/app/vendor/pop-schema/locationposts-wp
-        - >-
-          ../../layers/Schema/packages/locations:/app/vendor/pop-schema/locations
-        - >-
-          ../../layers/Schema/packages/locations-wp-em:/app/vendor/pop-schema/locations-wp-em
         - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
         - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
