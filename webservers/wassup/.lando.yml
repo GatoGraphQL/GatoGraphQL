@@ -163,10 +163,6 @@ services:
           ../../layers/Schema/packages/highlights:/app/vendor/pop-schema/highlights
         - >-
           ../../layers/Schema/packages/highlights-wp:/app/vendor/pop-schema/highlights-wp
-        - >-
-          ../../layers/Schema/packages/locationposts:/app/vendor/pop-schema/locationposts
-        - >-
-          ../../layers/Schema/packages/locationposts-wp:/app/vendor/pop-schema/locationposts-wp
         - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
         - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
@@ -321,10 +317,6 @@ services:
         - >-
           ../../layers/Wassup/packages/custompostlink-mutations:/app/vendor/pop-sites-wassup/custompostlink-mutations
         - >-
-          ../../layers/Wassup/packages/event-mutations:/app/vendor/pop-sites-wassup/event-mutations
-        - >-
-          ../../layers/Wassup/packages/eventlink-mutations:/app/vendor/pop-sites-wassup/eventlink-mutations
-        - >-
           ../../layers/Wassup/packages/everythingelse-mutations:/app/vendor/pop-sites-wassup/everythingelse-mutations
         - >-
           ../../layers/Wassup/packages/flag-mutations:/app/vendor/pop-sites-wassup/flag-mutations
@@ -334,12 +326,6 @@ services:
           ../../layers/Wassup/packages/gravityforms-mutations:/app/vendor/pop-sites-wassup/gravityforms-mutations
         - >-
           ../../layers/Wassup/packages/highlight-mutations:/app/vendor/pop-sites-wassup/highlight-mutations
-        - >-
-          ../../layers/Wassup/packages/location-mutations:/app/vendor/pop-sites-wassup/location-mutations
-        - >-
-          ../../layers/Wassup/packages/locationpost-mutations:/app/vendor/pop-sites-wassup/locationpost-mutations
-        - >-
-          ../../layers/Wassup/packages/locationpostlink-mutations:/app/vendor/pop-sites-wassup/locationpostlink-mutations
         - >-
           ../../layers/Wassup/packages/newsletter-mutations:/app/vendor/pop-sites-wassup/newsletter-mutations
         - >-

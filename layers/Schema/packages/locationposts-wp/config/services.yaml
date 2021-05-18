@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPSchema\LocationPosts\TypeAPIs\LocationPostTypeAPIInterface:
-        class: \PoPSchema\LocationPostsWP\TypeAPIs\LocationPostTypeAPI
