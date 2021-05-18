@@ -65,12 +65,12 @@ class Component extends AbstractComponent
 
                 \PoPSchema\NotificationsWP\Component::class,
                 \PoPSchema\HighlightsWP\Component::class,
-                \PoPSchema\LocationPostsWP\Component::class,
+                // Moved to outside repo
+                // \PoPSchema\LocationPostsWP\Component::class,
                 \PoPSchema\StancesWP\Component::class,
             ],
             $skipLoadingUnmigratedComponents ? [] : [
                 // These ones must have their ModuleProcessors defined as services
-                \PoPSchema\EventMutationsWPEM\Component::class,
                 \PoPSchema\EverythingElseWP\Component::class,
                 \PoP\SiteWP\Component::class,
                 \PoP\SPA\Component::class,
@@ -86,12 +86,14 @@ class Component extends AbstractComponent
                 \PoPSitesWassup\FlagMutations\Component::class,
                 \PoPSitesWassup\ShareMutations\Component::class,
                 \PoPSitesWassup\VolunteerMutations\Component::class,
-                \PoPSitesWassup\EventMutations\Component::class,
-                \PoPSitesWassup\LocationMutations\Component::class,
-                \PoPSitesWassup\LocationPostMutations\Component::class,
+                // Moved to outside repo
+                // \PoPSchema\EventMutationsWPEM\Component::class,
+                // \PoPSitesWassup\EventMutations\Component::class,
+                // \PoPSitesWassup\LocationMutations\Component::class,
+                // \PoPSitesWassup\LocationPostMutations\Component::class,
+                // \PoPSitesWassup\EventLinkMutations\Component::class,
+                // \PoPSitesWassup\LocationPostLinkMutations\Component::class,
                 \PoPSitesWassup\PostLinkMutations\Component::class,
-                \PoPSitesWassup\EventLinkMutations\Component::class,
-                \PoPSitesWassup\LocationPostLinkMutations\Component::class,
                 \PoPSitesWassup\NotificationMutations\Component::class,
                 \PoPSitesWassup\SocialNetworkMutations\Component::class,
                 \PoPSitesWassup\UserStateMutations\Component::class,
