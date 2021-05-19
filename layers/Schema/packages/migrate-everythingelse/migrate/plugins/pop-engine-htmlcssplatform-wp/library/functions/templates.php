@@ -11,5 +11,6 @@ HooksAPIFacade::getInstance()->addFilter(
 	    return $template;
 	},
 	// Priority: execute before PoP Engine
-	PHP_INT_MAX-1
+	// @todo Revise if this is still correct
+	PHP_INT_MAX - 1
 );
