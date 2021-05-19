@@ -13,7 +13,9 @@ class TemplateHookSet extends AbstractHookSet
     {
         $this->hooksAPI->addFilter(
             'template_include',
-            [$this, 'setTemplate']
+            [$this, 'setTemplate'],
+            // Execute last
+            PHP_INT_MAX
         );
     }
     public function setTemplate(string $template): string
