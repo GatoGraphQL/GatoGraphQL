@@ -14,12 +14,10 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
  */
 function doCommonContainerConfiguration(ContainerConfigurator $containerConfigurator): void
 {
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::SETS, []);
-
     $services = $containerConfigurator->services();
     $services->set(AndAssignsToSeparateLinesRector::class);
+
+    $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 };
