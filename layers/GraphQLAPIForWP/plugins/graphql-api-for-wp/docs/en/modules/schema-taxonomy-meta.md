@@ -1,14 +1,14 @@
 # Schema Taxonomy Meta
 
-Retrieve meta values for taxonomies (i.e. tags and categories), by querying field `meta`.
+Retrieve meta values for taxonomies (i.e. tags and categories), by querying fields `metaValue` and `metaValues`.
 
 For security reasons, which meta keys can be queried must be explicitly configured. By default, the list is empty.
 
-Querying meta values is an expensive operation, requiring a call to the database per object and meta key, so enable this module (as to expose the `meta` field in the GraphQL schema) only if needed.
+Querying meta values is an expensive operation, requiring a call to the database per object and meta key, so enable this module (as to expose the meta fields in the GraphQL schema) only if needed.
 
 ## How to use
 
-Query field `meta` on a tag or category, passing the required meta key as field argument `key`.
+Query fields `metaValue` and `metaValues` on a tag or category, passing the required meta key as field argument `key`.
 
 For instance, this query retrieves the category's `description` meta value (as long as allowed by configuration):
 
@@ -18,7 +18,7 @@ For instance, this query retrieves the category's `description` meta value (as l
     id
     categories {
       id
-      description: meta(key: "description", single: true)
+      description: metaValue(key: "description")
     }
   }
 }
@@ -26,7 +26,7 @@ For instance, this query retrieves the category's `description` meta value (as l
 
 ## Configure the allowed meta keys
 
-In the "Schema Taxonomy Meta" tab from the Settings, we must configure the list of meta keys that can be queried via `meta`.
+In the "Schema Taxonomy Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
 
 Each entry can either be:
 
