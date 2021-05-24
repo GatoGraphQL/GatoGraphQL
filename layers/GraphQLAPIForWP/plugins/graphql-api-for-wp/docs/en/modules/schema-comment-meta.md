@@ -1,14 +1,14 @@
 # Schema Comment Meta
 
-Retrieve meta values for comments, by querying field `meta`.
+Retrieve meta values for comments, by querying fields `metaValue` and `metaValues`.
 
 For security reasons, which meta keys can be queried must be explicitly configured. By default, the list is empty.
 
-Querying meta values is an expensive operation, requiring a call to the database per object and meta key, so enable this module (as to expose the `meta` field in the GraphQL schema) only if needed.
+Querying meta values is an expensive operation, requiring a call to the database per object and meta key, so enable this module (as to expose the meta fields in the GraphQL schema) only if needed.
 
 ## How to use
 
-Query field `meta` on a comment, passing the required meta key as field argument `key`.
+Query fields `metaValue` and `metaValues` on a comment, passing the required meta key as field argument `key`.
 
 For instance, this query retrieves the comment's `description` meta value (as long as allowed by configuration):
 
@@ -18,7 +18,7 @@ For instance, this query retrieves the comment's `description` meta value (as lo
     id
     comments {
       id
-      description: meta(key: "description", single: true)
+      description: metaValue(key: "description")
     }
   }
 }
@@ -26,7 +26,7 @@ For instance, this query retrieves the comment's `description` meta value (as lo
 
 ## Configure the allowed meta keys
 
-In the "Schema Comment Meta" tab from the Settings, we must configure the list of meta keys that can be queried via `meta`.
+In the "Schema Comment Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
 
 Each entry can either be:
 

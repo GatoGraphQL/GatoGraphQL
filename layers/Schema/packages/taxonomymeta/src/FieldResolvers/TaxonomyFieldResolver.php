@@ -30,7 +30,8 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'meta',
+            'metaValue',
+            'metaValues',
         ];
     }
 
@@ -60,11 +61,12 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
         $taxonomyMetaAPI = TaxonomyMetaTypeAPIFacade::getInstance();
         $taxonomy = $resultItem;
         switch ($fieldName) {
-            case 'meta':
+            case 'metaValue':
+            case 'metaValues':
                 return $taxonomyMetaAPI->getTaxonomyMeta(
                     $typeResolver->getID($taxonomy),
                     $fieldArgs['key'],
-                    $fieldArgs['single']
+                    $fieldName === 'metaValue'
                 );
         }
 

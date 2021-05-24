@@ -30,7 +30,8 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'meta',
+            'metaValue',
+            'metaValues',
         ];
     }
 
@@ -60,11 +61,12 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         $commentMetaAPI = CommentMetaTypeAPIFacade::getInstance();
         $comment = $resultItem;
         switch ($fieldName) {
-            case 'meta':
+            case 'metaValue':
+            case 'metaValues':
                 return $commentMetaAPI->getCommentMeta(
                     $typeResolver->getID($comment),
                     $fieldArgs['key'],
-                    $fieldArgs['single']
+                    $fieldName === 'metaValue'
                 );
         }
 

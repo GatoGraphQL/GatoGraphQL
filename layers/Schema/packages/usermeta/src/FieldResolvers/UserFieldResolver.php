@@ -30,7 +30,8 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'meta',
+            'metaValue',
+            'metaValues',
         ];
     }
 
@@ -60,11 +61,12 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         $userMetaAPI = UserMetaTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
-            case 'meta':
+            case 'metaValue':
+            case 'metaValues':
                 return $userMetaAPI->getUserMeta(
                     $typeResolver->getID($user),
                     $fieldArgs['key'],
-                    $fieldArgs['single']
+                    $fieldName === 'metaValue'
                 );
         }
 
