@@ -376,25 +376,25 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_CUSTOMPOST_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
-                    'meta',
+                    'metaValue',
                     $this->postTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USER_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
-                    'meta',
+                    'metaValue',
                     $this->userTypeResolver->getTypeName()
                 );
             case self::SCHEMA_COMMENT_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
-                    'meta',
+                    'metaValue',
                     $this->commentTypeResolver->getTypeName()
                 );
             case self::SCHEMA_TAXONOMY_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
-                    'meta',
+                    'metaValue',
                     $this->postTagTypeResolver->getTypeName(),
                     $this->postCategoryTypeResolver->getTypeName()
                 );

@@ -30,7 +30,8 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'meta',
+            'metaValue',
+            'metaValues',
         ];
     }
 
@@ -60,11 +61,12 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         $customPostMetaAPI = CustomPostMetaTypeAPIFacade::getInstance();
         $customPost = $resultItem;
         switch ($fieldName) {
-            case 'meta':
+            case 'metaValue':
+            case 'metaValues':
                 return $customPostMetaAPI->getCustomPostMeta(
                     $typeResolver->getID($customPost),
                     $fieldArgs['key'],
-                    $fieldArgs['single']
+                    $fieldName === 'metaValue'
                 );
         }
 
