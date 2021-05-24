@@ -219,20 +219,6 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 1. [Adding a Custom Welcome Guide to the WordPress Block Editor](https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/)
 2. [Using Markdown and Localization in the WordPress Block Editor](https://css-tricks.com/using-markdown-and-localization-in-the-wordpress-block-editor/)
 
-## Sponsorship
-
-Ongoing development for this project is funded via [Leonardo Losoviz](https://leoloso.com)'s GitHub sponsors:
-
-[Become a sponsor to Leonardo Losoviz ❤️](https://github.com/sponsors/leoloso)
-
-<!-- Please [browse the list of sponsorable requested features](https://github.com/GraphQLAPI/graphql-api-for-wp/projects/2). If you can benefit from them, be welcome to up-vote (👍) them, and to [sponsor Leonardo](https://github.com/sponsors/leoloso) on any of the available 3 tiers ❤️ .
-
-![Leo and wife](docs/images/jun-e-leo.jpg)<br/>_Leo and wife_ -->
-
-<!-- ## Sponsors
-
-<a href="https://getrector.org/"><img src="assets/img/rector-logo.svg" width="150" alt="Rector" title="Rector"></a> -->
-
 ## Standards
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
