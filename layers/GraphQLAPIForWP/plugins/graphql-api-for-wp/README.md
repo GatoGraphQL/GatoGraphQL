@@ -219,11 +219,6 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 1. [Adding a Custom Welcome Guide to the WordPress Block Editor](https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/)
 2. [Using Markdown and Localization in the WordPress Block Editor](https://css-tricks.com/using-markdown-and-localization-in-the-wordpress-block-editor/)
 
-## Feature Roadmap
-
-- [Baseline features](https://github.com/leoloso/PoP/projects/2)
-- [Sponsored features](https://github.com/leoloso/PoP/projects/1)
-
 ## Sponsorship
 
 Ongoing development for this project is funded via [Leonardo Losoviz](https://leoloso.com)'s GitHub sponsors:
