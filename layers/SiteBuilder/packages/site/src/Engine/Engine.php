@@ -66,7 +66,7 @@ class Engine extends \PoP\Application\Engine\Engine
     public function outputResponse(): void
     {
         // If doing JSON, the response from the parent is already adequate
-        if ($this->applicationStateHelperService->doingJson()) {
+        if ($this->applicationStateHelperService->doingJSON()) {
             parent::outputResponse();
             return;
         }

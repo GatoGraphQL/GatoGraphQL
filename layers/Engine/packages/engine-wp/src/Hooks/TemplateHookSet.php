@@ -38,7 +38,7 @@ class TemplateHookSet extends AbstractHookSet
     public function setTemplate(string $template): string
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
-        if ($this->applicationStateHelperService->doingJson()) {
+        if ($this->applicationStateHelperService->doingJSON()) {
             return TemplateHelpers::getTemplateFile();
         }
         return $template;

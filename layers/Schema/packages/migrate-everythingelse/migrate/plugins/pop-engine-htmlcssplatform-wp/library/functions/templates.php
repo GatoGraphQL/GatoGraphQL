@@ -8,7 +8,7 @@ HooksAPIFacade::getInstance()->addFilter(
 	function ($template) {
 	    // If the theme doesn't implement the template, use the default one
 		$applicationStateHelperService = ApplicationStateHelperServiceFacade::getInstance();
-		if (!$applicationStateHelperService->doingJson()) {
+		if (!$applicationStateHelperService->doingJSON()) {
 	        return POP_ENGINEHTMLCSSPLATFORM_TEMPLATES.'/index.php';
 	    }
 	    return $template;

@@ -8,7 +8,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class ApplicationStateHelperService implements ApplicationStateHelperServiceInterface
 {
-    function doingJson(): bool
+    function doingJSON(): bool
     {
         $vars = ApplicationState::getVars();
         return $vars['output'] == \PoP\ComponentModel\Constants\Outputs::JSON;

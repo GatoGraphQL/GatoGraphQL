@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\HelperServices;
 
 interface ApplicationStateHelperServiceInterface
 {
-    public function doingJson(): bool;
+    public function doingJSON(): bool;
 }
