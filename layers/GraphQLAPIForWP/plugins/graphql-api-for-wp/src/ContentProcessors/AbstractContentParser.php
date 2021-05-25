@@ -6,12 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
+use GraphQLAPI\GraphQLAPI\PluginInfo;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleUtils;
 use InvalidArgumentException;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -24,8 +24,11 @@ abstract class AbstractContentParser implements ContentParserInterface
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
      */
-    public function __construct(?string $baseDir = null, ?string $baseURL = null)
-    {
+    public function __construct(
+        protected RequestHelperServiceInterface $requestHelperService,
+        ?string $baseDir = null,
+        ?string $baseURL = null,
+    ) {
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
     }
@@ -306,7 +309,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                         RequestParams::DOC => $matches[1],
                         'TB_iframe' => 'true',
                     ],
-                    RequestUtils::getRequestedFullURL()
+                    $this->requestHelperService->getRequestedFullURL()
                 );
                 /** @var string */
                 $link = str_replace(

@@ -1,6 +1,7 @@
 <?php
 namespace PoP\ComponentModel\Settings;
 
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class AbstractSettingsProcessorManager
@@ -40,11 +41,12 @@ abstract class AbstractSettingsProcessorManager
             return $this->default_processor;
         }
 
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
         throw new \Exception(
             sprintf(
                 'No Settings Processor for $route \'%s\' (%s)',
                 $route,
-                RequestUtils::getRequestedFullURL()
+                $requestHelperService->getRequestedFullURL()
             )
         );
     }

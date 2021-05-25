@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 trait CustomEndpointClientTrait
@@ -26,11 +27,12 @@ trait CustomEndpointClientTrait
      */
     protected function getEndpointURL(): string
     {
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
         /**
          * If accessing from Nginx, the server_name might point to localhost
          * instead of the actual server domain. So use the user-requested host
          */
-        $fullURL = RequestUtils::getRequestedFullURL(true);
+        $fullURL = $requestHelperService->getRequestedFullURL(true);
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true

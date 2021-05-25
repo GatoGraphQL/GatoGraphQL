@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
@@ -52,8 +53,9 @@ class PoP_ServerSideRendering
         }
 
         $cmsService = CMSServiceFacade::getInstance();
-        $domain = $cmsService->getSiteURL();
-        $url = RequestUtils::getCurrentUrl();
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
+        $domain = $cmsService->getSiteURL();        
+        $url = $requestHelperService->getCurrentUrl();
 
         // Initialize the popManager, so it will get all its private values from $data
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
@@ -140,12 +142,13 @@ class PoP_ServerSideRendering
         }
 
         if (!$path = $this->template_paths[$template]) {
+            $requestHelperService = RequestHelperServiceFacade::getInstance();
             throw new Exception(
                 sprintf(
                     'No path registered for $template \'%s\', for $module \'%s\' (%s)',
                     $template,
                     $module,
-                    RequestUtils::getRequestedFullURL()
+                    $requestHelperService->getRequestedFullURL()
                 )
             );
         }
@@ -172,10 +175,11 @@ class PoP_ServerSideRendering
         }
 
         if (!$module) {
+            $requestHelperService = RequestHelperServiceFacade::getInstance();
             throw new Exception(
                 sprintf(
                     '$module cannot be null (%s)',
-                    RequestUtils::getRequestedFullURL()
+                    $requestHelperService->getRequestedFullURL()
                 )
             );
         }
@@ -212,6 +216,7 @@ class PoP_ServerSideRendering
             return '';
         }
 
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
         // The pageSection has its configuration right under key
         // $pagesection_settings_id of the global configuration
         $configuration = $this->getJsonConfiguration();
@@ -220,7 +225,7 @@ class PoP_ServerSideRendering
                 sprintf(
                     'No configuration in context for $pagesection_settings_id \'%s\' (%s)',
                     $pagesection_settings_id,
-                    RequestUtils::getRequestedFullURL()
+                    $requestHelperService->getRequestedFullURL()
                 )
             );
         }
@@ -232,7 +237,7 @@ class PoP_ServerSideRendering
             throw new Exception(
                 sprintf(
                     'No template defined in context (%s)',
-                    RequestUtils::getRequestedFullURL()
+                    $requestHelperService->getRequestedFullURL()
                 )
             );
         }

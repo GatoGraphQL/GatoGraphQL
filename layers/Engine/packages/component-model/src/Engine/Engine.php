@@ -5,44 +5,45 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use Exception;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\ComponentInfo;
-use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
-use PoP\ComponentModel\Constants\Props;
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\Actions;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\Constants\Response;
-use PoP\Definitions\Configuration\Request;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\Constants\DataLoading;
-use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\Constants\Actions;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
+use PoP\Definitions\Configuration\Request;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class Engine implements EngineInterface
 {
@@ -109,6 +110,7 @@ class Engine implements EngineInterface
         protected CheckpointProcessorManagerInterface $checkpointProcessorManager,
         protected DataloadHelperServiceInterface $dataloadHelperService,
         protected EntryModuleManagerInterface $entryModuleManager,
+        protected RequestHelperServiceInterface $requestHelperService,
         protected ?CacheInterface $persistentCache = null
     ) {
     }
@@ -136,7 +138,7 @@ class Engine implements EngineInterface
             throw new Exception(
                 sprintf(
                     'No entry module for this request (%s)',
-                    RequestUtils::getRequestedFullURL()
+                    $this->requestHelperService->getRequestedFullURL()
                 )
             );
         }
@@ -205,7 +207,7 @@ class Engine implements EngineInterface
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = !empty($this->getExtraRoutes())) {
             $model_instance_id = $this->modelInstance->getModelInstanceId();
-            $current_uri = removeDomain(RequestUtils::getCurrentUrl());
+            $current_uri = removeDomain($this->requestHelperService->getCurrentUrl());
         }
 
         return array($has_extra_routes, $model_instance_id, $current_uri);
@@ -505,7 +507,7 @@ class Engine implements EngineInterface
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
             Response::UNIQUE_ID => ComponentInfo::get('unique-id'),
-            Response::URL => RequestUtils::getCurrentUrl(),
+            Response::URL => $this->requestHelperService->getCurrentUrl(),
             'modelinstanceid' => $this->modelInstance->getModelInstanceId(),
         );
 

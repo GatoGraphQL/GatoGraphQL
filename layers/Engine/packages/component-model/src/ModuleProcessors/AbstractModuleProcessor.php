@@ -4,29 +4,30 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
-use PoP\ComponentModel\Constants\Props;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Definitions\Configuration\Request;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Definitions\Configuration\Request;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -52,6 +53,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         protected CMSServiceInterface $cmsService,
         protected NameResolverInterface $nameResolver,
         protected DataloadHelperServiceInterface $dataloadHelperService,
+        protected RequestHelperServiceInterface $requestHelperService,
     ) {
     }
 
@@ -1008,10 +1010,13 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
-        $ret = GeneralUtils::addQueryArgs([
-            ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
-            ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
-        ], RequestUtils::getCurrentUrl());
+        $ret = GeneralUtils::addQueryArgs(
+            [
+                ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
+                ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
+            ],
+            $this->requestHelperService->getCurrentUrl()
+        );
 
         // If we are in the API currently, stay in the API
         $vars = ApplicationState::getVars();
