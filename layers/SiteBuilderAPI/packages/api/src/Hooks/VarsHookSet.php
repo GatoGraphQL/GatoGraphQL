@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MoM\API\Hooks;
 
-use PoP\Engine\Constants\Stratum;
+use PoP\ConfigurationComponentModel\Constants\Stratum;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\API\Response\Schemes as APISchemes;

@@ -396,7 +396,6 @@
         "getpop/mandatory-directives-by-configuration": "0.7.13",
         "getpop/migrate-api": "0.7.13",
         "getpop/migrate-api-graphql": "0.7.13",
-        "getpop/migrate-component-model": "0.7.13",
         "getpop/migrate-component-model-configuration": "0.7.13",
         "getpop/migrate-engine": "0.7.13",
         "getpop/migrate-engine-wp": "0.7.13",

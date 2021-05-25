@@ -3,12 +3,12 @@ class GD_Stratum_Data extends \PoP\ComponentModel\StratumBase
 {
 	public function getStratum()
     {
-        return \PoP\Engine\Constants\Stratum::DATA;
+        return \PoP\ConfigurationComponentModel\Constants\Stratum::DATA;
     }
 
     public function getStrata() {
     	return [
-    		\PoP\Engine\Constants\Stratum::DATA
+    		\PoP\ConfigurationComponentModel\Constants\Stratum::DATA
     	];
     }
 }

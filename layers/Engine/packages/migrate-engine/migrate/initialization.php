@@ -18,11 +18,6 @@ class Initialization
         // include_once 'contractimplementations/load.php';
 
         /**
-         * Load the Kernel
-         */
-        include_once 'kernel/load.php';
-
-        /**
          * Load the PoP Library
          */
         include_once 'library/load.php';

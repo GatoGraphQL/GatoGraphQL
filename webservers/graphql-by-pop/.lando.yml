@@ -47,8 +47,6 @@ services:
         - >-
           ../../layers/API/packages/migrate-api-graphql:/app/vendor/getpop/migrate-api-graphql
         - >-
-          ../../layers/Engine/packages/migrate-component-model:/app/vendor/getpop/migrate-component-model
-        - >-
           ../../layers/Engine/packages/migrate-engine:/app/vendor/getpop/migrate-engine
         - >-
           ../../layers/Engine/packages/migrate-engine-wp:/app/vendor/getpop/migrate-engine-wp

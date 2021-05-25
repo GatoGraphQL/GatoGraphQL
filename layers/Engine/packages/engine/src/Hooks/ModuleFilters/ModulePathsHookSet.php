@@ -52,7 +52,7 @@ class ModulePathsHookSet extends AbstractHookSet
             $vars['modulepaths'] = ModulePathUtils::getModulePaths();
         }
     }
-    public function maybeAddComponent($components)
+    public function maybeAddComponent(array $components): array
     {
         $vars = ApplicationState::getVars();
         if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->modulePaths->getName()) {

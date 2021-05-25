@@ -70,8 +70,6 @@ services:
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
         - >-
-          ../../layers/Engine/packages/migrate-component-model:/app/vendor/getpop/migrate-component-model
-        - >-
           ../../layers/SiteBuilder/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
         - >-
           ../../layers/Engine/packages/migrate-engine:/app/vendor/getpop/migrate-engine

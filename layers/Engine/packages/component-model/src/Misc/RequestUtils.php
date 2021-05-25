@@ -53,7 +53,6 @@ class RequestUtils
                 Request::URLPARAM_MANGLED,
                 Params::EXTRA_ROUTES,
                 Params::ACTIONS, // Needed to remove ?actions[]=preload, ?actions[]=loaduserstate, ?actions[]=loadlazy
-                Params::STRATUM,
             )
         );
         $url = GeneralUtils::removeQueryArgs($remove_params, self::getRequestedFullURL());

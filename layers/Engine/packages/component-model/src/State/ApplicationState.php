@@ -22,7 +22,6 @@ use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ComponentModel\Environment as Environment;
 
 class ApplicationState
@@ -147,11 +146,6 @@ class ApplicationState
             $target = Targets::MAIN;
         }
 
-        $platformmanager = StratumManagerFactory::getInstance();
-        $stratum = $platformmanager->getStratum();
-        $strata = $platformmanager->getStrata($stratum);
-        $stratum_isdefault = $platformmanager->isDefaultStratum();
-
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter = $modulefilter_manager->getSelectedModuleFilterName();
 
@@ -180,9 +174,6 @@ class ApplicationState
             'format' => $format,
             'actions' => $actions,
             'scheme' => $scheme,
-            'stratum' => $stratum,
-            'strata' => $strata,
-            'stratum-isdefault' => $stratum_isdefault,
             'version' => $version,
             'variables' => $variables,
             'only-fieldname-as-outputkey' => false,
