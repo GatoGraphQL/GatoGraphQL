@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 
 abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
@@ -110,7 +111,8 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         $url = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($url, POP_FORMAT_TYPEAHEAD);
 
         if ($filter_params = $this->getSourceFilterParams($module, $props)) {
-            $url = \PoP\ComponentModel\DataloadUtils::addFilterParams($url, $filter_params);
+            $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+            $url = $dataloadHelperService->addFilterParams($url, $filter_params);
         }
 
         return $url;

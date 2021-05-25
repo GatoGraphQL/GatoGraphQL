@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\DataloadUtils;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\Constants\Props;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\ComponentModel\Constants\Params;
@@ -52,6 +52,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CMSServiceInterface $cmsService,
         protected NameResolverInterface $nameResolver,
+        protected DataloadHelperServiceInterface $dataloadHelperService,
     ) {
     }
 
@@ -194,7 +195,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
              */
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
-                if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                     foreach ($subcomponent_modules as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver_class);
                     }
@@ -207,7 +208,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $conditionalSubmodules) {
-                    if ($subcomponentTypeResolverClass = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
+                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
                         foreach ($conditionalSubmodules as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolverClass);
                         }
@@ -511,7 +512,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                     $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
@@ -521,7 +522,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach (array_keys($dataFieldTypeResolverOptionsConditionalSubmodules) as $conditionalDataField) {
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    if ($subcomponentTypeResolverClass = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
+                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
                         $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionalDataField);

@@ -8,7 +8,7 @@ use Exception;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ComponentInfo;
-use PoP\ComponentModel\DataloadUtils;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Actions;
@@ -105,6 +105,7 @@ class Engine implements EngineInterface
         protected ModuleFilterManagerInterface $moduleFilterManager,
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CheckpointProcessorManagerInterface $checkpointProcessorManager,
+        protected DataloadHelperServiceInterface $dataloadHelperService,
         protected ?CacheInterface $persistentCache = null
     ) {
     }
@@ -1591,9 +1592,9 @@ class Engine implements EngineInterface
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field);
+            $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field);
             if (!$subcomponent_typeResolver_class && $typeResolver != $targetTypeResolver) {
-                $subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
+                $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);

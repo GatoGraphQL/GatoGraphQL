@@ -1,5 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 
 // Add static suggestions: Search Content and Search Users
 class GD_StaticSearchUtils
@@ -14,7 +15,8 @@ class GD_StaticSearchUtils
                 'value' => $query_wildcard,
             ],
         );
-        return \PoP\ComponentModel\DataloadUtils::addFilterParams($searchcontent_url, $filter_params);
+        $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+        return $dataloadHelperService->addFilterParams($searchcontent_url, $filter_params);
     }
 
     public static function getUsersSearchUrl($props, $query_wildcard = GD_JSPLACEHOLDER_QUERY)
@@ -27,6 +29,7 @@ class GD_StaticSearchUtils
                 'value' => $query_wildcard,
             ],
         );
-        return \PoP\ComponentModel\DataloadUtils::addFilterParams($searchusers_url, $filter_params);
+        $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+        return $dataloadHelperService->addFilterParams($searchusers_url, $filter_params);
     }
 }

@@ -1,5 +1,8 @@
 <?php
-namespace PoP\ComponentModel;
+
+declare(strict_types=1);
+
+namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -8,9 +11,9 @@ use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class DataloadUtils
+class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    public static function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, $subcomponent_data_field)
+    public function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, $subcomponent_data_field)
     {
         $subcomponent_typeResolver_class = $typeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
         // if (!$subcomponent_typeResolver_class && \PoP\ComponentModel\Environment::failIfSubcomponentTypeDataLoaderUndefined()) {
@@ -37,7 +40,7 @@ class DataloadUtils
         return $subcomponent_typeResolver_class;
     }
 
-    public static function addFilterParams($url, $moduleValues = array())
+    public function addFilterParams($url, $moduleValues = array())
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $args = [];

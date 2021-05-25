@@ -46,6 +46,9 @@ services:
     PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\FormInputHelperService
 
+    PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\DataloadHelperService
+
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 

@@ -1,5 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 
 class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Module_Processor_LocationTypeaheadComponentFormInputsBase
 {
@@ -41,7 +42,8 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
     {
         $url = parent::getRemoteUrl($module, $props);
         
-        return \PoP\ComponentModel\DataloadUtils::addFilterParams(
+        $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+        return $dataloadHelperService->addFilterParams(
             $url, 
             [
                 [

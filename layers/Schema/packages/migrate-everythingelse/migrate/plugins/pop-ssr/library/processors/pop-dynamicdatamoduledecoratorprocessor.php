@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\DataloadUtils;
+use PoP\ComponentModel\HelperServices\DataloadHelperService;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;

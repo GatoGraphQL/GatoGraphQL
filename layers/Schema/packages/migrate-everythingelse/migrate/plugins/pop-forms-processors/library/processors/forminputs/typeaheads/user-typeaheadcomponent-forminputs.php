@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 
 class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputsBase
 {
@@ -46,7 +47,8 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
     {
         $url = parent::getRemoteUrl($module, $props);
 
-        return \PoP\ComponentModel\DataloadUtils::addFilterParams(
+        $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+        return $dataloadHelperService->addFilterParams(
             $url,
             [
                 [
