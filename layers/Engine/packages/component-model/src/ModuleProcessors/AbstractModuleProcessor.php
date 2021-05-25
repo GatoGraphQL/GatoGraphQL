@@ -12,7 +12,6 @@ use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
@@ -899,25 +898,13 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // When loading data or execution an action, check if to validate checkpoints?
         // This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doingPost()
         // (such as done to set-up checkpoint configuration for POP_USERSTANCE_ROUTE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
-        // if ($checkpoint_configuration = $this->getDataaccessCheckpointConfiguration($module, $props)) {
         if ($checkpoints = $this->getDataAccessCheckpoints($module, $props)) {
-            // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
-
-            // Pass info for PoP Engine
-            // $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
             $ret[DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoints;
-            // }
         }
 
         // To trigger the actionexecuter, its own checkpoints must be successful
-        // if ($checkpoint_configuration = $this->getActionexecutionCheckpointConfiguration($module, $props)) {
         if ($checkpoints = $this->getActionExecutionCheckpoints($module, $props)) {
-            // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
-
-            // Pass info for PoP Engine
-            // $ret[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
             $ret[DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoints;
-            // }
         }
 
         return $ret;

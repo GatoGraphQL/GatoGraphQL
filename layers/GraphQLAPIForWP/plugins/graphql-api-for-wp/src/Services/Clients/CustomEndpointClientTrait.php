@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 
 trait CustomEndpointClientTrait
 {
