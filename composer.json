@@ -196,7 +196,8 @@
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
             "PoP\\TraceTools\\": "layers/Engine/packages/trace-tools/src",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/src"
+            "PoP\\Translation\\": "layers/Engine/packages/translation/src",
+            "MoM\\API\\": "layers/SiteBuilderAPI/packages/api/src"
         }
     },
     "autoload-dev": {
@@ -394,8 +395,6 @@
         "getpop/hooks-wp": "0.7.13",
         "getpop/loosecontracts": "0.7.13",
         "getpop/mandatory-directives-by-configuration": "0.7.13",
-        "getpop/migrate-api": "0.7.13",
-        "getpop/migrate-api-graphql": "0.7.13",
         "getpop/migrate-component-model-configuration": "0.7.13",
         "getpop/migrate-static-site-generator": "0.7.13",
         "getpop/modulerouting": "0.7.13",

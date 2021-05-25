@@ -1,5 +1,5 @@
 <?php
-namespace PoP\API;
+namespace MoM\API\Helpers;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
@@ -8,7 +8,7 @@ use PoP\API\Response\Schemes as APISchemes;
 
 class APIUtils
 {
-    public static function getEndpoint($url, $dataoutputitems = null): string
+    public static function getEndpoint(string $url, ?array $dataoutputitems = null): string
     {
         $dataoutputitems = $dataoutputitems ?? [
             \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
@@ -28,9 +28,12 @@ class APIUtils
 
         $vars = ApplicationState::getVars();
         if ($mangled = $vars['mangled']) {
-            $endpoint = GeneralUtils::addQueryArgs([
-                Request::URLPARAM_MANGLED => $mangled,
-            ], $endpoint);
+            $endpoint = GeneralUtils::addQueryArgs(
+                [
+                    Request::URLPARAM_MANGLED => $mangled,
+                ],
+                $endpoint
+            );
         }
 
         return $endpoint;
