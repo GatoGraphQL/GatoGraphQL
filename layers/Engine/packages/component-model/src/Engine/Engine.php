@@ -27,7 +27,6 @@ use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
@@ -528,13 +527,6 @@ class Engine implements EngineInterface
             }
 
             $meta['filteredmodules'] = $filteredsettings;
-        }
-
-        // Any errors? Send them back
-        if (RequestUtils::$errors) {
-            $meta[Response::ERROR] = count(RequestUtils::$errors) > 1 ?
-                $this->translationAPI->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
-                : $this->translationAPI->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
         return $this->hooksAPI->applyFilters(

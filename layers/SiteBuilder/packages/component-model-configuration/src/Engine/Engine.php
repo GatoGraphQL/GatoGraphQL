@@ -13,6 +13,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
+use PoP\ComponentModel\Constants\Response;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -157,5 +158,22 @@ class Engine extends UpstreamEngine implements EngineInterface
     public function addSiteMeta(): bool
     {
         return RequestUtils::fetchingSite();
+    }
+
+    public function getRequestMeta(): array
+    {
+        $meta = parent::getRequestMeta();
+
+        // Any errors? Send them back
+        if (RequestUtils::$errors) {
+            $meta[Response::ERROR] = count(RequestUtils::$errors) > 1 ?
+                $this->translationAPI->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
+                : $this->translationAPI->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
+        }
+
+        return $this->hooksAPI->applyFilters(
+            '\MoM\ComponentModel\Engine:request-meta',
+            $meta
+        );
     }
 }
