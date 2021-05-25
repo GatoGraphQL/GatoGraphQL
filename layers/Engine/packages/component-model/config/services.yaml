@@ -49,6 +49,9 @@ services:
     PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\DataloadHelperService
 
+    PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
+
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
