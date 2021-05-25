@@ -1,0 +1,51 @@
+{
+    "name": "mom-api/api",
+    "type": "library",
+    "description": "Component-based API",
+    "keywords": ["MoM", "api"],
+    "homepage": "https://github.com/mom-api/api",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.0",
+        "getpop/api": "^0.8"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.76",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.10",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MoM\\API\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MoM\\API\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.8-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
