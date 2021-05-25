@@ -142,7 +142,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     public function getSiteMeta(): array
     {
         $meta = parent::getSiteMeta();
-        if (RequestUtils::fetchingSite()) {
+        if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
             if ($vars['stratum'] ?? null) {
                 $meta[Params::STRATUM] = $vars['stratum'];
@@ -152,5 +152,10 @@ class Engine extends UpstreamEngine implements EngineInterface
             '\MoM\ComponentModel\Engine:site-meta',
             $meta
         );
+    }
+
+    public function addSiteMeta(): bool
+    {
+        return RequestUtils::fetchingSite();
     }
 }

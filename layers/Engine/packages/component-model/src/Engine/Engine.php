@@ -551,10 +551,17 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * Function to override by the ConfigurationComponentModel
+     */
+    protected function addSiteMeta(): bool
+    {
+        return true;
+    }
     public function getSiteMeta(): array
     {
         $meta = array();
-        if (RequestUtils::fetchingSite()) {
+        if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
             $meta[Params::VERSION] = $vars['version'];
             $meta[Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
