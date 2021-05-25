@@ -91,7 +91,8 @@ class Engine implements EngineInterface
     /**
      * @var array<string, mixed>
      */
-    protected array $outputData;
+    protected array $outputData = [];
+    protected ?array $entryModule = null;
     
     function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -124,12 +125,23 @@ class Engine implements EngineInterface
 
     public function getEntryModule(): array
     {
-        $fullyQualifiedModule = $this->entryModuleManager->getEntryModule();
-        if (!$fullyQualifiedModule) {
-            throw new Exception(sprintf('No entry module for this request (%s)', RequestUtils::getRequestedFullURL()));
+        // Use cached results
+        if ($this->entryModule !== null) {
+            return $this->entryModule;
         }
 
-        return $fullyQualifiedModule;
+        // Obtain, validate and cache
+        $this->entryModule = $this->entryModuleManager->getEntryModule();
+        if ($this->entryModule === null) {
+            throw new Exception(
+                sprintf(
+                    'No entry module for this request (%s)',
+                    RequestUtils::getRequestedFullURL()
+                )
+            );
+        }
+
+        return $this->entryModule;
     }
 
     public function sendEtagHeader(): void
