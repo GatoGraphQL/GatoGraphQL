@@ -32,38 +32,6 @@ class RequestUtils
         return HooksAPIFacade::getInstance()->applyFilters('RequestUtils:isSearchEngine', false);
     }
 
-    // // public static function getCheckpointConfiguration($page_id = null) {
-
-    // //     return Settings\SettingsManagerFactory::getInstance()->getCheckpointConfiguration($page_id);
-    // // }
-    // public static function getCheckpoints($page_id = null) {
-
-    //     return Settings\SettingsManagerFactory::getInstance()->getCheckpoints($page_id);
-    // }
-
-    // public static function isServerAccessMandatory($checkpoint_configuration) {
-
-    //     // The Static type can be cached since it contains no data
-    //     $dynamic_types = array(
-    //         GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER,
-    //     );
-    //     $mandatory = in_array($checkpoint_configuration['type'], $dynamic_types);
-
-    //     // Allow to add 'requires-user-state' by PoP UserState dependency
-    //     return HooksAPIFacade::getInstance()->applyFilters(
-    //         'RequestUtils:isServerAccessMandatory',
-    //         $mandatory,
-    //         $checkpoint_configuration
-    //     );
-    // }
-
-    // public static function checkpointValidationRequired($checkpoint_configuration) {
-
-    //     return true;
-    //     // $type = $checkpoint_configuration['type'];
-    //     // return (doingPost() && $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATIC) || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_DATAFROMSERVER || $type == GD_DATALOAD_VALIDATECHECKPOINTS_TYPE_STATELESS;
-    // }
-
     public static function getCurrentUrl()
     {
         // Strip the Target and Output off it, users don't need to see those
