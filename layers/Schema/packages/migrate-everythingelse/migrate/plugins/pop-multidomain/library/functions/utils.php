@@ -1,19 +1,20 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_MultiDomain_Utils
 {
     public static function transformUrl($url, $domain, $website_name, $options = array())
     {
         // Must add the version (request will be routed through CDN)
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $vars = ApplicationState::getVars();
         $url = GeneralUtils::addQueryArgs([
             'ver' => $vars['version'],
         ], $url);
-        $subpath = substr($url, strlen($cmsengineapi->getSiteURL()));
+        $subpath = substr($url, strlen($cmsService->getSiteURL()));
 
         // Replace from /simple/ in GetPoP to /sliding/ in all the other websites
         if (defined('POP_THEME_INITIALIZED')) {
@@ -46,8 +47,8 @@ class PoP_MultiDomain_Utils
     {
         // Also add the theme and thememode properties for the resourceLoader, to get the corresponding resourceloader-config.js file
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $domain = $cmsengineapi->getSiteURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        $domain = $cmsService->getSiteURL();
         $domain_properties = array(
             $domain => array(
                 'name' => $cmsapplicationapi->getSiteName(),

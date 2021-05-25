@@ -33,11 +33,6 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     public function getPanelParams(array $module, array &$props)
     {
         return array();
-
-        // // Parameter needed to know what was the loaded URL, as to initialize lazy components (eg: collapse first time it opens)
-        // return array(
-        //     'data-original-url' => RequestUtils::getCurrentUrl(),
-        // );
     }
 
     public function getCustomPanelClass(array $module, array &$props)

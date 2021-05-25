@@ -1,6 +1,7 @@
 <?php
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
@@ -28,7 +29,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $cmspagesresolver = \PoPSchema\Pages\ObjectPropertyResolverFactory::getInstance();
         $page = $pageTypeAPI->getPage($page_id);
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmsengineapi->getDate('U', $cmspagesresolver->getPageModified($page));
+        $dateFormatter = DateFormatterFacade::getInstance();
+        $dateFormatter->format('U', $cmspagesresolver->getPageModified($page));
     }
 }

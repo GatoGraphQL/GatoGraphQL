@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks
 {
@@ -48,8 +49,8 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks
         if ($languages = $pluginapi->getEnabledLanguages()) {
             // Ignore what has been given here, add the qTrans languages instead
             $locales = array();
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                $url = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+            $cmsService = CMSServiceFacade::getInstance();
+            $url = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
             foreach ($languages as $lang) {
                 $locales[$pluginapi->convertUrl($url, $lang)] = $lang;
             }

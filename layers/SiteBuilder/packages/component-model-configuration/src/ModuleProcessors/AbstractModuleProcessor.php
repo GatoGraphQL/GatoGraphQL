@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\Constants\DataLoading;
+use PoP\ComponentModel\Settings\SettingsManagerFactory;
+
 abstract class AbstractModuleProcessor extends \PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor implements ModuleProcessorInterface
 {
     //-------------------------------------------------
@@ -82,5 +85,50 @@ abstract class AbstractModuleProcessor extends \PoP\ComponentModel\ModuleProcess
     public function getMutableonrequestConfiguration(array $module, array &$props): array
     {
         return array();
+    }
+
+    //-------------------------------------------------
+    // Others
+    //-------------------------------------------------
+
+    public function getRelevantRoute(array $module, array &$props): ?string
+    {
+        return null;
+    }
+
+    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    {
+        return DataLoading::DATA_ACCESS_CHECKPOINTS;
+    }
+
+    protected function maybeOverrideCheckpoints($checkpoints)
+    {
+        // Allow URE to add the extra checkpoint condition of the user having the Profile role
+        return $this->hooksAPI->applyFilters(
+            'ModuleProcessor:checkpoints',
+            $checkpoints
+        );
+    }
+
+    public function getDataAccessCheckpoints(array $module, array &$props): array
+    {
+        if ($route = $this->getRelevantRoute($module, $props)) {
+            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
+                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
+            }
+        }
+
+        return parent::getDataAccessCheckpoints($module, $props);
+    }
+
+    public function getActionExecutionCheckpoints(array $module, array &$props): array
+    {
+        if ($route = $this->getRelevantRoute($module, $props)) {
+            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
+                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
+            }
+        }
+
+        return parent::getActionExecutionCheckpoints($module, $props);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
@@ -60,8 +62,9 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         $content .= gdGetWebsiteDescription();
         $content .= '<br/><br/>';
 
+        $cmsService = CMSServiceFacade::getInstance();
         $btn_title = $this->translationAPI->__('Check it out here', 'pop-coreprocessors');
-        $content .= \PoP_EmailTemplatesFactory::getInstance()->getButtonhtml($btn_title, $cmsengineapi->getSiteURL());
+        $content .= \PoP_EmailTemplatesFactory::getInstance()->getButtonhtml($btn_title, $cmsService->getSiteURL());
 
         return $content;
     }

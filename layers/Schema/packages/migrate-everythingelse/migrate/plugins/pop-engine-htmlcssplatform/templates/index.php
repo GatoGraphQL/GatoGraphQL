@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ConfigurationComponentModel\Facades\Engine\EngineFacade;
 
 $engine = EngineFacade::getInstance();
 // $engine->outputResponse();

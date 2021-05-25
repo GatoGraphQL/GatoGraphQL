@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
@@ -34,8 +35,8 @@ function gdLoginLogo()
 HooksAPIFacade::getInstance()->addFilter('login_headerurl', 'gdLoginLogoUrl');
 function gdLoginLogoUrl()
 {
-    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    return $cmsengineapi->getHomeURL();
+    $cmsService = CMSServiceFacade::getInstance();
+    return $cmsService->getHomeURL();
 }
 HooksAPIFacade::getInstance()->addFilter('login_headertitle', 'gdLoginLogoUrlTitle');
 function gdLoginLogoUrlTitle()

@@ -6,6 +6,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 
 HooksAPIFacade::getInstance()->addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
 function gdMentionsExternalPlugins($plugins)
@@ -91,7 +92,8 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
             'value' =>  'post_count|DESC',
         ],
     );
-    $users_fetchurl = \PoP\ComponentModel\DataloadUtils::addFilterParams($users_url/*, POP_FILTER_USERS*/, $filter_params);
+    $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+    $users_fetchurl = $dataloadHelperService->addFilterParams($users_url/*, POP_FILTER_USERS*/, $filter_params);
     $users_fetchurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($users_fetchurl, POP_FORMAT_MENTION);
 
     // -------------------------------
@@ -103,7 +105,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
             'value' =>  'post_count|DESC',
         ],
     );
-    $users_baselineurl = \PoP\ComponentModel\DataloadUtils::addFilterParams($users_url/*, POP_FILTER_USERS*/, $filter_params);
+    $users_baselineurl = $dataloadHelperService->addFilterParams($users_url/*, POP_FILTER_USERS*/, $filter_params);
 
     // Bring 10 times the pre-defined result set
     $users_baselineurl = GeneralUtils::addQueryArgs([
@@ -125,7 +127,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
             'value' => 'count|DESC',
         ],
     );
-    $tags_fetchurl = \PoP\ComponentModel\DataloadUtils::addFilterParams($tags_url/*, POP_FILTER_TAGS*/, $filter_params);
+    $tags_fetchurl = $dataloadHelperService->addFilterParams($tags_url/*, POP_FILTER_TAGS*/, $filter_params);
     $tags_fetchurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($tags_fetchurl, POP_FORMAT_MENTION);
 
     // -------------------------------
@@ -137,7 +139,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
             'value' => 'count|DESC',
         ],
     );
-    $tags_baselineurl = \PoP\ComponentModel\DataloadUtils::addFilterParams($tags_url/*, POP_FILTER_USERS*/, $filter_params);
+    $tags_baselineurl = $dataloadHelperService->addFilterParams($tags_url/*, POP_FILTER_USERS*/, $filter_params);
 
     // Bring 10 times the pre-defined result set
     $tags_baselineurl = GeneralUtils::addQueryArgs([

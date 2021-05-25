@@ -4,30 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\DataloadUtils;
-use PoP\ComponentModel\Constants\Props;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Definitions\Configuration\Request;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\Settings\SettingsManagerFactory;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Definitions\Configuration\Request;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -52,6 +51,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CMSServiceInterface $cmsService,
         protected NameResolverInterface $nameResolver,
+        protected DataloadHelperServiceInterface $dataloadHelperService,
+        protected RequestHelperServiceInterface $requestHelperService,
     ) {
     }
 
@@ -194,7 +195,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
              */
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
-                if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                     foreach ($subcomponent_modules as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver_class);
                     }
@@ -207,7 +208,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $conditionalSubmodules) {
-                    if ($subcomponentTypeResolverClass = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
+                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
                         foreach ($conditionalSubmodules as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolverClass);
                         }
@@ -511,7 +512,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $typeResolver = $this->instanceManager->getInstance($typeResolver_class);
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                     $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponent_typeResolver_class);
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
@@ -521,7 +522,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach (array_keys($dataFieldTypeResolverOptionsConditionalSubmodules) as $conditionalDataField) {
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    if ($subcomponentTypeResolverClass = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
+                    if ($subcomponentTypeResolverClass = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $conditionalDataField)) {
                         $subcomponent_typeResolver = $this->instanceManager->getInstance($subcomponentTypeResolverClass);
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionalDataField);
@@ -897,25 +898,13 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // When loading data or execution an action, check if to validate checkpoints?
         // This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doingPost()
         // (such as done to set-up checkpoint configuration for POP_USERSTANCE_ROUTE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
-        // if ($checkpoint_configuration = $this->getDataaccessCheckpointConfiguration($module, $props)) {
-        if ($checkpoints = $this->getDataaccessCheckpoints($module, $props)) {
-            // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
-
-            // Pass info for PoP Engine
-            // $ret[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
+        if ($checkpoints = $this->getDataAccessCheckpoints($module, $props)) {
             $ret[DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoints;
-            // }
         }
 
         // To trigger the actionexecuter, its own checkpoints must be successful
-        // if ($checkpoint_configuration = $this->getActionexecutionCheckpointConfiguration($module, $props)) {
-        if ($checkpoints = $this->getActionexecutionCheckpoints($module, $props)) {
-            // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
-
-            // Pass info for PoP Engine
-            // $ret[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoint_configuration['checkpoints'];
+        if ($checkpoints = $this->getActionExecutionCheckpoints($module, $props)) {
             $ret[DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoints;
-            // }
         }
 
         return $ret;
@@ -984,56 +973,21 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // Others
     //-------------------------------------------------
 
-    public function getRelevantRoute(array $module, array &$props): ?string
+    public function getDataAccessCheckpoints(array $module, array &$props): array
     {
-        return null;
+        return [];
     }
 
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
+    public function getActionExecutionCheckpoints(array $module, array &$props): array
     {
-        return DataLoading::DATA_ACCESS_CHECKPOINTS;
-    }
-
-    protected function maybeOverrideCheckpoints($checkpoints)
-    {
-        // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return $this->hooksAPI->applyFilters(
-            'ModuleProcessor:checkpoints',
-            $checkpoints
-        );
-    }
-
-    // function getDataaccessCheckpointConfiguration(array $module, array &$props) {
-    public function getDataaccessCheckpoints(array $module, array &$props): array
-    {
-        if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
-                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
-            }
-        }
-
-        // return null;
-        return array();
-    }
-
-    // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
-    public function getActionexecutionCheckpoints(array $module, array &$props): array
-    {
-        if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
-                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
-            }
-        }
-
-        // return null;
-        return array();
+        return [];
     }
 
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // By default, execute only if the module is targeted for execution and doing POST
         $vars = ApplicationState::getVars();
-        return doingPost() && $vars['actionpath'] == $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
+        return 'POST' == $_SERVER['REQUEST_METHOD'] && $vars['actionpath'] == $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getDataloadSource(array $module, array &$props): string
@@ -1043,10 +997,13 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
         $stringified_module_propagation_current_path = $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
-        $ret = GeneralUtils::addQueryArgs([
-            ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
-            ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
-        ], RequestUtils::getCurrentUrl());
+        $ret = GeneralUtils::addQueryArgs(
+            [
+                ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
+                ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
+            ],
+            $this->requestHelperService->getCurrentURL()
+        );
 
         // If we are in the API currently, stay in the API
         $vars = ApplicationState::getVars();

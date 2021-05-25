@@ -4,11 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class TemplateHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected ApplicationStateHelperServiceInterface $applicationStateHelperService,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -21,7 +38,7 @@ class TemplateHookSet extends AbstractHookSet
     public function setTemplate(string $template): string
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
-        if (doingJson()) {
+        if ($this->applicationStateHelperService->doingJSON()) {
             return TemplateHelpers::getTemplateFile();
         }
         return $template;

@@ -1,17 +1,18 @@
 <?php
 use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Routing\RouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
@@ -72,7 +73,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
             $vars = ApplicationState::getVars();
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+            $cmsService = CMSServiceFacade::getInstance();
             $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
@@ -91,7 +92,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     return RequestUtils::addRoute($url, $route);
 
                 case RouteNatures::HOME:
-                    $url = $cmsengineapi->getHomeURL();
+                    $url = $cmsService->getHomeURL();
                     return RequestUtils::addRoute($url, $route);
             }
         }

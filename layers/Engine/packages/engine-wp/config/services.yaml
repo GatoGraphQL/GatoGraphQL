@@ -7,6 +7,9 @@ services:
     PoP\Engine\ErrorHandling\ErrorManagerInterface:
         class: \PoP\EngineWP\ErrorHandling\ErrorManager
 
+    PoP\Engine\Formatters\DateFormatterInterface:
+        class: \PoP\EngineWP\Formatters\DateFormatter
+
     PoP\Engine\CMS\CMSServiceInterface:
         class: \PoP\EngineWP\CMS\CMSService
 

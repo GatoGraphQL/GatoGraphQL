@@ -1,5 +1,6 @@
 <?php
 
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_CDN_ThumbprintManager
@@ -23,13 +24,14 @@ class PoP_CDN_ThumbprintManager
 
     public function getThumbprintValue($name)
     {
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
         $thumbprint = $this->thumbprints[$name];
         if (!$thumbprint) {
             throw new Exception(
                 sprintf(
                     'Error: there is no thumbprint with name \'%s\' (%s)',
                     $name,
-                    RequestUtils::getRequestedFullURL()
+                    $requestHelperService->getRequestedFullURL()
                 )
             );
         }

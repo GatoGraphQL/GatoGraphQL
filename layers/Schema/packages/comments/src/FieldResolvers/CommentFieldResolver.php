@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -105,8 +106,8 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         array $options = []
     ): mixed {
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $dateFormatter = DateFormatterFacade::getInstance();
         $comment = $resultItem;
         switch ($fieldName) {
             case 'content':
@@ -135,7 +136,10 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 return $cmscommentsresolver->getCommentParent($comment);
 
             case 'date':
-                return $cmsengineapi->getDate($fieldArgs['format'], $cmscommentsresolver->getCommentDateGmt($comment));
+                return $dateFormatter->format(
+                    $fieldArgs['format'],
+                    $cmscommentsresolver->getCommentDateGmt($comment)
+                );
 
             case 'responses':
                 $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();

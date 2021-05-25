@@ -1,7 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -130,7 +131,8 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                 return null;
 
             case self::MODULE_ANCHORCONTROL_CURRENTURL:
-                return RequestUtils::getCurrentUrl();
+                $requestHelperService = RequestHelperServiceFacade::getInstance();
+                return $requestHelperService->getCurrentURL();
 
             case self::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS:
                 // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`

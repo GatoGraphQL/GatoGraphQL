@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 // Add the locale to all the multidomains
@@ -53,7 +54,7 @@ function popMultidomainMaybeAddLang($querysource)
 {
 
     // Allow qTrans to inject the language
-    $domain = getDomain($querysource);
+    $domain = GeneralUtils::getDomain($querysource);
     if (in_array($domain, POP_MULTIDOMAIN_QTRANS_ADDLANG_QUERYSOURCES)) {
         $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();
         if ($pluginapi->getUrlModificationMode() == POP_MULTILINGUAL_URLMODIFICATIONMODE_PREPATH) {

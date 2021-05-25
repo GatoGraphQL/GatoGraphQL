@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers;
 
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Facades\Formatters\DateFormatterFacade;
+use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
 abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolver
@@ -48,7 +49,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $dateFormatter = DateFormatterFacade::getInstance();
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $resultItem;
         switch ($fieldName) {
@@ -79,7 +80,10 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return $fieldArgs['status'] == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return $cmsengineapi->getDate($fieldArgs['format'], $customPostTypeAPI->getPublishedDate($customPost));
+                return $dateFormatter->format(
+                    $fieldArgs['format'],
+                    $customPostTypeAPI->getPublishedDate($customPost)
+                );
 
             case 'datetime':
                 // If it is the current year, don't add the year. Otherwise, do
@@ -87,9 +91,9 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 $date = $customPostTypeAPI->getPublishedDate($customPost);
                 $format = $fieldArgs['format'];
                 if (!$format) {
-                    $format = ($cmsengineapi->getDate('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
+                    $format = ($dateFormatter->format('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
                 }
-                return $cmsengineapi->getDate($format, $date);
+                return $dateFormatter->format($format, $date);
 
             case 'title':
                 return $customPostTypeAPI->getTitle($customPost);

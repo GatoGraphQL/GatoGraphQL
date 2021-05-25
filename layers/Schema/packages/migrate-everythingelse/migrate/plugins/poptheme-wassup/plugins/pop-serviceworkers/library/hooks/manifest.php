@@ -43,9 +43,6 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest
         $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance();
         $path = $htmlcssplatformapi->getAssetsDirectoryURI().'/';
 
-        // // The path is relative to the website domain
-        // $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        // // $path = substr($path, strlen(GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getSiteURL())));
         foreach ($sizes as $size) {
             $icons[] = array(
                 'src' => $path.$imagename.$size.'.png',

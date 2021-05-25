@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_MultiDomain_Engine_Utils
 {
@@ -17,7 +18,7 @@ class PoP_MultiDomain_Engine_Utils
         // Add the external URL's domain, only if we are on the External Page
         if ($vars['routing-state']['is-standard'] && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
             if ($external_url = $_REQUEST[\PoP\ComponentModel\Constants\Response::URL] ?? null) {
-                $vars['external-url-domain'] = getDomain($external_url);
+                $vars['external-url-domain'] = GeneralUtils::getDomain($external_url);
             }
         }
     }

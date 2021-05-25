@@ -1,7 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_SocialLogin_API
 {
@@ -13,7 +14,8 @@ class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_Soc
 
     public function getNetworklinks()
     {
-        $current_page_url = RequestUtils::getCurrentUrl();
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
+        $current_page_url = $requestHelperService->getCurrentURL();
 
         $authenticate_base_url = site_url('wp-login.php', 'login_post') . (strpos(site_url('wp-login.php', 'login_post'), '?') ? '&' : '?') . "action=wordpress_social_authenticate&";
 

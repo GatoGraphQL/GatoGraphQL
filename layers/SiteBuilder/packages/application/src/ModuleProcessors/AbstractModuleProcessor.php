@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoP\Application\ModuleProcessors;
 
 use PoP\API\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
+use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Application\Constants\Actions;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class AbstractModuleProcessor extends \PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor implements ModuleProcessorInterface
 {
@@ -101,8 +102,8 @@ abstract class AbstractModuleProcessor extends \PoP\ConfigurationComponentModel\
     public function queriesExternalDomain(array $module, array &$props): bool
     {
         if ($sources = $this->getDataloadMultidomainSources($module, $props)) {
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            $domain = $cmsengineapi->getSiteURL();
+            $cmsService = CMSServiceFacade::getInstance();
+            $domain = $cmsService->getSiteURL();
             foreach ($sources as $source) {
                 if (substr($source, 0, strlen($domain)) != $domain) {
                     return true;

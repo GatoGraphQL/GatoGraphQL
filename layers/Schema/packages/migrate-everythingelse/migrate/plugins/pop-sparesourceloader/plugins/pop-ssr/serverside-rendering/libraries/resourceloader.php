@@ -173,27 +173,7 @@ class PoP_ServerSide_SPAResourceLoader
     public function getConfigByDomain($domain)
     {
         return $this->config[$domain];
-
-        // // Check we have a config for this domain
-        // $config = $this->config[$domain];
-        // $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        // if (!$config && $domain != $cmsengineapi->getSiteURL()) {
-
-        //     // If we don't have a config, and the domain is not local, then try the local domain
-        //     // (This is needed for if the external resourceloader-config.js file has not been loaded yet.
-        //     // This may happen often, as loading this file is asynchronous, so needing to check the URL path
-        //     // will happen before the script is loaded)
-        //     $config = $this->config[$cmsengineapi->getSiteURL()];
-        // }
-        
-        // return $config ?? array();
     }
-
-    // function getConfig($url) {
-
-    //     $domain = getDomain($url);
-    //     return $this->getConfigByDomain($domain);
-    // }
 }
 
 /**

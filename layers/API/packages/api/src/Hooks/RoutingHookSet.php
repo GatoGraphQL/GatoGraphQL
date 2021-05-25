@@ -5,13 +5,31 @@ declare(strict_types=1);
 namespace PoP\API\Hooks;
 
 use PoP\API\ComponentConfiguration;
-use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class RoutingHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected CMSServiceInterface $cmsService,
+        protected RequestHelperServiceInterface $requestHelperService,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+    
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
@@ -50,9 +68,8 @@ class RoutingHookSet extends AbstractHookSet
         if (!ComponentConfiguration::overrideRequestURI()) {
             return $route;
         }
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $homeURL = $cmsengineapi->getHomeURL();
-        $currentURL = RequestUtils::getCurrentUrl();
+        $homeURL = $this->cmsService->getHomeURL();
+        $currentURL = $this->requestHelperService->getCurrentURL();
         // Remove the protocol to avoid erroring on http/https
         $homeURL = preg_replace('#^https?://#', '', $homeURL);
         $currentURL = preg_replace('#^https?://#', '', $currentURL);

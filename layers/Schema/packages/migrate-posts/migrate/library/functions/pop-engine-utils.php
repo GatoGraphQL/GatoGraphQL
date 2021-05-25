@@ -2,19 +2,20 @@
 namespace PoPSchema\Posts;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class Engine_Utils
 {
     public static function getCustomPostPath($post_id, $remove_post_slug = false)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Generate the post path. If the post is published, just use permalink. If not, we can't, or it will get the URL to edit the post,
         // and not the URL the post will be published to, which is what is needed by the ResourceLoader
         $permalink = $customPostTypeAPI->getPermalink($post_id);
-        $domain = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+        $domain = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
 
         // Remove the domain from the permalink => page path
         $post_path = substr($permalink, strlen($domain));

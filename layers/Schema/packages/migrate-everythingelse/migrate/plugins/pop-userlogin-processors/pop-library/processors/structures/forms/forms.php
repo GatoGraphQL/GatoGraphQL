@@ -128,10 +128,6 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 break;
 
             case self::MODULE_FORM_LOGOUT:
-                // // Do not show if user already logged out
-                // // Notice that it works for the domain from wherever this block is being fetched from!
-                // $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                // $this->appendProp($module, $props, 'class', 'visible-loggedin-'.RequestUtils::getDomainId($cmsengineapi->getSiteURL()));
                 $this->appendProp($module, $props, 'class', 'visible-loggedin');
 
                 // Add the description

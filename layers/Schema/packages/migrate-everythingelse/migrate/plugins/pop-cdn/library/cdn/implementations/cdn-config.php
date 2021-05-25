@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproduction
@@ -14,10 +15,9 @@ class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproductio
     public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-
-        $configuration['{{$domain}}'] = $cmsengineapi->getSiteURL();
-
+        
+        $cmsService = CMSServiceFacade::getInstance();
+        $configuration['{{$domain}}'] = $cmsService->getSiteURL();
         $configuration['{{$cdnDomain}}'] = '';
         $configuration['{{$thumbprints}}'] = $configuration['{{$criteria_rejected}}'] = $configuration['{{$criteria_thumbprints}}'] = array();
         if (POP_CDNFOUNDATION_CDN_CONTENT_URI) {

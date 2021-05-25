@@ -1,6 +1,6 @@
 <?php
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Engine\ModuleFilters\MainContentModule;
 
@@ -11,7 +11,8 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
     public function getAction(array $module, array &$props)
     {
         // The delegator filter will simply point to the current page, adding ?modulefilter=maincontentmodule so that is the module that gets filtered
-        return RequestUtils::getCurrentUrl();
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
+        return $requestHelperService->getCurrentURL();
     }
 
     public function initWebPlatformModelProps(array $module, array &$props)

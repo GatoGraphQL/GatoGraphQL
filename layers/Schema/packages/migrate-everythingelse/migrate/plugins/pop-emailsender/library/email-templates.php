@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('POP_EMAILTEMPLATE_EMAIL', 'email.html');
 define('POP_EMAILTEMPLATE_EMAILBODY', 'emailbody.html');
@@ -40,8 +41,7 @@ class PoP_EmailSender_Templates
 
     public function addEmailframe($title, $content, $emails = array(), $names = array(), $template_name = POP_EMAILTEMPLATE_EMAIL/*, $frame = null*/)
     {
-
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         // If passing null, initialize it to the default value
         $template_name = $template_name ?? POP_EMAILTEMPLATE_EMAIL;
         // $frame = $frame ?? POP_EMAILFRAME_DEFAULT;
@@ -62,7 +62,7 @@ class PoP_EmailSender_Templates
 
             // If the frame had been generated, then fetch it from the cache
             if (!isset($this->email_frames[$template]/*[$frame]*/)) {
-                $url = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+                $url = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
                 ob_start();
                 include $template;
                 $this->email_frames[$template]/*[$frame]*/ = str_replace(

@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_SPAResourceLoader_EngineInitialization_Hooks
@@ -47,12 +48,12 @@ class PoP_SPAResourceLoader_EngineInitialization_Hooks
                 // Only then can use
                 global $pop_sparesourceloader_mappingstoragemanager;
                 if (!$pop_sparesourceloader_mappingstoragemanager->hasCachedEntries()) {
-                    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+                    $cmsService = CMSServiceFacade::getInstance();
                     $bundle_group_ids = $popwebplatform_resourceloader_scriptsandstyles_registration->getBundlegroupIds();
                     $bundle_ids = $popwebplatform_resourceloader_scriptsandstyles_registration->getBundleIds();
                     $scripts[] = sprintf(
                         'pop.SPAResourceLoader["loaded-by-domain"]["%s"] = %s;',
-                        $cmsengineapi->getSiteURL(),
+                        $cmsService->getSiteURL(),
                         json_encode(
                             array(
                                 'bundles' => $bundle_ids,

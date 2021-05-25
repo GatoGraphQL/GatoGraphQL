@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Application_Utils
@@ -10,12 +11,11 @@ class PoP_Application_Utils
 
     public static function getRequestDomain()
     {
-
         // Allow PoP Multidomain to override this value with the domain in the $_REQUEST
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_Application_Utils:request-domain',
-            $cmsengineapi->getSiteURL()
+            $cmsService->getSiteURL()
         );
     }
 

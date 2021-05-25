@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataSourceSelectors;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
+use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
+use PoP\ComponentModel\Constants\Response;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -113,5 +117,63 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         return $ret;
+    }
+
+    public function maybeRedirectAndExit(): void
+    {
+        if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
+            if ($query = $_SERVER['QUERY_STRING']) {
+                $redirect .= '?' . $query;
+            }
+
+            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+            $cmsengineapi->redirect($redirect);
+            exit;
+        }
+    }
+
+    public function outputResponse(): void
+    {
+        // Before anything: check if to do a redirect, and exit
+        $this->maybeRedirectAndExit();
+
+        parent::outputResponse();
+    }
+
+    public function getSiteMeta(): array
+    {
+        $meta = parent::getSiteMeta();
+        if ($this->addSiteMeta()) {
+            $vars = ApplicationState::getVars();
+            if ($vars['stratum'] ?? null) {
+                $meta[Params::STRATUM] = $vars['stratum'];
+            }
+        }
+        return $this->hooksAPI->applyFilters(
+            '\MoM\ComponentModel\Engine:site-meta',
+            $meta
+        );
+    }
+
+    public function addSiteMeta(): bool
+    {
+        return RequestUtils::fetchingSite();
+    }
+
+    public function getRequestMeta(): array
+    {
+        $meta = parent::getRequestMeta();
+
+        // Any errors? Send them back
+        if (RequestUtils::$errors) {
+            $meta[Response::ERROR] = count(RequestUtils::$errors) > 1 ?
+                $this->translationAPI->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
+                : $this->translationAPI->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
+        }
+
+        return $this->hooksAPI->applyFilters(
+            '\MoM\ComponentModel\Engine:request-meta',
+            $meta
+        );
     }
 }

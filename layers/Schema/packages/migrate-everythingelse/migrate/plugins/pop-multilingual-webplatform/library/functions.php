@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
@@ -49,8 +50,7 @@ function popQtransLocale($locale)
 HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:homelocale_url', 'popQtransHomelocaleUrl');
 function popQtransHomelocaleUrl($url)
 {
-
-    // $cmsengineapi->getHomeURL() already contains the language information
-    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    return $cmsengineapi->getHomeURL();
+    $cmsService = CMSServiceFacade::getInstance();
+    // $cmsService->getHomeURL() already contains the language information
+    return $cmsService->getHomeURL();
 }

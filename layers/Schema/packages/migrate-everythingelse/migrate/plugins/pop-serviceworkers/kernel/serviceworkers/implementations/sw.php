@@ -1,9 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Route\RouteUtils;
-use PoP\Definitions\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Definitions\Configuration\Request;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 {
@@ -23,13 +24,13 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     public function getSwConfiguration()
     {
         $configuration = parent::getSwConfiguration();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         $vars = ApplicationState::getVars();
 
         // Add a string before the version, since starting with a number makes trouble
         $configuration['${cacheNamePrefix}'] = 'PoP';
         $configuration['${version}'] = $vars['version'];
-        $configuration['${homeDomain}'] = $cmsengineapi->getSiteURL();
+        $configuration['${homeDomain}'] = $cmsService->getSiteURL();
         // $configuration['${contentDomain}'] = $this->getContentDomains();
         $configuration['${appshellPages}'] = $this->getAppshellPages();
         $configuration['${appshellPrecachedParams}'] = array();
@@ -68,7 +69,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
         // These values will be overriden in wp-content/plugins/pop-serviceworkers/plugins/pop-cdn-core/library/serviceworkers/sw-hooks.php,
         // but must declare here the empty values so that, if the plug-in is not activated, it still replaces those values in service-worker.js
-        $configuration['${contentCDNOriginalDomain}'] = $cmsengineapi->getSiteURL();
+        $configuration['${contentCDNOriginalDomain}'] = $cmsService->getSiteURL();
         $configuration['${contentCDNDomain}'] = '';
         $configuration['${contentCDNParams}'] = array();
 
@@ -249,8 +250,8 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         );
 
         // Make sure the homeurl is not there!
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $homeurl = $cmsengineapi->getSiteURL();
+		$cmsService = CMSServiceFacade::getInstance();
+        $homeurl = $cmsService->getSiteURL();
         $pos = array_search($homeurl, $multidomains);
         if ($pos > -1) {
             array_splice($multidomains, $pos, 1);
@@ -269,8 +270,8 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         );
 
         // Make sure the homeurl is not there!
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $homelocale = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+		$cmsService = CMSServiceFacade::getInstance();
+        $homelocale = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
         $pos = array_search($homelocale, $multidomain_locales);
         if ($pos > -1) {
             array_splice($multidomain_locales, $pos, 1);
@@ -309,18 +310,6 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
             $locale
         );
     }
-
-    // protected function getContentDomains() {
-
-    //     // Allow to hook in https://content.getpop.org
-    //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    //     return HooksAPIFacade::getInstance()->applyFilters(
-    //         'PoP_ServiceWorkers_Job_Fetch:content_domains',
-    //         array(
-    //             $cmsengineapi->getSiteURL(),
-    //         )
-    //     );
-    // }
 
     protected function getAppshellPages()
     {

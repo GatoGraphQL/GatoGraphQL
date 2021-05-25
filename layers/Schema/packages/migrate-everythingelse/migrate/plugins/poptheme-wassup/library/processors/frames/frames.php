@@ -1,13 +1,14 @@
 <?php
 define('POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE', 'pagesections-side-logosize');
 
-use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -175,9 +176,8 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -271,7 +271,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     'addcontent' => 'glyphicon-plus',
                 );
                 $ret['links'] = array(
-                    'home' => GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()),
+                    'home' => GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()),
                     'settings' => RouteUtils::getRouteURL(POP_USERPLATFORM_ROUTE_SETTINGS),
                     'login' => $cmsuseraccountapi->getLoginURL(),
                     'notifications' => RouteUtils::getRouteURL(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS),
@@ -371,7 +371,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     'home' => '_blank',
                 );
                 $ret['links'] = array(
-                    'home' => GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()),
+                    'home' => GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()),
                 );
                 $ret['icons'] = array(
                     'togglenavigation' => 'glyphicon-menu-hamburger',
@@ -404,7 +404,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
 
                 $ret['links'] = array(
                     // GeneralUtils::maybeAddTrailingSlash because of qTrans: it will output link https://www.mesym.com/zh and it fails with popURLInterceptors, which expects https://www.mesym.com/zh/
-                    'home' => GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()),
+                    'home' => GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()),
                 );
                 $ret[GD_JS_TITLES] = array(
                     'home' => $cmsapplicationapi->getSiteName(),

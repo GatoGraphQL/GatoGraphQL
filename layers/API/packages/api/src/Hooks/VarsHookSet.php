@@ -8,12 +8,10 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use PoP\Engine\Constants\Stratum;
 use PoP\API\Constants\Actions;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\QueryInputs;
 use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\API\PersistedQueries\PersistedQueryUtils;
 use PoP\API\State\ApplicationStateUtils;
@@ -69,12 +67,6 @@ class VarsHookSet extends AbstractHookSet
             // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
             // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
             $vars['dboutputmode'] = DatabasesOutputModes::COMBINED;
-
-            // Only the data stratum is needed
-            $platformmanager = StratumManagerFactory::getInstance();
-            $vars['stratum'] = Stratum::DATA;
-            $vars['strata'] = $platformmanager->getStrata($vars['stratum']);
-            $vars['stratum-isdefault'] = $vars['stratum'] == $platformmanager->getDefaultStratum();
 
             // Do not print the entry module
             $vars['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;

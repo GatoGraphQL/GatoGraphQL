@@ -1,7 +1,8 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_UserState_EngineHooks
 {
@@ -49,15 +50,19 @@ class PoP_UserState_EngineHooks
 
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-userstatedata-load'] ?? null) {
-                $url = GeneralUtils::addQueryArgs([
-                \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
-                    \PoP\ComponentModel\Constants\DataOutputItems::META,
-                    \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
-                    \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+            $requestHelperService = RequestHelperServiceFacade::getInstance();
+            $url = GeneralUtils::addQueryArgs(
+                [
+                    \PoP\ComponentModel\Constants\Params::DATA_OUTPUT_ITEMS => [
+                        \PoP\ComponentModel\Constants\DataOutputItems::META,
+                        \PoP\ComponentModel\Constants\DataOutputItems::MODULE_DATA,
+                        \PoP\ComponentModel\Constants\DataOutputItems::DATABASES,
+                    ],
+                    \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
+                    \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
                 ],
-                \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
-                \PoP\ComponentModel\Constants\Params::ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
-            ], RequestUtils::getCurrentUrl());
+                $requestHelperService->getCurrentURL()
+            );
             $engine->addBackgroundUrl($url, array(\PoP\ComponentModel\Constants\Targets::MAIN));
         }
     }

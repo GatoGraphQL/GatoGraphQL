@@ -72,10 +72,6 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     {
         switch ($module[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
-                // Not visible if user not logged in
-                // Notice that it works for the domain from wherever this block is being fetched from!
-                // $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                // $this->appendProp($module, $props, 'class', 'visible-loggedin-'.RequestUtils::getDomainId($cmsengineapi->getSiteURL()));
                 $this->appendProp($module, $props, 'class', 'visible-loggedin');
                 break;
         }

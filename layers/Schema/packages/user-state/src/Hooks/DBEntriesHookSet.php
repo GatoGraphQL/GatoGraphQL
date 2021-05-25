@@ -31,11 +31,11 @@ class DBEntriesHookSet extends AbstractHookSet
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
             array($this, 'moveEntriesUnderDBName'),
             10,
-            2
+            1
         );
     }
 
-    public function moveEntriesUnderDBName($dbname_datafields, $typeResolver)
+    public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
         $dbname_datafields['userstate'] = $this->hooksAPI->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',

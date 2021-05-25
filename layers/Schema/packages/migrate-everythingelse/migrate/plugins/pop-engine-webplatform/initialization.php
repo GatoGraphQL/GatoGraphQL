@@ -1,13 +1,14 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Definitions\Configuration\Request;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoPSchema\CustomPosts\Types\Status;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Definitions\Configuration\Request;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 
 define('POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS', 'popwebplatform-keepopentabs');
 
@@ -154,7 +155,6 @@ class PoPWebPlatform_Initialization
 
     public function getJqueryConstants()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
 
         // Define all jQuery constants
@@ -164,7 +164,7 @@ class PoPWebPlatform_Initialization
             '{0}'
         );
 
-        $homeurl = $cmsengineapi->getSiteURL();
+        $homeurl = $cmsService->getSiteURL();
         $allowed_domains = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
 
         // Locale is needed to store the Open Tabs under the right language
@@ -187,8 +187,9 @@ class PoPWebPlatform_Initialization
             Request::URLPARAM_MANGLED => Request::URLPARAMVALUE_MANGLED_NONE,
         ));
 
+        $requestHelperService = RequestHelperServiceFacade::getInstance();
         $jqueryConstants = array(
-            'INITIAL_URL' => RequestUtils::getCurrentUrl(), // Needed to always identify which was the first URL loaded
+            'INITIAL_URL' => $requestHelperService->getCurrentURL(), // Needed to always identify which was the first URL loaded
             'HOME_DOMAIN' => $homeurl,
             'ALLOWED_DOMAINS' => $allowed_domains,
             'VERSION' => $vars['version'],
@@ -253,7 +254,7 @@ class PoPWebPlatform_Initialization
             return;
         }
 
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
 
         // Allow PoP Server-Side Rendering, PoP Resource Loader to add their scripts
         $this->scripts = HooksAPIFacade::getInstance()->applyFilters(
@@ -266,7 +267,7 @@ class PoPWebPlatform_Initialization
         $this->scripts[] = sprintf(
             'window.pop.Data = %s;',
             json_encode(array(
-                $cmsengineapi->getSiteURL() => $engine->getOutputData(),
+                $cmsService->getSiteURL() => $engine->getOutputData(),
             ))
         );
 

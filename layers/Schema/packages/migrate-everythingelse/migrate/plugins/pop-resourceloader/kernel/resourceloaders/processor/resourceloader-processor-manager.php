@@ -53,7 +53,7 @@ class PoP_ResourceLoaderProcessorManager {
 		        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 				$version = $cmsengineapi->getVersion();
 			}
-	        			$url = GeneralUtils::addQueryArgs([
+	        $url = GeneralUtils::addQueryArgs([
 				'ver' => $version, 
 			], $url);
 		}

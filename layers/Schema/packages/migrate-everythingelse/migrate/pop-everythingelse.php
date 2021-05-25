@@ -8,6 +8,7 @@ class Plugins
     {
         // Priority: new section, after PoP CMS Model and PoP Meta
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888100);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'initMigratePackages'), 88820);
     }
     public function init()
     {
@@ -264,6 +265,17 @@ class Plugins
         foreach ($plugins as $plugin) {
             require_once ('plugins/'.$plugin.'/'.$plugin.'.php');
         }
+    }
+    public function initMigratePackages()
+    {
+        // Migrate packages that I wanted to remove from Packagist
+        $migratePackages = [
+            'migrate-engine' => 'pop-engine.php',
+            'migrate-engine-wp' => 'pop-engine-wp.php',
+        ];
+        foreach ($migratePackages as $migratePackage => $file) {
+            require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
+        }
 
         // Initialize dependencies too
         require_once (dirname(__DIR__, 2) . '/migrate-meta/migrate/pop-meta.php');
@@ -278,7 +290,6 @@ class Plugins
         require_once (dirname(__DIR__, 2) . '/migrate-events-wp-em/migrate/pop-events-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations-wp-em/migrate/pop-locations-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations/migrate/pop-locations.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-post-tags/migrate/pop-post-tags.php');
         require_once (dirname(__DIR__, 2) . '/migrate-posts/migrate/pop-posts.php');
     }
 }

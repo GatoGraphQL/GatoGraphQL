@@ -10,13 +10,29 @@ use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Targets;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected RequestHelperServiceInterface $requestHelperService,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         $this->hooksAPI->addAction(
@@ -63,15 +79,18 @@ class LazyLoadHookSet extends AbstractHookSet
 
         // Fetch the lazy-loaded data using the Background URL load
         if ($helperCalculations['has-lazy-load'] ?? null) {
-            $url = GeneralUtils::addQueryArgs([
-                Params::DATA_OUTPUT_ITEMS => [
-                    DataOutputItems::META,
-                    DataOutputItems::MODULE_DATA,
-                    DataOutputItems::DATABASES,
+            $url = GeneralUtils::addQueryArgs(
+                [
+                    Params::DATA_OUTPUT_ITEMS => [
+                        DataOutputItems::META,
+                        DataOutputItems::MODULE_DATA,
+                        DataOutputItems::DATABASES,
+                    ],
+                    ModuleFilterManager::URLPARAM_MODULEFILTER => $lazy->getName(),
+                    Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
-                ModuleFilterManager::URLPARAM_MODULEFILTER => $lazy->getName(),
-                Params::ACTIONS . '[]' => Actions::LOADLAZY,
-            ], RequestUtils::getCurrentUrl());
+                $this->requestHelperService->getCurrentURL()
+            );
             $engine->addBackgroundUrl($url, array(Targets::MAIN));
         }
     }

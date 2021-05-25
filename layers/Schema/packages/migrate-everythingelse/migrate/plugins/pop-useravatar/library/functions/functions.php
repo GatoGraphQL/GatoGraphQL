@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_FileUpload_Picture_Utils
 {
@@ -22,8 +23,8 @@ class GD_FileUpload_Picture_Utils
 
     public static function getActionUrlFromBasedir($basedir)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        return GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getSiteURL()).str_replace(ABSPATH, '', $basedir).'/directaccess-library/fileupload-userphoto/server/index.php';
+        $cmsService = CMSServiceFacade::getInstance();
+        return GeneralUtils::maybeAddTrailingSlash($cmsService->getSiteURL()) . str_replace(ABSPATH, '', $basedir) . '/directaccess-library/fileupload-userphoto/server/index.php';
     }
 
     public static function getFileuploadUserPath($user_id)

@@ -70,13 +70,7 @@ services:
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
         - >-
-          ../../layers/Engine/packages/migrate-component-model:/app/vendor/getpop/migrate-component-model
-        - >-
           ../../layers/SiteBuilder/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
-        - >-
-          ../../layers/Engine/packages/migrate-engine:/app/vendor/getpop/migrate-engine
-        - >-
-          ../../layers/Engine/packages/migrate-engine-wp:/app/vendor/getpop/migrate-engine-wp
         - >-
           ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
         - >-
@@ -212,8 +206,6 @@ services:
           ../../layers/Schema/packages/migrate-pages:/app/vendor/pop-schema/migrate-pages
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp
-        - >-
-          ../../layers/Schema/packages/migrate-post-tags:/app/vendor/pop-schema/migrate-post-tags
         - >-
           ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
         - >-

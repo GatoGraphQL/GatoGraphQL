@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 // In file wp-content/plugins/wp-super-cache-pop/plugins/pop-cluster/plugins/pop-system/installation.php
@@ -7,8 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('supercacherewriterules', 'popClusterSupercacherewriterules');
 function popClusterSupercacherewriterules($rules)
 {
-
-    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+    $cmsService = CMSServiceFacade::getInstance();
 
     // Code copied from from plugins/wp-super-cache/wp-cache.php
     if (isset($_SERVER[ "PHP_DOCUMENT_ROOT" ])) {
@@ -36,7 +36,7 @@ function popClusterSupercacherewriterules($rules)
         $content_dir_root = substr($content_dir_root, 7);
         $apache_root = $document_root;
     }
-    $home_root = parse_url($cmsengineapi->getHomeURL());
+    $home_root = parse_url($cmsService->getHomeURL());
     $home_root = isset($home_root['path']) ? trailingslashit($home_root['path']) : '/';
     $home_root_lc = str_replace('//', '/', strtolower($home_root));
     $inst_root = str_replace('//', '/', '/' . trailingslashit(str_replace($content_dir_root, '', str_replace('\\', '/', WP_CONTENT_DIR))));

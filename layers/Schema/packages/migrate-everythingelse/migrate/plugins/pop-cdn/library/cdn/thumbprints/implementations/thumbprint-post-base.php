@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
@@ -27,7 +28,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
     {
         // Doing it the manual way
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmsengineapi->getDate('U', $customPostTypeAPI->getModifiedDate($post_id));
+        $dateFormatter = DateFormatterFacade::getInstance();
+        $dateFormatter->format('U', $customPostTypeAPI->getModifiedDate($post_id));
     }
 }

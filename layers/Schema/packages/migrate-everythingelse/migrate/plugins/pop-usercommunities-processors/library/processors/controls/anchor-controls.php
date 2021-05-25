@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -47,8 +48,6 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
     }
     public function getHref(array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         switch ($module[1]) {
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::MODULE_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
@@ -58,7 +57,8 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 );
                 $source = $sources[$module[1]];
 
-                $url = RequestUtils::getCurrentUrl();
+                $requestHelperService = RequestHelperServiceFacade::getInstance();
+                $url = $requestHelperService->getCurrentURL();
                 // Remove the 'source' param if it exists on the current url
                 $url = GeneralUtils::removeQueryArgs([GD_URLPARAM_URECONTENTSOURCE], $url);
 

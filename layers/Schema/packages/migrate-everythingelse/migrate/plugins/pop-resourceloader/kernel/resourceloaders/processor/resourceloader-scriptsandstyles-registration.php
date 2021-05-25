@@ -1,5 +1,7 @@
 <?php
 
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesRegistration {
 
 	var $resources, $bundle_ids, $bundlegroup_ids, $maybe_generated_bundlefiles;
@@ -161,7 +163,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesRegistration {
 
 		// Comment Leo 21/11/2017: set the resources into the $popResourceLoader instance
 		global $pop_resourceloaderprocessor_manager;
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
 		$sources = array();
 		$types = array(
             $type => array(),
@@ -175,7 +177,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesRegistration {
 		// $inBody = $pop_resourceloaderprocessor_manager->filterInBody($resources);
 
 		// Do a merge below, because this function will be invoked twice: once for the JS and once for the CSS, so don't let them override each other
-		$domain = $cmsengineapi->getSiteURL();
+		$domain = $cmsService->getSiteURL();
 		$popResourceLoader = PoP_ResourceLoader_ServerSide_LibrariesFactory::getResourceloaderInstance();
 		if (!$popResourceLoader->config[$domain]) {
 

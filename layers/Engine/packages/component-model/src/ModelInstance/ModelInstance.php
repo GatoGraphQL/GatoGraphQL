@@ -95,9 +95,6 @@ class ModelInstance implements ModelInstanceInterface
         if ($modulefilter = $vars['modulefilter'] ?? null) {
             $components[] = $this->translationAPI->__('module filter:', 'component-model') . $modulefilter;
         }
-        if ($stratum = $vars['stratum'] ?? null) {
-            $components[] = $this->translationAPI->__('stratum:', 'component-model') . $stratum;
-        }
 
         // Can the configuration change when doing a POST or GET?
         if (
@@ -106,7 +103,7 @@ class ModelInstance implements ModelInstanceInterface
                 false
             )
         ) {
-            $components[] = $this->translationAPI->__('operation:', 'component-model') . (doingPost() ? 'post' : 'get');
+            $components[] = $this->translationAPI->__('operation:', 'component-model') . ('POST' == $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
         }
         if ($mangled = $vars['mangled'] ?? null) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",

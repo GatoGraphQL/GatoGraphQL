@@ -5,43 +5,44 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use Exception;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\ComponentInfo;
-use PoP\ComponentModel\DataloadUtils;
-use PoP\ComponentModel\Constants\Props;
-use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Constants\Actions;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\Constants\Response;
-use PoP\Definitions\Configuration\Request;
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Cache\CacheInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\Constants\DataLoading;
-use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\Constants\Actions;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\CheckpointProcessorManagerFactory;
+use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Settings\SiteConfigurationProcessorManagerFactory;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
+use PoP\Definitions\Configuration\Request;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class Engine implements EngineInterface
 {
@@ -90,7 +91,8 @@ class Engine implements EngineInterface
     /**
      * @var array<string, mixed>
      */
-    protected array $outputData;
+    protected array $outputData = [];
+    protected ?array $entryModule = null;
     
     function __construct(
         protected TranslationAPIInterface $translationAPI,
@@ -104,36 +106,46 @@ class Engine implements EngineInterface
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ModuleFilterManagerInterface $moduleFilterManager,
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected CheckpointProcessorManagerInterface $checkpointProcessorManager,
+        protected DataloadHelperServiceInterface $dataloadHelperService,
+        protected EntryModuleManagerInterface $entryModuleManager,
+        protected RequestHelperServiceInterface $requestHelperService,
         protected ?CacheInterface $persistentCache = null
     ) {
     }
 
-    public function getOutputData()
+    public function getOutputData(): array
     {
         return $this->outputData;
     }
 
-    public function addBackgroundUrl($url, $targets)
+    public function addBackgroundUrl(string $url, array $targets): void
     {
         $this->backgroundload_urls[$url] = $targets;
     }
 
     public function getEntryModule(): array
     {
-        $siteconfiguration = SiteConfigurationProcessorManagerFactory::getInstance()->getProcessor();
-        if (!$siteconfiguration) {
-            throw new Exception('There is no Site Configuration. Hence, we can\'t continue.');
+        // Use cached results
+        if ($this->entryModule !== null) {
+            return $this->entryModule;
         }
 
-        $fullyQualifiedModule = $siteconfiguration->getEntryModule();
-        if (!$fullyQualifiedModule) {
-            throw new Exception(sprintf('No entry module for this request (%s)', RequestUtils::getRequestedFullURL()));
+        // Obtain, validate and cache
+        $this->entryModule = $this->entryModuleManager->getEntryModule();
+        if ($this->entryModule === null) {
+            throw new Exception(
+                sprintf(
+                    'No entry module for this request (%s)',
+                    $this->requestHelperService->getRequestedFullURL()
+                )
+            );
         }
 
-        return $fullyQualifiedModule;
+        return $this->entryModule;
     }
 
-    public function sendEtagHeader()
+    public function sendEtagHeader(): void
     {
         // ETag is needed for the Service Workers
         // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
@@ -189,18 +201,20 @@ class Engine implements EngineInterface
         return $this->extra_routes;
     }
 
-    public function listExtraRouteVars()
+    public function listExtraRouteVars(): array
     {
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = !empty($this->getExtraRoutes())) {
             $model_instance_id = $this->modelInstance->getModelInstanceId();
-            $current_uri = removeDomain(RequestUtils::getCurrentUrl());
+            $current_uri = GeneralUtils::removeDomain(
+                $this->requestHelperService->getCurrentURL()
+            );
         }
 
         return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
-    public function generateData()
+    public function generateData(): void
     {
         $this->hooksAPI->doAction('\PoP\ComponentModel\Engine:beginning');
 
@@ -249,7 +263,7 @@ class Engine implements EngineInterface
         $this->data = $formatter->getFormattedData($this->data);
     }
 
-    public function calculateOutuputData()
+    public function calculateOutuputData(): void
     {
         $this->outputData = $this->getEncodedDataObject($this->data);
     }
@@ -264,7 +278,7 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsModuletree(array $module)
+    public function getModelPropsModuletree(array $module): array
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
@@ -294,7 +308,7 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsModuletree(array $module, array $props)
+    public function addRequestPropsModuletree(array $module, array $props): array
     {
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
@@ -440,7 +454,7 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getModuleDatasetSettings(array $module, $model_props, array &$props)
+    public function getModuleDatasetSettings(array $module, $model_props, array &$props): array
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
@@ -489,12 +503,12 @@ class Engine implements EngineInterface
         return $ret;
     }
 
-    public function getRequestMeta()
+    public function getRequestMeta(): array
     {
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
             Response::UNIQUE_ID => ComponentInfo::get('unique-id'),
-            Response::URL => RequestUtils::getCurrentUrl(),
+            Response::URL => $this->requestHelperService->getCurrentURL(),
             'modelinstanceid' => $this->modelInstance->getModelInstanceId(),
         );
 
@@ -517,20 +531,13 @@ class Engine implements EngineInterface
             $meta['filteredmodules'] = $filteredsettings;
         }
 
-        // Any errors? Send them back
-        if (RequestUtils::$errors) {
-            $meta[Response::ERROR] = count(RequestUtils::$errors) > 1 ?
-                $this->translationAPI->__('Oops, there were some errors:', 'pop-engine') . implode('<br/>', RequestUtils::$errors)
-                : $this->translationAPI->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
-        }
-
         return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:request-meta',
             $meta
         );
     }
 
-    public function getSessionMeta()
+    public function getSessionMeta(): array
     {
         return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:session-meta',
@@ -538,10 +545,17 @@ class Engine implements EngineInterface
         );
     }
 
-    public function getSiteMeta()
+    /**
+     * Function to override by the ConfigurationComponentModel
+     */
+    protected function addSiteMeta(): bool
+    {
+        return true;
+    }
+    public function getSiteMeta(): array
     {
         $meta = array();
-        if (RequestUtils::fetchingSite()) {
+        if ($this->addSiteMeta()) {
             $vars = ApplicationState::getVars();
             $meta[Params::VERSION] = $vars['version'];
             $meta[Params::DATAOUTPUTMODE] = $vars['dataoutputmode'];
@@ -555,9 +569,6 @@ class Engine implements EngineInterface
             }
             if (ComponentConfiguration::enableConfigByParams() && $vars['config']) {
                 $meta[Params::CONFIG] = $vars['config'];
-            }
-            if ($vars['stratum'] ?? null) {
-                $meta[Params::STRATUM] = $vars['stratum'];
             }
 
             // Tell the front-end: are the results from the cache? Needed for the editor, to initialize it since WP will not execute the code
@@ -775,13 +786,11 @@ class Engine implements EngineInterface
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
-    public function validateCheckpoints($checkpoints)
+    public function validateCheckpoints(array $checkpoints): bool | Error
     {
-        $checkpointprocessor_manager = CheckpointProcessorManagerFactory::getInstance();
-
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
-            $result = $checkpointprocessor_manager->getProcessor($checkpoint)->process($checkpoint);
+            $result = $this->checkpointProcessorManager->getProcessor($checkpoint)->process($checkpoint);
             if (GeneralUtils::isError($result)) {
                 return $result;
             }
@@ -797,7 +806,7 @@ class Engine implements EngineInterface
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData($root_module, $root_model_props, $root_props)
+    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
@@ -1220,7 +1229,7 @@ class Engine implements EngineInterface
         return $ret;
     }
 
-    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, $typeResolver): array
+    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, TypeResolverInterface $typeResolver): array
     {
         $dbname_entries = [];
         if ($entries) {
@@ -1263,7 +1272,7 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
-    public function getDatabases()
+    public function getDatabases(): array
     {
         $vars = ApplicationState::getVars();
 
@@ -1592,9 +1601,9 @@ class Engine implements EngineInterface
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field);
+            $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field);
             if (!$subcomponent_typeResolver_class && $typeResolver != $targetTypeResolver) {
-                $subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
+                $subcomponent_typeResolver_class = $this->dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($targetTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponent_typeResolver_class) {
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);

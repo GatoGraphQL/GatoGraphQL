@@ -1,6 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -62,7 +63,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
 
     public function initModelProps(array $module, array &$props): void
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
@@ -103,7 +104,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     );
                     // Allow parent modules to override the share url and the title (eg: GetPoP Campaign)
                     $this->setProp($module, $props, 'title', $title);
-                    $this->setProp($module, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
+                    $this->setProp($module, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()));
                     $this->mergeProp(
                         $module,
                         $props,

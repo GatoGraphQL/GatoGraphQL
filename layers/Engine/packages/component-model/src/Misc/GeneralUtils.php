@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Misc;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+
 class GeneralUtils
 {
     // Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
@@ -30,7 +31,7 @@ class GeneralUtils
     }
 
     // Taken from https://gist.github.com/SeanCannon/6585889
-    public static function arrayFlatten($items, $deep = false)
+    public static function arrayFlatten(mixed $items, $deep = false)
     {
         if (!is_array($items)) {
             return [$items];
@@ -111,5 +112,16 @@ class GeneralUtils
     public static function maybeAddTrailingSlash(string $text): string
     {
         return rtrim($text, '/\\') . '/';
+    }
+
+    public static function getDomain(string $url): string
+    {
+        $parse = parse_url($url);
+        return $parse['scheme'] . '://' . $parse['host'];
+    }
+
+    public static function removeDomain(string $url): string
+    {
+        return substr($url, strlen(self::getDomain($url)));
     }
 }

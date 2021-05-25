@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\Route\RouteUtils;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
@@ -14,7 +15,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 
         // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -28,7 +29,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             '<p>%s</p><br/>',
             sprintf(
                 $this->translationAPI->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
-                GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()),
+                GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );

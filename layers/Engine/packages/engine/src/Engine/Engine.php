@@ -5,22 +5,25 @@ declare(strict_types=1);
 namespace PoP\Engine\Engine;
 
 use Exception;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Cache\CacheInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\LooseContracts\LooseContractManagerInterface;
-use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
+use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\LooseContractManagerInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
@@ -36,6 +39,10 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ModuleFilterManagerInterface $moduleFilterManager,
         ModuleProcessorManagerInterface $moduleProcessorManager,
+        CheckpointProcessorManagerInterface $checkpointProcessorManager,
+        DataloadHelperServiceInterface $dataloadHelperService,
+        EntryModuleManagerInterface $entryModuleManager,
+        RequestHelperServiceInterface $requestHelperService,
         protected LooseContractManagerInterface $looseContractManager,
         protected CacheControlEngineInterface $cacheControlEngine,
         ?CacheInterface $persistentCache = null
@@ -52,11 +59,15 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
             $fieldQueryInterpreter,
             $moduleFilterManager,
             $moduleProcessorManager,
+            $checkpointProcessorManager,
+            $dataloadHelperService,
+            $entryModuleManager,
+            $requestHelperService,
             $persistentCache,
         );
     }
 
-    public function generateData()
+    public function generateData(): void
     {
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
@@ -80,24 +91,8 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         parent::generateData();
     }
 
-    public function maybeRedirectAndExit(): void
-    {
-        if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
-            if ($query = $_SERVER['QUERY_STRING']) {
-                $redirect .= '?' . $query;
-            }
-
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            $cmsengineapi->redirect($redirect);
-            exit;
-        }
-    }
-
     public function outputResponse(): void
     {
-        // Before anything: check if to do a redirect, and exit
-        $this->maybeRedirectAndExit();
-
         // 1. Generate the data
         $this->generateData();
 

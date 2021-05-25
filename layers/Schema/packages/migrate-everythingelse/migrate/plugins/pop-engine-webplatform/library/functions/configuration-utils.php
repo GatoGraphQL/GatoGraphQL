@@ -1,13 +1,13 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_WebPlatform_ConfigurationUtils
 {
     public static function getAllowedDomains()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $homeurl = $cmsengineapi->getSiteURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        $homeurl = $cmsService->getSiteURL();
         return array_values(array_unique(HooksAPIFacade::getInstance()->applyFilters(
             'pop_modulemanager:allowed_domains',
             array(

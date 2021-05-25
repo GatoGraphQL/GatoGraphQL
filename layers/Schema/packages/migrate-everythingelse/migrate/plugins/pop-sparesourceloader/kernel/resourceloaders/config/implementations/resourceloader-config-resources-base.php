@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\SPA\ModuleFilters\Page;
 
 abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extends \PoP\FileStore\File\AbstractRenderableFileFragment
@@ -30,10 +31,10 @@ abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extend
     public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
 
         // Domain
-        $configuration['$domain'] = $cmsengineapi->getSiteURL();
+        $configuration['$domain'] = $cmsService->getSiteURL();
 
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var Page */

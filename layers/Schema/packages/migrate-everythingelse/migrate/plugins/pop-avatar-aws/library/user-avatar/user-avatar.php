@@ -159,7 +159,7 @@ class PoP_Avatar_AWSFunctions
 
     public function getAllowedDomains($allowed_domains)
     {
-        $allowed_domains[] = getDomain($this->getBucketUrl());
+        $allowed_domains[] = GeneralUtils::getDomain($this->getBucketUrl());
         return $allowed_domains;
     }
 

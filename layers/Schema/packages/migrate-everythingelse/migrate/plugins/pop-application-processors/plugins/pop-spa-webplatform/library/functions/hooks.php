@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ApplicationProcessors_SPA_Hooks
@@ -15,9 +16,9 @@ class PoP_ApplicationProcessors_SPA_Hooks
 
     public function addBackgroundurls($backgroundurls, $domain)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $homedomain = $cmsengineapi->getSiteURL();
-        $bloginfo_url = $cmsengineapi->getHomeURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        $homedomain = $cmsService->getSiteURL();
+        $bloginfo_url = $cmsService->getHomeURL();
 
         // Load all the Initial Frame loader pages for the domain
         foreach (PoP_SPAWebPlatform_ConfigurationUtils::getBackgroundloadUrls() as $url => $targets) {

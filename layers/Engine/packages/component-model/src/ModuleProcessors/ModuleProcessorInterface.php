@@ -59,10 +59,8 @@ interface ModuleProcessorInterface
     public function getBackgroundurlsMergeddatasetmoduletree(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs): array;
     public function getBackgroundurls(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs): array;
     public function getDatasetmeta(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array;
-    public function getRelevantRoute(array $module, array &$props): ?string;
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string;
-    public function getDataaccessCheckpoints(array $module, array &$props): array;
-    public function getActionexecutionCheckpoints(array $module, array &$props): array;
+    public function getDataAccessCheckpoints(array $module, array &$props): array;
+    public function getActionExecutionCheckpoints(array $module, array &$props): array;
     public function shouldExecuteMutation(array $module, array &$props): bool;
     public function getDataloadSource(array $module, array &$props): string;
     public function getModulesToPropagateDataProperties(array $module): array;

@@ -16,7 +16,7 @@ class DBEntriesHookSet extends AbstractHookSet
         );
     }
 
-    public function moveEntriesUnderDBName($metaFields)
+    public function moveEntriesUnderDBName(array $metaFields): array
     {
         $metaFields[] = '__schema';
         $metaFields[] = '__typename';

@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_3DAYS', 'events-3days');
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_4DAYS', 'events-4days');
@@ -44,7 +45,8 @@ function gdEmRss()
     // Taken from plugins/events-manager/events-manager.php function emRss()
     // Calling https://www.mesym.com/events/feed/ does not produce the EM feed
     // So correct it here by checking if we're in the EM_URI
-    if (\is_feed() && strpos(RequestUtils::getRequestedFullURL(), \EM_URI) === 0) {
+    $requestHelperService = RequestHelperServiceFacade::getInstance();
+    if (\is_feed() && strpos($requestHelperService->getRequestedFullURL(), \EM_URI) === 0) {
         //events feed - show it all
         $wp_query->is_feed = true; //make is_feed() return true AIO SEO fix
         ob_start();

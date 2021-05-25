@@ -6,6 +6,7 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class SettingsMutationResolver extends AbstractMutationResolver
 {
@@ -27,18 +28,18 @@ class SettingsMutationResolver extends AbstractMutationResolver
     public function execute(array $form_data): mixed
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
 
         // Return the redirect. Use Hard redirect
         // $redirect_to = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL]);
         // if (!$redirect_to) {
-
+        //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         //     $redirect_to = $cmsengineapi->getHomeURL();
         // }
         // Comment Leo 22/05/2015: If we forward to the same URL but with different lang, it will always go to https://www.mesym.com/ms/settings/
         // So forward to the homepage instead (temporary solution)
-        // Using $cmsengineapi->getSiteURL() instead of $cmsengineapi->getHomeURL() so that it doesn't include the language bit, which will be changed later on
-        $redirect_to = $cmsengineapi->getSiteURL();
+        // Using $cmsService->getSiteURL() instead of $cmsService->getHomeURL() so that it doesn't include the language bit, which will be changed later on
+        $redirect_to = $cmsService->getSiteURL();
 
         // Add all the params selected by the user
         foreach ($this->fieldoperators as $fieldoperator) {

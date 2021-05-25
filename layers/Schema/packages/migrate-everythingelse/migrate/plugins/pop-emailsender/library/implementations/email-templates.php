@@ -2,14 +2,15 @@
 define('POP_EMAILFRAME_DEFAULT', 'default');
 define('POP_EMAILTEMPLATE_BUTTON', 'button.html');
 
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
-use PoPSchema\EverythingElse\Misc\TagHelpers;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\Facades\Formatters\DateFormatterFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
@@ -34,9 +35,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getEmailframeFooter(/*$frame, */$title, $emails, $names, $template)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $url = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+        $url = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
         return sprintf(
             '<p><a href="%s">%s</a><br/>%s</p>',
             $url,
@@ -120,7 +121,6 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getCommenthtml($comment)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $avatar = gdGetAvatar($cmscommentsresolver->getCommentUserId($comment), GD_AVATAR_SIZE_40);
         $avatar_html = sprintf(
@@ -131,6 +131,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
         );
 
         $comment_styles = HooksAPIFacade::getInstance()->applyFilters('sendemailToUsersFromComment:comment_styles', array('width: 100%'));
+        $dateFormatter = DateFormatterFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
         $comment_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
@@ -143,7 +144,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar_html,
             $comment->comment_author_url,
             $comment->comment_author,
-            $cmsengineapi->getDate($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
+            $dateFormatter->format($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
             $cmscommentsresolver->getCommentContent($comment)
         );
 
@@ -204,11 +205,11 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getWebsitehtml()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         return sprintf(
             '<a href="%s">%s</a>',
-            $cmsengineapi->getSiteURL(),
+            $cmsService->getSiteURL(),
             $cmsapplicationapi->getSiteName()
         );
     }

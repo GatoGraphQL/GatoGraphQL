@@ -1,10 +1,11 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -25,15 +26,14 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
     public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
 
         // Domain
-        $configuration['$domain'] = $cmsengineapi->getSiteURL();
-        // $configuration['$pathStartPos'] = strlen(GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
+        $configuration['$domain'] = $cmsService->getSiteURL();
 
         // Get the list of all categories, and then their paths
         $categories = $postCategoryTypeAPI->getCategories(['hide-empty' => false], ['return-type' => ReturnTypes::IDS]);

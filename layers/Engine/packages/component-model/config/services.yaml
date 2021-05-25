@@ -46,6 +46,15 @@ services:
     PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\FormInputHelperService
 
+    PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\DataloadHelperService
+
+    PoP\ComponentModel\HelperServices\RequestHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\RequestHelperService
+
+    PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
+
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
@@ -84,6 +93,9 @@ services:
 
     PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
         class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager
+
+    PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface:
+        class: \PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManager
 
     PoP\ComponentModel\Registries\TypeRegistryInterface:
         class: \PoP\ComponentModel\Registries\TypeRegistry

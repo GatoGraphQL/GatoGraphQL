@@ -482,7 +482,6 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             Params::SCHEME,
             Params::DATASTRUCTURE,
             Params::OUTPUT,
-            Params::STRATUM,
             Params::DATAOUTPUTMODE,
             Params::DATABASESOUTPUTMODE,
             Params::ACTIONS,

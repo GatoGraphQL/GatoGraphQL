@@ -1,17 +1,18 @@
 <?php
 
-use PoP\ComponentModel\DataloadUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\HelperServices\DataloadHelperService;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
@@ -227,7 +228,8 @@ class PoP_SSR_EngineInitialization_Hooks
                     $resultItemIDs = array_keys($sourcedb[$database_key]);
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
-                    if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
+                    $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
+                    if ($subcomponent_typeResolver_class = $dataloadHelperService->getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                         $subcomponentTypeResolver = $instanceManager->getInstance((string)$subcomponent_typeResolver_class);
                         $typeResultItemIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
