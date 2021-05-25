@@ -19,7 +19,6 @@ use PoP\ComponentModel\Constants\DataSources;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
