@@ -196,7 +196,8 @@
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
             "PoP\\TraceTools\\": "layers/Engine/packages/trace-tools/src",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
-            "PoP\\Translation\\": "layers/Engine/packages/translation/src"
+            "PoP\\Translation\\": "layers/Engine/packages/translation/src",
+            "MoM\\API\\": "layers/SiteBuilderAPI/packages/api/src"
         }
     },
     "autoload-dev": {
