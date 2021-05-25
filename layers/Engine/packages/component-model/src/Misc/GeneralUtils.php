@@ -30,7 +30,7 @@ class GeneralUtils
     }
 
     // Taken from https://gist.github.com/SeanCannon/6585889
-    public static function arrayFlatten($items, $deep = false)
+    public static function arrayFlatten(mixed $items, $deep = false)
     {
         if (!is_array($items)) {
             return [$items];
