@@ -18,6 +18,7 @@ use PoP\ComponentModel\Constants\Response;
 use PoP\Definitions\Configuration\Request;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
@@ -28,7 +29,6 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\CheckpointProcessorManagerFactory;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
@@ -104,6 +104,7 @@ class Engine implements EngineInterface
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected ModuleFilterManagerInterface $moduleFilterManager,
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
+        protected CheckpointProcessorManagerInterface $checkpointProcessorManager,
         protected ?CacheInterface $persistentCache = null
     ) {
     }
@@ -777,11 +778,9 @@ class Engine implements EngineInterface
 
     public function validateCheckpoints($checkpoints)
     {
-        $checkpointprocessor_manager = CheckpointProcessorManagerFactory::getInstance();
-
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
-            $result = $checkpointprocessor_manager->getProcessor($checkpoint)->process($checkpoint);
+            $result = $this->checkpointProcessorManager->getProcessor($checkpoint)->process($checkpoint);
             if (GeneralUtils::isError($result)) {
                 return $result;
             }
