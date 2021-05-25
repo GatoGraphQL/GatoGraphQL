@@ -985,49 +985,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // Others
     //-------------------------------------------------
 
-    public function getRelevantRoute(array $module, array &$props): ?string
-    {
-        return null;
-    }
-
-    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string
-    {
-        return DataLoading::DATA_ACCESS_CHECKPOINTS;
-    }
-
-    protected function maybeOverrideCheckpoints($checkpoints)
-    {
-        // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return $this->hooksAPI->applyFilters(
-            'ModuleProcessor:checkpoints',
-            $checkpoints
-        );
-    }
-
-    // function getDataaccessCheckpointConfiguration(array $module, array &$props) {
     public function getDataaccessCheckpoints(array $module, array &$props): array
     {
-        if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
-                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
-            }
-        }
-
-        // return null;
-        return array();
+        return [];
     }
 
-    // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
     public function getActionexecutionCheckpoints(array $module, array &$props): array
     {
-        if ($route = $this->getRelevantRoute($module, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
-                return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getCheckpoints($route));
-            }
-        }
-
-        // return null;
-        return array();
+        return [];
     }
 
     public function shouldExecuteMutation(array $module, array &$props): bool

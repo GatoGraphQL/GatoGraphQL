@@ -15,4 +15,6 @@ interface ModuleProcessorInterface extends \PoP\ComponentModel\ModuleProcessors\
     public function getMutableonrequestSettingsModuletree(array $module, array &$props): array;
     public function getMutableonrequestSettings(array $module, array &$props): array;
     public function getMutableonrequestConfiguration(array $module, array &$props): array;
+    public function getRelevantRoute(array $module, array &$props): ?string;
+    public function getRelevantRouteCheckpointTarget(array $module, array &$props): string;
 }
