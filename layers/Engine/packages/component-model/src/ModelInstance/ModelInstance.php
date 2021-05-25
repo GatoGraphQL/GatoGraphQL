@@ -103,7 +103,7 @@ class ModelInstance implements ModelInstanceInterface
                 false
             )
         ) {
-            $components[] = $this->translationAPI->__('operation:', 'component-model') . (doingPost() ? 'post' : 'get');
+            $components[] = $this->translationAPI->__('operation:', 'component-model') . ('POST' == $_SERVER['REQUEST_METHOD'] ? 'post' : 'get');
         }
         if ($mangled = $vars['mangled'] ?? null) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
