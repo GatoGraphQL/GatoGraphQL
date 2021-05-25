@@ -110,7 +110,7 @@ abstract class AbstractModuleProcessor extends \PoP\ComponentModel\ModuleProcess
         );
     }
 
-    public function getDataaccessCheckpoints(array $module, array &$props): array
+    public function getDataAccessCheckpoints(array $module, array &$props): array
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
             if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
@@ -118,10 +118,10 @@ abstract class AbstractModuleProcessor extends \PoP\ComponentModel\ModuleProcess
             }
         }
 
-        return parent::getDataaccessCheckpoints($module, $props);
+        return parent::getDataAccessCheckpoints($module, $props);
     }
 
-    public function getActionexecutionCheckpoints(array $module, array &$props): array
+    public function getActionExecutionCheckpoints(array $module, array &$props): array
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
             if ($this->getRelevantRouteCheckpointTarget($module, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
@@ -129,6 +129,6 @@ abstract class AbstractModuleProcessor extends \PoP\ComponentModel\ModuleProcess
             }
         }
 
-        return parent::getActionexecutionCheckpoints($module, $props);
+        return parent::getActionExecutionCheckpoints($module, $props);
     }
 }

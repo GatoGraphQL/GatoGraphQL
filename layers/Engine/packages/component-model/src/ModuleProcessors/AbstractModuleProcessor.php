@@ -899,7 +899,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doingPost()
         // (such as done to set-up checkpoint configuration for POP_USERSTANCE_ROUTE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
         // if ($checkpoint_configuration = $this->getDataaccessCheckpointConfiguration($module, $props)) {
-        if ($checkpoints = $this->getDataaccessCheckpoints($module, $props)) {
+        if ($checkpoints = $this->getDataAccessCheckpoints($module, $props)) {
             // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
 
             // Pass info for PoP Engine
@@ -910,7 +910,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // To trigger the actionexecuter, its own checkpoints must be successful
         // if ($checkpoint_configuration = $this->getActionexecutionCheckpointConfiguration($module, $props)) {
-        if ($checkpoints = $this->getActionexecutionCheckpoints($module, $props)) {
+        if ($checkpoints = $this->getActionExecutionCheckpoints($module, $props)) {
             // if (RequestUtils::checkpointValidationRequired($checkpoint_configuration)) {
 
             // Pass info for PoP Engine
@@ -985,12 +985,12 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // Others
     //-------------------------------------------------
 
-    public function getDataaccessCheckpoints(array $module, array &$props): array
+    public function getDataAccessCheckpoints(array $module, array &$props): array
     {
         return [];
     }
 
-    public function getActionexecutionCheckpoints(array $module, array &$props): array
+    public function getActionExecutionCheckpoints(array $module, array &$props): array
     {
         return [];
     }

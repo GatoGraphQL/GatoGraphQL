@@ -1862,15 +1862,15 @@ A "checkpoint" is a condition that must be satisfied when performing an operatio
 
 Modules can specify their checkpoints through 2 functions in the ModuleProcessor:
 
-- `getDataaccessCheckpoints`: Define the checkpoints to access data for the module: both load data or execute the module's actionexecuter
-- `getActionexecutionCheckpoints`: Define the checkpoints to execute the module's actionexecuter
+- `getDataAccessCheckpoints`: Define the checkpoints to access data for the module: both load data or execute the module's actionexecuter
+- `getActionExecutionCheckpoints`: Define the checkpoints to execute the module's actionexecuter
 
 The reason why these 2 functions are split like is, is to allow a page perform the validation only when posting data. Then, an "Add Post" page can require no checkpoints when first loaded, which enables to cache it, and only perform the validation (eg: is user logged in?) when executing the POST operation and triggering the actionexecuter.
 
 For instance, a module that needs to validate that the user's IP is whitelisted can do it like this:
 
 ```php
-function getDataaccessCheckpoints($module, &$props) 
+function getDataAccessCheckpoints($module, &$props) 
 {
   switch ($module[1]) {
     case self::MODULE_SOMEMODULE:
@@ -1878,7 +1878,7 @@ function getDataaccessCheckpoints($module, &$props)
       return [CHECKPOINT_WHITELISTEDIP];
   }
   
-  return parent::getDataaccessCheckpoints($module, $props);
+  return parent::getDataAccessCheckpoints($module, $props);
 }
 ```
 

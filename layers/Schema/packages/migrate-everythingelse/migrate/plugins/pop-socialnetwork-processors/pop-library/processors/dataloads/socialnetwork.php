@@ -26,7 +26,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     }
 
     // function getDataaccessCheckpointConfiguration(array $module, array &$props) {
-    public function getDataaccessCheckpoints(array $module, array &$props): array
+    public function getDataAccessCheckpoints(array $module, array &$props): array
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
@@ -38,7 +38,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         }
 
         // return parent::getDataaccessCheckpointConfiguration($module, $props);
-        return parent::getDataaccessCheckpoints($module, $props);
+        return parent::getDataAccessCheckpoints($module, $props);
     }
 
     protected function addHeaddatasetmoduleDataProperties(&$ret, array $module, array &$props)
