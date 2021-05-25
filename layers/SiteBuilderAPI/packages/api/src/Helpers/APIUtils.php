@@ -1,5 +1,5 @@
 <?php
-namespace PoP\API;
+namespace MoM\API\Helpers;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;

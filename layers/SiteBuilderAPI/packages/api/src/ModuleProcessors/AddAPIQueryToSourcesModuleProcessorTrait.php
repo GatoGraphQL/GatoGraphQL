@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\API\ModuleProcessors;
+namespace MoM\API\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\API\Schema\QueryInputs;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\API\APIUtils;
+use MoM\API\Helpers\APIUtils;
 
 trait AddAPIQueryToSourcesModuleProcessorTrait
 {
