@@ -290,15 +290,15 @@ services:
       - cp assets/.htaccess wordpress
       - wp rewrite structure '/%postname%/' --hard --path=wordpress
       - wp plugin activate graphql-api --path=wordpress
-      - wp plugin install wordpress-importer --activate --path=wordpress
-      - >-
-        wp import assets/graphql-api-sample-data.xml --authors=create
-        --path=wordpress
       - >-
         sed 's/__DIR__/dirname(__DIR__)/' wordpress/index.php >
         wordpress/Schema/index.php
       - cp wordpress/Schema/index.php wordpress/API/index.php
       - cp wordpress/Schema/index.php wordpress/Engine/index.php
       - cp wordpress/Schema/index.php wordpress/GraphQLByPoP/index.php
+      - wp plugin install wordpress-importer --activate --path=wordpress
+      - >-
+        wp import assets/graphql-api-sample-data.xml --authors=create
+        --path=wordpress
 env_file:
   - ../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/defaults.env
