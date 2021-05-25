@@ -52,3 +52,6 @@ services:
 
     PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\Engine\Schema\SchemaDefinitionService
+
+    PoP\ComponentModel\EntryModule\EntryModuleManagerInterface:
+        class: \PoP\Engine\EntryModule\EntryModuleManager

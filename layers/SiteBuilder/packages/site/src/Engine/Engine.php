@@ -8,6 +8,7 @@ use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -38,6 +39,7 @@ class Engine extends \PoP\Application\Engine\Engine
         ModuleProcessorManagerInterface $moduleProcessorManager,
         CheckpointProcessorManagerInterface $checkpointProcessorManager,
         DataloadHelperServiceInterface $dataloadHelperService,
+        EntryModuleManagerInterface $entryModuleManager,
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine,
         protected ApplicationStateHelperServiceInterface $applicationStateHelperService,
@@ -57,6 +59,7 @@ class Engine extends \PoP\Application\Engine\Engine
             $moduleProcessorManager,
             $checkpointProcessorManager,
             $dataloadHelperService,
+            $entryModuleManager,
             $looseContractManager,
             $cacheControlEngine,
             $persistentCache,

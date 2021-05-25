@@ -39,9 +39,9 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Settings\SiteConfigurationProcessorManagerFactory;
 
 class Engine implements EngineInterface
 {
@@ -106,6 +106,7 @@ class Engine implements EngineInterface
         protected ModuleProcessorManagerInterface $moduleProcessorManager,
         protected CheckpointProcessorManagerInterface $checkpointProcessorManager,
         protected DataloadHelperServiceInterface $dataloadHelperService,
+        protected EntryModuleManagerInterface $entryModuleManager,
         protected ?CacheInterface $persistentCache = null
     ) {
     }
@@ -122,12 +123,7 @@ class Engine implements EngineInterface
 
     public function getEntryModule(): array
     {
-        $siteconfiguration = SiteConfigurationProcessorManagerFactory::getInstance()->getProcessor();
-        if (!$siteconfiguration) {
-            throw new Exception('There is no Site Configuration. Hence, we can\'t continue.');
-        }
-
-        $fullyQualifiedModule = $siteconfiguration->getEntryModule();
+        $fullyQualifiedModule = $this->entryModuleManager->getEntryModule();
         if (!$fullyQualifiedModule) {
             throw new Exception(sprintf('No entry module for this request (%s)', RequestUtils::getRequestedFullURL()));
         }
