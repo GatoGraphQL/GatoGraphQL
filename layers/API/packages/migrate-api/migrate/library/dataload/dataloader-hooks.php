@@ -13,7 +13,7 @@ class DataloaderHooks
         );
     }
 
-    public function moveEntriesUnderDBName($dbname_datafields)
+    public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
         // All fields starting with "__" (such as "__schema") are meta
         $dbname_datafields['meta'] = HooksAPIFacade::getInstance()->applyFilters(

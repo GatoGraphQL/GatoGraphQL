@@ -125,7 +125,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData($root_module, $root_model_props, $root_props)
+    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         $ret = parent::getModuleData($root_module, $root_model_props, $root_props);
 
@@ -216,7 +216,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
     }
 
-    public function getRequestMeta()
+    public function getRequestMeta(): array
     {
         $meta = parent::getRequestMeta();
 

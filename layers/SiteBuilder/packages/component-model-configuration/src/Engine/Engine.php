@@ -139,7 +139,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::outputResponse();
     }
 
-    public function getSiteMeta()
+    public function getSiteMeta(): array
     {
         $meta = parent::getSiteMeta();
         if (RequestUtils::fetchingSite()) {

@@ -40,6 +40,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionTypeResolverInterface;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 
@@ -111,12 +112,12 @@ class Engine implements EngineInterface
     ) {
     }
 
-    public function getOutputData()
+    public function getOutputData(): array
     {
         return $this->outputData;
     }
 
-    public function addBackgroundUrl($url, $targets)
+    public function addBackgroundUrl(string $url, array $targets): void
     {
         $this->backgroundload_urls[$url] = $targets;
     }
@@ -131,7 +132,7 @@ class Engine implements EngineInterface
         return $fullyQualifiedModule;
     }
 
-    public function sendEtagHeader()
+    public function sendEtagHeader(): void
     {
         // ETag is needed for the Service Workers
         // Also needed to use together with the Control-Cache header, to know when to refetch data from the server: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
@@ -187,7 +188,7 @@ class Engine implements EngineInterface
         return $this->extra_routes;
     }
 
-    public function listExtraRouteVars()
+    public function listExtraRouteVars(): array
     {
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = !empty($this->getExtraRoutes())) {
@@ -198,7 +199,7 @@ class Engine implements EngineInterface
         return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
-    public function generateData()
+    public function generateData(): void
     {
         $this->hooksAPI->doAction('\PoP\ComponentModel\Engine:beginning');
 
@@ -247,7 +248,7 @@ class Engine implements EngineInterface
         $this->data = $formatter->getFormattedData($this->data);
     }
 
-    public function calculateOutuputData()
+    public function calculateOutuputData(): void
     {
         $this->outputData = $this->getEncodedDataObject($this->data);
     }
@@ -262,7 +263,7 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsModuletree(array $module)
+    public function getModelPropsModuletree(array $module): array
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
@@ -292,7 +293,7 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsModuletree(array $module, array $props)
+    public function addRequestPropsModuletree(array $module, array $props): array
     {
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
@@ -438,7 +439,7 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getModuleDatasetSettings(array $module, $model_props, array &$props)
+    public function getModuleDatasetSettings(array $module, $model_props, array &$props): array
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
@@ -487,7 +488,7 @@ class Engine implements EngineInterface
         return $ret;
     }
 
-    public function getRequestMeta()
+    public function getRequestMeta(): array
     {
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
@@ -528,7 +529,7 @@ class Engine implements EngineInterface
         );
     }
 
-    public function getSessionMeta()
+    public function getSessionMeta(): array
     {
         return $this->hooksAPI->applyFilters(
             '\PoP\ComponentModel\Engine:session-meta',
@@ -536,7 +537,7 @@ class Engine implements EngineInterface
         );
     }
 
-    public function getSiteMeta()
+    public function getSiteMeta(): array
     {
         $meta = array();
         if (RequestUtils::fetchingSite()) {
@@ -770,7 +771,7 @@ class Engine implements EngineInterface
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
-    public function validateCheckpoints($checkpoints)
+    public function validateCheckpoints(array $checkpoints): bool | Error
     {
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
@@ -790,7 +791,7 @@ class Engine implements EngineInterface
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData($root_module, $root_model_props, $root_props)
+    public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
@@ -1213,7 +1214,7 @@ class Engine implements EngineInterface
         return $ret;
     }
 
-    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, $typeResolver): array
+    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, TypeResolverInterface $typeResolver): array
     {
         $dbname_entries = [];
         if ($entries) {
@@ -1256,7 +1257,7 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
-    public function getDatabases()
+    public function getDatabases(): array
     {
         $vars = ApplicationState::getVars();
 
