@@ -113,4 +113,15 @@ class GeneralUtils
     {
         return rtrim($text, '/\\') . '/';
     }
+
+    public static function getDomain(string $url): string
+    {
+        $parse = parse_url($url);
+        return $parse['scheme'] . '://' . $parse['host'];
+    }
+
+    public static function removeDomain(string $url): string
+    {
+        return substr($url, strlen(self::getDomain($url)));
+    }
 }

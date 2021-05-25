@@ -1,19 +1,10 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-function getDomain($url)
-{
-    $parse = parse_url($url);
-    return $parse['scheme'].'://'.$parse['host'];
-}
 function removeScheme($domain)
 {
     $arr = explode("//", $domain);
     return count($arr) == 1 ? $arr[0] : $arr[1];
-}
-function removeDomain($url)
-{
-    return substr($url, strlen(getDomain($url)));
 }
 
 function arrayFlatten(array $array, bool $firstLevelOnly = false)

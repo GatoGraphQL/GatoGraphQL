@@ -1,7 +1,8 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-
 use Aws\Common\Aws;
+
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_WebPlatformEngine_AWS_S3UploadBase extends PoP_AWS_S3UploadBase
 {
@@ -22,7 +23,7 @@ class PoP_WebPlatformEngine_AWS_S3UploadBase extends PoP_AWS_S3UploadBase
 
     public function getAllowedDomains($domains)
     {
-        $domains[] = getDomain($this->getDomain());
+        $domains[] = GeneralUtils::getDomain($this->getDomain());
         return $domains;
     }
 

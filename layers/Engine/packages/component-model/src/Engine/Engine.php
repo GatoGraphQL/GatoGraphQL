@@ -206,7 +206,9 @@ class Engine implements EngineInterface
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = !empty($this->getExtraRoutes())) {
             $model_instance_id = $this->modelInstance->getModelInstanceId();
-            $current_uri = removeDomain($this->requestHelperService->getCurrentURL());
+            $current_uri = GeneralUtils::removeDomain(
+                $this->requestHelperService->getCurrentURL()
+            );
         }
 
         return array($has_extra_routes, $model_instance_id, $current_uri);

@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------
@@ -24,7 +25,7 @@ function popAwss3Allowedurl($allowed_domains)
             $domain = $scheme . '://' . $domain;
 
             // We need to do getDomain because the S3 URL Domain may be domain/bucket (if doing AWSS3CF_DOMAIN = 'path')
-            $allowed_domains[] = getDomain($domain);
+            $allowed_domains[] = GeneralUtils::getDomain($domain);
         }
     }
 

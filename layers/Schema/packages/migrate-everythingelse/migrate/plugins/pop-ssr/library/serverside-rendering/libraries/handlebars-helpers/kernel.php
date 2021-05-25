@@ -1,7 +1,8 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 /**
  * Helper functions, they have the same logic as the original javascript
@@ -66,7 +67,7 @@ class PoP_ServerSide_KernelHelpers
         // For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
         if ($url) {
             $items[] = 'data-'.POP_PARAMS_TOPLEVEL_URL.'="'.$url.'"';
-            $items[] = 'data-'.POP_PARAMS_TOPLEVEL_DOMAIN.'="'.getDomain($url).'"';
+            $items[] = 'data-'.POP_PARAMS_TOPLEVEL_DOMAIN.'="'.GeneralUtils::getDomain($url).'"';
         }
         return new LS(implode(' ', $items));
     }

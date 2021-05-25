@@ -2,6 +2,7 @@
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
@@ -487,7 +488,7 @@ class PoP_ServerSideManager
 
     public function getDestroyUrl($url)
     {
-        $domain = getDomain($url);
+        $domain = GeneralUtils::getDomain($url);
         return $domain.'/destroy'.substr($url, strlen($domain));
     }
 
