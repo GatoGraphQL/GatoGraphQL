@@ -10,6 +10,7 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
+use PoP\ComponentModel\Settings\SettingsManagerFactory;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -113,5 +114,26 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         return $ret;
+    }
+
+    public function maybeRedirectAndExit(): void
+    {
+        if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
+            if ($query = $_SERVER['QUERY_STRING']) {
+                $redirect .= '?' . $query;
+            }
+
+            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+            $cmsengineapi->redirect($redirect);
+            exit;
+        }
+    }
+
+    public function outputResponse(): void
+    {
+        // Before anything: check if to do a redirect, and exit
+        $this->maybeRedirectAndExit();
+
+        parent::outputResponse();
     }
 }

@@ -6,4 +6,5 @@ require_once 'pop-settingsprocessor-manager-factory.php';
 require_once 'pop-abstractsettingsprocessor-manager.php';
 require_once 'pop-settingsprocessor-manager.php';
 require_once 'pop-settingsprocessor.php';
+require_once 'pop-settingsprocessor-default-base.php';
 require_once 'pop-settingsprocessor-default.php';

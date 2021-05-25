@@ -20,7 +20,6 @@ use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\LooseContractManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -89,24 +88,8 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         parent::generateData();
     }
 
-    public function maybeRedirectAndExit(): void
-    {
-        if ($redirect = SettingsManagerFactory::getInstance()->getRedirectUrl()) {
-            if ($query = $_SERVER['QUERY_STRING']) {
-                $redirect .= '?' . $query;
-            }
-
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            $cmsengineapi->redirect($redirect);
-            exit;
-        }
-    }
-
     public function outputResponse(): void
     {
-        // Before anything: check if to do a redirect, and exit
-        $this->maybeRedirectAndExit();
-
         // 1. Generate the data
         $this->generateData();
 

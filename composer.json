@@ -481,7 +481,6 @@
         "pop-schema/migrate-metaquery-wp": "0.7.13",
         "pop-schema/migrate-pages": "0.7.13",
         "pop-schema/migrate-pages-wp": "0.7.13",
-        "pop-schema/migrate-post-tags": "0.7.13",
         "pop-schema/migrate-posts": "0.7.13",
         "pop-schema/migrate-queriedobject": "0.7.13",
         "pop-schema/migrate-queriedobject-wp": "0.7.13",
