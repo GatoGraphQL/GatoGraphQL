@@ -89,7 +89,7 @@ class LazyLoadHookSet extends AbstractHookSet
                     ModuleFilterManager::URLPARAM_MODULEFILTER => $lazy->getName(),
                     Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
-                $this->requestHelperService->getCurrentUrl()
+                $this->requestHelperService->getCurrentURL()
             );
             $engine->addBackgroundUrl($url, array(Targets::MAIN));
         }

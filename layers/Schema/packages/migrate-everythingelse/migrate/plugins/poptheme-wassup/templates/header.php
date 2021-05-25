@@ -46,7 +46,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
     <meta property="og:title" content="<?php echo $encoded_title ?>">
     <meta name="twitter:title" content="<?php echo $encoded_title ?>">
     <?php $requestHelperService = RequestHelperServiceFacade::getInstance(); ?>
-    <?php $url = $requestHelperService->getCurrentUrl(); ?>
+    <?php $url = $requestHelperService->getCurrentURL(); ?>
     <?php if ($url != urldecode($requestHelperService->getRequestedFullURL())) : ?>
         <link rel="canonical" href="<?php echo $url ?>">
     <?php endif; ?>

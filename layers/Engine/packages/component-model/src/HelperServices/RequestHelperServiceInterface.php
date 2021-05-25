@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\HelperServices;
 
 interface RequestHelperServiceInterface
 {
-    public function getCurrentUrl(): string;
+    public function getCurrentURL(): string;
     /**
      * Return the requested full URL
      *

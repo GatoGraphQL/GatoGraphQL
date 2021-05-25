@@ -84,7 +84,7 @@ class PoP_ServerSideManager
 
         // Stateful data is to be integrated under the corresponding URL
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         $datastore->store[$domain]['mutableonrequestdata'] = array(
             $url => $json['moduledata']['mutableonrequest'],
         );
@@ -150,7 +150,7 @@ class PoP_ServerSideManager
         // Set the URL for the 'session-ids'
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         $popJSRuntimeManager->setPageSectionURL($url);
 
         // Step 0: initialize the pageSection
@@ -312,7 +312,7 @@ class PoP_ServerSideManager
     {
         $pssId = $this->getSettingsId($pageSection);
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         return $this->getCombinedStateData($domain, $url)['settings']['configuration'][$pssId];
     }
 
@@ -410,7 +410,7 @@ class PoP_ServerSideManager
         // and not that from where the data is being rendered
         // $multidomain_urls = $this->getRuntimeSettings($blockTLDomain, $pssId, $bsId, 'query-multidomain-urls');
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         $runtimeConfiguration = $this->getStatefulSettings($blockTLDomain, $url, $pssId, $bsId, 'configuration');
         $multidomain_urls = $runtimeConfiguration['query-multidomain-urls'];
         return ($multidomain_urls && count($multidomain_urls) >= 2);
@@ -436,7 +436,7 @@ class PoP_ServerSideManager
         $pssId = $this->getSettingsId($pageSection);
         $bsId = $this->getSettingsId($block);
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         return $this->getStatefulData($domain, $url)['dbobjectids'][$pssId][$bsId];
     }
 
@@ -445,7 +445,7 @@ class PoP_ServerSideManager
         $pssId = $this->getSettingsId($pageSection);
         $bsId = $this->getSettingsId($block);
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         return $this->getStatefulData($domain, $url)['feedback']['block'][$pssId][$bsId];
     }
 
@@ -453,14 +453,14 @@ class PoP_ServerSideManager
     {
         $pssId = $this->getSettingsId($pageSection);
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         return $this->getStatefulData($domain, $url)['feedback']['pagesection'][$pssId];
     }
 
     public function getTopLevelFeedback($domain)
     {
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         return $this->getStatefulData($domain, $url)['feedback']['toplevel'];
     }
 

@@ -58,7 +58,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 $source = $sources[$module[1]];
 
                 $requestHelperService = RequestHelperServiceFacade::getInstance();
-                $url = $requestHelperService->getCurrentUrl();
+                $url = $requestHelperService->getCurrentURL();
                 // Remove the 'source' param if it exists on the current url
                 $url = GeneralUtils::removeQueryArgs([GD_URLPARAM_URECONTENTSOURCE], $url);
 

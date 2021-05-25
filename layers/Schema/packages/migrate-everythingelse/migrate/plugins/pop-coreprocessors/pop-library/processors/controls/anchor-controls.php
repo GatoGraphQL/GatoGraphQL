@@ -132,7 +132,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
             case self::MODULE_ANCHORCONTROL_CURRENTURL:
                 $requestHelperService = RequestHelperServiceFacade::getInstance();
-                return $requestHelperService->getCurrentUrl();
+                return $requestHelperService->getCurrentURL();
 
             case self::MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS:
                 // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`

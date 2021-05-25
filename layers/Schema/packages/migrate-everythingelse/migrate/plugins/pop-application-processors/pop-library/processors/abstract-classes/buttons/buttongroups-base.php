@@ -166,6 +166,6 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
     protected function getHeadersdataUrl(array $module, array &$props)
     {
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        return $requestHelperService->getCurrentUrl();
+        return $requestHelperService->getCurrentURL();
     }
 }

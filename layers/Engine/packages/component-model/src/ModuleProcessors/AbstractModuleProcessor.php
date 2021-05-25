@@ -1015,7 +1015,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 ModuleFilterManager::URLPARAM_MODULEFILTER => $modulePaths->getName(),
                 ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
             ],
-            $this->requestHelperService->getCurrentUrl()
+            $this->requestHelperService->getCurrentURL()
         );
 
         // If we are in the API currently, stay in the API

@@ -69,7 +69,7 @@ class RoutingHookSet extends AbstractHookSet
             return $route;
         }
         $homeURL = $this->cmsService->getHomeURL();
-        $currentURL = $this->requestHelperService->getCurrentUrl();
+        $currentURL = $this->requestHelperService->getCurrentURL();
         // Remove the protocol to avoid erroring on http/https
         $homeURL = preg_replace('#^https?://#', '', $homeURL);
         $currentURL = preg_replace('#^https?://#', '', $currentURL);

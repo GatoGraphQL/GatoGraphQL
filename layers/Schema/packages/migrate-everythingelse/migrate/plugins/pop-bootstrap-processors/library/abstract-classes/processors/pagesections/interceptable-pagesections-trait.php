@@ -16,7 +16,7 @@ trait PoP_Module_Processor_InterceptablePageSectionsTrait
 
         // Intercept current page
         $requestHelperService = RequestHelperServiceFacade::getInstance();
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
         $ret[$moduleOutputName] = $url;
 
         return $ret;

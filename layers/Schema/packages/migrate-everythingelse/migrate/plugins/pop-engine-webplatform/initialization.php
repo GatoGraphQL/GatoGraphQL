@@ -189,7 +189,7 @@ class PoPWebPlatform_Initialization
 
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $jqueryConstants = array(
-            'INITIAL_URL' => $requestHelperService->getCurrentUrl(), // Needed to always identify which was the first URL loaded
+            'INITIAL_URL' => $requestHelperService->getCurrentURL(), // Needed to always identify which was the first URL loaded
             'HOME_DOMAIN' => $homeurl,
             'ALLOWED_DOMAINS' => $allowed_domains,
             'VERSION' => $vars['version'],

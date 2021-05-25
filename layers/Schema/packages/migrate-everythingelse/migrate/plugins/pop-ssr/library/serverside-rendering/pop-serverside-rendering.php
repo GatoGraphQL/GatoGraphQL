@@ -55,7 +55,7 @@ class PoP_ServerSideRendering
         $cmsService = CMSServiceFacade::getInstance();
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $domain = $cmsService->getSiteURL();        
-        $url = $requestHelperService->getCurrentUrl();
+        $url = $requestHelperService->getCurrentURL();
 
         // Initialize the popManager, so it will get all its private values from $data
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
