@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ApplicationProcessors_UserLogin_Hooks
 {
@@ -18,11 +19,11 @@ class PoP_ApplicationProcessors_UserLogin_Hooks
     {
         
         // Add the loggedinuser-data page for that domain
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         $url = RouteUtils::getRouteURL(POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA);        
-        $homedomain = $cmsengineapi->getSiteURL();
+        $homedomain = $cmsService->getSiteURL();
         if ($domain != $homedomain) {
-            $bloginfo_url = $cmsengineapi->getHomeURL();
+            $bloginfo_url = $cmsService->getHomeURL();
 
             // Also send the path along (without language information)
             $path = substr($url, strlen($bloginfo_url));

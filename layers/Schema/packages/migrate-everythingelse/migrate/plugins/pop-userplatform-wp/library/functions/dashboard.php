@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 /*
@@ -22,7 +23,8 @@ function blockDashboardAccess()
     }
 
     // Otherwise, send them back home
+    $cmsService = CMSServiceFacade::getInstance();
     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    $cmsengineapi->redirect($cmsengineapi->getHomeURL());
+    $cmsengineapi->redirect($cmsService->getHomeURL());
     exit;
 }

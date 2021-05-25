@@ -1,8 +1,9 @@
 <?php
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServerSideRendering
 {
@@ -50,8 +51,8 @@ class PoP_ServerSideRendering
             return;
         }
 
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $domain = $cmsengineapi->getSiteURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        $domain = $cmsService->getSiteURL();
         $url = RequestUtils::getCurrentUrl();
 
         // Initialize the popManager, so it will get all its private values from $data

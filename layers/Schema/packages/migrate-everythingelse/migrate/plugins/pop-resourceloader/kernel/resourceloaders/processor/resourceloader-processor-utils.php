@@ -395,8 +395,6 @@ class PoP_ResourceLoaderProcessorUtils {
         $paths = array();
 
         if ($nature == PageRouteNatures::PAGE) {
-            // $homeUrl = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
-
             // For the page nature, we must save the resources under the page path,
             // for all pages in the website
             foreach ($ids as $page_id) {
@@ -458,11 +456,6 @@ class PoP_ResourceLoaderProcessorUtils {
                 // $pop_module_processor_runtimecache->deleteCache();
             }
         } elseif ($nature == CustomPostRouteNatures::CUSTOMPOST) {
-
-            // // For all the posts passed, get the resources and place them under the path of the post,
-            // // without including the post's slug itself (eg: mesym.com/en/posts/this-is-a-post/ will save
-            // // resources under key mesym.com/en/posts/)
-            // $homeUrl = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
 
             foreach ($ids as $post_id) {
 

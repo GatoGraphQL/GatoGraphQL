@@ -1,4 +1,7 @@
 <?php
+
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 // use PoP\Hooks\Facades\HooksAPIFacade;
 // use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
@@ -78,6 +81,9 @@
 
 function gdGetFavicon()
 {
-    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    return HooksAPIFacade::getInstance()->applyFilters('gdGetFavicon', $cmsengineapi->getHomeURL().'/favicon.ico');
+    $cmsService = CMSServiceFacade::getInstance();
+    return HooksAPIFacade::getInstance()->applyFilters(
+        'gdGetFavicon',
+        $cmsService->getHomeURL() . '/favicon.ico'
+    );
 }

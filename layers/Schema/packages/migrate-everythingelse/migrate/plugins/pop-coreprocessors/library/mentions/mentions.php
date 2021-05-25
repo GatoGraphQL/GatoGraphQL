@@ -2,12 +2,13 @@
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
@@ -243,7 +244,7 @@ class PoP_Mentions
     // function to generate user link
     private function makeLinkUsers($match)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         // get by nickname or by login name
@@ -257,7 +258,7 @@ class PoP_Mentions
             $userTypeResolver = $instanceManager->getInstance(UserTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-' . RequestUtils::getDomainId($cmsengineapi->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $cmsusersresolver->getUserId($user),
+                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $cmsusersresolver->getUserId($user),
                 $cmsusersapi->getUserURL($cmsusersresolver->getUserId($user)),
                 $cmsusersresolver->getUserDisplayName($user)
             );

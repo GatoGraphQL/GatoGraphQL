@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
@@ -85,8 +86,8 @@ class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends 
                     );
                     $file_url = $file_urls[$resource[1]];
                     
-                    $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                    $local_domain = $cmsengineapi->getSiteURL();
+                    $cmsService = CMSServiceFacade::getInstance();
+                    $local_domain = $cmsService->getSiteURL();
 
                     // Obtain all the info for that domain, or fall back on the local domain info, which we know we have
                     $multidomain_info = PoP_MultiDomain_Utils::getMultidomainWebsites();

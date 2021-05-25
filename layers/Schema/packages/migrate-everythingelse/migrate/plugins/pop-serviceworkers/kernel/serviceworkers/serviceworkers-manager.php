@@ -1,5 +1,7 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+
 class PoP_ServiceWorkersManager
 {
     private $scope;
@@ -43,6 +45,7 @@ class PoP_ServiceWorkersManager
     {
         $json = array();
 
+		$cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $description = $cmsapplicationapi->getSiteDescription();
@@ -58,7 +61,7 @@ class PoP_ServiceWorkersManager
         if ($icons = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:icons', array())) {
             $json['icons'] = $icons;
         }
-        if ($start_url = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:start_url', $cmsengineapi->getSiteURL())) {
+        if ($start_url = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:start_url', $cmsService->getSiteURL())) {
             $json['start_url'] = $start_url;
         }
         if ($display = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkersManager:manifest:display', 'standalone')) {

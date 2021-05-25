@@ -1,4 +1,5 @@
 <?php
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_Utils {
@@ -17,11 +18,10 @@ class PoP_ResourceLoader_Utils {
 		// Comment Leo 11/12/2017: get the dynamic module resources, and print already their source and type, since
 		// this information will be needed if including those resources in the body when initializing a lazy-load block
 		if ($dynamic_module_resources_data = PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils::getDynamicModuleResourcesData()) {
-
-	        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+			$cmsService = CMSServiceFacade::getInstance();
 			$dynamic_module_resourcesources = $dynamic_module_resources_data['sources'];
 			$dynamic_module_resourcetypes = $dynamic_module_resources_data['types'];
-			$domain = $cmsengineapi->getSiteURL();
+			$domain = $cmsService->getSiteURL();
 
 			$scripts[] = sprintf(
 				'pop.%s.config["%s"].sources = %s',

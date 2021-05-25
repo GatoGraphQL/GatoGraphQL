@@ -1,6 +1,8 @@
 <?php
 namespace PoP\Engine;
 
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+
 abstract class FunctionAPI_Base implements FunctionAPI
 {
     public function __construct()
@@ -14,7 +16,8 @@ abstract class FunctionAPI_Base implements FunctionAPI
 
     public function getHost(): string
     {
-        return removeScheme($this->getHomeURL());
+        $cmsService = CMSServiceFacade::getInstance();
+        return removeScheme($cmsService->getHomeURL());
     }
 
     public function getDate($format, $date) {

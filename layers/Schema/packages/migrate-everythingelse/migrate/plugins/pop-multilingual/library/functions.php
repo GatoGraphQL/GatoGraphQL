@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 function getMultilingualLanguageitems($shortnames = array())
 {
@@ -17,8 +18,8 @@ function getMultilingualLanguageitems($shortnames = array())
         }
         
         $current = $pluginapi->getCurrentLanguage();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $url = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+        $cmsService = CMSServiceFacade::getInstance();
+        $url = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
         foreach ($languages as $lang) {
             $name = $pluginapi->getLanguageName($lang);
             $shortname = $shortnames[$lang] ? $shortnames[$lang] : $name;

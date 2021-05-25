@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\ObjectModels;
 
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+
 class Site
 {
     private string $id;
@@ -16,8 +18,8 @@ class Site
         /*, $name, $description = ''*/
     ) {
         if (!$domain) {
-            $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            $domain = $cmsengineapi->getHomeURL();
+            $cmsService = CMSServiceFacade::getInstance();
+            $domain = $cmsService->getHomeURL();
         }
         $this->domain = $domain;
         $this->host = removeScheme($domain);

@@ -1,7 +1,8 @@
 <?php
+use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_ServerSideManager
 {
@@ -98,8 +99,8 @@ class PoP_ServerSideManager
     {
         $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
         // $datastore->init($json);
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        foreach (array($cmsengineapi->getSiteURL())/*PoP_WebPlatform_ConfigurationUtils::getAllowedDomains()*/ as $domain) {
+        $cmsService = CMSServiceFacade::getInstance();
+        foreach (array($cmsService->getSiteURL())/*PoP_WebPlatform_ConfigurationUtils::getAllowedDomains()*/ as $domain) {
             $datastore->store[$domain] = array();
             //     $datastore->store[$domain] = array(
             //         'statelessdata' => array(
@@ -138,7 +139,7 @@ class PoP_ServerSideManager
             //     );
         }
 
-        $domain = $cmsengineapi->getSiteURL();
+        $domain = $cmsService->getSiteURL();
 
         // Initialize Settings, Feedback and Data
         // Comment Leo: passing extra parameter $json in PHP

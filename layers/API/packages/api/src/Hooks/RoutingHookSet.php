@@ -9,6 +9,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\API\Response\Schemes as APISchemes;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -50,8 +51,8 @@ class RoutingHookSet extends AbstractHookSet
         if (!ComponentConfiguration::overrideRequestURI()) {
             return $route;
         }
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $homeURL = $cmsengineapi->getHomeURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        $homeURL = $cmsService->getHomeURL();
         $currentURL = RequestUtils::getCurrentUrl();
         // Remove the protocol to avoid erroring on http/https
         $homeURL = preg_replace('#^https?://#', '', $homeURL);

@@ -13,16 +13,6 @@ class FunctionAPI extends \PoP\Engine\FunctionAPI_Base
         return get_bloginfo('version');
     }
 
-    public function getHomeURL(string $path = ''): string
-    {
-        return home_url($path);
-    }
-
-    public function getSiteURL(): string
-    {
-        return get_site_url();
-    }
-
     public function getContentDir()
     {
         return WP_CONTENT_DIR;

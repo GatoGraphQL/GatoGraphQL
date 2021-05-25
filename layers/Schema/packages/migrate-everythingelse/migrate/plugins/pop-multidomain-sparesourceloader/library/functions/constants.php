@@ -24,8 +24,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 //         $url = GeneralUtils::addQueryArgs(['ver', $vars['version']], $url);
 
 //         // Replace the domain with "{0}" for the external domain to be injected in javascript
-// 		   $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-//         $url = '{0}'.substr($url, strlen($cmsengineapi->getSiteURL()));
+//         $cmsService = CMSServiceFacade::getInstance();
+//         $url = '{0}'.substr($url, strlen($cmsService->getSiteURL()));
 //         $jqueryConstants['CODESPLITTING']['URLPLACEHOLDERS']['CONFIG'] = $url;
 //     }
 //     return $jqueryConstants;

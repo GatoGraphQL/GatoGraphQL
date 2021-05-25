@@ -1,7 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {
@@ -223,8 +224,8 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
             case self::MODULE_GROUP_HOME_WELCOMEACCOUNT:
                 // Do not show if the user is logged in
                 // Notice that it works for the domain from wherever this block is being fetched from!
-                $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                $this->appendProp($module, $props, 'class', 'visible-notloggedin-'.RequestUtils::getDomainId($cmsengineapi->getSiteURL()));
+                $cmsService = CMSServiceFacade::getInstance();
+                $this->appendProp($module, $props, 'class', 'visible-notloggedin-'.RequestUtils::getDomainId($cmsService->getSiteURL()));
 
                 // Give it some formatting
                 $this->appendProp($module, $props, 'class', 'well well-sm');

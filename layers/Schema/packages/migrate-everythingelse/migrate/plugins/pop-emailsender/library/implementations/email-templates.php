@@ -34,9 +34,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getEmailframeFooter(/*$frame, */$title, $emails, $names, $template)
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $url = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
+        $url = GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL());
         return sprintf(
             '<p><a href="%s">%s</a><br/>%s</p>',
             $url,
@@ -204,11 +204,11 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getWebsitehtml()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+		$cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         return sprintf(
             '<a href="%s">%s</a>',
-            $cmsengineapi->getSiteURL(),
+            $cmsService->getSiteURL(),
             $cmsapplicationapi->getSiteName()
         );
     }

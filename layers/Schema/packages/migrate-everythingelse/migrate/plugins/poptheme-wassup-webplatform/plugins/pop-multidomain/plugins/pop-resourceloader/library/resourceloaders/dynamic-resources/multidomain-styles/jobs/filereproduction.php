@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoPTheme_Wassup_Multidomain_FileReproduction_Styles extends PoP_Engine_CSSFileReproductionBase
 {
@@ -13,8 +14,8 @@ class PoPTheme_Wassup_Multidomain_FileReproduction_Styles extends PoP_Engine_CSS
 
     public function getDomain()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        return $this->domain ?? $cmsengineapi->getSiteURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        return $this->domain ?? $cmsService->getSiteURL();
     }
 
     // public function getRenderer()

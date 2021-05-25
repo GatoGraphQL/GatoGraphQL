@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_CDN_Thumbprint_Utils
 {
@@ -9,10 +10,10 @@ class PoP_CDN_Thumbprint_Utils
 
         // Convert the URL to point to the CDN domain and use the passed thumbprints
         global $pop_cdn_thumbprint_manager;
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         
         // Plug-in the CDN here, and the needed params
-        $homeurl = $cmsengineapi->getSiteURL();
+        $homeurl = $cmsService->getSiteURL();
         if (POP_CDNFOUNDATION_CDN_CONTENT_URI && substr($url, 0, strlen($homeurl)) == $homeurl) {
             // Replace the home url with the CDN domain
             $url = POP_CDNFOUNDATION_CDN_CONTENT_URI.substr($url, strlen($homeurl));

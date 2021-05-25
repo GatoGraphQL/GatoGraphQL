@@ -1,9 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-
 use Aws\Common\Aws;
+
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Mailer_AWS_Engine
 {
@@ -52,11 +53,10 @@ class PoP_Mailer_AWS_Engine
 
     protected function uploadToS3($queue)
     {
-
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
         // Upload to S3, where a Lambda function will execute to send the emails through SES
         try {
-            $url = $cmsengineapi->getHomeURL();
+            $url = $cmsService->getHomeURL();
             $configuration_default = HooksAPIFacade::getInstance()->applyFilters(
                 'PoP_Mailer_AWS_Engine:uploadToS3:configuration',
                 array(

@@ -154,7 +154,6 @@ class PoPWebPlatform_Initialization
 
     public function getJqueryConstants()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
 
         // Define all jQuery constants
@@ -164,7 +163,7 @@ class PoPWebPlatform_Initialization
             '{0}'
         );
 
-        $homeurl = $cmsengineapi->getSiteURL();
+        $homeurl = $cmsService->getSiteURL();
         $allowed_domains = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
 
         // Locale is needed to store the Open Tabs under the right language
@@ -253,7 +252,7 @@ class PoPWebPlatform_Initialization
             return;
         }
 
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsService = CMSServiceFacade::getInstance();
 
         // Allow PoP Server-Side Rendering, PoP Resource Loader to add their scripts
         $this->scripts = HooksAPIFacade::getInstance()->applyFilters(
@@ -266,7 +265,7 @@ class PoPWebPlatform_Initialization
         $this->scripts[] = sprintf(
             'window.pop.Data = %s;',
             json_encode(array(
-                $cmsengineapi->getSiteURL() => $engine->getOutputData(),
+                $cmsService->getSiteURL() => $engine->getOutputData(),
             ))
         );
 

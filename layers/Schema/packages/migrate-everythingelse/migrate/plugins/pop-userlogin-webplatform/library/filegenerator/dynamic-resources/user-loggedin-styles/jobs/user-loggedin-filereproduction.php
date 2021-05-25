@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_CSSFileReproductionBase
 {
@@ -13,8 +14,8 @@ class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_
 
     public function getDomain()
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        return $this->domain ?? $cmsengineapi->getSiteURL();
+        $cmsService = CMSServiceFacade::getInstance();
+        return $this->domain ?? $cmsService->getSiteURL();
     }
 
     // public function getRenderer()
