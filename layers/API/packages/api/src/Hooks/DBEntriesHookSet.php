@@ -20,6 +20,7 @@ class DBEntriesHookSet extends AbstractHookSet
 
     public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
+        // Enable to add all fields starting with "__" (such as "__schema") as meta
         $dbname_datafields['meta'] = $this->hooksAPI->applyFilters(
             'PoP\API\DataloaderHooks:metaFields',
             [

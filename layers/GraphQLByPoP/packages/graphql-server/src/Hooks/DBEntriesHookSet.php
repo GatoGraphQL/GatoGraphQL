@@ -16,6 +16,9 @@ class DBEntriesHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * All fields starting with "__" (such as "__schema") are meta
+     */
     public function moveEntriesUnderDBName(array $metaFields): array
     {
         $metaFields[] = '__schema';
