@@ -5,22 +5,23 @@ declare(strict_types=1);
 namespace PoP\Engine\Engine;
 
 use Exception;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Cache\CacheInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\LooseContracts\LooseContractManagerInterface;
-use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
+use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
+use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Settings\SettingsManagerFactory;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\LooseContractManagerInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterface
 {
@@ -36,6 +37,7 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ModuleFilterManagerInterface $moduleFilterManager,
         ModuleProcessorManagerInterface $moduleProcessorManager,
+        CheckpointProcessorManagerInterface $checkpointProcessorManager,
         protected LooseContractManagerInterface $looseContractManager,
         protected CacheControlEngineInterface $cacheControlEngine,
         ?CacheInterface $persistentCache = null
@@ -52,6 +54,7 @@ class Engine extends \PoP\ComponentModel\Engine\Engine implements EngineInterfac
             $fieldQueryInterpreter,
             $moduleFilterManager,
             $moduleProcessorManager,
+            $checkpointProcessorManager,
             $persistentCache,
         );
     }

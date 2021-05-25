@@ -85,6 +85,9 @@ services:
     PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
         class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager
 
+    PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface:
+        class: \PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManager
+
     PoP\ComponentModel\Registries\TypeRegistryInterface:
         class: \PoP\ComponentModel\Registries\TypeRegistry
 
