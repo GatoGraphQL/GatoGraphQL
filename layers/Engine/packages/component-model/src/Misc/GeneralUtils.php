@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Misc;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+
 class GeneralUtils
 {
     // Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
