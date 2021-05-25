@@ -8,6 +8,7 @@ class Plugins
     {
         // Priority: new section, after PoP CMS Model and PoP Meta
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 888100);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'initMigratePackages'), 88820);
     }
     public function init()
     {
@@ -263,6 +264,17 @@ class Plugins
         ];
         foreach ($plugins as $plugin) {
             require_once ('plugins/'.$plugin.'/'.$plugin.'.php');
+        }
+    }
+    public function initMigratePackages()
+    {
+        // Migrate packages that I wanted to remove from Packagist
+        $migratePackages = [
+            'migrate-engine' => 'pop-engine.php',
+            'migrate-engine-wp' => 'pop-engine-wp.php',
+        ];
+        foreach ($migratePackages as $migratePackage => $file) {
+            require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
         }
 
         // Initialize dependencies too
