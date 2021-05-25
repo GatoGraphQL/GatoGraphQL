@@ -19,8 +19,4 @@ abstract class FunctionAPI_Base implements FunctionAPI
         $cmsService = CMSServiceFacade::getInstance();
         return removeScheme($cmsService->getHomeURL());
     }
-
-    public function getDate($format, $date) {
-        return date($format, strtotime($date));
-    }
 }

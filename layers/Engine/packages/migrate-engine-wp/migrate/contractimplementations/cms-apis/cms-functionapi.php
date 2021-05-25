@@ -22,10 +22,6 @@ class FunctionAPI extends \PoP\Engine\FunctionAPI_Base
     {
         return WP_CONTENT_URL;
     }
-
-    public function getDate($format, $date) {
-        return mysql2date($format, $date);
-    }
 }
 
 /**
