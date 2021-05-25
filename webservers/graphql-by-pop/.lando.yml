@@ -43,9 +43,6 @@ services:
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
-        - '../../layers/API/packages/migrate-api:/app/vendor/getpop/migrate-api'
-        - >-
-          ../../layers/API/packages/migrate-api-graphql:/app/vendor/getpop/migrate-api-graphql
         - >-
           ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
         - >-
