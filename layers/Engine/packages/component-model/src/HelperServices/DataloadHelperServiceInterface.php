@@ -8,7 +8,10 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 interface DataloadHelperServiceInterface
 {
-    public function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, $subcomponent_data_field);
+    public function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, string $subcomponent_data_field): ?string;
 
-    public function addFilterParams($url, $moduleValues = array());
+    /**
+     * @param array<array<string, mixed>> $moduleValues
+     */
+    public function addFilterParams(string $url, array $moduleValues = []): string;
 }

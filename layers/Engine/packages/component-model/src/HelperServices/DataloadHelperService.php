@@ -13,7 +13,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    public function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, $subcomponent_data_field)
+    public function getTypeResolverClassFromSubcomponentDataField(TypeResolverInterface $typeResolver, string $subcomponent_data_field): ?string
     {
         $subcomponent_typeResolver_class = $typeResolver->resolveFieldTypeResolverClass($subcomponent_data_field);
         // if (!$subcomponent_typeResolver_class && \PoP\ComponentModel\Environment::failIfSubcomponentTypeDataLoaderUndefined()) {
@@ -40,7 +40,10 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         return $subcomponent_typeResolver_class;
     }
 
-    public function addFilterParams($url, $moduleValues = array())
+    /**
+     * @param array<array<string, mixed>> $moduleValues
+     */
+    public function addFilterParams(string $url, array $moduleValues = []): string
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $args = [];
