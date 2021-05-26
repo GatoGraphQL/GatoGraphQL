@@ -159,8 +159,14 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             unset($query['slugs']);
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
-            'CMSAPI:tags:query',
+        $hooksAPI = HooksAPIFacade::getInstance();
+        return $hooksAPI->applyFilters(
+            'CMSAPI:taxonomies:query',
+            $hooksAPI->applyFilters(
+                'CMSAPI:tags:query',
+                $query,
+                $options
+            ),
             $query,
             $options
         );

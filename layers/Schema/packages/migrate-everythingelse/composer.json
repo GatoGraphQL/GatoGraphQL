@@ -16,11 +16,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/migrate-meta": "^0.8",
-        "pop-schema/migrate-usermeta": "^0.8",
-        "pop-schema/migrate-usermeta-wp": "^0.8",
-        "pop-schema/migrate-taxonomymeta": "^0.8",
-        "pop-schema/migrate-taxonomymeta-wp": "^0.8",
         "pop-schema/migrate-locations": "^0.8",
         "pop-schema/migrate-locations-wp-em": "^0.8",
         "pop-schema/migrate-events-wp-em": "^0.8",

@@ -274,17 +274,19 @@ class Plugins
             'migrate-engine-wp' => 'pop-engine-wp.php',
             'migrate-commentmeta' => 'pop-commentmeta.php',
             'migrate-commentmeta-wp' => 'pop-commentmeta-wp.php',
+            'migrate-custompostmeta' => 'pop-custompostmeta.php',
+            'migrate-custompostmeta-wp' => 'pop-custompostmeta-wp.php',
+            'migrate-taxonomymeta' => 'pop-taxonomymeta.php',
+            'migrate-taxonomymeta-wp' => 'pop-taxonomymeta-wp.php',
+            'migrate-usermeta' => 'pop-usermeta.php',
+            'migrate-usermeta-wp' => 'pop-usermeta-wp.php',
+            'migrate-meta' => 'pop-meta.php',
         ];
         foreach ($migratePackages as $migratePackage => $file) {
             require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
         }
 
         // Initialize dependencies too
-        require_once (dirname(__DIR__, 2) . '/migrate-meta/migrate/pop-meta.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-usermeta/migrate/pop-usermeta.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-usermeta-wp/migrate/pop-usermeta-wp.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-taxonomymeta/migrate/pop-taxonomymeta.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-taxonomymeta-wp/migrate/pop-taxonomymeta-wp.php');
         require_once (dirname(__DIR__, 2) . '/migrate-events-wp-em/migrate/pop-events-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations-wp-em/migrate/pop-locations-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations/migrate/pop-locations.php');

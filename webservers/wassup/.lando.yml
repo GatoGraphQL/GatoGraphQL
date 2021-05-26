@@ -178,12 +178,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-media-wp:/app/vendor/pop-schema/migrate-media-wp
         - >-
-          ../../layers/Schema/packages/migrate-meta:/app/vendor/pop-schema/migrate-meta
-        - >-
-          ../../layers/Schema/packages/migrate-metaquery:/app/vendor/pop-schema/migrate-metaquery
-        - >-
-          ../../layers/Schema/packages/migrate-metaquery-wp:/app/vendor/pop-schema/migrate-metaquery-wp
-        - >-
           ../../layers/Schema/packages/migrate-pages:/app/vendor/pop-schema/migrate-pages
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp
@@ -193,18 +187,6 @@ services:
           ../../layers/Schema/packages/migrate-queriedobject:/app/vendor/pop-schema/migrate-queriedobject
         - >-
           ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomymeta:/app/vendor/pop-schema/migrate-taxonomymeta
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomymeta-wp:/app/vendor/pop-schema/migrate-taxonomymeta-wp
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomyquery:/app/vendor/pop-schema/migrate-taxonomyquery
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomyquery-wp:/app/vendor/pop-schema/migrate-taxonomyquery-wp
-        - >-
-          ../../layers/Schema/packages/migrate-usermeta:/app/vendor/pop-schema/migrate-usermeta
-        - >-
-          ../../layers/Schema/packages/migrate-usermeta-wp:/app/vendor/pop-schema/migrate-usermeta-wp
         - >-
           ../../layers/Schema/packages/migrate-users:/app/vendor/pop-schema/migrate-users
         - >-
