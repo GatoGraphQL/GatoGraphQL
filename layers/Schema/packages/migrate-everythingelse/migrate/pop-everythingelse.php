@@ -274,6 +274,12 @@ class Plugins
             'migrate-engine-wp' => 'pop-engine-wp.php',
             'migrate-commentmeta' => 'pop-commentmeta.php',
             'migrate-commentmeta-wp' => 'pop-commentmeta-wp.php',
+            'migrate-custompostmeta' => 'pop-custompostmeta.php',
+            'migrate-custompostmeta-wp' => 'pop-custompostmeta-wp.php',
+            'migrate-taxonomymeta' => 'pop-taxonomymeta.php',
+            'migrate-taxonomymeta-wp' => 'pop-taxonomymeta-wp.php',
+            'migrate-usermeta' => 'pop-usermeta.php',
+            'migrate-usermeta-wp' => 'pop-usermeta-wp.php',
         ];
         foreach ($migratePackages as $migratePackage => $file) {
             require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
