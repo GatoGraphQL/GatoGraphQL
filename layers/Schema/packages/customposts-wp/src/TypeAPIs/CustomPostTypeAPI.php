@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\Types\Status;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-
 use function apply_filters;
 use function get_post_status;
+use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\CustomPosts\ComponentConfiguration;
+use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -148,7 +147,8 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $limit = TypeAPIUtils::getLimitOrMaxLimit(
+                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
+                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     $this->getCustomPostListMaxLimit()
                 );

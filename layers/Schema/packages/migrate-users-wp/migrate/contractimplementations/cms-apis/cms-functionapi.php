@@ -2,11 +2,11 @@
 
 namespace PoPSchema\Users\WP;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\ComponentConfiguration;
 use WP_User_Query;
 
 class FunctionAPI extends \PoPSchema\Users\FunctionAPI_Base
@@ -166,7 +166,8 @@ class FunctionAPI extends \PoPSchema\Users\FunctionAPI_Base
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $limit = TypeAPIUtils::getLimitOrMaxLimit(
+                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
+                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getUserListMaxLimit()
                 );

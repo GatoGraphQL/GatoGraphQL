@@ -11,8 +11,8 @@ use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Categories\ComponentConfiguration;
-use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -136,7 +136,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $limit = TypeAPIUtils::getLimitOrMaxLimit(
+                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
+                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getCategoryListMaxLimit()
                 );
