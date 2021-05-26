@@ -46,22 +46,26 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function getCommentData(array $form_data): array
     {
-        // TODO: Integrate with `mustHaveUserAccountToAddComment`
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
-        $author_url = $cmsusersapi->getUserURL($user_id);
-        $comment_data = array(
-            'userID' => $user_id,
-            'author' => $cmsusersapi->getUserDisplayName($user_id),
-            'authorEmail' => $cmsusersapi->getUserEmail($user_id),
-            'author-URL' => $author_url,
+        $comment_data = [
             'author-IP' => $_SERVER['REMOTE_ADDR'],
             'agent' => $_SERVER['HTTP_USER_AGENT'],
             'content' => $form_data[MutationInputProperties::COMMENT],
             'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID],
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID]
-        );
+        ];
+        if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $vars = ApplicationState::getVars();
+            $user_id = $vars['global-userstate']['current-user-id'];
+            $comment_data['userID'] = $user_id;
+            $comment_data['author'] = $cmsusersapi->getUserDisplayName($user_id);
+            $comment_data['authorEmail'] = $cmsusersapi->getUserEmail($user_id);
+            $comment_data['author-URL'] = $cmsusersapi->getUserURL($user_id);;
+        } else {
+            // @todo Implement!
+            // $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME];
+            // $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL];
+        }
 
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
