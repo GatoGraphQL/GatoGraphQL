@@ -1,6 +1,8 @@
 <?php
 namespace PoPSchema\CustomPostMeta;
 
+use PoPSchema\CustomPostMeta\Facades\CustomPostMetaTypeAPIFacade;
+
 class Utils
 {
     public static function getMetaKey($meta_key)
@@ -11,8 +13,8 @@ class Utils
 
     public static function getCustomPostMeta($post_id, $key, $single = false)
     {
-        $functionapi = FunctionAPIFactory::getInstance();
-        return $functionapi->getCustomPostMeta($post_id, self::getMetaKey($key), $single);
+        $customPostMetaTypeAPI = CustomPostMetaTypeAPIFacade::getInstance();
+        return $customPostMetaTypeAPI->getCustomPostMeta($post_id, self::getMetaKey($key), $single);
     }
     public static function updateCustomPostMeta($post_id, $key, $values, $single = false, $boolean = false)
     {
