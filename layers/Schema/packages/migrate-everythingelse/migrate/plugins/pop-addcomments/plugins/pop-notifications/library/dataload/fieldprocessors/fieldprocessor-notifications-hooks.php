@@ -9,6 +9,7 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -96,7 +97,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         array $options = []
     ): mixed {
         $vars = ApplicationState::getVars();
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
@@ -145,7 +146,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                 // Message depends basically on the action performed on the object type
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_SPAMMEDCOMMENT:
-                        $comment = $cmscommentsapi->getComment($notification->object_id);
+                        $comment = $commentTypeAPI->getComment($notification->object_id);
                         $messages = array(
                             AAL_POP_ACTION_COMMENT_SPAMMEDCOMMENT => TranslationAPIFacade::getInstance()->__('Your comment on %1$s <strong>%2$s</strong> was deleted for not adhering to our content guidelines', 'pop-notifications'),
                         );
@@ -157,13 +158,13 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // TODO: Integrate with `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
-                        $comment = $cmscommentsapi->getComment($notification->object_id);
+                        $comment = $commentTypeAPI->getComment($notification->object_id);
                         $user_id = $vars['global-userstate']['current-user-id'];
 
                         // Change the message if the comment is a response to the user's comment
                         $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> commented in %2$s <strong>%3$s</strong>', 'pop-notifications');
                         if ($comment_parent_id = $cmscommentsresolver->getCommentParent($comment)) {
-                            $comment_parent = $cmscommentsapi->getComment($comment_parent_id);
+                            $comment_parent = $commentTypeAPI->getComment($comment_parent_id);
                             if ($cmscommentsresolver->getCommentUserId($comment_parent) == $user_id) {
                                 $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> replied to your comment in %2$s <strong>%3$s</strong>', 'pop-notifications');
                             }

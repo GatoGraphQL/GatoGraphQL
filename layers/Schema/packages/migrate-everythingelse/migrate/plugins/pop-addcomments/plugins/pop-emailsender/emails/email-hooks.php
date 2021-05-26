@@ -3,6 +3,7 @@ define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_AddComments_EmailSender_Hooks
@@ -38,7 +39,7 @@ class PoP_AddComments_EmailSender_Hooks
             return;
         }
 
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
@@ -59,7 +60,7 @@ class PoP_AddComments_EmailSender_Hooks
         // If this comment is a response, notify the original comment's author
         // Unless they are the same person
         if ($comment_parent_id = $cmscommentsresolver->getCommentParent($comment)) {
-            $comment_parent = $cmscommentsapi->getComment($comment_parent_id);
+            $comment_parent = $commentTypeAPI->getComment($comment_parent_id);
             if ($cmscommentsresolver->getCommentUserId($comment_parent) && $cmscommentsresolver->getCommentUserId($comment_parent) != $cmscommentsresolver->getCommentUserId($comment)) {
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s replied your comment in “%s”', 'pop-emailsender'),

@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 
 class PoP_AddComments_Notifications_NotificationHooks
 {
@@ -97,8 +98,8 @@ class PoP_AddComments_Notifications_NotificationHooks
             if (in_array($notification->action, $comment_actions)) {
                 // Only approved comments
                 $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-                $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
-                $comment = $cmscommentsapi->getComment($notification->object_id);
+                $commentTypeAPI = CommentTypeAPIFacade::getInstance();
+                $comment = $commentTypeAPI->getComment($notification->object_id);
                 $actions = $comment_actions;
                 $objectids_sql = sprintf(
                     '

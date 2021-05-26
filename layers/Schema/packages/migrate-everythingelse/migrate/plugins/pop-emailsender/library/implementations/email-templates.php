@@ -12,6 +12,7 @@ use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -153,13 +154,13 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getCommentcontenthtml($comment)
     {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
         $url = $customPostTypeAPI->getPermalink($post_id);
         if ($cmscommentsresolver->getCommentParent($comment)) {
-            $parent = $cmscommentsapi->getComment($cmscommentsresolver->getCommentParent($comment));
+            $parent = $commentTypeAPI->getComment($cmscommentsresolver->getCommentParent($comment));
         }
 
         $content = $this->getCommenthtml($comment);

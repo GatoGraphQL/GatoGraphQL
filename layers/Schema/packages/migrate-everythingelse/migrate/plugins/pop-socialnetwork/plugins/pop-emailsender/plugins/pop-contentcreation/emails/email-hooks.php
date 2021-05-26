@@ -8,6 +8,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -240,9 +241,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function emailnotificationsNetworkAddedcomment($comment_id, $comment)
     {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $comment = $cmscommentsapi->getComment($comment_id);
+        $comment = $commentTypeAPI->getComment($comment_id);
 
         // Only for published comments
         if (!$cmscommentsresolver->isCommentApproved($comment)) {
@@ -478,10 +479,10 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function sendemailToUsersTaggedInComment($comment_id, $taggedusers_ids)
     {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $comment = $cmscommentsapi->getComment($comment_id);
+        $comment = $commentTypeAPI->getComment($comment_id);
 
         // Only for published comments
         if (!$cmscommentsresolver->isCommentApproved($comment)) {
