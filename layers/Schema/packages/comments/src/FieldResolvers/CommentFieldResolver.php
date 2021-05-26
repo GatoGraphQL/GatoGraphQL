@@ -15,7 +15,6 @@ use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
 use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
@@ -33,7 +32,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         protected CommentTypeAPIInterface $commentTypeAPI,
-        protected UserCommentTypeAPIInterface $userCommentTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -141,13 +139,13 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 return $this->commentTypeAPI->getCommentContent($comment);
 
             case 'authorName':
-                return $cmsusersapi->getUserDisplayName($this->userCommentTypeAPI->getCommentUserId($comment));
+                return $this->commentTypeAPI->getCommentAuthorName($comment);
 
             case 'authorURL':
-                return $cmsusersapi->getUserURL($this->userCommentTypeAPI->getCommentUserId($comment));
+                return $this->commentTypeAPI->getCommentAuthorURL($comment);
 
             case 'authorEmail':
-                return $cmsusersapi->getUserEmail($this->userCommentTypeAPI->getCommentUserId($comment));
+                return $this->commentTypeAPI->getCommentAuthorEmail($comment);
 
             case 'customPost':
             case 'customPostID':
