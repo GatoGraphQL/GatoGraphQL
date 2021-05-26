@@ -27,7 +27,7 @@ interface CommentTypeAPIInterface
     public function getCommentParent(object $comment): int | string | null;
     public function getCommentDateGmt(object $comment): string;
     public function getCommentId(object $comment): string | int;
-    public function getCommentAuthor(object $comment): string;
+    public function getCommentAuthorName(object $comment): string;
     public function getCommentAuthorEmail(object $comment): string;
     public function getCommentUserId(object $comment): string | int | null;
 }

@@ -219,7 +219,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $comment = $comment;
         return (int)$comment->comment_ID;
     }
-    public function getCommentAuthor(object $comment): string
+    public function getCommentAuthorName(object $comment): string
     {
         /** @var WP_Comment */
         $comment = $comment;

@@ -64,10 +64,10 @@ class PoP_AddComments_EmailSender_Hooks
             if ($cmscommentsresolver->getCommentUserId($comment_parent) && $cmscommentsresolver->getCommentUserId($comment_parent) != $cmscommentsresolver->getCommentUserId($comment)) {
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s replied your comment in “%s”', 'pop-emailsender'),
-                    $cmscommentsresolver->getCommentAuthor($comment),
+                    $cmscommentsresolver->getCommentAuthorName($comment),
                     $title
                 );
-                PoP_EmailSender_Utils::sendemailToUsers(array($cmscommentsresolver->getCommentAuthorEmail($comment_parent)), array($cmscommentsresolver->getCommentAuthor($comment_parent)), $subject, $content);
+                PoP_EmailSender_Utils::sendemailToUsers(array($cmscommentsresolver->getCommentAuthorEmail($comment_parent)), array($cmscommentsresolver->getCommentAuthorName($comment_parent)), $subject, $content);
 
                 // Add the users to the list of users who got an email sent to
                 PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT, array($cmscommentsresolver->getCommentUserId($comment_parent)));
