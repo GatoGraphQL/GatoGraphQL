@@ -8,12 +8,13 @@ use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
-use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -85,18 +86,18 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getPosthtml($post_id)
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
+        $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $post_url = $customPostTypeAPI->getPermalink($post_id);
         $post_title = $customPostTypeAPI->getTitle($post_id);
         $post_excerpt = $customPostTypeAPI->getExcerpt($post_id);
-        $thumb = $cmsmediaapi->getMediaSrc(MediaHelpers::getThumbId($post_id), 'thumb-sm');
+        $thumb = $mediaTypeAPI->getImageProperties(MediaHelpers::getThumbId($post_id), 'thumb-sm');
         $thumb_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%4$s"></a>',
             $post_url,
-            $thumb[0],
-            $thumb[1],
-            $thumb[2]
+            $thumb['src'],
+            $thumb['width'],
+            $thumb['height']
         );
         $title_html = sprintf(
             '<h3 style="display: block;"><a href="%s">%s</a></h3>',
@@ -112,7 +113,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             .'</tr>'.
             '</table>',
             implode(';', $posthtml_styles),
-            $thumb[1],
+            $thumb['width'],
             $thumb_html,
             $title_html,
             $post_excerpt

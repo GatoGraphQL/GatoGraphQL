@@ -4,20 +4,36 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\TypeDataLoaders;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 // use PoPSchema\CustomPosts\Types\Status;
 
 class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        protected MediaTypeAPIInterface $mediaTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+        );
+    }
+    
     public function getObjects(array $ids): array
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $query = array(
             'include' => $ids,
         );
-        return $cmsmediaapi->getMediaElements($query);
+        return $this->mediaTypeAPI->getMediaElements($query);
     }
 
     public function getDataFromIdsQuery(array $ids): array
@@ -34,8 +50,7 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = [])
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
-        return $cmsmediaapi->getMediaElements($query, $options);
+        return $this->mediaTypeAPI->getMediaElements($query, $options);
     }
 
     public function executeQueryIds($query): array

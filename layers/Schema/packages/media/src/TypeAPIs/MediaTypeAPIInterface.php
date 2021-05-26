@@ -13,4 +13,9 @@ interface MediaTypeAPIInterface
      * Indicates if the passed object is of type Media
      */
     public function isInstanceOfMediaType(object $object): bool;
+
+    public function getImageSrc(string | int $image_id, ?string $size = null): ?string;
+    public function getImageProperties(string | int $image_id, ?string $size = null): ?array;
+    public function getMediaElements(array $query, array $options = []): array;
+    public function getMediaElementId(object $media): string | int;
 }

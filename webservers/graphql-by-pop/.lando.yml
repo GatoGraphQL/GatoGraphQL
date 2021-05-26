@@ -129,10 +129,6 @@ services:
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
         - >-
-          ../../layers/Schema/packages/migrate-media:/app/vendor/pop-schema/migrate-media
-        - >-
-          ../../layers/Schema/packages/migrate-media-wp:/app/vendor/pop-schema/migrate-media-wp
-        - >-
           ../../layers/Schema/packages/migrate-pages:/app/vendor/pop-schema/migrate-pages
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/vendor/pop-schema/migrate-pages-wp

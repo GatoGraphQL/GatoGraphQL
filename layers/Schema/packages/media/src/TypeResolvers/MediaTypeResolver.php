@@ -4,11 +4,37 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\TypeResolvers;
 
-use PoPSchema\Media\TypeDataLoaders\MediaTypeDataLoader;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPSchema\Media\TypeDataLoaders\MediaTypeDataLoader;
 
 class MediaTypeResolver extends AbstractTypeResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ErrorProviderInterface $errorProvider,
+        protected MediaTypeAPIInterface $mediaTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $feedbackMessageStore,
+            $fieldQueryInterpreter,
+            $errorProvider,
+        );
+    }
+
     public function getTypeName(): string
     {
         return 'Media';
@@ -21,9 +47,8 @@ class MediaTypeResolver extends AbstractTypeResolver
 
     public function getID(object $resultItem): string | int
     {
-        $cmsmediaresolver = \PoPSchema\Media\ObjectPropertyResolverFactory::getInstance();
         $media = $resultItem;
-        return $cmsmediaresolver->getMediaId($media);
+        return $this->mediaTypeAPI->getMediaElementId($media);
     }
 
     public function getTypeDataLoaderClass(): string

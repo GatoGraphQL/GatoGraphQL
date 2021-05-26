@@ -1,7 +1,8 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
 abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -18,10 +19,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return $this->getFeaturedimageinnerSubmodule($module);
     }
 
-    public function getFeaturedimageinnerSubmodule(array $module)
-    {
-        return null;
-    }
+    abstract public function getFeaturedimageinnerSubmodule(array $module): ?array;
 
     public function getSubmodules(array $module): array
     {
@@ -38,8 +36,6 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         // Hack: re-use multiple.tmpl
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
@@ -77,7 +73,6 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     public function initModelProps(array $module, array &$props): void
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
 
         // Needed for the JS function
@@ -100,13 +95,9 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         );
 
         if ($defaultimg = $this->getDefaultImage($module, $props)) {
-            $defaultfeatured = $cmsmediaapi->getMediaSrc($defaultimg, $img_size);
-            $defaultfeaturedsrc = array(
-                'src' => $defaultfeatured[0],
-                'width' => $defaultfeatured[1],
-                'height' => $defaultfeatured[2]
-            );
-            $this->setProp($featuredimageinner, $props, 'default-img', $defaultfeaturedsrc);
+            $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+            $defaultfeatured = $mediaTypeAPI->getImageProperties($defaultimg, $img_size);
+            $this->setProp($featuredimageinner, $props, 'default-img', $defaultfeatured);
         }
 
         parent::initModelProps($module, $props);

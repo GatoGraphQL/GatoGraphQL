@@ -1,8 +1,9 @@
 <?php
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
 // to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
@@ -83,14 +84,15 @@ function gdGetDocumentThumb($size = 'large')
     if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
         $post_id = $vars['routing-state']['queried-object-id'];
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
-            $thumb = $cmsmediaapi->getMediaSrc($post_thumb_id, $size);
+            $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+            $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, $size);
             $thumb_mime_type = $cmsmediaapi->getMediaMimeType($post_thumb_id);
         }
     } elseif ($vars['routing-state']['is-user']) {
         if (defined('POP_AVATAR_INITIALIZED')) {
             $author = $vars['routing-state']['queried-object-id'];
             $userphoto = gdGetAvatarPhotoinfo($author);
-            $thumb = array($userphoto['src'], $userphoto['width'], $userphoto['height']);
+            $thumb = $userphoto['src'];
             $thumb_mime_type = '';
         }
     }
@@ -102,14 +104,14 @@ function gdGetDocumentThumb($size = 'large')
     }
 
     // If there's no thumb (eg: a page doesn't have Featured Image) then return nothing
-    if (!$thumb[0]) {
+    if (!$thumb['src']) {
         return null;
     }
 
-    return array(
-        'src' => $thumb[0],
-        'width' => $thumb[1],
-        'height' => $thumb[2],
-        'mime-type' => $thumb_mime_type
+    return array_merge(
+        $thumb,
+        [
+            'mime-type' => $thumb_mime_type,
+        ]
     );
 }

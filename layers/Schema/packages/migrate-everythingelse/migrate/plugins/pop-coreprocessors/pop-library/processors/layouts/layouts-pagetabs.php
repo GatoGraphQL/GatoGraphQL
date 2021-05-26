@@ -1,11 +1,12 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
 {
@@ -44,7 +45,6 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     }
     protected function getThumb(array $module, array &$props)
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
@@ -60,11 +60,12 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
                 $post_id = $vars['routing-state']['queried-object-id'];
                 if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
-                    $thumb = $cmsmediaapi->getMediaSrc($post_thumb_id, 'favicon');
+                    $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+                    $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, 'favicon');
                     return array(
-                        'src' => $thumb[0],
-                        'w' => $thumb[1],
-                        'h' => $thumb[2]
+                        'src' => $thumb['src'],
+                        'w' => $thumb['width'],
+                        'h' => $thumb['height']
                     );
                 }
                 break;
