@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\Misc;
 
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+
 class MediaHelpers
 {
     public static function getAttachmentImageProperties($imageid, $size = null)
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
-        $img = $cmsmediaapi->getImageSrc($imageid, $size);
+        $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+        $img = $mediaTypeAPI->getImageSrc($imageid, $size);
         return array(
             'src' => $img[0],
             'width' => $img[1],

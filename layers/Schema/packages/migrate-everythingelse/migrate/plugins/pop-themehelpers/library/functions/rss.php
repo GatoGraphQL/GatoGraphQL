@@ -1,7 +1,8 @@
 <?php
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
 /**
  * Add the Featured Image to the feed
@@ -31,10 +32,11 @@ function gdRssPrintFeaturedImage($post_id)
     $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
     if ($featuredimage_id = MediaHelpers::getThumbId($post_id)) {
         $featuredimage = $cmsmediaapi->getMediaObject($featuredimage_id);
+        $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
 
         // Allow to set the image width in the URL: Needed for using the rss merge tag *|RSSITEM:IMAGE|* in Mailchimp,
         // since it does not allow to resize the image
-        $img_attr = HooksAPIFacade::getInstance()->applyFilters('gdRssPrintFeaturedImage:img_attr', $cmsmediaapi->getImageSrc($featuredimage_id, 'thumb-md'), $featuredimage_id); ?>
+        $img_attr = HooksAPIFacade::getInstance()->applyFilters('gdRssPrintFeaturedImage:img_attr', $mediaTypeAPI->getImageSrc($featuredimage_id, 'thumb-md'), $featuredimage_id); ?>
         <media:content url="<?php echo $img_attr[0] ?>" type="<?php echo $featuredimage->post_mime_type; ?>" medium="image" width="<?php echo $img_attr[1] ?>" height="<?php echo $img_attr[2] ?>">
             <media:description type="plain"><![CDATA[<?php echo $featuredimage->post_title; ?>]]></media:description>
         </media:content>

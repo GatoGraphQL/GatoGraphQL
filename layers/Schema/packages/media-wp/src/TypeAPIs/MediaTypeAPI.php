@@ -10,7 +10,9 @@ use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
-
+use function wp_get_attachment_image_src;
+use function get_post;
+use function get_posts;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */

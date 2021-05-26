@@ -1,7 +1,8 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
 abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
 {
@@ -72,7 +73,6 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     public function initModelProps(array $module, array &$props): void
     {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
 
         // Needed for the JS function
@@ -95,7 +95,8 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         );
 
         if ($defaultimg = $this->getDefaultImage($module, $props)) {
-            $defaultfeatured = $cmsmediaapi->getImageSrc($defaultimg, $img_size);
+            $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+            $defaultfeatured = $mediaTypeAPI->getImageSrc($defaultimg, $img_size);
             $defaultfeaturedsrc = array(
                 'src' => $defaultfeatured[0],
                 'width' => $defaultfeatured[1],
