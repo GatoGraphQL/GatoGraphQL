@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\QueriedObject\TypeAPIs;
+namespace PoPSchema\QueriedObject\Helpers;
 
 // use PoP\ComponentModel\Feedback\Tokens;
 // use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 // use PoP\Translation\Facades\TranslationAPIFacade;
 
-class TypeAPIUtils
+class QueriedObjectHelperService implements QueriedObjectHelperServiceInterface
 {
     /**
      * Return the minimum number from between the request limit and the max limit.
