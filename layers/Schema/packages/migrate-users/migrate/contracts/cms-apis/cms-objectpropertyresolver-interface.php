@@ -6,5 +6,4 @@ interface ObjectPropertyResolver
     public function getUserNicename($user);
     public function getUserSlug($user);
     public function getUserId($user);
-    public function getUserWebsiteUrl($user);
 }

@@ -39,10 +39,6 @@ class ObjectPropertyResolver extends \PoPSchema\Users\ObjectPropertyResolver_Bas
     {
         return $user->description;
     }
-    public function getUserWebsiteUrl($user)
-    {
-        return $user->user_url;
-    }
 }
 
 /**

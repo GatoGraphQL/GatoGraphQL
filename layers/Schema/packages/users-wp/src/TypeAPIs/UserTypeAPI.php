@@ -225,6 +225,7 @@ class UserTypeAPI implements UserTypeAPIInterface
             }
         }
     }
+    
     public function getUserDisplayName(string | int | object $userObjectOrID): ?string
     {
         if (is_object($userObjectOrID)) {
@@ -289,5 +290,14 @@ class UserTypeAPI implements UserTypeAPIInterface
             $userID = $userObjectOrID;
         }
         return get_author_posts_url($userID);
+    }
+    public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string
+    {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->user_url;
+        }
+        return get_the_author_meta('user_url', $userObjectOrID);
     }
 }
