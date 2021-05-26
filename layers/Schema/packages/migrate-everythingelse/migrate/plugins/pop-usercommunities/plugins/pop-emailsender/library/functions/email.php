@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 /**
  * Create / Update Post
@@ -20,14 +21,14 @@ function gdUreSendemailCommunityNewmember($user_id, $communities)
         return;
     }
 
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-    $author_name = $cmsusersapi->getUserDisplayName($user_id);
+    $userTypeAPI = UserTypeAPIFacade::getInstance();
+    $author_name = $userTypeAPI->getUserDisplayName($user_id);
     $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
     
     foreach ($communities as $community) {
         // New Community => Send an email informing of the new member
-        $community_url = $cmsusersapi->getUserURL($community);
-        $community_name = $cmsusersapi->getUserDisplayName($community);
+        $community_url = $userTypeAPI->getUserURL($community);
+        $community_name = $userTypeAPI->getUserDisplayName($community);
         $subject = sprintf(TranslationAPIFacade::getInstance()->__('%s has a new member!', 'ure-pop'), $community_name);
         
         $community_html = sprintf(
@@ -69,7 +70,7 @@ function gdUreSendemailCommunityNewmember($user_id, $communities)
             RouteUtils::getRouteTitle(POP_USERCOMMUNITIES_ROUTE_MYMEMBERS)
         );
     
-        $email = $cmsusersapi->getUserEmail($community);
+        $email = $userTypeAPI->getUserEmail($community);
         PoP_EmailSender_Utils::sendemailToUsers($email, $community_name, $subject, $content);
     }
 }

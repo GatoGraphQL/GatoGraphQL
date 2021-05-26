@@ -1,6 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_EMAIL_JOINSCOMMUNITIES', 'joinscommunities');
 
@@ -21,7 +22,7 @@ class PoP_URE_EmailSender_Hooks
             return;
         }
 
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         // Get the current user's network's users (followers + members of same communities)
         $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($user_id);
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_JOINSCOMMUNITIES))) {
@@ -29,15 +30,15 @@ class PoP_URE_EmailSender_Hooks
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY, $networkusers)) {
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
-                    $emails[] = $cmsusersapi->getUserEmail($networkuser);
-                    $names[] = $cmsusersapi->getUserDisplayName($networkuser);
+                    $emails[] = $userTypeAPI->getUserEmail($networkuser);
+                    $names[] = $userTypeAPI->getUserDisplayName($networkuser);
                 }
 
-                $user_url = $cmsusersapi->getUserURL($user_id);
-                $user_name = $cmsusersapi->getUserDisplayName($user_id);
+                $user_url = $userTypeAPI->getUserURL($user_id);
+                $user_name = $userTypeAPI->getUserDisplayName($user_id);
                 $community_names = array();
                 foreach ($communities as $community) {
-                    $community_names[] = $cmsusersapi->getUserDisplayName($community);
+                    $community_names[] = $userTypeAPI->getUserDisplayName($community);
                 }
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s has joined %s', 'pop-emailsender'),

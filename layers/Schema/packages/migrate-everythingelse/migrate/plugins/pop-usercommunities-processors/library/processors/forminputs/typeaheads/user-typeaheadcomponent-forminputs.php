@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputs
 {
@@ -29,12 +30,12 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
 
     protected function getTypeaheadDataloadSource(array $module, array &$props)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS:
                 $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
-                $url = $cmsusersapi->getUserURL($author);
+                $url = $userTypeAPI->getUserURL($author);
                 return RequestUtils::addRoute($url, POP_USERCOMMUNITIES_ROUTE_COMMUNITYPLUSMEMBERS);
 
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY:

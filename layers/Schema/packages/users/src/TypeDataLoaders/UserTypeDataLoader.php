@@ -6,6 +6,7 @@ namespace PoPSchema\Users\TypeDataLoaders;
 
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
@@ -17,10 +18,10 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function getObjects(array $ids): array
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $ret = array();
         foreach ($ids as $user_id) {
-            $ret[] = $cmsusersapi->getUserById($user_id);
+            $ret[] = $userTypeAPI->getUserById($user_id);
         }
         return $ret;
     }
@@ -51,8 +52,8 @@ class UserTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = [])
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        return $cmsusersapi->getUsers($query, $options);
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
+        return $userTypeAPI->getUsers($query, $options);
     }
 
     public function executeQueryIds($query): array

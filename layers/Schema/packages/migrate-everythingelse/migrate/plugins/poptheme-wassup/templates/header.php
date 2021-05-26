@@ -1,8 +1,8 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 ?>
 
 <!DOCTYPE HTML>
@@ -23,7 +23,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
     <?php $vars = ApplicationState::getVars(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
     <?php $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance(); ?>
-    <?php $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance(); ?>
+    <?php $userTypeAPI = UserTypeAPIFacade::getInstance(); ?>
     <?php $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance(); ?>
     <?php $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
@@ -62,7 +62,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
         $description = gdHeaderRouteDescription();
     } elseif ($vars['routing-state']['is-user']) {
         $author = $vars['routing-state']['queried-object-id'];
-        $curauth = $cmsusersapi->getUserById($author);
+        $curauth = $userTypeAPI->getUserById($author);
         $description = sprintf(TranslationAPIFacade::getInstance()->__('View %1$s profile and get in touch through %2$s.', 'poptheme-wassup'), $curauth->display_name, $site_name);
     } elseif ($vars['routing-state']['is-tag']) {
         $tag_id = $vars['routing-state']['queried-object-id'];

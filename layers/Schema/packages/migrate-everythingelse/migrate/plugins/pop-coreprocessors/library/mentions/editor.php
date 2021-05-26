@@ -160,7 +160,8 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
                 'module' => [PoP_Module_Processor_UserMentionComponentLayouts::class, PoP_Module_Processor_UserMentionComponentLayouts::MODULE_LAYOUTUSER_MENTION_COMPONENT],
                 // Can't use "user-nicename", must use "nicename", because @Mentions plugin does not store the "-" in the html attribute, so it would
                 // save the entry as data-usernicename. To avoid conflicts, just remove the "-"
-                'key' => 'nicename',
+                // or even better, use "slug" instead
+                'key' => 'slug',
             ),
             '#' => array(
                 'url' => $tags_fetchurl,

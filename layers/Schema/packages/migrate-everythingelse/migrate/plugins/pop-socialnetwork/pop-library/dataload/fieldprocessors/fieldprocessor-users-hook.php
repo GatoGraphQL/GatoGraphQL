@@ -1,14 +1,15 @@
 <?php
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
@@ -79,7 +80,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
@@ -91,12 +92,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
             case 'followers':
                 $query = [];
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowers($query, $typeResolver->getID($user));
-                return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+                return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 
             case 'following':
                 $query = [];
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowingusers($query, $typeResolver->getID($user));
-                return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+                return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 
             case 'followersCount':
                 return \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);

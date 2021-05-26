@@ -1,11 +1,12 @@
 <?php
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -77,7 +78,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -106,7 +107,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
                 );
                 return sprintf(
                     $messages[$notification->action],
-                    $cmsusersapi->getUserDisplayName($notification->user_id),
+                    $userTypeAPI->getUserDisplayName($notification->user_id),
                     gdGetPostname($notification->object_id, 'lc'), //strtolower(gdGetPostname($notification->object_id)),
                     $notification->object_name
                 );

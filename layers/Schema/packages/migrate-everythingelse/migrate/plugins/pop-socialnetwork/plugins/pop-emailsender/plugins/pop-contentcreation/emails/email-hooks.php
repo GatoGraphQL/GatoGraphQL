@@ -10,6 +10,7 @@ use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPo
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -95,7 +96,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             return;
         }
 
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
@@ -119,12 +120,12 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                 if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT, $networkusers)) {
                     $emails = $names = array();
                     foreach ($networkusers as $networkuser) {
-                        $emails[] = $cmsusersapi->getUserEmail($networkuser);
-                        $names[] = $cmsusersapi->getUserDisplayName($networkuser);
+                        $emails[] = $userTypeAPI->getUserEmail($networkuser);
+                        $names[] = $userTypeAPI->getUserDisplayName($networkuser);
                     }
 
-                    $author_name = $cmsusersapi->getUserDisplayName($author);
-                    $author_url = $cmsusersapi->getUserURL($author);
+                    $author_name = $userTypeAPI->getUserDisplayName($author);
+                    $author_url = $userTypeAPI->getUserURL($author);
                     $subject = sprintf(
                         TranslationAPIFacade::getInstance()->__('%s has created a new %s: “%s”', 'pop-emailsender'),
                         $author_name,
@@ -182,7 +183,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         }
 
         // If the post has tags...
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
@@ -203,8 +204,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                         if ($tag_subscribers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT, $tag_subscribers, array($vars['global-userstate']['current-user-id']))) {
                             $emails = $names = array();
                             foreach ($tag_subscribers as $subscribeduser) {
-                                $emails[] = $cmsusersapi->getUserEmail($subscribeduser);
-                                $names[] = $cmsusersapi->getUserDisplayName($subscribeduser);
+                                $emails[] = $userTypeAPI->getUserEmail($subscribeduser);
+                                $names[] = $userTypeAPI->getUserDisplayName($subscribeduser);
                             }
 
                             $tag = $postTagTypeAPI->getTag($tag_id);
@@ -256,22 +257,22 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT, $networkusers)) {
-                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $userTypeAPI = UserTypeAPIFacade::getInstance();
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
-                    $emails[] = $cmsusersapi->getUserEmail($networkuser);
-                    $names[] = $cmsusersapi->getUserDisplayName($networkuser);
+                    $emails[] = $userTypeAPI->getUserEmail($networkuser);
+                    $names[] = $userTypeAPI->getUserDisplayName($networkuser);
                 }
 
                 $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment));
                 $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostId($comment));
                 $post_name = gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc');
-                $author_name = $cmsusersapi->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment));
+                $author_name = $userTypeAPI->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment));
 
                 $content = sprintf(
                     TranslationAPIFacade::getInstance()->__('<p><a href="%1$s">%2$s</a> added a comment in %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
-                    $cmsusersapi->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
+                    $userTypeAPI->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
                     $author_name,
                     $post_name,
                     $url,
@@ -312,7 +313,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $post_id = $commentTypeAPI->getCommentPostId($comment);
 
         // If the post has tags...
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
@@ -333,8 +334,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                         if ($tag_subscribers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT, $tag_subscribers, array($vars['global-userstate']['current-user-id']))) {
                             $emails = $names = array();
                             foreach ($tag_subscribers as $tag_subscriber) {
-                                $emails[] = $cmsusersapi->getUserEmail($tag_subscriber);
-                                $names[] = $cmsusersapi->getUserDisplayName($tag_subscriber);
+                                $emails[] = $userTypeAPI->getUserEmail($tag_subscriber);
+                                $names[] = $userTypeAPI->getUserDisplayName($tag_subscriber);
                             }
 
                             $tag = $postTagTypeAPI->getTag($tag_id);
@@ -381,16 +382,16 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_SUBSCRIBEDTOTOPIC))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC, $networkusers)) {
-                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $userTypeAPI = UserTypeAPIFacade::getInstance();
                 $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
-                    $emails[] = $cmsusersapi->getUserEmail($networkuser);
-                    $names[] = $cmsusersapi->getUserDisplayName($networkuser);
+                    $emails[] = $userTypeAPI->getUserEmail($networkuser);
+                    $names[] = $userTypeAPI->getUserDisplayName($networkuser);
                 }
 
-                $user_url = $cmsusersapi->getUserURL($user_id);
-                $user_name = $cmsusersapi->getUserDisplayName($user_id);
+                $user_url = $userTypeAPI->getUserURL($user_id);
+                $user_name = $userTypeAPI->getUserDisplayName($user_id);
                 $tag = $postTagTypeAPI->getTag($tag_id);
                 $tag_name = $applicationtaxonomyapi->getTagSymbolName($tag);
                 $subject = sprintf(
@@ -424,12 +425,12 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
      */
     public function sendemailToTaggedusers($taggedusers_ids, $subject, $content)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $emails = array();
         $names = array();
         foreach ($taggedusers_ids as $taggeduser_id) {
-            $emails[] = $cmsusersapi->getUserEmail($taggeduser_id);
-            $names[] = $cmsusersapi->getUserDisplayName($taggeduser_id);
+            $emails[] = $userTypeAPI->getUserEmail($taggeduser_id);
+            $names[] = $userTypeAPI->getUserDisplayName($taggeduser_id);
         }
 
         PoP_EmailSender_Utils::sendemailToUsers($emails, $names, $subject, $content, true);
@@ -437,7 +438,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function sendemailToUsersTaggedInPost($post_id, $taggedusers_ids, $newly_taggedusers_ids)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Only for published posts
@@ -453,8 +454,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p><a href="%s">%s</a> mentioned you in %s:</p>', 'pop-emailsender'),
-                $cmsusersapi->getUserURL($post_author_id),
-                $cmsusersapi->getUserDisplayName($post_author_id),
+                $userTypeAPI->getUserURL($post_author_id),
+                $userTypeAPI->getUserDisplayName($post_author_id),
                 $post_name
             );
 
@@ -480,7 +481,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     public function sendemailToUsersTaggedInComment($comment_id, $taggedusers_ids)
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $comment = $commentTypeAPI->getComment($comment_id);
 
         // Only for published comments
@@ -498,8 +499,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p><a href="%1$s">%2$s</a> mentioned you in a comment from %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
-                $cmsusersapi->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
-                $cmsusersapi->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment)),
+                $userTypeAPI->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
+                $userTypeAPI->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment)),
                 $post_name,
                 $url,
                 $title

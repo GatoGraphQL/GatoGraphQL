@@ -4,17 +4,43 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Users\ComponentConfiguration;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+    
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -101,7 +127,6 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'users':
                 $query = [
@@ -111,11 +136,11 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmsusersapi->getUsers($query, $options);
+                return $this->userTypeAPI->getUsers($query, $options);
             case 'userCount':
                 $options = [];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmsusersapi->getUserCount([], $options);
+                return $this->userTypeAPI->getUserCount([], $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

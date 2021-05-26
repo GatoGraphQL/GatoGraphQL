@@ -6,6 +6,7 @@ use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
@@ -96,14 +97,14 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     // }
     protected function getTitle(array $module, array &$props)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
-                return $cmsusersapi->getUserDisplayName($author);
+                return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_LAYOUT_PAGETABS_ROUTE:
                 $route = $vars['route'];

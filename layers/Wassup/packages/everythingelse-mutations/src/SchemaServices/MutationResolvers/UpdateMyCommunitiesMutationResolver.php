@@ -5,9 +5,23 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     public function execute(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];
@@ -64,7 +78,6 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     public function validateWarnings(array $form_data): ?array
     {
         $warnings = [];
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user_id = $form_data['user_id'];
         $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
         $communities = $form_data['communities'];
@@ -85,8 +98,8 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
             foreach ($banned_communities as $banned_community) {
                 $banned_communities_html[] = sprintf(
                     '<a href="%s">%s</a>',
-                    $cmsusersapi->getUserURL($banned_community),
-                    $cmsusersapi->getUserDisplayName($banned_community)
+                    $this->userTypeAPI->getUserURL($banned_community),
+                    $this->userTypeAPI->getUserDisplayName($banned_community)
                 );
             }
             $warnings[] = sprintf(

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\UserState\State\ApplicationStateUtils;
+use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {
@@ -41,8 +42,7 @@ class LoginMutationResolver extends AbstractMutationResolver
     public function execute(array $form_data): mixed
     {
         // If the user is already logged in, then return the error
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $userStateTypeMutationAPI = UserStateTypeMutationAPIFacade::getInstance();
 
         $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
@@ -51,14 +51,14 @@ class LoginMutationResolver extends AbstractMutationResolver
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');
         if ($is_email) {
-            $user = $cmsusersapi->getUserByEmail($username_or_email);
+            $user = $userTypeAPI->getUserByEmail($username_or_email);
             if (!$user) {
                 return new Error(
                     'no-user',
                     $this->translationAPI->__('There is no user registered with that email address.')
                 );
             }
-            $username = $cmsusersresolver->getUserLogin($user);
+            $username = $userTypeAPI->getUserLogin($user);
         } else {
             $username = $username_or_email;
         }
@@ -79,7 +79,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         // Modify the routing-state with the newly logged in user info
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
 
-        $userID = $cmsusersresolver->getUserId($user);
+        $userID = $userTypeAPI->getUserId($user);
         $this->hooksAPI->doAction('gd:user:loggedin', $userID);
         return $userID;
     }

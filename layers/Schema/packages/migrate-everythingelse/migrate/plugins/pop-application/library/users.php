@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 function userNameUpdated($user_id)
 {
@@ -30,10 +31,10 @@ function saveUserDisplayName($user_id)
  */
 function calculateBestDisplayName($user_id)
 {
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-    $first_name = $cmsusersapi->getUserFirstname($user_id);
-    $last_name = $cmsusersapi->getUserLastname($user_id);
-    $user_login = $cmsusersapi->getUserLogin($user_id);
+    $userTypeAPI = UserTypeAPIFacade::getInstance();
+    $first_name = $userTypeAPI->getUserFirstname($user_id);
+    $last_name = $userTypeAPI->getUserLastname($user_id);
+    $user_login = $userTypeAPI->getUserLogin($user_id);
   
     if (!$first_name && !$last_name) {
         $name = $user_login;

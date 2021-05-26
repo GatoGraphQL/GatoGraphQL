@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -77,9 +78,8 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         array $options = []
     ): mixed {
         $notification = $resultItem;
-
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'icon':
                 switch ($notification->action) {
@@ -103,7 +103,7 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>Please update your email</strong><br/>%s does not provide your email, so we set a random one for you: <em>%s</em>. Please click here to change it to your real email, or you won\'t receive notifications from the %s website', 'wsl-pop'),
                             getSocialloginProvider($user_id),
-                            $cmsusersapi->getUserEmail($user_id),
+                            $userTypeAPI->getUserEmail($user_id),
                             $cmsapplicationapi->getSiteName()
                         );
                 }

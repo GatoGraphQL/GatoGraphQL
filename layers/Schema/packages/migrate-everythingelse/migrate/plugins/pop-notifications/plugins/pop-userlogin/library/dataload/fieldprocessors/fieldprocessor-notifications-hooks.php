@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -77,7 +78,7 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
         array $options = []
     ): mixed {
         $notification = $resultItem;
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'icon':
                 $routes = array(
@@ -87,7 +88,7 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
                 return getRouteIcon($routes[$notification->action], false);
 
             case 'url':
-                return $cmsusersapi->getUserURL($notification->user_id);
+                return $userTypeAPI->getUserURL($notification->user_id);
 
             case 'message':
                 $messages = array(
@@ -96,7 +97,7 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
                 );
                 return sprintf(
                     $messages[$notification->action],
-                    $cmsusersapi->getUserDisplayName($notification->user_id)
+                    $userTypeAPI->getUserDisplayName($notification->user_id)
                 );
         }
 

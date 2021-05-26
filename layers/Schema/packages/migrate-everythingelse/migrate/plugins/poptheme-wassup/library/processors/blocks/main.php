@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -261,7 +262,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public function getTitle(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_404:
@@ -275,7 +276,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:
             case self::MODULE_BLOCK_AUTHORSUMMARY:
                 $author = $vars['routing-state']['queried-object-id'];
-                return $cmsusersapi->getUserDisplayName($author);
+                return $userTypeAPI->getUserDisplayName($author);
 
             case self::MODULE_BLOCK_TAG:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle(true, false);

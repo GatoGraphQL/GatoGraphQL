@@ -15,6 +15,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -51,9 +52,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getUserhtml($user_id)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $author_url = $cmsusersapi->getUserURL($user_id);
-        $author_name = $cmsusersapi->getUserDisplayName($user_id);
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
+        $author_url = $userTypeAPI->getUserURL($user_id);
+        $author_name = $userTypeAPI->getUserDisplayName($user_id);
         $avatar = gdGetAvatar($user_id, GD_AVATAR_SIZE_60);
         $avatar_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%3$s"></a>',

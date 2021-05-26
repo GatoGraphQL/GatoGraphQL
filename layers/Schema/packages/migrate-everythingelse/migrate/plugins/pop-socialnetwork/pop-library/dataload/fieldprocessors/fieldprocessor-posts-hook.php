@@ -1,12 +1,13 @@
 <?php
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -83,7 +84,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             // Users mentioned in the post: @mentions
@@ -93,7 +94,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             case 'recommendedby':
                 $query = [];
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsRecommendedby($query, $typeResolver->getID($post));
-                return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+                return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 
             case 'recommendPostCount':
                 return (int) \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_RECOMMENDCOUNT, true);

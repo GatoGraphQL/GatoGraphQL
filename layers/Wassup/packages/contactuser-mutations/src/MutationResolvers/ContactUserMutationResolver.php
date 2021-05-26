@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         if (empty($form_data['name'])) {
             $errors[] = $this->translationAPI->__('Your name cannot be empty.', 'pop-genericforms');
         }
@@ -30,7 +42,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         if (empty($form_data['target-id'])) {
             $errors[] = $this->translationAPI->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
-            $target = $cmsusersapi->getUserById($form_data['target-id']);
+            $target = $this->userTypeAPI->getUserById($form_data['target-id']);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-genericforms');
             }

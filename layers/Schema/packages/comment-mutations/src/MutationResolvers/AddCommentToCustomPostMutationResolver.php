@@ -13,6 +13,7 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
@@ -28,6 +29,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         HooksAPIInterface $hooksAPI,
         protected CommentTypeAPIInterface $commentTypeAPI,
         protected CommentTypeMutationAPIInterface $commentTypeMutationAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -70,13 +72,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID]
         ];
         if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $user_id;
-            $comment_data['author'] = $cmsusersapi->getUserDisplayName($user_id);
-            $comment_data['authorEmail'] = $cmsusersapi->getUserEmail($user_id);
-            $comment_data['author-URL'] = $cmsusersapi->getUserURL($user_id);;
+            $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($user_id);
+            $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($user_id);
+            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($user_id);;
         } else {
             // @todo Implement!
             // $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME];

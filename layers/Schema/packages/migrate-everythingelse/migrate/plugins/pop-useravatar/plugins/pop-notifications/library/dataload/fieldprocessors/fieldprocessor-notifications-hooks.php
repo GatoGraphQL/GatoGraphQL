@@ -1,10 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBDataFieldResolver
 {
@@ -77,9 +77,7 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
         array $options = []
     ): mixed {
         $notification = $resultItem;
-        $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($fieldName) {
             case 'icon':
                 switch ($notification->action) {
@@ -91,7 +89,7 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
             case 'url':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_USER_UPDATEDPHOTO:
-                        return $cmsusersapi->getUserURL($notification->user_id);
+                        return $userTypeAPI->getUserURL($notification->user_id);
                 }
                 return null;
 
@@ -101,7 +99,7 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
                 );
                 return sprintf(
                     $messages[$notification->action],
-                    $cmsusersapi->getUserDisplayName($notification->user_id)
+                    $userTypeAPI->getUserDisplayName($notification->user_id)
                 );
         }
 

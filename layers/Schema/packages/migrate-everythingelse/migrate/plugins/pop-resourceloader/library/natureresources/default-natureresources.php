@@ -1,16 +1,17 @@
 <?php
 
-use PoP\Routing\RouteNatures;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -84,8 +85,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addAuthorResources(&$resources, $modulefilter, $options)
     {
-
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         // The author is a special case: different roles will have different configurations
         // However, we can't tell from the URL the role of that author (mesym.com/u/leo/ and mesym.com/u/mesym/)
         // So then, we gotta calculate the resources for both cases, and add them together
@@ -99,7 +99,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         $roles = gdRoles();
         if (empty($roles)) {
             // Being here, GD_ROLE_PROFILE is not defined. Then, simply get any random user from the DB, and use its corresponding configuration (the default layouts for all non-profile users (eg: "subscriber") will be used)
-            $user_ids = $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+            $user_ids = $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
             $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
             $role = $userRoleTypeDataResolver->getTheUserRole($user_ids[0]);
             $roles = array($role);
@@ -110,7 +110,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
         $ids = array();
         foreach ($user_role_combinations as $user_role_combination) {
-            if ($role_ids = $cmsusersapi->getUsers(
+            if ($role_ids = $userTypeAPI->getUsers(
                 array_merge(
                     $query,
                     array(

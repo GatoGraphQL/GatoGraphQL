@@ -1,11 +1,12 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -101,7 +102,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
         array $options = []
     ): mixed {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $notification = $resultItem;
@@ -168,9 +169,9 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                             case AAL_POP_ACTION_USER_UNFOLLOWSUSER:
                                 // If the user is the object of this action, then point the link to the user who is doing the action
                                 if ($vars['global-userstate']['current-user-id'] == $notification->object_id) {
-                                    return $cmsusersapi->getUserURL($notification->user_id);
+                                    return $userTypeAPI->getUserURL($notification->user_id);
                                 }
-                                return $cmsusersapi->getUserURL($notification->object_id);
+                                return $userTypeAPI->getUserURL($notification->object_id);
                         }
                         return null;
 
@@ -209,7 +210,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                 );
                                 return sprintf(
                                     $messages[$notification->action],
-                                    $cmsusersapi->getUserDisplayName($notification->user_id),
+                                    $userTypeAPI->getUserDisplayName($notification->user_id),
                                     gdGetPostname($notification->object_id, 'lc'), //strtolower(gdGetPostname($notification->object_id)),
                                     $notification->object_name
                                 );
@@ -226,10 +227,10 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                 );
 
                                 // Change the message depending if the logged in user is the object of this action
-                                $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('you', 'pop-notifications') : sprintf('<strong>%s</strong>', $cmsusersapi->getUserDisplayName($notification->object_id));
+                                $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('you', 'pop-notifications') : sprintf('<strong>%s</strong>', $userTypeAPI->getUserDisplayName($notification->object_id));
                                 return sprintf(
                                     $messages[$notification->action],
-                                    $cmsusersapi->getUserDisplayName($notification->user_id),
+                                    $userTypeAPI->getUserDisplayName($notification->user_id),
                                     $recipient
                                 );
                         }
@@ -248,7 +249,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                         $tag = $postTagTypeAPI->getTag($notification->object_id);
                                         return sprintf(
                                             $messages[$notification->action],
-                                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                                            $userTypeAPI->getUserDisplayName($notification->user_id),
                                             $applicationtaxonomyapi->getTagSymbolName($tag)
                                         );
                                 }

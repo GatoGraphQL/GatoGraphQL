@@ -1,21 +1,22 @@
 <?php
 
-use PoP\Routing\RouteNatures;
-use PoPSchema\Pages\Routing\PathUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoP\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Routing\PathUtils;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -261,16 +262,10 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function addResourcesFromCurrentVars($modulefilter, &$resources, $nature, $ids = array(), $merge = false, $components = array(), $options = array()) {
 
-        // Use the $vars identifier to store the wrapper cache,
-        // so there is no collision with the values saved for the current request
-        global /*$pop_module_processor_runtimecache, */$pop_jsresourceloaderprocessor_manager;
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        // $pop_module_processor_runtimecache->setUseVarsIdentifier(true);
-
         // Keep the original values in the $vars, since they'll need to be changed
         // to pretend we are in a different $request
         $vars = &ApplicationState::$vars;
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
@@ -494,7 +489,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $author);
 
                 $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $cmsusersapi->getUserById($author);
+                $vars['routing-state']['queried-object'] = $userTypeAPI->getUserById($author);
                 $vars['routing-state']['queried-object-id'] = $author;
                 ApplicationState::augmentVarsProperties();
 

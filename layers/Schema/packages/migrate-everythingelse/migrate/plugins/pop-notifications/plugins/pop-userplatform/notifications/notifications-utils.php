@@ -1,5 +1,7 @@
 <?php
 
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+
 class PoP_Notifications_UserPlatform_Utils
 {
     public static function welcomeMessage($user_id)
@@ -10,14 +12,14 @@ class PoP_Notifications_UserPlatform_Utils
             return;
         }
 
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => AAL_POP_ACTION_USER_WELCOMENEWUSER,
                 'object_type' => 'User',
                 'user_id'     => POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS,
                 'object_id'   => $user_id,
-                'object_name' => $cmsusersapi->getUserDisplayName($user_id),
+                'object_name' => $userTypeAPI->getUserDisplayName($user_id),
             )
         );
     }

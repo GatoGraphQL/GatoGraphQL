@@ -1,18 +1,19 @@
 <?php
 
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoPSchema\EverythingElse\Enums\MemberTagEnum;
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
+use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
+use PoPSchema\EverythingElse\Enums\MemberTagEnum;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -157,14 +158,14 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
     ): mixed {
         $notification = $resultItem;
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'editUserMembershipURL':
                 return gdUreEditMembershipUrl($notification->user_id);
 
             case 'communityMembersURL':
-                return RequestUtils::addRoute($cmsusersapi->getUserURL($notification->object_id), POP_USERCOMMUNITIES_ROUTE_MEMBERS);
+                return RequestUtils::addRoute($userTypeAPI->getUserURL($notification->object_id), POP_USERCOMMUNITIES_ROUTE_MEMBERS);
 
          // ----------------------------------------
          // All fields below were copied from plugins/user-role-editor-popprocessors/pop-library/dataload/fieldresolvers/typeResolver-users-hook.php,
@@ -234,7 +235,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                     case URE_AAL_POP_ACTION_USER_UPDATEDCOMMUNITIES:
                         // Joined Community: link to the profile of the user joining
                         // Updated User Membership: link to the profile of the community
-                        return $cmsusersapi->getUserURL($notification->user_id);
+                        return $userTypeAPI->getUserURL($notification->user_id);
                 }
                 return null;
 
@@ -243,8 +244,8 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                     case URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY:
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%s</strong> has joined <strong>%s</strong>', 'ure-pop'),
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
-                            $cmsusersapi->getUserDisplayName($notification->object_id)
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->object_id)
                         );
 
                     case URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP:
@@ -252,7 +253,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                         $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('your', 'ure-pop') : sprintf('<strong>%s</strong>’s', $cmsengineapi->getUserDisplayName($notification->object_id));
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%s</strong> has updated %s membership settings:', 'ure-pop'),
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
                             $recipient
                         );
 
@@ -262,7 +263,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                         );
                         return sprintf(
                             $messages[$notification->action],
-                            $cmsusersapi->getUserDisplayName($notification->user_id)
+                            $userTypeAPI->getUserDisplayName($notification->user_id)
                         );
                 }
                 return null;

@@ -1,6 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
@@ -48,14 +49,14 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         $vars = ApplicationState::getVars();
         if (PoP_FormUtils::useLoggedinuserData() && doingPost() && $vars['global-userstate']['is-user-logged-in']) {
             $user_id = $vars['global-userstate']['current-user-id'];
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $userTypeAPI = UserTypeAPIFacade::getInstance();
             switch ($module[1]) {
                 case self::MODULE_FORMINPUT_NAME:
-                    $options['selected'] = $cmsusersapi->getUserDisplayName($user_id);
+                    $options['selected'] = $userTypeAPI->getUserDisplayName($user_id);
                     break;
 
                 case self::MODULE_FORMINPUT_EMAIL:
-                    $options['selected'] = $cmsusersapi->getUserEmail($user_id);
+                    $options['selected'] = $userTypeAPI->getUserEmail($user_id);
                     break;
             }
         }

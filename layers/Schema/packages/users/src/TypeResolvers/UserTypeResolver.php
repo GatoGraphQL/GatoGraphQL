@@ -4,11 +4,37 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeResolvers;
 
-use PoPSchema\Users\TypeDataLoaders\UserTypeDataLoader;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\Users\TypeDataLoaders\UserTypeDataLoader;
 
 class UserTypeResolver extends AbstractTypeResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ErrorProviderInterface $errorProvider,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $feedbackMessageStore,
+            $fieldQueryInterpreter,
+            $errorProvider,
+        );
+    }
+
     public function getTypeName(): string
     {
         return 'User';
@@ -21,9 +47,8 @@ class UserTypeResolver extends AbstractTypeResolver
 
     public function getID(object $resultItem): string | int
     {
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $user = $resultItem;
-        return $cmsusersresolver->getUserId($user);
+        return $this->userTypeAPI->getUserId($user);
     }
 
     public function getTypeDataLoaderClass(): string

@@ -20,10 +20,9 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         return sprintf(
             $this->translationAPI->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $cmsusersapi->getUserDisplayName($result_id)
+            $this->userTypeAPI->getUserDisplayName($result_id)
         );
     }
 }

@@ -4,14 +4,40 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers;
 
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+    
     public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -28,8 +54,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'username',
-            'userNicename',
-            'nicename',
             'name',
             'displayName',
             'firstname',
@@ -46,8 +70,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'username' => SchemaDefinition::TYPE_STRING,
-            'userNicename' => SchemaDefinition::TYPE_STRING,
-            'nicename' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
             'displayName' => SchemaDefinition::TYPE_STRING,
             'firstname' => SchemaDefinition::TYPE_STRING,
@@ -65,8 +87,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'username' => $this->translationAPI->__('User\'s username handle', 'pop-users'),
-            'userNicename' => $this->translationAPI->__('User\'s nice name', 'pop-users'),
-            'nicename' => $this->translationAPI->__('User\'s nice name', 'pop-users'),
             'name' => $this->translationAPI->__('Name of the user', 'pop-users'),
             'displayName' => $this->translationAPI->__('Name of the user as displayed on the website', 'pop-users'),
             'firstname' => $this->translationAPI->__('User\'s first name', 'pop-users'),
@@ -95,41 +115,35 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'username':
-                return $cmsusersresolver->getUserLogin($user);
-
-            case 'userNicename':
-            case 'nicename':
-                return $cmsusersresolver->getUserNicename($user);
+                return $this->userTypeAPI->getUserLogin($user);
 
             case 'name':
             case 'displayName':
-                return $cmsusersresolver->getUserDisplayName($user);
+                return $this->userTypeAPI->getUserDisplayName($user);
 
             case 'firstname':
-                return $cmsusersresolver->getUserFirstname($user);
+                return $this->userTypeAPI->getUserFirstname($user);
 
             case 'lastname':
-                return $cmsusersresolver->getUserLastname($user);
+                return $this->userTypeAPI->getUserLastname($user);
 
             case 'email':
-                return $cmsusersresolver->getUserEmail($user);
+                return $this->userTypeAPI->getUserEmail($user);
 
             case 'url':
-                return $cmsusersapi->getUserURL($typeResolver->getID($user));
+                return $this->userTypeAPI->getUserURL($typeResolver->getID($user));
 
             case 'slug':
-                return $cmsusersresolver->getUserSlug($user);
+                return $this->userTypeAPI->getUserSlug($user);
 
             case 'description':
-                return $cmsusersresolver->getUserDescription($user);
+                return $this->userTypeAPI->getUserDescription($user);
 
             case 'websiteURL':
-                return $cmsusersresolver->getUserWebsiteUrl($user);
+                return $this->userTypeAPI->getUserWebsiteUrl($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

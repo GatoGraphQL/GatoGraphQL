@@ -4,19 +4,32 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\Constants\InputNames;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $target_id = $form_data['target_id'];
 
             // Make sure the user exists
-            $target = $cmsusersapi->getUserById($target_id);
+            $target = $this->userTypeAPI->getUserById($target_id);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-coreprocessors');
             }

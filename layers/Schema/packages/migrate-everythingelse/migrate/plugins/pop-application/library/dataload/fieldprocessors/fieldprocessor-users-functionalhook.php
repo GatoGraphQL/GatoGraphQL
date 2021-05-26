@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
@@ -64,7 +65,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         array $options = []
     ): mixed {
         $user = $resultItem;
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         switch ($fieldName) {
             case 'multilayoutKeys':
@@ -83,11 +84,11 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
             case 'excerpt':
                 $readmore = sprintf(
                     TranslationAPIFacade::getInstance()->__('... <a href="%s">Read more</a>', 'pop-application'),
-                    $cmsusersapi->getUserURL($typeResolver->getID($user))
+                    $userTypeAPI->getUserURL($typeResolver->getID($user))
                 );
                 // Excerpt length can be set through fieldArgs
                 $length = $fieldArgs['length'] ? (int) $fieldArgs['length'] : 300;
-                return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($cmsusersapi->getUserDescription($typeResolver->getID($user)))), $length, $readmore));
+                return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($userTypeAPI->getUserDescription($typeResolver->getID($user)))), $length, $readmore));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

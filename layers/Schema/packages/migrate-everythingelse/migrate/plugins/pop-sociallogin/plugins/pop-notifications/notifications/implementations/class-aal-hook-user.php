@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -39,14 +40,14 @@ class WSL_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
             return;
         }
 
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => WSL_AAL_POP_ACTION_USER_REQUESTCHANGEEMAIL,
                 'object_type' => 'User',
                 'user_id'     => POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS,
                 'object_id'   => $user_id,
-                'object_name' => $cmsusersapi->getUserDisplayName($user_id),
+                'object_name' => $userTypeAPI->getUserDisplayName($user_id),
             )
         );
     }

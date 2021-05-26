@@ -1,6 +1,7 @@
 <?php
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {
@@ -32,7 +33,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
 
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
                 // Return all selected Communities + their Members
-                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $userTypeAPI = UserTypeAPIFacade::getInstance();
                 $memberstatus_key = \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
                 $memberprivileges_key = \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
                 $members = [];
@@ -40,7 +41,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
                     // Taken from https://codex.wordpress.org/Class_Reference/WP_Meta_Query
                     $members = array_merge(
                         $members,
-                        $cmsusersapi->getUsers(
+                        $userTypeAPI->getUsers(
                             [
                                 // 'fields' => 'ID',
                                 'meta-query' => [

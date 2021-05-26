@@ -9,6 +9,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 /**
@@ -85,7 +86,7 @@ class PoP_Mentions
     public function generatePostTags($post_id)
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
@@ -110,7 +111,7 @@ class PoP_Mentions
                 $taggedusers_ids = array();
                 foreach ($user_nicenames as $user_nicename) {
                     if ($user = $cmsusersapi->getUserBySlug($user_nicename)) {
-                        $taggedusers_ids[] = $cmsusersresolver->getUserId($user);
+                        $taggedusers_ids[] = $userTypeAPI->getUserId($user);
                     }
                 }
 
@@ -129,7 +130,7 @@ class PoP_Mentions
     public function generateCommentTags($comment_id, $comment)
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         if ($tags = $this->getHashtagsFromContent($commentTypeAPI->getCommentContent($comment))) {
@@ -155,7 +156,7 @@ class PoP_Mentions
             $taggedusers_ids = array();
             foreach ($user_nicenames as $user_nicename) {
                 if ($user = $cmsusersapi->getUserBySlug($user_nicename)) {
-                    $taggedusers_ids[] = $cmsusersresolver->getUserId($user);
+                    $taggedusers_ids[] = $userTypeAPI->getUserId($user);
                 }
             }
 
@@ -246,8 +247,8 @@ class PoP_Mentions
     private function makeLinkUsers($match)
     {
 		$cmsService = CMSServiceFacade::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         // get by nickname or by login name
         $user = $cmsusersapi->getUserBySlug($match[1]);
         if (!$user) {
@@ -259,9 +260,9 @@ class PoP_Mentions
             $userTypeResolver = $instanceManager->getInstance(UserTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $cmsusersresolver->getUserId($user),
-                $cmsusersapi->getUserURL($cmsusersresolver->getUserId($user)),
-                $cmsusersresolver->getUserDisplayName($user)
+                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserId($user),
+                $userTypeAPI->getUserURL($userTypeAPI->getUserId($user)),
+                $userTypeAPI->getUserDisplayName($user)
             );
         }
 
