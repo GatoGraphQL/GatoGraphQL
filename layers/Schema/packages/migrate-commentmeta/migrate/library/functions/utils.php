@@ -1,6 +1,8 @@
 <?php
 namespace PoPSchema\CommentMeta;
 
+use PoPSchema\CommentMeta\Facades\CommentMetaTypeAPIFacade;
+
 class Utils
 {
     public static function getMetaKey($meta_key)
@@ -11,8 +13,8 @@ class Utils
 
     public static function getCommentMeta($comment_id, $key, $single = false)
     {
-        $functionapi = FunctionAPIFactory::getInstance();
-        return $functionapi->getCommentMeta($comment_id, self::getMetaKey($key), $single);
+        $commentMetaTypeAPI = CommentMetaTypeAPIFacade::getInstance();
+        return $commentMetaTypeAPI->getCommentMeta($comment_id, self::getMetaKey($key), $single);
     }
     public static function updateCommentMeta($comment_id, $key, $values, $single = false, $boolean = false)
     {
