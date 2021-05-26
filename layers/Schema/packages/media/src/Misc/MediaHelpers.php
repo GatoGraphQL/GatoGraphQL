@@ -11,11 +11,6 @@ class MediaHelpers
     public static function getAttachmentImageProperties($imageid, $size = null)
     {
         $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
-        $img = $mediaTypeAPI->getImageProperties($imageid, $size);
-        return array(
-            'src' => $img[0],
-            'width' => $img[1],
-            'height' => $img[2]
-        );
+        return $mediaTypeAPI->getImageProperties($imageid, $size);
     }
 }

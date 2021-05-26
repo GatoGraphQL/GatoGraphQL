@@ -92,7 +92,7 @@ function gdGetDocumentThumb($size = 'large')
         if (defined('POP_AVATAR_INITIALIZED')) {
             $author = $vars['routing-state']['queried-object-id'];
             $userphoto = gdGetAvatarPhotoinfo($author);
-            $thumb = array($userphoto['src'], $userphoto['width'], $userphoto['height']);
+            $thumb = $userphoto['src'];
             $thumb_mime_type = '';
         }
     }
@@ -104,14 +104,14 @@ function gdGetDocumentThumb($size = 'large')
     }
 
     // If there's no thumb (eg: a page doesn't have Featured Image) then return nothing
-    if (!$thumb[0]) {
+    if (!$thumb['src']) {
         return null;
     }
 
-    return array(
-        'src' => $thumb[0],
-        'width' => $thumb[1],
-        'height' => $thumb[2],
-        'mime-type' => $thumb_mime_type
+    return array_merge(
+        $thumb,
+        [
+            'mime-type' => $thumb_mime_type,
+        ]
     );
 }

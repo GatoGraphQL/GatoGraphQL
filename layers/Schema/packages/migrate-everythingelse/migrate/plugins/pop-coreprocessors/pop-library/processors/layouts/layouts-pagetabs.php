@@ -63,9 +63,9 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
                     $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
                     $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, 'favicon');
                     return array(
-                        'src' => $thumb[0],
-                        'w' => $thumb[1],
-                        'h' => $thumb[2]
+                        'src' => $thumb['src'],
+                        'w' => $thumb['width'],
+                        'h' => $thumb['height']
                     );
                 }
                 break;

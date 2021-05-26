@@ -32,7 +32,12 @@ class MediaTypeAPI implements MediaTypeAPIInterface
 
     public function getImageProperties(string | int $image_id, ?string $size = null): ?string
     {
-        return wp_get_attachment_image_src($image_id, $size);
+        $img = wp_get_attachment_image_src($image_id, $size);
+        return [
+            'src' => $img[0],
+            'width' => $img[1],
+            'height' => $img[2]
+        ];
     }
 
     public function getMediaElements(array $query, array $options = []): array

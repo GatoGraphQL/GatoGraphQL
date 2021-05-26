@@ -95,9 +95,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
         $thumb_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%4$s"></a>',
             $post_url,
-            $thumb[0],
-            $thumb[1],
-            $thumb[2]
+            $thumb['src'],
+            $thumb['width'],
+            $thumb['height']
         );
         $title_html = sprintf(
             '<h3 style="display: block;"><a href="%s">%s</a></h3>',
@@ -113,7 +113,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             .'</tr>'.
             '</table>',
             implode(';', $posthtml_styles),
-            $thumb[1],
+            $thumb['width'],
             $thumb_html,
             $title_html,
             $post_excerpt

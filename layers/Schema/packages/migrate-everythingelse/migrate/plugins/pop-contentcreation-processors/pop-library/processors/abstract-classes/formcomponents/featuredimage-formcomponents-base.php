@@ -97,12 +97,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         if ($defaultimg = $this->getDefaultImage($module, $props)) {
             $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
             $defaultfeatured = $mediaTypeAPI->getImageProperties($defaultimg, $img_size);
-            $defaultfeaturedsrc = array(
-                'src' => $defaultfeatured[0],
-                'width' => $defaultfeatured[1],
-                'height' => $defaultfeatured[2]
-            );
-            $this->setProp($featuredimageinner, $props, 'default-img', $defaultfeaturedsrc);
+            $this->setProp($featuredimageinner, $props, 'default-img', $defaultfeatured);
         }
 
         parent::initModelProps($module, $props);
