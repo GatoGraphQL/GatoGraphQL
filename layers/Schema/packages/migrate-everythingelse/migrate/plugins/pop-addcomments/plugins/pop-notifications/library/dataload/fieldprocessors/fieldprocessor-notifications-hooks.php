@@ -101,7 +101,6 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
@@ -153,8 +152,8 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                         );
                         return sprintf(
                             $messages[$notification->action],
-                            gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc'),
-                            $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
+                            gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc'),
+                            $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment))
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
@@ -164,7 +163,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 
                         // Change the message if the comment is a response to the user's comment
                         $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> commented in %2$s <strong>%3$s</strong>', 'pop-notifications');
-                        if ($comment_parent_id = $cmscommentsresolver->getCommentParent($comment)) {
+                        if ($comment_parent_id = $commentTypeAPI->getCommentParent($comment)) {
                             $comment_parent = $commentTypeAPI->getComment($comment_parent_id);
                             $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
                             if ($userCommentTypeAPI->getCommentUserId($comment_parent) == $user_id) {
@@ -182,8 +181,8 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                         return sprintf(
                             $message,
                             $cmsusersapi->getUserDisplayName($notification->user_id),
-                            gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc'),
-                            $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
+                            gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc'),
+                            $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment))
                         );
                 }
                 return null;

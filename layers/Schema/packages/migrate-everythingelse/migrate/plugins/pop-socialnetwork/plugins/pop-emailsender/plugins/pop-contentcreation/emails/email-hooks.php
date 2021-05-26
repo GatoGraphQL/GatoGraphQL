@@ -243,11 +243,10 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     public function emailnotificationsNetworkAddedcomment($comment_id, $comment)
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $commentTypeAPI->getComment($comment_id);
 
         // Only for published comments
-        if (!$cmscommentsresolver->isCommentApproved($comment)) {
+        if (!$commentTypeAPI->isCommentApproved($comment)) {
             return;
         }
 
@@ -265,9 +264,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                     $names[] = $cmsusersapi->getUserDisplayName($networkuser);
                 }
 
-                $title = $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment));
-                $url = $customPostTypeAPI->getPermalink($cmscommentsresolver->getCommentPostId($comment));
-                $post_name = gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc');
+                $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment));
+                $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostId($comment));
+                $post_name = gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc');
                 $author_name = $cmsusersapi->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment));
 
                 $content = sprintf(
@@ -304,14 +303,13 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function emailnotificationsSubscribedtopicAddedcomment($comment_id, $comment)
     {
-
         // Only for published comments
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        if (!$cmscommentsresolver->isCommentApproved($comment)) {
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
+        if (!$commentTypeAPI->isCommentApproved($comment)) {
             return;
         }
 
-        $post_id = $cmscommentsresolver->getCommentPostId($comment);
+        $post_id = $commentTypeAPI->getCommentPostId($comment);
 
         // If the post has tags...
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
@@ -482,21 +480,20 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     public function sendemailToUsersTaggedInComment($comment_id, $taggedusers_ids)
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $comment = $commentTypeAPI->getComment($comment_id);
 
         // Only for published comments
-        if (!$cmscommentsresolver->isCommentApproved($comment)) {
+        if (!$commentTypeAPI->isCommentApproved($comment)) {
             return;
         }
 
         // From those, remove all users who got an email in a previous email function
         if ($taggedusers_ids = array_diff($taggedusers_ids, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $title = $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment));
-            $url = $customPostTypeAPI->getPermalink($cmscommentsresolver->getCommentPostId($comment));
-            $post_name = gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc');
+            $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment));
+            $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostId($comment));
+            $post_name = gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc');
 
             $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
             $content = sprintf(

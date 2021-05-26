@@ -35,17 +35,16 @@ class PoP_AddComments_EmailSender_Hooks
             'pingback',
             'trackback'
         );
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        if (in_array($cmscommentsresolver->getCommentType($comment), $skip) || !$cmscommentsresolver->isCommentApproved($comment)) {
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
+        if (in_array($commentTypeAPI->getCommentType($comment), $skip) || !$commentTypeAPI->isCommentApproved($comment)) {
             return;
         }
 
-        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
-        $post_id = $cmscommentsresolver->getCommentPostId($comment);
+        $post_id = $commentTypeAPI->getCommentPostId($comment);
         $title = $customPostTypeAPI->getTitle($post_id);
-        $intro = $cmscommentsresolver->getCommentParent($comment) ?
+        $intro = $commentTypeAPI->getCommentParent($comment) ?
             TranslationAPIFacade::getInstance()->__('<p>There is a response to a comment from <a href="%s">%s</a>:</p>', 'pop-emailsender') :
             TranslationAPIFacade::getInstance()->__('<p>A new comment has been added to <a href="%s">%s</a>:</p>', 'pop-emailsender');
         $content = sprintf(
@@ -61,15 +60,15 @@ class PoP_AddComments_EmailSender_Hooks
         // If this comment is a response, notify the original comment's author
         // Unless they are the same person
         $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
-        if ($comment_parent_id = $cmscommentsresolver->getCommentParent($comment)) {
+        if ($comment_parent_id = $commentTypeAPI->getCommentParent($comment)) {
             $comment_parent = $commentTypeAPI->getComment($comment_parent_id);
             if ($userCommentTypeAPI->getCommentUserId($comment_parent) && $userCommentTypeAPI->getCommentUserId($comment_parent) != $userCommentTypeAPI->getCommentUserId($comment)) {
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s replied your comment in “%s”', 'pop-emailsender'),
-                    $cmscommentsresolver->getCommentAuthorName($comment),
+                    $commentTypeAPI->getCommentAuthorName($comment),
                     $title
                 );
-                PoP_EmailSender_Utils::sendemailToUsers(array($cmscommentsresolver->getCommentAuthorEmail($comment_parent)), array($cmscommentsresolver->getCommentAuthorName($comment_parent)), $subject, $content);
+                PoP_EmailSender_Utils::sendemailToUsers(array($commentTypeAPI->getCommentAuthorEmail($comment_parent)), array($commentTypeAPI->getCommentAuthorName($comment_parent)), $subject, $content);
 
                 // Add the users to the list of users who got an email sent to
                 PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT, array($userCommentTypeAPI->getCommentUserId($comment_parent)));
@@ -104,7 +103,7 @@ class PoP_AddComments_EmailSender_Hooks
         $exclude_authors[] = $userCommentTypeAPI->getCommentUserId($comment);
 
         // Do not send the email to the author of the comment_parent comment, since we already sent it above
-        if ($cmscommentsresolver->getCommentParent($comment)) {
+        if ($commentTypeAPI->getCommentParent($comment)) {
             $exclude_authors[] = $userCommentTypeAPI->getCommentUserId($comment_parent);
         }
         $subject = sprintf(

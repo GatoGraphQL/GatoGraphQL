@@ -62,16 +62,15 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $commentTypeAPI->getComment($comment_id);
         PoP_Notifications_Utils::insertLog(
             array(
                 'user_id' => $user_id,
                 'action' => $action,
                 'object_type' => 'Comments',
-                'object_subtype' => $customPostTypeAPI->getCustomPostType($cmscommentsresolver->getCommentPostId($comment)),
+                'object_subtype' => $customPostTypeAPI->getCustomPostType($commentTypeAPI->getCommentPostId($comment)),
                 'object_id' => $comment_id,
-                'object_name' => $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment)),
+                'object_name' => $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment)),
             )
         );
     }

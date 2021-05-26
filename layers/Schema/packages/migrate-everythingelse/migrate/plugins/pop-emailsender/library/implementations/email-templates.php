@@ -124,7 +124,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     public function getCommenthtml($comment)
     {
         $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $avatar = gdGetAvatar($userCommentTypeAPI->getCommentUserId($comment), GD_AVATAR_SIZE_40);
         $avatar_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%3$s"></a>',
@@ -147,8 +147,8 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar_html,
             $comment->comment_author_url,
             $comment->comment_author,
-            $dateFormatter->format($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
-            $cmscommentsresolver->getCommentContent($comment)
+            $dateFormatter->format($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $commentTypeAPI->getCommentDateGmt($comment)),
+            $commentTypeAPI->getCommentContent($comment)
         );
 
         return $comment_html;
@@ -158,11 +158,10 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $post_id = $cmscommentsresolver->getCommentPostId($comment);
+        $post_id = $commentTypeAPI->getCommentPostId($comment);
         $url = $customPostTypeAPI->getPermalink($post_id);
-        if ($cmscommentsresolver->getCommentParent($comment)) {
-            $parent = $commentTypeAPI->getComment($cmscommentsresolver->getCommentParent($comment));
+        if ($commentTypeAPI->getCommentParent($comment)) {
+            $parent = $commentTypeAPI->getComment($commentTypeAPI->getCommentParent($comment));
         }
 
         $content = $this->getCommenthtml($comment);

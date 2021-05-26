@@ -97,7 +97,6 @@ class PoP_AddComments_Notifications_NotificationHooks
             );
             if (in_array($notification->action, $comment_actions)) {
                 // Only approved comments
-                $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
                 $commentTypeAPI = CommentTypeAPIFacade::getInstance();
                 $comment = $commentTypeAPI->getComment($notification->object_id);
                 $actions = $comment_actions;
@@ -118,7 +117,7 @@ class PoP_AddComments_Notifications_NotificationHooks
 					',
                     $wpdb->pop_notifications,
                     $wpdb->comments,
-                    $cmscommentsresolver->getCommentPostId($comment)
+                    $commentTypeAPI->getCommentPostId($comment)
                 );
 
                 return array($objectids_sql, $actions);
