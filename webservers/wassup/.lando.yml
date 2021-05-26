@@ -166,10 +166,6 @@ services:
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
         - >-
-          ../../layers/Schema/packages/migrate-comments:/app/vendor/pop-schema/migrate-comments
-        - >-
-          ../../layers/Schema/packages/migrate-comments-wp:/app/vendor/pop-schema/migrate-comments-wp
-        - >-
           ../../layers/Schema/packages/migrate-custompostmedia:/app/vendor/pop-schema/migrate-custompostmedia
         - >-
           ../../layers/Schema/packages/migrate-custompostmedia-wp:/app/vendor/pop-schema/migrate-custompostmedia-wp

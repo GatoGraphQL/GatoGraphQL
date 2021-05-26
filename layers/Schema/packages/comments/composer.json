@@ -16,8 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/customposts": "^0.8",
-        "pop-schema/migrate-comments": "^0.8"
+        "pop-schema/customposts": "^0.8"
     },
     "require-dev": {
         "pop-schema/users": "^0.8",
