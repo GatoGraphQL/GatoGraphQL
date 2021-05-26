@@ -286,6 +286,8 @@ class Plugins
             'migrate-pages' => 'pop-pages.php',
             'migrate-pages-wp' => 'pop-pages-wp.php',
             'migrate-posts' => 'pop-posts.php',
+            'migrate-users' => 'pop-users.php',
+            'migrate-users-wp' => 'pop-users-wp.php',
         ];
         foreach ($migratePackages as $migratePackage => $file) {
             require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
