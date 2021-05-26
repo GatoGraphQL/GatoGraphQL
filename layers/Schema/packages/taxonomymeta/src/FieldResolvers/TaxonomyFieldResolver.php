@@ -63,7 +63,7 @@ class TaxonomyFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $taxonomyMetaAPI->getTaxonomyMeta(
+                return $taxonomyMetaAPI->getTaxonomyTermMeta(
                     $typeResolver->getID($taxonomy),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
