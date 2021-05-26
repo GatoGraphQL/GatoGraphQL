@@ -6,6 +6,3 @@ services:
 
     PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface:
         class: \PoPSchema\QueriedObject\Helpers\QueriedObjectHelperService
-
-    PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface:
-        class: \PoPSchema\QueriedObject\Routing\CMSRoutingStateService
