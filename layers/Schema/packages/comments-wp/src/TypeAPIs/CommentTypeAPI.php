@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
-use WP_Comment;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 use PoPSchema\Comments\Constants\Status;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Comment;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -28,8 +28,9 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     protected array $popToCMSCommentStatusConversion;
 
-    public function __construct()
-    {
+    public function __construct(
+        protected HooksAPIInterface $hooksAPI,
+    ) {
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }
 
@@ -146,7 +147,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         // Only comments, no trackbacks or pingbacks
         $query['type'] = 'comment';
 
-        $query = HooksAPIFacade::getInstance()->applyFilters(
+        $query = $this->hooksAPI->applyFilters(
             'CMSAPI:comments:query',
             $query,
             $options
@@ -168,7 +169,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     public function getCommentContent(object $comment): string
     {
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'comment_text',
             $this->getCommentPlainContent($comment)
         );
