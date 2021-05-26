@@ -281,6 +281,8 @@ class Plugins
             'migrate-usermeta' => 'pop-usermeta.php',
             'migrate-usermeta-wp' => 'pop-usermeta-wp.php',
             'migrate-meta' => 'pop-meta.php',
+            'migrate-media' => 'pop-media.php',
+            'migrate-media-wp' => 'pop-media-wp.php',
         ];
         foreach ($migratePackages as $migratePackage => $file) {
             require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
