@@ -263,6 +263,14 @@ class UserTypeAPI implements UserTypeAPIInterface
     {
         return $this->getUserProperty('user_url', $userObjectOrID);
     }
+    public function getUserSlug(string | int | object $userObjectOrID): ?string
+    {
+        return $this->getUserProperty('user_nicename', $userObjectOrID);
+    }
+    public function getUserId(object $user): string | int
+    {
+        return $user->ID;
+    }
 
     public function getUserURL(string | int | object $userObjectOrID): ?string
     {
