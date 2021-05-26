@@ -56,7 +56,6 @@ class CommentsCustomPostFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             case 'commentsURL':
