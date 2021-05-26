@@ -6,13 +6,14 @@ namespace PoPSchema\CustomPostMedia\Misc;
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPostMedia\Environment;
+use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
 
 class MediaHelpers
 {
     public static function getThumbId($post_id)
     {
-        $cmsmediapostsapi = \PoPSchema\Media\PostsFunctionAPIFactory::getInstance();
-        if ($thumb_id = $cmsmediapostsapi->getCustomPostThumbnailID($post_id)) {
+        $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();
+        if ($thumb_id = $customPostMediaTypeAPI->getCustomPostThumbnailID($post_id)) {
             return $thumb_id;
         }
 

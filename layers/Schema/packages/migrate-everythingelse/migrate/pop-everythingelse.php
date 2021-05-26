@@ -281,8 +281,6 @@ class Plugins
 
         // Initialize dependencies too
         require_once (dirname(__DIR__, 2) . '/migrate-meta/migrate/pop-meta.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-custompostmeta/migrate/pop-custompostmeta.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-custompostmeta-wp/migrate/pop-custompostmeta-wp.php');
         require_once (dirname(__DIR__, 2) . '/migrate-usermeta/migrate/pop-usermeta.php');
         require_once (dirname(__DIR__, 2) . '/migrate-usermeta-wp/migrate/pop-usermeta-wp.php');
         require_once (dirname(__DIR__, 2) . '/migrate-taxonomymeta/migrate/pop-taxonomymeta.php');

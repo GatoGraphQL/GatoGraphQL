@@ -17,8 +17,6 @@
     "require": {
         "php": "^8.0",
         "pop-schema/migrate-meta": "^0.8",
-        "pop-schema/migrate-custompostmeta": "^0.8",
-        "pop-schema/migrate-custompostmeta-wp": "^0.8",
         "pop-schema/migrate-usermeta": "^0.8",
         "pop-schema/migrate-usermeta-wp": "^0.8",
         "pop-schema/migrate-taxonomymeta": "^0.8",

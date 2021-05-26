@@ -139,14 +139,6 @@ services:
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/metaquery-wp
         - >-
-          ../../layers/Schema/packages/migrate-custompostmedia:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-custompostmedia
-        - >-
-          ../../layers/Schema/packages/migrate-custompostmedia-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-custompostmedia-wp
-        - >-
-          ../../layers/Schema/packages/migrate-custompostmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-custompostmeta
-        - >-
-          ../../layers/Schema/packages/migrate-custompostmeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-custompostmeta-wp
-        - >-
           ../../layers/Schema/packages/migrate-media:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-media
         - >-
           ../../layers/Schema/packages/migrate-media-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-media-wp
