@@ -29,4 +29,5 @@ interface CommentTypeAPIInterface
     public function getCommentId(object $comment): string | int;
     public function getCommentAuthorName(object $comment): string;
     public function getCommentAuthorEmail(object $comment): string;
+    public function getCommentAuthorURL(object $comment): string;
 }
