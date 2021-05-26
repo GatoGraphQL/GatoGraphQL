@@ -227,30 +227,67 @@ class UserTypeAPI implements UserTypeAPIInterface
     }
     public function getUserDisplayName(string | int | object $userObjectOrID): ?string
     {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->display_name;
+        }
         return get_the_author_meta('display_name', $userObjectOrID);
     }
     public function getUserEmail(string | int | object $userObjectOrID): ?string
     {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->user_email;
+        }
         return get_the_author_meta('user_email', $userObjectOrID);
     }
     public function getUserFirstname(string | int | object $userObjectOrID): ?string
     {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->user_firstname;
+        }
         return get_the_author_meta('user_firstname', $userObjectOrID);
     }
     public function getUserLastname(string | int | object $userObjectOrID): ?string
     {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->user_lastname;
+        }
         return get_the_author_meta('user_lastname', $userObjectOrID);
     }
     public function getUserLogin(string | int | object $userObjectOrID): ?string
     {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->user_login;
+        }
         return get_the_author_meta('user_login', $userObjectOrID);
     }
     public function getUserDescription(string | int | object $userObjectOrID): ?string
     {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            return $user->description;
+        }
         return get_the_author_meta('description', $userObjectOrID);
     }
     public function getUserURL(string | int | object $userObjectOrID): ?string
     {
-        return get_author_posts_url($userObjectOrID);
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            $userID = $user->ID;
+        } else {
+            $userID = $userObjectOrID;
+        }
+        return get_author_posts_url($userID);
     }
 }
