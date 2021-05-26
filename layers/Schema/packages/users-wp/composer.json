@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/users": "^0.8",
-        "pop-schema/queriedobject-wp": "^0.8",
-        "pop-schema/migrate-users-wp": "^0.8"
+        "pop-schema/queriedobject-wp": "^0.8"
     },
     "require-dev": {
         "pop-schema/customposts-wp": "^0.8",

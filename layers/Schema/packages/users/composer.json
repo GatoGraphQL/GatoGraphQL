@@ -16,8 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/queriedobject": "^0.8",
-        "pop-schema/migrate-users": "^0.8"
+        "pop-schema/queriedobject": "^0.8"
     },
     "require-dev": {
         "pop-schema/customposts": "^0.8",
