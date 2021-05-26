@@ -174,8 +174,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-locations-wp-em:/app/vendor/pop-schema/migrate-locations-wp-em
         - >-
-          ../../layers/Schema/packages/migrate-posts:/app/vendor/pop-schema/migrate-posts
-        - >-
           ../../layers/Schema/packages/migrate-users:/app/vendor/pop-schema/migrate-users
         - >-
           ../../layers/Schema/packages/migrate-users-wp:/app/vendor/pop-schema/migrate-users-wp
