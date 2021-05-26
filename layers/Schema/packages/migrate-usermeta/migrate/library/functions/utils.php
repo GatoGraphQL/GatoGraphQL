@@ -1,6 +1,8 @@
 <?php
 namespace PoPSchema\UserMeta;
 
+use PoPSchema\UserMeta\Facades\UserMetaTypeAPIFacade;
+
 class Utils
 {
     public static function getMetaKey($meta_key)
@@ -11,8 +13,8 @@ class Utils
 
     public static function getUserMeta($user_id, $key, $single = false)
     {
-        $functionapi = FunctionAPIFactory::getInstance();
-        return $functionapi->getUserMeta($user_id, self::getMetaKey($key), $single);
+        $userMetaAPI = UserMetaTypeAPIFacade::getInstance();
+        return $userMetaAPI->getUserMeta($user_id, self::getMetaKey($key), $single);
     }
     public static function updateUserMeta($user_id, $key, $values, $single = false, $boolean = false)
     {
