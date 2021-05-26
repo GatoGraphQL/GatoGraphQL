@@ -467,8 +467,6 @@
         "pop-schema/migrate-pages": "0.7.13",
         "pop-schema/migrate-pages-wp": "0.7.13",
         "pop-schema/migrate-posts": "0.7.13",
-        "pop-schema/migrate-queriedobject": "0.7.13",
-        "pop-schema/migrate-queriedobject-wp": "0.7.13",
         "pop-schema/migrate-users": "0.7.13",
         "pop-schema/migrate-users-wp": "0.7.13",
         "pop-schema/notifications": "0.7.13",
