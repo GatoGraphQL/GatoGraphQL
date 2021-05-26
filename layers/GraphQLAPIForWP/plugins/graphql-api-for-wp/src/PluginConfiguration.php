@@ -108,6 +108,7 @@ class PluginConfiguration
     {
         self::mapEnvVariablesToWPConfigConstants();
         self::defineEnvironmentConstantsFromSettings();
+        self::defineEnvironmentConstantsFromCallbacks();
     }
 
     /**
@@ -559,6 +560,38 @@ class PluginConfiguration
                     }
                     return $value;
                 }
+            );
+        }
+    }
+
+    /**
+     * Define the values for certain environment constants from the plugin settings
+     */
+    protected static function defineEnvironmentConstantsFromCallbacks(): void
+    {
+        // All the environment variables to override
+        $mappings = [
+            [
+                'class' => \PoPSchema\Comments\ComponentConfiguration::class,
+                'envVariable' => \PoPSchema\Comments\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT,
+                'callback' => fn () => \get_option('comment_registration') === '1',
+            ],
+        ];
+        foreach ($mappings as $mapping) {
+            // If the environment value has been defined, or the constant in wp-config.php,
+            // then do nothing, since they have priority
+            $envVariable = $mapping['envVariable'];
+            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
+                continue;
+            }
+            $hookName = ComponentConfigurationHelpers::getHookName(
+                $mapping['class'],
+                $envVariable
+            );
+            $callback = $mapping['callback'];
+            \add_filter(
+                $hookName,
+                fn () => $callback(),
             );
         }
     }
