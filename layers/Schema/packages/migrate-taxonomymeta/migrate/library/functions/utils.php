@@ -1,6 +1,8 @@
 <?php
 namespace PoPSchema\TaxonomyMeta;
 
+use PoPSchema\TaxonomyMeta\Facades\TaxonomyMetaTypeAPIFacade;
+
 class Utils
 {
     public static function getMetaKey($meta_key)
@@ -11,8 +13,8 @@ class Utils
 
     public static function getTermMeta($term_id, $key, $single = false)
     {
-        $functionapi = FunctionAPIFactory::getInstance();
-        return $functionapi->getTermMeta($term_id, self::getMetaKey($key), $single);
+        $taxonomyMetaTypeAPI = TaxonomyMetaTypeAPIFacade::getInstance();
+        return $taxonomyMetaTypeAPI->getTaxonomyMeta($term_id, self::getMetaKey($key), $single);
     }
     public static function updateTermMeta($term_id, $key, $values, $single = false, $boolean = false)
     {
