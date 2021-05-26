@@ -11,8 +11,8 @@ use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
 use function wp_get_attachment_image_src;
-use function get_post;
 use function get_posts;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -33,12 +33,6 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     public function getImageSrc(string | int $image_id, ?string $size = null): ?string
     {
         return wp_get_attachment_image_src($image_id, $size);
-    }
-
-    public function getMediaAuthorId(string | int $media_id): string | int | null
-    {
-        $media = get_post($media_id);
-        return $media->post_author;
     }
 
     public function getMediaElements(array $query, array $options = []): array

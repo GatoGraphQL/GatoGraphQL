@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\MediaWP;
 
 use PoP\Root\Component\AbstractComponent;
+use PoPSchema\Users\Component as UsersComponent;
 
 /**
  * Initialize component
@@ -36,5 +37,13 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses = []
     ): void {
         self::initServices(dirname(__DIR__));
+
+        if (class_exists(UsersComponent::class)) {
+            self::initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
+                '/ConditionalOnComponent/Users'
+            );
+        }
     }
 }
