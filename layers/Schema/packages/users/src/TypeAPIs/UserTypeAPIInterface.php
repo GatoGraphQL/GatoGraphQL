@@ -14,15 +14,15 @@ interface UserTypeAPIInterface
      */
     public function isInstanceOfUserType(object $object): bool;
 
-    public function getUserById($value);
-    public function getUserByEmail($value);
+    public function getUserById(string | int $userID): ?object;
+    public function getUserByEmail(string | int $email): ?object;
     public function getUsers($query = array(), array $options = []): array;
     public function getUserCount(array $query = [], array $options = []): int;
-    public function getUserDisplayName($user_id);
-    public function getUserEmail($user_id);
-    public function getUserFirstname($user_id);
-    public function getUserLastname($user_id);
-    public function getUserLogin($user_id);
-    public function getUserDescription($user_id);
-    public function getUserURL($user_id);
+    public function getUserDisplayName(string | int $user_id): ?string;
+    public function getUserEmail(string | int $user_id): ?string;
+    public function getUserFirstname(string | int $user_id): ?string;
+    public function getUserLastname(string | int $user_id): ?string;
+    public function getUserLogin(string | int $user_id): ?string;
+    public function getUserDescription(string | int $user_id): ?string;
+    public function getUserURL(string | int $user_id): ?string;
 }

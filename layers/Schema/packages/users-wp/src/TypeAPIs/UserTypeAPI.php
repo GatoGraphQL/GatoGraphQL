@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\UsersWP\TypeAPIs;
 
-use WP_User;
-use WP_User_Query;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ComponentConfiguration;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use WP_User;
+use WP_User_Query;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -19,6 +20,12 @@ use PoPSchema\Users\ComponentConfiguration;
 class UserTypeAPI implements UserTypeAPIInterface
 {
     use APITypeDataResolverTrait;
+
+    function __construct(
+        protected HooksAPIInterface $hooksAPI,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+    ) {        
+    }
 
     /**
      * Indicates if the passed object is of type User
@@ -28,14 +35,23 @@ class UserTypeAPI implements UserTypeAPIInterface
         return $object instanceof WP_User;
     }
 
-    public function getUserById($value)
+    protected function getUserBy(string $property, string | int $userID): ?object
     {
-        return get_user_by('id', $value);
+        $user = get_user_by($property, $userID);
+        if ($user === false) {
+            return null;
+        }
+        return $user;
     }
 
-    public function getUserByEmail($value)
+    public function getUserById(string | int $userID): ?object
     {
-        return get_user_by('email', $value);
+        return $this->getUserBy('id', $userID);
+    }
+
+    public function getUserByEmail(string | int $email): ?object
+    {
+        return $this->getUserBy('email', $email);
     }
     
     public function getUserCount(array $query = [], array $options = []): int
@@ -112,7 +128,7 @@ class UserTypeAPI implements UserTypeAPIInterface
      * @param array $query
      * @return void
      */
-    protected function filterByEmails(&$query)
+    protected function filterByEmails(array &$query): bool
     {
         if (isset($query['emails'])) {
             $emails = $query['emails'];
@@ -125,7 +141,8 @@ class UserTypeAPI implements UserTypeAPIInterface
         }
         return false;
     }
-    protected function convertUsersQuery($query = array(), array $options = []): array
+
+    protected function convertUsersQuery(array $query, array $options = []): array
     {
         if ($return_type = $options['return-type'] ?? null) {
             if ($return_type == ReturnTypes::IDS) {
@@ -169,8 +186,7 @@ class UserTypeAPI implements UserTypeAPIInterface
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
-                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
+                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getUserListMaxLimit()
                 );
@@ -181,7 +197,7 @@ class UserTypeAPI implements UserTypeAPIInterface
             unset($query['limit']);
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'CMSAPI:users:query',
             $query,
             $options
@@ -210,32 +226,31 @@ class UserTypeAPI implements UserTypeAPIInterface
             }
         }
     }
-    public function getUserDisplayName($user_id)
+    public function getUserDisplayName(string | int $user_id): ?string
     {
         return get_the_author_meta('display_name', $user_id);
     }
-    public function getUserEmail($user_id)
+    public function getUserEmail(string | int $user_id): ?string
     {
         return get_the_author_meta('user_email', $user_id);
     }
-    public function getUserFirstname($user_id)
+    public function getUserFirstname(string | int $user_id): ?string
     {
         return get_the_author_meta('user_firstname', $user_id);
     }
-    public function getUserLastname($user_id)
+    public function getUserLastname(string | int $user_id): ?string
     {
         return get_the_author_meta('user_lastname', $user_id);
     }
-    public function getUserLogin($user_id)
+    public function getUserLogin(string | int $user_id): ?string
     {
         return get_the_author_meta('user_login', $user_id);
     }
-    public function getUserDescription($user_id)
+    public function getUserDescription(string | int $user_id): ?string
     {
         return get_the_author_meta('description', $user_id);
     }
-
-    public function getUserURL($user_id)
+    public function getUserURL(string | int $user_id): ?string
     {
         return get_author_posts_url($user_id);
     }
