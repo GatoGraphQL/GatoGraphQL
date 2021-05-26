@@ -85,16 +85,19 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
     ): mixed {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $comment = $resultItem;
+        // Check there is an author. Otherwise, let the upstream resolve it
         $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
-        switch ($fieldName) {
-            case 'authorName':
-                return $cmsusersapi->getUserDisplayName($commentUserID);
+        if ($commentUserID !== null) {
+            switch ($fieldName) {
+                case 'authorName':
+                    return $cmsusersapi->getUserDisplayName($commentUserID);
 
-            case 'authorURL':
-                return $cmsusersapi->getUserURL($commentUserID);
+                case 'authorURL':
+                    return $cmsusersapi->getUserURL($commentUserID);
 
-            case 'authorEmail':
-                return $cmsusersapi->getUserEmail($commentUserID);
+                case 'authorEmail':
+                    return $cmsusersapi->getUserEmail($commentUserID);
+            }
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
