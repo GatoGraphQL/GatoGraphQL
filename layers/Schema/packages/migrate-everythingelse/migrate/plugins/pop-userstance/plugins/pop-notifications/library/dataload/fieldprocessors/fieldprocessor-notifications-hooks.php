@@ -1,11 +1,12 @@
 <?php
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -77,7 +78,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -102,7 +103,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
                     case AAL_POP_ACTION_POST_CREATEDSTANCE:
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> posted a %2$s after reading <strong>%3$s</strong>', 'pop-userstance'),
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
                             PoP_UserStance_PostNameUtils::getNameLc(),
                             $customPostTypeAPI->getTitle($notification->object_id)
                         );

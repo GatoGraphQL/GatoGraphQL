@@ -1,10 +1,11 @@
 <?php
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusBase
 {
@@ -116,13 +117,13 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public function getUrl(array $module, $route, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
-                $url = $cmsusersapi->getUserURL($author);
+                $url = $userTypeAPI->getUserURL($author);
                 $url = RequestUtils::addRoute($url, $route);
 
                 // Allow URE to add the Organization/Community content source attribute

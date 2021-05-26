@@ -4,14 +4,40 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers;
 
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+    
     public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -90,7 +116,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'username':
@@ -110,7 +135,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                 return $cmsusersresolver->getUserEmail($user);
 
             case 'url':
-                return $cmsusersapi->getUserURL($typeResolver->getID($user));
+                return $this->userTypeAPI->getUserURL($typeResolver->getID($user));
 
             case 'slug':
                 return $cmsusersresolver->getUserSlug($user);

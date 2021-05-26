@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -54,7 +55,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public function getHref(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
@@ -69,7 +70,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
             case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
                 $author = $vars['routing-state']['queried-object-id'];
-                $url = $cmsusersapi->getUserURL($author);
+                $url = $userTypeAPI->getUserURL($author);
                 // Allow URE to add the ContentSource
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'GD_EM_Module_Processor_CustomAnchorControls:pastevents:url',

@@ -1,10 +1,11 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEmailsBase
 {
@@ -17,7 +18,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
         // Only users make sense here, no recipients, since we are serving personalized content to users on the website
         if ($users = $this->getUsers()) {
             // All the variables needed to operate into the pop-engine.php getData function
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $userTypeAPI = UserTypeAPIFacade::getInstance();
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
@@ -50,7 +51,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
-                $vars['global-userstate']['current-user'] = $cmsusersapi->getUserById($user_id)/*new WP_User($user_id, '')*/;
+                $vars['global-userstate']['current-user'] = $userTypeAPI->getUserById($user_id)/*new WP_User($user_id, '')*/;
                 $vars['global-userstate']['current-user-id'] = $user_id;
 
                 // Return the notifications from within the last 24 hs, or from the last time the user was last seen in the website, whatever is higher

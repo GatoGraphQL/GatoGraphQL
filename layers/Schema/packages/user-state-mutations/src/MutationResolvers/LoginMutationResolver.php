@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\UserState\State\ApplicationStateUtils;
+use PoPSchema\UserStateMutations\Facades\UserStateTypeMutationAPIFacade;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {
@@ -41,7 +42,7 @@ class LoginMutationResolver extends AbstractMutationResolver
     public function execute(array $form_data): mixed
     {
         // If the user is already logged in, then return the error
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $userStateTypeMutationAPI = UserStateTypeMutationAPIFacade::getInstance();
 
@@ -51,7 +52,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');
         if ($is_email) {
-            $user = $cmsusersapi->getUserByEmail($username_or_email);
+            $user = $userTypeAPI->getUserByEmail($username_or_email);
             if (!$user) {
                 return new Error(
                     'no-user',

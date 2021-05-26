@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldResolvers;
 
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoPSchema\Users\FieldResolvers\AbstractUserFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\FieldResolvers\AbstractUserFieldResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class RootUserFieldResolver extends AbstractUserFieldResolver
 {
@@ -80,7 +80,6 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'user':
                 $query = [
@@ -89,7 +88,7 @@ class RootUserFieldResolver extends AbstractUserFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                if ($users = $cmsusersapi->getUsers($query, $options)) {
+                if ($users = $this->userTypeAPI->getUsers($query, $options)) {
                     return $users[0];
                 }
                 return null;

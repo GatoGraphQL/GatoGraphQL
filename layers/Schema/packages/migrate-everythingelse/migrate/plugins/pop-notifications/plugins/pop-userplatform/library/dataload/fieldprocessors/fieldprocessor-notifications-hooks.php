@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -78,7 +79,7 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
         array $options = []
     ): mixed {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             case 'icon':
@@ -102,7 +103,7 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
                         return null;
 
                     case AAL_POP_ACTION_USER_UPDATEDPROFILE:
-                        return $cmsusersapi->getUserURL($notification->user_id);
+                        return $userTypeAPI->getUserURL($notification->user_id);
                 }
                 return null;
 
@@ -112,7 +113,7 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>Welcome to %s, %s!</strong><br/>Check out here what is the purpose of this website', 'pop-notifications'),
                             $cmsapplicationapi->getSiteName(),
-                            $notification->object_name //$cmsusersapi->getUserDisplayName($notification->object_id),
+                            $notification->object_name //$userTypeAPI->getUserDisplayName($notification->object_id),
                         );
                 }
 
@@ -122,7 +123,7 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
                 );
                 return sprintf(
                     $messages[$notification->action],
-                    $cmsusersapi->getUserDisplayName($notification->user_id)
+                    $userTypeAPI->getUserDisplayName($notification->user_id)
                 );
         }
 

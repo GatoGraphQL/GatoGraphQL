@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 define('GD_URLPARAM_RSSCAMPAIGN', 'campaign');
 define('GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST', 'dailypost-digest');
@@ -59,8 +60,8 @@ function gdRssAuthor($output)
     // $vars = ApplicationState::getVars();
     // $authordata = $vars['routing-state']['authordata']/*global $authordata*/;
     global $authordata;
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-    $url = $cmsusersapi->getUserURL($authordata->ID);
+    $userTypeAPI = UserTypeAPIFacade::getInstance();
+    $url = $userTypeAPI->getUserURL($authordata->ID);
 
     $output = sprintf(
         '<a href="%s" style="%s">%s</a>',

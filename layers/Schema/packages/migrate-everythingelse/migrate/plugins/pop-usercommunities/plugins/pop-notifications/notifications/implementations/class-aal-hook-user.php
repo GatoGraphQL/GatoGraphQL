@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -57,14 +58,14 @@ class URE_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
 
     protected function logCommunityAction($user_id, $object_id, $action)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => $action,
                 'object_type' => 'User',
                 'user_id'     => $user_id,
                 'object_id'   => $object_id,
-                'object_name' => $cmsusersapi->getUserDisplayName($object_id),
+                'object_name' => $userTypeAPI->getUserDisplayName($object_id),
             )
         );
     }

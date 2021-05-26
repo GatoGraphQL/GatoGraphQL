@@ -1,9 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 function gdUreGetCommunities($user_id): array
 {
@@ -12,8 +13,7 @@ function gdUreGetCommunities($user_id): array
 
 function gdUreGetActivecontributingcontentcommunitymembers($community)
 {
-
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+    $userTypeAPI = UserTypeAPIFacade::getInstance();
     // Taken from https://codex.wordpress.org/Class_Reference/WP_Meta_Query
 
     // It must fulfil 2 conditions: the user must've said he/she's a member of this community,
@@ -40,7 +40,7 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         ]
     );
 
-    return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+    return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 }
 
 function gdUreGetCommunityMetavalueContributecontent($user_id)

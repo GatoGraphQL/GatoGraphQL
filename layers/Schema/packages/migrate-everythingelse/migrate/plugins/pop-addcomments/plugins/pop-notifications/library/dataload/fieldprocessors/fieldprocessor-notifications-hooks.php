@@ -1,16 +1,17 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -99,7 +100,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     ): mixed {
         $vars = ApplicationState::getVars();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -180,7 +181,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 
                         return sprintf(
                             $message,
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
                             gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc'),
                             $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment))
                         );

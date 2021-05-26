@@ -268,10 +268,6 @@ function customSaveExtraUserProfileFields($user_id)
         return;
     }
 
-    // Is community?
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-    $user = $cmsusersapi->getUserById($user_id);
-
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, esc_attr($_POST['contact_person']), true);
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, esc_attr($_POST['contact_number']), true);
     \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, esc_attr($_POST['facebook']), true);

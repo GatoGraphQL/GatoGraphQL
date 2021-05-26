@@ -8,10 +8,24 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);
@@ -61,20 +75,19 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user_login = $form_data[MutationInputProperties::USER_LOGIN];
 
         // Code copied from file wp-login.php (We can't invoke it directly, since wp-login.php has not been loaded, and we can't do it since it executes a lot of unwanted code producing and output)
         if (empty($user_login)) {
             $errors[] = $this->translationAPI->__('Enter a username or e-mail address.');
         } elseif (strpos($user_login, '@')) {
-            $user = $cmsusersapi->getUserByEmail(trim($user_login));
+            $user = $this->userTypeAPI->getUserByEmail(trim($user_login));
             if (empty($user)) {
                 $errors[] = $this->translationAPI->__('There is no user registered with that email address.');
             }
         } else {
             $login = trim($user_login);
-            $user = $cmsusersapi->getUserByLogin($login);
+            $user = $this->userTypeAPI->getUserByLogin($login);
         }
 
         if (!$user) {
@@ -86,16 +99,15 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
 
     public function execute(array $form_data): mixed
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $user_login = $form_data[MutationInputProperties::USER_LOGIN];
 
         if (strpos($user_login, '@')) {
-            $user = $cmsusersapi->getUserByEmail(trim($user_login));
+            $user = $this->userTypeAPI->getUserByEmail(trim($user_login));
         } else {
             $login = trim($user_login);
-            $user = $cmsusersapi->getUserByLogin($login);
+            $user = $this->userTypeAPI->getUserByLogin($login);
         }
 
         // Generate something random for a password reset key.

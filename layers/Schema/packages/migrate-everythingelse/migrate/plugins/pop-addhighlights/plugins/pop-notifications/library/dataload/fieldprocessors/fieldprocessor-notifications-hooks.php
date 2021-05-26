@@ -1,11 +1,12 @@
 <?php
-use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -77,7 +78,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -103,7 +104,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
                     case AAL_POP_ACTION_POST_HIGHLIGHTEDFROMPOST:
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%s</strong> added a highlight from <strong>%s</strong>', 'poptheme-wassup'),
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
                             $customPostTypeAPI->getTitle($notification->object_id)
                         );
                 }

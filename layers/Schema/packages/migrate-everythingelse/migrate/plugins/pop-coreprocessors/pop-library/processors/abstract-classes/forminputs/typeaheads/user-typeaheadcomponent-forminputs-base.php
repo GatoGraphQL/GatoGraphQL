@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
@@ -45,8 +46,8 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     }
     protected function executeThumbprint($query)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
+        return $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
     }
 
     protected function getPendingMsg(array $module)

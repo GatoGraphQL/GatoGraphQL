@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -33,14 +34,14 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
     public function followunfollowsUser($user_id, $action)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => $action,
                 'object_type' => 'User',
                 'user_id'     => $vars['global-userstate']['current-user-id'],
                 'object_id'   => $user_id,
-                'object_name' => $cmsusersapi->getUserDisplayName($user_id),
+                'object_name' => $userTypeAPI->getUserDisplayName($user_id),
             )
         );
     }

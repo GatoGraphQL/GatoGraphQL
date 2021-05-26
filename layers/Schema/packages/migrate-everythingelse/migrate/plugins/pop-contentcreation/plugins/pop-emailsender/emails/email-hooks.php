@@ -2,13 +2,14 @@
 
 define('POP_EMAIL_CREATEDCONTENT', 'created-content');
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -63,15 +64,15 @@ class PoP_ContentCreation_EmailSender_Hooks
     protected function sendemailToAdminCreateupdatepost($post_id, $type)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $permalink = $customPostTypeAPI->getPermalink($post_id);
         $post_name = gdGetPostname($post_id);
         $post_author_id = get_post_field('post_author', $post_id);
-        $author_name = $cmsusersapi->getUserDisplayName($post_author_id);
-        $author_email = $cmsusersapi->getUserEmail($post_author_id);
+        $author_name = $userTypeAPI->getUserDisplayName($post_author_id);
+        $author_email = $userTypeAPI->getUserEmail($post_author_id);
 
         if ($type == 'create') {
             $subject = sprintf(
@@ -220,14 +221,14 @@ class PoP_ContentCreation_EmailSender_Hooks
         if ($users) {
             // From those, remove all users who got an email in a previous email function
             if ($users = array_diff($users, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
-                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $userTypeAPI = UserTypeAPIFacade::getInstance();
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
 
                 $emails = $names = array();
                 foreach ($users as $user) {
-                    $emails[] = $cmsusersapi->getUserEmail($user);
-                    $names[] = $cmsusersapi->getUserDisplayName($user);
+                    $emails[] = $userTypeAPI->getUserEmail($user);
+                    $names[] = $userTypeAPI->getUserDisplayName($user);
                 }
 
                 // No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
@@ -237,8 +238,8 @@ class PoP_ContentCreation_EmailSender_Hooks
                 $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are currently receiving notifications for all new content posted on the website.', 'pop-emailsender'));
 
                 $author = $customPostUserTypeAPI->getAuthorID($post_id);
-                $author_name = $cmsusersapi->getUserDisplayName($author);
-                $author_url = $cmsusersapi->getUserURL($author);
+                $author_name = $userTypeAPI->getUserDisplayName($author);
+                $author_url = $userTypeAPI->getUserURL($author);
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('There is a new %s: “%s”', 'pop-emailsender'),
                     $post_name,

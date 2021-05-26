@@ -13,7 +13,6 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         $errors = parent::validateErrors($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -22,7 +21,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $cmsusersapi->getUserDisplayName($target_id)
+                    $this->userTypeAPI->getUserDisplayName($target_id)
                 );
             }
         }

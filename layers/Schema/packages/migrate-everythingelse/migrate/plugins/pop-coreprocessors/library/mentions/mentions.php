@@ -9,6 +9,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 /**
@@ -246,6 +247,7 @@ class PoP_Mentions
     private function makeLinkUsers($match)
     {
 		$cmsService = CMSServiceFacade::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         // get by nickname or by login name
@@ -260,7 +262,7 @@ class PoP_Mentions
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
                 '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $cmsusersresolver->getUserId($user),
-                $cmsusersapi->getUserURL($cmsusersresolver->getUserId($user)),
+                $userTypeAPI->getUserURL($cmsusersresolver->getUserId($user)),
                 $cmsusersresolver->getUserDisplayName($user)
             );
         }

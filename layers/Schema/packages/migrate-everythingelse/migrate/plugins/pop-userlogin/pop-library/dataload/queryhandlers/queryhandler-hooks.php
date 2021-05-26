@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 define('GD_DATALOAD_GETUSERINFO', 'getuserinfo');
 
@@ -22,19 +23,18 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
 
     public function getSessionMeta($meta)
     {
-
         // Get the user info? (used for pages where user logged in is needed. Generally same as with checkpoints)
         if (PoP_UserLogin_Utils::getUserInfo()) {
             $vars = ApplicationState::getVars();
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $userTypeAPI = UserTypeAPIFacade::getInstance();
             $user_id = '';
             $user_name = '';
             $user_url = '';
             $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
             if ($user_logged_in) {
                 $user_id = $vars['global-userstate']['current-user-id'];
-                $user_name = $cmsusersapi->getUserDisplayName($user_id);
-                $user_url = $cmsusersapi->getUserURL($user_id);
+                $user_name = $userTypeAPI->getUserDisplayName($user_id);
+                $user_url = $userTypeAPI->getUserURL($user_id);
             }
             
             // Allow PoP Application User Avatar to add the user avatar

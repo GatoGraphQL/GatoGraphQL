@@ -1,5 +1,6 @@
 <?php
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserPlatform_UserPreferencesUtils
 {
@@ -26,8 +27,8 @@ class PoP_UserPlatform_UserPreferencesUtils
             $query['exclude'] = $exclude;
         }
 
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $users = $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
+        $users = $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 
         // Exclude users?
         if ($include && $exclude) {

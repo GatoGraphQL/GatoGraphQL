@@ -1,7 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserPlatform_EmailSender_Hooks
 {
@@ -36,11 +37,11 @@ class PoP_UserPlatform_EmailSender_Hooks
     protected function sendemailToAdminCreateupdateuser($user_id, $type)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
-        $permalink = $cmsusersapi->getUserURL($user_id);
-        $user_name = $cmsusersapi->getUserDisplayName($user_id);
+        $permalink = $userTypeAPI->getUserURL($user_id);
+        $user_name = $userTypeAPI->getUserDisplayName($user_id);
 
         if ($type == 'create') {
             $subject = sprintf(TranslationAPIFacade::getInstance()->__('[%s]: New Profile: %s', 'pop-emailsender'), $blogname, $user_name);

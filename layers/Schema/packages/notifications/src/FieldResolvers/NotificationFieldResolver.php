@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -208,7 +209,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $notification = $resultItem;
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         switch ($fieldName) {
@@ -225,7 +226,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             case 'userID':
                 return $notification->user_id;
             case 'websiteURL':
-                return $cmsusersapi->getUserURL($notification->user_id);
+                return $userTypeAPI->getUserURL($notification->user_id);
             case 'userCaps':
                 return $notification->user_caps;
             case 'histIp':
@@ -284,7 +285,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
                         return $customPostTypeAPI->getPermalink($notification->object_id);
 
                     case 'User':
-                        return $cmsusersapi->getUserURL($notification->object_id);
+                        return $userTypeAPI->getUserURL($notification->object_id);
 
                     case 'Taxonomy':
                         return $taxonomyapi->getTermLink($notification->object_id);

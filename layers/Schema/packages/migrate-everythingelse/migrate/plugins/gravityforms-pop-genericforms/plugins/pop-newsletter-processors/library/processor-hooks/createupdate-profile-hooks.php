@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
@@ -66,10 +67,10 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
             $form_id = PoP_Newsletter_GFHelpers::getNewsletterFormId();
             $fieldnames = PoP_Newsletter_GFHelpers::getNewsletterFormFieldNames();
 
-            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $userTypeAPI = UserTypeAPIFacade::getInstance();
             $form_values = array(
-                $fieldnames['email'] => $cmsusersapi->getUserEmail($user_id),
-                $fieldnames['name'] => $cmsusersapi->getUserDisplayName($user_id),
+                $fieldnames['email'] => $userTypeAPI->getUserEmail($user_id),
+                $fieldnames['name'] => $userTypeAPI->getUserDisplayName($user_id),
             );
 
             // Taken from http://www.gravityhelp.com/documentation/gravity-forms/extending-gravity-forms/api/api-functions/#submit_form

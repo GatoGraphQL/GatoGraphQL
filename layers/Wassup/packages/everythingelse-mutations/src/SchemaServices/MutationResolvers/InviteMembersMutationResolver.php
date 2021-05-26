@@ -4,20 +4,33 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
+    
     protected function getEmailContent($form_data)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
         $user_id = $form_data['user_id'];
 
-        $author_url = $cmsusersapi->getUserURL($user_id);
-        $author_name = $cmsusersapi->getUserDisplayName($user_id);
+        $author_url = $this->userTypeAPI->getUserURL($user_id);
+        $author_name = $this->userTypeAPI->getUserDisplayName($user_id);
 
         $user_html = \PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);//PoP_EmailUtils::get_user_html($user_id);
         $website_html = \PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
@@ -67,13 +80,11 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 
     protected function getEmailSubject($form_data)
     {
-
         // The user must be always logged in, so we will have the user_id
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user_id = $form_data['user_id'];
         return sprintf(
             $this->translationAPI->__('%s is inviting you to become their member!', 'ure-pop'),
-            $cmsusersapi->getUserDisplayName($user_id)
+            $this->userTypeAPI->getUserDisplayName($user_id)
         );
     }
 }

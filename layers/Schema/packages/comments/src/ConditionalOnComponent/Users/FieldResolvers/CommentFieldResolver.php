@@ -11,10 +11,11 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
-use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\Comments\FieldResolvers\CommentFieldResolver as UpstreamCommentFieldResolver;
 use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
+use PoPSchema\Comments\FieldResolvers\CommentFieldResolver as UpstreamCommentFieldResolver;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 /**
  * Override fields from the upstream class, getting the data from the user
@@ -30,6 +31,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
         CMSServiceInterface $cmsService,
         CommentTypeAPIInterface $commentTypeAPI,
         protected UserCommentTypeAPIInterface $userCommentTypeAPI,
+        protected UserTypeAPIInterface $userTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -97,18 +99,17 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $comment = $resultItem;
         $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
         switch ($fieldName) {
             case 'authorName':
-                return $cmsusersapi->getUserDisplayName($commentUserID);
+                return $this->userTypeAPI->getUserDisplayName($commentUserID);
 
             case 'authorURL':
-                return $cmsusersapi->getUserURL($commentUserID);
+                return $this->userTypeAPI->getUserURL($commentUserID);
 
             case 'authorEmail':
-                return $cmsusersapi->getUserEmail($commentUserID);
+                return $this->userTypeAPI->getUserEmail($commentUserID);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

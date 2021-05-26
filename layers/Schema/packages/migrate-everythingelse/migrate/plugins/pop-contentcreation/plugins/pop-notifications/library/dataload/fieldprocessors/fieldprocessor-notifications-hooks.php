@@ -1,12 +1,12 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -91,8 +91,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -168,7 +167,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
 
                         return sprintf(
                             $message, //$messages[$notification->action],
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
                             $attribute ? sprintf("“%s” ", $attribute) : '',
                             gdGetPostname($notification->object_id, 'lc'),
                             $notification->object_name
@@ -186,7 +185,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
                         );
                         return sprintf(
                             $messages[$notification->action],
-                            $cmsusersapi->getUserDisplayName($notification->user_id),
+                            $userTypeAPI->getUserDisplayName($notification->user_id),
                             gdGetPostname($notification->object_id, 'lc'), //strtolower(gdGetPostname($notification->object_id)),
                             $notification->object_name
                         );

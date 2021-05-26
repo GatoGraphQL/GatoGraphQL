@@ -1,6 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 // These are Notification names as defined in the Gravity Forms settings for the form
 define('GD_GF_NOTIFICATION_PROFILES', 'Notification to Profiles');
@@ -11,12 +12,12 @@ HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfChangeAutore
 function gdGfChangeAutoresponderEmailProfiles($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_PROFILES) {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         if ($profiles_ids = $_POST[\PoPSchema\Users\Constants\InputNames::USER_ID] ?? []) {
             $emails = array();
             $profiles = explode(',', $profiles_ids);
             foreach ($profiles as $profile_id) {
-                $emails[] = $cmsusersapi->getUserEmail($profile_id);
+                $emails[] = $userTypeAPI->getUserEmail($profile_id);
             }
 
             $notification['to'] = implode(', ', $emails);
@@ -30,13 +31,13 @@ HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfChangeAutore
 function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_POSTAUTHORS) {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         if ($post_ids = $_POST[\PoPSchema\Posts\Constants\InputNames::POST_ID] ?? []) {
             $emails = array();
             foreach (explode(',', $post_ids) as $post_id) {
                 $profiles = gdGetPostauthors($post_id);
                 foreach ($profiles as $profile_id) {
-                    $emails[] = $cmsusersapi->getUserEmail($profile_id);
+                    $emails[] = $userTypeAPI->getUserEmail($profile_id);
                 }
             }
 
@@ -53,7 +54,7 @@ HooksAPIFacade::getInstance()->addFilter("gform_notification", "gdGfEmailLayout"
 function gdGfEmailLayout($notification, $form, $entry)
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+    $userTypeAPI = UserTypeAPIFacade::getInstance();
     $title = sprintf(
         TranslationAPIFacade::getInstance()->__('Notification from %s', 'gravityforms-pop-genericforms'),
         $cmsapplicationapi->getSiteName()
@@ -79,8 +80,8 @@ function gdGfEmailLayout($notification, $form, $entry)
     }
     if ($user_ids) {
         foreach ($user_ids as $user_id) {
-            $names[] = $cmsusersapi->getUserDisplayName($user_id);
-            $emails[] = $cmsusersapi->getUserEmail($user_id);
+            $names[] = $userTypeAPI->getUserDisplayName($user_id);
+            $emails[] = $userTypeAPI->getUserEmail($user_id);
         }
     }
 

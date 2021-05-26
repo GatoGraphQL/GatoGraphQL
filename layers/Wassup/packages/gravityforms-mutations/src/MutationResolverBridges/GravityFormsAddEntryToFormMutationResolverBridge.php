@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
 
@@ -23,6 +24,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
         MutationResolutionManagerInterface $mutationResolutionManager,
+        protected UserTypeAPIInterface $userTypeAPI,
     ) {
         parent::__construct(
             $hooksAPI,
@@ -169,18 +171,17 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                 // Hook the fieldnames from the configuration
                 if ($fieldnames = $this->getFormFieldnames($form_id)) {
                     $user_id = $vars['global-userstate']['current-user-id'];
-                    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-
+                    
                     // Fill the user name
                     $name = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {
-                        $_POST[$fieldnames[$name]] = $cmsusersapi->getUserDisplayName($user_id);
+                        $_POST[$fieldnames[$name]] = $this->userTypeAPI->getUserDisplayName($user_id);
                     }
 
                     // Fill the user email
                     $email = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
                     if (isset($fieldnames[$email])) {
-                        $_POST[$fieldnames[$email]] = $cmsusersapi->getUserEmail($user_id);
+                        $_POST[$fieldnames[$email]] = $this->userTypeAPI->getUserEmail($user_id);
                     }
                 }
             }

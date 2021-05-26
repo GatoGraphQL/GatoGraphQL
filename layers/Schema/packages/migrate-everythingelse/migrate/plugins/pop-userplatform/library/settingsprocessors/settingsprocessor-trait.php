@@ -1,7 +1,8 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
+use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 {
@@ -52,9 +53,9 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
                     $ret[POP_USERPLATFORM_ROUTE_EDITPROFILE] = $redirect_url;
                 }
             } elseif ($route == POP_USERPLATFORM_ROUTE_MYPROFILE) {
-                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $userTypeAPI = UserTypeAPIFacade::getInstance();
                 $current_user_id = $vars['global-userstate']['current-user-id'];
-                $ret[POP_USERPLATFORM_ROUTE_MYPROFILE] = $cmsusersapi->getUserURL($current_user_id);
+                $ret[POP_USERPLATFORM_ROUTE_MYPROFILE] = $userTypeAPI->getUserURL($current_user_id);
             }
         }
 

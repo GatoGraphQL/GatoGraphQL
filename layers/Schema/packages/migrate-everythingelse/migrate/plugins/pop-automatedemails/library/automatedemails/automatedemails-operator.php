@@ -1,6 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_AutomatedEmails_Operator
 {
@@ -16,7 +17,7 @@ class PoP_AutomatedEmails_Operator
     {
         global $pop_automatedemails_manager;
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
 
         if ($vars['routing-state']['is-standard']) {
             $route = $vars['route'];
@@ -33,8 +34,8 @@ class PoP_AutomatedEmails_Operator
                         if ($users || $recipients) {
                             $useremails = $names = array();
                             foreach ($users as $user_id) {
-                                $useremails[] = $cmsusersapi->getUserEmail($user_id);
-                                $names[] = $cmsusersapi->getUserDisplayName($user_id);
+                                $useremails[] = $userTypeAPI->getUserEmail($user_id);
+                                $names[] = $userTypeAPI->getUserDisplayName($user_id);
                             }
 
                             // Allow Gravity Forms to already send a list of useremails and names

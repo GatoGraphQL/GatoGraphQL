@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -45,12 +46,12 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
                 $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
-                $url = $cmsusersapi->getUserURL($author);
+                $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
                 );

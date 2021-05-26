@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 // Do not use the original WSL getAvatar function
 HooksAPIFacade::getInstance()->removeFilter('get_avatar', 'wsl_get_wp_user_custom_avatar', 10, 5);
@@ -9,7 +10,7 @@ HooksAPIFacade::getInstance()->removeFilter('get_avatar', 'wsl_get_wp_user_custo
 HooksAPIFacade::getInstance()->addFilter('gd_avatar_default', 'gdWslAvatar', 100, 5);
 function gdWslAvatar($html, $user, $size, $default, $alt)
 {
-    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+    $userTypeAPI = UserTypeAPIFacade::getInstance();
     $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
 
     // If passed an object, assume $user->ID
@@ -23,7 +24,7 @@ function gdWslAvatar($html, $user, $size, $default, $alt)
     }
 
     // If passed a string and that string returns a user, get the $id
-    elseif (is_string($user) && ($user_by_email = $cmsusersapi->getUserByEmail($user))) {
+    elseif (is_string($user) && ($user_by_email = $userTypeAPI->getUserByEmail($user))) {
         $user_id = $cmsusersresolver->getUserId($user_by_email);
     }
 

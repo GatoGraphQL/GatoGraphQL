@@ -1,19 +1,20 @@
 <?php
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_CustomSectionBlocksUtils
 {
     public static function getAuthorTitle()
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         $author = $vars['routing-state']['queried-object-id'];
-        $ret = $cmsusersapi->getUserDisplayName($author);
+        $ret = $userTypeAPI->getUserDisplayName($author);
 
         $route = $vars['route'];
         if ($route != RoutingRoutes::$MAIN) {
