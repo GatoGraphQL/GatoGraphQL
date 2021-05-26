@@ -1,15 +1,15 @@
 <?php
-use PoPSchema\Media\Misc\MediaHelpers;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -23,7 +23,8 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
     public function getThumb($post, TypeResolverInterface $typeResolver, $size = null, $add_description = false)
     {
         $thumb_id = CustomPostMediaHelpers::getThumbId($typeResolver->getID($post));
-        $img = MediaHelpers::getAttachmentImageProperties($thumb_id, $size);
+        $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+        $img = $mediaTypeAPI->getImageProperties($thumb_id, $size);
 
         // Add the image description
         if ($add_description && $img) {

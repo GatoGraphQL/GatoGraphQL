@@ -5,7 +5,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoPSchema\Media\Misc\MediaHelpers;
+use PoPSchema\Media\Facades\MediaTypeAPIFacade;
 
 class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
 {
@@ -60,7 +60,8 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         switch ($fieldName) {
             case 'featuredImageAttrs':
                 if ($featuredimage = $customPostMediaTypeAPI->getCustomPostThumbnailID($typeResolver->getID($post))) {
-                    return MediaHelpers::getAttachmentImageProperties($featuredimage, 'thumb-md');
+                    $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
+                    return $mediaTypeAPI->getImageProperties($featuredimage, 'thumb-md');
                 }
                 return null;
         }

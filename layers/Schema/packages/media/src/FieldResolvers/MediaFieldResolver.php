@@ -4,16 +4,41 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers;
 
-use PoPSchema\Media\Misc\MediaHelpers;
-use PoPSchema\Media\Enums\MediaDeviceEnum;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Media\Enums\MediaDeviceEnum;
+use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 
 class MediaFieldResolver extends AbstractDBDataFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected MediaTypeAPIInterface $mediaTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+    
     public function getClassesToAttachTo(): array
     {
         return array(MediaTypeResolver::class);
@@ -80,7 +105,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             case 'width':
             case 'height':
                 $size = $this->obtainImageSizeFromParameters($fieldArgs);
-                $properties = MediaHelpers::getAttachmentImageProperties($typeResolver->getID($media), $size);
+                $properties = $this->mediaTypeAPI->getImageProperties($typeResolver->getID($media), $size);
                 return $properties[$fieldName];
         }
 
