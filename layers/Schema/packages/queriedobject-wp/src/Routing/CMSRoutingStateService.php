@@ -1,14 +1,18 @@
 <?php
-namespace PoPSchema\QueriedObject\WP;
 
-use \WP_Query;
+declare(strict_types=1);
+
+namespace PoPSchema\QueriedObjectWP\Routing;
+
+use WP_Query;
 use PoP\RoutingWP\RoutingManagerTrait;
+use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 
-class WPCMSRoutingState extends \PoPSchema\QueriedObject\AbstractCMSRoutingState
+class CMSRoutingStateService implements CMSRoutingStateServiceInterface
 {
     use RoutingManagerTrait;
 
-    public function getQueriedObject()
+    public function getQueriedObject(): ?object
     {
         $this->init();
         /** @var WP_Query */
@@ -28,7 +32,8 @@ class WPCMSRoutingState extends \PoPSchema\QueriedObject\AbstractCMSRoutingState
 
         return null;
     }
-    public function getQueriedObjectId()
+
+    public function getQueriedObjectId(): string | int | null
     {
         $this->init();
         if ($this->isStandard()) {
@@ -47,8 +52,3 @@ class WPCMSRoutingState extends \PoPSchema\QueriedObject\AbstractCMSRoutingState
         return null;
     }
 }
-
-/**
- * Initialize
- */
-new WPCMSRoutingState();

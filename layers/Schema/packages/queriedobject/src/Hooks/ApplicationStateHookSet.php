@@ -1,19 +1,40 @@
 <?php
-namespace PoPSchema\QueriedObject;
-use PoP\Hooks\Facades\HooksAPIFacade;
+
+declare(strict_types=1);
+
+namespace PoPSchema\QueriedObject\Hooks;
+
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 
-class PoP_QueriedObject_VarsHooks
+class ApplicationStateHookSet extends AbstractHookSet
 {
-    public function __construct()
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected CMSRoutingStateServiceInterface $cmsRoutingStateService,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+    
+    protected function init(): void
     {
-        HooksAPIFacade::getInstance()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             [$this, 'setQueriedObject'],
             0,
             1
         );
-        HooksAPIFacade::getInstance()->addAction(
+        $this->hooksAPI->addAction(
             OperatorGlobalFieldResolver::HOOK_SAFEVARS,
             [$this, 'setSafeVars'],
             10,
@@ -27,14 +48,13 @@ class PoP_QueriedObject_VarsHooks
     public function setQueriedObject(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        $cmsqueriedobjectrouting = CMSRoutingStateFactory::getInstance();
 
         // Allow to override the queried object, eg: by the AppShell
-        list($queried_object, $queried_object_id) = HooksAPIFacade::getInstance()->applyFilters(
+        list($queried_object, $queried_object_id) = $this->hooksAPI->applyFilters(
             'ApplicationState:queried-object',
             [
-                $cmsqueriedobjectrouting->getQueriedObject(),
-                $cmsqueriedobjectrouting->getQueriedObjectId()
+                $this->cmsRoutingStateService->getQueriedObject(),
+                $this->cmsRoutingStateService->getQueriedObjectId()
             ]
         );
 
@@ -52,8 +72,3 @@ class PoP_QueriedObject_VarsHooks
         unset($safeVars['routing-state']['queried-object']);
     }
 }
-
-/**
- * Initialization
- */
-new PoP_QueriedObject_VarsHooks();

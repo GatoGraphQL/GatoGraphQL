@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
-use WP_Taxonomy;
+use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Tags\ComponentConfiguration;
-use PoPSchema\QueriedObject\TypeAPIs\TypeAPIUtils;
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Taxonomy;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -140,7 +140,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $limit = TypeAPIUtils::getLimitOrMaxLimit(
+                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
+                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getTagListMaxLimit()
                 );
