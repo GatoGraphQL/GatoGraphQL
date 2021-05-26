@@ -6,3 +6,6 @@ services:
 
     PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface:
         class: \PoPSchema\CustomPostMetaWP\TypeAPIs\CustomPostMetaTypeAPI
+
+    PoPSchema\CustomPostMetaWP\Hooks\:
+        resource: '../src/Hooks/*'
