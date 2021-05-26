@@ -100,7 +100,6 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     public function execute(array $form_data): mixed
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $user_login = $form_data[MutationInputProperties::USER_LOGIN];
 
         if (strpos($user_login, '@')) {
@@ -123,14 +122,14 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         */
         // $site_name = wp_specialchars_decode($cmsapplicationapi->getSiteName(), ENT_QUOTES);
         // $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $site_name);
-        $user_id = $cmsusersresolver->getUserId($user);
+        $user_id = $this->userTypeAPI->getUserId($user);
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
         $title = $this->hooksAPI->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
         $message = $this->hooksAPI->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
-        $user_email = $cmsusersresolver->getUserEmail($user);
+        $user_email = $this->userTypeAPI->getUserEmail($user);
         return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
     }
 }

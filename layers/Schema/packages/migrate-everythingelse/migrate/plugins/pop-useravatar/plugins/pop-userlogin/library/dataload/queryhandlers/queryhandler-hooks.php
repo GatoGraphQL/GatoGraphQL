@@ -21,7 +21,6 @@ class PoP_UserAvatar_UserStance_Hooks
         $vars = ApplicationState::getVars();
         $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
         if ($user_logged_in) {
-            $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
             $avatar_user_id = $vars['global-userstate']['current-user-id'];
         }
 

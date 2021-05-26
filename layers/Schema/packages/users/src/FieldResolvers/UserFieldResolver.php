@@ -115,36 +115,35 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'username':
-                return $cmsusersresolver->getUserLogin($user);
+                return $this->userTypeAPI->getUserLogin($user);
 
             case 'name':
             case 'displayName':
-                return $cmsusersresolver->getUserDisplayName($user);
+                return $this->userTypeAPI->getUserDisplayName($user);
 
             case 'firstname':
-                return $cmsusersresolver->getUserFirstname($user);
+                return $this->userTypeAPI->getUserFirstname($user);
 
             case 'lastname':
-                return $cmsusersresolver->getUserLastname($user);
+                return $this->userTypeAPI->getUserLastname($user);
 
             case 'email':
-                return $cmsusersresolver->getUserEmail($user);
+                return $this->userTypeAPI->getUserEmail($user);
 
             case 'url':
                 return $this->userTypeAPI->getUserURL($typeResolver->getID($user));
 
             case 'slug':
-                return $cmsusersresolver->getUserSlug($user);
+                return $this->userTypeAPI->getUserSlug($user);
 
             case 'description':
-                return $cmsusersresolver->getUserDescription($user);
+                return $this->userTypeAPI->getUserDescription($user);
 
             case 'websiteURL':
-                return $cmsusersresolver->getUserWebsiteUrl($user);
+                return $this->userTypeAPI->getUserWebsiteUrl($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -1,6 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserLogin_EmailSender_Hooks
 {
@@ -21,12 +22,12 @@ class PoP_UserLogin_EmailSender_Hooks
     }
     public function retrievePasswordMessage($message, $key, $user_login, $user)
     {
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
+        $userTypeAPI = UserTypeAPIFacade::getInstance();
         return PoP_EmailTemplatesFactory::getInstance()->addEmailframe(
             TranslationAPIFacade::getInstance()->__('Retrieve password', 'pop-emailsender'), 
             $message, 
-            [$cmsusersresolver->getUserEmail($user)], 
-            [$cmsusersresolver->getUserDisplayName($user)]
+            [$userTypeAPI->getUserEmail($user)], 
+            [$userTypeAPI->getUserDisplayName($user)]
         );
     }
     public function lostpasswordreset($user_id)
