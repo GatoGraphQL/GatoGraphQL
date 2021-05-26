@@ -14,7 +14,7 @@ use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 
 /**
  * Add a comment to a custom post. Currently, the user must be logged-in.
- * @todo: Support non-logged-in users to add comments.
+ * @todo: Support non-logged-in users to add comments (check `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`)
  */
 class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
