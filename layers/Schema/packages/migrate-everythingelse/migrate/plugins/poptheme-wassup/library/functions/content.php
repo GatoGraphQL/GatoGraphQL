@@ -85,7 +85,7 @@ function gdGetDocumentThumb($size = 'large')
         $post_id = $vars['routing-state']['queried-object-id'];
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
             $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
-            $thumb = $mediaTypeAPI->getImageAttributes($post_thumb_id, $size);
+            $thumb = $mediaTypeAPI->getImageProperties($post_thumb_id, $size);
             $thumb_mime_type = $cmsmediaapi->getMediaMimeType($post_thumb_id);
         }
     } elseif ($vars['routing-state']['is-user']) {
