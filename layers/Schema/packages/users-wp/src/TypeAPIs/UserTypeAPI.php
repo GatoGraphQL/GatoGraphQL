@@ -226,60 +226,44 @@ class UserTypeAPI implements UserTypeAPIInterface
         }
     }
     
-    public function getUserDisplayName(string | int | object $userObjectOrID): ?string
+    protected function getUserProperty(string $property, string | int | object $userObjectOrID): ?string
     {
         if (is_object($userObjectOrID)) {
             /** @var WP_User */
             $user = $userObjectOrID;
-            return $user->display_name;
+            return $user->$property;
         }
-        return get_the_author_meta('display_name', $userObjectOrID);
+        return get_the_author_meta($property, $userObjectOrID);
+    }
+    public function getUserDisplayName(string | int | object $userObjectOrID): ?string
+    {
+        return $this->getUserProperty('display_name', $userObjectOrID);
     }
     public function getUserEmail(string | int | object $userObjectOrID): ?string
     {
-        if (is_object($userObjectOrID)) {
-            /** @var WP_User */
-            $user = $userObjectOrID;
-            return $user->user_email;
-        }
-        return get_the_author_meta('user_email', $userObjectOrID);
+        return $this->getUserProperty('user_email', $userObjectOrID);
     }
     public function getUserFirstname(string | int | object $userObjectOrID): ?string
     {
-        if (is_object($userObjectOrID)) {
-            /** @var WP_User */
-            $user = $userObjectOrID;
-            return $user->user_firstname;
-        }
-        return get_the_author_meta('user_firstname', $userObjectOrID);
+        return $this->getUserProperty('user_firstname', $userObjectOrID);
     }
     public function getUserLastname(string | int | object $userObjectOrID): ?string
     {
-        if (is_object($userObjectOrID)) {
-            /** @var WP_User */
-            $user = $userObjectOrID;
-            return $user->user_lastname;
-        }
-        return get_the_author_meta('user_lastname', $userObjectOrID);
+        return $this->getUserProperty('user_lastname', $userObjectOrID);
     }
     public function getUserLogin(string | int | object $userObjectOrID): ?string
     {
-        if (is_object($userObjectOrID)) {
-            /** @var WP_User */
-            $user = $userObjectOrID;
-            return $user->user_login;
-        }
-        return get_the_author_meta('user_login', $userObjectOrID);
+        return $this->getUserProperty('user_login', $userObjectOrID);
     }
     public function getUserDescription(string | int | object $userObjectOrID): ?string
     {
-        if (is_object($userObjectOrID)) {
-            /** @var WP_User */
-            $user = $userObjectOrID;
-            return $user->description;
-        }
-        return get_the_author_meta('description', $userObjectOrID);
+        return $this->getUserProperty('description', $userObjectOrID);
     }
+    public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string
+    {
+        return $this->getUserProperty('user_url', $userObjectOrID);
+    }
+
     public function getUserURL(string | int | object $userObjectOrID): ?string
     {
         if (is_object($userObjectOrID)) {
@@ -290,14 +274,5 @@ class UserTypeAPI implements UserTypeAPIInterface
             $userID = $userObjectOrID;
         }
         return get_author_posts_url($userID);
-    }
-    public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string
-    {
-        if (is_object($userObjectOrID)) {
-            /** @var WP_User */
-            $user = $userObjectOrID;
-            return $user->user_url;
-        }
-        return get_the_author_meta('user_url', $userObjectOrID);
     }
 }
