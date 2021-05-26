@@ -23,7 +23,7 @@ class MediaTypeResolver extends AbstractTypeResolver
     {
         $cmsmediaresolver = \PoPSchema\Media\ObjectPropertyResolverFactory::getInstance();
         $media = $resultItem;
-        return $cmsmediaresolver->getMediaId($media);
+        return $cmsmediaresolver->getMediaElementId($media);
     }
 
     public function getTypeDataLoaderClass(): string

@@ -32,7 +32,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
     {
         return wp_get_attachment_image_src($image_id, $size);
     }
-    
+
     public function getMediaAuthorId(string | int $media_id): string | int | null
     {
         $media = get_post($media_id);
@@ -125,5 +125,10 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             $query,
             $options
         );
+    }
+
+    public function getMediaElementId(object $media): string | int
+    {
+        return $media->ID;
     }
 }
