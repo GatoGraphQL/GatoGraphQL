@@ -14,14 +14,13 @@ use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\FieldResolvers\CommentFieldResolver as UpstreamCommentFieldResolver;
+use PoPSchema\Comments\ComponentConfiguration;
 
 /**
  * Override fields from the upstream class, getting the data from the user
  */
 class CommentFieldResolver extends UpstreamCommentFieldResolver
 {
-    use FieldResolverTrait;
-    
     function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
@@ -49,6 +48,15 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
     public function getPriorityToAttachToClasses(): int
     {
         return 20;
+    }
+
+    /**
+     * Only use it when `mustUserBeLoggedInToAddComment`.
+     * Check on runtime (not via container) since this option can be changed in WP.
+     */
+    public function isServiceEnabled(): bool
+    {
+        return ComponentConfiguration::mustUserBeLoggedInToAddComment();
     }
 
     public function getFieldNamesToResolve(): array
