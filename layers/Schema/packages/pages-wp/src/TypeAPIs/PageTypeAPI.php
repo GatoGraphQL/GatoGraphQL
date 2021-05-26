@@ -87,22 +87,6 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
         return 'page';
     }
 
-    /**
-     * Get the ID of the static page for the homepage
-     * Returns an ID (int? string?) or null
-     */
-    public function getHomeStaticPageID(): string | int
-    {
-        if (get_option('show_on_front') !== 'page') {
-            // Errors go in here
-            return null;
-        }
-
-        // This is the expected operation
-        $static_page_id = (int) get_option('page_on_front');
-        return $static_page_id > 0 ? $static_page_id : null;
-    }
-
     public function getPageId(object $page): string | int
     {
         return $page->ID;
