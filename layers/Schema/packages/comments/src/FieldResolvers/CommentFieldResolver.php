@@ -131,40 +131,39 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $dateFormatter = DateFormatterFacade::getInstance();
         $comment = $resultItem;
         switch ($fieldName) {
             case 'content':
-                return $cmscommentsresolver->getCommentContent($comment);
+                return $this->commentTypeAPI->getCommentContent($comment);
 
             case 'authorName':
-                return $cmsusersapi->getUserDisplayName($cmscommentsresolver->getCommentUserId($comment));
+                return $cmsusersapi->getUserDisplayName($this->commentTypeAPI->getCommentUserId($comment));
 
             case 'authorURL':
-                return $cmsusersapi->getUserURL($cmscommentsresolver->getCommentUserId($comment));
+                return $cmsusersapi->getUserURL($this->commentTypeAPI->getCommentUserId($comment));
 
             case 'authorEmail':
-                return $cmsusersapi->getUserEmail($cmscommentsresolver->getCommentUserId($comment));
+                return $cmsusersapi->getUserEmail($this->commentTypeAPI->getCommentUserId($comment));
 
             case 'customPost':
             case 'customPostID':
-                return $cmscommentsresolver->getCommentPostId($comment);
+                return $this->commentTypeAPI->getCommentPostId($comment);
 
             case 'approved':
-                return $cmscommentsresolver->isCommentApproved($comment);
+                return $this->commentTypeAPI->isCommentApproved($comment);
 
             case 'type':
-                return $cmscommentsresolver->getCommentType($comment);
+                return $this->commentTypeAPI->getCommentType($comment);
 
             case 'parent':
-                return $cmscommentsresolver->getCommentParent($comment);
+                return $this->commentTypeAPI->getCommentParent($comment);
 
             case 'date':
                 return $dateFormatter->format(
                     $fieldArgs['format'],
-                    $cmscommentsresolver->getCommentDateGmt($comment)
+                    $this->commentTypeAPI->getCommentDateGmt($comment)
                 );
 
             case 'responses':

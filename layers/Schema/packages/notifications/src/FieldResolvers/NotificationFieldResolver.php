@@ -211,7 +211,6 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         switch ($fieldName) {
             case 'action':
                 return $notification->action;
@@ -292,7 +291,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
 
                     case 'Comments':
                         $comment = $this->commentTypeAPI->getComment($notification->object_id);
-                        return $customPostTypeAPI->getPermalink($cmscommentsresolver->getCommentPostId($comment));
+                        return $customPostTypeAPI->getPermalink($this->commentTypeAPI->getCommentPostId($comment));
                 }
                 return null;
 
