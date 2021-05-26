@@ -13,10 +13,6 @@ class FunctionAPI extends \PoPSchema\Users\FunctionAPI_Base
     {
         return get_user_by('slug', $value);
     }
-    public function getUserByLogin($value)
-    {
-        return get_user_by('login', $value);
-    }
     public function getUserRegistrationDate($user_id)
     {
         return get_the_author_meta('user_registered', $user_id);

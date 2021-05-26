@@ -48,9 +48,14 @@ class UserTypeAPI implements UserTypeAPIInterface
         return $this->getUserBy('id', $userID);
     }
 
-    public function getUserByEmail(string | int $email): ?object
+    public function getUserByEmail(string $email): ?object
     {
         return $this->getUserBy('email', $email);
+    }
+
+    public function getUserByLogin(string $login): ?object
+    {
+        return $this->getUserBy('login', $login);
     }
     
     public function getUserCount(array $query = [], array $options = []): int
