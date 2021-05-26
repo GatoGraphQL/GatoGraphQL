@@ -12,14 +12,14 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         );
     }
 
-    public function getFeaturedimageinnerSubmodule(array $module)
+    public function getFeaturedimageinnerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return [PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER];
         }
 
-        return parent::getFeaturedimageinnerSubmodule($module);
+        return null;
     }
 
     public function getLabelText(array $module, array &$props)

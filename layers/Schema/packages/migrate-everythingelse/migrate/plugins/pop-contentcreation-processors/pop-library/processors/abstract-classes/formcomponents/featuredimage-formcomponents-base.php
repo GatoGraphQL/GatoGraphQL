@@ -18,10 +18,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return $this->getFeaturedimageinnerSubmodule($module);
     }
 
-    public function getFeaturedimageinnerSubmodule(array $module)
-    {
-        return null;
-    }
+    abstract public function getFeaturedimageinnerSubmodule(array $module): ?array;
 
     public function getSubmodules(array $module): array
     {
@@ -38,8 +35,6 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         // Hack: re-use multiple.tmpl
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
