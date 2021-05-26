@@ -14,9 +14,35 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
@@ -182,7 +208,6 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         array $options = []
     ): mixed {
         $notification = $resultItem;
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
@@ -266,7 +291,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
                         return $taxonomyapi->getTermLink($notification->object_id);
 
                     case 'Comments':
-                        $comment = $cmscommentsapi->getComment($notification->object_id);
+                        $comment = $this->commentTypeAPI->getComment($notification->object_id);
                         return $customPostTypeAPI->getPermalink($cmscommentsresolver->getCommentPostId($comment));
                 }
                 return null;
