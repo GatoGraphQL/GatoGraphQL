@@ -285,6 +285,7 @@ class Plugins
             'migrate-media-wp' => 'pop-media-wp.php',
             'migrate-pages' => 'pop-pages.php',
             'migrate-pages-wp' => 'pop-pages-wp.php',
+            'migrate-posts' => 'pop-posts.php',
         ];
         foreach ($migratePackages as $migratePackage => $file) {
             require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
@@ -294,7 +295,6 @@ class Plugins
         require_once (dirname(__DIR__, 2) . '/migrate-events-wp-em/migrate/pop-events-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations-wp-em/migrate/pop-locations-wp-em.php');
         require_once (dirname(__DIR__, 2) . '/migrate-locations/migrate/pop-locations.php');
-        require_once (dirname(__DIR__, 2) . '/migrate-posts/migrate/pop-posts.php');
     }
 }
 
