@@ -272,6 +272,8 @@ class Plugins
         $migratePackages = [
             'migrate-engine' => 'pop-engine.php',
             'migrate-engine-wp' => 'pop-engine-wp.php',
+            'migrate-commentmeta' => 'pop-commentmeta.php',
+            'migrate-commentmeta-wp' => 'pop-commentmeta-wp.php',
         ];
         foreach ($migratePackages as $migratePackage => $file) {
             require_once ("migrate-packages/${migratePackage}/migrate/${file}.php");
