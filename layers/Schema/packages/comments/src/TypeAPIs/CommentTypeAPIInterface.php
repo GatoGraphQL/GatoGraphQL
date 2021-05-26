@@ -18,4 +18,16 @@ interface CommentTypeAPIInterface
     public function getComment(string | int $comment_id): ?object;
     public function getCommentNumber(string | int $post_id): int;
     public function areCommentsOpen(string | int $post_id): bool;
+
+    public function getCommentContent(object $comment): string;
+    public function getCommentPlainContent(object $comment): string;
+    public function getCommentPostId(object $comment): int | string;
+    public function isCommentApproved(object $comment): bool;
+    public function getCommentType(object $comment): string;
+    public function getCommentParent(object $comment): int | string | null;
+    public function getCommentDateGmt(object $comment): string;
+    public function getCommentId(object $comment): string | int;
+    public function getCommentAuthor(object $comment): string;
+    public function getCommentAuthorEmail(object $comment): string;
+    public function getCommentUserId(object $comment): string | int | null;
 }

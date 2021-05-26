@@ -165,4 +165,82 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     {
         return \comments_open($post_id);
     }
+
+    public function getCommentContent(object $comment): string
+    {
+        return HooksAPIFacade::getInstance()->applyFilters(
+            'comment_text',
+            $this->getCommentPlainContent($comment)
+        );
+    }
+    public function getCommentPlainContent(object $comment): string
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return $comment->comment_content;
+    }
+    public function getCommentPostId(object $comment): string | int
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return (int)$comment->comment_post_ID;
+    }
+    public function isCommentApproved(object $comment): bool
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return $comment->comment_approved == "1";
+    }
+    public function getCommentType(object $comment): string
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return $comment->comment_type;
+    }
+    public function getCommentParent(object $comment): string | int | null
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        // If it has no parent, it is assigned 0. In that case, return null
+        if ($parent = $comment->comment_parent) {
+            return (int)$parent;
+        }
+        return null;
+    }
+    public function getCommentDateGmt(object $comment): string
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return $comment->comment_date_gmt;
+    }
+    public function getCommentId(object $comment): string | int
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return (int)$comment->comment_ID;
+    }
+    public function getCommentAuthor(object $comment): string
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return $comment->comment_author;
+    }
+    public function getCommentAuthorEmail(object $comment): string
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        return $comment->comment_author_email;
+    }
+
+    public function getCommentUserId(object $comment): string | int | null
+    {
+        /** @var WP_Comment */
+        $comment = $comment;
+        // Watch out! If there is no user ID, it stores it with ID "0"
+        $userID = (int)$comment->user_id;
+        if ($userID === 0) {
+            return null;
+        }
+        return $userID;
+    }
 }
