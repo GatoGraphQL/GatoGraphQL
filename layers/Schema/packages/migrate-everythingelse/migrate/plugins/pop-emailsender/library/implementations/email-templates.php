@@ -91,7 +91,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
         $post_url = $customPostTypeAPI->getPermalink($post_id);
         $post_title = $customPostTypeAPI->getTitle($post_id);
         $post_excerpt = $customPostTypeAPI->getExcerpt($post_id);
-        $thumb = $mediaTypeAPI->getImageSrc(MediaHelpers::getThumbId($post_id), 'thumb-sm');
+        $thumb = $mediaTypeAPI->getImageAttributes(MediaHelpers::getThumbId($post_id), 'thumb-sm');
         $thumb_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%4$s"></a>',
             $post_url,
