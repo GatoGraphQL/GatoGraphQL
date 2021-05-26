@@ -28,8 +28,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'username',
-            'userNicename',
-            'nicename',
             'name',
             'displayName',
             'firstname',
@@ -46,8 +44,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'username' => SchemaDefinition::TYPE_STRING,
-            'userNicename' => SchemaDefinition::TYPE_STRING,
-            'nicename' => SchemaDefinition::TYPE_STRING,
             'name' => SchemaDefinition::TYPE_STRING,
             'displayName' => SchemaDefinition::TYPE_STRING,
             'firstname' => SchemaDefinition::TYPE_STRING,
@@ -65,8 +61,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     {
         $descriptions = [
             'username' => $this->translationAPI->__('User\'s username handle', 'pop-users'),
-            'userNicename' => $this->translationAPI->__('User\'s nice name', 'pop-users'),
-            'nicename' => $this->translationAPI->__('User\'s nice name', 'pop-users'),
             'name' => $this->translationAPI->__('Name of the user', 'pop-users'),
             'displayName' => $this->translationAPI->__('Name of the user as displayed on the website', 'pop-users'),
             'firstname' => $this->translationAPI->__('User\'s first name', 'pop-users'),
@@ -101,10 +95,6 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'username':
                 return $cmsusersresolver->getUserLogin($user);
-
-            case 'userNicename':
-            case 'nicename':
-                return $cmsusersresolver->getUserNicename($user);
 
             case 'name':
             case 'displayName':

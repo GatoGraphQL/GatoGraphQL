@@ -12,7 +12,8 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
     {
         // Can't use "user-nicename", because @Mentions plugin does not store the "-" in the html attribute, so it would
         // save the entry as data-usernicename. To avoid conflicts, just remove the "-"
-        $data_fields = array('displayName', 'nicename', 'mentionQueryby');
+        // or even better, use "slug" instead
+        $data_fields = array('displayName', 'slug', 'mentionQueryby');
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             // Important: for Component the size is fixed! It can't be changed from 'avatar-40', because it is hardcoded
             // in layoutuser-mention-component.tmpl
