@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\ComponentConfiguration;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
@@ -19,6 +19,12 @@ use WP_Taxonomy;
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
     use APITypeDataResolverTrait;
+
+    function __construct(
+        protected HooksAPIInterface $hooksAPI,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+    ) {        
+    }
 
     abstract protected function getTagTaxonomyName(): string;
 
@@ -140,8 +146,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
-                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
+                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getTagListMaxLimit()
                 );
@@ -160,10 +165,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             unset($query['slugs']);
         }
 
-        $hooksAPI = HooksAPIFacade::getInstance();
-        return $hooksAPI->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'CMSAPI:taxonomies:query',
-            $hooksAPI->applyFilters(
+            $this->hooksAPI->applyFilters(
                 'CMSAPI:tags:query',
                 $query,
                 $options

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
-use WP_Taxonomy;
-use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Categories\ComponentConfiguration;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoPSchema\Categories\ComponentConfiguration;
+use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use WP_Taxonomy;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -20,6 +20,12 @@ use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
     use APITypeDataResolverTrait;
+
+    function __construct(
+        protected HooksAPIInterface $hooksAPI,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+    ) {        
+    }
 
     /**
      * Indicates if the passed object is of type Category
@@ -136,8 +142,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
-                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
+                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getCategoryListMaxLimit()
                 );
@@ -156,10 +161,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             unset($query['slugs']);
         }
 
-        $hooksAPI = HooksAPIFacade::getInstance();
-        return $hooksAPI->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'CMSAPI:taxonomies:query',
-            $hooksAPI->applyFilters(
+            $this->hooksAPI->applyFilters(
                 'CMSAPI:categories:query',
                 $query,
                 $options

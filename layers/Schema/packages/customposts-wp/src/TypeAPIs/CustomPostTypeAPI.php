@@ -7,14 +7,14 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use function apply_filters;
 use function get_post_status;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIHelpers;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
-use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 /**
@@ -23,6 +23,12 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     use APITypeDataResolverTrait;
+
+    function __construct(
+        protected HooksAPIInterface $hooksAPI,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
+    ) {        
+    }
 
     // public const NON_EXISTING_ID = "non-existing";
 
@@ -147,8 +153,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
-                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
+                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     $this->getCustomPostListMaxLimit()
                 );
@@ -205,7 +210,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
             unset($query['date-to-inclusive']);
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'CMSAPI:customposts:query',
             $query,
             $options
@@ -302,12 +307,12 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
         // Basic content: remove embeds, shortcodes, and tags
         // Remove the embed functionality, and then add again
         $wp_embed = $GLOBALS['wp_embed'];
-        HooksAPIFacade::getInstance()->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        $this->hooksAPI->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
 
         // Do not allow HTML tags or shortcodes
         $ret = \strip_shortcodes($customPost->post_content);
-        $ret = HooksAPIFacade::getInstance()->applyFilters('the_content', $ret);
-        HooksAPIFacade::getInstance()->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        $ret = $this->hooksAPI->applyFilters('the_content', $ret);
+        $this->hooksAPI->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
 
         return strip_tags($ret);
     }
