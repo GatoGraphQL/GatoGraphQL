@@ -20,6 +20,8 @@ use PoPSchema\Comments\FieldResolvers\CommentFieldResolver as UpstreamCommentFie
  */
 class CommentFieldResolver extends UpstreamCommentFieldResolver
 {
+    use FieldResolverTrait;
+    
     function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,

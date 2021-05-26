@@ -19,6 +19,8 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class CommentUserFieldResolver extends AbstractDBDataFieldResolver
 {
+    use FieldResolverTrait;
+
     function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
