@@ -100,7 +100,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         );
 
         if ($defaultimg = $this->getDefaultImage($module, $props)) {
-            $defaultfeatured = $cmsmediaapi->getMediaSrc($defaultimg, $img_size);
+            $defaultfeatured = $cmsmediaapi->getImageSrc($defaultimg, $img_size);
             $defaultfeaturedsrc = array(
                 'src' => $defaultfeatured[0],
                 'width' => $defaultfeatured[1],

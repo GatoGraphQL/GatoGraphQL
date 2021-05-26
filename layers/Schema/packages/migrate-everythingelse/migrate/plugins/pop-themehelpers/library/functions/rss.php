@@ -34,7 +34,7 @@ function gdRssPrintFeaturedImage($post_id)
 
         // Allow to set the image width in the URL: Needed for using the rss merge tag *|RSSITEM:IMAGE|* in Mailchimp,
         // since it does not allow to resize the image
-        $img_attr = HooksAPIFacade::getInstance()->applyFilters('gdRssPrintFeaturedImage:img_attr', $cmsmediaapi->getMediaSrc($featuredimage_id, 'thumb-md'), $featuredimage_id); ?>
+        $img_attr = HooksAPIFacade::getInstance()->applyFilters('gdRssPrintFeaturedImage:img_attr', $cmsmediaapi->getImageSrc($featuredimage_id, 'thumb-md'), $featuredimage_id); ?>
         <media:content url="<?php echo $img_attr[0] ?>" type="<?php echo $featuredimage->post_mime_type; ?>" medium="image" width="<?php echo $img_attr[1] ?>" height="<?php echo $img_attr[2] ?>">
             <media:description type="plain"><![CDATA[<?php echo $featuredimage->post_title; ?>]]></media:description>
         </media:content>

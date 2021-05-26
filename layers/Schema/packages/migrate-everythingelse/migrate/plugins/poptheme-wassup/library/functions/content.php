@@ -83,7 +83,7 @@ function gdGetDocumentThumb($size = 'large')
     if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
         $post_id = $vars['routing-state']['queried-object-id'];
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
-            $thumb = $cmsmediaapi->getMediaSrc($post_thumb_id, $size);
+            $thumb = $cmsmediaapi->getImageSrc($post_thumb_id, $size);
             $thumb_mime_type = $cmsmediaapi->getMediaMimeType($post_thumb_id);
         }
     } elseif ($vars['routing-state']['is-user']) {

@@ -9,7 +9,7 @@ class MediaHelpers
     public static function getAttachmentImageProperties($imageid, $size = null)
     {
         $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
-        $img = $cmsmediaapi->getMediaSrc($imageid, $size);
+        $img = $cmsmediaapi->getImageSrc($imageid, $size);
         return array(
             'src' => $img[0],
             'width' => $img[1],

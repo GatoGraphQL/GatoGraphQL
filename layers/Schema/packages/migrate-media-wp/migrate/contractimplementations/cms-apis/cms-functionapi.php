@@ -18,7 +18,7 @@ class FunctionAPI extends \PoPSchema\Media\FunctionAPI_Base
         $media = get_post($media_id);
         return $media->post_content;
     }
-    public function getMediaSrc($image_id, $size = null)
+    public function getImageSrc($image_id, $size = null)
     {
         return wp_get_attachment_image_src($image_id, $size);
     }

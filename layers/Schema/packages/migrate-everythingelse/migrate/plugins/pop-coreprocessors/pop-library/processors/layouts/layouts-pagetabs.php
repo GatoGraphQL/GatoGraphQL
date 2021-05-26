@@ -60,7 +60,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
                 $post_id = $vars['routing-state']['queried-object-id'];
                 if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
-                    $thumb = $cmsmediaapi->getMediaSrc($post_thumb_id, 'favicon');
+                    $thumb = $cmsmediaapi->getImageSrc($post_thumb_id, 'favicon');
                     return array(
                         'src' => $thumb[0],
                         'w' => $thumb[1],
