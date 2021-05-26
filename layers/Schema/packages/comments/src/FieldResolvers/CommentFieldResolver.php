@@ -131,7 +131,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $dateFormatter = DateFormatterFacade::getInstance();
         $comment = $resultItem;
         switch ($fieldName) {
