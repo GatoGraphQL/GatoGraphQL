@@ -69,6 +69,20 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
     }
 
     /**
+     * Check there is an author. Otherwise, let the upstream resolve it
+     */
+    function resolveCanProcessResultItem(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = []
+    ): bool {
+        $comment = $resultItem;
+        $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
+        return $commentUserID !== null;
+    }
+
+    /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
@@ -85,19 +99,16 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
     ): mixed {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $comment = $resultItem;
-        // Check there is an author. Otherwise, let the upstream resolve it
         $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
-        if ($commentUserID !== null) {
-            switch ($fieldName) {
-                case 'authorName':
-                    return $cmsusersapi->getUserDisplayName($commentUserID);
+        switch ($fieldName) {
+            case 'authorName':
+                return $cmsusersapi->getUserDisplayName($commentUserID);
 
-                case 'authorURL':
-                    return $cmsusersapi->getUserURL($commentUserID);
+            case 'authorURL':
+                return $cmsusersapi->getUserURL($commentUserID);
 
-                case 'authorEmail':
-                    return $cmsusersapi->getUserEmail($commentUserID);
-            }
+            case 'authorEmail':
+                return $cmsusersapi->getUserEmail($commentUserID);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
