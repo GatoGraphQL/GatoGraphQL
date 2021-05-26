@@ -10,7 +10,7 @@ use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
-    final public function getTaxonomyMeta(string | int $termID, string $key, bool $single = false): mixed
+    final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed
     {
         /**
          * Check if the allow/denylist validation fails

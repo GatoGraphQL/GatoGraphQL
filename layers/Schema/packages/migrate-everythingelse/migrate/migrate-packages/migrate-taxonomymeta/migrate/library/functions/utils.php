@@ -14,7 +14,7 @@ class Utils
     public static function getTermMeta($term_id, $key, $single = false)
     {
         $taxonomyMetaTypeAPI = TaxonomyMetaTypeAPIFacade::getInstance();
-        return $taxonomyMetaTypeAPI->getTaxonomyMeta($term_id, self::getMetaKey($key), $single);
+        return $taxonomyMetaTypeAPI->getTaxonomyTermMeta($term_id, self::getMetaKey($key), $single);
     }
     public static function updateTermMeta($term_id, $key, $values, $single = false, $boolean = false)
     {
