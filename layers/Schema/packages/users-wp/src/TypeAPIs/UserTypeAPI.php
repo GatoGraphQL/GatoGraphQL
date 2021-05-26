@@ -6,7 +6,6 @@ namespace PoPSchema\UsersWP\TypeAPIs;
 
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoP\Hooks\HooksAPIInterface;
-use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Users\ComponentConfiguration;
@@ -226,32 +225,32 @@ class UserTypeAPI implements UserTypeAPIInterface
             }
         }
     }
-    public function getUserDisplayName(string | int $user_id): ?string
+    public function getUserDisplayName(string | int | object $userObjectOrID): ?string
     {
-        return get_the_author_meta('display_name', $user_id);
+        return get_the_author_meta('display_name', $userObjectOrID);
     }
-    public function getUserEmail(string | int $user_id): ?string
+    public function getUserEmail(string | int | object $userObjectOrID): ?string
     {
-        return get_the_author_meta('user_email', $user_id);
+        return get_the_author_meta('user_email', $userObjectOrID);
     }
-    public function getUserFirstname(string | int $user_id): ?string
+    public function getUserFirstname(string | int | object $userObjectOrID): ?string
     {
-        return get_the_author_meta('user_firstname', $user_id);
+        return get_the_author_meta('user_firstname', $userObjectOrID);
     }
-    public function getUserLastname(string | int $user_id): ?string
+    public function getUserLastname(string | int | object $userObjectOrID): ?string
     {
-        return get_the_author_meta('user_lastname', $user_id);
+        return get_the_author_meta('user_lastname', $userObjectOrID);
     }
-    public function getUserLogin(string | int $user_id): ?string
+    public function getUserLogin(string | int | object $userObjectOrID): ?string
     {
-        return get_the_author_meta('user_login', $user_id);
+        return get_the_author_meta('user_login', $userObjectOrID);
     }
-    public function getUserDescription(string | int $user_id): ?string
+    public function getUserDescription(string | int | object $userObjectOrID): ?string
     {
-        return get_the_author_meta('description', $user_id);
+        return get_the_author_meta('description', $userObjectOrID);
     }
-    public function getUserURL(string | int $user_id): ?string
+    public function getUserURL(string | int | object $userObjectOrID): ?string
     {
-        return get_author_posts_url($user_id);
+        return get_author_posts_url($userObjectOrID);
     }
 }

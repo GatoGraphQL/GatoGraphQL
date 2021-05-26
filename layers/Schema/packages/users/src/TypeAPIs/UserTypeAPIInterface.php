@@ -18,11 +18,11 @@ interface UserTypeAPIInterface
     public function getUserByEmail(string | int $email): ?object;
     public function getUsers($query = array(), array $options = []): array;
     public function getUserCount(array $query = [], array $options = []): int;
-    public function getUserDisplayName(string | int $user_id): ?string;
-    public function getUserEmail(string | int $user_id): ?string;
-    public function getUserFirstname(string | int $user_id): ?string;
-    public function getUserLastname(string | int $user_id): ?string;
-    public function getUserLogin(string | int $user_id): ?string;
-    public function getUserDescription(string | int $user_id): ?string;
-    public function getUserURL(string | int $user_id): ?string;
+    public function getUserDisplayName(string | int | object $userObjectOrID): ?string;
+    public function getUserEmail(string | int | object $userObjectOrID): ?string;
+    public function getUserFirstname(string | int | object $userObjectOrID): ?string;
+    public function getUserLastname(string | int | object $userObjectOrID): ?string;
+    public function getUserLogin(string | int | object $userObjectOrID): ?string;
+    public function getUserDescription(string | int | object $userObjectOrID): ?string;
+    public function getUserURL(string | int | object $userObjectOrID): ?string;
 }
