@@ -23,7 +23,7 @@ class MediaTypeResolver extends AbstractTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
-        protected MediaTypeAPIInterface $MediaTypeAPI,
+        protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -48,7 +48,7 @@ class MediaTypeResolver extends AbstractTypeResolver
     public function getID(object $resultItem): string | int
     {
         $media = $resultItem;
-        return $this->mediaTypeAPIInterface->getMediaElementId($media);
+        return $this->mediaTypeAPI->getMediaElementId($media);
     }
 
     public function getTypeDataLoaderClass(): string

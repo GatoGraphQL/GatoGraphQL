@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers;
 
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -28,7 +29,8 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
-        protected CustomPostTypeResolver $customPostTypeResolver
+        protected CustomPostTypeResolver $customPostTypeResolver,
+        protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
             $translationAPI,
@@ -116,7 +118,6 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'mediaItems':
             case 'mediaItem':
@@ -129,7 +130,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
-                $mediaItems = $cmsmediaapi->getMediaElements($query, $options);
+                $mediaItems = $this->mediaTypeAPI->getMediaElements($query, $options);
                 if ($fieldName == 'mediaItem') {
                     return count($mediaItems) > 0 ? $mediaItems[0] : null;
                 }
