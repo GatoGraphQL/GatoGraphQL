@@ -4,11 +4,37 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\TypeResolvers;
 
-use PoPSchema\Pages\TypeDataLoaders\PageTypeDataLoader;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
+use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
+use PoPSchema\Pages\TypeDataLoaders\PageTypeDataLoader;
 
 class PageTypeResolver extends AbstractCustomPostTypeResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FeedbackMessageStoreInterface $feedbackMessageStore,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        ErrorProviderInterface $errorProvider,
+        protected PageTypeAPIInterface $pageTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $feedbackMessageStore,
+            $fieldQueryInterpreter,
+            $errorProvider,
+        );
+    }
+
     public function getTypeName(): string
     {
         return 'Page';
@@ -21,9 +47,8 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
 
     public function getID(object $resultItem): string | int
     {
-        $cmspagesresolver = \PoPSchema\Pages\ObjectPropertyResolverFactory::getInstance();
         $page = $resultItem;
-        return $cmspagesresolver->getPageId($page);
+        return $this->pageTypeAPI->getPageId($page);
     }
 
     public function getTypeDataLoaderClass(): string

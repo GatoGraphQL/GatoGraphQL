@@ -40,4 +40,6 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * Returns an ID (int? string?) or null
      */
     public function getHomeStaticPageID(): string | int;
+
+    public function getPageId(object $page): string | int;
 }

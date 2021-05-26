@@ -102,4 +102,9 @@ class PageTypeAPI extends CustomPostTypeAPI implements PageTypeAPIInterface
         $static_page_id = (int) get_option('page_on_front');
         return $static_page_id > 0 ? $static_page_id : null;
     }
+
+    public function getPageId(object $page): string | int
+    {
+        return $page->ID;
+    }
 }
