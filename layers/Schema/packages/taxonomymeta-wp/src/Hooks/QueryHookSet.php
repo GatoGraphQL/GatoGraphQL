@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\TaxonomyMetaWP\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
 
 class QueryHookSet extends AbstractHookSet
 {

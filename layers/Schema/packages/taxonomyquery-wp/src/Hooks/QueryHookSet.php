@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPostMetaWP\Hooks;
+namespace PoPSchema\TaxonomyQueryWP\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
+use PoPSchema\TaxonomyQueryWP\Helpers\TaxonomyQueryHelpers;
 
 class QueryHookSet extends AbstractHookSet
 {
@@ -13,7 +13,7 @@ class QueryHookSet extends AbstractHookSet
     {
         $this->hooksAPI->addAction(
             'CMSAPI:customposts:query',
-            [MetaQueryHelpers::class, 'convertMetaQuery']
+            [TaxonomyQueryHelpers::class, 'convertTaxonomyQuery']
         );
     }
 }
