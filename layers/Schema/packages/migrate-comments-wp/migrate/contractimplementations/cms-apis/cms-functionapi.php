@@ -5,6 +5,7 @@ namespace PoPSchema\Comments\WP;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 
 class FunctionAPI extends \PoPSchema\Comments\FunctionAPI_Base
 {
@@ -65,7 +66,7 @@ class FunctionAPI extends \PoPSchema\Comments\FunctionAPI_Base
             unset($query['parentID']);
         }
 
-        if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
+        if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
             if (isset($query['userID'])) {
 
                 $query['user_id'] = $query['userID'];

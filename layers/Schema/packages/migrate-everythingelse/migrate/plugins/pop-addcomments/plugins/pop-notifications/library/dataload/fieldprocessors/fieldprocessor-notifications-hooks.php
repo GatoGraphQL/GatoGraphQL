@@ -156,7 +156,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
-                        // TODO: Integrate with `mustHaveUserAccountToAddComment`
+                        // TODO: Integrate with `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
                         $comment = $cmscommentsapi->getComment($notification->object_id);
                         $user_id = $vars['global-userstate']['current-user-id'];
 

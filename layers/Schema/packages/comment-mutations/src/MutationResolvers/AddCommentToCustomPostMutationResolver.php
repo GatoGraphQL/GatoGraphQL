@@ -10,6 +10,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CommentMutations\Facades\CommentTypeMutationAPIFacade;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 
 /**
  * Add a comment to a custom post. Currently, the user must be logged-in.
@@ -53,7 +54,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             'parent' => $form_data[MutationInputProperties::PARENT_COMMENT_ID],
             'customPostID' => $form_data[MutationInputProperties::CUSTOMPOST_ID]
         ];
-        if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
+        if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
             $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
