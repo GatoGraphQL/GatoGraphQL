@@ -133,10 +133,6 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-custompostmedia-wp:/app/vendor/pop-schema/migrate-custompostmedia-wp
         - >-
-          ../../layers/Schema/packages/migrate-custompostmeta:/app/vendor/pop-schema/migrate-custompostmeta
-        - >-
-          ../../layers/Schema/packages/migrate-custompostmeta-wp:/app/vendor/pop-schema/migrate-custompostmeta-wp
-        - >-
           ../../layers/Schema/packages/migrate-media:/app/vendor/pop-schema/migrate-media
         - >-
           ../../layers/Schema/packages/migrate-media-wp:/app/vendor/pop-schema/migrate-media-wp
