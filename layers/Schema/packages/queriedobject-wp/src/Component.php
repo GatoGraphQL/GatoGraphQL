@@ -32,4 +32,18 @@ class Component extends AbstractComponent
             $folder . '/migrate-' . $packageName . '/initialize.php',
         ];
     }
+
+    /**
+     * Initialize services
+     *
+     * @param array<string, mixed> $configuration
+     * @param string[] $skipSchemaComponentClasses
+     */
+    protected static function initializeContainerServices(
+        array $configuration = [],
+        bool $skipSchema = false,
+        array $skipSchemaComponentClasses = []
+    ): void {
+        self::initServices(dirname(__DIR__));
+    }
 }

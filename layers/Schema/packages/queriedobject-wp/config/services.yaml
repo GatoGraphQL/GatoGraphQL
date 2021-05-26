@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface:
+        class: \PoPSchema\QueriedObjectWP\Routing\CMSRoutingStateService
