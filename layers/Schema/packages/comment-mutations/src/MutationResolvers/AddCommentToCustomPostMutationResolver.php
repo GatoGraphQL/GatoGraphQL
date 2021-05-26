@@ -8,9 +8,12 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\Facades\CommentTypeMutationAPIFacade;
-use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
  * Add a comment to a custom post. Currently, the user must be logged-in.
@@ -19,6 +22,17 @@ use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+        );
+    }
 
     public function validateErrors(array $form_data): ?array
     {
@@ -71,9 +85,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
         if (isset($comment_data['parent']) && !isset($comment_data['customPostID'])) {
-            $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
             $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-            $parentComment = $cmscommentsapi->getComment($comment_data['parent']);
+            $parentComment = $this->commentTypeAPI->getComment($comment_data['parent']);
             $comment_data['customPostID'] = $cmscommentsresolver->getCommentPostId($parentComment);
         }
 
