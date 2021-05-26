@@ -147,17 +147,9 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-queriedobject-wp:/app/vendor/pop-schema/migrate-queriedobject-wp
         - >-
-          ../../layers/Schema/packages/migrate-taxonomymeta:/app/vendor/pop-schema/migrate-taxonomymeta
-        - >-
-          ../../layers/Schema/packages/migrate-taxonomymeta-wp:/app/vendor/pop-schema/migrate-taxonomymeta-wp
-        - >-
           ../../layers/Schema/packages/migrate-taxonomyquery:/app/vendor/pop-schema/migrate-taxonomyquery
         - >-
           ../../layers/Schema/packages/migrate-taxonomyquery-wp:/app/vendor/pop-schema/migrate-taxonomyquery-wp
-        - >-
-          ../../layers/Schema/packages/migrate-usermeta:/app/vendor/pop-schema/migrate-usermeta
-        - >-
-          ../../layers/Schema/packages/migrate-usermeta-wp:/app/vendor/pop-schema/migrate-usermeta-wp
         - >-
           ../../layers/Schema/packages/migrate-users:/app/vendor/pop-schema/migrate-users
         - >-
