@@ -9,6 +9,7 @@ use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTyp
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -251,7 +252,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         }
 
         // Get all the author's network's users (followers + members of same communities)
-        $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($cmscommentsresolver->getCommentUserId($comment));
+        $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
+        $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($userCommentTypeAPI->getCommentUserId($comment));
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT, $networkusers)) {
@@ -266,11 +268,11 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                 $title = $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment));
                 $url = $customPostTypeAPI->getPermalink($cmscommentsresolver->getCommentPostId($comment));
                 $post_name = gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc');
-                $author_name = $cmsusersapi->getUserDisplayName($cmscommentsresolver->getCommentUserId($comment));
+                $author_name = $cmsusersapi->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment));
 
                 $content = sprintf(
                     TranslationAPIFacade::getInstance()->__('<p><a href="%1$s">%2$s</a> added a comment in %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
-                    $cmsusersapi->getUserURL($cmscommentsresolver->getCommentUserId($comment)),
+                    $cmsusersapi->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
                     $author_name,
                     $post_name,
                     $url,
@@ -496,10 +498,11 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $url = $customPostTypeAPI->getPermalink($cmscommentsresolver->getCommentPostId($comment));
             $post_name = gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc');
 
+            $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p><a href="%1$s">%2$s</a> mentioned you in a comment from %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
-                $cmsusersapi->getUserURL($cmscommentsresolver->getCommentUserId($comment)),
-                $cmsusersapi->getUserDisplayName($cmscommentsresolver->getCommentUserId($comment)),
+                $cmsusersapi->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
+                $cmsusersapi->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment)),
                 $post_name,
                 $url,
                 $title

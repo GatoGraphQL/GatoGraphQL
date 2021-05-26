@@ -13,6 +13,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -122,8 +123,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getCommenthtml($comment)
     {
+        $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $avatar = gdGetAvatar($cmscommentsresolver->getCommentUserId($comment), GD_AVATAR_SIZE_40);
+        $avatar = gdGetAvatar($userCommentTypeAPI->getCommentUserId($comment), GD_AVATAR_SIZE_40);
         $avatar_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%3$s"></a>',
             $comment->comment_author_url,

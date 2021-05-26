@@ -10,6 +10,7 @@ use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -165,7 +166,8 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                         $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> commented in %2$s <strong>%3$s</strong>', 'pop-notifications');
                         if ($comment_parent_id = $cmscommentsresolver->getCommentParent($comment)) {
                             $comment_parent = $commentTypeAPI->getComment($comment_parent_id);
-                            if ($cmscommentsresolver->getCommentUserId($comment_parent) == $user_id) {
+                            $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
+                            if ($userCommentTypeAPI->getCommentUserId($comment_parent) == $user_id) {
                                 $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> replied to your comment in %2$s <strong>%3$s</strong>', 'pop-notifications');
                             }
                         }

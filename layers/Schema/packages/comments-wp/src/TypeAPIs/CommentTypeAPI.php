@@ -232,16 +232,4 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $comment = $comment;
         return $comment->comment_author_email;
     }
-
-    public function getCommentUserId(object $comment): string | int | null
-    {
-        /** @var WP_Comment */
-        $comment = $comment;
-        // Watch out! If there is no user ID, it stores it with ID "0"
-        $userID = (int)$comment->user_id;
-        if ($userID === 0) {
-            return null;
-        }
-        return $userID;
-    }
 }
