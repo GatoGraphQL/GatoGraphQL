@@ -155,8 +155,14 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             unset($query['slugs']);
         }
 
-        return HooksAPIFacade::getInstance()->applyFilters(
-            'CMSAPI:categories:query',
+        $hooksAPI = HooksAPIFacade::getInstance();
+        return $hooksAPI->applyFilters(
+            'CMSAPI:taxonomies:query',
+            $hooksAPI->applyFilters(
+                'CMSAPI:categories:query',
+                $query,
+                $options
+            ),
             $query,
             $options
         );
