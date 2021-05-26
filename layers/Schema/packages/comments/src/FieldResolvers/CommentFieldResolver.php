@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\Constants\Status;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
@@ -17,6 +24,25 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(CommentTypeResolver::class);
@@ -142,7 +168,6 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                 );
 
             case 'responses':
-                $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
                 $query = array(
                     'status' => Status::APPROVED,
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
@@ -154,7 +179,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscommentsapi->getComments($query, $options);
+                return $this->commentTypeAPI->getComments($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
