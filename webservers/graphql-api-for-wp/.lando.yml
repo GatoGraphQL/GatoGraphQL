@@ -139,10 +139,6 @@ services:
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/metaquery-wp
         - >-
-          ../../layers/Schema/packages/migrate-media:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-media
-        - >-
-          ../../layers/Schema/packages/migrate-media-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-media-wp
-        - >-
           ../../layers/Schema/packages/migrate-pages:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-pages
         - >-
           ../../layers/Schema/packages/migrate-pages-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/migrate-pages-wp
