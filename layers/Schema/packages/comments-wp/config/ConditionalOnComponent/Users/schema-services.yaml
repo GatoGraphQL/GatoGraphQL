@@ -4,4 +4,4 @@ services:
         autowire: true
 
     PoPSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface:
-        class: \PoPSchema\CommentsWP\ConditionalOnComponent/Users/TypeAPIs\CommentTypeAPI
+        class: \PoPSchema\CommentsWP\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPI
