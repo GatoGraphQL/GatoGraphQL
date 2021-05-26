@@ -7,7 +7,7 @@ namespace PoPSchema\MediaWP\TypeAPIs;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\QueriedObject\Facades\Helpers\QueriedObjectHelperServiceFacade;
+use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
 use function wp_get_attachment_image_src;
@@ -20,6 +20,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
 {
     function __construct(
         protected HooksAPIInterface $hooksAPI,
+        protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {        
     }
     /**
@@ -79,8 +80,7 @@ class MediaTypeAPI implements MediaTypeAPIInterface
             // Allow to not limit by max when querying from within the application
             $limit = (int) $query['limit'];
             if (!isset($options['skip-max-limit']) || !$options['skip-max-limit']) {
-                $queriedObjectHelperService = QueriedObjectHelperServiceFacade::getInstance();
-                $limit = $queriedObjectHelperService->getLimitOrMaxLimit(
+                $limit = $this->queriedObjectHelperService->getLimitOrMaxLimit(
                     $limit,
                     ComponentConfiguration::getMediaListMaxLimit()
                 );
