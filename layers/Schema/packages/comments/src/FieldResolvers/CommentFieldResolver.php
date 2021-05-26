@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\Constants\Status;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
@@ -17,6 +24,25 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(CommentTypeResolver::class);
@@ -105,44 +131,41 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $dateFormatter = DateFormatterFacade::getInstance();
         $comment = $resultItem;
         switch ($fieldName) {
             case 'content':
-                return $cmscommentsresolver->getCommentContent($comment);
+                return $this->commentTypeAPI->getCommentContent($comment);
 
             case 'authorName':
-                return $cmsusersapi->getUserDisplayName($cmscommentsresolver->getCommentUserId($comment));
+                return $this->commentTypeAPI->getCommentAuthorName($comment);
 
             case 'authorURL':
-                return $cmsusersapi->getUserURL($cmscommentsresolver->getCommentUserId($comment));
+                return $this->commentTypeAPI->getCommentAuthorURL($comment);
 
             case 'authorEmail':
-                return $cmsusersapi->getUserEmail($cmscommentsresolver->getCommentUserId($comment));
+                return $this->commentTypeAPI->getCommentAuthorEmail($comment);
 
             case 'customPost':
             case 'customPostID':
-                return $cmscommentsresolver->getCommentPostId($comment);
+                return $this->commentTypeAPI->getCommentPostId($comment);
 
             case 'approved':
-                return $cmscommentsresolver->isCommentApproved($comment);
+                return $this->commentTypeAPI->isCommentApproved($comment);
 
             case 'type':
-                return $cmscommentsresolver->getCommentType($comment);
+                return $this->commentTypeAPI->getCommentType($comment);
 
             case 'parent':
-                return $cmscommentsresolver->getCommentParent($comment);
+                return $this->commentTypeAPI->getCommentParent($comment);
 
             case 'date':
                 return $dateFormatter->format(
                     $fieldArgs['format'],
-                    $cmscommentsresolver->getCommentDateGmt($comment)
+                    $this->commentTypeAPI->getCommentDateGmt($comment)
                 );
 
             case 'responses':
-                $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
                 $query = array(
                     'status' => Status::APPROVED,
                     // The Order must always be date > ASC so the jQuery works in inserting sub-comments in already-created parent comments
@@ -154,7 +177,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscommentsapi->getComments($query, $options);
+                return $this->commentTypeAPI->getComments($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

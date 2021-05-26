@@ -12,9 +12,36 @@ use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceReso
 use PoPSchema\Comments\FieldInterfaceResolvers\CommentableFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+
 
 class CustomPostFieldResolver extends AbstractQueryableFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return [
@@ -62,14 +89,13 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             case 'areCommentsOpen':
-                return $cmscommentsapi->areCommentsOpen($typeResolver->getID($post));
+                return $this->commentTypeAPI->areCommentsOpen($typeResolver->getID($post));
 
             case 'commentCount':
-                return $cmscommentsapi->getCommentNumber($typeResolver->getID($post));
+                return $this->commentTypeAPI->getCommentNumber($typeResolver->getID($post));
 
             case 'hasComments':
                 return $typeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
@@ -88,7 +114,7 @@ class CustomPostFieldResolver extends AbstractQueryableFieldResolver
                     'return-type' => ReturnTypes::IDS,
                 ];
                 $this->addFilterDataloadQueryArgs($options, $typeResolver, $fieldName, $fieldArgs);
-                return $cmscommentsapi->getComments($query, $options);
+                return $this->commentTypeAPI->getComments($query, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

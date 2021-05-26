@@ -7,6 +7,7 @@ namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use PoPSchema\Comments\ComponentConfiguration as CommentsComponentConfiguration;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -16,7 +17,7 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
     public function insertComment(array $comment_data): string | int | Error
     {
         // Convert the parameters
-        if (\PoPSchema\Comments\Server::mustHaveUserAccountToAddComment()) {
+        if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
             if (isset($comment_data['userID'])) {
                 $comment_data['user_id'] = $comment_data['userID'];
                 unset($comment_data['userID']);

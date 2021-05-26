@@ -32,15 +32,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\RESTAPI\Component::class,
-        ];
-    }
-
-    public static function getDependedMigrationPlugins(): array
-    {
-        $packageName = basename(dirname(__DIR__));
-        $folder = dirname(__DIR__, 2);
-        return [
-            $folder . '/migrate-' . $packageName . '/initialize.php',
+            \PoP\Users\Component::class,
         ];
     }
 

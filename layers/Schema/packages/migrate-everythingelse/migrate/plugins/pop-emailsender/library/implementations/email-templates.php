@@ -12,6 +12,8 @@ use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -121,8 +123,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getCommenthtml($comment)
     {
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $avatar = gdGetAvatar($cmscommentsresolver->getCommentUserId($comment), GD_AVATAR_SIZE_40);
+        $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
+        $avatar = gdGetAvatar($userCommentTypeAPI->getCommentUserId($comment), GD_AVATAR_SIZE_40);
         $avatar_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%3$s"></a>',
             $comment->comment_author_url,
@@ -144,8 +147,8 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar_html,
             $comment->comment_author_url,
             $comment->comment_author,
-            $dateFormatter->format($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
-            $cmscommentsresolver->getCommentContent($comment)
+            $dateFormatter->format($cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $commentTypeAPI->getCommentDateGmt($comment)),
+            $commentTypeAPI->getCommentContent($comment)
         );
 
         return $comment_html;
@@ -153,13 +156,12 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getCommentcontenthtml($comment)
     {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        $post_id = $cmscommentsresolver->getCommentPostId($comment);
+        $post_id = $commentTypeAPI->getCommentPostId($comment);
         $url = $customPostTypeAPI->getPermalink($post_id);
-        if ($cmscommentsresolver->getCommentParent($comment)) {
-            $parent = $cmscommentsapi->getComment($cmscommentsresolver->getCommentParent($comment));
+        if ($commentTypeAPI->getCommentParent($comment)) {
+            $parent = $commentTypeAPI->getComment($commentTypeAPI->getCommentParent($comment));
         }
 
         $content = $this->getCommenthtml($comment);

@@ -11,9 +11,35 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
+    function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(CommentTypeResolver::class);
@@ -82,8 +108,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         $comment = $resultItem;
         switch ($fieldName) {
             case 'reply':
-                $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $cmscommentsresolver->getCommentPostId($comment);
+                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $this->commentTypeAPI->getCommentPostId($comment);
                 $fieldArgs[MutationInputProperties::PARENT_COMMENT_ID] = $typeResolver->getID($comment);
                 break;
         }

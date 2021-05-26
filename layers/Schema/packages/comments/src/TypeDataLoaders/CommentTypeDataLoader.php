@@ -4,14 +4,31 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\TypeDataLoaders;
 
-use PoPSchema\Comments\Constants\Status;
-use PoPSchema\Comments\Constants\Params;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoPSchema\Comments\Constants\Params;
+use PoPSchema\Comments\Constants\Status;
 use PoPSchema\Comments\ModuleProcessors\CommentRelationalFieldDataloadModuleProcessor;
+use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        NameResolverInterface $nameResolver,
+        protected CommentTypeAPIInterface $commentTypeAPI,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $instanceManager,
+            $nameResolver,
+        );
+    }
+
     public function getFilterDataloadingModule(): ?array
     {
         return [CommentRelationalFieldDataloadModuleProcessor::class, CommentRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS];
@@ -19,11 +36,10 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function getObjects(array $ids): array
     {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $query = [
             'include' => $ids,
         ];
-        return $cmscommentsapi->getComments($query);
+        return $this->commentTypeAPI->getComments($query);
     }
 
     public function getQuery($query_args): array
@@ -45,8 +61,7 @@ class CommentTypeDataLoader extends AbstractTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = [])
     {
-        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
-        return $cmscommentsapi->getComments($query, $options);
+        return $this->commentTypeAPI->getComments($query, $options);
     }
 
     public function executeQueryIds($query): array

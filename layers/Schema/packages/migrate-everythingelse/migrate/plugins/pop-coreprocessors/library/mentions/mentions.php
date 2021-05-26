@@ -4,6 +4,7 @@ use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
@@ -130,10 +131,10 @@ class PoP_Mentions
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
-        if ($tags = $this->getHashtagsFromContent($cmscommentsresolver->getCommentContent($comment))) {
+        $commentTypeAPI = CommentTypeAPIFacade::getInstance();
+        if ($tags = $this->getHashtagsFromContent($commentTypeAPI->getCommentContent($comment))) {
             // $append = true because the tags are added to the post from the comment
-            $postTagTypeAPI->setPostTags($cmscommentsresolver->getCommentPostId($comment), $tags, true);
+            $postTagTypeAPI->setPostTags($commentTypeAPI->getCommentPostId($comment), $tags, true);
 
             // Save the tags as comment meta
             $tag_ids = $postTagTypeAPI->getTags(
@@ -148,9 +149,9 @@ class PoP_Mentions
 
         // Allow Events Manager to also add its own tags with its own taxonomy
         // This is needed so we can search using parameter 'tag' with events, using the common slug
-        HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:add', $cmscommentsresolver->getCommentPostId($comment), $tags);
+        HooksAPIFacade::getInstance()->doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostId($comment), $tags);
 
-        if ($user_nicenames = $this->getUserNicenamesFromContent($cmscommentsresolver->getCommentContent($comment))) {
+        if ($user_nicenames = $this->getUserNicenamesFromContent($commentTypeAPI->getCommentContent($comment))) {
             $taggedusers_ids = array();
             foreach ($user_nicenames as $user_nicename) {
                 if ($user = $cmsusersapi->getUserBySlug($user_nicename)) {
