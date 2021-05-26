@@ -1,10 +1,11 @@
 <?php
-use PoPSchema\Media\Misc\MediaHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPostMedia\Facades\CustomPostMediaTypeAPIFacade;
+use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\Media\Misc\MediaHelpers;
 
 class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
 {
@@ -54,11 +55,11 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $cmsmediapostsapi = \PoPSchema\Media\PostsFunctionAPIFactory::getInstance();
+        $customPostMediaTypeAPI = CustomPostMediaTypeAPIFacade::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             case 'featuredImageAttrs':
-                if ($featuredimage = $cmsmediapostsapi->getCustomPostThumbnailID($typeResolver->getID($post))) {
+                if ($featuredimage = $customPostMediaTypeAPI->getCustomPostThumbnailID($typeResolver->getID($post))) {
                     return MediaHelpers::getAttachmentImageProperties($featuredimage, 'thumb-md');
                 }
                 return null;
