@@ -30,9 +30,21 @@ class MediaTypeAPI implements MediaTypeAPIInterface
         return ($object instanceof WP_Post) && $object->post_type == 'attachment';
     }
 
-    public function getImageProperties(string | int $image_id, ?string $size = null): ?string
+    public function getImageSrc(string | int $image_id, ?string $size = null): ?string
+    {
+        $img = $this->getImageProperties($image_id, $size);
+        if ($img === null) {
+            return null;
+        }
+        return $img['src'];
+    }
+
+    public function getImageProperties(string | int $image_id, ?string $size = null): ?array
     {
         $img = wp_get_attachment_image_src($image_id, $size);
+        if ($img === false) {
+            return null;
+        }
         return [
             'src' => $img[0],
             'width' => $img[1],
