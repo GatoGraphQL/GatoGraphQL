@@ -6,8 +6,6 @@ use PoP\Engine\AppLoader;
 
 // Set the Component configuration
 AppLoader::addComponentClassesToInitialize([
-    \PoPSchema\ConvertCaseDirectives\Component::class,
-    \PoPSchema\CDNDirective\Component::class,
     \PoPSchema\CommentMetaWP\Component::class,
     \PoPSchema\PostsWP\Component::class,
     \PoPSchema\PagesWP\Component::class,
@@ -23,7 +21,6 @@ AppLoader::addComponentClassesToInitialize([
     \PoPSchema\MenusWP\Component::class,
     \PoPSchema\SettingsWP\Component::class,
     \PoPSchema\BlockMetadataWP\Component::class,
-    \PoPSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
     \PoPSchema\PostMutations\Component::class,
     \PoPSchema\CustomPostMediaMutationsWP\Component::class,
     \PoPSchema\PostTagMutationsWP\Component::class,
@@ -34,7 +31,5 @@ AppLoader::addComponentClassesToInitialize([
     \GraphQLByPoP\GraphQLServer\Component::class,
     \PoP\FunctionFields\Component::class,
     \PoP\RESTAPI\Component::class,
-    \PoP\TraceTools\Component::class,
-    \Leoloso\ExamplesForPoP\Component::class,
 ]);
 

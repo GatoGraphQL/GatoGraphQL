@@ -51,8 +51,6 @@ services:
         - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
         - >-
-          ../../layers/Engine/packages/trace-tools:/app/vendor/getpop/trace-tools
-        - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
@@ -69,8 +67,6 @@ services:
         - >-
           ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
         - >-
-          ../../layers/Schema/packages/cdn-directive:/app/vendor/pop-schema/cdn-directive
-        - >-
           ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
         - >-
           ../../layers/Schema/packages/comment-mutations-wp:/app/vendor/pop-schema/comment-mutations-wp
@@ -81,8 +77,6 @@ services:
         - '../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments'
         - >-
           ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
-        - >-
-          ../../layers/Schema/packages/convert-case-directives:/app/vendor/pop-schema/convert-case-directives
         - >-
           ../../layers/Schema/packages/custompost-mutations:/app/vendor/pop-schema/custompost-mutations
         - >-
@@ -117,10 +111,6 @@ services:
           ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
         - >-
           ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
-        - >-
-          ../../layers/Schema/packages/google-translate-directive:/app/vendor/pop-schema/google-translate-directive
-        - >-
-          ../../layers/Schema/packages/google-translate-directive-for-customposts:/app/vendor/pop-schema/google-translate-directive-for-customposts
         - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
         - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
         - '../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta'
@@ -171,8 +161,6 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
         - >-
-          ../../layers/Schema/packages/translate-directive:/app/vendor/pop-schema/translate-directive
-        - >-
           ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
         - >-
           ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
@@ -200,8 +188,6 @@ services:
         - '../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings'
         - >-
           ../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp
-        - >-
-          ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
     build_as_root:
       - a2enmod proxy proxy_http
     run:

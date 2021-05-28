@@ -27,7 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
         'layers/SiteBuilder/packages' => 'getpop',
         'layers/Wassup/packages' => 'PoPSites-Wassup',
-        'layers/Misc/packages' => 'leoloso',
+        // 'layers/Misc/packages' => 'leoloso',
     ];
     $parameters->set(CustomOption::PACKAGE_ORGANIZATIONS, $packagePathOrganizations);
     $parameters->set(Option::PACKAGE_DIRECTORIES, array_map(

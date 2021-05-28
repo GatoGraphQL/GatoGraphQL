@@ -128,7 +128,7 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
          * so we use the Translate service from the System Container
          */
         $translationAPI = SystemTranslationAPIFacade::getInstance();
-        $description = $translationAPI->__('GraphQL introspection query', 'examples-for-pop');
+        $description = $translationAPI->__('GraphQL introspection query', 'graphql-server');
         $graphQLPersistedQueryManagerDefinition = $containerBuilderWrapper->getDefinition(GraphQLPersistedQueryManagerInterface::class);
         $graphQLPersistedQueryManagerDefinition->addMethodCall(
             'addPersistedQuery',
