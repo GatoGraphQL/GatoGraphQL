@@ -161,8 +161,6 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
         - >-
-          ../../layers/Schema/packages/translate-directive:/app/vendor/pop-schema/translate-directive
-        - >-
           ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
         - >-
           ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
