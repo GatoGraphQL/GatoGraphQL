@@ -67,8 +67,6 @@ services:
         - >-
           ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
         - >-
-          ../../layers/Schema/packages/cdn-directive:/app/vendor/pop-schema/cdn-directive
-        - >-
           ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
         - >-
           ../../layers/Schema/packages/comment-mutations-wp:/app/vendor/pop-schema/comment-mutations-wp

@@ -58,7 +58,6 @@
         "leoloso/pop-graphql-voyager": "^1.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "pop-schema/block-metadata-for-wp": "dev-master",
-        "pop-schema/cdn-directive": "dev-master",
         "pop-schema/comment-mutations-wp": "dev-master",
         "pop-schema/commentmeta-wp": "dev-master",
         "pop-schema/convert-case-directives": "dev-master",

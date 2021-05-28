@@ -8,7 +8,6 @@ includes:
     - layers/Schema/packages/basic-directives/phpstan.neon.dist
     - layers/Engine/packages/cache-control/phpstan.neon.dist
     - layers/Schema/packages/categories-wp/phpstan.neon.dist
-    - layers/Schema/packages/cdn-directive/phpstan.neon.dist
     - layers/Schema/packages/commentmeta/phpstan.neon.dist
     - layers/Schema/packages/commentmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/comments-wp/phpstan.neon.dist
