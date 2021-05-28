@@ -7,7 +7,6 @@ namespace Leoloso\ExamplesForPoP\ConditionalOnContext\UseComponentModelCache\Sch
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoPSchema\GoogleTranslateDirective\DirectiveResolvers\GlobalGoogleTranslateDirectiveResolver;
-use PoPSchema\TranslateDirective\DirectiveResolvers\AbstractTranslateDirectiveResolver;
 
 /**
  * Add directive @cache to fields expensive to calculate
