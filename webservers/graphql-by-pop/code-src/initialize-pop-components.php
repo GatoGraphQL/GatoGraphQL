@@ -7,7 +7,6 @@ use PoP\Engine\AppLoader;
 // Set the Component configuration
 AppLoader::addComponentClassesToInitialize([
     \PoPSchema\ConvertCaseDirectives\Component::class,
-    \PoPSchema\CDNDirective\Component::class,
     \PoPSchema\CommentMetaWP\Component::class,
     \PoPSchema\PostsWP\Component::class,
     \PoPSchema\PagesWP\Component::class,
