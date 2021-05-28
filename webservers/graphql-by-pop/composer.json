@@ -53,7 +53,6 @@
         "graphql-by-pop/graphql-server": "dev-master",
         "leoloso-pop-api-wp/disable-user-edit-profile": "0.1.1",
         "leoloso-pop-api-wp/newsletter-subscriptions-rest-endpoints": "dev-master",
-        "leoloso/examples-for-pop": "dev-master",
         "leoloso/pop-graphiql": "^1.0",
         "leoloso/pop-graphql-voyager": "^1.0",
         "oomphinc/composer-installers-extender": "^2.0",
