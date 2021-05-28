@@ -188,8 +188,6 @@ services:
         - '../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings'
         - >-
           ../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp
-        - >-
-          ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
     build_as_root:
       - a2enmod proxy proxy_http
     run:

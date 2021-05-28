@@ -71,7 +71,7 @@ final class SourcePackagesProvider
                 'layers/Schema/packages/everythingelse',
                 'layers/Wassup/packages/everythingelse-mutations',
                 'layers/Schema/packages/everythingelse-wp',
-                'layers/Misc/packages/examples-for-pop',
+                // 'layers/Misc/packages/examples-for-pop',
                 'layers/Wassup/packages/flag-mutations',
                 'layers/Wassup/packages/form-mutations',
                 'layers/Schema/packages/generic-customposts',
