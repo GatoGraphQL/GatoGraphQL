@@ -51,8 +51,6 @@ services:
         - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
         - >-
-          ../../layers/Engine/packages/trace-tools:/app/vendor/getpop/trace-tools
-        - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
