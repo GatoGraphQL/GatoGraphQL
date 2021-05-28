@@ -60,7 +60,6 @@
         "pop-schema/block-metadata-for-wp": "dev-master",
         "pop-schema/comment-mutations-wp": "dev-master",
         "pop-schema/commentmeta-wp": "dev-master",
-        "pop-schema/convert-case-directives": "dev-master",
         "pop-schema/custompostmedia-wp": "dev-master",
         "pop-schema/custompostmedia-mutations-wp": "dev-master",
         "pop-schema/post-tag-mutations-wp": "dev-master",

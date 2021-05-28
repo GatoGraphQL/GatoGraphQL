@@ -78,8 +78,6 @@ services:
         - >-
           ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
         - >-
-          ../../layers/Schema/packages/convert-case-directives:/app/vendor/pop-schema/convert-case-directives
-        - >-
           ../../layers/Schema/packages/custompost-mutations:/app/vendor/pop-schema/custompost-mutations
         - >-
           ../../layers/Schema/packages/custompost-mutations-wp:/app/vendor/pop-schema/custompost-mutations-wp
