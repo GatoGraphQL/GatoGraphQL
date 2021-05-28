@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/pop-schema/taxonomyquery-wp).
+We accept contributions via Pull Requests under [the `leoloso/PoP` repo on GitHub](https://github.com/leoloso/PoP).
 
 
 ## Pull Requests
