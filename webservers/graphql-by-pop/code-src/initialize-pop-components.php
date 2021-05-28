@@ -21,7 +21,6 @@ AppLoader::addComponentClassesToInitialize([
     \PoPSchema\MenusWP\Component::class,
     \PoPSchema\SettingsWP\Component::class,
     \PoPSchema\BlockMetadataWP\Component::class,
-    \PoPSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
     \PoPSchema\PostMutations\Component::class,
     \PoPSchema\CustomPostMediaMutationsWP\Component::class,
     \PoPSchema\PostTagMutationsWP\Component::class,
