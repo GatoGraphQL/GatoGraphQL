@@ -66,7 +66,6 @@
         "pop-schema/post-category-mutations-wp": "dev-master",
         "pop-schema/custompostmeta-wp": "dev-master",
         "pop-schema/generic-customposts": "dev-master",
-        "pop-schema/google-translate-directive-for-customposts": "dev-master",
         "pop-schema/pages-wp": "dev-master",
         "pop-schema/post-mutations": "dev-master",
         "pop-schema/post-tags-wp": "dev-master",

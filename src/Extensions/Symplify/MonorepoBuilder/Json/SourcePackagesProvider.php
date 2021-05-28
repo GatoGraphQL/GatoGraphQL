@@ -75,7 +75,7 @@ final class SourcePackagesProvider
                 'layers/Wassup/packages/flag-mutations',
                 'layers/Wassup/packages/form-mutations',
                 'layers/Schema/packages/generic-customposts',
-                'layers/Schema/packages/google-translate-directive-for-customposts',
+                // 'layers/Schema/packages/google-translate-directive-for-customposts',
                 'layers/GraphQLByPoP/packages/graphql-server',
                 'layers/Wassup/packages/gravityforms-mutations',
                 'layers/Engine/packages/guzzle-helpers',
