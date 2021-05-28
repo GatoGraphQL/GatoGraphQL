@@ -34,7 +34,6 @@ AppLoader::addComponentClassesToInitialize([
     \GraphQLByPoP\GraphQLServer\Component::class,
     \PoP\FunctionFields\Component::class,
     \PoP\RESTAPI\Component::class,
-    \PoP\TraceTools\Component::class,
     \Leoloso\ExamplesForPoP\Component::class,
 ]);
 
