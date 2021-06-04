@@ -37,7 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\ExtensionDemo\\": "layers/GraphQLAPIForWP/plugins/graphql-api-extension-demo/src",
+            "GraphQLAPI\\ExtensionDemo\\": "layers/GraphQLAPIForWP/plugins/extension-demo/src",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
@@ -194,7 +194,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\ExtensionDemo\\": "layers/GraphQLAPIForWP/plugins/graphql-api-extension-demo/tests",
+            "GraphQLAPI\\ExtensionDemo\\": "layers/GraphQLAPIForWP/plugins/extension-demo/tests",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",

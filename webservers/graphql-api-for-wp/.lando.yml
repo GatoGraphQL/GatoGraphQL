@@ -219,7 +219,7 @@ services:
         - >-
           ../../layers/Schema/packages/settings-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/settings-wp
         - >-
-          ../../layers/GraphQLAPIForWP/plugins/graphql-api-extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo
+          ../../layers/GraphQLAPIForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo
     run:
       - >-
         wp config create --dbname=wordpress --dbuser=wordpress

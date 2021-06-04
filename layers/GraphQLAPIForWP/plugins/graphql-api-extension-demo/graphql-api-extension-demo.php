@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: GraphQL API - Extension Demo
-Plugin URI: https://github.com/GraphQLAPI/graphql-api-extension-demo
+Plugin URI: https://github.com/GraphQLAPI/extension-demo
 Description: Demonstration of extending the GraphQL schema, for the GraphQL API for WordPress
 Version: 0.8.0
 Requires at least: 5.4
