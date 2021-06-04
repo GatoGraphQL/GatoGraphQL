@@ -37,6 +37,7 @@
     },
     "autoload": {
         "psr-4": {
+            "GraphQLAPI\\ExtensionDemo\\": "layers/GraphQLAPIForWP/plugins/extension-demo/src",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
@@ -193,6 +194,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "GraphQLAPI\\ExtensionDemo\\": "layers/GraphQLAPIForWP/plugins/extension-demo/tests",
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",
@@ -394,6 +396,7 @@
         "getpop/static-site-generator": "0.7.13",
         "getpop/translation": "0.7.13",
         "getpop/translation-wp": "0.7.13",
+        "graphql-api/extension-demo": "0.7.13",
         "graphql-api/graphql-api-for-wp": "0.7.13",
         "graphql-api/markdown-convertor": "0.7.13",
         "graphql-by-pop/graphql-clients-for-wp": "0.7.13",

@@ -15,8 +15,7 @@ This is a monorepo containing all layers from the PoP project:
 [GraphQL API for WordPress ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
 
 - The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
-- Its extensions:
-  - TODO
+- An [extension demo](layers/GraphQLAPIForWP/plugins/extension-demo) plugin, demonstrating how to extend the GraphQL schema.
 
 [Site Builder](layers/SiteBuilder):<br/>Packages to build a website using the component-model architecture (WIP).
 

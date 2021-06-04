@@ -1,0 +1,7 @@
+parameters:
+    bootstrapFiles:
+        - graphql-api-extension-demo.php
+    level: 8
+    paths:
+        - src/
+        - tests/
