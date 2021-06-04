@@ -572,7 +572,6 @@
         "init-server": "Alias of 'start-server",
         "start-server": "Start the Lando webserver with the 'GraphQL API for WordPress' demo site, for development",
         "update-deps": "Update the Composer dependencies for the 'GraphQL API for WordPress' demo site",
-        "symlink-vendor-for-graphql-api-for-wp-plugin": "Install vendor dependencies for the \"GraphQL API\" plugin, symlinking them to local folders in the monorepo",
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "log-server-warnings": "Show (on real time) the warnings from the Lando webserver",
         "rebuild-server": "Rebuild the Lando webserver",
