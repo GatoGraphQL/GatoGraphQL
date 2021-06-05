@@ -26,29 +26,6 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Make sure this plugin is not duplicated.
- * For instance, if zip file already exists in Downloads folder, then
- * the newly downloaded file will be renamed (eg: graphql-api(2).zip)
- * and the plugin will exist twice, as graphql-api/... and graphql-api2/...
- */
-if (class_exists(PluginInfo::class)) {
-    \add_action('admin_notices', function () {
-        _e(sprintf(
-            '<div class="notice notice-error">' .
-                '<p>%s</p>' .
-            '</div>',
-            sprintf(
-                __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                __('GraphQL API for WordPress', 'graphql-api'),
-                PluginInfo::get('version'),
-                '0.8.0'
-            )
-        ));
-    });
-    return;
-}
-
-/**
  * Load translations
  */
 \add_action('init', function (): void {
