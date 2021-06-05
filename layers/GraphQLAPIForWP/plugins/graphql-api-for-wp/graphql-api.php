@@ -51,5 +51,5 @@ require_once($autoloadFile);
 MainPluginManager::register(new Plugin(
     __FILE__,
     '0.8.0',
-    __('GraphQL API for WordPress', 'graphql-api'),
+    \__('GraphQL API for WordPress', 'graphql-api'),
 ))->setup();
