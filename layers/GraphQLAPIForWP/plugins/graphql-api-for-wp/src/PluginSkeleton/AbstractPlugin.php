@@ -55,7 +55,7 @@ abstract class AbstractPlugin
     final public function getFullConfiguration(): array
     {
         if ($this->config === null) {
-            $this->config = $this->doGetConfig();
+            $this->config = $this->doGetFullConfiguration();
         }
         return $this->config;
     }
@@ -74,7 +74,7 @@ abstract class AbstractPlugin
      *
      * @return array<string, mixed>
      */
-    protected function doGetConfig(): array
+    protected function doGetFullConfiguration(): array
     {
         $baseName = plugin_basename($this->pluginFile);
         return [

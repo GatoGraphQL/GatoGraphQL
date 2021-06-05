@@ -16,10 +16,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      *
      * @return array<string, mixed>
      */
-    protected function doGetConfig(): array
+    protected function doGetFullConfiguration(): array
     {
         return array_merge(
-            parent::doGetConfig(),
+            parent::doGetFullConfiguration(),
             [
                 /**
                  * Where to store the config cache,
