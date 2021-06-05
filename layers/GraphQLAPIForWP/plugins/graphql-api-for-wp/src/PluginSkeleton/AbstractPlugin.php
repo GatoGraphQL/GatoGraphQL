@@ -245,13 +245,11 @@ abstract class AbstractPlugin
     }
 
     /**
-     * The PSR-4 namespace, with format "vendor\project"
+     * The PSR-4 namespace, with format "Vendor\Project"
      */
     public function getPluginNamespace(): string
     {
-        $class = get_called_class();
-        $parts = explode('\\', $class);
-        return $parts[0] . '\\' . $parts[1];
+        return PluginHelpers::getClassPSR4Namespace(get_called_class());
     }
 
     /**
