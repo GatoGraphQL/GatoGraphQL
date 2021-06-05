@@ -138,14 +138,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 }
 
                 // Check if any extension has been deactivated
-                $justDeactivatedExtensions = [];
+                $justDeactivatedExtensionBaseNames = array_diff(
+                    array_keys($storedPluginVersions),
+                    [
+                        $this->pluginBaseName,
+                    ],
+                    array_keys($registeredExtensionBaseNameInstances)
+                );
 
                 // If there were no changes, nothing to do
                 if (!$isMainPluginJustActivated
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
-                    && $justDeactivatedExtensions === []
+                    && $justDeactivatedExtensionBaseNames === []
                 ) {
                     return;
                 }
