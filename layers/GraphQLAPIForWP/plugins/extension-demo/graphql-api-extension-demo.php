@@ -60,8 +60,7 @@ add_action('plugins_loaded', function (): void {
 
     if (ExtensionManager::assertNotRegistered(
         GraphQLAPIExtension::class,
-        $extensionVersion,
-        $extensionName
+        $extensionVersion
     )) {
         // Load Composer’s autoloader
         require_once(__DIR__ . '/vendor/autoload.php');
