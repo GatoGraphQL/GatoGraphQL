@@ -40,7 +40,7 @@ class MainPluginManager extends AbstractPluginManager
      *
      * @return array<string, mixed>
      */
-    public static function getFullConfiguration(): array
+    protected static function getFullConfiguration(): array
     {
         return self::$mainPlugin->getFullConfiguration();
     }
