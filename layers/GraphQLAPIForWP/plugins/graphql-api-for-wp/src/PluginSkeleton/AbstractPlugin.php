@@ -70,12 +70,14 @@ abstract class AbstractPlugin
     {
         if ($this->config === null) {
             $this->config = array_merge(
+                // These configuration values are mandatory
                 [
                     'version' => $this->pluginVersion,
                     'file' => $this->pluginFile,
                     'baseName' => $this->pluginBaseName,
                     'name' => $this->pluginName,
                 ],
+                // These are custom configuration values
                 $this->doGetFullConfiguration()
             );
         }
