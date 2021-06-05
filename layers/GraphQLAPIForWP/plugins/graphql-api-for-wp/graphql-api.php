@@ -40,25 +40,8 @@ if (class_exists(Plugin::class) && !MainPluginManager::assertNotRegistered($plug
     return;
 }
 
-// Check Composer's autoload has been generated
-$autoloadFile = __DIR__ . '/vendor/autoload.php';
-if (!file_exists($autoloadFile)) {
-    add_action('admin_notices', function () use ($pluginName) {
-        _e(sprintf(
-            '<div class="notice notice-error">' .
-                '<p>%s</p>' .
-            '</div>',
-            sprintf(
-                __('Dependencies for <strong>%s</strong> are missing. Please install them by running <code>composer install</code> on the plugin\'s root folder. Until then, the plugin will be disabled.', 'graphql-api'),
-                $pluginName
-            )
-        ));
-    });
-    return;
-}
-
 // Load Composer’s autoloader
-require_once($autoloadFile);
+require_once(__DIR__ . '/vendor/autoload.php');
 
 // Create and set-up the plugin instance
 MainPluginManager::register(new Plugin(
