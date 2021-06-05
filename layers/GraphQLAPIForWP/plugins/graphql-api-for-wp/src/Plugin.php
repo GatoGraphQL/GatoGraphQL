@@ -19,7 +19,6 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\AppLoader;
@@ -53,8 +52,7 @@ class Plugin extends AbstractMainPlugin
             return;
         }
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
-        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
-        $currentMinorReleaseVersion = $this->getMinorReleaseVersion($mainPluginVersion);
+        $currentMinorReleaseVersion = $this->getMinorReleaseVersion($this->pluginVersion);
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
         if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
             return;
@@ -88,10 +86,9 @@ class Plugin extends AbstractMainPlugin
              * @var AboutMenuPage
              */
             $aboutMenuPage = $instanceManager->getInstance(AboutMenuPage::class);
-            $mainPluginVersion = (string) MainPluginManager::getConfig('version');
             // Calculate the minor release version.
             // Eg: if current version is 0.6.3, minor version is 0.6
-            $minorReleaseVersion = $this->getMinorReleaseVersion($mainPluginVersion);
+            $minorReleaseVersion = $this->getMinorReleaseVersion($this->pluginVersion);
             $releaseNotesURL = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true',
                 $aboutMenuPage->getScreenID(),
@@ -121,7 +118,7 @@ class Plugin extends AbstractMainPlugin
                 '</div>',
                 sprintf(
                     __('Plugin <strong>GraphQL API for WordPress</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'graphql-api'),
-                    $mainPluginVersion,
+                    $this->pluginVersion,
                     $releaseNotesURL,
                     'thickbox open-plugin-details-modal',
                     $generalSettingsURL
