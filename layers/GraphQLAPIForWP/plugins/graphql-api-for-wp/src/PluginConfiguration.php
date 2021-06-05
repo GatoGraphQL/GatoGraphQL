@@ -683,7 +683,7 @@ class PluginConfiguration
         if (is_null(self::$containerCacheConfigurationCache)) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
-            $mainPluginCacheDir = (string) MainPluginManager::getConfigValue('cache-dir');
+            $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
             if ($cacheContainerConfiguration = PluginEnvironment::isCachingEnabled()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
@@ -720,7 +720,7 @@ class PluginConfiguration
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
-        $mainPluginURL = (string) MainPluginManager::getConfigValue('url');
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
 
         /**
          * Enable the schema entity registries, as to retrieve the type/directive resolver classes

@@ -61,7 +61,7 @@ class Plugin extends AbstractMainPlugin
             return;
         }
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
         $currentMinorReleaseVersion = $this->getMinorReleaseVersion($mainPluginVersion);
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
         if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
@@ -96,7 +96,7 @@ class Plugin extends AbstractMainPlugin
              * @var AboutMenuPage
              */
             $aboutMenuPage = $instanceManager->getInstance(AboutMenuPage::class);
-            $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+            $mainPluginVersion = (string) MainPluginManager::getConfig('version');
             // Calculate the minor release version.
             // Eg: if current version is 0.6.3, minor version is 0.6
             $minorReleaseVersion = $this->getMinorReleaseVersion($mainPluginVersion);

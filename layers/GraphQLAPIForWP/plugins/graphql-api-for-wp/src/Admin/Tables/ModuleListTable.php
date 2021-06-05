@@ -533,8 +533,8 @@ class ModuleListTable extends AbstractItemListTable
     {
         parent::enqueueAssets();
 
-        $mainPluginURL = (string) MainPluginManager::getConfigValue('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
         
         /**
          * Fix the issues with the WP List Table

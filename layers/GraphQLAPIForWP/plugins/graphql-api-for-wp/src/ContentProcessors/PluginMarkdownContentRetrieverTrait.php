@@ -13,7 +13,7 @@ trait PluginMarkdownContentRetrieverTrait
      */
     protected function getBaseDir(): string
     {
-        return (string) MainPluginManager::getConfigValue('dir');
+        return (string) MainPluginManager::getConfig('dir');
     }
 
     /**
@@ -21,6 +21,6 @@ trait PluginMarkdownContentRetrieverTrait
      */
     protected function getBaseURL(): string
     {
-        return (string) MainPluginManager::getConfigValue('url');
+        return (string) MainPluginManager::getConfig('url');
     }
 }

@@ -39,7 +39,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseDir(?string $baseDir = null): void
     {
-        $this->baseDir = $baseDir ?? (string) MainPluginManager::getConfigValue('dir');
+        $this->baseDir = $baseDir ?? (string) MainPluginManager::getConfig('dir');
     }
 
     /**
@@ -48,7 +48,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseURL(?string $baseURL = null): void
     {
-        $this->baseURL = $baseURL ?? (string) MainPluginManager::getConfigValue('url');
+        $this->baseURL = $baseURL ?? (string) MainPluginManager::getConfig('url');
     }
 
     /**

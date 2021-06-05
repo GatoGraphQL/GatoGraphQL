@@ -45,8 +45,8 @@ class GraphiQLMenuPage extends AbstractMenuPage
      */
     protected function enqueueGraphiQLClientAssets(): void
     {
-        $mainPluginURL = (string) MainPluginManager::getConfigValue('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
         
         \wp_enqueue_style(
             'graphql-api-graphiql-client',
@@ -67,8 +67,8 @@ class GraphiQLMenuPage extends AbstractMenuPage
             'response' => $this->getResponse(),
         );
         
-        $mainPluginURL = (string) MainPluginManager::getConfigValue('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
 
         \wp_enqueue_style(
             'graphql-api-graphiql',

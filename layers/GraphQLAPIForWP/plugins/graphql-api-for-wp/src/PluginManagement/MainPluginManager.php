@@ -23,9 +23,9 @@ class MainPluginManager extends AbstractPluginManager
             self::printAdminNoticeErrorMessage(
                 sprintf(
                     __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    $mainPlugin->getConfigValue('name'),
-                    self::$mainPlugin->getConfigValue('version'),
-                    $mainPlugin->getConfigValue('version'),
+                    $mainPlugin->getConfig('name'),
+                    self::$mainPlugin->getConfig('version'),
+                    $mainPlugin->getConfig('version'),
                 )
             );
             return self::$mainPlugin;
@@ -50,7 +50,7 @@ class MainPluginManager extends AbstractPluginManager
      *
      * @return array<string, mixed>
      */
-    public static function getConfigValue(string $key): mixed
+    public static function getConfig(string $key): mixed
     {
         $mainPluginConfig = self::getFullConfiguration();
         return $mainPluginConfig[$key];

@@ -75,8 +75,8 @@ abstract class AbstractItemListTable extends WP_List_Table
      */
     public function enqueueAssets(): void
     {
-        $mainPluginURL = (string) MainPluginManager::getConfigValue('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
 
         /**
          * Fix the issues with the WP List Table

@@ -55,8 +55,8 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
             'queryDecodeURIComponent' => true,
         );
 
-        $mainPluginURL = (string) MainPluginManager::getConfigValue('url');
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
 
         // Print the HTML from the Client
         $htmlContent = $this->getGraphiQLWithExplorerClientHTML();

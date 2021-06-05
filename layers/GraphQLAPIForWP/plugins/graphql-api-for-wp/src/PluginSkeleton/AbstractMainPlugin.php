@@ -121,7 +121,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 if (!\is_admin()) {
                     return;
                 }
-                $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+                $mainPluginVersion = (string) MainPluginManager::getConfig('version');
                 // If there is no version stored, it's the first screen after activating the plugin
                 $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, $mainPluginVersion);
                 $isPluginJustActivated = $storedVersion === false;

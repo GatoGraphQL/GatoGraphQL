@@ -29,7 +29,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
      */
     public function getNamespace(): string
     {
-        $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
         // (Needed for development) Don't share cache among plugin versions
         $timestamp = '_v' . $mainPluginVersion;
         // The timestamp from when last saving settings/modules to the DB
@@ -50,7 +50,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
      */
     public function getDirectory(): ?string
     {
-        $mainPluginCacheDir = (string) MainPluginManager::getConfigValue('cache-dir');
+        $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
         return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'config-via-symfony-cache';
     }
 }
