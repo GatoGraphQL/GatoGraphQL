@@ -61,6 +61,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping-graphql-api.php',
             ],
         ],
+        // GraphQL API - Extension Demo
+        [
+            'path' => 'layers/GraphQLAPIForWP/plugins/extension-demo',
+            'zip_file' => 'graphql-api-extension-demo.zip',
+            'main_file' => 'graphql-api-extension-demo.php',
+            'exclude_files' => 'docs/images/\*',
+            'dist_repo_organization' => 'GraphQLAPI',
+            'dist_repo_name' => 'extension-demo-dist',
+            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-extension-demo.php',
+        ],
     ]);
 
     /**
