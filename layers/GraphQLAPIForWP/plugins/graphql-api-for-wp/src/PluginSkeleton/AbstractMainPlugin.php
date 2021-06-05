@@ -118,6 +118,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 if (!\is_admin()) {
                     return;
                 }
+                $regenerate = false;
                 // If there is no version stored, it's the first screen after activating the plugin
                 $storedVersion = \get_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
                 $isPluginJustActivated = $storedVersion === false;
@@ -125,17 +126,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 if (!$isPluginJustActivated || !$isPluginJustUpdated) {
                     return;
                 }
-                // Update to the current version
-                \update_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
-                // If new CPTs have rewrite rules, these must be flushed
-                \flush_rewrite_rules();
-                // Regenerate the timestamp, to generate the service container
-                $this->regenerateTimestamp();
+                $regenerate = true;
                 // Implement custom additional functionality
                 if ($isPluginJustActivated) {
                     $this->pluginJustActivated();
                 } elseif ($isPluginJustUpdated) {
                     $this->pluginJustUpdated($storedVersion);
+                }
+
+                if ($regenerate) {
+                    // Update to the current version
+                    \update_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
+                    // If new CPTs have rewrite rules, these must be flushed
+                    \flush_rewrite_rules();
+                    // Regenerate the timestamp, to generate the service container
+                    $this->regenerateTimestamp();
                 }
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
