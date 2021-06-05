@@ -5,11 +5,32 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
+    /**
+     * Get the plugin's immutable configuration values
+     *
+     * @return array<string, mixed>
+     */
+    protected function doGetConfig(): array
+    {
+        return array_merge(
+            parent::doGetConfig(),
+            [
+                /**
+                 * Where to store the config cache,
+                 * for both /service-containers and /config-via-symfony-cache
+                 * (config persistent cache: component model configuration + schema)
+                 */
+                'cache-dir' => PluginEnvironment::getCacheDir(),
+            ]
+        );
+    }
+
     /**
      * Activate the plugin
      */

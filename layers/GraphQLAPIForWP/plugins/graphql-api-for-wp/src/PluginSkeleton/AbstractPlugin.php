@@ -11,6 +11,11 @@ use PoP\Engine\AppLoader;
 
 abstract class AbstractPlugin
 {
+    /**
+     * @var array<string, mixed>|null
+     */
+    private ?array $config = null;
+
     final public function __construct(
         /** The main plugin file */
         protected string $pluginFile,
@@ -32,6 +37,35 @@ abstract class AbstractPlugin
     protected function getPluginVersion(): string
     {
         return $this->pluginVersion;
+    }
+
+    /**
+     * Get the plugin's immutable configuration values
+     *
+     * @return array<string, mixed>
+     */
+    final public function getConfig(): array
+    {
+        if ($this->config === null) {
+            $this->config = $this->doGetConfig();
+        }
+        return $this->config;
+    }
+    
+    /**
+     * Get the plugin's immutable configuration values
+     *
+     * @return array<string, mixed>
+     */
+    protected function doGetConfig(): array
+    {
+        return [
+            'version' => $this->pluginVersion,
+            'file' => $this->pluginFile,
+            'baseName' => plugin_basename($this->pluginFile),
+            'dir' => dirname($this->pluginFile),
+            'url' => plugin_dir_url($this->pluginFile),
+        ];
     }
 
     /**
