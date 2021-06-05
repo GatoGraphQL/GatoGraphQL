@@ -14,9 +14,10 @@ Text Domain: graphql-api-extension-demo
 Domain Path: /languages
 */
 
-use GraphQLAPI\ExtensionDemo\PluginInfo;
 use GraphQLAPI\ExtensionDemo\GraphQLAPIExtension;
+use GraphQLAPI\ExtensionDemo\PluginInfo;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -89,5 +90,5 @@ add_action('plugins_loaded', function (): void {
         'url' => plugin_dir_url(__FILE__),
     ]);
 
-    (new GraphQLAPIExtension(__FILE__))->setup();
+    ExtensionManager::register(new GraphQLAPIExtension(__FILE__))->setup();
 });
