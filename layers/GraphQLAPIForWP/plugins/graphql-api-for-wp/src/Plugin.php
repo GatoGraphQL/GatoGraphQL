@@ -32,14 +32,6 @@ class Plugin extends AbstractMainPlugin
     public const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Plugin name
-     */
-    protected function getPluginName(): ?string
-    {
-        return __('GraphQL API for WordPress', 'graphql-api');
-    }
-
-    /**
      * Show an admin notice with a link to the latest release notes
      */
     protected function pluginJustUpdated(string $storedVersion): void

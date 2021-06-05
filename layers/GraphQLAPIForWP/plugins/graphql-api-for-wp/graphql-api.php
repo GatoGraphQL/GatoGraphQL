@@ -48,4 +48,8 @@ if (!file_exists($autoloadFile)) {
 require_once($autoloadFile);
 
 // Create and set-up the plugin instance
-MainPluginManager::register(new Plugin(__FILE__, '0.8.0'))->setup();
+MainPluginManager::register(new Plugin(
+    __FILE__,
+    '0.8.0',
+    __('GraphQL API for WordPress', 'graphql-api'),
+))->setup();

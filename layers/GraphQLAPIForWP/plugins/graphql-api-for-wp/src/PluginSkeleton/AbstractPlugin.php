@@ -16,19 +16,23 @@ abstract class AbstractPlugin
      */
     private ?array $config = null;
 
+    protected string $pluginName;
+
     final public function __construct(
         /** The main plugin file */
         protected string $pluginFile,
         protected string $pluginVersion,
+        ?string $pluginName = null,
     ) {
+        $this->pluginName = $pluginName ?? \plugin_basename($pluginFile);
     }
 
     /**
      * Plugin name
      */
-    protected function getPluginName(): ?string
+    protected function getPluginName(): string
     {
-        return null;
+        return $this->pluginName;
     }
 
     /**
@@ -76,12 +80,11 @@ abstract class AbstractPlugin
      */
     protected function doGetFullConfiguration(): array
     {
-        $baseName = plugin_basename($this->pluginFile);
         return [
             'version' => $this->pluginVersion,
             'file' => $this->pluginFile,
-            'baseName' => $baseName,
-            'name' => $this->getPluginName() ?? $baseName,
+            'baseName' => plugin_basename($this->pluginFile),
+            'name' => $this->getPluginName(),
             'dir' => dirname($this->pluginFile),
             'url' => plugin_dir_url($this->pluginFile),
         ];
