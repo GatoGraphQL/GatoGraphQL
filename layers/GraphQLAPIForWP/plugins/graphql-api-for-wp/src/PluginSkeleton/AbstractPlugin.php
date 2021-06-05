@@ -32,7 +32,7 @@ abstract class AbstractPlugin
     /**
      * Plugin name
      */
-    protected function getPluginName(): string
+    public function getPluginName(): string
     {
         return $this->pluginName;
     }
@@ -40,7 +40,7 @@ abstract class AbstractPlugin
     /**
      * Plugin base name
      */
-    protected function getPluginBaseName(): string
+    public function getPluginBaseName(): string
     {
         return $this->pluginBaseName;
     }
@@ -48,7 +48,7 @@ abstract class AbstractPlugin
     /**
      * Plugin main file
      */
-    protected function getPluginFile(): string
+    public function getPluginFile(): string
     {
         return $this->pluginFile;
     }
@@ -56,7 +56,7 @@ abstract class AbstractPlugin
     /**
      * Plugin version
      */
-    protected function getPluginVersion(): string
+    public function getPluginVersion(): string
     {
         return $this->pluginVersion;
     }
