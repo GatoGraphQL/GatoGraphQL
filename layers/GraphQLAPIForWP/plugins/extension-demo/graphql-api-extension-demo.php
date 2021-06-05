@@ -67,12 +67,10 @@ add_action('plugins_loaded', function (): void {
         require_once(__DIR__ . '/vendor/autoload.php');
 
         // Create and set-up the extension instance
-        if ($extension = ExtensionManager::register(new GraphQLAPIExtension(
+        ExtensionManager::register(new GraphQLAPIExtension(
             __FILE__,
             $extensionVersion,
             $extensionName
-        ))) {
-            $extension->setup();
-        }
+        ))->setup();
     }
 });
