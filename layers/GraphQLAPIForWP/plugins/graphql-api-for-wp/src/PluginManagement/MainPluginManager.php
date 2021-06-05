@@ -10,7 +10,10 @@ class MainPluginManager extends AbstractPluginManager
 {
     private static ?AbstractMainPlugin $mainPlugin = null;
 
-    public static function register(AbstractMainPlugin $mainPlugin): AbstractMainPlugin
+    /**
+     * If the plugin is already registered, return null
+     */
+    public static function register(AbstractMainPlugin $mainPlugin): ?AbstractMainPlugin
     {
         /**
          * Validate it hasn't been registered yet, as to
@@ -28,7 +31,7 @@ class MainPluginManager extends AbstractPluginManager
                     $mainPlugin->getConfig('version'),
                 )
             );
-            return self::$mainPlugin;
+            return null;
         }
 
         self::$mainPlugin = $mainPlugin;

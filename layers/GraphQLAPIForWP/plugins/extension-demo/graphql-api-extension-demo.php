@@ -60,5 +60,5 @@ add_action('plugins_loaded', function (): void {
         __FILE__,
         '0.8.0',
         \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo')
-    ))->setup();
+    ))?->setup();
 });

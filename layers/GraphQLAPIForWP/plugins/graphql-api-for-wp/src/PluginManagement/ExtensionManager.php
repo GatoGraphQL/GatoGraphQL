@@ -14,7 +14,7 @@ class ExtensionManager extends AbstractPluginManager
      * @var array<string, AbstractExtension>
      */
     private static array $extensionClassInstances = [];
-    
+
     /**
      * Have the extensions organized by their baseName
      *
@@ -30,7 +30,10 @@ class ExtensionManager extends AbstractPluginManager
         return self::$extensionBaseNameInstances;
     }
 
-    public static function register(AbstractExtension $extension): AbstractExtension
+    /**
+     * If the extension is already registered, return null
+     */
+    public static function register(AbstractExtension $extension): ?AbstractExtension
     {
         $extensionClass = get_class($extension);
 
@@ -47,7 +50,7 @@ class ExtensionManager extends AbstractPluginManager
                     $extension->getConfig('version'),
                 )
             );
-            return self::$extensionClassInstances[$extensionClass];
+            return null;
         }
 
         self::$extensionClassInstances[$extensionClass] = $extension;
