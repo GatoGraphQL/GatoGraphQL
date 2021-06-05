@@ -15,7 +15,6 @@ Domain Path: /languages
 */
 
 use GraphQLAPI\ExtensionDemo\GraphQLAPIExtension;
-use GraphQLAPI\ExtensionDemo\PluginInfo;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 
@@ -60,15 +59,6 @@ add_action('plugins_loaded', function (): void {
 
     // Load Composer’s autoloader
     require_once(__DIR__ . '/vendor/autoload.php');
-
-    // Initialize the Plugin information
-    PluginInfo::init([
-        'version' => '0.8.0',
-        'file' => __FILE__,
-        'baseName' => plugin_basename(__FILE__),
-        'dir' => dirname(__FILE__),
-        'url' => plugin_dir_url(__FILE__),
-    ]);
 
     ExtensionManager::register(new GraphQLAPIExtension(__FILE__, '0.8.0'))->setup();
 });
