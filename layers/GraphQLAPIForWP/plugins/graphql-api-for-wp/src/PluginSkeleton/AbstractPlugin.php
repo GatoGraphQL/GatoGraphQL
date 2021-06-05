@@ -69,7 +69,15 @@ abstract class AbstractPlugin
     final public function getFullConfiguration(): array
     {
         if ($this->config === null) {
-            $this->config = $this->doGetFullConfiguration();
+            $this->config = array_merge(
+                [
+                    'version' => $this->pluginVersion,
+                    'file' => $this->pluginFile,
+                    'baseName' => $this->pluginBaseName,
+                    'name' => $this->pluginName,
+                ],
+                $this->doGetFullConfiguration()
+            );
         }
         return $this->config;
     }
@@ -91,10 +99,6 @@ abstract class AbstractPlugin
     protected function doGetFullConfiguration(): array
     {
         return [
-            'version' => $this->pluginVersion,
-            'file' => $this->pluginFile,
-            'baseName' => $this->pluginBaseName,
-            'name' => $this->getPluginName(),
             'dir' => dirname($this->pluginFile),
             'url' => plugin_dir_url($this->pluginFile),
         ];
