@@ -7,10 +7,10 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 class PluginOptions
 {
     /**
-     * Store the plugin version in the Options table, to track when
-     * the plugin is installed/updated
+     * Store the plugin/extension versions in the Options table,
+     * to track when each of them is installed/updated
      */
-    public const PLUGIN_VERSION = 'graphql-api-plugin-version';
+    public const PLUGIN_VERSIONS = 'graphql-api-plugin-versions';
 
     /**
      * Store when an extension is activated in the Options table,

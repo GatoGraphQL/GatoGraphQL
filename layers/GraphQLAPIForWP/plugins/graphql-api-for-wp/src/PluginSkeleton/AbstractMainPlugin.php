@@ -119,14 +119,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     return;
                 }
                 // If there is no version stored, it's the first screen after activating the plugin
-                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, $this->pluginVersion);
+                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
                 $isPluginJustActivated = $storedVersion === false;
                 $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== $this->pluginVersion;
                 if (!$isPluginJustActivated || !$isPluginJustUpdated) {
                     return;
                 }
                 // Update to the current version
-                \update_option(PluginOptions::PLUGIN_VERSION, $this->pluginVersion);
+                \update_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
                 // If new CPTs have rewrite rules, these must be flushed
                 \flush_rewrite_rules();
                 // Regenerate the timestamp, to generate the service container
