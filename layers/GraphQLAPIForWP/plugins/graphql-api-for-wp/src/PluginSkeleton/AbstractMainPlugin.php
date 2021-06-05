@@ -155,20 +155,35 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 ) {
                     return;
                 }
-
-                // Update to the current version
-                \update_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
-                // If new CPTs have rewrite rules, these must be flushed
-                \flush_rewrite_rules();
-                // Regenerate the timestamp, to generate the service container
-                $this->regenerateTimestamp();
             
-                // Implement custom additional functionality
+                // Enable to implement custom additional functionality (eg: show admin notice with changelog)
                 if ($isMainPluginJustActivated) {
                     $this->pluginJustActivated();
                 } elseif ($isMainPluginJustUpdated) {
-                    $this->pluginJustUpdated($storedPluginVersions);
+                    $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName]);
                 }
+                foreach ($justActivatedExtensions as $extensionBaseName => $extensionInstance) {
+                    $extensionInstance->pluginJustActivated();
+                }
+                foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
+                    $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName]);
+                }
+
+                // Recalculate the updated entry and update on the DB
+                $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
+                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
+                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersion();
+                }
+                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
+                    unset($storedPluginVersions[$extensionBaseName]);
+                }
+                \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+
+                // If new CPTs have rewrite rules, these must be flushed
+                \flush_rewrite_rules();
+                
+                // Regenerate the timestamp, to generate the service container
+                $this->regenerateTimestamp();
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
@@ -208,27 +223,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         \add_action('plugins_loaded', function () {
             \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
         }, PluginLifecyclePriorities::BOOT_EXTENSIONS);
-    }
-
-    /**
-     * Execute logic after the plugin has just been activated
-     */
-    protected function pluginJustActivated(): void
-    {
-    }
-
-    /**
-     * Execute logic after the plugin has just been activated
-     */
-    protected function extensionJustActivated(): void
-    {
-    }
-
-    /**
-     * Execute logic after the plugin has just been updated
-     */
-    protected function pluginJustUpdated(string $storedPluginVersions): void
-    {
     }
 
     /**
