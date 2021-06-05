@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
-abstract class AbstractMainPluginManager
+abstract class AbstractPluginManager
 {
     protected static function printAdminNoticeErrorMessage(string $errorMessage): void
     {

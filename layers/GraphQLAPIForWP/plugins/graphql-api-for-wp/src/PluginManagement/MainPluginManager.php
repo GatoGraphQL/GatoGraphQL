@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 
-class MainPluginManager extends AbstractMainPluginManager
+class MainPluginManager extends AbstractPluginManager
 {
     private static ?AbstractMainPlugin $mainPlugin = null;
 
