@@ -2,15 +2,15 @@
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginHelpers;
 use PHPUnit\Framework\TestCase;
 
 class ExtensionTest extends TestCase
 {
     public function testExtensionNamespace(): void
     {
-        $extension = new Extension('', '');
         $this->assertEquals(
-            $extension->getPluginNamespace(),
+            PluginHelpers::getClassPSR4Namespace('GraphQLAPI\GraphQLAPI\Plugin'),
             'GraphQLAPI\GraphQLAPI'
         );
     }
