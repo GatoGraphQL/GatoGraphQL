@@ -267,6 +267,9 @@ abstract class AbstractPlugin
      */
     public function deactivate(): void
     {
+        // Remove the plugin's version
+        \update_option(PluginOptions::PLUGIN_VERSION, false);
+
         $this->unregisterPluginCustomPostTypes();
 
         $this->regenerateTimestamp();

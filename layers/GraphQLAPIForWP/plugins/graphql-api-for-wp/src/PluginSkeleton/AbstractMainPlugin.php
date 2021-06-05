@@ -35,9 +35,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     public function activate(): void
     {
-        // By removing the option (in case it already exists from a previously-installed version),
-        // the next request will know the plugin was just installed
-        \update_option(PluginOptions::PLUGIN_VERSION, false);
+        // Override if needed
     }
 
     /**
