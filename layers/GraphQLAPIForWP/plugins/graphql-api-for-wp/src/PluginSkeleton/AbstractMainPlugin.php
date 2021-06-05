@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
@@ -110,7 +111,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     protected function handleNewActivations(): void
     {
         /**
-         * Logic to check if the main plugin has just been activated or updated.
+         * Logic to check if the main plugin or any extension has just been activated or updated.
          */
         \add_action(
             'plugins_loaded',
@@ -118,29 +119,49 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 if (!\is_admin()) {
                     return;
                 }
-                $regenerate = false;
-                // If there is no version stored, it's the first screen after activating the plugin
-                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
-                $isPluginJustActivated = $storedVersion === false;
-                $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== $this->pluginVersion;
-                if (!$isPluginJustActivated || !$isPluginJustUpdated) {
-                    return;
-                }
-                $regenerate = true;
-                // Implement custom additional functionality
-                if ($isPluginJustActivated) {
-                    $this->pluginJustActivated();
-                } elseif ($isPluginJustUpdated) {
-                    $this->pluginJustUpdated($storedVersion);
+                $storedPluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
+                $registeredExtensionBaseNameInstances = ExtensionManager::getExtensions();
+                
+                // Check if the main plugin has been activated or updated
+                $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
+                $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->pluginVersion;
+
+                // Check if any extension has been activated or updated
+                $justActivatedExtensions = [];
+                $justUpdatedExtensions = [];
+                foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+                    if (!isset($storedPluginVersions[$extensionBaseName])) {
+                        $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
+                    } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersion()) {
+                        $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
+                    }
                 }
 
-                if ($regenerate) {
-                    // Update to the current version
-                    \update_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
-                    // If new CPTs have rewrite rules, these must be flushed
-                    \flush_rewrite_rules();
-                    // Regenerate the timestamp, to generate the service container
-                    $this->regenerateTimestamp();
+                // Check if any extension has been deactivated
+                $justDeactivatedExtensions = [];
+
+                // If there were no changes, nothing to do
+                if (!$isMainPluginJustActivated
+                    && !$isMainPluginJustUpdated
+                    && $justActivatedExtensions === []
+                    && $justUpdatedExtensions === []
+                    && $justDeactivatedExtensions === []
+                ) {
+                    return;
+                }
+
+                // Update to the current version
+                \update_option(PluginOptions::PLUGIN_VERSIONS, $this->pluginVersion);
+                // If new CPTs have rewrite rules, these must be flushed
+                \flush_rewrite_rules();
+                // Regenerate the timestamp, to generate the service container
+                $this->regenerateTimestamp();
+            
+                // Implement custom additional functionality
+                if ($isMainPluginJustActivated) {
+                    $this->pluginJustActivated();
+                } elseif ($isMainPluginJustUpdated) {
+                    $this->pluginJustUpdated($storedPluginVersions);
                 }
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
@@ -200,7 +221,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     /**
      * Execute logic after the plugin has just been updated
      */
-    protected function pluginJustUpdated(string $storedVersion): void
+    protected function pluginJustUpdated(string $storedPluginVersions): void
     {
     }
 
