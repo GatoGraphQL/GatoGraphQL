@@ -51,6 +51,15 @@ abstract class AbstractPlugin
         }
         return $this->config;
     }
+
+    /**
+     * Get a plugin's immutable configuration value
+     */
+    final public function getConfigValue(string $key): mixed
+    {
+        $config = $this->getConfig();
+        return $config[$key];
+    }
     
     /**
      * Get the plugin's immutable configuration values
