@@ -90,5 +90,5 @@ add_action('plugins_loaded', function (): void {
         'url' => plugin_dir_url(__FILE__),
     ]);
 
-    ExtensionManager::register(new GraphQLAPIExtension(__FILE__))->setup();
+    ExtensionManager::register(new GraphQLAPIExtension(__FILE__, '0.8.0'))->setup();
 });

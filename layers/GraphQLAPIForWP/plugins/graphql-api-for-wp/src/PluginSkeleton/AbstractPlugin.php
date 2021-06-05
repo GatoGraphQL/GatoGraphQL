@@ -13,7 +13,8 @@ abstract class AbstractPlugin
 {
     final public function __construct(
         /** The main plugin file */
-        protected string $pluginFile
+        protected string $pluginFile,
+        protected string $pluginVersion,
     ) {
     }
 
@@ -23,6 +24,14 @@ abstract class AbstractPlugin
     protected function getPluginFile(): string
     {
         return $this->pluginFile;
+    }
+
+    /**
+     * Plugin version
+     */
+    protected function getPluginVersion(): string
+    {
+        return $this->pluginVersion;
     }
 
     /**
