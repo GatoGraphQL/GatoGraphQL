@@ -35,10 +35,15 @@ if (!defined('ABSPATH')) {
  */
 add_action('plugins_loaded', function (): void {
     /**
+     * Extension's name and version
+     */
+    $extensionVersion = '0.8.0';
+    $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
+    /**
      * Validate the GraphQL API plugin is active
      */
     if (!class_exists(Plugin::class)) {
-        \add_action('admin_notices', function () {
+        \add_action('admin_notices', function () use ($extensionName) {
             _e(sprintf(
                 '<div class="notice notice-error">' .
                     '<p>%s</p>' .
@@ -46,22 +51,28 @@ add_action('plugins_loaded', function (): void {
                 sprintf(
                     __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-extension-demo'),
                     __('GraphQL API for WordPress', 'graphql-api-extension-demo'),
-                    __('GraphQL API - Extension Demo', 'graphql-api-extension-demo')
+                    $extensionName
                 )
             ));
         });
         return;
     }
 
-    // Load Composer’s autoloader
-    require_once(__DIR__ . '/vendor/autoload.php');
+    if (ExtensionManager::assertNotRegistered(
+        GraphQLAPIExtension::class,
+        $extensionVersion,
+        $extensionName
+    )) {
+        // Load Composer’s autoloader
+        require_once(__DIR__ . '/vendor/autoload.php');
 
-    // Create and set-up the extension instance
-    if ($extension = ExtensionManager::register(new GraphQLAPIExtension(
-        __FILE__,
-        '0.8.0',
-        \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo')
-    ))) {
-        $extension->setup();
+        // Create and set-up the extension instance
+        if ($extension = ExtensionManager::register(new GraphQLAPIExtension(
+            __FILE__,
+            $extensionVersion,
+            $extensionName
+        ))) {
+            $extension->setup();
+        }
     }
 });
