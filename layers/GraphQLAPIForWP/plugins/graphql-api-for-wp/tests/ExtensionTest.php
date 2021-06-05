@@ -11,7 +11,7 @@ class ExtensionTest extends TestCase
      */
     public function testExtensionNamespace(): void
     {
-        $extension = new Extension('');
+        $extension = new Extension('', '');
         $this->assertEquals(
             $extension->getPluginNamespace(),
             'GraphQLAPI\GraphQLAPI'
