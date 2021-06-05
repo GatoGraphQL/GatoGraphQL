@@ -56,9 +56,12 @@ add_action('plugins_loaded', function (): void {
     // Load Composer’s autoloader
     require_once(__DIR__ . '/vendor/autoload.php');
 
-    ExtensionManager::register(new GraphQLAPIExtension(
+    // Create and set-up the extension instance
+    if ($extension = ExtensionManager::register(new GraphQLAPIExtension(
         __FILE__,
         '0.8.0',
         \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo')
-    ))?->setup();
+    ))) {
+        $extension->setup();
+    }
 });
