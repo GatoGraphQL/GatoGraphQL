@@ -59,6 +59,34 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
+     * Validate that the extension is not registered yet.
+     * If it is, print an error and return false
+     */
+    public static function assertNotRegistered(
+        string $extensionClass,
+        string $extensionVersion
+    ): bool
+    {
+        /**
+         * Validate it hasn't been registered yet, as to
+         * make sure this plugin is not duplicated.
+         */
+        if (isset(self::$extensionClassInstances[$extensionClass])) {
+            self::printAdminNoticeErrorMessage(
+                sprintf(
+                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    self::$extensionClassInstances[$extensionClass]->getConfig('name'),
+                    self::$extensionClassInstances[$extensionClass]->getConfig('version'),
+                    $extensionVersion,
+                )
+            );
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get the configuration for an extension
      *
      * @return array<string, mixed>
