@@ -9,9 +9,26 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 class ExtensionManager extends AbstractPluginManager
 {
     /**
+     * Have the extensions organized by their class
+     *
      * @var array<string, AbstractExtension>
      */
     private static array $extensionClassInstances = [];
+    
+    /**
+     * Have the extensions organized by their baseName
+     *
+     * @var array<string, AbstractExtension>
+     */
+    private static array $extensionBaseNameInstances = [];
+
+    /**
+     * @return array<string, AbstractExtension>
+     */
+    public static function getExtensions(): array
+    {
+        return self::$extensionBaseNameInstances;
+    }
 
     public static function register(AbstractExtension $extension): AbstractExtension
     {
@@ -34,6 +51,7 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         self::$extensionClassInstances[$extensionClass] = $extension;
+        self::$extensionBaseNameInstances[$extension->getPluginBaseName()] = $extension;
         return $extension;
     }
 
