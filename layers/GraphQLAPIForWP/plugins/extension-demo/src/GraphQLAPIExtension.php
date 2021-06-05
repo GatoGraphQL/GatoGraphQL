@@ -15,6 +15,14 @@ class GraphQLAPIExtension extends AbstractExtension
     public const NAMESPACE = __NAMESPACE__;
 
     /**
+     * Plugin name
+     */
+    protected function getPluginName(): ?string
+    {
+        return \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
+    }
+
+    /**
      * Add Component classes to be initialized
      *
      * @return string[] List of `Component` class to initialize
