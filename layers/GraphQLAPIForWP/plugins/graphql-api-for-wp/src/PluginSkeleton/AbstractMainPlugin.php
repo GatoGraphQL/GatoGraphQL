@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
@@ -121,15 +121,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 if (!\is_admin()) {
                     return;
                 }
+                $mainPluginVersion = (string) MainPluginManager::getConfigValue('version');
                 // If there is no version stored, it's the first screen after activating the plugin
-                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, PluginInfo::get('version'));
+                $storedVersion = \get_option(PluginOptions::PLUGIN_VERSION, $mainPluginVersion);
                 $isPluginJustActivated = $storedVersion === false;
-                $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== PluginInfo::get('version');
+                $isPluginJustUpdated = $storedVersion !== false && $storedVersion !== $mainPluginVersion;
                 if (!$isPluginJustActivated || !$isPluginJustUpdated) {
                     return;
                 }
                 // Update to the current version
-                \update_option(PluginOptions::PLUGIN_VERSION, PluginInfo::get('version'));
+                \update_option(PluginOptions::PLUGIN_VERSION, $mainPluginVersion);
                 // If new CPTs have rewrite rules, these must be flushed
                 \flush_rewrite_rules();
                 // Regenerate the timestamp, to generate the service container

@@ -16,8 +16,6 @@ GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 // Exit if accessed directly
@@ -48,21 +46,6 @@ if (!file_exists($autoloadFile)) {
 
 // Load Composer’s autoloader
 require_once($autoloadFile);
-
-// Initialize the Plugin information
-PluginInfo::init([
-    'version' => '0.8.0',
-    'file' => __FILE__,
-    'baseName' => plugin_basename(__FILE__),
-    'dir' => dirname(__FILE__),
-    'url' => plugin_dir_url(__FILE__),
-    /**
-     * Where to store the config cache,
-     * for both /service-containers and /config-via-symfony-cache
-     * (config persistent cache: component model configuration + schema)
-     */
-    'cache-dir' => PluginEnvironment::getCacheDir(),
-]);
 
 // Create and set-up the plugin instance
 MainPluginManager::register(new Plugin(__FILE__, '0.8.0'))->setup();

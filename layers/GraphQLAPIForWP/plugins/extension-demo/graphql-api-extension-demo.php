@@ -39,7 +39,6 @@ register_activation_hook(__FILE__, function (): void {
  * Create and set-up the extension
  */
 add_action('plugins_loaded', function (): void {
-
     /**
      * Validate the GraphQL API plugin is active
      */
