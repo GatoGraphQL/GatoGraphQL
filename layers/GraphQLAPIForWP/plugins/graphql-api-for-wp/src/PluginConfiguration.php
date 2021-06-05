@@ -19,7 +19,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleRes
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -683,10 +683,11 @@ class PluginConfiguration
         if (is_null(self::$containerCacheConfigurationCache)) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
+            $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
             if ($cacheContainerConfiguration = PluginEnvironment::isCachingEnabled()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
-                $containerConfigurationCacheDirectory = PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'service-containers';
+                $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
             }
             self::$containerCacheConfigurationCache = [
                 $cacheContainerConfiguration,
@@ -719,6 +720,7 @@ class PluginConfiguration
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
 
         /**
          * Enable the schema entity registries, as to retrieve the type/directive resolver classes
@@ -728,7 +730,7 @@ class PluginConfiguration
             ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
-            \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => PluginInfo::get('url') . 'vendor/graphql-by-pop/graphql-clients-for-wp',
+            \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
         $componentClassConfiguration[\PoP\APIEndpointsForWP\Component::class] = [
             // Disable the Native endpoint

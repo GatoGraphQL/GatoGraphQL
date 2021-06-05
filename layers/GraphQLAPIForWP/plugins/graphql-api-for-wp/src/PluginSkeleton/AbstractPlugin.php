@@ -11,18 +11,99 @@ use PoP\Engine\AppLoader;
 
 abstract class AbstractPlugin
 {
+    /**
+     * @var array<string, mixed>|null
+     */
+    private ?array $config = null;
+
+    protected string $pluginBaseName;
+    protected string $pluginName;
+
     final public function __construct(
         /** The main plugin file */
-        protected string $pluginFile
+        protected string $pluginFile,
+        protected string $pluginVersion,
+        ?string $pluginName = null,
     ) {
+        $this->pluginBaseName = \plugin_basename($pluginFile);
+        $this->pluginName = $pluginName ?? $this->pluginBaseName;
+    }
+
+    /**
+     * Plugin name
+     */
+    public function getPluginName(): string
+    {
+        return $this->pluginName;
+    }
+
+    /**
+     * Plugin base name
+     */
+    public function getPluginBaseName(): string
+    {
+        return $this->pluginBaseName;
     }
 
     /**
      * Plugin main file
      */
-    protected function getPluginFile(): string
+    public function getPluginFile(): string
     {
         return $this->pluginFile;
+    }
+
+    /**
+     * Plugin version
+     */
+    public function getPluginVersion(): string
+    {
+        return $this->pluginVersion;
+    }
+
+    /**
+     * Get the plugin's immutable configuration values
+     *
+     * @return array<string, mixed>
+     */
+    final public function getFullConfiguration(): array
+    {
+        if ($this->config === null) {
+            $this->config = array_merge(
+                // These configuration values are mandatory
+                [
+                    'version' => $this->pluginVersion,
+                    'file' => $this->pluginFile,
+                    'baseName' => $this->pluginBaseName,
+                    'name' => $this->pluginName,
+                ],
+                // These are custom configuration values
+                $this->doGetFullConfiguration()
+            );
+        }
+        return $this->config;
+    }
+
+    /**
+     * Get a plugin's immutable configuration value
+     */
+    final public function getConfig(string $key): mixed
+    {
+        $config = $this->getFullConfiguration();
+        return $config[$key];
+    }
+    
+    /**
+     * Get the plugin's immutable configuration values
+     *
+     * @return array<string, mixed>
+     */
+    protected function doGetFullConfiguration(): array
+    {
+        return [
+            'dir' => dirname($this->pluginFile),
+            'url' => plugin_dir_url($this->pluginFile),
+        ];
     }
 
     /**
@@ -164,13 +245,11 @@ abstract class AbstractPlugin
     }
 
     /**
-     * The PSR-4 namespace, with format "vendor\project"
+     * The PSR-4 namespace, with format "Vendor\Project"
      */
     public function getPluginNamespace(): string
     {
-        $class = get_called_class();
-        $parts = explode('\\', $class);
-        return $parts[0] . '\\' . $parts[1];
+        return PluginHelpers::getClassPSR4Namespace(get_called_class());
     }
 
     /**
@@ -202,8 +281,34 @@ abstract class AbstractPlugin
      */
     public function deactivate(): void
     {
+        $this->removePluginVersion();
+
         $this->unregisterPluginCustomPostTypes();
 
         $this->regenerateTimestamp();
+    }
+
+    /**
+     * Remove the plugin or extension's version from the wp_options table
+     */
+    private function removePluginVersion(): void
+    {
+        $pluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        unset($pluginVersions[$this->pluginBaseName]);
+        \update_option(PluginOptions::PLUGIN_VERSIONS, $pluginVersions);
+    }
+
+    /**
+     * Execute logic after the plugin/extension has just been activated
+     */
+    protected function pluginJustActivated(): void
+    {
+    }
+
+    /**
+     * Execute logic after the plugin/extension has just been updated
+     */
+    protected function pluginJustUpdated(string $storedVersion): void
+    {
     }
 }

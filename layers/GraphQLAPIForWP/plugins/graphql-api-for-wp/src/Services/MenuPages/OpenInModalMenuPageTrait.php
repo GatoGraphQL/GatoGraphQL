@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
  * Menu page that opens in modal window
@@ -16,23 +16,26 @@ trait OpenInModalMenuPageTrait
      */
     protected function enqueueModalAssets(): void
     {
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        
         /**
          * Hide the menus
          */
         \wp_enqueue_style(
             'graphql-api-hide-admin-bar',
-            PluginInfo::get('url') . 'assets/css/hide-admin-bar.css',
+            $mainPluginURL . 'assets/css/hide-admin-bar.css',
             array(),
-            PluginInfo::get('version')
+            $mainPluginVersion
         );
         /**
          * Styles for content within the modal window
          */
         \wp_enqueue_style(
             'graphql-api-modal-window-content',
-            PluginInfo::get('url') . 'assets/css/modal-window-content.css',
+            $mainPluginURL . 'assets/css/modal-window-content.css',
             array(),
-            PluginInfo::get('version')
+            $mainPluginVersion
         );
     }
 }

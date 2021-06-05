@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\GraphiQLExplorerInAdminClient\Overrides\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -55,6 +55,9 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
             'queryDecodeURIComponent' => true,
         );
 
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+
         // Print the HTML from the Client
         $htmlContent = $this->getGraphiQLWithExplorerClientHTML();
         // Extract the JS/CSS assets, from either the <head> or the <head>
@@ -66,7 +69,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
                 'graphql-api-graphiql-with-explorer-' . $index,
                 $cssFileURL,
                 array(),
-                PluginInfo::get('version')
+                $mainPluginVersion
             );
         }
         preg_match_all('/<script[^>]+src="([^">]+)"/s', $htmlContent, $matches);
@@ -76,7 +79,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
                 'graphql-api-graphiql-with-explorer-' . $index,
                 $jsFileURL,
                 array(),
-                PluginInfo::get('version'),
+                $mainPluginVersion,
                 true
             );
         }
@@ -84,9 +87,9 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         // Override styles for the admin, so load last
         \wp_enqueue_style(
             'graphql-api-graphiql-with-explorer-client',
-            PluginInfo::get('url') . 'assets/css/graphiql-with-explorer-client.css',
+            $mainPluginURL . 'assets/css/graphiql-with-explorer-client.css',
             array(),
-            PluginInfo::get('version')
+            $mainPluginVersion
         );
 
         // Load data into the script. Because no script is enqueued since it is

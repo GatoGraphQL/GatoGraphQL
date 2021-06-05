@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
  * GraphiQL page
@@ -45,11 +45,14 @@ class GraphiQLMenuPage extends AbstractMenuPage
      */
     protected function enqueueGraphiQLClientAssets(): void
     {
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        
         \wp_enqueue_style(
             'graphql-api-graphiql-client',
-            PluginInfo::get('url') . 'assets/css/graphiql-client.css',
+            $mainPluginURL . 'assets/css/graphiql-client.css',
             array(),
-            PluginInfo::get('version')
+            $mainPluginVersion
         );
     }
 
@@ -63,12 +66,15 @@ class GraphiQLMenuPage extends AbstractMenuPage
             'nonce' => \wp_create_nonce('wp_rest'),
             'response' => $this->getResponse(),
         );
+        
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
 
         \wp_enqueue_style(
             'graphql-api-graphiql',
-            PluginInfo::get('url') . 'assets/css/vendors/graphiql.min.css',
+            $mainPluginURL . 'assets/css/vendors/graphiql.min.css',
             array(),
-            PluginInfo::get('version')
+            $mainPluginVersion
         );
 
         // JS: execute them all in the footer
@@ -76,16 +82,16 @@ class GraphiQLMenuPage extends AbstractMenuPage
 
         \wp_enqueue_script(
             'graphql-api-graphiql',
-            PluginInfo::get('url') . 'assets/js/vendors/graphiql.min.js',
+            $mainPluginURL . 'assets/js/vendors/graphiql.min.js',
             array('graphql-api-react-dom'),
-            PluginInfo::get('version'),
+            $mainPluginVersion,
             true
         );
         \wp_enqueue_script(
             'graphql-api-graphiql-client',
-            PluginInfo::get('url') . 'assets/js/graphiql-client.js',
+            $mainPluginURL . 'assets/js/graphiql-client.js',
             array('graphql-api-graphiql'),
-            PluginInfo::get('version'),
+            $mainPluginVersion,
             true
         );
 

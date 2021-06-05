@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache;
 
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
@@ -29,8 +29,9 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
      */
     public function getNamespace(): string
     {
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
         // (Needed for development) Don't share cache among plugin versions
-        $timestamp = '_v' . PluginInfo::get('version');
+        $timestamp = '_v' . $mainPluginVersion;
         // The timestamp from when last saving settings/modules to the DB
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $timestamp .= '_' . $userSettingsManager->getTimestamp();
@@ -49,6 +50,7 @@ class CacheConfigurationManager implements CacheConfigurationManagerInterface
      */
     public function getDirectory(): ?string
     {
-        return PluginInfo::get('cache-dir') . \DIRECTORY_SEPARATOR . 'config-via-symfony-cache';
+        $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
+        return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'config-via-symfony-cache';
     }
 }

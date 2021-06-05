@@ -16,8 +16,7 @@ GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -25,44 +24,34 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Make sure this plugin is not duplicated.
- * For instance, if zip file already exists in Downloads folder, then
- * the newly downloaded file will be renamed (eg: graphql-api(2).zip)
- * and the plugin will exist twice, as graphql-api/... and graphql-api2/...
+ * Load translations
  */
-if (class_exists(PluginInfo::class)) {
-    \add_action('admin_notices', function () {
+add_action('init', function (): void {
+    load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
+});
+
+$pluginVersion = '0.8.0';
+$pluginName = __('GraphQL API for WordPress', 'graphql-api');
+
+/**
+ * If the plugin is already registered, print an error and halt loading
+ */
+if (class_exists(Plugin::class) && !MainPluginManager::assertNotRegistered($pluginVersion)) {
+    return;
+}
+
+// Check Composer's autoload has been generated
+$autoloadFile = __DIR__ . '/vendor/autoload.php';
+if (!file_exists($autoloadFile)) {
+    add_action('admin_notices', function () use ($pluginName) {
         _e(sprintf(
             '<div class="notice notice-error">' .
                 '<p>%s</p>' .
             '</div>',
             sprintf(
-                __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                __('GraphQL API for WordPress', 'graphql-api'),
-                PluginInfo::get('version'),
-                '0.8.0'
+                __('Dependencies for <strong>%s</strong> are missing. Please install them by running <code>composer install</code> on the plugin\'s root folder. Until then, the plugin will be disabled.', 'graphql-api'),
+                $pluginName
             )
-        ));
-    });
-    return;
-}
-
-/**
- * Load translations
- */
-\add_action('init', function (): void {
-    load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
-});
-
-// Check Composer's autoload has been generated
-$autoloadFile = __DIR__ . '/vendor/autoload.php';
-if (!file_exists($autoloadFile)) {
-    \add_action('admin_notices', function () {
-        _e(sprintf(
-            '<div class="notice notice-error">' .
-                '<p>%s</p>' .
-            '</div>',
-            __('Dependencies for <strong>GraphQL API for WordPress</strong> are missing. Please install them by running <code>composer install</code> on the plugin\'s root folder. Until then, the plugin will be disabled.', 'graphql-api')
         ));
     });
     return;
@@ -71,21 +60,9 @@ if (!file_exists($autoloadFile)) {
 // Load Composer’s autoloader
 require_once($autoloadFile);
 
-// Initialize the Plugin information
-PluginInfo::init([
-    'version' => '0.8.0',
-    'file' => __FILE__,
-    'baseName' => plugin_basename(__FILE__),
-    'slug' => 'graphql-api',
-    'dir' => dirname(__FILE__),
-    'url' => plugin_dir_url(__FILE__),
-    /**
-     * Where to store the config cache,
-     * for both /service-containers and /config-via-symfony-cache
-     * (config persistent cache: component model configuration + schema)
-     */
-    'cache-dir' => PluginEnvironment::getCacheDir(),
-]);
-
 // Create and set-up the plugin instance
-(new Plugin(__FILE__))->setup();
+MainPluginManager::register(new Plugin(
+    __FILE__,
+    $pluginVersion,
+    $pluginName
+))->setup();

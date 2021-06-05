@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
 
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
 
 /**
  * Module Table
@@ -533,14 +533,17 @@ class ModuleListTable extends AbstractItemListTable
     {
         parent::enqueueAssets();
 
+        $mainPluginURL = (string) MainPluginManager::getConfig('url');
+        $mainPluginVersion = (string) MainPluginManager::getConfig('version');
+        
         /**
          * Fix the issues with the WP List Table
          */
         \wp_enqueue_style(
             'graphql-api-module-list-table',
-            PluginInfo::get('url') . 'assets/css/module-list-table.css',
+            $mainPluginURL . 'assets/css/module-list-table.css',
             array(),
-            PluginInfo::get('version')
+            $mainPluginVersion
         );
     }
 

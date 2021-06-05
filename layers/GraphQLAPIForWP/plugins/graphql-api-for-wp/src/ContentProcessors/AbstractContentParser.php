@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleUtils;
 use InvalidArgumentException;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -39,7 +39,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseDir(?string $baseDir = null): void
     {
-        $this->baseDir = $baseDir ?? PluginInfo::get('dir');
+        $this->baseDir = $baseDir ?? (string) MainPluginManager::getConfig('dir');
     }
 
     /**
@@ -48,7 +48,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseURL(?string $baseURL = null): void
     {
-        $this->baseURL = $baseURL ?? PluginInfo::get('url');
+        $this->baseURL = $baseURL ?? (string) MainPluginManager::getConfig('url');
     }
 
     /**

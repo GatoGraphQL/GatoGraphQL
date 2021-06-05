@@ -16,7 +16,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  * To attain the needed order, we execute them using hook "plugins_loaded":
  *
  * 1. GraphQL API => setup(): immediately (not on "plugins_loaded")
- * 2. System => handleNewActivations(): priority 0
+ * 2. System => handleNewActivations(): priority 90 (before container is to be created)
  * 3. GraphQL API extensions => setup(): priority 100
  * 4. GraphQL API => initialize(): priority 110
  * 5. GraphQL API extensions => initialize(): priority 120
@@ -26,10 +26,11 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  * 9. GraphQL API => bootApplication(): priority 160
  * 10. GraphQL API => boot(): priority 170
  * 11. GraphQL API extensions => boot(): priority 180
+ * 12. After everything: priority 190
  */
 class PluginLifecyclePriorities
 {
-    public const HANDLE_NEW_ACTIVATIONS = 0;
+    public const HANDLE_NEW_ACTIVATIONS = 90;
     public const SETUP_EXTENSIONS = 100;
     public const INITIALIZE_PLUGIN = 110;
     public const INITIALIZE_EXTENSIONS = 120;
@@ -39,4 +40,5 @@ class PluginLifecyclePriorities
     public const BOOT_APPLICATION = 160;
     public const BOOT_PLUGIN = 170;
     public const BOOT_EXTENSIONS = 180;
+    public const AFTER_EVERYTHING = 190;
 }

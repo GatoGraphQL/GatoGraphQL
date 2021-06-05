@@ -10,16 +10,11 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
-use GraphQLAPI\GraphQLAPI\PluginInfo;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\AppLoader;
@@ -36,6 +31,8 @@ class Plugin extends AbstractMainPlugin
      */
     protected function pluginJustUpdated(string $storedVersion): void
     {
+        parent::pluginJustUpdated($storedVersion);
+        
         // Do not execute when doing Ajax, since we can't show the one-time
         // admin notice to the user then
         if (\wp_doing_ajax()) {
@@ -53,7 +50,7 @@ class Plugin extends AbstractMainPlugin
             return;
         }
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
-        $currentMinorReleaseVersion = $this->getMinorReleaseVersion(PluginInfo::get('version'));
+        $currentMinorReleaseVersion = $this->getMinorReleaseVersion($this->pluginVersion);
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
         if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
             return;
@@ -89,7 +86,7 @@ class Plugin extends AbstractMainPlugin
             $aboutMenuPage = $instanceManager->getInstance(AboutMenuPage::class);
             // Calculate the minor release version.
             // Eg: if current version is 0.6.3, minor version is 0.6
-            $minorReleaseVersion = $this->getMinorReleaseVersion(PluginInfo::get('version'));
+            $minorReleaseVersion = $this->getMinorReleaseVersion($this->pluginVersion);
             $releaseNotesURL = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true',
                 $aboutMenuPage->getScreenID(),
@@ -119,7 +116,7 @@ class Plugin extends AbstractMainPlugin
                 '</div>',
                 sprintf(
                     __('Plugin <strong>GraphQL API for WordPress</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'graphql-api'),
-                    PluginInfo::get('version'),
+                    $this->pluginVersion,
                     $releaseNotesURL,
                     'thickbox open-plugin-details-modal',
                     $generalSettingsURL
