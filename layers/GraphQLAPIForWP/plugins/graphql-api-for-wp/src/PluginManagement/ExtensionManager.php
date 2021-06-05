@@ -44,7 +44,7 @@ class ExtensionManager extends AbstractPluginManager
         if (isset(self::$extensionClassInstances[$extensionClass])) {
             self::printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
                     $extension->getConfig('name'),
                     self::$extensionClassInstances[$extensionClass]->getConfig('version'),
                     $extension->getConfig('version'),
