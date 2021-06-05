@@ -93,7 +93,7 @@ abstract class AbstractPlugin
         return [
             'version' => $this->pluginVersion,
             'file' => $this->pluginFile,
-            'baseName' => plugin_basename($this->pluginFile),
+            'baseName' => $this->pluginBaseName,
             'name' => $this->getPluginName(),
             'dir' => dirname($this->pluginFile),
             'url' => plugin_dir_url($this->pluginFile),
