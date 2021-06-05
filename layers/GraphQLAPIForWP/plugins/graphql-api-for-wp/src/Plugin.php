@@ -31,6 +31,8 @@ class Plugin extends AbstractMainPlugin
      */
     protected function pluginJustUpdated(string $storedVersion): void
     {
+        parent::pluginJustUpdated($storedVersion);
+        
         // Do not execute when doing Ajax, since we can't show the one-time
         // admin notice to the user then
         if (\wp_doing_ajax()) {

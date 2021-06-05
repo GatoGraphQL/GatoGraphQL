@@ -299,4 +299,18 @@ abstract class AbstractPlugin
         unset($pluginVersions[$this->pluginBaseName]);
         \update_option(PluginOptions::PLUGIN_VERSIONS, $pluginVersions);
     }
+
+    /**
+     * Execute logic after the plugin/extension has just been activated
+     */
+    protected function pluginJustActivated(): void
+    {
+    }
+
+    /**
+     * Execute logic after the plugin/extension has just been updated
+     */
+    protected function pluginJustUpdated(string $storedVersion): void
+    {
+    }
 }
