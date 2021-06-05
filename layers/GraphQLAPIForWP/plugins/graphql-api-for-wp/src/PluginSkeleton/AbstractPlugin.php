@@ -16,6 +16,7 @@ abstract class AbstractPlugin
      */
     private ?array $config = null;
 
+    protected string $pluginBaseName;
     protected string $pluginName;
 
     final public function __construct(
@@ -24,7 +25,8 @@ abstract class AbstractPlugin
         protected string $pluginVersion,
         ?string $pluginName = null,
     ) {
-        $this->pluginName = $pluginName ?? \plugin_basename($pluginFile);
+        $this->pluginBaseName = \plugin_basename($pluginFile);
+        $this->pluginName = $pluginName ?? $this->pluginBaseName;
     }
 
     /**
@@ -33,6 +35,14 @@ abstract class AbstractPlugin
     protected function getPluginName(): string
     {
         return $this->pluginName;
+    }
+
+    /**
+     * Plugin base name
+     */
+    protected function getPluginBaseName(): string
+    {
+        return $this->pluginBaseName;
     }
 
     /**
