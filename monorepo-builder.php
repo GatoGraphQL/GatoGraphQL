@@ -48,7 +48,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
             'zip_file' => 'graphql-api.zip',
             'main_file' => 'graphql-api.php',
-            'exclude_files' => 'dev-helpers/\* lando/\* docs/images/\*',
+            'exclude_files' => 'dev-helpers/\* docs/images/\*',
             'dist_repo_organization' => 'GraphQLAPI',
             'dist_repo_name' => 'graphql-api-for-wp-dist',
             'additional_rector_configs' => [

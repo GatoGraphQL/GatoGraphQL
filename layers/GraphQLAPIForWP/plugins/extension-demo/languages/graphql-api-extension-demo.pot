@@ -1,4 +1,4 @@
-# Copyright (C) 2020 GraphQL API - Extension Demo
+# Copyright (C) 2021 GraphQL API - Extension Demo
 # This file is distributed under the same license as the GraphQL API - Extension Demo package.
 #, fuzzy
 msgid ""
