@@ -39,6 +39,28 @@ class MainPluginManager extends AbstractPluginManager
     }
 
     /**
+     * Validate that the plugin is not registered yet.
+     * If it is, print an error and return false
+     */
+    public static function assertNotRegistered(
+        string $pluginVersion
+    ): bool {
+        if (self::$mainPlugin !== null) {
+            self::printAdminNoticeErrorMessage(
+                sprintf(
+                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    self::$mainPlugin->getConfig('name'),
+                    self::$mainPlugin->getConfig('version'),
+                    $pluginVersion,
+                )
+            );
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get the configuration for the main plugin
      *
      * @return array<string, mixed>

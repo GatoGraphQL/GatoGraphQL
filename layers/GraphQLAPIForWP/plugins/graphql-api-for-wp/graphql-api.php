@@ -26,19 +26,32 @@ if (!defined('ABSPATH')) {
 /**
  * Load translations
  */
-\add_action('init', function (): void {
+add_action('init', function (): void {
     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
 });
+
+$pluginVersion = '0.8.0';
+$pluginName = __('GraphQL API for WordPress', 'graphql-api');
+
+/**
+ * If the plugin is already registered, print an error and halt loading
+ */
+if (class_exists(Plugin::class) && !MainPluginManager::assertNotRegistered($pluginVersion)) {
+    return;
+}
 
 // Check Composer's autoload has been generated
 $autoloadFile = __DIR__ . '/vendor/autoload.php';
 if (!file_exists($autoloadFile)) {
-    \add_action('admin_notices', function () {
+    add_action('admin_notices', function () use ($pluginName) {
         _e(sprintf(
             '<div class="notice notice-error">' .
                 '<p>%s</p>' .
             '</div>',
-            __('Dependencies for <strong>GraphQL API for WordPress</strong> are missing. Please install them by running <code>composer install</code> on the plugin\'s root folder. Until then, the plugin will be disabled.', 'graphql-api')
+            sprintf(
+                __('Dependencies for <strong>%s</strong> are missing. Please install them by running <code>composer install</code> on the plugin\'s root folder. Until then, the plugin will be disabled.', 'graphql-api'),
+                $pluginName
+            )
         ));
     });
     return;
@@ -50,8 +63,8 @@ require_once($autoloadFile);
 // Create and set-up the plugin instance
 if ($plugin = MainPluginManager::register(new Plugin(
     __FILE__,
-    '0.8.0',
-    \__('GraphQL API for WordPress', 'graphql-api')
+    $pluginVersion,
+    $pluginName
 ))) {
     $plugin->setup();
 }
