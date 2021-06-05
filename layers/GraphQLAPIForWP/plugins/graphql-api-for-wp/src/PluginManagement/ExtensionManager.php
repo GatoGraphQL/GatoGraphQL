@@ -15,7 +15,25 @@ class ExtensionManager extends AbstractPluginManager
 
     public static function register(AbstractExtension $extension): AbstractExtension
     {
-        self::$extensionClassInstances[get_class($extension)] = $extension;
+        $extensionClass = get_class($extension);
+
+        /**
+         * Validate it hasn't been registered yet, as to
+         * make sure this plugin is not duplicated.
+         */
+        if (isset(self::$extensionClassInstances[$extensionClass])) {
+            self::printAdminNoticeErrorMessage(
+                sprintf(
+                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    $extension->getConfigValue('name'),
+                    self::$extensionClassInstances[$extensionClass]->getConfigValue('version'),
+                    $extension->getConfigValue('version'),
+                )
+            );
+            return self::$extensionClassInstances[$extensionClass];
+        }
+
+        self::$extensionClassInstances[$extensionClass] = $extension;
         return $extension;
     }
 
