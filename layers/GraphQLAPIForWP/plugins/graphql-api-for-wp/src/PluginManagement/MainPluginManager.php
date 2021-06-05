@@ -13,27 +13,8 @@ class MainPluginManager extends AbstractPluginManager
     /**
      * If the plugin is already registered, return null
      */
-    public static function register(AbstractMainPlugin $mainPlugin): ?AbstractMainPlugin
+    public static function register(AbstractMainPlugin $mainPlugin): AbstractMainPlugin
     {
-        /**
-         * Validate it hasn't been registered yet, as to
-         * make sure this plugin is not duplicated.
-         * For instance, if zip file already exists in Downloads folder, then
-         * the newly downloaded file will be renamed (eg: graphql-api(2).zip)
-         * and the plugin will exist twice, as graphql-api/... and graphql-api2/...
-         */
-        if (self::$mainPlugin !== null) {
-            self::printAdminNoticeErrorMessage(
-                sprintf(
-                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    $mainPlugin->getConfig('name'),
-                    self::$mainPlugin->getConfig('version'),
-                    $mainPlugin->getConfig('version'),
-                )
-            );
-            return null;
-        }
-
         self::$mainPlugin = $mainPlugin;
         return $mainPlugin;
     }

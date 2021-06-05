@@ -61,10 +61,8 @@ if (!file_exists($autoloadFile)) {
 require_once($autoloadFile);
 
 // Create and set-up the plugin instance
-if ($plugin = MainPluginManager::register(new Plugin(
+MainPluginManager::register(new Plugin(
     __FILE__,
     $pluginVersion,
     $pluginName
-))) {
-    $plugin->setup();
-}
+))->setup();
