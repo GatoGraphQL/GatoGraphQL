@@ -24,6 +24,14 @@ abstract class AbstractPlugin
     }
 
     /**
+     * Plugin name
+     */
+    protected function getPluginName(): ?string
+    {
+        return null;
+    }
+
+    /**
      * Plugin main file
      */
     protected function getPluginFile(): string
@@ -68,10 +76,12 @@ abstract class AbstractPlugin
      */
     protected function doGetConfig(): array
     {
+        $baseName = plugin_basename($this->pluginFile);
         return [
             'version' => $this->pluginVersion,
             'file' => $this->pluginFile,
-            'baseName' => plugin_basename($this->pluginFile),
+            'baseName' => $baseName,
+            'name' => $this->getPluginName() ?? $baseName,
             'dir' => dirname($this->pluginFile),
             'url' => plugin_dir_url($this->pluginFile),
         ];
