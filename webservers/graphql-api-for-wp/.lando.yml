@@ -243,4 +243,5 @@ services:
         wp import assets/graphql-api-sample-data.xml --authors=create
         --path=wordpress
 env_file:
-  - ../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/lando/defaults.env
+  - defaults.env
+  - defaults.local.env
