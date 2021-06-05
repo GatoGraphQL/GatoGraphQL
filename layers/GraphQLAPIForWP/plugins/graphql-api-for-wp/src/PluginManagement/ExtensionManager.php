@@ -65,12 +65,7 @@ class ExtensionManager extends AbstractPluginManager
     public static function assertNotRegistered(
         string $extensionClass,
         string $extensionVersion
-    ): bool
-    {
-        /**
-         * Validate it hasn't been registered yet, as to
-         * make sure this plugin is not duplicated.
-         */
+    ): bool {
         if (isset(self::$extensionClassInstances[$extensionClass])) {
             self::printAdminNoticeErrorMessage(
                 sprintf(
