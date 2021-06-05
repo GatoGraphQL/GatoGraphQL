@@ -283,11 +283,20 @@ abstract class AbstractPlugin
      */
     public function deactivate(): void
     {
-        // Remove the plugin's version
-        \update_option(PluginOptions::PLUGIN_VERSIONS, false);
+        $this->removePluginVersion();
 
         $this->unregisterPluginCustomPostTypes();
 
         $this->regenerateTimestamp();
+    }
+
+    /**
+     * Remove the plugin or extension's version from the wp_options table
+     */
+    private function removePluginVersion(): void
+    {
+        $pluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        unset($pluginVersions[$this->pluginBaseName]);
+        \update_option(PluginOptions::PLUGIN_VERSIONS, $pluginVersions);
     }
 }
