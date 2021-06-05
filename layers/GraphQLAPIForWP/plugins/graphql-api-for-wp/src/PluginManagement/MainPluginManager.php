@@ -36,23 +36,13 @@ class MainPluginManager extends AbstractPluginManager
     }
 
     /**
-     * Get the configuration for the main plugin
-     *
-     * @return array<string, mixed>
-     */
-    public static function getConfig(): array
-    {
-        return self::$mainPlugin->getConfig();
-    }
-
-    /**
      * Get a configuration value for the main plugin
      *
      * @return array<string, mixed>
      */
     public static function getConfigValue(string $key): mixed
     {
-        $mainPluginConfig = self::getConfig();
+        $mainPluginConfig = self::$mainPlugin->getConfig();
         return $mainPluginConfig[$key];
     }
 }

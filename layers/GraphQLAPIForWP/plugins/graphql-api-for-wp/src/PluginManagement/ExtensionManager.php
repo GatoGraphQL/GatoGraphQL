@@ -38,24 +38,14 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * Get the configuration for an extension
-     *
-     * @return array<string, mixed>
-     */
-    public static function getConfig(string $extensionClass): array
-    {
-        $extensionInstance = self::$extensionClassInstances[$extensionClass];
-        return $extensionInstance->getConfig();
-    }
-
-    /**
      * Get a configuration value for an extension
      *
      * @return array<string, mixed>
      */
     public static function getConfigValue(string $extensionClass, string $key): mixed
     {
-        $extensionConfig = self::getConfig($extensionClass);
+        $extensionInstance = self::$extensionClassInstances[$extensionClass];
+        $extensionConfig = $extensionInstance->getConfig();
         return $extensionConfig[$key];
     }
 }
