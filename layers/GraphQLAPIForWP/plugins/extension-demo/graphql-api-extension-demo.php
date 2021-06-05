@@ -29,15 +29,16 @@ register_activation_hook(__FILE__, function (): void {
 });
 
 /**
+ * Load translations
+ */
+\add_action('init', function (): void {
+    load_plugin_textdomain('graphql-api-extension-demo', false, plugin_basename(__FILE__) . '/languages');
+});
+
+/**
  * Create and set-up the extension
  */
 add_action('plugins_loaded', function (): void {
-    /**
-     * Load translations
-     */
-    \add_action('init', function (): void {
-        load_plugin_textdomain('graphql-api-extension-demo', false, plugin_basename(__FILE__) . '/languages');
-    });
 
     /**
      * Validate the GraphQL API plugin is active
