@@ -23,7 +23,7 @@ class MainPluginManager extends AbstractPluginManager
             self::printAdminNoticeErrorMessage(
                 sprintf(
                     __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                    __('GraphQL API for WordPress', 'graphql-api'),
+                    self::$mainPlugin->getConfigValue('name'),
                     self::$mainPlugin->getConfigValue('version'),
                     $mainPlugin->getConfigValue('version'),
                 )
