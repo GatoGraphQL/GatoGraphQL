@@ -23,10 +23,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-register_activation_hook(__FILE__, function (): void {
-    \update_option('graphql-api-extension', true);
-});
-
 /**
  * Load translations
  */

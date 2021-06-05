@@ -145,32 +145,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
-
-        /**
-         * Logic to check if an extension has just been activated.
-         */
-        \add_action(
-            'plugins_loaded',
-            function (): void {
-                if (!\is_admin()) {
-                    return;
-                }
-                // If the flag is true, it's the first screen after activating an extension
-                $justActivatedExtension = \get_option(PluginOptions::ACTIVATED_EXTENSION);
-                if (!$justActivatedExtension) {
-                    return;
-                }
-                // Remove the entry
-                \delete_option(PluginOptions::ACTIVATED_EXTENSION);
-                // If new CPTs have rewrite rules, these must be flushed
-                \flush_rewrite_rules();
-                // Regenerate the timestamp, to generate the service container
-                $this->regenerateTimestamp();
-                // Implement custom additional functionality
-                $this->extensionJustActivated();
-            },
-            PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
-        );
     }
 
     /**
