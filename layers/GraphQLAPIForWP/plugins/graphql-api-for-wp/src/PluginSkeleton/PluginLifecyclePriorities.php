@@ -26,6 +26,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  * 9. GraphQL API => bootApplication(): priority 160
  * 10. GraphQL API => boot(): priority 170
  * 11. GraphQL API extensions => boot(): priority 180
+ * 12. After everything: priority 190
  */
 class PluginLifecyclePriorities
 {
@@ -39,4 +40,5 @@ class PluginLifecyclePriorities
     public const BOOT_APPLICATION = 160;
     public const BOOT_PLUGIN = 170;
     public const BOOT_EXTENSIONS = 180;
+    public const AFTER_EVERYTHING = 190;
 }

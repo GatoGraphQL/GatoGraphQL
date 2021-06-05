@@ -157,17 +157,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 }
             
                 // Enable to implement custom additional functionality (eg: show admin notice with changelog)
-                if ($isMainPluginJustActivated) {
-                    $this->pluginJustActivated();
-                } elseif ($isMainPluginJustUpdated) {
-                    $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName]);
-                }
-                foreach ($justActivatedExtensions as $extensionBaseName => $extensionInstance) {
-                    $extensionInstance->pluginJustActivated();
-                }
-                foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
-                    $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName]);
-                }
+                // Watch out! Execute at the very end, just in case they need to access the service container,
+                // which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
+                \add_action(
+                    'plugins_loaded',
+                    function () use (
+                        $isMainPluginJustActivated,
+                        $isMainPluginJustUpdated,
+                        $storedPluginVersions,
+                        $justActivatedExtensions,
+                        $justUpdatedExtensions,
+                    ): void {
+                        if ($isMainPluginJustActivated) {
+                            $this->pluginJustActivated();
+                        } elseif ($isMainPluginJustUpdated) {
+                            $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName]);
+                        }
+                        foreach ($justActivatedExtensions as $extensionBaseName => $extensionInstance) {
+                            $extensionInstance->pluginJustActivated();
+                        }
+                        foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
+                            $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName]);
+                        }
+                    },
+                    PluginLifecyclePriorities::AFTER_EVERYTHING
+                );
 
                 // Recalculate the updated entry and update on the DB
                 $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
