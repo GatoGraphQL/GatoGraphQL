@@ -13,8 +13,9 @@ class ExtensionManager
      */
     private static array $extensionClassInstances = [];
 
-    public static function register(AbstractExtension $extension): void
+    public static function register(AbstractExtension $extension): AbstractExtension
     {
         self::$extensionClassInstances[get_class($extension)] = $extension;
+        return $extension;
     }
 }
