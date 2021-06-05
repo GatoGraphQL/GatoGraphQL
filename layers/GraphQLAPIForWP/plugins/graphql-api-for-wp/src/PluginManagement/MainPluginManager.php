@@ -40,9 +40,9 @@ class MainPluginManager extends AbstractPluginManager
      *
      * @return array<string, mixed>
      */
-    public static function getConfig(): array
+    public static function getFullConfiguration(): array
     {
-        return self::$mainPlugin->getConfig();
+        return self::$mainPlugin->getFullConfiguration();
     }
 
     /**
@@ -52,7 +52,7 @@ class MainPluginManager extends AbstractPluginManager
      */
     public static function getConfigValue(string $key): mixed
     {
-        $mainPluginConfig = self::getConfig();
+        $mainPluginConfig = self::getFullConfiguration();
         return $mainPluginConfig[$key];
     }
 }

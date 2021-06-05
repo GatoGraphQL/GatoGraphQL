@@ -52,7 +52,7 @@ abstract class AbstractPlugin
      *
      * @return array<string, mixed>
      */
-    final public function getConfig(): array
+    final public function getFullConfiguration(): array
     {
         if ($this->config === null) {
             $this->config = $this->doGetConfig();
@@ -65,7 +65,7 @@ abstract class AbstractPlugin
      */
     final public function getConfigValue(string $key): mixed
     {
-        $config = $this->getConfig();
+        $config = $this->getFullConfiguration();
         return $config[$key];
     }
     
