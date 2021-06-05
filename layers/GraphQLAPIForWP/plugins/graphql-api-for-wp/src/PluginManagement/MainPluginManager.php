@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 
-class MainPluginManager
+class MainPluginManager extends AbstractMainPluginManager
 {
     private static ?AbstractMainPlugin $mainPlugin = null;
 
@@ -20,19 +20,14 @@ class MainPluginManager
          * and the plugin will exist twice, as graphql-api/... and graphql-api2/...
          */
         if (self::$mainPlugin !== null) {
-            \add_action('admin_notices', function () {
-                _e(sprintf(
-                    '<div class="notice notice-error">' .
-                        '<p>%s</p>' .
-                    '</div>',
-                    sprintf(
-                        __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
-                        __('GraphQL API for WordPress', 'graphql-api'),
-                        self::$mainPlugin->getConfigValue('version'),
-                        $mainPlugin->getConfigValue('version'),
-                    )
-                ));
-            });
+            self::printAdminNoticeErrorMessage(
+                sprintf(
+                    __('Plugin <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    __('GraphQL API for WordPress', 'graphql-api'),
+                    self::$mainPlugin->getConfigValue('version'),
+                    $mainPlugin->getConfigValue('version'),
+                )
+            );
             return self::$mainPlugin;
         }
 

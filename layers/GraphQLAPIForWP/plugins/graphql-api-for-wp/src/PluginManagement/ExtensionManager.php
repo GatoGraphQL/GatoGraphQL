@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
-class ExtensionManager
+class ExtensionManager extends AbstractMainPluginManager
 {
     /**
      * @var array<string, AbstractExtension>
