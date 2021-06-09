@@ -30,10 +30,7 @@ class ExtensionManager extends AbstractPluginManager
         return self::$extensionBaseNameInstances;
     }
 
-    /**
-     * If the extension is already registered, return null
-     */
-    public static function register(AbstractExtension $extension): ?AbstractExtension
+    public static function register(AbstractExtension $extension): AbstractExtension
     {
         $extensionClass = get_class($extension);
         self::$extensionClassInstances[$extensionClass] = $extension;

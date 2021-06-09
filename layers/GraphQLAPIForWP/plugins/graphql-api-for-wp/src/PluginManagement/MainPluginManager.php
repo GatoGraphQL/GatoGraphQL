@@ -10,9 +10,6 @@ class MainPluginManager extends AbstractPluginManager
 {
     private static ?AbstractMainPlugin $mainPlugin = null;
 
-    /**
-     * If the plugin is already registered, return null
-     */
     public static function register(AbstractMainPlugin $mainPlugin): AbstractMainPlugin
     {
         self::$mainPlugin = $mainPlugin;
