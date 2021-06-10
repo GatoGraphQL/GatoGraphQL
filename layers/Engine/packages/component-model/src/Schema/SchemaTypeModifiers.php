@@ -12,4 +12,5 @@ namespace PoP\ComponentModel\Schema;
 class SchemaTypeModifiers
 {
     public const NON_NULLABLE = 1;
+    public const IS_ARRAY = 2;
 }
