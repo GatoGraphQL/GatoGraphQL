@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers as ComponentModelSchemaHelpers;
 
 class SchemaHelpers
 {
