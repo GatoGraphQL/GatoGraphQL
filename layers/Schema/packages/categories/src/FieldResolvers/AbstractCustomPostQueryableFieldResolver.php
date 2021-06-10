@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoPSchema\Categories\ComponentConfiguration;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -36,7 +37,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'categories',
@@ -44,9 +45,9 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
             'categoryNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

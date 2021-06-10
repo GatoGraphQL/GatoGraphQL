@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers;
 
-use PoP\FieldQuery\QueryHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Engine\Dataloading\Expressions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Dataloading\Expressions;
+use PoP\FieldQuery\QueryHelpers;
 
 class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -27,13 +28,13 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'getSelfProp':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

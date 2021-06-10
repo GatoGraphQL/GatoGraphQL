@@ -31,12 +31,12 @@ trait FieldSchemaDefinitionResolverTrait
         return $schemaDefinitionService->getDefaultType();
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
-            return $schemaDefinitionResolver->isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+            return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
         }
-        return false;
+        return null;
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

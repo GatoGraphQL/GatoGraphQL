@@ -28,10 +28,12 @@ trait SelfFieldSchemaDefinitionResolverTrait
         return $schemaDefinitionService->getDefaultType();
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    /**
+     * By default types are nullable, and not an array
+     */
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        // By default, types are nullable
-        return false;
+        return null;
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

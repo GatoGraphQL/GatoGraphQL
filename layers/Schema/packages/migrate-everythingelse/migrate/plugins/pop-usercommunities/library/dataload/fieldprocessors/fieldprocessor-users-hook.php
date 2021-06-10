@@ -1,15 +1,16 @@
 <?php
-use PoPSchema\EverythingElse\Enums\MemberTagEnum;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
+use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
+use PoPSchema\EverythingElse\Enums\MemberTagEnum;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
@@ -47,7 +48,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'communities',
@@ -55,9 +56,9 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
             'hasActiveCommunities',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

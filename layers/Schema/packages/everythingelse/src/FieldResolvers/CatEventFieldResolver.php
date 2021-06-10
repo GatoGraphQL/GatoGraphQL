@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
 
 class CatEventFieldResolver extends AbstractDBDataFieldResolver
@@ -37,13 +38,13 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'catSlugs':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

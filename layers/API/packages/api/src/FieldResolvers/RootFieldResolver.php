@@ -7,16 +7,17 @@ namespace PoP\API\FieldResolvers;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\Cache\CacheUtils;
 use PoP\API\ComponentConfiguration;
-use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Enums\SchemaFieldShapeEnum;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\API\Facades\PersistedQueryManagerFacade;
 use PoP\API\Facades\PersistedFragmentManagerFacade;
+use PoP\API\Facades\PersistedQueryManagerFacade;
+use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -40,13 +41,13 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'fullSchema':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

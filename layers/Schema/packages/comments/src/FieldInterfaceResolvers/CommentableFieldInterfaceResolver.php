@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldInterfaceResolvers;
 
+use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\Comments\TypeDataLoaders\CommentTypeDataLoader;
-use PoP\ComponentModel\FieldInterfaceResolvers\AbstractQueryableSchemaFieldInterfaceResolver;
 
 class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInterfaceResolver
 {
@@ -42,16 +43,16 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'areCommentsOpen':
             case 'commentCount':
             case 'hasComments':
             case 'comments':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($fieldName);
+        return parent::getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string

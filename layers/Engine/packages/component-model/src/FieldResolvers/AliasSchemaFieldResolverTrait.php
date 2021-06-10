@@ -203,10 +203,10 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
-        return $aliasedFieldResolver->isSchemaFieldResponseNonNullable(
+        return $aliasedFieldResolver->getSchemaFieldTypeModifiers(
             $typeResolver,
             $this->getAliasedFieldName($fieldName)
         );

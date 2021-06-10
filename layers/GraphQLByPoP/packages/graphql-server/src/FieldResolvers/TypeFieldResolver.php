@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use GraphQLByPoP\GraphQLServer\Enums\TypeKindEnum;
-use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\FieldTypeResolver;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumValueTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumValueTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\FieldTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class TypeFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -63,15 +64,15 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'kind',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string

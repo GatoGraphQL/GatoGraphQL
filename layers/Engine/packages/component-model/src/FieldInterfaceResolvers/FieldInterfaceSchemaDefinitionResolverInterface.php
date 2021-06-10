@@ -8,7 +8,7 @@ interface FieldInterfaceSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
     public function getSchemaFieldType(string $fieldName): string;
-    public function isSchemaFieldResponseNonNullable(string $fieldName): bool;
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int;
     public function getSchemaFieldDescription(string $fieldName): ?string;
     public function getSchemaFieldArgs(string $fieldName): array;
     public function getFilteredSchemaFieldArgs(string $fieldName): array;

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\FieldInterfaceResolvers;
 
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -35,13 +36,13 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'author':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($fieldName);
+        return parent::getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string

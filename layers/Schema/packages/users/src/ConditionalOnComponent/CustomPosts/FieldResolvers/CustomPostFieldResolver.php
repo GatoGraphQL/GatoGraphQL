@@ -61,14 +61,14 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'author':
                 $fieldInterfaceResolver = $this->getWithAuthorFieldInterfaceResolverInstance();
-                return $fieldInterfaceResolver->isSchemaFieldResponseNonNullable($fieldName);
+                return $fieldInterfaceResolver->getSchemaFieldTypeModifiers($fieldName);
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     /**

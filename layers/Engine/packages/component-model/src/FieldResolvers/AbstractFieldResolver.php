@@ -28,6 +28,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
 
@@ -285,7 +286,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             // If we found a resolver for this fieldName, get all its properties from it
             if ($schemaDefinitionResolver) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
-                if ($schemaDefinitionResolver->isSchemaFieldResponseNonNullable($typeResolver, $fieldName)) {
+                $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+                if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
                 }
                 if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($typeResolver, $fieldName)) {

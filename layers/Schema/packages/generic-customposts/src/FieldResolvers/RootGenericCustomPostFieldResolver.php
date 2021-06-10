@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\GenericCustomPosts\FieldResolvers;
 
-use PoPSchema\CustomPosts\Types\Status;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 /**
@@ -57,16 +58,16 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'genericCustomPosts',
             'genericCustomPostCount',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array

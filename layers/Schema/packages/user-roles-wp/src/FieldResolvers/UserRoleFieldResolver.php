@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractReflectionPropertyFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 
 class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
 {
@@ -41,16 +42,16 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'name',
             'capabilities',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     /**

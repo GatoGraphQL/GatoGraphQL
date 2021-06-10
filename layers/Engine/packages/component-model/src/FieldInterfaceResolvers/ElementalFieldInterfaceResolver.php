@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -34,13 +35,13 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'id':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($fieldName);
+        return parent::getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string

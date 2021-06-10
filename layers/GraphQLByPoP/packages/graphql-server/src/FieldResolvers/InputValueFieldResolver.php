@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class InputValueFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -38,16 +39,16 @@ class InputValueFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'name',
             'type',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
