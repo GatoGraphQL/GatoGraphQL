@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 
 trait FieldInterfaceSchemaDefinitionResolverTrait
 {
@@ -24,7 +25,8 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
             return $schemaDefinitionResolver->getSchemaFieldType($fieldName);
         }
-        return null;
+        // By default, it can be of any type. Return this instead of null since the type is mandatory for GraphQL, so we avoid its non-implementation by the developer to throw errors
+        return SchemaDefinition::TYPE_MIXED;
     }
 
     public function isSchemaFieldResponseNonNullable(string $fieldName): bool
