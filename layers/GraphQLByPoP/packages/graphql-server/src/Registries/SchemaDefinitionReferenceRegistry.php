@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
-use PoP\API\Cache\CacheUtils;
-use GraphQLByPoP\GraphQLServer\Environment;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
-use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\API\Facades\SchemaDefinitionRegistryFacade;
+use Exception;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Environment;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use PoP\API\Cache\CacheUtils;
+use PoP\API\ComponentConfiguration as APIComponentConfiguration;
+use PoP\API\Facades\SchemaDefinitionRegistryFacade;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
@@ -367,7 +368,15 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Also for the fieldOrDirective arguments
         if ($fieldOrDirectiveArgs = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
-                $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? null;
+                // The type is mandatory. If not provided, throw an error
+                if ($type === null) {
+                    $translationAPI = TranslationAPIFacade::getInstance();
+                    throw new Exception(sprintf(
+                        $translationAPI->__('The schema definition for field/directive args must always declare a type. Missing in \'%s\'', 'component-model'),
+                        \json_encode($fieldOrDirectiveArgSchemaDefinition)
+                    ));
+                }
                 $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($type, $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
                 // If it is an input object, it may have its own args to also convert
                 if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {
