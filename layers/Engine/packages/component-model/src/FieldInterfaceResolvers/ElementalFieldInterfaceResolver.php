@@ -26,7 +26,7 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'id' => SchemaDefinition::TYPE_ID,

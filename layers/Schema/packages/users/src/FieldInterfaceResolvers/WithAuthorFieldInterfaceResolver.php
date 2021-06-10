@@ -27,7 +27,7 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'author' => SchemaDefinition::TYPE_ID,

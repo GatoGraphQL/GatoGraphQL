@@ -50,7 +50,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         );
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'content' => SchemaDefinition::TYPE_STRING,
