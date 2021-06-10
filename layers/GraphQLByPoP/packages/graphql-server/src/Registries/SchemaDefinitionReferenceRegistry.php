@@ -23,7 +23,6 @@ use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface

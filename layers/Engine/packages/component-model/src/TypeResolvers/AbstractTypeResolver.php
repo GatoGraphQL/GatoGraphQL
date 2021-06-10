@@ -14,7 +14,6 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
 use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
-use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
