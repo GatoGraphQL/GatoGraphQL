@@ -284,9 +284,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
             // If we found a resolver for this fieldName, get all its properties from it
             if ($schemaDefinitionResolver) {
-                if ($type = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
-                }
+                $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
                 if ($schemaDefinitionResolver->isSchemaFieldResponseNonNullable($typeResolver, $fieldName)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
                 }
