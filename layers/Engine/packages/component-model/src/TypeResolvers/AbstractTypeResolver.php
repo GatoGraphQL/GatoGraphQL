@@ -1416,8 +1416,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function processFlatShapeSchemaDefinition(array $options = [])
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // By now, we have the schema definition
         if (isset($this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS])) {
@@ -1434,8 +1433,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Stop recursion
         $class = get_called_class();
@@ -1483,8 +1481,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $typeName = $this->getMaybeNamespacedTypeName();
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $typeName;
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
@@ -1510,10 +1507,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
 
         // Add all the implemented interfaces
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         $typeInterfaceDefinitions = [];
         foreach ($this->getAllImplementedInterfaceResolverInstances() as $interfaceInstance) {
-            $interfaceSchemaKey = $schemaDefinitionService->getInterfaceSchemaKey($interfaceInstance);
+            $interfaceSchemaKey = $this->schemaDefinitionService->getInterfaceSchemaKey($interfaceInstance);
 
             // Conveniently get the fields from the schema, which have already been calculated above
             // since they also include their interface fields
@@ -1681,8 +1677,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         if ($isConnection) {
             unset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]);
         }
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;
     }
 
