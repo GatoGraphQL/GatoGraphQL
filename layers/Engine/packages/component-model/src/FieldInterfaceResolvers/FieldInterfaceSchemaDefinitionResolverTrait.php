@@ -30,10 +30,10 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         return $schemaDefinitionService->getDefaultType();
     }
 
-    public function isSchemaFieldResponseNonNullable(string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(string $fieldName): bool
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
-            return $schemaDefinitionResolver->isSchemaFieldResponseNonNullable($fieldName);
+            return $schemaDefinitionResolver->getSchemaFieldResponseModifiers($fieldName);
         }
         return false;
     }

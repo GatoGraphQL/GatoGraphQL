@@ -36,7 +36,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
             'tags',
@@ -46,7 +46,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldResponseModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

@@ -92,7 +92,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
             'mediaItems',
@@ -100,7 +100,7 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldResponseModifiers($typeResolver, $fieldName);
     }
 
     /**

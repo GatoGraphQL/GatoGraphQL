@@ -41,7 +41,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
             'name',
@@ -50,7 +50,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
         }
-        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+        return parent::getSchemaFieldResponseModifiers($typeResolver, $fieldName);
     }
 
     /**

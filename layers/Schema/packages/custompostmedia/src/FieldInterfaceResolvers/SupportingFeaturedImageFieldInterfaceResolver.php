@@ -37,7 +37,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function isSchemaFieldResponseNonNullable(string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(string $fieldName): bool
     {
         $nonNullableFieldNames = [
             'hasFeaturedImage',
@@ -45,7 +45,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return true;
         }
-        return parent::isSchemaFieldResponseNonNullable($fieldName);
+        return parent::getSchemaFieldResponseModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string
