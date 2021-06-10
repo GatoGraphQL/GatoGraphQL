@@ -31,7 +31,7 @@ trait FieldSchemaDefinitionResolverTrait
         return $schemaDefinitionService->getDefaultType();
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
             return $schemaDefinitionResolver->getSchemaFieldResponseModifiers($typeResolver, $fieldName);

@@ -32,7 +32,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
     {
         $nonNullableFieldNames = [
             'hasLink',

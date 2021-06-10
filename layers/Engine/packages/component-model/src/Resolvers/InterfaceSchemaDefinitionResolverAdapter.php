@@ -44,7 +44,7 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         return $this->fieldInterfaceResolver->getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
     {
         return $this->fieldInterfaceResolver->getSchemaFieldResponseModifiers($fieldName);
     }

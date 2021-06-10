@@ -72,7 +72,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
     {
         $nonNullableFieldNames = [
             'setFeaturedImage',

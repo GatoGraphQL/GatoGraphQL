@@ -38,7 +38,7 @@ class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
     {
         switch ($fieldName) {
             case 'content':

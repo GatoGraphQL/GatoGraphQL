@@ -203,7 +203,7 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): bool
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->getSchemaFieldResponseModifiers(
