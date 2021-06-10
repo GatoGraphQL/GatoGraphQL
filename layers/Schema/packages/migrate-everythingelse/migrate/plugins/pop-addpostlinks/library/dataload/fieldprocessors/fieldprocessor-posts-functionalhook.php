@@ -29,7 +29,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'isLinkEmbeddable',

@@ -51,7 +51,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): int
+    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'itemDataEntries',
