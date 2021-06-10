@@ -37,7 +37,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         $nonNullableFieldNames = [
             'hasFeaturedImage',

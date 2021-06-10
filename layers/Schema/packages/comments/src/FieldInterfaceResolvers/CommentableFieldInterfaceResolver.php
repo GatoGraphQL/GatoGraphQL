@@ -42,7 +42,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'areCommentsOpen':

@@ -34,7 +34,7 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'id':
