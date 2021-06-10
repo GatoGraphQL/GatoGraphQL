@@ -35,7 +35,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
             return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
         }
-        return false;
+        return null;
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string
