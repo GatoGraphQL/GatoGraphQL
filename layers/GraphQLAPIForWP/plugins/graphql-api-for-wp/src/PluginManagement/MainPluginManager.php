@@ -20,7 +20,7 @@ class MainPluginManager extends AbstractPluginManager
      * Validate that the plugin is not registered yet.
      * If it is, print an error and return false
      */
-    public static function assertNotRegistered(
+    public static function assertIsValid(
         string $pluginVersion
     ): bool {
         if (self::$mainPlugin !== null) {

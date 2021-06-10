@@ -36,7 +36,7 @@ $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 /**
  * If the plugin is already registered, print an error and halt loading
  */
-if (class_exists(Plugin::class) && !MainPluginManager::assertNotRegistered($pluginVersion)) {
+if (class_exists(Plugin::class) && !MainPluginManager::assertIsValid($pluginVersion)) {
     return;
 }
 

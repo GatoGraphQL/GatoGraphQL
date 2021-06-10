@@ -39,6 +39,7 @@ add_action('plugins_loaded', function (): void {
      */
     $extensionVersion = '0.8.0';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
+    $mainPluginVersionConstraint = '^0.8';
     
     /**
      * Validate the GraphQL API plugin is active
@@ -59,9 +60,11 @@ add_action('plugins_loaded', function (): void {
         return;
     }
 
-    if (ExtensionManager::assertNotRegistered(
+    if (ExtensionManager::assertIsValid(
         GraphQLAPIExtension::class,
-        $extensionVersion
+        $extensionVersion,
+        $extensionName,
+        $mainPluginVersionConstraint
     )) {
         // Load Composer’s autoloader
         require_once(__DIR__ . '/vendor/autoload.php');
