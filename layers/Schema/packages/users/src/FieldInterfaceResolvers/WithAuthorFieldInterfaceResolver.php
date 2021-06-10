@@ -35,13 +35,13 @@ class WithAuthorFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResol
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): bool
     {
         switch ($fieldName) {
             case 'author':
                 return true;
         }
-        return parent::getSchemaFieldResponseModifiers($fieldName);
+        return parent::getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string

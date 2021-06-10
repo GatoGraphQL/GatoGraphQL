@@ -47,7 +47,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         switch ($fieldName) {
             case 'customPosts':
@@ -56,7 +56,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             case 'unrestrictedCustomPostCount':
                 return true;
         }
-        return parent::getSchemaFieldResponseModifiers($typeResolver, $fieldName);
+        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

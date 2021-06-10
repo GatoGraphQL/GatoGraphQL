@@ -42,7 +42,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): bool
     {
         switch ($fieldName) {
             case 'areCommentsOpen':
@@ -51,7 +51,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             case 'comments':
                 return true;
         }
-        return parent::getSchemaFieldResponseModifiers($fieldName);
+        return parent::getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string

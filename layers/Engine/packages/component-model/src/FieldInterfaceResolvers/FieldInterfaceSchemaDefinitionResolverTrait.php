@@ -30,10 +30,10 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         return $schemaDefinitionService->getDefaultType();
     }
 
-    public function getSchemaFieldResponseModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): bool
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
-            return $schemaDefinitionResolver->getSchemaFieldResponseModifiers($fieldName);
+            return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
         }
         return false;
     }

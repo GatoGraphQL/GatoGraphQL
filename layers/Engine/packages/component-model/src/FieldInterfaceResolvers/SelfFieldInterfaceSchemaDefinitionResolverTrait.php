@@ -26,7 +26,7 @@ trait SelfFieldInterfaceSchemaDefinitionResolverTrait
         return $schemaDefinitionService->getDefaultType();
     }
 
-    public function getSchemaFieldResponseModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): bool
     {
         // By default, types are nullable
         return false;

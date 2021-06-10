@@ -65,7 +65,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
-    public function getSchemaFieldResponseModifiers(string $fieldName): bool
+    public function getSchemaFieldTypeModifiers(string $fieldName): bool
     {
         /**
          * Please notice that the URL, slug, title and excerpt are nullable,
@@ -80,7 +80,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             case 'customPostType':
                 return true;
         }
-        return parent::getSchemaFieldResponseModifiers($fieldName);
+        return parent::getSchemaFieldTypeModifiers($fieldName);
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string
