@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers;
 
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class PostLegacyContentFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -41,7 +42,7 @@ class PostLegacyContentFieldResolver extends AbstractDBDataFieldResolver
             'isPublished',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

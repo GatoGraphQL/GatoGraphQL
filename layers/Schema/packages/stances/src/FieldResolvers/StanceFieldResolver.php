@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers;
 
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class StanceFieldResolver extends AbstractDBDataFieldResolver
@@ -62,7 +63,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
             'hasStanceTarget',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

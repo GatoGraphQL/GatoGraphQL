@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldInterfaceResolvers;
 
-use PoPSchema\CustomPosts\Types\Status;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
-use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoP\ComponentModel\FieldInterfaceResolvers\EnumTypeFieldInterfaceSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
+use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
+use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\QueriedObject\FieldInterfaceResolvers\QueryableFieldInterfaceResolver;
 
 class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
@@ -78,7 +79,7 @@ class IsCustomPostFieldInterfaceResolver extends QueryableFieldInterfaceResolver
             case 'date':
             case 'datetime':
             case 'customPostType':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($fieldName);
     }

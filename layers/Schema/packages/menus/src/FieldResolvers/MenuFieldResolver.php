@@ -7,6 +7,7 @@ namespace PoPSchema\Menus\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
@@ -57,7 +58,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
             'itemDataEntries',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

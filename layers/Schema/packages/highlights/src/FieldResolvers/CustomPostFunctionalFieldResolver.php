@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers;
 
-use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Route\RouteUtils;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -41,7 +42,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'addhighlightURL',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

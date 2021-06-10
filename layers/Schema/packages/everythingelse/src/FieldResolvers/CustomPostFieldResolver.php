@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -41,7 +42,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             'locations',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

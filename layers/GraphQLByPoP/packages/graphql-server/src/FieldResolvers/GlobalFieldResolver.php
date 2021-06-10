@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use PoP\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class GlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -31,7 +32,7 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
             '__typename',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

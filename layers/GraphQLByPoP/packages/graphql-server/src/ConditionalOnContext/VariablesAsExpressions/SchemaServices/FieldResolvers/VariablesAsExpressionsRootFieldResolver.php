@@ -9,6 +9,7 @@ use GraphQLByPoP\GraphQLServer\ConditionalOnContext\MultipleQueryExecution\Schem
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
@@ -45,7 +46,7 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
             'exportedVariables',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

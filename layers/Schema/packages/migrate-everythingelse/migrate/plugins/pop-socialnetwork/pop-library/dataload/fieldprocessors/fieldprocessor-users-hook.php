@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -48,7 +49,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
             'followersCount',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

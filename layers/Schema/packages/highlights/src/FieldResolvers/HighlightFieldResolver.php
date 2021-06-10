@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class HighlightFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -51,7 +52,7 @@ class HighlightFieldResolver extends AbstractDBDataFieldResolver
             'highlightedpost',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

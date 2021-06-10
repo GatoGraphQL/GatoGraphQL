@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Categories\FieldResolvers;
 
-use PoPSchema\Categories\ComponentConfiguration;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -44,7 +45,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
             'categoryNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
@@ -53,7 +54,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
             'setCategories',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

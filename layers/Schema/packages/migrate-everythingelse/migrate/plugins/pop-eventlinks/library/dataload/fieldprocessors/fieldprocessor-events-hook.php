@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
 class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
@@ -37,7 +38,7 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
             'content',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

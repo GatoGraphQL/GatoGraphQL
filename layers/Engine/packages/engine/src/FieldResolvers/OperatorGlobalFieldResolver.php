@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers;
 
-use PoP\Engine\Misc\Extract;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\Engine\Misc\Extract;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -71,7 +72,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'context':
             case 'time':
             case 'sprintf':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

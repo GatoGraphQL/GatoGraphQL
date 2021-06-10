@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
@@ -41,7 +42,7 @@ class CoreGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'qualifiedTypeName':
             case 'isType':
             case 'implements':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

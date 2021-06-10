@@ -1,9 +1,10 @@
 <?php
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 
 class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
@@ -38,7 +39,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             'hasLink',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

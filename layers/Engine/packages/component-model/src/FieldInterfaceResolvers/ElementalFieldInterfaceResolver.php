@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -38,7 +39,7 @@ class ElementalFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
     {
         switch ($fieldName) {
             case 'id':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($fieldName);
     }

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 
 class EventFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -56,7 +57,7 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
             case 'startDateReadable':
             case 'daterange':
             case 'daterangetime':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

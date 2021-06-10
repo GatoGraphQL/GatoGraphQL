@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootPageFieldResolver extends AbstractQueryableFieldResolver
@@ -79,7 +80,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
             'unrestrictedPageCount',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

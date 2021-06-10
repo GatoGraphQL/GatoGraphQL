@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers;
 
-use PoP\FieldQuery\QueryHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Engine\Dataloading\Expressions;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Dataloading\Expressions;
+use PoP\FieldQuery\QueryHelpers;
 
 class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -31,7 +32,7 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
     {
         switch ($fieldName) {
             case 'getSelfProp':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

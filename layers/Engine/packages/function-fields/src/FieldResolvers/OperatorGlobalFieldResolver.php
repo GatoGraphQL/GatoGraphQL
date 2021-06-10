@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\FunctionFields\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -75,7 +76,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             'titleCase',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

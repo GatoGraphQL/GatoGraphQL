@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumValueTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class EnumValueFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -44,7 +45,7 @@ class EnumValueFieldResolver extends AbstractDBDataFieldResolver
             'isDeprecated',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

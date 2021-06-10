@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMedia\FieldInterfaceResolvers;
 
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 
 class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -43,7 +44,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
             'hasFeaturedImage',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($fieldName);
     }

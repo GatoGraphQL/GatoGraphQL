@@ -1,12 +1,13 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 
 class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
@@ -38,7 +39,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
             'contentClipped',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

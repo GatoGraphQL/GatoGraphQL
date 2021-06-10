@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers;
 
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\Facades\PostTypeAPIFacade;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
@@ -55,7 +56,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
             'unrestrictedPostCount',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

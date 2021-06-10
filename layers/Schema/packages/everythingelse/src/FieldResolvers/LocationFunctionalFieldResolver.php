@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Locations\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 
@@ -41,7 +42,7 @@ class LocationFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'mapURL',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

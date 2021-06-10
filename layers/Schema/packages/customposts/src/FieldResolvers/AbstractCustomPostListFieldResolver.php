@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers;
 
-use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\CustomPosts\ComponentConfiguration;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -54,7 +55,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
             case 'customPostCount':
             case 'unrestrictedCustomPosts':
             case 'unrestrictedCustomPostCount':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

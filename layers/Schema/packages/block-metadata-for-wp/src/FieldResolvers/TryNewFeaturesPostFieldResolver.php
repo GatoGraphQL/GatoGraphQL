@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\BlockMetadataWP\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
@@ -42,7 +43,7 @@ class TryNewFeaturesPostFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'content':
-                return true;
+                return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

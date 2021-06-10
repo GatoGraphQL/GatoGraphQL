@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
-use PoP\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use GraphQLByPoP\GraphQLServer\TypeDataLoaders\SchemaTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\SchemaTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
+use PoP\API\Schema\SchemaDefinition;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 
 class RootFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -51,7 +52,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
             '__type',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -44,7 +45,7 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
             'taggedusers',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

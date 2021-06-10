@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\FieldResolvers;
 
-use PoPSchema\Tags\ComponentConfiguration;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Tags\ComponentConfiguration;
 
 class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -62,7 +63,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
             'postTagNames',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }

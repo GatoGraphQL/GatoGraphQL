@@ -1,14 +1,15 @@
 <?php
 namespace PoPSchema\UserRoles;
 
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class FieldResolver_Users extends AbstractDBDataFieldResolver
 {
@@ -40,7 +41,7 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
             'hasRole',
         ];
         if (in_array($fieldName, $nonNullableFieldNames)) {
-            return true;
+            return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
