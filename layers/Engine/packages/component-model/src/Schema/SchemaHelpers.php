@@ -43,7 +43,7 @@ class SchemaHelpers
         return array_filter(
             $schemaFieldArgs,
             function ($schemaFieldArg) {
-                return isset($schemaFieldArg[SchemaDefinition::ARGNAME_TYPE]) && $schemaFieldArg[SchemaDefinition::ARGNAME_TYPE] == SchemaDefinition::TYPE_ENUM;
+                return ($schemaFieldArg[SchemaDefinition::ARGNAME_TYPE] ?? null) == SchemaDefinition::TYPE_ENUM;
             }
         );
     }
