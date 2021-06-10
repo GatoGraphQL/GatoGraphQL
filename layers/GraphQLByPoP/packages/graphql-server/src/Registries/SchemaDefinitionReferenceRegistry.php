@@ -363,6 +363,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
         $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
             $type,
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null
         );
         $this->introduceSDLNotationToFieldOrDirectiveArgs($fieldSchemaDefinitionPath);
@@ -376,12 +377,20 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
                 // The type is mandatory. If not provided, use the default one
                 $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
-                $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($type, $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
+                $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
+                    $type,
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null
+                );
                 // If it is an input object, it may have its own args to also convert
                 if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {
                     foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
                         $inputFieldType = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE];
-                        $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($inputFieldType, $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
+                        $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
+                            $inputFieldType,
+                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
+                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null
+                        );
                     }
                 }
             }
