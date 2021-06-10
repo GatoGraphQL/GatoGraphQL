@@ -861,7 +861,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $directiveName,
                         is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
                         $failedCastingDirectiveArgName,
-                        TypeCastingHelpers::getTypeCombinationCurrentElement($directiveArgNameTypes[$failedCastingDirectiveArgName]),
+                        $directiveArgNameTypes[$failedCastingDirectiveArgName],
                         $directiveArgErrorMessage
                     );
                 } else {
@@ -870,7 +870,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $directiveName,
                         is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
                         $failedCastingDirectiveArgName,
-                        TypeCastingHelpers::getTypeCombinationCurrentElement($directiveArgNameTypes[$failedCastingDirectiveArgName])
+                        $directiveArgNameTypes[$failedCastingDirectiveArgName]
                     );
                 }
                 $schemaWarnings[] = [
