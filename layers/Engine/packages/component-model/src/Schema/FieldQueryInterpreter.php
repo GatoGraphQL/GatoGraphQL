@@ -573,7 +573,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         // Get the field argument types, to know to what type it will cast the value
         if ($directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver)) {
-            return $this->castFieldOrDirectiveArguments($directiveArgs, $directiveArgNameTypes, $failedCastingDirectiveArgErrorMessages, $forSchema);
+            $directiveArgNameIsArrayTypes = $this->getDirectiveArgumentNameIsArrayTypes($directiveResolver, $typeResolver);
+            return $this->castFieldOrDirectiveArguments($directiveArgs, $directiveArgNameTypes, $directiveArgNameIsArrayTypes, $failedCastingDirectiveArgErrorMessages, $forSchema);
         }
         return $directiveArgs;
     }
@@ -582,17 +583,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         // Get the field argument types, to know to what type it will cast the value
         if ($fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field)) {
-            return $this->castFieldOrDirectiveArguments($fieldArgs, $fieldArgNameTypes, $failedCastingFieldArgErrorMessages, $forSchema);
+            $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
+            return $this->castFieldOrDirectiveArguments($fieldArgs, $fieldArgNameTypes, $fieldArgNameIsArrayTypes, $failedCastingFieldArgErrorMessages, $forSchema);
         }
         return $fieldArgs;
     }
 
-    protected function castFieldOrDirectiveArguments(array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgNameTypes, array &$failedCastingFieldOrDirectiveArgErrorMessages, bool $forSchema): array
+    protected function castFieldOrDirectiveArguments(array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgNameTypes, array $fieldOrDirectiveArgNameIsArrayTypes, array &$failedCastingFieldOrDirectiveArgErrorMessages, bool $forSchema): array
     {
         // Cast all argument values
         foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
             // Maybe cast the value to the appropriate type. Eg: from string to boolean
             $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName];
+            // If not set, the return type is not an array
+            $fieldArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
             // There are 2 possibilities for casting:
             // 1. $forSchema = true: Cast all items except fields (eg: hasComments()) or arrays with fields (eg: [hasComments()])
             // 2. $forSchema = false: Should be cast only fields, however by now we can't tell which are fields and which are not, since fields have already been resolved to their value. Hence, cast everything (fieldArgValues that failed at the schema level will not be provided in the input array, so won't be validated twice)
@@ -606,21 +610,17 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     )
                 )
             ) {
-                // If the value is an array, and the type is a combination of types, then cast each element to the item type
-                $fieldArgCurrentType = TypeCastingHelpers::getTypeCombinationCurrentElement($fieldArgType);
-                $fieldArgOtherTypes = TypeCastingHelpers::getTypeCombinationNestedElements($fieldArgType);
+                // If the value is an array, then cast each element to the item type
                 // If it's an array, combine its elements recursively
-                if ($fieldArgCurrentType == SchemaDefinition::TYPE_ARRAY && !is_null($fieldArgOtherTypes) && is_array($argValue)) {
+                if ($fieldArgIsArrayType && is_array($argValue)) {
                     // We can make combinations of combinations: array:array:string. So when iterating down, pass all other types after the current one
                     $argValue = array_map(
-                        function ($arrayArgValueElem) use ($fieldArgOtherTypes) {
-                            return $this->typeCastingExecuter->cast($fieldArgOtherTypes, $arrayArgValueElem);
-                        },
+                        fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
                         $argValue
                     );
                 } else {
                     // Otherwise, simply cast the given value directly
-                    $argValue = $this->typeCastingExecuter->cast($fieldArgCurrentType, $argValue);
+                    $argValue = $this->typeCastingExecuter->cast($fieldArgType, $argValue);
                 }
                 // If the response is an error, extract the error message and set value to null
                 if (GeneralUtils::isError($argValue)) {
