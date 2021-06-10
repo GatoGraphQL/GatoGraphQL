@@ -42,7 +42,7 @@ class ExtensionManager extends AbstractPluginManager
      * Validate that the extension is not registered yet.
      * If it is, print an error and return false
      */
-    public static function assertNotRegistered(
+    public static function assertIsValid(
         string $extensionClass,
         string $extensionVersion
     ): bool {

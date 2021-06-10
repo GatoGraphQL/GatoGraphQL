@@ -59,7 +59,7 @@ add_action('plugins_loaded', function (): void {
         return;
     }
 
-    if (ExtensionManager::assertNotRegistered(
+    if (ExtensionManager::assertIsValid(
         GraphQLAPIExtension::class,
         $extensionVersion
     )) {
