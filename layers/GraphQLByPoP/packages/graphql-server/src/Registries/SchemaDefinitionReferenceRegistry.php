@@ -22,6 +22,7 @@ use PoP\API\Facades\SchemaDefinitionRegistryFacade;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
@@ -39,6 +40,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var AbstractSchemaDefinitionReferenceObject[]
      */
     protected array $dynamicTypes = [];
+
+    public function __construct(
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+    ) {
+    }
 
     /**
      * It returns the full schema, expanded with all data required to satisfy
@@ -368,15 +374,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Also for the fieldOrDirective arguments
         if ($fieldOrDirectiveArgs = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
-                $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? null;
-                // The type is mandatory. If not provided, throw an error
-                if ($type === null) {
-                    $translationAPI = TranslationAPIFacade::getInstance();
-                    throw new Exception(sprintf(
-                        $translationAPI->__('The schema definition for field/directive args must always declare a type. Missing in \'%s\'', 'component-model'),
-                        \json_encode($fieldOrDirectiveArgSchemaDefinition)
-                    ));
-                }
+                // The type is mandatory. If not provided, use the default one
+                $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
                 $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($type, $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
                 // If it is an input object, it may have its own args to also convert
                 if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {

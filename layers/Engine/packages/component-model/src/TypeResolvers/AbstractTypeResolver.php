@@ -24,6 +24,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
@@ -110,7 +111,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         protected InstanceManagerInterface $instanceManager,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ErrorProviderInterface $errorProvider
+        protected ErrorProviderInterface $errorProvider,
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
     }
 
@@ -1647,14 +1649,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
         // Convert the field type from its internal representation (eg: "array:id") to the type (eg: "array:Post")
         if ($options['useTypeName'] ?? null) {
-            $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? null;
-            // The type is mandatory. If not provided, throw an error
-            if ($type === null) {
-                throw new Exception(sprintf(
-                    $this->translationAPI->__('The field schema definition must always declare a type. Missing in \'%s\'', 'component-model'),
-                    \json_encode($fieldSchemaDefinition)
-                ));
-            }
+            // The type is mandatory. If not provided, use the default one
+            $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::convertTypeIDToTypeName($type, $this, $fieldName);
         } else {
             // Display the type under entry "referencedType"
