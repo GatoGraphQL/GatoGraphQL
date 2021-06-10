@@ -905,7 +905,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $fieldName,
                         is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
                         $failedCastingFieldArgName,
-                        TypeCastingHelpers::getTypeCombinationCurrentElement($fieldArgNameTypes[$failedCastingFieldArgName]),
+                        $fieldArgNameTypes[$failedCastingFieldArgName],
                         $fieldArgErrorMessage
                     );
                 } else {
@@ -914,7 +914,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $fieldName,
                         is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
                         $failedCastingFieldArgName,
-                        TypeCastingHelpers::getTypeCombinationCurrentElement($fieldArgNameTypes[$failedCastingFieldArgName])
+                        $fieldArgNameTypes[$failedCastingFieldArgName]
                     );
                 }
                 $schemaWarnings[] = [
