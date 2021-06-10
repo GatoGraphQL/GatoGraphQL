@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+
 trait SchemaFilterInputModuleProcessorTrait
 {
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
-        return null;
+        return $this->getDefaultSchemaFilterInputType();
+    }
+    protected function getDefaultSchemaFilterInputType(): string
+    {
+        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
+        return $schemaDefinitionService->getDefaultType();
     }
     public function getSchemaFilterInputDescription(array $module): ?string
     {

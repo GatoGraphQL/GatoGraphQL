@@ -94,7 +94,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERINPUT_ORDERUSER => SchemaDefinition::TYPE_STRING,
@@ -102,7 +102,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             self::MODULE_FILTERINPUT_ORDERTAG => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_ORDERCOMMENT => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

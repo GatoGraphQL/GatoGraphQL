@@ -80,14 +80,14 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_HASHTAGS => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

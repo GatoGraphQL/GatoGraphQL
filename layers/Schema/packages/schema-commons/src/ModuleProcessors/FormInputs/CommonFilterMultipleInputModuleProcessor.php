@@ -100,12 +100,12 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         }
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERINPUT_DATES => SchemaDefinition::TYPE_DATE,
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

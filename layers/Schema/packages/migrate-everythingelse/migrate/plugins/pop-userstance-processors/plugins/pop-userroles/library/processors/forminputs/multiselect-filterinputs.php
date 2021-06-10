@@ -67,12 +67,12 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
