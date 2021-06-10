@@ -19,4 +19,12 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         // By default, use the type name
         return $typeResolver->getMaybeNamespacedTypeName();
     }
+    /**
+     * The `mixed` type is a wildcard type,
+     * representing *any* type (string, int, bool, etc)
+     */
+    public function getDefaultType(): string
+    {
+        return SchemaDefinition::TYPE_MIXED;
+    }
 }
