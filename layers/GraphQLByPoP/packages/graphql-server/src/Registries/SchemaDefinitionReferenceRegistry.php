@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
-use Exception;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
@@ -25,6 +24,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
@@ -42,6 +42,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected array $dynamicTypes = [];
 
     public function __construct(
+        protected TranslationAPIInterface $translationAPI,
         protected SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
     }
@@ -399,12 +400,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if (isset($vars['edit-schema']) && $vars['edit-schema']) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_TYPE] == DirectiveTypes::SCHEMA) {
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $directiveSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = sprintf(
-                    $translationAPI->__('%s %s', 'graphql-server'),
+                    $this->translationAPI->__('%s %s', 'graphql-server'),
                     sprintf(
                         '_%s_', // Make it italic using markdown
-                        $translationAPI->__('("Schema" type directive)', 'graphql-server')
+                        $this->translationAPI->__('("Schema" type directive)', 'graphql-server')
                     ),
                     $directiveSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]
                 );
@@ -419,11 +419,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $fieldOrDirectiveSchemaDefinitionPath);
         if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_VERSION] ?? null) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] .= sprintf(
                 sprintf(
-                    $translationAPI->__(' _%s_', 'graphql-server'), // Make it italic using markdown
-                    $translationAPI->__('(Version: %s)', 'graphql-server')
+                    $this->translationAPI->__(' _%s_', 'graphql-server'), // Make it italic using markdown
+                    $this->translationAPI->__('(Version: %s)', 'graphql-server')
                 ),
                 $schemaFieldVersion
             );
@@ -435,13 +434,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected function addNestedDirectiveDataToSchemaDirectiveArgs(array $directiveSchemaDefinitionPath): void
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $directiveSchemaDefinitionPath);
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ??= [];
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][] = [
             SchemaDefinition::ARGNAME_NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
             SchemaDefinition::ARGNAME_TYPE => GraphQLServerSchemaDefinition::TYPE_INT,
-            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
+            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
         ];
     }
 
@@ -452,9 +450,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $fieldSchemaDefinitionPath);
         if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] ?? null) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = sprintf(
-                $translationAPI->__('[Mutation] %s', 'graphql-server'),
+                $this->translationAPI->__('[Mutation] %s', 'graphql-server'),
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]
             );
         }
