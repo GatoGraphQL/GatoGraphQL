@@ -47,7 +47,7 @@ class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'echoStr' => SchemaDefinition::TYPE_STRING,

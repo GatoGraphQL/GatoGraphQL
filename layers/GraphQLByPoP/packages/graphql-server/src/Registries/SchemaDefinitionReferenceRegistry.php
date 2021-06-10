@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
-use PoP\API\Cache\CacheUtils;
-use GraphQLByPoP\GraphQLServer\Environment;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
-use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\API\Facades\SchemaDefinitionRegistryFacade;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Environment;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use PoP\API\Cache\CacheUtils;
+use PoP\API\ComponentConfiguration as APIComponentConfiguration;
+use PoP\API\Facades\SchemaDefinitionRegistryFacade;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\TranslationAPIInterface;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
@@ -38,6 +39,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var AbstractSchemaDefinitionReferenceObject[]
      */
     protected array $dynamicTypes = [];
+
+    public function __construct(
+        protected TranslationAPIInterface $translationAPI,
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
+    ) {
+    }
 
     /**
      * It returns the full schema, expanded with all data required to satisfy
@@ -353,12 +360,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected function introduceSDLNotationToFieldSchemaDefinition(array $fieldSchemaDefinitionPath): void
     {
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $fieldSchemaDefinitionPath);
-        if ($type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? null) {
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
-                $type,
-                $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null
-            );
-        }
+        $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+        $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
+            $type,
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null
+        );
         $this->introduceSDLNotationToFieldOrDirectiveArgs($fieldSchemaDefinitionPath);
     }
     protected function introduceSDLNotationToFieldOrDirectiveArgs(array $fieldOrDirectiveSchemaDefinitionPath): void
@@ -368,14 +374,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Also for the fieldOrDirective arguments
         if ($fieldOrDirectiveArgs = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
-                if ($type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? null) {
-                    $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($type, $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
-                    // If it is an input object, it may have its own args to also convert
-                    if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {
-                        foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
-                            $inputFieldType = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE];
-                            $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($inputFieldType, $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
-                        }
+                // The type is mandatory. If not provided, use the default one
+                $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
+                $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($type, $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
+                // If it is an input object, it may have its own args to also convert
+                if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {
+                    foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
+                        $inputFieldType = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE];
+                        $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema($inputFieldType, $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null);
                     }
                 }
             }
@@ -393,12 +399,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if (isset($vars['edit-schema']) && $vars['edit-schema']) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $directiveSchemaDefinitionPath);
             if ($directiveSchemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_TYPE] == DirectiveTypes::SCHEMA) {
-                $translationAPI = TranslationAPIFacade::getInstance();
                 $directiveSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = sprintf(
-                    $translationAPI->__('%s %s', 'graphql-server'),
+                    $this->translationAPI->__('%s %s', 'graphql-server'),
                     sprintf(
                         '_%s_', // Make it italic using markdown
-                        $translationAPI->__('("Schema" type directive)', 'graphql-server')
+                        $this->translationAPI->__('("Schema" type directive)', 'graphql-server')
                     ),
                     $directiveSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]
                 );
@@ -413,11 +418,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $fieldOrDirectiveSchemaDefinitionPath);
         if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_VERSION] ?? null) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] .= sprintf(
                 sprintf(
-                    $translationAPI->__(' _%s_', 'graphql-server'), // Make it italic using markdown
-                    $translationAPI->__('(Version: %s)', 'graphql-server')
+                    $this->translationAPI->__(' _%s_', 'graphql-server'), // Make it italic using markdown
+                    $this->translationAPI->__('(Version: %s)', 'graphql-server')
                 ),
                 $schemaFieldVersion
             );
@@ -429,13 +433,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected function addNestedDirectiveDataToSchemaDirectiveArgs(array $directiveSchemaDefinitionPath): void
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $directiveSchemaDefinitionPath);
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ??= [];
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][] = [
             SchemaDefinition::ARGNAME_NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
             SchemaDefinition::ARGNAME_TYPE => GraphQLServerSchemaDefinition::TYPE_INT,
-            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
+            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
         ];
     }
 
@@ -446,9 +449,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $fieldSchemaDefinitionPath);
         if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] ?? null) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = sprintf(
-                $translationAPI->__('[Mutation] %s', 'graphql-server'),
+                $this->translationAPI->__('[Mutation] %s', 'graphql-server'),
                 $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]
             );
         }

@@ -23,7 +23,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'individualinterests' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),

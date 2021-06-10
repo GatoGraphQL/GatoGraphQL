@@ -23,7 +23,7 @@ class GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts extends
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'addContentPostLinkURL' => SchemaDefinition::TYPE_URL,

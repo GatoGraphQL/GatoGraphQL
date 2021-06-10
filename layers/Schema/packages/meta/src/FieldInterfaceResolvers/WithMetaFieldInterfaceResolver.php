@@ -28,7 +28,7 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'metaValue' => SchemaDefinition::TYPE_MIXED,

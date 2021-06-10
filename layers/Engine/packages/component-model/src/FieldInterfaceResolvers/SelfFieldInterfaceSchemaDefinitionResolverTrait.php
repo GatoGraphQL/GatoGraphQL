@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 
@@ -21,10 +20,10 @@ trait SelfFieldInterfaceSchemaDefinitionResolverTrait
         return $this;
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
-        // By default, it can be of any type. Return this instead of null since the type is mandatory for GraphQL, so we avoid its non-implementation by the developer to throw errors
-        return SchemaDefinition::TYPE_MIXED;
+        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
+        return $schemaDefinitionService->getDefaultType();
     }
 
     public function isSchemaFieldResponseNonNullable(string $fieldName): bool

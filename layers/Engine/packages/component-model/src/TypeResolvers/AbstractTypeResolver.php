@@ -4,36 +4,36 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Environment;
 use League\Pipeline\PipelineBuilder;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\FieldHelpers;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
-use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
-use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
+use PoP\ComponentModel\Facades\Engine\DataloadingEngineFacade;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\FieldQueryUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolverDecorators\TypeResolverDecoratorInterface;
+use PoP\ComponentModel\TypeResolvers\FieldHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\FieldQuery\QueryUtils;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
@@ -109,7 +109,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         protected InstanceManagerInterface $instanceManager,
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        protected ErrorProviderInterface $errorProvider
+        protected ErrorProviderInterface $errorProvider,
+        protected SchemaDefinitionServiceInterface $schemaDefinitionService,
     ) {
     }
 
@@ -1414,8 +1415,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function processFlatShapeSchemaDefinition(array $options = [])
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // By now, we have the schema definition
         if (isset($this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS])) {
@@ -1432,8 +1432,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Stop recursion
         $class = get_called_class();
@@ -1481,8 +1480,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = [])
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $typeName = $this->getMaybeNamespacedTypeName();
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $typeName;
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
@@ -1508,10 +1506,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
 
         // Add all the implemented interfaces
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         $typeInterfaceDefinitions = [];
         foreach ($this->getAllImplementedInterfaceResolverInstances() as $interfaceInstance) {
-            $interfaceSchemaKey = $schemaDefinitionService->getInterfaceSchemaKey($interfaceInstance);
+            $interfaceSchemaKey = $this->schemaDefinitionService->getInterfaceSchemaKey($interfaceInstance);
 
             // Conveniently get the fields from the schema, which have already been calculated above
             // since they also include their interface fields
@@ -1646,9 +1643,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
         // Convert the field type from its internal representation (eg: "array:id") to the type (eg: "array:Post")
         if ($options['useTypeName'] ?? null) {
-            if ($type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? null) {
-                $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::convertTypeIDToTypeName($type, $this, $fieldName);
-            }
+            // The type is mandatory. If not provided, use the default one
+            $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::convertTypeIDToTypeName($type, $this, $fieldName);
         } else {
             // Display the type under entry "referencedType"
             if ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null) {
@@ -1679,8 +1676,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         if ($isConnection) {
             unset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]);
         }
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        $typeSchemaKey = $schemaDefinitionService->getTypeSchemaKey($this);
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;
     }
 

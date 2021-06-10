@@ -27,7 +27,7 @@ class QueryableFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolv
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'url' => SchemaDefinition::TYPE_URL,

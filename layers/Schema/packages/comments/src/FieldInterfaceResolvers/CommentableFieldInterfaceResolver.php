@@ -31,7 +31,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'areCommentsOpen' => SchemaDefinition::TYPE_BOOL,

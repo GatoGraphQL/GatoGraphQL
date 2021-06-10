@@ -22,7 +22,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'followUserURL' => SchemaDefinition::TYPE_URL,

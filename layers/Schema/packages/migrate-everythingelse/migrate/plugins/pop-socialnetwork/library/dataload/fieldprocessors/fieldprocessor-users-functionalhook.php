@@ -21,7 +21,7 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'contactURL' => SchemaDefinition::TYPE_URL,

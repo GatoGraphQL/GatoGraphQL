@@ -28,7 +28,7 @@ class SupportingFeaturedImageFieldInterfaceResolver extends AbstractSchemaFieldI
         ];
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
             'hasFeaturedImage' => SchemaDefinition::TYPE_BOOL,

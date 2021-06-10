@@ -23,7 +23,7 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'icon' => SchemaDefinition::TYPE_STRING,

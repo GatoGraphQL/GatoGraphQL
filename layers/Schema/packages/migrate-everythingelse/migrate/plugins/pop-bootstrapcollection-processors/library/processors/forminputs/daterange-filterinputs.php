@@ -61,12 +61,12 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => SchemaDefinition::TYPE_DATE,
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

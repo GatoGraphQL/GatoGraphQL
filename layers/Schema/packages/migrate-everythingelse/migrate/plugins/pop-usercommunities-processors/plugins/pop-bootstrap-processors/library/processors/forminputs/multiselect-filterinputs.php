@@ -98,14 +98,14 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
             self::MODULE_URE_FILTERINPUT_MEMBERTAGS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
             self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

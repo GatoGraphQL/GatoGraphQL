@@ -18,7 +18,7 @@ class GlobalUserStateFieldResolver extends AbstractGlobalUserStateFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'loggedInUserID' => SchemaDefinition::TYPE_ID,

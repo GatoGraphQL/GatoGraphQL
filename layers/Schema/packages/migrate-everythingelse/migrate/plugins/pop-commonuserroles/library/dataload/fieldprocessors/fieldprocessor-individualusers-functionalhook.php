@@ -22,7 +22,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'individualInterestsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),

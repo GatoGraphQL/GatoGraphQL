@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
+use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 
@@ -19,12 +20,14 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         return null;
     }
 
-    public function getSchemaFieldType(string $fieldName): ?string
+    public function getSchemaFieldType(string $fieldName): string
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
             return $schemaDefinitionResolver->getSchemaFieldType($fieldName);
         }
-        return null;
+        
+        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
+        return $schemaDefinitionService->getDefaultType();
     }
 
     public function isSchemaFieldResponseNonNullable(string $fieldName): bool

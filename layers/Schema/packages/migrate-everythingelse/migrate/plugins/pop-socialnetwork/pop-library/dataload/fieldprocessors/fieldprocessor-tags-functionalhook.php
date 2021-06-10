@@ -22,7 +22,7 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'subscribeToTagURL' => SchemaDefinition::TYPE_URL,

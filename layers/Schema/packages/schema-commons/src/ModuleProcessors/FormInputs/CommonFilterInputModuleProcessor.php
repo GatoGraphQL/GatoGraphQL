@@ -80,7 +80,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         return $names[$module[1]] ?? parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERINPUT_ORDER => SchemaDefinition::TYPE_STRING,
@@ -90,7 +90,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_IDS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

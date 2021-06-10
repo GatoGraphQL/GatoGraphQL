@@ -8,6 +8,7 @@ use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\AbstractCustomPostTypeResolver;
@@ -23,6 +24,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected PageTypeAPIInterface $pageTypeAPI,
     ) {
         parent::__construct(
@@ -32,6 +34,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $schemaDefinitionService,
         );
     }
 

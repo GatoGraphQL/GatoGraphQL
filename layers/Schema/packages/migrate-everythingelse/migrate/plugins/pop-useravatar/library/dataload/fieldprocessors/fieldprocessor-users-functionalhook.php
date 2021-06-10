@@ -21,7 +21,7 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'fileUploadPictureURL' => SchemaDefinition::TYPE_URL,

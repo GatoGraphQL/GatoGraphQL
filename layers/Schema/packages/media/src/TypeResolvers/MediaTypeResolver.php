@@ -8,6 +8,7 @@ use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -23,6 +24,7 @@ class MediaTypeResolver extends AbstractTypeResolver
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
@@ -32,6 +34,7 @@ class MediaTypeResolver extends AbstractTypeResolver
             $feedbackMessageStore,
             $fieldQueryInterpreter,
             $errorProvider,
+            $schemaDefinitionService,
         );
     }
 

@@ -888,9 +888,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
             if ($args = $schemaDefinitionResolver->getFilteredSchemaDirectiveArgs($typeResolver)) {
-                // Add the args under their name
+                // Add the args under their name.
+                // Watch out: the name is mandatory!
+                // If it hasn't been set, then skip the entry
                 $nameArgs = [];
                 foreach ($args as $arg) {
+                    if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
+                        continue;
+                    }
                     $nameArgs[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
                 }
                 $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $nameArgs;

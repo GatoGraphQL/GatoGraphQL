@@ -43,7 +43,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         return $resolver;
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         switch ($fieldName) {
             case 'author':

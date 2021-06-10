@@ -69,12 +69,12 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         return parent::getTriggerLayoutSubmodule($module);
     }
 
-    public function getSchemaFilterInputType(array $module): ?string
+    public function getSchemaFilterInputType(array $module): string
     {
         $types = [
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
-        return $types[$module[1]] ?? null;
+        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

@@ -49,7 +49,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'users' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),

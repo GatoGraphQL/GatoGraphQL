@@ -23,7 +23,7 @@ class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'thumbFullDimensions' => SchemaDefinition::TYPE_STRING,

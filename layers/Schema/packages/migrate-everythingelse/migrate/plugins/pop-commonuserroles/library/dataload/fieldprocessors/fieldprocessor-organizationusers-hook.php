@@ -26,7 +26,7 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'contactPerson' => SchemaDefinition::TYPE_STRING,

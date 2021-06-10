@@ -25,7 +25,7 @@ class RootMeFieldResolver extends AbstractUserStateFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'me' => SchemaDefinition::TYPE_ID,

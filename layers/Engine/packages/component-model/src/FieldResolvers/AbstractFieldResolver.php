@@ -284,9 +284,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
             // If we found a resolver for this fieldName, get all its properties from it
             if ($schemaDefinitionResolver) {
-                if ($type = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
-                }
+                $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
                 if ($schemaDefinitionResolver->isSchemaFieldResponseNonNullable($typeResolver, $fieldName)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
                 }
@@ -298,9 +296,14 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
                 }
                 if ($args = $schemaDefinitionResolver->getFilteredSchemaFieldArgs($typeResolver, $fieldName)) {
-                    // Add the args under their name
+                    // Add the args under their name.
+                    // Watch out: the name is mandatory!
+                    // If it hasn't been set, then skip the entry
                     $nameArgs = [];
                     foreach ($args as $arg) {
+                        if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
+                            continue;
+                        }
                         $nameArgs[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
                     }
                     $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $nameArgs;
