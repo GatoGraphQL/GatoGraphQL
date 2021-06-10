@@ -286,6 +286,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             // If we found a resolver for this fieldName, get all its properties from it
             if ($schemaDefinitionResolver) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
+                // Use bitwise operators to extract the applied modifiers
+                // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
                 $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
                 if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
