@@ -38,7 +38,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),

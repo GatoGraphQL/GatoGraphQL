@@ -22,7 +22,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'shortDescriptionFormatted' => SchemaDefinition::TYPE_STRING,

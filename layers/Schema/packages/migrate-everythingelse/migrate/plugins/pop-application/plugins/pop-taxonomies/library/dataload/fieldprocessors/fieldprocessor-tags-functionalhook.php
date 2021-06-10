@@ -19,7 +19,7 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'mentionQueryby' => SchemaDefinition::TYPE_STRING,

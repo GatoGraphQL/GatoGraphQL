@@ -27,7 +27,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'printURL' => SchemaDefinition::TYPE_URL,

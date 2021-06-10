@@ -24,7 +24,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'flagURL' => SchemaDefinition::TYPE_URL,

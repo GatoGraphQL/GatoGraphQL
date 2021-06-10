@@ -24,7 +24,7 @@ abstract class AbstractLocationFunctionalFieldResolver extends AbstractFunctiona
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'locationsmapURL' => SchemaDefinition::TYPE_URL,

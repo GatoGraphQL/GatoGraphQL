@@ -30,7 +30,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'commentObjectID' => SchemaDefinition::TYPE_ID,

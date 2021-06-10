@@ -21,7 +21,7 @@ class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'volunteersNeeded' => SchemaDefinition::TYPE_BOOL,

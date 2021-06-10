@@ -42,7 +42,7 @@ class NamespacedTypeFieldResolver extends AbstractDBDataFieldResolver
         return $fieldName == 'name' && isset($fieldArgs['namespaced']);
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,

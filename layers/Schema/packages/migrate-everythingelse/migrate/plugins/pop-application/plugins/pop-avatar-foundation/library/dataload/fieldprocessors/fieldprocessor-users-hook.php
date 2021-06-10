@@ -19,7 +19,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'avatar' => SchemaDefinition::TYPE_OBJECT,

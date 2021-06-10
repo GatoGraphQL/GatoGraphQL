@@ -24,7 +24,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'icon' => SchemaDefinition::TYPE_STRING,

@@ -17,7 +17,7 @@ class GlobalFieldResolver extends AbstractGlobalFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             '__typename' => SchemaDefinition::TYPE_STRING,

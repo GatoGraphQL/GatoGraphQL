@@ -22,7 +22,7 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'excerpt' => SchemaDefinition::TYPE_STRING,

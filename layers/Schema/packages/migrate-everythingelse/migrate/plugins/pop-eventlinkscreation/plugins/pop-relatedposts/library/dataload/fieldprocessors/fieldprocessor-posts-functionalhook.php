@@ -24,7 +24,7 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'addEventLinkURL' => SchemaDefinition::TYPE_URL,

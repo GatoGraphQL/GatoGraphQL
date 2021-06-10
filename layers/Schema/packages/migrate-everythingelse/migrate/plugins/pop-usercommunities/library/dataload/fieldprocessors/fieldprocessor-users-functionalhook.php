@@ -24,7 +24,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'editMembershipURL' => SchemaDefinition::TYPE_URL,

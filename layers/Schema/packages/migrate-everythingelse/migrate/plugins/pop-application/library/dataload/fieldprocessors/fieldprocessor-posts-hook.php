@@ -53,7 +53,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'favicon' => SchemaDefinition::TYPE_OBJECT,

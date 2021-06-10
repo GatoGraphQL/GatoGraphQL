@@ -36,7 +36,7 @@ abstract class AbstractCustomPostListFieldResolver extends AbstractQueryableFiel
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'customPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),

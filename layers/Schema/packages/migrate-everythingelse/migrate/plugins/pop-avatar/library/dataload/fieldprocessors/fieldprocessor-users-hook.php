@@ -19,7 +19,7 @@ class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'userphoto' => SchemaDefinition::TYPE_OBJECT,

@@ -25,7 +25,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'icon' => SchemaDefinition::TYPE_STRING,

@@ -28,7 +28,7 @@ trait RolesFieldResolverTrait
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'roles' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),

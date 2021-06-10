@@ -39,7 +39,7 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'setCategories' => SchemaDefinition::TYPE_ID,

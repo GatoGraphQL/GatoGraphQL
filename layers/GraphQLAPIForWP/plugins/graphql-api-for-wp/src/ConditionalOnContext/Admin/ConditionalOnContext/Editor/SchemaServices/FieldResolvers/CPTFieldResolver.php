@@ -51,7 +51,7 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $ret = match($fieldName) {
             'accessControlLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),

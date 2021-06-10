@@ -22,7 +22,7 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'icon' => SchemaDefinition::TYPE_STRING,

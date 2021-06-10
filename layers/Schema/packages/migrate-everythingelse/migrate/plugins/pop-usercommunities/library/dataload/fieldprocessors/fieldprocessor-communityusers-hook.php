@@ -23,7 +23,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'members' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),

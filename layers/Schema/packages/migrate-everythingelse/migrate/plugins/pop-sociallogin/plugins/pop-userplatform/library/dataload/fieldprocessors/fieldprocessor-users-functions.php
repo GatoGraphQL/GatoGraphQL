@@ -20,7 +20,7 @@ class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'url' => SchemaDefinition::TYPE_URL,

@@ -27,7 +27,7 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,

@@ -20,7 +20,7 @@ trait FieldSchemaDefinitionResolverTrait
         return null;
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
             return $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);

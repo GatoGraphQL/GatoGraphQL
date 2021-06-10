@@ -23,7 +23,7 @@ class PoP_LocationPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts exten
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'addLocationPostLinkURL' => SchemaDefinition::TYPE_URL,

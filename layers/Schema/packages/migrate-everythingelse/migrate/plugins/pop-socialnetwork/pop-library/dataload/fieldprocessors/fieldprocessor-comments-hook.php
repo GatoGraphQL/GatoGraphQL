@@ -21,7 +21,7 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'taggedusers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),

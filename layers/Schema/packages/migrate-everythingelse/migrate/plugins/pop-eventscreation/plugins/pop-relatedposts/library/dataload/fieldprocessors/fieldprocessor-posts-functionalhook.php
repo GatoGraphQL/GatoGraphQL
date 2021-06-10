@@ -24,7 +24,7 @@ class PoP_EventsCreation_DataLoad_FunctionalFieldResolver extends AbstractFuncti
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'addEventURL' => SchemaDefinition::TYPE_URL,

@@ -22,7 +22,7 @@ class PoP_Notifications_UserPlatform_DataLoad_FieldResolver_Notifications extend
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'icon' => SchemaDefinition::TYPE_STRING,

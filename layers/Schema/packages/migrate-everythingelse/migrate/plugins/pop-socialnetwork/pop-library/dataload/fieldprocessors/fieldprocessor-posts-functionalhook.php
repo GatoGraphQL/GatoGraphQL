@@ -31,7 +31,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'recommendPostURL' => SchemaDefinition::TYPE_URL,

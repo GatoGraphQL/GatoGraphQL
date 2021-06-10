@@ -24,7 +24,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'icon' => SchemaDefinition::TYPE_STRING,

@@ -29,7 +29,7 @@ class VariablesAsExpressionsRootFieldResolver extends AbstractDBDataFieldResolve
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             'exportedVariables' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),

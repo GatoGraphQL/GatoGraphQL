@@ -23,7 +23,7 @@ class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
 			'addpostURL' => SchemaDefinition::TYPE_URL,

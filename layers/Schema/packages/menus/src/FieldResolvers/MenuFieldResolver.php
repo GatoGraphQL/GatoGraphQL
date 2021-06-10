@@ -27,7 +27,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         ];
     }
 
-    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
             // 'items' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
