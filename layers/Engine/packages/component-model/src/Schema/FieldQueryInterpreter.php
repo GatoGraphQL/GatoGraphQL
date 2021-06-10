@@ -50,6 +50,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * @var array<string, array>
      */
+    private array $fieldArgumentNameIsArrayTypesCache = [];
+    /**
+     * @var array<string, array>
+     */
     private array $directiveArgumentNameTypesCache = [];
     /**
      * @var array<string, array>
@@ -758,6 +762,26 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $fieldArgNameTypes;
+    }
+
+    protected function getFieldArgumentNameIsArrayTypes(TypeResolverInterface $typeResolver, string $field): array
+    {
+        if (!isset($this->fieldArgumentNameIsArrayTypesCache[get_class($typeResolver)][$field])) {
+            $this->fieldArgumentNameIsArrayTypesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameIsArrayTypes($typeResolver, $field);
+        }
+        return $this->fieldArgumentNameIsArrayTypesCache[get_class($typeResolver)][$field];
+    }
+
+    protected function doGetFieldArgumentNameIsArrayTypes(TypeResolverInterface $typeResolver, string $field): array
+    {
+        // Get the field argument types, to know to what type it will cast the value
+        $fieldArgNameIsArrayTypes = [];
+        if ($fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field)) {
+            foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
+                $fieldArgNameIsArrayTypes[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE];
+            }
+        }
+        return $fieldArgNameIsArrayTypes;
     }
 
     protected function getFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): array
