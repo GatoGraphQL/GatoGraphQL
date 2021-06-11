@@ -111,17 +111,15 @@ trait FieldOrDirectiveResolverTrait
                         );
                         continue;
                     }
-                    foreach ($fieldOrDirectiveArgumentValue as $fieldOrDirectiveArgumentValueItem) {
-                        $this->doValidateEnumFieldOrDirectiveArgumentsItem(
-                            $errors,
-                            $deprecations,
-                            $schemaFieldOrDirectiveArgumentEnumValues,
-                            $fieldOrDirectiveArgumentValueItem,
-                            $fieldOrDirectiveArgumentName,
-                            $fieldOrDirectiveName,
-                            $type,
-                        );
-                    }
+                    $this->doValidateEnumFieldOrDirectiveArgumentsItem(
+                        $errors,
+                        $deprecations,
+                        $schemaFieldOrDirectiveArgumentEnumValues,
+                        $fieldOrDirectiveArgumentValue,
+                        $fieldOrDirectiveArgumentName,
+                        $fieldOrDirectiveName,
+                        $type,
+                    );
                 } else {
                     if (is_array($fieldOrDirectiveArgumentValue)) {
                         $errors[] = sprintf(
@@ -136,7 +134,7 @@ trait FieldOrDirectiveResolverTrait
                         $errors,
                         $deprecations,
                         $schemaFieldOrDirectiveArgumentEnumValues,
-                        $fieldOrDirectiveArgumentValue,
+                        [$fieldOrDirectiveArgumentValue],
                         $fieldOrDirectiveArgumentName,
                         $fieldOrDirectiveName,
                         $type,
@@ -161,35 +159,66 @@ trait FieldOrDirectiveResolverTrait
         array &$errors,
         array &$deprecations,
         array $schemaFieldOrDirectiveArgumentEnumValues,
-        mixed $fieldOrDirectiveArgumentValue,
+        array $fieldOrDirectiveArgumentValueItems,
         string $fieldOrDirectiveArgumentName,
         string $fieldOrDirectiveName,
         string $type
     ): void {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValue];
-        if ($fieldOrDirectiveArgumentValueDefinition === null) {
-            // Remove deprecated ones and extract their names
-            $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
-            $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
-            $errors[] = sprintf(
-                $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
-                $fieldOrDirectiveArgumentValue,
-                $fieldOrDirectiveArgumentName,
-                $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                $fieldOrDirectiveName,
-                implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
-            );
-        } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
-            // Check if this enumValue is deprecated
-            $deprecations[] = sprintf(
-                $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
-                $fieldOrDirectiveArgumentValue,
-                $fieldOrDirectiveArgumentName,
-                $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                $fieldOrDirectiveName,
-                $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION]
-            );
+        $errorItems = $deprecationItems = [];
+        foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
+            $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem];
+            if ($fieldOrDirectiveArgumentValueDefinition === null) {
+                // Remove deprecated ones and extract their names
+                $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
+                $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
+                $errorItems[] = $fieldOrDirectiveArgumentValueItem;
+            } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
+                // Check if this enumValue is deprecated
+                $deprecationItems[] = $fieldOrDirectiveArgumentValueItem;
+            }
+        }
+        if ($errorItems) {
+            if (count($errorItems) === 1) {
+                $errors[] = sprintf(
+                    $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($translationAPI->__('\', \''), $errorItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                );
+            } else {
+                $errors[] = sprintf(
+                    $translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($translationAPI->__('\', \''), $errorItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                );
+            }
+        }
+        if ($deprecationItems) {
+            if (count($deprecationItems) === 1) {
+                $deprecations[] = sprintf(
+                    $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
+                    implode($translationAPI->__('\', \''), $deprecationItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION]
+                );
+            } else {
+                $deprecations[] = sprintf(
+                    $translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are deprecated: \'%5$s\'', 'component-model'),
+                    implode($translationAPI->__('\', \''), $deprecationItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION]
+                );
+            }
         }
     }
 }
