@@ -45,7 +45,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'fullSchema':
-                return SchemaTypeModifiers::NON_NULLABLE;
+                return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;
         }
         return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
     }
