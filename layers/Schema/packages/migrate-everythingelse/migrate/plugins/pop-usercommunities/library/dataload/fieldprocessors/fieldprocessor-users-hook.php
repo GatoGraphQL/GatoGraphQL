@@ -41,8 +41,8 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
             'memberprivileges' => SchemaDefinition::TYPE_ENUM,
             'membertags' => SchemaDefinition::TYPE_ENUM,
             'isCommunity' => SchemaDefinition::TYPE_BOOL,
-            'communities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'activeCommunities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'communities' => SchemaDefinition::TYPE_ID,
+            'activeCommunities' => SchemaDefinition::TYPE_ID,
             'hasActiveCommunities' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -50,15 +50,15 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'hasActiveCommunities'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'communities',
-            'activeCommunities',
-            'hasActiveCommunities',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'activeCommunities'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
