@@ -664,8 +664,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
 
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
-        $directiveResolvers = $directiveNameResolvers[$directiveName];
-        if (is_null($directiveResolvers)) {
+        $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
+        if ($directiveResolvers === null) {
             return null;
         }
 
