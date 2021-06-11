@@ -28,6 +28,8 @@ interface ErrorProviderInterface
      * @return Error
      */
     public function getNonNullableFieldError(string $fieldName): Error;
+    public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error;
+    public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error;
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error;
     public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
     public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error;

@@ -664,8 +664,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
 
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
-        $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
-        if ($directiveResolvers === null) {
+        $directiveResolvers = $directiveNameResolvers[$directiveName];
+        if (is_null($directiveResolvers)) {
             return null;
         }
 
@@ -1393,11 +1393,24 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     }
                     // Resolve the value
                     $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-                    // If it is null and the field is nonNullable, return an error
-                    if (is_null($value)) {
-                        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null) {
+
+                    // Validate that the value is what was defined in the schema, or throw a corresponding error
+                    $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                    if ($value === null) {
+                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
                             return $this->errorProvider->getNonNullableFieldError($fieldName);
+                        }
+                    } else {
+                        // If may be array or not, then there's no validation to do
+                        $fieldMayBeArrayType = ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false);
+                        if (!$fieldMayBeArrayType) {
+                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                            if (is_array($value) && !$fieldIsArrayType) {
+                                return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
+                            }
+                            if (!is_array($value) && $fieldIsArrayType) {
+                                return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
+                            }
                         }
                     }
                     // Everything is good, return the value (which could also be an Error!)

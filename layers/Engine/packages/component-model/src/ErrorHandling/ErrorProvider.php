@@ -53,9 +53,6 @@ class ErrorProvider implements ErrorProviderInterface
 
     /**
      * Return an error to indicate that a non-nullable field is returning a `null` value
-     *
-     * @param string $fieldName
-     * @return Error
      */
     public function getNonNullableFieldError(string $fieldName): Error
     {
@@ -69,6 +66,41 @@ class ErrorProvider implements ErrorProviderInterface
             )
         );
     }
+
+    /**
+     * Return an error to indicate that an array field is returning a non-array value
+     */
+    public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_BE_ARRAY_FIELD,
+            sprintf(
+                $translationAPI->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
+                $fieldName,
+                (string) $value
+            )
+        );
+    }
+
+    /**
+     * Return an error to indicate that a non-array field is returning an array value
+     */
+    public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
+            sprintf(
+                $translationAPI->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
+                $fieldName,
+                json_encode($value)
+            )
+        );
+    }
+
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error
     {
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
