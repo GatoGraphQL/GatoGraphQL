@@ -92,11 +92,11 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
+        return match($module[1]) {
             self::MODULE_FILTERINPUT_LINKCATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             self::MODULE_FILTERINPUT_LINKACCESS => SchemaDefinition::TYPE_STRING,
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

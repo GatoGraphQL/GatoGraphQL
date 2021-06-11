@@ -54,11 +54,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
+        return match($module[1]) {
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_EMAILS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_EMAIL),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

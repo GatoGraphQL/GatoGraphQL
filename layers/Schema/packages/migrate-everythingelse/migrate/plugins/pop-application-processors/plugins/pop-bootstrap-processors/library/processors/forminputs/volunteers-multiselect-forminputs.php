@@ -69,10 +69,10 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
+        return match($module[1]) {
             self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_BOOL),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string
