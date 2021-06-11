@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Enums\CustomPostModeratedStatusEnum;
 use PoPSchema\EverythingElse\Enums\CustomPostUnmoderatedStatusEnum;

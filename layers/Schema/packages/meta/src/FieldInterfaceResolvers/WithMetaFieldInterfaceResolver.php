@@ -7,7 +7,6 @@ namespace PoPSchema\Meta\FieldInterfaceResolvers;
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 
 class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {

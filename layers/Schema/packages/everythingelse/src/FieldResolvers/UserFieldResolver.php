@@ -7,7 +7,6 @@ namespace PoPSchema\Locations\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
