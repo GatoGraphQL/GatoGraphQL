@@ -1391,6 +1391,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     if ($validationErrorDescriptions = $fieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
+                    
                     // Resolve the value
                     $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
 
