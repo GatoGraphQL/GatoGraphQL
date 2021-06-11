@@ -69,7 +69,8 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'roles',
-                SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Roles to validate if the logged-in user has (any of them)', 'component-model'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],

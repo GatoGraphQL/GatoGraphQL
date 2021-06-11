@@ -69,7 +69,8 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'capabilities',
-                SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Capabilities to validate if the logged-in user has (any of them)', 'component-model'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
