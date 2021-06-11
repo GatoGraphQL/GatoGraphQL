@@ -175,7 +175,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
-        if ($schemaFieldArgs = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
              * Validate mandatory values
              */
@@ -184,7 +184,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                     $typeResolver,
                     $fieldName,
                     $fieldArgs,
-                    $schemaFieldArgs,
+                    $fieldArgsSchemaDefinition,
                     ResolverTypes::FIELD
                 )
             ) {
@@ -200,7 +200,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $typeResolver,
                 $fieldName,
                 $fieldArgs,
-                $schemaFieldArgs,
+                $fieldArgsSchemaDefinition,
                 ResolverTypes::FIELD
             );
             if ($maybeError) {
@@ -221,7 +221,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveSchemaValidationDeprecationDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
-        if ($schemaFieldArgs = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             list(
                 $maybeError,
                 $maybeDeprecation
@@ -229,7 +229,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $typeResolver,
                 $fieldName,
                 $fieldArgs,
-                $schemaFieldArgs,
+                $fieldArgsSchemaDefinition,
                 ResolverTypes::FIELD
             );
             if ($maybeDeprecation) {

@@ -28,21 +28,21 @@ class SchemaHelpers
         ));
     }
 
-    public static function getSchemaMandatoryFieldArgs(array $schemaFieldArgs)
+    public static function getSchemaMandatoryFieldOrDirectiveArgs(array $fieldOrDirectiveArgsSchemaDefinition)
     {
         return array_filter(
-            $schemaFieldArgs,
-            function ($schemaFieldArg) {
-                return isset($schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY]) && $schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY];
+            $fieldOrDirectiveArgsSchemaDefinition,
+            function ($fieldOrDirectiveArgSchemaDefinition) {
+                return isset($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY]) && $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY];
             }
         );
     }
 
-    public static function getSchemaEnumTypeFieldArgs(array $schemaFieldArgs)
+    public static function getEnumTypeFieldOrDirectiveArgsSchemaDefinition(array $fieldOrDirectiveArgsSchemaDefinition)
     {
         return array_filter(
-            $schemaFieldArgs,
-            fn ($schemaFieldArg) => $schemaFieldArg[SchemaDefinition::ARGNAME_TYPE] == SchemaDefinition::TYPE_ENUM
+            $fieldOrDirectiveArgsSchemaDefinition,
+            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] == SchemaDefinition::TYPE_ENUM
         );
     }
 

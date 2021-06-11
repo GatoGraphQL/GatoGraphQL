@@ -387,7 +387,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs = []): ?array
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
-        if ($schemaDirectiveArgs = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
              * Validate mandatory values
              */
@@ -396,7 +396,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $typeResolver,
                     $directiveName,
                     $directiveArgs,
-                    $schemaDirectiveArgs,
+                    $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
                 )
             ) {
@@ -412,7 +412,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $typeResolver,
                 $directiveName,
                 $directiveArgs,
-                $schemaDirectiveArgs,
+                $directiveArgsSchemaDefinition,
                 ResolverTypes::DIRECTIVE
             );
             if ($maybeError) {
@@ -531,7 +531,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     public function resolveSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
-        if ($schemaDirectiveArgs = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             list(
                 $maybeError,
                 $maybeDeprecation
@@ -539,7 +539,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $typeResolver,
                 $directiveName,
                 $directiveArgs,
-                $schemaDirectiveArgs,
+                $directiveArgsSchemaDefinition,
                 ResolverTypes::DIRECTIVE
             );
             if ($maybeDeprecation) {
