@@ -9,6 +9,11 @@ interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     public function getSchemaFilterInputType(array $module): string;
     public function getSchemaFilterInputDescription(array $module): ?string;
     public function getSchemaFilterInputDeprecationDescription(array $module): ?string;
+    public function getSchemaFilterInputIsArrayType(array $module): bool;
+    /**
+     * This function is needed by PoP API, not by GraphQL
+     */
+    public function getSchemaFilterInputMayBeArrayType(array $module): bool;
     public function getSchemaFilterInputMandatory(array $module): bool;
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void;
 }

@@ -8,7 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
@@ -37,8 +36,8 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'locations' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'locations' => SchemaDefinition::TYPE_ID,
+            'categories' => SchemaDefinition::TYPE_ID,
             'dates' => SchemaDefinition::TYPE_STRING,
             'times' => SchemaDefinition::TYPE_STRING,
             'startDateReadable' => SchemaDefinition::TYPE_STRING,
@@ -50,16 +49,20 @@ class EventFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'categories':
-            case 'dates':
-            case 'times':
-            case 'startDateReadable':
-            case 'daterange':
-            case 'daterangetime':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'dates',
+            'times',
+            'startDateReadable',
+            'daterange',
+            'daterangetime'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'locations'
+                => SchemaTypeModifiers::IS_ARRAY,
+            'categories'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

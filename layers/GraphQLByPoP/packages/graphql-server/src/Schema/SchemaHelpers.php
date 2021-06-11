@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers as ComponentModelSchemaHelpers;
 
 class SchemaHelpers
 {
@@ -20,17 +19,12 @@ class SchemaHelpers
      * - field response: isNonNullable
      * - field argument: isMandatory (its provided value can still be null)
      */
-    public static function getTypeToOutputInSchema(string $type, ?bool $isNonNullableOrMandatory = false): string
+    public static function getTypeToOutputInSchema(string $type, ?bool $isArray = false, ?bool $isNonNullableOrMandatory = false): string
     {
-        list (
-            $arrayInstances,
-            $convertedType
-        ) = ComponentModelSchemaHelpers::getTypeComponents($type);
-
         // Convert the type name to standards by GraphQL
-        $convertedType = self::convertTypeNameToGraphQLStandard($convertedType);
+        $convertedType = self::convertTypeNameToGraphQLStandard($type);
 
-        return self::convertTypeToSDLSyntax($arrayInstances, $convertedType, $isNonNullableOrMandatory);
+        return self::convertTypeToSDLSyntax($isArray ? 1 : 0, $convertedType, $isNonNullableOrMandatory);
     }
     public static function convertTypeNameToGraphQLStandard(string $typeName): string
     {
@@ -49,7 +43,6 @@ class SchemaHelpers
             SchemaDefinition::TYPE_EMAIL => GraphQLServerSchemaDefinition::TYPE_EMAIL,
             SchemaDefinition::TYPE_IP => GraphQLServerSchemaDefinition::TYPE_IP,
             SchemaDefinition::TYPE_ENUM => GraphQLServerSchemaDefinition::TYPE_ENUM,
-            SchemaDefinition::TYPE_ARRAY => GraphQLServerSchemaDefinition::TYPE_ARRAY,
             SchemaDefinition::TYPE_INPUT_OBJECT => GraphQLServerSchemaDefinition::TYPE_INPUT_OBJECT,
         ];
         if (isset($conversionTypes[$typeName])) {

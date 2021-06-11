@@ -1,10 +1,10 @@
 <?php
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_Module_Processor_PostSelectableTypeaheadFormComponentsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -71,10 +71,18 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => SchemaDefinition::TYPE_ID,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Events\FieldResolvers;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Events\TypeResolvers\EventTypeResolver;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
 class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -33,10 +33,21 @@ class EventFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'multilayoutKeys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'latestcountsTriggerValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
+            'latestcountsTriggerValues' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'multilayoutKeys',
+            'latestcountsTriggerValues'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

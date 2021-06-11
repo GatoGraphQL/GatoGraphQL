@@ -6,7 +6,6 @@ namespace PoPSchema\UserRoles\FieldResolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
@@ -32,22 +31,21 @@ trait RolesFieldResolverTrait
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'roles' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'capabilities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'roles' => SchemaDefinition::TYPE_STRING,
+            'capabilities' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
             'roles',
-            'capabilities',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'capabilities'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

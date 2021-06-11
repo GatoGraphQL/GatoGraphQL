@@ -11,7 +11,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
@@ -82,15 +81,23 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
+        return match($module[1]) {
             self::MODULE_FILTERINPUT_ORDER => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_LIMIT => SchemaDefinition::TYPE_INT,
             self::MODULE_FILTERINPUT_OFFSET => SchemaDefinition::TYPE_INT,
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_IDS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_IDS => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

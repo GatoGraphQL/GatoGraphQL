@@ -11,7 +11,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\CustomPosts\Enums\CustomPostStatusEnum;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
@@ -73,12 +72,22 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => true,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
+            default => false,
+        };
     }
 
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void

@@ -6,7 +6,6 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
@@ -71,7 +70,8 @@ abstract class AbstractRootFieldResolver extends AbstractQueryableFieldResolver
                     ],
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
-                        SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
+                        SchemaDefinition::ARGNAME_IS_ARRAY => true,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                             $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                             $categoryTypeResolver->getTypeName()

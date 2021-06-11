@@ -8,7 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
@@ -36,49 +35,53 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        $types = [
-            'concat' => SchemaDefinition::TYPE_STRING,
-            'divide' => SchemaDefinition::TYPE_FLOAT,
-            'arrayRandom' => SchemaDefinition::TYPE_MIXED,
-            'arrayJoin' => SchemaDefinition::TYPE_STRING,
-            'arrayItem' => SchemaDefinition::TYPE_MIXED,
-            'arraySearch' => SchemaDefinition::TYPE_MIXED,
-            'arrayFill' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayUnique' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayDiff' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayAddItem' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayAsQueryStr' => SchemaDefinition::TYPE_STRING,
-            'upperCase' => SchemaDefinition::TYPE_STRING,
-            'lowerCase' => SchemaDefinition::TYPE_STRING,
-            'titleCase' => SchemaDefinition::TYPE_STRING,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
-    {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'divide'
+                => SchemaDefinition::TYPE_FLOAT,
             'concat',
-            'divide',
-            'arrayRandom',
             'arrayJoin',
+            'arrayAsQueryStr',
+            'upperCase',
+            'lowerCase',
+            'titleCase'
+                => SchemaDefinition::TYPE_STRING,
+            'arrayRandom',
             'arrayItem',
             'arraySearch',
             'arrayFill',
             'arrayValues',
             'arrayUnique',
             'arrayDiff',
-            'arrayAddItem',
+            'arrayAddItem'
+                => SchemaDefinition::TYPE_MIXED,
+            default
+                => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'concat',
+            'divide',
+            'arrayRandom',
+            'arrayJoin',
+            'arrayItem',
+            'arraySearch',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
-            'titleCase',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'titleCase'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'arrayFill',
+            'arrayValues',
+            'arrayUnique',
+            'arrayDiff',
+            'arrayAddItem'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -113,7 +116,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'values',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Strings to concatenate', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -145,7 +149,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array of elements from which to randomly select one', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ]
@@ -158,7 +163,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array of strings to be joined all together', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -176,7 +182,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array containing the element to retrieve', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -195,7 +202,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array containing the element to search', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -214,13 +222,15 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'target',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array to be added elements coming from the source array', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'source',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array whose elements will be added to the target array', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -232,7 +242,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'properties',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
                         ],
                     ]
@@ -244,7 +255,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array from which to retrieve the values', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -257,7 +269,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to operate on', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -270,7 +283,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'arrays',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -283,7 +297,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to add an item on', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -307,7 +322,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to represented as a string', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],

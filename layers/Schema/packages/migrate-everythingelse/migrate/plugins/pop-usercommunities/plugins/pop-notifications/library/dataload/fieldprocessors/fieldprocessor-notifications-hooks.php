@@ -5,7 +5,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -46,17 +46,32 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         $types = [
             'editUserMembershipURL' => SchemaDefinition::TYPE_URL,
             'communityMembersURL' => SchemaDefinition::TYPE_URL,
-            'memberstatus' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'memberStatusByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'memberprivileges' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'memberPrivilegesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'membertags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'memberTagsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberstatus' => SchemaDefinition::TYPE_ENUM,
+            'memberStatusByName' => SchemaDefinition::TYPE_STRING,
+            'memberprivileges' => SchemaDefinition::TYPE_ENUM,
+            'memberPrivilegesByName' => SchemaDefinition::TYPE_STRING,
+            'membertags' => SchemaDefinition::TYPE_ENUM,
+            'memberTagsByName' => SchemaDefinition::TYPE_STRING,
             'icon' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'message' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'memberstatus',
+            'memberStatusByName',
+            'memberprivileges',
+            'memberPrivilegesByName',
+            'membertags',
+            'memberTagsByName'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

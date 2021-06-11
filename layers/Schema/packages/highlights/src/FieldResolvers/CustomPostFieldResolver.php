@@ -8,7 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -36,7 +35,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'highlights' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'highlights' => SchemaDefinition::TYPE_ID,
             'hasHighlights' => SchemaDefinition::TYPE_BOOL,
             'highlightsCount' => SchemaDefinition::TYPE_INT,
         ];
@@ -45,15 +44,15 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'highlights',
+        return match($fieldName) {
             'hasHighlights',
-            'highlightsCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'highlightsCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'highlights'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

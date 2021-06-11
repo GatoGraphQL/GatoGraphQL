@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Users\ModuleProcessors;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
@@ -54,11 +53,19 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
+        return match($module[1]) {
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_EMAILS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_EMAIL),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+            self::MODULE_FILTERINPUT_EMAILS => SchemaDefinition::TYPE_EMAIL,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_EMAILS => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

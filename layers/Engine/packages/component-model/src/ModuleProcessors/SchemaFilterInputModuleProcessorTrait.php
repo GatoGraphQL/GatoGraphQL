@@ -25,6 +25,17 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return null;
     }
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return false;
+    }
+    /**
+     * This function is needed by PoP API, not by GraphQL
+     */
+    public function getSchemaFilterInputMayBeArrayType(array $module): bool
+    {
+        return false;
+    }
     public function getSchemaFilterInputMandatory(array $module): bool
     {
         return false;

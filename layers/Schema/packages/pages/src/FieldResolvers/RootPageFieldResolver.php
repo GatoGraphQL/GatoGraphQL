@@ -7,7 +7,6 @@ namespace PoPSchema\Pages\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CustomPostRelationalFieldDataloadModuleProcessor;
@@ -62,10 +61,10 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'page' => SchemaDefinition::TYPE_ID,
-            'pages' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'pages' => SchemaDefinition::TYPE_ID,
             'pageCount' => SchemaDefinition::TYPE_INT,
             'unrestrictedPage' => SchemaDefinition::TYPE_ID,
-            'unrestrictedPages' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'unrestrictedPages' => SchemaDefinition::TYPE_ID,
             'unrestrictedPageCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -73,16 +72,16 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'pages',
+        return match($fieldName) {
             'pageCount',
-            'unrestrictedPages',
-            'unrestrictedPageCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'unrestrictedPageCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'pages',
+            'unrestrictedPages'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array

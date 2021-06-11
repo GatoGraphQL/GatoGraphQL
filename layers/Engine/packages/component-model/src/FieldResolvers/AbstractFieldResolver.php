@@ -175,7 +175,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
-        if ($schemaFieldArgs = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
              * Validate mandatory values
              */
@@ -184,27 +184,44 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                     $typeResolver,
                     $fieldName,
                     $fieldArgs,
-                    $schemaFieldArgs,
+                    $fieldArgsSchemaDefinition,
                     ResolverTypes::FIELD
                 )
             ) {
                 return [$maybeError];
             }
 
-            /**
-             * Validate enums
-             */
-            list(
-                $maybeError
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
-                $fieldName,
-                $fieldArgs,
-                $schemaFieldArgs,
-                ResolverTypes::FIELD
-            );
-            if ($maybeError) {
-                return [$maybeError];
+            if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
+                /**
+                 * Validate array types are provided as arrays
+                 */
+                if (
+                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+                        $typeResolver,
+                        $fieldName,
+                        $fieldArgs,
+                        $fieldArgsSchemaDefinition,
+                        ResolverTypes::FIELD
+                    )
+                ) {
+                    return [$maybeError];
+                }
+
+                /**
+                 * Validate enums
+                 */
+                list(
+                    $maybeError
+                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
+                    $typeResolver,
+                    $fieldName,
+                    $fieldArgs,
+                    $fieldArgsSchemaDefinition,
+                    ResolverTypes::FIELD
+                );
+                if ($maybeError) {
+                    return [$maybeError];
+                }
             }
         }
         // If a MutationResolver is declared, let it resolve the value
@@ -221,7 +238,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     public function resolveSchemaValidationDeprecationDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
-        if ($schemaFieldArgs = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             list(
                 $maybeError,
                 $maybeDeprecation
@@ -229,7 +246,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 $typeResolver,
                 $fieldName,
                 $fieldArgs,
-                $schemaFieldArgs,
+                $fieldArgsSchemaDefinition,
                 ResolverTypes::FIELD
             );
             if ($maybeDeprecation) {
@@ -286,9 +303,17 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             // If we found a resolver for this fieldName, get all its properties from it
             if ($schemaDefinitionResolver) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
+                // Use bitwise operators to extract the applied modifiers
+                // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
                 $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
                 if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
+                }
+                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                }
+                if ($schemaTypeModifiers & SchemaTypeModifiers::MAY_BE_ARRAY) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] = true;
                 }
                 if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($typeResolver, $fieldName)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;

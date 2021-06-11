@@ -7,7 +7,6 @@ namespace PoPSchema\PostTags\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
@@ -48,24 +47,24 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'postTag' => SchemaDefinition::TYPE_ID,
-            'postTags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'postTags' => SchemaDefinition::TYPE_ID,
             'postTagCount' => SchemaDefinition::TYPE_INT,
-            'postTagNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'postTagNames' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'postTagCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'postTags',
-            'postTagCount',
-            'postTagNames',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'postTagNames'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array

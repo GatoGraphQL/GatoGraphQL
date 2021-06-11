@@ -8,7 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Misc\Extract;
@@ -145,7 +144,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'values',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_BOOL),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                                 $this->translationAPI->__('The array of values on which to execute the `%s` operation', 'component-model'),
                                 strtoupper($fieldName)
@@ -218,7 +218,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'object',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The object to retrieve the data from', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -238,6 +239,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_MAY_BE_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The input to be echoed back', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
@@ -256,7 +258,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'values',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The values to replace the placeholders with inside the string', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],

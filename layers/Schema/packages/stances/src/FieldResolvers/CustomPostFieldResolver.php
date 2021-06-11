@@ -7,7 +7,6 @@ namespace PoPSchema\Stances\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -38,7 +37,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'stances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'stances' => SchemaDefinition::TYPE_ID,
             'hasStances' => SchemaDefinition::TYPE_BOOL,
             'stanceProCount' => SchemaDefinition::TYPE_INT,
             'stanceNeutralCount' => SchemaDefinition::TYPE_INT,
@@ -49,17 +48,17 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'stances',
+        return match($fieldName) {
             'hasStances',
             'stanceProCount',
             'stanceNeutralCount',
-            'stanceAgainstCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'stanceAgainstCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'stances'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

@@ -7,7 +7,6 @@ namespace PoPSchema\Categories\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\Categories\ComponentConfiguration;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
@@ -30,24 +29,24 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'categories' => SchemaDefinition::TYPE_ID,
             'categoryCount' => SchemaDefinition::TYPE_INT,
-            'categoryNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'categoryNames' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'categoryCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'categories',
-            'categoryCount',
-            'categoryNames',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'categoryNames'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

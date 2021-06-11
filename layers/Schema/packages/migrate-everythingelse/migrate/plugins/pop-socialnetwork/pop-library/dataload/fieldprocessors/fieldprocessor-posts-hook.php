@@ -2,7 +2,6 @@
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -33,8 +32,8 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'taggedusers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'recommendedby' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'taggedusers' => SchemaDefinition::TYPE_ID,
+            'recommendedby' => SchemaDefinition::TYPE_ID,
             'recommendPostCount' => SchemaDefinition::TYPE_INT,
             'upvotePostCount' => SchemaDefinition::TYPE_INT,
             'downvotePostCount' => SchemaDefinition::TYPE_INT,
@@ -44,17 +43,17 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'taggedusers',
-            'recommendedby',
+        return match($fieldName) {
             'recommendPostCount',
             'upvotePostCount',
-            'downvotePostCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'downvotePostCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'taggedusers',
+            'recommendedby'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

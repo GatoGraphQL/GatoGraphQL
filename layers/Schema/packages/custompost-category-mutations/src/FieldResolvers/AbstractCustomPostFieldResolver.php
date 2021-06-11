@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPostCategoryMutations\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
@@ -69,7 +68,8 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
-                        SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
+                        SchemaDefinition::ARGNAME_IS_ARRAY => true,
                         SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                             $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                             $categoryTypeResolver->getTypeName()

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
@@ -59,15 +59,27 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 			'favicon' => SchemaDefinition::TYPE_OBJECT,
             'thumb' => SchemaDefinition::TYPE_OBJECT,
             'thumbFullSrc' => SchemaDefinition::TYPE_URL,
-            'authors' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'topics' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'authors' => SchemaDefinition::TYPE_ID,
+            'topics' => SchemaDefinition::TYPE_STRING,
             'hasTopics' => SchemaDefinition::TYPE_BOOL,
-            'appliesto' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'appliesto' => SchemaDefinition::TYPE_STRING,
             'hasAppliesto' => SchemaDefinition::TYPE_BOOL,
             'hasUserpostactivity' => SchemaDefinition::TYPE_BOOL,
             'userPostActivityCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'authors',
+            'topics',
+            'appliesto'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

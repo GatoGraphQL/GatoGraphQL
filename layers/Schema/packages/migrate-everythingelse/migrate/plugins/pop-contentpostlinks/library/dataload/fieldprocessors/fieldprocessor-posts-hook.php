@@ -3,7 +3,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -42,8 +41,8 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             'linkcontent' => SchemaDefinition::TYPE_STRING,
             'linkaccess' => SchemaDefinition::TYPE_ENUM,
             'linkAccessByName' => SchemaDefinition::TYPE_STRING,
-            'linkcategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'linkCategoriesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'linkcategories' => SchemaDefinition::TYPE_ENUM,
+            'linkCategoriesByName' => SchemaDefinition::TYPE_STRING,
             'hasLinkCategories' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -51,14 +50,16 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
             'content',
             'hasLinkCategories',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'linkcategories',
+            'linkCategoriesByName'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

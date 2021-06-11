@@ -10,7 +10,6 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Route\RouteUtils;
@@ -92,7 +91,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'objectID' => SchemaDefinition::TYPE_ID,
             'userID' => SchemaDefinition::TYPE_ID,
             'websiteURL' => SchemaDefinition::TYPE_URL,
-            'userCaps' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'userCaps' => SchemaDefinition::TYPE_STRING,
             'histIp' => SchemaDefinition::TYPE_IP,
             'histTime' => SchemaDefinition::TYPE_DATE,
             'histTimeNogmt' => SchemaDefinition::TYPE_DATE,
@@ -117,7 +116,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
             'action',
             'objectType',
             'objectID',
@@ -132,12 +131,13 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             'isUserNotification',
             'isCommentNotification',
             'isTaxonomyNotification',
-            'isAction',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'isAction'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'userCaps'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

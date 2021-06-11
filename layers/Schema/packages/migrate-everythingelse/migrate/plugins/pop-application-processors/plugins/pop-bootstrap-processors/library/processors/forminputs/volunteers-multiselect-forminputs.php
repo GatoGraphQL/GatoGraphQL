@@ -4,7 +4,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 
 class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_BooleanMultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -69,10 +68,18 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_BOOL),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => SchemaDefinition::TYPE_BOOL,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

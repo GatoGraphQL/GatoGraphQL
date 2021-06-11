@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class FieldFieldResolver extends AbstractDBDataFieldResolver
@@ -38,27 +37,29 @@ class FieldFieldResolver extends AbstractDBDataFieldResolver
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'args' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'args' => SchemaDefinition::TYPE_ID,
             'type' => SchemaDefinition::TYPE_STRING,
             'isDeprecated' => SchemaDefinition::TYPE_BOOL,
             'deprecationReason' => SchemaDefinition::TYPE_STRING,
-            'extensions' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+            'extensions' => SchemaDefinition::TYPE_MIXED,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
             'name',
-            'args',
             'type',
-            'isDeprecated',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'isDeprecated'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'extensions'
+                => SchemaTypeModifiers::IS_ARRAY,
+            'args'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

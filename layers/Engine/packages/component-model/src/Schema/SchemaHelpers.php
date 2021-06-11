@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use InvalidArgumentException;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
@@ -28,21 +26,21 @@ class SchemaHelpers
         ));
     }
 
-    public static function getSchemaMandatoryFieldArgs(array $schemaFieldArgs)
+    public static function getSchemaMandatoryFieldOrDirectiveArgs(array $fieldOrDirectiveArgsSchemaDefinition)
     {
         return array_filter(
-            $schemaFieldArgs,
-            function ($schemaFieldArg) {
-                return isset($schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY]) && $schemaFieldArg[SchemaDefinition::ARGNAME_MANDATORY];
+            $fieldOrDirectiveArgsSchemaDefinition,
+            function ($fieldOrDirectiveArgSchemaDefinition) {
+                return isset($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY]) && $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY];
             }
         );
     }
 
-    public static function getSchemaEnumTypeFieldArgs(array $schemaFieldArgs)
+    public static function getEnumTypeFieldOrDirectiveArgsSchemaDefinition(array $fieldOrDirectiveArgsSchemaDefinition)
     {
         return array_filter(
-            $schemaFieldArgs,
-            fn ($schemaFieldArg) => ($schemaFieldArg[SchemaDefinition::ARGNAME_TYPE] ?? null) == SchemaDefinition::TYPE_ENUM
+            $fieldOrDirectiveArgsSchemaDefinition,
+            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] == SchemaDefinition::TYPE_ENUM
         );
     }
 
@@ -118,35 +116,6 @@ class SchemaHelpers
         return $enumValueDefinitions;
     }
 
-    public static function getTypeComponents(string $type): array
-    {
-        $convertedType = $type;
-
-        // Replace all instances of "array:" with wrapping the type with "[]"
-        $arrayInstances = 0;
-        while ($convertedType && TypeCastingHelpers::getTypeCombinationCurrentElement($convertedType) == SchemaDefinition::TYPE_ARRAY) {
-            $arrayInstances++;
-            $convertedType = TypeCastingHelpers::getTypeCombinationNestedElements($convertedType);
-        }
-
-        // If the type was actually only "array", without indicating its type, by now $type will be null
-        // In that case, inform of the error (an array cannot have its inner type undefined)
-        if (!$convertedType) {
-            $translationAPI = TranslationAPIFacade::getInstance();
-            throw new InvalidArgumentException(
-                sprintf(
-                    $translationAPI->__('Type \'%s\' doesn\'t declare the type of the innermost element'),
-                    $type
-                )
-            );
-        }
-
-        return [
-            $arrayInstances,
-            $convertedType
-        ];
-    }
-
     /**
      * If the internal type is "id", convert it to its type name
      */
@@ -155,21 +124,16 @@ class SchemaHelpers
         TypeResolverInterface $typeResolver,
         string $fieldName
     ): string {
-        list (
-            $arrayInstances,
-            $convertedType
-        ) = self::getTypeComponents($type);
-
         // If the type is an ID, replace it with the actual type the ID references
-        if ($convertedType == SchemaDefinition::TYPE_ID) {
+        if ($type == SchemaDefinition::TYPE_ID) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            // The convertedType may not be implemented yet (eg: Category), then skip
+            // The type may not be implemented yet (eg: Category), then skip
             if ($fieldTypeResolverClass = $typeResolver->resolveFieldTypeResolverClass($fieldName)) {
                 $fieldTypeResolver = $instanceManager->getInstance((string)$fieldTypeResolverClass);
-                $convertedType = $fieldTypeResolver->getMaybeNamespacedTypeName();
+                $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             }
         }
-        return TypeCastingHelpers::makeArray($convertedType, $arrayInstances);
+        return $type;
     }
 
     public static function getSchemaNamespace(string $namespace): string

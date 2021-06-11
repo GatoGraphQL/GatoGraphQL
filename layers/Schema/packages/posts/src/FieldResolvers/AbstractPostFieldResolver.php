@@ -7,7 +7,6 @@ namespace PoPSchema\Posts\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\ComponentConfiguration;
@@ -39,9 +38,9 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'posts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'posts' => SchemaDefinition::TYPE_ID,
             'postCount' => SchemaDefinition::TYPE_INT,
-            'unrestrictedPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'unrestrictedPosts' => SchemaDefinition::TYPE_ID,
             'unrestrictedPostCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -49,16 +48,16 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'posts',
+        return match($fieldName) {
             'postCount',
-            'unrestrictedPosts',
-            'unrestrictedPostCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'unrestrictedPostCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'posts',
+            'unrestrictedPosts'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

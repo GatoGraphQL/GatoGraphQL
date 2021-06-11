@@ -16,17 +16,28 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
     }
 
     /**
-     * Cast the value to the indicated type, or return null or Error (with a message) if it fails
+     * Cast the value to the indicated type, or return null or Error (with a message) if it fails.
+     * 
+     * An array is not a type. For instance, in `[String]`, the type is `String`,
+     * and the array is a modifier.
+     * Then, if passing an array, this function will always fail casting
      */
     public function cast(string $type, mixed $value): mixed
     {
+        if (is_array($value)) {
+            return new Error(
+                'array-cast',
+                $this->translationAPI->__('An array is not considered a type. Consider converting it into an object')
+            );
+        }
+        
         switch ($type) {
             case SchemaDefinition::TYPE_MIXED:
                 // Accept anything and everything
                 return $value;
             case SchemaDefinition::TYPE_ID:
                 // An array or an object cannot be an ID
-                if (is_array($value) || is_object($value)) {
+                if (is_object($value)) {
                     return null;
                 }
                 // Accept anything and everything
@@ -50,14 +61,9 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_ENUM:
                 // It is not possible to validate this, so just return whatever it gets
                 return $value;
-            case SchemaDefinition::TYPE_ARRAY:
-                if (!is_array($value)) {
-                    return null;
-                }
-                return $value;
             case SchemaDefinition::TYPE_OBJECT:
             case SchemaDefinition::TYPE_INPUT_OBJECT:
-                if (!is_array($value) && !is_object($value)) {
+                if (!is_object($value)) {
                     return null;
                 }
                 return $value;

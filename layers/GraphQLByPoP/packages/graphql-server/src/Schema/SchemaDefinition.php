@@ -19,6 +19,5 @@ class SchemaDefinition
     const TYPE_EMAIL = 'Email';
     const TYPE_IP = 'IP';
     const TYPE_ENUM = 'Enum';
-    const TYPE_ARRAY = 'Array';
     const TYPE_INPUT_OBJECT = 'InputObject';
 }

@@ -6,7 +6,7 @@ namespace PoPSchema\Meta\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\FieldInterfaceResolvers\AbstractSchemaFieldInterfaceResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolver
 {
@@ -32,9 +32,17 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
     {
         $types = [
             'metaValue' => SchemaDefinition::TYPE_MIXED,
-            'metaValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+            'metaValues' => SchemaDefinition::TYPE_MIXED,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'metaValues' => SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(string $fieldName): array

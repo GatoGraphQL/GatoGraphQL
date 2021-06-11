@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers;
 
-use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Route\RouteUtils;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
@@ -46,18 +46,30 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         $types = [
             'addStanceURL' => SchemaDefinition::TYPE_URL,
-            'loggedInUserStances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_INT),
+            'loggedInUserStances' => SchemaDefinition::TYPE_INT,
             'hasLoggedInUserStances' => SchemaDefinition::TYPE_BOOL,
             'editStanceURL' => SchemaDefinition::TYPE_URL,
             'postStancesProURL' => SchemaDefinition::TYPE_URL,
             'postStancesNeutralURL' => SchemaDefinition::TYPE_URL,
             'postStancesAgainstURL' => SchemaDefinition::TYPE_URL,
-            'createStanceButtonLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'stancesLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'createStanceButtonLazy' => SchemaDefinition::TYPE_ID,
+            'stancesLazy' => SchemaDefinition::TYPE_ID,
             'stanceName' => SchemaDefinition::TYPE_STRING,
             'catName' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'loggedInUserStances',
+            'createStanceButtonLazy',
+            'stancesLazy'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

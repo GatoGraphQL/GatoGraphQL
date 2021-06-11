@@ -192,8 +192,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 ];
                 return [
                     null, // $validDirective
-                    // null, // $directiveName <= null because no need to find out which one it is
-                    // null, // $directiveArgs <= null because no need to find out which one it is
+                    null, // $directiveName
+                    null, // $directiveArgs
                 ];
             }
         }
@@ -387,7 +387,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs = []): ?array
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
-        if ($schemaDirectiveArgs = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
              * Validate mandatory values
              */
@@ -396,27 +396,44 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $typeResolver,
                     $directiveName,
                     $directiveArgs,
-                    $schemaDirectiveArgs,
+                    $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
                 )
             ) {
                 return [$maybeError];
             }
 
-            /**
-             * Validate enums
-             */
-            list(
-                $maybeError
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
-                $directiveName,
-                $directiveArgs,
-                $schemaDirectiveArgs,
-                ResolverTypes::DIRECTIVE
-            );
-            if ($maybeError) {
-                return [$maybeError];
+            if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
+                /**
+                 * Validate array types are provided as arrays
+                 */
+                if (
+                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+                        $typeResolver,
+                        $directiveName,
+                        $directiveArgs,
+                        $directiveArgsSchemaDefinition,
+                        ResolverTypes::DIRECTIVE
+                    )
+                ) {
+                    return [$maybeError];
+                }
+
+                /**
+                 * Validate enums
+                 */
+                list(
+                    $maybeError
+                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgs,
+                    $directiveArgsSchemaDefinition,
+                    ResolverTypes::DIRECTIVE
+                );
+                if ($maybeError) {
+                    return [$maybeError];
+                }
             }
         }
         return null;
@@ -531,7 +548,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     public function resolveSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
-        if ($schemaDirectiveArgs = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             list(
                 $maybeError,
                 $maybeDeprecation
@@ -539,7 +556,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $typeResolver,
                 $directiveName,
                 $directiveArgs,
-                $schemaDirectiveArgs,
+                $directiveArgsSchemaDefinition,
                 ResolverTypes::DIRECTIVE
             );
             if ($maybeDeprecation) {

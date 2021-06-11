@@ -1,14 +1,14 @@
 <?php
-use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
-use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 
 class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFunctionalFieldResolver
 {
@@ -36,16 +36,32 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-			'multilayoutKeys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'latestcountsTriggerValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'catsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'commentsLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'noheadercommentsLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+			'multilayoutKeys' => SchemaDefinition::TYPE_STRING,
+            'latestcountsTriggerValues' => SchemaDefinition::TYPE_STRING,
+            'catsByName' => SchemaDefinition::TYPE_STRING,
+            'commentsLazy' => SchemaDefinition::TYPE_ID,
+            'noheadercommentsLazy' => SchemaDefinition::TYPE_ID,
             'addCommentURL' => SchemaDefinition::TYPE_URL,
-            'topicsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'appliestoByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'topicsByName' => SchemaDefinition::TYPE_STRING,
+            'appliestoByName' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'multilayoutKeys',
+            'latestcountsTriggerValues',
+            'catsByName',
+            'commentsLazy',
+            'noheadercommentsLazy',
+            'topicsByName',
+            'appliestoByName'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

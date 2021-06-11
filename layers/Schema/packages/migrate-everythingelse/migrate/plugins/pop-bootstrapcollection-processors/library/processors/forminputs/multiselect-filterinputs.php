@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\Enums\CustomPostModeratedStatusEnum;
 use PoPSchema\EverythingElse\Enums\CustomPostUnmoderatedStatusEnum;
@@ -83,11 +82,20 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => true,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

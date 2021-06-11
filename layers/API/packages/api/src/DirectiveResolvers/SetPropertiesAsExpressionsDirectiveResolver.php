@@ -7,7 +7,6 @@ namespace PoP\API\DirectiveResolvers;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 
@@ -49,13 +48,15 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         return [
             [
                 SchemaDefinition::ARGNAME_NAME => 'properties',
-                SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The property in the current object from which to copy the data into the expressions', 'component-model'),
                 SchemaDefinition::ARGNAME_MANDATORY => true,
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'expressions',
-                SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Name of the expressions. Default value: Same name as the properties', 'component-model'),
             ],
         ];

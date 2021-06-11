@@ -10,7 +10,6 @@ use PoP\Engine\Dataloading\Expressions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
@@ -42,7 +41,8 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
             ],
             [
                 SchemaDefinition::ARGNAME_NAME => 'addArguments',
-                SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                     $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                     QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)

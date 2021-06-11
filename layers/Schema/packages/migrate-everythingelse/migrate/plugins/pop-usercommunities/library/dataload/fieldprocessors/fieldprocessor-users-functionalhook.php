@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
@@ -29,11 +29,23 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
         $types = [
 			'editMembershipURL' => SchemaDefinition::TYPE_URL,
             'editMemberStatusInlineURL' => SchemaDefinition::TYPE_URL,
-            'memberStatusByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'memberPrivilegesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'memberTagsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberStatusByName' => SchemaDefinition::TYPE_STRING,
+            'memberPrivilegesByName' => SchemaDefinition::TYPE_STRING,
+            'memberTagsByName' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'memberStatusByName',
+            'memberPrivilegesByName',
+            'memberTagsByName'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPostTagMutations\FieldResolvers;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
@@ -66,7 +65,8 @@ abstract class AbstractCustomPostFieldResolver extends AbstractDBDataFieldResolv
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
-                        SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                        SchemaDefinition::ARGNAME_IS_ARRAY => true,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
                         SchemaDefinition::ARGNAME_MANDATORY => true,
                     ],

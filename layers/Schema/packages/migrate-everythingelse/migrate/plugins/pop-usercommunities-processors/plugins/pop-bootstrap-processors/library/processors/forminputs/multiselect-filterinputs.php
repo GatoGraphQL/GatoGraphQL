@@ -3,7 +3,6 @@ use PoPSchema\EverythingElse\Enums\MemberTagEnum;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -100,12 +99,22 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => SchemaDefinition::TYPE_ENUM,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => true,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => true,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

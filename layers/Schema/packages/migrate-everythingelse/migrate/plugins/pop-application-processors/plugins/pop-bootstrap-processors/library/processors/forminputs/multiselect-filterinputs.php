@@ -4,7 +4,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 
 class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -101,13 +100,24 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_FILTERINPUT_APPLIESTO => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_FILTERINPUT_CATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_POSTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_APPLIESTO => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_CATEGORIES => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_POSTSECTIONS => SchemaDefinition::TYPE_ID,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_APPLIESTO => true,
+            self::MODULE_FILTERINPUT_CATEGORIES => true,
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS => true,
+            self::MODULE_FILTERINPUT_POSTSECTIONS => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

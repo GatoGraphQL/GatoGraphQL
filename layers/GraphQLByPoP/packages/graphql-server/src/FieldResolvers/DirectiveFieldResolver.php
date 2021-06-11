@@ -11,7 +11,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class DirectiveFieldResolver extends AbstractDBDataFieldResolver
@@ -39,7 +38,7 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'args' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'args' => SchemaDefinition::TYPE_ID,
             'locations' => SchemaDefinition::TYPE_ENUM,
             'locations' => SchemaDefinition::TYPE_BOOL,
         ];
@@ -48,16 +47,16 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
             'name',
-            'args',
             'locations',
-            'isRepeatable',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'isRepeatable'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'args'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string

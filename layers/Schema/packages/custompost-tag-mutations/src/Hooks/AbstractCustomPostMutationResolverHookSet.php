@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostTagMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
@@ -44,7 +43,8 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         }
         $fieldArgs[] = [
             SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
-            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+            SchemaDefinition::ARGNAME_IS_ARRAY => true,
             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
         ];
         return $fieldArgs;

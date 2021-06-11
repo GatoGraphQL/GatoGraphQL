@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class SchemaFieldResolver extends AbstractDBDataFieldResolver
@@ -38,8 +37,8 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
             'queryType' => SchemaDefinition::TYPE_ID,
             'mutationType' => SchemaDefinition::TYPE_ID,
             'subscriptionType' => SchemaDefinition::TYPE_ID,
-            'types' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'directives' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'types' => SchemaDefinition::TYPE_ID,
+            'directives' => SchemaDefinition::TYPE_ID,
             'type' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -47,15 +46,15 @@ class SchemaFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'queryType',
+        return match($fieldName) {
+            'queryType'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'types',
-            'directives',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'directives'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

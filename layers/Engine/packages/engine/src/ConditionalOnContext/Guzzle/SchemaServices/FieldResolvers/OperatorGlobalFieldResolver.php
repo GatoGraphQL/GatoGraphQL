@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ConditionalOnContext\Guzzle\SchemaServices\FieldResolvers;
 
-use PoP\GuzzleHelpers\GuzzleHelpers;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\GuzzleHelpers\GuzzleHelpers;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -24,9 +24,17 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     {
         $types = [
             'getJSON' => SchemaDefinition::TYPE_OBJECT,
-            'getAsyncJSON' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_OBJECT),
+            'getAsyncJSON' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'getAsyncJSON' => SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -60,7 +68,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'urls',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_URL),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_URL,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],

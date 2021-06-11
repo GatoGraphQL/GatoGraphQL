@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers;
 
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoP\Engine\TypeResolvers\RootTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -53,26 +53,39 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        $ret = match($fieldName) {
-            'accessControlLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'cacheControlLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'fieldDeprecationLists' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'schemaConfigurations' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            default => parent::getSchemaFieldType($typeResolver, $fieldName),
+        return match($fieldName) {
+            'accessControlLists',
+            'cacheControlLists',
+            'fieldDeprecationLists',
+            'schemaConfigurations'
+                => SchemaDefinition::TYPE_ID,
+            default
+                => parent::getSchemaFieldType($typeResolver, $fieldName),
         };
-        return $ret;
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'accessControlLists',
+            'cacheControlLists',
+            'fieldDeprecationLists',
+            'schemaConfigurations'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        $ret = match($fieldName) {
+        return match($fieldName) {
             'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
             'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
             'fieldDeprecationLists' => $this->translationAPI->__('Field Deprecation Lists', 'graphql-api'),
             'schemaConfigurations' => $this->translationAPI->__('Schema Configurations', 'graphql-api'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
-        return $ret;
     }
 
     /**

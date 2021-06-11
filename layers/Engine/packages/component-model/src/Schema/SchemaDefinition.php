@@ -12,6 +12,8 @@ class SchemaDefinition
     const ARGNAME_ELEMENT_NAME = 'elementName';
     const ARGNAME_TYPE = 'type';
     const ARGNAME_NON_NULLABLE = 'nonNullable';
+    const ARGNAME_IS_ARRAY = 'isArray';
+    const ARGNAME_MAY_BE_ARRAY = 'mayBeArray';
     const ARGNAME_REFERENCED_TYPE = 'referencedType';
     const ARGNAME_DESCRIPTION = 'description';
     const ARGNAME_VERSION = 'version';
@@ -66,7 +68,6 @@ class SchemaDefinition
     const TYPE_EMAIL = 'email';
     const TYPE_IP = 'ip';
     const TYPE_ENUM = 'enum';
-    const TYPE_ARRAY = 'array';
     const TYPE_INPUT_OBJECT = 'input_object';
 
     /**

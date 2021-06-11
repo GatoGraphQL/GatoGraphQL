@@ -5,7 +5,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 
 class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -104,12 +103,22 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
 
     public function getSchemaFilterInputType(array $module): string
     {
-        $types = [
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-        ];
-        return $types[$module[1]] ?? $this->getDefaultSchemaFilterInputType();
+        return match($module[1]) {
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => SchemaDefinition::TYPE_STRING,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => SchemaDefinition::TYPE_STRING,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => SchemaDefinition::TYPE_STRING,
+            default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => true,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => true,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => true,
+            default => false,
+        };
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

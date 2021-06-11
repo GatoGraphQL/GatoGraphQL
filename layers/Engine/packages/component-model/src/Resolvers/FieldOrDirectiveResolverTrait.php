@@ -17,9 +17,9 @@ trait FieldOrDirectiveResolverTrait
      */
     protected array $enumValueArgumentValidationCache = [];
 
-    protected function maybeValidateNotMissingFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $schemaFieldOrDirectiveArgs, string $type): ?string
+    protected function maybeValidateNotMissingFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
     {
-        if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldArgs($schemaFieldOrDirectiveArgs)) {
+        if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldOrDirectiveArgs($fieldOrDirectiveArgsSchemaDefinition)) {
             if (
                 $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
                     SchemaHelpers::getSchemaFieldArgNames($mandatoryArgs),
@@ -56,70 +56,156 @@ trait FieldOrDirectiveResolverTrait
     }
 
     /**
-     * Important: The validations below can only be done if no fieldArg contains a field!
+     * The validations below can only be done if no fieldArg or directiveArg contains a field!
      * That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
      * For instance, this doesn't work: /?query=arrayItem(posts(),3)
      * In that case, the validation will be done inside ->resolveValue(),
-     * and will be treated as a $dbError, not a $schemaError
+     * and will be treated as a $dbError, not a $schemaError.
+     * 
+     * Same with expressions, as when calling `getSelfProp(%self%, "posts")`.
+     * 
+     * But no need with variables, because by now they will have been replaced with the actual value.
      */
-    protected function maybeValidateEnumFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $schemaFieldOrDirectiveArgs, string $type): ?array
+    protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
     {
-        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs)) {
-            // Iterate all the enum types and check that the provided values is one of them, or throw an error
-            if ($enumArgs = SchemaHelpers::getSchemaEnumTypeFieldArgs($schemaFieldOrDirectiveArgs)) {
-                return $this->validateEnumFieldOrDirectiveArguments(
-                    $enumArgs,
-                    $fieldOrDirectiveName,
-                    $fieldOrDirectiveArgs,
-                    $type
-                );
-            }
+        return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
+    }
+
+    protected function maybeValidateArrayTypeFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
+    {
+        if (
+            $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                $fieldOrDirectiveArgsSchemaDefinition,
+                $fieldOrDirectiveName,
+                $fieldOrDirectiveArgs,
+                $type
+            )
+        ) {
+            return $maybeError;
         }
         return null;
     }
 
-    protected function validateEnumFieldOrDirectiveArguments(array $enumArgs, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?array
-    {
-        $key = serialize($enumArgs) . '|' . $fieldOrDirectiveName . serialize($fieldOrDirectiveArgs);
-        if (!isset($this->enumValueArgumentValidationCache[$key])) {
-            $this->enumValueArgumentValidationCache[$key] = $this->doValidateEnumFieldOrDirectiveArguments($enumArgs, $fieldOrDirectiveName, $fieldOrDirectiveArgs, $type);
-        }
-        return $this->enumValueArgumentValidationCache[$key];
-    }
-    protected function doValidateEnumFieldOrDirectiveArguments(array $enumArgs, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?array
-    {
+    protected function validateArrayTypeFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?string {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $errors = $deprecations = [];
-        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($enumArgs);
-        $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumArgs);
+        $errors = [];
+        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($fieldOrDirectiveArgsSchemaDefinition);
         for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
             $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
-            if (!is_null($fieldOrDirectiveArgumentValue)) {
+            if ($fieldOrDirectiveArgumentValue !== null) {
+                // Check if it's an array or not from the schema definition
+                $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+                // If the value may be array, may be not, then there's nothing to validate
+                $fieldOrDirectiveArgMayBeArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
+                if ($fieldOrDirectiveArgMayBeArray === true) {
+                    continue;
+                }
+                $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                if ($fieldOrDirectiveArgIsArray && !is_array($fieldOrDirectiveArgumentValue)) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                } elseif (!$fieldOrDirectiveArgIsArray && is_array($fieldOrDirectiveArgumentValue)) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                }
+            }
+        }
+        if ($errors) {
+            return implode($translationAPI->__('. '), $errors);
+        }
+        return null;
+    }
+
+    protected function maybeValidateEnumFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?array
+    {
+        // Iterate all the enum types and check that the provided values is one of them, or throw an error
+        if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
+            return $this->validateEnumFieldOrDirectiveArguments(
+                $enumTypeFieldOrDirectiveArgsSchemaDefinition,
+                $fieldOrDirectiveName,
+                $fieldOrDirectiveArgs,
+                $type
+            );
+        }
+        return null;
+    }
+
+    protected function validateEnumFieldOrDirectiveArguments(array $enumTypeFieldOrDirectiveArgsSchemaDefinition, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?array
+    {
+        $key = serialize($enumTypeFieldOrDirectiveArgsSchemaDefinition) . '|' . $fieldOrDirectiveName . serialize($fieldOrDirectiveArgs);
+        if (!isset($this->enumValueArgumentValidationCache[$key])) {
+            $this->enumValueArgumentValidationCache[$key] = $this->doValidateEnumFieldOrDirectiveArguments($enumTypeFieldOrDirectiveArgsSchemaDefinition, $fieldOrDirectiveName, $fieldOrDirectiveArgs, $type);
+        }
+        return $this->enumValueArgumentValidationCache[$key];
+    }
+    protected function doValidateEnumFieldOrDirectiveArguments(array $enumTypeFieldOrDirectiveArgsSchemaDefinition, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, string $type): ?array
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        $errors = $deprecations = [];
+        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($enumTypeFieldOrDirectiveArgsSchemaDefinition);
+        $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumTypeFieldOrDirectiveArgsSchemaDefinition);
+        for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
+            $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
+            $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
+            if ($fieldOrDirectiveArgumentValue !== null) {
+                // Check if it's an array or not from the schema definition
+                $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+                // If the value may be array, may be not, then there's nothing to validate
+                $enumTypeFieldOrDirectiveArgMayBeArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
+                $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
                 $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
-                $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValue];
-                if (is_null($fieldOrDirectiveArgumentValueDefinition)) {
-                    // Remove deprecated ones and extract their names
-                    $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
-                    $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
-                    $errors[] = sprintf(
-                        $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                if ($enumTypeFieldOrDirectiveArgIsArray) {
+                    if (!$enumTypeFieldOrDirectiveArgMayBeArray && !is_array($fieldOrDirectiveArgumentValue)) {
+                        $errors[] = sprintf(
+                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                            $fieldOrDirectiveArgumentName,
+                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                            $fieldOrDirectiveName
+                        );
+                        continue;
+                    }
+                    $this->doValidateEnumFieldOrDirectiveArgumentsItem(
+                        $errors,
+                        $deprecations,
+                        $schemaFieldOrDirectiveArgumentEnumValues,
                         $fieldOrDirectiveArgumentValue,
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName,
-                        implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                        $type,
                     );
-                } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
-                    // Check if this enumValue is deprecated
-                    $deprecations[] = sprintf(
-                        $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
-                        $fieldOrDirectiveArgumentValue,
+                } else {
+                    if (!$enumTypeFieldOrDirectiveArgMayBeArray && is_array($fieldOrDirectiveArgumentValue)) {
+                        $errors[] = sprintf(
+                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                            $fieldOrDirectiveArgumentName,
+                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                            $fieldOrDirectiveName
+                        );
+                        continue;
+                    }
+                    $this->doValidateEnumFieldOrDirectiveArgumentsItem(
+                        $errors,
+                        $deprecations,
+                        $schemaFieldOrDirectiveArgumentEnumValues,
+                        [$fieldOrDirectiveArgumentValue],
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName,
-                        $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION]
+                        $type,
                     );
                 }
             }
@@ -135,5 +221,72 @@ trait FieldOrDirectiveResolverTrait
             ];
         }
         return null;
+    }
+
+    protected function doValidateEnumFieldOrDirectiveArgumentsItem(
+        array &$errors,
+        array &$deprecations,
+        array $schemaFieldOrDirectiveArgumentEnumValues,
+        array $fieldOrDirectiveArgumentValueItems,
+        string $fieldOrDirectiveArgumentName,
+        string $fieldOrDirectiveName,
+        string $type
+    ): void {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        $errorItems = $deprecationItems = [];
+        foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
+            $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem] ?? null;
+            if ($fieldOrDirectiveArgumentValueDefinition === null) {
+                // Remove deprecated ones and extract their names
+                $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
+                $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
+                $errorItems[] = $fieldOrDirectiveArgumentValueItem;
+            } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
+                // Check if this enumValue is deprecated
+                $deprecationItems[] = $fieldOrDirectiveArgumentValueItem;
+            }
+        }
+        if ($errorItems) {
+            if (count($errorItems) === 1) {
+                $errors[] = sprintf(
+                    $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($translationAPI->__('\', \''), $errorItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                );
+            } else {
+                $errors[] = sprintf(
+                    $translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($translationAPI->__('\', \''), $errorItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                );
+            }
+        }
+        if ($deprecationItems) {
+            if (count($deprecationItems) === 1) {
+                $deprecations[] = sprintf(
+                    $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
+                    implode($translationAPI->__('\', \''), $deprecationItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION]
+                );
+            } else {
+                $deprecations[] = sprintf(
+                    $translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are deprecated: \'%5$s\'', 'component-model'),
+                    implode($translationAPI->__('\', \''), $deprecationItems),
+                    $fieldOrDirectiveArgumentName,
+                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION]
+                );
+            }
+        }
     }
 }

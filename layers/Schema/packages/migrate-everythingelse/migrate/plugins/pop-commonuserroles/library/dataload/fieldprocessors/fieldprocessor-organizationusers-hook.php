@@ -2,7 +2,6 @@
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
@@ -32,8 +31,8 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
         $types = [
 			'contactPerson' => SchemaDefinition::TYPE_STRING,
             'contactNumber' => SchemaDefinition::TYPE_STRING,
-            'organizationtypes' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'organizationcategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'organizationtypes' => SchemaDefinition::TYPE_STRING,
+            'organizationcategories' => SchemaDefinition::TYPE_STRING,
             'hasOrganizationDetails' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -41,13 +40,15 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'hasOrganizationDetails',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'hasOrganizationDetails'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'organizationtypes',
+            'organizationcategories'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
