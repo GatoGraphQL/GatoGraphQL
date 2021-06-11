@@ -65,7 +65,8 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'ofTypes',
-                            SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
                             // SchemaDefinition::ARGNAME_MANDATORY => true,
                             // SchemaDefinition::ARGNAME_DEFAULT_VALUE => [

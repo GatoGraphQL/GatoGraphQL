@@ -79,7 +79,8 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                                 ],
                                 [
                                     SchemaDefinition::ARGNAME_NAME => 'metaProperties',
-                                    SchemaDefinition::ARGNAME_TYPE => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+                                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                                    SchemaDefinition::ARGNAME_IS_ARRAY => true,
                                     SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
                                 ]
                             ]
