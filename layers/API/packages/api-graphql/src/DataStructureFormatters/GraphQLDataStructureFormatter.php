@@ -39,6 +39,30 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $ret['errors'] = $errors;
         }
 
+        // Add warnings always, not inside of Proactive Feedback,
+        // because the difference between errors and warnings sometimes is not clear
+        // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
+        // raising a warning, but field `posts` is still executed, retrieving all results.
+        // If the user is not told that there was an error/warning, it's very confusing
+        if ($data['dbWarnings'] ?? null) {
+            $warnings = $this->reformatDBEntries($data['dbWarnings']);
+        }
+        if ($data['schemaWarnings'] ?? null) {
+            $warnings = array_merge(
+                $warnings,
+                $this->reformatSchemaEntries($data['schemaWarnings'])
+            );
+        }
+        if ($data['queryWarnings'] ?? null) {
+            $warnings = array_merge(
+                $warnings,
+                $this->reformatQueryEntries($data['queryWarnings'])
+            );
+        }
+        if ($warnings) {
+            $ret['extensions']['warnings'] = $warnings;
+        }
+
         /**
          * "Warnings", "deprecations", and "logEntries" top-level entries:
          * since they are not part of the spec, place them under the top-level entry "extensions":
@@ -49,26 +73,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            // Add warnings
-            if ($data['dbWarnings'] ?? null) {
-                $warnings = $this->reformatDBEntries($data['dbWarnings']);
-            }
-            if ($data['schemaWarnings'] ?? null) {
-                $warnings = array_merge(
-                    $warnings,
-                    $this->reformatSchemaEntries($data['schemaWarnings'])
-                );
-            }
-            if ($data['queryWarnings'] ?? null) {
-                $warnings = array_merge(
-                    $warnings,
-                    $this->reformatQueryEntries($data['queryWarnings'])
-                );
-            }
-            if ($warnings) {
-                $ret['extensions']['warnings'] = $warnings;
-            }
-
             // Add notices
             if ($data['dbNotices'] ?? null) {
                 $notices = $this->reformatDBEntries($data['dbNotices']);
