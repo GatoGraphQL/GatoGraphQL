@@ -1004,15 +1004,24 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
+            $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
             foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
+                $fieldArgIsArrayType = $fieldArgNameIsArrayTypes[$failedCastingFieldArgName];
+                $composedFieldArgType = $fieldArgNameTypes[$failedCastingFieldArgName];
+                if ($fieldArgIsArrayType) {
+                    $composedFieldArgType = sprintf(
+                        $this->translationAPI->__('array of %s', 'pop-component-model'),
+                        $composedFieldArgType
+                    );
+                }
                 if ($fieldArgErrorMessage = $failedCastingFieldArgErrorMessages[$failedCastingFieldArgName] ?? null) {
                     $errorMessage = sprintf(
                         $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s. It has been ignored', 'pop-component-model'),
                         $fieldName,
                         is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
                         $failedCastingFieldArgName,
-                        $fieldArgNameTypes[$failedCastingFieldArgName],
+                        $composedFieldArgType,
                         $fieldArgErrorMessage
                     );
                 } else {
@@ -1021,7 +1030,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $fieldName,
                         is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
                         $failedCastingFieldArgName,
-                        $fieldArgNameTypes[$failedCastingFieldArgName]
+                        $composedFieldArgType
                     );
                 }
                 $schemaWarnings[] = [
