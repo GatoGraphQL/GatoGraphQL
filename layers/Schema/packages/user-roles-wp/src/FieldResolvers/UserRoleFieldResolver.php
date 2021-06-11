@@ -32,26 +32,18 @@ class UserRoleFieldResolver extends AbstractReflectionPropertyFieldResolver
     {
         $types = [
             'name' => SchemaDefinition::TYPE_STRING,
-            'capabilities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'capabilities' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    /**
-     * Because we can't obtain this data from reflection yet, explicitly define it
-     *
-     * @see https://github.com/getpop/component-model/issues/1
-     */
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'name',
-            'capabilities',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'name' => SchemaTypeModifiers::NON_NULLABLE,
+            'capabilities' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     /**

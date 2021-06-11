@@ -30,24 +30,24 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'tags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'tags' => SchemaDefinition::TYPE_ID,
             'tagCount' => SchemaDefinition::TYPE_INT,
-            'tagNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'tagNames' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'tagCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'tags',
-            'tagCount',
-            'tagNames',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'tagNames'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

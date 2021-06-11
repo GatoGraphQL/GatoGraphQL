@@ -48,24 +48,24 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'postCategory' => SchemaDefinition::TYPE_ID,
-            'postCategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'postCategories' => SchemaDefinition::TYPE_ID,
             'postCategoryCount' => SchemaDefinition::TYPE_INT,
-            'postCategoryNames' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'postCategoryNames' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'postCategoryCount'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'postCategories',
-            'postCategoryCount',
-            'postCategoryNames',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'postCategoryNames'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array

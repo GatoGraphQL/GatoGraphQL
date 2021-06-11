@@ -42,8 +42,8 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'catSlugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'categories' => SchemaDefinition::TYPE_ID,
+            'catSlugs' => SchemaDefinition::TYPE_STRING,
             'stance' => SchemaDefinition::TYPE_INT,
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
@@ -56,16 +56,16 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'categories',
-            'catSlugs',
+        return match($fieldName) {
             'content',
-            'hasStanceTarget',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'hasStanceTarget'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'categories',
+            'catSlugs'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
