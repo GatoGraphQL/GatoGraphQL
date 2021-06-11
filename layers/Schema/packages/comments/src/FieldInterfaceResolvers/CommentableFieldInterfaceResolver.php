@@ -38,21 +38,23 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
             'areCommentsOpen' => SchemaDefinition::TYPE_BOOL,
             'commentCount' => SchemaDefinition::TYPE_INT,
             'hasComments' => SchemaDefinition::TYPE_BOOL,
-            'comments' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'comments' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'areCommentsOpen':
-            case 'commentCount':
-            case 'hasComments':
-            case 'comments':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return match($fieldName) {
+            'areCommentsOpen',
+            'commentCount',
+            'hasComments'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'comments'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string
