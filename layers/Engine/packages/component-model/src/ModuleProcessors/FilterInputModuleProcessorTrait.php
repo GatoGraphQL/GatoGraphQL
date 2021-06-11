@@ -45,6 +45,9 @@ trait FilterInputModuleProcessorTrait
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
+            if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+            }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
             }
