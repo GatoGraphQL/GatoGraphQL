@@ -218,7 +218,8 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'object',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The object to retrieve the data from', 'pop-component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
