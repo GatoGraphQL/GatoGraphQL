@@ -594,8 +594,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
             // Maybe cast the value to the appropriate type. Eg: from string to boolean
             $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName];
-            // If not set, the return type is not an array
-            $fieldArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
             // There are 2 possibilities for casting:
             // 1. $forSchema = true: Cast all items except fields (eg: hasComments()) or arrays with fields (eg: [hasComments()])
             // 2. $forSchema = false: Should be cast only fields, however by now we can't tell which are fields and which are not, since fields have already been resolved to their value. Hence, cast everything (fieldArgValues that failed at the schema level will not be provided in the input array, so won't be validated twice)
@@ -609,18 +607,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     )
                 )
             ) {
-                // If the value is an array, then cast each element to the item type
-                // If it's an array, combine its elements recursively
-                if ($fieldArgIsArrayType && is_array($argValue)) {
-                    // We can make combinations of combinations: array:array:string. So when iterating down, pass all other types after the current one
-                    $argValue = array_map(
-                        fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
-                        $argValue
-                    );
-                } else {
-                    // Otherwise, simply cast the given value directly
-                    $argValue = $this->typeCastingExecuter->cast($fieldArgType, $argValue);
-                }
+                // Cast (or "coerce" in GraphQL terms) the value
+                $argValue = $this->castFieldOrDirectiveArgumentValue($fieldArgType, $argValue);
+                
                 // If the response is an error, extract the error message and set value to null
                 if (GeneralUtils::isError($argValue)) {
                     $error = $argValue;
@@ -632,6 +621,21 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $fieldOrDirectiveArgs;
+    }
+
+    /**
+     * If the value is an array, then execute this function recursively on each element.
+     * Otherwise, cast the element
+     */
+    protected function castFieldOrDirectiveArgumentValue(string $fieldArgType, mixed $argValue): mixed
+    {
+        if (is_array($argValue)) {
+            return array_map(
+                fn ($argValueItem) => $this->castFieldOrDirectiveArgumentValue($fieldArgType, $argValueItem),
+                $argValue
+            );
+        }
+        return $this->typeCastingExecuter->cast($fieldArgType, $argValue);
     }
 
     protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages, bool $disableDynamicFields = false): array
