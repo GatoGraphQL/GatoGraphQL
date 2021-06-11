@@ -588,8 +588,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgs;
     }
 
-    protected function castFieldOrDirectiveArguments(array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgNameTypes, array $fieldOrDirectiveArgNameIsArrayTypes, array &$failedCastingFieldOrDirectiveArgErrorMessages, bool $forSchema): array
-    {
+    protected function castFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgs,
+        array $fieldOrDirectiveArgNameTypes,
+        array $fieldOrDirectiveArgNameIsArrayTypes,
+        array &$failedCastingFieldOrDirectiveArgErrorMessages,
+        bool $forSchema
+    ): array {
         // Cast all argument values
         foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
             // Maybe cast the value to the appropriate type. Eg: from string to boolean
