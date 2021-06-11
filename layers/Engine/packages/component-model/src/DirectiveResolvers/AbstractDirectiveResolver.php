@@ -192,8 +192,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 ];
                 return [
                     null, // $validDirective
-                    // null, // $directiveName <= null because no need to find out which one it is
-                    // null, // $directiveArgs <= null because no need to find out which one it is
+                    null, // $directiveName
+                    null, // $directiveArgs
                 ];
             }
         }
