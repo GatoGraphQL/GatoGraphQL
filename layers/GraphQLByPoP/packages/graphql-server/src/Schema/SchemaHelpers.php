@@ -43,7 +43,6 @@ class SchemaHelpers
             SchemaDefinition::TYPE_EMAIL => GraphQLServerSchemaDefinition::TYPE_EMAIL,
             SchemaDefinition::TYPE_IP => GraphQLServerSchemaDefinition::TYPE_IP,
             SchemaDefinition::TYPE_ENUM => GraphQLServerSchemaDefinition::TYPE_ENUM,
-            SchemaDefinition::TYPE_ARRAY => GraphQLServerSchemaDefinition::TYPE_ARRAY,
             SchemaDefinition::TYPE_INPUT_OBJECT => GraphQLServerSchemaDefinition::TYPE_INPUT_OBJECT,
         ];
         if (isset($conversionTypes[$typeName])) {

@@ -50,11 +50,6 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_ENUM:
                 // It is not possible to validate this, so just return whatever it gets
                 return $value;
-            case SchemaDefinition::TYPE_ARRAY:
-                if (!is_array($value)) {
-                    return null;
-                }
-                return $value;
             case SchemaDefinition::TYPE_OBJECT:
             case SchemaDefinition::TYPE_INPUT_OBJECT:
                 if (!is_array($value) && !is_object($value)) {
