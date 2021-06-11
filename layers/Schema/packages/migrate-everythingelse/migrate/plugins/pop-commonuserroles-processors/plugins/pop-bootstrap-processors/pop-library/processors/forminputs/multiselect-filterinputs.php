@@ -105,10 +105,20 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getSchemaFilterInputType(array $module): string
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => SchemaDefinition::TYPE_STRING,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => SchemaDefinition::TYPE_STRING,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => SchemaDefinition::TYPE_STRING,
             default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => true,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => true,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => true,
+            default => false,
         };
     }
 

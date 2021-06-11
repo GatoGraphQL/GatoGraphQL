@@ -98,8 +98,16 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     public function getSchemaFilterInputType(array $module): string
     {
         return match($module[1]) {
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => true,
+            default => false,
         };
     }
 

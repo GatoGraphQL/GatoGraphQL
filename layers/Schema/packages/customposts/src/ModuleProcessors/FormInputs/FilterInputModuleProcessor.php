@@ -74,10 +74,20 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getSchemaFilterInputType(array $module): string
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
             default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => true,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
+            default => false,
         };
     }
 

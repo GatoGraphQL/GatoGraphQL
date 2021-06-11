@@ -1,10 +1,11 @@
 <?php
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_Module_Processor_ButtonGroupFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -97,10 +98,20 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
     public function getSchemaFilterInputType(array $module): string
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => SchemaDefinition::TYPE_ID,
             default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => true,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => true,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => true,
+            default => false,
         };
     }
 

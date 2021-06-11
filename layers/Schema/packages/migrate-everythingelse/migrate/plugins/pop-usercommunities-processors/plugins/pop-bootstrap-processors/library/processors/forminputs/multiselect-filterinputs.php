@@ -101,10 +101,20 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     public function getSchemaFilterInputType(array $module): string
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => SchemaDefinition::TYPE_ENUM,
             default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => true,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => true,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => true,
+            default => false,
         };
     }
 

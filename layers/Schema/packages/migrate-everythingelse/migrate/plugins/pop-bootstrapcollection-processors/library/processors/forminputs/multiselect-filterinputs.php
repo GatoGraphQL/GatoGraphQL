@@ -84,9 +84,18 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getSchemaFilterInputType(array $module): string
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
             default => $this->getDefaultSchemaFilterInputType(),
+        };
+    }
+
+    public function getSchemaFilterInputIsArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => true,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => true,
+            default => false,
         };
     }
 
