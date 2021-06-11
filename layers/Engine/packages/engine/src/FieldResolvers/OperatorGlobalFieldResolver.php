@@ -239,6 +239,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         [
                             SchemaDefinition::ARGNAME_NAME => 'value',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_MAY_BE_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The input to be echoed back', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
