@@ -52,7 +52,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
     {
         $types = [
             'genericCustomPost' => SchemaDefinition::TYPE_ID,
-            'genericCustomPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'genericCustomPosts' => SchemaDefinition::TYPE_ID,
             'genericCustomPostCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -60,14 +60,11 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'genericCustomPosts',
-            'genericCustomPostCount',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'genericCustomPostCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'genericCustomPosts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array

@@ -31,20 +31,17 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'locations' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'locations' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'locations',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'locations' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

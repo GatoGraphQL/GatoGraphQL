@@ -32,7 +32,7 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'catSlugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'catSlugs' => SchemaDefinition::TYPE_STRING,
             'catName' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -40,11 +40,10 @@ class CatEventFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'catSlugs':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'catSlugs' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

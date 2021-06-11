@@ -79,24 +79,26 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             'type' => SchemaDefinition::TYPE_STRING,
             'parent' => SchemaDefinition::TYPE_ID,
             'date' => SchemaDefinition::TYPE_DATE,
-            'responses' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'responses' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'content':
-            case 'customPost':
-            case 'customPostID':
-            case 'approved':
-            case 'type':
-            case 'date':
-            case 'responses':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'content',
+            'customPost',
+            'customPostID',
+            'approved',
+            'type',
+            'date'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'responses'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
