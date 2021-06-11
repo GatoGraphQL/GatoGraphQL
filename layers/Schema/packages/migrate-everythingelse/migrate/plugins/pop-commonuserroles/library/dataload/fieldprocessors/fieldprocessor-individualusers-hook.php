@@ -27,7 +27,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-			'individualinterests' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+			'individualinterests' => SchemaDefinition::TYPE_STRING,
             'hasIndividualDetails' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -35,13 +35,11 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'hasIndividualDetails',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'hasIndividualDetails' => SchemaTypeModifiers::NON_NULLABLE,
+            'individualinterests' => SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
