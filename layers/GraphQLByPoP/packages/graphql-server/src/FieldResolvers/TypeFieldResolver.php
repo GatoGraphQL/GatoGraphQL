@@ -53,26 +53,32 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
             'kind' => SchemaDefinition::TYPE_ENUM,
             'name' => SchemaDefinition::TYPE_STRING,
             'description' => SchemaDefinition::TYPE_STRING,
-            'fields' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'interfaces' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'possibleTypes' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'enumValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'inputFields' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'fields' => SchemaDefinition::TYPE_ID,
+            'interfaces' => SchemaDefinition::TYPE_ID,
+            'possibleTypes' => SchemaDefinition::TYPE_ID,
+            'enumValues' => SchemaDefinition::TYPE_ID,
+            'inputFields' => SchemaDefinition::TYPE_ID,
             'ofType' => SchemaDefinition::TYPE_ID,
-            'extensions' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
+            'extensions' => SchemaDefinition::TYPE_MIXED,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'kind',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+        return match($fieldName) {
+            'kind'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'fields',
+            'interfaces',
+            'possibleTypes',
+            'enumValues',
+            'inputFields',
+            'extensions'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
