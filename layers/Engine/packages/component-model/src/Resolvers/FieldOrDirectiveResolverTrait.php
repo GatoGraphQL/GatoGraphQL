@@ -60,11 +60,15 @@ trait FieldOrDirectiveResolverTrait
      * That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
      * For instance, this doesn't work: /?query=arrayItem(posts(),3)
      * In that case, the validation will be done inside ->resolveValue(),
-     * and will be treated as a $dbError, not a $schemaError
+     * and will be treated as a $dbError, not a $schemaError.
+     * 
+     * Same with expressions, as when calling `getSelfProp(%self%, "posts")`.
+     * 
+     * But no need with variables, because by now they will have been replaced with the actual value.
      */
     protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
     {
-        return !FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs);
+        return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
     }
 
     protected function maybeValidateArrayTypeFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string

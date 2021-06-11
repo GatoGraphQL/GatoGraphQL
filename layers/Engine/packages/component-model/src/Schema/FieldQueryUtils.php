@@ -16,6 +16,17 @@ class FieldQueryUtils
             [$fieldQueryInterpreter, 'isFieldArgumentValueAField']
         );
     }
+    public static function isAnyFieldArgumentValueAFieldOrExpression(array $fieldArgValues): bool
+    {
+        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
+        return self::isAnyFieldArgumentValueASomething(
+            $fieldArgValues,
+            function ($fieldArgValue) use ($fieldQueryInterpreter) {
+                return $fieldQueryInterpreter->isFieldArgumentValueAField($fieldArgValue)
+                    || $fieldQueryInterpreter->isFieldArgumentValueAnExpression($fieldArgValue);
+            }
+        );
+    }
 
     public static function isAnyFieldArgumentValueDynamic(array $fieldArgValues): bool
     {
