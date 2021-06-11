@@ -36,49 +36,53 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        $types = [
-            'concat' => SchemaDefinition::TYPE_STRING,
-            'divide' => SchemaDefinition::TYPE_FLOAT,
-            'arrayRandom' => SchemaDefinition::TYPE_MIXED,
-            'arrayJoin' => SchemaDefinition::TYPE_STRING,
-            'arrayItem' => SchemaDefinition::TYPE_MIXED,
-            'arraySearch' => SchemaDefinition::TYPE_MIXED,
-            'arrayFill' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayUnique' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayDiff' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayAddItem' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_MIXED),
-            'arrayAsQueryStr' => SchemaDefinition::TYPE_STRING,
-            'upperCase' => SchemaDefinition::TYPE_STRING,
-            'lowerCase' => SchemaDefinition::TYPE_STRING,
-            'titleCase' => SchemaDefinition::TYPE_STRING,
-        ];
-        return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
-    {
-        $nonNullableFieldNames = [
+        return match($fieldName) {
+            'divide'
+                => SchemaDefinition::TYPE_FLOAT,
             'concat',
-            'divide',
-            'arrayRandom',
             'arrayJoin',
+            'arrayAsQueryStr',
+            'upperCase',
+            'lowerCase',
+            'titleCase'
+                => SchemaDefinition::TYPE_STRING,
+            'arrayRandom',
             'arrayItem',
             'arraySearch',
             'arrayFill',
             'arrayValues',
             'arrayUnique',
             'arrayDiff',
-            'arrayAddItem',
+            'arrayAddItem'
+                => SchemaDefinition::TYPE_MIXED,
+            default
+                => parent::getSchemaFieldType($typeResolver, $fieldName),
+        };
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'concat',
+            'divide',
+            'arrayRandom',
+            'arrayJoin',
+            'arrayItem',
+            'arraySearch',
             'arrayAsQueryStr',
             'upperCase',
             'lowerCase',
-            'titleCase',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
+            'titleCase'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'arrayFill',
+            'arrayValues',
+            'arrayUnique',
+            'arrayDiff',
+            'arrayAddItem'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\ConditionalOnContext\Guzzle\SchemaServices\FieldResolvers;
 
-use PoP\GuzzleHelpers\GuzzleHelpers;
+use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
+use PoP\GuzzleHelpers\GuzzleHelpers;
 
 class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 {
@@ -24,9 +25,17 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
     {
         $types = [
             'getJSON' => SchemaDefinition::TYPE_OBJECT,
-            'getAsyncJSON' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_OBJECT),
+            'getAsyncJSON' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match($fieldName) {
+            'getAsyncJSON' => SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
