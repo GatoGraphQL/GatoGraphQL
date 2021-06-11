@@ -49,7 +49,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * @var array<string, array>
      */
+    private array $fieldArgumentNameIsArrayTypesCache = [];
+    /**
+     * @var array<string, array>
+     */
     private array $directiveArgumentNameTypesCache = [];
+    /**
+     * @var array<string, array>
+     */
+    private array $directiveArgumentNameIsArrayTypesCache = [];
     /**
      * @var array<string, array>
      */
@@ -564,7 +572,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         // Get the field argument types, to know to what type it will cast the value
         if ($directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver)) {
-            return $this->castFieldOrDirectiveArguments($directiveArgs, $directiveArgNameTypes, $failedCastingDirectiveArgErrorMessages, $forSchema);
+            $directiveArgNameIsArrayTypes = $this->getDirectiveArgumentNameIsArrayTypes($directiveResolver, $typeResolver);
+            return $this->castFieldOrDirectiveArguments($directiveArgs, $directiveArgNameTypes, $directiveArgNameIsArrayTypes, $failedCastingDirectiveArgErrorMessages, $forSchema);
         }
         return $directiveArgs;
     }
@@ -573,17 +582,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     {
         // Get the field argument types, to know to what type it will cast the value
         if ($fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field)) {
-            return $this->castFieldOrDirectiveArguments($fieldArgs, $fieldArgNameTypes, $failedCastingFieldArgErrorMessages, $forSchema);
+            $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
+            return $this->castFieldOrDirectiveArguments($fieldArgs, $fieldArgNameTypes, $fieldArgNameIsArrayTypes, $failedCastingFieldArgErrorMessages, $forSchema);
         }
         return $fieldArgs;
     }
 
-    protected function castFieldOrDirectiveArguments(array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgNameTypes, array &$failedCastingFieldOrDirectiveArgErrorMessages, bool $forSchema): array
+    protected function castFieldOrDirectiveArguments(array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgNameTypes, array $fieldOrDirectiveArgNameIsArrayTypes, array &$failedCastingFieldOrDirectiveArgErrorMessages, bool $forSchema): array
     {
         // Cast all argument values
         foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
             // Maybe cast the value to the appropriate type. Eg: from string to boolean
             $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName];
+            // If not set, the return type is not an array
+            $fieldArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
             // There are 2 possibilities for casting:
             // 1. $forSchema = true: Cast all items except fields (eg: hasComments()) or arrays with fields (eg: [hasComments()])
             // 2. $forSchema = false: Should be cast only fields, however by now we can't tell which are fields and which are not, since fields have already been resolved to their value. Hence, cast everything (fieldArgValues that failed at the schema level will not be provided in the input array, so won't be validated twice)
@@ -597,9 +609,39 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     )
                 )
             ) {
+                // Validate that the expected array/non-array input is provided
+                $errorMessage = null;
+                if ($fieldArgIsArrayType && !is_array($argValue)) {
+                    $errorMessage = sprintf(
+                        $this->translationAPI->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
+                        $argName,
+                        $argValue
+                    );
+                } elseif (!$fieldArgIsArrayType && is_array($argValue)) {
+                    $errorMessage = sprintf(
+                        $this->translationAPI->__('Argument \'%s\' does not expect an array, but array with value \'%s\' was provided', 'pop-component-model'),
+                        $argName,
+                        json_encode($argValue)
+                    );
+                }
+                if ($errorMessage !== null) {
+                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $errorMessage;
+                    $fieldOrDirectiveArgs[$argName] = null;
+                    continue;
+                }
+
                 // Cast (or "coerce" in GraphQL terms) the value
-                $argValue = $this->castFieldOrDirectiveArgumentValue($fieldArgType, $argValue);
-                
+                // If the value is an array, then cast each element to the item type
+                if ($fieldArgIsArrayType) {
+                    $argValue = array_map(
+                        fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
+                        $argValue
+                    );
+                } else {
+                    // Otherwise, simply cast the given value directly
+                    $argValue = $this->typeCastingExecuter->cast($fieldArgType, $argValue);
+                }
+
                 // If the response is an error, extract the error message and set value to null
                 if (GeneralUtils::isError($argValue)) {
                     $error = $argValue;
@@ -611,21 +653,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $fieldOrDirectiveArgs;
-    }
-
-    /**
-     * If the value is an array, then execute this function recursively on each element.
-     * Otherwise, cast the element
-     */
-    protected function castFieldOrDirectiveArgumentValue(string $fieldArgType, mixed $argValue): mixed
-    {
-        if (is_array($argValue)) {
-            return array_map(
-                fn ($argValueItem) => $this->castFieldOrDirectiveArgumentValue($fieldArgType, $argValueItem),
-                $argValue
-            );
-        }
-        return $this->typeCastingExecuter->cast($fieldArgType, $argValue);
     }
 
     protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages, bool $disableDynamicFields = false): array
@@ -668,6 +695,26 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $directiveArgNameTypes;
+    }
+
+    protected function getDirectiveArgumentNameIsArrayTypes(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    {
+        if (!isset($this->directiveArgumentNameIsArrayTypesCache[get_class($directiveResolver)][get_class($typeResolver)])) {
+            $this->directiveArgumentNameIsArrayTypesCache[get_class($directiveResolver)][get_class($typeResolver)] = $this->doGetDirectiveArgumentNameIsArrayTypes($directiveResolver, $typeResolver);
+        }
+        return $this->directiveArgumentNameIsArrayTypesCache[get_class($directiveResolver)][get_class($typeResolver)];
+    }
+
+    protected function doGetDirectiveArgumentNameIsArrayTypes(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
+    {
+        // Get the fieldDirective argument types, to know to what type it will cast the value
+        $directiveArgNameIsArrayTypes = [];
+        if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $typeResolver)) {
+            foreach ($directiveSchemaDefinitionArgs as $directiveSchemaDefinitionArg) {
+                $directiveArgNameIsArrayTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE];
+            }
+        }
+        return $directiveArgNameIsArrayTypes;
     }
 
     protected function getDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
@@ -734,6 +781,26 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $fieldArgNameTypes;
+    }
+
+    protected function getFieldArgumentNameIsArrayTypes(TypeResolverInterface $typeResolver, string $field): array
+    {
+        if (!isset($this->fieldArgumentNameIsArrayTypesCache[get_class($typeResolver)][$field])) {
+            $this->fieldArgumentNameIsArrayTypesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameIsArrayTypes($typeResolver, $field);
+        }
+        return $this->fieldArgumentNameIsArrayTypesCache[get_class($typeResolver)][$field];
+    }
+
+    protected function doGetFieldArgumentNameIsArrayTypes(TypeResolverInterface $typeResolver, string $field): array
+    {
+        // Get the field argument types, to know to what type it will cast the value
+        $fieldArgNameIsArrayTypes = [];
+        if ($fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field)) {
+            foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
+                $fieldArgNameIsArrayTypes[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_IS_ARRAY];
+            }
+        }
+        return $fieldArgNameIsArrayTypes;
     }
 
     protected function getFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): array
