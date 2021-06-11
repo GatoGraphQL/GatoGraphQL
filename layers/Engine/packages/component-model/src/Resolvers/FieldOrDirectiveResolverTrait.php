@@ -56,25 +56,28 @@ trait FieldOrDirectiveResolverTrait
     }
 
     /**
-     * Important: The validations below can only be done if no fieldArg contains a field!
+     * The validations below can only be done if no fieldArg or directiveArg contains a field!
      * That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
      * For instance, this doesn't work: /?query=arrayItem(posts(),3)
      * In that case, the validation will be done inside ->resolveValue(),
      * and will be treated as a $dbError, not a $schemaError
      */
+    protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
+    {
+        return !FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs);
+    }
+
     protected function maybeValidateArrayTypeFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
     {
-        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs)) {
-            if (
-                $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
-                    $fieldOrDirectiveArgsSchemaDefinition,
-                    $fieldOrDirectiveName,
-                    $fieldOrDirectiveArgs,
-                    $type
-                )
-            ) {
-                return $maybeError;
-            }
+        if (
+            $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                $fieldOrDirectiveArgsSchemaDefinition,
+                $fieldOrDirectiveName,
+                $fieldOrDirectiveArgs,
+                $type
+            )
+        ) {
+            return $maybeError;
         }
         return null;
     }
@@ -118,25 +121,16 @@ trait FieldOrDirectiveResolverTrait
         return null;
     }
 
-    /**
-     * Important: The validations below can only be done if no fieldArg contains a field!
-     * That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
-     * For instance, this doesn't work: /?query=arrayItem(posts(),3)
-     * In that case, the validation will be done inside ->resolveValue(),
-     * and will be treated as a $dbError, not a $schemaError
-     */
     protected function maybeValidateEnumFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?array
     {
-        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs)) {
-            // Iterate all the enum types and check that the provided values is one of them, or throw an error
-            if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-                return $this->validateEnumFieldOrDirectiveArguments(
-                    $enumTypeFieldOrDirectiveArgsSchemaDefinition,
-                    $fieldOrDirectiveName,
-                    $fieldOrDirectiveArgs,
-                    $type
-                );
-            }
+        // Iterate all the enum types and check that the provided values is one of them, or throw an error
+        if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
+            return $this->validateEnumFieldOrDirectiveArguments(
+                $enumTypeFieldOrDirectiveArgsSchemaDefinition,
+                $fieldOrDirectiveName,
+                $fieldOrDirectiveArgs,
+                $type
+            );
         }
         return null;
     }

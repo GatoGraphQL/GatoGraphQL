@@ -191,35 +191,37 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 return [$maybeError];
             }
 
-            /**
-             * Validate array types are provided as arrays
-             */
-            if (
-                $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+            if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
+                /**
+                 * Validate array types are provided as arrays
+                 */
+                if (
+                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+                        $typeResolver,
+                        $fieldName,
+                        $fieldArgs,
+                        $fieldArgsSchemaDefinition,
+                        ResolverTypes::FIELD
+                    )
+                ) {
+                    return [$maybeError];
+                }
+
+                /**
+                 * Validate enums
+                 */
+                list(
+                    $maybeError
+                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
                     $typeResolver,
                     $fieldName,
                     $fieldArgs,
                     $fieldArgsSchemaDefinition,
                     ResolverTypes::FIELD
-                )
-            ) {
-                return [$maybeError];
-            }
-
-            /**
-             * Validate enums
-             */
-            list(
-                $maybeError
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
-                $fieldName,
-                $fieldArgs,
-                $fieldArgsSchemaDefinition,
-                ResolverTypes::FIELD
-            );
-            if ($maybeError) {
-                return [$maybeError];
+                );
+                if ($maybeError) {
+                    return [$maybeError];
+                }
             }
         }
         // If a MutationResolver is declared, let it resolve the value

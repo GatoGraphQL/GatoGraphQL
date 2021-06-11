@@ -402,36 +402,38 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             ) {
                 return [$maybeError];
             }
-            
-            /**
-             * Validate array types are provided as arrays
-             */
-            if (
-                $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+
+            if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
+                /**
+                 * Validate array types are provided as arrays
+                 */
+                if (
+                    $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+                        $typeResolver,
+                        $directiveName,
+                        $directiveArgs,
+                        $directiveArgsSchemaDefinition,
+                        ResolverTypes::DIRECTIVE
+                    )
+                ) {
+                    return [$maybeError];
+                }
+
+                /**
+                 * Validate enums
+                 */
+                list(
+                    $maybeError
+                ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
                     $typeResolver,
                     $directiveName,
                     $directiveArgs,
                     $directiveArgsSchemaDefinition,
                     ResolverTypes::DIRECTIVE
-                )
-            ) {
-                return [$maybeError];
-            }
-
-            /**
-             * Validate enums
-             */
-            list(
-                $maybeError
-            ) = $this->maybeValidateEnumFieldOrDirectiveArguments(
-                $typeResolver,
-                $directiveName,
-                $directiveArgs,
-                $directiveArgsSchemaDefinition,
-                ResolverTypes::DIRECTIVE
-            );
-            if ($maybeError) {
-                return [$maybeError];
+                );
+                if ($maybeError) {
+                    return [$maybeError];
+                }
             }
         }
         return null;
