@@ -62,6 +62,69 @@ trait FieldOrDirectiveResolverTrait
      * In that case, the validation will be done inside ->resolveValue(),
      * and will be treated as a $dbError, not a $schemaError
      */
+    protected function maybeValidateArrayTypeFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?string
+    {
+        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs)) {
+            if (
+                $maybeError = $this->validateArrayTypeFieldOrDirectiveArguments(
+                    $fieldOrDirectiveArgsSchemaDefinition,
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgs,
+                    $type
+                )
+            ) {
+                return $maybeError;
+            }
+        }
+        return null;
+    }
+
+    protected function validateArrayTypeFieldOrDirectiveArguments(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): ?string {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        $errors = [];
+        $fieldOrDirectiveArgumentNames = SchemaHelpers::getSchemaFieldArgNames($fieldOrDirectiveArgsSchemaDefinition);
+        for ($i = 0; $i < count($fieldOrDirectiveArgumentNames); $i++) {
+            $fieldOrDirectiveArgumentName = $fieldOrDirectiveArgumentNames[$i];
+            $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
+            if ($fieldOrDirectiveArgumentValue !== null) {
+                // Check if it's an array or not from the schema definition
+                $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+                $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                if ($fieldOrDirectiveArgIsArray && !is_array($fieldOrDirectiveArgumentValue)) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                } elseif (!$fieldOrDirectiveArgIsArray && is_array($fieldOrDirectiveArgumentValue)) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                }
+            }
+        }
+        if ($errors) {
+            return implode($translationAPI->__('. '), $errors);
+        }
+        return null;
+    }
+
+    /**
+     * Important: The validations below can only be done if no fieldArg contains a field!
+     * That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
+     * For instance, this doesn't work: /?query=arrayItem(posts(),3)
+     * In that case, the validation will be done inside ->resolveValue(),
+     * and will be treated as a $dbError, not a $schemaError
+     */
     protected function maybeValidateEnumFieldOrDirectiveArguments(TypeResolverInterface $typeResolver, string $fieldOrDirectiveName, array $fieldOrDirectiveArgs, array $fieldOrDirectiveArgsSchemaDefinition, string $type): ?array
     {
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldOrDirectiveArgs)) {

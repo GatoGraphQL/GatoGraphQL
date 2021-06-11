@@ -192,6 +192,21 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             }
 
             /**
+             * Validate array types are provided as arrays
+             */
+            if (
+                $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+                    $typeResolver,
+                    $fieldName,
+                    $fieldArgs,
+                    $fieldArgsSchemaDefinition,
+                    ResolverTypes::FIELD
+                )
+            ) {
+                return [$maybeError];
+            }
+
+            /**
              * Validate enums
              */
             list(

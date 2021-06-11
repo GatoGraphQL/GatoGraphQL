@@ -402,6 +402,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             ) {
                 return [$maybeError];
             }
+            
+            /**
+             * Validate array types are provided as arrays
+             */
+            if (
+                $maybeError = $this->maybeValidateArrayTypeFieldOrDirectiveArguments(
+                    $typeResolver,
+                    $directiveName,
+                    $directiveArgs,
+                    $directiveArgsSchemaDefinition,
+                    ResolverTypes::DIRECTIVE
+                )
+            ) {
+                return [$maybeError];
+            }
 
             /**
              * Validate enums
