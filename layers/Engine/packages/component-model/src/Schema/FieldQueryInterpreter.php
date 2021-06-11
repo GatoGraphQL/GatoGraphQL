@@ -651,7 +651,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         );
                     } elseif (!$fieldArgIsArrayType && is_array($argValue)) {
                         $errorMessage = sprintf(
-                            $this->translationAPI->__('Argument \'%s\' does not expect an array, but array with value \'%s\' was provided', 'pop-component-model'),
+                            $this->translationAPI->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
                             $argName,
                             json_encode($argValue)
                         );
