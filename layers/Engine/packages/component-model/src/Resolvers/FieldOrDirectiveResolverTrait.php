@@ -101,6 +101,11 @@ trait FieldOrDirectiveResolverTrait
             if ($fieldOrDirectiveArgumentValue !== null) {
                 // Check if it's an array or not from the schema definition
                 $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+                // If the value may be array, may be not, then there's nothing to validate
+                $fieldOrDirectiveArgMayBeArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
+                if ($fieldOrDirectiveArgMayBeArray === true) {
+                    continue;
+                }
                 $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 if ($fieldOrDirectiveArgIsArray && !is_array($fieldOrDirectiveArgumentValue)) {
                     $errors[] = sprintf(
@@ -159,11 +164,13 @@ trait FieldOrDirectiveResolverTrait
             if ($fieldOrDirectiveArgumentValue !== null) {
                 // Check if it's an array or not from the schema definition
                 $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+                // If the value may be array, may be not, then there's nothing to validate
+                $enumTypeFieldOrDirectiveArgMayBeArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
                 $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
                 $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
                 if ($enumTypeFieldOrDirectiveArgIsArray) {
-                    if (!is_array($fieldOrDirectiveArgumentValue)) {
+                    if (!$enumTypeFieldOrDirectiveArgMayBeArray && !is_array($fieldOrDirectiveArgumentValue)) {
                         $errors[] = sprintf(
                             $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
                             $fieldOrDirectiveArgumentName,
@@ -182,7 +189,7 @@ trait FieldOrDirectiveResolverTrait
                         $type,
                     );
                 } else {
-                    if (is_array($fieldOrDirectiveArgumentValue)) {
+                    if (!$enumTypeFieldOrDirectiveArgMayBeArray && is_array($fieldOrDirectiveArgumentValue)) {
                         $errors[] = sprintf(
                             $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
                             $fieldOrDirectiveArgumentName,
