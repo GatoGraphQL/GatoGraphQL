@@ -224,7 +224,7 @@ trait FieldOrDirectiveResolverTrait
         $translationAPI = TranslationAPIFacade::getInstance();
         $errorItems = $deprecationItems = [];
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
-            $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem];
+            $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem] ?? null;
             if ($fieldOrDirectiveArgumentValueDefinition === null) {
                 // Remove deprecated ones and extract their names
                 $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
