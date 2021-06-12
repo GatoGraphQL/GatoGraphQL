@@ -330,7 +330,7 @@ In the example below, an array contains strings to translate and the language to
     [
       text: How do you like this software so far?,
       translateTo: es
-    ],
+    ]
   ])@translated<
     forEach<
       advancePointerInArray(
