@@ -49,7 +49,7 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'self',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
