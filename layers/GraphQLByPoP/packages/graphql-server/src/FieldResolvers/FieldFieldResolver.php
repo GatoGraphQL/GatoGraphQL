@@ -52,7 +52,8 @@ class FieldFieldResolver extends AbstractDBDataFieldResolver
         return match($fieldName) {
             'name',
             'type',
-            'isDeprecated'
+            'isDeprecated',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'args'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,

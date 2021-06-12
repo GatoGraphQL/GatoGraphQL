@@ -67,7 +67,8 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
-            'kind'
+            'kind',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'fields',
             'interfaces',
