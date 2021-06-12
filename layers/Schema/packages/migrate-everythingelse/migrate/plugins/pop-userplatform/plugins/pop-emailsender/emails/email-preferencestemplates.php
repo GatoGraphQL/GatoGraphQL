@@ -4,7 +4,7 @@ define('POP_EMAILFRAME_PREFERENCES', 'preferences');
 
 class PoP_EmailSender_Templates_Preferences extends PoP_EmailSender_Templates_Simple
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_EMAILFRAME_PREFERENCES;
     }

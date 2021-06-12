@@ -4,39 +4,41 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use Exception;
 use Composer\Semver\Semver;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\Hooks\HooksAPIInterface;
+use Exception;
 use League\Pipeline\StageInterface;
-use PoP\ComponentModel\Environment;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\FieldSymbols;
-use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\ComponentModel\TypeResolvers\PipelinePositions;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\ResolverTypes;
+use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\FieldSymbols;
+use PoP\ComponentModel\TypeResolvers\PipelinePositions;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface, StageInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDsDataFieldsDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait;
+    use WithVersionConstraintFieldOrDirectiveResolverTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
@@ -47,11 +49,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     /**
-     * @var array<string, array>
+     * @var array<string, mixed>
      */
     protected array $directiveArgsForSchema = [];
     /**
-     * @var array<string, array>
+     * @var array<string, mixed>
      */
     protected array $directiveArgsForResultItems = [];
     /**

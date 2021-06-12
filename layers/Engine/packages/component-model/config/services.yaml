@@ -110,6 +110,8 @@ services:
         class: \PoP\ComponentModel\Schema\FeedbackMessageStore
 
     # Override the service from FieldQuery
+    PoP\FieldQuery\FieldQueryInterpreterInterface:
+        class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
     PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
         class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
 

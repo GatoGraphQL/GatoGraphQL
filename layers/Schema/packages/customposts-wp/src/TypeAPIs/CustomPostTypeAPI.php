@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use function apply_filters;
 use function get_post_status;
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\ComponentModel\TypeDataResolvers\InjectedFilterDataloadingModuleTypeDataResolverTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -22,7 +22,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
-    use APITypeDataResolverTrait;
+    use InjectedFilterDataloadingModuleTypeDataResolverTrait;
 
     function __construct(
         protected HooksAPIInterface $hooksAPI,

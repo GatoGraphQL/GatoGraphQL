@@ -925,7 +925,7 @@ _**In PoP** ([View query in browser](https://newapi.getpop.org/api/graphql/?quer
     [
       text: How do you like this software so far?,
       translateTo: es
-    ],
+    ]
   ])@translated<
     forEach<
       advancePointerInArray(

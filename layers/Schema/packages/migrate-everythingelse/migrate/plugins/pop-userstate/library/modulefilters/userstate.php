@@ -7,12 +7,12 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_ModuleFilter_UserState extends AbstractModuleFilter
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_MODULEFILTER_USERSTATE;
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
 
         // Exclude if it has no user state

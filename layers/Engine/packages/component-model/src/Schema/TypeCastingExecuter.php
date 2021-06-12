@@ -24,23 +24,72 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
      */
     public function cast(string $type, mixed $value): mixed
     {
-        if (is_array($value)) {
-            return new Error(
-                'array-cast',
-                $this->translationAPI->__('An array is not considered a type. Consider converting it into an object')
-            );
+        // Fail if passing an array for unsupporting types
+        switch ($type) {
+            case SchemaDefinition::TYPE_ANY_SCALAR:
+            case SchemaDefinition::TYPE_ID:
+            case SchemaDefinition::TYPE_ARRAY_KEY:
+            case SchemaDefinition::TYPE_STRING:
+            case SchemaDefinition::TYPE_URL:
+            case SchemaDefinition::TYPE_EMAIL:
+            case SchemaDefinition::TYPE_IP:
+            case SchemaDefinition::TYPE_ENUM:
+            case SchemaDefinition::TYPE_DATE:
+            case SchemaDefinition::TYPE_INT:
+            case SchemaDefinition::TYPE_FLOAT:
+            case SchemaDefinition::TYPE_BOOL:
+            case SchemaDefinition::TYPE_TIME:
+                if (is_array($value)) {
+                    return new Error(
+                        'array-cast',
+                        sprintf(
+                            $this->translationAPI->__('An array cannot be casted to type \'%s\'', 'component-model'),
+                            $type
+                        )
+                    );
+                }
+                break;
+        }
+
+        // Fail if passing an object for unsupporting types
+        switch ($type) {
+            case SchemaDefinition::TYPE_ANY_SCALAR:
+            case SchemaDefinition::TYPE_ID:
+            case SchemaDefinition::TYPE_ARRAY_KEY:
+            case SchemaDefinition::TYPE_STRING:
+            case SchemaDefinition::TYPE_URL:
+            case SchemaDefinition::TYPE_EMAIL:
+            case SchemaDefinition::TYPE_IP:
+            case SchemaDefinition::TYPE_ENUM:
+            case SchemaDefinition::TYPE_DATE:
+            case SchemaDefinition::TYPE_INT:
+            case SchemaDefinition::TYPE_FLOAT:
+            case SchemaDefinition::TYPE_BOOL:
+            case SchemaDefinition::TYPE_TIME:
+                if (is_object($value)) {
+                    return new Error(
+                        'object-cast',
+                        sprintf(
+                            $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
+                            $type
+                        )
+                    );
+                }
+                break;
         }
         
         switch ($type) {
             case SchemaDefinition::TYPE_MIXED:
-                // Accept anything and everything
+                return $value;
+            case SchemaDefinition::TYPE_ANY_SCALAR:
                 return $value;
             case SchemaDefinition::TYPE_ID:
-                // An array or an object cannot be an ID
-                if (is_object($value)) {
+            case SchemaDefinition::TYPE_ARRAY_KEY:
+                // Type ID in GraphQL spec: only String or Int allowed.
+                // @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
+                if (is_float($value) && is_bool($value)) {
                     return null;
                 }
-                // Accept anything and everything
                 return $value;
             case SchemaDefinition::TYPE_STRING:
                 return (string)$value;
@@ -63,7 +112,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 return $value;
             case SchemaDefinition::TYPE_OBJECT:
             case SchemaDefinition::TYPE_INPUT_OBJECT:
-                if (!is_object($value)) {
+                if (!(is_object($value) || is_array($value))) {
                     return null;
                 }
                 return $value;

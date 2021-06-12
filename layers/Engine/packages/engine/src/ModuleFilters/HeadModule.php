@@ -11,12 +11,12 @@ class HeadModule extends AbstractModuleFilter
 {
     public const URLPARAM_HEADMODULE = 'headmodule';
 
-    public function getName()
+    public function getName(): string
     {
         return 'headmodule';
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
         $vars = ApplicationState::getVars();
         return $vars['headmodule'] != $module;

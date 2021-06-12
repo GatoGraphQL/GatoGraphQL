@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TaxonomiesWP\TypeAPIs;
+namespace EverythingElse\PoPSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;

@@ -7,7 +7,7 @@ define('POP_CDN_THUMBPRINT_COMMENT', 'comment');
 
 class PoP_CDN_Thumbprint_Comment extends PoP_CDN_ThumbprintBase
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_CDN_THUMBPRINT_COMMENT;
     }

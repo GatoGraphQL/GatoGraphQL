@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
 use GraphQLByPoP\GraphQLServer\Enums\TypeKindEnum;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
@@ -58,7 +59,7 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
             'enumValues' => SchemaDefinition::TYPE_ID,
             'inputFields' => SchemaDefinition::TYPE_ID,
             'ofType' => SchemaDefinition::TYPE_ID,
-            'extensions' => SchemaDefinition::TYPE_MIXED,
+            'extensions' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -66,14 +67,14 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
-            'kind'
+            'kind',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'fields',
             'interfaces',
             'possibleTypes',
             'enumValues',
-            'inputFields',
-            'extensions'
+            'inputFields'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
@@ -160,6 +161,7 @@ class TypeFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
+        /** @var AbstractType */
         $type = $resultItem;
         switch ($fieldName) {
             case 'kind':

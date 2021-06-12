@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FormInputs;
 
 class FormMultipleInput extends FormInput
 {
-    public function isMultiple()
+    public function isMultiple(): bool
     {
         return true;
     }

@@ -302,7 +302,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
             // If we found a resolver for this fieldName, get all its properties from it
             if ($schemaDefinitionResolver) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
+                $type = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
+                $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
                 // Use bitwise operators to extract the applied modifiers
                 // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
                 $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($typeResolver, $fieldName);
@@ -311,9 +312,6 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 }
                 if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                }
-                if ($schemaTypeModifiers & SchemaTypeModifiers::MAY_BE_ARRAY) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] = true;
                 }
                 if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($typeResolver, $fieldName)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldInterfaceResolvers;
 
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
-use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 
 trait FieldInterfaceSchemaDefinitionResolverTrait
@@ -15,7 +15,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
     /**
      * Return the object implementing the schema definition for this fieldResolver
      */
-    public function getSchemaDefinitionResolver(): ?FieldSchemaDefinitionResolverInterface
+    public function getSchemaDefinitionResolver(): ?FieldInterfaceSchemaDefinitionResolverInterface
     {
         return null;
     }

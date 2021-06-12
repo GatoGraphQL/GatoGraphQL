@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\TagsWP\TypeAPIs;
+namespace EverythingElse\PoPSchema\TagsWP\TypeAPIs;
 
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;

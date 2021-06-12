@@ -11,7 +11,7 @@ class SelectFormInput extends FormInput
     /**
      * Function to override
      */
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         if ($label) {
             return array('' => $label);

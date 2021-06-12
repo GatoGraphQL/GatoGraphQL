@@ -9,12 +9,12 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class MainContentModule extends AbstractModuleFilter
 {
-    public function getName()
+    public function getName(): string
     {
         return 'maincontentmodule';
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
         $vars = ApplicationState::getVars();
         return $vars['maincontentmodule'] != $module;

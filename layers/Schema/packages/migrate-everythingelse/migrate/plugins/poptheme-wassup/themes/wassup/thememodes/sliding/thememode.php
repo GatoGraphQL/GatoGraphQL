@@ -12,7 +12,7 @@ class GD_ThemeMode_Wassup_Sliding extends GD_WassupThemeMode_Base
         parent::__construct();
     }
 
-    public function getName()
+    public function getName(): string
     {
         return GD_THEMEMODE_WASSUP_SLIDING;
     }

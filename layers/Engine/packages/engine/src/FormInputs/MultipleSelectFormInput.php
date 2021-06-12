@@ -6,7 +6,7 @@ namespace PoP\Engine\FormInputs;
 
 class MultipleSelectFormInput extends SelectFormInput
 {
-    public function isMultiple()
+    public function isMultiple(): bool
     {
         return true;
     }

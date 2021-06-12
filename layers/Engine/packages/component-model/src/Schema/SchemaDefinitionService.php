@@ -25,6 +25,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      */
     public function getDefaultType(): string
     {
-        return SchemaDefinition::TYPE_MIXED;
+        return SchemaDefinition::TYPE_ANY_SCALAR;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\ComponentModel\TypeDataResolvers\InjectedFilterDataloadingModuleTypeDataResolverTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -18,7 +18,7 @@ use WP_Taxonomy;
  */
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
-    use APITypeDataResolverTrait;
+    use InjectedFilterDataloadingModuleTypeDataResolverTrait;
 
     function __construct(
         protected HooksAPIInterface $hooksAPI,

@@ -310,7 +310,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'key',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ARRAY_KEY,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
                         ],
                     ]
@@ -324,7 +324,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                             SchemaDefinition::ARGNAME_NAME => 'array',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
                             SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to represented as a string', 'function-fields'),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to be represented as a string', 'function-fields'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],
                     ]
