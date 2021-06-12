@@ -31,7 +31,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             // 'items' => SchemaDefinition::TYPE_ID,
-            'itemDataEntries' => SchemaDefinition::TYPE_MIXED,
+            'itemDataEntries' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
