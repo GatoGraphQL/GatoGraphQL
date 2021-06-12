@@ -103,7 +103,7 @@ trait FieldOrDirectiveResolverTrait
                 $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
                 // If the value may be array, may be not, then there's nothing to validate
                 $fieldOrDirectiveArgMayBeArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
-                if ($fieldOrDirectiveArgMayBeArray === true) {
+                if ($fieldOrDirectiveArgMayBeArray) {
                     continue;
                 }
                 $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
