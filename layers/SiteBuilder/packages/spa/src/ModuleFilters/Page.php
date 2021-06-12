@@ -15,7 +15,7 @@ class Page extends AbstractModuleFilter
         return 'page';
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
 
         // Exclude until reaching the pageSection

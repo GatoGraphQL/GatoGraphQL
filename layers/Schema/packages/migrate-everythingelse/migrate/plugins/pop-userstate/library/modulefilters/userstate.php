@@ -12,7 +12,7 @@ class PoP_ModuleFilter_UserState extends AbstractModuleFilter
         return POP_MODULEFILTER_USERSTATE;
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
 
         // Exclude if it has no user state
