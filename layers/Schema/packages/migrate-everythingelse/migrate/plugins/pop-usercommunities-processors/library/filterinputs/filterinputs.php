@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value)
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
     {
         switch ($filterInput[1]) {
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:

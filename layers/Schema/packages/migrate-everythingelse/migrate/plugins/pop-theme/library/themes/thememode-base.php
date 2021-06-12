@@ -10,5 +10,5 @@ abstract class ThemeModeBase
 
     abstract public function getTheme();
 
-    abstract public function getName();
+    abstract public function getName(): string;
 }

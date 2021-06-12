@@ -4,7 +4,7 @@ define('POP_CDN_THUMBPRINT_POST', 'post');
 
 class PoP_CDN_Thumbprint_Post extends PoP_CDN_Thumbprint_PostBase
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_CDN_THUMBPRINT_POST;
     }

@@ -36,7 +36,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         parent::__construct();
     }
 
-    public function getName()
+    public function getName(): string
     {
         return GD_THEME_WASSUP;
     }

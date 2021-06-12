@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomiesWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\ComponentModel\TypeDataResolvers\InjectedFilterDataloadingModuleTypeDataResolverTrait;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
 /**
@@ -12,7 +12,7 @@ use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
  */
 class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
-    use APITypeDataResolverTrait;
+    use InjectedFilterDataloadingModuleTypeDataResolverTrait;
 
     protected function getTermObjectAndID(string | int | object $termObjectOrID): array
     {

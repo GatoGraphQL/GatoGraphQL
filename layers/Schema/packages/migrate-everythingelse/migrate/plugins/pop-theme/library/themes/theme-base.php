@@ -25,7 +25,7 @@ abstract class ThemeBase
         $this->themestyles[$themestyle->getName()] = $themestyle;
     }
 
-    abstract public function getName();
+    abstract public function getName(): string;
 
     public function getThememodes()
     {

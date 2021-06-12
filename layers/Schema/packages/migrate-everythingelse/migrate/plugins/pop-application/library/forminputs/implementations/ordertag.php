@@ -4,7 +4,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_FormInput_OrderTag extends OrderFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 
@@ -21,7 +21,7 @@ class GD_FormInput_OrderTag extends OrderFormInput
         return $values;
     }
 
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return 'count|DESC';
     }

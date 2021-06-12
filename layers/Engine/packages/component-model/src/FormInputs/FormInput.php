@@ -17,12 +17,12 @@ class FormInput
         $this->selected = $params['selected'] ?? null;
     }
 
-    public function isMultiple()
+    public function isMultiple(): bool
     {
         return false;
     }
 
-    protected function getValueFromSource(array $source)
+    protected function getValueFromSource(array $source): mixed
     {
         // If not set, it will be NULL
         $value =  $source[$this->getName()] ?? null;
@@ -40,7 +40,7 @@ class FormInput
         return $value;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -48,7 +48,7 @@ class FormInput
     /**
      * $_REQUEST has priority (for when editing post / user data, after submitting form this will override original post / user metadata values)
      */
-    public function getValue(?array $source = null)
+    public function getValue(?array $source = null): mixed
     {
         // Empty values (eg: '', array()) can be the value. Only if NULL get a default value
         if (!is_null($this->selected)) {
@@ -69,7 +69,7 @@ class FormInput
     /**
      * Function to override
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return null;
     }

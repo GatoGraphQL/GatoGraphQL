@@ -6,7 +6,7 @@ namespace PoP\Engine\FormInputs;
 
 trait BooleanFormInputTrait
 {
-    protected function getValueFromSource(array $source)
+    protected function getValueFromSource(array $source): mixed
     {
         // If it is not set, then return NULL, so that doing #formcomponentValue ignores value and proceeds to dbObject[dbObjectField]
         if (!isset($source[$this->getName()])) {

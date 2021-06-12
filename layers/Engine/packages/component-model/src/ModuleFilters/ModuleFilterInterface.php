@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\ModuleFilters;
 
 interface ModuleFilterInterface
 {
-    public function getName();
-    public function excludeModule(array $module, array &$props);
-    public function removeExcludedSubmodules(array $module, $submodules);
-    public function prepareForPropagation(array $module, array &$props);
-    public function restoreFromPropagation(array $module, array &$props);
+    public function getName(): string;
+    public function excludeModule(array $module, array &$props): bool;
+    public function removeExcludedSubmodules(array $module, array $submodules): array;
+    public function prepareForPropagation(array $module, array &$props): void;
+    public function restoreFromPropagation(array $module, array &$props): void;
 }

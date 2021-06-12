@@ -5,7 +5,7 @@ use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 class GD_FormInput_EM_LocationCountries extends SelectFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 
@@ -17,7 +17,7 @@ class GD_FormInput_EM_LocationCountries extends SelectFormInput
         return $values;
     }
 
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         $cmsService = CMSServiceFacade::getInstance();
         return $cmsService->getOption(NameResolverFacade::getInstance()->getName('popcomponent:addlocations:option:locationDefaultCountry'));

@@ -3,7 +3,7 @@ use PoP\Engine\FormInputs\SelectFormInput;
 
 class GD_QT_FormInput_Languages extends SelectFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 
@@ -18,7 +18,7 @@ class GD_QT_FormInput_Languages extends SelectFormInput
         return $values;
     }
 
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         $pluginapi = PoP_Multilingual_FunctionsAPIFactory::getInstance();
         return $pluginapi->getCurrentLanguage();

@@ -5,7 +5,7 @@ use PoP\Engine\FormInputs\SelectFormInput;
 
 class GD_FormInput_SettingsFormat extends SelectFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 
@@ -36,7 +36,7 @@ class GD_FormInput_SettingsFormat extends SelectFormInput
         return $values;
     }
 
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         $vars = ApplicationState::getVars();
         if ($selected = $vars['settingsformat']) {

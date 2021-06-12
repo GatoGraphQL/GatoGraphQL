@@ -21,7 +21,7 @@ class PoP_EmailSender_Templates
         PoP_EmailTemplatesFactory::setInstance($this);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return '';
     }

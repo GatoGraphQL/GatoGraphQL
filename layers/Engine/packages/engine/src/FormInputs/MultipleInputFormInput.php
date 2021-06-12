@@ -21,7 +21,7 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         $this->subnames = $params['subnames'] ? $params['subnames'] : array();
     }
 
-    protected function getValueFromSource(array $source)
+    protected function getValueFromSource(array $source): mixed
     {
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
         $name = $this->getName();

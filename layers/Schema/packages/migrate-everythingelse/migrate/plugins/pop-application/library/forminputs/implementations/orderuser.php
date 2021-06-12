@@ -4,7 +4,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_FormInput_OrderUser extends OrderFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 

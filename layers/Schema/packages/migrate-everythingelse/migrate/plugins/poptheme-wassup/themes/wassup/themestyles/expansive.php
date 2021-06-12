@@ -15,7 +15,7 @@ class GD_ThemeMode_Wassup_Expansive extends GD_WassupThemeStyle_Base
         parent::__construct();
     }
 
-    public function getName()
+    public function getName(): string
     {
         return GD_THEMESTYLE_WASSUP_EXPANSIVE;
     }

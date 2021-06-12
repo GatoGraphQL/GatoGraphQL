@@ -7,7 +7,7 @@ use PoP\Engine\Route\RouteUtils;
 
 class PoP_EmailSender_Templates_Newsletter extends PoP_EmailSender_Templates_Simple
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_EMAILFRAME_NEWSLETTER;
     }

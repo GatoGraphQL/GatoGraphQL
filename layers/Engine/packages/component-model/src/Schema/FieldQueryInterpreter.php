@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryHelpers;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\QueryParsing\QueryParserInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
+use PoP\FieldQuery\FeedbackMessageStoreInterface as UpstreamFeedbackMessageStoreInterface;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax;
+use PoP\FieldQuery\QueryUtils;
+use PoP\QueryParsing\QueryParserInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
@@ -77,7 +79,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
     public function __construct(
         TranslationAPIInterface $translationAPI,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
+        UpstreamFeedbackMessageStoreInterface $feedbackMessageStore,
         protected TypeCastingExecuterInterface $typeCastingExecuter,
         QueryParserInterface $queryParser
     ) {
@@ -235,7 +237,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 }
                 $fieldOrDirectiveArgName = $orderedFieldOrDirectiveArgNames[$i];
                 // Log the found fieldOrDirectiveArgName
-                $this->feedbackMessageStore->maybeAddLogEntry(
+                // Must re-cast to this package's class, to avoid IDE showing error
+                /** @var FeedbackMessageStoreInterface */
+                $feedbackMessageStore = $this->feedbackMessageStore;
+                $feedbackMessageStore->maybeAddLogEntry(
                     sprintf(
                         $this->translationAPI->__('In field or directive \'%s\', the argument on position number %s (with value \'%s\') is resolved as argument \'%s\'', 'pop-component-model'),
                         $fieldOrDirective,

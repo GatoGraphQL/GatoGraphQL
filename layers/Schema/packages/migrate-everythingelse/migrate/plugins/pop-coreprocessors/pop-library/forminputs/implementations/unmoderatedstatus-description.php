@@ -5,7 +5,7 @@ use PoP\Engine\FormInputs\SelectFormInput;
 
 class GD_FormInput_UnmoderatedStatusDescription extends SelectFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 
@@ -20,7 +20,7 @@ class GD_FormInput_UnmoderatedStatusDescription extends SelectFormInput
         return $values;
     }
 
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return Status::DRAFT;
     }

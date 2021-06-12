@@ -4,7 +4,7 @@ use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
 class GD_FormInput_LocationPostCategories extends MultipleSelectFormInput
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
 

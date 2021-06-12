@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_URE_FormInput_FilterMemberPrivileges extends GD_URE_FormInput_MemberPrivileges
 {
-    public function getAllValues($label = null)
+    public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);
         

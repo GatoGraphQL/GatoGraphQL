@@ -33,7 +33,7 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
     //     return $jqueryConstants;
     // }
 
-    public function getName()
+    public function getName(): string
     {
         return GD_THEMEMODE_WASSUP_EMBED;
     }

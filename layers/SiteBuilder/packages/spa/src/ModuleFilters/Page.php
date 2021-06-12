@@ -10,12 +10,12 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class Page extends AbstractModuleFilter
 {
-    public function getName()
+    public function getName(): string
     {
         return 'page';
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
 
         // Exclude until reaching the pageSection

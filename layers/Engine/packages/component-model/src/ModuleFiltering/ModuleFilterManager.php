@@ -61,7 +61,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     /**
      * The selected filter can be set from outside by the engine
      */
-    public function setSelectedModuleFilterName(string $selectedModuleFilterName)
+    public function setSelectedModuleFilterName(string $selectedModuleFilterName): void
     {
         $this->selected_filter_name = $selectedModuleFilterName;
     }
@@ -80,18 +80,18 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         return null;
     }
 
-    public function getNotExcludedModuleSets()
+    public function getNotExcludedModuleSets(): ?array
     {
         // It shall be used for requestmeta.rendermodules, to know from which modules the client must start rendering
         return $this->not_excluded_module_sets;
     }
 
-    public function neverExclude($neverExclude)
+    public function neverExclude($neverExclude): void
     {
         $this->neverExclude = $neverExclude;
     }
 
-    public function excludeModule(array $module, array &$props)
+    public function excludeModule(array $module, array &$props): bool
     {
         if (!$this->initialized) {
             $this->init();
@@ -110,7 +110,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         return false;
     }
 
-    public function removeExcludedSubmodules(array $module, $submodules)
+    public function removeExcludedSubmodules(array $module, array $submodules): array
     {
         if (!$this->initialized) {
             $this->init();
@@ -129,7 +129,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     /**
      * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $module, array &$props)
+    public function prepareForPropagation(array $module, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();
@@ -155,7 +155,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         // Add the module to the path
         $this->modulePathManager->prepareForPropagation($module, $props);
     }
-    public function restoreFromPropagation(array $module, array &$props)
+    public function restoreFromPropagation(array $module, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();
