@@ -91,7 +91,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         // If the field name is missing, show an error
         if ($pos === 0) {
             $this->feedbackMessageStore->addQueryError(sprintf(
-                $this->translationAPI->__('Name in \'%s\' is missing', 'pop-component-model'),
+                $this->translationAPI->__('Name in \'%s\' is missing', 'field-query'),
                 $field
             ));
             return '';
@@ -166,7 +166,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->feedbackMessageStore->addQueryError(sprintf(
                 $this->translationAPI->__(
                     'Arguments \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
-                    'component-model'
+                    'field-query'
                 ),
                 $field,
                 QuerySyntax::SYMBOL_FIELDARGS_OPENING,
@@ -334,14 +334,14 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             if ($aliasSymbolPos === 0) {
                 // Only there is the alias, nothing to alias to
                 $this->feedbackMessageStore->addQueryError(sprintf(
-                    $this->translationAPI->__('The field to be aliased in \'%s\' is missing', 'pop-component-model'),
+                    $this->translationAPI->__('The field to be aliased in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
             } elseif ($aliasSymbolPos === strlen($field) - 1) {
                 // Only the "@" was added, but the alias is missing
                 $this->feedbackMessageStore->addQueryError(sprintf(
-                    $this->translationAPI->__('Alias in \'%s\' is missing', 'pop-component-model'),
+                    $this->translationAPI->__('Alias in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
@@ -449,7 +449,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->feedbackMessageStore->addQueryError(sprintf(
                 $this->translationAPI->__(
                     'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
-                    'component-model'
+                    'field-query'
                 ),
                 $field,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING,

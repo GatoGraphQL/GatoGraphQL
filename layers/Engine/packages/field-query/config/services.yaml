@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\ComponentModel\Schema\FeedbackMessageStoreInterface:
+    PoP\FieldQuery\FeedbackMessageStoreInterface:
         class: \PoP\FieldQuery\FeedbackMessageStore
