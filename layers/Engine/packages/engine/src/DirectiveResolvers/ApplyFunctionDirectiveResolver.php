@@ -42,6 +42,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
             [
                 SchemaDefinition::ARGNAME_NAME => 'addArguments',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
+                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                     $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                     QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
