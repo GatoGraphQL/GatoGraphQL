@@ -28,15 +28,6 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
-    {
-        switch ($fieldName) {
-            case 'getSelfProp':
-                return SchemaTypeModifiers::MAY_BE_ARRAY;
-        }
-        return parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName);
-    }
-
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
@@ -58,8 +49,7 @@ class FunctionGlobalFieldResolver extends AbstractGlobalFieldResolver
                     [
                         [
                             SchemaDefinition::ARGNAME_NAME => 'self',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
                             SchemaDefinition::ARGNAME_MANDATORY => true,
                         ],

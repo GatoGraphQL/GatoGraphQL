@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
 
+use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\FieldTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\InputValueTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\TypeTypeResolver;
@@ -41,7 +42,7 @@ class FieldFieldResolver extends AbstractDBDataFieldResolver
             'type' => SchemaDefinition::TYPE_STRING,
             'isDeprecated' => SchemaDefinition::TYPE_BOOL,
             'deprecationReason' => SchemaDefinition::TYPE_STRING,
-            'extensions' => SchemaDefinition::TYPE_MIXED,
+            'extensions' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -51,10 +52,9 @@ class FieldFieldResolver extends AbstractDBDataFieldResolver
         return match($fieldName) {
             'name',
             'type',
-            'isDeprecated'
-                => SchemaTypeModifiers::NON_NULLABLE,
+            'isDeprecated',
             'extensions'
-                => SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE,
             'args'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
@@ -91,6 +91,7 @@ class FieldFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
+        /** @var Field */
         $field = $resultItem;
         switch ($fieldName) {
             case 'name':

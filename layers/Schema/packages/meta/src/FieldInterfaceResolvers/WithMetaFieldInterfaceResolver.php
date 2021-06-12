@@ -31,8 +31,8 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
     public function getSchemaFieldType(string $fieldName): string
     {
         $types = [
-            'metaValue' => SchemaDefinition::TYPE_MIXED,
-            'metaValues' => SchemaDefinition::TYPE_MIXED,
+            'metaValue' => SchemaDefinition::TYPE_ANY_SCALAR,
+            'metaValues' => SchemaDefinition::TYPE_ANY_SCALAR,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($fieldName);
     }

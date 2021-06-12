@@ -41,15 +41,13 @@ trait FilterInputModuleProcessorTrait
             SchemaDefinition::ARGNAME_NAME => $this->getName($module),
         ];
         if ($filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $filterSchemaDefinitionResolver->getSchemaFilterInputType($module);
+            $type = $filterSchemaDefinitionResolver->getSchemaFilterInputType($module);
+            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-            }
-            if ($filterSchemaDefinitionResolver->getSchemaFilterInputMayBeArrayType($module)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] = true;
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;

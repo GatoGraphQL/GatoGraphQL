@@ -13,7 +13,6 @@ class SchemaDefinition
     const ARGNAME_TYPE = 'type';
     const ARGNAME_NON_NULLABLE = 'nonNullable';
     const ARGNAME_IS_ARRAY = 'isArray';
-    const ARGNAME_MAY_BE_ARRAY = 'mayBeArray';
     const ARGNAME_REFERENCED_TYPE = 'referencedType';
     const ARGNAME_DESCRIPTION = 'description';
     const ARGNAME_VERSION = 'version';
@@ -55,15 +54,81 @@ class SchemaDefinition
     const ARGVALUE_SCHEMA_SHAPE_NESTED = 'nested';
 
     // Field/Directive Argument Types
+
+    /**
+     * Custom scalar type "comprising" the 5 atomic scalar types by GraphQL:
+     * 
+     * - String
+     * - Int
+     * - Float
+     * - Bool
+     * - ID
+     * 
+     * In GraphQL there is no union of scalars, hence this type comes to represent
+     * any of all the scalars. It can be used when we cannot know of what type will
+     * the value be. Eg: when calling `get_option` or `get_post_meta` in WordPress.
+     * 
+     * In GraphQL clients, errors will be shown when providing a `String` to an input
+     * of type `ANY_SCALAR`, but the GraphQL server will process the value correctly.
+     * 
+     * @see https://spec.graphql.org/draft/#sec-Scalars
+     * @see https://github.com/graphql/graphql-spec/issues/215
+     */
+    const TYPE_ANY_SCALAR = 'any_scalar';
+    /**
+     * Custom scalar type representing an `object` from PHP:
+     * some instance from a class or stdClass.
+     * 
+     * It also represents a JSONObject input.
+     * 
+     * Please notice: this type is not an `array`, however it can be represented
+     * through an array on the server-side via PHP. The distinction is important,
+     * because an `array` is not a type in GraphQL, but an `object` can be, as a custom scalar
+     */
+    const TYPE_OBJECT = 'object';
+    /**
+     * This custom scalar type comprises the 5 atomic types by GraphQL, plus the Object.
+     * 
+     * As a consequence, this type can also be represented through an array
+     * on the server-side via PHP
+     */
     const TYPE_MIXED = 'mixed';
-    const TYPE_ID = 'id';
+    /**
+     * This custom scalar type comprises the 2 atomic types by GraphQL:
+     * 
+     * - String
+     * - Int
+     * 
+     * It is used to represent array keys, which can only be numeric or strings.
+     */
+    const TYPE_ARRAY_KEY = 'array_key';
+
+    /**
+     * One of the 5 atomic scalars in GraphQL
+     */
     const TYPE_STRING = 'string';
+    /**
+     * One of the 5 atomic scalars in GraphQL
+     */
     const TYPE_INT = 'int';
+    /**
+     * One of the 5 atomic scalars in GraphQL
+     */
     const TYPE_FLOAT = 'float';
+    /**
+     * One of the 5 atomic scalars in GraphQL
+     */
     const TYPE_BOOL = 'bool';
+    /**
+     * One of the 5 atomic scalars in GraphQL
+     */
+    const TYPE_ID = 'id';
+
+    /**
+     * Custom scalars
+     */
     const TYPE_DATE = 'date';
     const TYPE_TIME = 'time';
-    const TYPE_OBJECT = 'object';
     const TYPE_URL = 'url';
     const TYPE_EMAIL = 'email';
     const TYPE_IP = 'ip';

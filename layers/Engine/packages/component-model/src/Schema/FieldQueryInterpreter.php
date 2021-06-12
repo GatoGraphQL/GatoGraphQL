@@ -53,19 +53,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * @var array<string, array>
      */
-    private array $fieldArgumentNameMayBeArrayTypesCache = [];
-    /**
-     * @var array<string, array>
-     */
     private array $directiveArgumentNameTypesCache = [];
     /**
      * @var array<string, array>
      */
     private array $directiveArgumentNameIsArrayTypesCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $directiveArgumentNameMayBeArrayTypesCache = [];
     /**
      * @var array<string, array>
      */
@@ -587,12 +579,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // Get the field argument types, to know to what type it will cast the value
         if ($directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver)) {
             $directiveArgNameIsArrayTypes = $this->getDirectiveArgumentNameIsArrayTypes($directiveResolver, $typeResolver);
-            $directiveArgNameMayBeArrayTypes = $this->getDirectiveArgumentNameMayBeArrayTypes($directiveResolver, $typeResolver);
             return $this->castFieldOrDirectiveArguments(
                 $directiveArgs,
                 $directiveArgNameTypes,
                 $directiveArgNameIsArrayTypes,
-                $directiveArgNameMayBeArrayTypes,
                 $failedCastingDirectiveArgErrorMessages,
                 $forSchema
             );
@@ -610,12 +600,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // Get the field argument types, to know to what type it will cast the value
         if ($fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field)) {
             $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
-            $fieldArgNameMayBeArrayTypes = $this->getFieldArgumentNameMayBeArrayTypes($typeResolver, $field);
             return $this->castFieldOrDirectiveArguments(
                 $fieldArgs,
                 $fieldArgNameTypes,
                 $fieldArgNameIsArrayTypes,
-                $fieldArgNameMayBeArrayTypes,
                 $failedCastingFieldArgErrorMessages,
                 $forSchema
             );
@@ -627,7 +615,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgNameTypes,
         array $fieldOrDirectiveArgNameIsArrayTypes,
-        array $fieldOrDirectiveArgNameMayBeArrayTypes,
         array &$failedCastingFieldOrDirectiveArgErrorMessages,
         bool $forSchema
     ): array {
@@ -649,18 +636,37 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Maybe cast the value to the appropriate type. Eg: from string to boolean
                 $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName];
                 // If not set, the return type is not an array
-                $fieldArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
-                $fieldArgMayBeArrayType = $fieldOrDirectiveArgNameMayBeArrayTypes[$argName] ?? false;
-                if ($fieldArgMayBeArrayType === false) {
+                $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
+                
+                /**
+                 * This value will not be used with GraphQL, but can be used by PoP.
+                 * 
+                 * While GraphQL has a strong type system, PoP takes a more lenient approach,
+                 * enabling fields to maybe be an array, maybe not.
+                 * 
+                 * Eg: `echo(value: ...)` will print back whatever provided,
+                 * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
+                 * an `Object`, so it could be provided as an array, or also `String`, which
+                 * will not be an array.
+                 * 
+                 * Whenever the value may be an array, the server will skip those validations
+                 * to check if an input is array or not (and throw an error).
+                 */
+                $fieldOrDirectiveArgMayBeArrayType = in_array($fieldArgType, [
+                    SchemaDefinition::TYPE_INPUT_OBJECT,
+                    SchemaDefinition::TYPE_OBJECT,
+                    SchemaDefinition::TYPE_MIXED,
+                ]);
+                if (!$fieldOrDirectiveArgMayBeArrayType) {
                     // Validate that the expected array/non-array input is provided
                     $errorMessage = null;
-                    if ($fieldArgIsArrayType && !is_array($argValue)) {
+                    if ($fieldOrDirectiveArgIsArrayType && !is_array($argValue)) {
                         $errorMessage = sprintf(
                             $this->translationAPI->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
                             $argName,
                             $argValue
                         );
-                    } elseif (!$fieldArgIsArrayType && is_array($argValue)) {
+                    } elseif (!$fieldOrDirectiveArgIsArrayType && is_array($argValue)) {
                         $errorMessage = sprintf(
                             $this->translationAPI->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
                             $argName,
@@ -677,8 +683,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Cast (or "coerce" in GraphQL terms) the value
                 // If the value is an array, then cast each element to the item type
                 if (
-                    (!$fieldArgMayBeArrayType && $fieldArgIsArrayType)
-                    || ($fieldArgMayBeArrayType && is_array($argValue))
+                    (!$fieldOrDirectiveArgMayBeArrayType && $fieldOrDirectiveArgIsArrayType)
+                    || ($fieldOrDirectiveArgMayBeArrayType && is_array($argValue))
                 ) {
                     $argValue = array_map(
                         fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
@@ -762,26 +768,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $directiveArgNameIsArrayTypes;
-    }
-
-    protected function getDirectiveArgumentNameMayBeArrayTypes(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
-    {
-        if (!isset($this->directiveArgumentNameMayBeArrayTypesCache[get_class($directiveResolver)][get_class($typeResolver)])) {
-            $this->directiveArgumentNameMayBeArrayTypesCache[get_class($directiveResolver)][get_class($typeResolver)] = $this->doGetDirectiveArgumentNameMayBeArrayTypes($directiveResolver, $typeResolver);
-        }
-        return $this->directiveArgumentNameMayBeArrayTypesCache[get_class($directiveResolver)][get_class($typeResolver)];
-    }
-
-    protected function doGetDirectiveArgumentNameMayBeArrayTypes(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
-    {
-        // Get the fieldDirective argument types, to know to what type it will cast the value
-        $directiveArgNameMayBeArrayTypes = [];
-        if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $typeResolver)) {
-            foreach ($directiveSchemaDefinitionArgs as $directiveSchemaDefinitionArg) {
-                $directiveArgNameMayBeArrayTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
-            }
-        }
-        return $directiveArgNameMayBeArrayTypes;
     }
 
     protected function getDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver): array
@@ -868,26 +854,6 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             }
         }
         return $fieldArgNameIsArrayTypes;
-    }
-
-    protected function getFieldArgumentNameMayBeArrayTypes(TypeResolverInterface $typeResolver, string $field): array
-    {
-        if (!isset($this->fieldArgumentNameMayBeArrayTypesCache[get_class($typeResolver)][$field])) {
-            $this->fieldArgumentNameMayBeArrayTypesCache[get_class($typeResolver)][$field] = $this->doGetFieldArgumentNameMayBeArrayTypes($typeResolver, $field);
-        }
-        return $this->fieldArgumentNameMayBeArrayTypesCache[get_class($typeResolver)][$field];
-    }
-
-    protected function doGetFieldArgumentNameMayBeArrayTypes(TypeResolverInterface $typeResolver, string $field): array
-    {
-        // Get the field argument types, to know to what type it will cast the value
-        $fieldArgNameMayBeArrayTypes = [];
-        if ($fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($typeResolver, $field)) {
-            foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
-                $fieldArgNameMayBeArrayTypes[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
-            }
-        }
-        return $fieldArgNameMayBeArrayTypes;
     }
 
     protected function getFieldArgumentNameDefaultValues(TypeResolverInterface $typeResolver, string $field): array
@@ -1007,9 +973,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
             foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
-                $fieldArgIsArrayType = $fieldArgNameIsArrayTypes[$failedCastingFieldArgName];
+                $fieldOrDirectiveArgIsArrayType = $fieldArgNameIsArrayTypes[$failedCastingFieldArgName];
                 $composedFieldArgType = $fieldArgNameTypes[$failedCastingFieldArgName];
-                if ($fieldArgIsArrayType) {
+                if ($fieldOrDirectiveArgIsArrayType) {
                     $composedFieldArgType = sprintf(
                         $this->translationAPI->__('array of %s', 'pop-component-model'),
                         $composedFieldArgType

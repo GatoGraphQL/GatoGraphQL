@@ -101,9 +101,28 @@ trait FieldOrDirectiveResolverTrait
             if ($fieldOrDirectiveArgumentValue !== null) {
                 // Check if it's an array or not from the schema definition
                 $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
+                /**
+                 * This value will not be used with GraphQL, but can be used by PoP.
+                 * 
+                 * While GraphQL has a strong type system, PoP takes a more lenient approach,
+                 * enabling fields to maybe be an array, maybe not.
+                 * 
+                 * Eg: `echo(object: ...)` will print back whatever provided,
+                 * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
+                 * an `Object`, so it could be provided as an array, or also `String`, which
+                 * will not be an array.
+                 * 
+                 * Whenever the value may be an array, the server will skip those validations
+                 * to check if an input is array or not (and throw an error).
+                 */
+                $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                $fieldOrDirectiveArgMayBeArray = in_array($fieldOrDirectiveArgType, [
+                    SchemaDefinition::TYPE_INPUT_OBJECT,
+                    SchemaDefinition::TYPE_OBJECT,
+                    SchemaDefinition::TYPE_MIXED,
+                ]);
                 // If the value may be array, may be not, then there's nothing to validate
-                $fieldOrDirectiveArgMayBeArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
-                if ($fieldOrDirectiveArgMayBeArray === true) {
+                if ($fieldOrDirectiveArgMayBeArray) {
                     continue;
                 }
                 $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
@@ -165,7 +184,26 @@ trait FieldOrDirectiveResolverTrait
                 // Check if it's an array or not from the schema definition
                 $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
                 // If the value may be array, may be not, then there's nothing to validate
-                $enumTypeFieldOrDirectiveArgMayBeArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false;
+                /**
+                 * This value will not be used with GraphQL, but can be used by PoP.
+                 * 
+                 * While GraphQL has a strong type system, PoP takes a more lenient approach,
+                 * enabling fields to maybe be an array, maybe not.
+                 * 
+                 * Eg: `echo(value: ...)` will print back whatever provided,
+                 * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
+                 * an `Object`, so it could be provided as an array, or also `String`, which
+                 * will not be an array.
+                 * 
+                 * Whenever the value may be an array, the server will skip those validations
+                 * to check if an input is array or not (and throw an error).
+                 */
+                $enumTypeFieldOrDirectiveArgType = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                $enumTypeFieldOrDirectiveArgMayBeArray = in_array($enumTypeFieldOrDirectiveArgType, [
+                    SchemaDefinition::TYPE_INPUT_OBJECT,
+                    SchemaDefinition::TYPE_OBJECT,
+                    SchemaDefinition::TYPE_MIXED,
+                ]);
                 $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
                 $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
