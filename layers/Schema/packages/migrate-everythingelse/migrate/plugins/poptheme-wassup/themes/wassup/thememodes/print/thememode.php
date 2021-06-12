@@ -32,7 +32,7 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
     //     return $jqueryConstants;
     // }
 
-    public function getName()
+    public function getName(): string
     {
         return GD_THEMEMODE_WASSUP_PRINT;
     }

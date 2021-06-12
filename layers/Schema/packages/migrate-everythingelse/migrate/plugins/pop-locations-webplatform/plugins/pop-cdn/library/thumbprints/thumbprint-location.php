@@ -4,7 +4,7 @@ define('POP_EM_CDN_THUMBPRINT_LOCATION', 'location');
 
 class PoP_EM_CDN_Thumbprint_Location extends PoP_CDN_Thumbprint_PostBase
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_EM_CDN_THUMBPRINT_LOCATION;
     }

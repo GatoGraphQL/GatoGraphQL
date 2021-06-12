@@ -9,7 +9,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class MainContentModule extends AbstractModuleFilter
 {
-    public function getName()
+    public function getName(): string
     {
         return 'maincontentmodule';
     }

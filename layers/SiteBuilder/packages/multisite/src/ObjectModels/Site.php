@@ -39,7 +39,7 @@ class Site
     {
         return $this->host;
     }
-    // public function getName() {
+    // public function getName(): string {
     //     return $this->name;
     // }
     // public function getDescription() {

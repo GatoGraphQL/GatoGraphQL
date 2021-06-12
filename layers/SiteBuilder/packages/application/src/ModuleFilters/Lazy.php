@@ -9,7 +9,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class Lazy extends AbstractModuleFilter
 {
-    public function getName()
+    public function getName(): string
     {
         return 'lazy';
     }

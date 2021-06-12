@@ -19,7 +19,7 @@ use PoPSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_EMAILFRAME_DEFAULT;
     }

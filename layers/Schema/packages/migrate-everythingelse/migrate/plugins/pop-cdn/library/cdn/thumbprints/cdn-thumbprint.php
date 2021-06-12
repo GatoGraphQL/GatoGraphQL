@@ -8,7 +8,7 @@ class PoP_CDN_ThumbprintBase
         $pop_cdn_thumbprint_manager->add($this);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return '';
     }

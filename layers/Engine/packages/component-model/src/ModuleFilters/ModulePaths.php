@@ -34,7 +34,7 @@ class ModulePaths extends AbstractModuleFilter
         $this->backlog_unsettled_paths = array();
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'modulepaths';
     }

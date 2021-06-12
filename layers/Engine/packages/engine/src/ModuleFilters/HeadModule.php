@@ -11,7 +11,7 @@ class HeadModule extends AbstractModuleFilter
 {
     public const URLPARAM_HEADMODULE = 'headmodule';
 
-    public function getName()
+    public function getName(): string
     {
         return 'headmodule';
     }

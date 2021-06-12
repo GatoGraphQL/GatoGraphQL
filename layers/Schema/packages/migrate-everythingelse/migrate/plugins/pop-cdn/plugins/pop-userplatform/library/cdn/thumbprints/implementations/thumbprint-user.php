@@ -7,7 +7,7 @@ define('POP_CDN_THUMBPRINT_USER', 'user');
 
 class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
 {
-    public function getName()
+    public function getName(): string
     {
         return POP_CDN_THUMBPRINT_USER;
     }

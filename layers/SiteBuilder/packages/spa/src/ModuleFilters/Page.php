@@ -10,7 +10,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class Page extends AbstractModuleFilter
 {
-    public function getName()
+    public function getName(): string
     {
         return 'page';
     }
