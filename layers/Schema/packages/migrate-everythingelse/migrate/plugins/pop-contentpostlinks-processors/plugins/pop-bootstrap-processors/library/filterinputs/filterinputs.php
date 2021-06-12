@@ -14,7 +14,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value)
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_LINKCATEGORIES:

@@ -14,7 +14,7 @@ class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractFilterInput
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value)
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
     {
         switch ($filterInput[1]) {
             case self::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:

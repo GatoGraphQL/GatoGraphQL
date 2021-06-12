@@ -12,7 +12,7 @@ class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends Abstr
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value)
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
     {
         switch ($filterInput[1]) {
 

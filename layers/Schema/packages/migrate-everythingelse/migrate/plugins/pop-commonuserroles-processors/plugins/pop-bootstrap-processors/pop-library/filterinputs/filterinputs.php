@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFi
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value)
+    public function filterDataloadQueryArgs(array $filterInput, array &$query, $value): void
     {
         switch ($filterInput[1]) {
 
