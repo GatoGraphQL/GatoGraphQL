@@ -66,7 +66,7 @@ trait QueryDataModuleProcessorTrait
 
         return $ret;
     }
-    public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null)
+    public function filterHeadmoduleDataloadQueryArgs(array $module, array &$query, array $source = null): void
     {
         if ($active_filterqueryargs_modules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
             $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
