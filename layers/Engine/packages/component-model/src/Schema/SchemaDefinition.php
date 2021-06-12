@@ -102,7 +102,7 @@ class SchemaDefinition
      * 
      * It is used to represent array keys, which can only be numeric or strings.
      */
-    const TYPE_KEY = 'key';
+    const TYPE_ARRAY_KEY = 'array_key';
 
     /**
      * One of the 5 atomic scalars in GraphQL

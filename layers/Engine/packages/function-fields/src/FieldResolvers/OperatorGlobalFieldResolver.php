@@ -310,7 +310,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                         ],
                         [
                             SchemaDefinition::ARGNAME_NAME => 'key',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_KEY,
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ARRAY_KEY,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
                         ],
                     ]
