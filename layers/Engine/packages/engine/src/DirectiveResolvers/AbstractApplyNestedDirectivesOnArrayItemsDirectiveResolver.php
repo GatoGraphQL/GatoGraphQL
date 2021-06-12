@@ -11,7 +11,6 @@ use PoP\Engine\Dataloading\Expressions;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Feedback\Tokens;
 
@@ -28,7 +27,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             [
                 SchemaDefinition::ARGNAME_NAME => 'addExpressions',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                     $this->translationAPI->__('Expressions to inject to the composed directive. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                     QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
@@ -37,7 +35,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             [
                 SchemaDefinition::ARGNAME_NAME => 'appendExpressions',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
                 SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                     $this->translationAPI->__('Append a value to an expression which must be an array, to inject to the composed directive. If the array has not been set, it is initialized as an empty array. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                     QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
