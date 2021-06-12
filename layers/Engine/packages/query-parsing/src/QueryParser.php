@@ -26,6 +26,9 @@ class QueryParser implements QueryParserInterface
         ?string $ignoreSkippingUntilChar = null,
         array $options = []
     ): array {
+        if ($query === '') {
+            return [$query];
+        }
         $buffer = '';
         $stack = array();
         $depth = 0;
