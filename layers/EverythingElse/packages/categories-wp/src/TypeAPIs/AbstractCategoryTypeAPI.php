@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CategoriesWP\TypeAPIs;
+namespace EverythingElse\PoPSchema\CategoriesWP\TypeAPIs;
 
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Tags\TypeAPIs;
+namespace EverythingElse\PoPSchema\Tags\TypeAPIs;
 
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 

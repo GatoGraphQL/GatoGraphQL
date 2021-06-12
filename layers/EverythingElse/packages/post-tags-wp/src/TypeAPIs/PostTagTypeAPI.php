@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagsWP\TypeAPIs;
+namespace EverythingElse\PoPSchema\PostTagsWP\TypeAPIs;
 
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
