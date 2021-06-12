@@ -36,6 +36,7 @@ class SchemaHelpers
             SchemaDefinition::TYPE_FLOAT => GraphQLServerSchemaDefinition::TYPE_FLOAT,
             SchemaDefinition::TYPE_BOOL => GraphQLServerSchemaDefinition::TYPE_BOOL,
             SchemaDefinition::TYPE_OBJECT => GraphQLServerSchemaDefinition::TYPE_OBJECT,
+            SchemaDefinition::TYPE_ANY_SCALAR => GraphQLServerSchemaDefinition::TYPE_ANY_SCALAR,
             SchemaDefinition::TYPE_MIXED => GraphQLServerSchemaDefinition::TYPE_MIXED,
             SchemaDefinition::TYPE_DATE => GraphQLServerSchemaDefinition::TYPE_DATE,
             SchemaDefinition::TYPE_TIME => GraphQLServerSchemaDefinition::TYPE_TIME,

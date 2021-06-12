@@ -334,6 +334,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             GraphQLServerSchemaDefinition::TYPE_FLOAT,
             GraphQLServerSchemaDefinition::TYPE_BOOL,
             GraphQLServerSchemaDefinition::TYPE_OBJECT,
+            GraphQLServerSchemaDefinition::TYPE_ANY_SCALAR,
             GraphQLServerSchemaDefinition::TYPE_MIXED,
             GraphQLServerSchemaDefinition::TYPE_DATE,
             GraphQLServerSchemaDefinition::TYPE_TIME,
