@@ -66,7 +66,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_FLOAT:
             case SchemaDefinition::TYPE_BOOL:
             case SchemaDefinition::TYPE_TIME:
-                if (is_array($value)) {
+                if (is_object($value)) {
                     return new Error(
                         'object-cast',
                         sprintf(
