@@ -682,10 +682,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
                 // Cast (or "coerce" in GraphQL terms) the value
                 // If the value is an array, then cast each element to the item type
-                if (
-                    (!$fieldOrDirectiveArgMayBeArrayType && $fieldOrDirectiveArgIsArrayType)
-                    || ($fieldOrDirectiveArgMayBeArrayType && is_array($argValue))
-                ) {
+                if ($fieldOrDirectiveArgIsArrayType) {
                     $argValue = array_map(
                         fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
                         $argValue
