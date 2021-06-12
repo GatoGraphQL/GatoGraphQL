@@ -35,7 +35,7 @@ class RootFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'option' => SchemaDefinition::TYPE_MIXED,
+            'option' => SchemaDefinition::TYPE_ANY_SCALAR,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
