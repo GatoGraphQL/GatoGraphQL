@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
-use PoP\ComponentModel\TypeDataResolvers\APITypeDataResolverTrait;
+use PoP\ComponentModel\TypeDataResolvers\InjectedFilterModuleTypeDataResolverTrait;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Categories\ComponentConfiguration;
@@ -19,7 +19,7 @@ use WP_Taxonomy;
  */
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
-    use APITypeDataResolverTrait;
+    use InjectedFilterModuleTypeDataResolverTrait;
 
     function __construct(
         protected HooksAPIInterface $hooksAPI,
