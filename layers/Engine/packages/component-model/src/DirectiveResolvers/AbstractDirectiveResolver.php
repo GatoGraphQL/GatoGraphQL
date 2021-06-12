@@ -49,11 +49,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     /**
-     * @var array<string, array>
+     * @var array<string, mixed>
      */
     protected array $directiveArgsForSchema = [];
     /**
-     * @var array<string, array>
+     * @var array<string, mixed>
      */
     protected array $directiveArgsForResultItems = [];
     /**
