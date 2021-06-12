@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeDataResolvers;
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-trait InjectedFilterModuleTypeDataResolverTrait
+trait InjectedFilterDataloadingModuleTypeDataResolverTrait
 {
     public function maybeFilterDataloadQueryArgs(array &$query, array $options = [])
     {
