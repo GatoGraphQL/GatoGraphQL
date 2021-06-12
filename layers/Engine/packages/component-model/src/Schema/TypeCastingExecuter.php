@@ -24,11 +24,54 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
      */
     public function cast(string $type, mixed $value): mixed
     {
-        if (is_array($value)) {
-            return new Error(
-                'array-cast',
-                $this->translationAPI->__('An array is not considered a type. Consider converting it into an object')
-            );
+        // Fail if passing an array for unsupporting types
+        switch ($type) {
+            case SchemaDefinition::TYPE_ID:
+            case SchemaDefinition::TYPE_STRING:
+            case SchemaDefinition::TYPE_URL:
+            case SchemaDefinition::TYPE_EMAIL:
+            case SchemaDefinition::TYPE_IP:
+            case SchemaDefinition::TYPE_ENUM:
+            case SchemaDefinition::TYPE_DATE:
+            case SchemaDefinition::TYPE_INT:
+            case SchemaDefinition::TYPE_FLOAT:
+            case SchemaDefinition::TYPE_BOOL:
+            case SchemaDefinition::TYPE_TIME:
+                if (is_array($value)) {
+                    return new Error(
+                        'array-cast',
+                        sprintf(
+                            $this->translationAPI->__('An array cannot be casted to type \'%s\'', 'component-model'),
+                            $type
+                        )
+                    );
+                }
+                break;
+        }
+
+        // Fail if passing an object for unsupporting types
+        switch ($type) {
+            case SchemaDefinition::TYPE_ID:
+            case SchemaDefinition::TYPE_STRING:
+            case SchemaDefinition::TYPE_URL:
+            case SchemaDefinition::TYPE_EMAIL:
+            case SchemaDefinition::TYPE_IP:
+            case SchemaDefinition::TYPE_ENUM:
+            case SchemaDefinition::TYPE_DATE:
+            case SchemaDefinition::TYPE_INT:
+            case SchemaDefinition::TYPE_FLOAT:
+            case SchemaDefinition::TYPE_BOOL:
+            case SchemaDefinition::TYPE_TIME:
+                if (is_array($value)) {
+                    return new Error(
+                        'object-cast',
+                        sprintf(
+                            $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
+                            $type
+                        )
+                    );
+                }
+                break;
         }
         
         switch ($type) {
