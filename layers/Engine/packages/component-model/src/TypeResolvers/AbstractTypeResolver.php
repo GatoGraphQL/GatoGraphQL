@@ -1403,7 +1403,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         }
                     } else {
                         // If may be array or not, then there's no validation to do
-                        $fieldMayBeArrayType = ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] ?? false);
+                        $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                        $fieldMayBeArrayType = in_array($fieldType, [
+                            SchemaDefinition::TYPE_INPUT_OBJECT,
+                            SchemaDefinition::TYPE_OBJECT,
+                            SchemaDefinition::TYPE_MIXED,
+                        ]);
                         if (!$fieldMayBeArrayType) {
                             $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                             if (is_array($value) && !$fieldIsArrayType) {
