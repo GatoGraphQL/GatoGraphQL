@@ -28,6 +28,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
         switch ($type) {
             case SchemaDefinition::TYPE_ANY_SCALAR:
             case SchemaDefinition::TYPE_ID:
+            case SchemaDefinition::TYPE_KEY:
             case SchemaDefinition::TYPE_STRING:
             case SchemaDefinition::TYPE_URL:
             case SchemaDefinition::TYPE_EMAIL:
@@ -54,6 +55,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
         switch ($type) {
             case SchemaDefinition::TYPE_ANY_SCALAR:
             case SchemaDefinition::TYPE_ID:
+            case SchemaDefinition::TYPE_KEY:
             case SchemaDefinition::TYPE_STRING:
             case SchemaDefinition::TYPE_URL:
             case SchemaDefinition::TYPE_EMAIL:
@@ -78,13 +80,12 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
         
         switch ($type) {
             case SchemaDefinition::TYPE_MIXED:
-                // Accept anything and everything
                 return $value;
             case SchemaDefinition::TYPE_ANY_SCALAR:
-                // Accept anything and everything
                 return $value;
             case SchemaDefinition::TYPE_ID:
-                // GraphQL spec: only String or Int allowed.
+            case SchemaDefinition::TYPE_KEY:
+                // Type ID in GraphQL spec: only String or Int allowed.
                 // @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
                 if (is_float($value) && is_bool($value)) {
                     return null;

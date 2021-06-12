@@ -94,6 +94,15 @@ class SchemaDefinition
      * on the server-side via PHP
      */
     const TYPE_MIXED = 'mixed';
+    /**
+     * This custom scalar type comprises the 2 atomic types by GraphQL:
+     * 
+     * - String
+     * - Int
+     * 
+     * It is used to represent array keys, which can only be numeric or strings.
+     */
+    const TYPE_KEY = 'key';
 
     /**
      * One of the 5 atomic scalars in GraphQL

@@ -8,6 +8,7 @@ class SchemaDefinition
 {
     const TYPE_ANY_SCALAR = 'AnyScalar';
     const TYPE_MIXED = 'Mixed';
+    const TYPE_KEY = 'Key';
     const TYPE_ID = 'ID';
     const TYPE_STRING = 'String';
     const TYPE_INT = 'Int';
