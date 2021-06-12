@@ -61,7 +61,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     /**
      * The selected filter can be set from outside by the engine
      */
-    public function setSelectedModuleFilterName(string $selectedModuleFilterName)
+    public function setSelectedModuleFilterName(string $selectedModuleFilterName): void
     {
         $this->selected_filter_name = $selectedModuleFilterName;
     }
@@ -80,13 +80,13 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         return null;
     }
 
-    public function getNotExcludedModuleSets()
+    public function getNotExcludedModuleSets(): ?array
     {
         // It shall be used for requestmeta.rendermodules, to know from which modules the client must start rendering
         return $this->not_excluded_module_sets;
     }
 
-    public function neverExclude($neverExclude)
+    public function neverExclude($neverExclude): void
     {
         $this->neverExclude = $neverExclude;
     }
