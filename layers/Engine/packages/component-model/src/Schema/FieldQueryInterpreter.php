@@ -651,7 +651,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // If not set, the return type is not an array
                 $fieldArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
                 $fieldArgMayBeArrayType = $fieldOrDirectiveArgNameMayBeArrayTypes[$argName] ?? false;
-                if ($fieldArgMayBeArrayType === false) {
+                if (!$fieldArgMayBeArrayType) {
                     // Validate that the expected array/non-array input is provided
                     $errorMessage = null;
                     if ($fieldArgIsArrayType && !is_array($argValue)) {
