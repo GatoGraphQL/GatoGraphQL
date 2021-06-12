@@ -41,14 +41,33 @@ trait FilterInputModuleProcessorTrait
             SchemaDefinition::ARGNAME_NAME => $this->getName($module),
         ];
         if ($filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $filterSchemaDefinitionResolver->getSchemaFilterInputType($module);
+            $type = $filterSchemaDefinitionResolver->getSchemaFilterInputType($module);
+            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
             }
-            if ($filterSchemaDefinitionResolver->getSchemaFilterInputMayBeArrayType($module)) {
+            /**
+             * This value will not be used with GraphQL, but can be used by PoP.
+             * 
+             * While GraphQL has a strong type system, PoP takes a more lenient approach,
+             * enabling fields to maybe be an array, maybe not.
+             * 
+             * Eg: `echo(object: ...)` will print back whatever provided,
+             * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
+             * an `Object`, so it could be provided as an array, or also `String`, which
+             * will not be an array.
+             * 
+             * Whenever `MAY_BE_ARRAY` flag is on, the server will skip validations
+             * concerning an input being array or not.
+             */
+            if (in_array($type, [
+                SchemaDefinition::TYPE_INPUT_OBJECT,
+                SchemaDefinition::TYPE_OBJECT,
+                SchemaDefinition::TYPE_MIXED,
+            ])) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_MAY_BE_ARRAY] = true;
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
