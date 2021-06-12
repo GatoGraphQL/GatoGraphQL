@@ -26,6 +26,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
     {
         // Fail if passing an array for unsupporting types
         switch ($type) {
+            case SchemaDefinition::TYPE_ANY_SCALAR:
             case SchemaDefinition::TYPE_ID:
             case SchemaDefinition::TYPE_STRING:
             case SchemaDefinition::TYPE_URL:
@@ -51,6 +52,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
 
         // Fail if passing an object for unsupporting types
         switch ($type) {
+            case SchemaDefinition::TYPE_ANY_SCALAR:
             case SchemaDefinition::TYPE_ID:
             case SchemaDefinition::TYPE_STRING:
             case SchemaDefinition::TYPE_URL:
@@ -78,12 +80,15 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_MIXED:
                 // Accept anything and everything
                 return $value;
+            case SchemaDefinition::TYPE_ANY_SCALAR:
+                // Accept anything and everything
+                return $value;
             case SchemaDefinition::TYPE_ID:
-                // An array or an object cannot be an ID
-                if (is_object($value)) {
+                // GraphQL spec: only String or Int allowed.
+                // @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
+                if (is_float($value) && is_bool($value)) {
                     return null;
                 }
-                // Accept anything and everything
                 return $value;
             case SchemaDefinition::TYPE_STRING:
                 return (string)$value;
@@ -106,7 +111,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 return $value;
             case SchemaDefinition::TYPE_OBJECT:
             case SchemaDefinition::TYPE_INPUT_OBJECT:
-                if (!is_object($value)) {
+                if (!is_object($value) || !is_array($value)) {
                     return null;
                 }
                 return $value;
