@@ -55,7 +55,7 @@ abstract class AbstractUseDefaultValueIfConditionDirectiveResolver extends Abstr
                 continue;
             }
             // Take the default value from the directiveArgs
-            $defaultValue = $resultItemDirectiveArgs['value'];
+            $defaultValue = $resultItemDirectiveArgs['value'] ?? null;
             $condition = $resultItemDirectiveArgs['condition'];
             if (!is_null($defaultValue)) {
                 foreach ($dataFields['direct'] as $field) {
