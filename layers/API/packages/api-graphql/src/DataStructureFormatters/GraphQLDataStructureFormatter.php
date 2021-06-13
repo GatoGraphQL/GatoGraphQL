@@ -171,16 +171,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getDBEntryExtensions($dbKey, $id, $item),
-                    $item[Tokens::EXTENSIONS] ?? []
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getDBEntryExtensions($dbKey, $id, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
         }
+        // }
         return $entry;
     }
 
@@ -214,16 +214,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getSchemaEntryExtensions($dbKey, $item),
-                    $item[Tokens::EXTENSIONS] ?? []
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getSchemaEntryExtensions($dbKey, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
         }
+        // }
         return $entry;
     }
 
@@ -250,16 +250,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $entry = [
             'message' => $message,
         ];
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getQueryEntryExtensions(),
-                    $extensions
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            };
-        }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getQueryEntryExtensions(),
+                $extensions
+            )
+        ) {
+            $entry['extensions'] = $extensions;
+        };
+        // }
         return $entry;
     }
 
