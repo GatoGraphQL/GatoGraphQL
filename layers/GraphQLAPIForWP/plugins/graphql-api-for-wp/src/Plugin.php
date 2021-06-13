@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use Exception;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
@@ -225,9 +226,31 @@ class Plugin extends AbstractMainPlugin
      */
     public function bootApplication(): void
     {
-        // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootApplication(
-            ...PluginConfiguration::getContainerCacheConfiguration()
-        );
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootApplication(
+                ...PluginConfiguration::getContainerCacheConfiguration()
+            );
+        } catch (Exception $e) {
+            $this->printExceptionAsAdminNotice($e);
+        }
+    }
+
+    protected function printExceptionAsAdminNotice(Exception $e): void
+    {
+        \add_action('admin_notices', function () use ($e) {
+            $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
+            . sprintf(
+                \__('<p>Something went wrong initializing plugin <strong>%s</strong>:</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
+                $this->pluginName,
+                $e->getMessage(),
+                $e->getTraceAsString()
+            );
+            _e(sprintf(
+                '<div class="notice notice-error">%s</div>',
+                $errorMessage
+            ));
+        });
     }
 }
