@@ -387,7 +387,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         );
         $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($typeResolver, $fieldDirective, $directiveArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $schemaWarnings, $disableDynamicFields);
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
         $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($typeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
@@ -506,14 +506,22 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForResultItem($typeResolver, $resultItem, $directiveArgs, $directiveOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $resultItemDBWarnings = [];
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForResultItem($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $resultItemDBWarnings);
-        if ($resultItemDBWarnings) {
+        $resultItemDBErrors = $resultItemDBWarnings = [];
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForResultItem($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $resultItemDBErrors, $resultItemDBWarnings);
+        if ($resultItemDBErrors || $resultItemDBWarnings) {
             $id = $typeResolver->getID($resultItem);
-            $dbWarnings[(string)$id] = array_merge(
-                $dbWarnings[(string)$id] ?? [],
-                $resultItemDBWarnings
-            );
+            if ($resultItemDBErrors) {
+                $dbErrors[(string)$id] = array_merge(
+                    $dbErrors[(string)$id] ?? [],
+                    $resultItemDBErrors
+                );
+            }
+            if ($resultItemDBWarnings) {
+                $dbWarnings[(string)$id] = array_merge(
+                    $dbWarnings[(string)$id] ?? [],
+                    $resultItemDBWarnings
+                );
+            }
         }
         if ($dbErrors) {
             $validAndResolvedDirective = null;
@@ -884,12 +892,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgNameDefaultValues;
     }
 
-    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$schemaWarnings, bool $disableDynamicFields = false): array
+    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, bool $disableDynamicFields = false): array
     {
         if ($directiveArgs) {
             $failedCastingDirectiveArgErrorMessages = [];
             $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages, $disableDynamicFields);
-            return $this->castAndValidateDirectiveArguments($directiveResolver, $typeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $schemaWarnings);
+            return $this->castAndValidateDirectiveArguments($directiveResolver, $typeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings);
         }
         return $directiveArgs;
     }
@@ -904,11 +912,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgs;
     }
 
-    protected function castAndValidateDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$dbWarnings): array
+    protected function castAndValidateDirectiveArgumentsForResultItem(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, array $directiveArgs, array &$dbErrors, array &$dbWarnings): array
     {
         $failedCastingDirectiveArgErrorMessages = [];
         $castedDirectiveArgs = $this->castDirectiveArgumentsForResultItem($directiveResolver, $typeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages);
-        return $this->castAndValidateDirectiveArguments($directiveResolver, $typeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $dbWarnings);
+        return $this->castAndValidateDirectiveArguments($directiveResolver, $typeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $dbErrors, $dbWarnings);
     }
 
     protected function castAndValidateFieldArgumentsForResultItem(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$dbWarnings): array
@@ -918,7 +926,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->castAndValidateFieldArguments($typeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $dbWarnings);
     }
 
-    protected function castAndValidateDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaWarnings): array
+    protected function castAndValidateDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
         if (
