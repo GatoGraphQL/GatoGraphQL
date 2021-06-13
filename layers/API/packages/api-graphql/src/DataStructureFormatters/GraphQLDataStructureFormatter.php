@@ -64,13 +64,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         /**
-         * "Warnings", "deprecations", and "logEntries" top-level entries:
+         * "deprecations", and "logEntries" top-level entries:
          * since they are not part of the spec, place them under the top-level entry "extensions":
          *
          * > This entry is reserved for implementors to extend the protocol however they see fit,
          * > and hence there are no additional restrictions on its contents.
          *
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
+         * 
+         * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             // Add notices
