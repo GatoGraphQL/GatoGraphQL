@@ -937,7 +937,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
             $directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
-            $treatCastingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
+            $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingDirectiveArgs) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
                 if ($directiveArgErrorMessage = $failedCastingDirectiveArgErrorMessages[$failedCastingDirectiveArgName] ?? null) {
@@ -959,7 +959,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     );
                 }
                 // Either treat it as an error or a warning
-                if ($treatCastingFailuresAsErrors) {
+                if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => $errorMessage,
@@ -995,7 +995,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
-            $treatCastingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
+            $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
                 $fieldOrDirectiveArgIsArrayType = $fieldArgNameIsArrayTypes[$failedCastingFieldArgName];
@@ -1024,7 +1024,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $composedFieldArgType
                     );
                 }
-                if ($treatCastingFailuresAsErrors) {
+                if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$field],
                         Tokens::MESSAGE => $errorMessage,
