@@ -56,7 +56,7 @@ class SchemaDefinition
     // Field/Directive Argument Types
 
     /**
-     * Scalar type "comprising" the 5 built-in scalar types by GraphQL:
+     * Custom scalar type "comprising" the 5 built-in scalar types by GraphQL:
      * 
      * - String
      * - Int
@@ -64,11 +64,14 @@ class SchemaDefinition
      * - Bool
      * - ID
      * 
-     * In GraphQL there is no union of scalars, hence this type comes to represent
-     * any these scalars. It can be used when we cannot know of what type will
-     * the value be. Eg: when calling `get_option` or `get_post_meta` in WordPress,
-     * which may return a bool, or int, or string. The developer will know, but the
-     * schema doesn't know.
+     * This type is a hack, to address a defficiency in the GraphQL spec:
+     * In GraphQL there is no union of scalars.
+     * 
+     * This type comes to represent any the built-in scalars.
+     * It can be used when we cannot know of what type will the value be.
+     * Eg: when calling `get_option` or `get_post_meta` in WordPress,
+     * which may return a bool, or int, or string. The developer will know,
+     * but the schema doesn't know.
      * 
      * In GraphQL clients (such as GraphiQL), errors will be shown
      * when providing a `String` to an input of type `ANY_SCALAR`,
