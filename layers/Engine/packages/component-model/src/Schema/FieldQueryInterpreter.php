@@ -655,8 +655,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     )
                 )
             ) {
-                // Maybe cast the value to the appropriate type. Eg: from string to boolean
-                $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName];
+                /**
+                 * Maybe cast the value to the appropriate type.
+                 * Eg: from string to boolean.
+                 * 
+                 * Handle also the case of executing a query with a fieldArg
+                 * that was not defined in the schema. Eg:
+                 * 
+                 * ```
+                 * { posts(thisArgIsNonExistent: "saloro") { id } }
+                 * ```
+                 * 
+                 * In that case, assign type `MIXED`, which implies "Do not cast"
+                 **/
+                $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName] ?? SchemaDefinition::TYPE_MIXED;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
                 
