@@ -173,40 +173,45 @@ class Plugin extends AbstractMainPlugin
      */
     public function bootSystem(): void
     {
-        // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootSystem(
-            ...PluginConfiguration::getContainerCacheConfiguration()
-        );
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootSystem(
+                ...PluginConfiguration::getContainerCacheConfiguration()
+            );
 
-        /**
-         * Watch out! If we are in the Modules page and enabling/disabling
-         * a module, then already take that new state!
-         *
-         * This is because `maybeProcessAction`, which is where modules are
-         * enabled/disabled, must be executed before PluginConfiguration::initialize(),
-         * which is where the plugin reads if a module is enabled/disabled as to
-         * set the environment constants.
-         *
-         * This is mandatory, because only when it is enabled, can a module
-         * have its state persisted when calling `flush_rewrite`.
-         *
-         * For that, all the classes below have also been registered in system-services.yaml
-         */
-        if (\is_admin()) {
-            // Obtain these services from the SystemContainer
-            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-            /** @var MenuPageHelper */
-            $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
-            /** @var ModulesMenuPage */
-            $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
-            if (
-                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
-                && !$menuPageHelper->isDocumentationScreen()
-            ) {
-                /** @var ModuleListTableAction */
-                $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
-                $tableAction->maybeProcessAction();
+            /**
+             * Watch out! If we are in the Modules page and enabling/disabling
+             * a module, then already take that new state!
+             *
+             * This is because `maybeProcessAction`, which is where modules are
+             * enabled/disabled, must be executed before PluginConfiguration::initialize(),
+             * which is where the plugin reads if a module is enabled/disabled as to
+             * set the environment constants.
+             *
+             * This is mandatory, because only when it is enabled, can a module
+             * have its state persisted when calling `flush_rewrite`.
+             *
+             * For that, all the classes below have also been registered in system-services.yaml
+             */
+            if (\is_admin()) {
+                // Obtain these services from the SystemContainer
+                $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+                /** @var MenuPageHelper */
+                $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
+                /** @var ModulesMenuPage */
+                $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
+                if (
+                    (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
+                    && !$menuPageHelper->isDocumentationScreen()
+                ) {
+                    /** @var ModuleListTableAction */
+                    $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
+                    $tableAction->maybeProcessAction();
+                }
             }
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
         }
     }
 
@@ -233,24 +238,7 @@ class Plugin extends AbstractMainPlugin
                 ...PluginConfiguration::getContainerCacheConfiguration()
             );
         } catch (Exception $e) {
-            $this->printExceptionAsAdminNotice($e);
+            $this->inititalizationException = $e;
         }
-    }
-
-    protected function printExceptionAsAdminNotice(Exception $e): void
-    {
-        \add_action('admin_notices', function () use ($e) {
-            $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
-            . sprintf(
-                \__('<p>Something went wrong initializing plugin <strong>%s</strong>:</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
-                $this->pluginName,
-                $e->getMessage(),
-                $e->getTraceAsString()
-            );
-            _e(sprintf(
-                '<div class="notice notice-error">%s</div>',
-                $errorMessage
-            ));
-        });
     }
 }
