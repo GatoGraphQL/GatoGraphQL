@@ -722,12 +722,16 @@ class PluginConfiguration
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
 
-        /**
-         * Enable the schema entity registries, as to retrieve the type/directive resolver classes
-         * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
-         */
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
+            /**
+             * Enable the schema entity registries, as to retrieve the type/directive resolver classes
+             * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
+             */
             ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
+            /**
+             * Treat casting failures as errors, not warnings
+             */
+            ComponentModelEnvironment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
