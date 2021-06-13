@@ -1407,29 +1407,40 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                      * Items NOT being validated:
                      * 
                      * - Is the returned type (String, Int, some Object, etc) the expected one?
+                     * 
+                     * According to the GraphQL speck, checking if a non-null field returns null
+                     * is handled always:
+                     * 
+                     *   If the result of resolving a field is null (either because the function
+                     *   to resolve the field returned null or because a field error was raised),
+                     *   and that field is of a Non-Null type, then a field error is raised.
+                     *   The error must be added to the "errors" list in the response.
+                     * 
+                     * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
+                     * 
+                     * All other conditions, check them when enabled by configuration.
                      */
-                    if (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
+                    if ($value === null) {
                         $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-                        if ($value === null) {
-                            if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
-                                return $this->errorProvider->getNonNullableFieldError($fieldName);
+                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
+                            return $this->errorProvider->getNonNullableFieldError($fieldName);
+                        }
+                    } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
+                        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        // If may be array or not, then there's no validation to do
+                        $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                        $fieldMayBeArrayType = in_array($fieldType, [
+                            SchemaDefinition::TYPE_INPUT_OBJECT,
+                            SchemaDefinition::TYPE_OBJECT,
+                            SchemaDefinition::TYPE_MIXED,
+                        ]);
+                        if (!$fieldMayBeArrayType) {
+                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                            if (is_array($value) && !$fieldIsArrayType) {
+                                return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
                             }
-                        } else {
-                            // If may be array or not, then there's no validation to do
-                            $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-                            $fieldMayBeArrayType = in_array($fieldType, [
-                                SchemaDefinition::TYPE_INPUT_OBJECT,
-                                SchemaDefinition::TYPE_OBJECT,
-                                SchemaDefinition::TYPE_MIXED,
-                            ]);
-                            if (!$fieldMayBeArrayType) {
-                                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                                if (is_array($value) && !$fieldIsArrayType) {
-                                    return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
-                                }
-                                if (!is_array($value) && $fieldIsArrayType) {
-                                    return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
-                                }
+                            if (!is_array($value) && $fieldIsArrayType) {
+                                return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
                             }
                         }
                     }
