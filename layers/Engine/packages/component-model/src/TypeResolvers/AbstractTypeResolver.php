@@ -42,7 +42,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * Cache of which fieldResolvers will process the given field
      *
-     * @var FieldResolverInterface[]
+     * @var array<string, FieldResolverInterface>
      */
     protected array $fieldResolvers = [];
     /**
