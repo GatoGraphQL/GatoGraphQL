@@ -42,7 +42,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::NO_FIELD,
             sprintf(
-                $translationAPI->__('There is no resolver for field \'%s\' on type \'%s\' and ID type \'%s\'', 'pop-component-model'),
+                $translationAPI->__('There is no resolver for field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
                 $fieldName,
                 $typeName,
                 $resultItemID
