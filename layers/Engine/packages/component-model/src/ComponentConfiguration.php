@@ -29,6 +29,7 @@ class ComponentConfiguration
     private static bool $enableAdminSchema = false;
     private static bool $validateFieldTypeResponseWithSchemaDefinition = false;
     private static bool $treatTypeCoercingFailuresAsErrors = false;
+    private static bool $setFailingFieldResponseAsNull = false;
 
     /**
      * Initialize component configuration
@@ -234,6 +235,32 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS;
         $selfProperty = &self::$treatTypeCoercingFailuresAsErrors;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * The GraphQL spec indicates that, when a field produces an error (during
+     * value resolution or coercion) then its response must be set as null:
+     * 
+     *   If a field error is raised while resolving a field, it is handled as though the field returned null, and the error must be added to the "errors" list in the response.
+     * 
+     * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
+     */
+    public static function setFailingFieldResponseAsNull(): bool
+    {
+        // Define properties
+        $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
+        $selfProperty = &self::$setFailingFieldResponseAsNull;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
