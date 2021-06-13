@@ -1396,29 +1396,32 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
 
                     // Validate that the value is what was defined in the schema, or throw a corresponding error
-                    $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-                    if ($value === null) {
-                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
-                            return $this->errorProvider->getNonNullableFieldError($fieldName);
-                        }
-                    } else {
-                        // If may be array or not, then there's no validation to do
-                        $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-                        $fieldMayBeArrayType = in_array($fieldType, [
-                            SchemaDefinition::TYPE_INPUT_OBJECT,
-                            SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::TYPE_MIXED,
-                        ]);
-                        if (!$fieldMayBeArrayType) {
-                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                            if (is_array($value) && !$fieldIsArrayType) {
-                                return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
+                    if (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
+                        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        if ($value === null) {
+                            if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
+                                return $this->errorProvider->getNonNullableFieldError($fieldName);
                             }
-                            if (!is_array($value) && $fieldIsArrayType) {
-                                return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
+                        } else {
+                            // If may be array or not, then there's no validation to do
+                            $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                            $fieldMayBeArrayType = in_array($fieldType, [
+                                SchemaDefinition::TYPE_INPUT_OBJECT,
+                                SchemaDefinition::TYPE_OBJECT,
+                                SchemaDefinition::TYPE_MIXED,
+                            ]);
+                            if (!$fieldMayBeArrayType) {
+                                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                                if (is_array($value) && !$fieldIsArrayType) {
+                                    return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
+                                }
+                                if (!is_array($value) && $fieldIsArrayType) {
+                                    return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
+                                }
                             }
                         }
                     }
+                    
                     // Everything is good, return the value (which could also be an Error!)
                     return $value;
                 }
