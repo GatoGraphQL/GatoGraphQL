@@ -1395,7 +1395,19 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     // Resolve the value
                     $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
 
-                    // Validate that the value is what was defined in the schema, or throw a corresponding error
+                    /**
+                     * Validate that the value is what was defined in the schema, or throw a corresponding error.
+                     * 
+                     * Items being validated:
+                     * 
+                     * - Is it null?
+                     * - Is it an array when it should be?
+                     * - Is it not an array when it should not be?
+                     * 
+                     * Items NOT being validated:
+                     * 
+                     * - Is the returned type (String, Int, some Object, etc) the expected one?
+                     */
                     if (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
                         $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
                         if ($value === null) {
@@ -1421,7 +1433,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             }
                         }
                     }
-                    
+
                     // Everything is good, return the value (which could also be an Error!)
                     return $value;
                 }
