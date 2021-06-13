@@ -1455,7 +1455,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        return $this->errorProvider->getNoFieldError($fieldName);
+        return $this->errorProvider->getNoFieldError($fieldName, $this->getTypeName());
     }
 
     protected function processFlatShapeSchemaDefinition(array $options = [])
