@@ -344,7 +344,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments($typeResolver, $field, $variables, $schemaWarnings);
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($typeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($typeResolver, $field, $fieldArgs, $schemaWarnings);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($typeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
         // Enable the typeResolver to add its own code validations
         $fieldArgs = $typeResolver->validateFieldArgumentsForSchema($field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
@@ -465,14 +465,22 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $fieldOutputKey = $this->getFieldOutputKey($field);
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForResultItem($typeResolver, $resultItem, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $resultItemDBWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForResultItem($typeResolver, $field, $fieldArgs, $resultItemDBWarnings);
-        if ($resultItemDBWarnings) {
+        $resultItemDBErrors = $resultItemDBWarnings = [];
+        $fieldArgs = $this->castAndValidateFieldArgumentsForResultItem($typeResolver, $field, $fieldArgs, $resultItemDBErrors, $resultItemDBWarnings);
+        if ($resultItemDBErrors || $resultItemDBWarnings) {
             $id = $typeResolver->getID($resultItem);
-            $dbWarnings[(string)$id] = array_merge(
-                $dbWarnings[(string)$id] ?? [],
-                $resultItemDBWarnings
-            );
+            if ($resultItemDBErrors) {
+                $dbErrors[(string)$id] = array_merge(
+                    $dbErrors[(string)$id] ?? [],
+                    $resultItemDBErrors
+                );
+            }
+            if ($resultItemDBWarnings) {
+                $dbWarnings[(string)$id] = array_merge(
+                    $dbWarnings[(string)$id] ?? [],
+                    $resultItemDBWarnings
+                );
+            }
         }
         if ($dbErrors) {
             $validAndResolvedField = null;
@@ -903,12 +911,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $directiveArgs;
     }
 
-    protected function castAndValidateFieldArgumentsForSchema(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$schemaWarnings): array
+    protected function castAndValidateFieldArgumentsForSchema(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         if ($fieldArgs) {
             $failedCastingFieldArgErrorMessages = [];
             $castedFieldArgs = $this->castFieldArgumentsForSchema($typeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages);
-            return $this->castAndValidateFieldArguments($typeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $schemaWarnings);
+            return $this->castAndValidateFieldArguments($typeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
         }
         return $fieldArgs;
     }
@@ -920,11 +928,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $this->castAndValidateDirectiveArguments($directiveResolver, $typeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $dbErrors, $dbWarnings);
     }
 
-    protected function castAndValidateFieldArgumentsForResultItem(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$dbWarnings): array
+    protected function castAndValidateFieldArgumentsForResultItem(TypeResolverInterface $typeResolver, string $field, array $fieldArgs, array &$dbErrors, array &$dbWarnings): array
     {
         $failedCastingFieldArgErrorMessages = [];
         $castedFieldArgs = $this->castFieldArgumentsForResultItem($typeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages);
-        return $this->castAndValidateFieldArguments($typeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $dbWarnings);
+        return $this->castAndValidateFieldArguments($typeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $dbErrors, $dbWarnings);
     }
 
     protected function castAndValidateDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
@@ -980,7 +988,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $castedDirectiveArgs;
     }
 
-    protected function castAndValidateFieldArguments(TypeResolverInterface $typeResolver, array $castedFieldArgs, array &$failedCastingFieldArgErrorMessages, string $field, array $fieldArgs, array &$schemaWarnings): array
+    protected function castAndValidateFieldArguments(TypeResolverInterface $typeResolver, array $castedFieldArgs, array &$failedCastingFieldArgErrorMessages, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
         if (
