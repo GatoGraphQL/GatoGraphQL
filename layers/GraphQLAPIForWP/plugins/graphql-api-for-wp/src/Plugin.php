@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use Exception;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
@@ -172,40 +173,45 @@ class Plugin extends AbstractMainPlugin
      */
     public function bootSystem(): void
     {
-        // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootSystem(
-            ...PluginConfiguration::getContainerCacheConfiguration()
-        );
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootSystem(
+                ...PluginConfiguration::getContainerCacheConfiguration()
+            );
 
-        /**
-         * Watch out! If we are in the Modules page and enabling/disabling
-         * a module, then already take that new state!
-         *
-         * This is because `maybeProcessAction`, which is where modules are
-         * enabled/disabled, must be executed before PluginConfiguration::initialize(),
-         * which is where the plugin reads if a module is enabled/disabled as to
-         * set the environment constants.
-         *
-         * This is mandatory, because only when it is enabled, can a module
-         * have its state persisted when calling `flush_rewrite`.
-         *
-         * For that, all the classes below have also been registered in system-services.yaml
-         */
-        if (\is_admin()) {
-            // Obtain these services from the SystemContainer
-            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-            /** @var MenuPageHelper */
-            $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
-            /** @var ModulesMenuPage */
-            $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
-            if (
-                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
-                && !$menuPageHelper->isDocumentationScreen()
-            ) {
-                /** @var ModuleListTableAction */
-                $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
-                $tableAction->maybeProcessAction();
+            /**
+             * Watch out! If we are in the Modules page and enabling/disabling
+             * a module, then already take that new state!
+             *
+             * This is because `maybeProcessAction`, which is where modules are
+             * enabled/disabled, must be executed before PluginConfiguration::initialize(),
+             * which is where the plugin reads if a module is enabled/disabled as to
+             * set the environment constants.
+             *
+             * This is mandatory, because only when it is enabled, can a module
+             * have its state persisted when calling `flush_rewrite`.
+             *
+             * For that, all the classes below have also been registered in system-services.yaml
+             */
+            if (\is_admin()) {
+                // Obtain these services from the SystemContainer
+                $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+                /** @var MenuPageHelper */
+                $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
+                /** @var ModulesMenuPage */
+                $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
+                if (
+                    (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
+                    && !$menuPageHelper->isDocumentationScreen()
+                ) {
+                    /** @var ModuleListTableAction */
+                    $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
+                    $tableAction->maybeProcessAction();
+                }
             }
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
         }
     }
 
@@ -225,9 +231,14 @@ class Plugin extends AbstractMainPlugin
      */
     public function bootApplication(): void
     {
-        // Boot all PoP components, from this plugin and all extensions
-        AppLoader::bootApplication(
-            ...PluginConfiguration::getContainerCacheConfiguration()
-        );
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootApplication(
+                ...PluginConfiguration::getContainerCacheConfiguration()
+            );
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
+        }
     }
 }

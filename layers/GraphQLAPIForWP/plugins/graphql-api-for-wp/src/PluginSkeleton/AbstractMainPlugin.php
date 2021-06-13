@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use Exception;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
+    /**
+     * If there is any error when initializing the plugin,
+     * set this var to `true` to stop loading it and show an error message.
+     */
+    protected ?Exception $inititalizationException = null;
+
     /**
      * Get the plugin's immutable configuration values
      *
@@ -116,7 +124,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         \add_action(
             'plugins_loaded',
             function (): void {
-                if (!\is_admin()) {
+                if (!\is_admin() || $this->inititalizationException !== null) {
                     return;
                 }
                 $storedPluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
@@ -223,20 +231,93 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
          * - Allow other plugins to inject their own functionality
          */
-        \add_action('plugins_loaded', [$this, 'initialize'], PluginLifecyclePriorities::INITIALIZE_PLUGIN);
-        \add_action('plugins_loaded', function () {
-            \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
-        }, PluginLifecyclePriorities::INITIALIZE_EXTENSIONS);
-        \add_action('plugins_loaded', [$this, 'bootSystem'], PluginLifecyclePriorities::BOOT_SYSTEM);
-        \add_action('plugins_loaded', [$this, 'configure'], PluginLifecyclePriorities::CONFIGURE_PLUGIN);
-        \add_action('plugins_loaded', function () {
-            \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
-        }, PluginLifecyclePriorities::CONFIGURE_EXTENSIONS);
-        \add_action('plugins_loaded', [$this, 'bootApplication'], PluginLifecyclePriorities::BOOT_APPLICATION);
-        \add_action('plugins_loaded', [$this, 'boot'], PluginLifecyclePriorities::BOOT_PLUGIN);
-        \add_action('plugins_loaded', function () {
-            \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
-        }, PluginLifecyclePriorities::BOOT_EXTENSIONS);
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
+                $this->initialize();
+            },
+            PluginLifecyclePriorities::INITIALIZE_PLUGIN
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }    
+                \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
+            },
+            PluginLifecyclePriorities::INITIALIZE_EXTENSIONS
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
+                $this->bootSystem();
+            },
+            PluginLifecyclePriorities::BOOT_SYSTEM
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
+                $this->configure();
+            },
+            PluginLifecyclePriorities::CONFIGURE_PLUGIN
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }    
+                \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
+            },
+            PluginLifecyclePriorities::CONFIGURE_EXTENSIONS
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
+                $this->bootApplication();
+            },
+            PluginLifecyclePriorities::BOOT_APPLICATION
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }
+                $this->boot();
+            },
+            PluginLifecyclePriorities::BOOT_PLUGIN
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                if ($this->inititalizationException !== null) {
+                    return;
+                }    
+                \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
+            },
+            PluginLifecyclePriorities::BOOT_EXTENSIONS
+        );
+        \add_action(
+            'plugins_loaded',
+            function () {
+                $this->handleInitializationException();
+            },
+            PHP_INT_MAX
+        );
     }
 
     /**
@@ -248,4 +329,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * Boot the application
      */
     abstract public function bootApplication(): void;
+
+    /**
+     * If in development, throw the exception.
+     * If in production, show the error as an admin notice.
+     */
+    protected function handleInitializationException(): void
+    {
+        if ($this->inititalizationException !== null) {
+            if (RootEnvironment::isApplicationEnvironmentDev()) {
+                throw $this->inititalizationException;
+            } else {
+                \add_action('admin_notices', function () {
+                    $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
+                    . sprintf(
+                        \__('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
+                        $this->pluginName,
+                        $this->inititalizationException->getMessage(),
+                        $this->inititalizationException->getTraceAsString()
+                    );
+                    _e(sprintf(
+                        '<div class="notice notice-error">%s</div>',
+                        $errorMessage
+                    ));
+                });
+            }
+        }
+    }
 }
