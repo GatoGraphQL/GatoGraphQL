@@ -1324,13 +1324,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldName,
                 $fieldArgs,
                 $schemaErrors,
-                // $schemaWarnings,
+                $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
 
-            // // Store the warnings to be read if needed
-            // if ($schemaWarnings) {
-            //     $this->feedbackMessageStore->addSchemaWarnings($schemaWarnings);
-            // }
+            // Store the warnings to be read if needed
+            if ($schemaWarnings) {
+                $this->feedbackMessageStore->addSchemaWarnings($schemaWarnings);
+            }
             if ($schemaErrors) {
                 return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
             }
