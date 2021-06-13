@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
@@ -313,7 +314,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         \add_action(
             'plugins_loaded',
             function () {
-                $this->maybePrintInitializationExceptionAsAdminNotice();
+                $this->handleInitializationException();
             },
             PHP_INT_MAX
         );
@@ -329,22 +330,30 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     abstract public function bootApplication(): void;
 
-    protected function maybePrintInitializationExceptionAsAdminNotice(): void
+    /**
+     * If in development, throw the exception.
+     * If in production, show the error as an admin notice.
+     */
+    protected function handleInitializationException(): void
     {
         if ($this->inititalizationException !== null) {
-            \add_action('admin_notices', function () {
-                $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
-                . sprintf(
-                    \__('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
-                    $this->pluginName,
-                    $this->inititalizationException->getMessage(),
-                    $this->inititalizationException->getTraceAsString()
-                );
-                _e(sprintf(
-                    '<div class="notice notice-error">%s</div>',
-                    $errorMessage
-                ));
-            });
+            if (RootEnvironment::isApplicationEnvironmentDev()) {
+                throw $this->inititalizationException;
+            } else {
+                \add_action('admin_notices', function () {
+                    $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
+                    . sprintf(
+                        \__('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
+                        $this->pluginName,
+                        $this->inititalizationException->getMessage(),
+                        $this->inititalizationException->getTraceAsString()
+                    );
+                    _e(sprintf(
+                        '<div class="notice notice-error">%s</div>',
+                        $errorMessage
+                    ));
+                });
+            }
         }
     }
 }
