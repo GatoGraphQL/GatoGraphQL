@@ -664,8 +664,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
 
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
-        $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
-        if ($directiveResolvers === null) {
+        $directiveResolvers = $directiveNameResolvers[$directiveName];
+        if (is_null($directiveResolvers)) {
             return null;
         }
 
@@ -1391,15 +1391,49 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     if ($validationErrorDescriptions = $fieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
+                    
                     // Resolve the value
                     $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
-                    // If it is null and the field is nonNullable, return an error
-                    if (is_null($value)) {
+
+                    /**
+                     * Validate that the value is what was defined in the schema, or throw a corresponding error.
+                     * 
+                     * Items being validated:
+                     * 
+                     * - Is it null?
+                     * - Is it an array when it should be?
+                     * - Is it not an array when it should not be?
+                     * 
+                     * Items NOT being validated:
+                     * 
+                     * - Is the returned type (String, Int, some Object, etc) the expected one?
+                     */
+                    if (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
                         $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null) {
-                            return $this->errorProvider->getNonNullableFieldError($fieldName);
+                        if ($value === null) {
+                            if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
+                                return $this->errorProvider->getNonNullableFieldError($fieldName);
+                            }
+                        } else {
+                            // If may be array or not, then there's no validation to do
+                            $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                            $fieldMayBeArrayType = in_array($fieldType, [
+                                SchemaDefinition::TYPE_INPUT_OBJECT,
+                                SchemaDefinition::TYPE_OBJECT,
+                                SchemaDefinition::TYPE_MIXED,
+                            ]);
+                            if (!$fieldMayBeArrayType) {
+                                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                                if (is_array($value) && !$fieldIsArrayType) {
+                                    return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
+                                }
+                                if (!is_array($value) && $fieldIsArrayType) {
+                                    return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
+                                }
+                            }
                         }
                     }
+
                     // Everything is good, return the value (which could also be an Error!)
                     return $value;
                 }

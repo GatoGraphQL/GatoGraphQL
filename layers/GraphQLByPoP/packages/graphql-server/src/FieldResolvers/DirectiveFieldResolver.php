@@ -40,7 +40,7 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
             'description' => SchemaDefinition::TYPE_STRING,
             'args' => SchemaDefinition::TYPE_ID,
             'locations' => SchemaDefinition::TYPE_ENUM,
-            'locations' => SchemaDefinition::TYPE_BOOL,
+            'isRepeatable' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -49,9 +49,9 @@ class DirectiveFieldResolver extends AbstractDBDataFieldResolver
     {
         return match($fieldName) {
             'name',
-            'locations',
             'isRepeatable'
                 => SchemaTypeModifiers::NON_NULLABLE,
+            'locations',
             'args'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default

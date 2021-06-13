@@ -8,6 +8,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\Root\Environment as RootEnvironment;
 
 class ComponentConfiguration
 {
@@ -26,6 +27,7 @@ class ComponentConfiguration
     private static bool $namespaceTypesAndInterfaces = false;
     private static bool $useSingleTypeInsteadOfUnionType = false;
     private static bool $enableAdminSchema = false;
+    private static bool $validateFieldTypeResponseWithSchemaDefinition = false;
 
     /**
      * Initialize component configuration
@@ -189,6 +191,27 @@ class ComponentConfiguration
         $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
         $selfProperty = &self::$enableAdminSchema;
         $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * By default, validate for DEV only
+     */
+    public static function validateFieldTypeResponseWithSchemaDefinition(): bool
+    {
+        // Define properties
+        $envVariable = Environment::VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION;
+        $selfProperty = &self::$validateFieldTypeResponseWithSchemaDefinition;
+        $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
