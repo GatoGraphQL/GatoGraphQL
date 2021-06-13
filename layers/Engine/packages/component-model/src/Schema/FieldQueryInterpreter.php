@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -936,11 +937,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
             $directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
+            $treatCastingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingDirectiveArgs) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
                 if ($directiveArgErrorMessage = $failedCastingDirectiveArgErrorMessages[$failedCastingDirectiveArgName] ?? null) {
                     $errorMessage = sprintf(
-                        $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s. It has been ignored', 'pop-component-model'),
+                        $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
                         $directiveName,
                         is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
                         $failedCastingDirectiveArgName,
@@ -949,17 +951,29 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     );
                 } else {
                     $errorMessage = sprintf(
-                        $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed, so it has been ignored', 'pop-component-model'),
+                        $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
                         $directiveName,
                         is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
                         $failedCastingDirectiveArgName,
                         $directiveArgNameTypes[$failedCastingDirectiveArgName]
                     );
                 }
-                $schemaWarnings[] = [
-                    Tokens::PATH => [$fieldDirective],
-                    Tokens::MESSAGE => $errorMessage,
-                ];
+                // Either treat it as an error or a warning
+                if ($treatCastingFailuresAsErrors) {
+                    $schemaErrors[] = [
+                        Tokens::PATH => [$fieldDirective],
+                        Tokens::MESSAGE => $errorMessage,
+                    ];
+                } else {
+                    $errorMessage = sprintf(
+                        $this->translationAPI->__('%1$s. It has been ignored', 'pop-component-model'),
+                        $errorMessage
+                    );
+                    $schemaWarnings[] = [
+                        Tokens::PATH => [$fieldDirective],
+                        Tokens::MESSAGE => $errorMessage,
+                    ];
+                }
             }
             return $this->filterFieldArgs($castedDirectiveArgs);
         }
@@ -981,6 +995,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
             $fieldArgNameIsArrayTypes = $this->getFieldArgumentNameIsArrayTypes($typeResolver, $field);
+            $treatCastingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
                 $fieldOrDirectiveArgIsArrayType = $fieldArgNameIsArrayTypes[$failedCastingFieldArgName];
@@ -993,7 +1008,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 }
                 if ($fieldArgErrorMessage = $failedCastingFieldArgErrorMessages[$failedCastingFieldArgName] ?? null) {
                     $errorMessage = sprintf(
-                        $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s. It has been ignored', 'pop-component-model'),
+                        $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
                         $fieldName,
                         is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
                         $failedCastingFieldArgName,
@@ -1002,17 +1017,28 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     );
                 } else {
                     $errorMessage = sprintf(
-                        $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed, so it has been ignored', 'pop-component-model'),
+                        $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
                         $fieldName,
                         is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
                         $failedCastingFieldArgName,
                         $composedFieldArgType
                     );
                 }
-                $schemaWarnings[] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $errorMessage,
-                ];
+                if ($treatCastingFailuresAsErrors) {
+                    $schemaErrors[] = [
+                        Tokens::PATH => [$field],
+                        Tokens::MESSAGE => $errorMessage,
+                    ];
+                } else {
+                    $errorMessage = sprintf(
+                        $this->translationAPI->__('%1$s. It has been ignored', 'pop-component-model'),
+                        $errorMessage
+                    );
+                    $schemaWarnings[] = [
+                        Tokens::PATH => [$field],
+                        Tokens::MESSAGE => $errorMessage,
+                    ];
+                }
             }
             return $this->filterFieldArgs($castedFieldArgs);
         }
