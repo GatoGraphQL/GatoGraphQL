@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -196,6 +196,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                     Tokens::PATH => [$field],
                     Tokens::MESSAGE => $errorMessage,
                 ];
+            }
+            // For GraphQL, set the response for the failing field as null
+            if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         } else {
             // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs

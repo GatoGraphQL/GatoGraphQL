@@ -15,11 +15,8 @@ interface ErrorProviderInterface
      * which is different than returning a null value.
      * Needed for compatibility with CustomPostUnionTypeResolver,
      * so that data-fields aimed for another post_type are not retrieved
-     *
-     * @param string $fieldName
-     * @return Error
      */
-    public function getNoFieldError(string $fieldName): Error;
+    public function getNoFieldError(string | int $resultItemID, string $fieldName, string $typeName): Error;
 
     /**
      * Return an error to indicate that a non-nullable field is returning a `null` value

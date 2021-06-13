@@ -16,6 +16,7 @@ class Environment
     public const ENABLE_ADMIN_SCHEMA = 'ENABLE_ADMIN_SCHEMA';
     public const VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION = 'VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION';
     public const TREAT_TYPE_COERCING_FAILURES_AS_ERRORS = 'TREAT_TYPE_COERCING_FAILURES_AS_ERRORS';
+    public const SET_FAILING_FIELD_RESPONSE_AS_NULL = 'SET_FAILING_FIELD_RESPONSE_AS_NULL';
 
     /**
      * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution

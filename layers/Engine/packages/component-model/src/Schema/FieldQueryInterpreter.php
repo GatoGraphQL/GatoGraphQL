@@ -9,6 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -187,7 +188,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $directiveArgumentNameTypes,
                 $directiveArgumentNameDefaultValues,
                 $variables,
-                $schemaWarnings
+                $schemaWarnings,
+                ResolverTypes::DIRECTIVE
             );
         }
 
@@ -204,7 +206,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array $fieldOrDirectiveArgumentNameTypes,
         array $fieldArgumentNameDefaultValues,
         ?array $variables,
-        array &$schemaWarnings
+        array &$schemaWarnings,
+        string $resolverType
     ): array {
         if ($orderedFieldOrDirectiveArgNamesEnabled) {
             $orderedFieldOrDirectiveArgNames = array_keys($fieldOrDirectiveArgumentNameTypes);
@@ -259,7 +262,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     $schemaWarnings[] = [
                         Tokens::PATH => [$fieldOrDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Argument with name \'%s\' has not been documented in the schema, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
+                            $this->translationAPI->__('On %1$s \'%2$s\', argument with name \'%3$s\' has not been documented in the schema, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
+                            $resolverType == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
+                            $fieldOrDirective,
                             $fieldOrDirectiveArgName
                         ),
                     ];
@@ -318,7 +323,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldArgumentNameTypes,
                 $fieldArgumentNameDefaultValues,
                 $variables,
-                $schemaWarnings
+                $schemaWarnings,
+                ResolverTypes::FIELD
             );
         }
 
@@ -655,8 +661,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     )
                 )
             ) {
-                // Maybe cast the value to the appropriate type. Eg: from string to boolean
-                $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName];
+                /**
+                 * Maybe cast the value to the appropriate type.
+                 * Eg: from string to boolean.
+                 * 
+                 * Handle also the case of executing a query with a fieldArg
+                 * that was not defined in the schema. Eg:
+                 * 
+                 * ```
+                 * { posts(thisArgIsNonExistent: "saloro") { id } }
+                 * ```
+                 * 
+                 * In that case, assign type `MIXED`, which implies "Do not cast"
+                 **/
+                $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName] ?? SchemaDefinition::TYPE_MIXED;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgNameIsArrayTypes[$argName] ?? false;
                 

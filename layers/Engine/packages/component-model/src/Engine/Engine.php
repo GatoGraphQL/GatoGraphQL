@@ -1248,7 +1248,9 @@ class Engine implements EngineInterface
                 if ($entryHasId) {
                     foreach ($dbname_entries['primary'] as $id => $dbObject) {
                         $entry_data_fields_to_move = array_intersect(
-                            array_keys($dbObject),
+                            // If field "id" for this type has been disabled (eg: by ACL),
+                            // then $dbObject may be `null`
+                            array_keys($dbObject ?? []),
                             $data_fields
                         );
                         foreach ($entry_data_fields_to_move as $data_field) {
@@ -1748,7 +1750,9 @@ class Engine implements EngineInterface
                             foreach ($dbItems as $dbobject_id => $dbobject_values) {
                                 $combined_databases[$database_key][(string)$dbobject_id] = array_merge(
                                     $combined_databases[$database_key][(string)$dbobject_id] ?? [],
-                                    $dbobject_values
+                                    // If field "id" for this type has been disabled (eg: by ACL),
+                                    // then $dbObject may be `null`
+                                    $dbobject_values ?? []
                                 );
                             }
                         }

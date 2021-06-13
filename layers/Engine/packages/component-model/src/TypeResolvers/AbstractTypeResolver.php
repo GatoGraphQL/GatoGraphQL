@@ -42,7 +42,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * Cache of which fieldResolvers will process the given field
      *
-     * @var FieldResolverInterface[]
+     * @var array<string, FieldResolverInterface[]>
      */
     protected array $fieldResolvers = [];
     /**
@@ -1177,7 +1177,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             if ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null) {
                 $errorMessage = sprintf(
                     $this->translationAPI->__(
-                        'No FieldResolver resolves field \'%s\' and version constraint \'%s\' for type \'%s\'',
+                        'There is no resolver for field \'%s\' and version constraint \'%s\' on type \'%s\'',
                         'pop-component-model'
                     ),
                     $fieldName,
@@ -1189,7 +1189,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         if (!isset($errorMessage)) {
             $errorMessage = sprintf(
                 $this->translationAPI->__(
-                    'No FieldResolver resolves field \'%s\' for type \'%s\'',
+                    'There is no resolver for field \'%s\' on type \'%s\'',
                     'pop-component-model'
                 ),
                 $fieldName,
@@ -1324,13 +1324,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldName,
                 $fieldArgs,
                 $schemaErrors,
-                // $schemaWarnings,
+                $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
 
-            // // Store the warnings to be read if needed
-            // if ($schemaWarnings) {
-            //     $this->feedbackMessageStore->addSchemaWarnings($schemaWarnings);
-            // }
+            // Store the warnings to be read if needed
+            if ($schemaWarnings) {
+                $this->feedbackMessageStore->addSchemaWarnings($schemaWarnings);
+            }
             if ($schemaErrors) {
                 return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
             }
@@ -1407,29 +1407,40 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                      * Items NOT being validated:
                      * 
                      * - Is the returned type (String, Int, some Object, etc) the expected one?
+                     * 
+                     * According to the GraphQL speck, checking if a non-null field returns null
+                     * is handled always:
+                     * 
+                     *   If the result of resolving a field is null (either because the function
+                     *   to resolve the field returned null or because a field error was raised),
+                     *   and that field is of a Non-Null type, then a field error is raised.
+                     *   The error must be added to the "errors" list in the response.
+                     * 
+                     * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
+                     * 
+                     * All other conditions, check them when enabled by configuration.
                      */
-                    if (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
+                    if ($value === null) {
                         $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-                        if ($value === null) {
-                            if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
-                                return $this->errorProvider->getNonNullableFieldError($fieldName);
+                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
+                            return $this->errorProvider->getNonNullableFieldError($fieldName);
+                        }
+                    } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
+                        $fieldSchemaDefinition = $fieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        // If may be array or not, then there's no validation to do
+                        $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                        $fieldMayBeArrayType = in_array($fieldType, [
+                            SchemaDefinition::TYPE_INPUT_OBJECT,
+                            SchemaDefinition::TYPE_OBJECT,
+                            SchemaDefinition::TYPE_MIXED,
+                        ]);
+                        if (!$fieldMayBeArrayType) {
+                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                            if (is_array($value) && !$fieldIsArrayType) {
+                                return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
                             }
-                        } else {
-                            // If may be array or not, then there's no validation to do
-                            $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-                            $fieldMayBeArrayType = in_array($fieldType, [
-                                SchemaDefinition::TYPE_INPUT_OBJECT,
-                                SchemaDefinition::TYPE_OBJECT,
-                                SchemaDefinition::TYPE_MIXED,
-                            ]);
-                            if (!$fieldMayBeArrayType) {
-                                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                                if (is_array($value) && !$fieldIsArrayType) {
-                                    return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
-                                }
-                                if (!is_array($value) && $fieldIsArrayType) {
-                                    return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
-                                }
+                            if (!is_array($value) && $fieldIsArrayType) {
+                                return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
                             }
                         }
                     }
@@ -1444,7 +1455,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        return $this->errorProvider->getNoFieldError($fieldName);
+        return $this->errorProvider->getNoFieldError($this->getID($resultItem), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
     protected function processFlatShapeSchemaDefinition(array $options = [])

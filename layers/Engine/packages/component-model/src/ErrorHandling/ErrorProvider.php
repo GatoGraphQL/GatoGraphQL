@@ -34,19 +34,18 @@ class ErrorProvider implements ErrorProviderInterface
      * which is different than returning a null value.
      * Needed for compatibility with CustomPostUnionTypeResolver,
      * so that data-fields aimed for another post_type are not retrieved
-     *
-     * @param string $fieldName
-     * @return Error
      */
-    public function getNoFieldError(string $fieldName): Error
+    public function getNoFieldError(string | int $resultItemID, string $fieldName, string $typeName): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return $this->getError(
             $fieldName,
             ErrorCodes::NO_FIELD,
             sprintf(
-                $translationAPI->__('No FieldResolver resolves field \'%s\'', 'pop-component-model'),
-                $fieldName
+                $translationAPI->__('There is no resolver for field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+                $fieldName,
+                $typeName,
+                $resultItemID
             )
         );
     }

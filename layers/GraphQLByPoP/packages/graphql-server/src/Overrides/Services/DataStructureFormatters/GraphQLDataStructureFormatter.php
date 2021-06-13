@@ -121,16 +121,16 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             unset($extensions['location']);
             $entry['location'] = $location;
         }
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getQueryEntryExtensions(),
-                    $extensions
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            };
-        }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getQueryEntryExtensions(),
+                $extensions
+            )
+        ) {
+            $entry['extensions'] = $extensions;
+        };
+        // }
         return $entry;
     }
 

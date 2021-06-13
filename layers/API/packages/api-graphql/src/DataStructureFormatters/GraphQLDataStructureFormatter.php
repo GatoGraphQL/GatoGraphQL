@@ -64,13 +64,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         /**
-         * "Warnings", "deprecations", and "logEntries" top-level entries:
+         * "deprecations", and "logEntries" top-level entries:
          * since they are not part of the spec, place them under the top-level entry "extensions":
          *
          * > This entry is reserved for implementors to extend the protocol however they see fit,
          * > and hence there are no additional restrictions on its contents.
          *
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
+         * 
+         * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
             // Add notices
@@ -169,16 +171,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getDBEntryExtensions($dbKey, $id, $item),
-                    $item[Tokens::EXTENSIONS] ?? []
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getDBEntryExtensions($dbKey, $id, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
         }
+        // }
         return $entry;
     }
 
@@ -212,16 +214,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getSchemaEntryExtensions($dbKey, $item),
-                    $item[Tokens::EXTENSIONS] ?? []
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getSchemaEntryExtensions($dbKey, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
         }
+        // }
         return $entry;
     }
 
@@ -248,16 +250,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $entry = [
             'message' => $message,
         ];
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            if (
-                $extensions = array_merge(
-                    $this->getQueryEntryExtensions(),
-                    $extensions
-                )
-            ) {
-                $entry['extensions'] = $extensions;
-            };
-        }
+        // if ($this->addTopLevelExtensionsEntryToResponse()) {
+        if (
+            $extensions = array_merge(
+                $this->getQueryEntryExtensions(),
+                $extensions
+            )
+        ) {
+            $entry['extensions'] = $extensions;
+        };
+        // }
         return $entry;
     }
 

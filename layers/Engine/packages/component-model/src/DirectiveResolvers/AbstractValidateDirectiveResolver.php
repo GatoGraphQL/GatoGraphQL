@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -50,11 +51,19 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $this->validateAndFilterFields($typeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->validateAndFilterFields($typeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $dbItems, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
-    protected function validateAndFilterFields(TypeResolverInterface $typeResolver, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    {
+    protected function validateAndFilterFields(
+        TypeResolverInterface $typeResolver,
+        array &$idsDataFields,
+        array &$succeedingPipelineIDsDataFields,
+        array &$dbItems,
+        array &$variables,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations
+    ): void {
         // Validate that the schema and the provided data match, eg: passing mandatory values
         // (Such as fieldArg "status" for field "isStatus")
         // Combine all the datafields under all IDs
@@ -77,6 +86,17 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 );
             }
             $this->removeIDsDataFields($idsDataFieldsToRemove, $succeedingPipelineIDsDataFields);
+
+            // For GraphQL, set the response for the failing field as null
+            if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
+                foreach (array_keys($idsDataFieldsToRemove) as $id) {
+                    $fieldsToRemoveForID = $idsDataFieldsToRemove[(string)$id]['direct'];
+                    foreach ($fieldsToRemoveForID as $field) {
+                        $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                        $dbItems[(string)$id][$fieldOutputKey] = null;
+                    }
+                }
+            }
         }
         // Since adding the Validate directive also when processing the conditional fields, there is no need to validate them now
         // They will be validated when it's their turn to be processed
