@@ -732,6 +732,10 @@ class PluginConfiguration
              * Treat casting failures as errors, not warnings
              */
             ComponentModelEnvironment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS => true,
+            /**
+             * Show a `null` entry in the response for failing fields
+             */
+            ComponentModelEnvironment::SET_FAILING_FIELD_RESPONSE_AS_NULL => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
