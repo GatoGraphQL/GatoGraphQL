@@ -153,10 +153,7 @@ class ErrorProvider implements ErrorProviderInterface
             )
         );
         foreach ($schemaErrors as $schemaError) {
-            $error->add(
-                'nested-error',
-                $schemaError
-            );
+            $error->addData($schemaError);
         }
 
         return $error;

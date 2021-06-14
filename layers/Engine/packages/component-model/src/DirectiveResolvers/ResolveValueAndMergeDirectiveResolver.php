@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -190,12 +191,19 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         // Extract the errors and add them on the other array
         if (GeneralUtils::isError($value)) {
             // Extract the error message
+            /** @var Error */
             $error = $value;
-            foreach ($error->getErrorMessages() as $errorMessage) {
-                $dbErrors[(string)$id][] = [
+            foreach ($error->getErrorCodes() as $errorCode) {
+                $dbError = [
                     Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $errorMessage,
+                    Tokens::MESSAGE => $error->getErrorMessage($errorCode),
                 ];
+                if ($data = $error->getErrorData($errorCode)) {
+                    $dbError[Tokens::EXTENSIONS] = [
+                        Tokens::NESTED => $data,
+                    ];
+                }
+                $dbErrors[(string)$id][] = $dbError;
             }
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
