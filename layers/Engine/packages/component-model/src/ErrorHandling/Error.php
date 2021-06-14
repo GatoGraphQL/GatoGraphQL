@@ -15,15 +15,21 @@ class Error
      */
     protected array $error_data = [];
 
-    public function __construct(string $code, ?string $message = null, ?array $data = null)
-    {
+    public function __construct(
+        string $code,
+        ?string $message = null,
+        ?array $data = null
+    ) {
         $this->errors[$code][] = $message;
         if ($data) {
             $this->error_data[$code] = $data;
         }
     }
 
-    public function getErrorCodes()
+    /**
+     * @return string[]
+     */
+    public function getErrorCodes(): array
     {
         return array_keys($this->errors);
     }
