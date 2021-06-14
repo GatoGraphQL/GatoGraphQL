@@ -9,7 +9,13 @@ class Error
     public function __construct(
         protected string $code,
         protected ?string $message = null,
+        /**
+         * @var array<string, mixed>|null
+         */
         protected ?array $data = null,
+        /**
+         * @var Error[]
+         */
         protected ?array $nestedErrors = null
     ) {}
 
