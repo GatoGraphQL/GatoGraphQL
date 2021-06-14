@@ -6,25 +6,12 @@ namespace PoP\ComponentModel\ErrorHandling;
 
 class Error
 {
-    /**
-     * @var array<string, string[]>
-     */
-    protected array $errors = [];
-    /**
-     * @var array<string, array<string, mixed>>
-     */
-    protected array $error_data = [];
-
     public function __construct(
-        string $code,
-        ?string $message = null,
-        ?array $data = null
-    ) {
-        $this->errors[$code][] = $message;
-        if ($data) {
-            $this->error_data[$code] = $data;
-        }
-    }
+        protected string $code,
+        protected ?string $message = null,
+        protected ?array $data = null,
+        protected ?array $nestedErrors = null
+    ) {}
 
     /**
      * @return string[]
