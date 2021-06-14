@@ -72,16 +72,6 @@ class Error
         return $this->nestedErrors;
     }
 
-    public function getErrorMessages($code = null)
-    {
-        if ($code) {
-            return $this->errors[$code] ?? [];
-        }
-
-        // Return all messages if no code specified.
-        return array_reduce($this->errors, 'array_merge', array());
-    }
-
     public function getErrorMessage($code = null)
     {
         if (!$code) {

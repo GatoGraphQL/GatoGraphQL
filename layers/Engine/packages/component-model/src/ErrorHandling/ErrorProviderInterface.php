@@ -31,5 +31,8 @@ interface ErrorProviderInterface
     public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
     public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error;
     public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error;
-    public function getNestedErrorsFieldError(array $errors, string $fieldName): Error;
+    /**
+     * @param Error[] $errors
+     */
+    public function getNestedErrorsFieldError(string $fieldName, array $errors): Error;
 }

@@ -179,23 +179,21 @@ class ErrorProvider implements ErrorProviderInterface
 
         return $error;
     }
-    public function getNestedErrorsFieldError(array $errors, string $fieldName): Error
+
+    /**
+     * @param Error[] $errors
+     */
+    public function getNestedErrorsFieldError(string $fieldName, array $errors): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $error = $this->getError(
-            $fieldName,
+        return new Error(
             ErrorCodes::NESTED_ERRORS,
             sprintf(
                 $translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
-            )
+            ),
+            [ErrorDataTokens::FIELD_NAME => $fieldName],
+            $errors
         );
-        foreach ($errors as $nestedError) {
-            foreach ($nestedError->getErrorMessages() as $nestedErrorMessage) {
-                $error->addData($nestedErrorMessage);
-            }
-        }
-
-        return $error;
     }
 }
