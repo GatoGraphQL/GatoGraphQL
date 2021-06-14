@@ -2,6 +2,7 @@
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\ErrorHandling\Error;
 
 class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -23,13 +24,13 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION:
                 if (!gdUreIsOrganization($current_user_id)) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('profilenotorganization');
+                    return new Error('profilenotorganization');
                 }
                 break;
 
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEINDIVIDUAL:
                 if (!gdUreIsIndividual($current_user_id)) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('profilenotindividual');
+                    return new Error('profilenotindividual');
                 }
                 break;
         }

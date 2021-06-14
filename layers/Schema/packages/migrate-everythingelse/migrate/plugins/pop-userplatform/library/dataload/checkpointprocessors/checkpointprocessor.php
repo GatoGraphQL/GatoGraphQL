@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\ErrorHandling\Error;
 
 class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -20,18 +21,18 @@ class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
             case self::CHECKPOINT_PROFILEACCESS:
                 // Check if the user has Profile Access: access to add/edit content
                 if (!userHasProfileAccess()) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('usernoprofileaccess');
+                    return new Error('usernoprofileaccess');
                 }
                 break;
 
             case self::CHECKPOINT_PROFILEACCESS_SUBMIT:
                 // Check if the user has Profile Access: access to add/edit content
                 if (!doingPost()) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('notdoingpost');
+                    return new Error('notdoingpost');
                 }
 
                 if (!userHasProfileAccess()) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('usernoprofileaccess');
+                    return new Error('usernoprofileaccess');
                 }
                 break;
         }
