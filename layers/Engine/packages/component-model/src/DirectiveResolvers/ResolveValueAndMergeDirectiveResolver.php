@@ -188,14 +188,14 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * @return array<string, mixed>
      */
-    protected function getErrorOuput(Error $error): array
+    protected function getErrorOutput(Error $error): array
     {
         $errorOutput = [
             Tokens::MESSAGE => $error->getMessageWithCode(),
             Tokens::EXTENSIONS => $error->getData(),
         ];
         foreach ($error->getNestedErrors() as $nestedError) {
-            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getErrorOuput($nestedError);
+            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getErrorOutput($nestedError);
         }
         return $errorOutput;
     }
@@ -212,7 +212,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 [
                     Tokens::PATH => [$field],
                 ],
-                $this->getErrorOuput($error)
+                $this->getErrorOutput($error)
             );
 
             // For GraphQL, set the response for the failing field as null
