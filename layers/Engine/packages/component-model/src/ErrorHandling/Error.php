@@ -72,14 +72,6 @@ class Error
         return $this->nestedErrors;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getErrorCodes(): array
-    {
-        return array_keys($this->errors);
-    }
-
     public function getErrorCode()
     {
         if ($codes = $this->getErrorCodes()) {
