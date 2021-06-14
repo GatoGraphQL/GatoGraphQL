@@ -45,7 +45,7 @@ class Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return $this->message ?? sprintf(
-            $translationAPI->__('Error code: %s', 'component-model'),
+            $translationAPI->__('Error code: \'%s\'', 'component-model'),
             $this->code
         );
     }
