@@ -1,6 +1,8 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ErrorHandling\Error;
+
 /**
  * Copied from:
  * Captcha Code Authentication Plugin
@@ -11,7 +13,6 @@ class GD_Captcha
 {
     public static function getImageSrc($encoded, $random)
     {
-
         // Encode to add as parameters in the URL
         $encoded = rawurlencode($encoded);
         $random = rawurlencode($random);
@@ -27,13 +28,14 @@ class GD_Captcha
 
     public static function validate($value)
     {
-        $errors = new \PoP\ComponentModel\ErrorHandling\Error();
-
+        $translationAPI = TranslationAPIFacade::getInstance();
         // No captcha?
         $captcha = $value['input'];
         if (empty($captcha)) {
-            $errors->add('empty', TranslationAPIFacade::getInstance()->__('Captcha is empty.', 'pop-coreprocessors'));
-            return $errors;
+            return new Error(
+                'captcha-empty',
+                $translationAPI->__('Captcha is empty.', 'pop-coreprocessors')
+            );
         }
 
         // Compare the decoded captcha with the user value
@@ -44,8 +46,10 @@ class GD_Captcha
         $userinput_encoded = PoP_CaptchaEncodeDecode::encode($captcha, $random);
 
         if ($userinput_encoded !== $encoded) {
-            $errors->add('mismatches', TranslationAPIFacade::getInstance()->__('Captcha doesn\'t match.', 'pop-coreprocessors'));
-            return $errors;
+            return new Error(
+                'captcha-mismatch',
+                $translationAPI->__('Captcha doesn\'t match.', 'pop-coreprocessors')
+            );
         }
 
         return true;
