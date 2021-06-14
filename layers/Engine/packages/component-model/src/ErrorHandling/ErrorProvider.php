@@ -172,14 +172,7 @@ class ErrorProvider implements ErrorProviderInterface
         foreach ($dbErrors as $resultItemID => $fieldOutputKeyErrors) {
             foreach ($fieldOutputKeyErrors as $fieldOutputKey => $errors) {
                 foreach ($errors as $dbError) {
-                    $error->add(
-                        'nested-error',
-                        sprintf(
-                            $translationAPI->__('Field \'%s\' could not be processed due to error: %s', 'pop-component-model'),
-                            $fieldOutputKey,
-                            $dbError
-                        )
-                    );
+                    $error->addData($dbError);
                 }
             }
         }
@@ -199,10 +192,7 @@ class ErrorProvider implements ErrorProviderInterface
         );
         foreach ($errors as $nestedError) {
             foreach ($nestedError->getErrorMessages() as $nestedErrorMessage) {
-                $error->add(
-                    'nested-error',
-                    $nestedErrorMessage
-                );
+                $error->addData($nestedErrorMessage);
             }
         }
 
