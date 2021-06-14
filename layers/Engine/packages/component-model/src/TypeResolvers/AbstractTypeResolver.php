@@ -2044,6 +2044,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return array_values(array_unique($interfaceClasses));
     }
 
+    /**
+     * @return FieldResolverInterface[]
+     */
     protected function getFieldResolversForField(string $field): array
     {
         // Calculate the fieldResolver to process this field if not already in the cache
