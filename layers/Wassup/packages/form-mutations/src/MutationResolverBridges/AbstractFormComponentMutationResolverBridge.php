@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
 abstract class AbstractFormComponentMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
@@ -42,10 +43,10 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
         return true;
     }
 
-    protected function getCaptchaError($captcha_error)
+    protected function getCaptchaError(Error $captcha_error)
     {
         return array(
-            ResponseConstants::ERRORSTRINGS => array($captcha_error->getErrorMessage())
+            ResponseConstants::ERRORSTRINGS => array($captcha_error->getMessageWithCode())
         );
     }
 }
