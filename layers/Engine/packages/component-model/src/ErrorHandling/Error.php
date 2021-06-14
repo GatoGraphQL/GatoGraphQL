@@ -72,15 +72,6 @@ class Error
         return $this->nestedErrors;
     }
 
-    public function getErrorData($code = null)
-    {
-        if (!$code) {
-            $code = $this->getErrorCode();
-        }
-
-        return $this->error_data[$code];
-    }
-
     public function add($code, $message, $data = null)
     {
         $this->errors[$code][] = $message;

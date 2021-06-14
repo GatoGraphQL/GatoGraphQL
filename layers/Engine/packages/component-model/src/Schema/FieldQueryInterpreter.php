@@ -679,8 +679,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 if (GeneralUtils::isError($directiveArgValue)) {
                     /** @var Error */
                     $error = $directiveArgValue;
-                    if ($errorData = $error->getErrorData()) {
-                        $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME];
+                    if ($errorData = $error->getData()) {
+                        $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
                     $dbErrors[(string)$id][] = [
