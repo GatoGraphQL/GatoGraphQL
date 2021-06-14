@@ -16,18 +16,23 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
+     * @param array<string, mixed>|null $data
      * @param Error[]|null $nestedErrors
      */
     public function getError(
         string $fieldName,
         string $errorCode,
         string $errorMessage,
+        ?array $data,
         ?array $nestedErrors
     ): Error {
         return new Error(
             $errorCode,
             $errorMessage,
-            [ErrorDataTokens::FIELD_NAME => $fieldName],
+            array_merge(
+                [ErrorDataTokens::FIELD_NAME => $fieldName],
+                $data ?? []
+            ),
             $nestedErrors
         );
     }
@@ -179,9 +184,9 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
-     * @param Error[] $errors
+     * @param Error[] $nestedErrors
      */
-    public function getNestedErrorsFieldError(string $fieldName, array $errors): Error
+    public function getNestedErrorsFieldError(string $fieldName, array $nestedErrors): Error
     {
         return $this->getError(
             $fieldName,
@@ -190,7 +195,8 @@ class ErrorProvider implements ErrorProviderInterface
                 $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
             ),
-            $errors
+            null,
+            $nestedErrors
         );
     }
 }

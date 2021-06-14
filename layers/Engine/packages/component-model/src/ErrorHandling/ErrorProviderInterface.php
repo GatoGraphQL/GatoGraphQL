@@ -9,12 +9,14 @@ use PoP\ComponentModel\ErrorHandling\Error;
 interface ErrorProviderInterface
 {
     /**
+     * @param array<string, mixed>|null $data
      * @param Error[]|null $nestedErrors
      */
     public function getError(
         string $fieldName,
         string $errorCode,
         string $errorMessage,
+        ?array $data,
         ?array $nestedErrors
     ): Error;
     // public function getNoDirectiveError(string $directiveName): Error;
