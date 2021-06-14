@@ -80,7 +80,9 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
             $captcha_validation = GD_Captcha::validate($captcha);
             if (GeneralUtils::isError($captcha_validation)) {
-                $errors[] = $captcha_validation->getErrorMessage();
+                /** @var Error */
+                $error = $captcha_validation;
+                $errors[] = $error->getMessageOrCode();
             }
         }
     }

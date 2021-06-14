@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
 abstract class AbstractFormComponentMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
@@ -43,53 +43,10 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
         return true;
     }
 
-    protected function getCaptchaError($captcha_error)
+    protected function getCaptchaError(Error $captcha_error)
     {
         return array(
-            ResponseConstants::ERRORSTRINGS => array($captcha_error->getErrorMessage())
+            ResponseConstants::ERRORSTRINGS => array($captcha_error->getMessageOrCode())
         );
     }
-
-    // /**
-    //  * @param array<string, mixed> $data_properties
-    //  * @return array<string, mixed>
-    //  */
-    // protected function executeForm(array &$data_properties): array
-    // {
-    //     $mutationResolverClass = $this->getMutationResolverClass();
-    //     /** @var MutationResolverInterface */
-    //     $mutationResolver = $this->instanceManager->getInstance($mutationResolverClass);
-    //     $form_data = $this->getFormData();
-    //     $errorType = $mutationResolver->getErrorType();
-    //     $errorTypeKeys = [
-    //         ErrorTypes::DESCRIPTIONS => ResponseConstants::ERRORSTRINGS,
-    //         ErrorTypes::CODES => ResponseConstants::ERRORCODES,
-    //     ];
-    //     $errorTypeKey = $errorTypeKeys[$errorType];
-    //     if ($errors = $mutationResolver->validateErrors($form_data)) {
-    //         return [
-    //             $errorTypeKey => $errors,
-    //         ];
-    //     }
-    //     $errors = $errorcodes = [];
-    //     $result = $mutationResolver->execute($errors, $errorcodes, $form_data);
-    //     if (GeneralUtils::isError($result)) {
-    //         /** @var Error */
-    //         $error = $result;
-    //         $errors = [];
-    //         if ($errorTypeKey == ErrorTypes::DESCRIPTIONS) {
-    //             $errors = $error->getErrorMessages();
-    //         } elseif ($errorTypeKey == ErrorTypes::CODES) {
-    //             $errors = $error->getErrorCodes();
-    //         }
-    //         return [
-    //             $errorTypeKey => $errors,
-    //         ];
-    //     }
-
-    //     // No errors => success
-    //     return array(
-    //         ResponseConstants::SUCCESS => true
-    //     );
-    // }
 }

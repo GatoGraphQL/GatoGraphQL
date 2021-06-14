@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\FieldQuery\QueryHelpers;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\Engine\Dataloading\Expressions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\Engine\Dataloading\Expressions;
+use PoP\FieldQuery\QueryHelpers;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -219,6 +220,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
                 // If there was an error (eg: a missing mandatory argument), then the function will be of type Error
                 if (GeneralUtils::isError($functionValue)) {
+                    /** @var Error */
                     $error = $functionValue;
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
@@ -226,7 +228,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                             $this->translationAPI->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
                             $fieldOutputKey,
                             $id,
-                            $error->getErrorMessage()
+                            $error->getMessageOrCode()
                         ),
                     ];
                     continue;

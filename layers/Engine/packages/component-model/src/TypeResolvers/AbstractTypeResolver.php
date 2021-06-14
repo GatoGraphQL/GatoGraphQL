@@ -769,7 +769,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             $schemaErrors[] = [
                 Tokens::PATH => [implode($this->translationAPI->__('\', \''), $failedFields)],
-                Tokens::MESSAGE => $error->getErrorMessage(),
+                Tokens::MESSAGE => $error->getMessageOrCode(),
             ];
 
             // Indicate that this ID must be removed from the results
@@ -2044,6 +2044,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return array_values(array_unique($interfaceClasses));
     }
 
+    /**
+     * @return FieldResolverInterface[]
+     */
     protected function getFieldResolversForField(string $field): array
     {
         // Calculate the fieldResolver to process this field if not already in the cache

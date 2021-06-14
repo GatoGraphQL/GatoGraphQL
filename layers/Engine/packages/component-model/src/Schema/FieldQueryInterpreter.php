@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -676,14 +677,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $directiveArgValue = $this->maybeResolveFieldArgumentValueForResultItem($typeResolver, $resultItem, $directiveArgValue, $variables, $expressions);
                 // Validate it
                 if (GeneralUtils::isError($directiveArgValue)) {
+                    /** @var Error */
                     $error = $directiveArgValue;
-                    if ($errorData = $error->getErrorData()) {
-                        $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME];
+                    if ($errorData = $error->getData()) {
+                        $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$errorFieldOrDirective],
-                        Tokens::MESSAGE => $error->getErrorMessage(),
+                        Tokens::MESSAGE => $error->getMessageOrCode(),
                     ];
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
@@ -833,8 +835,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
 
                 // If the response is an error, extract the error message and set value to null
                 if (GeneralUtils::isError($argValue)) {
+                    /** @var Error */
                     $error = $argValue;
-                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $error->getErrorMessage();
+                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $error->getMessageOrCode();
                     $fieldOrDirectiveArgs[$argName] = null;
                     continue;
                 }
@@ -1340,11 +1343,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $resolvedValue = $typeResolver->resolveValue($resultItem, (string)$fieldArgValue, $variables, $expressions, $options);
             if (GeneralUtils::isError($resolvedValue)) {
                 // Show the error message, and return nothing
+                /** @var Error */
                 $error = $resolvedValue;
                 $this->feedbackMessageStore->addQueryError(sprintf(
                     $this->translationAPI->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
                     $fieldArgValue,
-                    $error->getErrorMessage()
+                    $error->getMessageOrCode()
                 ));
                 return null;
             }

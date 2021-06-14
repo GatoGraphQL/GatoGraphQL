@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\ErrorHandling\Error;
 
 class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
@@ -21,7 +22,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
                 // Check if the user can edit the specific post
                 $post_id = $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID];
                 if (!gdCurrentUserCanEdit($post_id)) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('usercannotedit');
+                    return new Error('usercannotedit');
                 }
                 break;
 
@@ -29,7 +30,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckp
                 $post_id = $_REQUEST[\PoPSchema\Posts\Constants\InputNames::POST_ID];
                 $nonce = $_REQUEST[POP_INPUTNAME_NONCE];
                 if (!gdVerifyNonce($nonce, GD_NONCE_EDITURL, $post_id)) {
-                    return new \PoP\ComponentModel\ErrorHandling\Error('nonceinvalid');
+                    return new Error('nonceinvalid');
                 }
                 break;
         }

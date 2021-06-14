@@ -185,6 +185,21 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return $value;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getErrorOutput(Error $error): array
+    {
+        $errorOutput = [
+            Tokens::MESSAGE => $error->getMessageOrCode(),
+            Tokens::EXTENSIONS => $error->getData(),
+        ];
+        foreach ($error->getNestedErrors() as $nestedError) {
+            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getErrorOutput($nestedError);
+        }
+        return $errorOutput;
+    }
+
     protected function addValueForResultItem(TypeResolverInterface $typeResolver, $id, string $field, $value, array &$dbItems, array &$dbErrors)
     {
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
@@ -193,18 +208,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // Extract the error message
             /** @var Error */
             $error = $value;
-            foreach ($error->getErrorCodes() as $errorCode) {
-                $dbError = [
+            $dbErrors[(string)$id][] = array_merge(
+                [
                     Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $error->getErrorMessage($errorCode),
-                ];
-                if ($data = $error->getErrorData($errorCode)) {
-                    $dbError[Tokens::EXTENSIONS] = [
-                        Tokens::NESTED => $data,
-                    ];
-                }
-                $dbErrors[(string)$id][] = $dbError;
-            }
+                ],
+                $this->getErrorOutput($error)
+            );
+
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
                 $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\Engine\Dataloading\Expressions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
+use PoP\Engine\Dataloading\Expressions;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
@@ -83,6 +84,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     }
                     if (GeneralUtils::isError($resolvedValue)) {
                         // Show the error message, and return nothing
+                        /** @var Error */
                         $error = $resolvedValue;
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
@@ -90,7 +92,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $value,
                                 $id,
-                                $error->getErrorMessage(),
+                                $error->getMessageOrCode(),
                                 $key
                             ),
                         ];

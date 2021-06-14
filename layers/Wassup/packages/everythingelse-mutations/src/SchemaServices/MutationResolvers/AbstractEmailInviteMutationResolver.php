@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResolver
 {
@@ -33,7 +34,9 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
 
             $captcha_validation = \GD_Captcha::validate($captcha);
             if (GeneralUtils::isError($captcha_validation)) {
-                $errors[] = $captcha_validation->getErrorMessage();
+                /** @var Error */
+                $error = $captcha_validation;
+                $errors[] = $error->getMessageOrCode();
             }
         }
     }

@@ -6,6 +6,7 @@ namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -231,6 +232,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                     unset($dbItems[(string)$id][$arrayItemPropertyOutputKey]);
                     // Validate it's not an error
                     if (GeneralUtils::isError($arrayItemValue)) {
+                        /**
+                         * @var Error
+                         */
                         $error = $arrayItemValue;
                         $dbErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
@@ -239,7 +243,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                                 $key,
                                 $fieldOutputKey,
                                 $id,
-                                $error->getErrorMessage()
+                                $error->getMessageOrCode()
                             ),
                         ];
                         continue;
