@@ -266,7 +266,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
                         $schemaErrors[] = [
                             Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => $errorMessage,
+                            Tokens::MESSAGE => $resolverType === ResolverTypes::FIELD ?
+                                $errorMessage
+                                : sprintf(
+                                    $this->translationAPI->__('%s. The directive has been ignored', 'pop-component-model'),
+                                    $errorMessage
+                                ),
                         ];
                     } else {
                         $schemaWarnings[] = [
@@ -309,7 +314,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
                         $schemaErrors[] = [
                             Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => $errorMessage,
+                            Tokens::MESSAGE => $resolverType === ResolverTypes::FIELD ?
+                                $errorMessage
+                                : sprintf(
+                                    $this->translationAPI->__('%s. The directive has been ignored', 'pop-component-model'),
+                                    $errorMessage
+                                ),
                         ];
                     } else {
                         $schemaWarnings[] = [
