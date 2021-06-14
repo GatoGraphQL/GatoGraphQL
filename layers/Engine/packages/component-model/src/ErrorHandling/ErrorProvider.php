@@ -148,45 +148,38 @@ class ErrorProvider implements ErrorProviderInterface
     }
     public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error
     {
-        $error = $this->getError(
-            $fieldName,
-            ErrorCodes::NESTED_SCHEMA_ERRORS,
-            sprintf(
-                $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
-                $fieldName
-            )
-        );
-        foreach ($schemaErrors as $schemaError) {
-            $error->addData($schemaError);
-        }
-
-        return $error;
-    }
-    public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error
-    {
-        $error = $this->getError(
+        return $this->getError(
             $fieldName,
             ErrorCodes::NESTED_DB_ERRORS,
             sprintf(
                 $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
-            )
+            ),
+            [
+                'argumentErrors' => $schemaErrors,
+            ]
         );
-        foreach ($dbErrors as $resultItemID => $fieldOutputKeyErrors) {
-            foreach ($fieldOutputKeyErrors as $fieldOutputKey => $errors) {
-                foreach ($errors as $dbError) {
-                    $error->addData($dbError);
-                }
-            }
-        }
+    }
 
-        return $error;
+    public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::NESTED_DB_ERRORS,
+            sprintf(
+                $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                $fieldName
+            ),
+            [
+                'argumentErrors' => $dbErrors,
+            ]
+        );
     }
 
     /**
      * @param Error[] $nestedErrors
      */
-    public function getNestedErrorsFieldError(string $fieldName, array $nestedErrors): Error
+    public function getNestedErrorsFieldError(array $nestedErrors, string $fieldName): Error
     {
         return $this->getError(
             $fieldName,

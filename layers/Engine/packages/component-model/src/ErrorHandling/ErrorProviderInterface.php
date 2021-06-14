@@ -39,10 +39,16 @@ interface ErrorProviderInterface
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error;
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error;
     public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
+    /**
+     * @param string[] $schemaErrors
+     */
     public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error;
+    /**
+     * @param string[] $dbErrors
+     */
     public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error;
     /**
-     * @param Error[] $errors
+     * @param Error[] $nestedErrors
      */
-    public function getNestedErrorsFieldError(string $fieldName, array $errors): Error;
+    public function getNestedErrorsFieldError(array $nestedErrors, string $fieldName): Error;
 }
