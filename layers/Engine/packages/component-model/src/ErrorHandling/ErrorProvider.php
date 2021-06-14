@@ -36,15 +36,6 @@ class ErrorProvider implements ErrorProviderInterface
             $nestedErrors
         );
     }
-    // public function getNoDirectiveError(string $directiveName): Error
-    // {
-    //     $this->translationAPI = TranslationAPIFacade::getInstance();
-    //     return $this->getError(
-    //         $directiveName,
-    //         ErrorCodes::NO_DIRECTIVE,
-    //         $this->translationAPI->__('No DirectiveResolver resolves this directive', 'pop-component-model')
-    //     );
-    // }
 
     /**
      * Return an error to indicate that no fieldResolver processes this field,

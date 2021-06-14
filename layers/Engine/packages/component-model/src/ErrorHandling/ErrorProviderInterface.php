@@ -19,7 +19,6 @@ interface ErrorProviderInterface
         ?array $data = null,
         ?array $nestedErrors = null
     ): Error;
-    // public function getNoDirectiveError(string $directiveName): Error;
     /**
      * Return an error to indicate that no fieldResolver processes this field,
      * which is different than returning a null value.
