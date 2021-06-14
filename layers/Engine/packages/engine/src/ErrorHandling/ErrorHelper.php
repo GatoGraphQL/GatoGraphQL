@@ -13,7 +13,7 @@ class ErrorHelper implements ErrorHelperInterface
     public function returnResultOrConvertError(mixed $result): mixed
     {
         if ($this->errorManager->isCMSError($result)) {
-            return $this->errorManager->convertFromCMSToPoPError($result);
+            return $this->errorManager->convertFromCMSToPoPError((object) $result);
         }
         return $result;
     }
