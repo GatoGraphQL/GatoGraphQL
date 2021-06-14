@@ -243,7 +243,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                                 $key,
                                 $fieldOutputKey,
                                 $id,
-                                $error->getMessageWithCode()
+                                $error->getMessageOrCode()
                             ),
                         ];
                         continue;

@@ -301,7 +301,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                                     $key,
                                     $fieldOutputKey,
                                     $id,
-                                    $error->getMessageWithCode()
+                                    $error->getMessageOrCode()
                                 ),
                             ];
                             continue;
@@ -407,7 +407,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $value,
                                 $id,
-                                $error->getMessageWithCode(),
+                                $error->getMessageOrCode(),
                                 $key
                             ),
                         ];
@@ -439,7 +439,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $value,
                                 $id,
-                                $error->getMessageWithCode(),
+                                $error->getMessageOrCode(),
                                 $key
                             ),
                         ];

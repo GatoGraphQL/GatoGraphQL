@@ -191,7 +191,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     protected function getErrorOutput(Error $error): array
     {
         $errorOutput = [
-            Tokens::MESSAGE => $error->getMessageWithCode(),
+            Tokens::MESSAGE => $error->getMessageOrCode(),
             Tokens::EXTENSIONS => $error->getData(),
         ];
         foreach ($error->getNestedErrors() as $nestedError) {

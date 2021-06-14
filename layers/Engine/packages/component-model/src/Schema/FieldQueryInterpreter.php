@@ -685,7 +685,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
                     $dbErrors[(string)$id][] = [
                         Tokens::PATH => [$errorFieldOrDirective],
-                        Tokens::MESSAGE => $error->getMessageWithCode(),
+                        Tokens::MESSAGE => $error->getMessageOrCode(),
                     ];
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
@@ -837,7 +837,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 if (GeneralUtils::isError($argValue)) {
                     /** @var Error */
                     $error = $argValue;
-                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $error->getMessageWithCode();
+                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $error->getMessageOrCode();
                     $fieldOrDirectiveArgs[$argName] = null;
                     continue;
                 }
@@ -1348,7 +1348,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $this->feedbackMessageStore->addQueryError(sprintf(
                     $this->translationAPI->__('Executing field \'%s\' produced error: %s', 'pop-component-model'),
                     $fieldArgValue,
-                    $error->getMessageWithCode()
+                    $error->getMessageOrCode()
                 ));
                 return null;
             }

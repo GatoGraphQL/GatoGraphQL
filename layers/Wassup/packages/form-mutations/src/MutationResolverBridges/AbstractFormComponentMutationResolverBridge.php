@@ -46,7 +46,7 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
     protected function getCaptchaError(Error $captcha_error)
     {
         return array(
-            ResponseConstants::ERRORSTRINGS => array($captcha_error->getMessageWithCode())
+            ResponseConstants::ERRORSTRINGS => array($captcha_error->getMessageOrCode())
         );
     }
 }

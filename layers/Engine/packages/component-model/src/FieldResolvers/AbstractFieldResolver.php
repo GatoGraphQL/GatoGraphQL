@@ -497,7 +497,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $validation = $engine->validateCheckpoints($checkpoints);
             if (GeneralUtils::isError($validation)) {
                 $error = $validation;
-                $errorMessage = $error->getMessageWithCode();
+                $errorMessage = $error->getMessageOrCode();
                 // Allow to customize the error message for the failing entity
                 return [
                     $this->getValidationCheckpointsErrorMessage($error, $errorMessage, $typeResolver, $resultItem, $fieldName, $fieldArgs)

@@ -36,7 +36,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
             if (GeneralUtils::isError($captcha_validation)) {
                 /** @var Error */
                 $error = $captcha_validation;
-                $errors[] = $error->getMessageWithCode();
+                $errors[] = $error->getMessageOrCode();
             }
         }
     }

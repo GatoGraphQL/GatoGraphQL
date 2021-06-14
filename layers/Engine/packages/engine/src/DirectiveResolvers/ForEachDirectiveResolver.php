@@ -92,7 +92,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                                 $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $value,
                                 $id,
-                                $error->getMessageWithCode(),
+                                $error->getMessageOrCode(),
                                 $key
                             ),
                         ];

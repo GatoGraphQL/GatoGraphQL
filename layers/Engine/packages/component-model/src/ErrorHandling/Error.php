@@ -41,19 +41,13 @@ class Error
         return $this->message;
     }
 
-    public function getMessageWithCode(): string
+    public function getMessageOrCode(): string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return $this->message !== null ?
-            sprintf(
-                $translationAPI->__('[%1$s] %2$s', 'component-model'),
-                $this->code,
-                $this->message
-            )
-            : sprintf(
-                $translationAPI->__('Error code: %s', 'component-model'),
-                $this->code
-            );
+        return $this->message ?? sprintf(
+            $translationAPI->__('Error code: %s', 'component-model'),
+            $this->code
+        );
     }
 
     /**

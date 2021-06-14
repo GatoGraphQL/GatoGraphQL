@@ -228,7 +228,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                             $this->translationAPI->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
                             $fieldOutputKey,
                             $id,
-                            $error->getMessageWithCode()
+                            $error->getMessageOrCode()
                         ),
                     ];
                     continue;

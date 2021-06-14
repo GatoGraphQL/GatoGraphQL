@@ -92,7 +92,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $error = $result_id;
             $errors = [];
             if ($errorTypeKey == ErrorTypes::DESCRIPTIONS) {
-                $errors[] = $error->getMessageWithCode();
+                $errors[] = $error->getMessageOrCode();
             } elseif ($errorTypeKey == ErrorTypes::CODES) {
                 $errors[] = $error->getCode();
             }
