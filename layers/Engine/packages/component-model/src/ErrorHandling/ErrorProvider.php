@@ -11,12 +11,20 @@ use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    public function getError(string $fieldName, string $errorCode, string $errorMessage): Error
-    {
+    /**
+     * @param Error[]|null $nestedErrors
+     */
+    public function getError(
+        string $fieldName,
+        string $errorCode,
+        string $errorMessage,
+        ?array $nestedErrors
+    ): Error {
         return new Error(
             $errorCode,
             $errorMessage,
-            [ErrorDataTokens::FIELD_NAME => $fieldName]
+            [ErrorDataTokens::FIELD_NAME => $fieldName],
+            $nestedErrors
         );
     }
     // public function getNoDirectiveError(string $directiveName): Error
@@ -112,21 +120,15 @@ class ErrorProvider implements ErrorProviderInterface
             );
         }
         $translationAPI = TranslationAPIFacade::getInstance();
-        $error = $this->getError(
+        return $this->getError(
             $fieldName,
             ErrorCodes::VALIDATION_FAILED,
             sprintf(
-                $translationAPI->__('Field \'%s\' could not be processed due to previous error(s)', 'pop-component-model'),
-                $fieldName
+                $translationAPI->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
+                $fieldName,
+                implode($translationAPI->__('\', \'', 'pop-component-model'), $validationDescriptions)
             )
         );
-        foreach ($validationDescriptions as $validationDescription) {
-            $error->add(
-                'nested-error',
-                $validationDescription
-            );
-        }
-        return $error;
     }
     public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
     {
@@ -186,13 +188,13 @@ class ErrorProvider implements ErrorProviderInterface
     public function getNestedErrorsFieldError(string $fieldName, array $errors): Error
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return new Error(
+        return $this->getError(
+            $fieldName,
             ErrorCodes::NESTED_ERRORS,
             sprintf(
                 $translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
             ),
-            [ErrorDataTokens::FIELD_NAME => $fieldName],
             $errors
         );
     }

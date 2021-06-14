@@ -8,7 +8,15 @@ use PoP\ComponentModel\ErrorHandling\Error;
 
 interface ErrorProviderInterface
 {
-    public function getError(string $fieldName, string $errorCode, string $errorMessage): Error;
+    /**
+     * @param Error[]|null $nestedErrors
+     */
+    public function getError(
+        string $fieldName,
+        string $errorCode,
+        string $errorMessage,
+        ?array $nestedErrors
+    ): Error;
     // public function getNoDirectiveError(string $directiveName): Error;
     /**
      * Return an error to indicate that no fieldResolver processes this field,
