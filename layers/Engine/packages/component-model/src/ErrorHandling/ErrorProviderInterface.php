@@ -16,8 +16,8 @@ interface ErrorProviderInterface
         string $fieldName,
         string $errorCode,
         string $errorMessage,
-        ?array $data,
-        ?array $nestedErrors
+        ?array $data = null,
+        ?array $nestedErrors = null
     ): Error;
     // public function getNoDirectiveError(string $directiveName): Error;
     /**

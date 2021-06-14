@@ -23,8 +23,8 @@ class ErrorProvider implements ErrorProviderInterface
         string $fieldName,
         string $errorCode,
         string $errorMessage,
-        ?array $data,
-        ?array $nestedErrors
+        ?array $data = null,
+        ?array $nestedErrors = null
     ): Error {
         return new Error(
             $errorCode,
