@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
+use PoP\Translation\Facades\TranslationAPIFacade;
+
 class Error
 {
     public function __construct(
@@ -18,6 +20,47 @@ class Error
          */
         protected ?array $nestedErrors = null
     ) {}
+
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function getMessageWithCode(): string
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        return $this->message !== null ?
+            sprintf(
+                $translationAPI->__('[%1$s] %2$s', 'component-model'),
+                $this->code,
+                $this->message
+            )
+            : sprintf(
+                $translationAPI->__('Error code: %s', 'component-model'),
+                $this->code
+            );
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return Error[]
+     */
+    public function getNestedErrors(): ?array
+    {
+        return $this->nestedErrors;
+    }
 
     /**
      * @return string[]
