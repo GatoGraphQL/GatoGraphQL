@@ -733,6 +733,10 @@ class PluginConfiguration
              */
             ComponentModelEnvironment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS => true,
             /**
+             * Treat querying for an undefined field/directive arg as an error, not a warning
+             */
+            ComponentModelEnvironment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS => true,
+            /**
              * Show a `null` entry in the response for failing fields
              */
             ComponentModelEnvironment::SET_FAILING_FIELD_RESPONSE_AS_NULL => true,

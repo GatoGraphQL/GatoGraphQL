@@ -41,7 +41,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * @var array<string, array>
      */
+    private array $extractedFieldArgumentErrorsCache = [];
+    /**
+     * @var array<string, array>
+     */
     private array $extractedFieldArgumentWarningsCache = [];
+    /**
+     * @var array<string, array>
+     */
+    private array $extractedDirectiveArgumentErrorsCache = [];
     /**
      * @var array<string, array>
      */
@@ -150,32 +158,52 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgs;
     }
 
-    public function extractDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, ?array $variables = null, ?array &$schemaWarnings = null): array
-    {
+    public function extractDirectiveArguments(
+        DirectiveResolverInterface $directiveResolver,
+        TypeResolverInterface $typeResolver,
+        string $fieldDirective,
+        ?array $variables = null,
+        ?array &$schemaErrors = null,
+        ?array &$schemaWarnings = null,
+    ): array {
         $variablesHash = $this->getVariablesHash($variables);
         if (!isset($this->extractedDirectiveArgumentsCache[get_class($typeResolver)][$fieldDirective][$variablesHash])) {
-            $fieldSchemaWarnings = [];
-            $this->extractedDirectiveArgumentsCache[get_class($typeResolver)][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments($directiveResolver, $typeResolver, $fieldDirective, $variables, $fieldSchemaWarnings);
+            $fieldSchemaWarnings = $fieldSchemaErrors = [];
+            $this->extractedDirectiveArgumentsCache[get_class($typeResolver)][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments(
+                $directiveResolver,
+                $typeResolver,
+                $fieldDirective,
+                $variables,
+                $fieldSchemaErrors,
+                $fieldSchemaWarnings,
+            );
+            $this->extractedDirectiveArgumentErrorsCache[get_class($typeResolver)][$fieldDirective][$variablesHash] = $fieldSchemaErrors;
             $this->extractedDirectiveArgumentWarningsCache[get_class($typeResolver)][$fieldDirective][$variablesHash] = $fieldSchemaWarnings;
         }
-        // Integrate the schemaWarnings too
-        if (!is_null($schemaWarnings)) {
+        // Integrate the errors/warnings too
+        if ($schemaErrors !== null) {
+            $schemaErrors = array_merge(
+                $schemaErrors,
+                $this->extractedDirectiveArgumentErrorsCache[get_class($typeResolver)][$fieldDirective][$variablesHash]
+            );
+        }
+        if ($schemaWarnings !== null) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $this->extractedDirectiveArgumentWarningsCache[get_class($typeResolver)][$fieldDirective][$variablesHash]
             );
-            // foreach ($this->extractedDirectiveArgumentWarningsCache[get_class($typeResolver)][$fieldDirective][$variablesHash] as $schemaWarning) {
-            //     $schemaWarnings[] = [
-            //         Tokens::PATH => array_merge([$fieldDirective], $schemaWarning[Tokens::PATH]),
-            //         Tokens::MESSAGE => $schemaWarning[Tokens::MESSAGE],
-            //     ];
-            // }
         }
         return $this->extractedDirectiveArgumentsCache[get_class($typeResolver)][$fieldDirective][$variablesHash];
     }
 
-    protected function doExtractDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $fieldDirective, ?array $variables, array &$schemaWarnings): array
-    {
+    protected function doExtractDirectiveArguments(
+        DirectiveResolverInterface $directiveResolver,
+        TypeResolverInterface $typeResolver,
+        string $fieldDirective,
+        ?array $variables,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+    ): array {
         $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $typeResolver, $fieldDirective);
         // Iterate all the elements, and extract them into the array
         if ($directiveArgElems = QueryHelpers::getFieldArgElements($this->getFieldDirectiveArgs($fieldDirective))) {
@@ -188,6 +216,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $directiveArgumentNameTypes,
                 $directiveArgumentNameDefaultValues,
                 $variables,
+                $schemaErrors,
                 $schemaWarnings,
                 ResolverTypes::DIRECTIVE
             );
@@ -206,6 +235,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array $fieldOrDirectiveArgumentNameTypes,
         array $fieldArgumentNameDefaultValues,
         ?array $variables,
+        array &$schemaErrors,
         array &$schemaWarnings,
         string $resolverType
     ): array {
@@ -214,6 +244,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
         // $fieldOrDirectiveOutputKey = $this->getFieldOutputKey($fieldOrDirective);
         $fieldOrDirectiveArgs = [];
+        $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
         for ($i = 0; $i < count($fieldOrDirectiveArgElems); $i++) {
             $fieldOrDirectiveArg = $fieldOrDirectiveArgElems[$i];
             // Either one of 2 formats are accepted:
@@ -223,19 +254,34 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             if ($separatorPos === false) {
                 $fieldOrDirectiveArgValue = $fieldOrDirectiveArg;
                 if (!$orderedFieldOrDirectiveArgNamesEnabled || !isset($orderedFieldOrDirectiveArgNames[$i])) {
-                    $errorMessage = $orderedFieldOrDirectiveArgNamesEnabled ?
-                        $this->translationAPI->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'pop-component-model') :
-                        $this->translationAPI->__('retrieving this information from the schema definition is disabled for the corresponding “typeResolver”', 'pop-component-model');
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$fieldOrDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('The argument on position number %s (with value \'%s\') has its name missing, and %s. Please define the query using the \'key%svalue\' format. This argument has been ignored', 'pop-component-model'),
-                            $i + 1,
-                            $fieldOrDirectiveArgValue,
-                            $errorMessage,
-                            QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR
-                        ),
-                    ];
+                    $errorMessage = sprintf(
+                        $this->translationAPI->__('The argument on position number %s (with value \'%s\') has its name missing, and %s. Please define the query using the \'key%svalue\' format', 'pop-component-model'),
+                        $i + 1,
+                        $fieldOrDirectiveArgValue,
+                        $orderedFieldOrDirectiveArgNamesEnabled ?
+                            $this->translationAPI->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'pop-component-model') :
+                            $this->translationAPI->__('retrieving this information from the schema definition is disabled for the corresponding “typeResolver”', 'pop-component-model'),
+                        QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR
+                    );
+                    if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
+                        $schemaErrors[] = [
+                            Tokens::PATH => [$fieldOrDirective],
+                            Tokens::MESSAGE => $resolverType === ResolverTypes::FIELD ?
+                                $errorMessage
+                                : sprintf(
+                                    $this->translationAPI->__('%s. The directive has been ignored', 'pop-component-model'),
+                                    $errorMessage
+                                ),
+                        ];
+                    } else {
+                        $schemaWarnings[] = [
+                            Tokens::PATH => [$fieldOrDirective],
+                            Tokens::MESSAGE => sprintf(
+                                $this->translationAPI->__('%s. This argument has been ignored', 'pop-component-model'),
+                                $errorMessage
+                            ),
+                        ];
+                    }
                     // Ignore extracting this argument
                     continue;
                 }
@@ -259,15 +305,31 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Validate that this argument exists in the schema, or show a warning if not
                 // But don't skip it! It may be that the engine accepts the property, it is just not documented!
                 if (!array_key_exists($fieldOrDirectiveArgName, $fieldOrDirectiveArgumentNameTypes)) {
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$fieldOrDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('On %1$s \'%2$s\', argument with name \'%3$s\' has not been documented in the schema, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
-                            $resolverType == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
-                            $fieldOrDirective,
-                            $fieldOrDirectiveArgName
-                        ),
-                    ];
+                    $errorMessage = sprintf(
+                        $this->translationAPI->__('On %1$s \'%2$s\', argument with name \'%3$s\' has not been documented in the schema', 'pop-component-model'),
+                        $resolverType == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirective,
+                        $fieldOrDirectiveArgName
+                    );
+                    if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
+                        $schemaErrors[] = [
+                            Tokens::PATH => [$fieldOrDirective],
+                            Tokens::MESSAGE => $resolverType === ResolverTypes::FIELD ?
+                                $errorMessage
+                                : sprintf(
+                                    $this->translationAPI->__('%s. The directive has been ignored', 'pop-component-model'),
+                                    $errorMessage
+                                ),
+                        ];
+                    } else {
+                        $schemaWarnings[] = [
+                            Tokens::PATH => [$fieldOrDirective],
+                            Tokens::MESSAGE => sprintf(
+                                $this->translationAPI->__('%s, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
+                                $errorMessage
+                            ),
+                        ];
+                    }
                 }
             }
 
@@ -285,32 +347,49 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldOrDirectiveArgs;
     }
 
-    public function extractFieldArguments(TypeResolverInterface $typeResolver, string $field, ?array $variables = null, ?array &$schemaWarnings = null): array
-    {
+    public function extractFieldArguments(
+        TypeResolverInterface $typeResolver,
+        string $field,
+        ?array $variables = null,
+        ?array &$schemaErrors = null,
+        ?array &$schemaWarnings = null,
+    ): array {
         $variablesHash = $this->getVariablesHash($variables);
         if (!isset($this->extractedFieldArgumentsCache[get_class($typeResolver)][$field][$variablesHash])) {
-            $fieldSchemaWarnings = [];
-            $this->extractedFieldArgumentsCache[get_class($typeResolver)][$field][$variablesHash] = $this->doExtractFieldArguments($typeResolver, $field, $variables, $fieldSchemaWarnings);
+            $fieldSchemaErrors = $fieldSchemaWarnings = [];
+            $this->extractedFieldArgumentsCache[get_class($typeResolver)][$field][$variablesHash] = $this->doExtractFieldArguments(
+                $typeResolver,
+                $field,
+                $variables,
+                $fieldSchemaErrors,
+                $fieldSchemaWarnings,
+            );
+            $this->extractedFieldArgumentErrorsCache[get_class($typeResolver)][$field][$variablesHash] = $fieldSchemaErrors;
             $this->extractedFieldArgumentWarningsCache[get_class($typeResolver)][$field][$variablesHash] = $fieldSchemaWarnings;
         }
-        // Integrate the schemaWarnings too
-        if (!is_null($schemaWarnings)) {
+        // Integrate the errors/warnings too
+        if ($schemaErrors !== null) {
+            $schemaErrors = array_merge(
+                $schemaErrors,
+                $this->extractedFieldArgumentErrorsCache[get_class($typeResolver)][$field][$variablesHash]
+            );
+        }
+        if ($schemaWarnings !== null) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $this->extractedFieldArgumentWarningsCache[get_class($typeResolver)][$field][$variablesHash]
             );
-            // foreach ($this->extractedFieldArgumentWarningsCache[get_class($typeResolver)][$field][$variablesHash] as $schemaWarning) {
-            //     $schemaWarnings[] = [
-            //         Tokens::PATH => array_merge([$field], $schemaWarning[Tokens::PATH]),
-            //         Tokens::MESSAGE => $schemaWarning[Tokens::MESSAGE],
-            //     ];
-            // }
         }
         return $this->extractedFieldArgumentsCache[get_class($typeResolver)][$field][$variablesHash];
     }
 
-    protected function doExtractFieldArguments(TypeResolverInterface $typeResolver, string $field, ?array $variables, array &$schemaWarnings): array
-    {
+    protected function doExtractFieldArguments(
+        TypeResolverInterface $typeResolver,
+        string $field,
+        ?array $variables,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+    ): array {
         // Iterate all the elements, and extract them into the array
         $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($typeResolver, $field);
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
@@ -323,6 +402,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldArgumentNameTypes,
                 $fieldArgumentNameDefaultValues,
                 $variables,
+                $schemaErrors,
                 $schemaWarnings,
                 ResolverTypes::FIELD
             );
@@ -340,14 +420,23 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         });
     }
 
-    public function extractFieldArgumentsForSchema(TypeResolverInterface $typeResolver, string $field, ?array $variables = null): array
-    {
+    public function extractFieldArgumentsForSchema(
+        TypeResolverInterface $typeResolver,
+        string $field,
+        ?array $variables = null
+    ): array {
         $schemaErrors = [];
         $schemaWarnings = [];
         $schemaDeprecations = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
-        $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments($typeResolver, $field, $variables, $schemaWarnings);
+        $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
+            $typeResolver,
+            $field,
+            $variables,
+            $schemaErrors,
+            $schemaWarnings,
+        );
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($typeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($typeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
@@ -390,7 +479,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $typeResolver,
             $fieldDirective,
             $variables,
-            $schemaWarnings
+            $schemaErrors,
+            $schemaWarnings,
         );
         $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($typeResolver, $fieldDirective, $directiveArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
@@ -466,7 +556,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $dbErrors = $dbWarnings = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
-        $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments($typeResolver, $field, $variables);
+        $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
+            $typeResolver,
+            $field,
+            $variables
+        );
         // Only need to extract arguments if they have fields or arrays
         $fieldOutputKey = $this->getFieldOutputKey($field);
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForResultItem($typeResolver, $resultItem, $fieldArgs, $fieldOutputKey, $variables, $expressions, $dbErrors);
@@ -516,7 +610,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         $dbErrors = $dbWarnings = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
-        $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments($directiveResolver, $typeResolver, $fieldDirective, $variables);
+        $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
+            $directiveResolver,
+            $typeResolver,
+            $fieldDirective,
+            $variables,
+        );
         // Only need to extract arguments if they have fields or arrays
         $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForResultItem($typeResolver, $resultItem, $directiveArgs, $directiveOutputKey, $variables, $expressions, $dbErrors);

@@ -14,8 +14,21 @@ interface FieldQueryInterpreterInterface extends \PoP\FieldQuery\FieldQueryInter
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array;
     public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array;
-    public function extractFieldArguments(TypeResolverInterface $typeResolver, string $field, ?array $variables = null, ?array &$schemaWarnings = null): array;
-    public function extractDirectiveArguments(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $directive, ?array $variables = null, ?array &$schemaWarnings = null): array;
+    public function extractFieldArguments(
+        TypeResolverInterface $typeResolver,
+        string $field,
+        ?array $variables = null,
+        ?array &$schemaErrors = null,
+        ?array &$schemaWarnings = null,
+    ): array;
+    public function extractDirectiveArguments(
+        DirectiveResolverInterface $directiveResolver,
+        TypeResolverInterface $typeResolver,
+        string $directive,
+        ?array $variables = null,
+        ?array &$schemaErrors = null,
+        ?array &$schemaWarnings = null,
+    ): array;
     public function extractFieldArgumentsForSchema(TypeResolverInterface $typeResolver, string $field, ?array $variables = null): array;
     public function extractDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, TypeResolverInterface $typeResolver, string $directive, ?array $variables = null, bool $disableDynamicFields = false): array;
     public function extractFieldArgumentsForResultItem(
