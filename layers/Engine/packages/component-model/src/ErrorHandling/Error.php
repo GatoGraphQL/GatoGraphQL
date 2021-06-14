@@ -8,18 +8,28 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class Error
 {
+    protected string $code;
+    protected ?string $message;
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $data;
+    /**
+     * @var Error[]
+     */
+    protected array $nestedErrors;
+    
     public function __construct(
-        protected string $code,
-        protected ?string $message = null,
-        /**
-         * @var array<string, mixed>|null
-         */
-        protected ?array $data = null,
-        /**
-         * @var Error[]
-         */
-        protected ?array $nestedErrors = null
-    ) {}
+        string $code,
+        ?string $message = null,
+        ?array $data = null,
+        ?array $nestedErrors = null
+    ) {
+        $this->code = $code;
+        $this->message = $message;
+        $this->data = $data ?? [];
+        $this->nestedErrors = $nestedErrors ?? [];
+    }
 
     public function getCode(): string
     {
@@ -47,9 +57,9 @@ class Error
     }
 
     /**
-     * @return array<string, mixed>|null
+     * @return array<string, mixed>
      */
-    public function getData(): ?array
+    public function getData(): array
     {
         return $this->data;
     }
@@ -57,7 +67,7 @@ class Error
     /**
      * @return Error[]
      */
-    public function getNestedErrors(): ?array
+    public function getNestedErrors(): array
     {
         return $this->nestedErrors;
     }
