@@ -36,6 +36,12 @@ interface ErrorProviderInterface
     public function getNonNullableFieldError(string $fieldName): Error;
     public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error;
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error;
+    /**
+     * Return an error to indicate that no fieldResolver processes this field,
+     * which is different than returning a null value.
+     * Needed for compatibility with CustomPostUnionTypeResolver
+     * (so that data-fields aimed for another post_type are not retrieved)
+     */
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error;
     public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error;
     /**

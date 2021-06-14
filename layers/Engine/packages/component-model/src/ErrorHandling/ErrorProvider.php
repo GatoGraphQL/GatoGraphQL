@@ -104,10 +104,14 @@ class ErrorProvider implements ErrorProviderInterface
         );
     }
 
+    /**
+     * Return an error to indicate that no fieldResolver processes this field,
+     * which is different than returning a null value.
+     * Needed for compatibility with CustomPostUnionTypeResolver
+     * (so that data-fields aimed for another post_type are not retrieved)
+     */
     public function getValidationFailedError(string $fieldName, array $fieldArgs, array $validationDescriptions): Error
     {
-        // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
-        // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
         if (count($validationDescriptions) == 1) {
             return $this->getError(
                 $fieldName,
@@ -125,6 +129,7 @@ class ErrorProvider implements ErrorProviderInterface
             )
         );
     }
+
     public function getNoFieldResolverProcessesFieldError(string | int $resultItemID, string $fieldName, array $fieldArgs): Error
     {
         return $this->getError(
@@ -137,33 +142,40 @@ class ErrorProvider implements ErrorProviderInterface
             )
         );
     }
-    public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error
-    {
+    
+    protected function getNestedArgumentError(
+        string $fieldName,
+        string $errorCode,
+        array $argumentErrors
+    ): Error {
         return $this->getError(
             $fieldName,
-            ErrorCodes::NESTED_DB_ERRORS,
+            $errorCode,
             sprintf(
                 $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
             ),
             [
-                'argumentErrors' => $schemaErrors,
+                'argumentErrors' => $argumentErrors,
             ]
+        );
+    }
+
+    public function getNestedSchemaErrorsFieldError(array $schemaErrors, string $fieldName): Error
+    {
+        return $this->getNestedArgumentError(
+            $fieldName,
+            ErrorCodes::NESTED_SCHEMA_ERRORS,
+            $schemaErrors
         );
     }
 
     public function getNestedDBErrorsFieldError(array $dbErrors, string $fieldName): Error
     {
-        return $this->getError(
+        return $this->getNestedArgumentError(
             $fieldName,
             ErrorCodes::NESTED_DB_ERRORS,
-            sprintf(
-                $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
-                $fieldName
-            ),
-            [
-                'argumentErrors' => $dbErrors,
-            ]
+            $dbErrors
         );
     }
 
