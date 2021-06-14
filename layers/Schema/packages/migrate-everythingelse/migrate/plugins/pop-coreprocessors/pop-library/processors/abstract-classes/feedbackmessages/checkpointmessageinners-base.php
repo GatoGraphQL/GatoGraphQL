@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Modu
         if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] && GeneralUtils::isError($dataaccess_checkpoint_validation)) {
             $msg = array(
                 'codes' => array(
-                    $dataaccess_checkpoint_validation->getErrorCode()
+                    $dataaccess_checkpoint_validation->getCode()
                 ),
                 'header' => array(
                     'code' => 'error-header',

@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
         if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] && GeneralUtils::isError($actionexecution_checkpoint_validation)) {
             $msg = array(
                 'codes' => array(
-                    $actionexecution_checkpoint_validation->getErrorCode()
+                    $actionexecution_checkpoint_validation->getCode()
                 ),
                 'header' => array(
                     'code' => 'error-header',

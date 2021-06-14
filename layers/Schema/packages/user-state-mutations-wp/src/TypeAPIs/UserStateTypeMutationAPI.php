@@ -55,8 +55,8 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
     {
         // Transform the error message from WordPress
         $translationAPI = TranslationAPIFacade::getInstance();
-        $errorCode = $error->getErrorCode();
-        if ($errorCode == 'incorrect_password') {
+        $errorCode = $error->getCode();
+        if ($errorCode === 'incorrect_password') {
             return new Error(
                 'incorrect_password',
                 sprintf(
