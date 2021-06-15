@@ -397,14 +397,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaNotices,
         array &$schemaTraces
     ): array {
-        // Check if, once a directive fails, the continuing directives must execute or not
-        $stopDirectivePipelineExecutionIfDirectiveFailed = ComponentConfiguration::stopDirectivePipelineExecutionIfDirectiveFailed();
-        $showStopDirectivePipelineExecutionIfDirectiveFailedError = false;
-        if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-            $stopDirectivePipelineExecutionPlaceholder = $this->translationAPI->__('Because directive \'%s\' failed, the succeeding directives in the pipeline have not been executed', 'pop-component-model');
-            $showStopDirectivePipelineExecutionIfDirectiveFailedError = !ComponentConfiguration::removeFieldIfDirectiveFailed();
-        }
-
         $instances = [];
         // Count how many times each directive is added
         $directiveFieldTrack = [];
@@ -446,18 +438,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $directiveName
                     ),
                 ];
-                if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                    if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $stopDirectivePipelineExecutionPlaceholder,
-                                $fieldDirective
-                            ),
-                        ];
-                    }
-                    break;
-                }
                 continue;
             }
             $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
@@ -475,18 +455,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         )
                     ),
                 ];
-                if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                    if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $stopDirectivePipelineExecutionPlaceholder,
-                                $fieldDirective
-                            ),
-                        ];
-                    }
-                    break;
-                }
                 continue;
             }
 
@@ -502,18 +470,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $field
                         ),
                     ];
-                    if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
-                            $schemaErrors[] = [
-                                Tokens::PATH => [$fieldDirective],
-                                Tokens::MESSAGE => sprintf(
-                                    $stopDirectivePipelineExecutionPlaceholder,
-                                    $fieldDirective
-                                ),
-                            ];
-                        }
-                        break;
-                    }
                     continue;
                 }
 
@@ -572,19 +528,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $schemaErrors,
                         $fieldSchemaErrors
                     );
-                    // Because there were schema errors, skip this directive
-                    if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
-                            $schemaErrors[] = [
-                                Tokens::PATH => [$fieldDirective],
-                                Tokens::MESSAGE => sprintf(
-                                    $stopDirectivePipelineExecutionPlaceholder,
-                                    $fieldDirective
-                                ),
-                            ];
-                        }
-                        break;
-                    }
                     continue;
                 }
 
@@ -595,18 +538,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             Tokens::PATH => [$fieldDirective],
                             Tokens::MESSAGE => $error,
                         ];
-                    }
-                    if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
-                            $schemaErrors[] = [
-                                Tokens::PATH => [$fieldDirective],
-                                Tokens::MESSAGE => sprintf(
-                                    $stopDirectivePipelineExecutionPlaceholder,
-                                    $fieldDirective
-                                ),
-                            ];
-                        }
-                        break;
                     }
                     continue;
                 }
@@ -654,18 +585,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             implode('\', \'', $alreadyProcessingFields)
                         ),
                     ];
-                    if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
-                            $schemaErrors[] = [
-                                Tokens::PATH => [$fieldDirective],
-                                Tokens::MESSAGE => sprintf(
-                                    $stopDirectivePipelineExecutionPlaceholder,
-                                    $fieldDirective
-                                ),
-                            ];
-                        }
-                        break;
-                    }
                     // If after removing the duplicated fields there are still others, process them
                     // Otherwise, skip
                     if (!$directiveResolverFields) {
