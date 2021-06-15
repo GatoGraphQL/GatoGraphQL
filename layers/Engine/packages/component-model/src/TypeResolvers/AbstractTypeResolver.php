@@ -398,7 +398,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaTraces
     ): array {
         // Check if, once a directive fails, the continuing directives must execute or not
-        $stopDirectivePipelineExecutionIfDirectiveFailed = Environment::stopDirectivePipelineExecutionIfDirectiveFailed();
+        $stopDirectivePipelineExecutionIfDirectiveFailed = ComponentConfiguration::stopDirectivePipelineExecutionIfDirectiveFailed();
         if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
             $stopDirectivePipelineExecutionPlaceholder = $this->translationAPI->__('Because directive \'%s\' failed, the succeeding directives in the pipeline have not been executed', 'pop-component-model');
         }
