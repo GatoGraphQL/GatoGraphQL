@@ -407,7 +407,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Count how many times each directive is added
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
-        for ($i = 0; $i < count($fieldDirectives); $i++) {
+        $fieldDirectivesCount = count($fieldDirectives);
+        for ($i = 0; $i < $fieldDirectivesCount; $i++) {
             // Because directives can be repeated inside a field (eg: <resize(50%),resize(50%)>),
             // then we deal with 2 variables:
             // 1. $fieldDirective: the actual directive
