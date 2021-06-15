@@ -182,16 +182,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             }
             // If there is any error, then we also can't proceed with the current directive
             if ($nestedDirectiveSchemaErrors) {
-                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
-                        Tokens::MESSAGE => $nestedDirectiveSchemaError[Tokens::MESSAGE],
-                    ];
-                }
-                $schemaErrors[] = [
+                $schemaError = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => $this->translationAPI->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
                 ];
+                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = [
+                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
+                        Tokens::MESSAGE => $nestedDirectiveSchemaError[Tokens::MESSAGE],
+                        Tokens::EXTENSIONS => $nestedDirectiveSchemaError[Tokens::EXTENSIONS] ?? [],
+                    ];
+                }
+                $schemaErrors[] = $schemaError;
                 return [
                     null, // $validDirective
                     null, // $directiveName
