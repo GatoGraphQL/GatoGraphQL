@@ -191,13 +191,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                         Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
                         Tokens::MESSAGE => $nestedDirectiveSchemaError[Tokens::MESSAGE],
                     ];
-                    if (isset($nestedDirectiveSchemaError[Tokens::NESTED])) {
-                        $nestedSchemaError[Tokens::NESTED] = $nestedDirectiveSchemaError[Tokens::NESTED];
-                    }
                     if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS])) {
                         $nestedSchemaError[Tokens::EXTENSIONS] = $nestedDirectiveSchemaError[Tokens::EXTENSIONS];
                     }
-                    $schemaError[Tokens::NESTED][] = $nestedSchemaError;
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedSchemaError;
                 }
                 $schemaErrors[] = $schemaError;
                 return [
