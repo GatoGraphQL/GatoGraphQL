@@ -1025,16 +1025,25 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
             $directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
+            $directiveArgNameSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $typeResolver);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingDirectiveArgs) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
+                $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                $composedDirectiveArgType = $directiveArgNameTypes[$failedCastingDirectiveArgName];
+                if ($directiveArgIsArrayType) {
+                    $composedDirectiveArgType = sprintf(
+                        $this->translationAPI->__('array of %s', 'pop-component-model'),
+                        $composedDirectiveArgType
+                    );
+                }
                 if ($directiveArgErrorMessage = $failedCastingDirectiveArgErrorMessages[$failedCastingDirectiveArgName] ?? null) {
                     $errorMessage = sprintf(
                         $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
                         $directiveName,
                         is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
                         $failedCastingDirectiveArgName,
-                        $directiveArgNameTypes[$failedCastingDirectiveArgName],
+                        $composedDirectiveArgType,
                         $directiveArgErrorMessage
                     );
                 } else {
@@ -1043,7 +1052,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $directiveName,
                         is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
                         $failedCastingDirectiveArgName,
-                        $directiveArgNameTypes[$failedCastingDirectiveArgName]
+                        $composedDirectiveArgType
                     );
                 }
                 // Either treat it as an error or a warning
