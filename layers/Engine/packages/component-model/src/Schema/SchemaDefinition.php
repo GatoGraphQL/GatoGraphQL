@@ -13,6 +13,7 @@ class SchemaDefinition
     const ARGNAME_TYPE = 'type';
     const ARGNAME_NON_NULLABLE = 'nonNullable';
     const ARGNAME_IS_ARRAY = 'isArray';
+    const ARGNAME_NON_EMPTY_ARRAY = 'nonEmptyArray';
     const ARGNAME_REFERENCED_TYPE = 'referencedType';
     const ARGNAME_DESCRIPTION = 'description';
     const ARGNAME_VERSION = 'version';

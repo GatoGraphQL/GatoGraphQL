@@ -312,6 +312,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 }
                 if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                    if ($schemaTypeModifiers & SchemaTypeModifiers::NON_EMPTY_ARRAY) {
+                        $schemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] = true;
+                    }
                 }
                 if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($typeResolver, $fieldName)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
