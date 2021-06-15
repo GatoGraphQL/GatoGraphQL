@@ -157,36 +157,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $nestedDirectiveSchemaTraces
             );
             foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
-                $schemaDeprecations[] = array_merge(
-                    $nestedDirectiveSchemaDeprecation,
-                    [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaDeprecation[Tokens::PATH]),
-                    ]
-                );
+                array_unshift($nestedDirectiveSchemaDeprecation[Tokens::PATH], $this->directive);
+                $schemaDeprecations[] = $nestedDirectiveSchemaDeprecation;
             }
             foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
-                $schemaWarnings[] = array_merge(
-                    $nestedDirectiveSchemaWarning,
-                    [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaWarning[Tokens::PATH]),
-                    ]
-                );
+                array_unshift($nestedDirectiveSchemaWarning[Tokens::PATH], $this->directive);
+                $schemaWarnings[] = $nestedDirectiveSchemaWarning;
             }
             foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
-                $schemaNotices[] = array_merge(
-                    $nestedDirectiveSchemaNotice,
-                    [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaNotice[Tokens::PATH]),
-                    ]
-                );
+                array_unshift($nestedDirectiveSchemaNotice[Tokens::PATH], $this->directive);
+                $schemaNotices[] = $nestedDirectiveSchemaNotice;
             }
             foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
-                $schemaTraces[] = array_merge(
-                    $nestedDirectiveSchemaTrace,
-                    [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaTrace[Tokens::PATH]),
-                    ]
-                );
+                array_unshift($nestedDirectiveSchemaTrace[Tokens::PATH], $this->directive);
+                $schemaTraces[] = $nestedDirectiveSchemaTrace;
             }
             // If there is any error, then we also can't proceed with the current directive.
             // Throw an error for this level, and underlying errors as nested
