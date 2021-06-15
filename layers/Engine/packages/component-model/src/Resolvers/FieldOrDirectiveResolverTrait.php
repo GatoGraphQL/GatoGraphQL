@@ -126,6 +126,7 @@ trait FieldOrDirectiveResolverTrait
                     continue;
                 }
                 $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                $fieldOrDirectiveArgNonEmtpyArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false;
                 if ($fieldOrDirectiveArgIsArray && !is_array($fieldOrDirectiveArgumentValue)) {
                     $errors[] = sprintf(
                         $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
@@ -136,6 +137,16 @@ trait FieldOrDirectiveResolverTrait
                 } elseif (!$fieldOrDirectiveArgIsArray && is_array($fieldOrDirectiveArgumentValue)) {
                     $errors[] = sprintf(
                         $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                } elseif ($fieldOrDirectiveArgIsArray
+                    && $fieldOrDirectiveArgumentValue === []
+                    && $fieldOrDirectiveArgNonEmtpyArray
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot be empty', 'component-model'),
                         $fieldOrDirectiveArgumentName,
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
@@ -205,10 +216,23 @@ trait FieldOrDirectiveResolverTrait
                     SchemaDefinition::TYPE_MIXED,
                 ]);
                 $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                $enumTypeFieldOrDirectiveArgNonEmptyArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false;
                 // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
                 $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
                 if ($enumTypeFieldOrDirectiveArgIsArray) {
                     if (!$enumTypeFieldOrDirectiveArgMayBeArray && !is_array($fieldOrDirectiveArgumentValue)) {
+                        $errors[] = sprintf(
+                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                            $fieldOrDirectiveArgumentName,
+                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                            $fieldOrDirectiveName
+                        );
+                        continue;
+                    } elseif (
+                        !$enumTypeFieldOrDirectiveArgMayBeArray
+                        && $fieldOrDirectiveArgumentValue === []
+                        && $enumTypeFieldOrDirectiveArgNonEmptyArray
+                    ) {
                         $errors[] = sprintf(
                             $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
                             $fieldOrDirectiveArgumentName,
