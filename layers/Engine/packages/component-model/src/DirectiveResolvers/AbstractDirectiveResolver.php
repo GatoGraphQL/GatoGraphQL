@@ -157,28 +157,44 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $nestedDirectiveSchemaTraces
             );
             foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
-                $schemaDeprecations[] = [
+                $schemaDeprecation = [
                     Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaDeprecation[Tokens::PATH]),
                     Tokens::MESSAGE => $nestedDirectiveSchemaDeprecation[Tokens::MESSAGE],
                 ];
+                if (isset($nestedDirectiveSchemaDeprecation[Tokens::EXTENSIONS])) {
+                    $schemaDeprecation = $nestedDirectiveSchemaDeprecation[Tokens::EXTENSIONS];
+                }
+                $schemaDeprecations[] = $schemaDeprecation;
             }
             foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
-                $schemaWarnings[] = [
+                $schemaWarning = [
                     Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaWarning[Tokens::PATH]),
                     Tokens::MESSAGE => $nestedDirectiveSchemaWarning[Tokens::MESSAGE],
                 ];
+                if (isset($nestedDirectiveSchemaWarning[Tokens::EXTENSIONS])) {
+                    $schemaWarning = $nestedDirectiveSchemaWarning[Tokens::EXTENSIONS];
+                }
+                $schemaWarnings[] = $schemaWarning;
             }
             foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
-                $schemaNotices[] = [
+                $schemaNotice = [
                     Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaNotice[Tokens::PATH]),
                     Tokens::MESSAGE => $nestedDirectiveSchemaNotice[Tokens::MESSAGE],
                 ];
+                if (isset($nestedDirectiveSchemaNotice[Tokens::EXTENSIONS])) {
+                    $schemaNotice = $nestedDirectiveSchemaNotice[Tokens::EXTENSIONS];
+                }
+                $schemaNotices[] = $schemaNotice;
             }
             foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
-                $schemaTraces[] = [
+                $schemaTrace = [
                     Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaTrace[Tokens::PATH]),
                     Tokens::MESSAGE => $nestedDirectiveSchemaTrace[Tokens::MESSAGE],
                 ];
+                if (isset($nestedDirectiveSchemaTrace[Tokens::EXTENSIONS])) {
+                    $schemaTrace = $nestedDirectiveSchemaTrace[Tokens::EXTENSIONS];
+                }
+                $schemaTraces[] = $schemaTrace;
             }
             // If there is any error, then we also can't proceed with the current directive
             if ($nestedDirectiveSchemaErrors) {
