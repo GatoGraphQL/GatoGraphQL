@@ -156,7 +156,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $nestedDirectiveSchemaNotices,
                 $nestedDirectiveSchemaTraces
             );
-            // Append the current level to the path of the feedback item
             foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
                 $schemaDeprecations[] = array_merge(
                     $nestedDirectiveSchemaDeprecation,
