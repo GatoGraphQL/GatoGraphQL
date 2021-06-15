@@ -13,4 +13,5 @@ class SchemaTypeModifiers
 {
     public const NON_NULLABLE = 1;
     public const IS_ARRAY = 2;
+    public const NON_EMPTY_ARRAY = 4;
 }
