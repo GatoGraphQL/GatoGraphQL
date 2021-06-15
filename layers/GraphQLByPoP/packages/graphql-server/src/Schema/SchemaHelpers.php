@@ -19,12 +19,26 @@ class SchemaHelpers
      * - field response: isNonNullable
      * - field argument: isMandatory (its provided value can still be null)
      */
-    public static function getTypeToOutputInSchema(string $type, ?bool $isArray = false, ?bool $isNonNullableOrMandatory = false): string
+    public static function getTypeToOutputInSchema(string $type, ?bool $isArray = false, ?bool $isNonEmptyArray = false, ?bool $isNonNullableOrMandatory = false): string
     {
         // Convert the type name to standards by GraphQL
         $convertedType = self::convertTypeNameToGraphQLStandard($type);
 
-        return self::convertTypeToSDLSyntax($isArray ? 1 : 0, $convertedType, $isNonNullableOrMandatory);
+        // Wrap the type with the array brackets
+        if ($isArray) {
+            $convertedType = sprintf(
+                '[%s%s]',
+                $convertedType,
+                $isNonEmptyArray ? '!' : ''
+            );
+        }
+        if ($isNonNullableOrMandatory) {
+            $convertedType = sprintf(
+                '%s!',
+                $convertedType
+            );
+        }
+        return $convertedType;
     }
     public static function convertTypeNameToGraphQLStandard(string $typeName): string
     {
@@ -52,19 +66,5 @@ class SchemaHelpers
         }
 
         return $typeName;
-    }
-    protected static function convertTypeToSDLSyntax(int $arrayInstances, string $convertedType, ?bool $isNonNullableOrMandatory = false): string
-    {
-        // Wrap the type with the array brackets
-        for ($i = 0; $i < $arrayInstances; $i++) {
-            $convertedType = sprintf(
-                '[%s]',
-                $convertedType
-            );
-        }
-        if ($isNonNullableOrMandatory) {
-            $convertedType .= '!';
-        }
-        return $convertedType;
     }
 }
