@@ -265,6 +265,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
                     $fields = implode($this->translationAPI->__(', '), $directiveFields);
                     array_unshift($directiveSchemaError[Tokens::PATH], $fields);
+                    $this->prependPathOnNestedErrors($directiveSchemaError, $fields);
                     $schemaError = $directiveSchemaError;
                     $schemaErrors[] = $schemaError;
                 } else {
@@ -360,6 +361,16 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
         }
         return $pipelineData;
+    }
+
+    protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $fields): void {
+        
+        if (isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
+            foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
+                array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $fields);
+                $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $fields);
+            }
+        }
     }
 
     public function getDirectivePipeline(array $directiveResolverInstances): DirectivePipelineDecorator
