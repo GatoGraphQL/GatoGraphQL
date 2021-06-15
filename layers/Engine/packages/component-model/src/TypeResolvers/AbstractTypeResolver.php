@@ -1077,16 +1077,21 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $idFieldDirectiveIDFields = array_unique($idFieldDirectiveIDFields);
 
             // Validate and resolve the directives into instances and fields they operate on
+            $directivePipelineSchemaErrors = [];
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $fieldDirectives,
                 $fieldDirectiveFields,
                 false,
                 $variables,
-                $schemaErrors,
+                $directivePipelineSchemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
                 $schemaTraces
+            );
+            $schemaErrors = array_merge(
+                $schemaErrors,
+                $directivePipelineSchemaErrors
             );
 
             // From the fields, reconstitute the $idsDataFields for each directive,
@@ -1141,6 +1146,32 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaNotices,
                 $schemaTraces
             );
+
+            /**
+             * If any directive has errors, check if to set the field to null.
+             * Execute at the end, or otherwise the `null` will be overriden
+             * by `resolveDirectivePipeline`
+             */
+            if (!empty($directivePipelineSchemaErrors) && ComponentConfiguration::removeFieldIfDirectiveFailed()) {
+                // Extract the failing fields from the path of the thrown error
+                $schemaErrorFailingFields = [];
+                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
+                    $schemaErrorFailingFields[] = $directivePipelineSchemaError[Tokens::PATH][0];
+                }
+                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
+                foreach ($fieldDirectives as $fieldDirective) {
+                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
+                        $failingFields = array_intersect(
+                            $dataFields['direct'],
+                            $schemaErrorFailingFields
+                        );
+                        foreach ($failingFields as $field) {
+                            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                            $dbItems[(string)$id][$fieldOutputKey] = null;
+                        }
+                    }
+                }
+            }
         }
     }
 
