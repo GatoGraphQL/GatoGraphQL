@@ -272,8 +272,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $schemaError[Tokens::NESTED] = $directiveSchemaError[Tokens::NESTED];
                     }
                     if (isset($directiveSchemaError[Tokens::EXTENSIONS])) {
-                        $schemaError[Tokens::EXTENSIONS] = $directiveSchemaError[Tokens::EXTENSIONS],
-                    ];
+                        $schemaError[Tokens::EXTENSIONS] = $directiveSchemaError[Tokens::EXTENSIONS];
+                    }
                     $schemaErrors[] = $schemaError;
                 } else {
                     $schemaErrors[] = $directiveSchemaError;
@@ -291,8 +291,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $schemaWarning[Tokens::NESTED] = $directiveSchemaWarning[Tokens::NESTED];
                     }
                     if (isset($directiveSchemaWarning[Tokens::EXTENSIONS])) {
-                        $schemaWarning[Tokens::EXTENSIONS] = $directiveSchemaWarning[Tokens::EXTENSIONS],
-                    ];
+                        $schemaWarning[Tokens::EXTENSIONS] = $directiveSchemaWarning[Tokens::EXTENSIONS];
+                    }
                     $schemaWarnings[] = $schemaWarning;
                 } else {
                     $schemaWarnings[] = $directiveSchemaWarning;
@@ -310,8 +310,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $schemaDeprecation[Tokens::NESTED] = $directiveSchemaDeprecation[Tokens::NESTED];
                     }
                     if (isset($directiveSchemaDeprecation[Tokens::EXTENSIONS])) {
-                        $schemaDeprecation[Tokens::EXTENSIONS] = $directiveSchemaDeprecation[Tokens::EXTENSIONS],
-                    ];
+                        $schemaDeprecation[Tokens::EXTENSIONS] = $directiveSchemaDeprecation[Tokens::EXTENSIONS];
+                    }
                     $schemaDeprecations[] = $schemaDeprecation;
                 } else {
                     $schemaDeprecations[] = $directiveSchemaDeprecation;
@@ -329,8 +329,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $schemaNotice[Tokens::NESTED] = $directiveSchemaNotice[Tokens::NESTED];
                     }
                     if (isset($directiveSchemaNotice[Tokens::EXTENSIONS])) {
-                        $schemaNotice[Tokens::EXTENSIONS] = $directiveSchemaNotice[Tokens::EXTENSIONS],
-                    ];
+                        $schemaNotice[Tokens::EXTENSIONS] = $directiveSchemaNotice[Tokens::EXTENSIONS];
+                    }
                     $schemaNotices[] = $schemaNotice;
                 } else {
                     $schemaNotices[] = $directiveSchemaNotice;
@@ -348,8 +348,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $schemaTrace[Tokens::NESTED] = $directiveSchemaTrace[Tokens::NESTED];
                     }
                     if (isset($directiveSchemaTrace[Tokens::EXTENSIONS])) {
-                        $schemaTrace[Tokens::EXTENSIONS] = $directiveSchemaTrace[Tokens::EXTENSIONS],
-                    ];
+                        $schemaTrace[Tokens::EXTENSIONS] = $directiveSchemaTrace[Tokens::EXTENSIONS];
+                    }
                     $schemaTraces[] = $schemaTrace;
                 } else {
                     $schemaTraces[] = $directiveSchemaTrace;
