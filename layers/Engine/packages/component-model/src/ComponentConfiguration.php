@@ -31,8 +31,8 @@ class ComponentConfiguration
     private static bool $treatTypeCoercingFailuresAsErrors = false;
     private static bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
     private static bool $setFailingFieldResponseAsNull = false;
-    private static bool $stopDirectivePipelineExecutionIfDirectiveFailed = false;
     private static bool $removeFieldIfDirectiveFailed = false;
+    private static bool $stopDirectivePipelineExecutionIfDirectiveFailed = false;
 
     /**
      * Initialize component configuration
@@ -301,13 +301,13 @@ class ComponentConfiguration
     }
 
     /**
-     * Indicate: If a directive fails, then stop execution of the directive pipeline altogether
+     * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
      */
-    public static function stopDirectivePipelineExecutionIfDirectiveFailed(): bool
+    public static function removeFieldIfDirectiveFailed(): bool
     {
         // Define properties
-        $envVariable = Environment::STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED;
-        $selfProperty = &self::$stopDirectivePipelineExecutionIfDirectiveFailed;
+        $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
+        $selfProperty = &self::$removeFieldIfDirectiveFailed;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -322,13 +322,13 @@ class ComponentConfiguration
     }
 
     /**
-     * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
+     * Indicate: If a directive fails, then stop execution of the directive pipeline altogether
      */
-    public static function removeFieldIfDirectiveFailed(): bool
+    public static function stopDirectivePipelineExecutionIfDirectiveFailed(): bool
     {
         // Define properties
-        $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
-        $selfProperty = &self::$removeFieldIfDirectiveFailed;
+        $envVariable = Environment::STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED;
+        $selfProperty = &self::$stopDirectivePipelineExecutionIfDirectiveFailed;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
