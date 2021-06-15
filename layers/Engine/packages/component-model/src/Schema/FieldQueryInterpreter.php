@@ -404,10 +404,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgumentNameDefaultValues;
     }
 
-    protected function filterFieldArgs($fieldArgs): array
+    protected function filterFieldOrDirectiveArgs($fieldOrDirectiveArgs): array
     {
         // If there was an error, the value will be NULL. In this case, remove it
-        return array_filter($fieldArgs, function ($elem) {
+        return array_filter($fieldOrDirectiveArgs, function ($elem) {
             // Remove only NULL values and Errors. Keep '', 0 and false
             return !is_null($elem) && !GeneralUtils::isError($elem);
         });
@@ -542,7 +542,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 }
             }
             // If there was an error, remove those entries
-            $fieldOrDirectiveArgs = $this->filterFieldArgs($fieldOrDirectiveArgs);
+            $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
         }
         return $fieldOrDirectiveArgs;
     }
@@ -692,7 +692,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 }
                 $fieldOrDirectiveArgs[$directiveArgName] = $directiveArgValue;
             }
-            return $this->filterFieldArgs($fieldOrDirectiveArgs);
+            return $this->filterFieldOrDirectiveArgs($fieldOrDirectiveArgs);
         }
         return $fieldOrDirectiveArgs;
     }
@@ -1072,7 +1072,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     ];
                 }
             }
-            return $this->filterFieldArgs($castedDirectiveArgs);
+            return $this->filterFieldOrDirectiveArgs($castedDirectiveArgs);
         }
         return $castedDirectiveArgs;
     }
@@ -1137,7 +1137,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     ];
                 }
             }
-            return $this->filterFieldArgs($castedFieldArgs);
+            return $this->filterFieldOrDirectiveArgs($castedFieldArgs);
         }
         return $castedFieldArgs;
     }
@@ -1255,7 +1255,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
         if (is_array($fieldArgValue)) {
             // Resolve each element the same way
-            return $this->filterFieldArgs(array_map(function ($arrayValueElem) use ($variables) {
+            return $this->filterFieldOrDirectiveArgs(array_map(function ($arrayValueElem) use ($variables) {
                 return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
             }, $fieldArgValue));
         }
