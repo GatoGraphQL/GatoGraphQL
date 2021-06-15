@@ -196,12 +196,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     Tokens::MESSAGE => $this->translationAPI->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
                 ];
                 foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
-                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = array_merge(
-                        $nestedDirectiveSchemaError,
-                        [
-                            Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
-                        ]
-                    );
+                    array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $this->directive);
+                    $this->prependPathOnNestedErrors($nestedDirectiveSchemaError);
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedDirectiveSchemaError;
                 }
                 $schemaErrors[] = $schemaError;
                 return [
@@ -267,6 +264,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveName,
             $directiveArgs,
         ];
+    }
+
+    protected function prependPathOnNestedErrors(array &$nestedDirectiveSchemaError): void {
+        
+        if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
+            foreach ($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedDirectiveSchemaError) {
+                array_unshift($deeplyNestedDirectiveSchemaError[Tokens::PATH], $this->directive);
+                $this->prependPathOnNestedErrors($deeplyNestedDirectiveSchemaError);
+            }
+        }
     }
 
     /**
