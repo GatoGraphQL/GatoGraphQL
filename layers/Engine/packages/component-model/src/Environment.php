@@ -18,6 +18,7 @@ class Environment
     public const TREAT_TYPE_COERCING_FAILURES_AS_ERRORS = 'TREAT_TYPE_COERCING_FAILURES_AS_ERRORS';
     public const TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS = 'TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS';
     public const SET_FAILING_FIELD_RESPONSE_AS_NULL = 'SET_FAILING_FIELD_RESPONSE_AS_NULL';
+    public const STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED = 'STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED';
 
     /**
      * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
@@ -25,14 +26,6 @@ class Environment
     public static function removeFieldIfDirectiveFailed(): bool
     {
         return getenv('REMOVE_FIELD_IF_DIRECTIVE_FAILED') !== false ? strtolower(getenv('REMOVE_FIELD_IF_DIRECTIVE_FAILED')) == "true" : false;
-    }
-
-    /**
-     * Indicate: If a directive fails, then stop execution of the directive pipeline altogether
-     */
-    public static function stopDirectivePipelineExecutionIfDirectiveFailed(): bool
-    {
-        return getenv('STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED') !== false ? strtolower(getenv('STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED')) == "true" : false;
     }
 
     /**

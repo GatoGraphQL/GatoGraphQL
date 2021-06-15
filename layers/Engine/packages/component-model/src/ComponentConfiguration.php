@@ -31,6 +31,7 @@ class ComponentConfiguration
     private static bool $treatTypeCoercingFailuresAsErrors = false;
     private static bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
     private static bool $setFailingFieldResponseAsNull = false;
+    private static bool $stopDirectivePipelineExecutionIfDirectiveFailed = false;
 
     /**
      * Initialize component configuration
@@ -285,6 +286,27 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
         $selfProperty = &self::$setFailingFieldResponseAsNull;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * Indicate: If a directive fails, then stop execution of the directive pipeline altogether
+     */
+    public static function stopDirectivePipelineExecutionIfDirectiveFailed(): bool
+    {
+        // Define properties
+        $envVariable = Environment::STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED;
+        $selfProperty = &self::$stopDirectivePipelineExecutionIfDirectiveFailed;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
