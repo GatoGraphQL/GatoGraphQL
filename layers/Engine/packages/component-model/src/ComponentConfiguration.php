@@ -32,6 +32,7 @@ class ComponentConfiguration
     private static bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
     private static bool $setFailingFieldResponseAsNull = false;
     private static bool $stopDirectivePipelineExecutionIfDirectiveFailed = false;
+    private static bool $removeFieldIfDirectiveFailed = false;
 
     /**
      * Initialize component configuration
@@ -307,6 +308,27 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED;
         $selfProperty = &self::$stopDirectivePipelineExecutionIfDirectiveFailed;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
+     */
+    public static function removeFieldIfDirectiveFailed(): bool
+    {
+        // Define properties
+        $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
+        $selfProperty = &self::$removeFieldIfDirectiveFailed;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

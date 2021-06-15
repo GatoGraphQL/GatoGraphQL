@@ -8,6 +8,7 @@ use Composer\Semver\Semver;
 use Exception;
 use League\Pipeline\StageInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
@@ -751,7 +752,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             }
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
-        $removeFieldIfDirectiveFailed = Environment::removeFieldIfDirectiveFailed();
+        $removeFieldIfDirectiveFailed = ComponentConfiguration::removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields($idsDataFieldsToRemove, $succeedingPipelineIDsDataFields);
         }
