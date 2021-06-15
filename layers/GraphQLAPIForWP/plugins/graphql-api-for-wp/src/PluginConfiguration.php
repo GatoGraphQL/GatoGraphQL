@@ -740,6 +740,10 @@ class PluginConfiguration
              * Show a `null` entry in the response for failing fields
              */
             ComponentModelEnvironment::SET_FAILING_FIELD_RESPONSE_AS_NULL => true,
+            /**
+             * If a directive fails, then stop execution of the directive pipeline altogether
+             */
+            ComponentModelEnvironment::STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
