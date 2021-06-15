@@ -1086,9 +1086,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
-                $fieldOrDirectiveArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $composedFieldArgType = $fieldArgNameTypes[$failedCastingFieldArgName];
-                if ($fieldOrDirectiveArgIsArrayType) {
+                if ($fieldArgIsArrayType) {
                     $composedFieldArgType = sprintf(
                         $this->translationAPI->__('array of %s', 'pop-component-model'),
                         $composedFieldArgType
