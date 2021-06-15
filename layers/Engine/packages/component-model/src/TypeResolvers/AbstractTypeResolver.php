@@ -267,6 +267,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $schemaErrors[] = [
                         Tokens::PATH => array_merge([$fields], $directiveSchemaError[Tokens::PATH]),
                         Tokens::MESSAGE => $directiveSchemaError[Tokens::MESSAGE],
+                        Tokens::EXTENSIONS => $directiveSchemaError[Tokens::EXTENSIONS] ?? [],
                     ];
                 } else {
                     $schemaErrors[] = $directiveSchemaError;
