@@ -1109,6 +1109,32 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directivePipelineSchemaErrors
             );
 
+            // If any directive failed validation and the field must be set to `null`,
+            // then skip processing that field altogether
+            $schemaErrorFailingFields = [];
+            if (!empty($directivePipelineSchemaErrors)
+                && ComponentConfiguration::removeFieldIfDirectiveFailed()
+            ) {
+                // Extract the failing fields from the path of the thrown error
+                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
+                    $schemaErrorFailingFields[] = $directivePipelineSchemaError[Tokens::PATH][0];
+                }
+                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
+                // Set those fields as null
+                foreach ($fieldDirectives as $fieldDirective) {
+                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
+                        $failingFields = array_intersect(
+                            $dataFields['direct'],
+                            $schemaErrorFailingFields
+                        );
+                        foreach ($failingFields as $field) {
+                            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                            $dbItems[(string)$id][$fieldOutputKey] = null;
+                        }
+                    }
+                }
+            }
+
             // From the fields, reconstitute the $idsDataFields for each directive,
             // and build the array to pass to the pipeline, for each directive (stage)
             $directiveResolverInstances = $pipelineIDsDataFields = [];
@@ -1120,6 +1146,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directiveDirectFields = array_intersect(
                     $directiveFields,
                     $fieldDirectiveDirectFields
+                );
+                // Remove those fields which have a failing directive
+                $directiveDirectFields = array_diff(
+                    $directiveDirectFields,
+                    $schemaErrorFailingFields
                 );
                 // From the fields, reconstitute the $idsDataFields for each directive, and build the array to pass to the pipeline, for each directive (stage)
                 $directiveIDFields = [];
@@ -1161,32 +1192,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaNotices,
                 $schemaTraces
             );
-
-            /**
-             * If any directive has errors, check if to set the field to null.
-             * Execute at the end, or otherwise the `null` will be overriden
-             * by `resolveDirectivePipeline`
-             */
-            if (!empty($directivePipelineSchemaErrors) && ComponentConfiguration::removeFieldIfDirectiveFailed()) {
-                // Extract the failing fields from the path of the thrown error
-                $schemaErrorFailingFields = [];
-                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
-                    $schemaErrorFailingFields[] = $directivePipelineSchemaError[Tokens::PATH][0];
-                }
-                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
-                foreach ($fieldDirectives as $fieldDirective) {
-                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
-                        $failingFields = array_intersect(
-                            $dataFields['direct'],
-                            $schemaErrorFailingFields
-                        );
-                        foreach ($failingFields as $field) {
-                            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
-                            $dbItems[(string)$id][$fieldOutputKey] = null;
-                        }
-                    }
-                }
-            }
         }
     }
 
