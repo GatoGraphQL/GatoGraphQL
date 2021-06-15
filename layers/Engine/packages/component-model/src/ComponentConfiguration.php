@@ -326,6 +326,10 @@ class ComponentConfiguration
      */
     public static function stopDirectivePipelineExecutionIfDirectiveFailed(): bool
     {
+        // If the field will be removed nevertheless, there's no point in executing the upcoming directives
+        if (static::removeFieldIfDirectiveFailed()) {
+            return true;
+        }
         // Define properties
         $envVariable = Environment::STOP_DIRECTIVE_PIPELINE_EXECUTION_IF_DIRECTIVE_FAILED;
         $selfProperty = &self::$stopDirectivePipelineExecutionIfDirectiveFailed;
