@@ -398,16 +398,19 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         array &$schemaTraces
     ): array {
         // Check if, once a directive fails, the continuing directives must execute or not
-        $stopDirectivePipelineExecutionIfDirectiveFailed = Environment::stopDirectivePipelineExecutionIfDirectiveFailed();
+        $stopDirectivePipelineExecutionIfDirectiveFailed = ComponentConfiguration::stopDirectivePipelineExecutionIfDirectiveFailed();
+        $showStopDirectivePipelineExecutionIfDirectiveFailedError = false;
         if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
             $stopDirectivePipelineExecutionPlaceholder = $this->translationAPI->__('Because directive \'%s\' failed, the succeeding directives in the pipeline have not been executed', 'pop-component-model');
+            $showStopDirectivePipelineExecutionIfDirectiveFailedError = !ComponentConfiguration::removeFieldIfDirectiveFailed();
         }
 
         $instances = [];
         // Count how many times each directive is added
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
-        for ($i = 0; $i < count($fieldDirectives); $i++) {
+        $fieldDirectivesCount = count($fieldDirectives);
+        for ($i = 0; $i < $fieldDirectivesCount; $i++) {
             // Because directives can be repeated inside a field (eg: <resize(50%),resize(50%)>),
             // then we deal with 2 variables:
             // 1. $fieldDirective: the actual directive
@@ -444,13 +447,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     ),
                 ];
                 if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $stopDirectivePipelineExecutionPlaceholder,
-                            $fieldDirective
-                        ),
-                    ];
+                    if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
+                        $schemaErrors[] = [
+                            Tokens::PATH => [$fieldDirective],
+                            Tokens::MESSAGE => sprintf(
+                                $stopDirectivePipelineExecutionPlaceholder,
+                                $fieldDirective
+                            ),
+                        ];
+                    }
                     break;
                 }
                 continue;
@@ -471,13 +476,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     ),
                 ];
                 if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => sprintf(
-                            $stopDirectivePipelineExecutionPlaceholder,
-                            $fieldDirective
-                        ),
-                    ];
+                    if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
+                        $schemaErrors[] = [
+                            Tokens::PATH => [$fieldDirective],
+                            Tokens::MESSAGE => sprintf(
+                                $stopDirectivePipelineExecutionPlaceholder,
+                                $fieldDirective
+                            ),
+                        ];
+                    }
                     break;
                 }
                 continue;
@@ -496,13 +503,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         ),
                     ];
                     if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $stopDirectivePipelineExecutionPlaceholder,
-                                $fieldDirective
-                            ),
-                        ];
+                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
+                            $schemaErrors[] = [
+                                Tokens::PATH => [$fieldDirective],
+                                Tokens::MESSAGE => sprintf(
+                                    $stopDirectivePipelineExecutionPlaceholder,
+                                    $fieldDirective
+                                ),
+                            ];
+                        }
                         break;
                     }
                     continue;
@@ -565,13 +574,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     );
                     // Because there were schema errors, skip this directive
                     if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $stopDirectivePipelineExecutionPlaceholder,
-                                $fieldDirective
-                            ),
-                        ];
+                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
+                            $schemaErrors[] = [
+                                Tokens::PATH => [$fieldDirective],
+                                Tokens::MESSAGE => sprintf(
+                                    $stopDirectivePipelineExecutionPlaceholder,
+                                    $fieldDirective
+                                ),
+                            ];
+                        }
                         break;
                     }
                     continue;
@@ -586,13 +597,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         ];
                     }
                     if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $stopDirectivePipelineExecutionPlaceholder,
-                                $fieldDirective
-                            ),
-                        ];
+                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
+                            $schemaErrors[] = [
+                                Tokens::PATH => [$fieldDirective],
+                                Tokens::MESSAGE => sprintf(
+                                    $stopDirectivePipelineExecutionPlaceholder,
+                                    $fieldDirective
+                                ),
+                            ];
+                        }
                         break;
                     }
                     continue;
@@ -642,13 +655,15 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         ),
                     ];
                     if ($stopDirectivePipelineExecutionIfDirectiveFailed) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => [$fieldDirective],
-                            Tokens::MESSAGE => sprintf(
-                                $stopDirectivePipelineExecutionPlaceholder,
-                                $fieldDirective
-                            ),
-                        ];
+                        if ($showStopDirectivePipelineExecutionIfDirectiveFailedError) {
+                            $schemaErrors[] = [
+                                Tokens::PATH => [$fieldDirective],
+                                Tokens::MESSAGE => sprintf(
+                                    $stopDirectivePipelineExecutionPlaceholder,
+                                    $fieldDirective
+                                ),
+                            ];
+                        }
                         break;
                     }
                     // If after removing the duplicated fields there are still others, process them
@@ -1077,16 +1092,21 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $idFieldDirectiveIDFields = array_unique($idFieldDirectiveIDFields);
 
             // Validate and resolve the directives into instances and fields they operate on
+            $directivePipelineSchemaErrors = [];
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $fieldDirectives,
                 $fieldDirectiveFields,
                 false,
                 $variables,
-                $schemaErrors,
+                $directivePipelineSchemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
                 $schemaTraces
+            );
+            $schemaErrors = array_merge(
+                $schemaErrors,
+                $directivePipelineSchemaErrors
             );
 
             // From the fields, reconstitute the $idsDataFields for each directive,
@@ -1141,6 +1161,32 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaNotices,
                 $schemaTraces
             );
+
+            /**
+             * If any directive has errors, check if to set the field to null.
+             * Execute at the end, or otherwise the `null` will be overriden
+             * by `resolveDirectivePipeline`
+             */
+            if (!empty($directivePipelineSchemaErrors) && ComponentConfiguration::removeFieldIfDirectiveFailed()) {
+                // Extract the failing fields from the path of the thrown error
+                $schemaErrorFailingFields = [];
+                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
+                    $schemaErrorFailingFields[] = $directivePipelineSchemaError[Tokens::PATH][0];
+                }
+                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
+                foreach ($fieldDirectives as $fieldDirective) {
+                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
+                        $failingFields = array_intersect(
+                            $dataFields['direct'],
+                            $schemaErrorFailingFields
+                        );
+                        foreach ($failingFields as $field) {
+                            $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                            $dbItems[(string)$id][$fieldOutputKey] = null;
+                        }
+                    }
+                }
+            }
         }
     }
 
