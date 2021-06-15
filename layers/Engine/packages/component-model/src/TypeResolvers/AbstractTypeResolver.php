@@ -363,6 +363,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $pipelineData;
     }
 
+    /**
+     * Add the field(s) to the head of the error path, for all nested errors
+     */
     protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $fields): void {
         
         if (isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {

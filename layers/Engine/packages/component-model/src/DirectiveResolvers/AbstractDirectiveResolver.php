@@ -232,6 +232,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         ];
     }
 
+    /**
+     * Add the directive to the head of the error path, for all nested errors
+     */
     protected function prependPathOnNestedErrors(array &$nestedDirectiveSchemaError): void {
         
         if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
@@ -718,7 +721,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $schemaTraces
         );
     }
-    
+
     /**
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
