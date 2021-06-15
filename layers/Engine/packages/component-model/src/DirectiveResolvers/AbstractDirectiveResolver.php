@@ -156,61 +156,53 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $nestedDirectiveSchemaNotices,
                 $nestedDirectiveSchemaTraces
             );
+            // Append the current level to the path of the feedback item
             foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
-                $schemaDeprecation = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaDeprecation[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaDeprecation[Tokens::MESSAGE],
-                ];
-                if (isset($nestedDirectiveSchemaDeprecation[Tokens::EXTENSIONS])) {
-                    $schemaDeprecation = $nestedDirectiveSchemaDeprecation[Tokens::EXTENSIONS];
-                }
-                $schemaDeprecations[] = $schemaDeprecation;
+                $schemaDeprecations[] = array_merge(
+                    $nestedDirectiveSchemaDeprecation,
+                    [
+                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaDeprecation[Tokens::PATH]),
+                    ]
+                );
             }
             foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
-                $schemaWarning = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaWarning[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaWarning[Tokens::MESSAGE],
-                ];
-                if (isset($nestedDirectiveSchemaWarning[Tokens::EXTENSIONS])) {
-                    $schemaWarning = $nestedDirectiveSchemaWarning[Tokens::EXTENSIONS];
-                }
-                $schemaWarnings[] = $schemaWarning;
+                $schemaWarnings[] = array_merge(
+                    $nestedDirectiveSchemaWarning,
+                    [
+                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaWarning[Tokens::PATH]),
+                    ]
+                );
             }
             foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
-                $schemaNotice = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaNotice[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaNotice[Tokens::MESSAGE],
-                ];
-                if (isset($nestedDirectiveSchemaNotice[Tokens::EXTENSIONS])) {
-                    $schemaNotice = $nestedDirectiveSchemaNotice[Tokens::EXTENSIONS];
-                }
-                $schemaNotices[] = $schemaNotice;
+                $schemaNotices[] = array_merge(
+                    $nestedDirectiveSchemaNotice,
+                    [
+                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaNotice[Tokens::PATH]),
+                    ]
+                );
             }
             foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
-                $schemaTrace = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaTrace[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaTrace[Tokens::MESSAGE],
-                ];
-                if (isset($nestedDirectiveSchemaTrace[Tokens::EXTENSIONS])) {
-                    $schemaTrace = $nestedDirectiveSchemaTrace[Tokens::EXTENSIONS];
-                }
-                $schemaTraces[] = $schemaTrace;
+                $schemaTraces[] = array_merge(
+                    $nestedDirectiveSchemaTrace,
+                    [
+                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaTrace[Tokens::PATH]),
+                    ]
+                );
             }
-            // If there is any error, then we also can't proceed with the current directive
+            // If there is any error, then we also can't proceed with the current directive.
+            // Throw an error for this level, and underlying errors as nested
             if ($nestedDirectiveSchemaErrors) {
                 $schemaError = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => $this->translationAPI->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
                 ];
                 foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
-                    $nestedSchemaError = [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
-                        Tokens::MESSAGE => $nestedDirectiveSchemaError[Tokens::MESSAGE],
-                    ];
-                    if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS])) {
-                        $nestedSchemaError[Tokens::EXTENSIONS] = $nestedDirectiveSchemaError[Tokens::EXTENSIONS];
-                    }
-                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedSchemaError;
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = array_merge(
+                        $nestedDirectiveSchemaError,
+                        [
+                            Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
+                        ]
+                    );
                 }
                 $schemaErrors[] = $schemaError;
                 return [
