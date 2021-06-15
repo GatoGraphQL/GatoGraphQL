@@ -718,68 +718,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $schemaTraces
         );
     }
-
-    // public function validateDirective(TypeResolverInterface $typeResolver, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    // {
-    //     // Check that the directive can be applied to all provided fields
-    //     $this->validateAndFilterFieldsForDirective($idsDataFields, $schemaErrors, $schemaWarnings);
-    // }
-    // /**
-    //  * Check that the directive can be applied to all provided fields
-    //  *
-    //  * @param array $idsDataFields
-    //  * @param array $schemaErrors
-    //  */
-    // protected function validateAndFilterFieldsForDirective(array &$idsDataFields, array &$schemaErrors, array &$schemaWarnings)
-    // {
-    //     $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
-    //     // If this function returns an empty array, then it supports all fields, then do nothing
-    //     if (!$directiveSupportedFieldNames) {
-    //         return;
-    //     }
-    //     // Check if all fields are supported by this directive
-    //     $failedFields = [];
-    //     foreach ($idsDataFields as $id => &$data_fields) {
-    //         // Get the fieldName for each field
-    //         $nameFields = [];
-    //         foreach ($data_fields['direct'] as $field) {
-    //             $nameFields[$this->fieldQueryInterpreter->getFieldName($field)] = $field;
-    //         }
-    //         // If any fieldName failed, remove it from the list of fields to execute for this directive
-    //         if ($unsupportedFieldNames = array_diff(array_keys($nameFields), $directiveSupportedFieldNames)) {
-    //             $unsupportedFields = array_map(
-    //                 function($fieldName) use ($nameFields) {
-    //                     return $nameFields[$fieldName];
-    //                 },
-    //                 $unsupportedFieldNames
-    //             );
-    //             $failedFields = array_values(array_unique(array_merge(
-    //                 $failedFields,
-    //                 $unsupportedFields
-    //             )));
-    //         }
-    //     }
-    //     // Give an error message for all failed fields
-    //     if ($failedFields) {
-    //         $directiveName = $this->getDirectiveName();
-    //         $failedFieldNames = array_map(
-    //             [$this->fieldQueryInterpreter, 'getFieldName'],
-    //             $failedFields
-    //         );
-    //         if (count($failedFields) == 1) {
-    //             $message = $this->translationAPI->__('Directive \'%s\' doesn\'t support field \'%s\' (the only supported field names are: \'%s\')', 'component-model');
-    //         } else {
-    //             $message = $this->translationAPI->__('Directive \'%s\' doesn\'t support fields \'%s\' (the only supported field names are: \'%s\')', 'component-model');
-    //         }
-    //         $failureMessage = sprintf(
-    //             $message,
-    //             $directiveName,
-    //             implode($this->translationAPI->__('\', \''), $failedFieldNames),
-    //             implode($this->translationAPI->__('\', \''), $directiveSupportedFieldNames)
-    //         );
-    //         $this->processFailure($failureMessage, $failedFields, $idsDataFields, $schemaErrors, $schemaWarnings);
-    //     }
-    // }
+    
     /**
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
@@ -816,10 +755,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // Show the failureMessage either as error or as warning
         $directiveName = $this->getDirectiveName();
-        // $failedFieldNames = array_map(
-        //     [$this->fieldQueryInterpreter, 'getFieldName'],
-        //     $failedFields
-        // );
         if ($removeFieldIfDirectiveFailed) {
             if (count($failedFields) == 1) {
                 $message = $this->translationAPI->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
