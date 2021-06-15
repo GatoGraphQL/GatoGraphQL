@@ -48,6 +48,9 @@ trait FilterInputModuleProcessorTrait
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                if ($filterSchemaDefinitionResolver->isSchemaFilterInputNonEmptyArrayType($module)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] = true;
+                }
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
