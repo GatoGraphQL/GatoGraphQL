@@ -710,10 +710,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $ids_data_fields[$unresolvedResultItemID]['direct'] ?? [];
             // Add in $schemaErrors instead of $dbErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
-            $schemaErrors[] = [
-                Tokens::PATH => [implode($this->translationAPI->__('\', \''), $failedFields)],
-                Tokens::MESSAGE => $error->getMessageOrCode(),
-            ];
+            foreach ($failedFields as $failedField) {
+                $schemaErrors[] = [
+                    Tokens::PATH => [$failedField],
+                    Tokens::MESSAGE => $error->getMessageOrCode(),
+                ];
+            }
 
             // Indicate that this ID must be removed from the results
             $unresolvedResultItemIDs[] = $unresolvedResultItemID;
