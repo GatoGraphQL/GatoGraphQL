@@ -264,10 +264,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directive = $directiveSchemaError[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
                     $fields = implode($this->translationAPI->__(', '), $directiveFields);
-                    $schemaErrors[] = [
-                        Tokens::PATH => array_merge([$fields], $directiveSchemaError[Tokens::PATH]),
-                        Tokens::MESSAGE => $directiveSchemaError[Tokens::MESSAGE],
-                    ];
+                    array_unshift($directiveSchemaError[Tokens::PATH], $fields);
+                    $this->prependPathOnNestedErrors($directiveSchemaError, $fields);
+                    $schemaError = $directiveSchemaError;
+                    $schemaErrors[] = $schemaError;
                 } else {
                     $schemaErrors[] = $directiveSchemaError;
                 }
@@ -276,10 +276,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directive = $directiveSchemaWarning[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
                     $fields = implode($this->translationAPI->__(', '), $directiveFields);
-                    $schemaWarnings[] = [
-                        Tokens::PATH => array_merge([$fields], $directiveSchemaWarning[Tokens::PATH]),
-                        Tokens::MESSAGE => $directiveSchemaWarning[Tokens::MESSAGE],
-                    ];
+                    array_unshift($directiveSchemaWarning[Tokens::PATH], $fields);
+                    $schemaWarning = $directiveSchemaWarning;
+                    $schemaWarnings[] = $schemaWarning;
                 } else {
                     $schemaWarnings[] = $directiveSchemaWarning;
                 }
@@ -288,10 +287,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directive = $directiveSchemaDeprecation[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
                     $fields = implode($this->translationAPI->__(', '), $directiveFields);
-                    $schemaDeprecations[] = [
-                        Tokens::PATH => array_merge([$fields], $directiveSchemaDeprecation[Tokens::PATH]),
-                        Tokens::MESSAGE => $directiveSchemaDeprecation[Tokens::MESSAGE],
-                    ];
+                    array_unshift($directiveSchemaDeprecation[Tokens::PATH], $fields);
+                    $schemaDeprecation = $directiveSchemaDeprecation;
+                    $schemaDeprecations[] = $schemaDeprecation;
                 } else {
                     $schemaDeprecations[] = $directiveSchemaDeprecation;
                 }
@@ -300,10 +298,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directive = $directiveSchemaNotice[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
                     $fields = implode($this->translationAPI->__(', '), $directiveFields);
-                    $schemaNotices[] = [
-                        Tokens::PATH => array_merge([$fields], $directiveSchemaNotice[Tokens::PATH]),
-                        Tokens::MESSAGE => $directiveSchemaNotice[Tokens::MESSAGE],
-                    ];
+                    array_unshift($directiveSchemaNotice[Tokens::PATH], $fields);
+                    $schemaNotice = $directiveSchemaNotice;
+                    $schemaNotices[] = $schemaNotice;
                 } else {
                     $schemaNotices[] = $directiveSchemaNotice;
                 }
@@ -312,10 +309,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directive = $directiveSchemaTrace[Tokens::PATH][0];
                 if ($directiveFields = $fieldDirectiveFields[$directive] ?? null) {
                     $fields = implode($this->translationAPI->__(', '), $directiveFields);
-                    $schemaTraces[] = [
-                        Tokens::PATH => array_merge([$fields], $directiveSchemaTrace[Tokens::PATH]),
-                        Tokens::MESSAGE => $directiveSchemaTrace[Tokens::MESSAGE],
-                    ];
+                    array_unshift($directiveSchemaTrace[Tokens::PATH], $fields);
+                    $schemaTrace = $directiveSchemaTrace;
+                    $schemaTraces[] = $schemaTrace;
                 } else {
                     $schemaTraces[] = $directiveSchemaTrace;
                 }
@@ -365,6 +361,19 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
         }
         return $pipelineData;
+    }
+
+    /**
+     * Add the field(s) to the head of the error path, for all nested errors
+     */
+    protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $fields): void {
+        
+        if (isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
+            foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
+                array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $fields);
+                $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $fields);
+            }
+        }
     }
 
     public function getDirectivePipeline(array $directiveResolverInstances): DirectivePipelineDecorator

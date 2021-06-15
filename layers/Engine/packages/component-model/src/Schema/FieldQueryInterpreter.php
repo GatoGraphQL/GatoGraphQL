@@ -508,6 +508,19 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         ];
     }
 
+    /**
+     * Add the field or directive to the head of the error path, for all nested errors
+     */
+    protected function prependPathOnNestedErrors(array &$nestedFieldOrDirectiveSchemaError, string $fieldOrDirective): void {
+        
+        if (isset($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
+            foreach ($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedFieldOrDirectiveSchemaError) {
+                array_unshift($deeplyNestedFieldOrDirectiveSchemaError[Tokens::PATH], $fieldOrDirective);
+                $this->prependPathOnNestedErrors($deeplyNestedFieldOrDirectiveSchemaError, $fieldOrDirective);
+            }
+        }
+    }
+
     protected function validateExtractedFieldOrDirectiveArgumentsForSchema(TypeResolverInterface $typeResolver, string $fieldOrDirective, array $fieldOrDirectiveArgs, ?array $variables, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
         if ($fieldOrDirectiveArgs) {
@@ -515,10 +528,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Validate it
                 if ($maybeErrors = $this->resolveFieldArgumentValueErrorDescriptionsForSchema($typeResolver, $argValue, $variables)) {
                     foreach ($maybeErrors as $schemaError) {
-                        $schemaErrors[] = [
-                            Tokens::PATH => array_merge([$fieldOrDirective], $schemaError[Tokens::PATH]),
-                            Tokens::MESSAGE => $schemaError[Tokens::MESSAGE],
-                        ];
+                        array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
+                        $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
+                        $schemaErrors[] = $schemaError;
                     }
                     // Because it's an error, set the value to null, so it will be filtered out
                     $fieldOrDirectiveArgs[$argName] = null;
@@ -526,18 +538,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Find warnings and deprecations
                 if ($maybeWarnings = $this->resolveFieldArgumentValueWarningsForSchema($typeResolver, $argValue, $variables)) {
                     foreach ($maybeWarnings as $schemaWarning) {
-                        $schemaWarnings[] = [
-                            Tokens::PATH => array_merge([$fieldOrDirective], $schemaWarning[Tokens::PATH]),
-                            Tokens::MESSAGE => $schemaWarning[Tokens::MESSAGE],
-                        ];
+                        array_unshift($schemaWarning[Tokens::PATH], $fieldOrDirective);
+                        $schemaWarnings[] = $schemaWarning;
                     }
                 }
                 if ($maybeDeprecations = $this->resolveFieldArgumentValueDeprecationsForSchema($typeResolver, $argValue, $variables)) {
                     foreach ($maybeDeprecations as $schemaDeprecation) {
-                        $schemaDeprecations[] = [
-                            Tokens::PATH => array_merge([$fieldOrDirective], $schemaDeprecation[Tokens::PATH]),
-                            Tokens::MESSAGE => $schemaDeprecation[Tokens::MESSAGE],
-                        ];
+                        array_unshift($schemaDeprecation[Tokens::PATH], $fieldOrDirective);
+                        $schemaDeprecations[] = $schemaDeprecation;
                     }
                 }
             }

@@ -157,41 +157,34 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $nestedDirectiveSchemaTraces
             );
             foreach ($nestedDirectiveSchemaDeprecations as $nestedDirectiveSchemaDeprecation) {
-                $schemaDeprecations[] = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaDeprecation[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaDeprecation[Tokens::MESSAGE],
-                ];
+                array_unshift($nestedDirectiveSchemaDeprecation[Tokens::PATH], $this->directive);
+                $schemaDeprecations[] = $nestedDirectiveSchemaDeprecation;
             }
             foreach ($nestedDirectiveSchemaWarnings as $nestedDirectiveSchemaWarning) {
-                $schemaWarnings[] = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaWarning[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaWarning[Tokens::MESSAGE],
-                ];
+                array_unshift($nestedDirectiveSchemaWarning[Tokens::PATH], $this->directive);
+                $schemaWarnings[] = $nestedDirectiveSchemaWarning;
             }
             foreach ($nestedDirectiveSchemaNotices as $nestedDirectiveSchemaNotice) {
-                $schemaNotices[] = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaNotice[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaNotice[Tokens::MESSAGE],
-                ];
+                array_unshift($nestedDirectiveSchemaNotice[Tokens::PATH], $this->directive);
+                $schemaNotices[] = $nestedDirectiveSchemaNotice;
             }
             foreach ($nestedDirectiveSchemaTraces as $nestedDirectiveSchemaTrace) {
-                $schemaTraces[] = [
-                    Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaTrace[Tokens::PATH]),
-                    Tokens::MESSAGE => $nestedDirectiveSchemaTrace[Tokens::MESSAGE],
-                ];
+                array_unshift($nestedDirectiveSchemaTrace[Tokens::PATH], $this->directive);
+                $schemaTraces[] = $nestedDirectiveSchemaTrace;
             }
-            // If there is any error, then we also can't proceed with the current directive
+            // If there is any error, then we also can't proceed with the current directive.
+            // Throw an error for this level, and underlying errors as nested
             if ($nestedDirectiveSchemaErrors) {
-                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => array_merge([$this->directive], $nestedDirectiveSchemaError[Tokens::PATH]),
-                        Tokens::MESSAGE => $nestedDirectiveSchemaError[Tokens::MESSAGE],
-                    ];
-                }
-                $schemaErrors[] = [
+                $schemaError = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => $this->translationAPI->__('This directive can\'t be executed due to errors from its composed directives', 'component-model'),
                 ];
+                foreach ($nestedDirectiveSchemaErrors as $nestedDirectiveSchemaError) {
+                    array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $this->directive);
+                    $this->prependPathOnNestedErrors($nestedDirectiveSchemaError);
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedDirectiveSchemaError;
+                }
+                $schemaErrors[] = $schemaError;
                 return [
                     null, // $validDirective
                     null, // $directiveName
@@ -224,37 +217,32 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $schemaErrors,
             $directiveSchemaErrors
         );
-        // foreach ($directiveSchemaErrors as $directiveSchemaError) {
-        //     $schemaErrors[] = [
-        //         Tokens::PATH => array_merge([$this->directive], $directiveSchemaError[Tokens::PATH]),
-        //         Tokens::MESSAGE => $directiveSchemaError[Tokens::MESSAGE],
-        //     ];
-        // }
         $schemaWarnings = array_merge(
             $schemaWarnings,
             $directiveSchemaWarnings
         );
-        // foreach ($directiveSchemaWarnings as $directiveSchemaWarning) {
-        //     $schemaWarnings[] = [
-        //         Tokens::PATH => array_merge([$this->directive], $directiveSchemaWarning[Tokens::PATH]),
-        //         Tokens::MESSAGE => $directiveSchemaWarning[Tokens::MESSAGE],
-        //     ];
-        // }
         $schemaDeprecations = array_merge(
             $schemaDeprecations,
             $directiveSchemaDeprecations
         );
-        // foreach ($directiveSchemaDeprecations as $directiveSchemaDeprecation) {
-        //     $schemaDeprecations[] = [
-        //         Tokens::PATH => array_merge([$this->directive], $directiveSchemaDeprecation[Tokens::PATH]),
-        //         Tokens::MESSAGE => $directiveSchemaDeprecation[Tokens::MESSAGE],
-        //     ];
-        // }
         return [
             $validDirective,
             $directiveName,
             $directiveArgs,
         ];
+    }
+
+    /**
+     * Add the directive to the head of the error path, for all nested errors
+     */
+    protected function prependPathOnNestedErrors(array &$nestedDirectiveSchemaError): void {
+        
+        if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
+            foreach ($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedDirectiveSchemaError) {
+                array_unshift($deeplyNestedDirectiveSchemaError[Tokens::PATH], $this->directive);
+                $this->prependPathOnNestedErrors($deeplyNestedDirectiveSchemaError);
+            }
+        }
     }
 
     /**
@@ -734,67 +722,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         );
     }
 
-    // public function validateDirective(TypeResolverInterface $typeResolver, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$resultIDItems, array &$dbItems, array &$previousDBItems, array &$variables, array &$messages, array &$dbErrors, array &$dbWarnings, array &$dbDeprecations, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations)
-    // {
-    //     // Check that the directive can be applied to all provided fields
-    //     $this->validateAndFilterFieldsForDirective($idsDataFields, $schemaErrors, $schemaWarnings);
-    // }
-    // /**
-    //  * Check that the directive can be applied to all provided fields
-    //  *
-    //  * @param array $idsDataFields
-    //  * @param array $schemaErrors
-    //  */
-    // protected function validateAndFilterFieldsForDirective(array &$idsDataFields, array &$schemaErrors, array &$schemaWarnings)
-    // {
-    //     $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
-    //     // If this function returns an empty array, then it supports all fields, then do nothing
-    //     if (!$directiveSupportedFieldNames) {
-    //         return;
-    //     }
-    //     // Check if all fields are supported by this directive
-    //     $failedFields = [];
-    //     foreach ($idsDataFields as $id => &$data_fields) {
-    //         // Get the fieldName for each field
-    //         $nameFields = [];
-    //         foreach ($data_fields['direct'] as $field) {
-    //             $nameFields[$this->fieldQueryInterpreter->getFieldName($field)] = $field;
-    //         }
-    //         // If any fieldName failed, remove it from the list of fields to execute for this directive
-    //         if ($unsupportedFieldNames = array_diff(array_keys($nameFields), $directiveSupportedFieldNames)) {
-    //             $unsupportedFields = array_map(
-    //                 function($fieldName) use ($nameFields) {
-    //                     return $nameFields[$fieldName];
-    //                 },
-    //                 $unsupportedFieldNames
-    //             );
-    //             $failedFields = array_values(array_unique(array_merge(
-    //                 $failedFields,
-    //                 $unsupportedFields
-    //             )));
-    //         }
-    //     }
-    //     // Give an error message for all failed fields
-    //     if ($failedFields) {
-    //         $directiveName = $this->getDirectiveName();
-    //         $failedFieldNames = array_map(
-    //             [$this->fieldQueryInterpreter, 'getFieldName'],
-    //             $failedFields
-    //         );
-    //         if (count($failedFields) == 1) {
-    //             $message = $this->translationAPI->__('Directive \'%s\' doesn\'t support field \'%s\' (the only supported field names are: \'%s\')', 'component-model');
-    //         } else {
-    //             $message = $this->translationAPI->__('Directive \'%s\' doesn\'t support fields \'%s\' (the only supported field names are: \'%s\')', 'component-model');
-    //         }
-    //         $failureMessage = sprintf(
-    //             $message,
-    //             $directiveName,
-    //             implode($this->translationAPI->__('\', \''), $failedFieldNames),
-    //             implode($this->translationAPI->__('\', \''), $directiveSupportedFieldNames)
-    //         );
-    //         $this->processFailure($failureMessage, $failedFields, $idsDataFields, $schemaErrors, $schemaWarnings);
-    //     }
-    // }
     /**
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
@@ -831,10 +758,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // Show the failureMessage either as error or as warning
         $directiveName = $this->getDirectiveName();
-        // $failedFieldNames = array_map(
-        //     [$this->fieldQueryInterpreter, 'getFieldName'],
-        //     $failedFields
-        // );
         if ($removeFieldIfDirectiveFailed) {
             if (count($failedFields) == 1) {
                 $message = $this->translationAPI->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
