@@ -90,6 +90,16 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
+    public function isSchemaFilterInputNonEmptyArrayType(array $module): bool
+    {
+        return match($module[1]) {
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
+            self::MODULE_FILTERINPUT_GENERICPOSTTYPES => true,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
+            default => false,
+        };
+    }
+
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
     {
         switch ($module[1]) {

@@ -10,6 +10,7 @@ interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     public function getSchemaFilterInputDescription(array $module): ?string;
     public function getSchemaFilterInputDeprecationDescription(array $module): ?string;
     public function getSchemaFilterInputIsArrayType(array $module): bool;
+    public function isSchemaFilterInputNonEmptyArrayType(array $module): bool;
     public function getSchemaFilterInputMandatory(array $module): bool;
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void;
 }

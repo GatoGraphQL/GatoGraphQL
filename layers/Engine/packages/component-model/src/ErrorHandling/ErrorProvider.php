@@ -105,6 +105,21 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
+     * Return an error to indicate that a non-empty-array field is returning an empty array value
+     */
+    public function getMustNotBeEmptyArrayFieldError(string $fieldName, array $value): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_NOT_BE_EMPTY_ARRAY_FIELD,
+            sprintf(
+                $this->translationAPI->__('Field \'%s\' must not return an empty array', 'pop-component-model'),
+                $fieldName
+            )
+        );
+    }
+
+    /**
      * Return an error to indicate that no fieldResolver processes this field,
      * which is different than returning a null value.
      * Needed for compatibility with CustomPostUnionTypeResolver

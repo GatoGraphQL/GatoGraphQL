@@ -19,14 +19,6 @@ trait RolesFieldResolverTrait
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
-    {
-        return match($fieldName) {
-            'roles' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
-        };
-    }
-
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         switch ($fieldName) {

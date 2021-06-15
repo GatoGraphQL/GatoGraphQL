@@ -29,6 +29,10 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return false;
     }
+    public function isSchemaFilterInputNonEmptyArrayType(array $module): bool
+    {
+        return false;
+    }
     public function getSchemaFilterInputMandatory(array $module): bool
     {
         return false;
