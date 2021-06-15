@@ -25,10 +25,7 @@ class RootRolesFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
-            'roles'
-                => SchemaTypeModifiers::NON_NULLABLE
-                | SchemaTypeModifiers::IS_ARRAY
-                | SchemaTypeModifiers::NON_EMPTY_ARRAY,
+            'roles',
             'capabilities'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY
