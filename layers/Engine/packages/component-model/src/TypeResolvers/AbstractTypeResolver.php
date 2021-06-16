@@ -1124,6 +1124,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // If any directive failed execution, then prepend the path on the error
             if ($directivePipelineSchemaErrors) {
                 // Extract the failing fields from the path of the thrown error
+                $failingFieldSchemaErrors = [];
                 foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
                     $schemaErrorFailingField = $directivePipelineSchemaError[Tokens::PATH][0];
                     if ($failingFields = $fieldDirectiveFields[$schemaErrorFailingField] ?? []) {
@@ -1131,12 +1132,21 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             $schemaError = $directivePipelineSchemaError;
                             array_unshift($schemaError[Tokens::PATH], $failingField);
                             $this->prependPathOnNestedErrors($schemaError, $failingField);
-                            $schemaErrors[] = $schemaError;
+                            $failingFieldSchemaErrors[$failingField][] = $schemaError;
                         }
                     } else {
                         $schemaErrors[] = $directivePipelineSchemaError;
                     }
-                }                
+                }  
+                foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
+                    $schemaErrors[] = [
+                        Tokens::PATH => [$failingField],
+                        Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its composed directives', 'component-model'),
+                        Tokens::EXTENSIONS => [
+                            Tokens::NESTED => $failingSchemaErrors,
+                        ],
+                    ];
+                }              
             }
             if ($directivePipelineIDDBErrors) {
                 // Extract the failing fields from the path of the thrown error
