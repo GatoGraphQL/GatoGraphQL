@@ -20,19 +20,22 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Add errors
         $errors = $warnings = $deprecations = $notices = $traces = [];
-        if ($data['dbErrors'] ?? null) {
-            $errors = $this->reformatDBEntries($data['dbErrors']);
+        if (isset($data['queryErrors'])) {
+            $errors = array_merge(
+                $errors,
+                $this->reformatQueryEntries($data['queryErrors'])
+            );
         }
-        if ($data['schemaErrors'] ?? null) {
+        if (isset($data['schemaErrors'])) {
             $errors = array_merge(
                 $errors,
                 $this->reformatSchemaEntries($data['schemaErrors'])
             );
         }
-        if ($data['queryErrors'] ?? null) {
+        if (isset($data['dbErrors'])) {
             $errors = array_merge(
                 $errors,
-                $this->reformatQueryEntries($data['queryErrors'])
+                $this->reformatDBEntries($data['dbErrors'])
             );
         }
         if ($errors) {
