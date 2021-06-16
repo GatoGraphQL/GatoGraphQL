@@ -1095,6 +1095,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 
+            $directivePipelineSchemaErrors = $directivePipelineIDDBErrors = [];
+
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
             $directivePipeline = $this->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
@@ -1107,17 +1109,53 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $previousDBItems,
                 $variables,
                 $messages,
-                $dbErrors,
+                $directivePipelineIDDBErrors,
                 $dbWarnings,
                 $dbDeprecations,
                 $dbNotices,
                 $dbTraces,
-                $schemaErrors,
+                $directivePipelineSchemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
                 $schemaTraces
             );
+            
+            // If any directive failed execution, then prepend the path on the error
+            if ($directivePipelineSchemaErrors) {
+                // Extract the failing fields from the path of the thrown error
+                foreach ($directivePipelineSchemaErrors as $directivePipelineSchemaError) {
+                    $schemaErrorFailingField = $directivePipelineSchemaError[Tokens::PATH][0];
+                    if ($failingFields = $fieldDirectiveFields[$schemaErrorFailingField] ?? []) {
+                        foreach ($failingFields as $failingField) {
+                            $schemaError = $directivePipelineSchemaError;
+                            array_unshift($schemaError[Tokens::PATH], $failingField);
+                            $this->prependPathOnNestedErrors($schemaError, $failingField);
+                            $schemaErrors[] = $schemaError;
+                        }
+                    } else {
+                        $schemaErrors[] = $directivePipelineSchemaError;
+                    }
+                }                
+            }
+            if ($directivePipelineIDDBErrors) {
+                // Extract the failing fields from the path of the thrown error
+                foreach ($directivePipelineIDDBErrors as $id => $directivePipelineDBErrors) {
+                    foreach ($directivePipelineDBErrors as $directivePipelineDBError) {
+                        $dbErrorFailingField = $directivePipelineDBError[Tokens::PATH][0];
+                        if ($failingFields = $fieldDirectiveFields[$dbErrorFailingField] ?? []) {
+                            foreach ($failingFields as $failingField) {
+                                $dbError = $directivePipelineDBError;
+                                array_unshift($dbError[Tokens::PATH], $failingField);
+                                $this->prependPathOnNestedErrors($dbError, $failingField);
+                                $dbErrors[$id][] = $dbError;
+                            }
+                        } else {
+                            $dbErrors[$id][] = $directivePipelineDBError;
+                        }
+                    }
+                }                
+            }
         }
     }
 
