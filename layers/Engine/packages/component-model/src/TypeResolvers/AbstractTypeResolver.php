@@ -1120,7 +1120,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $schemaNotices,
                 $schemaTraces
             );
-            
+
             // If any directive failed execution, then prepend the path on the error
             if ($directivePipelineSchemaErrors) {
                 // Extract the failing fields from the path of the thrown error
@@ -1140,6 +1140,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             if ($directivePipelineIDDBErrors) {
                 // Extract the failing fields from the path of the thrown error
+                $failingFieldIDDBErrors = [];
                 foreach ($directivePipelineIDDBErrors as $id => $directivePipelineDBErrors) {
                     foreach ($directivePipelineDBErrors as $directivePipelineDBError) {
                         $dbErrorFailingField = $directivePipelineDBError[Tokens::PATH][0];
@@ -1148,13 +1149,24 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 $dbError = $directivePipelineDBError;
                                 array_unshift($dbError[Tokens::PATH], $failingField);
                                 $this->prependPathOnNestedErrors($dbError, $failingField);
-                                $dbErrors[$id][] = $dbError;
+                                $failingFieldIDDBErrors[$failingField][$id][] = $dbError;
                             }
                         } else {
                             $dbErrors[$id][] = $directivePipelineDBError;
                         }
                     }
-                }                
+                }
+                foreach ($failingFieldIDDBErrors as $failingField => $failingIDDBErrors) {
+                    foreach ($failingIDDBErrors as $id => $failingDBErrors) {
+                        $dbErrors[$id][] = [
+                            Tokens::PATH => [$failingField],
+                            Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its composed directives', 'component-model'),
+                            Tokens::EXTENSIONS => [
+                                Tokens::NESTED => $failingDBErrors,
+                            ],
+                        ];
+                    }
+                }
             }
         }
     }
