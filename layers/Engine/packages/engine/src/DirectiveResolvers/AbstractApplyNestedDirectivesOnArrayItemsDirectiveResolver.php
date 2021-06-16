@@ -224,6 +224,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $pipelineArrayItemIdsProperties[] = $arrayItemIdsProperties;
             }
             // 2. Execute the composed directive pipeline on all arrayItems
+            $nestedSchemaErrors = $nestedIDDBErrors = [];
             $nestedDirectivePipeline->resolveDirectivePipeline(
                 $typeResolver,
                 $pipelineArrayItemIdsProperties, // Here we pass the properties to the array elements!
@@ -234,17 +235,40 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $previousDBItems,
                 $variables,
                 $messages,
-                $dbErrors,
+                $nestedIDDBErrors,
                 $dbWarnings,
                 $dbDeprecations,
                 $dbNotices,
                 $dbTraces,
-                $schemaErrors,
+                $nestedSchemaErrors,
                 $schemaWarnings,
                 $schemaDeprecations,
                 $schemaNotices,
                 $schemaTraces
             );
+
+            // If there was an error, prepend the path
+            if ($nestedSchemaErrors) {
+                $schemaError = [
+                    Tokens::PATH => [$this->directive],
+                    Tokens::MESSAGE => $this->translationAPI->__('The nested directive has produced errors', 'component-model'),
+                ];
+                foreach ($nestedSchemaErrors as $nestedSchemaError) {
+                    array_unshift($nestedSchemaError[Tokens::PATH], $this->directive);
+                    $this->prependPathOnNestedErrors($nestedSchemaError);
+                    $schemaError[Tokens::EXTENSIONS][Tokens::NESTED][] = $nestedSchemaError;
+                }
+                $schemaErrors[] = $schemaError;
+            }
+            if ($nestedIDDBErrors) {
+                foreach ($nestedIDDBErrors as $id => $nestedDBErrors) {
+                    foreach ($nestedDBErrors as &$nestedDBError) {
+                        array_unshift($nestedDBError[Tokens::PATH], $this->directive);
+                        $this->prependPathOnNestedErrors($nestedDBError);
+                    }
+                    $dbErrors[(string) $id] = $nestedDBErrors;                
+                }
+            }
 
             // 3. Compose the array from the results for each array item
             foreach ($idsDataFields as $id => $dataFields) {
