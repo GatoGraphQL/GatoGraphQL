@@ -1141,7 +1141,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$failingField],
-                        Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its composed directives', 'component-model'),
+                        Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                         Tokens::EXTENSIONS => [
                             Tokens::NESTED => $failingSchemaErrors,
                         ],
@@ -1170,7 +1170,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     foreach ($failingIDDBErrors as $id => $failingDBErrors) {
                         $dbErrors[$id][] = [
                             Tokens::PATH => [$failingField],
-                            Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its composed directives', 'component-model'),
+                            Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                             Tokens::EXTENSIONS => [
                                 Tokens::NESTED => $failingDBErrors,
                             ],
