@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers;
 
+use ArgumentCountError;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\FieldResolvers\AbstractGlobalFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -362,7 +364,19 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
             case 'echo':
                 return $fieldArgs['value'];
             case 'sprintf':
-                return sprintf($fieldArgs['string'], ...$fieldArgs['values']);
+                // If more "%s" are passed than replacements provided, then `sprintf`
+                // will throw an ArgumentCountError. Catch it and return an error instead.
+                try {
+                    return sprintf($fieldArgs['string'], ...$fieldArgs['values']);
+                } catch (ArgumentCountError $e) {
+                    return new Error(
+                        'sprintf-wrong-params',
+                        sprintf(
+                            $this->translationAPI->__('There was an error executing `sprintf`: %s', 'engine'),
+                            $e->getMessage()
+                        )
+                    );
+                }
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
