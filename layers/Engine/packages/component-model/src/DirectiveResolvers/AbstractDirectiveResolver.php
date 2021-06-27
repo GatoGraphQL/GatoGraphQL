@@ -711,6 +711,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     [],
                     $idsDataFields,
                     $pipelineIDsDataFields,
+                    $dbItems,
                     $schemaErrors,
                     $schemaWarnings
                 );
@@ -750,6 +751,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array $failedFields,
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
+        array &$dbItems,
         array &$schemaErrors,
         array &$schemaWarnings
     ): void {
@@ -778,7 +780,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         $removeFieldIfDirectiveFailed = ComponentConfiguration::removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
-            $this->removeIDsDataFields($idsDataFieldsToRemove, $succeedingPipelineIDsDataFields);
+            $this->removeIDsDataFields(
+                $idsDataFieldsToRemove,
+                $succeedingPipelineIDsDataFields
+            );
+            $this->maybeSetFailingFieldResponseAsNull(
+                $idsDataFieldsToRemove,
+                $dbItems
+            );
         }
 
         // Show the failureMessage either as error or as warning

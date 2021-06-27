@@ -85,18 +85,14 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                     $failedDataFields
                 );
             }
-            $this->removeIDsDataFields($idsDataFieldsToRemove, $succeedingPipelineIDsDataFields);
-
-            // For GraphQL, set the response for the failing field as null
-            if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
-                foreach (array_keys($idsDataFieldsToRemove) as $id) {
-                    $fieldsToRemoveForID = $idsDataFieldsToRemove[(string)$id]['direct'];
-                    foreach ($fieldsToRemoveForID as $field) {
-                        $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
-                        $dbItems[(string)$id][$fieldOutputKey] = null;
-                    }
-                }
-            }
+            $this->removeIDsDataFields(
+                $idsDataFieldsToRemove,
+                $succeedingPipelineIDsDataFields
+            );
+            $this->maybeSetFailingFieldResponseAsNull(
+                $idsDataFieldsToRemove,
+                $dbItems
+            );
         }
         // Since adding the Validate directive also when processing the conditional fields, there is no need to validate them now
         // They will be validated when it's their turn to be processed
