@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use Exception;
 use League\Pipeline\PipelineBuilder;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ComponentConfiguration;
@@ -1438,8 +1439,20 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
                     
-                    // Resolve the value
-                    $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                    // Resolve the value. If the field resolver throws an Exception,
+                    // catch it and return the equivalent GraphQL error
+                    try {
+                        $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                    } catch (Exception $e) {
+                        return new Error(
+                            'exception',
+                            sprintf(
+                                $this->translationAPI->__('Resolving field \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
+                                $field,
+                                $e->getMessage()
+                            )
+                        );
+                    }
 
                     /**
                      * Validate that the value is what was defined in the schema, or throw a corresponding error.

@@ -113,7 +113,10 @@ class LoadCacheDirectiveResolver extends AbstractGlobalDirectiveResolver
                 }
 
                 // Remove the $idsDataFields for them
-                $this->removeIDsDataFields($idsDataFieldsToRemove, $pipelineIDsDataFieldsToRemove);
+                $this->removeIDsDataFields(
+                    $idsDataFieldsToRemove,
+                    $pipelineIDsDataFieldsToRemove
+                );
             }
 
             // Log the cached items

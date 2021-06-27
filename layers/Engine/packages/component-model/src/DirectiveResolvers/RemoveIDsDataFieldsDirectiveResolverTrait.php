@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\ComponentConfiguration;
+
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
-    protected function removeIDsDataFields(array &$idsDataFieldsToRemove, array &$succeedingPipelineIDsDataFields)
-    {
+    protected function removeIDsDataFields(
+        array &$idsDataFieldsToRemove,
+        array &$succeedingPipelineIDsDataFields
+    ): void {
         // For each combination of ID and field, remove them from the upcoming pipeline stages
         foreach ($idsDataFieldsToRemove as $id => $dataFields) {
             foreach ($succeedingPipelineIDsDataFields as &$pipelineStageIDsDataFields) {
@@ -22,6 +26,22 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
                 foreach ($dataFields['direct'] as $removeField) {
                     unset($pipelineStageIDsDataFields[(string)$id]['conditional'][$removeField]);
                 }
+            }
+        }
+    }
+
+    /**
+     * For GraphQL, set the response for the failing field as null
+     */
+    protected function setIDsDataFieldsAsNull(
+        array &$idsDataFieldsToSetAsNull,
+        array &$dbItems
+    ): void {
+        foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
+            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]['direct'];
+            foreach ($fieldsToSetAsNullForID as $field) {
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         }
     }

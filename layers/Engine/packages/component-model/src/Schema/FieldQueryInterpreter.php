@@ -238,6 +238,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // $fieldOrDirectiveOutputKey = $this->getFieldOutputKey($fieldOrDirective);
         $fieldOrDirectiveArgs = [];
         $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
+        $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
         for ($i = 0; $i < count($fieldOrDirectiveArgElems); $i++) {
             $fieldOrDirectiveArg = $fieldOrDirectiveArgElems[$i];
             // Either one of 2 formats are accepted:
@@ -259,7 +260,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
                         $schemaErrors[] = [
                             Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => $resolverType === ResolverTypes::FIELD ?
+                            Tokens::MESSAGE => ($resolverType === ResolverTypes::FIELD || $setFailingFieldResponseAsNull) ?
                                 $errorMessage
                                 : sprintf(
                                     $this->translationAPI->__('%s. The directive has been ignored', 'pop-component-model'),
@@ -307,7 +308,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
                         $schemaErrors[] = [
                             Tokens::PATH => [$fieldOrDirective],
-                            Tokens::MESSAGE => $resolverType === ResolverTypes::FIELD ?
+                            Tokens::MESSAGE => ($resolverType === ResolverTypes::FIELD || $setFailingFieldResponseAsNull) ?
                                 $errorMessage
                                 : sprintf(
                                     $this->translationAPI->__('%s. The directive has been ignored', 'pop-component-model'),
