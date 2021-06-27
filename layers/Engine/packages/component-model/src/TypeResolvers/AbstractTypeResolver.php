@@ -1439,8 +1439,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
                     
-                    // Resolve the value. If the resolver threw an Error or Exception,
-                    // catch it and transform it to a GraphQL error
+                    // Resolve the value. If the resolver throws an Exception,
+                    // catch it and return the equivalent GraphQL error
                     try {
                         $value = $fieldResolver->resolveValue($this, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
                     } catch (Exception $e) {
