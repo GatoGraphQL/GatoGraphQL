@@ -225,7 +225,10 @@ class RemoveIfNullDirectiveResolver extends AbstractGlobalDirectiveResolver
          * (check function `needsIDsDataFieldsToExecute` must be `false` for them)
          */
         if ($idsDataFieldsToRemove) {
-            $this->removeIDsDataFields($idsDataFieldsToRemove, $succeedingPipelineIDsDataFields);
+            $this->removeIDsDataFields(
+                $idsDataFieldsToRemove,
+                $succeedingPipelineIDsDataFields
+            );
         }
     }
 

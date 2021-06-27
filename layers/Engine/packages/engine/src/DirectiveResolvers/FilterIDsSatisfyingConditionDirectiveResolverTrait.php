@@ -51,6 +51,9 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
             },
             ARRAY_FILTER_USE_KEY
         );
-        $this->removeIDsDataFields($idsDataFieldsToRemove, $succeedingPipelineIDsDataFields);
+        $this->removeIDsDataFields(
+            $idsDataFieldsToRemove,
+            $succeedingPipelineIDsDataFields
+        );
     }
 }
