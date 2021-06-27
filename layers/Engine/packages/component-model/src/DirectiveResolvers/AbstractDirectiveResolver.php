@@ -674,29 +674,47 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // First check that if the validation took away the elements, and so the directive can't execute anymore
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
-        if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
-            $this->resolveDirective(
-                $typeResolver,
-                $idsDataFields,
-                $pipelineIDsDataFields,
-                $pipelineDirectiveResolverInstances,
-                $resultIDItems,
-                $unionDBKeyIDs,
-                $dbItems,
-                $previousDBItems,
-                $variables,
-                $messages,
-                $dbErrors,
-                $dbWarnings,
-                $dbDeprecations,
-                $dbNotices,
-                $dbTraces,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-                $schemaNotices,
-                $schemaTraces
-            );
+        if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {   
+            // If the directive resolver throws an Exception,
+            // catch it and add dbErrors
+            try {
+                $this->resolveDirective(
+                    $typeResolver,
+                    $idsDataFields,
+                    $pipelineIDsDataFields,
+                    $pipelineDirectiveResolverInstances,
+                    $resultIDItems,
+                    $unionDBKeyIDs,
+                    $dbItems,
+                    $previousDBItems,
+                    $variables,
+                    $messages,
+                    $dbErrors,
+                    $dbWarnings,
+                    $dbDeprecations,
+                    $dbNotices,
+                    $dbTraces,
+                    $schemaErrors,
+                    $schemaWarnings,
+                    $schemaDeprecations,
+                    $schemaNotices,
+                    $schemaTraces
+                );
+            } catch (Exception $e) {
+                $failureMessage = sprintf(
+                    $this->translationAPI->__('Resolving directive \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
+                    $this->directive,
+                    $e->getMessage()
+                );
+                $this->processFailure(
+                    $failureMessage,
+                    [],
+                    $idsDataFields,
+                    $pipelineIDsDataFields,
+                    $schemaErrors,
+                    $schemaWarnings
+                );
+            }
         }
 
         // 3. Re-create the payload from the modified variables
@@ -727,8 +745,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
      */
-    protected function processFailure(string $failureMessage, array $failedFields, array &$idsDataFields, array &$succeedingPipelineIDsDataFields, array &$schemaErrors, array &$schemaWarnings): void
-    {
+    protected function processFailure(
+        string $failureMessage,
+        array $failedFields,
+        array &$idsDataFields,
+        array &$succeedingPipelineIDsDataFields,
+        array &$schemaErrors,
+        array &$schemaWarnings
+    ): void {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
             // Remove all fields
