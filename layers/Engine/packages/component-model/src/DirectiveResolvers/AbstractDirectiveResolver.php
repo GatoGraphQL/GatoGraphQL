@@ -779,6 +779,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         $removeFieldIfDirectiveFailed = ComponentConfiguration::removeFieldIfDirectiveFailed();
+        $setFailingFieldResponseAsNull = ComponentConfiguration::setFailingFieldResponseAsNull();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
@@ -792,7 +793,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
         // Show the failureMessage either as error or as warning
         $directiveName = $this->getDirectiveName();
-        if ($removeFieldIfDirectiveFailed) {
+        if ($setFailingFieldResponseAsNull) {
+            foreach ($failedFields as $failedField) {
+                $schemaErrors[] = [
+                    Tokens::PATH => [$failedField, $this->directive],
+                    Tokens::MESSAGE => $failureMessage,
+                ];
+            }
+        } elseif ($removeFieldIfDirectiveFailed) {
             if (count($failedFields) == 1) {
                 $message = $this->translationAPI->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
             } else {
