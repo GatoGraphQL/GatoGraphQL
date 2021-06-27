@@ -4326,21 +4326,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.11.14",
+            "version": "0.11.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "49dd2ff88bd67d5126557db91c446c322f5bbcef"
+                "reference": "1f5182eaa4f7255ecaa10d3304468d1c1b555a37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/49dd2ff88bd67d5126557db91c446c322f5bbcef",
-                "reference": "49dd2ff88bd67d5126557db91c446c322f5bbcef",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/1f5182eaa4f7255ecaa10d3304468d1c1b555a37",
+                "reference": "1f5182eaa4f7255ecaa10d3304468d1c1b555a37",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1|^8.0",
-                "phpstan/phpstan": ">=0.12.86 <=0.12.88"
+                "phpstan/phpstan": ">=0.12.86 <=0.12.90"
             },
             "conflict": {
                 "phpstan/phpdoc-parser": "<=0.5.3",
@@ -4348,7 +4348,6 @@
                 "rector/rector-cakephp": "*",
                 "rector/rector-doctrine": "*",
                 "rector/rector-nette": "*",
-                "rector/rector-nette-to-symfony": "*",
                 "rector/rector-phpunit": "*",
                 "rector/rector-prefixed": "*",
                 "rector/rector-symfony": "*"
@@ -4374,7 +4373,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.11.14"
+                "source": "https://github.com/rectorphp/rector/tree/0.11.27"
             },
             "funding": [
                 {
@@ -4382,7 +4381,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-05T21:48:47+00:00"
+            "time": "2021-06-27T15:34:09+00:00"
         },
         {
             "name": "sebastian/cli-parser",
