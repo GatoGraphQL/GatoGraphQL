@@ -809,7 +809,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 ];
             }
         } else {
-            if (count($failedFields) == 1) {
+            if (count($failedFields) === 1) {
                 $message = $this->translationAPI->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
             } else {
                 $message = $this->translationAPI->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
