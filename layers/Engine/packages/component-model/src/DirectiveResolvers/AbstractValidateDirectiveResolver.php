@@ -89,10 +89,12 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
-            $this->maybeSetFailingFieldResponseAsNull(
-                $idsDataFieldsToRemove,
-                $dbItems
-            );
+            if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
+                $this->setIDsDataFieldsAsNull(
+                    $idsDataFieldsToRemove,
+                    $dbItems
+                );
+            }
         }
         // Since adding the Validate directive also when processing the conditional fields, there is no need to validate them now
         // They will be validated when it's their turn to be processed

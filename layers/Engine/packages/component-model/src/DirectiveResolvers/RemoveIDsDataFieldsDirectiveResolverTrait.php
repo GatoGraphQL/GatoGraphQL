@@ -33,17 +33,15 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
     /**
      * For GraphQL, set the response for the failing field as null
      */
-    protected function maybeSetFailingFieldResponseAsNull(
-        array &$idsDataFieldsToRemove,
+    protected function setIDsDataFieldsAsNull(
+        array &$idsDataFieldsToSetAsNull,
         array &$dbItems
     ): void {
-        if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
-            foreach (array_keys($idsDataFieldsToRemove) as $id) {
-                $fieldsToRemoveForID = $idsDataFieldsToRemove[(string)$id]['direct'];
-                foreach ($fieldsToRemoveForID as $field) {
-                    $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
-                    $dbItems[(string)$id][$fieldOutputKey] = null;
-                }
+        foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
+            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]['direct'];
+            foreach ($fieldsToSetAsNullForID as $field) {
+                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         }
     }
