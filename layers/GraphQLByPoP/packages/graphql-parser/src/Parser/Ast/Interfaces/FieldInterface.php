@@ -44,4 +44,14 @@ interface FieldInterface extends LocatableInterface
      * @return array
      */
     public function getFields();
+
+    /**
+     * @return bool
+     */
+    public function hasDirectives();
+
+    /**
+     * @return Directive[]
+     */
+    public function getDirectives();
 }
