@@ -17,16 +17,10 @@ use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 function doCommonContainerConfiguration(ContainerConfigurator $containerConfigurator): void
 {
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-
-    // here we can define, what sets of rules will be applied
-    $parameters->set(Option::SETS, [
-        DowngradeSetList::PHP_80,
-        DowngradeSetList::PHP_74,
-        DowngradeSetList::PHP_73,
-        DowngradeSetList::PHP_72,
-    ]);
+    $containerConfigurator->import(DowngradeSetList::PHP_80);
+    $containerConfigurator->import(DowngradeSetList::PHP_74);
+    $containerConfigurator->import(DowngradeSetList::PHP_73);
+    $containerConfigurator->import(DowngradeSetList::PHP_72);
 
     /**
      * Hack to fix bug.
@@ -57,6 +51,8 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
             ]),
         ]]);
 
+    $parameters = $containerConfigurator->parameters();
+    
     // is your PHP version different from the one your refactor to? [default: your PHP version]
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
 
