@@ -712,8 +712,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $idsDataFields,
                     $pipelineIDsDataFields,
                     $dbItems,
-                    $schemaErrors,
-                    $schemaWarnings
+                    $dbErrors,
+                    $dbWarnings
                 );
             }
         }
@@ -752,8 +752,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array &$idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array &$dbItems,
-        array &$schemaErrors,
-        array &$schemaWarnings
+        array &$dbErrors,
+        array &$dbWarnings
     ): void {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
@@ -796,11 +796,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         // Show the failureMessage either as error or as warning
         $directiveName = $this->getDirectiveName();
         if ($setFailingFieldResponseAsNull) {
-            foreach ($failedFields as $failedField) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$failedField, $this->directive],
-                    Tokens::MESSAGE => $failureMessage,
-                ];
+            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
+                foreach ($dataFields['direct'] as $failedField) {
+                    $dbErrors[(string)$id][] = [
+                        Tokens::PATH => [$failedField, $this->directive],
+                        Tokens::MESSAGE => $failureMessage,
+                    ];
+                }
             }
         } elseif ($removeFieldIfDirectiveFailed) {
             if (count($failedFields) == 1) {
@@ -808,15 +810,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             } else {
                 $message = $this->translationAPI->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             }
-            foreach ($failedFields as $failedField) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$failedField, $this->directive],
-                    Tokens::MESSAGE => sprintf(
-                        $message,
-                        $failureMessage,
-                        implode($this->translationAPI->__('\', \''), $failedFields)
-                    ),
-                ];
+            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
+                foreach ($dataFields['direct'] as $failedField) {
+                    $dbErrors[(string)$id][] = [
+                        Tokens::PATH => [$failedField, $this->directive],
+                        Tokens::MESSAGE => sprintf(
+                            $message,
+                            $failureMessage,
+                            implode($this->translationAPI->__('\', \''), $failedFields)
+                        ),
+                    ];
+                }
             }
         } else {
             if (count($failedFields) === 1) {
@@ -824,16 +828,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             } else {
                 $message = $this->translationAPI->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
             }
-            foreach ($failedFields as $failedField) {
-                $schemaWarnings[] = [
-                    Tokens::PATH => [$failedField, $this->directive],
-                    Tokens::MESSAGE => sprintf(
-                        $message,
-                        $failureMessage,
-                        $directiveName,
-                        implode($this->translationAPI->__('\', \''), $failedFields)
-                    ),
-                ];
+            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
+                foreach ($dataFields['direct'] as $failedField) {
+                    $dbWarnings[(string)$id][] = [
+                        Tokens::PATH => [$failedField, $this->directive],
+                        Tokens::MESSAGE => sprintf(
+                            $message,
+                            $failureMessage,
+                            $directiveName,
+                            implode($this->translationAPI->__('\', \''), $failedFields)
+                        ),
+                    ];
+                }
             }
         }
     }
