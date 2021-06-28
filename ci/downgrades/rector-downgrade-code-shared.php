@@ -11,8 +11,6 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 use Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use Symfony\Component\Cache\Traits\FilesystemCommonTrait;
-use Symfony\Component\Cache\Traits\FilesystemTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Contracts\Cache\CacheTrait;
 use Symfony\Contracts\Service\ServiceLocatorTrait;
@@ -60,9 +58,9 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 0, new StringType()),
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 2, new NullType()),
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 3, new NullType()),
-                new AddParamTypeDeclaration(FilesystemTrait::class, 'doHave', 0, new NullType()),
-                new AddParamTypeDeclaration(FilesystemTrait::class, 'doSave', 1, new NullType()),
-                new AddParamTypeDeclaration(FilesystemCommonTrait::class, 'doClear', 0, new NullType()),
+                // new AddParamTypeDeclaration(FilesystemTrait::class, 'doHave', 0, new NullType()),
+                // new AddParamTypeDeclaration(FilesystemTrait::class, 'doSave', 1, new NullType()),
+                // new AddParamTypeDeclaration(FilesystemCommonTrait::class, 'doClear', 0, new NullType()),
             ]),
         ]]);
 
