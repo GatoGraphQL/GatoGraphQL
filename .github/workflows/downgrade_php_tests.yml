@@ -68,11 +68,11 @@ jobs:
             ################################################################################
             -   name: (Again) Local packages - Downgrade PHP code via Rector
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=ci/downgrades/rector-downgrade-code.php --ansi --dry-run
-                # if: github.event_name == 'push'
+                if: github.event_name == 'push'
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
                 run: ci/downgrades/downgrade_code.sh ci/downgrades/rector-downgrade-code.php --dry-run "" "$(vendor/bin/monorepo-builder additional-downgrade-rector-configs)"
-                # if: github.event_name == 'push'
+                if: github.event_name == 'push'
             ################################################################################
 
             # Prepare for testing on PHP 7.1
