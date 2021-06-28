@@ -164,6 +164,74 @@ CODE_SAMPLE
         $this->refactorClassWithAncestorsAndChildren($classReflection, $methodName, $position);
     }
 
+    /**
+     * @return array<class-string, Type>
+     */
+    private function resolveParameterTypesByClassLike(
+        ClassReflection $classReflection,
+        string $methodName,
+        int $position
+    ): array {
+        $parameterTypesByParentClassLikes = [];
+
+        foreach ($classReflection->getAncestors() as $ancestorClassReflection) {
+            if ($ancestorClassReflection->isTrait()) {
+                continue;
+            }
+
+            if (! $ancestorClassReflection->hasMethod($methodName)) {
+                continue;
+            }
+
+            $parameterType = $this->nativeTypeClassTreeResolver->resolveParameterReflectionType(
+                $ancestorClassReflection,
+                $methodName,
+                $position
+            );
+            $parameterTypesByParentClassLikes[$ancestorClassReflection->getName()] = $parameterType;
+        }
+
+        return $parameterTypesByParentClassLikes;
+    }
+
+    private function refactorClassWithAncestorsAndChildren(
+        ClassReflection $classReflection,
+        string $methodName,
+        int $position
+    ): void {
+        foreach ($classReflection->getAncestors() as $ancestorClassRelection) {
+            $classLike = $this->nodeRepository->findClassLike($ancestorClassRelection->getName());
+            if (! $classLike instanceof ClassLike) {
+                continue;
+            }
+
+            $currentClassMethod = $classLike->getMethod($methodName);
+            if (! $currentClassMethod instanceof ClassMethod) {
+                continue;
+            }
+
+            $className = $this->getName($classLike);
+            if ($className === null) {
+                continue;
+            }
+
+            /**
+             * If it doesn't find the method, it's because the method
+             * lives somewhere else.
+             * For instance, in test "interface_on_parent_class.php.inc",
+             * the ancestorClassReflection abstract class is also retrieved
+             * as containing the method, but it does not: it is
+             * in its implemented interface. That happens because
+             * `ReflectionMethod` doesn't allow to do do the distinction.
+             * The interface is also retrieve though, so that method
+             * will eventually be refactored.
+             */
+
+            $this->removeParamTypeFromMethod($classLike, $position, $methodName);
+            $this->removeParamTypeFromMethodForChildren($className, $methodName, $position);
+        }
+    }
+
     private function removeParamTypeFromMethod(
         ClassLike $classLike,
         int $position,
@@ -240,73 +308,5 @@ CODE_SAMPLE
         $paramName = $this->getName($param);
         $mappedCurrentParamType = $this->staticTypeMapper->mapPhpParserNodePHPStanType($param->type);
         $this->phpDocTypeChanger->changeParamType($phpDocInfo, $mappedCurrentParamType, $param, $paramName);
-    }
-
-    /**
-     * @return array<class-string, Type>
-     */
-    private function resolveParameterTypesByClassLike(
-        ClassReflection $classReflection,
-        string $methodName,
-        int $position
-    ): array {
-        $parameterTypesByParentClassLikes = [];
-
-        foreach ($classReflection->getAncestors() as $ancestorClassReflection) {
-            if ($ancestorClassReflection->isTrait()) {
-                continue;
-            }
-
-            if (! $ancestorClassReflection->hasMethod($methodName)) {
-                continue;
-            }
-
-            $parameterType = $this->nativeTypeClassTreeResolver->resolveParameterReflectionType(
-                $ancestorClassReflection,
-                $methodName,
-                $position
-            );
-            $parameterTypesByParentClassLikes[$ancestorClassReflection->getName()] = $parameterType;
-        }
-
-        return $parameterTypesByParentClassLikes;
-    }
-
-    private function refactorClassWithAncestorsAndChildren(
-        ClassReflection $classReflection,
-        string $methodName,
-        int $position
-    ): void {
-        foreach ($classReflection->getAncestors() as $ancestorClassRelection) {
-            $classLike = $this->nodeRepository->findClassLike($ancestorClassRelection->getName());
-            if (! $classLike instanceof ClassLike) {
-                continue;
-            }
-
-            $currentClassMethod = $classLike->getMethod($methodName);
-            if (! $currentClassMethod instanceof ClassMethod) {
-                continue;
-            }
-
-            $className = $this->getName($classLike);
-            if ($className === null) {
-                continue;
-            }
-
-            /**
-             * If it doesn't find the method, it's because the method
-             * lives somewhere else.
-             * For instance, in test "interface_on_parent_class.php.inc",
-             * the ancestorClassReflection abstract class is also retrieved
-             * as containing the method, but it does not: it is
-             * in its implemented interface. That happens because
-             * `ReflectionMethod` doesn't allow to do do the distinction.
-             * The interface is also retrieve though, so that method
-             * will eventually be refactored.
-             */
-
-            $this->removeParamTypeFromMethod($classLike, $position, $methodName);
-            $this->removeParamTypeFromMethodForChildren($className, $methodName, $position);
-        }
     }
 }
