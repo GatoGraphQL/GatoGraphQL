@@ -20,9 +20,9 @@ use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 
 function doCommonContainerConfiguration(ContainerConfigurator $containerConfigurator): void
 {
-    // $containerConfigurator->import(DowngradeSetList::PHP_80);
-    // $containerConfigurator->import(DowngradeSetList::PHP_74);
-    // $containerConfigurator->import(DowngradeSetList::PHP_73);
+    $containerConfigurator->import(DowngradeSetList::PHP_80);
+    $containerConfigurator->import(DowngradeSetList::PHP_74);
+    $containerConfigurator->import(DowngradeSetList::PHP_73);
     /**
      * Replace the current `DowngradeParameterTypeWideningRector` (because it takes too long)
      * with a "legacy" version (from up to v0.10.9), which is fast
