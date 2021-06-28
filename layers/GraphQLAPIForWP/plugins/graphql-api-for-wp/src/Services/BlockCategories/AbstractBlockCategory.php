@@ -6,17 +6,32 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_Post;
+use WP_Block_Editor_Context;
 
 abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService
 {
     final public function initialize(): void
     {
-        \add_filter(
-            'block_categories',
-            [$this, 'getBlockCategories'],
-            10,
-            2
-        );
+        /**
+         * Starting from WP 5.8 the hook is a different one
+         * 
+         * @see https://github.com/leoloso/PoP/issues/711
+         */
+        if (\is_wp_version_compatible('5.8')) {
+            \add_filter(
+                'block_categories_all',
+                [$this, 'getBlockCategoriesViaBlockEditorContext'],
+                10,
+                2
+            );
+        } else {
+            \add_filter(
+                'block_categories',
+                [$this, 'getBlockCategories'],
+                10,
+                2
+            );
+        }
     }
 
     /**
@@ -38,6 +53,20 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      * Block category's title
      */
     abstract protected function getBlockCategoryTitle(): string;
+
+    /**
+     * Register the category when in the corresponding CPT
+     *
+     * @param array<array> $categories List of categories, each item is an array with props "slug" and "title"
+     * @return array<array> List of categories, each item is an array with props "slug" and "title"
+     */
+    public function getBlockCategoriesViaBlockEditorContext(array $categories, WP_Block_Editor_Context $blockEditorContext): array
+    {
+        return $this->getBlockCategories(
+            $categories,
+            $blockEditorContext->post
+        );
+    }
 
     /**
      * Register the category when in the corresponding CPT
