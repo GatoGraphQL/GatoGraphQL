@@ -24,18 +24,19 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
     $containerConfigurator->import(DowngradeSetList::PHP_74);
     $containerConfigurator->import(DowngradeSetList::PHP_73);
     /**
-     * We can't run `DowngradeParameterTypeWideningRector` because it takes too long.
-     * So execute all rules from the downgrade set, skipping this rule.
+     * Replace the current `DowngradeParameterTypeWideningRector` (because it takes too long)
+     * with a previous version, which is fast but does not replace code within traits.
+     * 
+     * To make up, the hack below manually fixes the code within traits.
      * 
      * @see https://github.com/leoloso/PoP/issues/715
      */
     // $containerConfigurator->import(DowngradeSetList::PHP_72);
     $services = $containerConfigurator->services();
     $services->set(DowngradeObjectTypeDeclarationRector::class);
-    // $services->set(DowngradeParameterTypeWideningRector::class);
     $services->set(DowngradePregUnmatchedAsNullConstantRector::class);
     $services->set(DowngradeStreamIsattyRector::class);
-    
+    // $services->set(DowngradeParameterTypeWideningRector::class);
     /**
      * Hack to fix bug.
      *
