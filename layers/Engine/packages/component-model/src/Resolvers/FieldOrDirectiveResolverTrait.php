@@ -126,7 +126,7 @@ trait FieldOrDirectiveResolverTrait
                     continue;
                 }
                 $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $fieldOrDirectiveArgNonEmtpyArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
+                $fieldOrDirectiveArgNonEmptyArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
                 if ($fieldOrDirectiveArgIsArray && !is_array($fieldOrDirectiveArgumentValue)) {
                     $errors[] = sprintf(
                         $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
@@ -143,7 +143,7 @@ trait FieldOrDirectiveResolverTrait
                     );
                 } elseif ($fieldOrDirectiveArgIsArray
                     && $fieldOrDirectiveArgumentValue === []
-                    && $fieldOrDirectiveArgNonEmtpyArray
+                    && $fieldOrDirectiveArgNonEmptyArray
                 ) {
                     $errors[] = sprintf(
                         $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot be empty', 'component-model'),
