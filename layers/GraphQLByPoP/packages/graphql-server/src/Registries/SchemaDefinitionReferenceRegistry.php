@@ -366,7 +366,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
             $type,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false,
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null
         );
         $this->introduceSDLNotationToFieldOrDirectiveArgs($fieldSchemaDefinitionPath);
@@ -383,7 +383,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
                     $type,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
-                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false,
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null
                 );
                 // If it is an input object, it may have its own args to also convert
@@ -393,7 +393,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
                             $inputFieldType,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
-                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false,
+                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null
                         );
                     }
