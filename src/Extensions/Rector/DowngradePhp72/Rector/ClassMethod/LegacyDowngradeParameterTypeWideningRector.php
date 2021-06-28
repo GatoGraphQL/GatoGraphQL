@@ -167,20 +167,41 @@ CODE_SAMPLE
     private function removeParamTypeFromMethod(
         ClassLike $classLike,
         int $position,
-        ClassMethod $classMethod
+        string $classMethodName
     ): void {
-        $classMethodName = $this->getName($classMethod);
+        $className = $classLike->getAttribute(AttributeKey::CLASS_NAME);
+        if ($className === null) {
+            return;
+        }
+
+        if (! $this->reflectionProvider->hasClass($className)) {
+            return;
+        }
+
+        $classReflection = $this->reflectionProvider->getClass($className);
+        if (! $classReflection->hasMethod($classMethodName)) {
+            return;
+        }
+
+        if ($classReflection->isTrait()) {
+            return;
+        }
+        
+        $classMethod = $classLike->getMethod($classMethodName);
+        if ($classMethod === null) {
+            return;
+        }
 
         $currentClassMethod = $classLike->getMethod($classMethodName);
         if (! $currentClassMethod instanceof ClassMethod) {
             return;
         }
 
-        if (! isset($currentClassMethod->params[$position])) {
+        if (! isset($classMethod->params[$position])) {
             return;
         }
 
-        $param = $currentClassMethod->params[$position];
+        $param = $classMethod->params[$position];
 
         // It already has no type => nothing to do
         if ($param->type === null) {
@@ -201,21 +222,7 @@ CODE_SAMPLE
     ): void {
         $childrenClassLikes = $this->nodeRepository->findClassesAndInterfacesByType($parentClassName);
         foreach ($childrenClassLikes as $childClassLike) {
-            $childClassName = $childClassLike->getAttribute(AttributeKey::CLASS_NAME);
-            if ($childClassName === null) {
-                continue;
-            }
-
-            /**
-             * This bit is different than the original source code
-             */
-            // $childClassMethod = $this->nodeRepository->findClassMethod($childClassName, $methodName);
-            $childClassMethod = $childClassLike->getMethod($methodName);
-            if ($childClassMethod === null) {
-                continue;
-            }
-
-            $this->removeParamTypeFromMethod($childClassLike, $position, $childClassMethod);
+            $this->removeParamTypeFromMethod($childClassLike, $position, $methodName);
         }
     }
 
@@ -298,7 +305,7 @@ CODE_SAMPLE
              * will eventually be refactored.
              */
 
-            $this->removeParamTypeFromMethod($classLike, $position, $currentClassMethod);
+            $this->removeParamTypeFromMethod($classLike, $position, $methodName);
             $this->removeParamTypeFromMethodForChildren($className, $methodName, $position);
         }
     }
