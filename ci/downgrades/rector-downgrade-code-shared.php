@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use PHPStan\Type\NullType;
 use PHPStan\Type\StringType;
+use PoP\PoP\Extensions\Rector\DowngradePhp72\Rector\ClassMethod\LegacyDowngradeParameterTypeWideningRector;
 use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationInTraitRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
@@ -25,7 +26,8 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
     $containerConfigurator->import(DowngradeSetList::PHP_73);
     /**
      * Replace the current `DowngradeParameterTypeWideningRector` (because it takes too long)
-     * with a previous version, which is fast but does not replace code within traits.
+     * with a "legacy" version (from up to v0.10.9), which is fast
+     * but does not replace code within traits.
      * 
      * To make up, the hack below manually fixes the code within traits.
      * 
@@ -36,7 +38,7 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
     $services->set(DowngradeObjectTypeDeclarationRector::class);
     $services->set(DowngradePregUnmatchedAsNullConstantRector::class);
     $services->set(DowngradeStreamIsattyRector::class);
-    // $services->set(DowngradeParameterTypeWideningRector::class);
+    $services->set(LegacyDowngradeParameterTypeWideningRector::class);
     /**
      * Hack to fix bug.
      *
