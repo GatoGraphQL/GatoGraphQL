@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Rector\DowngradePhp72\Rector\ClassMethod;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassLike;
@@ -14,7 +13,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\Type;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTypeChanger;
-use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\Rector\AbstractRector;
 use Rector\DowngradePhp72\NodeAnalyzer\NativeTypeClassTreeResolver;
@@ -45,11 +43,6 @@ final class LegacyDowngradeParameterTypeWideningRector extends AbstractRector
      * @var TypeFactory
      */
     private $typeFactory;
-
-    /**
-     * @var array<class-string, ClassMethod[]>
-     */
-    private $classMethodsByType = [];
 
     public function __construct(
         PhpDocTypeChanger $phpDocTypeChanger,
@@ -214,14 +207,9 @@ CODE_SAMPLE
             }
 
             /**
-             * Function `findClassMethod` has been removed, so copy/pasted the function
-             * within this class
+             * This bit is different than the original source code
              */
             // $childClassMethod = $this->nodeRepository->findClassMethod($childClassName, $methodName);
-            // $childClassMethod = $this->nodeRepositoryFindClassMethod($childClassName, $methodName);
-            // if ($childClassMethod === null) {
-            //     continue;
-            // }
             $childClassMethod = $childClassLike->getMethod($methodName);
             if ($childClassMethod === null) {
                 continue;
