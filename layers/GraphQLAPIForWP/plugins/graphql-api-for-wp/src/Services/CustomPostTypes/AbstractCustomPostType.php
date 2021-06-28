@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
+use WP_Block_Editor_Context;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
@@ -42,12 +43,26 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'init',
             [$this, 'maybeLockGutenbergTemplate']
         );
-        \add_filter(
-            'allowed_block_types',
-            [$this, 'allowGutenbergBlocksForCustomPostType'],
-            10,
-            2
-        );
+        /**
+         * Starting from WP 5.8 the hook is a different one
+         * 
+         * @see https://github.com/leoloso/PoP/issues/711
+         */
+        if (\is_wp_version_compatible('5.8')) {
+            \add_filter(
+                'allowed_block_types_all',
+                [$this, 'allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext'],
+                10,
+                2
+            );
+        } else {
+            \add_filter(
+                'allowed_block_types',
+                [$this, 'allowGutenbergBlocksForCustomPostType'],
+                10,
+                2
+            );
+        }
 
         /**
          * Add the excerpt, which is the description of the
@@ -498,10 +513,24 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param string[]|bool $allowedBlocks The list of blocks, or `true` for all of them
      * @return string[]|bool The list of blocks, or `true` for all of them
      */
+    public function allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext(array|bool $allowedBlocks, WP_Block_Editor_Context $blockEditorContext): array|bool
+    {
+        return $this->allowGutenbergBlocksForCustomPostType(
+            $allowedBlocks,
+            $blockEditorContext->post
+        );
+    }
+
+    /**
+     * Restrict the Gutenberg blocks available for this Custom Post Type
+     *
+     * @param string[]|bool $allowedBlocks The list of blocks, or `true` for all of them
+     * @return string[]|bool The list of blocks, or `true` for all of them
+     */
     public function allowGutenbergBlocksForCustomPostType(array|bool $allowedBlocks, WP_Post $post): array|bool
     {
         /**
-         * Check it is this CPT
+         * Check if it is this CPT
          */
         if ($post->post_type == $this->getCustomPostType()) {
             if ($blocks = $this->getGutenbergBlocksForCustomPostType()) {
