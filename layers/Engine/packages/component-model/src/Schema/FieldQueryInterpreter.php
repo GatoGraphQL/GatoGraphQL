@@ -779,7 +779,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName] ?? SchemaDefinition::TYPE_MIXED;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $fieldOrDirectiveArgIsNonEmptyArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
+                $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
                 
                 /**
                  * This value will not be used with GraphQL, but can be used by PoP.
@@ -815,7 +815,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName,
                             json_encode($argValue)
                         );
-                    } elseif ($fieldOrDirectiveArgIsNonEmptyArrayType && $argValue === []) {
+                    } elseif ($fieldOrDirectiveArgIsNonNullArrayItemsType && $argValue === []) {
                         $errorMessage = sprintf(
                             $this->translationAPI->__('Argument \'%s\' cannot receive an empty array', 'pop-component-model'),
                             $argName
