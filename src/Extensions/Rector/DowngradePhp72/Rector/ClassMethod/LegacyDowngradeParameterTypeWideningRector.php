@@ -218,8 +218,12 @@ CODE_SAMPLE
              * within this class
              */
             // $childClassMethod = $this->nodeRepository->findClassMethod($childClassName, $methodName);
-            $childClassMethod = $this->nodeRepositoryFindClassMethod($childClassName, $methodName);
-            if (! $childClassMethod instanceof ClassMethod) {
+            // $childClassMethod = $this->nodeRepositoryFindClassMethod($childClassName, $methodName);
+            // if ($childClassMethod === null) {
+            //     continue;
+            // }
+            $childClassMethod = $childClassLike->getMethod($methodName);
+            if ($childClassMethod === null) {
                 continue;
             }
 
@@ -311,48 +315,43 @@ CODE_SAMPLE
         }
     }
 
-    /**
-     * Method `findClassMethod` in NodeRepository was removed on v0.11,
-     * hence add the needed code again via this "hack" function
-     *
-     * @source https://raw.githubusercontent.com/rectorphp/rector-src/0.10.6/packages/NodeCollector/NodeCollector/NodeRepository.php
-     */
-    private function nodeRepositoryFindClassMethod(string $className, string $methodName): ?ClassMethod
-    {
-        if (Strings::contains($methodName, '\\')) {
-            $message = sprintf('Class and method arguments are switched in "%s"', __METHOD__);
-            throw new ShouldNotHappenException($message);
-        }
+    // /**
+    //  * Method `findClassMethod` in NodeRepository was removed on v0.11,
+    //  * hence add the needed code again via this "hack" function
+    //  *
+    //  * @source https://raw.githubusercontent.com/rectorphp/rector-src/0.10.6/packages/NodeCollector/NodeCollector/NodeRepository.php
+    //  */
+    // private function nodeRepositoryFindClassMethod(string $className, string $methodName): ?ClassMethod
+    // {
+    //     if (Strings::contains($methodName, '\\')) {
+    //         $message = sprintf('Class and method arguments are switched in "%s"', __METHOD__);
+    //         throw new ShouldNotHappenException($message);
+    //     }
 
-        if (isset($this->classMethodsByType[$className][$methodName])) {
-            return $this->classMethodsByType[$className][$methodName];
-        }
+    //     if (isset($this->classMethodsByType[$className][$methodName])) {
+    //         return $this->classMethodsByType[$className][$methodName];
+    //     }
 
-        if (! $this->reflectionProvider->hasClass($className)) {
-            return null;
-        }
+    //     if (! $this->reflectionProvider->hasClass($className)) {
+    //         return null;
+    //     }
 
-        $classReflection = $this->reflectionProvider->getClass($className);
-        foreach ($classReflection->getParents() as $parentClassReflection) {
-            if (isset($this->classMethodsByType[$parentClassReflection->getName()][$methodName])) {
-                return $this->classMethodsByType[$parentClassReflection->getName()][$methodName];
-            }
-            /**
-             * This bit is an addition to the original source code
-             */
-            if ($classReflection->hasNativeMethod($methodName)) {
-                $methodReflection = $classReflection->getNativeMethod($methodName);
-                $classMethod = $this->reflectionAstResolver->resolveClassMethodFromMethodReflection($methodReflection);
-                if ($classMethod !== null) {
-                    if (! $classMethod instanceof ClassMethod) {
-                        throw new ShouldNotHappenException();
-                    }
-                    $this->classMethodsByType[$className][$methodName] = $classMethod;
-                    return $classMethod;
-                }
-            }
-        }
+    //     $classReflection = $this->reflectionProvider->getClass($className);
+    //     /**
+    //      * This bit is an addition to the original source code
+    //      */
+    //     if ($classReflection->hasNativeMethod($methodName)) {
+    //         $methodReflection = $classReflection->getNativeMethod($methodName);
+    //         $classMethod = $this->reflectionAstResolver->resolveClassMethodFromMethodReflection($methodReflection);
+    //         if ($classMethod !== null) {
+    //             if (! $classMethod instanceof ClassMethod) {
+    //                 throw new ShouldNotHappenException();
+    //             }
+    //             $this->classMethodsByType[$className][$methodName] = $classMethod;
+    //             return $classMethod;
+    //         }
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 }
