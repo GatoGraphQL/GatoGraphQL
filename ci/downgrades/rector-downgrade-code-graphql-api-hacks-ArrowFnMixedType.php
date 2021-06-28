@@ -10,10 +10,10 @@ require_once __DIR__ . '/rector-downgrade-code-shared-hacks-ArrowFnMixedType.php
 /**
  * Hack to fix bug.
  *
- * fn(mixed $foo) requires 2 steps to be downgraded:
+ * `fn(mixed $foo)` requires 2 steps to be downgraded:
  * 
- * 1. function(mixed $foo)
- * 2. function($foo)
+ *   1. function(mixed $foo)
+ *   2. function($foo)
  * 
  * Because of chained rules not taking place, manually execute the 2nd rule
  */
