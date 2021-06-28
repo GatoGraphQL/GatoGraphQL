@@ -53,6 +53,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dist_repo_name' => 'graphql-api-for-wp-dist',
             'additional_rector_configs' => [
                 __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
+                __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnMixedType.php',
             ],
             'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
             'scoping' => [
@@ -80,6 +81,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      */
     $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
         __DIR__ . '/ci/downgrades/rector-downgrade-code-hacks-CacheItem.php',
+        __DIR__ . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnMixedType.php',
     ]);
 
     $parameters = $containerConfigurator->parameters();
