@@ -58,9 +58,6 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 0, new StringType()),
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 2, new NullType()),
                 new AddParamTypeDeclaration(CacheTrait::class, 'get', 3, new NullType()),
-                // new AddParamTypeDeclaration(FilesystemTrait::class, 'doHave', 0, new NullType()),
-                // new AddParamTypeDeclaration(FilesystemTrait::class, 'doSave', 1, new NullType()),
-                // new AddParamTypeDeclaration(FilesystemCommonTrait::class, 'doClear', 0, new NullType()),
             ]),
         ]]);
 
