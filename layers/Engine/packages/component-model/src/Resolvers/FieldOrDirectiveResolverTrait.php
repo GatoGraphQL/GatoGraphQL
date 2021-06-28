@@ -142,11 +142,12 @@ trait FieldOrDirectiveResolverTrait
                         $fieldOrDirectiveName
                     );
                 } elseif ($fieldOrDirectiveArgIsArray
-                    && $fieldOrDirectiveArgumentValue === []
                     && $fieldOrDirectiveArgNonNullArrayItems
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    && in_array(null, $fieldOrDirectiveArgumentValue)
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot be empty', 'component-model'),
+                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                         $fieldOrDirectiveArgumentName,
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
@@ -230,11 +231,12 @@ trait FieldOrDirectiveResolverTrait
                         continue;
                     } elseif (
                         !$enumTypeFieldOrDirectiveArgMayBeArray
-                        && $fieldOrDirectiveArgumentValue === []
                         && $enumTypeFieldOrDirectiveArgNonNullArrayItems
+                        && is_array($fieldOrDirectiveArgumentValue)
+                        && in_array(null, $fieldOrDirectiveArgumentValue)
                     ) {
                         $errors[] = sprintf(
-                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                            $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                             $fieldOrDirectiveArgumentName,
                             $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                             $fieldOrDirectiveName
