@@ -815,7 +815,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName,
                             json_encode($argValue)
                         );
-                    } elseif ($fieldOrDirectiveArgIsNonNullArrayItemsType && is_array($argValue) && in_array(null, $argValue)) {
+                    } elseif ($fieldOrDirectiveArgIsNonNullArrayItemsType && is_array($argValue) && array_filter($argValue, fn ($arrayItem) => $arrayItem === null)) {
                         $errorMessage = sprintf(
                             $this->translationAPI->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
                             $argName

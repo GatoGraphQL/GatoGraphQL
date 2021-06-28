@@ -144,7 +144,7 @@ trait FieldOrDirectiveResolverTrait
                 } elseif ($fieldOrDirectiveArgIsArray
                     && $fieldOrDirectiveArgNonNullArrayItems
                     && is_array($fieldOrDirectiveArgumentValue)
-                    && in_array(null, $fieldOrDirectiveArgumentValue)
+                    && array_filter($fieldOrDirectiveArgumentValue, fn ($arrayItem) => $arrayItem === null)
                 ) {
                     $errors[] = sprintf(
                         $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
@@ -233,7 +233,7 @@ trait FieldOrDirectiveResolverTrait
                         !$enumTypeFieldOrDirectiveArgMayBeArray
                         && $enumTypeFieldOrDirectiveArgNonNullArrayItems
                         && is_array($fieldOrDirectiveArgumentValue)
-                        && in_array(null, $fieldOrDirectiveArgumentValue)
+                        && array_filter($fieldOrDirectiveArgumentValue, fn ($arrayItem) => $arrayItem === null)
                     ) {
                         $errors[] = sprintf(
                             $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
