@@ -13,12 +13,7 @@ class MenuItemTypeDataLoader extends AbstractTypeDataLoader
     {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
         return array_map(
-            /**
-             * Commented temporarily until Rector can downgrade union types on anonymous functions
-             * @see https://github.com/rectorphp/rector/issues/5989
-             */
-            // fn (string | int $id) => $menuItemTypeAPI->getMenuItem($id),
-            fn ($id) => $menuItemTypeAPI->getMenuItem($id),
+            fn (string | int $id) => $menuItemTypeAPI->getMenuItem($id),
             $ids
         );
     }

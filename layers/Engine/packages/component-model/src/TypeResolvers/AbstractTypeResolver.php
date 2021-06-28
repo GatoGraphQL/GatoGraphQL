@@ -172,17 +172,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         // Add the type before the ID
         $dbObjectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            /**
-             * Commented temporarily until Rector can downgrade union types on anonymous functions
-             * @see https://github.com/rectorphp/rector/issues/5989
-             */
-            // function (int | string $id) {
-            function ($id) {
-                return UnionTypeHelpers::getDBObjectComposedTypeAndID(
-                    $this,
-                    $id
-                );
-            },
+            fn (int | string $id) => UnionTypeHelpers::getDBObjectComposedTypeAndID(
+                $this,
+                $id
+            ),
             $dbObjectIDs
         );
         return is_array($dbObjectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
@@ -734,14 +727,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             }
             $ids_data_fields = array_filter(
                 $ids_data_fields,
-                /**
-                 * Commented temporarily until Rector can downgrade union types on anonymous functions
-                 * @see https://github.com/rectorphp/rector/issues/5989
-                 */
-                // function (int | string $id) use ($unresolvedResultItemIDs) {
-                function ($id) use ($unresolvedResultItemIDs) {
-                    return !in_array($id, $unresolvedResultItemIDs);
-                },
+                fn (int | string $id) => !in_array($id, $unresolvedResultItemIDs),
                 ARRAY_FILTER_USE_KEY
             );
         }
