@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Rector\DowngradePhp72\Rector\ClassMethod;
 
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\Type;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTypeChanger;
+use Rector\Core\Exception\ShouldNotHappenException;
 use Rector\Core\Rector\AbstractRector;
 use Rector\DowngradePhp72\NodeAnalyzer\NativeTypeClassTreeResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
@@ -20,12 +23,12 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @changelog https://www.php.net/manual/en/migration72.new-features.php#migration72.new-features.param-type-widening
- * @see https://3v4l.org/fOgSE
+ * Method `findClassMethod` in NodeRepository was removed on v0.11,
+ * hence add the needed code again via function nodeRepositoryFindClassMethod
  *
- * @see \Rector\Tests\DowngradePhp72\Rector\ClassMethod\DowngradeParameterTypeWideningRector\DowngradeParameterTypeWideningRectorTest
+ * @source https://raw.githubusercontent.com/rectorphp/rector-src/0.10.6/packages/NodeCollector/NodeCollector/NodeRepository.php
  */
-final class DowngradeParameterTypeWideningRector extends AbstractRector
+final class LegacyDowngradeParameterTypeWideningRector extends AbstractRector
 {
     /**
      * @var PhpDocTypeChanger
@@ -42,10 +45,16 @@ final class DowngradeParameterTypeWideningRector extends AbstractRector
      */
     private $typeFactory;
 
+    /**
+     * @var array<class-string, ClassMethod[]>
+     */
+    private $classMethodsByType = [];
+
     public function __construct(
         PhpDocTypeChanger $phpDocTypeChanger,
         NativeTypeClassTreeResolver $nativeTypeClassTreeResolver,
-        TypeFactory $typeFactory
+        TypeFactory $typeFactory,
+        private ReflectionProvider $reflectionProvider,
     ) {
         $this->phpDocTypeChanger = $phpDocTypeChanger;
         $this->nativeTypeClassTreeResolver = $nativeTypeClassTreeResolver;
@@ -202,7 +211,12 @@ CODE_SAMPLE
                 continue;
             }
 
-            $childClassMethod = $this->nodeRepository->findClassMethod($childClassName, $methodName);
+            /**
+             * Function `findClassMethod` has been removed, so copy/pasted the function
+             * within this class
+             */
+            // $childClassMethod = $this->nodeRepository->findClassMethod($childClassName, $methodName);
+            $childClassMethod = $this->nodeRepositoryFindClassMethod($childClassName, $methodName);
             if (! $childClassMethod instanceof ClassMethod) {
                 continue;
             }
@@ -293,5 +307,36 @@ CODE_SAMPLE
             $this->removeParamTypeFromMethod($classLike, $position, $currentClassMethod);
             $this->removeParamTypeFromMethodForChildren($className, $methodName, $position);
         }
+    }
+
+    /**
+     * Method `findClassMethod` in NodeRepository was removed on v0.11,
+     * hence add the needed code again via this "hack" function
+     *
+     * @source https://raw.githubusercontent.com/rectorphp/rector-src/0.10.6/packages/NodeCollector/NodeCollector/NodeRepository.php
+     */
+    private function nodeRepositoryFindClassMethod(string $className, string $methodName): ?ClassMethod
+    {
+        if (Strings::contains($methodName, '\\')) {
+            $message = sprintf('Class and method arguments are switched in "%s"', __METHOD__);
+            throw new ShouldNotHappenException($message);
+        }
+
+        if (isset($this->classMethodsByType[$className][$methodName])) {
+            return $this->classMethodsByType[$className][$methodName];
+        }
+
+        if (! $this->reflectionProvider->hasClass($className)) {
+            return null;
+        }
+
+        $classReflection = $this->reflectionProvider->getClass($className);
+        foreach ($classReflection->getParents() as $parentClassReflection) {
+            if (isset($this->classMethodsByType[$parentClassReflection->getName()][$methodName])) {
+                return $this->classMethodsByType[$parentClassReflection->getName()][$methodName];
+            }
+        }
+
+        return null;
     }
 }
