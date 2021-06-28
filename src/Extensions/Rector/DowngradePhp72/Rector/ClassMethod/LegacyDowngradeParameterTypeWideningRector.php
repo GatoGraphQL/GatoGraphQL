@@ -302,44 +302,4 @@ CODE_SAMPLE
             $this->removeParamTypeFromMethodForChildren($className, $methodName, $position);
         }
     }
-
-    // /**
-    //  * Method `findClassMethod` in NodeRepository was removed on v0.11,
-    //  * hence add the needed code again via this "hack" function
-    //  *
-    //  * @source https://raw.githubusercontent.com/rectorphp/rector-src/0.10.6/packages/NodeCollector/NodeCollector/NodeRepository.php
-    //  */
-    // private function nodeRepositoryFindClassMethod(string $className, string $methodName): ?ClassMethod
-    // {
-    //     if (Strings::contains($methodName, '\\')) {
-    //         $message = sprintf('Class and method arguments are switched in "%s"', __METHOD__);
-    //         throw new ShouldNotHappenException($message);
-    //     }
-
-    //     if (isset($this->classMethodsByType[$className][$methodName])) {
-    //         return $this->classMethodsByType[$className][$methodName];
-    //     }
-
-    //     if (! $this->reflectionProvider->hasClass($className)) {
-    //         return null;
-    //     }
-
-    //     $classReflection = $this->reflectionProvider->getClass($className);
-    //     /**
-    //      * This bit is an addition to the original source code
-    //      */
-    //     if ($classReflection->hasNativeMethod($methodName)) {
-    //         $methodReflection = $classReflection->getNativeMethod($methodName);
-    //         $classMethod = $this->reflectionAstResolver->resolveClassMethodFromMethodReflection($methodReflection);
-    //         if ($classMethod !== null) {
-    //             if (! $classMethod instanceof ClassMethod) {
-    //                 throw new ShouldNotHappenException();
-    //             }
-    //             $this->classMethodsByType[$className][$methodName] = $classMethod;
-    //             return $classMethod;
-    //         }
-    //     }
-
-    //     return null;
-    // }
 }
