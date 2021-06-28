@@ -20,8 +20,19 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
     $containerConfigurator->import(DowngradeSetList::PHP_80);
     $containerConfigurator->import(DowngradeSetList::PHP_74);
     $containerConfigurator->import(DowngradeSetList::PHP_73);
-    $containerConfigurator->import(DowngradeSetList::PHP_72);
-
+    /**
+     * We can't run `DowngradeParameterTypeWideningRector` because it takes too long.
+     * So execute all rules from the downgrade set, skipping this rule.
+     * 
+     * @see https://github.com/leoloso/PoP/issues/715
+     */
+    // $containerConfigurator->import(DowngradeSetList::PHP_72);
+    $services = $containerConfigurator->services();
+    $services->set(DowngradeObjectTypeDeclarationRector::class);
+    // $services->set(DowngradeParameterTypeWideningRector::class);
+    $services->set(DowngradePregUnmatchedAsNullConstantRector::class);
+    $services->set(DowngradeStreamIsattyRector::class);
+    
     /**
      * Hack to fix bug.
      *
@@ -37,7 +48,6 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
      *
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
-    $services = $containerConfigurator->services();
     $services->set(AddParamTypeDeclarationInTraitRector::class)
         ->call('configure', [[
             AddParamTypeDeclarationInTraitRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
