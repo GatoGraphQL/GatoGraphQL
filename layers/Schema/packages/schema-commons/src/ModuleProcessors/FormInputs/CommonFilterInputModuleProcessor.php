@@ -100,7 +100,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function isSchemaFilterInputNonEmptyArrayType(array $module): bool
+    public function isSchemaFilterInputNonNullArrayItemsType(array $module): bool
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_IDS => true,

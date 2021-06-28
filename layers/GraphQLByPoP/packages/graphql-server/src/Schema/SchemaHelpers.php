@@ -19,7 +19,7 @@ class SchemaHelpers
      * - field response: isNonNullable
      * - field argument: isMandatory (its provided value can still be null)
      */
-    public static function getTypeToOutputInSchema(string $type, ?bool $isArray = false, ?bool $isNonEmptyArray = false, ?bool $isNonNullableOrMandatory = false): string
+    public static function getTypeToOutputInSchema(string $type, ?bool $isArray = false, ?bool $isNonNullArrayItems = false, ?bool $isNonNullableOrMandatory = false): string
     {
         // Convert the type name to standards by GraphQL
         $convertedType = self::convertTypeNameToGraphQLStandard($type);
@@ -29,7 +29,7 @@ class SchemaHelpers
             $convertedType = sprintf(
                 '[%s%s]',
                 $convertedType,
-                $isNonEmptyArray ? '!' : ''
+                $isNonNullArrayItems ? '!' : ''
             );
         }
         if ($isNonNullableOrMandatory) {

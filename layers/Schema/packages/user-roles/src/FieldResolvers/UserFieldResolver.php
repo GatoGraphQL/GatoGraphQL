@@ -51,7 +51,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             'roles'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY
-                | SchemaTypeModifiers::NON_EMPTY_ARRAY,
+                | SchemaTypeModifiers::NON_NULL_ARRAY_ITEMS,
             'capabilities'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY,

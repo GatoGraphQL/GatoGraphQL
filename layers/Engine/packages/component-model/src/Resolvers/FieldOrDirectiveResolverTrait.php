@@ -126,7 +126,7 @@ trait FieldOrDirectiveResolverTrait
                     continue;
                 }
                 $fieldOrDirectiveArgIsArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $fieldOrDirectiveArgNonEmtpyArray = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false;
+                $fieldOrDirectiveArgNonNullArrayItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
                 if ($fieldOrDirectiveArgIsArray && !is_array($fieldOrDirectiveArgumentValue)) {
                     $errors[] = sprintf(
                         $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
@@ -142,11 +142,12 @@ trait FieldOrDirectiveResolverTrait
                         $fieldOrDirectiveName
                     );
                 } elseif ($fieldOrDirectiveArgIsArray
-                    && $fieldOrDirectiveArgumentValue === []
-                    && $fieldOrDirectiveArgNonEmtpyArray
+                    && $fieldOrDirectiveArgNonNullArrayItems
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    && array_filter($fieldOrDirectiveArgumentValue, fn ($arrayItem) => $arrayItem === null)
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot be empty', 'component-model'),
+                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                         $fieldOrDirectiveArgumentName,
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
@@ -216,7 +217,7 @@ trait FieldOrDirectiveResolverTrait
                     SchemaDefinition::TYPE_MIXED,
                 ]);
                 $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $enumTypeFieldOrDirectiveArgNonEmptyArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_EMPTY_ARRAY] ?? false;
+                $enumTypeFieldOrDirectiveArgNonNullArrayItems = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
                 // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
                 $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
                 if ($enumTypeFieldOrDirectiveArgIsArray) {
@@ -230,11 +231,12 @@ trait FieldOrDirectiveResolverTrait
                         continue;
                     } elseif (
                         !$enumTypeFieldOrDirectiveArgMayBeArray
-                        && $fieldOrDirectiveArgumentValue === []
-                        && $enumTypeFieldOrDirectiveArgNonEmptyArray
+                        && $enumTypeFieldOrDirectiveArgNonNullArrayItems
+                        && is_array($fieldOrDirectiveArgumentValue)
+                        && array_filter($fieldOrDirectiveArgumentValue, fn ($arrayItem) => $arrayItem === null)
                     ) {
                         $errors[] = sprintf(
-                            $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                            $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                             $fieldOrDirectiveArgumentName,
                             $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                             $fieldOrDirectiveName
