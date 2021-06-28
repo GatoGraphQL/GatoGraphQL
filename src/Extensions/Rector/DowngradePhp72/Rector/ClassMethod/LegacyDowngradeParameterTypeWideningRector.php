@@ -15,6 +15,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\Type;
 use Rector\BetterPhpDocParser\PhpDocManipulator\PhpDocTypeChanger;
 use Rector\Core\Exception\ShouldNotHappenException;
+use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\Rector\AbstractRector;
 use Rector\DowngradePhp72\NodeAnalyzer\NativeTypeClassTreeResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
@@ -55,6 +56,7 @@ final class LegacyDowngradeParameterTypeWideningRector extends AbstractRector
         NativeTypeClassTreeResolver $nativeTypeClassTreeResolver,
         TypeFactory $typeFactory,
         private ReflectionProvider $reflectionProvider,
+        private AstResolver $reflectionAstResolver,
     ) {
         $this->phpDocTypeChanger = $phpDocTypeChanger;
         $this->nativeTypeClassTreeResolver = $nativeTypeClassTreeResolver;
@@ -334,6 +336,20 @@ CODE_SAMPLE
         foreach ($classReflection->getParents() as $parentClassReflection) {
             if (isset($this->classMethodsByType[$parentClassReflection->getName()][$methodName])) {
                 return $this->classMethodsByType[$parentClassReflection->getName()][$methodName];
+            }
+            /**
+             * This bit is an addition to the original source code
+             */
+            if ($classReflection->hasNativeMethod($methodName)) {
+                $methodReflection = $classReflection->getNativeMethod($methodName);
+                $classMethod = $this->reflectionAstResolver->resolveClassMethodFromMethodReflection($methodReflection);
+                if ($classMethod !== null) {
+                    if (! $classMethod instanceof ClassMethod) {
+                        throw new ShouldNotHappenException();
+                    }
+                    $this->classMethodsByType[$className][$methodName] = $classMethod;
+                    return $classMethod;
+                }
             }
         }
 
