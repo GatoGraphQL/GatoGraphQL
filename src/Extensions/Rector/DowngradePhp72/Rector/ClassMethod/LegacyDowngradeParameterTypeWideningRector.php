@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * Method `findClassMethod` in NodeRepository was removed on v0.11,
- * hence add the needed code again via function nodeRepositoryFindClassMethod
+ * hence the original code has been modified somewhat
  *
  * @source https://raw.githubusercontent.com/rectorphp/rector-src/0.10.6/packages/NodeCollector/NodeCollector/NodeRepository.php
  */
