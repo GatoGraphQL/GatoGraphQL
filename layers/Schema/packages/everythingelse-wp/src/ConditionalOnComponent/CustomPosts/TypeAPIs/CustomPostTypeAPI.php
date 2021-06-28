@@ -12,7 +12,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
  */
 class CustomPostTypeAPI extends \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
 {
-    public function getExcerpt($customPostObjectOrID): ?string
+    public function getExcerpt(string | int | object $customPostObjectOrID): ?string
     {
         list(
             $customPost,
