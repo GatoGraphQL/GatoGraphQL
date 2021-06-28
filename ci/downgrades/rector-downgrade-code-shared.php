@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 use PHPStan\Type\NullType;
 use PHPStan\Type\StringType;
-use PoP\PoP\Extensions\Rector\DowngradePhp72\Rector\ClassMethod\LegacyDowngradeParameterTypeWideningRector;
+use PoP\PoP\Extensions\Rector\Set\ValueObject\CustomDowngradeSetList;
 use PoP\PoP\Extensions\Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationInTraitRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Rector\DowngradePhp72\Rector\FuncCall\DowngradePregUnmatchedAsNullConstantRector;
-use Rector\DowngradePhp72\Rector\FuncCall\DowngradeStreamIsattyRector;
-use Rector\DowngradePhp72\Rector\FunctionLike\DowngradeObjectTypeDeclarationRector;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\TypeDeclaration\ValueObject\AddParamTypeDeclaration;
 use Symfony\Component\Cache\Traits\AbstractAdapterTrait;
@@ -34,11 +31,7 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
      * @see https://github.com/leoloso/PoP/issues/715
      */
     // $containerConfigurator->import(DowngradeSetList::PHP_72);
-    $services = $containerConfigurator->services();
-    $services->set(DowngradeObjectTypeDeclarationRector::class);
-    $services->set(DowngradePregUnmatchedAsNullConstantRector::class);
-    $services->set(DowngradeStreamIsattyRector::class);
-    $services->set(LegacyDowngradeParameterTypeWideningRector::class);
+    $containerConfigurator->import(CustomDowngradeSetList::PHP_72);
     /**
      * Hack to fix bug.
      *
@@ -54,6 +47,7 @@ function doCommonContainerConfiguration(ContainerConfigurator $containerConfigur
      *
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
+    $services = $containerConfigurator->services();
     $services->set(AddParamTypeDeclarationInTraitRector::class)
         ->call('configure', [[
             AddParamTypeDeclarationInTraitRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
