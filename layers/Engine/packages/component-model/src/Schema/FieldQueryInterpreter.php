@@ -1087,14 +1087,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function castAndValidateFieldArguments(TypeResolverInterface $typeResolver, array $castedFieldArgs, array &$failedCastingFieldArgErrorMessages, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
-        if (
-            // Temporarily commented out until Rector can downgrade `mixed` in anonymous functions
-            // @see https://github.com/leoloso/PoP/issues/626
-            // $failedCastingFieldArgs = array_filter($castedFieldArgs, function (mixed $fieldArgValue) {
-            $failedCastingFieldArgs = array_filter($castedFieldArgs, function ($fieldArgValue) {
-                return is_null($fieldArgValue);
-            })
-        ) {
+        if ($failedCastingFieldArgs = array_filter($castedFieldArgs, fn (mixed $fieldArgValue) => is_null($fieldArgValue))) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
