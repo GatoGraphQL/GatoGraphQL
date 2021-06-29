@@ -39,7 +39,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Improved support for PHP 8.0 (fixed several issues)
 - PHP notice `"is_singular was called incorrectly"` in WordPress 5.8
 - When a directive fails, the field is set to `null` in the response
-- Failing an input coercion produces an error (previously it produced a warning, printed under `extensions`)
+- A failing input coercion produces an error (previously it produced a warning, printed under `extensions`)
 
 ## 0.7.12/13 - 2021-02-23
 
