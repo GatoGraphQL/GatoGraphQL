@@ -777,7 +777,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                  * 
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
-                $fieldArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE] ?? SchemaDefinition::TYPE_MIXED;
+                $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE] ?? SchemaDefinition::TYPE_MIXED;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
@@ -798,7 +798,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                  * Whenever the value may be an array, the server will skip those validations
                  * to check if an input is array or not (and throw an error).
                  */
-                $fieldOrDirectiveArgMayBeArrayType = in_array($fieldArgType, [
+                $fieldOrDirectiveArgMayBeArrayType = in_array($fieldOrDirectiveArgType, [
                     SchemaDefinition::TYPE_INPUT_OBJECT,
                     SchemaDefinition::TYPE_OBJECT,
                     SchemaDefinition::TYPE_MIXED,
@@ -873,7 +873,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     // If the value is an array of arrays, then cast each subelement to the item type
                     $argValue = array_map(
                         fn ($arrayArgValueElem) => array_map(
-                            fn ($arrayOfArraysArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayOfArraysArgValueElem),
+                            fn ($arrayOfArraysArgValueElem) => $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $arrayOfArraysArgValueElem),
                             $arrayArgValueElem
                         ),
                         $argValue
@@ -881,12 +881,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 } elseif ($fieldOrDirectiveArgIsArrayType) {
                     // If the value is an array, then cast each element to the item type
                     $argValue = array_map(
-                        fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
+                        fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $arrayArgValueElem),
                         $argValue
                     );
                 } else {
                     // Otherwise, simply cast the given value directly
-                    $argValue = $this->typeCastingExecuter->cast($fieldArgType, $argValue);
+                    $argValue = $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
                 }
 
                 // If the response is an error, extract the error message and set value to null
