@@ -410,13 +410,20 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         bool $allowNullValues = false
     ): array {
         // If there was an error, the value will be NULL. In this case, remove it
-        return array_filter($fieldOrDirectiveArgs, function ($elem) use ($allowNullValues) {
-            // Remove only NULL values and Errors. Keep '', 0 and false
-            return !GeneralUtils::isError($elem)
-                && ($elem !== null
-                    || ($elem === null && $allowNullValues)
-                );
-        });
+        return array_filter(
+            $fieldOrDirectiveArgs,
+            function ($elem) use ($allowNullValues) {
+                // // If the input is `[[String]]`, then must validate the subitems
+                // if (is_array($elem)) {
+                //     return $this->filterFieldOrDirectiveArgs($elem, $allowNullValues);
+                // }
+                // Remove only NULL values and Errors. Keep '', 0 and false
+                return !GeneralUtils::isError($elem)
+                    && ($elem !== null
+                        || ($elem === null && $allowNullValues)
+                    );
+            }
+        );
     }
 
     public function extractFieldArgumentsForSchema(
@@ -873,8 +880,17 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 }
 
                 // Cast (or "coerce" in GraphQL terms) the value
-                // If the value is an array, then cast each element to the item type
-                if ($fieldOrDirectiveArgIsArrayType) {
+                if ($fieldOrDirectiveArgIsArrayOfArraysType) {
+                    // If the value is an array of arrays, then cast each subelement to the item type
+                    $argValue = array_map(
+                        fn ($arrayArgValueElem) => array_map(
+                            fn ($arrayOfArraysArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayOfArraysArgValueElem),
+                            $arrayArgValueElem
+                        ),
+                        $argValue
+                    );
+                } elseif ($fieldOrDirectiveArgIsArrayType) {
+                    // If the value is an array, then cast each element to the item type
                     $argValue = array_map(
                         fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldArgType, $arrayArgValueElem),
                         $argValue
@@ -1131,7 +1147,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function castAndValidateFieldArguments(TypeResolverInterface $typeResolver, array $castedFieldArgs, array &$failedCastingFieldArgErrorMessages, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
-        if ($failedCastingFieldArgs = array_filter($castedFieldArgs, fn (mixed $fieldArgValue) => is_null($fieldArgValue))) {
+        if ($failedCastingFieldArgs = array_filter(
+            $castedFieldArgs,
+            fn (mixed $fieldArgValue) => is_null($fieldArgValue)
+        )) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
