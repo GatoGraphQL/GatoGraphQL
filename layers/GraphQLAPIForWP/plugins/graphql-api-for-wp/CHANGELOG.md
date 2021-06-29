@@ -13,22 +13,34 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Menus
   - Meta values
   - Settings
-  - User posts
+  - Logged-in user's posts
 - "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
+- Introduced scalar type `AnyScalar`, representing any of the built-in scalars (`String`, `Int`, `Boolean`, `Float` and `ID`)
 - Composable directives
 - Cache is saved under the plugin folder
 - Split the GraphQL endpoint for accessing data for the WordPress editor into two:
   1. `GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
   2. `GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT`
 - Option to display the Settings page in long form, or using tabs
+- Further support of field types in the schema:
+  - Lists with non-null items (`[String!]`)
+  - Lists of lists (`[[String]]`)
+- Input coercion: accept a single value when a list is expected 
+- Avoid deprecation notices in WordPress 5.8, by using the new filter hooks:
+  - `block_categories_all`
+  - `allowed_block_types_all`
 
 ### Backwards-breaking changes:
 
 - Simplified the codebase, using container services everywhere
+- Use bitwise operations and flags to augment a field's type (eg: `[String]!` => `SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY`)
 
 ### Fixed:
 
 - Improved support for PHP 8.0 (fixed several issues)
+- PHP notice `"is_singular was called incorrectly"` in WordPress 5.8
+- When a directive fails, the field is set to `null` in the response (previously the directive was ignored, and the field still printed)
+- A failing input coercion produces an error (previously it produced a warning, printed under `extensions`)
 
 ## 0.7.12/13 - 2021-02-23
 
