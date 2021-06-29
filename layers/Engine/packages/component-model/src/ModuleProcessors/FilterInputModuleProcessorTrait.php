@@ -46,12 +46,16 @@ trait FilterInputModuleProcessorTrait
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
-            if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
+            // If setting the "array of arrays" flag, there's no need to set the "array" flag
+            $isArrayOfArrays = $filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayOfArraysType($module);
+            if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)
+                || $isArrayOfArrays
+            ) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
                 if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsNonNullableItemsInArrayType($module)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
                 }
-                if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayOfArraysType($module)) {
+                if ($isArrayOfArrays) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
                     if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType($module)) {
                         $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;

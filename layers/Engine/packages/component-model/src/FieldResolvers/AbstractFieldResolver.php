@@ -310,12 +310,16 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
                 }
-                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY) {
+                // If setting the "array of arrays" flag, there's no need to set the "array" flag
+                $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
+                    || $isArrayOfArrays
+                ) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
                     if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
                         $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
                     }
-                    if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) {
+                    if ($isArrayOfArrays) {
                         $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
                         if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
                             $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
