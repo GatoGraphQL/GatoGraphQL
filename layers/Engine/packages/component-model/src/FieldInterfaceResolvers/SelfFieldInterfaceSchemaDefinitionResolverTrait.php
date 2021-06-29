@@ -41,21 +41,6 @@ trait SelfFieldInterfaceSchemaDefinitionResolverTrait
         return [];
     }
 
-    abstract protected function hasSchemaFieldVersion(string $fieldName): bool;
-
-    public function getFilteredSchemaFieldArgs(string $fieldName): array
-    {
-        $schemaFieldArgs = $this->getSchemaFieldArgs($fieldName);
-        /**
-         * Add the "versionConstraint" param. Add it at the end, so it doesn't affect the order of params for "orderedSchemaFieldArgs"
-         */
-        $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-            $schemaFieldArgs,
-            $this->hasSchemaFieldVersion($fieldName)
-        );
-        return $schemaFieldArgs;
-    }
-
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
     {
         return null;
