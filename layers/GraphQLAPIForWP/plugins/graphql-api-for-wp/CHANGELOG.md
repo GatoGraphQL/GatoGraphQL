@@ -13,7 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Menus
   - Meta values
   - Settings
-  - User posts
+  - Logged-in user's posts
 - "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
 - Composable directives
 - Cache is saved under the plugin folder
