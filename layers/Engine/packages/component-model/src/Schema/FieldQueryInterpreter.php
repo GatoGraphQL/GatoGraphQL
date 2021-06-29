@@ -405,12 +405,17 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $fieldArgumentNameDefaultValues;
     }
 
-    protected function filterFieldOrDirectiveArgs($fieldOrDirectiveArgs): array
-    {
+    protected function filterFieldOrDirectiveArgs(
+        array $fieldOrDirectiveArgs,
+        bool $allowNullValues = false
+    ): array {
         // If there was an error, the value will be NULL. In this case, remove it
-        return array_filter($fieldOrDirectiveArgs, function ($elem) {
+        return array_filter($fieldOrDirectiveArgs, function ($elem) use ($allowNullValues) {
             // Remove only NULL values and Errors. Keep '', 0 and false
-            return !is_null($elem) && !GeneralUtils::isError($elem);
+            return !GeneralUtils::isError($elem)
+                && ($elem !== null
+                    || ($elem === null && $allowNullValues)
+                );
         });
     }
 
@@ -1027,7 +1032,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // If any casting can't be done, show an error
         if (
             $failedCastingDirectiveArgs = array_filter($castedDirectiveArgs, function ($directiveArgValue) {
-                return is_null($directiveArgValue);
+                return $directiveArgValue === null;
             })
         ) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
@@ -1151,8 +1156,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
-            // Remove the white spaces before and after
-            if ($fieldArgValue = trim($fieldArgValue)) {
+            // The string "null" means `null`
+            if ($fieldArgValue === 'null') {
+                $fieldArgValue = null;
+            } elseif ($fieldArgValue = trim($fieldArgValue)) {
+                // Remove the white spaces before and after
                 // Special case: when wrapping a string between quotes (eg: to avoid it being treated as a field, such as: posts(searchfor:"image(vertical)")),
                 // the quotes are converted, from:
                 // "value"
@@ -1259,9 +1267,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         }
         if (is_array($fieldArgValue)) {
             // Resolve each element the same way
-            return $this->filterFieldOrDirectiveArgs(array_map(function ($arrayValueElem) use ($variables) {
-                return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
-            }, $fieldArgValue));
+            // `null` values in the array are permitted
+            return $this->filterFieldOrDirectiveArgs(
+                array_map(function ($arrayValueElem) use ($variables) {
+                    return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
+                }, $fieldArgValue),
+                true
+            );
         }
 
         return $fieldArgValue;

@@ -738,8 +738,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         $elems = [];
         foreach ($fieldArgs as $fieldArgKey => $fieldArgValue) {
-            // Convert from array to its representation of array in a string
-            if (is_array($fieldArgValue)) {
+            // If it is null, the unquoted `null` string will be represented as null
+            if ($fieldArgValue === null) {
+                $fieldArgValue = 'null';
+            } elseif (is_array($fieldArgValue)) {
+                // Convert from array to its representation of array in a string
                 $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
             } elseif (is_string($fieldArgValue)) {
                 // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
@@ -809,10 +812,13 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
                     $this->getArrayAsStringForQuery($value);
             } else {
-                // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
-                // inside of it (eg: it if has a ",", it will split the element there when decoding again
-                // from string to array in `getField`)
-                if (is_string($value)) {
+                // If it is null, the unquoted `null` string will be represented as null
+                if ($value === null) {
+                    $value = 'null';
+                } elseif (is_string($value)) {
+                    // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
+                    // inside of it (eg: it if has a ",", it will split the element there when decoding again
+                    // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
                 }
                 $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER . $value;
