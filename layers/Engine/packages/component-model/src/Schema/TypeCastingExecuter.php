@@ -92,7 +92,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 }
                 return $value;
             case SchemaDefinition::TYPE_STRING:
-                return (string)$value;
+                return (string) $value;
             case SchemaDefinition::TYPE_URL:
             case SchemaDefinition::TYPE_EMAIL:
             case SchemaDefinition::TYPE_IP:
@@ -137,16 +137,16 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 }
                 return $value;
             case SchemaDefinition::TYPE_INT:
-                return CastToType::_int($value);
+                return (int) CastToType::_int($value);
             case SchemaDefinition::TYPE_FLOAT:
-                return CastToType::_float($value);
+                return (float) CastToType::_float($value);
             case SchemaDefinition::TYPE_BOOL:
                 // Watch out! In Library CastToType, an empty string is not false, but it's NULL
                 // But for us it must be false, since calling query ?query=and([true,false]) gets transformed to the $field string "[1,]"
                 if ($value == '') {
                     return false;
                 }
-                return CastToType::_bool($value);
+                return (bool) CastToType::_bool($value);
             case SchemaDefinition::TYPE_TIME:
                 $converted = strtotime($value);
                 if ($converted === false) {
