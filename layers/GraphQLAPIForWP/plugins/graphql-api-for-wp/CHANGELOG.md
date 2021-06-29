@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Settings
   - Logged-in user's posts
 - "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
+- Introduced scalar type `AnyScalar`, representing any of the built-in scalars (`String`, `Int`, `Boolean`, `Float` and `ID`)
 - Composable directives
 - Cache is saved under the plugin folder
 - Split the GraphQL endpoint for accessing data for the WordPress editor into two:
