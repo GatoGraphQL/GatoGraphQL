@@ -1151,8 +1151,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
-            // Remove the white spaces before and after
-            if ($fieldArgValue = trim($fieldArgValue)) {
+            // The string "null" means `null`
+            if ($fieldArgValue === 'null') {
+                $fieldArgValue = null;
+            } elseif ($fieldArgValue = trim($fieldArgValue)) {
+                // Remove the white spaces before and after
                 // Special case: when wrapping a string between quotes (eg: to avoid it being treated as a field, such as: posts(searchfor:"image(vertical)")),
                 // the quotes are converted, from:
                 // "value"
