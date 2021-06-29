@@ -365,9 +365,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
         $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
             $type,
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false,
+            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
         );
         $this->introduceSDLNotationToFieldOrDirectiveArgs($fieldSchemaDefinitionPath);
     }
@@ -382,9 +384,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] ?? $this->schemaDefinitionService->getDefaultType();
                 $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
                     $type,
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false,
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
                 );
                 // If it is an input object, it may have its own args to also convert
                 if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {
@@ -392,9 +396,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         $inputFieldType = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE];
                         $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
                             $inputFieldType,
+                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null
+                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false,
+                            $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
                         );
                     }
                 }

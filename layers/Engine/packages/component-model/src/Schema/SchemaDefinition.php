@@ -14,6 +14,8 @@ class SchemaDefinition
     const ARGNAME_NON_NULLABLE = 'nonNullable';
     const ARGNAME_IS_ARRAY = 'isArray';
     const ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY = 'isNonNullableItemsInArray';
+    const ARGNAME_IS_ARRAY_OF_ARRAYS = 'isArrayOfArrays';
+    const ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS = 'isNonNullableItemsInArrayOfArrays';
     const ARGNAME_REFERENCED_TYPE = 'referencedType';
     const ARGNAME_DESCRIPTION = 'description';
     const ARGNAME_VERSION = 'version';
