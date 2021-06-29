@@ -804,6 +804,24 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     SchemaDefinition::TYPE_MIXED,
                 ]);
                 if (!$fieldOrDirectiveArgMayBeArrayType) {
+                    /**
+                     * Support passing a single value where a list is expected:
+                     * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+                     * 
+                     * Defined in the GraphQL spec.
+                     * 
+                     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+                     */
+                    if (!is_array($argValue)
+                        && ComponentConfiguration::coerceInputFromSingleValueToList()
+                    ) {
+                        if ($fieldOrDirectiveArgIsArrayOfArraysType) {
+                            $argValue = [[$argValue]];
+                        } elseif ($fieldOrDirectiveArgIsArrayType) {
+                            $argValue = [$argValue];
+                        }
+                    }
+                    
                     // Validate that the expected array/non-array input is provided
                     $errorMessage = null;
                     if (!$fieldOrDirectiveArgIsArrayType

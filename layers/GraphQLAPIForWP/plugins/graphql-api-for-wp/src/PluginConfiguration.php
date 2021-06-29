@@ -744,6 +744,11 @@ class PluginConfiguration
              * If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
              */
             ComponentModelEnvironment::REMOVE_FIELD_IF_DIRECTIVE_FAILED => true,
+            /**
+             * Enable passing a single value where a list is expected:
+             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+             */
+            ComponentModelEnvironment::COERCE_INPUT_FROM_SINGLE_VALUE_TO_LIST => true,
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
