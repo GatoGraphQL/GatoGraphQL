@@ -29,7 +29,7 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return false;
     }
-    public function isSchemaFilterInputNonNullArrayItemsType(array $module): bool
+    public function isSchemaFilterInputNonNullItemsInArrayType(array $module): bool
     {
         return false;
     }

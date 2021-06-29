@@ -68,7 +68,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function isSchemaFilterInputNonNullArrayItemsType(array $module): bool
+    public function isSchemaFilterInputNonNullItemsInArrayType(array $module): bool
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_EMAILS => true,
