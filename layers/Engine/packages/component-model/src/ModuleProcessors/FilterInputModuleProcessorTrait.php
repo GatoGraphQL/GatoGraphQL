@@ -48,7 +48,7 @@ trait FilterInputModuleProcessorTrait
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                if ($filterSchemaDefinitionResolver->isSchemaFilterInputNonNullItemsInArrayType($module)) {
+                if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsNonNullableItemsInArrayType($module)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ITEMS_IN_ARRAY] = true;
                 }
             }
