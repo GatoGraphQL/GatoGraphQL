@@ -413,10 +413,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return array_filter(
             $fieldOrDirectiveArgs,
             function ($elem) use ($allowNullValues) {
-                // // If the input is `[[String]]`, then must validate the subitems
-                // if (is_array($elem)) {
-                //     return $this->filterFieldOrDirectiveArgs($elem, $allowNullValues);
-                // }
+                // If the input is `[[String]]`, must then validate if any subitem is Error
+                if (is_array($elem)) {
+                    return $this->filterFieldOrDirectiveArgs($elem, true);
+                }
                 // Remove only NULL values and Errors. Keep '', 0 and false
                 return !GeneralUtils::isError($elem)
                     && ($elem !== null
@@ -1144,12 +1144,40 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         return $castedDirectiveArgs;
     }
 
-    protected function castAndValidateFieldArguments(TypeResolverInterface $typeResolver, array $castedFieldArgs, array &$failedCastingFieldArgErrorMessages, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): array
+    /**
+     * Any element that is null or error,
+     * or any array that contains an error
+     */
+    protected function getFailedCastingFieldArgs(
+        array $castedFieldArgs,
+        bool $isNullValueFailing
+    ): array
     {
-        // If any casting can't be done, show an error
-        if ($failedCastingFieldArgs = array_filter(
+        return array_filter(
             $castedFieldArgs,
-            fn (mixed $fieldArgValue) => is_null($fieldArgValue)
+            fn (mixed $fieldArgValue) =>
+                GeneralUtils::isError($fieldArgValue)
+                || ($isNullValueFailing && $fieldArgValue === null)
+                || (is_array($fieldArgValue) && $this->getFailedCastingFieldArgs(
+                    $fieldArgValue,
+                    false
+                ))
+        );
+    }
+
+    protected function castAndValidateFieldArguments(
+        TypeResolverInterface $typeResolver,
+        array $castedFieldArgs,
+        array &$failedCastingFieldArgErrorMessages,
+        string $field,
+        array $fieldArgs,
+        array &$schemaErrors,
+        array &$schemaWarnings
+    ): array {
+        // If any casting can't be done, show an error
+        if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs(
+            $castedFieldArgs,
+            true
         )) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
