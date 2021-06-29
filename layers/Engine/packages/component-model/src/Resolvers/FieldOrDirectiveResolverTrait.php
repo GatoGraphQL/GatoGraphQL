@@ -161,6 +161,20 @@ trait FieldOrDirectiveResolverTrait
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
+                } elseif (!$fieldOrDirectiveArgIsArrayOfArrays
+                    && is_array($fieldOrDirectiveArgumentValue)
+                    // Check if any element is not an array
+                    && array_filter(
+                        $fieldOrDirectiveArgumentValue,
+                        fn ($arrayItem) => is_array($arrayItem)
+                    )
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
                 } elseif ($fieldOrDirectiveArgIsArrayOfArrays
                     && is_array($fieldOrDirectiveArgumentValue)
                     // Check if any element is not an array
@@ -298,6 +312,21 @@ trait FieldOrDirectiveResolverTrait
                     ) {
                         $errors[] = sprintf(
                             $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                            $fieldOrDirectiveArgumentName,
+                            $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                            $fieldOrDirectiveName
+                        );
+                        continue;
+                    }
+                    if (!$enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                        && is_array($fieldOrDirectiveArgumentValue)
+                        && array_filter(
+                            $fieldOrDirectiveArgumentValue,
+                            fn ($arrayItem) => is_array($arrayItem)
+                        )
+                    ) {
+                        $errors[] = sprintf(
+                            $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
                             $fieldOrDirectiveArgumentName,
                             $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                             $fieldOrDirectiveName

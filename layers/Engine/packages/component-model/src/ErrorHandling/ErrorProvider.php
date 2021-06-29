@@ -119,6 +119,19 @@ class ErrorProvider implements ErrorProviderInterface
         );
     }
 
+    public function getMustNotBeArrayOfArraysFieldError(string $fieldName, mixed $value): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
+            sprintf(
+                $this->translationAPI->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
+                $fieldName,
+                (string) $value
+            )
+        );
+    }
+
     public function getMustBeArrayOfArraysFieldError(string $fieldName, mixed $value): Error
     {
         return $this->getError(
