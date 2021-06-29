@@ -76,17 +76,6 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getFilteredSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
-    {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();
-        return $aliasedDirectiveResolver->getFilteredSchemaDirectiveArgs(
-            $typeResolver
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased DirectiveResolver
-     */
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolverInstance();

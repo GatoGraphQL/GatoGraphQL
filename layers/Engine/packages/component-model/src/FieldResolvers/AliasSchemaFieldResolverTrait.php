@@ -242,19 +242,6 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    public function getFilteredSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
-        return $aliasedFieldResolver->getFilteredSchemaFieldArgs(
-            $typeResolver,
-            $this->getAliasedFieldName($fieldName)
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased FieldResolver,
-     * for the aliased $fieldName
-     */
     public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();

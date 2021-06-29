@@ -59,11 +59,6 @@ class InterfaceSchemaDefinitionResolverAdapter implements FieldSchemaDefinitionR
         return $this->fieldInterfaceResolver->getSchemaFieldArgs($fieldName);
     }
 
-    public function getFilteredSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        return $this->fieldInterfaceResolver->getFilteredSchemaFieldArgs($fieldName);
-    }
-
     public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         return $this->fieldInterfaceResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);

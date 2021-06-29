@@ -54,26 +54,6 @@ trait FieldSchemaDefinitionResolverTrait
         return [];
     }
 
-    abstract protected function hasSchemaFieldVersion(TypeResolverInterface $typeResolver, string $fieldName): bool;
-
-    public function getFilteredSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
-    {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
-            $schemaFieldArgs = $schemaDefinitionResolver->getSchemaFieldArgs($typeResolver, $fieldName);
-        } else {
-            $schemaFieldArgs = [];
-        }
-
-        /**
-         * Add the "versionConstraint" param. Add it at the end, so it doesn't affect the order of params for "orderedSchemaFieldArgs"
-         */
-        $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-            $schemaFieldArgs,
-            $this->hasSchemaFieldVersion($typeResolver, $fieldName)
-        );
-        return $schemaFieldArgs;
-    }
-
     public function getSchemaFieldDeprecationDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {

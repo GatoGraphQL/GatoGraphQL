@@ -333,18 +333,12 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
                 }
-                if ($args = $schemaDefinitionResolver->getFilteredSchemaFieldArgs($typeResolver, $fieldName)) {
-                    // Add the args under their name.
-                    // Watch out: the name is mandatory!
-                    // If it hasn't been set, then skip the entry
-                    $nameArgs = [];
-                    foreach ($args as $arg) {
-                        if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
-                            continue;
-                        }
-                        $nameArgs[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
-                    }
-                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $nameArgs;
+                if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($typeResolver, $fieldName)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
+                        $typeResolver,
+                        $fieldName,
+                        $args
+                    );
                 }
                 $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $typeResolver, $fieldName);
             }
@@ -400,6 +394,40 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $this->schemaDefinitionForFieldCache[$key] = $schemaDefinition;
         }
         return $this->schemaDefinitionForFieldCache[$key];
+    }
+
+    /**
+     * Processes the field args:
+     * 
+     * 1. Adds the version constraint (if enabled)
+     * 2. Places all entries under their own name
+     * 3. If any entry has no name, it is skipped
+     * 
+     * @return array<string, array>
+     */
+    protected function getFilteredSchemaFieldArgs(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        array $schemaFieldArgs
+    ): array {
+        /**
+         * Add the "versionConstraint" param. Add it at the end, so it doesn't affect the order of params for "orderedSchemaFieldArgs"
+         */
+        $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
+            $schemaFieldArgs,
+            $this->hasSchemaFieldVersion($typeResolver, $fieldName)
+        );
+
+        // Add the args under their name. Watch out: the name is mandatory!
+        // If it hasn't been set, then skip the entry
+        $schemaFieldArgsByName = [];
+        foreach ($schemaFieldArgs as $arg) {
+            if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
+                continue;
+            }
+            $schemaFieldArgsByName[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
+        }
+        return $schemaFieldArgsByName;
     }
 
     public function enableOrderedSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): bool

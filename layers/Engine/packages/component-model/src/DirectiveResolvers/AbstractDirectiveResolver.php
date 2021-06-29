@@ -61,6 +61,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * @var array[]
      */
     protected array $nestedDirectivePipelineData = [];
+
+    /**
+     * @var array<string, array>
+     */
+    protected array $schemaDefinitionForDirectiveCache = [];
     
     /**
      * The directiveResolvers are NOT instantiated through the service container!
@@ -517,18 +522,34 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return [];
     }
 
-    public function getFilteredSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
-    {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
-            $schemaDirectiveArgs = $schemaDefinitionResolver->getSchemaDirectiveArgs($typeResolver);
-        } else {
-            $schemaDirectiveArgs = [];
-        }
+    /**
+     * Processes the directive args:
+     * 
+     * 1. Adds the version constraint (if enabled)
+     * 2. Places all entries under their own name
+     * 3. If any entry has no name, it is skipped
+     * 
+     * @return array<string, array>
+     */
+    protected function getFilteredSchemaDirectiveArgs(
+        TypeResolverInterface $typeResolver,
+        array $schemaDirectiveArgs
+    ): array {
         $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
             $schemaDirectiveArgs,
             !empty($this->getSchemaDirectiveVersion($typeResolver))
         );
-        return $schemaDirectiveArgs;
+
+        // Add the args under their name. Watch out: the name is mandatory!
+        // If it hasn't been set, then skip the entry
+        $schemaDirectiveArgsByName = [];
+        foreach ($schemaDirectiveArgs as $arg) {
+            if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
+                continue;
+            }
+            $schemaDirectiveArgsByName[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
+        }
+        return $schemaDirectiveArgsByName;
     }
 
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
@@ -861,56 +882,54 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function getSchemaDefinitionForDirective(TypeResolverInterface $typeResolver): array
     {
-        $directiveName = $this->getDirectiveName();
-        $schemaDefinition = [
-            SchemaDefinition::ARGNAME_NAME => $directiveName,
-            SchemaDefinition::ARGNAME_DIRECTIVE_TYPE => $this->getDirectiveType(),
-            SchemaDefinition::ARGNAME_DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
-            SchemaDefinition::ARGNAME_DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
-            SchemaDefinition::ARGNAME_DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
-        ];
-        if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
-        }
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
-            if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($typeResolver)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+        // First check if the value was cached
+        $key = $typeResolver->getNamespacedTypeName();
+        if (!isset($this->schemaDefinitionForDirectiveCache[$key])) {
+            $directiveName = $this->getDirectiveName();
+            $schemaDefinition = [
+                SchemaDefinition::ARGNAME_NAME => $directiveName,
+                SchemaDefinition::ARGNAME_DIRECTIVE_TYPE => $this->getDirectiveType(),
+                SchemaDefinition::ARGNAME_DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
+                SchemaDefinition::ARGNAME_DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
+                SchemaDefinition::ARGNAME_DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
+            ];
+            if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
             }
-            if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($typeResolver)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_EXPRESSIONS] = $expressions;
-            }
-            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($typeResolver)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
-            }
-            if ($args = $schemaDefinitionResolver->getFilteredSchemaDirectiveArgs($typeResolver)) {
-                // Add the args under their name.
-                // Watch out: the name is mandatory!
-                // If it hasn't been set, then skip the entry
-                $nameArgs = [];
-                foreach ($args as $arg) {
-                    if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
-                        continue;
-                    }
-                    $nameArgs[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
+            if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
+                if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($typeResolver)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
                 }
-                $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $nameArgs;
+                if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($typeResolver)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_EXPRESSIONS] = $expressions;
+                }
+                if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($typeResolver)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
+                    $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+                }
+                if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($typeResolver)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
+                        $typeResolver,
+                        $args
+                    );
+                }
             }
-        }
-        /**
-         * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
-         * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
-         * If the interface changes, the implementer will need to change, so the version will be upgraded
-         * But it could also be that the contract doesn't change, but the implementation changes
-         * it's really not their responsibility
-         */
-        if (Environment::enableSemanticVersionConstraints()) {
-            if ($version = $this->getSchemaDirectiveVersion($typeResolver)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
+            /**
+             * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
+             * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
+             * If the interface changes, the implementer will need to change, so the version will be upgraded
+             * But it could also be that the contract doesn't change, but the implementation changes
+             * it's really not their responsibility
+             */
+            if (Environment::enableSemanticVersionConstraints()) {
+                if ($version = $this->getSchemaDirectiveVersion($typeResolver)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
+                }
             }
+            $this->addSchemaDefinitionForDirective($schemaDefinition);
+            $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
-        $this->addSchemaDefinitionForDirective($schemaDefinition);
-        return $schemaDefinition;
+        return $this->schemaDefinitionForDirectiveCache[$key];
     }
 
     /**
