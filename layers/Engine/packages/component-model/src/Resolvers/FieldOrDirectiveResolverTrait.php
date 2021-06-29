@@ -130,20 +130,20 @@ trait FieldOrDirectiveResolverTrait
                 $fieldOrDirectiveArgNonNullArrayItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsArrayOfArrays = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldOrDirectiveArgNonNullArrayOfArraysItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                if ($fieldOrDirectiveArgIsArray
-                    && !is_array($fieldOrDirectiveArgumentValue)
-                ) {
-                    $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
-                        $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
-                        $fieldOrDirectiveName
-                    );
-                } elseif (!$fieldOrDirectiveArgIsArray
+                if (!$fieldOrDirectiveArgIsArray
                     && is_array($fieldOrDirectiveArgumentValue)
                 ) {
                     $errors[] = sprintf(
                         $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                        $fieldOrDirectiveArgumentName,
+                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $fieldOrDirectiveName
+                    );
+                } elseif ($fieldOrDirectiveArgIsArray
+                    && !is_array($fieldOrDirectiveArgumentValue)
+                ) {
+                    $errors[] = sprintf(
+                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
                         $fieldOrDirectiveArgumentName,
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
