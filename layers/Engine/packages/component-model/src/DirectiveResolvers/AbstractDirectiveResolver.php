@@ -522,6 +522,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return [];
     }
 
+    /**
+     * Processes the directive args:
+     * 
+     * 1. Adds the version constraint (if enabled)
+     * 2. Places all entries under their own name
+     * 3. If any entry has no name, it is skipped
+     * 
+     * @return array<string, array>
+     */
     protected function getFilteredSchemaDirectiveArgs(
         TypeResolverInterface $typeResolver,
         array $schemaDirectiveArgs
@@ -530,7 +539,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $schemaDirectiveArgs,
             !empty($this->getSchemaDirectiveVersion($typeResolver))
         );
-        return $schemaDirectiveArgs;
+
+        // Add the args under their name. Watch out: the name is mandatory!
+        // If it hasn't been set, then skip the entry
+        $schemaDirectiveArgsByName = [];
+        foreach ($schemaDirectiveArgs as $arg) {
+            if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
+                continue;
+            }
+            $schemaDirectiveArgsByName[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
+        }
+        return $schemaDirectiveArgsByName;
     }
 
     public function getSchemaDirectiveDeprecationDescription(TypeResolverInterface $typeResolver): ?string
@@ -889,18 +908,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
                 }
                 if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($typeResolver)) {
-                    $args = $this->getFilteredSchemaDirectiveArgs($typeResolver, $args);
-                    // Add the args under their name.
-                    // Watch out: the name is mandatory!
-                    // If it hasn't been set, then skip the entry
-                    $nameArgs = [];
-                    foreach ($args as $arg) {
-                        if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
-                            continue;
-                        }
-                        $nameArgs[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
-                    }
-                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $nameArgs;
+                    $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
+                        $typeResolver,
+                        $args
+                    );
                 }
             }
             /**
