@@ -127,7 +127,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->translationAPI->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                (string) $value
+                json_encode($value)
             )
         );
     }
@@ -140,7 +140,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->translationAPI->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                (string) $value
+                json_encode($value)
             )
         );
     }
