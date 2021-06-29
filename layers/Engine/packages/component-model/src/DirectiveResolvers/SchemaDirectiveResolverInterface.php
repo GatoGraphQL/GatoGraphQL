@@ -23,10 +23,6 @@ interface SchemaDirectiveResolverInterface
      */
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array;
     /**
-     * Filtered Schema Directive Arguments
-     */
-    public function getFilteredSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array;
-    /**
      * Expressions set by the directive
      */
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array;

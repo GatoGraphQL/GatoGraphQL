@@ -522,13 +522,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return [];
     }
 
-    public function getFilteredSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
-    {
-        if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver($typeResolver)) {
-            $schemaDirectiveArgs = $schemaDefinitionResolver->getSchemaDirectiveArgs($typeResolver);
-        } else {
-            $schemaDirectiveArgs = [];
-        }
+    protected function getFilteredSchemaDirectiveArgs(
+        TypeResolverInterface $typeResolver,
+        array $schemaDirectiveArgs
+    ): array {
         $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
             $schemaDirectiveArgs,
             !empty($this->getSchemaDirectiveVersion($typeResolver))
@@ -891,7 +888,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
                     $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
                 }
-                if ($args = $schemaDefinitionResolver->getFilteredSchemaDirectiveArgs($typeResolver)) {
+                if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($typeResolver)) {
+                    $args = $this->getFilteredSchemaDirectiveArgs($typeResolver, $args);
                     // Add the args under their name.
                     // Watch out: the name is mandatory!
                     // If it hasn't been set, then skip the entry
