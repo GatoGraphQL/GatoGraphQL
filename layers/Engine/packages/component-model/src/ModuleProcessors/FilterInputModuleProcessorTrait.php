@@ -48,8 +48,8 @@ trait FilterInputModuleProcessorTrait
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                if ($filterSchemaDefinitionResolver->isSchemaFilterInputNonNullArrayItemsType($module)) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] = true;
+                if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsNonNullableItemsInArrayType($module)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
                 }
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {

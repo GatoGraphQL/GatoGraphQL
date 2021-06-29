@@ -1487,7 +1487,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             if (!is_array($value) && $fieldIsArrayType) {
                                 return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
                             }
-                            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULL_ARRAY_ITEMS] ?? false;
+                            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                             if ($fieldIsNonNullArrayItemsType && is_array($value) && array_filter($value, fn ($arrayItem) => $arrayItem === null)) {
                                 return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
                             }

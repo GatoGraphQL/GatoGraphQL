@@ -29,7 +29,7 @@ class RootRolesFieldResolver extends AbstractDBDataFieldResolver
             'capabilities'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY
-                | SchemaTypeModifiers::NON_NULL_ARRAY_ITEMS,
+                | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
