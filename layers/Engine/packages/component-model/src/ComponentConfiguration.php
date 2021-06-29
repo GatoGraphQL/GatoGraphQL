@@ -32,6 +32,7 @@ class ComponentConfiguration
     private static bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
     private static bool $setFailingFieldResponseAsNull = false;
     private static bool $removeFieldIfDirectiveFailed = false;
+    private static bool $coerceInputFromSingleValueToList = false;
 
     /**
      * Initialize component configuration
@@ -307,6 +308,30 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
         $selfProperty = &self::$removeFieldIfDirectiveFailed;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * Support passing a single value where a list is expected.
+     * Defined in the GraphQL spec.
+     * 
+     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+     */
+    public static function coerceInputFromSingleValueToList(): bool
+    {
+        // Define properties
+        $envVariable = Environment::COERCE_INPUT_FROM_SINGLE_VALUE_TO_LIST;
+        $selfProperty = &self::$coerceInputFromSingleValueToList;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
