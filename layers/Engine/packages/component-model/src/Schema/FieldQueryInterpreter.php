@@ -854,7 +854,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         $errorMessage = sprintf(
                             $this->translationAPI->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
                             $argName,
-                            $argValue
+                            json_encode($argValue)
                         );
                     } elseif ($fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
                         && is_array($argValue)
@@ -1097,8 +1097,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             foreach (array_keys($failedCastingDirectiveArgs) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
                 $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                $directiveArgIsArrayOfArraysType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $composedDirectiveArgType = $directiveArgNameTypes[$failedCastingDirectiveArgName];
-                if ($directiveArgIsArrayType) {
+                if ($directiveArgIsArrayOfArraysType) {
+                    $composedDirectiveArgType = sprintf(
+                        $this->translationAPI->__('array of arrays of %s', 'pop-component-model'),
+                        $composedDirectiveArgType
+                    );
+                } elseif ($directiveArgIsArrayType) {
                     $composedDirectiveArgType = sprintf(
                         $this->translationAPI->__('array of %s', 'pop-component-model'),
                         $composedDirectiveArgType
@@ -1187,8 +1193,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             foreach (array_keys($failedCastingFieldArgs) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
                 $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $composedFieldArgType = $fieldArgNameTypes[$failedCastingFieldArgName];
-                if ($fieldArgIsArrayType) {
+                if ($fieldArgIsArrayOfArraysType) {
+                    $composedFieldArgType = sprintf(
+                        $this->translationAPI->__('array of arrays of %s', 'pop-component-model'),
+                        $composedFieldArgType
+                    );
+                } elseif ($fieldArgIsArrayType) {
                     $composedFieldArgType = sprintf(
                         $this->translationAPI->__('array of %s', 'pop-component-model'),
                         $composedFieldArgType
