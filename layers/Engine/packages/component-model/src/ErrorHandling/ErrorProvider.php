@@ -105,15 +105,15 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
-     * Return an error to indicate that a non-empty-array field is returning an empty array value
+     * Return an error to indicate that an array field is returning an array with null items
      */
-    public function getMustNotBeEmptyArrayFieldError(string $fieldName, array $value): Error
+    public function getArrayMustNotHaveNullItemsFieldError(string $fieldName, array $value): Error
     {
         return $this->getError(
             $fieldName,
-            ErrorCodes::MUST_NOT_BE_EMPTY_ARRAY_FIELD,
+            ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' must not return an empty array', 'pop-component-model'),
+                $this->translationAPI->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
                 $fieldName
             )
         );
