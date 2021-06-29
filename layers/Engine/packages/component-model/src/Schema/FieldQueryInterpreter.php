@@ -718,18 +718,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$failedCastingDirectiveArgErrorMessages,
         bool $forSchema
     ): array {
-        // Get the field argument types, to know to what type it will cast the value
-        if ($directiveArgNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver)) {
-            $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $typeResolver);
-            return $this->castFieldOrDirectiveArguments(
-                $directiveArgs,
-                $directiveArgNameTypes,
-                $directiveArgSchemaDefinition,
-                $failedCastingDirectiveArgErrorMessages,
-                $forSchema
-            );
-        }
-        return $directiveArgs;
+        $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $typeResolver);
+        return $this->castFieldOrDirectiveArguments(
+            $directiveArgs,
+            $directiveArgSchemaDefinition,
+            $failedCastingDirectiveArgErrorMessages,
+            $forSchema
+        );
     }
 
     protected function castFieldArguments(
@@ -739,23 +734,17 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$failedCastingFieldArgErrorMessages,
         bool $forSchema
     ): array {
-        // Get the field argument types, to know to what type it will cast the value
-        if ($fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field)) {
-            $fieldArgSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
-            return $this->castFieldOrDirectiveArguments(
-                $fieldArgs,
-                $fieldArgNameTypes,
-                $fieldArgSchemaDefinition,
-                $failedCastingFieldArgErrorMessages,
-                $forSchema
-            );
-        }
-        return $fieldArgs;
+        $fieldArgSchemaDefinition = $this->getFieldSchemaDefinitionArgs($typeResolver, $field);
+        return $this->castFieldOrDirectiveArguments(
+            $fieldArgs,
+            $fieldArgSchemaDefinition,
+            $failedCastingFieldArgErrorMessages,
+            $forSchema
+        );
     }
 
     protected function castFieldOrDirectiveArguments(
         array $fieldOrDirectiveArgs,
-        array $fieldOrDirectiveArgNameTypes,
         array $fieldOrDirectiveArgSchemaDefinition,
         array &$failedCastingFieldOrDirectiveArgErrorMessages,
         bool $forSchema
@@ -788,7 +777,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                  * 
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
-                $fieldArgType = $fieldOrDirectiveArgNameTypes[$argName] ?? SchemaDefinition::TYPE_MIXED;
+                $fieldArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE] ?? SchemaDefinition::TYPE_MIXED;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
