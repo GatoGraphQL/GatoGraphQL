@@ -73,22 +73,6 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
-     * Return an error to indicate that an array field is returning a non-array value
-     */
-    public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error
-    {
-        return $this->getError(
-            $fieldName,
-            ErrorCodes::MUST_BE_ARRAY_FIELD,
-            sprintf(
-                $this->translationAPI->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
-                $fieldName,
-                (string) $value
-            )
-        );
-    }
-
-    /**
      * Return an error to indicate that a non-array field is returning an array value
      */
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error
@@ -105,6 +89,22 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
+     * Return an error to indicate that an array field is returning a non-array value
+     */
+    public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_BE_ARRAY_FIELD,
+            sprintf(
+                $this->translationAPI->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
+                $fieldName,
+                (string) $value
+            )
+        );
+    }
+
+    /**
      * Return an error to indicate that an array field is returning an array with null items
      */
     public function getArrayMustNotHaveNullItemsFieldError(string $fieldName, array $value): Error
@@ -114,6 +114,44 @@ class ErrorProvider implements ErrorProviderInterface
             ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
             sprintf(
                 $this->translationAPI->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
+                $fieldName
+            )
+        );
+    }
+
+    public function getMustNotBeArrayOfArraysFieldError(string $fieldName, mixed $value): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
+            sprintf(
+                $this->translationAPI->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
+                $fieldName,
+                json_encode($value)
+            )
+        );
+    }
+
+    public function getMustBeArrayOfArraysFieldError(string $fieldName, mixed $value): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
+            sprintf(
+                $this->translationAPI->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
+                $fieldName,
+                json_encode($value)
+            )
+        );
+    }
+
+    public function getArrayOfArraysMustNotHaveNullItemsFieldError(string $fieldName, array $value): Error
+    {
+        return $this->getError(
+            $fieldName,
+            ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
+            sprintf(
+                $this->translationAPI->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
                 $fieldName
             )
         );

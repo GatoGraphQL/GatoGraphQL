@@ -33,6 +33,14 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return false;
     }
+    public function getSchemaFilterInputIsArrayOfArraysType(array $module): bool
+    {
+        return false;
+    }
+    public function getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType(array $module): bool
+    {
+        return false;
+    }
     public function getSchemaFilterInputMandatory(array $module): bool
     {
         return false;

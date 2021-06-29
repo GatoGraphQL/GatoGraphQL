@@ -34,9 +34,12 @@ interface ErrorProviderInterface
      * @return Error
      */
     public function getNonNullableFieldError(string $fieldName): Error;
-    public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error;
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error;
+    public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error;
     public function getArrayMustNotHaveNullItemsFieldError(string $fieldName, array $value): Error;
+    public function getMustBeArrayOfArraysFieldError(string $fieldName, mixed $value): Error;
+    public function getMustNotBeArrayOfArraysFieldError(string $fieldName, mixed $value): Error;
+    public function getArrayOfArraysMustNotHaveNullItemsFieldError(string $fieldName, array $value): Error;
     /**
      * Return an error to indicate that no fieldResolver processes this field,
      * which is different than returning a null value.

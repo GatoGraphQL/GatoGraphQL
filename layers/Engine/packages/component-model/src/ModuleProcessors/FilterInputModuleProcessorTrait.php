@@ -51,6 +51,12 @@ trait FilterInputModuleProcessorTrait
                 if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsNonNullableItemsInArrayType($module)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
                 }
+                if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayOfArraysType($module)) {
+                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                    if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType($module)) {
+                        $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                    }
+                }
             }
             if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;

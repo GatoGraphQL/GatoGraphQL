@@ -1481,15 +1481,57 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         ]);
                         if (!$fieldMayBeArrayType) {
                             $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                            if (is_array($value) && !$fieldIsArrayType) {
+                            if (!$fieldIsArrayType
+                                && is_array($value)
+                            ) {
                                 return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
                             }
-                            if (!is_array($value) && $fieldIsArrayType) {
+                            if ($fieldIsArrayType
+                                && !is_array($value)
+                            ) {
                                 return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
                             }
                             $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                            if ($fieldIsNonNullArrayItemsType && is_array($value) && array_filter($value, fn ($arrayItem) => $arrayItem === null)) {
+                            if ($fieldIsNonNullArrayItemsType
+                                && is_array($value)
+                                && array_filter(
+                                    $value,
+                                    fn ($arrayItem) => $arrayItem === null
+                                )
+                            ) {
                                 return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
+                            }
+                            $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+                            if (!$fieldIsArrayOfArraysType
+                                && is_array($value)
+                                && array_filter(
+                                    $value,
+                                    fn ($arrayItem) => is_array($arrayItem)
+                                )
+                            ) {
+                                return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
+                            }
+                            if ($fieldIsArrayOfArraysType
+                                && is_array($value)
+                                && array_filter(
+                                    $value,
+                                    fn ($arrayItem) => !is_array($arrayItem)
+                                )
+                            ) {
+                                return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
+                            }
+                            $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+                            if ($fieldIsNonNullArrayOfArraysItemsType
+                                && is_array($value)
+                                && array_filter(
+                                    $value,
+                                    fn ($arrayItem) => array_filter(
+                                        $arrayItem,
+                                        fn ($arrayItemItem) => $arrayItemItem === null
+                                    )
+                                )
+                            ) {
+                                return $this->errorProvider->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
                             }
                         }
                     }
