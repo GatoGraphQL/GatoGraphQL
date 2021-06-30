@@ -304,15 +304,12 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
          * Use a single `sprintf` for all matches.
          * Eg: "title is {{title}} and authorID is {{authorID}}" is replaced
          * as "sprintf(title is %s and authorID is %s, [title(), authorID()])"
-         *
-         * We know that SYMBOL_FIELDARGS_OPENING is "(" and SYMBOL_FIELDARGS_CLOSING is ")",
-         * so we escape them in the regex using "\\"
          */
         $regex = sprintf(
             '/%s(\s*)([a-zA-Z_][0-9a-zA-Z_]*(%s.*%s)?)(\s*)%s/',
             APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX,
-            '\\' . FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING,
-            '\\' . FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING,
+            FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING,
+            FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING,
             APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX
         );
         foreach ($fieldOrDirectiveArgValues as $fieldOrDirectiveArgValue) {
