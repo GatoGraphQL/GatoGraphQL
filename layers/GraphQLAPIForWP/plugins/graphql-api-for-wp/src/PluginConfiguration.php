@@ -44,6 +44,7 @@ use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
+use PoP\FieldQuery\QuerySyntax;
 use PoP\Root\Environment as RootEnvironment;
 use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
 use PoPSchema\Categories\Environment as CategoriesEnvironment;
@@ -106,9 +107,20 @@ class PluginConfiguration
      */
     public static function initialize(): void
     {
+        self::redefineQuerySyntax();
         self::mapEnvVariablesToWPConfigConstants();
         self::defineEnvironmentConstantsFromSettings();
         self::defineEnvironmentConstantsFromCallbacks();
+    }
+
+    /**
+     * Make it difficult to have the string be considered a field (eg: title()),
+     * by changing the field args `()` symbols into something difficult.
+     */
+    protected static function redefineQuerySyntax(): void
+    {
+        QuerySyntax::$SYMBOL_FIELDARGS_OPENING = '≤';
+        QuerySyntax::$SYMBOL_FIELDARGS_CLOSING = '≥';
     }
 
     /**

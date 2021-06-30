@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\QueryParsing;
 
+use Exception;
+use PoP\Translation\TranslationAPIInterface;
+
 class QueryParser implements QueryParserInterface
 {
+    function __construct(protected TranslationAPIInterface $translationAPI)
+    {
+    }
+
     /**
      * Parse elements by a separator, not failing whenever the separator
      * is also inside the fieldArgs (i.e. inside the brackets "(" and ")")
@@ -39,6 +46,30 @@ class QueryParser implements QueryParserInterface
         if (!is_array($skipUntilChars)) {
             $skipUntilChars = [$skipUntilChars];
         }
+        /**
+         * Watch out! $skipFromChars and $skipUntilChars can only be chars,
+         * i.e. strings of length 1, otherwise the function doesn't work.
+         * 
+         * So validate this is the case
+         * 
+         * @see https://github.com/leoloso/PoP/pull/734#issuecomment-871074708
+         */
+        // if (!$this->hasOnlyChars($skipFromChars) || !$this->hasOnlyChars($skipUntilChars)) {
+        if ($longStrings = array_filter(
+            array_unique(array_merge($skipFromChars, $skipUntilChars)),
+            fn ($string) => mb_strlen($string) > 1
+        )) {
+            throw new Exception(
+                sprintf(
+                    $this->translationAPI->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
+                    implode(
+                        $this->translationAPI->__('\', \''),
+                        $longStrings
+                    )
+                )
+            );
+        }
+
         // To reduce the amount of "if" statements executed, first ask if the character is any of the special chars
         $specialChars = array_merge(
             [
@@ -169,5 +200,16 @@ class QueryParser implements QueryParserInterface
             $stack = array_reverse(array_map('strrev', $stack));
         }
         return $stack;
+    }
+
+
+    /**
+     * Indicate if the array only has strings of length 1
+     *
+     * @param string[] $strings
+     */
+    protected function hasOnlyChars(array $strings): bool
+    {
+        return empty(array_filter($strings, fn ($string) => strlen($string) > 1));
     }
 }
