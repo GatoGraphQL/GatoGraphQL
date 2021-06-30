@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
+use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use WP_Post;
 
@@ -23,6 +24,15 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         protected UserAuthorizationInterface $userAuthorization
     ) {
         parent::__construct($endpointHelpers);
+    }
+
+    /**
+     * Do not load the query if already loaded
+     * in `processURLParamVars` from `graphql-request/src/Hooks/VarsHookSet.php`
+     */
+    protected function loadGraphQLQueryAndVariables(): bool
+    {
+        return !GraphQLRequestComponentConfiguration::disableGraphQLAPIForPoP();
     }
 
     /**

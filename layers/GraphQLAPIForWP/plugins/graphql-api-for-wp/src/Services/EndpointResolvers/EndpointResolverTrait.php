@@ -62,6 +62,14 @@ trait EndpointResolverTrait
     abstract protected function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array;
 
     /**
+     * Indicate if the endpoint must load the GraphQL query
+     */
+    protected function loadGraphQLQueryAndVariables(): bool
+    {
+        return true;
+    }
+
+    /**
      * Indicate if the GraphQL variables must override the URL params
      */
     protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
@@ -94,6 +102,14 @@ trait EndpointResolverTrait
         [&$vars] = $vars_in_array;
         $vars['scheme'] = APISchemes::API;
         $vars['datastructure'] = $graphQLDataStructureFormatter->getName();
+
+        /**
+         * Enable the AdminEndpointResolver to not load the query,
+         * since it's already loaded by the GraphQLRequest package
+         */
+        if (!$this->loadGraphQLQueryAndVariables()) {
+            return;
+        }
 
         /**
          * Get the query and variables from the implementing class
