@@ -64,8 +64,8 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         
         // If --skip-unmigrated, fetch the list of failing unmigrated packages
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
-        $unmigratedFailingSourcePackages = $input->getOption(Option::UNMIGRATED_FAILING_SOURCE_PACKAGES);
-        $packagesToSkip = $skipUnmigrated ? $unmigratedFailingSourcePackages : [];
+        $unmigratedFailingPackages = $input->getOption(Option::UNMIGRATED_FAILING_SOURCE_PACKAGES);
+        $packagesToSkip = $skipUnmigrated ? $unmigratedFailingPackages : [];
 
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);

@@ -90,7 +90,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // because they have not been fully converted to PSR-4 (WIP),
     // and converting them will take some time. Hence, for the time being,
     // skip them from executing PHPStan, to avoid the CI from failing
-    $unmigratedFailingSourcePackages = [
+    $unmigratedFailingPackages = [
         'layers/Engine/packages/access-control',
         'layers/API/packages/api',
         'layers/API/packages/api-mirrorquery',
@@ -166,7 +166,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'layers/SiteBuilder/packages/spa',
         'layers/SiteBuilder/packages/static-site-generator',
     ];
-    $parameters->set(CustomOption::UNMIGRATED_FAILING_SOURCE_PACKAGES, $unmigratedFailingSourcePackages);
+    $parameters->set(CustomOption::UNMIGRATED_FAILING_SOURCE_PACKAGES, $unmigratedFailingPackages);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::DATA_TO_REMOVE, [
