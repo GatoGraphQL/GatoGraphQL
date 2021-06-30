@@ -47,16 +47,9 @@ final class AddParamTypeDeclarationInTraitRector extends AbstractRector implemen
      */
     private array $parameterTypehints = [];
 
-    private TypeComparator $typeComparator;
-
-    private TraitTypeAnalyzer $traitTypeAnalyzer;
-
     public function __construct(
-        TypeComparator $typeComparator,
-        TraitTypeAnalyzer $traitTypeAnalyzer
+        private TypeComparator $typeComparator
     ) {
-        $this->typeComparator = $typeComparator;
-        $this->traitTypeAnalyzer = $traitTypeAnalyzer;
     }
 
     public function getRuleDefinition(): RuleDefinition

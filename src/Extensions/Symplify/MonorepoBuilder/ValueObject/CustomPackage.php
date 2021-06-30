@@ -9,20 +9,9 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class CustomPackage
 {
-    /**
-     * @var SmartFileInfo
-     */
-    private $rootDirectoryFileInfo;
-
-    /**
-     * @var string
-     */
-    private $shortName;
-
-    /**
-     * @var string
-     */
-    private $shortDirectory;
+    private SmartFileInfo $rootDirectoryFileInfo;
+    private string $shortName;
+    private string $shortDirectory;
 
     public function __construct(
         private string $name,
