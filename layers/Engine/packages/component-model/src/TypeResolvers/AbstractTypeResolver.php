@@ -413,8 +413,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $counterSeparatorPos = QueryUtils::findLastSymbolPosition(
                 $enqueuedFieldDirective,
                 FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR,
-                [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING],
-                [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING],
+                [QuerySyntax::$SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING],
+                [QuerySyntax::$SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING],
                 QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
                 QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
             );
