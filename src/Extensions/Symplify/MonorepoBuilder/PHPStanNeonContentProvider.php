@@ -26,9 +26,9 @@ final class PHPStanNeonContentProvider
     /**
      * Merge all common includes together, and all paths to package configs
      */
-    public function provideContent(bool $skipUnmigrated): string
+    public function provideContent(array $sourcePackagesToSkip = []): string
     {
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(true, $skipUnmigrated);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(true, $sourcePackagesToSkip);
 
         $phpStanNeon = [
             self::INCLUDES_KEY => $this->provideIncludes($sourcePackages),

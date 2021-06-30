@@ -61,13 +61,16 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
         $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
+        // If --skip-unmigrated, fetch the list of failing unmigrated packages
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
+        $unmigratedFailingSourcePackages = $input->getOption(Option::UNMIGRATED_FAILING_SOURCE_PACKAGES);
+        $sourcePackagesToSkip = $skipUnmigrated ? $unmigratedFailingSourcePackages : [];
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);
         /** @var string[] $fileFilter */
         $fileFilter = $input->getOption(Option::FILTER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($psr4Only, $skipUnmigrated, $fileFilter);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($psr4Only, $sourcePackagesToSkip, $fileFilter);
 
         // Point to some subfolder?
         if ($subfolders !== []) {
