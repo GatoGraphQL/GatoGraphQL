@@ -56,7 +56,7 @@ class QueryParser implements QueryParserInterface
          */
         // if (!$this->hasOnlyChars($skipFromChars) || !$this->hasOnlyChars($skipUntilChars)) {
         if ($longStrings = array_filter(
-            array_merge($skipFromChars, $skipUntilChars),
+            array_unique(array_merge($skipFromChars, $skipUntilChars)),
             fn ($string) => strlen($string) > 1
         )) {
             throw new Exception(
