@@ -12,14 +12,17 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class MergePhpstanCommand extends AbstractSymplifyCommand
 {
     public function __construct(
         private PHPStanNeonContentProvider $phpstanNeonContentProvider,
-        private NeonFilePrinter $neonFilePrinter
+        private NeonFilePrinter $neonFilePrinter,
+        ParameterProvider $parameterProvider,
     ) {
         parent::__construct();
+        $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
     }
 
     protected function configure(): void
@@ -42,8 +45,11 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        // If --skip-unmigrated, fetch the list of failing unmigrated packages
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
-        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($skipUnmigrated);
+        $packagesToSkip = $skipUnmigrated ? $this->unmigratedFailingPackages : [];
+
+        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip);
 
         $outputFilePath = (string) $input->getOption(Option::OUTPUT_FILE);
         $this->neonFilePrinter->printContentToOutputFile($neonFileContent, $outputFilePath);
