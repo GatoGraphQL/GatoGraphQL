@@ -33,6 +33,10 @@ final class Option
     /**
      * @var string
      */
+    public const UNMIGRATED_FAILING_SOURCE_PACKAGES = 'unmigrated_failing_source_packages';
+    /**
+     * @var string
+     */
     public const SUBFOLDER = 'subfolder';
     /**
      * @var string
