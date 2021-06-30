@@ -85,7 +85,8 @@ class QueryParser implements QueryParserInterface
         while ($charPos < $len - 1) {
             $charPos++;
             $char = $query[$charPos];
-            if (in_array($char, $specialChars)) {
+            $charStretch = substr($query, $charPos, strlen($separator));
+            if (in_array($char, $specialChars) || $charStretch == $separator) {
                 if ($char == $ignoreSkippingFromChar) {
                     // Search the closing symbol and shortcut to that position
                     // (eg: opening then closing quotes for strings)
@@ -121,7 +122,7 @@ class QueryParser implements QueryParserInterface
                         // Then, we can search by strings like this (notice that the ".", "(" and ")"
                         // inside the search are ignored):
                         // /api/?query=posts(searchfor:(.)).id|title
-                        $restStr = substr($query, $charPos + 1);
+                        $restStr = substr($query, $charPos + strlen($separator));
                         $restStrEndBracketPos = strpos($restStr, (string) $skipUntilChars[0]);
                         $restStrSeparatorPos = strpos($restStr, $separator);
                         if (
@@ -135,14 +136,14 @@ class QueryParser implements QueryParserInterface
                             $depth--;
                         }
                     }
-                } elseif ($char == $separator) {
+                } elseif ($charStretch == $separator) {
                     if (!$depth) {
                         if ($buffer !== '') {
                             $stack[] = $buffer;
                             $buffer = '';
                             // If we need only one occurrence, then already return.
                             if ($onlyFirstOccurrence) {
-                                $restStr = substr($query, $charPos + 1);
+                                $restStr = substr($query, $charPos + strlen($separator));
                                 $stack[] = $restStr;
                                 if ($startFromEnd) {
                                     // Reverse each result, and the order of the results
@@ -151,6 +152,9 @@ class QueryParser implements QueryParserInterface
                                 return $stack;
                             }
                         }
+                        // Advance the whole stretch
+                        // Minus one because on the new iteration it will do $charPos++ again
+                        $charPos = $charPos + strlen($separator) - 1;
                         continue;
                     }
                 }
