@@ -29,20 +29,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class LegacyDowngradeParameterTypeWideningRector extends AbstractRector
 {
-    /**
-     * @var PhpDocTypeChanger
-     */
-    private $phpDocTypeChanger;
-
-    /**
-     * @var NativeTypeClassTreeResolver
-     */
-    private $nativeTypeClassTreeResolver;
-
-    /**
-     * @var TypeFactory
-     */
-    private $typeFactory;
+    private PhpDocTypeChanger $phpDocTypeChanger;
+    private NativeTypeClassTreeResolver $nativeTypeClassTreeResolver;
+    private TypeFactory $typeFactory;
 
     public function __construct(
         PhpDocTypeChanger $phpDocTypeChanger,
