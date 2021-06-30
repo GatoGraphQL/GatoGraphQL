@@ -33,7 +33,7 @@ final class Option
     /**
      * @var string
      */
-    public const UNMIGRATED_FAILING_SOURCE_PACKAGES = 'unmigrated_failing_source_packages';
+    public const UNMIGRATED_FAILING_PACKAGES = 'unmigrated_failing_packages';
     /**
      * @var string
      */

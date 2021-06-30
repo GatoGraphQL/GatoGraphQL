@@ -166,7 +166,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'layers/SiteBuilder/packages/spa',
         'layers/SiteBuilder/packages/static-site-generator',
     ];
-    $parameters->set(CustomOption::UNMIGRATED_FAILING_SOURCE_PACKAGES, $unmigratedFailingPackages);
+    $parameters->set(CustomOption::UNMIGRATED_FAILING_PACKAGES, $unmigratedFailingPackages);
 
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::DATA_TO_REMOVE, [
