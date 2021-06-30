@@ -18,9 +18,9 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  *
  * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#more-information
  *
- * Then, the activation must be done on the extension's main file.
+ * Then, the activation is done when registering the extension.
  *
- * @see https://github.com/leoloso/PoP/blob/bdbe7c911f3a7919c42e19d42a1354de1a94806c/layers/GraphQLAPIForWP/plugins/convert-case-directives/graphql-api-convert-case-directives.php#L29
+ * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GraphQLAPIForWP/plugins/extension-demo/graphql-api-extension-demo.php#L73-L77
  */
 abstract class AbstractExtension extends AbstractPlugin
 {
