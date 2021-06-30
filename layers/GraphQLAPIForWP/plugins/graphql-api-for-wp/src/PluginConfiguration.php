@@ -119,8 +119,8 @@ class PluginConfiguration
      */
     protected static function redefineQuerySyntax(): void
     {
-        QuerySyntax::$SYMBOL_FIELDARGS_OPENING = '(((((';
-        QuerySyntax::$SYMBOL_FIELDARGS_CLOSING = ')))))';
+        QuerySyntax::$SYMBOL_FIELDARGS_OPENING = '(((';
+        QuerySyntax::$SYMBOL_FIELDARGS_CLOSING = ')))';
     }
 
     /**
