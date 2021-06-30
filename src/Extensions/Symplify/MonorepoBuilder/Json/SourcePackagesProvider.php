@@ -23,7 +23,7 @@ final class SourcePackagesProvider
      */
     public function provideSourcePackages(
         bool $psr4Only = false,
-        array $sourcePackagesToSkip = [],
+        array $packagesToSkip = [],
         array $fileListFilter = []
     ): array {
         $packages = $this->customPackageProvider->provide();
@@ -48,7 +48,7 @@ final class SourcePackagesProvider
         // skip them from executing PHPStan, to avoid the CI from failing
         $packages = array_values(array_diff(
             $packages,
-            $sourcePackagesToSkip
+            $packagesToSkip
         ));
         
         // If provided, filter the packages to the ones containing

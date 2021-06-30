@@ -45,9 +45,9 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
         // If --skip-unmigrated, fetch the list of failing unmigrated packages
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
         $unmigratedFailingSourcePackages = $input->getOption(Option::UNMIGRATED_FAILING_SOURCE_PACKAGES);
-        $sourcePackagesToSkip = $skipUnmigrated ? $unmigratedFailingSourcePackages : [];
+        $packagesToSkip = $skipUnmigrated ? $unmigratedFailingSourcePackages : [];
 
-        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($sourcePackagesToSkip);
+        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip);
 
         $outputFilePath = (string) $input->getOption(Option::OUTPUT_FILE);
         $this->neonFilePrinter->printContentToOutputFile($neonFileContent, $outputFilePath);
