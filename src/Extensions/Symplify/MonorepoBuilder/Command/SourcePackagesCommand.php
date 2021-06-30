@@ -12,12 +12,16 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class SourcePackagesCommand extends AbstractSymplifyCommand
 {
-    public function __construct(private SourcePackagesProvider $sourcePackagesProvider)
-    {
+    public function __construct(
+        private SourcePackagesProvider $sourcePackagesProvider,
+        ParameterProvider $parameterProvider,
+    ) {
         parent::__construct();
+        $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
     }
 
     protected function configure(): void
@@ -64,8 +68,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         
         // If --skip-unmigrated, fetch the list of failing unmigrated packages
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
-        $unmigratedFailingPackages = $input->getOption(Option::UNMIGRATED_FAILING_PACKAGES);
-        $packagesToSkip = $skipUnmigrated ? $unmigratedFailingPackages : [];
+        $packagesToSkip = $skipUnmigrated ? $this->unmigratedFailingPackages : [];
 
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);
