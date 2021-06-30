@@ -107,20 +107,28 @@ class PluginConfiguration
      */
     public static function initialize(): void
     {
-        self::redefineQuerySyntax();
+        self::maybeRedefineQuerySyntax();
         self::mapEnvVariablesToWPConfigConstants();
         self::defineEnvironmentConstantsFromSettings();
         self::defineEnvironmentConstantsFromCallbacks();
     }
 
     /**
-     * Make it difficult to have the string be considered a field (eg: title()),
-     * by changing the field args `()` symbols into something difficult.
+     * Allow to change the query syntax for field/directive arguments,
+     * to avoid the issue of passing an ending with `()` being considered a field
+     * and executed.
+     * 
+     * Because there is no suitable replacement, allow the user to input
+     * it via environment constants.
+     * 
+     * @see https://github.com/leoloso/PoP/pull/734
      */
-    protected static function redefineQuerySyntax(): void
+    protected static function maybeRedefineQuerySyntax(): void
     {
-        QuerySyntax::$SYMBOL_FIELDARGS_OPENING = '≤';
-        QuerySyntax::$SYMBOL_FIELDARGS_CLOSING = '≥';
+        if ($redefinedFieldArgsSymbols = PluginEnvironment::getRedefinedFieldArgsSymbols()) {
+            QuerySyntax::$SYMBOL_FIELDARGS_OPENING = $redefinedFieldArgsSymbols[0];
+            QuerySyntax::$SYMBOL_FIELDARGS_CLOSING = $redefinedFieldArgsSymbols[1];
+        }
     }
 
     /**

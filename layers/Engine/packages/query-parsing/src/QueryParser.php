@@ -54,10 +54,9 @@ class QueryParser implements QueryParserInterface
          * 
          * @see https://github.com/leoloso/PoP/pull/734#issuecomment-871074708
          */
-        // if (!$this->hasOnlyChars($skipFromChars) || !$this->hasOnlyChars($skipUntilChars)) {
         if ($longStrings = array_filter(
             array_unique(array_merge($skipFromChars, $skipUntilChars)),
-            fn ($string) => mb_strlen($string) > 1
+            fn ($string) => strlen($string) > 1
         )) {
             throw new Exception(
                 sprintf(
@@ -200,16 +199,5 @@ class QueryParser implements QueryParserInterface
             $stack = array_reverse(array_map('strrev', $stack));
         }
         return $stack;
-    }
-
-
-    /**
-     * Indicate if the array only has strings of length 1
-     *
-     * @param string[] $strings
-     */
-    protected function hasOnlyChars(array $strings): bool
-    {
-        return empty(array_filter($strings, fn ($string) => strlen($string) > 1));
     }
 }
