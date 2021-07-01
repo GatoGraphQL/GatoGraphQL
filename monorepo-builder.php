@@ -20,14 +20,14 @@ use Symplify\PackageBuilder\Neon\NeonPrinter;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    $packageOrganizationConfig = new PackageOrganizationConfig();
+    $packageOrganizationConfig = new PackageOrganizationConfig(__DIR__);
     $parameters->set(
         CustomOption::PACKAGE_ORGANIZATIONS,
         $packageOrganizationConfig->getPackagePathOrganizations()
     );
     $parameters->set(
         Option::PACKAGE_DIRECTORIES,
-        $packageOrganizationConfig->getPackageDirectories(__DIR__)
+        $packageOrganizationConfig->getPackageDirectories()
     );
     $parameters->set(
         Option::PACKAGE_DIRECTORIES_EXCLUDES,
@@ -37,10 +37,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     /**
      * Plugins to generate
      */
-    $pluginConfig = new PluginConfig();
+    $pluginConfig = new PluginConfig(__DIR__);
     $parameters->set(
         CustomOption::PLUGIN_CONFIG_ENTRIES,
-        $pluginConfig->getPluginConfigEntries(__DIR__)
+        $pluginConfig->getPluginConfigEntries()
     );
 
     /**
