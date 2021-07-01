@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-class GraphQLAPIContainerConfigurationService extends AbstractPluginContainerConfigurationService
+class GraphQLAPIContainerConfigurationService extends AbstractPluginDowngradeContainerConfigurationService
 {
     protected function getPluginRelativePath(): string
     {
