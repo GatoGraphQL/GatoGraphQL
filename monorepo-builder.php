@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use PoP\PoP\Config\Symplify\MonorepoBuilder\PackageOrganizationConfig;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
@@ -18,26 +19,19 @@ use Symplify\PackageBuilder\Neon\NeonPrinter;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    $packagePathOrganizations = [
-        'layers/Engine/packages' => 'getpop',
-        'layers/API/packages' => 'getpop',
-        'layers/Schema/packages' => 'PoPSchema',
-        'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
-        'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
-        'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
-        'layers/SiteBuilder/packages' => 'getpop',
-        'layers/Wassup/packages' => 'PoPSites-Wassup',
-    ];
-    $parameters->set(CustomOption::PACKAGE_ORGANIZATIONS, $packagePathOrganizations);
-    $parameters->set(Option::PACKAGE_DIRECTORIES, array_map(
-        function (string $packagePath): string {
-            return __DIR__ . '/' . $packagePath;
-        },
-        array_keys($packagePathOrganizations)
-    ));
-    $parameters->set(Option::PACKAGE_DIRECTORIES_EXCLUDES, [
-        'graphql-api-for-wp/wordpress',
-    ]);
+    $packageOrganizationConfig = new PackageOrganizationConfig();
+    $parameters->set(
+        CustomOption::PACKAGE_ORGANIZATIONS,
+        $packageOrganizationConfig->getPackagePathOrganizations()
+    );
+    $parameters->set(
+        Option::PACKAGE_DIRECTORIES,
+        $packageOrganizationConfig->getPackageDirectories(__DIR__)
+    );
+    $parameters->set(
+        Option::PACKAGE_DIRECTORIES_EXCLUDES,
+        $packageOrganizationConfig->getPackageDirectoryExcludes()
+    );
 
     /**
      * Plugins to generate
