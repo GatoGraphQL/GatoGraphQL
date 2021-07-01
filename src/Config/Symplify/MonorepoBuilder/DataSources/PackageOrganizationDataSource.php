@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Config\Symplify\MonorepoBuilder;
+namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
-class PackageOrganizationConfig
+class PackageOrganizationDataSource
 {
     function __construct(protected string $dir)
     {        
