@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-class MonorepoArrowFnUnionTypeChainedRuleContainerConfigurationService extends AbstractCacheItemChainedRuleContainerConfigurationService
+class MonorepoArrowFnUnionTypeChainedRuleContainerConfigurationService extends AbstractArrowFnUnionTypeChainedRuleContainerConfigurationService
 {
     protected function getPaths(): array
     {

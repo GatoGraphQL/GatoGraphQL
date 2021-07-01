@@ -6,7 +6,7 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-abstract class AbstractPluginArrowFnMixedTypeChainedRuleContainerConfigurationService extends AbstractCacheItemChainedRuleContainerConfigurationService
+abstract class AbstractPluginArrowFnMixedTypeChainedRuleContainerConfigurationService extends AbstractArrowFnMixedTypeChainedRuleContainerConfigurationService
 {
     protected string $pluginDir;
 

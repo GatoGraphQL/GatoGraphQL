@@ -6,7 +6,7 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
 use PoP\PoP\Config\Rector\Downgrade\Configurators\GraphQLAPIContainerConfigurationServiceTrait;
 
-class GraphQLAPIArrowFnMixedTypeChainedRuleContainerConfigurationService extends AbstractPluginCacheItemChainedRuleContainerConfigurationService
+class GraphQLAPIArrowFnMixedTypeChainedRuleContainerConfigurationService extends AbstractPluginArrowFnMixedTypeChainedRuleContainerConfigurationService
 {
     use GraphQLAPIContainerConfigurationServiceTrait;
     
