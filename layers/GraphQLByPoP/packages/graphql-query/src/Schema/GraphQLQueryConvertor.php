@@ -156,7 +156,18 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
-        } elseif ($value instanceof VariableReference || $value instanceof Variable || $value instanceof Literal) {
+        } elseif ($value instanceof VariableReference || $value instanceof Variable | $value instanceof Literal) {
+            /**
+             * If it ends with "()" it must be wrapped with quotes "", to make
+             * sure it is interpreted as a string, and it doesn't execute the field.
+             * 
+             * eg: `{ posts(searchfor:"hel()") { id } }`
+             * 
+             * @see https://github.com/leoloso/PoP/issues/743
+             */
+            if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value->getValue())) {
+                return $this->fieldQueryInterpreter->wrapStringInQuotes($value->getValue());
+            }
             return $value->getValue();
         } elseif (is_array($value)) {
             /**
