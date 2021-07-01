@@ -20,10 +20,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $packageOrganizationConfig = new PackageOrganizationConfig();
-
-    $parameters->set(CustomOption::PACKAGE_ORGANIZATIONS, $packageOrganizationConfig->getPackagePathOrganizations());
-    $parameters->set(Option::PACKAGE_DIRECTORIES, $packageOrganizationConfig->getPackageDirectories(__DIR__));
-    $parameters->set(Option::PACKAGE_DIRECTORIES_EXCLUDES, $packageOrganizationConfig->getPackageDirectoryExcludes());
+    $parameters->set(
+        CustomOption::PACKAGE_ORGANIZATIONS,
+        $packageOrganizationConfig->getPackagePathOrganizations()
+    );
+    $parameters->set(
+        Option::PACKAGE_DIRECTORIES,
+        $packageOrganizationConfig->getPackageDirectories(__DIR__)
+    );
+    $parameters->set(
+        Option::PACKAGE_DIRECTORIES_EXCLUDES,
+        $packageOrganizationConfig->getPackageDirectoryExcludes()
+    );
 
     /**
      * Plugins to generate
