@@ -50,8 +50,6 @@ class MainPluginManager extends AbstractPluginManager
 
     /**
      * Get a configuration value for the main plugin
-     *
-     * @return array<string, mixed>
      */
     public static function getConfig(string $key): mixed
     {
