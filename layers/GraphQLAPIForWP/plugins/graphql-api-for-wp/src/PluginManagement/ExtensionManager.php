@@ -47,8 +47,9 @@ class ExtensionManager extends AbstractPluginManager
      * 
      * If the assertion fails, it prints an error on the WP admin and returns false
      * 
-     * @param $mainPluginVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
-     * @return `true` if the extension can be registered, `false` otherwise
+     * @param string|null $mainPluginVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
+     * @return bool `true` if the extension can be registered, `false` otherwise
+     *
      * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
      */
     public static function assertIsValid(
