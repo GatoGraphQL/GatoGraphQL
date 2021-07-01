@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\MonorepoCacheItemContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\MonorepoCacheItemChainedRuleContainerConfigurationService;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurationService = new MonorepoCacheItemContainerConfigurationService(
+    $containerConfigurationService = new MonorepoCacheItemChainedRuleContainerConfigurationService(
         $containerConfigurator,
         dirname(__DIR__, 5)
     );
