@@ -15,8 +15,8 @@ parameters:
         -
             message: '#^Cannot access an offset on array<string>\|bool\|string\.$#'
             path: src/PostTypes/AbstractCustomPostType.php
-    bootstrapFiles:
-        - graphql-api.php
+    # bootstrapFiles:
+    #     - graphql-api.php
     level: 8
     paths:
         - src/
