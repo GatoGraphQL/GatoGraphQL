@@ -67,7 +67,7 @@
         ],
         "symlink-vendor": [
             "php -r \"copy('composer.json', 'composer.local.json');\"",
-            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package webservers/wassup/composer.local.json",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php webservers/wassup/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev"
         ],
         "log-server-errors": "lando logs -t -f | grep \"php:error\"",
