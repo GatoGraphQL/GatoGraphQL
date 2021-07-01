@@ -107,28 +107,9 @@ class PluginConfiguration
      */
     public static function initialize(): void
     {
-        self::maybeRedefineQuerySyntax();
         self::mapEnvVariablesToWPConfigConstants();
         self::defineEnvironmentConstantsFromSettings();
         self::defineEnvironmentConstantsFromCallbacks();
-    }
-
-    /**
-     * Allow to change the query syntax for field/directive arguments,
-     * to avoid the issue of passing an ending with `()` being considered a field
-     * and executed.
-     * 
-     * Because there is no suitable replacement, allow the user to input
-     * it via environment constants.
-     * 
-     * @see https://github.com/leoloso/PoP/pull/734
-     */
-    protected static function maybeRedefineQuerySyntax(): void
-    {
-        if ($redefinedFieldArgsSymbols = PluginEnvironment::getRedefinedFieldArgsSymbols()) {
-            QuerySyntax::$SYMBOL_FIELDARGS_OPENING = $redefinedFieldArgsSymbols[0];
-            QuerySyntax::$SYMBOL_FIELDARGS_CLOSING = $redefinedFieldArgsSymbols[1];
-        }
     }
 
     /**
