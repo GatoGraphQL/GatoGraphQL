@@ -10,10 +10,8 @@ class QuerySyntax
     const SYMBOL_QUERYFIELDS_SEPARATOR = ',';
     const SYMBOL_FIELDPROPERTIES_SEPARATOR = '|';
     const SYMBOL_RELATIONALFIELDS_NEXTLEVEL = '.';
-    // Make these vars instead of consts, so they can be overriden
-    // by the GraphQL API for WordPress
-    public static string $SYMBOL_FIELDARGS_OPENING = '(';
-    public static string $SYMBOL_FIELDARGS_CLOSING = ')';
+    const SYMBOL_FIELDARGS_OPENING = '(';
+    const SYMBOL_FIELDARGS_CLOSING = ')';
     const SYMBOL_FIELDALIAS_PREFIX = '@';
     const SYMBOL_BOOKMARK_OPENING = '[';
     const SYMBOL_BOOKMARK_CLOSING = ']';

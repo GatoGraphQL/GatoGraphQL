@@ -169,8 +169,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     'field-query'
                 ),
                 $field,
-                QuerySyntax::$SYMBOL_FIELDARGS_OPENING,
-                QuerySyntax::$SYMBOL_FIELDARGS_CLOSING
+                QuerySyntax::SYMBOL_FIELDARGS_OPENING,
+                QuerySyntax::SYMBOL_FIELDARGS_CLOSING
             ));
             return null;
         }
@@ -179,7 +179,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return substr(
             $field,
             (int)$fieldArgsOpeningSymbolPos,
-            $fieldArgsClosingSymbolPos + strlen(QuerySyntax::$SYMBOL_FIELDARGS_CLOSING) - $fieldArgsOpeningSymbolPos
+            $fieldArgsClosingSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING) - $fieldArgsOpeningSymbolPos
         );
     }
 
@@ -254,12 +254,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             && is_string($fieldArgValue)
             && substr(
                 $fieldArgValue,
-                -1 * strlen(QuerySyntax::$SYMBOL_FIELDARGS_CLOSING)
-            ) == QuerySyntax::$SYMBOL_FIELDARGS_CLOSING
+                -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)
+            ) == QuerySyntax::SYMBOL_FIELDARGS_CLOSING
             // Please notice: if position is 0 (i.e. for a string "(something)") then it's not a field,
             // since the fieldName is missing
             // Then it's ok asking for strpos: either `false` or `0` must both fail
-            && strpos($fieldArgValue, QuerySyntax::$SYMBOL_FIELDARGS_OPENING);
+            && strpos($fieldArgValue, QuerySyntax::SYMBOL_FIELDARGS_OPENING);
     }
 
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
@@ -514,12 +514,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                 [
-                    QuerySyntax::$SYMBOL_FIELDARGS_OPENING,
+                    QuerySyntax::SYMBOL_FIELDARGS_OPENING,
                     QuerySyntax::SYMBOL_BOOKMARK_OPENING,
                     QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
                 ],
                 [
-                    QuerySyntax::$SYMBOL_FIELDARGS_CLOSING,
+                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
                     QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
                     QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
                 ],
@@ -731,8 +731,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if (!$fieldArgs) {
             if ($addFieldArgSymbolsIfEmpty) {
                 return
-                    QuerySyntax::$SYMBOL_FIELDARGS_OPENING .
-                    QuerySyntax::$SYMBOL_FIELDARGS_CLOSING;
+                    QuerySyntax::SYMBOL_FIELDARGS_OPENING .
+                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
             }
             return '';
         }
@@ -753,9 +753,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $elems[] = $fieldArgKey . QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR . $fieldArgValue;
         }
         return
-            QuerySyntax::$SYMBOL_FIELDARGS_OPENING .
+            QuerySyntax::SYMBOL_FIELDARGS_OPENING .
             implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, $elems) .
-            QuerySyntax::$SYMBOL_FIELDARGS_CLOSING;
+            QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
     }
 
     /**
