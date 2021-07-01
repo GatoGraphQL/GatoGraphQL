@@ -535,8 +535,8 @@
         "check-style": "phpcs -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --ansi",
-        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src) --config=ci/downgrades/rector-downgrade-code.php --ansi --dry-run || true",
-        "preview-vendor-downgrade": "ci/downgrades/downgrade_code.sh ci/downgrades/rector-downgrade-code.php --dry-run || true",
+        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src) --config=config/rector/downgrades/monorepo/rector.php --ansi --dry-run || true",
+        "preview-vendor-downgrade": "ci/downgrades/downgrade_code.sh config/rector/downgrades/monorepo/rector.php --dry-run || true",
         "preview-code-downgrade": [
             "@preview-src-downgrade",
             "@preview-vendor-downgrade"
@@ -557,7 +557,7 @@
         "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
         "release": "monorepo-builder release --config=config/monorepo-builder/release.php patch --ansi",
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
-        "improve-code-quality": "rector process --config=ci/rector-code-quality.php --ansi"
+        "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi"
     },
     "scripts-descriptions": {
         "test": "Execute PHPUnit tests",

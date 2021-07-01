@@ -25,11 +25,11 @@ class PluginDataSource
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-for-wp-dist',
                 'additional_rector_configs' => [
-                    $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
-                    $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnMixedType.php',
-                    $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnUnionType.php',
+                    $this->rootDir . '/config/rector/downgrades/graphql-api/chained-rules/rector-cacheitem.php',
+                    $this->rootDir . '/config/rector/downgrades/graphql-api/chained-rules/rector-arrowfunction-mixedtype.php',
+                    $this->rootDir . '/config/rector/downgrades/graphql-api/chained-rules/rector-arrowfunction-uniontype.php',
                 ],
-                'rector_downgrade_config' => $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrades/graphql-api/rector.php',
                 'scoping' => [
                     'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-graphql-api.inc.php',
                     'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-graphql-api.php',
@@ -43,7 +43,7 @@ class PluginDataSource
                 'exclude_files' => 'docs/images/\*',
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'extension-demo-dist',
-                'rector_downgrade_config' => $this->rootDir . '/ci/downgrades/rector-downgrade-code-extension-demo.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrades/extension-demo/rector.php',
             ],
         ];
     }
