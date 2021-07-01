@@ -157,16 +157,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              */
             return QueryHelpers::getExpressionQuery($value->getName());
         } elseif ($value instanceof VariableReference || $value instanceof Variable | $value instanceof Literal) {
-            /**
-             * If it ends with "()" it must be wrapped with quotes "", to make
-             * sure it is interpreted as a string, and it doesn't execute the field.
-             * 
-             * eg: `{ posts(searchfor:"hel()") { id } }`
-             * 
-             * @see https://github.com/leoloso/PoP/issues/743
-             */
-            if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value->getValue())) {
-                return $this->fieldQueryInterpreter->wrapStringInQuotes($value->getValue());
+            if (is_string($value->getValue())) {
+                return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
             }
             return $value->getValue();
         } elseif (is_array($value)) {
@@ -184,6 +176,26 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
         }
         // Otherwise it may be a scalar value
+        if (is_string($value)) {
+            return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value);
+        }
+        return $value;
+    }
+
+    /**
+     * If the string ends with "()" it must be wrapped with quotes "", to make
+     * sure it is interpreted as a string, and not as a field.
+     * 
+     * eg: `{ posts(searchfor:"hel()") { id } }`
+     * eg: `{ posts(ids:["hel()"]) { id } }`
+     * 
+     * @see https://github.com/leoloso/PoP/issues/743
+     */
+    protected function maybeWrapStringInQuotesToAvoidExecutingAsAField(string $value): string
+    {
+        if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
+            return $this->fieldQueryInterpreter->wrapStringInQuotes($value);
+        }
         return $value;
     }
 
