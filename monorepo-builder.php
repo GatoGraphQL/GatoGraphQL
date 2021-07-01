@@ -72,7 +72,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $dataToAppendAndRemoveConfig = new DataToAppendAndRemoveConfig();
     $parameters->set(
         Option::DATA_TO_APPEND,
-        $dataToAppendAndRemoveConfig->getDataToRemove()
+        $dataToAppendAndRemoveConfig->getDataToAppend()
     );
     $parameters->set(
         Option::DATA_TO_REMOVE,
