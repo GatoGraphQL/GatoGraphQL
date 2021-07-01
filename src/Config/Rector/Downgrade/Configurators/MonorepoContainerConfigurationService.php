@@ -7,7 +7,7 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 use Rector\Core\Configuration\Option;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-class ContainerConfigurationService
+class MonorepoContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function __construct(
         protected ContainerConfigurator $containerConfigurator,
@@ -15,21 +15,18 @@ class ContainerConfigurationService
     ) {
     }
     
-    public function configureContainer(): void
+    public function applyCustomConfiguration(): void
     {
-        // Shared configuration
-        doCommonContainerConfiguration($this->containerConfigurator);
-
         $monorepoDir = $this->rootDirectory;
 
         // get parameters
         $parameters = $this->containerConfigurator->parameters();
 
-        // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-        $parameters->set(Option::BOOTSTRAP_FILES, [
-            // full directory
-            $monorepoDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-        ]);
+        // // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
+        // $parameters->set(Option::BOOTSTRAP_FILES, [
+        //     // full directory
+        //     $monorepoDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+        // ]);
 
         // files to skip downgrading
         $parameters->set(Option::SKIP, [
