@@ -55,12 +55,10 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
         );
         return $this->getMarkdownContent(
             $doc,
-            $this->getRelativePathDir(),
-            [],
-            sprintf(
-                \__('Page \'%s\' does not exist', 'graphql-api'),
-                $doc
-            )
+            $this->getRelativePathDir()
+        ) ?? sprintf(
+            \__('Page \'%s\' does not exist', 'graphql-api'),
+            $doc
         );
     }
 }
