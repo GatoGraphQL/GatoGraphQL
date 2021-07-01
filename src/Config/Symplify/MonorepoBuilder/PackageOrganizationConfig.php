@@ -6,6 +6,10 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder;
 
 class PackageOrganizationConfig
 {
+    function __construct(protected string $dir)
+    {        
+    }
+
     /**
      * @return array<string, string>
      */
@@ -26,10 +30,10 @@ class PackageOrganizationConfig
     /**
      * @return array<string>
      */
-    public function getPackageDirectories(string $dir): array
+    public function getPackageDirectories(): array
     {
         return array_map(
-            fn (string $packagePath) => $dir . '/' . $packagePath,
+            fn (string $packagePath) => $this->dir . '/' . $packagePath,
             array_keys($this->getPackagePathOrganizations())
         );
     }
