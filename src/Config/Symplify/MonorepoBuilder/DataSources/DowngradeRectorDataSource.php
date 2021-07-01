@@ -6,7 +6,7 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
 class DowngradeRectorDataSource
 {
-    function __construct(protected string $dir)
+    function __construct(protected string $rootDir)
     {        
     }
 
@@ -16,9 +16,9 @@ class DowngradeRectorDataSource
     public function getAdditionalDowngradeRectorDataSourceFiles(): array
     {
         return [
-            $this->dir . '/ci/downgrades/rector-downgrade-code-hacks-CacheItem.php',
-            $this->dir . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnMixedType.php',
-            $this->dir . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnUnionType.php',
+            $this->rootDir . '/ci/downgrades/rector-downgrade-code-hacks-CacheItem.php',
+            $this->rootDir . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnMixedType.php',
+            $this->rootDir . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnUnionType.php',
         ];
     }
 }

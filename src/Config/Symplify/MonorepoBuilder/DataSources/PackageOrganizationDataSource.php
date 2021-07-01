@@ -6,7 +6,7 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
 class PackageOrganizationDataSource
 {
-    function __construct(protected string $dir)
+    function __construct(protected string $rootDir)
     {        
     }
 
@@ -33,7 +33,7 @@ class PackageOrganizationDataSource
     public function getPackageDirectories(): array
     {
         return array_map(
-            fn (string $packagePath) => $this->dir . '/' . $packagePath,
+            fn (string $packagePath) => $this->rootDir . '/' . $packagePath,
             array_keys($this->getPackagePathOrganizations())
         );
     }
