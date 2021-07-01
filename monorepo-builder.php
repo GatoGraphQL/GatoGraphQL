@@ -6,17 +6,10 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataToAppendAndRemoveConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DowngradeRectorConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PackageOrganizationConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PluginConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\ReleaseWorkersConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\UnmigratedFailingPackagesConfig;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
 
@@ -90,12 +83,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->load('PoP\\PoP\\', 'src/*');
 
     /** release workers - in order to execute */
-    $services->set(UpdateReplaceReleaseWorker::class);
-    $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
-    $services->set(AddTagToChangelogReleaseWorker::class);
-    $services->set(TagVersionReleaseWorker::class);
-    $services->set(PushTagReleaseWorker::class);
-    $services->set(SetNextMutualDependenciesReleaseWorker::class);
-    $services->set(UpdateBranchAliasReleaseWorker::class);
-    $services->set(PushNextDevReleaseWorker::class);
+    $releaseWorkersConfig = new ReleaseWorkersConfig();
+    foreach ($releaseWorkersConfig->getReleaseWorkerClasses() as $releaseWorkerClass) {
+        $services->set($releaseWorkerClass);
+    }
 };
