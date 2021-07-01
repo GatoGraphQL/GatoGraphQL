@@ -532,10 +532,10 @@
     ],
     "scripts": {
         "test": "phpunit",
-        "check-style": "phpcs -n src $(monorepo-builder source-packages --psr4-only --subfolder=src --subfolder=tests)",
-        "fix-style": "phpcbf -n src $(monorepo-builder source-packages --psr4-only --subfolder=src --subfolder=tests)",
+        "check-style": "phpcs -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
+        "fix-style": "phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --ansi",
-        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --psr4-only --subfolder=src) --config=ci/downgrades/rector-downgrade-code.php --ansi --dry-run || true",
+        "preview-src-downgrade": "rector process $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src) --config=ci/downgrades/rector-downgrade-code.php --ansi --dry-run || true",
         "preview-vendor-downgrade": "ci/downgrades/downgrade_code.sh ci/downgrades/rector-downgrade-code.php --dry-run || true",
         "preview-code-downgrade": [
             "@preview-src-downgrade",
@@ -552,11 +552,11 @@
         "enable-caching": "composer enable-caching -d webservers/graphql-api-for-wp",
         "disable-caching": "composer disable-caching -d webservers/graphql-api-for-wp",
         "purge-cache": "composer purge-cache -d webservers/graphql-api-for-wp",
-        "merge-monorepo": "monorepo-builder merge --ansi",
-        "propagate-monorepo": "monorepo-builder propagate --ansi",
-        "validate-monorepo": "monorepo-builder validate --ansi",
-        "release": "monorepo-builder release patch --ansi",
-        "merge-phpstan": "monorepo-builder merge-phpstan --skip-unmigrated --ansi",
+        "merge-monorepo": "monorepo-builder merge --config=config/monorepo-builder/merge.php --ansi",
+        "propagate-monorepo": "monorepo-builder propagate --config=config/monorepo-builder/propagate.php --ansi",
+        "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
+        "release": "monorepo-builder release --config=config/monorepo-builder/release.php patch --ansi",
+        "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
         "improve-code-quality": "rector process --config=ci/rector-code-quality.php --ansi"
     },
     "scripts-descriptions": {

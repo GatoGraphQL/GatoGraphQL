@@ -95,8 +95,8 @@ jobs:
             # https://github.com/symplify/symplify/issues/2773
             -   name: Localize package paths
                 run: |
-                    vendor/bin/monorepo-builder custom-bump-interdependency "dev-master"
-                    vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.pluginConfig.path }}/composer.json --ansi
+                    vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-master"
+                    vendor/bin/monorepo-builder localize-composer-paths --config=config/monorepo-builder/localize-composer-paths.php ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
             -   name: Install plugin dependencies, avoiding v2 platform check
                 run: |

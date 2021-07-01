@@ -25,5 +25,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run validation
-                run: vendor/bin/monorepo-builder validate --ansi
+                run: vendor/bin/monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi
 

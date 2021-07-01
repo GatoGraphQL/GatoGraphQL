@@ -55,7 +55,7 @@ jobs:
                     packages_in_diff="$(echo $clean_diff | grep -E -o 'layers/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/' | sort -u)"
                     echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
                     filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / \-\-filter=/g')"
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json $(echo $filter_arg))"
+                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $filter_arg))"
 
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
@@ -82,7 +82,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   uses: "ramsey/composer-install@v1"
 
-            -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package.path }}/composer.json --ansi
+            -   run: vendor/bin/monorepo-builder localize-composer-paths --config=config/monorepo-builder/localize-composer-paths.php ${{ matrix.package.path }}/composer.json --ansi
 
             -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package.path }}
 
