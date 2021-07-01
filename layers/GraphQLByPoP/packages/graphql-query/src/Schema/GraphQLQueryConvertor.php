@@ -156,7 +156,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
-        } elseif ($value instanceof VariableReference || $value instanceof Variable || $value instanceof Literal) {
+        } elseif ($value instanceof VariableReference || $value instanceof Variable | $value instanceof Literal) {
+            if (is_string($value->getValue())) {
+                return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
+            }
             return $value->getValue();
         } elseif (is_array($value)) {
             /**
@@ -173,6 +176,26 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
         }
         // Otherwise it may be a scalar value
+        if (is_string($value)) {
+            return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value);
+        }
+        return $value;
+    }
+
+    /**
+     * If the string ends with "()" it must be wrapped with quotes "", to make
+     * sure it is interpreted as a string, and not as a field.
+     * 
+     * eg: `{ posts(searchfor:"hel()") { id } }`
+     * eg: `{ posts(ids:["hel()"]) { id } }`
+     * 
+     * @see https://github.com/leoloso/PoP/issues/743
+     */
+    protected function maybeWrapStringInQuotesToAvoidExecutingAsAField(string $value): string
+    {
+        if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
+            return $this->fieldQueryInterpreter->wrapStringInQuotes($value);
+        }
         return $value;
     }
 
