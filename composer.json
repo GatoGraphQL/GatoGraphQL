@@ -557,7 +557,7 @@
         "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
         "release": "monorepo-builder release --config=config/monorepo-builder/release.php patch --ansi",
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
-        "improve-code-quality": "rector process --config=ci/rector-code-quality.php --ansi"
+        "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi"
     },
     "scripts-descriptions": {
         "test": "Execute PHPUnit tests",
