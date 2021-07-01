@@ -394,6 +394,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'publicly_queryable' => true,
         );
         $canAccessSchemaEditor = $this->userAuthorization->canAccessSchemaEditor();
+        /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
             array(

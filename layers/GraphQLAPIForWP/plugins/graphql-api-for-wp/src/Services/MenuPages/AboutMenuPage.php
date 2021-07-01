@@ -42,11 +42,10 @@ class AboutMenuPage extends AbstractDocsMenuPage
             '',
             [
                 ContentParserOptions::TAB_CONTENT => true,
-            ],
-            sprintf(
-                '<p>%s</p>',
-                \__('Oops, there was a problem loading the page', 'graphql-api')
-            )
+            ]
+        ) ?? sprintf(
+            '<p>%s</p>',
+            \__('Oops, there was a problem loading the page', 'graphql-api')
         );
     }
 

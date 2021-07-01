@@ -275,6 +275,14 @@ abstract class AbstractPlugin
     }
 
     /**
+     * Activate the plugin
+     */
+    public function activate(): void
+    {
+        // Override if needed
+    }
+
+    /**
      * Remove permalinks when deactivating the plugin
      *
      * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/

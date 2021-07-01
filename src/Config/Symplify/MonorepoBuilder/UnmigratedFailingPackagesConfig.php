@@ -58,7 +58,6 @@ class UnmigratedFailingPackagesConfig
             'layers/Wassup/packages/postlink-mutations',
             'layers/Schema/packages/posts',
             'layers/Schema/packages/posts-wp',
-            'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
             'layers/Wassup/packages/share-mutations',
             'layers/SiteBuilder/packages/site',
             'layers/SiteBuilder/packages/site-wp',

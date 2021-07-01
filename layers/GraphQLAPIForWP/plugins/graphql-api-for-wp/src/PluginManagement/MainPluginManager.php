@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
+use Exception;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 
 class MainPluginManager extends AbstractPluginManager
@@ -45,13 +46,16 @@ class MainPluginManager extends AbstractPluginManager
      */
     protected static function getFullConfiguration(): array
     {
+        if (self::$mainPlugin === null) {
+            throw new Exception(
+                __('The main plugin has not been registered yet', 'graphql-api')
+            );
+        }
         return self::$mainPlugin->getFullConfiguration();
     }
 
     /**
      * Get a configuration value for the main plugin
-     *
-     * @return array<string, mixed>
      */
     public static function getConfig(string $key): mixed
     {

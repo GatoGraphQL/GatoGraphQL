@@ -90,36 +90,42 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
      */
     protected function getDefaultQuery(): string
     {
-        // Temporarily print nothing, until "Ctrl+A" works well:
-        // @see https://github.com/WordPress/gutenberg/issues/22689
+        /**
+         * Temporarily print nothing, until "Ctrl+A" works well:
+         * @see https://github.com/WordPress/gutenberg/issues/22689
+         * 
+         * When fixed, uncomment the code below.
+         * 
+         * @see https://github.com/leoloso/PoP/issues/251
+         */
         return '';
-        return <<<EOT
-            # Welcome to GraphiQL
-            #
-            # GraphiQL is an in-browser tool for writing, validating, and
-            # testing GraphQL queries.
-            #
-            # Type queries into this side of the screen, and you will see intelligent
-            # typeaheads aware of the current GraphQL type schema and live syntax and
-            # validation errors highlighted within the text.
-            #
-            # GraphQL queries typically start with a "{" character. Lines that starts
-            # with a # are ignored.
-            #
-            # An example GraphQL query might look like:
-            #
-            #   {
-            #     field(arg: "value") {
-            #       subField
-            #     }
-            #   }
-            #
-            # Run the query (at any moment):
-            #
-            #   Ctrl-Enter (or press the play button above)
-            #
+    //     return <<<EOT
+    //         # Welcome to GraphiQL
+    //         #
+    //         # GraphiQL is an in-browser tool for writing, validating, and
+    //         # testing GraphQL queries.
+    //         #
+    //         # Type queries into this side of the screen, and you will see intelligent
+    //         # typeaheads aware of the current GraphQL type schema and live syntax and
+    //         # validation errors highlighted within the text.
+    //         #
+    //         # GraphQL queries typically start with a "{" character. Lines that starts
+    //         # with a # are ignored.
+    //         #
+    //         # An example GraphQL query might look like:
+    //         #
+    //         #   {
+    //         #     field(arg: "value") {
+    //         #       subField
+    //         #     }
+    //         #   }
+    //         #
+    //         # Run the query (at any moment):
+    //         #
+    //         #   Ctrl-Enter (or press the play button above)
+    //         #
 
-            EOT;
+    //         EOT;
     }
 
     /**

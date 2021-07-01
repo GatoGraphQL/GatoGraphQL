@@ -44,11 +44,10 @@ trait HasMarkdownDocumentationModuleResolverTrait
                 'modules',
                 [
                     ContentParserOptions::TAB_CONTENT => true,
-                ],
-                sprintf(
-                    '<p>%s</p>',
-                    \__('Oops, the documentation for this module is not available', 'graphql-api')
-                )
+                ]
+            ) ?? sprintf(
+                '<p>%s</p>',
+                \__('Oops, the documentation for this module is not available', 'graphql-api')
             );
         }
         return null;

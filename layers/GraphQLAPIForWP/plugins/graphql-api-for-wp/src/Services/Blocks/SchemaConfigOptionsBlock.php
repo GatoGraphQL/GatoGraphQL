@@ -72,11 +72,11 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock
             );
         }
 
+        $enabledDisabledLabels = [
+            self::ATTRIBUTE_VALUE_ENABLED => \__('✅ Yes', 'graphql-api'),
+            self::ATTRIBUTE_VALUE_DISABLED => \__('❌ No', 'graphql-api'),
+        ];
         if ($this->moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA)) {
-            $enabledDisabledLabels = [
-                self::ATTRIBUTE_VALUE_ENABLED => \__('✅ Yes', 'graphql-api'),
-                self::ATTRIBUTE_VALUE_DISABLED => \__('❌ No', 'graphql-api'),
-            ];
             $blockContent .= sprintf(
                 $blockContentPlaceholder,
                 \__('Add admin fields to schema?', 'graphql-api'),

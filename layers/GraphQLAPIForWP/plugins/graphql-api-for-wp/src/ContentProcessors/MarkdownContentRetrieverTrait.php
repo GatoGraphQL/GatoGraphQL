@@ -9,11 +9,13 @@ use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
 
 trait MarkdownContentRetrieverTrait
 {
+    /**
+     * @param array<string, mixed> $options
+     */
     public function getMarkdownContent(
         string $markdownFilename,
         string $relativePathDir = '',
-        array $options = [],
-        ?string $errorMessage = null
+        array $options = []
     ): ?string {
         $markdownContentParser = MarkdownContentParserFacade::getInstance();
         // Inject the place to look for the documentation
@@ -26,16 +28,8 @@ trait MarkdownContentRetrieverTrait
                 $options
             );
         } catch (InvalidArgumentException) {
-            $errorMessage ??= sprintf(
-                \__('Oops, there was a problem retrieving content from file \'%s\'', 'graphql-api'),
-                $markdownFilename
-            );
-            return sprintf(
-                '<p>%s</p>',
-                $errorMessage
-            );
+            return null;
         }
-        return null;
     }
 
     /**

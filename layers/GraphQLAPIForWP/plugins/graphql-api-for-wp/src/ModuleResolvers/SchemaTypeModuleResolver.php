@@ -315,6 +315,30 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 
     public function getDescription(string $module): string
     {
+        /**
+         * Inner properties will not be null. Assign them their type,
+         * to avoid PHPStan errors
+         */
+        /** @var CommentTypeResolver */
+        $commentTypeResolver = $this->commentTypeResolver;
+        /** @var GenericCustomPostTypeResolver */
+        $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
+        /** @var MediaTypeResolver */
+        $mediaTypeResolver = $this->mediaTypeResolver;
+        /** @var PageTypeResolver */
+        $pageTypeResolver = $this->pageTypeResolver;
+        /** @var PostTagTypeResolver */
+        $postTagTypeResolver = $this->postTagTypeResolver;
+        /** @var PostCategoryTypeResolver */
+        $postCategoryTypeResolver = $this->postCategoryTypeResolver;
+        /** @var MenuTypeResolver */
+        $menuTypeResolver = $this->menuTypeResolver;
+        /** @var PostTypeResolver */
+        $postTypeResolver = $this->postTypeResolver;
+        /** @var UserRoleTypeResolver */
+        $userRoleTypeResolver = $this->userRoleTypeResolver;
+        /** @var UserTypeResolver */
+        $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
             case self::SCHEMA_ADMIN_SCHEMA:
                 return \__('Add "unrestricted" admin fields to the schema', 'graphql-api');
@@ -323,86 +347,86 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
-                    $this->genericCustomPostTypeResolver->getTypeName()
+                    $genericCustomPostTypeResolver->getTypeName()
                 );
             case self::SCHEMA_POSTS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('posts', 'graphql-api'),
-                    $this->postTypeResolver->getTypeName()
+                    $postTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USERS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('users', 'graphql-api'),
-                    $this->userTypeResolver->getTypeName()
+                    $userTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USER_ROLES:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('user roles', 'graphql-api'),
-                    $this->userRoleTypeResolver->getTypeName()
+                    $userRoleTypeResolver->getTypeName()
                 );
             case self::SCHEMA_PAGES:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('pages', 'graphql-api'),
-                    $this->pageTypeResolver->getTypeName()
+                    $pageTypeResolver->getTypeName()
                 );
             case self::SCHEMA_MEDIA:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('media elements', 'graphql-api'),
-                    $this->mediaTypeResolver->getTypeName()
+                    $mediaTypeResolver->getTypeName()
                 );
             case self::SCHEMA_COMMENTS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('comments', 'graphql-api'),
-                    $this->commentTypeResolver->getTypeName()
+                    $commentTypeResolver->getTypeName()
                 );
             case self::SCHEMA_POST_TAGS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('post tags', 'graphql-api'),
-                    $this->postTagTypeResolver->getTypeName()
+                    $postTagTypeResolver->getTypeName()
                 );
             case self::SCHEMA_POST_CATEGORIES:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('post categories', 'graphql-api'),
-                    $this->postCategoryTypeResolver->getTypeName()
+                    $postCategoryTypeResolver->getTypeName()
                 );
             case self::SCHEMA_CUSTOMPOST_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $this->postTypeResolver->getTypeName()
+                    $postTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USER_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $this->userTypeResolver->getTypeName()
+                    $userTypeResolver->getTypeName()
                 );
             case self::SCHEMA_COMMENT_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $this->commentTypeResolver->getTypeName()
+                    $commentTypeResolver->getTypeName()
                 );
             case self::SCHEMA_TAXONOMY_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
                     'metaValue',
-                    $this->postTagTypeResolver->getTypeName(),
-                    $this->postCategoryTypeResolver->getTypeName()
+                    $postTagTypeResolver->getTypeName(),
+                    $postCategoryTypeResolver->getTypeName()
                 );
             case self::SCHEMA_MENUS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('menus', 'graphql-api'),
-                    $this->menuTypeResolver->getTypeName()
+                    $menuTypeResolver->getTypeName()
                 );
             case self::SCHEMA_SETTINGS:
                 return \__('Fetch settings from the site', 'graphql-api');
@@ -575,6 +599,19 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public function getSettings(string $module): array
     {
+        /**
+         * Inner properties will not be null. Assign them their type,
+         * to avoid PHPStan errors
+         */
+        /** @var CustomPostUnionTypeResolver */
+        $customPostUnionTypeResolver = $this->customPostUnionTypeResolver;
+        /** @var GenericCustomPostTypeResolver */
+        $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
+        /** @var PageTypeResolver */
+        $pageTypeResolver = $this->pageTypeResolver;
+        /** @var PostTypeResolver */
+        $postTypeResolver = $this->postTypeResolver;
+        
         $moduleSettings = parent::getSettings($module);
         // Common variables to set the limit on the schema types
         $limitArg = 'limit';
@@ -688,8 +725,8 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                     Properties::TITLE => \__('Use single type instead of union type?', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
                         \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then return this single type directly in field <code>%s</code>?', 'graphql-api'),
-                        $this->customPostUnionTypeResolver->getTypeName(),
-                        $this->postTypeResolver->getTypeName(),
+                        $customPostUnionTypeResolver->getTypeName(),
+                        $postTypeResolver->getTypeName(),
                         'customPosts'
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
@@ -704,32 +741,32 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             $titlePlaceholder = sprintf(
                 \__('Include type <code>%1$s</code> in <code>%2$s</code>?', 'graphql-api'),
                 '%1$s',
-                $this->customPostUnionTypeResolver->getTypeName()
+                $customPostUnionTypeResolver->getTypeName()
             );
             $moduleTitles = [
                 self::SCHEMA_POSTS => sprintf(
                     $titlePlaceholder,
-                    $this->postTypeResolver->getTypeName()
+                    $postTypeResolver->getTypeName()
                 ),
                 self::SCHEMA_PAGES => sprintf(
                     $titlePlaceholder,
-                    $this->pageTypeResolver->getTypeName()
+                    $pageTypeResolver->getTypeName()
                 ),
             ];
             $descriptionPlaceholder = sprintf(
                 \__('Results of type <code>%1$s</code> will be included when querying a field of type <code>%2$s</code> (such as <code>%3$s</code>)', 'graphql-api'),
                 '%1$s',
-                $this->customPostUnionTypeResolver->getTypeName(),
+                $customPostUnionTypeResolver->getTypeName(),
                 'customPosts'
             );
             $moduleDescriptions = [
                 self::SCHEMA_POSTS => sprintf(
                     $descriptionPlaceholder,
-                    $this->postTypeResolver->getTypeName()
+                    $postTypeResolver->getTypeName()
                 ),
                 self::SCHEMA_PAGES => sprintf(
                     $descriptionPlaceholder,
-                    $this->pageTypeResolver->getTypeName()
+                    $pageTypeResolver->getTypeName()
                 ),
             ];
             $option = self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
@@ -793,7 +830,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
                 Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Results from these custom post types will be included when querying a field with type <code>%s</code> (such as <code>%s</code>)<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
-                    $this->genericCustomPostTypeResolver->getTypeName(),
+                    $genericCustomPostTypeResolver->getTypeName(),
                     'genericCustomPosts'
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
