@@ -196,6 +196,8 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
 
     /**
      * Apply the Mutation Scheme settings
+     * 
+     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
     protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
     {

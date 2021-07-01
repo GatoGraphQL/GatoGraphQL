@@ -421,7 +421,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $postTypeArgs['taxonomies'] = $taxonomies;
         }
         if ($this->isAPIHierarchyModuleEnabled() && $this->isHierarchical()) {
-            /** @var array<string, array> */
             $postTypeArgs['supports'][] = 'page-attributes';
         }
         if ($this->isExcerptAsDescriptionEnabled() && $this->usePostExcerptAsDescription()) {
