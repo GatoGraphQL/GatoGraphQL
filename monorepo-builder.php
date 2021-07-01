@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataToAppendAndRemoveConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DowngradeRectorConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\PackageOrganizationConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\PluginConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\ReleaseWorkersConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\UnmigratedFailingPackagesConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\UnmigratedFailingPackagesConfig;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
