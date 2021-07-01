@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PackageOrganizationConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\PluginConfig;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker;
@@ -36,37 +37,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     /**
      * Plugins to generate
      */
-    $parameters->set(CustomOption::PLUGIN_CONFIG_ENTRIES, [
-        // GraphQL API for WordPress
-        [
-            'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
-            'zip_file' => 'graphql-api.zip',
-            'main_file' => 'graphql-api.php',
-            'exclude_files' => 'dev-helpers/\* docs/images/\*',
-            'dist_repo_organization' => 'GraphQLAPI',
-            'dist_repo_name' => 'graphql-api-for-wp-dist',
-            'additional_rector_configs' => [
-                __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
-                __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnMixedType.php',
-                __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnUnionType.php',
-            ],
-            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-graphql-api.php',
-            'scoping' => [
-                'phpscoper_config' => __DIR__ . '/ci/scoping/scoper-graphql-api.inc.php',
-                'rector_test_config' => __DIR__ . '/ci/scoping/rector-test-scoping-graphql-api.php',
-            ],
-        ],
-        // GraphQL API - Extension Demo
-        [
-            'path' => 'layers/GraphQLAPIForWP/plugins/extension-demo',
-            'zip_file' => 'graphql-api-extension-demo.zip',
-            'main_file' => 'graphql-api-extension-demo.php',
-            'exclude_files' => 'docs/images/\*',
-            'dist_repo_organization' => 'GraphQLAPI',
-            'dist_repo_name' => 'extension-demo-dist',
-            'rector_downgrade_config' => __DIR__ . '/ci/downgrades/rector-downgrade-code-extension-demo.php',
-        ],
-    ]);
+    $pluginConfig = new PluginConfig();
+    $parameters->set(
+        CustomOption::PLUGIN_CONFIG_ENTRIES,
+        $pluginConfig->getPluginConfigEntries(__DIR__)
+    );
 
     /**
      * Additional downgrade Rector configs:
