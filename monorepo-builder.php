@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataToAppendAndRemoveConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DowngradeRectorConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PackageOrganizationConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PluginConfig;
@@ -68,33 +69,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     );
 
     $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::DATA_TO_REMOVE, [
-        'require-dev' => [
-            // 'phpunit/phpunit' => '*',
-            'wpackagist-plugin/block-metadata' => '*',
-        ],
-        // 'minimum-stability' => 'dev',
-        // 'prefer-stable' => true,
-    ]);
-
-    // Install also the monorepo-builder! So it can be used in CI
-    $parameters->set(Option::DATA_TO_APPEND, [
-        'require-dev' => [
-            'symplify/monorepo-builder' => '^9.0',
-        ],
-        'autoload' => [
-            'psr-4' => [
-                'PoP\\PoP\\'=> 'src',
-            ],
-        ],
-        // 'extra' => [
-        //     'installer-paths' => [
-        //         'wordpress/wp-content/plugins/{$name}/' => [
-        //             'type:wordpress-plugin',
-        //         ]
-        //     ]
-        // ],
-    ]);
+    $dataToAppendAndRemoveConfig = new DataToAppendAndRemoveConfig();
+    $parameters->set(
+        Option::DATA_TO_APPEND,
+        $dataToAppendAndRemoveConfig->getDataToRemove()
+    );
+    $parameters->set(
+        Option::DATA_TO_REMOVE,
+        $dataToAppendAndRemoveConfig->getDataToRemove()
+    );
 
     $services = $containerConfigurator->services();
     $services->defaults()
