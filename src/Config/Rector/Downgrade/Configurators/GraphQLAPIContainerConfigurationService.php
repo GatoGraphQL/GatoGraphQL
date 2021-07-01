@@ -6,10 +6,7 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
 class GraphQLAPIContainerConfigurationService extends AbstractPluginDowngradeContainerConfigurationService
 {
-    protected function getPluginRelativePath(): string
-    {
-        return 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
-    }
+    use GraphQLAPIContainerConfigurationServiceTrait;
     
     public function configureContainer(): void
     {

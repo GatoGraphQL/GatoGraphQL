@@ -25,7 +25,7 @@ class PluginDataSource
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-for-wp-dist',
                 'additional_rector_configs' => [
-                    $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-CacheItem.php',
+                    $this->rootDir . '/config/rector/downgrades/graphql-api/chained-rules/rector-cacheitem.php',
                     $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnMixedType.php',
                     $this->rootDir . '/ci/downgrades/rector-downgrade-code-graphql-api-hacks-ArrowFnUnionType.php',
                 ],

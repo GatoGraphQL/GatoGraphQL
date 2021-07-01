@@ -32,7 +32,7 @@ class DowngradeRectorDataSource
     protected function getAdditionalDowngradeRectorDataSourceFileRelativePaths(): array
     {
         return [
-            '/ci/downgrades/rector-downgrade-code-hacks-CacheItem.php',
+            '/config/rector/downgrades/monorepo/chained-rules/rector-cacheitem.php',
             '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnMixedType.php',
             '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnUnionType.php',
         ];
