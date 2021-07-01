@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DowngradeRectorConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PackageOrganizationConfig;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\PluginConfig;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
@@ -49,11 +50,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * @see https://github.com/rectorphp/rector/issues/5962
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
-    $parameters->set(CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS, [
-        __DIR__ . '/ci/downgrades/rector-downgrade-code-hacks-CacheItem.php',
-        __DIR__ . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnMixedType.php',
-        __DIR__ . '/ci/downgrades/rector-downgrade-code-hacks-ArrowFnUnionType.php',
-    ]);
+    $downgradeRectorConfig = new DowngradeRectorConfig(__DIR__);
+    $parameters->set(
+        CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
+        $downgradeRectorConfig->getAdditionalDowngradeRectorConfigFiles()
+    );
 
     // Temporary hack! PHPStan is currently failing for these packages,
     // because they have not been fully converted to PSR-4 (WIP),
