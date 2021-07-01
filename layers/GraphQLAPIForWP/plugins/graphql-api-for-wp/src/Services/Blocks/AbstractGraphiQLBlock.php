@@ -126,7 +126,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     //         #
 
     //         EOT;
-    // }
+    }
 
     /**
      * @param array<string, mixed> $attributes
