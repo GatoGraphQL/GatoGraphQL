@@ -15,6 +15,19 @@ parameters:
         -
             message: '#^Cannot access an offset on array<string>\|bool\|string\.$#'
             path: src/PostTypes/AbstractCustomPostType.php
+        # Remove these errors when `szepeviktor/phpstan-wordpress` supports WP 5.8
+        -
+            message: '#^Parameter \$blockEditorContext of method GraphQLAPI\\GraphQLAPI\\Services\\BlockCategories\\AbstractBlockCategory::getBlockCategoriesViaBlockEditorContext\(\) has invalid typehint type WP_Block_Editor_Context\.$#'
+            path: src/Services/BlockCategories/AbstractBlockCategory.php
+        -
+            message: '#^Access to property \$post on an unknown class WP_Block_Editor_Context\.$#'
+            path: src/Services/BlockCategories/AbstractBlockCategory.php
+        -
+            message: '#^Parameter \$blockEditorContext of method GraphQLAPI\\GraphQLAPI\\Services\\CustomPostTypes\\AbstractCustomPostType::allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext\(\) has invalid typehint type WP_Block_Editor_Context\.$#'
+            path: src/Services/CustomPostTypes/AbstractCustomPostType.php
+        -
+            message: '#^Access to property \$post on an unknown class WP_Block_Editor_Context\.$#'
+            path: src/Services/CustomPostTypes/AbstractCustomPostType.php
     # bootstrapFiles:
     #     - graphql-api.php
     level: 8
