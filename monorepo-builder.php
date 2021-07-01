@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersConfig;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\UnmigratedFailingPackagesConfig;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\UnmigratedFailingPackagesDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
@@ -16,7 +16,7 @@ use Symplify\PackageBuilder\Neon\NeonPrinter;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    $packageOrganizationConfig = new PackageOrganizationConfig(__DIR__);
+    $packageOrganizationConfig = new PackageOrganizationDataSource(__DIR__);
     $parameters->set(
         CustomOption::PACKAGE_ORGANIZATIONS,
         $packageOrganizationConfig->getPackagePathOrganizations()
@@ -33,7 +33,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     /**
      * Plugins to generate
      */
-    $pluginConfig = new PluginConfig(__DIR__);
+    $pluginConfig = new PluginDataSource(__DIR__);
     $parameters->set(
         CustomOption::PLUGIN_CONFIG_ENTRIES,
         $pluginConfig->getPluginConfigEntries()
@@ -45,24 +45,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
      * @see https://github.com/rectorphp/rector/issues/5962
      * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
      */
-    $downgradeRectorConfig = new DowngradeRectorConfig(__DIR__);
+    $downgradeRectorConfig = new DowngradeRectorDataSource(__DIR__);
     $parameters->set(
         CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
-        $downgradeRectorConfig->getAdditionalDowngradeRectorConfigFiles()
+        $downgradeRectorConfig->getAdditionalDowngradeRectorDataSourceFiles()
     );
 
     // Temporary hack! PHPStan is currently failing for these packages,
     // because they have not been fully converted to PSR-4 (WIP),
     // and converting them will take some time. Hence, for the time being,
     // skip them from executing PHPStan, to avoid the CI from failing
-    $unmigratedFailingPackagesConfig = new UnmigratedFailingPackagesConfig();
+    $unmigratedFailingPackagesConfig = new UnmigratedFailingPackagesDataSource();
     $parameters->set(
         CustomOption::UNMIGRATED_FAILING_PACKAGES,
         $unmigratedFailingPackagesConfig->getUnmigratedFailingPackages()
     );
 
     $parameters = $containerConfigurator->parameters();
-    $dataToAppendAndRemoveConfig = new DataToAppendAndRemoveConfig();
+    $dataToAppendAndRemoveConfig = new DataToAppendAndRemoveDataSource();
     $parameters->set(
         Option::DATA_TO_APPEND,
         $dataToAppendAndRemoveConfig->getDataToAppend()
@@ -83,7 +83,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->load('PoP\\PoP\\', 'src/*');
 
     /** release workers - in order to execute */
-    $releaseWorkersConfig = new ReleaseWorkersConfig();
+    $releaseWorkersConfig = new ReleaseWorkersDataSource();
     foreach ($releaseWorkersConfig->getReleaseWorkerClasses() as $releaseWorkerClass) {
         $services->set($releaseWorkerClass);
     }
