@@ -341,12 +341,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 throw $this->inititalizationException;
             } else {
                 \add_action('admin_notices', function () {
+                    // Avoid PHPStan error
+                    /** @var Exception */
+                    $inititalizationException = $this->inititalizationException;
                     $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
                     . sprintf(
                         \__('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
                         $this->pluginName,
-                        $this->inititalizationException->getMessage(),
-                        $this->inititalizationException->getTraceAsString()
+                        $inititalizationException->getMessage(),
+                        $inititalizationException->getTraceAsString()
                     );
                     _e(sprintf(
                         '<div class="notice notice-error">%s</div>',
