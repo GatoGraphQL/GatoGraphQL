@@ -1272,9 +1272,22 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 // Transform back. Keep the quotes so that the string is still not converted to a field
                 $fieldArgValue = stripcslashes($fieldArgValue);
 
-                // If it has quotes at the beginning and end, it's a string. Remove them
+                /**
+                 * If it has quotes at the beginning and end, it's a string.
+                 * Remove them, unless it could be interpreted as a field, then keep them.
+                 * 
+                 * Explanation: If the string ends with "()" keep the quotes "", to make
+                 * sure it is interpreted as a string, and it doesn't execute the field.
+                 * 
+                 * eg: `{ posts(searchfor:"hel()") { id } }`
+                 * 
+                 * @see https://github.com/leoloso/PoP/issues/743
+                 */
                 if ($this->isFieldArgumentValueWrappedWithStringSymbols((string) $fieldArgValue)) {
-                    $fieldArgValue = substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING));
+                    $strippedFieldArgValue = substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING));
+                    if (!$this->isFieldArgumentValueAField($strippedFieldArgValue)) {
+                        $fieldArgValue = $strippedFieldArgValue;
+                    }
                 }
 
                 // Chain functions. At any moment, if any of them throws an error, the result will be null so don't process anymore
