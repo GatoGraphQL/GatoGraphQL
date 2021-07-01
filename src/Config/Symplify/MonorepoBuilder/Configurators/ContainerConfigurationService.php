@@ -23,7 +23,8 @@ class ContainerConfigurationService
     ) {
     }
     
-    public function configureContainer(): void {
+    public function configureContainer(): void
+    {
         $parameters = $this->containerConfigurator->parameters();
 
         $packageOrganizationConfig = new PackageOrganizationDataSource($this->rootDirectory);
@@ -43,7 +44,7 @@ class ContainerConfigurationService
         /**
          * Plugins to generate
          */
-        $pluginConfig = new PluginDataSource(__DIR__);
+        $pluginConfig = new PluginDataSource($this->rootDirectory);
         $parameters->set(
             CustomOption::PLUGIN_CONFIG_ENTRIES,
             $pluginConfig->getPluginConfigEntries()
@@ -55,7 +56,7 @@ class ContainerConfigurationService
          * @see https://github.com/rectorphp/rector/issues/5962
          * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
          */
-        $downgradeRectorConfig = new DowngradeRectorDataSource(__DIR__);
+        $downgradeRectorConfig = new DowngradeRectorDataSource($this->rootDirectory);
         $parameters->set(
             CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
             $downgradeRectorConfig->getAdditionalDowngradeRectorDataSourceFiles()
