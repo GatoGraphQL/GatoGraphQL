@@ -27,28 +27,33 @@ class ContainerConfigurationService
     {
         $parameters = $this->containerConfigurator->parameters();
 
-        $packageOrganizationConfig = new PackageOrganizationDataSource($this->rootDirectory);
-        $parameters->set(
-            CustomOption::PACKAGE_ORGANIZATIONS,
-            $packageOrganizationConfig->getPackagePathOrganizations()
-        );
-        $parameters->set(
-            Option::PACKAGE_DIRECTORIES,
-            $packageOrganizationConfig->getPackageDirectories()
-        );
-        $parameters->set(
-            Option::PACKAGE_DIRECTORIES_EXCLUDES,
-            $packageOrganizationConfig->getPackageDirectoryExcludes()
-        );
+        /**
+         * Packages handled by the monorepo
+         */
+        if ($packageOrganizationConfig = $this->getPackageOrganizationDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::PACKAGE_ORGANIZATIONS,
+                $packageOrganizationConfig->getPackagePathOrganizations()
+            );
+            $parameters->set(
+                Option::PACKAGE_DIRECTORIES,
+                $packageOrganizationConfig->getPackageDirectories()
+            );
+            $parameters->set(
+                Option::PACKAGE_DIRECTORIES_EXCLUDES,
+                $packageOrganizationConfig->getPackageDirectoryExcludes()
+            );
+        }
 
         /**
          * Plugins to generate
          */
-        $pluginConfig = new PluginDataSource($this->rootDirectory);
-        $parameters->set(
-            CustomOption::PLUGIN_CONFIG_ENTRIES,
-            $pluginConfig->getPluginConfigEntries()
-        );
+        if ($pluginConfig = $this->getPluginDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::PLUGIN_CONFIG_ENTRIES,
+                $pluginConfig->getPluginConfigEntries()
+            );
+        }
 
         /**
          * Additional downgrade Rector configs:
@@ -56,32 +61,40 @@ class ContainerConfigurationService
          * @see https://github.com/rectorphp/rector/issues/5962
          * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
          */
-        $downgradeRectorConfig = new DowngradeRectorDataSource($this->rootDirectory);
-        $parameters->set(
-            CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
-            $downgradeRectorConfig->getAdditionalDowngradeRectorDataSourceFiles()
-        );
+        if ($downgradeRectorConfig = $this->getDowngradeRectorDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
+                $downgradeRectorConfig->getAdditionalDowngradeRectorDataSourceFiles()
+            );
+        }
 
-        // Temporary hack! PHPStan is currently failing for these packages,
-        // because they have not been fully converted to PSR-4 (WIP),
-        // and converting them will take some time. Hence, for the time being,
-        // skip them from executing PHPStan, to avoid the CI from failing
-        $unmigratedFailingPackagesConfig = new UnmigratedFailingPackagesDataSource();
-        $parameters->set(
-            CustomOption::UNMIGRATED_FAILING_PACKAGES,
-            $unmigratedFailingPackagesConfig->getUnmigratedFailingPackages()
-        );
+        /**
+         * Temporary hack! PHPStan is currently failing for these packages,
+         * because they have not been fully converted to PSR-4 (WIP),
+         * and converting them will take some time. Hence, for the time being,
+         * skip them from executing PHPStan, to avoid the CI from failing
+         */
+        if ($unmigratedFailingPackagesConfig = $this->getUnmigratedFailingPackagesDataSource()) {
+            $parameters->set(
+                CustomOption::UNMIGRATED_FAILING_PACKAGES,
+                $unmigratedFailingPackagesConfig->getUnmigratedFailingPackages()
+            );
+        }
 
+        /**
+         * Libraries that must always be required (or removed) in composer.json
+         */
         $parameters = $this->containerConfigurator->parameters();
-        $dataToAppendAndRemoveConfig = new DataToAppendAndRemoveDataSource();
-        $parameters->set(
-            Option::DATA_TO_APPEND,
-            $dataToAppendAndRemoveConfig->getDataToAppend()
-        );
-        $parameters->set(
-            Option::DATA_TO_REMOVE,
-            $dataToAppendAndRemoveConfig->getDataToRemove()
-        );
+        if ($dataToAppendAndRemoveConfig = $this->getDataToAppendAndRemoveDataSource()) {
+            $parameters->set(
+                Option::DATA_TO_APPEND,
+                $dataToAppendAndRemoveConfig->getDataToAppend()
+            );
+            $parameters->set(
+                Option::DATA_TO_REMOVE,
+                $dataToAppendAndRemoveConfig->getDataToRemove()
+            );
+        }
 
         $services = $this->containerConfigurator->services();
         $services->defaults()
@@ -93,10 +106,38 @@ class ContainerConfigurationService
             ->set(NeonPrinter::class) // Required to inject into PHPStanNeonContentProvider
             ->load('PoP\\PoP\\', 'src/*');
 
-        /** release workers - in order to execute */
-        $releaseWorkersConfig = new ReleaseWorkersDataSource();
-        foreach ($releaseWorkersConfig->getReleaseWorkerClasses() as $releaseWorkerClass) {
-            $services->set($releaseWorkerClass);
+        /**
+         * Release workers - in order to execute
+         */
+        if ($releaseWorkersConfig = $this->getReleaseWorkersDataSource()) {
+            foreach ($releaseWorkersConfig->getReleaseWorkerClasses() as $releaseWorkerClass) {
+                $services->set($releaseWorkerClass);
+            }
         }
+    }
+
+    protected function getPackageOrganizationDataSource(): ?PackageOrganizationDataSource
+    {
+        return new PackageOrganizationDataSource($this->rootDirectory);
+    }
+    protected function getPluginDataSource(): ?PluginDataSource
+    {
+        return new PluginDataSource($this->rootDirectory);
+    }
+    protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource
+    {
+        return new DowngradeRectorDataSource($this->rootDirectory);
+    }
+    protected function getUnmigratedFailingPackagesDataSource(): ?UnmigratedFailingPackagesDataSource
+    {
+        return new UnmigratedFailingPackagesDataSource();
+    }
+    protected function getDataToAppendAndRemoveDataSource(): ?DataToAppendAndRemoveDataSource
+    {
+        return new DataToAppendAndRemoveDataSource();
+    }
+    protected function getReleaseWorkersDataSource(): ?ReleaseWorkersDataSource
+    {
+        return new ReleaseWorkersDataSource();
     }
 }
