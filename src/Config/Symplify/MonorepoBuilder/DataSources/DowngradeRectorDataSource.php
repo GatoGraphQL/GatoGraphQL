@@ -16,7 +16,7 @@ class DowngradeRectorDataSource
     public function getAdditionalDowngradeRectorDataSourceFiles(): array
     {
         return array_map(
-            fn (string $file) => $this->getRelativePathToDataSourceFiles() . $file,
+            fn (string $file) => $this->getRelativePathToDataSourceFiles() . '/' . $file,
             $this->getAdditionalDowngradeRectorDataSourceFileRelativePaths()
         );
     }
@@ -32,9 +32,9 @@ class DowngradeRectorDataSource
     protected function getAdditionalDowngradeRectorDataSourceFileRelativePaths(): array
     {
         return [
-            '/config/rector/downgrades/monorepo/chained-rules/rector-cacheitem.php',
-            '/config/rector/downgrades/monorepo/chained-rules/rector-arrowfunction-mixedtype.php',
-            '/config/rector/downgrades/monorepo/chained-rules/rector-arrowfunction-uniontype.php',
+            'config/rector/downgrades/monorepo/chained-rules/rector-cacheitem.php',
+            'config/rector/downgrades/monorepo/chained-rules/rector-arrowfunction-mixedtype.php',
+            'config/rector/downgrades/monorepo/chained-rules/rector-arrowfunction-uniontype.php',
         ];
     }
 }
