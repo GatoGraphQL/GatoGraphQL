@@ -28,12 +28,6 @@ abstract class AbstractContainerConfigurationService
     
     public function configureContainer(): void
     {
-        $this->applyDowngradeConfiguration();
-        $this->applyCustomConfiguration();
-    }
-
-    protected function applyDowngradeConfiguration(): void
-    {
         $this->containerConfigurator->import(DowngradeSetList::PHP_80);
         $this->containerConfigurator->import(DowngradeSetList::PHP_74);
         $this->containerConfigurator->import(DowngradeSetList::PHP_73);
@@ -48,6 +42,7 @@ abstract class AbstractContainerConfigurationService
          */
         // $this->containerConfigurator->import(DowngradeSetList::PHP_72);
         $this->containerConfigurator->import(CustomDowngradeSetList::PHP_72);
+        
         /**
          * Hack to fix bug.
          *
@@ -86,13 +81,35 @@ abstract class AbstractContainerConfigurationService
         $parameters->set(Option::AUTO_IMPORT_NAMES, false);
         $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
-        $monorepoDir = $this->rootDirectory;
-
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-        $parameters->set(Option::BOOTSTRAP_FILES, [
-            $monorepoDir . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-        ]);
+        if ($bootstrapFiles = $this->getBootstrapFiles()) {
+            $parameters->set(Option::BOOTSTRAP_FILES, $bootstrapFiles);
+        }
+
+        // files to skip downgrading
+        if ($skip = $this->getSkip()) {
+            $parameters->set(Option::SKIP, $skip);
+        }
     }
 
-    protected abstract function applyCustomConfiguration();
+    /**
+     * @return string[]
+     */
+    protected function getBootstrapFiles(): array {
+        return [
+            $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getSkip(): array {
+        return [
+            // Skip tests
+            '*/tests/*',
+            '*/test/*',
+            '*/Test/*',
+        ];
+    }
 }
