@@ -47,29 +47,4 @@ class PluginEnvironment
         
         return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
-
-    /**
-     * Make it difficult to have the string be considered a field (eg: title()),
-     * by changing the field args `()` symbols into something different.
-     * 
-     * Must pass a string of exactly two characters:
-     * 
-     *   1st: QuerySyntax::$SYMBOL_FIELDARGS_OPENING (eg: `{`)
-     *   2nd: QuerySyntax::$SYMBOL_FIELDARGS_CLOSING (eg: `}`)
-     * 
-     * Eg: REDEFINED_FIELD_ARGS_SYMBOLS={}
-     */
-    public static function getRedefinedFieldArgsSymbols(): ?array
-    {
-        $chars = null;
-        if (getenv(self::REDEFINED_FIELD_ARGS_SYMBOLS) !== false) {
-            $chars = getenv(self::REDEFINED_FIELD_ARGS_SYMBOLS);
-        } elseif (PluginConfigurationHelpers::isWPConfigConstantDefined(self::REDEFINED_FIELD_ARGS_SYMBOLS)) {
-            $chars = PluginConfigurationHelpers::getWPConfigConstantValue(self::REDEFINED_FIELD_ARGS_SYMBOLS);
-        }
-        if ($chars !== null && strlen($chars) === 2) {
-            return [$chars[0], $chars[1]];
-        }
-        return null;
-    }
 }
