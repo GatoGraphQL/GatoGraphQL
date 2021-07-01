@@ -16,7 +16,7 @@ use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeSelfTypeDeclarationRector;
  *
  * @see https://github.com/rectorphp/rector/issues/5962
  */
-abstract class AbstractCacheItemContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
+abstract class AbstractCacheItemChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
 {
     protected function getRectorRuleClasses(): array
     {
