@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
     $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
-    $monorepoDir = dirname(__DIR__);
+    $monorepoDir = dirname(__DIR__, 3);
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::BOOTSTRAP_FILES, [
