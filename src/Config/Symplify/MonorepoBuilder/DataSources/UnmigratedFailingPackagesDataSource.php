@@ -55,6 +55,7 @@ class UnmigratedFailingPackagesDataSource
             'layers/SiteBuilder/packages/multisite',
             'layers/SiteBuilder/packages/resourceloader',
             'layers/SiteBuilder/packages/resources',
+            'layers/SiteBuilder/packages/site-builder-api',
             'layers/SiteBuilder/packages/site-wp',
             'layers/SiteBuilder/packages/site',
             'layers/SiteBuilder/packages/spa',
