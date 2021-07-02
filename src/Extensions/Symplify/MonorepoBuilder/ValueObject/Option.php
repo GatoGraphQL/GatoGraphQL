@@ -25,6 +25,10 @@ final class Option
     /**
      * @var string
      */
+    public const ENVIRONMENT_VARIABLE_NAME = 'environment-variable-name';
+    /**
+     * @var string
+     */
     public const JSON = 'json';
     /**
      * @var string
