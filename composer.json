@@ -186,6 +186,7 @@
             "PoP\\Routing\\": "layers/Engine/packages/routing/src",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/src",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/src",
+            "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/src",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/src",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/src",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/src",
@@ -342,6 +343,7 @@
             "PoP\\Routing\\": "layers/Engine/packages/routing/tests",
             "PoP\\SPA\\": "layers/SiteBuilder/packages/spa/tests",
             "PoP\\SSG\\": "layers/SiteBuilder/packages/static-site-generator/tests",
+            "PoP\\SiteBuilderAPI\\": "layers/SiteBuilder/packages/site-builder-api/tests",
             "PoP\\SiteWP\\": "layers/SiteBuilder/packages/site-wp/tests",
             "PoP\\Site\\": "layers/SiteBuilder/packages/site/tests",
             "PoP\\TranslationWP\\": "layers/Engine/packages/translation-wp/tests",
@@ -507,7 +509,8 @@
         "pop-sites-wassup/system-mutations": "0.7.13",
         "pop-sites-wassup/user-state-mutations": "0.7.13",
         "pop-sites-wassup/volunteer-mutations": "0.7.13",
-        "pop-sites-wassup/wassup": "0.7.13"
+        "pop-sites-wassup/wassup": "0.7.13",
+        "pop/site-builder-api": "0.7.13"
     },
     "authors": [
         {
