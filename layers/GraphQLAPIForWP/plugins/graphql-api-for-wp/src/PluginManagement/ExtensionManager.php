@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
-use Composer\Semver\Semver;
+use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class ExtensionManager extends AbstractPluginManager
@@ -72,7 +72,7 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         // Validate that the required version of the GraphQL API for WP plugin is installed
-        if ($mainPluginVersionConstraint !== null && !Semver::satisfies(
+        if ($mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
             MainPluginManager::getConfig('version'),
             $mainPluginVersionConstraint
         )) {

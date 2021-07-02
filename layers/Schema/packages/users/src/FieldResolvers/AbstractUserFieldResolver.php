@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Users\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -29,6 +30,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         protected UserTypeAPIInterface $userTypeAPI,
     ) {
         parent::__construct(
@@ -38,6 +40,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
         );
     }
     

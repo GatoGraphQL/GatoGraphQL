@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ConditionalOnComponent\Users\FieldResolvers;
 
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -29,6 +30,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         CommentTypeAPIInterface $commentTypeAPI,
         protected UserCommentTypeAPIInterface $userCommentTypeAPI,
         protected UserTypeAPIInterface $userTypeAPI,
@@ -40,6 +42,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
             $commentTypeAPI,
         );
     }

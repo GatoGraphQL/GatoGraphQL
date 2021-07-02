@@ -16,6 +16,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
+        "graphql-api/external-dependency-wrappers": "^0.8",
         "graphql-api/markdown-convertor": "^0.8",
         "pop-schema/generic-customposts": "^0.8",
         "pop-schema/commentmeta-wp": "^0.8",

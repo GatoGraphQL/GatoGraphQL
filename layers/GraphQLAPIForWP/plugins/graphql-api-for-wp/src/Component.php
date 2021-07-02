@@ -55,6 +55,7 @@ class Component extends AbstractPluginComponent
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
             \GraphQLAPI\MarkdownConvertor\Component::class,
+            \GraphQLAPI\ExternalDependencyWrappers\Component::class,
         ];
     }
 

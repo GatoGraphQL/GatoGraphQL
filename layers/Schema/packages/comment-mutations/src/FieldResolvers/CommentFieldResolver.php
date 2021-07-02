@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
-use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
+use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -28,6 +29,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
@@ -37,6 +39,7 @@ class CommentFieldResolver extends AbstractDBDataFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
         );
     }
 
