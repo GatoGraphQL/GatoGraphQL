@@ -6,6 +6,7 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\Configurators;
 
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\EnvironmentVariablesDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
@@ -70,6 +71,16 @@ class ContainerConfigurationService
         }
 
         /**
+         * Environment variables
+         */
+        if ($environmentVariablesConfig = $this->getEnvironmentVariablesDataSource()) {
+            $parameters->set(
+                CustomOption::ENVIRONMENT_VARIABLES,
+                $environmentVariablesConfig->getEnvironmentVariables()
+            );
+        }
+
+        /**
          * Temporary hack! PHPStan is currently failing for these packages,
          * because they have not been fully converted to PSR-4 (WIP),
          * and converting them will take some time. Hence, for the time being,
@@ -124,6 +135,11 @@ class ContainerConfigurationService
     protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource
     {
         return new DowngradeRectorDataSource($this->rootDirectory);
+    }
+    
+    protected function getEnvironmentVariablesDataSource(): ?EnvironmentVariablesDataSource
+    {
+        return new EnvironmentVariablesDataSource();
     }
     
     protected function getUnmigratedFailingPackagesDataSource(): ?UnmigratedFailingPackagesDataSource
