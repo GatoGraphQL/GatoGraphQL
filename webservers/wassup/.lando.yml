@@ -143,9 +143,9 @@ services:
         - >-
           ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
         - >-
-          ../../layers/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
+          ../../layers/Legacy/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
         - >-
-          ../../layers/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
+          ../../layers/Legacy/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
         - >-
           ../../layers/Schema/packages/google-translate-directive:/app/vendor/pop-schema/google-translate-directive
         - >-
@@ -168,7 +168,7 @@ services:
         - >-
           ../../layers/Schema/packages/migrate-events-wp-em:/app/vendor/pop-schema/migrate-events-wp-em
         - >-
-          ../../layers/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse
+          ../../layers/Legacy/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse
         - >-
           ../../layers/Schema/packages/migrate-locations:/app/vendor/pop-schema/migrate-locations
         - >-
