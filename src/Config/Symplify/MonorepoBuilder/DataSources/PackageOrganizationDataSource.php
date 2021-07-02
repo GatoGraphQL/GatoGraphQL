@@ -22,8 +22,8 @@ class PackageOrganizationDataSource
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
             'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
             'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
-            'layers/SiteBuilder/packages' => 'getpop',
-            'layers/Wassup/packages' => 'PoPSites-Wassup',
+            // 'layers/SiteBuilder/packages' => 'getpop',
+            // 'layers/Wassup/packages' => 'PoPSites-Wassup',
         ];
     }
 
@@ -45,6 +45,7 @@ class PackageOrganizationDataSource
     {
         return [
             'graphql-api-for-wp/wordpress',
+            // 'migrate-everythingelse',
         ];
     }
 }
