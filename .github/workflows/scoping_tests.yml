@@ -19,6 +19,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
+                with:
+                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -46,6 +48,8 @@ jobs:
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
+                with:
+                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
 
                 # see https://github.com/shivammathur/setup-php
             -   name: Set-up PHP

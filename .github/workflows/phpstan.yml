@@ -12,6 +12,8 @@ jobs:
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
+                with:
+                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
 
             -   name: Set-up PHP
                 uses: shivammathur/setup-php@v2
