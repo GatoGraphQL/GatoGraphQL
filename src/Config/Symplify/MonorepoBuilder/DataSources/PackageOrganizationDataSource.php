@@ -23,7 +23,7 @@ class PackageOrganizationDataSource
             'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
             'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
             'layers/SiteBuilder/packages' => 'getpop',
-            // 'layers/Wassup/packages' => 'PoPSites-Wassup',
+            'layers/Wassup/packages' => 'PoPSites-Wassup',
         ];
     }
 
