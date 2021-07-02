@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MoM\API\Schema;
+namespace PoP\SiteBuilderAPI\Schema;
 
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\API\Schema\FieldQueryConvertor as UpstreamFieldQueryConvertor;

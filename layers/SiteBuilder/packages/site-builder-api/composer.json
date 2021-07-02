@@ -1,9 +1,9 @@
 {
-    "name": "mom-api/api",
+    "name": "pop/sitebuilder-api",
     "type": "library",
     "description": "Component-based API",
-    "keywords": ["MoM", "api"],
-    "homepage": "https://github.com/mom-api/api",
+    "keywords": ["PoP", "sitebuilder-api"],
+    "homepage": "https://github.com/pop/sitebuilder-api",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MoM\\API\\": "src"
+            "PoP\\SiteBuilderAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MoM\\API\\": "tests"
+            "PoP\\SiteBuilderAPI\\": "tests"
         }
     },
     "scripts": {

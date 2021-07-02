@@ -150,7 +150,7 @@ class Engine extends UpstreamEngine implements EngineInterface
             }
         }
         return $this->hooksAPI->applyFilters(
-            '\MoM\ComponentModel\Engine:site-meta',
+            '\PoPSiteBuilder\ComponentModel\Engine:site-meta',
             $meta
         );
     }
@@ -172,7 +172,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
 
         return $this->hooksAPI->applyFilters(
-            '\MoM\ComponentModel\Engine:request-meta',
+            '\PoPSiteBuilder\ComponentModel\Engine:request-meta',
             $meta
         );
     }

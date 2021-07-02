@@ -5,7 +5,7 @@ services:
         autoconfigure: true
 
     PoP\API\Schema\FieldQueryConvertorInterface:
-        class: \MoM\API\Schema\FieldQueryConvertor
+        class: \PoP\SiteBuilderAPI\Schema\FieldQueryConvertor
 
-    MoM\API\Hooks\:
+    PoP\SiteBuilderAPI\Hooks\:
         resource: '../src/Hooks/*'

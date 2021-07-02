@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MoM\API;
+namespace PoP\SiteBuilderAPI;
 
 use PoP\API\Environment;
 use PoP\Root\Component\AbstractComponent;

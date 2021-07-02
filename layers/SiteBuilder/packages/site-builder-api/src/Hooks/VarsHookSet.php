@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MoM\API\Hooks;
+namespace PoP\SiteBuilderAPI\Hooks;
 
 use PoP\ConfigurationComponentModel\Constants\Stratum;
 use PoP\Hooks\AbstractHookSet;

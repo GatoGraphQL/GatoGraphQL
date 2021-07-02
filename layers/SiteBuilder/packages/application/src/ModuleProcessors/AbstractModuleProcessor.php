@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\ModuleProcessors;
 
-use MoM\API\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
+use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Environment;

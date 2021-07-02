@@ -1,6 +1,6 @@
 <?php
 
-namespace MoM\API;
+namespace PoP\SiteBuilderAPI;
 
 use PHPUnit\Framework\TestCase;
 
