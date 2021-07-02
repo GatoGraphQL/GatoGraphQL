@@ -96,7 +96,6 @@ class ContainerConfigurationService
         /**
          * Libraries that must always be required (or removed) in composer.json
          */
-        $parameters = $this->containerConfigurator->parameters();
         if ($dataToAppendAndRemoveConfig = $this->getDataToAppendAndRemoveDataSource()) {
             $parameters->set(
                 Option::DATA_TO_APPEND,
