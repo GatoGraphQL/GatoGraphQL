@@ -6,8 +6,5 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
 class ExtensionDemoContainerConfigurationService extends AbstractPluginDowngradeContainerConfigurationService
 {
-    protected function getPluginRelativePath(): string
-    {
-        return 'layers/GraphQLAPIForWP/plugins/extension-demo';
-    }
+    use ExtensionDemoContainerConfigurationServiceTrait;
 }
