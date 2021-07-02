@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -31,6 +32,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
@@ -40,6 +42,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
         );
     }
 

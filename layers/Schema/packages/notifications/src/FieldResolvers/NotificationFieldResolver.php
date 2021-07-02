@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Notifications\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -32,6 +33,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         protected CommentTypeAPIInterface $commentTypeAPI,
     ) {
         parent::__construct(
@@ -41,6 +43,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
         );
     }
 

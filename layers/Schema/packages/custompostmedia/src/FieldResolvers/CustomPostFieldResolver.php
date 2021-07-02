@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPostMedia\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -26,6 +27,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
     ) {
         parent::__construct(
@@ -35,6 +37,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
         );
     }
 

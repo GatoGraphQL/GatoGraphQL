@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Media\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -28,6 +29,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
         protected MediaTypeAPIInterface $mediaTypeAPI,
     ) {
         parent::__construct(
@@ -37,6 +39,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             $fieldQueryInterpreter,
             $nameResolver,
             $cmsService,
+            $semverHelperService,
         );
     }
     
