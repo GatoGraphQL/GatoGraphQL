@@ -5,6 +5,8 @@ on:
         # see https://github.community/t/how-to-run-github-actions-workflow-only-for-new-tags/16075/10?u=tomasvotruba
         tags:
             - '*'
+env:
+    CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_packages_json_tagged:
@@ -16,7 +18,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             # required for matrix of packages set
             -   uses: shivammathur/setup-php@v2
@@ -51,7 +53,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
                     # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
                     # see https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
                     fetch-depth: 0

@@ -4,6 +4,8 @@ on:
         branches:
             - master
     pull_request: null
+env:
+    CHECKOUT_SUBMODULES: ""
 
 jobs:
     main:
@@ -13,7 +15,7 @@ jobs:
             -   name: Checkout code
                 uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   name: Set-up PHP
                 uses: shivammathur/setup-php@v2

@@ -4,7 +4,9 @@ on:
         branches:
             - master
     pull_request: null
-
+env:
+    CHECKOUT_SUBMODULES: ""
+    
 jobs:
     provide_data:
         name: Provide list of package paths
@@ -13,7 +15,7 @@ jobs:
             -
                 uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -39,7 +41,7 @@ jobs:
             -   name: Checkout code
                 uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   name: Set-up PHP
                 uses: shivammathur/setup-php@v2

@@ -16,6 +16,7 @@ on:
     pull_request: null
 
 env:
+    CHECKOUT_SUBMODULES: ""
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
     COMPOSER_ROOT_VERSION: "dev-master"
 
@@ -27,7 +28,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -76,7 +77,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   uses: shivammathur/setup-php@v2
                 with:

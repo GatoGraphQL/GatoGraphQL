@@ -4,6 +4,8 @@ on:
     push:
         branches:
             - master
+env:
+    CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_packages_json:
@@ -15,7 +17,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             # required for matrix of packages set
             -   uses: shivammathur/setup-php@v2
@@ -66,7 +68,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
                 with:
-                    submodules: "$(vendor/bin/monorepo-builder env-var checkout-submodules)"
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
                 # Uses an action in the root directory
             -   name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
