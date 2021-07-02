@@ -117,9 +117,9 @@ jobs:
             # Test everything, including Composer dependencies which (supposedly)
             # do not require downgrading
             # Use a PHP Linter. If PHP is not valid, it will throw an error
-            # Also test all the migrate-* packages, but migrate-everythingelse that
-            # should not be part of any project, and DOES contain PHP 8.0 (it's not being downgraded)
+            # Exclude layers/Legacy/ which is not part of any project,
+            # and DOES contain PHP 8.0 (it's not being downgraded)
             -   name: Run PHP Parallel Lint on PHP 7.1
-                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude layers/SiteBuilderAPI/ --exclude layers/Schema/packages/migrate-everythingelse/ --exclude layers/EverythingElse/ --exclude vendor/symfony/polyfill-ctype/bootstrap80.php --exclude vendor/symfony/polyfill-intl-grapheme/bootstrap80.php --exclude vendor/symfony/polyfill-intl-idn/bootstrap80.php --exclude vendor/symfony/polyfill-intl-normalizer/bootstrap80.php --exclude vendor/symfony/polyfill-mbstring/bootstrap80.php
+                run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude layers/Legacy/ --exclude vendor/symfony/polyfill-ctype/bootstrap80.php --exclude vendor/symfony/polyfill-intl-grapheme/bootstrap80.php --exclude vendor/symfony/polyfill-intl-idn/bootstrap80.php --exclude vendor/symfony/polyfill-intl-normalizer/bootstrap80.php --exclude vendor/symfony/polyfill-mbstring/bootstrap80.php
 
 
