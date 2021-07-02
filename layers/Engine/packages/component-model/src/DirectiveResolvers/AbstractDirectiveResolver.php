@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use Composer\Semver\Semver;
 use Exception;
 use League\Pipeline\StageInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
@@ -12,10 +11,12 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Facades\HelperServices\SemverHelperServiceFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
@@ -49,6 +50,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected InstanceManagerInterface $instanceManager;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
+    protected SemverHelperServiceInterface $semverHelperService;
     /**
      * @var array<string, mixed>
      */
@@ -93,6 +95,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->instanceManager = InstanceManagerFacade::getInstance();
         $this->fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $this->feedbackMessageStore = FeedbackMessageStoreFacade::getInstance();
+        $this->semverHelperService = SemverHelperServiceFacade::getInstance();
     }
 
     /**
@@ -371,7 +374,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                  * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
                  */
                 try {
-                    return Semver::satisfies($schemaDirectiveVersion, $versionConstraint);
+                    return $this->semverHelperService->satisfies($schemaDirectiveVersion, $versionConstraint);
                 } catch (Exception) {
                     return false;
                 }

@@ -52,6 +52,9 @@ services:
     PoP\ComponentModel\HelperServices\RequestHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\RequestHelperService
 
+    PoP\ComponentModel\HelperServices\SemverHelperServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\SemverHelperService
+
     PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
 

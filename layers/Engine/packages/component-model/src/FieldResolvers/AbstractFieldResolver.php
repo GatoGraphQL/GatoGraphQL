@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use Exception;
-use Composer\Semver\Semver;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -26,6 +25,7 @@ use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\FieldResolvers\FieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -53,6 +53,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected NameResolverInterface $nameResolver,
         protected CMSServiceInterface $cmsService,
+        protected SemverHelperServiceInterface $semverHelperService,
     ) {
     }
 
@@ -164,7 +165,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                  * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
                  */
                 try {
-                    return Semver::satisfies($schemaFieldVersion, $versionConstraint);
+                    return $this->semverHelperService->satisfies($schemaFieldVersion, $versionConstraint);
                 } catch (Exception) {
                     return false;
                 }
