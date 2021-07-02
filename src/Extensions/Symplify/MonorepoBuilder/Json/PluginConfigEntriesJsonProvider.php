@@ -22,7 +22,6 @@ final class PluginConfigEntriesJsonProvider
     }
 
     /**
-     * @param string[] $fileListFilter
      * @return array<array<string,string>>
      */
     public function providePluginConfigEntries(bool $scopedOnly = false): array
