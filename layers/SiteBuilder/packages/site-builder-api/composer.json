@@ -1,9 +1,9 @@
 {
-    "name": "pop/sitebuilder-api",
+    "name": "pop/site-builder-api",
     "type": "library",
     "description": "Component-based API",
-    "keywords": ["PoP", "sitebuilder-api"],
-    "homepage": "https://github.com/pop/sitebuilder-api",
+    "keywords": ["PoP", "site-builder-api"],
+    "homepage": "https://github.com/pop/site-builder-api",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -510,7 +510,7 @@
         "pop-sites-wassup/user-state-mutations": "0.7.13",
         "pop-sites-wassup/volunteer-mutations": "0.7.13",
         "pop-sites-wassup/wassup": "0.7.13",
-        "pop/sitebuilder-api": "0.7.13"
+        "pop/site-builder-api": "0.7.13"
     },
     "authors": [
         {
