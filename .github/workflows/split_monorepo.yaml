@@ -4,6 +4,8 @@ on:
     push:
         branches:
             - master
+env:
+    CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_packages_json:
@@ -13,8 +15,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            -
-                uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             # required for matrix of packages set
             -   uses: shivammathur/setup-php@v2
@@ -63,12 +66,12 @@ jobs:
         name: Split Tests of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
         steps:
-            -
-                uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
-            -
                 # Uses an action in the root directory
-                name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
+            -   name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
                 uses: symplify/monorepo-split-github-action@1.1
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

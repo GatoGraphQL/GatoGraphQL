@@ -4,6 +4,8 @@ on:
         branches:
             - master
     pull_request: null
+env:
+    CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_data:
@@ -11,6 +13,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -35,6 +39,8 @@ jobs:
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
                 # see https://github.com/shivammathur/setup-php
             -   name: Set-up PHP

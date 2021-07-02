@@ -4,7 +4,9 @@ on:
         branches:
             - master
     pull_request: null
-
+env:
+    CHECKOUT_SUBMODULES: ""
+    
 jobs:
     provide_data:
         name: Provide list of package paths
@@ -12,6 +14,8 @@ jobs:
         steps:
             -
                 uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -36,6 +40,8 @@ jobs:
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   name: Set-up PHP
                 uses: shivammathur/setup-php@v2

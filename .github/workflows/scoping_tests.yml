@@ -10,6 +10,7 @@ on:
     pull_request: null
 
 env:
+    CHECKOUT_SUBMODULES: ""
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
     COMPOSER_ROOT_VERSION: "dev-master"
 
@@ -19,6 +20,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -46,6 +49,8 @@ jobs:
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
                 # see https://github.com/shivammathur/setup-php
             -   name: Set-up PHP

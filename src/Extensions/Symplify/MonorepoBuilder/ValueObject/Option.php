@@ -9,15 +9,23 @@ final class Option
     /**
      * @var string
      */
-    public const PACKAGE_ORGANIZATIONS = 'package_organizations';
+    public const PACKAGE_ORGANIZATIONS = 'package-organizations';
     /**
      * @var string
      */
-    public const PLUGIN_CONFIG_ENTRIES = 'plugin_config_entries';
+    public const PLUGIN_CONFIG_ENTRIES = 'plugin-config-entries';
     /**
      * @var string
      */
-    public const ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS = 'additional_downgrade_rector_configs';
+    public const ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS = 'additional-downgrade-rector-configs';
+    /**
+     * @var string
+     */
+    public const ENVIRONMENT_VARIABLES = 'environment-variables';
+    /**
+     * @var string
+     */
+    public const ENVIRONMENT_VARIABLE_NAME = 'environment-variable-name';
     /**
      * @var string
      */
@@ -33,7 +41,7 @@ final class Option
     /**
      * @var string
      */
-    public const UNMIGRATED_FAILING_PACKAGES = 'unmigrated_failing_packages';
+    public const UNMIGRATED_FAILING_PACKAGES = 'unmigrated-failing-packages';
     /**
      * @var string
      */
