@@ -83,11 +83,11 @@ else
     PACKAGES="$rootPackage $(composer info --name-only --no-dev --working-dir=$composer_working_dir)"
 fi
 
-# Ignore all the "migrate" packages
-for local_package_owner in ${local_package_owners[@]}
-do
-    PACKAGES=$(echo "$PACKAGES" | awk "!/${local_package_owner}\/migrate-/")
-done
+# # Ignore all the "migrate" packages
+# for local_package_owner in ${local_package_owners[@]}
+# do
+#     PACKAGES=$(echo "$PACKAGES" | awk "!/${local_package_owner}\/migrate-/")
+# done
 
 if [ -n "$PACKAGES" ]; then
     for package in $PACKAGES

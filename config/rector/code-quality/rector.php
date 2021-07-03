@@ -38,7 +38,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // files to skip downgrading
     $parameters->set(Option::SKIP, [
-        '*/migrate-*',
+        // '*/migrate-*',
         '*/vendor/*',
     ]);
 
