@@ -14,10 +14,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v2.3.4
 
             # required for matrix of packages set
-            -   uses: shivammathur/setup-php@v2
+            -   uses: shivammathur/setup-php@v2.3.4
                 with:
                     php-version: 8.0
                     coverage: none
@@ -63,7 +63,7 @@ jobs:
         name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v2.3.4
 
                 # Uses an action in the root directory
             -   name: Split ${{ matrix.package.name }} (${{ matrix.package.path }})
