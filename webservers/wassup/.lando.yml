@@ -276,7 +276,6 @@ services:
       - sed "s#require_once ABSPATH . 'wp-settings.php';#require_once(__DIR__ . '/../vendor/autoload.php'); require_once(__DIR__ . '/../code-src/initialize-pop-components.php'); require_once  ABSPATH  .  'wp-settings.php' ;#g" wordpress/wp-config.php > wp-config.php.tmp
       - mv wp-config.php.tmp wordpress/wp-config.php
       - wp plugin activate engine-wp-bootloader --path=wordpress
-      - wp plugin activate events-manager --path=wordpress
       - wp plugin activate aryo-activity-log --path=wordpress
       - cp assets/.htaccess wordpress
       - wp rewrite structure '/%postname%/' --hard --path=wordpress
