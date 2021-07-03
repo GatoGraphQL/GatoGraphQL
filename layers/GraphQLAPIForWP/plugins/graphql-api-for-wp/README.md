@@ -31,17 +31,13 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 
 ## Installing the plugin (for production)
 
-Please read [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-graphql-api-for-wordpress.md).
-
-It requires PHP 7.1+
+👀 Instructions: [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-graphql-api-for-wordpress.md).
 
 ## Development
 
 The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp).
 
-Please read [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
-
-It requires PHP 8.0+
+👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
 ### Supported PHP features
 

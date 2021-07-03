@@ -2,6 +2,11 @@
 
 These are the several ways to install the [GraphQL API for WordPress](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) plugin.
 
+## Requirements
+
+- WordPress 5.4+
+- PHP 7.1+
+
 ## Plugin
 
 Download [the latest release of the plugin][latest-release-url] as a .zip file.
