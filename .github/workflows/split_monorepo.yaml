@@ -17,8 +17,6 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
-                with:
-                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
             # required for matrix of packages set
             -   uses: shivammathur/setup-php@v2
@@ -68,8 +66,6 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
-                with:
-                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
                 # Uses an action in the root directory
             -   name: Split ${{ matrix.package.name }} (${{ matrix.package.path }})
