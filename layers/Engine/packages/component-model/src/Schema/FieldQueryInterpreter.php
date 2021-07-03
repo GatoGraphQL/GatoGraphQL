@@ -412,16 +412,16 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         // If there was an error, the value will be NULL. In this case, remove it
         return array_filter(
             $fieldOrDirectiveArgs,
-            function ($elem) use ($allowNullValues) {
+            function ($elem) use ($allowNullValues): bool {
                 // If the input is `[[String]]`, must then validate if any subitem is Error
                 if (is_array($elem)) {
-                    return $this->filterFieldOrDirectiveArgs($elem, true);
+                    // Filter elements in the array. If any is missing, filter the array out
+                    $filteredElem = $this->filterFieldOrDirectiveArgs($elem, true);
+                    return count($elem) === count($filteredElem);
                 }
-                // Remove only NULL values and Errors. Keep '', 0 and false
+                // Remove only NULL values and Errors. Keep '', 0, false and []
                 return !GeneralUtils::isError($elem)
-                    && ($elem !== null
-                        || ($elem === null && $allowNullValues)
-                    );
+                    && ($elem !== null || $allowNullValues);
             }
         );
     }
