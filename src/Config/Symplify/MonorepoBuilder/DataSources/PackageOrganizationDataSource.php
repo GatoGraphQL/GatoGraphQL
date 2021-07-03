@@ -45,7 +45,6 @@ class PackageOrganizationDataSource
     {
         return [
             'graphql-api-for-wp/wordpress',
-            // 'migrate-everythingelse',
         ];
     }
 }
