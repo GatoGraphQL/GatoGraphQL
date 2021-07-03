@@ -30,8 +30,6 @@ services:
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/graphql-by-pop/graphql-server
         - >-
-          ../../layers/Misc/packages/examples-for-pop:/app/vendor/leoloso/examples-for-pop
-        - >-
           ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
           ../../layers/SiteBuilder/packages/application:/app/vendor/getpop/application
@@ -80,8 +78,6 @@ services:
         - '../../layers/SiteBuilder/packages/site-wp:/app/vendor/getpop/site-wp'
         - '../../layers/SiteBuilder/packages/spa:/app/vendor/getpop/spa'
         - >-
-          ../../layers/Engine/packages/trace-tools:/app/vendor/getpop/trace-tools
-        - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
@@ -94,8 +90,6 @@ services:
         - >-
           ../../layers/Schema/packages/categories-wp:/app/vendor/pop-schema/categories-wp
         - >-
-          ../../layers/Schema/packages/cdn-directive:/app/vendor/pop-schema/cdn-directive
-        - >-
           ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
         - >-
           ../../layers/Schema/packages/comment-mutations-wp:/app/vendor/pop-schema/comment-mutations-wp
@@ -106,8 +100,6 @@ services:
         - '../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments'
         - >-
           ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
-        - >-
-          ../../layers/Schema/packages/convert-case-directives:/app/vendor/pop-schema/convert-case-directives
         - >-
           ../../layers/Schema/packages/custompost-mutations:/app/vendor/pop-schema/custompost-mutations
         - >-
@@ -144,10 +136,6 @@ services:
           ../../layers/Legacy/Schema/packages/everythingelse:/app/vendor/pop-schema/everythingelse
         - >-
           ../../layers/Legacy/Schema/packages/everythingelse-wp:/app/vendor/pop-schema/everythingelse-wp
-        - >-
-          ../../layers/Schema/packages/google-translate-directive:/app/vendor/pop-schema/google-translate-directive
-        - >-
-          ../../layers/Schema/packages/google-translate-directive-for-customposts:/app/vendor/pop-schema/google-translate-directive-for-customposts
         - >-
           ../../layers/Schema/packages/highlights:/app/vendor/pop-schema/highlights
         - >-
@@ -208,8 +196,6 @@ services:
           ../../layers/Schema/packages/taxonomyquery:/app/vendor/pop-schema/taxonomyquery
         - >-
           ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
-        - >-
-          ../../layers/Schema/packages/translate-directive:/app/vendor/pop-schema/translate-directive
         - >-
           ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
         - >-
