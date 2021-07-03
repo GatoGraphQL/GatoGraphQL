@@ -28,7 +28,7 @@ $ cd PoP
 $ composer install
 ```
 
-Build the Lando webserver. The first time, execute:
+Build the Lando webserver:
 
 ```bash
 composer build-server
