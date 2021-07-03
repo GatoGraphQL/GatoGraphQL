@@ -77,16 +77,6 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * All migration plugins that this component depends upon, to initialize them
-     *
-     * @return string[]
-     */
-    public static function getDependedMigrationPlugins(): array
-    {
-        return [];
-    }
-
-    /**
      * Compiler Passes for the System Container
      *
      * @return string[]

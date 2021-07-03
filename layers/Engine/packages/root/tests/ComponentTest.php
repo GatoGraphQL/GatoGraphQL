@@ -17,8 +17,5 @@ class ComponentTest extends TestCase
         $this->assertEmpty(
             Component::getDependedConditionalComponentClasses()
         );
-        $this->assertEmpty(
-            Component::getDependedMigrationPlugins()
-        );
     }
 }
