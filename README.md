@@ -1,6 +1,6 @@
 # PoP
 
-This is a monorepo containing several projects.
+PoP is a monorepo containing several projects.
 
 ## The GraphQL API for WordPress plugin
 
@@ -11,7 +11,10 @@ This is a monorepo containing several projects.
 - Website: [graphql-api.com](https://graphql-api.com)
 - [Download](https://github.com/leoloso/PoP/releases/latest/download/graphql-api.zip)
 - [Plugin source code](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp)
-- [Extension source code](layers/GraphQLAPIForWP/plugins/extension-demo): demonstration on how to extend the GraphQL schema.
+
+Plugins can extend the GraphQL schema, to fetch their own data.
+
+- [Extension demo source code](layers/GraphQLAPIForWP/plugins/extension-demo)
 
 ## GraphQL By PoP
 
@@ -22,11 +25,11 @@ This is a monorepo containing several projects.
 - Website: [graphql-by-pop.com](https://graphql-by-pop.com)
 - [Source code](layers/GraphQLByPoP)
 
-## PoP ("Platform of Platforms") PHP components
+## PoP - set of PHP components
 
 <p align="center"><img src="https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
 
-**PoP** is a set of libraries, providing a server-side component model in PHP, and applications obtained with it.
+**PoP** is a set of libraries which provide a server-side component model in PHP, and the foundation to implement applications with it.
 
 - Website: [getpop.org](https://getpop.org)
 - Source code:
