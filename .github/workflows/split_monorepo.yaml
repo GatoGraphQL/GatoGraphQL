@@ -4,10 +4,8 @@ on:
     push:
         branches:
             - master
-    pull_request: null
 env:
     CHECKOUT_SUBMODULES: ""
-    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
 jobs:
     provide_packages_json:
@@ -74,12 +72,13 @@ jobs:
 
                 # Uses an action in the root directory
             -   name: Split ${{ matrix.package.name }} (${{ matrix.package.path }})
-                if: "!startsWith(github.ref, 'refs/tags/')"
-                uses: symplify/monorepo-split-github-action@3db02ab581d2875a9ef3a6c2bcddd07953baddb1
+                uses: symplify/monorepo-split-github-action@1.1
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
                     branch: 'master'
-                    package_directory: '${{ matrix.package.path }}'
-                    repository_organization: '${{ matrix.package.organization }}'
-                    repository_name: '${{ matrix.package.name }}'
-                    user_name: "leoloso"
-                    user_email: "leo@getpop.org"
+                    package-directory: '${{ matrix.package.path }}'
+                    split-repository-organization: '${{ matrix.package.organization }}'
+                    split-repository-name: '${{ matrix.package.name }}'
+                    user-name: "leoloso"
+                    user-email: "leo@getpop.org"
