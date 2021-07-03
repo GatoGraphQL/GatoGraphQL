@@ -67,8 +67,6 @@ services:
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
         - >-
-          ../../layers/SiteBuilder/packages/migrate-component-model-configuration:/app/vendor/getpop/migrate-component-model-configuration
-        - >-
           ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
         - >-
           ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
@@ -165,14 +163,6 @@ services:
           ../../layers/Schema/packages/metaquery:/app/vendor/pop-schema/metaquery
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
-        - >-
-          ../../layers/Schema/packages/migrate-events-wp-em:/app/vendor/pop-schema/migrate-events-wp-em
-        - >-
-          ../../layers/Legacy/Schema/packages/migrate-everythingelse:/app/vendor/pop-schema/migrate-everythingelse
-        - >-
-          ../../layers/Schema/packages/migrate-locations:/app/vendor/pop-schema/migrate-locations
-        - >-
-          ../../layers/Schema/packages/migrate-locations-wp-em:/app/vendor/pop-schema/migrate-locations-wp-em
         - >-
           ../../layers/Schema/packages/notifications:/app/vendor/pop-schema/notifications
         - >-
