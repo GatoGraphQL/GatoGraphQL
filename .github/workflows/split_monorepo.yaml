@@ -75,7 +75,7 @@ jobs:
             -   name: Split ${{ matrix.package.name }} (${{ matrix.package.path }})
                 uses: symplify/monorepo-split-github-action@1.1
                 env:
-                    GITHUB_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
+                    GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
                 with:
                     branch: 'master'
                     package-directory: '${{ matrix.package.path }}'
