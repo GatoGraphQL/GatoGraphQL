@@ -1,10 +1,10 @@
-![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
-
 # PoP
 
-This is a monorepo containing all code for the PoP project.
+This is a monorepo containing several projects.
 
 ## The GraphQL API for WordPress plugin
+
+<p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>
 
 **GraphQL API for WordPress** is a forward-looking and powerful GraphQL server for WordPress: [graphql-api.com](https://graphql-api.com).
 
@@ -14,11 +14,15 @@ This is a monorepo containing all code for the PoP project.
 
 ## GraphQL By PoP
 
+<p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p>
+
 **GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP: [graphql-by-pop.com](https://graphql-by-pop.com).
 
 - [Source code](layers/GraphQLByPoP)
 
-## PHP components
+## PoP ("Platform of Platforms") PHP components
+
+<p align="center"><img src="https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
 
 **PoP** is a server-side component model in PHP: [getpop.org](https://getpop.org).
 
