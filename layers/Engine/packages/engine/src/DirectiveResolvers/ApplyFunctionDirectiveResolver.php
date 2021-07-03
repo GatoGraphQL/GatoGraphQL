@@ -155,52 +155,58 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
                 // Place the errors not under schema but under DB, since they may change on a resultItem by resultItem basis
                 if ($schemaDBWarnings) {
-                    foreach ($schemaDBWarnings as $warningMessage) {
-                        $dbWarnings[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Warning validating function \'%s\' on object with ID \'%s\' and field under property \'%s\': %s)', 'component-model'),
-                                $function,
-                                $id,
-                                $fieldOutputKey,
-                                $warningMessage
-                            ),
-                        ];
+                    $dbWarning = [
+                        Tokens::PATH => [$this->directive],
+                        Tokens::MESSAGE => sprintf(
+                            $this->translationAPI->__('Warning validating function \'%s\' on object with ID \'%s\' and field under property \'%s\')', 'component-model'),
+                            $function,
+                            $id,
+                            $fieldOutputKey
+                        )
+                    ];
+                    foreach ($schemaDBWarnings as $schemaDBWarning) {
+                        array_unshift($schemaDBWarning[Tokens::PATH], $this->directive);
+                        $this->prependPathOnNestedErrors($schemaDBWarning);
+                        $dbWarning[Tokens::EXTENSIONS][Tokens::NESTED][] = $schemaDBWarning;
                     }
+                    $dbWarnings[(string)$id][] = $dbWarning;
                 }
                 if ($schemaDBErrors) {
-                    foreach ($schemaDBErrors as $errorMessage) {
-                        $dbErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Error validating function \'%s\' on object with ID \'%s\' and field under property \'%s\': %s)', 'component-model'),
-                                $function,
-                                $id,
-                                $fieldOutputKey,
-                                $errorMessage
-                            ),
-                        ];
+                    $dbError = [
+                        Tokens::PATH => [$this->directive],
+                        Tokens::MESSAGE => sprintf(
+                            $this->translationAPI->__('Error validating function \'%s\' on object with ID \'%s\' and field under property \'%s\')', 'component-model'),
+                            $function,
+                            $id,
+                            $fieldOutputKey
+                        )
+                    ];
+                    foreach ($schemaDBErrors as $schemaDBError) {
+                        array_unshift($schemaDBError[Tokens::PATH], $this->directive);
+                        $this->prependPathOnNestedErrors($schemaDBError);
+                        $dbError[Tokens::EXTENSIONS][Tokens::NESTED][] = $schemaDBError;
                     }
-                    if ($fieldOutputKey != $field) {
-                        $dbErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
-                                $field,
-                                $fieldOutputKey,
-                                $id
-                            ),
-                        ];
-                    } else {
-                        $dbErrors[(string)$id][] = [
-                            Tokens::PATH => [$this->directive],
-                            Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Applying function on field \'%s\' on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
-                                $fieldOutputKey,
-                                $id
-                            ),
-                        ];
-                    }
+                    $dbErrors[(string)$id][] = $dbError;
+                    // if ($fieldOutputKey != $field) {
+                    //     $dbErrors[(string)$id][] = [
+                    //         Tokens::PATH => [$this->directive],
+                    //         Tokens::MESSAGE => sprintf(
+                    //             $this->translationAPI->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
+                    //             $field,
+                    //             $fieldOutputKey,
+                    //             $id
+                    //         ),
+                    //     ];
+                    // } else {
+                    //     $dbErrors[(string)$id][] = [
+                    //         Tokens::PATH => [$this->directive],
+                    //         Tokens::MESSAGE => sprintf(
+                    //             $this->translationAPI->__('Applying function on field \'%s\' on object with ID \'%s\' can\'t be executed due to previous errors', 'component-model'),
+                    //             $fieldOutputKey,
+                    //             $id
+                    //         ),
+                    //     ];
+                    // }
                     continue;
                 }
 
