@@ -6,8 +6,9 @@ This is a monorepo containing several projects.
 
 <p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>
 
-**GraphQL API for WordPress** is a forward-looking and powerful GraphQL server for WordPress: [graphql-api.com](https://graphql-api.com).
+**GraphQL API for WordPress** is a forward-looking and powerful GraphQL server for WordPress.
 
+- Website: [graphql-api.com](https://graphql-api.com)
 - [Download](https://github.com/leoloso/PoP/releases/latest/download/graphql-api.zip)
 - [Plugin source code](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp)
 - [Extension source code](layers/GraphQLAPIForWP/plugins/extension-demo): demonstration on how to extend the GraphQL schema.
@@ -16,28 +17,32 @@ This is a monorepo containing several projects.
 
 <p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p>
 
-**GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP: [graphql-by-pop.com](https://graphql-by-pop.com).
+**GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP.
 
+- Website: [graphql-by-pop.com](https://graphql-by-pop.com)
 - [Source code](layers/GraphQLByPoP)
 
 ## PoP ("Platform of Platforms") PHP components
 
 <p align="center"><img src="https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
 
-**PoP** is a server-side component model in PHP: [getpop.org](https://getpop.org).
+**PoP** is a set of libraries, providing a server-side component model in PHP, and applications obtained with it.
 
-It is composed of the following layers:
-
-- [Engine](layers/Engine): The basic libraries.
-- [Schema](layers/Schema): The definitions for data entities (posts, users, comments, etc).
-- [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
+- Website: [getpop.org](https://getpop.org)
+- Source code:
+    - [Engine](layers/Engine): The basic libraries.
+    - [Schema](layers/Schema): The definitions for data entities (posts, users, comments, etc).
+    - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
 
 ## Site Builder (WIP)
 
 **Site Builder** is a set of PHP components to build a website using PoP's component-model architecture.
 
 - [Source code](layers/SiteBuilder)
-- [Wassup](layers/Wassup): Theme for the Site Builder, powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org).
+
+Similar to WordPress, it accepts themes.
+
+- [Wassup](layers/Wassup): theme powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)
 
 ---
 
