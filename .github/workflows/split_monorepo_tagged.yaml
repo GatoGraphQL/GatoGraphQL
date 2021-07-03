@@ -7,6 +7,7 @@ on:
             - '*'
 env:
     CHECKOUT_SUBMODULES: ""
+    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
 jobs:
     provide_packages_json_tagged:
@@ -62,8 +63,6 @@ jobs:
             -   name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
                 if: "startsWith(github.ref, 'refs/tags/')"
                 uses: symplify/monorepo-split-github-action@2.0
-                env:
-                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
                     branch: 'master'
                     package-directory: '${{ matrix.package.path }}'
