@@ -2,24 +2,40 @@
 
 # PoP
 
-This is a monorepo containing all layers from the PoP project:
+This is a monorepo containing all code for the PoP project.
 
-[Engine](layers/Engine):<br/>A server-side component model in PHP.
+## The GraphQL API for WordPress plugin
 
-[Schema](layers/Schema):<br/>The definitions for data entities (posts, users, comments, etc).
+**GraphQL API for WordPress** is a forward-looking and powerful GraphQL server for WordPress: [graphql-api.com](https://graphql-api.com).
 
-[API](layers/API):<br/>Packages to access the schema data through an API, including REST and GraphQL.
+- [Download](https://github.com/leoloso/PoP/releases/latest/download/graphql-api.zip)
+- [Plugin source code](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp)
+- [Extension source code](layers/GraphQLAPIForWP/plugins/extension-demo): demonstration on how to extend the GraphQL schema.
 
-[GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP ([graphql-by-pop.com](https://graphql-by-pop.com)).
+## GraphQL By PoP
 
-[GraphQL API for WordPress ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
+**GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP: [graphql-by-pop.com](https://graphql-by-pop.com).
 
-- The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
-- An [extension demo](layers/GraphQLAPIForWP/plugins/extension-demo) plugin, demonstrating how to extend the GraphQL schema.
+- [Source code](layers/GraphQLByPoP)
 
-[Site Builder](layers/SiteBuilder):<br/>Packages to build a website using the component-model architecture (WIP).
+## PHP components
 
-[Wassup](layers/Wassup):<br/>Implementation of a PoP website for WordPress (powering [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org) - WIP).
+**PoP** is a server-side component model in PHP: [getpop.org](https://getpop.org).
+
+It is composed of the following layers:
+
+- [Engine](layers/Engine): The basic libraries.
+- [Schema](layers/Schema): The definitions for data entities (posts, users, comments, etc).
+- [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
+
+## Site Builder (WIP)
+
+**Site Builder** is a set of PHP components to build a website using PoP's component-model architecture.
+
+- [Source code](layers/SiteBuilder)
+- [Wassup](layers/Wassup): Theme for the Site Builder, powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org).
+
+---
 
 ## Requirements
 
