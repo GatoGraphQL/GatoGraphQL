@@ -1,29 +1,56 @@
-![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
-
 # PoP
 
-This is a monorepo containing all layers from the PoP project:
+PoP is a monorepo containing several projects.
 
-[Engine](layers/Engine):<br/>A server-side component model in PHP.
+## The GraphQL API for WordPress plugin
 
-[Schema](layers/Schema):<br/>The definitions for data entities (posts, users, comments, etc).
+<p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>
 
-[API](layers/API):<br/>Packages to access the schema data through an API, including REST and GraphQL.
+**GraphQL API for WordPress** is a forward-looking and powerful GraphQL server for WordPress.
 
-[GraphQL by PoP](layers/GraphQLByPoP):<br/>Implementation of a CMS-agnostic GraphQL server in PHP ([graphql-by-pop.com](https://graphql-by-pop.com)).
+- Website: [graphql-api.com](https://graphql-api.com)
+- [Download](https://github.com/leoloso/PoP/releases/latest/download/graphql-api.zip)
+- [Plugin source code](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp)
+- [Development](docs/development-environment.md)
 
-[GraphQL API for WordPress ecosystem](layers/GraphQLAPIForWP):<br/>Implementation of the CMS-agnostic GraphQL server for WordPress. This layer comprises:
+Plugins can extend the GraphQL schema, to fetch their own data.
 
-- The main plugin, [GraphQL API for WordPress](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
-- An [extension demo](layers/GraphQLAPIForWP/plugins/extension-demo) plugin, demonstrating how to extend the GraphQL schema.
+- [Extension demo source code](layers/GraphQLAPIForWP/plugins/extension-demo)
 
-[Site Builder](layers/SiteBuilder):<br/>Packages to build a website using the component-model architecture (WIP).
+## GraphQL By PoP
 
-[Wassup](layers/Wassup):<br/>Implementation of a PoP website for WordPress (powering [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org) - WIP).
+<p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p>
 
-[Misc](layers/Misc):<br/>Collection of packages, clients, and others, related to PoP or any of its layers.
+**GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP.
 
-## Requirements
+- Website: [graphql-by-pop.com](https://graphql-by-pop.com)
+- [Source code](layers/GraphQLByPoP)
+
+## PoP - set of PHP components
+
+<p align="center"><img src="https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
+
+**PoP** is a set of libraries which provide a server-side component model in PHP, and the foundation to implement applications with it.
+
+- Website: [getpop.org](https://getpop.org)
+- Source code:
+    - [Engine](layers/Engine): The basic libraries.
+    - [Schema](layers/Schema): The definitions for data entities (posts, users, comments, etc).
+    - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
+
+## Site Builder (WIP)
+
+**Site Builder** is a set of PHP components to build a website using PoP's component-model architecture.
+
+- [Source code](layers/SiteBuilder)
+
+Similar to WordPress, it accepts themes.
+
+- [Wassup](layers/Wassup): theme powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)
+
+---
+
+<!-- ## Requirements
 
 - PHP 8.0+ for development
 - PHP 7.1+ for production
@@ -41,7 +68,7 @@ And then install the dependencies, via Composer
 ```bash
 $ cd PoP
 $ composer install
-```
+``` -->
 
 ## Table of Contents
 
@@ -55,11 +82,11 @@ $ composer install
 8. [How scoping works](docs/how-scoping-works.md)
 9. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
 
-## Resources
+<!-- ## Resources
 
 - [GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
-- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
+- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/) -->
 
 ## Standards
 

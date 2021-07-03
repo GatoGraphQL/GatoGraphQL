@@ -23,23 +23,25 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 - An overview of all its features
 - Q&A -->
 
-## Requirements
+<!-- ## Requirements
 
 - WordPress 5.4 or above
 - PHP 8.0+ for development
-- PHP 7.1+ for production
+- PHP 7.1+ for production -->
 
-## Install
+## Installing the plugin (for production)
 
-Please read [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-graphql-api-for-wordpress.md), on the monorepo.
+👀 Instructions: [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-graphql-api-for-wordpress.md).
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp).
+<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp). -->
 
-Please read [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md), on the monorepo.
+👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
-## Allowed code in the repo
+### Supported PHP features
+
+Check the list of [Supported PHP features](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
 
 ### Gutenberg JS builds
 
@@ -57,17 +59,6 @@ This method requires the code for the component to be divided into 2 separate pa
 
 - A CMS-agnostic package, containing the business code and generic contracts, but without using any WordPress code (eg: [posts](https://github.com/PoPSchema/posts))
 - A CMS-specific package, containing the implementation of the contracts for WordPress (eg: [posts-wp](https://github.com/PoPSchema/posts-wp)) -->
-
-## PHP versions
-
-Requirements:
-
-- PHP 8.0+ for development
-- PHP 7.1+ for production (through release [`graphql-api.zip`][latest-release-url])
-
-### Supported PHP features
-
-Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
 
 ## Modules
 
@@ -151,34 +142,14 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 
 ## Resources
 
-### Videos
+- [YouTube video: GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
+- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
+- [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
+- [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
 
-GraphQL API for WordPress demo:
+<details>
 
-- [Intro to the GraphQL API for WordPress](https://youtu.be/LnyNyT2RwwI)
-
-The following videos demonstrate several features:
-
-- [Persisted queries](https://vimeo.com/413503547)
-- [Custom endpoints](https://vimeo.com/413503485)
-- [Access control](https://vimeo.com/413503383)
-- [Public/private API](https://vimeo.com/413503284)
-- [HTTP caching](https://vimeo.com/413503188)
-- [Field deprecation](https://vimeo.com/413503110)
-- [Query inheritance](https://vimeo.com/413503010)
-
-### Comparison with WPGraphQL
-
-These articles demonstrate how the GraphQL API fares against WPGraphQL:
-
-1. [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
-2. [🥊 GraphQL API vs WPGraphQL: the fight!](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
-
-### WordPress Philosophy
-
-Detailed explanation of the plugin goals, and how it renders the WordPress philosophy:
-
-1. [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
+<summary>Architectural resources</summary>
 
 ### PHP Architecture
 
@@ -218,6 +189,8 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 1. [Adding a Custom Welcome Guide to the WordPress Block Editor](https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/)
 2. [Using Markdown and Localization in the WordPress Block Editor](https://css-tricks.com/using-markdown-and-localization-in-the-wordpress-block-editor/)
+
+</details>
 
 ## Standards
 
