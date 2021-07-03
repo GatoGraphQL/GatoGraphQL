@@ -58,12 +58,9 @@ jobs:
                     # see https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
                     fetch-depth: 0
 
-            # see https://github.com/WyriHaximus/github-action-get-previous-tag
-            -   id: previous_tag
-                uses: "WyriHaximus/github-action-get-previous-tag@master"
-
                 # Uses an action in the root directory
             -   name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
+                if: "startsWith(github.ref, 'refs/tags/')"
                 uses: symplify/monorepo-split-github-action@2.0
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -72,6 +69,6 @@ jobs:
                     package-directory: '${{ matrix.package.path }}'
                     split-repository-organization: '${{ matrix.package.organization }}'
                     split-repository-name: '${{ matrix.package.name }}'
-                    tag: ${{ steps.previous_tag.outputs.tag }}
+                    tag: ${GITHUB_REF#refs/tags/}
                     user-name: "leoloso"
                     user-email: "leo@getpop.org"
