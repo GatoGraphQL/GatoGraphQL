@@ -1,5 +1,5 @@
 {
-    "name": "leoloso/graphql-by-pop-demo-site",
+    "name": "pop/graphql-by-pop-demo-site",
     "description": "GraphQL by PoP Demo Site",
     "homepage": "https://newapi.getpop.org",
     "license": "GPL-2.0-or-later",
@@ -16,7 +16,7 @@
         {
             "type": "package",
             "package": {
-                "name": "leoloso-pop-api-wp/newsletter-subscriptions-rest-endpoints",
+                "name": "pop-api-demo-site/newsletter-subscriptions-rest-endpoints",
                 "version": "master",
                 "type": "wordpress-plugin",
                 "source": {
@@ -29,7 +29,7 @@
         {
             "type": "package",
             "package": {
-                "name": "leoloso-pop-api-wp/disable-user-edit-profile",
+                "name": "pop-api-demo-site/disable-user-edit-profile",
                 "version": "0.1.1",
                 "type": "wordpress-plugin",
                 "source": {
@@ -51,10 +51,10 @@
         "getpop/function-fields": "dev-master",
         "getpop/trace-tools": "dev-master",
         "graphql-by-pop/graphql-server": "dev-master",
-        "leoloso-pop-api-wp/disable-user-edit-profile": "0.1.1",
-        "leoloso-pop-api-wp/newsletter-subscriptions-rest-endpoints": "dev-master",
-        "leoloso/pop-graphiql": "^1.0",
-        "leoloso/pop-graphql-voyager": "^1.0",
+        "pop-api-demo-site/disable-user-edit-profile": "0.1.1",
+        "pop-api-demo-site/newsletter-subscriptions-rest-endpoints": "dev-master",
+        "pop-api-demo-site/pop-graphiql": "^1.0",
+        "pop-api-demo-site/pop-graphql-voyager": "^1.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "pop-schema/block-metadata-for-wp": "dev-master",
         "pop-schema/comment-mutations-wp": "dev-master",
@@ -99,10 +99,10 @@
                 "type:wordpress-theme"
             ],
             "wordpress/graphiql/": [
-                "leoloso/pop-graphiql"
+                "pop-api-demo-site/pop-graphiql"
             ],
             "wordpress/graphql-interactive/": [
-                "leoloso/pop-graphql-voyager"
+                "pop-api-demo-site/pop-graphql-voyager"
             ]
         }
     },
