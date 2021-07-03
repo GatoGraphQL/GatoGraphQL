@@ -5,8 +5,6 @@ on:
         branches:
             - master
     pull_request: null
-env:
-    CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_packages_json:
