@@ -50,7 +50,7 @@ Similar to WordPress, it accepts themes.
 
 ---
 
-## Requirements
+<!-- ## Requirements
 
 - PHP 8.0+ for development
 - PHP 7.1+ for production
@@ -68,7 +68,7 @@ And then install the dependencies, via Composer
 ```bash
 $ cd PoP
 $ composer install
-```
+``` -->
 
 ## Table of Contents
 
@@ -82,11 +82,11 @@ $ composer install
 8. [How scoping works](docs/how-scoping-works.md)
 9. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
 
-## Resources
+<!-- ## Resources
 
 - [GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
-- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
+- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/) -->
 
 ## Standards
 
