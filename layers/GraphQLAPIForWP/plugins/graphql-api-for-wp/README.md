@@ -151,73 +151,54 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 
 ## Resources
 
-### Videos
+- [YouTube video: GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
+- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
+- [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
+- [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
 
-GraphQL API for WordPress demo:
+<details>
+    <summary>Architectural resources</summary>
+  
+    ### PHP Architecture
 
-- [Intro to the GraphQL API for WordPress](https://youtu.be/LnyNyT2RwwI)
+    Articles explaining how the plugin is coded using PHP 8.0 but can run on PHP 7.1:
 
-The following videos demonstrate several features:
+    1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
+    2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)
 
-- [Persisted queries](https://vimeo.com/413503547)
-- [Custom endpoints](https://vimeo.com/413503485)
-- [Access control](https://vimeo.com/413503383)
-- [Public/private API](https://vimeo.com/413503284)
-- [HTTP caching](https://vimeo.com/413503188)
-- [Field deprecation](https://vimeo.com/413503110)
-- [Query inheritance](https://vimeo.com/413503010)
+    ### GraphQL by PoP documentation
 
-### Comparison with WPGraphQL
+    GraphQL API for WordPress is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
 
-These articles demonstrate how the GraphQL API fares against WPGraphQL:
+    For technical information on how it works, check out [its documentation](https://graphql-by-pop.com/docs/getting-started/intro.html).
 
-1. [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
-2. [🥊 GraphQL API vs WPGraphQL: the fight!](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
+    Description of how a GraphQL server using server-side components works:
 
-### WordPress Philosophy
+    1. [Implementing a GraphQL server with components in PHP](https://www.wpkube.com/implementing-graphql-server/)
 
-Detailed explanation of the plugin goals, and how it renders the WordPress philosophy:
+    These articles explain the concepts, design and implementation of GraphQL by PoP:
 
-1. [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
+    1. [Designing a GraphQL server for optimal performance](https://blog.logrocket.com/designing-graphql-server-optimal-performance/)
+    2. [Simplifying the GraphQL data model](https://blog.logrocket.com/simplifying-the-graphql-data-model/)
+    3. [Schema-first vs code-first development in GraphQL](https://blog.logrocket.com/code-first-vs-schema-first-development-graphql/)
+    4. [Speeding-up changes to the GraphQL schema](https://blog.logrocket.com/speeding-up-changes-to-the-graphql-schema/)
+    5. [Versioning fields in GraphQL](https://blog.logrocket.com/versioning-fields-graphql/)
+    6. [GraphQL directives are underrated](https://blog.logrocket.com/graphql-directives-are-underrated/)
+    7. [Treating GraphQL directives as middleware](https://blog.logrocket.com/treating-graphql-directives-as-middleware/) 
+    8. [Creating an @export GraphQL directive](https://blog.logrocket.com/creating-an-export-graphql-directive/)
+    9. [Adding directives to the schema in code-first GraphQL servers](https://blog.logrocket.com/adding-directives-schema-code-first-graphql-servers/)
+    10. [Coding a GraphQL server in JavaScript vs. WordPress](https://blog.logrocket.com/coding-a-graphql-server-in-javascript-vs-wordpress/)
+    11. [Supporting opt-in nested mutations in GraphQL](https://blog.logrocket.com/supporting-opt-in-nested-mutations-in-graphql/)
+    12. [HTTP caching in GraphQL](https://blog.logrocket.com/http-caching-graphql/)
 
-### PHP Architecture
+    ### Gutenberg
 
-Articles explaining how the plugin is coded using PHP 8.0 but can run on PHP 7.1:
+    These articles explain the integration with Gutenberg (the WordPress editor).
 
-1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
-2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)
+    1. [Adding a Custom Welcome Guide to the WordPress Block Editor](https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/)
+    2. [Using Markdown and Localization in the WordPress Block Editor](https://css-tricks.com/using-markdown-and-localization-in-the-wordpress-block-editor/)
 
-### GraphQL by PoP documentation
-
-GraphQL API for WordPress is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
-
-For technical information on how it works, check out [its documentation](https://graphql-by-pop.com/docs/getting-started/intro.html).
-
-Description of how a GraphQL server using server-side components works:
-
-1. [Implementing a GraphQL server with components in PHP](https://www.wpkube.com/implementing-graphql-server/)
-
-These articles explain the concepts, design and implementation of GraphQL by PoP:
-
-1. [Designing a GraphQL server for optimal performance](https://blog.logrocket.com/designing-graphql-server-optimal-performance/)
-2. [Simplifying the GraphQL data model](https://blog.logrocket.com/simplifying-the-graphql-data-model/)
-3. [Schema-first vs code-first development in GraphQL](https://blog.logrocket.com/code-first-vs-schema-first-development-graphql/)
-4. [Speeding-up changes to the GraphQL schema](https://blog.logrocket.com/speeding-up-changes-to-the-graphql-schema/)
-5. [Versioning fields in GraphQL](https://blog.logrocket.com/versioning-fields-graphql/)
-6. [GraphQL directives are underrated](https://blog.logrocket.com/graphql-directives-are-underrated/)
-7. [Treating GraphQL directives as middleware](https://blog.logrocket.com/treating-graphql-directives-as-middleware/) 
-8. [Creating an @export GraphQL directive](https://blog.logrocket.com/creating-an-export-graphql-directive/)
-9. [Adding directives to the schema in code-first GraphQL servers](https://blog.logrocket.com/adding-directives-schema-code-first-graphql-servers/)
-10. [Coding a GraphQL server in JavaScript vs. WordPress](https://blog.logrocket.com/coding-a-graphql-server-in-javascript-vs-wordpress/)
-11. [Supporting opt-in nested mutations in GraphQL](https://blog.logrocket.com/supporting-opt-in-nested-mutations-in-graphql/)
-12. [HTTP caching in GraphQL](https://blog.logrocket.com/http-caching-graphql/)
-
-### Gutenberg
-
-These articles explain the integration with Gutenberg (the WordPress editor).
-
-1. [Adding a Custom Welcome Guide to the WordPress Block Editor](https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/)
-2. [Using Markdown and Localization in the WordPress Block Editor](https://css-tricks.com/using-markdown-and-localization-in-the-wordpress-block-editor/)
+</details>
 
 ## Standards
 
