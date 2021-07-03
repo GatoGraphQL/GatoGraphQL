@@ -1,20 +1,40 @@
 # Setting-up the development environment
 
-The project uses [Lando](https://lando.dev/) to spin the webserver used for development, with WordPress installed and the GraphQL API plugin activated, and symlinking all packages to the source code in the monorepo.
+These are the instructions on how to set-up a local development environment.
+## Requirements
 
-Please make sure you have Lando installed, with version `3.0.26` or upwards (install the latest version from [here](https://github.com/lando/lando/releases/)).
+- PHP 8.0+
+- Composer
+- Lando 3.0.26+
 
-The first time, to install the server, execute:
+[Lando](https://lando.dev/) is a Docker-based tool. It is used to spin the webserver for development, providing:
+
+- WordPress installed
+- the GraphQL API plugin installed and activated
+- symlinking to the source code
+
+## Install
+
+Clone the monorepo:
+
+```bash
+git clone https://github.com/leoloso/PoP.git
+```
+
+Install the dependencies, via Composer:
+
+```bash
+$ cd PoP
+$ composer install
+```
+
+Build the Lando webserver. The first time, execute:
 
 ```bash
 composer build-server
 ```
 
-From then on, to start the server, execute:
-
-```bash
-composer start-server
-```
+## Site URL
 
 The site will be available under `http://graphql-api.lndo.site`.
 
@@ -23,11 +43,19 @@ To access the [wp-admin](http://graphql-api.lndo.site/wp-admin/):
 - User: `admin`
 - Password: `admin`
 
+## Starting the Lando webserver
+
+To start the server, execute:
+
+```bash
+composer start-server
+```
+
 ## Caching
 
-By default, the DEV webserver will have global caching enabled.
+By default, the webserver will have global caching enabled.
 
-When developing, we must manually purge the cache after doing some change (recommended option to keep the GraphQL server running fast), or directly disable caching.
+To test a change during development, we must manually purge the cache (recommended option to keep the GraphQL server running fast), or directly disable caching.
 
 ### Purging the cache
 
@@ -79,4 +107,5 @@ composer rebuild-server
 
 ## Additional resources
 
+- [Composer](https://getcomposer.org)
 - [Lando](https://lando.dev/)
