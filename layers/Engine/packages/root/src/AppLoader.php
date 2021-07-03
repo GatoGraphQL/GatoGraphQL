@@ -262,17 +262,6 @@ class AppLoader
         }
 
         /**
-         * Register all components in the ComponentManager
-         */
-        foreach (self::$orderedComponentClasses as $componentClass) {
-            // Temporary solution until migrated:
-            // Initialize all depended-upon migration plugins
-            foreach ($componentClass::getDependedMigrationPlugins() as $migrationPluginPath) {
-                require_once $migrationPluginPath;
-            }
-        }
-
-        /**
          * Initialize the Application container only
          */
         ContainerBuilderFactory::init(
