@@ -394,6 +394,7 @@
         "getpop/routing": "0.7.13",
         "getpop/routing-wp": "0.7.13",
         "getpop/site": "0.7.13",
+        "getpop/site-builder-api": "0.7.13",
         "getpop/site-wp": "0.7.13",
         "getpop/spa": "0.7.13",
         "getpop/static-site-generator": "0.7.13",
@@ -509,8 +510,7 @@
         "pop-sites-wassup/system-mutations": "0.7.13",
         "pop-sites-wassup/user-state-mutations": "0.7.13",
         "pop-sites-wassup/volunteer-mutations": "0.7.13",
-        "pop-sites-wassup/wassup": "0.7.13",
-        "pop/site-builder-api": "0.7.13"
+        "pop-sites-wassup/wassup": "0.7.13"
     },
     "authors": [
         {
