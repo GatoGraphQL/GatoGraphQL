@@ -21,8 +21,6 @@ This is a monorepo containing all layers from the PoP project:
 
 [Wassup](layers/Wassup):<br/>Implementation of a PoP website for WordPress (powering [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org) - WIP).
 
-[Misc](layers/Misc):<br/>Collection of packages, clients, and others, related to PoP or any of its layers.
-
 ## Requirements
 
 - PHP 8.0+ for development
