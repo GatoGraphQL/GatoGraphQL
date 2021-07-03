@@ -46,9 +46,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         //   "Analyze error: "Class PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
         '*/ConditionalOnComponent/RESTAPI/*',
 
-        // Exclude migrate libraries
-        $pluginDir . '/vendor/getpop/migrate-*',
-        $pluginDir . '/vendor/pop-schema/migrate-*',
+        // // Exclude migrate libraries
+        // $pluginDir . '/vendor/getpop/migrate-*',
+        // $pluginDir . '/vendor/pop-schema/migrate-*',
         // Exclude tests from libraries
         $pluginDir . '/vendor/nikic/fast-route/test/*',
         $pluginDir . '/vendor/psr/log/Psr/Log/Test/*',
