@@ -169,7 +169,7 @@ jobs:
                 with:
                     name: generated-plugins
                     path: build/${{ matrix.pluginConfig.zip_file }}
-                    retention-days: 30
+                    retention-days: 3
 
     ###########################################################################
     # Upload and Deploy
