@@ -27,7 +27,7 @@ on:
     push:
         branches:
             - master
-    #pull_request: null
+    pull_request: null
 
 env:
     CHECKOUT_SUBMODULES: "recursive"
@@ -113,7 +113,7 @@ jobs:
 
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.1)
-                run: submodules/PoP/ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_configs }}"
+                run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_configs }}"
 
             -   name: Replace PHP version in plugin main file
                 run: |
