@@ -11,7 +11,7 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as Upst
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,
@@ -21,7 +21,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
             $hooksAPI,
         );
     }
-    
+
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

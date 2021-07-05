@@ -6,7 +6,7 @@ class PoP_ResourceLoader_GeneratedResourcesManager {
 
 	public $generatedfiles, $initialized;
 
-	function __construct() {
+	public function __construct() {
 
 		$this->reset();
 		$this->initialized = false;

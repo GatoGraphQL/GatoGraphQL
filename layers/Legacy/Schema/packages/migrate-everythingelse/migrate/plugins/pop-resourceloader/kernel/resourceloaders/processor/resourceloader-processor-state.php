@@ -8,7 +8,7 @@ class PoP_ResourceLoaderProcessorState {
     protected $saveEntries = false;
     protected $bundle_ids, $bundle_counter, $bundlegroup_ids, $bundlegroup_counter, $key_ids, $key_counter, $bundle_versions, $bundlegroup_versions;
 
-    function __construct() {
+    public function __construct() {
 
         $this->initialized = $this->saveEntries = false;
         $this->bundle_ids = $this->bundle_counter = $this->bundlegroup_ids = $this->bundlegroup_counter = $this->key_ids = $this->key_counter = $this->bundle_versions = $this->bundlegroup_versions = array();

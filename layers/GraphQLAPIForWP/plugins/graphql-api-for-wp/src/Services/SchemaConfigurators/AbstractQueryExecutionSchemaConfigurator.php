@@ -35,7 +35,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQu
 
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
-    function __construct(
+    public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
@@ -196,7 +196,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
 
     /**
      * Apply the Mutation Scheme settings
-     * 
+     *
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
     protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array

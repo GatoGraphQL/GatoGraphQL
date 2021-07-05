@@ -74,7 +74,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * > and hence there are no additional restrictions on its contents.
          *
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
-         * 
+         *
          * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {

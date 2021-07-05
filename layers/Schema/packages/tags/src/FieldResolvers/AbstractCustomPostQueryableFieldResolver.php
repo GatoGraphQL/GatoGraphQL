@@ -38,7 +38,7 @@ abstract class AbstractCustomPostQueryableFieldResolver extends AbstractQueryabl
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'tagCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'tags',

@@ -59,7 +59,7 @@ class RootGenericCustomPostFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'genericCustomPostCount' => SchemaTypeModifiers::NON_NULLABLE,
             'genericCustomPosts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),

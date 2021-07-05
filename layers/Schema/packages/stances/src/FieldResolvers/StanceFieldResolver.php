@@ -55,7 +55,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'content',
             'hasStanceTarget'
                 => SchemaTypeModifiers::NON_NULLABLE,

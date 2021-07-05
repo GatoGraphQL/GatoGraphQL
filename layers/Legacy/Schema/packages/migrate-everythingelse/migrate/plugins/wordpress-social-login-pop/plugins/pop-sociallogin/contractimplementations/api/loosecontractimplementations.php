@@ -4,7 +4,7 @@ use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class WSLPoP_SocialLogin_LooseContractImplementations
 {
-	function __construct() {
+	public function __construct() {
 		
 		$hooksapi = HooksAPIFacade::getInstance();
 		$loosecontract_manager = LooseContractManagerFacade::getInstance();

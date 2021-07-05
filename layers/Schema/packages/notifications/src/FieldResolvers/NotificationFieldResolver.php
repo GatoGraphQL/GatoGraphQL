@@ -26,7 +26,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class NotificationFieldResolver extends AbstractDBDataFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
@@ -119,7 +119,7 @@ class NotificationFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'action',
             'objectType',
             'objectID',

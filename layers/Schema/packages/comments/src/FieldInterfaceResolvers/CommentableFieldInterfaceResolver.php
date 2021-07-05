@@ -44,7 +44,7 @@ class CommentableFieldInterfaceResolver extends AbstractQueryableSchemaFieldInte
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'areCommentsOpen',
             'commentCount',
             'hasComments'

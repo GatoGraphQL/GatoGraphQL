@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\MediaWP\ConditionalOnComponent\Users\TypeAPIs;
 
 use PoPSchema\Media\ConditionalOnComponent\Users\TypeAPIs\MediaTypeAPIInterface;
+
 use function get_post;
 
 /**

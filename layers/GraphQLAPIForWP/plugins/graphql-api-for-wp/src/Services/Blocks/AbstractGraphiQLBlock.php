@@ -23,7 +23,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
@@ -93,9 +93,9 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         /**
          * Temporarily print nothing, until "Ctrl+A" works well:
          * @see https://github.com/WordPress/gutenberg/issues/22689
-         * 
+         *
          * When fixed, uncomment the code below.
-         * 
+         *
          * @see https://github.com/leoloso/PoP/issues/251
          */
         return '';

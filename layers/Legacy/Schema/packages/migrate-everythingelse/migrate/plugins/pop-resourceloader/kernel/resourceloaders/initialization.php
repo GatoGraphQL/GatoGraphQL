@@ -4,7 +4,7 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoPWebPlatform_ResourceLoader_Initialization {
 
-	function __construct() {
+	public function __construct() {
 
 		// Wait until the system is initialized, so we can access $vars
 		// These 2 functions (register and localize) are separated into 2 calls, so that they can independently 

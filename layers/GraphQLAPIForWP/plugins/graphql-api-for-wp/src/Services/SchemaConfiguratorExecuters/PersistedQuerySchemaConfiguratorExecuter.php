@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfi
 
 class PersistedQuerySchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    function __construct(protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator)
+    public function __construct(protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator)
     {
     }
 

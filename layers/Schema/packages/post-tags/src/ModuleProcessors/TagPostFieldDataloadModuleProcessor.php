@@ -68,6 +68,3 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         return parent::getFilterSubmodule($module);
     }
 }
-
-
-

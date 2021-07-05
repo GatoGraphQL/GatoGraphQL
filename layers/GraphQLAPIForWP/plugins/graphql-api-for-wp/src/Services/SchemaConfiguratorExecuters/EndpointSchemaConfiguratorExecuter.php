@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterfa
 
 class EndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    function __construct(protected EndpointSchemaConfigurator $endpointSchemaConfigurator)
+    public function __construct(protected EndpointSchemaConfigurator $endpointSchemaConfigurator)
     {
     }
 

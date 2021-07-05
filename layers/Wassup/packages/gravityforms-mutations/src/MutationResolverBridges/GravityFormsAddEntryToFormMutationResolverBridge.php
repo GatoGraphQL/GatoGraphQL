@@ -171,7 +171,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                 // Hook the fieldnames from the configuration
                 if ($fieldnames = $this->getFormFieldnames($form_id)) {
                     $user_id = $vars['global-userstate']['current-user-id'];
-                    
+
                     // Fill the user name
                     $name = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {

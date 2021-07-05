@@ -31,7 +31,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'getAsyncJSON' => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };

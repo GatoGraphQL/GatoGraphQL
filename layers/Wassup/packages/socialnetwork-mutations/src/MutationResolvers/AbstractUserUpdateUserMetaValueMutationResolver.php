@@ -11,7 +11,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,
@@ -21,7 +21,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             $hooksAPI,
         );
     }
-    
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validateErrors($form_data);

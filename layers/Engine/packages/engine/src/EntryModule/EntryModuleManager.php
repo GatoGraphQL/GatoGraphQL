@@ -10,7 +10,7 @@ use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 
 class EntryModuleManager implements EntryModuleManagerInterface
 {
-    function __construct(
+    public function __construct(
         protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager,
     ) {
     }

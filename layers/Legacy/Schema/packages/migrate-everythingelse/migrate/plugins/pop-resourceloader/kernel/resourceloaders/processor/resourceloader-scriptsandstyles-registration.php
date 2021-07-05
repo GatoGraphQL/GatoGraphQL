@@ -6,7 +6,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesRegistration {
 
 	var $resources, $bundle_ids, $bundlegroup_ids, $maybe_generated_bundlefiles;
 	
-	function __construct() {
+	public function __construct() {
 	
 		$this->resources = array(
 			POP_RESOURCELOADER_RESOURCETYPE_JS => array(),

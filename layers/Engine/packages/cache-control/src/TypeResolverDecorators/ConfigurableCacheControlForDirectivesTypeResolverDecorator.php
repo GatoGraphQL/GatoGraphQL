@@ -14,7 +14,7 @@ class ConfigurableCacheControlForDirectivesTypeResolverDecorator extends Abstrac
 {
     use ConfigurableCacheControlTypeResolverDecoratorTrait;
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected CacheControlManagerInterface $cacheControlManager,

@@ -93,8 +93,8 @@ class Engine implements EngineInterface
      */
     protected array $outputData = [];
     protected ?array $entryModule = null;
-    
-    function __construct(
+
+    public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected DataStructureManagerInterface $dataStructureManager,
@@ -283,7 +283,7 @@ class Engine implements EngineInterface
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
         }
-        
+
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
@@ -459,7 +459,7 @@ class Engine implements EngineInterface
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
         }
-        
+
         $ret = array();
 
         $processor = $this->moduleProcessorManager->getProcessor($module);
@@ -811,7 +811,7 @@ class Engine implements EngineInterface
         if ($useCache = ComponentConfiguration::useComponentModelCache()) {
             $useCache = $this->persistentCache !== null;
         }
-        
+
         $root_processor = $this->moduleProcessorManager->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both

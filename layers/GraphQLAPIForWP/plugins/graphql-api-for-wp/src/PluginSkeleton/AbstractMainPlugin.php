@@ -121,7 +121,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 }
                 $storedPluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
                 $registeredExtensionBaseNameInstances = ExtensionManager::getExtensions();
-                
+
                 // Check if the main plugin has been activated or updated
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
                 $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->pluginVersion;
@@ -147,7 +147,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 );
 
                 // If there were no changes, nothing to do
-                if (!$isMainPluginJustActivated
+                if (
+                    !$isMainPluginJustActivated
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
@@ -155,7 +156,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 ) {
                     return;
                 }
-            
+
                 // Enable to implement custom additional functionality (eg: show admin notice with changelog)
                 // Watch out! Execute at the very end, just in case they need to access the service container,
                 // which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
@@ -195,7 +196,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
 
                 // If new CPTs have rewrite rules, these must be flushed
                 \flush_rewrite_rules();
-                
+
                 // Regenerate the timestamp, to generate the service container
                 $this->regenerateTimestamp();
             },
@@ -238,7 +239,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             function () {
                 if ($this->inititalizationException !== null) {
                     return;
-                }    
+                }
                 \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
             },
             PluginLifecyclePriorities::INITIALIZE_EXTENSIONS
@@ -268,7 +269,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             function () {
                 if ($this->inititalizationException !== null) {
                     return;
-                }    
+                }
                 \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
             },
             PluginLifecyclePriorities::CONFIGURE_EXTENSIONS
@@ -298,7 +299,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
             function () {
                 if ($this->inititalizationException !== null) {
                     return;
-                }    
+                }
                 \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
             },
             PluginLifecyclePriorities::BOOT_EXTENSIONS

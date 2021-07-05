@@ -41,7 +41,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
 
-    function __construct(
+    public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,

@@ -17,7 +17,7 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
 {
     protected ?string $hookName = null;
 
-    function __construct(
+    public function __construct(
         protected Menu $menu,
         protected MenuPageHelper $menuPageHelper,
         protected EndpointHelpers $endpointHelpers

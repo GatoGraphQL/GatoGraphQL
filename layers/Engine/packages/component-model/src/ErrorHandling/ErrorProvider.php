@@ -12,7 +12,7 @@ use PoP\Translation\TranslationAPIInterface;
 class ErrorProvider implements ErrorProviderInterface
 {
     public function __construct(protected TranslationAPIInterface $translationAPI)
-    {        
+    {
     }
 
     /**
@@ -195,7 +195,7 @@ class ErrorProvider implements ErrorProviderInterface
             )
         );
     }
-    
+
     protected function getNestedArgumentError(
         string $fieldName,
         string $errorCode,

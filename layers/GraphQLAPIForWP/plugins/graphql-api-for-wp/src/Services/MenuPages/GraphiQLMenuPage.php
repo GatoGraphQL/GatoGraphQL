@@ -47,7 +47,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
     {
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
         $mainPluginVersion = (string) MainPluginManager::getConfig('version');
-        
+
         \wp_enqueue_style(
             'graphql-api-graphiql-client',
             $mainPluginURL . 'assets/css/graphiql-client.css',
@@ -66,7 +66,7 @@ class GraphiQLMenuPage extends AbstractMenuPage
             'nonce' => \wp_create_nonce('wp_rest'),
             'response' => $this->getResponse(),
         );
-        
+
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
         $mainPluginVersion = (string) MainPluginManager::getConfig('version');
 

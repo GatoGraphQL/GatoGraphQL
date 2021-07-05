@@ -47,7 +47,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'roles'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY

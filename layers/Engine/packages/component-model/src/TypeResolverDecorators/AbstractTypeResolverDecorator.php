@@ -17,7 +17,7 @@ abstract class AbstractTypeResolverDecorator implements TypeResolverDecoratorInt
      */
     use AttachableExtensionTrait;
 
-    function __construct(
+    public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ) {

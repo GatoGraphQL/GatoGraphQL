@@ -516,8 +516,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     /**
      * Add the field or directive to the head of the error path, for all nested errors
      */
-    protected function prependPathOnNestedErrors(array &$nestedFieldOrDirectiveSchemaError, string $fieldOrDirective): void {
-        
+    protected function prependPathOnNestedErrors(array &$nestedFieldOrDirectiveSchemaError, string $fieldOrDirective): void
+    {
+
         if (isset($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
             foreach ($nestedFieldOrDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedFieldOrDirectiveSchemaError) {
                 array_unshift($deeplyNestedFieldOrDirectiveSchemaError[Tokens::PATH], $fieldOrDirective);
@@ -767,14 +768,14 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 /**
                  * Maybe cast the value to the appropriate type.
                  * Eg: from string to boolean.
-                 * 
+                 *
                  * Handle also the case of executing a query with a fieldArg
                  * that was not defined in the schema. Eg:
-                 * 
+                 *
                  * ```
                  * { posts(thisArgIsNonExistent: "saloro") { id } }
                  * ```
-                 * 
+                 *
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
                 $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE] ?? SchemaDefinition::TYPE_MIXED;
@@ -783,18 +784,18 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsArrayOfArraysType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                
+
                 /**
                  * This value will not be used with GraphQL, but can be used by PoP.
-                 * 
+                 *
                  * While GraphQL has a strong type system, PoP takes a more lenient approach,
                  * enabling fields to maybe be an array, maybe not.
-                 * 
+                 *
                  * Eg: `echo(value: ...)` will print back whatever provided,
                  * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
                  * an `Object`, so it could be provided as an array, or also `String`, which
                  * will not be an array.
-                 * 
+                 *
                  * Whenever the value may be an array, the server will skip those validations
                  * to check if an input is array or not (and throw an error).
                  */
@@ -807,12 +808,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     /**
                      * Support passing a single value where a list is expected:
                      * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
-                     * 
+                     *
                      * Defined in the GraphQL spec.
-                     * 
+                     *
                      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
                      */
-                    if (!is_array($argValue)
+                    if (
+                        !is_array($argValue)
                         && ComponentConfiguration::coerceInputFromSingleValueToList()
                     ) {
                         if ($fieldOrDirectiveArgIsArrayOfArraysType) {
@@ -821,10 +823,11 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argValue = [$argValue];
                         }
                     }
-                    
+
                     // Validate that the expected array/non-array input is provided
                     $errorMessage = null;
-                    if (!$fieldOrDirectiveArgIsArrayType
+                    if (
+                        !$fieldOrDirectiveArgIsArrayType
                         && is_array($argValue)
                     ) {
                         $errorMessage = sprintf(
@@ -832,7 +835,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName,
                             json_encode($argValue)
                         );
-                    } elseif ($fieldOrDirectiveArgIsArrayType
+                    } elseif (
+                        $fieldOrDirectiveArgIsArrayType
                         && !is_array($argValue)
                     ) {
                         $errorMessage = sprintf(
@@ -840,7 +844,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName,
                             $argValue
                         );
-                    } elseif ($fieldOrDirectiveArgIsNonNullArrayItemsType
+                    } elseif (
+                        $fieldOrDirectiveArgIsNonNullArrayItemsType
                         && is_array($argValue)
                         && array_filter(
                             $argValue,
@@ -851,7 +856,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $this->translationAPI->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
                             $argName
                         );
-                    } elseif ($fieldOrDirectiveArgIsArrayOfArraysType
+                    } elseif (
+                        $fieldOrDirectiveArgIsArrayOfArraysType
                         && is_array($argValue)
                         && array_filter(
                             $argValue,
@@ -863,7 +869,8 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName,
                             json_encode($argValue)
                         );
-                    } elseif ($fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
+                    } elseif (
+                        $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
                         && is_array($argValue)
                         && array_filter(
                             $argValue,
@@ -1162,8 +1169,7 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     protected function getFailedCastingFieldArgs(
         array $castedFieldArgs,
         bool $isNullValueFailing
-    ): array
-    {
+    ): array {
         return array_filter(
             $castedFieldArgs,
             fn (mixed $fieldArgValue) =>
@@ -1186,10 +1192,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaWarnings
     ): array {
         // If any casting can't be done, show an error
-        if ($failedCastingFieldArgs = $this->getFailedCastingFieldArgs(
-            $castedFieldArgs,
-            true
-        )) {
+        if (
+            $failedCastingFieldArgs = $this->getFailedCastingFieldArgs(
+                $castedFieldArgs,
+                true
+            )
+        ) {
             // $fieldOutputKey = $this->getFieldOutputKey($field);
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypes = $this->getFieldArgumentNameTypes($typeResolver, $field);
@@ -1275,12 +1283,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 /**
                  * If it has quotes at the beginning and end, it's a string.
                  * Remove them, unless it could be interpreted as a field, then keep them.
-                 * 
+                 *
                  * Explanation: If the string ends with "()" keep the quotes "", to make
                  * sure it is interpreted as a string, and it doesn't execute the field.
-                 * 
+                 *
                  * eg: `{ posts(searchfor:"hel()") { id } }`
-                 * 
+                 *
                  * @see https://github.com/leoloso/PoP/issues/743
                  */
                 if ($this->isFieldArgumentValueWrappedWithStringSymbols((string) $fieldArgValue)) {

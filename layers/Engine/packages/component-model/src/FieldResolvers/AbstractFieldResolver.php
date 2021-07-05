@@ -46,7 +46,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
      */
     protected array $schemaDefinitionForFieldCache = [];
 
-    function __construct(
+    public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,
@@ -313,7 +313,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 }
                 // If setting the "array of arrays" flag, there's no need to set the "array" flag
                 $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
+                if (
+                    $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
                     || $isArrayOfArrays
                 ) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
@@ -399,11 +400,11 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
 
     /**
      * Processes the field args:
-     * 
+     *
      * 1. Adds the version constraint (if enabled)
      * 2. Places all entries under their own name
      * 3. If any entry has no name, it is skipped
-     * 
+     *
      * @return array<string, array>
      */
     protected function getFilteredSchemaFieldArgs(

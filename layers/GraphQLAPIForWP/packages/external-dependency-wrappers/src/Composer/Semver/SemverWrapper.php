@@ -8,7 +8,7 @@ use Composer\Semver\Semver;
 
 /**
  * Wrapper for Composer\Semver\Semver.
- * 
+ *
  * These methods are accessed static, instead of via a service,
  * since they are referenced in ExtensionManager, before
  * the container service has been initialized.

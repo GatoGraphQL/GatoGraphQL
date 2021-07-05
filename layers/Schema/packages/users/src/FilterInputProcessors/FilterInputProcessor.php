@@ -31,6 +31,3 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         }
     }
 }
-
-
-

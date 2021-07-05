@@ -39,7 +39,7 @@ class WithMetaFieldInterfaceResolver extends AbstractSchemaFieldInterfaceResolve
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'metaValues' => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($fieldName),
         };

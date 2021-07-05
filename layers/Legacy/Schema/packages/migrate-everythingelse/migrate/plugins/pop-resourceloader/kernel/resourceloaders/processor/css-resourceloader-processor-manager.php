@@ -6,7 +6,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 	protected /*$first_style, */$inline_resources;
 
-	function __construct() {
+	public function __construct() {
 
 		$this->inline_resources = array();
 

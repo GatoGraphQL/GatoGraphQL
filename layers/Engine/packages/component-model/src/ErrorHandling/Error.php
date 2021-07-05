@@ -18,7 +18,7 @@ class Error
      * @var Error[]
      */
     protected array $nestedErrors;
-    
+
     public function __construct(
         string $code,
         ?string $message = null,

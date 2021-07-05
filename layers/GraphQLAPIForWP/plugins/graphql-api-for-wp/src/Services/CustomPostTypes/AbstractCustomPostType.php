@@ -19,7 +19,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
-    function __construct(
+    public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected Menu $menu,
         protected ModuleRegistryInterface $moduleRegistry,
@@ -45,7 +45,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         );
         /**
          * Starting from WP 5.8 the hook is a different one
-         * 
+         *
          * @see https://github.com/leoloso/PoP/issues/711
          */
         if (\is_wp_version_compatible('5.8')) {

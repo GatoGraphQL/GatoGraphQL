@@ -24,7 +24,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected CommentTypeAPIInterface $commentTypeAPI,
@@ -77,7 +77,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $comment_data['userID'] = $user_id;
             $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($user_id);
             $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($user_id);
-            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($user_id);;
+            $comment_data['author-URL'] = $this->userTypeAPI->getUserURL($user_id);
+            ;
         } else {
             // @todo Implement!
             // $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME];

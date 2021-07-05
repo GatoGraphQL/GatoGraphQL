@@ -10,6 +10,7 @@ use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
+
 use function wp_get_attachment_image_src;
 use function get_posts;
 
@@ -18,10 +19,10 @@ use function get_posts;
  */
 class MediaTypeAPI implements MediaTypeAPIInterface
 {
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {        
+    ) {
     }
     /**
      * Indicates if the passed object is of type Media

@@ -22,7 +22,7 @@ use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 
 class CommentFieldResolver extends AbstractDBDataFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,

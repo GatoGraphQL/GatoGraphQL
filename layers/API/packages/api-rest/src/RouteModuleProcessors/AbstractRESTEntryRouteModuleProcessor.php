@@ -14,8 +14,8 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
 {
     protected ?string $restFieldsQuery = null;
     protected ?array $restFields = null;
-    
-    function __construct(
+
+    public function __construct(
         HooksAPIInterface $hooksAPI,
         protected RESTDataStructureFormatter $restDataStructureFormatter,
         protected FieldQueryConvertorInterface $fieldQueryConvertor
@@ -43,6 +43,6 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
         }
         return $this->restFieldsQuery;
     }
-    
+
     abstract protected function getInitialRESTFields(): string;
 }

@@ -14,7 +14,7 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
     {
         /**
          * Starting from WP 5.8 the hook is a different one
-         * 
+         *
          * @see https://github.com/leoloso/PoP/issues/711
          */
         if (\is_wp_version_compatible('5.8')) {

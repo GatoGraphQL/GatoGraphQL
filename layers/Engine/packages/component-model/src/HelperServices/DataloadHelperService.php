@@ -13,7 +13,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    function __construct(
+    public function __construct(
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected TranslationAPIInterface $translationAPI,

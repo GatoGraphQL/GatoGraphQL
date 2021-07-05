@@ -25,7 +25,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
@@ -88,7 +88,7 @@ class CommentFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'content',
             'customPost',
             'customPostID',

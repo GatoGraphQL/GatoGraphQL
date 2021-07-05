@@ -21,10 +21,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 {
     use InjectedFilterDataloadingModuleTypeDataResolverTrait;
 
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {        
+    ) {
     }
 
     /**

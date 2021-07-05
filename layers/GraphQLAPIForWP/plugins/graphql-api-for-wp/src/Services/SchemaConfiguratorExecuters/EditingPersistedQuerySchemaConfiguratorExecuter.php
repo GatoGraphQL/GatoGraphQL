@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfi
 
 class EditingPersistedQuerySchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
-    function __construct(
+    public function __construct(
         protected EndpointHelpers $endpointHelpers,
         protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator
     ) {

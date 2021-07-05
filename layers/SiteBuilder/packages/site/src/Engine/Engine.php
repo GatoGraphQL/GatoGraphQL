@@ -26,7 +26,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 class Engine extends \PoP\Application\Engine\Engine
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,

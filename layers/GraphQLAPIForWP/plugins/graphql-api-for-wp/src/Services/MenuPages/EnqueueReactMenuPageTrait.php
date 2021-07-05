@@ -16,7 +16,7 @@ trait EnqueueReactMenuPageTrait
     {
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
         $mainPluginVersion = (string) MainPluginManager::getConfig('version');
-        
+
         \wp_enqueue_script(
             'graphql-api-react',
             $mainPluginURL . 'assets/js/vendors/react.min.js',

@@ -365,8 +365,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     /**
      * Add the field(s) to the head of the error path, for all nested errors
      */
-    protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $directiveField): void {
-        
+    protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $directiveField): void
+    {
+
         if (isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
             foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
                 array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $directiveField);
@@ -1025,7 +1026,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             // If any directive failed validation and the field must be set to `null`,
             // then skip processing that field altogether
             $schemaErrorFailingFields = [];
-            if (!empty($directivePipelineSchemaErrors)
+            if (
+                !empty($directivePipelineSchemaErrors)
                 && ComponentConfiguration::removeFieldIfDirectiveFailed()
             ) {
                 // Extract the failing fields from the path of the thrown error
@@ -1124,7 +1126,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     } else {
                         $schemaErrors[] = $directivePipelineSchemaError;
                     }
-                }  
+                }
                 foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$failingField],
@@ -1133,7 +1135,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             Tokens::NESTED => $failingSchemaErrors,
                         ],
                     ];
-                }              
+                }
             }
             if ($directivePipelineIDDBErrors) {
                 // Extract the failing fields from the path of the thrown error
@@ -1424,7 +1426,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     if ($validationErrorDescriptions = $fieldResolver->getValidationErrorDescriptions($this, $resultItem, $fieldName, $fieldArgs)) {
                         return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
-                    
+
                     // Resolve the value. If the field resolver throws an Exception,
                     // catch it and return the equivalent GraphQL error
                     try {
@@ -1442,27 +1444,27 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
                     /**
                      * Validate that the value is what was defined in the schema, or throw a corresponding error.
-                     * 
+                     *
                      * Items being validated:
-                     * 
+                     *
                      * - Is it null?
                      * - Is it an array when it should be?
                      * - Is it not an array when it should not be?
-                     * 
+                     *
                      * Items NOT being validated:
-                     * 
+                     *
                      * - Is the returned type (String, Int, some Object, etc) the expected one?
-                     * 
+                     *
                      * According to the GraphQL speck, checking if a non-null field returns null
                      * is handled always:
-                     * 
+                     *
                      *   If the result of resolving a field is null (either because the function
                      *   to resolve the field returned null or because a field error was raised),
                      *   and that field is of a Non-Null type, then a field error is raised.
                      *   The error must be added to the "errors" list in the response.
-                     * 
+                     *
                      * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
-                     * 
+                     *
                      * All other conditions, check them when enabled by configuration.
                      */
                     if ($value === null) {
@@ -1481,18 +1483,21 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         ]);
                         if (!$fieldMayBeArrayType) {
                             $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                            if (!$fieldIsArrayType
+                            if (
+                                !$fieldIsArrayType
                                 && is_array($value)
                             ) {
                                 return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
                             }
-                            if ($fieldIsArrayType
+                            if (
+                                $fieldIsArrayType
                                 && !is_array($value)
                             ) {
                                 return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
                             }
                             $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                            if ($fieldIsNonNullArrayItemsType
+                            if (
+                                $fieldIsNonNullArrayItemsType
                                 && is_array($value)
                                 && array_filter(
                                     $value,
@@ -1502,7 +1507,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
                             }
                             $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
-                            if (!$fieldIsArrayOfArraysType
+                            if (
+                                !$fieldIsArrayOfArraysType
                                 && is_array($value)
                                 && array_filter(
                                     $value,
@@ -1511,7 +1517,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                             ) {
                                 return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
                             }
-                            if ($fieldIsArrayOfArraysType
+                            if (
+                                $fieldIsArrayOfArraysType
                                 && is_array($value)
                                 && array_filter(
                                     $value,
@@ -1521,7 +1528,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
                             }
                             $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                            if ($fieldIsNonNullArrayOfArraysItemsType
+                            if (
+                                $fieldIsNonNullArrayOfArraysItemsType
                                 && is_array($value)
                                 && array_filter(
                                     $value,

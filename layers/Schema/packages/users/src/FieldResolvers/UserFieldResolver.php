@@ -20,7 +20,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
@@ -40,7 +40,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             $semverHelperService,
         );
     }
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);

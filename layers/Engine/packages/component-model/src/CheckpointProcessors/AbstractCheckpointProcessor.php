@@ -9,7 +9,7 @@ use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractCheckpointProcessor
 {
-    function __construct(
+    public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI
     ) {

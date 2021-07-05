@@ -2,7 +2,7 @@
 
 class PoP_ResourceLoader_NatureResources_ProcessorBase implements PoP_ResourceLoader_NatureResources {
 
-    function __construct() {
+    public function __construct() {
 
         PoP_ResourceLoader_NatureResourcesManagerFactory::getInstance()->add($this);
     }

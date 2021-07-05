@@ -15,7 +15,7 @@ use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtil
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,
@@ -25,7 +25,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);

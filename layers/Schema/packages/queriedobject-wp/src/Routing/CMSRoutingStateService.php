@@ -26,7 +26,6 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
             $query->is_author() ||
             $query->is_category()
         ) {
-
             return $query->get_queried_object();
         }
 
@@ -45,7 +44,6 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
             $this->query->is_author() ||
             $this->query->is_category()
         ) {
-
             return $this->query->get_queried_object_id();
         }
 

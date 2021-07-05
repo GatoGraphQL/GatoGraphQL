@@ -11,7 +11,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,
@@ -21,7 +21,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];

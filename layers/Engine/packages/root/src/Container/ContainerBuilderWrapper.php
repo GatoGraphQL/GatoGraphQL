@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class ContainerBuilderWrapper implements ContainerBuilderWrapperInterface
 {
-    public final function __construct(private ContainerBuilder $containerBuilder)
+    final public function __construct(private ContainerBuilder $containerBuilder)
     {
     }
 

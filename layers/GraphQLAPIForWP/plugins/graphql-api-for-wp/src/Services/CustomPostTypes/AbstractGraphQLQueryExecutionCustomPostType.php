@@ -27,7 +27,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
         EndpointResolverTrait::addGraphQLVars as upstreamAddGraphQLVars;
     }
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
@@ -149,7 +149,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
         parent::initialize();
 
         // Execute at the beginning
-        \add_action('init', function(): void {
+        \add_action('init', function (): void {
             if ($this->isAccessForbidden()) {
                 $this->forbidAccess();
             }

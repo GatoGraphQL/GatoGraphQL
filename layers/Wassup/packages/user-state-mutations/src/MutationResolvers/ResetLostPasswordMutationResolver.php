@@ -15,7 +15,7 @@ use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtil
 
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,
@@ -25,7 +25,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function getErrorType(): int
     {
         return ErrorTypes::CODES;

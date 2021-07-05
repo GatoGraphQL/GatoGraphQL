@@ -22,7 +22,7 @@ use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 
 class MediaFieldResolver extends AbstractDBDataFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
@@ -42,7 +42,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             $semverHelperService,
         );
     }
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(MediaTypeResolver::class);

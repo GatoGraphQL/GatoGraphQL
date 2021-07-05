@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
 
 class PoP_JSResourceLoaderProcessor extends PoP_ResourceLoaderProcessor {
 
-	function __construct() {
+	public function __construct() {
 
 		global $pop_jsresourceloaderprocessor_manager;
 		$pop_jsresourceloaderprocessor_manager->add($this, $this->getResourcesToProcess());

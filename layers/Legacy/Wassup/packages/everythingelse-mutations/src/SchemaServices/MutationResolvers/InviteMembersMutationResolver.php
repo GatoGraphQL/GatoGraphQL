@@ -12,7 +12,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,

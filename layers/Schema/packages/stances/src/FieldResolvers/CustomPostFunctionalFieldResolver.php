@@ -62,7 +62,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'loggedInUserStances',
             'createStanceButtonLazy',
             'stancesLazy'

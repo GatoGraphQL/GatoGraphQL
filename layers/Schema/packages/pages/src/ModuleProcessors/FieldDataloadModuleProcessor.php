@@ -41,6 +41,3 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         return parent::getTypeResolverClass($module);
     }
 }
-
-
-

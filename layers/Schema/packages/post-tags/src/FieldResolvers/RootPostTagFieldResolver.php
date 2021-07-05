@@ -56,7 +56,7 @@ class RootPostTagFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postTagCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'postTags',

@@ -9,7 +9,7 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
-    function __construct(
+    public function __construct(
         RequestHelperServiceInterface $requestHelperService,
         protected MarkdownConvertorInterface $markdownConvertorInterface,
         ?string $baseDir = null,

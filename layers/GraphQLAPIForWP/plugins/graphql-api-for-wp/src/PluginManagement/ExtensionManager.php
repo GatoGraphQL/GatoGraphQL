@@ -41,12 +41,12 @@ class ExtensionManager extends AbstractPluginManager
 
     /**
      * Validate that the extension can be registered:
-     * 
+     *
      * 1. It hasn't been registered yet (eg: the plugin is not duplicated)
      * 2. The required version of the main plugin is the one installed
-     * 
+     *
      * If the assertion fails, it prints an error on the WP admin and returns false
-     * 
+     *
      * @param string|null $mainPluginVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
      * @return bool `true` if the extension can be registered, `false` otherwise
      *
@@ -72,10 +72,12 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         // Validate that the required version of the GraphQL API for WP plugin is installed
-        if ($mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
-            MainPluginManager::getConfig('version'),
-            $mainPluginVersionConstraint
-        )) {
+        if (
+            $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
+                MainPluginManager::getConfig('version'),
+                $mainPluginVersionConstraint
+            )
+        ) {
             self::printAdminNoticeErrorMessage(
                 sprintf(
                     __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'graphql-api'),

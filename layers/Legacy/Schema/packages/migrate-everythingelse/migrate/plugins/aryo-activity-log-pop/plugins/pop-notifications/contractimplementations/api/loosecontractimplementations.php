@@ -4,7 +4,7 @@ use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class PoP_AAL_Notifications_LooseContractImplementations
 {
-	function __construct() {
+	public function __construct() {
 		
 		$hooksapi = HooksAPIFacade::getInstance();
 

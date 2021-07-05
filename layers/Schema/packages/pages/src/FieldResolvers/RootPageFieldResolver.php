@@ -72,7 +72,7 @@ class RootPageFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'pageCount',
             'unrestrictedPageCount'
                 => SchemaTypeModifiers::NON_NULLABLE,

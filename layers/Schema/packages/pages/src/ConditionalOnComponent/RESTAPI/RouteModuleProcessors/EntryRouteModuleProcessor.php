@@ -16,7 +16,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         return 'id|title|url|content';
     }
-    
+
     /**
      * @return array<string, array<array>>
      */

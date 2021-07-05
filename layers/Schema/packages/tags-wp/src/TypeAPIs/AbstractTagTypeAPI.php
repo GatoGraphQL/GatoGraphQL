@@ -20,10 +20,10 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 {
     use InjectedFilterDataloadingModuleTypeDataResolverTrait;
 
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {        
+    ) {
     }
 
     abstract protected function getTagTaxonomyName(): string;

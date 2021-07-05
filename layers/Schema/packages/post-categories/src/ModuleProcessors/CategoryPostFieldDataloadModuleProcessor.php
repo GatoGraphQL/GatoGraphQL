@@ -68,6 +68,3 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
         return parent::getFilterSubmodule($module);
     }
 }
-
-
-

@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQu
 
 class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,

@@ -23,7 +23,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,
@@ -43,7 +43,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
             $semverHelperService,
         );
     }
-    
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -63,7 +63,7 @@ abstract class AbstractUserFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'userCount' => SchemaTypeModifiers::NON_NULLABLE,
             'users' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
