@@ -1,11 +1,7 @@
 name: Split Monorepo Dev-Master
 
 on:
-    push:
-        branches:
-            - master
-env:
-    CHECKOUT_SUBMODULES: ""
+    pull_request: null
 
 jobs:
     provide_packages_json:
