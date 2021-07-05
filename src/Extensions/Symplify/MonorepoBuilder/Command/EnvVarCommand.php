@@ -42,8 +42,11 @@ final class EnvVarCommand extends AbstractSymplifyCommand
         $environmentVariable = $input->getArgument(Option::ENVIRONMENT_VARIABLE_NAME);
 
         // If not set, return an empty string
-        $environmentVariableValue = $this->environmentVariables[$environmentVariable] ?? '';
+        $environmentVariableValue = (string) $this->environmentVariables[$environmentVariable] ?? '';
 
+        // If the value is boolean, it gets converted to string:
+        // true => "1"
+        // false => ""
         $this->symfonyStyle->writeln($environmentVariableValue);
 
         return ShellCode::SUCCESS;
