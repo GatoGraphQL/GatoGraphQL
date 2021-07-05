@@ -30,7 +30,7 @@ on:
     pull_request: null
 
 env:
-    CHECKOUT_SUBMODULES: "recursive"
+    CHECKOUT_SUBMODULES: ""
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
     COMPOSER_ROOT_VERSION: "dev-master"
 
