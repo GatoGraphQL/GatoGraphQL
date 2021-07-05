@@ -48,7 +48,7 @@ class GraphQLAPIContainerConfigurationService extends AbstractPluginDowngradeCon
     
                 // Skip since they are not needed and they fail
                 $this->pluginDir . '/vendor/composer/*',
-                $this->pluginDir . '/vendor/lkwdwrd/wp-muplugin-loader/*',
+                $this->pluginDir . '/vendor/boxuk/wp-muplugin-loader/*',
     
                 // These are skipped in the .sh since it's faster
                 // // All the "migrate" folders

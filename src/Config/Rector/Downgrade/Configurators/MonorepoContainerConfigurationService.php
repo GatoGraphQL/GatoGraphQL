@@ -22,7 +22,7 @@ class MonorepoContainerConfigurationService extends AbstractDowngradeContainerCo
 
                 // Skip since they are not needed and they fail
                 $this->rootDirectory . '/vendor/composer/*',
-                $this->rootDirectory . '/vendor/lkwdwrd/wp-muplugin-loader/*',
+                $this->rootDirectory . '/vendor/boxuk/wp-muplugin-loader/*',
 
                 // Ignore errors from classes we don't have in our environment,
                 // or that come from referencing a class present in DEV, not PROD
