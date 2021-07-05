@@ -14,7 +14,7 @@ class EnvironmentVariablesDataSource
     public function getEnvironmentVariables(): array
     {
         return [
-            self::GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE => true,
+            self::GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE => false,
         ];
     }
 }
