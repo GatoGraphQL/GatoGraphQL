@@ -11,7 +11,7 @@ use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as Upst
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         protected UserTypeAPIInterface $userTypeAPI,

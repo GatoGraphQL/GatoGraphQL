@@ -5,7 +5,7 @@ use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class WebPlatformCMSLooseContractImplementations
 {
-	function __construct() {
+	public function __construct() {
 		
 		$hooksapi = HooksAPIFacade::getInstance();
 

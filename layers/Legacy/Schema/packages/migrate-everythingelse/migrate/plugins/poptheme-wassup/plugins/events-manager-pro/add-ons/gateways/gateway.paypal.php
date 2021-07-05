@@ -13,7 +13,7 @@ class EM_Gateway_Paypal extends EM_Gateway_Online
      * Sets up gateaway and adds relevant actions/filters
      */
     /*
-    function __construct() {
+    public function __construct() {
     }
     */
 

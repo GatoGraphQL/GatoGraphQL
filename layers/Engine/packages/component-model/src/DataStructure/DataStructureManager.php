@@ -14,7 +14,7 @@ class DataStructureManager implements DataStructureManagerInterface
      */
     public array $formatters = [];
 
-    function __construct(protected DataStructureFormatterInterface $defaultFormatter)
+    public function __construct(protected DataStructureFormatterInterface $defaultFormatter)
     {
     }
 

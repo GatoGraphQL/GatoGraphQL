@@ -35,7 +35,7 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQu
 
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
-    function __construct(
+    public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,

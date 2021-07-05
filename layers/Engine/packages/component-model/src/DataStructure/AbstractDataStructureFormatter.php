@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {
-    function __construct(
+    public function __construct(
         protected FeedbackMessageStoreInterface $feedbackMessageStore,
         protected FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ) {

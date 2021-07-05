@@ -23,7 +23,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecution
 
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,

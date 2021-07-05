@@ -17,7 +17,7 @@ abstract class AbstractFieldInterfaceResolver implements FieldInterfaceResolverI
 {
     use FieldInterfaceSchemaDefinitionResolverTrait;
 
-    function __construct(
+    public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected InstanceManagerInterface $instanceManager,

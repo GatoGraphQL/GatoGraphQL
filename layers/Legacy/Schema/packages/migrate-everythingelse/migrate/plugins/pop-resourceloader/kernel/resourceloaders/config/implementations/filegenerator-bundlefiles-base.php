@@ -7,7 +7,7 @@ class PoP_ResourceLoader_FileGenerator_BundleFilesBase {
 
     protected $resource_mapping, $generated;
 
-    function __construct() {
+    public function __construct() {
 
         $this->generated = array(
             'bundlegroup' => array(),

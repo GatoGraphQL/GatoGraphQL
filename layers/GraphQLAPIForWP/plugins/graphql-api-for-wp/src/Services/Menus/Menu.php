@@ -25,7 +25,7 @@ use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsFor
  */
 class Menu extends AbstractMenu
 {
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         protected MenuPageHelper $menuPageHelper,
         protected ModuleRegistryInterface $moduleRegistry,

@@ -27,7 +27,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 {
     use HasDocumentationScriptTrait;
 
-    function __construct(
+    public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization,

@@ -11,7 +11,7 @@ use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
-    function __construct(
+    public function __construct(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected EngineInterface $engine,

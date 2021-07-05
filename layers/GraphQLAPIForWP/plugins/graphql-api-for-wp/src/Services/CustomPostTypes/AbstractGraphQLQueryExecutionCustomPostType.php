@@ -27,7 +27,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
         EndpointResolverTrait::addGraphQLVars as upstreamAddGraphQLVars;
     }
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         Menu $menu,
         ModuleRegistryInterface $moduleRegistry,

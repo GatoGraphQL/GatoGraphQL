@@ -7,7 +7,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
 	var $initialized, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $first_script, $scripttag_attributes, $inline_resources;
 
-	function __construct() {
+	public function __construct() {
 
 		// parent::__construct();
 

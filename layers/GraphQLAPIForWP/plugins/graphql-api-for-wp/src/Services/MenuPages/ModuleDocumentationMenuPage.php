@@ -22,7 +22,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    function __construct(
+    public function __construct(
         Menu $menu,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,

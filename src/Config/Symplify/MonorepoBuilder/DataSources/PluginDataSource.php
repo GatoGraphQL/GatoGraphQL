@@ -6,7 +6,7 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
 class PluginDataSource
 {
-    function __construct(protected string $rootDir)
+    public function __construct(protected string $rootDir)
     {        
     }
 

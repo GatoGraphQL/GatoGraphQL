@@ -20,7 +20,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class MediaUserFieldResolver extends AbstractDBDataFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,

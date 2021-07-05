@@ -25,7 +25,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class CommentFieldResolver extends AbstractQueryableFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,

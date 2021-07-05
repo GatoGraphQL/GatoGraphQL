@@ -17,7 +17,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaTypeResolverDecorator
     use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
     use ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait;
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected AccessControlManagerInterface $accessControlManager,

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
-    function __construct(
+    public function __construct(
         protected InstanceManagerInterface $instanceManager,
     ) {
     }

@@ -94,7 +94,7 @@ class Engine implements EngineInterface
     protected array $outputData = [];
     protected ?array $entryModule = null;
 
-    function __construct(
+    public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
         protected DataStructureManagerInterface $dataStructureManager,

@@ -13,7 +13,7 @@ abstract class AbstractConfigurableAccessControlForFieldsInPublicSchemaTypeResol
 {
     use ConfigurableAccessControlForFieldsTypeResolverDecoratorTrait;
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected AccessControlManagerInterface $accessControlManager,

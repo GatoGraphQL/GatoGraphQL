@@ -5,7 +5,7 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ResourceLoader_EngineInitialization_Hooks {
 
-	function __construct() {
+	public function __construct() {
 
 		HooksAPIFacade::getInstance()->addFilter(
 			'PoPWebPlatform_Engine:enqueue-scripts:first-script-handle',

@@ -4,7 +4,7 @@ class PoP_ResourceLoader_NatureResourcesManager {
 
     var $processors;
     
-    function __construct() {
+    public function __construct() {
     
         $this->processors = array();
         PoP_ResourceLoader_NatureResourcesManagerFactory::setInstance($this);

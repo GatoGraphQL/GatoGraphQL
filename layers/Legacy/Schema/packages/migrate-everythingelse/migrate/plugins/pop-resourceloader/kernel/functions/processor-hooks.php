@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoader_ProcessorHooks {
 
-	function __construct() {
+	public function __construct() {
 
 		HooksAPIFacade::getInstance()->addFilter(
 			'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',

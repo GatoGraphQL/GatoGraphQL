@@ -4,7 +4,7 @@ use PoP\LooseContracts\Facades\LooseContractManagerFacade;
 
 class QTX_PoP_Multilingual_LooseContractImplementations
 {
-	function __construct() {
+	public function __construct() {
 		
 		$hooksapi = HooksAPIFacade::getInstance();
 		$loosecontract_manager = LooseContractManagerFacade::getInstance();

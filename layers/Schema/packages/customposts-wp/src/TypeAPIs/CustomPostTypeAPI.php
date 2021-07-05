@@ -25,7 +25,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
     use InjectedFilterDataloadingModuleTypeDataResolverTrait;
 
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {

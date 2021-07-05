@@ -8,7 +8,7 @@ use PoP\Hooks\HooksAPIInterface;
 
 abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResolverInterface
 {
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI
     ) {
     }

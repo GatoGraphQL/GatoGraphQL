@@ -16,7 +16,7 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
  */
 class CacheConfigurationManager implements CacheConfigurationManagerInterface
 {
-    function __construct(private EndpointHelpers $endpointHelpers)
+    public function __construct(private EndpointHelpers $endpointHelpers)
     {
     }
 

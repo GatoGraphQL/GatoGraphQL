@@ -13,7 +13,7 @@ use PoP\Hooks\HooksAPIInterface;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI,
     ) {
     }

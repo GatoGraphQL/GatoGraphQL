@@ -12,7 +12,7 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeR
 {
     use ConfigurableAccessControlForDirectivesTypeResolverDecoratorTrait;
 
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected AccessControlManagerInterface $accessControlManager,

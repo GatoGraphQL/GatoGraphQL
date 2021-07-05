@@ -5,7 +5,7 @@ class PoP_ResourceLoader_MappingStorageManager {
 
 	public $entries, $initialized;
 
-	function __construct() {
+	public function __construct() {
 
 		$this->entries = array();
 		$this->initialized = false;

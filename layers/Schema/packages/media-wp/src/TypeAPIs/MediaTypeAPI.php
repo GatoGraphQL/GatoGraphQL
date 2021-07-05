@@ -19,7 +19,7 @@ use function get_posts;
  */
 class MediaTypeAPI implements MediaTypeAPIInterface
 {
-    function __construct(
+    public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
     ) {

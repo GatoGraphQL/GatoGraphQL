@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
-    function __construct(protected ModuleRegistryInterface $moduleRegistry)
+    public function __construct(protected ModuleRegistryInterface $moduleRegistry)
     {
     }
 

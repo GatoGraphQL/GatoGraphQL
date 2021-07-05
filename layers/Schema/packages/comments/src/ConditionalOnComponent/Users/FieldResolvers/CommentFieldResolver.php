@@ -23,7 +23,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
  */
 class CommentFieldResolver extends UpstreamCommentFieldResolver
 {
-    function __construct(
+    public function __construct(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,

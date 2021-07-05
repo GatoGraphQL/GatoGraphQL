@@ -15,7 +15,7 @@ use PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators\AbstractMandat
 
 class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractMandatoryDirectivesForFieldsTypeResolverDecorator
 {
-    function __construct(
+    public function __construct(
         InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         protected SchemaFeedbackManagerInterface $schemaFeedbackManager,

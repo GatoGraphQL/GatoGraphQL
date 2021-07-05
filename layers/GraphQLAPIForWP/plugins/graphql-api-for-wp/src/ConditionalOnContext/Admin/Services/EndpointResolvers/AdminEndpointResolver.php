@@ -19,7 +19,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }
 
-    function __construct(
+    public function __construct(
         EndpointHelpers $endpointHelpers,
         protected UserAuthorizationInterface $userAuthorization
     ) {
