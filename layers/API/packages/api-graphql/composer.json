@@ -2,7 +2,7 @@
     "name": "getpop/api-graphql",
     "type": "library",
     "description": "Extended/Upgraded implementation of GraphQL, implemented on PHP, based on the PoP API",
-    "keywords": ["PoP", "API", "graphql"],
+    "keywords": ["PoP", "API", "graphql", "server"],
     "homepage": "https://github.com/getpop/api-graphql",
     "license": "GPL-2.0-or-later",
     "authors": [
