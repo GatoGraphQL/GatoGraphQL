@@ -44,7 +44,7 @@ class PluginEnvironment
         if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::CACHE_DIR)) {
             return rtrim(PluginConfigurationHelpers::getWPConfigConstantValue(self::CACHE_DIR), '/');
         }
-        
+
         return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 }

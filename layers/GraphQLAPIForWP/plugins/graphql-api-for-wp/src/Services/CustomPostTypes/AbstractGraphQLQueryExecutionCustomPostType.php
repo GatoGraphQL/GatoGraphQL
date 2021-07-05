@@ -149,7 +149,7 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
         parent::initialize();
 
         // Execute at the beginning
-        \add_action('init', function(): void {
+        \add_action('init', function (): void {
             if ($this->isAccessForbidden()) {
                 $this->forbidAccess();
             }

@@ -17,7 +17,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
 
     /**
      * Cast the value to the indicated type, or return null or Error (with a message) if it fails.
-     * 
+     *
      * An array is not a type. For instance, in `[String]`, the type is `String`,
      * and the array is a modifier.
      * Then, if passing an array, this function will always fail casting
@@ -77,7 +77,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
                 }
                 break;
         }
-        
+
         switch ($type) {
             case SchemaDefinition::TYPE_MIXED:
                 return $value;

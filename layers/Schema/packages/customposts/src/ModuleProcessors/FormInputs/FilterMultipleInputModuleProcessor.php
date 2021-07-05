@@ -64,7 +64,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
 
     public function getSchemaFilterInputType(array $module): string
     {
-        return match($module[1]) {
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => SchemaDefinition::TYPE_DATE,
             default => $this->getDefaultSchemaFilterInputType(),
         };

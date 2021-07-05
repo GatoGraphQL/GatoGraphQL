@@ -25,7 +25,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function getErrorType(): int
     {
         return ErrorTypes::CODES;

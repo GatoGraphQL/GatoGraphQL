@@ -12,7 +12,7 @@ use WP_Error;
 class ErrorManager extends AbstractErrorManager
 {
     public function __construct(protected TranslationAPIInterface $translationAPI)
-    {        
+    {
     }
 
     public function convertFromCMSToPoPError(object $cmsError): Error
@@ -26,7 +26,7 @@ class ErrorManager extends AbstractErrorManager
                 $cmsErrorCode,
                 $cmsError->get_error_message($cmsErrorCode)
             );
-        } 
+        }
         $errorMessages = [];
         foreach ($cmsErrorCodes as $cmsErrorCode) {
             if ($errorMessage = $cmsError->get_error_message($cmsErrorCode)) {

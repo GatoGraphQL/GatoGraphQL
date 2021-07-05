@@ -35,7 +35,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'divide'
                 => SchemaDefinition::TYPE_FLOAT,
             'concat',
@@ -61,7 +61,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'concat',
             'divide',
             'arrayRandom',

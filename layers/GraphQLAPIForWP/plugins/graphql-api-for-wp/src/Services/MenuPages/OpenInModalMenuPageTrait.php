@@ -18,7 +18,7 @@ trait OpenInModalMenuPageTrait
     {
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
         $mainPluginVersion = (string) MainPluginManager::getConfig('version');
-        
+
         /**
          * Hide the menus
          */

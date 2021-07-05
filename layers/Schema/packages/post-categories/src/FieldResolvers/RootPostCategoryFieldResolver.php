@@ -56,7 +56,7 @@ class RootPostCategoryFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postCategoryCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'postCategories',

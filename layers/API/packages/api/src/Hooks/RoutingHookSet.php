@@ -29,7 +29,7 @@ class RoutingHookSet extends AbstractHookSet
             $instanceManager,
         );
     }
-    
+
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

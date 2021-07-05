@@ -48,7 +48,7 @@ abstract class AbstractPostFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'postCount',
             'unrestrictedPostCount'
                 => SchemaTypeModifiers::NON_NULLABLE,

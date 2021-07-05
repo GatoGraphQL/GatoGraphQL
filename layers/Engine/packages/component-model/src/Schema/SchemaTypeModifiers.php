@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Schema;
 
 /**
  * Values to extract using a bitwise operation
- * 
+ *
  * @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
  */
 class SchemaTypeModifiers

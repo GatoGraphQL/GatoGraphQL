@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use function apply_filters;
 use function get_post_status;
+
 use PoP\ComponentModel\TypeDataResolvers\InjectedFilterDataloadingModuleTypeDataResolverTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;
@@ -27,7 +28,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {        
+    ) {
     }
 
     // public const NON_EXISTING_ID = "non-existing";

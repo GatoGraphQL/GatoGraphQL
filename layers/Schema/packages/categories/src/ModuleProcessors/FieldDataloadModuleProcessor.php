@@ -69,6 +69,3 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         return parent::getFilterSubmodule($module);
     }
 }
-
-
-

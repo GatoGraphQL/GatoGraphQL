@@ -106,6 +106,3 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         return $value;
     }
 }
-
-
-

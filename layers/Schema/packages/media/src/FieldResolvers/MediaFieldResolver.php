@@ -42,7 +42,7 @@ class MediaFieldResolver extends AbstractDBDataFieldResolver
             $semverHelperService,
         );
     }
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(MediaTypeResolver::class);

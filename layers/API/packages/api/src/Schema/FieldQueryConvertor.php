@@ -7,6 +7,7 @@ namespace PoP\API\Schema;
 use function count;
 use function strlen;
 use function substr;
+
 use PoP\FieldQuery\QueryUtils;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\API\Schema\FieldQuerySet;
@@ -466,7 +467,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      * or they could clash.
      *
      * Eg: this query would lead to an infinite recursion:
-     * 
+     *
      *   ?query=--query
      *
      */

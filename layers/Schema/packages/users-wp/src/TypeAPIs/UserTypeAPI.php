@@ -23,7 +23,7 @@ class UserTypeAPI implements UserTypeAPIInterface
     function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected QueriedObjectHelperServiceInterface $queriedObjectHelperService,
-    ) {        
+    ) {
     }
 
     /**
@@ -57,7 +57,7 @@ class UserTypeAPI implements UserTypeAPIInterface
     {
         return $this->getUserBy('login', $login);
     }
-    
+
     public function getUserCount(array $query = [], array $options = []): int
     {
         // Convert the parameters
@@ -230,7 +230,7 @@ class UserTypeAPI implements UserTypeAPIInterface
             }
         }
     }
-    
+
     protected function getUserProperty(string $property, string | int | object $userObjectOrID): ?string
     {
         if (is_object($userObjectOrID)) {

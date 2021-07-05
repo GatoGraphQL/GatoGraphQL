@@ -72,7 +72,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputType(array $module): string
     {
-        return match($module[1]) {
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
@@ -82,7 +82,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputIsArrayType(array $module): bool
     {
-        return match($module[1]) {
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => true,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
@@ -92,7 +92,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
     {
-        return match($module[1]) {
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
             self::MODULE_FILTERINPUT_GENERICPOSTTYPES => true,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,

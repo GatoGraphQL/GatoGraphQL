@@ -92,7 +92,7 @@ abstract class AbstractPlugin
         $config = $this->getFullConfiguration();
         return $config[$key];
     }
-    
+
     /**
      * Get the plugin's immutable configuration values
      *

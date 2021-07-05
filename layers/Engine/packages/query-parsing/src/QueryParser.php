@@ -49,15 +49,17 @@ class QueryParser implements QueryParserInterface
         /**
          * Watch out! $skipFromChars and $skipUntilChars can only be chars,
          * i.e. strings of length 1, otherwise the function doesn't work.
-         * 
+         *
          * So validate this is the case
-         * 
+         *
          * @see https://github.com/leoloso/PoP/pull/734#issuecomment-871074708
          */
-        if ($longStrings = array_filter(
-            array_unique(array_merge($skipFromChars, $skipUntilChars)),
-            fn ($string) => strlen($string) > 1
-        )) {
+        if (
+            $longStrings = array_filter(
+                array_unique(array_merge($skipFromChars, $skipUntilChars)),
+                fn ($string) => strlen($string) > 1
+            )
+        ) {
             throw new Exception(
                 sprintf(
                     $this->translationAPI->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),

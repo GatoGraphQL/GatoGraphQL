@@ -277,9 +277,9 @@ class ComponentConfiguration
     /**
      * The GraphQL spec indicates that, when a field produces an error (during
      * value resolution or coercion) then its response must be set as null:
-     * 
+     *
      *   If a field error is raised while resolving a field, it is handled as though the field returned null, and the error must be added to the "errors" list in the response.
-     * 
+     *
      * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
      */
     public static function setFailingFieldResponseAsNull(): bool
@@ -324,7 +324,7 @@ class ComponentConfiguration
     /**
      * Support passing a single value where a list is expected.
      * Defined in the GraphQL spec.
-     * 
+     *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
     public static function coerceInputFromSingleValueToList(): bool

@@ -25,7 +25,7 @@ trait FieldInterfaceSchemaDefinitionResolverTrait
         if ($schemaDefinitionResolver = $this->getSchemaDefinitionResolver()) {
             return $schemaDefinitionResolver->getSchemaFieldType($fieldName);
         }
-        
+
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         return $schemaDefinitionService->getDefaultType();
     }

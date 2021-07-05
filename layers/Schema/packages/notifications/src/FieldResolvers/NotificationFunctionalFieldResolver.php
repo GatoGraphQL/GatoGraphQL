@@ -34,7 +34,7 @@ class NotificationFunctionalFieldResolver extends AbstractFunctionalFieldResolve
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'multilayoutKeys' => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };

@@ -21,7 +21,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             $hooksAPI,
         );
     }
-    
+
     public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validateErrors($form_data);

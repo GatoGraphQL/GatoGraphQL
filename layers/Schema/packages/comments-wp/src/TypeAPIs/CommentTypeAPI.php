@@ -84,12 +84,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
         if (CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()) {
             if (isset($query['userID'])) {
-
                 $query['user_id'] = $query['userID'];
                 unset($query['userID']);
             }
             if (isset($query['authors'])) {
-
                 // Only 1 author is accepted
                 $query['user_id'] = $query['authors'][0];
                 unset($query['authors']);
@@ -113,7 +111,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
         // Filtering by date: Instead of operating on the query, it does it through filter 'posts_where'
         if (isset($query['date-from'])) {
-
             $query['date_query'][] = [
                 'after' => $query['date-from'],
                 'inclusive' => false,
@@ -121,7 +118,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['date-from']);
         }
         if (isset($query['date-from-inclusive'])) {
-
             $query['date_query'][] = [
                 'after' => $query['date-from-inclusive'],
                 'inclusive' => true,
@@ -129,7 +125,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['date-from-inclusive']);
         }
         if (isset($query['date-to'])) {
-
             $query['date_query'][] = [
                 'before' => $query['date-to'],
                 'inclusive' => false,
@@ -137,7 +132,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['date-to']);
         }
         if (isset($query['date-to-inclusive'])) {
-
             $query['date_query'][] = [
                 'before' => $query['date-to-inclusive'],
                 'inclusive' => true,

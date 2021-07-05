@@ -21,7 +21,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
             $hooksAPI,
         );
     }
-    
+
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

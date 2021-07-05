@@ -48,7 +48,8 @@ trait FilterInputModuleProcessorTrait
             }
             // If setting the "array of arrays" flag, there's no need to set the "array" flag
             $isArrayOfArrays = $filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayOfArraysType($module);
-            if ($filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)
+            if (
+                $filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayType($module)
                 || $isArrayOfArrays
             ) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;

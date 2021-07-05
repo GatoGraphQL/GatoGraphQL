@@ -266,7 +266,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                         array_unshift($nestedDBError[Tokens::PATH], $this->directive);
                         $this->prependPathOnNestedErrors($nestedDBError);
                     }
-                    $dbErrors[(string) $id] = $nestedDBErrors;                
+                    $dbErrors[(string) $id] = $nestedDBErrors;
                 }
             }
 

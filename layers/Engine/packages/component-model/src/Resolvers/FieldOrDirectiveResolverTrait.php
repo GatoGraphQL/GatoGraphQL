@@ -62,9 +62,9 @@ trait FieldOrDirectiveResolverTrait
      * For instance, this doesn't work: /?query=arrayItem(posts(),3)
      * In that case, the validation will be done inside ->resolveValue(),
      * and will be treated as a $dbError, not a $schemaError.
-     * 
+     *
      * Same with expressions, as when calling `getSelfProp(%self%, "posts")`.
-     * 
+     *
      * But no need with variables, because by now they will have been replaced with the actual value.
      */
     protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
@@ -104,15 +104,15 @@ trait FieldOrDirectiveResolverTrait
                 $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
                 /**
                  * This value will not be used with GraphQL, but can be used by PoP.
-                 * 
+                 *
                  * While GraphQL has a strong type system, PoP takes a more lenient approach,
                  * enabling fields to maybe be an array, maybe not.
-                 * 
+                 *
                  * Eg: `echo(object: ...)` will print back whatever provided,
                  * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
                  * an `Object`, so it could be provided as an array, or also `String`, which
                  * will not be an array.
-                 * 
+                 *
                  * Whenever the value may be an array, the server will skip those validations
                  * to check if an input is array or not (and throw an error).
                  */
@@ -130,7 +130,8 @@ trait FieldOrDirectiveResolverTrait
                 $fieldOrDirectiveArgNonNullArrayItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsArrayOfArrays = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldOrDirectiveArgNonNullArrayOfArraysItems = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                if (!$fieldOrDirectiveArgIsArray
+                if (
+                    !$fieldOrDirectiveArgIsArray
                     && is_array($fieldOrDirectiveArgumentValue)
                 ) {
                     $errors[] = sprintf(
@@ -139,7 +140,8 @@ trait FieldOrDirectiveResolverTrait
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
-                } elseif ($fieldOrDirectiveArgIsArray
+                } elseif (
+                    $fieldOrDirectiveArgIsArray
                     && !is_array($fieldOrDirectiveArgumentValue)
                 ) {
                     $errors[] = sprintf(
@@ -148,7 +150,8 @@ trait FieldOrDirectiveResolverTrait
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
-                } elseif ($fieldOrDirectiveArgNonNullArrayItems
+                } elseif (
+                    $fieldOrDirectiveArgNonNullArrayItems
                     && is_array($fieldOrDirectiveArgumentValue)
                     && array_filter(
                         $fieldOrDirectiveArgumentValue,
@@ -161,7 +164,8 @@ trait FieldOrDirectiveResolverTrait
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
-                } elseif (!$fieldOrDirectiveArgIsArrayOfArrays
+                } elseif (
+                    !$fieldOrDirectiveArgIsArrayOfArrays
                     && is_array($fieldOrDirectiveArgumentValue)
                     // Check if any element is not an array
                     && array_filter(
@@ -175,7 +179,8 @@ trait FieldOrDirectiveResolverTrait
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
-                } elseif ($fieldOrDirectiveArgIsArrayOfArrays
+                } elseif (
+                    $fieldOrDirectiveArgIsArrayOfArrays
                     && is_array($fieldOrDirectiveArgumentValue)
                     // Check if any element is not an array
                     && array_filter(
@@ -189,7 +194,8 @@ trait FieldOrDirectiveResolverTrait
                         $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
-                } elseif ($fieldOrDirectiveArgNonNullArrayOfArraysItems
+                } elseif (
+                    $fieldOrDirectiveArgNonNullArrayOfArraysItems
                     && is_array($fieldOrDirectiveArgumentValue)
                     && array_filter(
                         $fieldOrDirectiveArgumentValue,
@@ -255,15 +261,15 @@ trait FieldOrDirectiveResolverTrait
                 // If the value may be array, may be not, then there's nothing to validate
                 /**
                  * This value will not be used with GraphQL, but can be used by PoP.
-                 * 
+                 *
                  * While GraphQL has a strong type system, PoP takes a more lenient approach,
                  * enabling fields to maybe be an array, maybe not.
-                 * 
+                 *
                  * Eg: `echo(value: ...)` will print back whatever provided,
                  * whether `String` or `[String]`. Its input is `Mixed`, which can comprise
                  * an `Object`, so it could be provided as an array, or also `String`, which
                  * will not be an array.
-                 * 
+                 *
                  * Whenever the value may be an array, the server will skip those validations
                  * to check if an input is array or not (and throw an error).
                  */
@@ -282,7 +288,8 @@ trait FieldOrDirectiveResolverTrait
                 // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
                 $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName];
                 if (!$enumTypeFieldOrDirectiveArgMayBeArray) {
-                    if (!$enumTypeFieldOrDirectiveArgIsArray
+                    if (
+                        !$enumTypeFieldOrDirectiveArgIsArray
                         && is_array($fieldOrDirectiveArgumentValue)
                     ) {
                         $errors[] = sprintf(
@@ -293,7 +300,8 @@ trait FieldOrDirectiveResolverTrait
                         );
                         continue;
                     }
-                    if ($enumTypeFieldOrDirectiveArgIsArray
+                    if (
+                        $enumTypeFieldOrDirectiveArgIsArray
                         && !is_array($fieldOrDirectiveArgumentValue)
                     ) {
                         $errors[] = sprintf(
@@ -304,7 +312,8 @@ trait FieldOrDirectiveResolverTrait
                         );
                         continue;
                     }
-                    if ($enumTypeFieldOrDirectiveArgIsArray
+                    if (
+                        $enumTypeFieldOrDirectiveArgIsArray
                         && is_array($fieldOrDirectiveArgumentValue)
                         && $enumTypeFieldOrDirectiveArgNonNullArrayItems
                         && array_filter(
@@ -320,7 +329,8 @@ trait FieldOrDirectiveResolverTrait
                         );
                         continue;
                     }
-                    if (!$enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                    if (
+                        !$enumTypeFieldOrDirectiveArgIsArrayOfArrays
                         && is_array($fieldOrDirectiveArgumentValue)
                         && array_filter(
                             $fieldOrDirectiveArgumentValue,
@@ -335,7 +345,8 @@ trait FieldOrDirectiveResolverTrait
                         );
                         continue;
                     }
-                    if ($enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                    if (
+                        $enumTypeFieldOrDirectiveArgIsArrayOfArrays
                         && is_array($fieldOrDirectiveArgumentValue)
                         && array_filter(
                             $fieldOrDirectiveArgumentValue,
@@ -350,7 +361,8 @@ trait FieldOrDirectiveResolverTrait
                         );
                         continue;
                     }
-                    if ($enumTypeFieldOrDirectiveArgIsArrayOfArrays
+                    if (
+                        $enumTypeFieldOrDirectiveArgIsArrayOfArrays
                         && is_array($fieldOrDirectiveArgumentValue)
                         && $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems
                         && array_filter(

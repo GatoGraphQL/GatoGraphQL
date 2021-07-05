@@ -40,7 +40,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
             $semverHelperService,
         );
     }
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);

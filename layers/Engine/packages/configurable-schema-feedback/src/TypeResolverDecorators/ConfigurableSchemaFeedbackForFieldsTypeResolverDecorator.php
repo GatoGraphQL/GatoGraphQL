@@ -25,7 +25,7 @@ class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractM
             $fieldQueryInterpreter,
         );
     }
-    
+
     protected function getConfigurationEntries(): array
     {
         return $this->schemaFeedbackManager->getEntriesForFields();

@@ -53,7 +53,7 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'accessControlLists',
             'cacheControlLists',
             'fieldDeprecationLists',
@@ -66,7 +66,7 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'accessControlLists',
             'cacheControlLists',
             'fieldDeprecationLists',
@@ -79,7 +79,7 @@ class CPTFieldResolver extends AbstractQueryableFieldResolver
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        return match($fieldName) {
+        return match ($fieldName) {
             'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
             'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
             'fieldDeprecationLists' => $this->translationAPI->__('Field Deprecation Lists', 'graphql-api'),

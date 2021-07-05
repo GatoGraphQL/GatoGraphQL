@@ -54,6 +54,3 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
         return $ret;
     }
 }
-
-
-

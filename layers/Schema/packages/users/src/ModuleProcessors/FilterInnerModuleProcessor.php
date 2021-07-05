@@ -42,11 +42,13 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
             ],
         ];
-        if ($modules = $this->hooksAPI->applyFilters(
-            'Users:FilterInnerModuleProcessor:inputmodules',
-            $inputmodules[$module[1]],
-            $module
-        )) {
+        if (
+            $modules = $this->hooksAPI->applyFilters(
+                'Users:FilterInnerModuleProcessor:inputmodules',
+                $inputmodules[$module[1]],
+                $module
+            )
+        ) {
             $ret = array_merge(
                 $ret,
                 $modules
@@ -55,6 +57,3 @@ class FilterInnerModuleProcessor extends AbstractModuleProcessor
         return $ret;
     }
 }
-
-
-

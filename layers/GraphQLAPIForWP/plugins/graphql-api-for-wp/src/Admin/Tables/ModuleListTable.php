@@ -535,7 +535,7 @@ class ModuleListTable extends AbstractItemListTable
 
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
         $mainPluginVersion = (string) MainPluginManager::getConfig('version');
-        
+
         /**
          * Fix the issues with the WP List Table
          */

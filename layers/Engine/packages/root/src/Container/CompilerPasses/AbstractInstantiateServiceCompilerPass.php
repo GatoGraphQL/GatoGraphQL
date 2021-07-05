@@ -23,7 +23,8 @@ abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPa
             }
 
             $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
-            if (!$onlyProcessAutoconfiguredServices
+            if (
+                !$onlyProcessAutoconfiguredServices
                 || ($onlyProcessAutoconfiguredServices && $definition->isAutoconfigured())
             ) {
                 $serviceInstantiatorDefinition->addMethodCall(

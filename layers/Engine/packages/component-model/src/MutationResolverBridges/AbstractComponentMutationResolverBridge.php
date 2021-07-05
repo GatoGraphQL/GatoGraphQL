@@ -17,7 +17,8 @@ use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
-{ 
+{
+
     public function __construct(
         protected HooksAPIInterface $hooksAPI,
         protected TranslationAPIInterface $translationAPI,

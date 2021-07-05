@@ -25,7 +25,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             $hooksAPI,
         );
     }
-    
+
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);

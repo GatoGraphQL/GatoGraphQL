@@ -35,12 +35,12 @@ class ApplicationStateHookSet extends AbstractHookSet
         $stratum = $platformmanager->getStratum();
         $strata = $platformmanager->getStrata($stratum);
         $stratum_isdefault = $platformmanager->isDefaultStratum();
-        
+
         $vars['stratum'] = $stratum;
         $vars['strata'] = $strata;
         $vars['stratum-isdefault'] = $stratum_isdefault;
     }
-    
+
     public function maybeAddComponent(array $components): array
     {
         $vars = ApplicationState::getVars();

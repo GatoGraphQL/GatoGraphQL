@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMediaWP\TypeAPIs;
 
 use PoPSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
+
 use function has_post_thumbnail;
 use function get_post_thumbnail_id;
 

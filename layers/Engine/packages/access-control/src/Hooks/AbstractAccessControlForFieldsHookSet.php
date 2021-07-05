@@ -27,7 +27,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
             $instanceManager,
         );
     }
-    
+
     /**
      * Indicate if this hook is enabled
      */

@@ -611,7 +611,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         $pageTypeResolver = $this->pageTypeResolver;
         /** @var PostTypeResolver */
         $postTypeResolver = $this->postTypeResolver;
-        
+
         $moduleSettings = parent::getSettings($module);
         // Common variables to set the limit on the schema types
         $limitArg = 'limit';

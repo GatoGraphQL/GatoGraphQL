@@ -27,7 +27,7 @@ class MediaTypeDataLoader extends AbstractTypeQueryableDataLoader
             $nameResolver,
         );
     }
-    
+
     public function getObjects(array $ids): array
     {
         $query = array(

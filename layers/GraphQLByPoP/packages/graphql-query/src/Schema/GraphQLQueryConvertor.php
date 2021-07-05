@@ -185,10 +185,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     /**
      * If the string ends with "()" it must be wrapped with quotes "", to make
      * sure it is interpreted as a string, and not as a field.
-     * 
+     *
      * eg: `{ posts(searchfor:"hel()") { id } }`
      * eg: `{ posts(ids:["hel()"]) { id } }`
-     * 
+     *
      * @see https://github.com/leoloso/PoP/issues/743
      */
     protected function maybeWrapStringInQuotesToAvoidExecutingAsAField(string $value): string

@@ -1,4 +1,5 @@
 <?php
+
 namespace PoP\SiteBuilderAPI\Helpers;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
