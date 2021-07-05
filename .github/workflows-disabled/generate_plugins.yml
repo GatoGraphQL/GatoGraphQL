@@ -199,7 +199,7 @@ jobs:
             -   name: Publish to DIST repo
                 uses: symplify/monorepo-split-github-action@2.0
                 env:
-                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                    GITHUB_TOKEN: "wrong credential!!! ${{ secrets.ACCESS_TOKEN }}"
                 with:
                     branch: ${{ matrix.pluginConfig.dist_repo_branch }}
                     package-directory: 'build/dist-plugin'
