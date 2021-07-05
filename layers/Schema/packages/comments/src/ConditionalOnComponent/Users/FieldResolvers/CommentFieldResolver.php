@@ -76,7 +76,7 @@ class CommentFieldResolver extends UpstreamCommentFieldResolver
     /**
      * Check there is an author. Otherwise, let the upstream resolve it
      */
-    function resolveCanProcessResultItem(
+    public function resolveCanProcessResultItem(
         TypeResolverInterface $typeResolver,
         object $resultItem,
         string $fieldName,
