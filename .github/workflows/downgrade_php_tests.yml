@@ -28,9 +28,11 @@ jobs:
             -   id: output_data
                 run: |
                     echo "::set-output name=package_srcs::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src)"
+                    echo "::set-output name=generate_artifact_with_downgraded_code::$(vendor/bin/monorepo-builder env-var GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE)"
 
         outputs:
             package_srcs: ${{ steps.output_data.outputs.package_srcs }}
+            generate_artifact: ${{ steps.output_data.outputs.generate_artifact_with_downgraded_code }}
 
     main:
         needs: provide_data
@@ -95,12 +97,16 @@ jobs:
             # Upload artifact with downgraded code, for debugging
             -   name: Create build folder
                 run: mkdir build
+                if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Install zip
                 uses: montudor/action-zip@v0.1.1
+                if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Create zip
                 run: zip -X -r build/downgraded-code.zip . -x *.git* build/\* php-parallel-lint/\*
+                if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Upload artifact
                 uses: actions/upload-artifact@v2
+                if: ${{ needs.provide_data.outputs.generate_artifact }}
                 with:
                     name: downgraded-code
                     path: build/downgraded-code.zip
