@@ -78,8 +78,8 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
                     branch: 'master'
-                    package-directory: '${{ matrix.package.path }}'
-                    split-repository-organization: '${{ matrix.package.organization }}'
-                    split-repository-name: '${{ matrix.package.name }}'
-                    user-name: "leoloso"
-                    user-email: "leo@getpop.org"
+                    package_directory: '${{ matrix.package.path }}'
+                    repository_organization: '${{ matrix.package.organization }}'
+                    repository_name: '${{ matrix.package.name }}'
+                    user_name: "leoloso"
+                    user_email: "leo@getpop.org"
