@@ -19,7 +19,7 @@ jobs:
                 if: "!startsWith(github.ref, 'refs/tags/')"
                 uses: leoloso/monorepo-split-github-action@issues/17
                 env:
-                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                    GITHUB_TOKEN: "wrong credential!!! ${{ secrets.ACCESS_TOKEN }}"
                 with:
                     branch: 'master'
                     package_directory: 'layers/API/packages/api-graphql'
