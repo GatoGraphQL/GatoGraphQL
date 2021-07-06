@@ -44,7 +44,6 @@ use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoP\FieldQuery\QuerySyntax;
 use PoP\Root\Environment as RootEnvironment;
 use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
 use PoPSchema\Categories\Environment as CategoriesEnvironment;

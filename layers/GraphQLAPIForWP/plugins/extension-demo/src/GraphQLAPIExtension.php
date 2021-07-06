@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ExtensionDemo;
 
-use GraphQLAPI\ExtensionDemo\ModuleResolvers\SchemaModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class GraphQLAPIExtension extends AbstractExtension
