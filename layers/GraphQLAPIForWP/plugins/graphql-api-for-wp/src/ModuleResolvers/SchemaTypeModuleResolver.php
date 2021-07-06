@@ -4,29 +4,30 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
+use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
-use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use PoPSchema\Media\TypeResolvers\MediaTypeResolver;
-use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
-use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
-use PoPSchema\GenericCustomPosts\TypeResolvers\GenericCustomPostTypeResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
 {
@@ -89,6 +90,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public function __construct(
         ModuleRegistryInterface $moduleRegistry,
+        TranslationAPIInterface $translationAPI,
         protected ?CommentTypeResolver $commentTypeResolver,
         protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         protected ?GenericCustomPostTypeResolver $genericCustomPostTypeResolver,
@@ -101,7 +103,10 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
         protected ?UserRoleTypeResolver $userRoleTypeResolver,
         protected ?UserTypeResolver $userTypeResolver
     ) {
-        parent::__construct($moduleRegistry);
+        parent::__construct(
+            $moduleRegistry,
+            $translationAPI,
+        );
     }
 
     /**
