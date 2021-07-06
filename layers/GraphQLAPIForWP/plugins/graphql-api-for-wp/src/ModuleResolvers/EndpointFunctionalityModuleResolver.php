@@ -134,7 +134,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 self::OPTION_PATH => 'graphql-query',
             ],
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**

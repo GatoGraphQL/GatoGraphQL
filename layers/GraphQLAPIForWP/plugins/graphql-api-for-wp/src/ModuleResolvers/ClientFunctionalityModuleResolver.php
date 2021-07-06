@@ -157,7 +157,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS => true,
             ],
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**

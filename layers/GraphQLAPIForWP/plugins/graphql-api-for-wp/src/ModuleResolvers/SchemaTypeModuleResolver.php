@@ -594,7 +594,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_COMMENT_META => $defaultMetaValues,
             self::SCHEMA_TAXONOMY_META => $defaultMetaValues,
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**

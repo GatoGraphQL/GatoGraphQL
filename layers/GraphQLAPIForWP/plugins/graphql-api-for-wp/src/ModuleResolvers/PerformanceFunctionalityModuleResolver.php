@@ -101,7 +101,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
                 self::OPTION_MAX_AGE => 86400, // 1 day
             ],
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**

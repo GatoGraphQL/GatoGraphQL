@@ -136,7 +136,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 self::OPTION_ENABLE_GRANULAR => true,
             ],
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**

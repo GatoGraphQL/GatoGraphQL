@@ -104,7 +104,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
             ],
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**

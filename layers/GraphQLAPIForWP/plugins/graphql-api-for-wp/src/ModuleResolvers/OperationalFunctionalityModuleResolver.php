@@ -130,7 +130,7 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
                 self::OPTION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
             ],
         ];
-        return $defaultValues[$module][$option];
+        return $defaultValues[$module][$option] ?? null;
     }
 
     /**
