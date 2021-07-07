@@ -2,11 +2,14 @@ parameters:
     level: 5
 
 includes:
+    - layers/Engine/packages/access-control/phpstan.neon.dist
+    - layers/API/packages/api/phpstan.neon.dist
     - layers/API/packages/api-clients/phpstan.neon.dist
     - layers/API/packages/api-endpoints/phpstan.neon.dist
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
     - layers/API/packages/api-endpoints-for-wp/phpstan.neon.dist
     - layers/API/packages/api-graphql/phpstan.neon.dist
+    - layers/API/packages/api-mirrorquery/phpstan.neon.dist
     - layers/API/packages/api-rest/phpstan.neon.dist
     - layers/Schema/packages/basic-directives/phpstan.neon.dist
     - layers/Engine/packages/cache-control/phpstan.neon.dist
@@ -38,6 +41,7 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-query/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist
+    - layers/Engine/packages/guzzle-helpers/phpstan.neon.dist
     - layers/Engine/packages/hooks/phpstan.neon.dist
     - layers/Engine/packages/hooks-wp/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
