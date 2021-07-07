@@ -20,7 +20,7 @@ class MenuItemTypeResolver extends AbstractTypeResolver
         return $this->translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
     }
 
-    public function getID(object $resultItem): string | int
+    public function getID(object $resultItem): string | int | null
     {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
         $menuItem = $resultItem;

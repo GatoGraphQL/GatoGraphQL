@@ -48,7 +48,7 @@ class MediaTypeResolver extends AbstractTypeResolver
         return $this->translationAPI->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
     }
 
-    public function getID(object $resultItem): string | int
+    public function getID(object $resultItem): string | int | null
     {
         $media = $resultItem;
         return $this->mediaTypeAPI->getMediaElementId($media);

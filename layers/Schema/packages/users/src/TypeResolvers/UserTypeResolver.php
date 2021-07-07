@@ -48,7 +48,7 @@ class UserTypeResolver extends AbstractTypeResolver
         return $this->translationAPI->__('Representation of a user', 'users');
     }
 
-    public function getID(object $resultItem): string | int
+    public function getID(object $resultItem): string | int | null
     {
         $user = $resultItem;
         return $this->userTypeAPI->getUserId($user);
