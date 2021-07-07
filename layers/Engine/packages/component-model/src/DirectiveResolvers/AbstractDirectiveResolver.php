@@ -384,8 +384,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return true;
     }
 
-    public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $directiveName, array $directiveArgs = []): ?array
-    {
+    final public function resolveSchemaValidationErrorDescriptions(
+        TypeResolverInterface $typeResolver,
+        string $directiveName,
+        array $directiveArgs = []
+    ): ?array {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($typeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             /**
@@ -436,6 +439,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 }
             }
         }
+
+        // Custom validations
+        return $this->doResolveSchemaValidationErrorDescriptions(
+            $typeResolver,
+            $directiveName,
+            $directiveArgs,
+        );
+    }
+
+    /**
+     * Custom validations. Function to override
+     */
+    protected function doResolveSchemaValidationErrorDescriptions(
+        TypeResolverInterface $typeResolver,
+        string $directiveName,
+        array $directiveArgs = []
+    ): ?array {
         return null;
     }
 
