@@ -14,17 +14,18 @@ class DateRangeTimeFormInput extends MultipleInputFormInput
 
         // Re-implement to re-create the "readable" input from the other inputs
         if (!isset($params['selected']) && $this->selected) {
-            $from = $this->selected['from'];
-            $fromtime = $this->selected['fromtime'];
-            $to = $this->selected['to'];
-            $totime = $this->selected['totime'];
+            $selected = (array) $this->selected;
+            $from = $selected['from'];
+            $fromtime = $selected['fromtime'];
+            $to = $selected['to'];
+            $totime = $selected['totime'];
 
             // Transform it to the format needed by the DateRange plugin
             // Please notice that the date formats in daterange(time) are "d/m/Y" and "m/d/Y" or 1 of them will not work for some reason
             if ($from && $fromtime && $to && $totime) {
                 $datefrom = $from . ' ' . $fromtime . ':00';
                 $dateto = $to . ' ' . $totime . ':00';
-                $this->selected['readable'] = sprintf(
+                $selected['readable'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('%1$s - %2$s', 'engine'),
                     date('d/m/Y g:i A', strtotime($datefrom)),
                     date('d/m/Y g:i A', strtotime($dateto))
