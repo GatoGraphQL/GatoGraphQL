@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 /**
@@ -40,9 +40,9 @@ trait HasDocumentationScriptTrait
         // Add the locale language?
         if ($this->addLocalLanguage()) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var LocaleUtils */
-            $localeUtils = $instanceManager->getInstance(LocaleUtils::class);
-            $data[DocumentationConstants::LOCALE_LANG] = $localeUtils->getLocaleLanguage();
+            /** @var LocaleHelper */
+            $localeHelper = $instanceManager->getInstance(LocaleHelper::class);
+            $data[DocumentationConstants::LOCALE_LANG] = $localeHelper->getLocaleLanguage();
         }
         // Add the default language?
         if ($defaultLang = $this->getDefaultLanguage()) {
@@ -104,9 +104,9 @@ trait HasDocumentationScriptTrait
         }
         if ($this->addLocalLanguage()) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var LocaleUtils */
-            $localeUtils = $instanceManager->getInstance(LocaleUtils::class);
-            $localeLang = $localeUtils->getLocaleLanguage();
+            /** @var LocaleHelper */
+            $localeHelper = $instanceManager->getInstance(LocaleHelper::class);
+            $localeLang = $localeHelper->getLocaleLanguage();
             // Check the current locale has been translated, otherwise if will try to load an unexisting file
             // If the locale lang is the same as the default lang, the file has already been loaded
             if ($localeLang != $defaultLang && in_array($localeLang, $this->getDocLanguages())) {

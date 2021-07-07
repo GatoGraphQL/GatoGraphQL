@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GraphQLAPI\GraphQLAPI\Static;
 
 class LocaleUtils
 {
     /**
      * User's selected language code for the admin panel
      */
-    public function getLocaleLanguage(): string
+    public static function getLocaleLanguage(): string
     {
         // locale has shape "en_US". Retrieve the language code only: "en"
         $localeParts = explode('_', \get_locale());
