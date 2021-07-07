@@ -92,7 +92,7 @@ trait AliasSchemaFieldResolverTrait
      * Proxy pattern: execute same function on the aliased FieldResolver,
      * for the aliased $fieldName
      */
-    final public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $aliasedFieldResolver = $this->getAliasedFieldResolverInstance();
         return $aliasedFieldResolver->resolveSchemaValidationErrorDescriptions(
