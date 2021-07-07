@@ -382,7 +382,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return true;
     }
 
-    final public function resolveSchemaValidationErrorDescriptions(
+    public function resolveSchemaValidationErrorDescriptions(
         TypeResolverInterface $typeResolver,
         string $directiveName,
         array $directiveArgs = []
