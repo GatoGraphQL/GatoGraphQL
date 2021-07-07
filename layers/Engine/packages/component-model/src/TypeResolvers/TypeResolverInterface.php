@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 interface TypeResolverInterface
 {
@@ -25,7 +27,7 @@ interface TypeResolverInterface
      */
     public function getAllImplementedInterfaceResolverInstances(): array;
     /**
-     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;

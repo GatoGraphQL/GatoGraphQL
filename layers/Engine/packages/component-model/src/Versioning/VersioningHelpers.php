@@ -70,9 +70,6 @@ class VersioningHelpers
 
     /**
      * Indicates the version constraints for specific directives in the schema
-     *
-     * @param string $maybeNamespacedTypeName
-     * @param string $fieldName
      */
     public static function getVersionConstraintsForDirective(string $directiveName): ?string
     {
