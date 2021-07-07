@@ -36,7 +36,6 @@ class GuzzleHelpers
                 $exception->getMessage()
             );
         }
-        return [];
     }
 
     protected static function validateAndDecodeJSONResponse(ResponseInterface $response): mixed
@@ -74,15 +73,15 @@ class GuzzleHelpers
                 )
             );
         }
-        $body = $response->getBody();
-        if (!$body) {
+        $bodyResponse = $response->getBody()->__toString();
+        if (!$bodyResponse) {
             // Throw an error
             return new Error(
                 'request-failed',
                 $translationAPI->__('The body of the response is empty', 'guzzle-helpers')
             );
         }
-        return json_decode($body->__toString(), true);
+        return json_decode($bodyResponse, true);
     }
 
     /**
@@ -148,6 +147,5 @@ class GuzzleHelpers
                 )
             ];
         }
-        return [];
     }
 }
