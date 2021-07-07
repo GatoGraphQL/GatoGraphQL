@@ -31,7 +31,7 @@ abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCom
             $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
             if (
                 !$onlyProcessAutoconfiguredServices
-                || ($onlyProcessAutoconfiguredServices && $definition->isAutoconfigured())
+                || $definition->isAutoconfigured()
             ) {
                 // Register the service in the corresponding registry
                 $registryDefinition->addMethodCall(
