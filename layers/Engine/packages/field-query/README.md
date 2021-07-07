@@ -913,7 +913,7 @@ _**In PoP** ([View query in browser](https://newapi.getpop.org/api/graphql/?quer
 
 In the example below, directive `<advancePointerInArray>` communicates to directive `<translate>` the language to translate to through expression `%translateTo%`, which is defined on-the-fly.
 
-_**In PoP** ([View query in browser](https://newapi.getpop.org/api/graphql/?query=echo([[text:%20Hello%20my%20friends,translateTo:%20fr],[text:%20How%20do%20you%20like%20this%20software%20so%20far?,translateTo:%20es],])@translated%3CforEach%3CadvancePointerInArray(path:%20text,appendExpressions:%20[toLang:extract(%value%,translateTo)])%3Ctranslate(from:%20en,to:%20%toLang%,oneLanguagePerField:%20true,override:%20true)%3E%3E%3E)):_
+_**In PoP** (<a href="https://newapi.getpop.org/api/graphql/?query=echo([[text:%20Hello%20my%20friends,translateTo:%20fr],[text:%20How%20do%20you%20like%20this%20software%20so%20far?,translateTo:%20es],])@translated%3CforEach%3CadvancePointerInArray(path:%20text,appendExpressions:%20[toLang:extract(%value%,translateTo)])%3CtranslateMultiple(from:%20en,to:%20%toLang%,oneLanguagePerField:%20true,override:%20true)%3E%3E%3E">View query in browser</a>):_
 
 ```php
 /?query=
@@ -934,7 +934,7 @@ _**In PoP** ([View query in browser](https://newapi.getpop.org/api/graphql/?quer
           toLang:extract(%value%,translateTo)
         ]
       )<
-        translate(
+        translateMultiple(
           from: en,
           to: %toLang%,
           oneLanguagePerField: true,
