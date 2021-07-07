@@ -348,12 +348,11 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
         return $schemaFieldArgs;
     }
 
-    public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
-    {
-        if ($errors = parent::resolveSchemaValidationErrorDescriptions($typeResolver, $fieldName, $fieldArgs)) {
-            return $errors;
-        }
-
+    protected function doResolveSchemaValidationErrorDescriptions(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        array $fieldArgs = []
+    ): ?array {
         // Important: The validations below can only be done if no fieldArg contains a field!
         // That is because this is a schema error, so we still don't have the $resultItem against which to resolve the field
         // For instance, this doesn't work: /?query=arrayItem(posts(),3)
@@ -369,7 +368,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                             ),
                         ];
                     };
-                    return null;
+                    break;
                 case 'arrayDiff':
                     if (count($fieldArgs['arrays']) < 2) {
                         return [
@@ -379,7 +378,7 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                             ),
                         ];
                     };
-                    return null;
+                    break;
                 case 'divide':
                     if ($fieldArgs['by'] === (float)0) {
                         return [
@@ -397,11 +396,11 @@ class OperatorGlobalFieldResolver extends AbstractGlobalFieldResolver
                     //         json_encode($fieldArgs['arrays'])
                     //     );
                     // }
-                    return null;
+                    break;
             }
         }
 
-        return null;
+        return parent::doResolveSchemaValidationErrorDescriptions($typeResolver, $fieldName, $fieldArgs);
     }
 
     /**
