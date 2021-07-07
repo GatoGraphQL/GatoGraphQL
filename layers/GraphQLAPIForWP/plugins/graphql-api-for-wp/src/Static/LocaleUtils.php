@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Static;
 
+/**
+ * "Static" because it can be invoked from a TypeModuleResolver's getSettingsDefaultValue
+ * and printed on the Settings page, where the services have not yet been initialized
+ */
 class LocaleUtils
 {
     /**
