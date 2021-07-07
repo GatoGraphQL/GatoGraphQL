@@ -19,7 +19,7 @@ class PHPStanDataSource
         return [
             'layers/Engine/packages/component-model',
             'layers/Engine/packages/engine-wp',
-            'layers/Engine/packages/engine',
+            // 'layers/Engine/packages/engine',
             'layers/GraphQLByPoP/packages/graphql-parser',
             'layers/Schema/packages/block-metadata-for-wp',
             'layers/Schema/packages/categories',
