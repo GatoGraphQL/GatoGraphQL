@@ -41,6 +41,7 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-query/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist
+    - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/guzzle-helpers/phpstan.neon.dist
     - layers/Engine/packages/hooks/phpstan.neon.dist
     - layers/Engine/packages/hooks-wp/phpstan.neon.dist
