@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
-class UnmigratedFailingPackagesDataSource
+class PHPStanDataSource
 {
     public function getLevel(): int|string
     {

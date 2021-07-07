@@ -10,7 +10,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\EnvironmentVariablesData
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\UnmigratedFailingPackagesDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
@@ -86,14 +86,14 @@ class ContainerConfigurationService
          * and converting them will take some time. Hence, for the time being,
          * skip them from executing PHPStan, to avoid the CI from failing
          */
-        if ($unmigratedFailingPackagesConfig = $this->getUnmigratedFailingPackagesDataSource()) {
+        if ($phpStanConfig = $this->getPHPStanDataSource()) {
             $parameters->set(
                 CustomOption::UNMIGRATED_FAILING_PACKAGES,
-                $unmigratedFailingPackagesConfig->getUnmigratedFailingPackages()
+                $phpStanConfig->getUnmigratedFailingPackages()
             );
             $parameters->set(
                 CustomOption::LEVEL,
-                $unmigratedFailingPackagesConfig->getLevel()
+                $phpStanConfig->getLevel()
             );
         }
 
@@ -145,9 +145,9 @@ class ContainerConfigurationService
         return new EnvironmentVariablesDataSource();
     }
     
-    protected function getUnmigratedFailingPackagesDataSource(): ?UnmigratedFailingPackagesDataSource
+    protected function getPHPStanDataSource(): ?PHPStanDataSource
     {
-        return new UnmigratedFailingPackagesDataSource();
+        return new PHPStanDataSource();
     }
     
     protected function getDataToAppendAndRemoveDataSource(): ?DataToAppendAndRemoveDataSource
