@@ -95,8 +95,6 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
     }
     /**
      * Decide if to remove the directiveNames
-     *
-     * @param FieldResolverInterface $directiveResolver
      */
     protected function removeDirective(TypeResolverInterface $typeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
