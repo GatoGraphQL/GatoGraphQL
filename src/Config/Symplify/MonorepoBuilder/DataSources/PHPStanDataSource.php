@@ -21,7 +21,6 @@ class PHPStanDataSource
             'layers/Engine/packages/engine-wp',
             'layers/Engine/packages/engine',
             'layers/GraphQLByPoP/packages/graphql-parser',
-            'layers/GraphQLByPoP/packages/graphql-server',
             'layers/Schema/packages/block-metadata-for-wp',
             'layers/Schema/packages/categories',
             'layers/Schema/packages/categories',
