@@ -101,7 +101,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             ],
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
-                self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
+                self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
