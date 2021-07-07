@@ -21,7 +21,7 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
     /**
      * Indicate if the user has the item, to be implemented
      *
-     * @param mixed[] $items
+     * @param mixed[] $capabilities
      */
     protected function doesCurrentUserHaveAnyItem(array $capabilities): bool
     {

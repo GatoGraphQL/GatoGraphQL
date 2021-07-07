@@ -14,8 +14,6 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaTypeResolverDecoratorTrait
 {
     /**
      * By default, only the admin can see the roles from the users
-     *
-     * @param TypeResolverInterface $typeResolver
      */
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {

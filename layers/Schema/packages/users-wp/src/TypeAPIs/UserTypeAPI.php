@@ -129,8 +129,7 @@ class UserTypeAPI implements UserTypeAPIInterface
      * 3. Execute query
      * 4. Remove hook
      *
-     * @param array $query
-     * @return void
+     * @param mixed[] $query
      */
     protected function filterByEmails(array &$query): bool
     {
