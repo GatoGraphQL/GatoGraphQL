@@ -1,4 +1,6 @@
 <?php
+
+use PoP\Engine\Constants\FormInputConstants;
 /**
 Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
  */
@@ -19,15 +21,15 @@ class PoP_ServerSide_FormatValueHelpers
                 if (is_array($value)) {
                     $ret = array();
                     foreach ($value as $val) {
-                        $ret[] = ($val ? POP_BOOLSTRING_TRUE : POP_BOOLSTRING_FALSE);
+                        $ret[] = ($val ? FormInputConstants::BOOLSTRING_TRUE : FormInputConstants::BOOLSTRING_FALSE);
                     }
                     return $ret;
                 }
 
                 if ($value) {
-                    return POP_BOOLSTRING_TRUE;
+                    return FormInputConstants::BOOLSTRING_TRUE;
                 }
-                return POP_BOOLSTRING_FALSE;
+                return FormInputConstants::BOOLSTRING_FALSE;
         }
 
         return $value;

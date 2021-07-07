@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FormInputs;
 
+use PoP\Engine\Constants\FormInputConstants;
+
 trait BooleanFormInputTrait
 {
     protected function getValueFromSource(array $source): mixed
@@ -17,7 +19,7 @@ trait BooleanFormInputTrait
             $ret = array();
             if ($values = $source[$this->getName()]) {
                 foreach ($values as $value) {
-                    $ret[] = ($value === POP_BOOLSTRING_TRUE);
+                    $ret[] = ($value === FormInputConstants::BOOLSTRING_TRUE);
                 }
             }
 
@@ -28,6 +30,6 @@ trait BooleanFormInputTrait
         // but if they key has been set at all (checked: sends the attribute. unchecked: sends nothing)
         // Hence, for checkbox, it will always be true at this stage.
         // For select, it could be true or false
-        return ($source[$this->getName()] === POP_BOOLSTRING_TRUE);
+        return ($source[$this->getName()] === FormInputConstants::BOOLSTRING_TRUE);
     }
 }
