@@ -16,7 +16,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaTypeResolverDecoratorTra
      *
      * @param TypeResolverInterface $typeResolver
      */
-    protected function getMandatoryDirectives($entryValue = null): array
+    protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $capabilities = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

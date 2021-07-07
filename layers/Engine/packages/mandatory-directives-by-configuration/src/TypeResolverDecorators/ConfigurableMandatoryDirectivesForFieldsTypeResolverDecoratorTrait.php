@@ -26,7 +26,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
         );
     }
 
-    abstract protected function getMandatoryDirectives($entryValue = null): array;
+    abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {

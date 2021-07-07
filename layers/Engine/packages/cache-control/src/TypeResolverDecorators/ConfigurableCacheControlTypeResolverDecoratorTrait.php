@@ -15,7 +15,7 @@ trait ConfigurableCacheControlTypeResolverDecoratorTrait
     /**
      * By default, only the admin can see the roles from the users
      */
-    protected function getMandatoryDirectives($entryValue = null): array
+    protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $maxAge = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

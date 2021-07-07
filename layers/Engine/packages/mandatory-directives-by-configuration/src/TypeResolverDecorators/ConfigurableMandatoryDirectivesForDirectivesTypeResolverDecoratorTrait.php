@@ -13,7 +13,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForDirectivesTrait;
 
-    abstract protected function getMandatoryDirectives($entryValue = null): array;
+    abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     public function getPrecedingMandatoryDirectivesForDirectives(TypeResolverInterface $typeResolver): array
     {
