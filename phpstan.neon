@@ -1,5 +1,6 @@
 parameters:
-	level: 5
+    level: 5
+
 includes:
     - layers/API/packages/api-clients/phpstan.neon.dist
     - layers/API/packages/api-endpoints/phpstan.neon.dist
