@@ -173,7 +173,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
         }
         return true;
     }
-    public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
+    final public function resolveSchemaValidationErrorDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
@@ -234,8 +234,26 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
                 return $mutationResolver->validateErrors($fieldArgs);
             }
         }
+
+        // Custom validations
+        return $this->doResolveSchemaValidationErrorDescriptions(
+            $typeResolver,
+            $fieldName,
+            $fieldArgs,
+        );
+    }
+    
+    /**
+     * Custom validations. Function to override
+     */
+    protected function doResolveSchemaValidationErrorDescriptions(
+        TypeResolverInterface $typeResolver,
+        string $fieldName,
+        array $fieldArgs = []
+    ): ?array {
         return null;
     }
+
     public function resolveSchemaValidationDeprecationDescriptions(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($typeResolver, $fieldName, $fieldArgs);
