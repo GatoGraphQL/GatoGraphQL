@@ -19,6 +19,7 @@ class UnmigratedFailingPackagesDataSource
             'layers/Engine/packages/engine-wp',
             'layers/Engine/packages/engine',
             'layers/Engine/packages/guzzle-helpers',
+            'layers/GraphQLByPoP/packages/graphql-parser',
             'layers/GraphQLByPoP/packages/graphql-server',
             'layers/Schema/packages/block-metadata-for-wp',
             'layers/Schema/packages/categories',
