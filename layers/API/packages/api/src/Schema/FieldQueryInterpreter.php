@@ -70,7 +70,12 @@ class FieldQueryInterpreter extends \PoP\ComponentModel\Schema\FieldQueryInterpr
                 for ($i = 0; $i < count($fieldArgElems); $i++) {
                     $fieldArg = $fieldArgElems[$i];
                     // If there is no separator, then the element is the value
-                    $separatorPos = QueryUtils::findFirstSymbolPosition($fieldArg, QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+                    $separatorPos = QueryUtils::findFirstSymbolPosition(
+                        $fieldArg,
+                        QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR,
+                        [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING],
+                        [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING],
+                    );
                     if ($separatorPos === false) {
                         $fieldArgValue = $fieldArg;
                     } else {
