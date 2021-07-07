@@ -10,7 +10,7 @@ abstract class AbstractSchemaDefinitionReferenceObject
 {
     protected string $id;
     /**
-     * @var <string, mixed>
+     * @var array<string, mixed>
      */
     protected array $fullSchemaDefinition;
     /**
@@ -18,7 +18,7 @@ abstract class AbstractSchemaDefinitionReferenceObject
      */
     protected array $schemaDefinitionPath;
     /**
-     * @var <string, mixed>
+     * @var array<string, mixed>
      */
     protected array $schemaDefinition;
     /**

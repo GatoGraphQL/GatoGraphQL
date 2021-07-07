@@ -49,6 +49,8 @@ trait HasInterfacesTypeTrait
                     implode(' => ', $schemaDefinitionPath)
                 ));
             }
+            /** @var InterfaceType */
+            $interface = $interface;
             $this->interfaces[] = $interface;
         }
     }

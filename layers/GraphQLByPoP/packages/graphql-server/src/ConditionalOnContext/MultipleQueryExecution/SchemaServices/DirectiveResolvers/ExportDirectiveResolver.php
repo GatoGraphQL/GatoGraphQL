@@ -118,8 +118,6 @@ class ExportDirectiveResolver extends AbstractGlobalDirectiveResolver
      * ```
      *
      * ... exports variable $postIDsAndTitles as an array, where each item is a dictionary {"id": post ID, "title": post title}
-     *
-     * @param array $_messages
      */
     public function resolveDirective(
         TypeResolverInterface $typeResolver,
