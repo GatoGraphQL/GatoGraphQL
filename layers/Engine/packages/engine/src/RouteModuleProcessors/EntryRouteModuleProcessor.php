@@ -10,7 +10,7 @@ use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     /**
-     * @return array<string, string[]>
+     * @return array<array<string, string[]>>
      */
     public function getModulesVarsProperties(): array
     {

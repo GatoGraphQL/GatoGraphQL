@@ -3,7 +3,7 @@
 class PoP_Module_TabsPageSectionTopLevelRouteModuleProcessor extends PoP_Module_TabsPageSectionTopLevelRouteModuleProcessorBase
 {
     /**
-     * @return array<string, string[]>
+     * @return array<array<string, string[]>>
      */
     public function getModulesVarsProperties(): array
     {
