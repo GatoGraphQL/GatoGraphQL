@@ -6,6 +6,11 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
 class UnmigratedFailingPackagesDataSource
 {
+    public function getLevel(): int|string
+    {
+        return 5;
+    }
+
     /**
      * @return string[]
      */

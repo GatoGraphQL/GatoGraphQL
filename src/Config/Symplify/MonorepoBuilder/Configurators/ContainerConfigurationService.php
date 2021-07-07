@@ -91,6 +91,10 @@ class ContainerConfigurationService
                 CustomOption::UNMIGRATED_FAILING_PACKAGES,
                 $unmigratedFailingPackagesConfig->getUnmigratedFailingPackages()
             );
+            $parameters->set(
+                CustomOption::LEVEL,
+                $unmigratedFailingPackagesConfig->getLevel()
+            );
         }
 
         /**
