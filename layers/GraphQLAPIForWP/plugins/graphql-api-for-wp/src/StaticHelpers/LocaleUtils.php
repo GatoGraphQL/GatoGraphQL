@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Static;
+namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
 
 /**
  * "Static" because it can be invoked from a TypeModuleResolver's getSettingsDefaultValue
