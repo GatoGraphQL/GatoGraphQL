@@ -16,6 +16,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
 
 use function count;
 use function strlen;
@@ -277,10 +278,12 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
              * Identify all the fieldArgValues from the string, because
              * embeddable fields can only appear in field/directive arguments
              */
-            if ($fieldArgValues = $this->fieldQueryInterpreter->extractFieldArgumentValues($field)) {
+            /** @var APIFieldQueryInterpreterInterface */
+            $fieldQueryInterpreter = $this->fieldQueryInterpreter;
+            if ($fieldArgValues = $fieldQueryInterpreter->extractFieldArgumentValues($field)) {
                 $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $fieldArgValues);
             }
-            if ($directiveArgValues = $this->fieldQueryInterpreter->extractDirectiveArgumentValues($field)) {
+            if ($directiveArgValues = $fieldQueryInterpreter->extractDirectiveArgumentValues($field)) {
                 $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $directiveArgValues);
             }
         }
@@ -574,8 +577,6 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                                 FieldQueryQuerySyntax::SYMBOL_FIELDPROPERTIES_SEPARATOR,
                                 [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING],
                                 [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING],
-                                FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
-                                FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
                             );
                             // Extract the new "rest" of the query section
                             $querySectionRest = substr(
