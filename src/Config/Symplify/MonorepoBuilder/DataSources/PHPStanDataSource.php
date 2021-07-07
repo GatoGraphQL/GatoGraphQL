@@ -17,13 +17,9 @@ class PHPStanDataSource
     public function getUnmigratedFailingPackages(): array
     {
         return [
-            'layers/API/packages/api-mirrorquery',
-            'layers/API/packages/api',
-            'layers/Engine/packages/access-control',
             'layers/Engine/packages/component-model',
             'layers/Engine/packages/engine-wp',
             'layers/Engine/packages/engine',
-            'layers/Engine/packages/guzzle-helpers',
             'layers/GraphQLByPoP/packages/graphql-parser',
             'layers/GraphQLByPoP/packages/graphql-server',
             'layers/Schema/packages/block-metadata-for-wp',
