@@ -11,6 +11,7 @@ class Properties
     public const TITLE = 'title';
     public const DESCRIPTION = 'description';
     public const POSSIBLE_VALUES = 'possibleValues';
+    public const CAN_BE_EMPTY = 'canBeEmpty';
     // Used for Select inputs
     public const IS_MULTIPLE = 'isMultiple';
     // Used for Integers

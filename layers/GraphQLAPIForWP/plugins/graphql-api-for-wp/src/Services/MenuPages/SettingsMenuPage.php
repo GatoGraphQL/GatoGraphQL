@@ -161,6 +161,7 @@ class SettingsMenuPage extends AbstractMenuPage
                  */
                 $name = (string)$itemSetting[Properties::NAME];
                 $option = $itemSetting[Properties::INPUT];
+                $canBeEmpty = $itemSetting[Properties::CAN_BE_EMPTY] ?? false;
                 /**
                  * If the input is empty, replace with the default
                  * It can't be empty, because that could be equivalent
@@ -170,7 +171,7 @@ class SettingsMenuPage extends AbstractMenuPage
                  * For int, "0" is valid, it must not be considered empty
                  */
                 if (
-                    empty($value[$name])
+                    (!$canBeEmpty && empty($value[$name]))
                     && $type != Properties::TYPE_BOOL
                     && !($type == Properties::TYPE_INT && $value[$name] == '0')
                 ) {
