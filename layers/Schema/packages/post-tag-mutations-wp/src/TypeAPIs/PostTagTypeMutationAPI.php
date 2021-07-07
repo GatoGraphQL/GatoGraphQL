@@ -15,7 +15,7 @@ class PostTagTypeMutationAPI implements PostTagTypeMutationAPIInterface
      * Watch out! $tags must be the array of tags as string, not their IDs
      * Passing the IDs will create a tag with that ID as the name!
      *
-     * @param $tags string[]
+     * @param string[] $tags
      */
     public function setTags(int | string $postID, array $tags, bool $append = false): void
     {

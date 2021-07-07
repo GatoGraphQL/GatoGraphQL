@@ -12,7 +12,7 @@ use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterfac
 class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterface
 {
     /**
-     * @param $categories array<string|int>
+     * @param array<string|int> $categories
      */
     public function setCategories(int | string $postID, array $categoryIDs, bool $append = false): void
     {

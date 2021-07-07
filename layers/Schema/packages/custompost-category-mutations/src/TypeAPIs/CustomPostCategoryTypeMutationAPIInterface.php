@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostCategoryMutations\TypeAPIs;
 interface CustomPostCategoryTypeMutationAPIInterface
 {
     /**
-     * @param $categoryIDs array<string|int>
+     * @param array<string|int> $categoryIDs
      */
     public function setCategories(int | string $postID, array $categoryIDs, bool $append = false): void;
 }
