@@ -61,6 +61,7 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
         ];
         $schemaDefinitionID = SchemaDefinitionHelpers::getID($typeSchemaDefinitionPath);
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
+        /** @var AbstractType */
         return $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
     }
 }

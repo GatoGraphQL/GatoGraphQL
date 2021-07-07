@@ -114,6 +114,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
+        $queryRootTypeSchemaKey = null;
         if (!$enableNestedMutations) {
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         }
