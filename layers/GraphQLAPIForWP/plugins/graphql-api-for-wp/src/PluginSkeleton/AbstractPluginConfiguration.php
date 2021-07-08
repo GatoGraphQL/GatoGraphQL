@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
@@ -69,8 +69,8 @@ abstract class AbstractPluginConfiguration
                  * in wp-config.php, with the environment name prepended with "GRAPHQL_API_"
                  */
                 function ($value) use ($envVariable) {
-                    if (PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                        return PluginConfigurationHelpers::getWPConfigConstantValue($envVariable);
+                    if (PluginConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
+                        return PluginConfigurationHelper::getWPConfigConstantValue($envVariable);
                     }
                     return $value;
                 }
@@ -109,7 +109,7 @@ abstract class AbstractPluginConfiguration
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
             $hookName = ComponentConfigurationHelpers::getHookName(
@@ -151,7 +151,7 @@ abstract class AbstractPluginConfiguration
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginConfigurationHelper::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
             $hookName = ComponentConfigurationHelpers::getHookName(
