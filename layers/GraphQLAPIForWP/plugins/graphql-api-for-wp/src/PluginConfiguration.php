@@ -21,7 +21,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginConfiguration;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -86,7 +86,7 @@ use PoPSchema\Users\Environment as UsersEnvironment;
  * it is necessary to flush the rewrite rules for the change to take effect.
  * For that, on the WordPress admin, go to Settings => Permalinks and click on Save changes
  */
-class PluginConfiguration extends AbstractPluginConfiguration
+class PluginConfiguration extends AbstractMainPluginConfiguration
 {
     /**
      * Cache the Container Cache Configuration
