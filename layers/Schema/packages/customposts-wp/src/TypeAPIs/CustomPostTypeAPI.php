@@ -49,7 +49,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
-     * @return mixed[]
+     * @return object[]
      */
     public function getCustomPosts(array $query, array $options = []): array
     {

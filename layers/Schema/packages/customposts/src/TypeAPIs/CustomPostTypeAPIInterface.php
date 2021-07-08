@@ -19,7 +19,7 @@ interface CustomPostTypeAPIInterface extends CustomPostTypeInterface
     /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @return object[]
      */
     public function getCustomPosts(array $query, array $options = []): array;
     public function getCustomPostCount(array $query = [], array $options = []): int;
