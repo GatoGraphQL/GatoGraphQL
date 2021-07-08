@@ -857,6 +857,19 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName
                         );
                     } elseif (
+                        $fieldOrDirectiveArgIsArrayType
+                        && !$fieldOrDirectiveArgIsArrayOfArraysType
+                        && array_filter(
+                            $argValue,
+                            fn ($arrayItem) => is_array($arrayItem)
+                        )
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
+                            $argName,
+                            json_encode($argValue)
+                        );
+                    } elseif (
                         $fieldOrDirectiveArgIsArrayOfArraysType
                         && is_array($argValue)
                         && array_filter(
