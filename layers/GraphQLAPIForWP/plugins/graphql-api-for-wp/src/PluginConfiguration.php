@@ -20,6 +20,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -39,7 +41,6 @@ use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
@@ -85,15 +86,8 @@ use PoPSchema\Users\Environment as UsersEnvironment;
  * it is necessary to flush the rewrite rules for the change to take effect.
  * For that, on the WordPress admin, go to Settings => Permalinks and click on Save changes
  */
-class PluginConfiguration
+class PluginConfiguration extends AbstractPluginConfiguration
 {
-    /**
-     * Cache the options after normalizing them
-     *
-     * @var array<string, mixed>|null
-     */
-    protected static ?array $normalizedOptionValuesCache = null;
-
     /**
      * Cache the Container Cache Configuration
      *
@@ -109,26 +103,6 @@ class PluginConfiguration
         self::mapEnvVariablesToWPConfigConstants();
         self::defineEnvironmentConstantsFromSettings();
         self::defineEnvironmentConstantsFromCallbacks();
-    }
-
-    /**
-     * Get the values from the form submitted to options.php, and normalize them
-     *
-     * @return array<string, mixed>
-     */
-    protected static function getNormalizedOptionValues(): array
-    {
-        if (is_null(self::$normalizedOptionValuesCache)) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /**
-             * @var SettingsMenuPage
-             */
-            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            // Obtain the values from the POST and normalize them
-            $value = $_POST[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            self::$normalizedOptionValuesCache = $settingsMenuPage->normalizeSettings($value);
-        }
-        return self::$normalizedOptionValuesCache;
     }
 
     /**
@@ -149,7 +123,7 @@ class PluginConfiguration
             && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
             && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
         ) {
-            $value = self::getNormalizedOptionValues();
+            $value = PluginConfigurationHelper::getNormalizedOptionValues();
             // Return the specific value to this module/option
             $moduleRegistry = SystemModuleRegistryFacade::getInstance();
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
