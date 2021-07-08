@@ -4,7 +4,6 @@
     <arg value="p" />
 
     <config name="ignore_warnings_on_exit" value="1" />
-    <config name="ignore_errors_on_exit" value="1" />
 
     <!-- Don't show a warning on the line length -->
     <rule ref="Generic.Files.LineLength.MaxExceeded">

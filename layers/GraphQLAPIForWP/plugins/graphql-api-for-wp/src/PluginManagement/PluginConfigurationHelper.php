@@ -100,7 +100,7 @@ class PluginConfigurationHelper
         // Make sure the path does not have "/" on either end
         return trim($value, '/');
     }
-    
+
     /**
      * Determine if the environment variable was defined
      * as a constant in wp-config.php

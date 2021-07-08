@@ -18,7 +18,7 @@ class DataToAppendAndRemoveDataSource
             ],
             'autoload' => [
                 'psr-4' => [
-                    'PoP\\PoP\\'=> 'src',
+                    'PoP\\PoP\\' => 'src',
                 ],
             ],
             // 'extra' => [

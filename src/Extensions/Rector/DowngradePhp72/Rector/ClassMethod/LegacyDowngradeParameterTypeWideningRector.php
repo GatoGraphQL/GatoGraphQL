@@ -74,8 +74,9 @@ class C implements A
     public function test(array $input){}
 }
 CODE_SAMPLE
-            ),
-            ]);
+                ),
+            ]
+        );
     }
 
     /**
@@ -243,7 +244,7 @@ CODE_SAMPLE
         if ($classReflection->isTrait()) {
             return;
         }
-        
+
         $classMethod = $classLike->getMethod($classMethodName);
         if ($classMethod === null) {
             return;

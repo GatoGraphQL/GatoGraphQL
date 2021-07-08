@@ -230,45 +230,47 @@ class UserTypeAPI implements UserTypeAPIInterface
         }
     }
 
-	/**
+    /**
      * Function copied from WordPress source, because it is protected!
-     * 
+     *
      * @source wp-includes/class-wp-user-query.php
-     * 
-	 * Used internally to generate an SQL string for searching across multiple columns
-	 *
-	 * @since 3.1.0
-	 *
-	 * @global wpdb $wpdb WordPress database abstraction object.
-	 *
-	 * @param string $string
-	 * @param array  $cols
-	 * @param bool   $wild   Whether to allow wildcard searches. Default is false for Network Admin, true for single site.
-	 *                       Single site allows leading and trailing wildcards, Network Admin only trailing.
-	 * @return string
-	 */
-	protected function get_search_sql( $string, $cols, $wild = false ) {
-		global $wpdb;
+     *
+     * Used internally to generate an SQL string for searching across multiple columns
+     *
+     * @since 3.1.0
+     *
+     * @global wpdb $wpdb WordPress database abstraction object.
+     *
+     * @param string $string
+     * @param array  $cols
+     * @param bool   $wild   Whether to allow wildcard searches. Default is false for Network Admin, true for single site.
+     *                       Single site allows leading and trailing wildcards, Network Admin only trailing.
+     * @return string
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function get_search_sql($string, $cols, $wild = false)
+    {
+        global $wpdb;
 
-		$searches      = array();
+        $searches      = array();
         // Avoid PHPStan errors:
         //   Result of || is always false
-		// $leading_wild  = ( 'leading' === $wild || 'both' === $wild ) ? '%' : '';
-		// $trailing_wild = ( 'trailing' === $wild || 'both' === $wild ) ? '%' : '';
-		$leading_wild  = '';
-		$trailing_wild = '';
-		$like          = $leading_wild . $wpdb->esc_like( $string ) . $trailing_wild;
+        // $leading_wild  = ( 'leading' === $wild || 'both' === $wild ) ? '%' : '';
+        // $trailing_wild = ( 'trailing' === $wild || 'both' === $wild ) ? '%' : '';
+        $leading_wild  = '';
+        $trailing_wild = '';
+        $like          = $leading_wild . $wpdb->esc_like($string) . $trailing_wild;
 
-		foreach ( $cols as $col ) {
-			if ( 'ID' === $col ) {
-				$searches[] = $wpdb->prepare( "$col = %s", $string );
-			} else {
-				$searches[] = $wpdb->prepare( "$col LIKE %s", $like );
-			}
-		}
+        foreach ($cols as $col) {
+            if ('ID' === $col) {
+                $searches[] = $wpdb->prepare("$col = %s", $string);
+            } else {
+                $searches[] = $wpdb->prepare("$col LIKE %s", $like);
+            }
+        }
 
-		return ' AND (' . implode( ' OR ', $searches ) . ')';
-	}
+        return ' AND (' . implode(' OR ', $searches) . ')';
+    }
 
     protected function getUserProperty(string $property, string | int | object $userObjectOrID): ?string
     {

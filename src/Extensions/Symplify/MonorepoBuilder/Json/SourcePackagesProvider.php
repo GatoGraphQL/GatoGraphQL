@@ -50,7 +50,7 @@ final class SourcePackagesProvider
             $packages,
             $packagesToSkip
         ));
-        
+
         // If provided, filter the packages to the ones containing
         // the list of files. Useful to launch GitHub runners to split modified packages only
         if ($fileListFilter !== []) {

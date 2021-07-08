@@ -52,17 +52,17 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 ],
-            self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
-            self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT,
-            self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT,
-            self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT => 
+                self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
+                self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT,
+                self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT,
+                self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT =>
                 [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 ],
-            default => []
+                default => []
         };
         // Fields "customPosts" and "customPostCount" also have the "postTypes" filter
         if (

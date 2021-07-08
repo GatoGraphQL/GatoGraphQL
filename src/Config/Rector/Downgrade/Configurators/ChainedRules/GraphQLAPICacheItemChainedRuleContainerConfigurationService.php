@@ -9,7 +9,7 @@ use PoP\PoP\Config\Rector\Downgrade\Configurators\GraphQLAPIContainerConfigurati
 class GraphQLAPICacheItemChainedRuleContainerConfigurationService extends AbstractPluginCacheItemChainedRuleContainerConfigurationService
 {
     use GraphQLAPIContainerConfigurationServiceTrait;
-    
+
     protected function getPaths(): array
     {
         return [

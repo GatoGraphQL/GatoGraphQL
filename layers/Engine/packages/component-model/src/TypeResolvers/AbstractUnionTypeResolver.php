@@ -196,7 +196,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     /**
      * In order to enable elements from different types (such as posts and users) to have same ID,
      * add the type to the ID.
-     * 
+     *
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it
      */
     public function getID(object $resultItem): string | int | null

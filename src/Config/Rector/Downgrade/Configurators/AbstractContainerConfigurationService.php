@@ -13,6 +13,6 @@ abstract class AbstractContainerConfigurationService
         protected string $rootDirectory,
     ) {
     }
-    
+
     abstract public function configureContainer(): void;
 }

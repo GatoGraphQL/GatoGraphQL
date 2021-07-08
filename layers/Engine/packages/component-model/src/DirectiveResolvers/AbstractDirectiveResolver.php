@@ -71,10 +71,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     /**
      * The directiveResolvers are NOT instantiated through the service container!
-     * 
+     *
      * Instead, the directive will be instantiated in AbstractTypeResolver:
      *   new $directiveClass($fieldDirective)
-     * 
+     *
      * Whenever having depended-upon services, these can be obtained like this (or via a Facade):
      *   $instanceManager->getInstance(...)
      *
