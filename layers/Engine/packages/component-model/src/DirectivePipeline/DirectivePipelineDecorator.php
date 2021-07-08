@@ -34,7 +34,7 @@ class DirectivePipelineDecorator
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $payload = $this->pipeline->process(
+        $payload = $this->pipeline->__invoke(
             DirectivePipelineUtils::convertArgumentsToPayload(
                 $typeResolver,
                 $pipelineIDsDataFields,
