@@ -246,6 +246,7 @@ class UserTypeAPI implements UserTypeAPIInterface
      * @param bool   $wild   Whether to allow wildcard searches. Default is false for Network Admin, true for single site.
      *                       Single site allows leading and trailing wildcards, Network Admin only trailing.
      * @return string
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function get_search_sql($string, $cols, $wild = false)
     {
