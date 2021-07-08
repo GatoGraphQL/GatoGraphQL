@@ -1680,7 +1680,7 @@ class Engine implements EngineInterface
                                 // Merge, after adding their type!
                                 $field_ids = array_merge(
                                     $field_ids,
-                                    is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
+                                    $database_field_ids
                                 );
                             }
                         }
