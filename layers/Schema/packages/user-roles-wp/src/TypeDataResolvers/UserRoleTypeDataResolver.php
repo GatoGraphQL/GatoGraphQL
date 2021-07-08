@@ -78,10 +78,13 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return array_values(array_unique($capabilities));
     }
 
-    public function getTheUserRole(string | int | object $userObjectOrID): string
+    /**
+     * @return string|null `null` if the user is not found, its first role otherwise
+     */
+    public function getTheUserRole(string | int | object $userObjectOrID): ?string
     {
         $roles = $this->getUserRoles($userObjectOrID);
-        return $roles[0];
+        return $roles[0] ?? null;
     }
 
     public function userCan(string | int | object $userObjectOrID, string $capability): bool

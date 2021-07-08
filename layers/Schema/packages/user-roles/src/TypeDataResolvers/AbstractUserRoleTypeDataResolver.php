@@ -13,10 +13,10 @@ abstract class AbstractUserRoleTypeDataResolver implements UserRoleTypeDataResol
     ) {
     }
 
-    public function getTheUserRole(string | int | object $userObjectOrID): string
+    public function getTheUserRole(string | int | object $userObjectOrID): ?string
     {
         $roles = $this->getUserRoles($userObjectOrID);
-        $role = $roles[0];
+        $role = $roles[0] ?? null;
         // Allow URE to override this function
         return $this->hooksAPI->applyFilters(
             'getTheUserRole',
