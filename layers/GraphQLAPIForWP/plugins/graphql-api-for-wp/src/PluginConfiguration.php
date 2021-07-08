@@ -489,16 +489,17 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     }
 
     /**
-     * Add the fixed configuration for all components required in the plugin
+     * Get the fixed configuration for all components required in the plugin
      *
-     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Component class, [value]: Configuration
      */
-    protected function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function getPredefinedComponentClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
-
+        
+        $componentClassConfiguration = [];
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             /**
              * Enable the schema entity registries, as to retrieve the type/directive resolver classes
@@ -590,6 +591,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
             $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
         }
+        return $componentClassConfiguration;
     }
 
     /**
@@ -600,15 +602,9 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         return !$value;
     }
 
-    /**
-     * Add configuration values if modules are enabled or disabled
-     *
-     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
-     */
-    protected function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function getModuleToComponentClassConfigurationMapping(): array
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $moduleToComponentClassConfigurationMappings = [
+        return [
             [
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
@@ -645,16 +641,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => \PoP\API\Environment::USE_SCHEMA_DEFINITION_CACHE,
             ],
         ];
-        foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
-            // Copy the state (enabled/disabled) to the component
-            $value = $moduleRegistry->isModuleEnabled($mapping['module']);
-            // Make explicit it can be null so that PHPStan level 3 doesn't fail
-            $callback = $mapping['callback'] ?? null;
-            if (!is_null($callback)) {
-                $value = $callback($value);
-            }
-            $componentClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
-        }
     }
 
     /**

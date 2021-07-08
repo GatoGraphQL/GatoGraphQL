@@ -239,29 +239,49 @@ abstract class AbstractPluginConfiguration
      */
     public function getComponentClassConfiguration(): array
     {
-        $componentClassConfiguration = [];
-        $this->addPredefinedComponentClassConfiguration($componentClassConfiguration);
-        $this->addBasedOnModuleEnabledStateComponentClassConfiguration($componentClassConfiguration);
-        return $componentClassConfiguration;
+        return array_merge_recursive(
+            $this->getPredefinedComponentClassConfiguration(),
+            $this->getBasedOnModuleEnabledStateComponentClassConfiguration(),
+        );
     }
 
     /**
-     * Add the fixed configuration for all components required in the plugin
+     * Get the fixed configuration for all components required in the plugin
      *
-     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Component class, [value]: Configuration
      */
-    protected function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function getPredefinedComponentClassConfiguration(): array
     {
-        // Override
+        return [];
     }
 
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @return array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
-    protected function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function getBasedOnModuleEnabledStateComponentClassConfiguration(): array
     {
-        // Override
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $componentClassConfiguration = [];
+
+        $moduleToComponentClassConfigurationMappings = $this->getModuleToComponentClassConfigurationMapping();
+        foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
+            // Copy the state (enabled/disabled) to the component
+            $value = $moduleRegistry->isModuleEnabled($mapping['module']);
+            // Make explicit it can be null so that PHPStan level 3 doesn't fail
+            $callback = $mapping['callback'] ?? null;
+            if (!is_null($callback)) {
+                $value = $callback($value);
+            }
+            $componentClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
+        }
+
+        return $componentClassConfiguration;
+    }
+
+    protected function getModuleToComponentClassConfigurationMapping(): array
+    {
+        return [];
     }
 }
