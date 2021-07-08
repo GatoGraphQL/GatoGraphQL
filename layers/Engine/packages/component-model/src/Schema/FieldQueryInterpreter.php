@@ -90,11 +90,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     /**
-     * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
-     * Directive arguments have the same syntax as field arguments, so simply re-utilize the corresponding function for field arguments
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $field
+     * Extract field args without using the schema.
+     * It is needed to find out which fieldResolver will process a field,
+     * where we can't depend on the schema since this one needs to know
+     * who the fieldResolver is, creating an infitine loop.
+     * 
+     * Directive arguments have the same syntax as field arguments,
+     * so simply re-utilize the corresponding function for field arguments.
      */
     public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array
     {
@@ -107,9 +109,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     /**
-     * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
-     *
-     * @param TypeResolverInterface $typeResolver
+     * Extract field args without using the schema.
+     * It is needed to find out which fieldResolver will process a field,
+     * where we can't depend on the schema since this one needs to know
+     * who the fieldResolver is, creating an infitine loop.
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array
     {
@@ -134,7 +137,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     for ($i = 0; $i < count($fieldArgElems); $i++) {
                         $fieldArg = $fieldArgElems[$i];
                         // If there is no separator, then skip this arg, since it is not static (without the schema, we can't know which fieldArgName it is)
-                        $separatorPos = QueryUtils::findFirstSymbolPosition($fieldArg, QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+                        $separatorPos = QueryUtils::findFirstSymbolPosition(
+                            $fieldArg,
+                            QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR,
+                            [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING],
+                            [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING],
+                        );
                         if ($separatorPos === false) {
                             continue;
                         }
@@ -197,10 +205,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaErrors,
         array &$schemaWarnings,
     ): array {
-        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $typeResolver, $fieldDirective);
+        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $typeResolver);
         // Iterate all the elements, and extract them into the array
         if ($directiveArgElems = QueryHelpers::getFieldArgElements($this->getFieldDirectiveArgs($fieldDirective))) {
-            $directiveArgumentNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver, $fieldDirective);
+            $directiveArgumentNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
             $orderedDirectiveArgNamesEnabled = $directiveResolver->enableOrderedSchemaDirectiveArgs($typeResolver);
             return $this->extractAndValidateFielOrDirectiveArguments(
                 $fieldDirective,
@@ -244,7 +252,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // Either one of 2 formats are accepted:
             // 1. The key:value pair
             // 2. Only the value, and extract the key from the schema definition (if enabled for that fieldOrDirective)
-            $separatorPos = QueryUtils::findFirstSymbolPosition($fieldOrDirectiveArg, QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+            $separatorPos = QueryUtils::findFirstSymbolPosition(
+                $fieldOrDirectiveArg,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR,
+                [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING],
+                [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING],
+            );
             if ($separatorPos === false) {
                 $fieldOrDirectiveArgValue = $fieldOrDirectiveArg;
                 if (!$orderedFieldOrDirectiveArgNamesEnabled || !isset($orderedFieldOrDirectiveArgNames[$i])) {
@@ -758,12 +771,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // Otherwise, simply add the argValue directly, it will be eventually casted by the other function
             if (
                 !$forSchema
-                || (
-                    $forSchema && (
-                        (!is_array($argValue) && !$this->isFieldArgumentValueDynamic($argValue))
-                        || (is_array($argValue) && !FieldQueryUtils::isAnyFieldArgumentValueDynamic($argValue))
-                    )
-                )
+                // Conditions below are for `$forSchema => true`
+                || (!is_array($argValue) && !$this->isFieldArgumentValueDynamic($argValue))
+                || (is_array($argValue) && !FieldQueryUtils::isAnyFieldArgumentValueDynamic($argValue))
             ) {
                 /**
                  * Maybe cast the value to the appropriate type.
