@@ -940,6 +940,7 @@ class Engine implements EngineInterface
                 $model_props = &$model_props[$submoduleFullName][Props::SUBMODULES];
             }
 
+            $module_props = null;
             if (
                 in_array(
                     $datasource,
@@ -1058,6 +1059,7 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
+            $datasetmodulemeta = null;
             if ($datasource == DataSources::IMMUTABLE) {
                 $datasetmoduledata = &$immutable_datasetmoduledata;
                 if ($add_meta) {
@@ -1158,32 +1160,41 @@ class Engine implements EngineInterface
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
             if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
+                /** @phpstan-ignore-next-line */
                 if ($immutable_moduledata) {
                     $ret['moduledata']['immutable'] = $immutable_moduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonmodel_moduledata) {
                     $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_moduledata) : $mutableonmodel_moduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonrequest_moduledata) {
                     $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_moduledata) : $mutableonrequest_moduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($immutable_datasetmoduledata) {
                     $ret['datasetmoduledata']['immutable'] = $immutable_datasetmoduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonmodel_datasetmoduledata) {
                     $ret['datasetmoduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmoduledata) : $mutableonmodel_datasetmoduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonrequest_datasetmoduledata) {
                     $ret['datasetmoduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmoduledata) : $mutableonrequest_datasetmoduledata;
                 }
 
                 if ($add_meta) {
+                    /** @phpstan-ignore-next-line */
                     if ($immutable_datasetmodulemeta) {
                         $ret['datasetmodulemeta']['immutable'] = $immutable_datasetmodulemeta;
                     }
+                    /** @phpstan-ignore-next-line */
                     if ($mutableonmodel_datasetmodulemeta) {
                         $ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
                     }
+                    /** @phpstan-ignore-next-line */
                     if ($mutableonrequest_datasetmodulemeta) {
                         $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
                     }
