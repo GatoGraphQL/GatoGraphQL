@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Environment;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -22,7 +20,6 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
@@ -34,14 +31,11 @@ use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\APIEndpoints\EndpointUtils;
 use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguration;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Environment as RootEnvironment;
@@ -72,18 +66,7 @@ use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
 
 /**
- * Sets the configuration in all the PoP components.
- *
- * To set the value for properties, it uses this order:
- *
- * 1. Retrieve it as an environment value, if defined
- * 2. Retrieve as a constant `GRAPHQL_API_...` from wp-config.php, if defined
- * 3. Retrieve it from the user settings, if stored
- * 4. Use the default value
- *
- * If a slug is set or updated in the environment variable or wp-config constant,
- * it is necessary to flush the rewrite rules for the change to take effect.
- * For that, on the WordPress admin, go to Settings => Permalinks and click on Save changes
+ * Sets the configuration in all the PoP components from the main plugin.
  */
 class PluginConfiguration extends AbstractMainPluginConfiguration
 {
