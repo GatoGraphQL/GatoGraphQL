@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use Exception;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\Engine\AppLoader;
 
 class Plugin extends AbstractMainPlugin
 {
@@ -149,96 +147,39 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Add configuration for the Component classes
-     *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
-     */
-    public function getComponentClassConfiguration(): array
-    {
-        return PluginConfiguration::getComponentClassConfiguration();
-    }
-
-    /**
-     * Add schema Component classes to skip initializing
-     *
-     * @return string[] List of `Component` class which must not initialize their Schema services
-     */
-    public function getSchemaComponentClassesToSkip(): array
-    {
-        return PluginConfiguration::getSkippingSchemaComponentClasses();
-    }
-
-    /**
      * Boot the system
      */
-    public function bootSystem(): void
+    protected function doBootSystem(): void
     {
-        // If the service container has an error, Symfony DI will throw an exception
-        try {
-            // Boot all PoP components, from this plugin and all extensions
-            AppLoader::bootSystem(
-                ...PluginConfiguration::getContainerCacheConfiguration()
-            );
-
-            /**
-             * Watch out! If we are in the Modules page and enabling/disabling
-             * a module, then already take that new state!
-             *
-             * This is because `maybeProcessAction`, which is where modules are
-             * enabled/disabled, must be executed before PluginConfiguration::initialize(),
-             * which is where the plugin reads if a module is enabled/disabled as to
-             * set the environment constants.
-             *
-             * This is mandatory, because only when it is enabled, can a module
-             * have its state persisted when calling `flush_rewrite`.
-             *
-             * For that, all the classes below have also been registered in system-services.yaml
-             */
-            if (\is_admin()) {
-                // Obtain these services from the SystemContainer
-                $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-                /** @var MenuPageHelper */
-                $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
-                /** @var ModulesMenuPage */
-                $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
-                if (
-                    (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
-                    && !$menuPageHelper->isDocumentationScreen()
-                ) {
-                    /** @var ModuleListTableAction */
-                    $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
-                    $tableAction->maybeProcessAction();
-                }
+        /**
+         * Watch out! If we are in the Modules page and enabling/disabling
+         * a module, then already take that new state!
+         *
+         * This is because `maybeProcessAction`, which is where modules are
+         * enabled/disabled, must be executed before PluginConfiguration->initialize(),
+         * which is where the plugin reads if a module is enabled/disabled as to
+         * set the environment constants.
+         *
+         * This is mandatory, because only when it is enabled, can a module
+         * have its state persisted when calling `flush_rewrite`.
+         *
+         * For that, all the classes below have also been registered in system-services.yaml
+         */
+        if (\is_admin()) {
+            // Obtain these services from the SystemContainer
+            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+            /** @var MenuPageHelper */
+            $menuPageHelper = $systemInstanceManager->getInstance(MenuPageHelper::class);
+            /** @var ModulesMenuPage */
+            $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
+            if (
+                (isset($_GET['page']) && $_GET['page'] == $modulesMenuPage->getScreenID())
+                && !$menuPageHelper->isDocumentationScreen()
+            ) {
+                /** @var ModuleListTableAction */
+                $tableAction = $systemInstanceManager->getInstance(ModuleListTableAction::class);
+                $tableAction->maybeProcessAction();
             }
-        } catch (Exception $e) {
-            $this->inititalizationException = $e;
-        }
-    }
-
-    /**
-     * Configure the plugin.
-     * This defines hooks to set environment variables,
-     * so must be executed before those hooks are triggered for first time
-     * (in ComponentConfiguration classes)
-     */
-    protected function callPluginConfiguration(): void
-    {
-        PluginConfiguration::initialize();
-    }
-
-    /**
-     * Boot the application
-     */
-    public function bootApplication(): void
-    {
-        // If the service container has an error, Symfony DI will throw an exception
-        try {
-            // Boot all PoP components, from this plugin and all extensions
-            AppLoader::bootApplication(
-                ...PluginConfiguration::getContainerCacheConfiguration()
-            );
-        } catch (Exception $e) {
-            $this->inititalizationException = $e;
         }
     }
 }

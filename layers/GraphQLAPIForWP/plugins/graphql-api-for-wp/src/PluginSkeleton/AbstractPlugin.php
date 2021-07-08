@@ -19,7 +19,7 @@ abstract class AbstractPlugin
     protected string $pluginBaseName;
     protected string $pluginName;
 
-    final public function __construct(
+    public function __construct(
         protected string $pluginFile, /** The main plugin file */
         protected string $pluginVersion,
         ?string $pluginName = null,
@@ -165,10 +165,7 @@ abstract class AbstractPlugin
     /**
      * Configure the plugin.
      */
-    protected function callPluginConfiguration(): void
-    {
-        // Override if needed
-    }
+    abstract protected function callPluginConfiguration(): void;
 
     /**
      * Plugin's booting

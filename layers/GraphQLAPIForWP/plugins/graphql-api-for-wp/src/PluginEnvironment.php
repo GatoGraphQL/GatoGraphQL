@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 
 class PluginEnvironment
 {
@@ -23,8 +23,8 @@ class PluginEnvironment
             return strtolower(getenv(self::DISABLE_CACHING)) != "true";
         }
 
-        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::DISABLE_CACHING)) {
-            return !PluginConfigurationHelpers::getWPConfigConstantValue(self::DISABLE_CACHING);
+        if (PluginConfigurationHelper::isWPConfigConstantDefined(self::DISABLE_CACHING)) {
+            return !PluginConfigurationHelper::getWPConfigConstantValue(self::DISABLE_CACHING);
         }
 
         return true;
@@ -41,8 +41,8 @@ class PluginEnvironment
             return rtrim(getenv(self::CACHE_DIR), '/');
         }
 
-        if (PluginConfigurationHelpers::isWPConfigConstantDefined(self::CACHE_DIR)) {
-            return rtrim(PluginConfigurationHelpers::getWPConfigConstantValue(self::CACHE_DIR), '/');
+        if (PluginConfigurationHelper::isWPConfigConstantDefined(self::CACHE_DIR)) {
+            return rtrim(PluginConfigurationHelper::getWPConfigConstantValue(self::CACHE_DIR), '/');
         }
 
         return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';

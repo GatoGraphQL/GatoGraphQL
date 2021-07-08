@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
@@ -18,6 +19,50 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * set this var to `true` to stop loading it and show an error message.
      */
     protected ?Exception $inititalizationException = null;
+
+    public function __construct(
+        string $pluginFile, /** The main plugin file */
+        string $pluginVersion,
+        ?string $pluginName = null,
+        protected AbstractMainPluginConfiguration $pluginConfiguration,
+    ) {
+        parent::__construct(
+            $pluginFile,
+            $pluginVersion,
+            $pluginName,
+        );
+    }
+
+    /**
+     * Configure the plugin.
+     * This defines hooks to set environment variables,
+     * so must be executed before those hooks are triggered for first time
+     * (in ComponentConfiguration classes)
+     */
+    protected function callPluginConfiguration(): void
+    {
+        $this->pluginConfiguration->initialize();
+    }
+
+    /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return $this->pluginConfiguration->getComponentClassConfiguration();
+    }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return $this->pluginConfiguration->getSchemaComponentClassesToSkip();
+    }
 
     /**
      * Get the plugin's immutable configuration values
@@ -316,12 +361,54 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     /**
      * Boot the system
      */
-    abstract public function bootSystem(): void;
+    public function bootSystem(): void
+    {
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootSystem(
+                ...$this->pluginConfiguration->getContainerCacheConfiguration()
+            );
+
+            // Custom logic
+            $this->doBootSystem();
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
+        }
+    }
+
+    /**
+     * Custom function to boot the system. Override if needed
+     */
+    protected function doBootSystem(): void
+    {
+    }
 
     /**
      * Boot the application
      */
-    abstract public function bootApplication(): void;
+    public function bootApplication(): void
+    {
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootApplication(
+                ...$this->pluginConfiguration->getContainerCacheConfiguration()
+            );
+
+            // Custom logic
+            $this->doBootApplication();
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
+        }
+    }
+
+    /**
+     * Custom function to boot the application. Override if needed
+     */
+    protected function doBootApplication(): void
+    {
+    }
 
     /**
      * If in development, throw the exception.

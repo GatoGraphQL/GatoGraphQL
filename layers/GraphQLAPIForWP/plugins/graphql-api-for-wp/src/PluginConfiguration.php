@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Environment;
-use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -20,8 +17,9 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
@@ -33,15 +31,11 @@ use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\APIEndpoints\EndpointUtils;
 use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguration;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Environment as RootEnvironment;
@@ -72,133 +66,22 @@ use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
 
 /**
- * Sets the configuration in all the PoP components.
- *
- * To set the value for properties, it uses this order:
- *
- * 1. Retrieve it as an environment value, if defined
- * 2. Retrieve as a constant `GRAPHQL_API_...` from wp-config.php, if defined
- * 3. Retrieve it from the user settings, if stored
- * 4. Use the default value
- *
- * If a slug is set or updated in the environment variable or wp-config constant,
- * it is necessary to flush the rewrite rules for the change to take effect.
- * For that, on the WordPress admin, go to Settings => Permalinks and click on Save changes
+ * Sets the configuration in all the PoP components from the main plugin.
  */
-class PluginConfiguration
+class PluginConfiguration extends AbstractMainPluginConfiguration
 {
-    /**
-     * Cache the options after normalizing them
-     *
-     * @var array<string, mixed>|null
-     */
-    protected static ?array $normalizedOptionValuesCache = null;
-
-    /**
-     * Cache the Container Cache Configuration
-     *
-     * @var array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
-     */
-    protected static ?array $containerCacheConfigurationCache = null;
-
-    /**
-     * Initialize all configuration
-     */
-    public static function initialize(): void
+    protected function isCachingEnabled(): bool
     {
-        self::mapEnvVariablesToWPConfigConstants();
-        self::defineEnvironmentConstantsFromSettings();
-        self::defineEnvironmentConstantsFromCallbacks();
-    }
-
-    /**
-     * Get the values from the form submitted to options.php, and normalize them
-     *
-     * @return array<string, mixed>
-     */
-    protected static function getNormalizedOptionValues(): array
-    {
-        if (is_null(self::$normalizedOptionValuesCache)) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /**
-             * @var SettingsMenuPage
-             */
-            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            // Obtain the values from the POST and normalize them
-            $value = $_POST[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            self::$normalizedOptionValuesCache = $settingsMenuPage->normalizeSettings($value);
-        }
-        return self::$normalizedOptionValuesCache;
-    }
-
-    /**
-     * If we are in options.php, already set the new slugs in the hook,
-     * so that the EndpointHandler's `addRewriteEndpoints` (executed on `init`)
-     * adds the rewrite with the new slug, which will be persisted on
-     * flushing the rewrite rules
-     *
-     * Hidden input "form-origin" is used to only execute for this plugin,
-     * since options.php is used everywhere, including WP core and other plugins.
-     * Otherwise, it may thrown an exception!
-     */
-    protected static function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
-    {
-        global $pagenow;
-        if (
-            $pagenow == 'options.php'
-            && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
-            && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
-        ) {
-            $value = self::getNormalizedOptionValues();
-            // Return the specific value to this module/option
-            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $optionName = $moduleResolver->getSettingOptionName($module, $option);
-            return $value[$optionName];
-        }
-        return $value;
-    }
-
-    /**
-     * Process the "URL path" option values
-     */
-    protected static function getURLPathSettingValue(
-        string $value,
-        string $module,
-        string $option
-    ): string {
-        // If we are on options.php, use the value submitted to the form,
-        // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
-        $value = self::maybeOverrideValueFromForm($value, $module, $option);
-
-        // Make sure the path has a "/" on both ends
-        return EndpointUtils::slashURI($value);
-    }
-
-    /**
-     * Process the "URL base path" option values
-     */
-    protected static function getCPTPermalinkBasePathSettingValue(
-        string $value,
-        string $module,
-        string $option
-    ): string {
-        // If we are on options.php, use the value submitted to the form,
-        // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
-        $value = self::maybeOverrideValueFromForm($value, $module, $option);
-
-        // Make sure the path does not have "/" on either end
-        return trim($value, '/');
+        return PluginEnvironment::isCachingEnabled();
     }
 
     /**
      * Define the values for certain environment constants from the plugin settings
      */
-    protected static function defineEnvironmentConstantsFromSettings(): void
+    protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        // All the environment variables to override
-        $mappings = [
+        return [
             // Editing Access Scheme
             [
                 'class' => ComponentConfiguration::class,
@@ -212,7 +95,7 @@ class PluginConfiguration
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -225,7 +108,7 @@ class PluginConfiguration
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -238,7 +121,7 @@ class PluginConfiguration
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -251,7 +134,7 @@ class PluginConfiguration
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -264,7 +147,7 @@ class PluginConfiguration
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -527,82 +410,28 @@ class PluginConfiguration
                 'option' => SchemaTypeModuleResolver::OPTION_ENABLE_ADMIN_SCHEMA,
             ],
         ];
-        // For each environment variable, see if its value has been saved in the settings
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        foreach ($mappings as $mapping) {
-            $module = $mapping['module'];
-            $condition = $mapping['condition'] ?? true;
-            // Check if the hook must be executed always (condition => 'any') or with
-            // stated enabled (true) or disabled (false). By default, it's enabled
-            if ($condition !== 'any' && $condition !== $moduleRegistry->isModuleEnabled($module)) {
-                continue;
-            }
-            // If the environment value has been defined, or the constant in wp-config.php,
-            // then do nothing, since they have priority
-            $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                continue;
-            }
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $mapping['class'],
-                $envVariable
-            );
-            $option = $mapping['option'];
-            $optionModule = $mapping['optionModule'] ?? $module;
-            // Make explicit it can be null so that PHPStan level 3 doesn't fail
-            $callback = $mapping['callback'] ?? null;
-            \add_filter(
-                $hookName,
-                function () use ($userSettingsManager, $optionModule, $option, $callback) {
-                    $value = $userSettingsManager->getSetting($optionModule, $option);
-                    if (!is_null($callback)) {
-                        return $callback($value);
-                    }
-                    return $value;
-                }
-            );
-        }
     }
 
     /**
      * Define the values for certain environment constants from the plugin settings
      */
-    protected static function defineEnvironmentConstantsFromCallbacks(): void
+    protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
-        // All the environment variables to override
-        $mappings = [
+        return [
             [
                 'class' => \PoPSchema\Comments\ComponentConfiguration::class,
                 'envVariable' => \PoPSchema\Comments\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT,
                 'callback' => fn () => \get_option('comment_registration') === '1',
             ],
         ];
-        foreach ($mappings as $mapping) {
-            // If the environment value has been defined, or the constant in wp-config.php,
-            // then do nothing, since they have priority
-            $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                continue;
-            }
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $mapping['class'],
-                $envVariable
-            );
-            $callback = $mapping['callback'];
-            \add_filter(
-                $hookName,
-                fn () => $callback(),
-            );
-        }
     }
 
     /**
-     * Map the environment variables from the components, to WordPress wp-config.php constants
+     * All the environment variables to override
      */
-    protected static function mapEnvVariablesToWPConfigConstants(): void
+    protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
-        // All the environment variables to override
-        $mappings = [
+        return [
             [
                 'class' => ComponentConfiguration::class,
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,
@@ -640,88 +469,20 @@ class PluginConfiguration
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
             ],
         ];
-        // For each environment variable, see if it has been defined as a wp-config.php constant
-        foreach ($mappings as $mapping) {
-            $class = $mapping['class'];
-            $envVariable = $mapping['envVariable'];
-
-            // If the environment value has been defined, then do nothing, since it has priority
-            if (getenv($envVariable) !== false) {
-                continue;
-            }
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $class,
-                $envVariable
-            );
-
-            \add_filter(
-                $hookName,
-                /**
-                 * Override the value of an environment variable if it has been definedas a constant
-                 * in wp-config.php, with the environment name prepended with "GRAPHQL_API_"
-                 */
-                function ($value) use ($envVariable) {
-                    if (PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                        return PluginConfigurationHelpers::getWPConfigConstantValue($envVariable);
-                    }
-                    return $value;
-                }
-            );
-        }
     }
 
     /**
-     * Provide the configuration to cache the container
-     *
-     * @return array<mixed> Array with args to pass to `AppLoader::initializeContainers`:
-     *                      [0]: cache container? (bool)
-     *                      [1]: container namespace (string|null)
-     *                      [2]: container directory (string|null)
-     */
-    public static function getContainerCacheConfiguration(): array
-    {
-        if (is_null(self::$containerCacheConfigurationCache)) {
-            $containerConfigurationCacheNamespace = null;
-            $containerConfigurationCacheDirectory = null;
-            $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-            if ($cacheContainerConfiguration = PluginEnvironment::isCachingEnabled()) {
-                $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
-                $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
-                $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
-            }
-            self::$containerCacheConfigurationCache = [
-                $cacheContainerConfiguration,
-                $containerConfigurationCacheNamespace,
-                $containerConfigurationCacheDirectory
-            ];
-        }
-        return self::$containerCacheConfigurationCache;
-    }
-
-    /**
-     * Provide the configuration for all components required in the plugin
+     * Get the fixed configuration for all components required in the plugin
      *
      * @return array<string, array> [key]: Component class, [value]: Configuration
      */
-    public static function getComponentClassConfiguration(): array
-    {
-        $componentClassConfiguration = [];
-        self::addPredefinedComponentClassConfiguration($componentClassConfiguration);
-        self::addBasedOnModuleEnabledStateComponentClassConfiguration($componentClassConfiguration);
-        return $componentClassConfiguration;
-    }
-
-    /**
-     * Add the fixed configuration for all components required in the plugin
-     *
-     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
-     */
-    protected static function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function getPredefinedComponentClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
-
+        
+        $componentClassConfiguration = [];
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             /**
              * Enable the schema entity registries, as to retrieve the type/directive resolver classes
@@ -813,42 +574,37 @@ class PluginConfiguration
             $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
             $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
         }
+        return $componentClassConfiguration;
     }
 
     /**
      * Return the opposite value
      */
-    protected static function opposite(bool $value): bool
+    protected function opposite(bool $value): bool
     {
         return !$value;
     }
 
-    /**
-     * Add configuration values if modules are enabled or disabled
-     *
-     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
-     */
-    protected static function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function getModuleToComponentClassConfigurationMapping(): array
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $moduleToComponentClassConfigurationMappings = [
+        return [
             [
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLEndpointForWP\Environment::DISABLE_GRAPHQL_API_ENDPOINT,
-                'callback' => [self::class, 'opposite'],
+                'callback' => [$this, 'opposite'],
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT,
-                'callback' => [self::class, 'opposite'],
+                'callback' => [$this, 'opposite'],
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT,
-                'callback' => [self::class, 'opposite'],
+                'callback' => [$this, 'opposite'],
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
@@ -868,36 +624,17 @@ class PluginConfiguration
                 'envVariable' => \PoP\API\Environment::USE_SCHEMA_DEFINITION_CACHE,
             ],
         ];
-        foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
-            // Copy the state (enabled/disabled) to the component
-            $value = $moduleRegistry->isModuleEnabled($mapping['module']);
-            // Make explicit it can be null so that PHPStan level 3 doesn't fail
-            $callback = $mapping['callback'] ?? null;
-            if (!is_null($callback)) {
-                $value = $callback($value);
-            }
-            $componentClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
-        }
     }
 
     /**
-     * Provide the classes of the components whose
-     * schema initialization must be skipped
+     * Provide the list of modules to check if they are enabled and,
+     * if they are not, what component classes must skip initialization
      *
-     * @return string[]
+     * @return array<string,string[]>
      */
-    public static function getSkippingSchemaComponentClasses(): array
+    protected function getModuleComponentClassesToSkipIfDisabled(): array
     {
-        // If doing ?behavior=unrestricted, always enable all schema-type modules
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            return [];
-        }
-
-        // Component classes enabled/disabled by module
-        $maybeSkipSchemaModuleComponentClasses = [
+        return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [
                 \PoPSchema\CustomPostMedia\Component::class,
             ],
@@ -973,16 +710,5 @@ class PluginConfiguration
                 \PoPSchema\CommentMutations\Component::class,
             ],
         ];
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $skipSchemaModuleComponentClasses = array_filter(
-            $maybeSkipSchemaModuleComponentClasses,
-            fn ($module) => !$moduleRegistry->isModuleEnabled($module),
-            ARRAY_FILTER_USE_KEY
-        );
-        return GeneralUtils::arrayFlatten(
-            array_values(
-                $skipSchemaModuleComponentClasses
-            )
-        );
     }
 }
