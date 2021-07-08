@@ -48,7 +48,7 @@ abstract class AbstractUnionTypeResolver extends AbstractTypeResolver implements
     }
 
     /**
-     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
