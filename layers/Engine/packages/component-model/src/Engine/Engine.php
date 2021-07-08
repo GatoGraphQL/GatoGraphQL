@@ -1059,7 +1059,7 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
-            $datasetmodulemeta = null;
+            $datasetmoduledata = $datasetmodulemeta = null;
             if ($datasource == DataSources::IMMUTABLE) {
                 $datasetmoduledata = &$immutable_datasetmoduledata;
                 if ($add_meta) {
@@ -1082,7 +1082,7 @@ class Engine implements EngineInterface
 
             // Integrate the dbobjectids into $datasetmoduledata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
-            if (!is_null($datasetmoduledata)) {
+            if ($datasetmoduledata !== null) {
                 $this->assignValueForModule($datasetmoduledata, $module_path, $module, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
