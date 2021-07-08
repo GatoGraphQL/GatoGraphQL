@@ -9,7 +9,7 @@ use PoP\PoP\Config\Rector\Downgrade\Configurators\GraphQLAPIContainerConfigurati
 class GraphQLAPIArrowFnMixedTypeChainedRuleContainerConfigurationService extends AbstractPluginArrowFnMixedTypeChainedRuleContainerConfigurationService
 {
     use GraphQLAPIContainerConfigurationServiceTrait;
-    
+
     protected function getPaths(): array
     {
         return [

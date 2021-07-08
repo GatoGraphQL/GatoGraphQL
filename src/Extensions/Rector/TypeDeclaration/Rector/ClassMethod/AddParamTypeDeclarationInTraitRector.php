@@ -68,7 +68,7 @@ trait SomeTrait
     }
 }
 CODE_SAMPLE
-,
+                ,
                 <<<'CODE_SAMPLE'
 trait SomeTrait
 {
@@ -77,7 +77,7 @@ trait SomeTrait
     }
 }
 CODE_SAMPLE
-            ,
+                ,
                 $configuration
             ),
         ]);

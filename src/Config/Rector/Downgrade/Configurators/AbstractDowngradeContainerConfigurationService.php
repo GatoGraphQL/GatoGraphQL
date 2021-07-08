@@ -28,14 +28,14 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
          * Replace the current `DowngradeParameterTypeWideningRector` (because it takes too long)
          * with a "legacy" version (from up to v0.10.9), which is fast
          * but does not replace code within traits.
-         * 
+         *
          * To make up, the hack below manually fixes the code within traits.
-         * 
+         *
          * @see https://github.com/leoloso/PoP/issues/715
          */
         // $this->containerConfigurator->import(DowngradeSetList::PHP_72);
         $this->containerConfigurator->import(CustomDowngradeSetList::PHP_72);
-        
+
         /**
          * Hack to fix bug.
          *
@@ -66,7 +66,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
             ]]);
 
         $parameters = $this->containerConfigurator->parameters();
-        
+
         // is your PHP version different from the one your refactor to? [default: your PHP version]
         $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
 
@@ -88,7 +88,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     /**
      * @return string[]
      */
-    protected function getBootstrapFiles(): array {
+    protected function getBootstrapFiles(): array
+    {
         return [
             $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
         ];
@@ -97,7 +98,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     /**
      * @return string[]
      */
-    protected function getSkip(): array {
+    protected function getSkip(): array
+    {
         return [
             // Skip tests
             '*/tests/*',

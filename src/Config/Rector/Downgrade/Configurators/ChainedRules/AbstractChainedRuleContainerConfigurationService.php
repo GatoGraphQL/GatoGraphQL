@@ -30,8 +30,8 @@ abstract class AbstractChainedRuleContainerConfigurationService extends Abstract
 
         $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
         $parameters->set(Option::AUTO_IMPORT_NAMES, false);
-        $parameters->set(Option::IMPORT_SHORT_CLASSES, false); 
-        
+        $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+
         $parameters->set(Option::PATHS, $this->getPaths());
     }
 

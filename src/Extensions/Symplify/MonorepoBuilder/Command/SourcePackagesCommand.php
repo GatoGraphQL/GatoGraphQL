@@ -65,7 +65,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
         $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
-        
+
         // If --skip-unmigrated, fetch the list of failing unmigrated packages
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
         $packagesToSkip = $skipUnmigrated ? $this->unmigratedFailingPackages : [];

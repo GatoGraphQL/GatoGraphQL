@@ -24,7 +24,7 @@ class ContainerConfigurationService
         protected string $rootDirectory,
     ) {
     }
-    
+
     public function configureContainer(): void
     {
         $parameters = $this->containerConfigurator->parameters();
@@ -129,32 +129,32 @@ class ContainerConfigurationService
     {
         return new PackageOrganizationDataSource($this->rootDirectory);
     }
-    
+
     protected function getPluginDataSource(): ?PluginDataSource
     {
         return new PluginDataSource($this->rootDirectory);
     }
-    
+
     protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource
     {
         return new DowngradeRectorDataSource($this->rootDirectory);
     }
-    
+
     protected function getEnvironmentVariablesDataSource(): ?EnvironmentVariablesDataSource
     {
         return new EnvironmentVariablesDataSource();
     }
-    
+
     protected function getPHPStanDataSource(): ?PHPStanDataSource
     {
         return new PHPStanDataSource();
     }
-    
+
     protected function getDataToAppendAndRemoveDataSource(): ?DataToAppendAndRemoveDataSource
     {
         return new DataToAppendAndRemoveDataSource();
     }
-    
+
     protected function getReleaseWorkersDataSource(): ?ReleaseWorkersDataSource
     {
         return new ReleaseWorkersDataSource();
