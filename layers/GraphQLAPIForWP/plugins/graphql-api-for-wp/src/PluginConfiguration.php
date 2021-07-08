@@ -93,66 +93,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     }
 
     /**
-     * If we are in options.php, already set the new slugs in the hook,
-     * so that the EndpointHandler's `addRewriteEndpoints` (executed on `init`)
-     * adds the rewrite with the new slug, which will be persisted on
-     * flushing the rewrite rules
-     *
-     * Hidden input "form-origin" is used to only execute for this plugin,
-     * since options.php is used everywhere, including WP core and other plugins.
-     * Otherwise, it may thrown an exception!
-     */
-    protected static function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
-    {
-        global $pagenow;
-        if (
-            $pagenow == 'options.php'
-            && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
-            && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
-        ) {
-            $value = PluginConfigurationHelper::getNormalizedOptionValues();
-            // Return the specific value to this module/option
-            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $optionName = $moduleResolver->getSettingOptionName($module, $option);
-            return $value[$optionName];
-        }
-        return $value;
-    }
-
-    /**
-     * Process the "URL path" option values
-     */
-    protected static function getURLPathSettingValue(
-        string $value,
-        string $module,
-        string $option
-    ): string {
-        // If we are on options.php, use the value submitted to the form,
-        // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
-        $value = self::maybeOverrideValueFromForm($value, $module, $option);
-
-        // Make sure the path has a "/" on both ends
-        return EndpointUtils::slashURI($value);
-    }
-
-    /**
-     * Process the "URL base path" option values
-     */
-    protected static function getCPTPermalinkBasePathSettingValue(
-        string $value,
-        string $module,
-        string $option
-    ): string {
-        // If we are on options.php, use the value submitted to the form,
-        // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
-        $value = self::maybeOverrideValueFromForm($value, $module, $option);
-
-        // Make sure the path does not have "/" on either end
-        return trim($value, '/');
-    }
-
-    /**
      * Define the values for certain environment constants from the plugin settings
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
@@ -172,7 +112,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -185,7 +125,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -198,7 +138,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getCPTPermalinkBasePathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -211,7 +151,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                     EndpointFunctionalityModuleResolver::OPTION_PATH
@@ -224,7 +164,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
-                'callback' => fn ($value) => self::getURLPathSettingValue(
+                'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                     EndpointFunctionalityModuleResolver::OPTION_PATH

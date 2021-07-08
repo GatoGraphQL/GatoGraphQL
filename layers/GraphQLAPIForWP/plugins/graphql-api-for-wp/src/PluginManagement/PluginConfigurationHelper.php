@@ -113,4 +113,64 @@ class PluginConfigurationHelper
         }
         return self::$normalizedOptionValuesCache;
     }
+
+    /**
+     * If we are in options.php, already set the new slugs in the hook,
+     * so that the EndpointHandler's `addRewriteEndpoints` (executed on `init`)
+     * adds the rewrite with the new slug, which will be persisted on
+     * flushing the rewrite rules
+     *
+     * Hidden input "form-origin" is used to only execute for this plugin,
+     * since options.php is used everywhere, including WP core and other plugins.
+     * Otherwise, it may thrown an exception!
+     */
+    public static function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
+    {
+        global $pagenow;
+        if (
+            $pagenow == 'options.php'
+            && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
+            && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
+        ) {
+            $value = PluginConfigurationHelper::getNormalizedOptionValues();
+            // Return the specific value to this module/option
+            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $optionName = $moduleResolver->getSettingOptionName($module, $option);
+            return $value[$optionName];
+        }
+        return $value;
+    }
+
+    /**
+     * Process the "URL path" option values
+     */
+    public static function getURLPathSettingValue(
+        string $value,
+        string $module,
+        string $option
+    ): string {
+        // If we are on options.php, use the value submitted to the form,
+        // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
+        $value = self::maybeOverrideValueFromForm($value, $module, $option);
+
+        // Make sure the path has a "/" on both ends
+        return EndpointUtils::slashURI($value);
+    }
+
+    /**
+     * Process the "URL base path" option values
+     */
+    public static function getCPTPermalinkBasePathSettingValue(
+        string $value,
+        string $module,
+        string $option
+    ): string {
+        // If we are on options.php, use the value submitted to the form,
+        // so it's updated before doing `add_rewrite_endpoint` and `flush_rewrite_rules`
+        $value = self::maybeOverrideValueFromForm($value, $module, $option);
+
+        // Make sure the path does not have "/" on either end
+        return trim($value, '/');
+    }
 }
