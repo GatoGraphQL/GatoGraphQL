@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\TypeResolverDecorators;
 
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
@@ -26,7 +27,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTypeResolverDecoratorTrait
         );
     }
 
-    abstract protected function getMandatoryDirectives($entryValue = null): array;
+    abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     public function getMandatoryDirectivesForFields(TypeResolverInterface $typeResolver): array
     {

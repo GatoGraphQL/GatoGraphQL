@@ -5,7 +5,7 @@ use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 class PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessor extends PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessorBase
 {
     /**
-     * @return array<string, string[]>
+     * @return array<array<string, string[]>>
      */
     public function getModulesVarsProperties(): array
     {

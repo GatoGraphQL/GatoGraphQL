@@ -4,13 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FormInputs;
 
+use Exception;
+use PoP\Translation\Facades\TranslationAPIFacade;
+
 class FormInput
 {
     public string $name;
-    public ?string $selected = null;
+    public mixed $selected = null;
 
     public function __construct($params = array())
     {
+        if (!isset($params['name'])) {
+            $translationAPI = TranslationAPIFacade::getInstance();
+            throw new Exception(
+                $translationAPI->__('Mandatory property \'name\' in \'$params\' is missing', 'component-model')
+            );
+        }
         $this->name = $params['name'];
 
         // Selected value. If provided, use it

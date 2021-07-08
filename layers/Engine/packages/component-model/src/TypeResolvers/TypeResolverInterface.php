@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineDecorator;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\FieldInterfaceResolvers\FieldInterfaceResolverInterface;
 
 interface TypeResolverInterface
 {
-    // Only these 4 functions must be implemented by a new Type class...
-    public function getID(object $resultItem): string | int;
+    /**
+     * All objects MUST have an ID. `null` is supported for the UnionTypeResolver,
+     * when it cannot find a resolver to handle the object.
+     * 
+     * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
+     */
+    public function getID(object $resultItem): string | int | null;
     public function getTypeName(): string;
     public function getNamespace(): string;
     public function getNamespacedTypeName(): string;
@@ -25,7 +32,7 @@ interface TypeResolverInterface
      */
     public function getAllImplementedInterfaceResolverInstances(): array;
     /**
-     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;

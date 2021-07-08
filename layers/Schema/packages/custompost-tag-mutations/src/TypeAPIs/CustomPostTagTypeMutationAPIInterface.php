@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostTagMutations\TypeAPIs;
 interface CustomPostTagTypeMutationAPIInterface
 {
     /**
-     * @param $tags string[]
+     * @param string[] $tags
      */
     public function setTags(int | string $postID, array $tags, bool $append = false): void;
 }

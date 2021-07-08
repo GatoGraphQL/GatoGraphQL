@@ -60,7 +60,7 @@ class ComponentConfiguration
      * Obtain the override configuration for a key, with possible values being only
      * `true` or `false`, or `null` if that key is not set
      *
-     * @param $key the key to get the value
+     * @param string $key the key to get the value
      */
     public static function getOverrideConfiguration(string $key): ?bool
     {

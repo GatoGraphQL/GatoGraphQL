@@ -40,11 +40,8 @@ trait HasInterfacesTypeTrait
                 ]
             );
             // If the interface was not registered, that means that no FieldResolver implements it
-            /**
-             * @var InterfaceType
-             */
             $interface = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
-            if (is_null($interface)) {
+            if ($interface === null) {
                 $translationAPI = TranslationAPIFacade::getInstance();
                 throw new Exception(sprintf(
                     $translationAPI->__('No FieldResolver resolves Interface \'%s\' for schema definition path \'%s\'', 'graphql-server'),
@@ -52,6 +49,8 @@ trait HasInterfacesTypeTrait
                     implode(' => ', $schemaDefinitionPath)
                 ));
             }
+            /** @var InterfaceType */
+            $interface = $interface;
             $this->interfaces[] = $interface;
         }
     }

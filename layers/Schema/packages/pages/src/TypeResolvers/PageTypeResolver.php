@@ -48,7 +48,7 @@ class PageTypeResolver extends AbstractCustomPostTypeResolver
         return $this->translationAPI->__('Representation of a page', 'pages');
     }
 
-    public function getID(object $resultItem): string | int
+    public function getID(object $resultItem): string | int | null
     {
         $page = $resultItem;
         return $this->pageTypeAPI->getPageId($page);

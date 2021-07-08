@@ -23,6 +23,7 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
     ) {
         parent::__construct();
         $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
+        $this->level = $parameterProvider->provideParameter(Option::LEVEL);
     }
 
     protected function configure(): void
@@ -49,7 +50,7 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
         $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
         $packagesToSkip = $skipUnmigrated ? $this->unmigratedFailingPackages : [];
 
-        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip);
+        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip, $this->level);
 
         $outputFilePath = (string) $input->getOption(Option::OUTPUT_FILE);
         $this->neonFilePrinter->printContentToOutputFile($neonFileContent, $outputFilePath);

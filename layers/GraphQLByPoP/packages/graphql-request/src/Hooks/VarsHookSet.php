@@ -41,9 +41,8 @@ class VarsHookSet extends AbstractHookSet
 
     /**
      * Override the error message when executing a query through standard GraphQL
-     * @param array<array> $vars_in_array
      */
-    public function getMutationsNotSupportedErrorMessage($errorMessage): string
+    public function getMutationsNotSupportedErrorMessage(string $errorMessage): string
     {
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {

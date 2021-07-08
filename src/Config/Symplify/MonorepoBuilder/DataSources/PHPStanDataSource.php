@@ -4,48 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
-class UnmigratedFailingPackagesDataSource
+class PHPStanDataSource
 {
+    public function getLevel(): int|string
+    {
+        return 5;
+    }
+
     /**
      * @return string[]
      */
     public function getUnmigratedFailingPackages(): array
     {
         return [
-            'layers/API/packages/api-mirrorquery',
-            'layers/API/packages/api',
-            'layers/Engine/packages/access-control',
-            'layers/Engine/packages/component-model',
-            'layers/Engine/packages/engine-wp',
-            'layers/Engine/packages/engine',
-            'layers/Engine/packages/guzzle-helpers',
-            'layers/GraphQLByPoP/packages/graphql-server',
+            'layers/GraphQLByPoP/packages/graphql-parser',
             'layers/Schema/packages/block-metadata-for-wp',
-            'layers/Schema/packages/categories',
-            'layers/Schema/packages/categories',
-            'layers/Schema/packages/comment-mutations-wp',
-            'layers/Schema/packages/comment-mutations',
-            'layers/Schema/packages/comments',
-            'layers/Schema/packages/custompostmedia',
-            'layers/Schema/packages/customposts',
-            'layers/Schema/packages/generic-customposts',
-            'layers/Schema/packages/highlights-wp',
-            'layers/Schema/packages/highlights',
-            'layers/Schema/packages/media',
-            'layers/Schema/packages/menus-wp',
-            'layers/Schema/packages/menus',
-            'layers/Schema/packages/notifications',
-            'layers/Schema/packages/pages',
-            'layers/Schema/packages/post-categories',
-            'layers/Schema/packages/post-tags',
-            'layers/Schema/packages/posts-wp',
-            'layers/Schema/packages/posts',
-            'layers/Schema/packages/stances-wp',
-            'layers/Schema/packages/stances',
-            'layers/Schema/packages/tags',
-            'layers/Schema/packages/user-roles-wp',
-            'layers/Schema/packages/user-state-mutations',
-            'layers/Schema/packages/users',
             'layers/SiteBuilder/packages/application-wp',
             'layers/SiteBuilder/packages/application',
             'layers/SiteBuilder/packages/component-model-configuration',
@@ -79,10 +52,6 @@ class UnmigratedFailingPackagesDataSource
             'layers/Wassup/packages/system-mutations',
             'layers/Wassup/packages/user-state-mutations',
             'layers/Wassup/packages/volunteer-mutations',
-            // 'layers/Legacy/Schema/packages/everythingelse-wp',
-            // 'layers/Legacy/Schema/packages/everythingelse',
-            // 'layers/Legacy/Wassup/packages/everythingelse-mutations',
-            // 'layers/Legacy/Wassup/packages/wassup',
         ];
     }
 }

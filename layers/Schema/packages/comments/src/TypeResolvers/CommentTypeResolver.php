@@ -48,7 +48,7 @@ class CommentTypeResolver extends AbstractTypeResolver
         return $this->translationAPI->__('Comments added to posts', 'comments');
     }
 
-    public function getID(object $resultItem): string | int
+    public function getID(object $resultItem): string | int | null
     {
         $comment = $resultItem;
         return $this->commentTypeAPI->getCommentId($comment);

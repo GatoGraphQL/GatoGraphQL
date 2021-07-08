@@ -9,6 +9,7 @@
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
 
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
+use GraphQLByPoP\GraphQLParser\Parser\Ast\Directive;
 
 interface FieldInterface extends LocatableInterface
 {

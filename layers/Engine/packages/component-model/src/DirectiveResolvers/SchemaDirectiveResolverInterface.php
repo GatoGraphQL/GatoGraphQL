@@ -14,8 +14,6 @@ interface SchemaDirectiveResolverInterface
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string;
     /**
      * Indicates if the directive argument names can be omitted from the query, deducing them from the order in which they were defined in the schema
-     *
-     * @param string $directive
      */
     public function enableOrderedSchemaDirectiveArgs(TypeResolverInterface $typeResolver): bool;
     /**

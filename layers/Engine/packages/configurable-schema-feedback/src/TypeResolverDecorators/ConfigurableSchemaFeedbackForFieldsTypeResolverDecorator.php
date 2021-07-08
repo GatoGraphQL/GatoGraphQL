@@ -31,7 +31,7 @@ class ConfigurableSchemaFeedbackForFieldsTypeResolverDecorator extends AbstractM
         return $this->schemaFeedbackManager->getEntriesForFields();
     }
 
-    protected function getMandatoryDirectives($entryValue = null): array
+    protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $message = $entryValue;
         /** @var DirectiveResolverInterface */

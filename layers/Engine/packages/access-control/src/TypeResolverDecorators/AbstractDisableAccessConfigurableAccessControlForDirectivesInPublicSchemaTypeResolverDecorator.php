@@ -10,7 +10,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaTypeResolverDecorator
 {
-    protected function getMandatoryDirectives($entryValue = null): array
+    protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         /** @var DirectiveResolverInterface */
         $disableAccessForDirectivesDirectiveResolver = $this->instanceManager->getInstance(DisableAccessForDirectivesDirectiveResolver::class);

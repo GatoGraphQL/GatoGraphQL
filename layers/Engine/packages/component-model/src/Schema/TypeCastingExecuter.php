@@ -87,7 +87,7 @@ class TypeCastingExecuter implements TypeCastingExecuterInterface
             case SchemaDefinition::TYPE_ARRAY_KEY:
                 // Type ID in GraphQL spec: only String or Int allowed.
                 // @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
-                if (is_float($value) && is_bool($value)) {
+                if (is_float($value) || is_bool($value)) {
                     return null;
                 }
                 return $value;

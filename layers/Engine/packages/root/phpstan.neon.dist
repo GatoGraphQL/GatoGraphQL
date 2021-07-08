@@ -3,3 +3,7 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			path: src/Container/ContainerBuilderFactoryTrait.php

@@ -65,10 +65,4 @@ class Error
     {
         return $this->nestedErrors;
     }
-
-    public function remove($code)
-    {
-        unset($this->errors[$code]);
-        unset($this->error_data[$code]);
-    }
 }

@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
-use WP_Menu;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
-    /**
-     * Indicates if the passed object is of type Menu
-     */
-    public function isInstanceOfMenuType(object $object): bool
-    {
-        return $object instanceof WP_Menu;
-    }
     public function getMenu(string | int $menuID): ?object
     {
         $object = wp_get_nav_menu_object($menuID);

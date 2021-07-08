@@ -439,7 +439,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     }
                     $value = $resolvedValue;
                 }
-                $this->addExpressionForResultItem($id, (string) $key, $resolvedValue, $messages);
+                $this->addExpressionForResultItem($id, (string) $key, $value, $messages);
             }
             foreach ($appendExpressions as $key => $value) {
                 $existingValue = $this->getExpressionForResultItem($id, (string) $key, $messages) ?? [];

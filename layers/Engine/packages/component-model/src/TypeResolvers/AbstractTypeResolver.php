@@ -164,7 +164,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     /**
-     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
@@ -416,8 +416,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR,
                 [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING],
                 [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING],
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
             );
             $isRepeatedFieldDirective = $counterSeparatorPos !== false;
             if ($isRepeatedFieldDirective) {
@@ -523,6 +521,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                     $schemaNotices,
                     $schemaTraces
                 );
+                /** @phpstan-ignore-next-line */
                 if ($fieldSchemaErrors) {
                     $schemaErrors = array_merge(
                         $schemaErrors,
@@ -987,10 +986,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                         $dataFields['direct']
                     );
                     $conditionalFields = FieldHelpers::extractConditionalFields($dataFields);
-                    $idFieldDirectiveIDFields = array_merge(
+                    $idFieldDirectiveIDFields = array_unique(array_merge(
                         $dataFields['direct'],
                         $conditionalFields
-                    );
+                    ));
                     $fieldDirectiveFields[$fieldDirective] = array_merge(
                         $fieldDirectiveFields[$fieldDirective] ?? [],
                         $idFieldDirectiveIDFields
@@ -1003,7 +1002,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                 $fieldDirectiveFields[$fieldDirective] = array_unique($fieldDirectiveFields[$fieldDirective]);
             }
             $fieldDirectiveDirectFields = array_unique($fieldDirectiveDirectFields);
-            $idFieldDirectiveIDFields = array_unique($idFieldDirectiveIDFields);
 
             // Validate and resolve the directives into instances and fields they operate on
             $directivePipelineSchemaErrors = [];
@@ -1512,7 +1510,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => is_array($arrayItem)
+                                    fn (mixed $arrayItem) => is_array($arrayItem)
                                 )
                             ) {
                                 return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
@@ -1522,7 +1520,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => !is_array($arrayItem)
+                                    // `null` could be accepted as an array! (Validation against null comes next)
+                                    fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                                 )
                             ) {
                                 return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
@@ -1533,10 +1532,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => array_filter(
+                                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                                         $arrayItem,
                                         fn ($arrayItemItem) => $arrayItemItem === null
-                                    )
+                                    ) !== [],
                                 )
                             ) {
                                 return $this->errorProvider->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
@@ -1609,6 +1608,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             if ($isFlatShape) {
                 $this->processFlatShapeSchemaDefinition($options);
                 // Add the type to the list of all types, displayed when doing "shape=>flat"
+                /** @phpstan-ignore-next-line */
                 $generalMessages[SchemaDefinition::ARGNAME_TYPES][$typeSchemaKey] = $this->schemaDefinition[$typeSchemaKey];
             }
         }

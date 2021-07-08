@@ -46,7 +46,7 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             $tag_slugs = [];
             if (isset($query['tag_id'])) {
                 foreach (explode(',', $query['tag_id']) as $tag_id) {
-                    $tag = get_tag($tag_id);
+                    $tag = get_tag((int) $tag_id);
                     $tag_slugs[] = $tag->slug;
                 }
             }

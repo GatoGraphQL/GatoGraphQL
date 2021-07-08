@@ -419,7 +419,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     $fragment = $request->getFragment($fragmentName);
                     $fragmentFields = $fragment->getFields();
                     $fragmentType = $fragment->getModel();
-                } elseif ($fragmentReference instanceof TypedFragmentReference) {
+                } else {
                     $fragmentFields = $fragmentReference->getFields();
                     $fragmentType = $fragmentReference->getTypeName();
                 }

@@ -294,6 +294,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
     {
         // First check if the value was cached
         $key = $typeResolver->getNamespacedTypeName() . '|' . $fieldName . '|' . json_encode($fieldArgs);
+        $schemaDefinitionResolver = null;
         if (!isset($this->schemaDefinitionForFieldCache[$key])) {
             $schemaDefinition = [
                 SchemaDefinition::ARGNAME_NAME => $fieldName,
@@ -320,7 +321,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             }
 
             // If we found a resolver for this fieldName, get all its properties from it
-            if ($schemaDefinitionResolver) {
+            if ($schemaDefinitionResolver !== null) {
                 $type = $schemaDefinitionResolver->getSchemaFieldType($typeResolver, $fieldName);
                 $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
                 // Use bitwise operators to extract the applied modifiers

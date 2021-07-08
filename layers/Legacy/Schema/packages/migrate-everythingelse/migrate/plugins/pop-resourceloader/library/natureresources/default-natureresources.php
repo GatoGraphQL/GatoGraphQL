@@ -101,6 +101,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Being here, GD_ROLE_PROFILE is not defined. Then, simply get any random user from the DB, and use its corresponding configuration (the default layouts for all non-profile users (eg: "subscriber") will be used)
             $user_ids = $userTypeAPI->getUsers($query, ['return-type' => ReturnTypes::IDS]);
             $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+            /** @var string */
             $role = $userRoleTypeDataResolver->getTheUserRole($user_ids[0]);
             $roles = array($role);
             $user_role_combinations = array($roles);

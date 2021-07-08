@@ -10,6 +10,7 @@ use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Environment;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
+use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractDynamicType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
@@ -36,7 +37,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected array $fullSchemaDefinitionReferenceDictionary = [];
     /**
-     * @var AbstractSchemaDefinitionReferenceObject[]
+     * @var AbstractDynamicType[]
      */
     protected array $dynamicTypes = [];
 
@@ -113,6 +114,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
         $rootTypeSchemaKey = $graphQLSchemaDefinitionService->getRootTypeSchemaKey();
+        $queryRootTypeSchemaKey = null;
         if (!$enableNestedMutations) {
             $queryRootTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         }
@@ -491,6 +493,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Dynamic types are stored so that the schema can add them to its "types" field
         if ($referenceObject->isDynamicType()) {
+            /** @var AbstractDynamicType */
+            $referenceObject = $referenceObject;
             $this->dynamicTypes[] = $referenceObject;
         }
         return $referenceObjectID;

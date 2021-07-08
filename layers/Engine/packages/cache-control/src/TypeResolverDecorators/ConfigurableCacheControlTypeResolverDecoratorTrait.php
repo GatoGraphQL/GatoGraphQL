@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\TypeResolverDecorators;
 
-use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -15,10 +14,8 @@ trait ConfigurableCacheControlTypeResolverDecoratorTrait
 {
     /**
      * By default, only the admin can see the roles from the users
-     *
-     * @param TypeResolverInterface $typeResolver
      */
-    protected function getMandatoryDirectives($entryValue = null): array
+    protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $maxAge = $entryValue;
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

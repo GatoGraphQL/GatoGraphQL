@@ -3,7 +3,7 @@
 class PoP_Module_SideInfoPageSectionTopLevelRouteModuleProcessor extends PoP_Module_SideInfoPageSectionTopLevelRouteModuleProcessorBase
 {
     /**
-     * @return array<string, string[]>
+     * @return array<array<string, string[]>>
      */
     public function getModulesVarsProperties(): array
     {

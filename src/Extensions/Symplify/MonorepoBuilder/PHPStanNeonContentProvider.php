@@ -16,6 +16,14 @@ final class PHPStanNeonContentProvider
      * @var string
      */
     private const INCLUDES_KEY = 'includes';
+    /**
+     * @var string
+     */
+    private const PARAMETERS = 'parameters';
+    /**
+     * @var string
+     */
+    private const LEVEL = 'level';
 
     public function __construct(
         private SourcePackagesProvider $sourcePackagesProvider,
@@ -26,11 +34,14 @@ final class PHPStanNeonContentProvider
     /**
      * Merge all common includes together, and all paths to package configs
      */
-    public function provideContent(array $packagesToSkip = []): string
+    public function provideContent(array $packagesToSkip = [], string|int $level = 'max'): string
     {
         $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(true, $packagesToSkip);
 
         $phpStanNeon = [
+            self::PARAMETERS => [
+                self::LEVEL => $level,
+            ],
             self::INCLUDES_KEY => $this->provideIncludes($sourcePackages),
         ];
 

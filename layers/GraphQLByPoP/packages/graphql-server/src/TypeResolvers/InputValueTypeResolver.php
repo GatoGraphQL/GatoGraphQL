@@ -19,7 +19,7 @@ class InputValueTypeResolver extends AbstractIntrospectionTypeResolver
         return $this->translationAPI->__('Representation of an input object in GraphQL', 'graphql-server');
     }
 
-    public function getID(object $resultItem): string | int
+    public function getID(object $resultItem): string | int | null
     {
         $inputValue = $resultItem;
         return $inputValue->getID();

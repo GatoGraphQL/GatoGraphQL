@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPSchema\Tags\ModuleProcessors\FieldDataloadModuleProcessor as TagFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
 use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserPostFieldDataloads;
@@ -32,7 +32,7 @@ $moduleprocessor_manager->overrideProcessorClass(
     FieldDataloadModuleProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        TagFieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
         TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );

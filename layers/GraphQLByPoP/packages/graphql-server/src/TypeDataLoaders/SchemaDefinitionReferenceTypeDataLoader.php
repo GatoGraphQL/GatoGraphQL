@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeDataLoaders;
 
-use PoP\ComponentModel\TypeDataLoaders\AbstractTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
+use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
+use PoP\ComponentModel\TypeDataLoaders\AbstractTypeDataLoader;
 
 class SchemaDefinitionReferenceTypeDataLoader extends AbstractTypeDataLoader
 {

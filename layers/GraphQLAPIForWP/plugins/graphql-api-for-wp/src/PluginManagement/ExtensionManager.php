@@ -106,8 +106,6 @@ class ExtensionManager extends AbstractPluginManager
 
     /**
      * Get a configuration value for an extension
-     *
-     * @return array<string, mixed>
      */
     public static function getConfig(string $extensionClass, string $key): mixed
     {

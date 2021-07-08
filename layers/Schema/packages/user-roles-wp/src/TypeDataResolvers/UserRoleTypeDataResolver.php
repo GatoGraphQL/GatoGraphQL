@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesWP\TypeDataResolvers;
 
 use PoPSchema\UserRoles\TypeDataResolvers\AbstractUserRoleTypeDataResolver;
+use WP_User;
 
 class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
 {
@@ -52,7 +53,11 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
             $user = $userObjectOrID;
         } else {
             $user = \get_user_by('id', $userObjectOrID);
+            if ($user === false) {
+                return [];
+            }
         }
+        /** @var WP_User $user */
         return $user->roles;
     }
 
@@ -73,9 +78,13 @@ class UserRoleTypeDataResolver extends AbstractUserRoleTypeDataResolver
         return array_values(array_unique($capabilities));
     }
 
-    public function getTheUserRole(string | int | object $userObjectOrID): string
+    /**
+     * @return string|null `null` if the user is not found, its first role otherwise
+     */
+    public function getTheUserRole(string | int | object $userObjectOrID): ?string
     {
-        return \get_the_user_role($userObjectOrID);
+        $roles = $this->getUserRoles($userObjectOrID);
+        return $roles[0] ?? null;
     }
 
     public function userCan(string | int | object $userObjectOrID, string $capability): bool

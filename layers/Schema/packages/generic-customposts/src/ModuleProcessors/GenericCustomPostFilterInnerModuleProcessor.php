@@ -44,6 +44,7 @@ class GenericCustomPostFilterInnerModuleProcessor extends AbstractModuleProcesso
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_GENERICPOSTTYPES],
             ],
+            default => [],
         };
         if (
             $modules = $this->hooksAPI->applyFilters(

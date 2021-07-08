@@ -15,7 +15,6 @@ use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 use PoPSchema\QueriedObject\Helpers\QueriedObjectHelperServiceInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-use function apply_filters;
 use function get_post_status;
 
 /**
@@ -50,7 +49,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
     /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @return object[]
      */
     public function getCustomPosts(array $query, array $options = []): array
     {
@@ -286,7 +285,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return apply_filters('the_title', $customPost->post_title, $customPostID);
+        return $this->hooksAPI->applyFilters('the_title', $customPost->post_title, $customPostID);
     }
 
     public function getContent(string | int | object $customPostObjectOrID): ?string
@@ -295,7 +294,7 @@ class CustomPostTypeAPI implements CustomPostTypeAPIInterface
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return apply_filters('the_content', $customPost->post_content);
+        return $this->hooksAPI->applyFilters('the_content', $customPost->post_content);
     }
 
     public function getPlainTextContent(string | int | object $customPostObjectOrID): string

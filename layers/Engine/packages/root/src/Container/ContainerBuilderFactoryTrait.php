@@ -7,6 +7,7 @@ namespace PoP\Root\Container;
 use InvalidArgumentException;
 use PoP\Root\Environment;
 use Symfony\Component\Config\ConfigCache;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
@@ -35,6 +36,7 @@ trait ContainerBuilderFactoryTrait
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
+        $containerClass = $containerNamespace = null;
 
         if (static::$cacheContainerConfiguration) {
             /**

@@ -3,7 +3,7 @@
 class PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor extends PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessorBase
 {
     /**
-     * @return array<string, string[]>
+     * @return array<array<string, string[]>>
      */
     public function getModulesVarsProperties(): array
     {

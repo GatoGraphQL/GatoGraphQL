@@ -266,7 +266,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
 
     /**
-     * @return mixed The ID of the updated entity, or an Error
+     * @return string|int|Error The ID of the updated entity, or an Error
      */
     protected function update(array $form_data): string | int | Error
     {
@@ -303,7 +303,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     /**
      * @param array<string, mixed> $data
-     * @return mixed the ID of the created custom post
+     * @return string|int|null|Error the ID of the created custom post
      */
     protected function executeCreateCustomPost(array $data): string | int | null | Error
     {
@@ -312,7 +312,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
 
     /**
-     * @return mixed The ID of the created entity, or an Error
+     * @return string|int|Error The ID of the created entity, or an Error
      */
     protected function create(array $form_data): string | int | Error
     {

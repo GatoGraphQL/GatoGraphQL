@@ -36,7 +36,9 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-                    $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRoleTypeDataResolver->getTheUserRole($user_id);
+                    /** @var string */
+                    $userRole = $userRoleTypeDataResolver->getTheUserRole($user_id);
+                    $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;
         }

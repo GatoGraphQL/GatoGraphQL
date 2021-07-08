@@ -21,7 +21,7 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveRolePrivateSchemaHookSet ex
     /**
      * Indicate if the user has the item, to be implemented
      *
-     * @param string $item
+     * @param mixed[] $roles
      */
     protected function doesCurrentUserHaveAnyItem(array $roles): bool
     {

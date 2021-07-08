@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\ModuleProcessors;
 
 use PoPSchema\PostCategories\TypeResolvers\PostCategoryTypeResolver;
-use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor as CategoryFieldDataloads;
+use PoPSchema\Categories\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
 
-class PostCategoryFieldDataloadModuleProcessor extends CategoryFieldDataloads
+class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
     public function getTypeResolverClass(array $module): ?string
     {

@@ -30,8 +30,9 @@ class SelectFormInput extends FormInput
         $all = $this->getAllValues();
         if ($this->isMultiple()) {
             $value = array();
-            foreach ($this->selected as $selected) {
-                $value[] = $all[$selected];
+            $selected = (array)$this->selected;
+            foreach ($selected as $selectedItem) {
+                $value[] = $all[$selectedItem];
             }
         } else {
             $value = $all[$this->selected];

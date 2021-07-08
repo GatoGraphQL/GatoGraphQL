@@ -45,6 +45,10 @@ final class Option
     /**
      * @var string
      */
+    public const LEVEL = 'level';
+    /**
+     * @var string
+     */
     public const SUBFOLDER = 'subfolder';
     /**
      * @var string

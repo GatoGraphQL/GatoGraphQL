@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\Hooks;
 
-use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
-use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\AccessControl\ConfigurationEntries\AccessControlConfigurableMandatoryDirectivesForFieldsTrait;
+use PoP\AccessControl\Hooks\AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
+use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
+use PoPSchema\UserRolesAccessControl\Helpers\UserRoleHelper;
+use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 use PoPSchema\UserStateAccessControl\Hooks\AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet;
 
 class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet extends AbstractDisableFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSchemaHookSet
 {
+    use AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait;
     use ConfigurableMandatoryDirectivesForFieldsTrait, AccessControlConfigurableMandatoryDirectivesForFieldsTrait {
         AccessControlConfigurableMandatoryDirectivesForFieldsTrait::getMatchingEntries insteadof ConfigurableMandatoryDirectivesForFieldsTrait;
         // The conflict resolutions below should not be needed, because the functions are not repeated, but it is defined just once in the same source trait

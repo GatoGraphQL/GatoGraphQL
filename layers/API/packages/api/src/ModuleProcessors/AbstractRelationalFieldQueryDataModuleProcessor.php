@@ -60,6 +60,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getNotIsEmptyConditionField(string $field): string
     {
+        $conditionFieldAlias = null;
         // Convert the field into its "not is null" version
         if ($fieldAlias = $this->fieldQueryInterpreter->getFieldAlias($field)) {
             $conditionFieldAlias = 'not-isnull-' . $fieldAlias;

@@ -90,11 +90,13 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     /**
-     * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
-     * Directive arguments have the same syntax as field arguments, so simply re-utilize the corresponding function for field arguments
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $field
+     * Extract field args without using the schema.
+     * It is needed to find out which fieldResolver will process a field,
+     * where we can't depend on the schema since this one needs to know
+     * who the fieldResolver is, creating an infitine loop.
+     * 
+     * Directive arguments have the same syntax as field arguments,
+     * so simply re-utilize the corresponding function for field arguments.
      */
     public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array
     {
@@ -107,9 +109,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
     }
 
     /**
-     * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
-     *
-     * @param TypeResolverInterface $typeResolver
+     * Extract field args without using the schema.
+     * It is needed to find out which fieldResolver will process a field,
+     * where we can't depend on the schema since this one needs to know
+     * who the fieldResolver is, creating an infitine loop.
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array
     {
@@ -134,7 +137,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                     for ($i = 0; $i < count($fieldArgElems); $i++) {
                         $fieldArg = $fieldArgElems[$i];
                         // If there is no separator, then skip this arg, since it is not static (without the schema, we can't know which fieldArgName it is)
-                        $separatorPos = QueryUtils::findFirstSymbolPosition($fieldArg, QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+                        $separatorPos = QueryUtils::findFirstSymbolPosition(
+                            $fieldArg,
+                            QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR,
+                            [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING],
+                            [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING],
+                        );
                         if ($separatorPos === false) {
                             continue;
                         }
@@ -197,10 +205,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
         array &$schemaErrors,
         array &$schemaWarnings,
     ): array {
-        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $typeResolver, $fieldDirective);
+        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $typeResolver);
         // Iterate all the elements, and extract them into the array
         if ($directiveArgElems = QueryHelpers::getFieldArgElements($this->getFieldDirectiveArgs($fieldDirective))) {
-            $directiveArgumentNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver, $fieldDirective);
+            $directiveArgumentNameTypes = $this->getDirectiveArgumentNameTypes($directiveResolver, $typeResolver);
             $orderedDirectiveArgNamesEnabled = $directiveResolver->enableOrderedSchemaDirectiveArgs($typeResolver);
             return $this->extractAndValidateFielOrDirectiveArguments(
                 $fieldDirective,
@@ -244,7 +252,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // Either one of 2 formats are accepted:
             // 1. The key:value pair
             // 2. Only the value, and extract the key from the schema definition (if enabled for that fieldOrDirective)
-            $separatorPos = QueryUtils::findFirstSymbolPosition($fieldOrDirectiveArg, QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+            $separatorPos = QueryUtils::findFirstSymbolPosition(
+                $fieldOrDirectiveArg,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR,
+                [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING],
+                [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING],
+            );
             if ($separatorPos === false) {
                 $fieldOrDirectiveArgValue = $fieldOrDirectiveArg;
                 if (!$orderedFieldOrDirectiveArgNamesEnabled || !isset($orderedFieldOrDirectiveArgNames[$i])) {
@@ -758,12 +771,9 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
             // Otherwise, simply add the argValue directly, it will be eventually casted by the other function
             if (
                 !$forSchema
-                || (
-                    $forSchema && (
-                        (!is_array($argValue) && !$this->isFieldArgumentValueDynamic($argValue))
-                        || (is_array($argValue) && !FieldQueryUtils::isAnyFieldArgumentValueDynamic($argValue))
-                    )
-                )
+                // Conditions below are for `$forSchema => true`
+                || (!is_array($argValue) && !$this->isFieldArgumentValueDynamic($argValue))
+                || (is_array($argValue) && !FieldQueryUtils::isAnyFieldArgumentValueDynamic($argValue))
             ) {
                 /**
                  * Maybe cast the value to the appropriate type.
@@ -857,11 +867,25 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                             $argName
                         );
                     } elseif (
+                        $fieldOrDirectiveArgIsArrayType
+                        && !$fieldOrDirectiveArgIsArrayOfArraysType
+                        && array_filter(
+                            $argValue,
+                            fn ($arrayItem) => is_array($arrayItem)
+                        )
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
+                            $argName,
+                            json_encode($argValue)
+                        );
+                    } elseif (
                         $fieldOrDirectiveArgIsArrayOfArraysType
                         && is_array($argValue)
                         && array_filter(
                             $argValue,
-                            fn ($arrayItem) => !is_array($arrayItem)
+                            // `null` could be accepted as an array! (Validation against null comes next)
+                            fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                         )
                     ) {
                         $errorMessage = sprintf(
@@ -874,10 +898,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         && is_array($argValue)
                         && array_filter(
                             $argValue,
-                            fn ($arrayItem) => array_filter(
+                            fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                                 $arrayItem,
                                 fn ($arrayItemItem) => $arrayItemItem === null
-                            )
+                            ) !== [],
                         )
                     ) {
                         $errorMessage = sprintf(
@@ -897,8 +921,12 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 if ($fieldOrDirectiveArgIsArrayOfArraysType) {
                     // If the value is an array of arrays, then cast each subelement to the item type
                     $argValue = array_map(
-                        fn ($arrayArgValueElem) => array_map(
-                            fn ($arrayOfArraysArgValueElem) => $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $arrayOfArraysArgValueElem),
+                        // If it contains a null value, return it as is
+                        fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
+                            fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $this->typeCastingExecuter->cast(
+                                $fieldOrDirectiveArgType,
+                                $arrayOfArraysArgValueElem
+                            ),
                             $arrayArgValueElem
                         ),
                         $argValue
@@ -906,12 +934,15 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                 } elseif ($fieldOrDirectiveArgIsArrayType) {
                     // If the value is an array, then cast each element to the item type
                     $argValue = array_map(
-                        fn ($arrayArgValueElem) => $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $arrayArgValueElem),
+                        fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $this->typeCastingExecuter->cast(
+                            $fieldOrDirectiveArgType,
+                            $arrayArgValueElem
+                        ),
                         $argValue
                     );
                 } else {
                     // Otherwise, simply cast the given value directly
-                    $argValue = $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
+                    $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
                 }
 
                 // If the response is an error, extract the error message and set value to null

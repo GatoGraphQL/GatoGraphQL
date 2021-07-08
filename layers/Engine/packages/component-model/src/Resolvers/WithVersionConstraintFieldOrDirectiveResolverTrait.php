@@ -22,9 +22,6 @@ trait WithVersionConstraintFieldOrDirectiveResolverTrait
 
     /**
      * If enabled, add the "versionConstraint" param. Add it at the end, so it doesn't affect the order of params for "orderedSchemaDirectiveArgs"
-     *
-     * @param array $schemaDirectiveArgs
-     * @param string|null $version the version of the fieldResolver/directiveResolver
      */
     protected function maybeAddVersionConstraintSchemaFieldOrDirectiveArg(array &$schemaFieldOrDirectiveArgs, bool $hasVersion): void
     {

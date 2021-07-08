@@ -94,6 +94,12 @@ class Engine implements EngineInterface
     protected array $outputData = [];
     protected ?array $entryModule = null;
 
+    /**
+     * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional" 
+     * @var array<string,array<string|int,array<string,mixed>>>>
+     */
+    protected array $typeResolverClass_ids_data_fields = [];
+
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
@@ -934,6 +940,7 @@ class Engine implements EngineInterface
                 $model_props = &$model_props[$submoduleFullName][Props::SUBMODULES];
             }
 
+            $module_props = null;
             if (
                 in_array(
                     $datasource,
@@ -1052,6 +1059,7 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
+            $datasetmoduledata = $datasetmodulemeta = null;
             if ($datasource == DataSources::IMMUTABLE) {
                 $datasetmoduledata = &$immutable_datasetmoduledata;
                 if ($add_meta) {
@@ -1074,7 +1082,7 @@ class Engine implements EngineInterface
 
             // Integrate the dbobjectids into $datasetmoduledata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
-            if (!is_null($datasetmoduledata)) {
+            if ($datasetmoduledata !== null) {
                 $this->assignValueForModule($datasetmoduledata, $module_path, $module, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
@@ -1152,32 +1160,41 @@ class Engine implements EngineInterface
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
             if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
+                /** @phpstan-ignore-next-line */
                 if ($immutable_moduledata) {
                     $ret['moduledata']['immutable'] = $immutable_moduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonmodel_moduledata) {
                     $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_moduledata) : $mutableonmodel_moduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonrequest_moduledata) {
                     $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_moduledata) : $mutableonrequest_moduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($immutable_datasetmoduledata) {
                     $ret['datasetmoduledata']['immutable'] = $immutable_datasetmoduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonmodel_datasetmoduledata) {
                     $ret['datasetmoduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmoduledata) : $mutableonmodel_datasetmoduledata;
                 }
+                /** @phpstan-ignore-next-line */
                 if ($mutableonrequest_datasetmoduledata) {
                     $ret['datasetmoduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmoduledata) : $mutableonrequest_datasetmoduledata;
                 }
 
                 if ($add_meta) {
+                    /** @phpstan-ignore-next-line */
                     if ($immutable_datasetmodulemeta) {
                         $ret['datasetmodulemeta']['immutable'] = $immutable_datasetmodulemeta;
                     }
+                    /** @phpstan-ignore-next-line */
                     if ($mutableonmodel_datasetmodulemeta) {
                         $ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
                     }
+                    /** @phpstan-ignore-next-line */
                     if ($mutableonrequest_datasetmodulemeta) {
                         $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
                     }
@@ -1391,30 +1408,35 @@ class Engine implements EngineInterface
             if ($iterationDBErrors) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationDBErrors, true, $typeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
+                    $dbErrors[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbErrors[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBWarnings) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationDBWarnings, true, $typeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
+                    $dbWarnings[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbWarnings[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $typeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
+                    $dbDeprecations[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbDeprecations[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBNotices) {
                 $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $typeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
+                    $dbNotices[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbNotices[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $typeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
+                    $dbTraces[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbTraces[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
@@ -1675,7 +1697,7 @@ class Engine implements EngineInterface
                                 // Merge, after adding their type!
                                 $field_ids = array_merge(
                                     $field_ids,
-                                    is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
+                                    $database_field_ids
                                 );
                             }
                         }
