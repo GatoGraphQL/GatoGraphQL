@@ -87,6 +87,11 @@ use PoPSchema\Users\Environment as UsersEnvironment;
  */
 class PluginConfiguration extends AbstractMainPluginConfiguration
 {
+    protected static function isCachingEnabled(): bool
+    {
+        return PluginEnvironment::isCachingEnabled();
+    }
+
     /**
      * Initialize all configuration
      */

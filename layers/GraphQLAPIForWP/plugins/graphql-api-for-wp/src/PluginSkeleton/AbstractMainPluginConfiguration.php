@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-
-
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Environment;
@@ -111,7 +109,7 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
             $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-            if ($cacheContainerConfiguration = PluginEnvironment::isCachingEnabled()) {
+            if ($cacheContainerConfiguration = static::isCachingEnabled()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
                 $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
@@ -124,4 +122,6 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
         }
         return self::$containerCacheConfigurationCache;
     }
+
+    abstract protected static function isCachingEnabled(): bool;
 }
