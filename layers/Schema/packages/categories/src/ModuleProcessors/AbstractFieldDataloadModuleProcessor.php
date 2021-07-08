@@ -7,9 +7,8 @@ namespace PoPSchema\Categories\ModuleProcessors;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPSchema\Categories\TypeResolvers\CategoryTypeResolver;
 
-class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
+abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
 
@@ -34,17 +33,6 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         }
 
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
-    }
-
-    public function getTypeResolverClass(array $module): ?string
-    {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return CategoryTypeResolver::class;
-        }
-
-        return parent::getTypeResolverClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

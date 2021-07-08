@@ -7,16 +7,10 @@ namespace PoPSchema\Categories\TypeDataLoaders;
 use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractTrait;
 use PoP\ComponentModel\TypeDataLoaders\AbstractTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Categories\ModuleProcessors\FieldDataloadModuleProcessor;
 
 abstract class AbstractCategoryTypeDataLoader extends AbstractTypeQueryableDataLoader
 {
     use CategoryAPIRequestedContractTrait;
-
-    public function getFilterDataloadingModule(): ?array
-    {
-        return [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST];
-    }
 
     public function getObjects(array $ids): array
     {
