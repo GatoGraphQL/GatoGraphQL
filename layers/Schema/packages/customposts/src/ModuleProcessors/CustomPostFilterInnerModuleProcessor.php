@@ -38,12 +38,12 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
     {
         $ret = parent::getSubmodules($module);
 
-        switch ($module[1]) {
-            case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST:
-            case self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST:
-            case self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST:
-            case self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST:
-                $inputmodules = [
+        $inputmodules = match ($module[1]) {
+            self::MODULE_FILTERINNER_UNIONCUSTOMPOSTLIST,
+            self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTLIST,
+            self::MODULE_FILTERINNER_CUSTOMPOSTLISTLIST,
+            self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTLIST =>
+                [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
@@ -51,20 +51,19 @@ class CustomPostFilterInnerModuleProcessor extends AbstractModuleProcessor
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                ];
-                break;
-            case self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT:
-            case self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT:
-            case self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT:
-            case self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT:
-                $inputmodules = [
+                ],
+            self::MODULE_FILTERINNER_UNIONCUSTOMPOSTCOUNT,
+            self::MODULE_FILTERINNER_ADMINUNIONCUSTOMPOSTCOUNT,
+            self::MODULE_FILTERINNER_CUSTOMPOSTLISTCOUNT,
+            self::MODULE_FILTERINNER_ADMINCUSTOMPOSTLISTCOUNT => 
+                [
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
                     [CommonFilterMultipleInputModuleProcessor::class, CommonFilterMultipleInputModuleProcessor::MODULE_FILTERINPUT_DATES],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
                     [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                ];
-                break;
-        }
+                ],
+            default => []
+        };
         // Fields "customPosts" and "customPostCount" also have the "postTypes" filter
         if (
             in_array($module[1], [
