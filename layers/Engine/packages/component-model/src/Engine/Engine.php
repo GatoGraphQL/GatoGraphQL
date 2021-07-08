@@ -94,6 +94,11 @@ class Engine implements EngineInterface
     protected array $outputData = [];
     protected ?array $entryModule = null;
 
+    /**
+     * @var array<string,array<string|int,array<string,string[]>>>>
+     */
+    protected array $typeResolverClass_ids_data_fields = [];
+
     public function __construct(
         protected TranslationAPIInterface $translationAPI,
         protected HooksAPIInterface $hooksAPI,
