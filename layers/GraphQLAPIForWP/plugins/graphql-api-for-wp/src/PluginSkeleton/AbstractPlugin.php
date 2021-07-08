@@ -165,10 +165,7 @@ abstract class AbstractPlugin
     /**
      * Configure the plugin.
      */
-    protected function callPluginConfiguration(): void
-    {
-        // Override if needed
-    }
+    abstract protected function callPluginConfiguration(): void;
 
     /**
      * Plugin's booting

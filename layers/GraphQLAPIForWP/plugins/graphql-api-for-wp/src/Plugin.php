@@ -177,7 +177,7 @@ class Plugin extends AbstractMainPlugin
          * a module, then already take that new state!
          *
          * This is because `maybeProcessAction`, which is where modules are
-         * enabled/disabled, must be executed before PluginConfiguration::initialize(),
+         * enabled/disabled, must be executed before PluginConfiguration->initialize(),
          * which is where the plugin reads if a module is enabled/disabled as to
          * set the environment constants.
          *
@@ -202,16 +202,5 @@ class Plugin extends AbstractMainPlugin
                 $tableAction->maybeProcessAction();
             }
         }
-    }
-
-    /**
-     * Configure the plugin.
-     * This defines hooks to set environment variables,
-     * so must be executed before those hooks are triggered for first time
-     * (in ComponentConfiguration classes)
-     */
-    protected function callPluginConfiguration(): void
-    {
-        PluginConfiguration::initialize();
     }
 }

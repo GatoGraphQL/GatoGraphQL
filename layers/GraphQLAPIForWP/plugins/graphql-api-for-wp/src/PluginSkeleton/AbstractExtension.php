@@ -38,6 +38,17 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
+     * Configure the plugin.
+     * This defines hooks to set environment variables,
+     * so must be executed before those hooks are triggered for first time
+     * (in ComponentConfiguration classes)
+     */
+    protected function callPluginConfiguration(): void
+    {
+        $this->extensionConfiguration?->initialize();
+    }
+
+    /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
      */

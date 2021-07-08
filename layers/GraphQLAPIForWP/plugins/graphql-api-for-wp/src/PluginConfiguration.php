@@ -93,16 +93,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     }
 
     /**
-     * Initialize all configuration
-     */
-    public static function initialize(): void
-    {
-        self::mapEnvVariablesToWPConfigConstants();
-        self::defineEnvironmentConstantsFromSettings();
-        self::defineEnvironmentConstantsFromCallbacks();
-    }
-
-    /**
      * If we are in options.php, already set the new slugs in the hook,
      * so that the EndpointHandler's `addRewriteEndpoints` (executed on `init`)
      * adds the rewrite with the new slug, which will be persisted on
@@ -165,11 +155,10 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     /**
      * Define the values for certain environment constants from the plugin settings
      */
-    protected static function defineEnvironmentConstantsFromSettings(): void
+    protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        // All the environment variables to override
-        $mappings = [
+        return [
             // Editing Access Scheme
             [
                 'class' => ComponentConfiguration::class,
@@ -498,82 +487,28 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'option' => SchemaTypeModuleResolver::OPTION_ENABLE_ADMIN_SCHEMA,
             ],
         ];
-        // For each environment variable, see if its value has been saved in the settings
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        foreach ($mappings as $mapping) {
-            $module = $mapping['module'];
-            $condition = $mapping['condition'] ?? true;
-            // Check if the hook must be executed always (condition => 'any') or with
-            // stated enabled (true) or disabled (false). By default, it's enabled
-            if ($condition !== 'any' && $condition !== $moduleRegistry->isModuleEnabled($module)) {
-                continue;
-            }
-            // If the environment value has been defined, or the constant in wp-config.php,
-            // then do nothing, since they have priority
-            $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                continue;
-            }
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $mapping['class'],
-                $envVariable
-            );
-            $option = $mapping['option'];
-            $optionModule = $mapping['optionModule'] ?? $module;
-            // Make explicit it can be null so that PHPStan level 3 doesn't fail
-            $callback = $mapping['callback'] ?? null;
-            \add_filter(
-                $hookName,
-                function () use ($userSettingsManager, $optionModule, $option, $callback) {
-                    $value = $userSettingsManager->getSetting($optionModule, $option);
-                    if (!is_null($callback)) {
-                        return $callback($value);
-                    }
-                    return $value;
-                }
-            );
-        }
     }
 
     /**
      * Define the values for certain environment constants from the plugin settings
      */
-    protected static function defineEnvironmentConstantsFromCallbacks(): void
+    protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
-        // All the environment variables to override
-        $mappings = [
+        return [
             [
                 'class' => \PoPSchema\Comments\ComponentConfiguration::class,
                 'envVariable' => \PoPSchema\Comments\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT,
                 'callback' => fn () => \get_option('comment_registration') === '1',
             ],
         ];
-        foreach ($mappings as $mapping) {
-            // If the environment value has been defined, or the constant in wp-config.php,
-            // then do nothing, since they have priority
-            $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                continue;
-            }
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $mapping['class'],
-                $envVariable
-            );
-            $callback = $mapping['callback'];
-            \add_filter(
-                $hookName,
-                fn () => $callback(),
-            );
-        }
     }
 
     /**
-     * Map the environment variables from the components, to WordPress wp-config.php constants
+     * All the environment variables to override
      */
-    protected static function mapEnvVariablesToWPConfigConstants(): void
+    protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
-        // All the environment variables to override
-        $mappings = [
+        return [
             [
                 'class' => ComponentConfiguration::class,
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,
@@ -611,34 +546,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
             ],
         ];
-        // For each environment variable, see if it has been defined as a wp-config.php constant
-        foreach ($mappings as $mapping) {
-            $class = $mapping['class'];
-            $envVariable = $mapping['envVariable'];
-
-            // If the environment value has been defined, then do nothing, since it has priority
-            if (getenv($envVariable) !== false) {
-                continue;
-            }
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $class,
-                $envVariable
-            );
-
-            \add_filter(
-                $hookName,
-                /**
-                 * Override the value of an environment variable if it has been definedas a constant
-                 * in wp-config.php, with the environment name prepended with "GRAPHQL_API_"
-                 */
-                function ($value) use ($envVariable) {
-                    if (PluginConfigurationHelpers::isWPConfigConstantDefined($envVariable)) {
-                        return PluginConfigurationHelpers::getWPConfigConstantValue($envVariable);
-                    }
-                    return $value;
-                }
-            );
-        }
     }
 
     /**
