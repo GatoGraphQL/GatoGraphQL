@@ -29,7 +29,7 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
      */
     public function getContainerCacheConfiguration(): array
     {
-        if (is_null($this->containerCacheConfigurationCache)) {
+        if ($this->containerCacheConfigurationCache === null) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
             $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
