@@ -481,7 +481,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
-        
+
         $componentClassConfiguration = [];
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             /**

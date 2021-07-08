@@ -92,10 +92,10 @@ abstract class AbstractPluginConfiguration
     protected function defineEnvironmentConstantsFromSettings(): void
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        
+
         // All the environment variables to override
         $mappings = $this->getEnvironmentConstantsFromSettingsMapping();
-        
+
         // For each environment variable, see if its value has been saved in the settings
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         foreach ($mappings as $mapping) {
@@ -241,7 +241,7 @@ abstract class AbstractPluginConfiguration
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             return [];
         }
-        
+
         // Component classes are skipped if the module is disabled
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleComponentClasses = array_filter(

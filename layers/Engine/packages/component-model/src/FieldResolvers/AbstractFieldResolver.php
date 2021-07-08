@@ -242,7 +242,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface, FieldSch
             $fieldArgs,
         );
     }
-    
+
     /**
      * Custom validations. Function to override
      */

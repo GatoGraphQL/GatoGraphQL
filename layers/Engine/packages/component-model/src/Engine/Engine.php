@@ -95,7 +95,7 @@ class Engine implements EngineInterface
     protected ?array $entryModule = null;
 
     /**
-     * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional" 
+     * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
      * @var array<string,array<string|int,array<string,mixed>>>>
      */
     protected array $typeResolverClass_ids_data_fields = [];

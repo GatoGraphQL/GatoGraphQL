@@ -20,7 +20,7 @@ trait QueryDataModuleProcessorTrait
      * @var array<string, array<string[]>>
      */
     protected array $activeDataloadQueryArgsFilteringModules = [];
-    
+
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         return array();

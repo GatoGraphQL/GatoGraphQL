@@ -13,7 +13,7 @@ interface TypeResolverInterface
     /**
      * All objects MUST have an ID. `null` is supported for the UnionTypeResolver,
      * when it cannot find a resolver to handle the object.
-     * 
+     *
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
      */
     public function getID(object $resultItem): string | int | null;
