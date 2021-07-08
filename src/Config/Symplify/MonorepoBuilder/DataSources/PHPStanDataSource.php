@@ -52,10 +52,6 @@ class PHPStanDataSource
             'layers/Wassup/packages/system-mutations',
             'layers/Wassup/packages/user-state-mutations',
             'layers/Wassup/packages/volunteer-mutations',
-            // 'layers/Legacy/Schema/packages/everythingelse-wp',
-            // 'layers/Legacy/Schema/packages/everythingelse',
-            // 'layers/Legacy/Wassup/packages/everythingelse-mutations',
-            // 'layers/Legacy/Wassup/packages/wassup',
         ];
     }
 }
