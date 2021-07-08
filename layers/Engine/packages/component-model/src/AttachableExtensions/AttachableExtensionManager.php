@@ -9,7 +9,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 class AttachableExtensionManager implements AttachableExtensionManagerInterface
 {
     /**
-     * @var array<string, array<string, AttachableExtensionInterface[]>
+     * @var array<string, array<string, AttachableExtensionInterface[]>>
      */
     protected array $attachableExtensions = [];
 
@@ -19,7 +19,7 @@ class AttachableExtensionManager implements AttachableExtensionManagerInterface
     }
 
     /**
-     * @return array<string, array<string, AttachableExtensionInterface[]>
+     * @return AttachableExtensionInterface[]
      */
     public function getAttachedExtensions(string $attachableClass, string $group): array
     {
