@@ -33,8 +33,6 @@ trait EnumTypeFieldInterfaceSchemaDefinitionResolverTrait
 
     /**
      * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
-     *
-     * @param TypeResolverInterface $typeResolver
      */
     protected function addSchemaDefinitionEnumValuesForField(array &$schemaDefinition, string $fieldName): void
     {
