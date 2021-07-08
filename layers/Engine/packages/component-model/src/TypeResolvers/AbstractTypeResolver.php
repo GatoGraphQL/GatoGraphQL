@@ -164,7 +164,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     /**
-     * @param $dbObjectIDOrIDs string|int|array<string|int>
+     * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
@@ -1533,10 +1533,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => array_filter(
+                                    fn (array $arrayItem) => array_filter(
                                         $arrayItem,
                                         fn ($arrayItemItem) => $arrayItemItem === null
-                                    )
+                                    ) !== [],
                                 )
                             ) {
                                 return $this->errorProvider->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
@@ -1609,6 +1609,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             if ($isFlatShape) {
                 $this->processFlatShapeSchemaDefinition($options);
                 // Add the type to the list of all types, displayed when doing "shape=>flat"
+                /** @phpstan-ignore-next-line */
                 $generalMessages[SchemaDefinition::ARGNAME_TYPES][$typeSchemaKey] = $this->schemaDefinition[$typeSchemaKey];
             }
         }

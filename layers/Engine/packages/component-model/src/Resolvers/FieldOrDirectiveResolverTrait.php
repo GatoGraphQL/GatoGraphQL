@@ -199,10 +199,10 @@ trait FieldOrDirectiveResolverTrait
                     && is_array($fieldOrDirectiveArgumentValue)
                     && array_filter(
                         $fieldOrDirectiveArgumentValue,
-                        fn ($arrayItem) => array_filter(
+                        fn (array $arrayItem) => array_filter(
                             $arrayItem,
                             fn ($arrayItemItem) => $arrayItemItem === null
-                        )
+                        ) !== [],
                     )
                 ) {
                     $errors[] = sprintf(
@@ -367,10 +367,10 @@ trait FieldOrDirectiveResolverTrait
                         && $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems
                         && array_filter(
                             $fieldOrDirectiveArgumentValue,
-                            fn ($arrayItem) => array_filter(
+                            fn (array $arrayItem) => array_filter(
                                 $arrayItem,
                                 fn ($arrayItemItem) => $arrayItemItem === null
-                            )
+                            ) !== [],
                         )
                     ) {
                         $errors[] = sprintf(

@@ -874,10 +874,10 @@ class FieldQueryInterpreter extends \PoP\FieldQuery\FieldQueryInterpreter implem
                         && is_array($argValue)
                         && array_filter(
                             $argValue,
-                            fn ($arrayItem) => array_filter(
+                            fn (array $arrayItem) => array_filter(
                                 $arrayItem,
                                 fn ($arrayItemItem) => $arrayItemItem === null
-                            )
+                            ) !== [],
                         )
                     ) {
                         $errorMessage = sprintf(
