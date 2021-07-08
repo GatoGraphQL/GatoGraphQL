@@ -1396,30 +1396,35 @@ class Engine implements EngineInterface
             if ($iterationDBErrors) {
                 $dbNameErrorEntries = $this->moveEntriesUnderDBName($iterationDBErrors, true, $typeResolver);
                 foreach ($dbNameErrorEntries as $dbname => $entries) {
+                    $dbErrors[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbErrors[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBWarnings) {
                 $dbNameWarningEntries = $this->moveEntriesUnderDBName($iterationDBWarnings, true, $typeResolver);
                 foreach ($dbNameWarningEntries as $dbname => $entries) {
+                    $dbWarnings[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbWarnings[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBDeprecations) {
                 $dbNameDeprecationEntries = $this->moveEntriesUnderDBName($iterationDBDeprecations, true, $typeResolver);
                 foreach ($dbNameDeprecationEntries as $dbname => $entries) {
+                    $dbDeprecations[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbDeprecations[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBNotices) {
                 $dbNameNoticeEntries = $this->moveEntriesUnderDBName($iterationDBNotices, true, $typeResolver);
                 foreach ($dbNameNoticeEntries as $dbname => $entries) {
+                    $dbNotices[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbNotices[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
             if ($iterationDBTraces) {
                 $dbNameTraceEntries = $this->moveEntriesUnderDBName($iterationDBTraces, true, $typeResolver);
                 foreach ($dbNameTraceEntries as $dbname => $entries) {
+                    $dbTraces[$dbname] ??= [];
                     $this->addDatasetToDatabase($dbTraces[$dbname], $typeResolver, $database_key, $entries, $resultIDItems, true);
                 }
             }
