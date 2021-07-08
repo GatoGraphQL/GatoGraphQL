@@ -93,7 +93,7 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
      *
      * @var array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
      */
-    protected static ?array $containerCacheConfigurationCache = null;
+    protected ?array $containerCacheConfigurationCache = null;
 
     /**
      * Provide the configuration to cache the container
@@ -103,25 +103,28 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
      *                      [1]: container namespace (string|null)
      *                      [2]: container directory (string|null)
      */
-    public static function getContainerCacheConfiguration(): array
+    public function getContainerCacheConfiguration(): array
     {
-        if (is_null(self::$containerCacheConfigurationCache)) {
+        if (is_null($this->containerCacheConfigurationCache)) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
             $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-            if ($cacheContainerConfiguration = static::isCachingEnabled()) {
+            if ($cacheContainerConfiguration = $this->isCachingEnabled()) {
                 $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
                 $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
             }
-            self::$containerCacheConfigurationCache = [
+            $this->containerCacheConfigurationCache = [
                 $cacheContainerConfiguration,
                 $containerConfigurationCacheNamespace,
                 $containerConfigurationCacheDirectory
             ];
         }
-        return self::$containerCacheConfigurationCache;
+        return $this->containerCacheConfigurationCache;
     }
 
-    abstract protected static function isCachingEnabled(): bool;
+    protected function isCachingEnabled(): bool
+    {
+        return false;
+    }
 }

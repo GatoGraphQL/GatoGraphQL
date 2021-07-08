@@ -19,7 +19,7 @@ abstract class AbstractPlugin
     protected string $pluginBaseName;
     protected string $pluginName;
 
-    final public function __construct(
+    public function __construct(
         protected string $pluginFile, /** The main plugin file */
         protected string $pluginVersion,
         ?string $pluginName = null,

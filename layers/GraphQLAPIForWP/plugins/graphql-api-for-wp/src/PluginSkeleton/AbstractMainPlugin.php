@@ -20,6 +20,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      */
     protected ?Exception $inititalizationException = null;
 
+    public function __construct(
+        string $pluginFile, /** The main plugin file */
+        string $pluginVersion,
+        ?string $pluginName = null,
+        protected AbstractMainPluginConfiguration $pluginConfiguration,
+    ) {
+        parent::__construct(
+            $pluginFile,
+            $pluginVersion,
+            $pluginName,
+        );
+    }
+
     /**
      * Get the plugin's immutable configuration values
      *
@@ -314,8 +327,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
     }
 
-    abstract protected function getPluginConfigurationClass(): string;
-
     /**
      * Boot the system
      */
@@ -323,11 +334,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         // If the service container has an error, Symfony DI will throw an exception
         try {
-            $pluginConfigurationClass = $this->getPluginConfigurationClass();
-
             // Boot all PoP components, from this plugin and all extensions
             AppLoader::bootSystem(
-                ...$pluginConfigurationClass::getContainerCacheConfiguration()
+                ...$this->pluginConfiguration->getContainerCacheConfiguration()
             );
 
             // Custom logic
@@ -351,11 +360,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         // If the service container has an error, Symfony DI will throw an exception
         try {
-            $pluginConfigurationClass = $this->getPluginConfigurationClass();
-
             // Boot all PoP components, from this plugin and all extensions
             AppLoader::bootApplication(
-                ...$pluginConfigurationClass::getContainerCacheConfiguration()
+                ...$this->pluginConfiguration->getContainerCacheConfiguration()
             );
 
             // Custom logic

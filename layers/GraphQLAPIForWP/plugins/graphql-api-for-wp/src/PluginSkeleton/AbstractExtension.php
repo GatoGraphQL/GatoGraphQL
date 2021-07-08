@@ -24,6 +24,19 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  */
 abstract class AbstractExtension extends AbstractPlugin
 {
+    public function __construct(
+        string $pluginFile, /** The main plugin file */
+        string $pluginVersion,
+        ?string $pluginName = null,
+        protected ?AbstractExtensionConfiguration $extensionConfiguration = null,
+    ) {
+        parent::__construct(
+            $pluginFile,
+            $pluginVersion,
+            $pluginName,
+        );
+    }
+
     /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized

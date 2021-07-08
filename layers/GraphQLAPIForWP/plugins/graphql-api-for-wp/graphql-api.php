@@ -16,6 +16,7 @@ GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 // Exit if accessed directly
@@ -47,5 +48,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 MainPluginManager::register(new Plugin(
     __FILE__,
     $pluginVersion,
-    $pluginName
+    $pluginName,
+    new PluginConfiguration()
 ))->setup();

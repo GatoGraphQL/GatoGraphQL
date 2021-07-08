@@ -10,11 +10,12 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 
@@ -164,11 +165,6 @@ class Plugin extends AbstractMainPlugin
     public function getSchemaComponentClassesToSkip(): array
     {
         return PluginConfiguration::getSkippingSchemaComponentClasses();
-    }
-
-    protected function getPluginConfigurationClass(): string
-    {
-        return PluginConfiguration::class;
     }
 
     /**
