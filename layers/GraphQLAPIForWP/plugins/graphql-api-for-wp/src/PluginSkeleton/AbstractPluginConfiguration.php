@@ -299,22 +299,17 @@ abstract class AbstractPluginConfiguration
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             return [];
         }
-
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-
+        
         // Component classes are skipped if the module is disabled
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleComponentClasses = array_filter(
             $this->getModuleComponentClasses(),
-            function ($module) use ($moduleRegistry) {
-                return !$moduleRegistry->isModuleEnabled($module);
-            },
+            fn ($module) => !$moduleRegistry->isModuleEnabled($module),
             ARRAY_FILTER_USE_KEY
         );
-        return GeneralUtils::arrayFlatten(
-            array_values(
-                $skipSchemaModuleComponentClasses
-            )
-        );
+        return GeneralUtils::arrayFlatten(array_values(
+            $skipSchemaModuleComponentClasses
+        ));
     }
 
     /**
