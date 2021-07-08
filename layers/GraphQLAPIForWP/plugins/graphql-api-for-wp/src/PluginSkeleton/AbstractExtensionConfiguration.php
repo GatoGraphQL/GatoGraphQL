@@ -19,7 +19,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  * it is necessary to flush the rewrite rules for the change to take effect.
  * For that, on the WordPress admin, go to Settings => Permalinks and click on Save changes
  */
-class AbstractExtensionConfiguration extends AbstractPluginConfiguration
+abstract class AbstractExtensionConfiguration extends AbstractPluginConfiguration
 {
     
 }

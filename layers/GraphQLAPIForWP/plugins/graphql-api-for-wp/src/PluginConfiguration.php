@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Config\PluginConfigurationHelpers;
 use GraphQLAPI\GraphQLAPI\Environment;
-use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
@@ -88,13 +87,6 @@ use PoPSchema\Users\Environment as UsersEnvironment;
  */
 class PluginConfiguration extends AbstractMainPluginConfiguration
 {
-    /**
-     * Cache the Container Cache Configuration
-     *
-     * @var array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
-     */
-    protected static ?array $containerCacheConfigurationCache = null;
-
     /**
      * Initialize all configuration
      */
@@ -642,34 +634,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 }
             );
         }
-    }
-
-    /**
-     * Provide the configuration to cache the container
-     *
-     * @return array<mixed> Array with args to pass to `AppLoader::initializeContainers`:
-     *                      [0]: cache container? (bool)
-     *                      [1]: container namespace (string|null)
-     *                      [2]: container directory (string|null)
-     */
-    public static function getContainerCacheConfiguration(): array
-    {
-        if (is_null(self::$containerCacheConfigurationCache)) {
-            $containerConfigurationCacheNamespace = null;
-            $containerConfigurationCacheDirectory = null;
-            $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-            if ($cacheContainerConfiguration = PluginEnvironment::isCachingEnabled()) {
-                $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
-                $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
-                $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
-            }
-            self::$containerCacheConfigurationCache = [
-                $cacheContainerConfiguration,
-                $containerConfigurationCacheNamespace,
-                $containerConfigurationCacheDirectory
-            ];
-        }
-        return self::$containerCacheConfigurationCache;
     }
 
     /**

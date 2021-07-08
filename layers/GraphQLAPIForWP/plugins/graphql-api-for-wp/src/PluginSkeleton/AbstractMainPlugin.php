@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
+use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
@@ -313,15 +314,63 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         );
     }
 
+    abstract protected function getPluginConfigurationClass(): string;
+
     /**
      * Boot the system
      */
-    abstract public function bootSystem(): void;
+    public function bootSystem(): void
+    {
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            $pluginConfigurationClass = $this->getPluginConfigurationClass();
+
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootSystem(
+                ...$pluginConfigurationClass::getContainerCacheConfiguration()
+            );
+
+            // Custom logic
+            $this->doBootSystem();
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
+        }
+    }
+
+    /**
+     * Custom function to boot the system. Override if needed
+     */
+    protected function doBootSystem(): void
+    {
+    }
 
     /**
      * Boot the application
      */
-    abstract public function bootApplication(): void;
+    public function bootApplication(): void
+    {
+        // If the service container has an error, Symfony DI will throw an exception
+        try {
+            $pluginConfigurationClass = $this->getPluginConfigurationClass();
+
+            // Boot all PoP components, from this plugin and all extensions
+            AppLoader::bootApplication(
+                ...$pluginConfigurationClass::getContainerCacheConfiguration()
+            );
+
+            // Custom logic
+            $this->doBootApplication();
+        } catch (Exception $e) {
+            $this->inititalizationException = $e;
+        }
+    }
+
+    /**
+     * Custom function to boot the application. Override if needed
+     */
+    protected function doBootApplication(): void
+    {
+    }
 
     /**
      * If in development, throw the exception.
