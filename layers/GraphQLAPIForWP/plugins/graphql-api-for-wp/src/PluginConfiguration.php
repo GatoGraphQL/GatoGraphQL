@@ -649,7 +649,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
      *
      * @return array<string,string[]>
      */
-    protected function getModuleComponentClasses(): array
+    protected function getModuleComponentClassesToSkipIfDisabled(): array
     {
         return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [

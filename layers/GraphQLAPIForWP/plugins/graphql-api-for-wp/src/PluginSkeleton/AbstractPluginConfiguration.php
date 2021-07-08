@@ -303,7 +303,7 @@ abstract class AbstractPluginConfiguration
         // Component classes are skipped if the module is disabled
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleComponentClasses = array_filter(
-            $this->getModuleComponentClasses(),
+            $this->getModuleComponentClassesToSkipIfDisabled(),
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
             ARRAY_FILTER_USE_KEY
         );
@@ -318,7 +318,7 @@ abstract class AbstractPluginConfiguration
      *
      * @return array<string,string[]>
      */
-    protected function getModuleComponentClasses(): array
+    protected function getModuleComponentClassesToSkipIfDisabled(): array
     {
         return [];
     }
