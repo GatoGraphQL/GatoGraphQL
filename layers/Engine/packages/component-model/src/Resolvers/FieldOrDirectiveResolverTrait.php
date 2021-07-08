@@ -167,10 +167,10 @@ trait FieldOrDirectiveResolverTrait
                 } elseif (
                     !$fieldOrDirectiveArgIsArrayOfArrays
                     && is_array($fieldOrDirectiveArgumentValue)
-                    // Check if any element is not an array
+                    // Check if any element is an array
                     && array_filter(
                         $fieldOrDirectiveArgumentValue,
-                        fn ($arrayItem) => is_array($arrayItem)
+                        fn (mixed $arrayItem) => is_array($arrayItem)
                     )
                 ) {
                     $errors[] = sprintf(
@@ -185,7 +185,8 @@ trait FieldOrDirectiveResolverTrait
                     // Check if any element is not an array
                     && array_filter(
                         $fieldOrDirectiveArgumentValue,
-                        fn ($arrayItem) => !is_array($arrayItem)
+                        // `null` could be accepted as an array! (Validation against null comes next)
+                        fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                     )
                 ) {
                     $errors[] = sprintf(
@@ -199,7 +200,7 @@ trait FieldOrDirectiveResolverTrait
                     && is_array($fieldOrDirectiveArgumentValue)
                     && array_filter(
                         $fieldOrDirectiveArgumentValue,
-                        fn (array $arrayItem) => array_filter(
+                        fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                             $arrayItem,
                             fn ($arrayItemItem) => $arrayItemItem === null
                         ) !== [],
@@ -334,7 +335,7 @@ trait FieldOrDirectiveResolverTrait
                         && is_array($fieldOrDirectiveArgumentValue)
                         && array_filter(
                             $fieldOrDirectiveArgumentValue,
-                            fn ($arrayItem) => is_array($arrayItem)
+                            fn (mixed $arrayItem) => is_array($arrayItem)
                         )
                     ) {
                         $errors[] = sprintf(
@@ -350,7 +351,8 @@ trait FieldOrDirectiveResolverTrait
                         && is_array($fieldOrDirectiveArgumentValue)
                         && array_filter(
                             $fieldOrDirectiveArgumentValue,
-                            fn ($arrayItem) => !is_array($arrayItem)
+                            // `null` could be accepted as an array! (Validation against null comes next)
+                            fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                         )
                     ) {
                         $errors[] = sprintf(
@@ -367,7 +369,7 @@ trait FieldOrDirectiveResolverTrait
                         && $enumTypeFieldOrDirectiveArgNonNullArrayOfArraysItems
                         && array_filter(
                             $fieldOrDirectiveArgumentValue,
-                            fn (array $arrayItem) => array_filter(
+                            fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                                 $arrayItem,
                                 fn ($arrayItemItem) => $arrayItemItem === null
                             ) !== [],

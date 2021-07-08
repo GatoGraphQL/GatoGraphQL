@@ -1512,7 +1512,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => is_array($arrayItem)
+                                    fn (mixed $arrayItem) => is_array($arrayItem)
                                 )
                             ) {
                                 return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
@@ -1522,7 +1522,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn ($arrayItem) => !is_array($arrayItem)
+                                    // `null` could be accepted as an array! (Validation against null comes next)
+                                    fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                                 )
                             ) {
                                 return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
@@ -1533,7 +1534,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
                                 && is_array($value)
                                 && array_filter(
                                     $value,
-                                    fn (array $arrayItem) => array_filter(
+                                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                                         $arrayItem,
                                         fn ($arrayItemItem) => $arrayItemItem === null
                                     ) !== [],
