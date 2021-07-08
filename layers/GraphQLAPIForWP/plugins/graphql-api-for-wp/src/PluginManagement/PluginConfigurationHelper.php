@@ -59,7 +59,7 @@ class PluginConfigurationHelper
             && isset($_REQUEST[SettingsMenuPage::FORM_ORIGIN])
             && $_REQUEST[SettingsMenuPage::FORM_ORIGIN] == SettingsMenuPage::SETTINGS_FIELD
         ) {
-            $value = PluginConfigurationHelper::getNormalizedOptionValues();
+            $value = self::getNormalizedOptionValues();
             // Return the specific value to this module/option
             $moduleRegistry = SystemModuleRegistryFacade::getInstance();
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
