@@ -580,7 +580,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     /**
      * Return the opposite value
      */
-    protected function opposite(bool $value): bool
+    private function opposite(bool $value): bool
     {
         return !$value;
     }
