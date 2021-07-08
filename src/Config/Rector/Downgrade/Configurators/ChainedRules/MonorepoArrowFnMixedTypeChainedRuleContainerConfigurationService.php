@@ -9,7 +9,9 @@ class MonorepoArrowFnMixedTypeChainedRuleContainerConfigurationService extends A
     protected function getPaths(): array
     {
         return [
+            $this->rootDirectory . '/layers/Engine/packages/component-model/src/Resolvers/FieldOrDirectiveResolverTrait.php',
             $this->rootDirectory . '/layers/Engine/packages/component-model/src/Schema/FieldQueryInterpreter.php',
+            $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/AbstractTypeResolver.php',
             $this->rootDirectory . '/layers/API/packages/api/src/Schema/FieldQueryConvertor.php',
         ];
     }

@@ -13,7 +13,9 @@ class GraphQLAPIArrowFnMixedTypeChainedRuleContainerConfigurationService extends
     protected function getPaths(): array
     {
         return [
+            $this->pluginDir . '/vendor/getpop/component-model/src/Resolvers/FieldOrDirectiveResolverTrait.php',
             $this->pluginDir . '/vendor/getpop/component-model/src/Schema/FieldQueryInterpreter.php',
+            $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/AbstractTypeResolver.php',
             $this->pluginDir . '/vendor/getpop/api/src/Schema/FieldQueryConvertor.php',
         ];
     }
