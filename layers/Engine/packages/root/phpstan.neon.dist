@@ -5,5 +5,5 @@ parameters:
 		- tests
 	ignoreErrors:
 		-
-			message: '#^Negated boolean expression is always false.$#'
+			message: '#^Negated boolean expression is always false\.$#'
 			path: src/Container/ContainerBuilderFactoryTrait.php

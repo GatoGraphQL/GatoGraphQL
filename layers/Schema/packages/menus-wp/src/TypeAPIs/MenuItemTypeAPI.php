@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\MenusWP\TypeAPIs;
 
 use PoPSchema\Menus\TypeAPIs\MenuItemTypeAPIInterface;
+use WP_Post;
 
 class MenuItemTypeAPI implements MenuItemTypeAPIInterface
 {
@@ -14,6 +15,7 @@ class MenuItemTypeAPI implements MenuItemTypeAPIInterface
      */
     public function getMenuItem(string | int $id): ?object
     {
+        /** @var WP_Post|null */
         return get_post($id, ARRAY_A);
     }
     public function getMenuItemID(object $menuItem): string | int
