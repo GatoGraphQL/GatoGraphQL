@@ -55,6 +55,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     }
 
     /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return $this->pluginConfiguration->getSchemaComponentClassesToSkip();
+    }
+
+    /**
      * Get the plugin's immutable configuration values
      *
      * @return array<string, mixed>

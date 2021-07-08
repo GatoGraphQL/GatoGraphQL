@@ -147,16 +147,6 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Add schema Component classes to skip initializing
-     *
-     * @return string[] List of `Component` class which must not initialize their Schema services
-     */
-    public function getSchemaComponentClassesToSkip(): array
-    {
-        return PluginConfiguration::getSkippingSchemaComponentClasses();
-    }
-
-    /**
      * Boot the system
      */
     protected function doBootSystem(): void

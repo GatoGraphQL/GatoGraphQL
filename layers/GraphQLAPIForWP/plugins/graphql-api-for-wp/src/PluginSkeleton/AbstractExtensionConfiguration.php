@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 /**
  * Sets the configuration in all the PoP components.
@@ -20,6 +24,5 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  * For that, on the WordPress admin, go to Settings => Permalinks and click on Save changes
  */
 abstract class AbstractExtensionConfiguration extends AbstractPluginConfiguration
-{
-    
+{    
 }

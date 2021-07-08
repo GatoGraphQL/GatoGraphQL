@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
-
 /**
  * This class is hosted within the graphql-api-for-wp plugin, and not
  * within the extension plugin. That means that the main plugin
@@ -59,6 +56,16 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        return $this->extensionConfiguration?->getSchemaComponentClassesToSkip() ?? parent::getSchemaComponentClassesToSkip();
+    }
+
+    /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
      */
@@ -93,52 +100,6 @@ abstract class AbstractExtension extends AbstractPlugin
             },
             PluginLifecyclePriorities::SETUP_EXTENSIONS
         );
-    }
-
-    /**
-     * Add schema Component classes to skip initializing
-     *
-     * @return string[] List of `Component` class which must not initialize their Schema services
-     */
-    public function getSchemaComponentClassesToSkip(): array
-    {
-        return $this->getSkippingSchemaComponentClasses();
-    }
-
-    /**
-     * Provide the classes of the components whose
-     * schema initialization must be skipped
-     *
-     * @return string[]
-     */
-    protected function getSkippingSchemaComponentClasses(): array
-    {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-
-        // Component classes are skipped if the module is disabled
-        $skipSchemaModuleComponentClasses = array_filter(
-            $this->getModuleComponentClasses(),
-            function ($module) use ($moduleRegistry) {
-                return !$moduleRegistry->isModuleEnabled($module);
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-        return GeneralUtils::arrayFlatten(
-            array_values(
-                $skipSchemaModuleComponentClasses
-            )
-        );
-    }
-
-    /**
-     * Provide the list of modules to check if they are enabled and,
-     * if they are not, what component classes must skip initialization
-     *
-     * @return array<string,string[]>
-     */
-    protected function getModuleComponentClasses(): array
-    {
-        return [];
     }
 
     /**

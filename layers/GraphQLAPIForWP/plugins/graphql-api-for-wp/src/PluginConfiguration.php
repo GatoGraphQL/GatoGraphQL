@@ -644,23 +644,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     }
 
     /**
-     * Provide the classes of the components whose
-     * schema initialization must be skipped
+     * Provide the list of modules to check if they are enabled and,
+     * if they are not, what component classes must skip initialization
      *
-     * @return string[]
+     * @return array<string,string[]>
      */
-    public static function getSkippingSchemaComponentClasses(): array
+    protected function getModuleComponentClasses(): array
     {
-        // If doing ?behavior=unrestricted, always enable all schema-type modules
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            return [];
-        }
-
-        // Component classes enabled/disabled by module
-        $maybeSkipSchemaModuleComponentClasses = [
+        return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [
                 \PoPSchema\CustomPostMedia\Component::class,
             ],
@@ -736,16 +727,5 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 \PoPSchema\CommentMutations\Component::class,
             ],
         ];
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $skipSchemaModuleComponentClasses = array_filter(
-            $maybeSkipSchemaModuleComponentClasses,
-            fn ($module) => !$moduleRegistry->isModuleEnabled($module),
-            ARRAY_FILTER_USE_KEY
-        );
-        return GeneralUtils::arrayFlatten(
-            array_values(
-                $skipSchemaModuleComponentClasses
-            )
-        );
     }
 }

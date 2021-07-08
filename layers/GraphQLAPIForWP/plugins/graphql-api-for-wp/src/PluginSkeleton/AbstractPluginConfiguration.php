@@ -284,4 +284,47 @@ abstract class AbstractPluginConfiguration
     {
         return [];
     }
+
+    /**
+     * Add schema Component classes to skip initializing
+     *
+     * @return string[] List of `Component` class which must not initialize their Schema services
+     */
+    public function getSchemaComponentClassesToSkip(): array
+    {
+        // If doing ?behavior=unrestricted, always enable all schema-type modules
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
+            return [];
+        }
+
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+
+        // Component classes are skipped if the module is disabled
+        $skipSchemaModuleComponentClasses = array_filter(
+            $this->getModuleComponentClasses(),
+            function ($module) use ($moduleRegistry) {
+                return !$moduleRegistry->isModuleEnabled($module);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+        return GeneralUtils::arrayFlatten(
+            array_values(
+                $skipSchemaModuleComponentClasses
+            )
+        );
+    }
+
+    /**
+     * Provide the list of modules to check if they are enabled and,
+     * if they are not, what component classes must skip initialization
+     *
+     * @return array<string,string[]>
+     */
+    protected function getModuleComponentClasses(): array
+    {
+        return [];
+    }
 }
