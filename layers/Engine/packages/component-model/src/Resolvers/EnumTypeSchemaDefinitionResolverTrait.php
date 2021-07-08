@@ -10,10 +10,8 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 trait EnumTypeSchemaDefinitionResolverTrait
 {
     /**
-     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
-     *
-     * @param TypeResolverInterface $typeResolver
-     * @param string $fieldName
+     * Add the enum values in the schema: arrays of enum name,
+     * description, deprecated and deprecation description
      */
     protected function doAddSchemaDefinitionEnumValuesForField(
         array &$schemaDefinition,

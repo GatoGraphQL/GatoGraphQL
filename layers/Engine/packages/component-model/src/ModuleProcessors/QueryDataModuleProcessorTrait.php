@@ -7,14 +7,20 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 trait QueryDataModuleProcessorTrait
 {
+    /**
+     * @var array<string, array<string[]>>
+     */
+    protected array $activeDataloadQueryArgsFilteringModules = [];
+    
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         return array();

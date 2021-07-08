@@ -75,8 +75,6 @@ class GeneralUtils
     /**
      * Add paramters "key" => "value" to the URL
      * Implementation based on that from https://stackoverflow.com/a/5809881
-     *
-     * @param array $keyValues
      */
     public static function removeQueryArgs(array $keys, string $url): string
     {
