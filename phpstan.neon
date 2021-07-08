@@ -53,8 +53,6 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/guzzle-helpers/phpstan.neon.dist
-    - layers/Schema/packages/highlights/phpstan.neon.dist
-    - layers/Schema/packages/highlights-wp/phpstan.neon.dist
     - layers/Engine/packages/hooks/phpstan.neon.dist
     - layers/Engine/packages/hooks-wp/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
@@ -68,8 +66,6 @@ includes:
     - layers/Schema/packages/metaquery/phpstan.neon.dist
     - layers/Schema/packages/metaquery-wp/phpstan.neon.dist
     - layers/Engine/packages/modulerouting/phpstan.neon.dist
-    - layers/Schema/packages/notifications/phpstan.neon.dist
-    - layers/Schema/packages/notifications-wp/phpstan.neon.dist
     - layers/Schema/packages/pages/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
     - layers/Schema/packages/post-categories/phpstan.neon.dist
@@ -92,8 +88,6 @@ includes:
     - layers/Schema/packages/schema-commons/phpstan.neon.dist
     - layers/Schema/packages/settings/phpstan.neon.dist
     - layers/Schema/packages/settings-wp/phpstan.neon.dist
-    - layers/Schema/packages/stances/phpstan.neon.dist
-    - layers/Schema/packages/stances-wp/phpstan.neon.dist
     - layers/Schema/packages/tags/phpstan.neon.dist
     - layers/Schema/packages/tags-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomies/phpstan.neon.dist
