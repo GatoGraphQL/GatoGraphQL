@@ -597,7 +597,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     /**
      * Return the opposite value
      */
-    protected static function opposite(bool $value): bool
+    protected function opposite(bool $value): bool
     {
         return !$value;
     }
@@ -609,19 +609,19 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLEndpointForWP\Environment::DISABLE_GRAPHQL_API_ENDPOINT,
-                'callback' => [self::class, 'opposite'],
+                'callback' => [$this, 'opposite'],
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT,
-                'callback' => [self::class, 'opposite'],
+                'callback' => [$this, 'opposite'],
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT,
-                'callback' => [self::class, 'opposite'],
+                'callback' => [$this, 'opposite'],
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
