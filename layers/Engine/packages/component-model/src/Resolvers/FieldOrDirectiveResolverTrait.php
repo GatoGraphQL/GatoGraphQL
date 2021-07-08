@@ -435,8 +435,6 @@ trait FieldOrDirectiveResolverTrait
             $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem] ?? null;
             if ($fieldOrDirectiveArgumentValueDefinition === null) {
                 // Remove deprecated ones and extract their names
-                $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
-                $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
             } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
                 // Check if this enumValue is deprecated
@@ -444,6 +442,8 @@ trait FieldOrDirectiveResolverTrait
             }
         }
         if ($errorItems) {
+            $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
+            $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
                     $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
