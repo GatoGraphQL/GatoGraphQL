@@ -231,4 +231,37 @@ abstract class AbstractPluginConfiguration
     {
         return [];
     }
+
+    /**
+     * Provide the configuration for all components required in the plugin
+     *
+     * @return array<string, array> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        $componentClassConfiguration = [];
+        $this->addPredefinedComponentClassConfiguration($componentClassConfiguration);
+        $this->addBasedOnModuleEnabledStateComponentClassConfiguration($componentClassConfiguration);
+        return $componentClassConfiguration;
+    }
+
+    /**
+     * Add the fixed configuration for all components required in the plugin
+     *
+     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     */
+    protected function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
+    {
+        // Override
+    }
+
+    /**
+     * Add configuration values if modules are enabled or disabled
+     *
+     * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     */
+    protected function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
+    {
+        // Override
+    }
 }

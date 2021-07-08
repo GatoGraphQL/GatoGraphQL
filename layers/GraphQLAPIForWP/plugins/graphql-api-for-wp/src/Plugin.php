@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginConfiguration;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
@@ -145,16 +144,6 @@ class Plugin extends AbstractMainPlugin
         return [
             Component::class,
         ];
-    }
-
-    /**
-     * Add configuration for the Component classes
-     *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
-     */
-    public function getComponentClassConfiguration(): array
-    {
-        return PluginConfiguration::getComponentClassConfiguration();
     }
 
     /**

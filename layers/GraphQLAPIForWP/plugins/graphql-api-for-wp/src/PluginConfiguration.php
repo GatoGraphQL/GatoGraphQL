@@ -489,24 +489,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     }
 
     /**
-     * Provide the configuration for all components required in the plugin
-     *
-     * @return array<string, array> [key]: Component class, [value]: Configuration
-     */
-    public static function getComponentClassConfiguration(): array
-    {
-        $componentClassConfiguration = [];
-        self::addPredefinedComponentClassConfiguration($componentClassConfiguration);
-        self::addBasedOnModuleEnabledStateComponentClassConfiguration($componentClassConfiguration);
-        return $componentClassConfiguration;
-    }
-
-    /**
      * Add the fixed configuration for all components required in the plugin
      *
      * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
-    protected static function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function addPredefinedComponentClassConfiguration(array &$componentClassConfiguration): void
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isDev = RootEnvironment::isApplicationEnvironmentDev();
@@ -618,7 +605,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
      *
      * @param array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
-    protected static function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
+    protected function addBasedOnModuleEnabledStateComponentClassConfiguration(array &$componentClassConfiguration): void
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleToComponentClassConfigurationMappings = [

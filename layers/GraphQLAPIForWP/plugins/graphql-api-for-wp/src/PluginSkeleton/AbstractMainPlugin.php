@@ -45,6 +45,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     }
 
     /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return $this->pluginConfiguration->getComponentClassConfiguration();
+    }
+
+    /**
      * Get the plugin's immutable configuration values
      *
      * @return array<string, mixed>

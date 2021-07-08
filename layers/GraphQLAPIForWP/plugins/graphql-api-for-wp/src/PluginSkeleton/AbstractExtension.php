@@ -49,6 +49,16 @@ abstract class AbstractExtension extends AbstractPlugin
     }
 
     /**
+     * Add configuration for the Component classes
+     *
+     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     */
+    public function getComponentClassConfiguration(): array
+    {
+        return $this->extensionConfiguration?->getComponentClassConfiguration() ?? parent::getComponentClassConfiguration();
+    }
+
+    /**
      * Plugin set-up, executed after the GraphQL API plugin is loaded,
      * and before it is initialized
      */
