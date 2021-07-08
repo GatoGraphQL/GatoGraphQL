@@ -13,9 +13,13 @@ includes:
     - layers/API/packages/api-rest/phpstan.neon.dist
     - layers/Schema/packages/basic-directives/phpstan.neon.dist
     - layers/Engine/packages/cache-control/phpstan.neon.dist
+    - layers/Schema/packages/categories/phpstan.neon.dist
     - layers/Schema/packages/categories-wp/phpstan.neon.dist
+    - layers/Schema/packages/comment-mutations/phpstan.neon.dist
+    - layers/Schema/packages/comment-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/commentmeta/phpstan.neon.dist
     - layers/Schema/packages/commentmeta-wp/phpstan.neon.dist
+    - layers/Schema/packages/comments/phpstan.neon.dist
     - layers/Schema/packages/comments-wp/phpstan.neon.dist
     - layers/Engine/packages/component-model/phpstan.neon.dist
     - layers/Engine/packages/configurable-schema-feedback/phpstan.neon.dist
@@ -25,11 +29,13 @@ includes:
     - layers/Schema/packages/custompost-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompost-tag-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompost-tags-wp/phpstan.neon.dist
+    - layers/Schema/packages/custompostmedia/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmeta/phpstan.neon.dist
     - layers/Schema/packages/custompostmeta-wp/phpstan.neon.dist
+    - layers/Schema/packages/customposts/phpstan.neon.dist
     - layers/Schema/packages/customposts-wp/phpstan.neon.dist
     - layers/Engine/packages/definitions/phpstan.neon.dist
     - layers/Engine/packages/engine/phpstan.neon.dist
@@ -39,6 +45,7 @@ includes:
     - layers/Engine/packages/field-query/phpstan.neon.dist
     - layers/Engine/packages/filestore/phpstan.neon.dist
     - layers/Engine/packages/function-fields/phpstan.neon.dist
+    - layers/Schema/packages/generic-customposts/phpstan.neon.dist
     - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
@@ -46,25 +53,36 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/guzzle-helpers/phpstan.neon.dist
+    - layers/Schema/packages/highlights/phpstan.neon.dist
+    - layers/Schema/packages/highlights-wp/phpstan.neon.dist
     - layers/Engine/packages/hooks/phpstan.neon.dist
     - layers/Engine/packages/hooks-wp/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
     - layers/GraphQLAPIForWP/packages/markdown-convertor/phpstan.neon.dist
+    - layers/Schema/packages/media/phpstan.neon.dist
     - layers/Schema/packages/media-wp/phpstan.neon.dist
+    - layers/Schema/packages/menus/phpstan.neon.dist
+    - layers/Schema/packages/menus-wp/phpstan.neon.dist
     - layers/Schema/packages/meta/phpstan.neon.dist
     - layers/Schema/packages/metaquery/phpstan.neon.dist
     - layers/Schema/packages/metaquery-wp/phpstan.neon.dist
     - layers/Engine/packages/modulerouting/phpstan.neon.dist
+    - layers/Schema/packages/notifications/phpstan.neon.dist
     - layers/Schema/packages/notifications-wp/phpstan.neon.dist
+    - layers/Schema/packages/pages/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
+    - layers/Schema/packages/post-categories/phpstan.neon.dist
     - layers/Schema/packages/post-categories-wp/phpstan.neon.dist
     - layers/Schema/packages/post-category-mutations/phpstan.neon.dist
     - layers/Schema/packages/post-category-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/post-mutations/phpstan.neon.dist
     - layers/Schema/packages/post-tag-mutations/phpstan.neon.dist
     - layers/Schema/packages/post-tag-mutations-wp/phpstan.neon.dist
+    - layers/Schema/packages/post-tags/phpstan.neon.dist
     - layers/Schema/packages/post-tags-wp/phpstan.neon.dist
+    - layers/Schema/packages/posts/phpstan.neon.dist
+    - layers/Schema/packages/posts-wp/phpstan.neon.dist
     - layers/Schema/packages/queriedobject/phpstan.neon.dist
     - layers/Schema/packages/queriedobject-wp/phpstan.neon.dist
     - layers/Engine/packages/query-parsing/phpstan.neon.dist
@@ -74,6 +92,9 @@ includes:
     - layers/Schema/packages/schema-commons/phpstan.neon.dist
     - layers/Schema/packages/settings/phpstan.neon.dist
     - layers/Schema/packages/settings-wp/phpstan.neon.dist
+    - layers/Schema/packages/stances/phpstan.neon.dist
+    - layers/Schema/packages/stances-wp/phpstan.neon.dist
+    - layers/Schema/packages/tags/phpstan.neon.dist
     - layers/Schema/packages/tags-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomies/phpstan.neon.dist
     - layers/Schema/packages/taxonomies-wp/phpstan.neon.dist
@@ -86,10 +107,13 @@ includes:
     - layers/Schema/packages/user-roles/phpstan.neon.dist
     - layers/Schema/packages/user-roles-access-control/phpstan.neon.dist
     - layers/Schema/packages/user-roles-acl/phpstan.neon.dist
+    - layers/Schema/packages/user-roles-wp/phpstan.neon.dist
     - layers/Schema/packages/user-state/phpstan.neon.dist
     - layers/Schema/packages/user-state-access-control/phpstan.neon.dist
+    - layers/Schema/packages/user-state-mutations/phpstan.neon.dist
     - layers/Schema/packages/user-state-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/user-state-wp/phpstan.neon.dist
     - layers/Schema/packages/usermeta/phpstan.neon.dist
     - layers/Schema/packages/usermeta-wp/phpstan.neon.dist
+    - layers/Schema/packages/users/phpstan.neon.dist
     - layers/Schema/packages/users-wp/phpstan.neon.dist
