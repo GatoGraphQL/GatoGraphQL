@@ -2786,6 +2786,11 @@ msgstr ""
 msgid "Must provide an operation."
 msgstr ""
 
+#: vendor/graphql-by-pop/graphql-query/src/Schema/GraphQLQueryConvertor.php:525
+#, php-format
+msgid "Feature 'Multiple Query Execution' is not enabled, so can execute 1 operation only, but %s operations were submitted ('%s')"
+msgstr ""
+
 #: vendor/graphql-by-pop/graphql-query/src/Schema/GraphQLQueryConvertor.php:642
 #, php-format
 msgid "No operation with name '%s' was submitted."
