@@ -19,6 +19,12 @@ const FieldDeprecationListMultiSelectControl = compose( [
 			hasRetrievedFieldDeprecationLists,
 			getRetrievingFieldDeprecationListsErrorMessage,
 		} = select ( 'graphql-api/components' );
+
+		/**
+		 * Title to use when the CPT doesn't have a title
+		 */
+		const noTitleLabel = __('(No title)', 'graphql-api');
+		
 		/**
 		 * Convert the fieldDeprecationLists array to this structure:
 		 * [{group:"FieldDeprecationLists",title:"fieldDeprecationList.title",value:"fieldDeprecationList.id",help:"fieldDeprecationList.excerpt"},...]
@@ -26,7 +32,7 @@ const FieldDeprecationListMultiSelectControl = compose( [
 		const items = getFieldDeprecationLists().map( fieldDeprecationList => (
 			{
 				group: __('Field Deprecation Lists', 'graphql-api'),
-				title: fieldDeprecationList.title,
+				title: fieldDeprecationList.title || noTitleLabel,
 				value: fieldDeprecationList.id,
 				help: fieldDeprecationList.excerpt,
 			}

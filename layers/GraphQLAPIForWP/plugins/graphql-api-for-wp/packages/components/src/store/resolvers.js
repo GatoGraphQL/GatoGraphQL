@@ -54,20 +54,13 @@ export const FETCH_DIRECTIVES_GRAPHQL_QUERY = `
 `
 
 /**
- * Title to use when the CPT doesn't have a title
- */
-const noTitleLabel = __('(No title)', 'graphql-api');
-
-/**
  * GraphQL query to fetch the list of Access Control Lists from the GraphQL schema
  */
 export const FETCH_ACCESS_CONTROL_LISTS_GRAPHQL_QUERY = `
 	query GetAccessControlLists {
 		accessControlLists {
 			id
-			title @default(
-				value: "${ noTitleLabel }"
-			)
+			title
 			excerpt
 		}
 	}
@@ -80,9 +73,7 @@ export const FETCH_CACHE_CONTROL_LISTS_GRAPHQL_QUERY = `
 	query GetCacheControlLists {
 		cacheControlLists {
 			id
-			title @default(
-				value: "${ noTitleLabel }"
-			)
+			title
 			excerpt
 		}
 	}
@@ -95,9 +86,7 @@ export const FETCH_FIELD_DEPRECATION_LISTS_GRAPHQL_QUERY = `
 	query GetFieldDeprecationLists {
 		fieldDeprecationLists {
 			id
-			title @default(
-				value: "${ noTitleLabel }"
-			)
+			title
 			excerpt
 		}
 	}

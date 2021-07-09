@@ -24,6 +24,12 @@ const SchemaConfigurationSelectCard = ( props ) => {
 			schemaConfiguration
 		}
 	} = props;
+	
+	/**
+	 * Title to use when the CPT doesn't have a title
+	 */
+	const noTitleLabel = __('(No title)', 'graphql-api');
+
 	/**
 	 * React Select expects an object with this format:
 	 * { value: ..., label: ... },
@@ -33,7 +39,7 @@ const SchemaConfigurationSelectCard = ( props ) => {
 	const schemaConfigurationOptions = schemaConfigurations.map( schemaConfiguration => (
 		{
 			// label: `→ ${ schemaConfiguration.title }`,
-			label: schemaConfiguration.title,
+			label: schemaConfiguration.title || noTitleLabel,
 			value: schemaConfiguration.id,
 		}
 	) );

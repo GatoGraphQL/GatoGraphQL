@@ -16,20 +16,13 @@ import {
 } from './action-creators';
 
 /**
- * Title to use when the CPT doesn't have a title
- */
-const noTitleLabel = __('(No title)', 'graphql-api');
-
-/**
  * GraphQL query to fetch the list of schemaConfigurations from the GraphQL schema
  */
 export const FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY = `
 	query GetSchemaConfigurations {
 		schemaConfigurations {
 			id
-			title @default(
-				value: "${ noTitleLabel }"
-			)
+			title
 			# excerpt
 		}
 	}
