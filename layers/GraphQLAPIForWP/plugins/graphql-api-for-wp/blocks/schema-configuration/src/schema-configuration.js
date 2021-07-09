@@ -26,7 +26,8 @@ const SchemaConfigurationSelectCard = ( props ) => {
 	} = props;
 	
 	/**
-	 * Title to use when the CPT doesn't have a title
+	 * Title to use when the element's title is empty.
+	 * (This may not happen: WordPress might then set it as "Untitled")
 	 */
 	const noTitleLabel = __('(No title)', 'graphql-api');
 
