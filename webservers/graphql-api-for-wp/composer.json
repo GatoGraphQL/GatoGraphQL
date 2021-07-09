@@ -50,6 +50,7 @@
             "@symlink-vendor-for-graphql-api-extension-demo"
         ],
         "rebuild-server": [
+            "@purge-cache",
             "@update-deps",
             "lando rebuild appserver -y"
         ],
