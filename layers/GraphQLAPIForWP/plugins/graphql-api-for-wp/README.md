@@ -95,7 +95,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/configuration-cache.md">Configuration Cache</a></td><td>Cache the generated application configuration to disk</td></tr>
 <tr><td><a href="docs/en/modules/schema-cache.md">Schema Cache</a></td><td>Cache the generated schema to disk</td></tr>
 <tr><th colspan="2"><br/>Operational</th></tr>
-<tr><td><a href="docs/en/modules/remove-if-null-directive.md">Remove if Null</a></td><td>Addition of <code>@removeIfNull</code> directive, to remove an output from the response if it is <code>null</code></td></tr>
 <tr><td><a href="docs/en/modules/proactive-feedback.md">Proactive Feedback</a></td><td>Usage of the top-level entry <code>extensions</code> to send deprecations, warnings, logs, notices and traces in the response to the query</td></tr>
 <tr><td><a href="docs/en/modules/embeddable-fields.md">Embeddable Fields</a></td><td>Resolve a field within an argument for another field from the same type, using syntax <code>{{ fieldName }}</code></td></tr>
 <tr><td><a href="docs/en/modules/composable-directives.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
