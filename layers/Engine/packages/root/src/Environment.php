@@ -8,6 +8,7 @@ class Environment
 {
     public const CACHE_CONTAINER_CONFIGURATION = 'CACHE_CONTAINER_CONFIGURATION';
     public const CONTAINER_CONFIGURATION_CACHE_NAMESPACE = 'CONTAINER_CONFIGURATION_CACHE_NAMESPACE';
+    public const CONTAINER_CONFIGURATION_CACHE_DIRECTORY = 'CONTAINER_CONFIGURATION_CACHE_DIRECTORY';
     public const THROW_EXCEPTION_IF_CACHE_SETUP_ERROR = 'THROW_EXCEPTION_IF_CACHE_SETUP_ERROR';
     public const APPLICATION_VERSION = 'APPLICATION_VERSION';
 
@@ -55,6 +56,14 @@ class Environment
             return $sitename . '_' . $applicationVersion;
         }
         return $sitename;
+    }
+
+    public static function getCacheContainerConfigurationDirectory(): ?string
+    {
+        if (getenv(self::CONTAINER_CONFIGURATION_CACHE_DIRECTORY) !== false) {
+            return getenv(self::CONTAINER_CONFIGURATION_CACHE_DIRECTORY);
+        }
+        return null;
     }
 
     /**

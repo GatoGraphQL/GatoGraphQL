@@ -34,6 +34,7 @@ trait ContainerBuilderFactoryTrait
     ): void {
         static::$cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
+        $directory ??= Environment::getCacheContainerConfigurationDirectory();
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
         $containerClass = $containerNamespace = null;
