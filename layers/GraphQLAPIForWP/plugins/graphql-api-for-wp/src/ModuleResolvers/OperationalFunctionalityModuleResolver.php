@@ -14,7 +14,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
 {
     use ModuleResolverTrait;
 
-    public const REMOVE_IF_NULL_DIRECTIVE = Plugin::NAMESPACE . '\remove-if-null-directive';
     public const PROACTIVE_FEEDBACK = Plugin::NAMESPACE . '\proactive-feedback';
     public const EMBEDDABLE_FIELDS = Plugin::NAMESPACE . '\embeddable-fields';
     public const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
@@ -31,7 +30,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getModulesToResolve(): array
     {
         return [
-            self::REMOVE_IF_NULL_DIRECTIVE,
             self::PROACTIVE_FEEDBACK,
             self::EMBEDDABLE_FIELDS,
             self::COMPOSABLE_DIRECTIVES,
@@ -62,7 +60,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::REMOVE_IF_NULL_DIRECTIVE:
             case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
@@ -75,7 +72,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getName(string $module): string
     {
         $names = [
-            self::REMOVE_IF_NULL_DIRECTIVE => \__('Remove if Null', 'graphql-api'),
             self::PROACTIVE_FEEDBACK => \__('Proactive Feedback', 'graphql-api'),
             self::EMBEDDABLE_FIELDS => \__('Embeddable Fields', 'graphql-api'),
             self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api'),
@@ -87,8 +83,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::REMOVE_IF_NULL_DIRECTIVE:
-                return \__('Addition of <code>@removeIfNull</code> directive, to remove an output from the response if it is <code>null</code>', 'graphql-api');
             case self::PROACTIVE_FEEDBACK:
                 return \__('Usage of the top-level entry <code>extensions</code> to send deprecations, warnings, logs, notices and traces in the response to the query', 'graphql-api');
             case self::EMBEDDABLE_FIELDS:
@@ -104,7 +98,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function isEnabledByDefault(string $module): bool
     {
         switch ($module) {
-            case self::REMOVE_IF_NULL_DIRECTIVE:
             case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
