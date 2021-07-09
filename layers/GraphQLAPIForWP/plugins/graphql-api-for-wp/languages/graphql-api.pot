@@ -2817,19 +2817,6 @@ msgstr ""
 msgid "Remove the field from the response if it is `null`"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:64
-#, php-format
-msgid "Returns a dictionary with the values for all variables exported through the `%s` directive"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:71
-msgid "Returns the variable value"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:103
-msgid "The variable to echo back, of any type"
-msgstr ""
-
 #: vendor/graphql-by-pop/graphql-server/src/FieldResolvers/DirectiveFieldResolver.php:96
 msgid "Directive's name"
 msgstr ""

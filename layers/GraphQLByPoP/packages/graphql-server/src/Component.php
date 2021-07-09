@@ -94,10 +94,6 @@ class Component extends AbstractComponent
             self::initServices(dirname(__DIR__), '/Overrides');
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-            // Boot conditional on having variables treated as expressions for @export directive
-            if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/VariablesAsExpressions');
-            }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/EmbeddableFields');
