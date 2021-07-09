@@ -14,7 +14,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
 {
     use ModuleResolverTrait;
 
-    public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\multiple-query-execution';
     public const REMOVE_IF_NULL_DIRECTIVE = Plugin::NAMESPACE . '\remove-if-null-directive';
     public const PROACTIVE_FEEDBACK = Plugin::NAMESPACE . '\proactive-feedback';
     public const EMBEDDABLE_FIELDS = Plugin::NAMESPACE . '\embeddable-fields';
@@ -32,7 +31,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getModulesToResolve(): array
     {
         return [
-            self::MULTIPLE_QUERY_EXECUTION,
             self::REMOVE_IF_NULL_DIRECTIVE,
             self::PROACTIVE_FEEDBACK,
             self::EMBEDDABLE_FIELDS,
@@ -77,7 +75,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getName(string $module): string
     {
         $names = [
-            self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'graphql-api'),
             self::REMOVE_IF_NULL_DIRECTIVE => \__('Remove if Null', 'graphql-api'),
             self::PROACTIVE_FEEDBACK => \__('Proactive Feedback', 'graphql-api'),
             self::EMBEDDABLE_FIELDS => \__('Embeddable Fields', 'graphql-api'),
@@ -90,8 +87,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::MULTIPLE_QUERY_EXECUTION:
-                return \__('Execute multiple GraphQL queries in a single operation', 'graphql-api');
             case self::REMOVE_IF_NULL_DIRECTIVE:
                 return \__('Addition of <code>@removeIfNull</code> directive, to remove an output from the response if it is <code>null</code>', 'graphql-api');
             case self::PROACTIVE_FEEDBACK:
@@ -109,7 +104,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function isEnabledByDefault(string $module): bool
     {
         switch ($module) {
-            case self::MULTIPLE_QUERY_EXECUTION:
             case self::REMOVE_IF_NULL_DIRECTIVE:
             case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
