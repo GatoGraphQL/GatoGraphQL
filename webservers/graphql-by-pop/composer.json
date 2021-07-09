@@ -117,6 +117,7 @@
             "lando start"
         ],
         "rebuild-server": [
+            "@purge-cache",
             "@symlink-vendor",
             "lando rebuild appserver -y"
         ],
@@ -126,6 +127,7 @@
             "COMPOSER=composer.local.json composer update --no-dev"
         ],
         "log-server-errors": "lando logs -t -f | grep \"php:error\"",
-        "log-server-warnings": "lando logs -t -f | grep \"php:warn\""
+        "log-server-warnings": "lando logs -t -f | grep \"php:warn\"",
+        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"cache\""
     }
 }
