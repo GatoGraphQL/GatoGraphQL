@@ -63,8 +63,6 @@ services:
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/graphql-by-pop/graphql-server
         - >-
-          ../../layers/Schema/packages/basic-directives:/app/vendor/pop-schema/basic-directives
-        - >-
           ../../layers/Schema/packages/block-metadata-for-wp:/app/vendor/pop-schema/block-metadata-for-wp
         - >-
           ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations

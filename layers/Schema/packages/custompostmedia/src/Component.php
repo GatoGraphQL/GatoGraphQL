@@ -21,7 +21,6 @@ class Component extends AbstractComponent
         return [
             \PoPSchema\CustomPosts\Component::class,
             \PoPSchema\Media\Component::class,
-            \PoPSchema\BasicDirectives\Component::class,
         ];
     }
 

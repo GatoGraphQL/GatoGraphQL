@@ -34,7 +34,6 @@
         "pop-schema/taxonomyquery-wp": "^0.8",
         "pop-schema/post-tags-wp": "^0.8",
         "pop-schema/post-categories-wp": "^0.8",
-        "pop-schema/basic-directives": "^0.8",
         "pop-schema/user-roles-access-control": "^0.8",
         "pop-schema/user-roles-wp": "^0.8",
         "pop-schema/user-state-wp": "^0.8",

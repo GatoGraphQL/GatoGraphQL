@@ -3,9 +3,6 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\CustomPostMedia\DirectiveResolvers\:
-        resource: '../src/DirectiveResolvers/*'
-
     PoPSchema\CustomPostMedia\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 

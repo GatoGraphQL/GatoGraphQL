@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -49,7 +48,6 @@ class Component extends AbstractPluginComponent
             \PoPSchema\PostCategoryMutationsWP\Component::class,
             \PoPSchema\CommentMutationsWP\Component::class,
             \PoPSchema\UserStateMutationsWP\Component::class,
-            \PoPSchema\BasicDirectives\Component::class,
             \PoPSchema\MenusWP\Component::class,
             \PoPSchema\SettingsWP\Component::class,
             \GraphQLByPoP\GraphQLClientsForWP\Component::class,
