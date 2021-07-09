@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
-use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -97,10 +95,6 @@ class Component extends AbstractComponent
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/EmbeddableFields');
-            }
-            // Attach @removeIfNull?
-            if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/RemoveIfNull');
             }
             if (
                 class_exists(CacheControlComponent::class)
