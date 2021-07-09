@@ -13,7 +13,6 @@ class ComponentConfiguration
 
     private static bool $addSelfFieldForRootTypeToSchema = false;
     private static bool $sortSchemaAlphabetically = true;
-    private static bool $enableRemoveIfNullDirective = true;
     private static bool $enableProactiveFeedback = true;
     private static bool $enableNestedMutations = false;
     private static ?bool $enableGraphQLIntrospection = null;
@@ -41,24 +40,6 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::SORT_SCHEMA_ALPHABETICALLY;
         $selfProperty = &self::$sortSchemaAlphabetically;
-        $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
-            $envVariable,
-            $selfProperty,
-            $defaultValue,
-            $callback
-        );
-        return $selfProperty;
-    }
-
-    public static function enableRemoveIfNullDirective(): bool
-    {
-        // Define properties
-        $envVariable = Environment::ENABLE_REMOVE_IF_NULL_DIRECTIVE;
-        $selfProperty = &self::$enableRemoveIfNullDirective;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
-use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -94,21 +92,9 @@ class Component extends AbstractComponent
             self::initServices(dirname(__DIR__), '/Overrides');
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-            // Boot conditional on having variables treated as expressions for @export directive
-            if (GraphQLQueryComponentConfiguration::enableVariablesAsExpressions()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/VariablesAsExpressions');
-            }
             // Boot conditional on having embeddable fields
             if (APIComponentConfiguration::enableEmbeddableFields()) {
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/EmbeddableFields');
-            }
-            // The @export directive depends on the Multiple Query Execution being enabled
-            if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/MultipleQueryExecution');
-            }
-            // Attach @removeIfNull?
-            if (ComponentConfiguration::enableRemoveIfNullDirective()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/RemoveIfNull');
             }
             if (
                 class_exists(CacheControlComponent::class)

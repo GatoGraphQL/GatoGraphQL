@@ -2813,37 +2813,6 @@ msgstr ""
 msgid "Repeat back the input string"
 msgstr ""
 
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:268
-#, php-format
-msgid "Cannot export variable with name '%s' because this variable has already been set"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:280
-msgid "Exports a field value as a variable"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/MultipleQueryExecution/SchemaServices/DirectiveResolvers/ExportDirectiveResolver.php:290
-#, php-format
-msgid "Name of the variable. It must start with '%s', or the directive will not work"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/RemoveIfNull/SchemaServices/DirectiveResolvers/RemoveIfNullDirectiveResolver.php:238
-msgid "Remove the field from the response if it is `null`"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:64
-#, php-format
-msgid "Returns a dictionary with the values for all variables exported through the `%s` directive"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:71
-msgid "Returns the variable value"
-msgstr ""
-
-#: vendor/graphql-by-pop/graphql-server/src/ConditionalOnContext/VariablesAsExpressions/SchemaServices/FieldResolvers/VariablesAsExpressionsRootFieldResolver.php:103
-msgid "The variable to echo back, of any type"
-msgstr ""
-
 #: vendor/graphql-by-pop/graphql-server/src/FieldResolvers/DirectiveFieldResolver.php:96
 msgid "Directive's name"
 msgstr ""
