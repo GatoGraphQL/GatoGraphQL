@@ -19,6 +19,13 @@ const CacheControlListMultiSelectControl = compose( [
 			hasRetrievedCacheControlLists,
 			getRetrievingCacheControlListsErrorMessage,
 		} = select ( 'graphql-api/components' );
+
+		/**
+		 * Title to use when the element's title is empty.
+		 * (This may not happen: WordPress might then set it as "Untitled")
+		 */
+		const noTitleLabel = __('(No title)', 'graphql-api');
+
 		/**
 		 * Convert the cacheControlLists array to this structure:
 		 * [{group:"CacheControlLists",title:"cacheControlList.title",value:"cacheControlList.id",help:"cacheControlList.excerpt"},...]
@@ -26,7 +33,7 @@ const CacheControlListMultiSelectControl = compose( [
 		const items = getCacheControlLists().map( cacheControlList => (
 			{
 				group: __('Cache Control Lists', 'graphql-api'),
-				title: cacheControlList.title,
+				title: cacheControlList.title || noTitleLabel,
 				value: cacheControlList.id,
 				help: cacheControlList.excerpt,
 			}

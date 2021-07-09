@@ -26,4 +26,3 @@ export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
 export { maybeGetErrorMessage } from './store/resolvers';
 export { EMPTY_LABEL, SETTINGS_VALUE_LABEL } from './default-configuration';
-export { DEFAULT_DIRECTIVE_CONDITION_IS_NULL, DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY } from './constants/default-directive-conditions';

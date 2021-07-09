@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support to query single objects (users, posts, etc) in the request
+Code shared by the schema packages
 
 ## Install
 
