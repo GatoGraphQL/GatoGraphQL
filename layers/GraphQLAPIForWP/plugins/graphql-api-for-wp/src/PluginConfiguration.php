@@ -521,8 +521,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $componentClassConfiguration[\GraphQLByPoP\GraphQLRequest\Component::class] = [
             // Disable processing ?query=...
             \GraphQLByPoP\GraphQLRequest\Environment::DISABLE_GRAPHQL_API_FOR_POP => true,
-            // Enable Multiple Query Execution?
-            \GraphQLByPoP\GraphQLRequest\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::MULTIPLE_QUERY_EXECUTION),
         ];
         // Cache the container
         if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
