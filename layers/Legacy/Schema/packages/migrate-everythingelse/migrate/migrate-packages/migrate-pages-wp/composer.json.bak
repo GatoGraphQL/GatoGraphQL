@@ -1,7 +1,7 @@
 {
     "name": "pop-schema/migrate-pages-wp",
     "type": "library",
-    "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/pages-wp. Target package description: Implementation for WordPress of contracts from package \"Pages\"",
+    "description": "(Temporary package) Migrate code to package https://github.com/PoPSchema/pages-wp. Target package description: Implementation for WordPress of contracts from package \"Pages\"",
     "keywords": ["PoP", "pages-wp"],
     "homepage": "https://github.com/PoPSchema/migrate-pages-wp",
     "license": "GPL-2.0-or-later",

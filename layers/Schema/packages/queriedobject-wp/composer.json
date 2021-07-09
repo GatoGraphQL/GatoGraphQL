@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Queried Object\"",
     "keywords": ["PoP", "queriedobject-wp"],
-    "homepage": "https://github.com/pop-schema/queriedobject-wp",
+    "homepage": "https://github.com/PoPSchema/queriedobject-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

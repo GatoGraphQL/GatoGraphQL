@@ -1,9 +1,9 @@
 {
     "name": "pop-schema/migrate-taxonomymeta",
     "type": "library",
-    "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/taxonomymeta. Target package description: Adds support for taxonomy (category and tag) meta",
+    "description": "(Temporary package) Migrate code to package https://github.com/PoPSchema/taxonomymeta. Target package description: Adds support for taxonomy (category and tag) meta",
     "keywords": ["PoP", "taxonomymeta"],
-    "homepage": "https://github.com/pop-schema/migrate-taxonomymeta",
+    "homepage": "https://github.com/PoPSchema/migrate-taxonomymeta",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

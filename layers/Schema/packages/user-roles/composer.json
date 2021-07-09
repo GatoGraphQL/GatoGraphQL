@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for user roles",
     "keywords": ["PoP", "user-roles"],
-    "homepage": "https://github.com/pop-schema/user-roles",
+    "homepage": "https://github.com/PoPSchema/user-roles",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Adds support for meta queries",
     "keywords": ["PoP", "metaquery"],
-    "homepage": "https://github.com/pop-schema/metaquery",
+    "homepage": "https://github.com/PoPSchema/metaquery",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

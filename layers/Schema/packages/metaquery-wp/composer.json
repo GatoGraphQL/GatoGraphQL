@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Meta Query\"",
     "keywords": ["PoP", "metaquery-wp"],
-    "homepage": "https://github.com/pop-schema/metaquery-wp",
+    "homepage": "https://github.com/PoPSchema/metaquery-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

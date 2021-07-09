@@ -1,7 +1,7 @@
 {
     "name": "pop-schema/migrate-users",
     "type": "library",
-    "description": "(Temporary package) Migrate code to package https://github.com/pop-schema/users. Target package description: Adds support for users",
+    "description": "(Temporary package) Migrate code to package https://github.com/PoPSchema/users. Target package description: Adds support for users",
     "keywords": ["PoP", "users"],
     "homepage": "https://github.com/PoPSchema/migrate-users",
     "license": "GPL-2.0-or-later",
