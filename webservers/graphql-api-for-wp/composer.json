@@ -71,6 +71,6 @@
             "lando wp config set GRAPHQL_API_DISABLE_CACHING true --raw --path=wordpress",
             "@purge-cache"
         ],
-        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/cache\""
+        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/cache\" || true"
     }
 }
