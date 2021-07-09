@@ -32,6 +32,10 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
+    /**
+     * Disable hook, because it is invoked by `export-directive`
+     * on its Component's `resolveEnabled` function.
+     */
     public static function enableMultipleQueryExecution(): bool
     {
         // Define properties
@@ -40,12 +44,13 @@ class ComponentConfiguration
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
+        // Initialize property from the environment
         self::maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
             $defaultValue,
-            $callback
+            $callback,
+            false
         );
         return $selfProperty;
     }
