@@ -3113,27 +3113,6 @@ msgstr ""
 msgid "Representation of each GraphQL type in the graph"
 msgstr ""
 
-#: vendor/pop-schema/basic-directives/src/DirectiveResolvers/AbstractTransformFieldStringValueDirectiveResolver.php:22
-#, php-format
-msgid "Directive '%s' from field '%s' cannot be applied on object with ID '%s' because it is not a string"
-msgstr ""
-
-#: vendor/pop-schema/basic-directives/src/DirectiveResolvers/AbstractUseDefaultValueIfConditionDirectiveResolver.php:97
-msgid "If the value of the field is `NULL` (or empty), replace it with the value provided under argument 'value'"
-msgstr ""
-
-#: vendor/pop-schema/basic-directives/src/DirectiveResolvers/AbstractUseDefaultValueIfConditionDirectiveResolver.php:99
-msgid "If the value of the field is `NULL` (or empty), replace it with either the value provided under argument 'value', or with a default value configured in the directive resolver"
-msgstr ""
-
-#: vendor/pop-schema/basic-directives/src/DirectiveResolvers/AbstractUseDefaultValueIfConditionDirectiveResolver.php:112
-msgid "If the value of the field is `NULL`, replace it with the value from this argument"
-msgstr ""
-
-#: vendor/pop-schema/basic-directives/src/DirectiveResolvers/AbstractUseDefaultValueIfConditionDirectiveResolver.php:125
-msgid "Condition under which using the default value kicks in"
-msgstr ""
-
 #: vendor/pop-schema/categories/src/FieldResolvers/AbstractCategoryFieldResolver.php:54
 msgid "Category URL"
 msgstr ""

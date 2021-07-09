@@ -62,7 +62,6 @@
         "getpop/routing": "^0.8",
         "getpop/modulerouting": "^0.8",
         "getpop/engine": "^0.8",
-        "pop-schema/schema-commons": "^0.8",
-        "pop-schema/basic-directives": "^0.8"
+        "pop-schema/schema-commons": "^0.8"
     }
 }
