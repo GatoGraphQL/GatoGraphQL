@@ -102,10 +102,6 @@ class Component extends AbstractComponent
             if (APIComponentConfiguration::enableEmbeddableFields()) {
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/EmbeddableFields');
             }
-            // The @export directive depends on the Multiple Query Execution being enabled
-            if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/MultipleQueryExecution');
-            }
             // Attach @removeIfNull?
             if (ComponentConfiguration::enableRemoveIfNullDirective()) {
                 self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/RemoveIfNull');
