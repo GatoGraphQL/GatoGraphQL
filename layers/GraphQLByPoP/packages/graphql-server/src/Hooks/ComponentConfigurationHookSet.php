@@ -18,18 +18,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
     {
         if (GraphQLRequestComponentConfiguration::enableMultipleQueryExecution()) {
             /**
-             * Set environment variable to true because it's needed by @export
-             */
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                GraphQLQueryComponentConfiguration::class,
-                GraphQLQueryEnvironment::ENABLE_VARIABLES_AS_EXPRESSIONS
-            );
-            $this->hooksAPI->addFilter(
-                $hookName,
-                fn () => true
-            );
-            /**
-             * @export requires the queries to be executed in order
+             * Multiple query execution requires the queries to be executed in order
              */
             $hookName = ComponentConfigurationHelpers::getHookName(
                 APIComponentConfiguration::class,
