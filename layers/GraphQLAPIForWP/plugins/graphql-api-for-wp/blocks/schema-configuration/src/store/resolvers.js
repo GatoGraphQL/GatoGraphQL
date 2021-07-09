@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { maybeGetErrorMessage, DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY } from '@graphqlapi/components';
+import { maybeGetErrorMessage } from '@graphqlapi/components';
 
 /**
  * External dependencies
@@ -28,8 +28,7 @@ export const FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY = `
 		schemaConfigurations {
 			id
 			title @default(
-				value: "${ noTitleLabel }",
-				condition: ${ DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY }
+				value: "${ noTitleLabel }"
 			)
 			# excerpt
 		}

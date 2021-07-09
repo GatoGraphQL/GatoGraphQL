@@ -20,7 +20,6 @@ import {
 } from './action-creators';
 
 import { DIRECTIVE_TYPE_QUERY } from '../constants/directive-types'
-import { DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY } from '../constants/default-directive-conditions'
 
 /**
  * GraphQL query to fetch the list of types and their fields from the GraphQL schema
@@ -67,8 +66,7 @@ export const FETCH_ACCESS_CONTROL_LISTS_GRAPHQL_QUERY = `
 		accessControlLists {
 			id
 			title @default(
-				value: "${ noTitleLabel }",
-				condition: ${ DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY }
+				value: "${ noTitleLabel }"
 			)
 			excerpt
 		}
@@ -83,8 +81,7 @@ export const FETCH_CACHE_CONTROL_LISTS_GRAPHQL_QUERY = `
 		cacheControlLists {
 			id
 			title @default(
-				value: "${ noTitleLabel }",
-				condition: ${ DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY }
+				value: "${ noTitleLabel }"
 			)
 			excerpt
 		}
@@ -99,8 +96,7 @@ export const FETCH_FIELD_DEPRECATION_LISTS_GRAPHQL_QUERY = `
 		fieldDeprecationLists {
 			id
 			title @default(
-				value: "${ noTitleLabel }",
-				condition: ${ DEFAULT_DIRECTIVE_CONDITION_IS_EMPTY }
+				value: "${ noTitleLabel }"
 			)
 			excerpt
 		}
