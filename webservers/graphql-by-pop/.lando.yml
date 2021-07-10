@@ -215,20 +215,7 @@ services:
     build_as_root:
       - a2enmod proxy proxy_http
     run:
-      - >-
-        wp config create --dbname=wordpress --dbuser=wordpress
-        --dbpass=wordpress --dbhost=database --skip-check --force
-        --path=wordpress
-      - >-
-        wp core install --url=graphql-by-pop.lndo.site --title="GraphQL by PoP"
-        --admin_user=admin --admin_password=admin
-        --admin_email=admin@example.com --path=wordpress
-      - wp config set WP_DEBUG true --raw --path=wordpress
-      - sed "s#require_once ABSPATH . 'wp-settings.php';#require_once(__DIR__ . '/../vendor/autoload.php'); require_once(__DIR__ . '/../code-src/initialize-pop-components.php'); require_once  ABSPATH  .  'wp-settings.php' ;#g" wordpress/wp-config.php > wp-config.php.tmp
-      - mv wp-config.php.tmp wordpress/wp-config.php
-      - wp plugin activate engine-wp-bootloader --path=wordpress
-      - cp assets/.htaccess wordpress
-      - wp rewrite structure '/%postname%/' --hard --path=wordpress
+      - /bin/sh /app/setup/setup.sh
 env_file:
   - defaults.env
   - defaults.local.env
