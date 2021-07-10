@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\AppLoader;
-use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractPlugin
 {
@@ -198,23 +195,6 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Remove the service container (and config) cache,
-     * and regenerate the timestamp
-     */
-    protected function invalidateCache(): void
-    {
-        // The Service Container cache is generated always, so remove it always
-        // This folder may also contain the config cache (if enabled), remove it too
-        $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
-        $fileSystem = new Filesystem();
-        $fileSystem->remove([$mainPluginCacheDir]);
-
-        // Regenerate the timestamp
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeTimestamp();
-    }
-
-    /**
      * Remove the CPTs from the DB
      */
     protected function unregisterPluginCustomPostTypes(): void
@@ -299,7 +279,12 @@ abstract class AbstractPlugin
 
         $this->unregisterPluginCustomPostTypes();
 
-        $this->invalidateCache();
+        /**
+         * No need to invalidate the cache here anymore,
+         * since AbstractMainPlugin already invalidates it
+         * for ANY deactivated plugin.
+         */
+        // $this->invalidateCache();
     }
 
     /**
