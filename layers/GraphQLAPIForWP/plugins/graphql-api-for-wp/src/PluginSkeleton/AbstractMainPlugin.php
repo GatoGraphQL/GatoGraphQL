@@ -129,14 +129,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         $fileSystem = new Filesystem();
 
         // Service Container
-        [
-            $cacheContainerConfiguration,
-            $containerConfigurationCacheNamespace,
-            $containerConfigurationCacheDirectory
-        ] = $this->pluginConfiguration->getContainerCacheConfiguration();
-        if ($cacheContainerConfiguration) {
+        $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
+        if ($containerCacheConfiguration->cacheContainerConfiguration()) {
             try {
-                $fileSystem->remove($containerConfigurationCacheDirectory);
+                $fileSystem->remove($containerCacheConfiguration->getContainerConfigurationCacheDirectory());
             } catch (IOExceptionInterface) {
                 // If the folder does not exist, do nothing
             }
@@ -446,8 +442,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
+            $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
             AppLoader::bootSystem(
-                ...$this->pluginConfiguration->getContainerCacheConfiguration()
+                $containerCacheConfiguration->cacheContainerConfiguration(),
+                $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
+                $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
 
             // Custom logic
@@ -472,8 +471,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
+            $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
             AppLoader::bootApplication(
-                ...$this->pluginConfiguration->getContainerCacheConfiguration()
+                $containerCacheConfiguration->cacheContainerConfiguration(),
+                $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
+                $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
 
             // Custom logic

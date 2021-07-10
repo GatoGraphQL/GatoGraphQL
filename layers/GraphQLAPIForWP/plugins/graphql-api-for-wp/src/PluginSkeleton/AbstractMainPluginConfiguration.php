@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
+use GraphQLAPI\GraphQLAPI\GetterSetterObjects\ContainerCacheConfiguration;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 
 /**
@@ -14,10 +15,8 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
 {
     /**
      * Cache the Container Cache Configuration
-     *
-     * @var array<mixed> Array with args to pass to `AppLoader::initializeContainers` - [0]: cache container? (bool), [1]: container namespace (string|null)
      */
-    protected ?array $containerCacheConfigurationCache = null;
+    protected ?ContainerCacheConfiguration $containerCacheConfigurationCache = null;
 
     /**
      * Provide the configuration to cache the container
@@ -27,7 +26,7 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
      *                      [1]: container namespace (string|null)
      *                      [2]: container directory (string|null)
      */
-    public function getContainerCacheConfiguration(): array
+    public function getContainerCacheConfiguration(): ContainerCacheConfiguration
     {
         if ($this->containerCacheConfigurationCache === null) {
             $containerConfigurationCacheNamespace = null;
@@ -38,11 +37,11 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
                 $containerConfigurationCacheNamespace = $cacheConfigurationManager->getNamespace();
                 $containerConfigurationCacheDirectory = $mainPluginCacheDir . \DIRECTORY_SEPARATOR . 'service-containers';
             }
-            $this->containerCacheConfigurationCache = [
+            $this->containerCacheConfigurationCache = new ContainerCacheConfiguration(
                 $cacheContainerConfiguration,
                 $containerConfigurationCacheNamespace,
                 $containerConfigurationCacheDirectory
-            ];
+            );
         }
         return $this->containerCacheConfigurationCache;
     }
