@@ -91,7 +91,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * When activating/deactivating ANY plugin (either from GraphQL API
      * or 3rd-parties), the cached service container and the config
      * must be dumped, so that they can be regenerated.
-     * 
+     *
      * This way, extensions depending on 3rd-party plugins
      * can have their functionality automatically enabled/disabled.
      */
@@ -99,7 +99,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         $this->invalidateCache();
     }
-    
+
 
     /**
      * Remove the cached folders (service container and config),
@@ -116,10 +116,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin
 
     /**
      * Remove the cached folders:
-     * 
+     *
      * - Service Container
      * - Config
-     * 
+     *
      * Because the parent cache folder (defined under 'cache-dir')
      * can be set by the user, we can't directly remove that one.
      * Otherwise, setting it to "wp-content" would remove this folder!
@@ -191,7 +191,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          * When activating/deactivating ANY plugin (either from GraphQL API
          * or 3rd-parties), the cached service container and the config
          * must be dumped, so that they can be regenerated.
-         * 
+         *
          * This way, extensions depending on 3rd-party plugins
          * can have their functionality automatically enabled/disabled.
          */

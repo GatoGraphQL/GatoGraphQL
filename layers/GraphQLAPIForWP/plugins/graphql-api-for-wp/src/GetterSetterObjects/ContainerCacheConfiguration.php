@@ -13,7 +13,7 @@ class ContainerCacheConfiguration
         private bool $cacheContainerConfiguration,
         private ?string $containerConfigurationCacheNamespace,
         private ?string $containerConfigurationCacheDirectory,
-    ) {        
+    ) {
     }
 
     public function cacheContainerConfiguration(): bool
