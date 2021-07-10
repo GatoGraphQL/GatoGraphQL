@@ -221,28 +221,7 @@ services:
         - >-
           ../../layers/Schema/packages/users:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/users
     run:
-      - >-
-        wp config create --dbname=wordpress --dbuser=wordpress
-        --dbpass=wordpress --dbhost=database --skip-check --force
-        --path=wordpress
-      - >-
-        wp core install --url=graphql-api.lndo.site --title="GraphQL API"
-        --admin_user=admin --admin_password=admin
-        --admin_email=admin@example.com --path=wordpress
-      - wp config set WP_DEBUG true --raw --path=wordpress
-      - cp assets/.htaccess wordpress
-      - wp rewrite structure '/%postname%/' --hard --path=wordpress
-      - wp plugin activate graphql-api --path=wordpress
-      - >-
-        sed 's/__DIR__/dirname(__DIR__)/' wordpress/index.php >
-        wordpress/Schema/index.php
-      - cp wordpress/Schema/index.php wordpress/API/index.php
-      - cp wordpress/Schema/index.php wordpress/Engine/index.php
-      - cp wordpress/Schema/index.php wordpress/GraphQLByPoP/index.php
-      - wp plugin install wordpress-importer --activate --path=wordpress
-      - >-
-        wp import assets/graphql-api-sample-data.xml --authors=create
-        --path=wordpress
+      - SITE_NAME=graphql-api SITE_TITLE="GraphQL API" /bin/sh /app/setup/setup.sh        
 env_file:
   - defaults.env
   - defaults.local.env
