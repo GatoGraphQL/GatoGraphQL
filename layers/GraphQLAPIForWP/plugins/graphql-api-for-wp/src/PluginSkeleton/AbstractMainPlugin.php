@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use Exception;
+use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractMainPlugin extends AbstractPlugin
 {
@@ -85,6 +88,72 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     }
 
     /**
+     * When activating/deactivating ANY plugin (either from GraphQL API
+     * or 3rd-parties), the cached service container and the config
+     * must be dumped, so that they can be regenerated.
+     * 
+     * This way, extensions depending on 3rd-party plugins
+     * can have their functionality automatically enabled/disabled.
+     */
+    public function handleAnyPluginActivatedOrDeactivated(): void
+    {
+        $this->invalidateCache();
+    }
+    
+
+    /**
+     * Remove the cached folders (service container and config),
+     * and regenerate the timestamp
+     */
+    protected function invalidateCache(): void
+    {
+        $this->removeCachedFolders();
+
+        // Regenerate the timestamp
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $userSettingsManager->storeTimestamp();
+    }
+
+    /**
+     * Remove the cached folders:
+     * 
+     * - Service Container
+     * - Config
+     * 
+     * Because the parent cache folder (defined under 'cache-dir')
+     * can be set by the user, we can't directly remove that one.
+     * Otherwise, setting it to "wp-content" would remove this folder!
+     */
+    protected function removeCachedFolders(): void
+    {
+        $fileSystem = new Filesystem();
+
+        // Service Container
+        [
+            $cacheContainerConfiguration,
+            $containerConfigurationCacheNamespace,
+            $containerConfigurationCacheDirectory
+        ] = $this->pluginConfiguration->getContainerCacheConfiguration();
+        if ($cacheContainerConfiguration) {
+            try {
+                $fileSystem->remove($containerConfigurationCacheDirectory);
+            } catch (IOExceptionInterface) {
+                // If the folder does not exist, do nothing
+            }
+        }
+
+        // Config
+        $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
+        if ($serviceContainerDir = $cacheConfigurationManager->getDirectory()) {
+            try {
+                $fileSystem->remove($serviceContainerDir);
+            } catch (IOExceptionInterface) {
+                // If the folder does not exist, do nothing
+            }
+        }
+    }
+
+    /**
      * Remove permalinks when deactivating the plugin
      *
      * @see https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
@@ -121,6 +190,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     public function setup(): void
     {
         parent::setup();
+
+        /**
+         * When activating/deactivating ANY plugin (either from GraphQL API
+         * or 3rd-parties), the cached service container and the config
+         * must be dumped, so that they can be regenerated.
+         * 
+         * This way, extensions depending on 3rd-party plugins
+         * can have their functionality automatically enabled/disabled.
+         */
+        \add_action('activate_plugin', [$this, 'handleAnyPluginActivatedOrDeactivated']);
+        \add_action('deactivate_plugin', [$this, 'handleAnyPluginActivatedOrDeactivated']);
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
