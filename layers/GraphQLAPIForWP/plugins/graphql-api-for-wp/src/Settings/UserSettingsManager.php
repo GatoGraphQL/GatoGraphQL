@@ -19,21 +19,21 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
      * module enabled/disabled, user settings updated.
-     * 
+     *
      * If there is not timestamp yet, then we just installed the plugin.
-     * 
+     *
      * In that case, we must return a random `time()` timestamp and not
      * a fixed value such as `0`, because the service container
      * will be generated on each interaction with WordPress,
      * including WP-CLI.
-     * 
+     *
      * Using `0` as the default value, when installing the plugin
      * and an extension via WP-CLI (before accessing wp-admin)
      * it will throw errors, because after installing the main plugin
      * the container cache is generated and cached with timestamp `0`,
      * and it would be loaded again when installing the extension,
      * however the cache does not contain the services from the extension.
-     * 
+     *
      * By providing `time()`, the cached service container is always
      * a one-time-use before accessing the wp-admin and
      * having a new timestamp generated via `regenerateServiceContainer`.
