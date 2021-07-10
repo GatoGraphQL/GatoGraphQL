@@ -91,7 +91,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * When activating/deactivating ANY plugin (either from GraphQL API
      * or 3rd-parties), the cached service container and the config
      * must be dumped, so that they can be regenerated.
-     * 
+     *
      * This way, extensions depending on 3rd-party plugins
      * can have their functionality automatically enabled/disabled.
      */
@@ -99,7 +99,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     {
         $this->invalidateCache();
     }
-    
+
 
     /**
      * Remove the cached folders (service container and config),
@@ -116,10 +116,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin
 
     /**
      * Remove the cached folders:
-     * 
+     *
      * - Service Container
      * - Config
-     * 
+     *
      * Because the parent cache folder (defined under 'cache-dir')
      * can be set by the user, we can't directly remove that one.
      * Otherwise, setting it to "wp-content" would remove this folder!
@@ -129,14 +129,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         $fileSystem = new Filesystem();
 
         // Service Container
-        [
-            $cacheContainerConfiguration,
-            $containerConfigurationCacheNamespace,
-            $containerConfigurationCacheDirectory
-        ] = $this->pluginConfiguration->getContainerCacheConfiguration();
-        if ($cacheContainerConfiguration) {
+        $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
+        if ($containerCacheConfiguration->cacheContainerConfiguration()) {
             try {
-                $fileSystem->remove($containerConfigurationCacheDirectory);
+                $fileSystem->remove($containerCacheConfiguration->getContainerConfigurationCacheDirectory());
             } catch (IOExceptionInterface) {
                 // If the folder does not exist, do nothing
             }
@@ -195,7 +191,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          * When activating/deactivating ANY plugin (either from GraphQL API
          * or 3rd-parties), the cached service container and the config
          * must be dumped, so that they can be regenerated.
-         * 
+         *
          * This way, extensions depending on 3rd-party plugins
          * can have their functionality automatically enabled/disabled.
          */
@@ -446,8 +442,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
+            $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
             AppLoader::bootSystem(
-                ...$this->pluginConfiguration->getContainerCacheConfiguration()
+                $containerCacheConfiguration->cacheContainerConfiguration(),
+                $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
+                $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
 
             // Custom logic
@@ -472,8 +471,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
+            $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
             AppLoader::bootApplication(
-                ...$this->pluginConfiguration->getContainerCacheConfiguration()
+                $containerCacheConfiguration->cacheContainerConfiguration(),
+                $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
+                $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
 
             // Custom logic
