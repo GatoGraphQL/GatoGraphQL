@@ -88,7 +88,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     }
 
     /**
-     * Remove the service container (and config) cache,
+     * Remove the cached folders (service container and config),
      * and regenerate the timestamp
      */
     protected function invalidateCache(): void
@@ -106,9 +106,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * - Service Container
      * - Config
      * 
-     * Because the parent `cache` folder can be set by the user,
-     * we can't directly remove that one. (Otherwise, setting it
-     * to wp-content would completely remove this folder!)
+     * Because the parent cache folder (defined under 'cache-dir')
+     * can be set by the user, we can't directly remove that one.
+     * Otherwise, setting it to "wp-content" would remove this folder!
      */
     protected function removeCachedFolders(): void
     {
