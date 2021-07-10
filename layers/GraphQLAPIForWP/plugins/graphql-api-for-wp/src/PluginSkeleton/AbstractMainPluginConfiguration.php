@@ -20,11 +20,6 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
 
     /**
      * Provide the configuration to cache the container
-     *
-     * @return array<mixed> Array with args to pass to `AppLoader::initializeContainers`:
-     *                      [0]: cache container? (bool)
-     *                      [1]: container namespace (string|null)
-     *                      [2]: container directory (string|null)
      */
     public function getContainerCacheConfiguration(): ContainerCacheConfiguration
     {
