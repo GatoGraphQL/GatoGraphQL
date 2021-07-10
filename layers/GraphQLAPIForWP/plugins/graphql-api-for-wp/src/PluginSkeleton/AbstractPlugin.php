@@ -198,12 +198,13 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Remove the service container cache (and also the config),
+     * Remove the service container (and config) cache,
      * and regenerate the timestamp
      */
-    protected function regenerateServiceContainer(): void
+    protected function invalidateCache(): void
     {
-        // Remove the cache
+        // The Service Container cache is generated always, so remove it always
+        // This folder may also contain the config cache (if enabled), remove it too
         $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
         $fileSystem = new Filesystem();
         $fileSystem->remove([$mainPluginCacheDir]);
@@ -298,7 +299,7 @@ abstract class AbstractPlugin
 
         $this->unregisterPluginCustomPostTypes();
 
-        $this->regenerateServiceContainer();
+        $this->invalidateCache();
     }
 
     /**
