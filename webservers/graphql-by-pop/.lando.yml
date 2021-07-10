@@ -14,14 +14,11 @@ services:
   appserver:
     overrides:
       volumes:
-        - >-
-          ../../layers/API/packages/api-graphql:/app/vendor/getpop/api-graphql
+        - '../../layers/API/packages/api-graphql:/app/vendor/getpop/api-graphql'
         - >-
           ../../layers/API/packages/api-mirrorquery:/app/vendor/getpop/api-mirrorquery
-        - >-
-          ../../layers/API/packages/api-rest:/app/vendor/getpop/api-rest
-        - >-
-          ../../layers/API/packages/api:/app/vendor/getpop/api
+        - '../../layers/API/packages/api-rest:/app/vendor/getpop/api-rest'
+        - '../../layers/API/packages/api:/app/vendor/getpop/api'
         - >-
           ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
@@ -32,20 +29,16 @@ services:
           ../../layers/Engine/packages/definitions:/app/vendor/getpop/definitions
         - >-
           ../../layers/Engine/packages/engine-wp-bootloader:/app/wordpress/wp-content/plugins/engine-wp-bootloader
-        - >-
-          ../../layers/Engine/packages/engine-wp:/app/vendor/getpop/engine-wp
-        - >-
-          ../../layers/Engine/packages/engine:/app/vendor/getpop/engine
+        - '../../layers/Engine/packages/engine-wp:/app/vendor/getpop/engine-wp'
+        - '../../layers/Engine/packages/engine:/app/vendor/getpop/engine'
         - >-
           ../../layers/Engine/packages/field-query:/app/vendor/getpop/field-query
         - >-
           ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
-        - >-
-          ../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp
-        - >-
-          ../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks
+        - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
+        - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
         - >-
           ../../layers/Engine/packages/loosecontracts:/app/vendor/getpop/loosecontracts
         - >-
@@ -54,12 +47,9 @@ services:
           ../../layers/Engine/packages/modulerouting:/app/vendor/getpop/modulerouting
         - >-
           ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
-        - >-
-          ../../layers/Engine/packages/root:/app/vendor/getpop/root
-        - >-
-          ../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp
-        - >-
-          ../../layers/Engine/packages/routing:/app/vendor/getpop/routing
+        - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
+        - '../../layers/Engine/packages/routing-wp:/app/vendor/getpop/routing-wp'
+        - '../../layers/Engine/packages/routing:/app/vendor/getpop/routing'
         - >-
           ../../layers/Engine/packages/translation-wp:/app/vendor/getpop/translation-wp
         - >-
@@ -88,8 +78,7 @@ services:
           ../../layers/Schema/packages/commentmeta:/app/vendor/pop-schema/commentmeta
         - >-
           ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
-        - >-
-          ../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments
+        - '../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments'
         - >-
           ../../layers/Schema/packages/custompost-categories-wp:/app/vendor/pop-schema/custompost-categories-wp
         - >-
@@ -120,24 +109,17 @@ services:
           ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
         - >-
           ../../layers/Schema/packages/generic-customposts:/app/vendor/pop-schema/generic-customposts
-        - >-
-          ../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp
-        - >-
-          ../../layers/Schema/packages/media:/app/vendor/pop-schema/media
-        - >-
-          ../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp
-        - >-
-          ../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus
-        - >-
-          ../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta
+        - '../../layers/Schema/packages/media-wp:/app/vendor/pop-schema/media-wp'
+        - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
+        - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
+        - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
+        - '../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta'
         - >-
           ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
         - >-
           ../../layers/Schema/packages/metaquery:/app/vendor/pop-schema/metaquery
-        - >-
-          ../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp
-        - >-
-          ../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages
+        - '../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp'
+        - '../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages'
         - >-
           ../../layers/Schema/packages/post-categories-wp:/app/vendor/pop-schema/post-categories-wp
         - >-
@@ -156,10 +138,8 @@ services:
           ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
         - >-
           ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
-        - >-
-          ../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp
-        - >-
-          ../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts
+        - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
+        - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
         - >-
           ../../layers/Schema/packages/queriedobject-wp:/app/vendor/pop-schema/queriedobject-wp
         - >-
@@ -168,12 +148,9 @@ services:
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - >-
           ../../layers/Schema/packages/settings-wp:/app/vendor/pop-schema/settings-wp
-        - >-
-          ../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings
-        - >-
-          ../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp
-        - >-
-          ../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags
+        - '../../layers/Schema/packages/settings:/app/vendor/pop-schema/settings'
+        - '../../layers/Schema/packages/tags-wp:/app/vendor/pop-schema/tags-wp'
+        - '../../layers/Schema/packages/tags:/app/vendor/pop-schema/tags'
         - >-
           ../../layers/Schema/packages/taxonomies-wp:/app/vendor/pop-schema/taxonomies-wp
         - >-
@@ -206,16 +183,15 @@ services:
           ../../layers/Schema/packages/user-state:/app/vendor/pop-schema/user-state
         - >-
           ../../layers/Schema/packages/usermeta-wp:/app/vendor/pop-schema/usermeta-wp
-        - >-
-          ../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta
-        - >-
-          ../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp
-        - >-
-          ../../layers/Schema/packages/users:/app/vendor/pop-schema/users
+        - '../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta'
+        - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
+        - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
     build_as_root:
       - a2enmod proxy proxy_http
     run:
-      - SITE_URL=graphql-by-pop.lndo.site SITE_TITLE="GraphQL by PoP" /bin/sh /app/setup/setup.sh
+      - >-
+        SITE_NAME=graphql-by-pop SITE_TITLE="GraphQL by PoP" /bin/sh
+        /app/setup/setup.sh
 env_file:
   - defaults.env
   - defaults.local.env
