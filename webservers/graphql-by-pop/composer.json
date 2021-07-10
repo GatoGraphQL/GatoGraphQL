@@ -12,34 +12,6 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "pop-api-demo-site/newsletter-subscriptions-rest-endpoints",
-                "version": "master",
-                "type": "wordpress-plugin",
-                "source": {
-                    "url": "https://gist.github.com/leoloso/6588f6c1bdcce82fc317052616d3dfb4",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "pop-api-demo-site/disable-user-edit-profile",
-                "version": "0.1.1",
-                "type": "wordpress-plugin",
-                "source": {
-                    "url": "https://gist.github.com/leoloso/4e367eb8d8014a7aa7580567608bd5b4",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
-    ],
     "require": {
         "php": "~8.0",
         "getpop/api-rest": "dev-master",
@@ -50,8 +22,6 @@
         "graphql-by-pop/graphql-voyager-client": "^1.0",
         "graphql-by-pop/graphql-server": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0",
-        "pop-api-demo-site/disable-user-edit-profile": "0.1.1",
-        "pop-api-demo-site/newsletter-subscriptions-rest-endpoints": "dev-master",
         "pop-schema/block-metadata-for-wp": "dev-master",
         "pop-schema/comment-mutations-wp": "dev-master",
         "pop-schema/commentmeta-wp": "dev-master",
