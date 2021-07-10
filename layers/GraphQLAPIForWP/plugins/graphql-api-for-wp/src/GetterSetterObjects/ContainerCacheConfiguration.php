@@ -10,15 +10,15 @@ namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects;
 class ContainerCacheConfiguration
 {
     public function __construct(
-        private bool $isCachingEnabled,
+        private bool $cacheContainerConfiguration,
         private ?string $containerConfigurationCacheNamespace,
         private ?string $containerConfigurationCacheDirectory,
     ) {        
     }
 
-    public function isCachingEnabled(): bool
+    public function cacheContainerConfiguration(): bool
     {
-        return $this->isCachingEnabled;
+        return $this->cacheContainerConfiguration;
     }
 
     public function getContainerConfigurationCacheNamespace(): ?string
