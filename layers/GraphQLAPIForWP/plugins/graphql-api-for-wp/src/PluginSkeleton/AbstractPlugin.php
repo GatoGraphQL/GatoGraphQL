@@ -198,7 +198,8 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Remove the cache, and regenerate the timestamp
+     * Remove the service container cache (and also the config),
+     * and regenerate the timestamp
      */
     protected function regenerateServiceContainer(): void
     {
