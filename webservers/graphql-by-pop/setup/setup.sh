@@ -5,7 +5,7 @@ if wp core is-installed --path=/app/wordpress; then
     exit
 fi
 echo "Installing WordPress..."
-./install.sh
-./configure.sh
-./load-custom-code.sh
-./activate-plugins.sh
+/bin/sh /app/setup/install.sh
+/bin/sh /app/setup/configure.sh
+/bin/sh /app/setup/load-custom-code.sh
+/bin/sh /app/setup/activate-plugins.sh
