@@ -88,6 +88,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     }
 
     /**
+     * When activating/deactivating ANY plugin (either from GraphQL API
+     * or 3rd-parties), the cached service container and the config
+     * must be dumped, so that they can be regenerated.
+     * 
+     * This way, extensions depending on 3rd-party plugins
+     * can have their functionality automatically enabled/disabled.
+     */
+    public function handleAnyPluginActivatedOrDeactivated(): void
+    {
+        $this->invalidateCache();
+    }
+    
+
+    /**
      * Remove the cached folders (service container and config),
      * and regenerate the timestamp
      */
@@ -185,8 +199,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin
          * This way, extensions depending on 3rd-party plugins
          * can have their functionality automatically enabled/disabled.
          */
-        \add_action('activate_plugin', [$this, 'invalidateCache']);
-        \add_action('deactivate_plugin', [$this, 'invalidateCache']);
+        \add_action('activate_plugin', [$this, 'handleAnyPluginActivatedOrDeactivated']);
+        \add_action('deactivate_plugin', [$this, 'handleAnyPluginActivatedOrDeactivated']);
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
