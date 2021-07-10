@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects;
 
+/**
+ * Configuration to cache the container
+ */
 class ContainerCacheConfiguration
 {
     public function __construct(
