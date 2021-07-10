@@ -243,7 +243,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                 \flush_rewrite_rules();
 
                 // Regenerate the timestamp, to generate the service container
-                $this->regenerateTimestamp();
+                $this->regenerateServiceContainer();
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
