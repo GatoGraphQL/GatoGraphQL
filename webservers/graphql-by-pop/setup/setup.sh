@@ -6,7 +6,7 @@ if wp core is-installed --path=/app/wordpress; then
 fi
 echo "Installing WordPress..."
 # Install
-wp core install --url=graphql-by-pop.lndo.site --title="GraphQL by PoP" --admin_user=admin --admin_password=admin --admin_email=admin@example.com --path=/app/wordpress 
+wp core install --url="$SITE_URL" --title="$SITE_TITLE" --admin_user=admin --admin_password=admin --admin_email=admin@example.com --path=/app/wordpress 
 # Configure
 wp config set WP_DEBUG true --raw --path=/app/wordpress
 wp rewrite structure '/%postname%/' --hard --path=/app/wordpress

@@ -215,7 +215,7 @@ services:
     build_as_root:
       - a2enmod proxy proxy_http
     run:
-      - /bin/sh /app/setup/setup.sh
+      - SITE_URL=graphql-by-pop.lndo.site SITE_TITLE="GraphQL by PoP" /bin/sh /app/setup/setup.sh
 env_file:
   - defaults.env
   - defaults.local.env
