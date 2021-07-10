@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Engine\AppLoader;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractPlugin
 {
@@ -196,10 +198,17 @@ abstract class AbstractPlugin
     }
 
     /**
-     * Regenerate the timestamp
+     * Remove the service container cache (and also the config),
+     * and regenerate the timestamp
      */
-    protected function regenerateTimestamp(): void
+    protected function regenerateServiceContainer(): void
     {
+        // Remove the cache
+        $mainPluginCacheDir = (string) MainPluginManager::getConfig('cache-dir');
+        $fileSystem = new Filesystem();
+        $fileSystem->remove([$mainPluginCacheDir]);
+
+        // Regenerate the timestamp
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $userSettingsManager->storeTimestamp();
     }
@@ -289,7 +298,7 @@ abstract class AbstractPlugin
 
         $this->unregisterPluginCustomPostTypes();
 
-        $this->regenerateTimestamp();
+        $this->regenerateServiceContainer();
     }
 
     /**
