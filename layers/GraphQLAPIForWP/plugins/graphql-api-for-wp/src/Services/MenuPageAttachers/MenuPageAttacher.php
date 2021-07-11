@@ -9,7 +9,6 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SupportMenuPage;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
@@ -190,23 +189,6 @@ class MenuPageAttacher extends AbstractMenuPageAttacher
             ) {
                 $aboutMenuPage->setHookName($hookName);
             }
-        }
-
-        /**
-         * @var SupportMenuPage
-         */
-        $supportMenuPage = $this->instanceManager->getInstance(SupportMenuPage::class);
-        if (
-            $hookName = \add_submenu_page(
-                $this->getMenuName(),
-                __('Support', 'graphql-api'),
-                __('Support', 'graphql-api'),
-                'manage_options',
-                $supportMenuPage->getScreenID(),
-                [$supportMenuPage, 'print']
-            )
-        ) {
-            $supportMenuPage->setHookName($hookName);
         }
 
         // $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
