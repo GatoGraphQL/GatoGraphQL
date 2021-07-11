@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
 use PoP\Hooks\HooksAPIInterface;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -25,7 +25,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         HooksAPIInterface $hooksAPI,
@@ -34,7 +33,6 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
     ) {
         parent::__construct(
             $instanceManager,
-            $menu,
             $moduleRegistry,
             $userAuthorization,
             $hooksAPI,

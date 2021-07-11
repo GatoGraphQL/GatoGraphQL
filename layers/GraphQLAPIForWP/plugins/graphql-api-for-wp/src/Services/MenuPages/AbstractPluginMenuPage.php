@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
+namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 
 /**
- * Admin menu class
+ * Main plugin menu page
  */
-abstract class AbstractPluginMenuPageAttacher extends AbstractMenuPageAttacher
+abstract class AbstractPluginMenuPage extends AbstractMenuPage
 {
     public function getMenuClass(): string
     {

@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
 use WP_Block_Editor_Context;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -16,12 +16,12 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
-        protected Menu $menu,
         protected ModuleRegistryInterface $moduleRegistry,
         protected UserAuthorizationInterface $userAuthorization
     ) {
@@ -404,7 +404,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
                 'show_in_admin_bar' => $this->showInAdminBar(),
-                'show_in_menu' => $canAccessSchemaEditor ? $this->menu->getName() : false,
+                'show_in_menu' => $canAccessSchemaEditor ? $this->getMenu()->getName() : false,
                 'show_in_rest' => true,
                 'supports' => [
                     'title',
@@ -431,6 +431,18 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $postTypeArgs['template'] = $template;
         }
         return $postTypeArgs;
+    }
+
+    public function getMenuClass(): string
+    {
+        return PluginMenu::class;
+    }
+
+    protected function getMenu(): AbstractMenu
+    {
+        $menuClass = $this->getMenuClass();
+        /** @var AbstractMenu */
+        return $this->instanceManager->getInstance($menuClass);
     }
 
     /**

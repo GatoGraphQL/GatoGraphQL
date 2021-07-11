@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentRetrieverTrait;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractPluginMenuPage;
 
 /**
  * Docs menu page
  */
-abstract class AbstractDocsMenuPage extends AbstractMenuPage
+abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 {
     use OpenInModalMenuPageTrait;
     use UseTabpanelMenuPageTrait;

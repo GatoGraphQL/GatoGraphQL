@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractPluginMenuPage;
 use GraphQLAPI\GraphQLAPI\Admin\Tables\AbstractItemListTable;
 
 /**
  * Table menu page
  */
-abstract class AbstractTableMenuPage extends AbstractMenuPage
+abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 {
     protected ?AbstractItemListTable $tableObject;
 

@@ -8,9 +8,9 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 
 /**
- * Admin menu class
+ * Main plugin's admin menu
  */
-class Menu extends AbstractMenu
+class PluginMenu extends AbstractMenu
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,

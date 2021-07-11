@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache\CacheConfigurati
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManager;
 
@@ -34,7 +34,7 @@ class CacheConfigurationManagerFacade
             $instanceManager = new InstanceManager();
             $moduleRegistry = new ModuleRegistry();
             $userAuthorization = new UserAuthorization();
-            $menu = new Menu(
+            $menu = new PluginMenu(
                 $instanceManager,
                 $userAuthorization,
             );

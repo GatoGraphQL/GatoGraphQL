@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Settings\Options;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\Settings\Options;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Settings menu page
  */
-class SettingsMenuPage extends AbstractMenuPage
+class SettingsMenuPage extends AbstractPluginMenuPage
 {
     use UseTabpanelMenuPageTrait;
 
@@ -26,12 +25,16 @@ class SettingsMenuPage extends AbstractMenuPage
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
     public function __construct(
-        Menu $menu,
+        InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
         protected ModuleRegistryInterface $moduleRegistry
     ) {
-        parent::__construct($menu, $menuPageHelper, $endpointHelpers);
+        parent::__construct(
+            $instanceManager,
+            $menuPageHelper,
+            $endpointHelpers
+        );
     }
 
     public function getMenuPageSlug(): string
