@@ -18,36 +18,17 @@ abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService
     }
 
     abstract public function getName(): string;
+    abstract public function addMenuPage(): void;
 
     /**
      * Initialize the endpoints
      */
     public function initialize(): void
     {
-        /**
-         * Low priority to execute before adding the menus for the CPTs
-         */
         \add_action(
             'admin_menu',
-            [$this, 'addMenuPagesTop'],
-            9
+            [$this, 'addMenuPage'],
+            5
         );
-        /**
-         * High priority to execute after adding the menus for the CPTs
-         */
-        \add_action(
-            'admin_menu',
-            [$this, 'addMenuPagesBottom'],
-            20
-        );
-    }
-    public function addMenuPagesTop(): void
-    {
-        // Initially empty
-    }
-
-    public function addMenuPagesBottom(): void
-    {
-        // Initially empty
     }
 }
