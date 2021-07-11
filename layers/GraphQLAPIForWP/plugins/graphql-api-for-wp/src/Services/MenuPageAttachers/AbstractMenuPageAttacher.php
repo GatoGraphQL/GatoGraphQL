@@ -38,7 +38,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
      */
     protected function getPriority(): int
     {
-        return 10;
+        return 30;
     }
 
     /**
