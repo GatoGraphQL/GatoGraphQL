@@ -9,10 +9,9 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class TopMenuPageAttacher extends AbstractMenuPageAttacher
+class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -23,11 +22,6 @@ class TopMenuPageAttacher extends AbstractMenuPageAttacher
         parent::__construct(
             $instanceManager,
         );
-    }
-
-    public function getMenuClass(): string
-    {
-        return Menu::class;
     }
 
     /**
