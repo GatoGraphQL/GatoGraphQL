@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache\CacheConfigurati
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManager;
@@ -33,13 +32,10 @@ class CacheConfigurationManagerFacade
             // because their instantiation produces no side-effects
             // (maybe that happens under `initialize`)
             $instanceManager = new InstanceManager();
-            $menuPageHelper = new MenuPageHelper();
             $moduleRegistry = new ModuleRegistry();
             $userAuthorization = new UserAuthorization();
             $menu = new Menu(
                 $instanceManager,
-                $menuPageHelper,
-                $moduleRegistry,
                 $userAuthorization,
             );
             $endpointHelpers = new EndpointHelpers($menu, $moduleRegistry);
