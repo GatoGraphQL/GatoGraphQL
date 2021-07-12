@@ -79,7 +79,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-
             // Add notices
             if (ComponentConfiguration::enableProactiveFeedbackNotices()) {
                 if ($data['dbNotices'] ?? null) {
