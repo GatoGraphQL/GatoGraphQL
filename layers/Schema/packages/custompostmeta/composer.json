@@ -16,8 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
+        "pop-schema/customposts": "^0.8",
         "pop-schema/meta": "^0.8",
-        "pop-schema/customposts": "^0.8"
+        "pop-schema/metaquery": "^0.8"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.76",

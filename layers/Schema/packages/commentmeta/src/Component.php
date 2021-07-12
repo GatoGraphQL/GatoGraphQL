@@ -21,6 +21,7 @@ class Component extends AbstractComponent
         return [
             \PoPSchema\Meta\Component::class,
             \PoPSchema\Comments\Component::class,
+            \PoPSchema\MetaQuery\Component::class,
         ];
     }
 
