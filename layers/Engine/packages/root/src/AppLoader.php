@@ -36,7 +36,7 @@ class AppLoader
     /**
      * [key]: Component class, [value]: Configuration
      *
-     * @var string[]
+     * @var array<string, array<string, mixed>>
      */
     protected static array $componentClassConfiguration = [];
     /**
@@ -63,15 +63,19 @@ class AppLoader
     /**
      * Add configuration for the Component classes
      *
-     * @param array<string, mixed> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
     public static function addComponentClassConfiguration(
         array $componentClassConfiguration = []
     ): void {
-        self::$componentClassConfiguration = array_merge_recursive(
-            self::$componentClassConfiguration,
-            $componentClassConfiguration
-        );
+        // Allow to override entries under each Component
+        foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
+            self::$componentClassConfiguration[$componentClass] ??= [];
+            self::$componentClassConfiguration[$componentClass] = array_merge(
+                self::$componentClassConfiguration[$componentClass],
+                $componentConfiguration
+            );
+        }
     }
 
     /**

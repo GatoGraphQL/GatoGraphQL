@@ -14,6 +14,10 @@ class ComponentConfiguration
     private static bool $addSelfFieldForRootTypeToSchema = false;
     private static bool $sortSchemaAlphabetically = true;
     private static bool $enableProactiveFeedback = true;
+    private static bool $enableProactiveFeedbackDeprecations = true;
+    private static bool $enableProactiveFeedbackNotices = true;
+    private static bool $enableProactiveFeedbackTraces = true;
+    private static bool $enableProactiveFeedbackLogs = true;
     private static bool $enableNestedMutations = false;
     private static ?bool $enableGraphQLIntrospection = null;
 
@@ -58,6 +62,78 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK;
         $selfProperty = &self::$enableProactiveFeedback;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function enableProactiveFeedbackDeprecations(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS;
+        $selfProperty = &self::$enableProactiveFeedbackDeprecations;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function enableProactiveFeedbackNotices(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_NOTICES;
+        $selfProperty = &self::$enableProactiveFeedbackNotices;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function enableProactiveFeedbackTraces(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_TRACES;
+        $selfProperty = &self::$enableProactiveFeedbackTraces;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function enableProactiveFeedbackLogs(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_LOGS;
+        $selfProperty = &self::$enableProactiveFeedbackLogs;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
