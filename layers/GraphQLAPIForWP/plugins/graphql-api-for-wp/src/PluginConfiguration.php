@@ -38,10 +38,6 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
 use PoPSchema\Categories\Environment as CategoriesEnvironment;
-use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
-use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
-use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
-use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
 use PoPSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
@@ -55,10 +51,6 @@ use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
 use PoPSchema\Settings\Environment as SettingsEnvironment;
 use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
-use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
-use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
-use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
 
@@ -331,66 +323,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
             ],
-            // White/Blacklisted entries to CustomPost.meta
-            [
-                'class' => CustomPostMetaComponentConfiguration::class,
-                'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
-                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
-                // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
-            ],
-            [
-                'class' => CustomPostMetaComponentConfiguration::class,
-                'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR,
-                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
-                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
-            ],
-            // White/Blacklisted entries to User.meta
-            [
-                'class' => UserMetaComponentConfiguration::class,
-                'envVariable' => UserMetaEnvironment::USER_META_ENTRIES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_USER_META,
-                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
-                // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
-            ],
-            [
-                'class' => UserMetaComponentConfiguration::class,
-                'envVariable' => UserMetaEnvironment::USER_META_BEHAVIOR,
-                'module' => SchemaTypeModuleResolver::SCHEMA_USER_META,
-                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
-            ],
-            // White/Blacklisted entries to Comment.meta
-            [
-                'class' => CommentMetaComponentConfiguration::class,
-                'envVariable' => CommentMetaEnvironment::COMMENT_META_ENTRIES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENT_META,
-                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
-                // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
-            ],
-            [
-                'class' => CommentMetaComponentConfiguration::class,
-                'envVariable' => CommentMetaEnvironment::COMMENT_META_BEHAVIOR,
-                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENT_META,
-                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
-            ],
-            // White/Blacklisted entries to PostTag.meta and PostCategory.meta
-            [
-                'class' => TaxonomyMetaComponentConfiguration::class,
-                'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
-                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
-                // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
-            ],
-            [
-                'class' => TaxonomyMetaComponentConfiguration::class,
-                'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR,
-                'module' => SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
-                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
-            ],
             // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
@@ -543,15 +475,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             // Allow access to all entries for Root.option
             $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
             $componentClassConfiguration[\PoPSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
-            // Allow access to all meta values
-            $componentClassConfiguration[\PoPSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
         }
         return $componentClassConfiguration;
     }
@@ -639,18 +562,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
                 \PoPSchema\PostCategories\Component::class,
-            ],
-            SchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
-                \PoPSchema\CustomPostMeta\Component::class,
-            ],
-            SchemaTypeModuleResolver::SCHEMA_USER_META => [
-                \PoPSchema\UserMeta\Component::class,
-            ],
-            SchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
-                \PoPSchema\CommentMeta\Component::class,
-            ],
-            SchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
-                \PoPSchema\TaxonomyMeta\Component::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
                 \PoPSchema\Menus\Component::class,
