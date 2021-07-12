@@ -12,6 +12,7 @@ AppLoader::addComponentClassesToInitialize([
     \PoPSchema\CustomPostMetaWP\Component::class,
     \PoPSchema\CustomPostMediaWP\Component::class,
     \PoPSchema\TaxonomyQueryWP\Component::class,
+    \PoPSchema\TaxonomyMetaWP\Component::class,
     \PoPSchema\UserMetaWP\Component::class,
     \PoPSchema\UserStateWP\Component::class,
     \PoPSchema\UserRolesWP\Component::class,
