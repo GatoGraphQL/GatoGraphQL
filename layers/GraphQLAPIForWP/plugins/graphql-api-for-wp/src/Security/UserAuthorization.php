@@ -28,7 +28,7 @@ class UserAuthorization implements UserAuthorizationInterface
         if ($accessScheme = ComponentConfiguration::getEditingAccessScheme()) {
             // If the capability does not exist, catch the exception
             try {
-                $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getSchemaEditorAccessCapability($accessScheme);
+                $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
             } catch (InvalidArgumentException) {
                 
             }

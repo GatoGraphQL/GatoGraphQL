@@ -11,11 +11,7 @@ use InvalidArgumentException;
 class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistryInterface
 {
     /**
-     * @var array<string,string>
-     */
-    protected array $schemaEditorAccessCapabilities = [];
-    /**
-     * @var UserAuthorizationSchemeInterface[]
+     * @var array<string,UserAuthorizationSchemeInterface>
      */
     protected array $userAuthorizationSchemes = [];
     protected ?UserAuthorizationSchemeInterface $defaultUserAuthorizationScheme = null;
@@ -23,14 +19,9 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     public function addUserAuthorizationScheme(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
-        $this->schemaEditorAccessCapabilities[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getSchemaEditorAccessCapability();
+        $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
         if ($userAuthorizationScheme instanceof DefaultUserAuthorizationSchemeTagInterface) {
             $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
-            // Place the default one at the top
-            array_unshift($this->userAuthorizationSchemes, $userAuthorizationScheme);
-        } else {
-            // Place at the end
-            $this->userAuthorizationSchemes[] = $userAuthorizationScheme;
         }
     }
 
@@ -39,28 +30,25 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
      */
     public function getUserAuthorizationSchemes(): array
     {
-        return $this->userAuthorizationSchemes;
+        return array_values($this->userAuthorizationSchemes);
     }
-    
-    /**
-     * @throws InvalidArgumentException When the scheme is not registered
-     */
-    public function getSchemaEditorAccessCapability(string $userAuthorizationSchemeName): string
+
+    public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface
     {
-        if (!isset($this->schemaEditorAccessCapabilities[$userAuthorizationSchemeName])) {
+        if (!isset($this->userAuthorizationSchemes[$name])) {
             throw new InvalidArgumentException(sprintf(
-                \__('User authorization scheme \'%s\' does not exist', 'graphql-api'),
-                $userAuthorizationSchemeName
+                \__('User authorization scheme with name \'%s\' does not exist', 'graphql-api'),
+                $name
             ));
         }
-        return $this->schemaEditorAccessCapabilities[$userAuthorizationSchemeName];
+        return $this->userAuthorizationSchemes[$name];
     }
 
     public function getDefaultUserAuthorizationScheme(): UserAuthorizationSchemeInterface
     {
         if ($this->defaultUserAuthorizationScheme === null) {
             throw new InvalidArgumentException(
-                \__('No default User Authorization Scheme has been set', 'graphql-api')
+                \__('No default user authorization scheme has been set', 'graphql-api')
             );
         }
         return $this->defaultUserAuthorizationScheme;

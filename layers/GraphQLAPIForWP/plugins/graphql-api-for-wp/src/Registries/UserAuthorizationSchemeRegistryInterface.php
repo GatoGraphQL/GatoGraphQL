@@ -17,7 +17,7 @@ interface UserAuthorizationSchemeRegistryInterface
     /**
      * @throws InvalidArgumentException When the scheme is not registered
      */
-    public function getSchemaEditorAccessCapability(string $userAuthorizationSchemeName): string;
+    public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface;
     /**
      * @throws InvalidArgumentException When no default object has been set
      */
