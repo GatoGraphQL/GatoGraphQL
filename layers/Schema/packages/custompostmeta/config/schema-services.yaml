@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-
-    PoPSchema\CustomPostMeta\FieldResolvers\:
-        resource: '../src/FieldResolvers/*'

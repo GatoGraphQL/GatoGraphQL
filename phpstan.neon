@@ -16,8 +16,6 @@ includes:
     - layers/Schema/packages/categories-wp/phpstan.neon.dist
     - layers/Schema/packages/comment-mutations/phpstan.neon.dist
     - layers/Schema/packages/comment-mutations-wp/phpstan.neon.dist
-    - layers/Schema/packages/commentmeta/phpstan.neon.dist
-    - layers/Schema/packages/commentmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/comments/phpstan.neon.dist
     - layers/Schema/packages/comments-wp/phpstan.neon.dist
     - layers/Engine/packages/component-model/phpstan.neon.dist
@@ -32,8 +30,6 @@ includes:
     - layers/Schema/packages/custompostmedia-mutations/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-wp/phpstan.neon.dist
-    - layers/Schema/packages/custompostmeta/phpstan.neon.dist
-    - layers/Schema/packages/custompostmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/customposts/phpstan.neon.dist
     - layers/Schema/packages/customposts-wp/phpstan.neon.dist
     - layers/Engine/packages/definitions/phpstan.neon.dist
@@ -61,9 +57,6 @@ includes:
     - layers/Schema/packages/media-wp/phpstan.neon.dist
     - layers/Schema/packages/menus/phpstan.neon.dist
     - layers/Schema/packages/menus-wp/phpstan.neon.dist
-    - layers/Schema/packages/meta/phpstan.neon.dist
-    - layers/Schema/packages/metaquery/phpstan.neon.dist
-    - layers/Schema/packages/metaquery-wp/phpstan.neon.dist
     - layers/Engine/packages/modulerouting/phpstan.neon.dist
     - layers/Schema/packages/pages/phpstan.neon.dist
     - layers/Schema/packages/pages-wp/phpstan.neon.dist
@@ -91,8 +84,6 @@ includes:
     - layers/Schema/packages/tags-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomies/phpstan.neon.dist
     - layers/Schema/packages/taxonomies-wp/phpstan.neon.dist
-    - layers/Schema/packages/taxonomymeta/phpstan.neon.dist
-    - layers/Schema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery-wp/phpstan.neon.dist
     - layers/Engine/packages/translation/phpstan.neon.dist
@@ -106,7 +97,5 @@ includes:
     - layers/Schema/packages/user-state-mutations/phpstan.neon.dist
     - layers/Schema/packages/user-state-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/user-state-wp/phpstan.neon.dist
-    - layers/Schema/packages/usermeta/phpstan.neon.dist
-    - layers/Schema/packages/usermeta-wp/phpstan.neon.dist
     - layers/Schema/packages/users/phpstan.neon.dist
     - layers/Schema/packages/users-wp/phpstan.neon.dist
