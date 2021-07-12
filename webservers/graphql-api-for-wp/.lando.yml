@@ -93,10 +93,6 @@ services:
         - >-
           ../../layers/Schema/packages/comment-mutations:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/comment-mutations
         - >-
-          ../../layers/Schema/packages/commentmeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/commentmeta-wp
-        - >-
-          ../../layers/Schema/packages/commentmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/commentmeta
-        - >-
           ../../layers/Schema/packages/comments-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/comments-wp
         - >-
           ../../layers/Schema/packages/comments:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/comments
@@ -121,10 +117,6 @@ services:
         - >-
           ../../layers/Schema/packages/custompostmedia:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmedia
         - >-
-          ../../layers/Schema/packages/custompostmeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta-wp
-        - >-
-          ../../layers/Schema/packages/custompostmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta
-        - >-
           ../../layers/Schema/packages/customposts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts-wp
         - >-
           ../../layers/Schema/packages/customposts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts
@@ -138,12 +130,6 @@ services:
           ../../layers/Schema/packages/menus-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/menus-wp
         - >-
           ../../layers/Schema/packages/menus:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/menus
-        - >-
-          ../../layers/Schema/packages/meta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/meta
-        - >-
-          ../../layers/Schema/packages/metaquery-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/metaquery-wp
-        - >-
-          ../../layers/Schema/packages/metaquery:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/metaquery
         - >-
           ../../layers/Schema/packages/pages-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/pages-wp
         - >-
@@ -189,10 +175,6 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomies:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomies
         - >-
-          ../../layers/Schema/packages/taxonomymeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomymeta-wp
-        - >-
-          ../../layers/Schema/packages/taxonomymeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomymeta
-        - >-
           ../../layers/Schema/packages/taxonomyquery-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomyquery-wp
         - >-
           ../../layers/Schema/packages/taxonomyquery:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomyquery
@@ -212,10 +194,6 @@ services:
           ../../layers/Schema/packages/user-state-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/user-state-wp
         - >-
           ../../layers/Schema/packages/user-state:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/user-state
-        - >-
-          ../../layers/Schema/packages/usermeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/usermeta-wp
-        - >-
-          ../../layers/Schema/packages/usermeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/usermeta
         - >-
           ../../layers/Schema/packages/users-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/users-wp
         - >-
