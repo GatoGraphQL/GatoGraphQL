@@ -19,9 +19,14 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     public function addUserAuthorizationScheme(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
-        $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
         if ($userAuthorizationScheme instanceof DefaultUserAuthorizationSchemeTagInterface) {
             $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
+            // Place the default one at the top
+            // @see http://www.mendoweb.be/blog/php-array_unshift-key-array_unshift-associative-array/
+            $this->userAuthorizationSchemes = [$userAuthorizationScheme->getName() => $userAuthorizationScheme] + $this->userAuthorizationSchemes;
+        } else {
+            // Place at the end
+            $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
         }
     }
 
