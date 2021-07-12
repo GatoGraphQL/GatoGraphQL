@@ -9,7 +9,7 @@ use InvalidArgumentException;
 
 interface UserAuthorizationSchemeRegistryInterface
 {
-    public function addSchemaEditorAccessCapability(UserAuthorizationSchemeInterface $userAuthorizationScheme): void;
+    public function addUserAuthorizationScheme(UserAuthorizationSchemeInterface $userAuthorizationScheme): void;
     /**
      * @throws InvalidArgumentException When the scheme is not registered
      */

@@ -20,6 +20,6 @@ class RegisterUserAuthorizationSchemeCompilerPass extends AbstractInjectServiceI
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'addSchemaEditorAccessCapability';
+        return 'addUserAuthorizationScheme';
     }
 }

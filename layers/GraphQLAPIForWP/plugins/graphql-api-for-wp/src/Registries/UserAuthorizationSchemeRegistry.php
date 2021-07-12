@@ -16,7 +16,7 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     protected array $schemaEditorAccessCapabilities = [];
     protected ?UserAuthorizationSchemeInterface $defaultUserAuthorizationScheme = null;
 
-    public function addSchemaEditorAccessCapability(
+    public function addUserAuthorizationScheme(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
         $this->schemaEditorAccessCapabilities[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getSchemaEditorAccessCapability();
