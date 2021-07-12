@@ -11,6 +11,10 @@ interface UserAuthorizationSchemeRegistryInterface
 {
     public function addUserAuthorizationScheme(UserAuthorizationSchemeInterface $userAuthorizationScheme): void;
     /**
+     * @return UserAuthorizationSchemeInterface[]
+     */
+    public function getUserAuthorizationSchemes(): array;
+    /**
      * @throws InvalidArgumentException When the scheme is not registered
      */
     public function getSchemaEditorAccessCapability(string $userAuthorizationSchemeName): string;

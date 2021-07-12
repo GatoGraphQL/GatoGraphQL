@@ -14,16 +14,30 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
      * @var array<string,string>
      */
     protected array $schemaEditorAccessCapabilities = [];
+    /**
+     * @var UserAuthorizationSchemeInterface[]
+     */
+    protected array $userAuthorizationSchemes = [];
     protected ?UserAuthorizationSchemeInterface $defaultUserAuthorizationScheme = null;
 
     public function addUserAuthorizationScheme(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
         $this->schemaEditorAccessCapabilities[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getSchemaEditorAccessCapability();
+        $this->userAuthorizationSchemes[] = $userAuthorizationScheme;
         if ($userAuthorizationScheme instanceof DefaultUserAuthorizationSchemeTagInterface) {
             $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
         }
     }
+
+    /**
+     * @return UserAuthorizationSchemeInterface[]
+     */
+    public function getUserAuthorizationSchemes(): array
+    {
+        return $this->userAuthorizationSchemes;
+    }
+    
     /**
      * @throws InvalidArgumentException When the scheme is not registered
      */

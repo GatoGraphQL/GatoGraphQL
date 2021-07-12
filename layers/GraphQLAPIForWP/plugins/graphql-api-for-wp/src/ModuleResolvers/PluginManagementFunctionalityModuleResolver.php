@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Facades\Registries\UserAuthorizationSchemeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -95,9 +96,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        $userAuthorizationSchemeRegistry = UserAuthorizationSchemeRegistryFacade::getInstance();
+        $defaultUserAuthorizationScheme = $userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
         $defaultValues = [
             self::SCHEMA_EDITING_ACCESS => [
-                self::OPTION_EDITING_ACCESS_SCHEME => AccessSchemes::ADMIN_ONLY,
+                self::OPTION_EDITING_ACCESS_SCHEME => $defaultUserAuthorizationScheme->getName(),
             ],
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
