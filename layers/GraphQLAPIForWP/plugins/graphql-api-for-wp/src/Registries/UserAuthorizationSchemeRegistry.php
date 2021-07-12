@@ -4,36 +4,37 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-use GraphQLAPI\GraphQLAPI\Services\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
 use InvalidArgumentException;
 
 class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistryInterface
 {
     /**
-     * @var array<string,UserAuthorizationSchemeInterface>
+     * @var array<string,string>
      */
-    protected array $userAuthorizationSchemes = [];
+    protected array $schemaEditorAccessCapabilities = [];
 
-    public function addUserAuthorizationScheme(
+    public function addSchemaEditorAccessCapability(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
-        $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
+        $this->schemaEditorAccessCapabilities[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getSchemaEditorAccessCapability();
     }
     /**
-     * @return array<string,UserAuthorizationSchemeInterface>
+     * @throws InvalidArgumentException When the scheme is not registered
      */
-    public function getUserAuthorizationSchemes(): array
+    public function getSchemaEditorAccessCapability(string $userAuthorizationSchemeName): string
     {
-        return $this->userAuthorizationSchemes;
-    }
-    public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface
-    {
-        if (!isset($this->userAuthorizationSchemes[$name])) {
+        if (!isset($this->userAuthorizationSchemes[$userAuthorizationSchemeName])) {
             throw new InvalidArgumentException(sprintf(
                 \__('User authorization scheme \'%s\' does not exist', 'graphql-api'),
-                $name
+                $userAuthorizationSchemeName
             ));
         }
-        return $this->userAuthorizationSchemes[$name];
+        return $this->schemaEditorAccessCapabilities[$userAuthorizationSchemeName];
+    }
+
+    public function getDefaultSchemaEditorAccessCapability(): string
+    {
+        return 'admin';
     }
 }

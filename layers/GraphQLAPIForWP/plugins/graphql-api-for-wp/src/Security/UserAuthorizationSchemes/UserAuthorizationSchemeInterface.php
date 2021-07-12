@@ -7,5 +7,5 @@ namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
 interface UserAuthorizationSchemeInterface
 {
     public function getName(): string;
-    public function canAccessSchemaEditor(): bool;
+    public function getSchemaEditorAccessCapability(): string;
 }

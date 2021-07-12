@@ -12,3 +12,5 @@ services:
     # Hence, it is defined as a Hybrid
     GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface:
         class: '\GraphQLAPI\GraphQLAPI\Security\UserAuthorization'
+    GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\ManageOptionsUserAuthorizationScheme:
+        class: ~

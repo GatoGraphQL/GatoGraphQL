@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Security;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\UserAuthorizationSchemeRegistryFacade;
+use InvalidArgumentException;
 
 /**
  * UserAuthorization
@@ -18,15 +20,27 @@ class UserAuthorization implements UserAuthorizationInterface
      */
     public function getSchemaEditorAccessCapability(): string
     {
-        $accessScheme = ComponentConfiguration::getEditingAccessScheme();
+        $accessSchemeCapability = null;
+        if ($accessScheme = ComponentConfiguration::getEditingAccessScheme()) {
+            $userAuthorizationSchemeRegistry = UserAuthorizationSchemeRegistryFacade::getInstance();
+            // If the capability does not exist, fall back on the "admin" one
+            try {
+                $accessSchemeCapability = $userAuthorizationSchemeRegistry->getSchemaEditorAccessCapability($accessScheme);
+            } catch (InvalidArgumentException) {
+                
+            }
+        }
 
-        // If the capability does not exist, fall back on the "admin" one
-        $accessSchemeCapabilities = [
-            AccessSchemes::ADMIN_ONLY => 'manage_options',
-            AccessSchemes::POST => 'edit_posts',
-        ];
+        // Default access is the admin
+        if ($accessSchemeCapability === null) {
+            return $userAuthorizationSchemeRegistry->getDefaultSchemaEditorAccessCapability();
+        }
+        // $accessSchemeCapabilities = [
+        //     AccessSchemes::ADMIN_ONLY => 'manage_options',
+        //     AccessSchemes::POST => 'edit_posts',
+        // ];
         // If the option chosen does not exist, or none provided, use the "admin" by default
-        return $accessSchemeCapabilities[$accessScheme] ?? 'manage_options';
+        return $accessSchemeCapability;
     }
 
     public function canAccessSchemaEditor(): bool
