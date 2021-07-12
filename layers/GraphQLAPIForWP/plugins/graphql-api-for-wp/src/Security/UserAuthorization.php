@@ -30,7 +30,6 @@ class UserAuthorization implements UserAuthorizationInterface
             try {
                 $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
             } catch (InvalidArgumentException) {
-                
             }
         }
 
