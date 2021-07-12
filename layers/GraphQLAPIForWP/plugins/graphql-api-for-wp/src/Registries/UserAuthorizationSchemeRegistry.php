@@ -13,6 +13,7 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
      * @var array<string,string>
      */
     protected array $schemaEditorAccessCapabilities = [];
+    protected ?UserAuthorizationSchemeInterface $defaultUserAuthorizationScheme;
 
     public function addSchemaEditorAccessCapability(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
@@ -33,8 +34,13 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
         return $this->schemaEditorAccessCapabilities[$userAuthorizationSchemeName];
     }
 
-    public function getDefaultSchemaEditorAccessCapability(): string
+    public function getDefaultUserAuthorizationScheme(): UserAuthorizationSchemeInterface
     {
-        return 'admin';
+        if ($this->defaultUserAuthorizationScheme === null) {
+            throw new InvalidArgumentException(
+                \__('No default User authorization scheme has been set', 'graphql-api')
+            );
+        }
+        return $this->defaultUserAuthorizationScheme;
     }
 }

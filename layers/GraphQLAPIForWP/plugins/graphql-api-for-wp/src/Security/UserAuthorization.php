@@ -33,7 +33,9 @@ class UserAuthorization implements UserAuthorizationInterface
 
         // Default access is the admin
         if ($accessSchemeCapability === null) {
-            return $userAuthorizationSchemeRegistry->getDefaultSchemaEditorAccessCapability();
+            // If there is none, let the exception bubble up - that's an application error
+            $defaultUserAuthorizationScheme = $userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
+            return $defaultUserAuthorizationScheme->getSchemaEditorAccessCapability();
         }
         // $accessSchemeCapabilities = [
         //     AccessSchemes::ADMIN_ONLY => 'manage_options',
