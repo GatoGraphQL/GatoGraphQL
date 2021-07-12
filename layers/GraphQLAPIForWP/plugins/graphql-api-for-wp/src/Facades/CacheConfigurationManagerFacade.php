@@ -6,7 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Facades;
 
 use GraphQLAPI\GraphQLAPI\Overrides\Services\ConfigurationCache\CacheConfigurationManager;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry;
+use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\ManageOptionsUserAuthorizationScheme;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
@@ -33,7 +35,9 @@ class CacheConfigurationManagerFacade
             // (maybe that happens under `initialize`)
             $instanceManager = new InstanceManager();
             $moduleRegistry = new ModuleRegistry();
-            $userAuthorization = new UserAuthorization();
+            $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
+            $userAuthorizationSchemeRegistry->addUserAuthorizationScheme(new ManageOptionsUserAuthorizationScheme());
+            $userAuthorization = new UserAuthorization($userAuthorizationSchemeRegistry);
             $menu = new PluginMenu(
                 $instanceManager,
                 $userAuthorization,

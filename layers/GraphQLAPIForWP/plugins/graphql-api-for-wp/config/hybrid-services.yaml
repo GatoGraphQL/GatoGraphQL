@@ -7,6 +7,11 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry
 
+    GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry'
+    GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\:
+        resource: '../src/Security/UserAuthorizationSchemes/*'
+
     # This service (and also ModuleRegistryInterface) is required to
     # maybe execute ModuleListTableAction in Plugin.php
     # Hence, it is defined as a Hybrid

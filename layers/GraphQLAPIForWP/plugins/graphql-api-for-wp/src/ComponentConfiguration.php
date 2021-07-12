@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Security\AccessSchemes;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
@@ -140,12 +139,12 @@ class ComponentConfiguration
      * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
      * but not publish the query, Editor role can publish it, etc)
      */
-    public static function getEditingAccessScheme(): string
+    public static function getEditingAccessScheme(): ?string
     {
         // Define properties
         $envVariable = Environment::EDITING_ACCESS_SCHEME;
         $selfProperty = &self::$getEditingAccessScheme;
-        $defaultValue = AccessSchemes::ADMIN_ONLY;
+        $defaultValue = null;
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(

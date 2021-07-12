@@ -5,25 +5,18 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Security;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
+use InvalidArgumentException;
 
 /**
  * UserAuthorization
  */
 class UserAuthorization implements UserAuthorizationInterface
 {
-    /**
-     * The different ways to grant access to the schema editor
-     *
-     * @return string[]
-     */
-    public function getAccessSchemes(): array
-    {
-        return [
-            AccessSchemes::ADMIN_ONLY,
-            AccessSchemes::POST,
-        ];
+    public function __construct(
+        protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry
+    ) {
     }
-
     /**
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager
      * against the admin endpoint /wp-admin/?page=graphql_api, and execute queries against it).
@@ -31,13 +24,22 @@ class UserAuthorization implements UserAuthorizationInterface
      */
     public function getSchemaEditorAccessCapability(): string
     {
-        $accessScheme = ComponentConfiguration::getEditingAccessScheme();
-        $accessSchemeCapabilities = [
-            AccessSchemes::ADMIN_ONLY => 'manage_options',
-            AccessSchemes::POST => 'edit_posts',
-        ];
-        // If the option chosen does not exist, or none provided, use the "admin" by default
-        return $accessSchemeCapabilities[$accessScheme] ?? 'manage_options';
+        $accessSchemeCapability = null;
+        if ($accessScheme = ComponentConfiguration::getEditingAccessScheme()) {
+            // If the capability does not exist, catch the exception
+            try {
+                $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
+            } catch (InvalidArgumentException) {
+            }
+        }
+
+        // Return the default access
+        if ($accessSchemeCapability === null) {
+            // This function also throws an exception. Let it bubble up - that's an application error
+            $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
+            return $defaultUserAuthorizationScheme->getSchemaEditorAccessCapability();
+        }
+        return $accessSchemeCapability;
     }
 
     public function canAccessSchemaEditor(): bool
