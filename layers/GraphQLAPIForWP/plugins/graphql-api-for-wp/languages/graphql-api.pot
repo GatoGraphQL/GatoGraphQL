@@ -364,10 +364,6 @@ msgstr ""
 msgid "Oops, the documentation for this module is not available"
 msgstr ""
 
-#: src/ModuleResolvers/OperationalFunctionalityModuleResolver.php:98
-msgid "Proactive Feedback"
-msgstr ""
-
 #: src/ModuleResolvers/OperationalFunctionalityModuleResolver.php:99
 msgid "Embeddable Fields"
 msgstr ""
