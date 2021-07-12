@@ -53,7 +53,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
      */
     public function getPriority(): int
     {
-        return 110;
+        return 120;
     }
 
     /**
