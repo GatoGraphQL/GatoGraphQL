@@ -4,7 +4,7 @@ Retrieve meta values for comments, by querying fields `metaValue` and `metaValue
 
 For security reasons, which meta keys can be queried must be explicitly configured. By default, the list is empty.
 
-Querying meta values is an expensive operation, requiring a call to the database per object and meta key, so enable this module (as to expose the meta fields in the GraphQL schema) only if needed.
+Please notice: Querying meta values is an expensive operation, requiring a call to the database per object and meta key, so it should be used sparingly.
 
 ## How to use
 
