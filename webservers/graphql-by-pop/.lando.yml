@@ -73,10 +73,6 @@ services:
         - >-
           ../../layers/Schema/packages/comment-mutations:/app/vendor/pop-schema/comment-mutations
         - >-
-          ../../layers/Schema/packages/commentmeta-wp:/app/vendor/pop-schema/commentmeta-wp
-        - >-
-          ../../layers/Schema/packages/commentmeta:/app/vendor/pop-schema/commentmeta
-        - >-
           ../../layers/Schema/packages/comments-wp:/app/vendor/pop-schema/comments-wp
         - '../../layers/Schema/packages/comments:/app/vendor/pop-schema/comments'
         - >-
@@ -100,10 +96,6 @@ services:
         - >-
           ../../layers/Schema/packages/custompostmedia:/app/vendor/pop-schema/custompostmedia
         - >-
-          ../../layers/Schema/packages/custompostmeta-wp:/app/vendor/pop-schema/custompostmeta-wp
-        - >-
-          ../../layers/Schema/packages/custompostmeta:/app/vendor/pop-schema/custompostmeta
-        - >-
           ../../layers/Schema/packages/customposts-wp:/app/vendor/pop-schema/customposts-wp
         - >-
           ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
@@ -113,11 +105,6 @@ services:
         - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
         - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
         - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
-        - '../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta'
-        - >-
-          ../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp
-        - >-
-          ../../layers/Schema/packages/metaquery:/app/vendor/pop-schema/metaquery
         - '../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp'
         - '../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages'
         - >-
@@ -156,10 +143,6 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomies:/app/vendor/pop-schema/taxonomies
         - >-
-          ../../layers/Schema/packages/taxonomymeta-wp:/app/vendor/pop-schema/taxonomymeta-wp
-        - >-
-          ../../layers/Schema/packages/taxonomymeta:/app/vendor/pop-schema/taxonomymeta
-        - >-
           ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
         - >-
           ../../layers/Schema/packages/taxonomyquery:/app/vendor/pop-schema/taxonomyquery
@@ -181,9 +164,6 @@ services:
           ../../layers/Schema/packages/user-state-wp:/app/vendor/pop-schema/user-state-wp
         - >-
           ../../layers/Schema/packages/user-state:/app/vendor/pop-schema/user-state
-        - >-
-          ../../layers/Schema/packages/usermeta-wp:/app/vendor/pop-schema/usermeta-wp
-        - '../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta'
         - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
         - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
     build_as_root:
