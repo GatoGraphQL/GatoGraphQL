@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Security;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\UserAuthorizationSchemeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use InvalidArgumentException;
 
 /**
@@ -13,6 +13,10 @@ use InvalidArgumentException;
  */
 class UserAuthorization implements UserAuthorizationInterface
 {
+    public function __construct(
+        protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry
+    ) {
+    }
     /**
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager
      * against the admin endpoint /wp-admin/?page=graphql_api, and execute queries against it).
@@ -22,26 +26,24 @@ class UserAuthorization implements UserAuthorizationInterface
     {
         $accessSchemeCapability = null;
         if ($accessScheme = ComponentConfiguration::getEditingAccessScheme()) {
-            $userAuthorizationSchemeRegistry = UserAuthorizationSchemeRegistryFacade::getInstance();
-            // If the capability does not exist, fall back on the "admin" one
+            // If the capability does not exist, catch the exception
             try {
-                $accessSchemeCapability = $userAuthorizationSchemeRegistry->getSchemaEditorAccessCapability($accessScheme);
+                $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getSchemaEditorAccessCapability($accessScheme);
             } catch (InvalidArgumentException) {
                 
             }
         }
 
-        // Default access is the admin
+        // Return the default access
         if ($accessSchemeCapability === null) {
-            // If there is none, let the exception bubble up - that's an application error
-            $defaultUserAuthorizationScheme = $userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
+            // This function also throws an exception. Let it bubble up - that's an application error
+            $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
             return $defaultUserAuthorizationScheme->getSchemaEditorAccessCapability();
         }
         // $accessSchemeCapabilities = [
         //     AccessSchemes::ADMIN_ONLY => 'manage_options',
         //     AccessSchemes::POST => 'edit_posts',
         // ];
-        // If the option chosen does not exist, or none provided, use the "admin" by default
         return $accessSchemeCapability;
     }
 
