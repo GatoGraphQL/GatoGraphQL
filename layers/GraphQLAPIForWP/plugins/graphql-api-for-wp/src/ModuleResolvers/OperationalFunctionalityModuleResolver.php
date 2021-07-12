@@ -14,7 +14,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
 {
     use ModuleResolverTrait;
 
-    public const PROACTIVE_FEEDBACK = Plugin::NAMESPACE . '\proactive-feedback';
     public const EMBEDDABLE_FIELDS = Plugin::NAMESPACE . '\embeddable-fields';
     public const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
@@ -30,7 +29,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getModulesToResolve(): array
     {
         return [
-            self::PROACTIVE_FEEDBACK,
             self::EMBEDDABLE_FIELDS,
             self::COMPOSABLE_DIRECTIVES,
             self::NESTED_MUTATIONS,
@@ -60,7 +58,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
             case self::NESTED_MUTATIONS:
@@ -72,7 +69,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getName(string $module): string
     {
         $names = [
-            self::PROACTIVE_FEEDBACK => \__('Proactive Feedback', 'graphql-api'),
             self::EMBEDDABLE_FIELDS => \__('Embeddable Fields', 'graphql-api'),
             self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
@@ -83,8 +79,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::PROACTIVE_FEEDBACK:
-                return \__('Usage of the top-level entry <code>extensions</code> to send deprecations, warnings, logs, notices and traces in the response to the query', 'graphql-api');
             case self::EMBEDDABLE_FIELDS:
                 return \__('Embed the value of field into the argument of another field, via notation <code>{{ field }}</code>', 'graphql-api');
             case self::COMPOSABLE_DIRECTIVES:
@@ -98,7 +92,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function isEnabledByDefault(string $module): bool
     {
         switch ($module) {
-            case self::PROACTIVE_FEEDBACK:
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
             case self::NESTED_MUTATIONS:
