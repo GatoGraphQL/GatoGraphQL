@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\TaxonomyQuery\Component::class,
-            \PoPSchema\EngineWP\Component::class,
+            \PoP\EngineWP\Component::class,
         ];
     }
 }
