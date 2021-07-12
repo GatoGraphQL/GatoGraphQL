@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLAPI\DataStructureFormatters;
 
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use PoP\ComponentModel\Feedback\Tokens;
 
@@ -78,51 +79,60 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
+
             // Add notices
-            if ($data['dbNotices'] ?? null) {
-                $notices = $this->reformatDBEntries($data['dbNotices']);
-            }
-            if ($data['schemaNotices'] ?? null) {
-                $notices = array_merge(
-                    $notices,
-                    $this->reformatSchemaEntries($data['schemaNotices'])
-                );
-            }
-            if ($notices) {
-                $ret['extensions']['notices'] = $notices;
+            if (ComponentConfiguration::enableProactiveFeedbackNotices()) {
+                if ($data['dbNotices'] ?? null) {
+                    $notices = $this->reformatDBEntries($data['dbNotices']);
+                }
+                if ($data['schemaNotices'] ?? null) {
+                    $notices = array_merge(
+                        $notices,
+                        $this->reformatSchemaEntries($data['schemaNotices'])
+                    );
+                }
+                if ($notices) {
+                    $ret['extensions']['notices'] = $notices;
+                }
             }
 
             // Add traces
-            if ($data['dbTraces'] ?? null) {
-                $traces = $this->reformatDBEntries($data['dbTraces']);
-            }
-            if ($data['schemaTraces'] ?? null) {
-                $traces = array_merge(
-                    $traces,
-                    $this->reformatSchemaEntries($data['schemaTraces'])
-                );
-            }
-            if ($traces) {
-                $ret['extensions']['traces'] = $traces;
+            if (ComponentConfiguration::enableProactiveFeedbackTraces()) {
+                if ($data['dbTraces'] ?? null) {
+                    $traces = $this->reformatDBEntries($data['dbTraces']);
+                }
+                if ($data['schemaTraces'] ?? null) {
+                    $traces = array_merge(
+                        $traces,
+                        $this->reformatSchemaEntries($data['schemaTraces'])
+                    );
+                }
+                if ($traces) {
+                    $ret['extensions']['traces'] = $traces;
+                }
             }
 
             // Add deprecations
-            if ($data['dbDeprecations'] ?? null) {
-                $deprecations = $this->reformatDBEntries($data['dbDeprecations']);
-            }
-            if ($data['schemaDeprecations'] ?? null) {
-                $deprecations = array_merge(
-                    $deprecations,
-                    $this->reformatSchemaEntries($data['schemaDeprecations'])
-                );
-            }
-            if ($deprecations) {
-                $ret['extensions']['deprecations'] = $deprecations;
+            if (ComponentConfiguration::enableProactiveFeedbackDeprecations()) {
+                if ($data['dbDeprecations'] ?? null) {
+                    $deprecations = $this->reformatDBEntries($data['dbDeprecations']);
+                }
+                if ($data['schemaDeprecations'] ?? null) {
+                    $deprecations = array_merge(
+                        $deprecations,
+                        $this->reformatSchemaEntries($data['schemaDeprecations'])
+                    );
+                }
+                if ($deprecations) {
+                    $ret['extensions']['deprecations'] = $deprecations;
+                }
             }
 
-            // Logs
-            if ($data['logEntries'] ?? null) {
-                $ret['extensions']['logs'] = $data['logEntries'];
+            // Add logs
+            if (ComponentConfiguration::enableProactiveFeedbackLogs()) {
+                if ($data['logEntries'] ?? null) {
+                    $ret['extensions']['logs'] = $data['logEntries'];
+                }
             }
         }
 
