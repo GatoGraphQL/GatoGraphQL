@@ -21,6 +21,7 @@ class Component extends AbstractComponent
         return [
             \PoPSchema\CustomPostMeta\Component::class,
             \PoPSchema\CustomPostsWP\Component::class,
+            \PoPSchema\MetaQueryWP\Component::class,
         ];
     }
 

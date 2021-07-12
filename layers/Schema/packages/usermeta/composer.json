@@ -17,6 +17,7 @@
     "require": {
         "php": "^8.0",
         "pop-schema/meta": "^0.8",
+        "pop-schema/metaquery": "^0.8",
         "pop-schema/users": "^0.8"
     },
     "require-dev": {

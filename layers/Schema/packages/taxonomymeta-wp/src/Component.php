@@ -21,6 +21,7 @@ class Component extends AbstractComponent
         return [
             \PoPSchema\TaxonomyMeta\Component::class,
             \PoPSchema\TaxonomiesWP\Component::class,
+            \PoPSchema\MetaQueryWP\Component::class,
         ];
     }
 
