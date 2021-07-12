@@ -68,10 +68,14 @@ class AppLoader
     public static function addComponentClassConfiguration(
         array $componentClassConfiguration = []
     ): void {
-        self::$componentClassConfiguration = array_merge_recursive(
-            self::$componentClassConfiguration,
-            $componentClassConfiguration
-        );
+        // Allow to override entries under each Component
+        foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
+            self::$componentClassConfiguration[$componentClass] ??= [];
+            self::$componentClassConfiguration[$componentClass] = array_merge(
+                self::$componentClassConfiguration[$componentClass],
+                $componentConfiguration
+            );
+        }
     }
 
     /**
