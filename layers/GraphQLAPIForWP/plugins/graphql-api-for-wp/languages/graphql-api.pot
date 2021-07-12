@@ -201,22 +201,6 @@ msgstr ""
 msgid "Allow or reject access to the fields and directives based on the user having a certain capability"
 msgstr ""
 
-#: src/ModuleResolvers/CacheFunctionalityModuleResolver.php:78
-msgid "Configuration Cache"
-msgstr ""
-
-#: src/ModuleResolvers/CacheFunctionalityModuleResolver.php:79
-msgid "Schema Cache"
-msgstr ""
-
-#: src/ModuleResolvers/CacheFunctionalityModuleResolver.php:88
-msgid "Cache the generated application configuration to disk"
-msgstr ""
-
-#: src/ModuleResolvers/CacheFunctionalityModuleResolver.php:90
-msgid "Cache the generated schema to disk"
-msgstr ""
-
 #: src/ModuleResolvers/ClientFunctionalityModuleResolver.php:109
 msgid "GraphiQL for Single Endpoint"
 msgstr ""
