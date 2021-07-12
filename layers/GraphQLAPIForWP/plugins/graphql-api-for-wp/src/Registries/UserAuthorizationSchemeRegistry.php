@@ -47,7 +47,7 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
      */
     public function getSchemaEditorAccessCapability(string $userAuthorizationSchemeName): string
     {
-        if (!isset($this->userAuthorizationSchemes[$userAuthorizationSchemeName])) {
+        if (!isset($this->schemaEditorAccessCapabilities[$userAuthorizationSchemeName])) {
             throw new InvalidArgumentException(sprintf(
                 \__('User authorization scheme \'%s\' does not exist', 'graphql-api'),
                 $userAuthorizationSchemeName
