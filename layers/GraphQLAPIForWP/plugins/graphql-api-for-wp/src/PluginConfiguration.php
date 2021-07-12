@@ -531,6 +531,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [
             // Expose the "self" field when doing Low Level Query Editing
             GraphQLServerEnvironment::ADD_SELF_FIELD_FOR_ROOT_TYPE_TO_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
+            // Do not send proactive deprecations
+            GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
         $componentClassConfiguration[\PoP\API\Component::class] = [
             // Enable Embeddable Fields?
