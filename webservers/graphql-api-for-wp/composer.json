@@ -43,6 +43,7 @@
         ],
         "init-server": "@start-server",
         "start-server": [
+            "@purge-cache",
             "lando start"
         ],
         "update-deps": [
