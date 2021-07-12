@@ -92,8 +92,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/excerpt-as-description.md">Excerpt as Description</a></td><td>Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt</td></tr>
 <tr><th colspan="2"><br/>Performance</th></tr>
 <tr><td><a href="docs/en/modules/cache-control.md">Cache Control</a></td><td>Provide HTTP Caching for Persisted Queries, sending the Cache-Control header with a max-age value calculated from all fields in the query</td></tr>
-<tr><td><a href="docs/en/modules/configuration-cache.md">Configuration Cache</a></td><td>Cache the generated application configuration to disk</td></tr>
-<tr><td><a href="docs/en/modules/schema-cache.md">Schema Cache</a></td><td>Cache the generated schema to disk</td></tr>
 <tr><th colspan="2"><br/>Operational</th></tr>
 <tr><td><a href="docs/en/modules/embeddable-fields.md">Embeddable Fields</a></td><td>Resolve a field within an argument for another field from the same type, using syntax <code>{{ fieldName }}</code></td></tr>
 <tr><td><a href="docs/en/modules/composable-directives.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
