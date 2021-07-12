@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SupportMenuPage;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class MenuPageAttacher extends AbstractMenuPageAttacher
+class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -34,80 +30,16 @@ class MenuPageAttacher extends AbstractMenuPageAttacher
         );
     }
 
-    public function getMenuClass(): string
-    {
-        return Menu::class;
-    }
-
-    public function addMenuPagesTop(): void
-    {
-        parent::addMenuPagesTop();
-
-        $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
-        
-        /**
-         * @var GraphiQLMenuPage
-         */
-        $graphiQLMenuPage = $this->instanceManager->getInstance(GraphiQLMenuPage::class);
-        if (
-            $hookName = \add_submenu_page(
-                $this->getMenuName(),
-                __('GraphiQL', 'graphql-api'),
-                __('GraphiQL', 'graphql-api'),
-                $schemaEditorAccessCapability,
-                $this->getMenuName(),
-                [$graphiQLMenuPage, 'print']
-            )
-        ) {
-            $graphiQLMenuPage->setHookName($hookName);
-        }
-
-        /**
-         * @var GraphQLVoyagerMenuPage
-         */
-        $graphQLVoyagerMenuPage = $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
-        if (
-            $hookName = \add_submenu_page(
-                $this->getMenuName(),
-                __('Interactive Schema', 'graphql-api'),
-                __('Interactive Schema', 'graphql-api'),
-                $schemaEditorAccessCapability,
-                $graphQLVoyagerMenuPage->getScreenID(),
-                [$graphQLVoyagerMenuPage, 'print']
-            )
-        ) {
-            $graphQLVoyagerMenuPage->setHookName($hookName);
-        }
-    }
-
     /**
-     * Either the Modules menu page, or the Module Documentation menu page,
-     * based on parameter ?tab="docs" or not
+     * After adding the menus for the CPTs
      */
-    protected function getModuleMenuPageClass(): string
+    protected function getPriority(): int
     {
-        return
-            $this->menuPageHelper->isDocumentationScreen() ?
-                ModuleDocumentationMenuPage::class
-                : ModulesMenuPage::class;
+        return 20;
     }
 
-    /**
-     * Either the About menu page, or the Release Notes menu page,
-     * based on parameter ?tab="docs" or not
-     */
-    protected function getAboutMenuPageClass(): string
+    public function addMenuPages(): void
     {
-        return
-            $this->menuPageHelper->isDocumentationScreen() ?
-                ReleaseNotesAboutMenuPage::class
-                : AboutMenuPage::class;
-    }
-
-    public function addMenuPagesBottom(): void
-    {
-        parent::addMenuPagesBottom();
-
         $menuPageClass = $this->getModuleMenuPageClass();
         /**
          * @var AbstractMenuPage
@@ -192,23 +124,6 @@ class MenuPageAttacher extends AbstractMenuPageAttacher
             }
         }
 
-        /**
-         * @var SupportMenuPage
-         */
-        $supportMenuPage = $this->instanceManager->getInstance(SupportMenuPage::class);
-        if (
-            $hookName = \add_submenu_page(
-                $this->getMenuName(),
-                __('Support', 'graphql-api'),
-                __('Support', 'graphql-api'),
-                'manage_options',
-                $supportMenuPage->getScreenID(),
-                [$supportMenuPage, 'print']
-            )
-        ) {
-            $supportMenuPage->setHookName($hookName);
-        }
-
         // $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
         // if (\current_user_can($schemaEditorAccessCapability)) {
         //     global $submenu;
@@ -218,5 +133,29 @@ class MenuPageAttacher extends AbstractMenuPageAttacher
         //         'https://graphql-api.com/documentation/',
         //     ];
         // }
+    }
+
+    /**
+     * Either the Modules menu page, or the Module Documentation menu page,
+     * based on parameter ?tab="docs" or not
+     */
+    protected function getModuleMenuPageClass(): string
+    {
+        return
+            $this->menuPageHelper->isDocumentationScreen() ?
+                ModuleDocumentationMenuPage::class
+                : ModulesMenuPage::class;
+    }
+
+    /**
+     * Either the About menu page, or the Release Notes menu page,
+     * based on parameter ?tab="docs" or not
+     */
+    protected function getAboutMenuPageClass(): string
+    {
+        return
+            $this->menuPageHelper->isDocumentationScreen() ?
+                ReleaseNotesAboutMenuPage::class
+                : AboutMenuPage::class;
     }
 }

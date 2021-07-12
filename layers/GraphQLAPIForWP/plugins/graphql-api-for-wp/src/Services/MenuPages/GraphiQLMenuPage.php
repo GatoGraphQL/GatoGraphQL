@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 /**
  * GraphiQL page
  */
-class GraphiQLMenuPage extends AbstractMenuPage
+class GraphiQLMenuPage extends AbstractPluginMenuPage
 {
     use EnqueueReactMenuPageTrait;
 

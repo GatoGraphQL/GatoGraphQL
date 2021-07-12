@@ -33,36 +33,25 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
     }
 
     /**
+     * Priority to add the submenu page. It must be above "5",
+     * which is the priority for the menu "GraphQL API" to be added
+     */
+    protected function getPriority(): int
+    {
+        return 30;
+    }
+
+    /**
      * Initialize the endpoints
      */
     public function initialize(): void
     {
-        /**
-         * Low priority to execute before adding the menus for the CPTs,
-         * but still after adding the Menu (priority 5)
-         */
         \add_action(
             'admin_menu',
-            [$this, 'addMenuPagesTop'],
-            9
-        );
-        /**
-         * High priority to execute after adding the menus for the CPTs
-         */
-        \add_action(
-            'admin_menu',
-            [$this, 'addMenuPagesBottom'],
-            20
+            [$this, 'addMenuPages'],
+            $this->getPriority()
         );
     }
 
-    public function addMenuPagesTop(): void
-    {
-        // Initially empty
-    }
-
-    public function addMenuPagesBottom(): void
-    {
-        // Initially empty
-    }
+    abstract public function addMenuPages(): void;
 }

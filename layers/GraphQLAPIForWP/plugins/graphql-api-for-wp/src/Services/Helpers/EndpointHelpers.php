@@ -7,13 +7,13 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 
 class EndpointHelpers
 {
     public function __construct(
-        protected Menu $menu,
+        protected PluginMenu $pluginMenu,
         protected ModuleRegistryInterface $moduleRegistry
     ) {
     }
@@ -27,7 +27,7 @@ class EndpointHelpers
         return \is_admin()
             && 'POST' == $_SERVER['REQUEST_METHOD']
             && isset($_GET['page'])
-            && $_GET['page'] == $this->menu->getName()
+            && $_GET['page'] == $this->pluginMenu->getName()
             && isset($_GET[RequestParams::ACTION])
             && $_GET[RequestParams::ACTION] == RequestParams::ACTION_EXECUTE_QUERY;
     }
@@ -62,7 +62,7 @@ class EndpointHelpers
     {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
-            $this->menu->getName(),
+            $this->pluginMenu->getName(),
             RequestParams::ACTION,
             RequestParams::ACTION_EXECUTE_QUERY
         ));

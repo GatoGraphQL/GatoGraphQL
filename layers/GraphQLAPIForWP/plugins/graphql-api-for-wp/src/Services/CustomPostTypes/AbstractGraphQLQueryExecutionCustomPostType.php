@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use WP_Post;
 use WP_Query;
 use PoP\Hooks\HooksAPIInterface;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
@@ -29,14 +29,12 @@ abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCusto
 
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        Menu $menu,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         protected HooksAPIInterface $hooksAPI
     ) {
         parent::__construct(
             $instanceManager,
-            $menu,
             $moduleRegistry,
             $userAuthorization,
         );

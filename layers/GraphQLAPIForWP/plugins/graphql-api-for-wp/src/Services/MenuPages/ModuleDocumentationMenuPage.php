@@ -11,9 +11,9 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractDocsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\Menus\Menu;
 use InvalidArgumentException;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Module Documentation menu page
@@ -23,12 +23,16 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     use PluginMarkdownContentRetrieverTrait;
 
     public function __construct(
-        Menu $menu,
+        InstanceManagerInterface $instanceManager,
         MenuPageHelper $menuPageHelper,
         EndpointHelpers $endpointHelpers,
         protected ModuleRegistryInterface $moduleRegistry
     ) {
-        parent::__construct($menu, $menuPageHelper, $endpointHelpers);
+        parent::__construct(
+            $instanceManager,
+            $menuPageHelper,
+            $endpointHelpers
+        );
     }
 
     public function getMenuPageSlug(): string

@@ -1322,7 +1322,6 @@ msgid "is admin:"
 msgstr ""
 
 #: src/Services/MenuPages/AboutMenuPage.php:44
-#: src/Services/MenuPages/SupportMenuPage.php:36
 msgid "Oops, there was a problem loading the page"
 msgstr ""
 

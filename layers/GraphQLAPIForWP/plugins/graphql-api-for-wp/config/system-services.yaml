@@ -18,7 +18,7 @@ services:
     GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper:
         class: ~
         autoconfigure: false
-    GraphQLAPI\GraphQLAPI\Services\Menus\Menu:
+    GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu:
         class: ~
         autoconfigure: false
     GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers:
