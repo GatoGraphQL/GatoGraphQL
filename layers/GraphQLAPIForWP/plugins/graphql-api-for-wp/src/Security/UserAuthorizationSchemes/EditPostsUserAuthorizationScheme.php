@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
 
-class ManageOptionsUserAuthorizationScheme extends AbstractUserAuthorizationScheme implements DefaultUserAuthorizationSchemeTagInterface
+class EditPostsUserAuthorizationScheme extends AbstractUserAuthorizationScheme
 {
     public function getSchemaEditorAccessCapability(): string
     {
-        return 'manage_options';
+        return 'edit_posts';
     }
 
     public function getDescription(): string
     {
-        return \__('Admin user(s) only', 'graphql-api');
+        return \__('Use same access workflow as for editing posts', 'graphql-api');
     }
 }
