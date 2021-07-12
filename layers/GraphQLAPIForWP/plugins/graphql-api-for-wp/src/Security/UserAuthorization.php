@@ -40,10 +40,6 @@ class UserAuthorization implements UserAuthorizationInterface
             $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
             return $defaultUserAuthorizationScheme->getSchemaEditorAccessCapability();
         }
-        // $accessSchemeCapabilities = [
-        //     AccessSchemes::ADMIN_ONLY => 'manage_options',
-        //     AccessSchemes::POST => 'edit_posts',
-        // ];
         return $accessSchemeCapability;
     }
 
