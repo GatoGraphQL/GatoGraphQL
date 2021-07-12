@@ -260,8 +260,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * Check if it is enabled and it is this CPT...
          */
         if (
-            $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION)
-            && $this->userAuthorization->canAccessSchemaEditor()
+            $this->userAuthorization->canAccessSchemaEditor()
             && \is_singular($this->getCustomPostType())
         ) {
             /**
