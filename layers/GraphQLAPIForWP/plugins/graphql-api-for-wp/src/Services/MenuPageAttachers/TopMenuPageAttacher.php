@@ -35,7 +35,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     public function addMenuPages(): void
     {
         $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
-        
+
         /**
          * @var GraphiQLMenuPage
          */
