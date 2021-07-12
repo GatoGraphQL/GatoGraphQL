@@ -96,8 +96,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/embeddable-fields.md">Embeddable Fields</a></td><td>Resolve a field within an argument for another field from the same type, using syntax <code>{{ fieldName }}</code></td></tr>
 <tr><td><a href="docs/en/modules/composable-directives.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
 <tr><td><a href="docs/en/modules/nested-mutations.md">Nested Mutations</a></td><td>Execute mutations from any type in the schema, not only from the root</td></tr>
-<tr><th colspan="2"><br/>Plugin Management</th></tr>
-<tr><td><a href="docs/en/modules/schema-editing-access.md">Schema Editing Access</a></td><td>Grant access to users other than admins to edit the GraphQL schema</td></tr>
 <tr><th colspan="2"><br/>Clients</th></tr>
 <tr><td><a href="docs/en/modules/graphiql-for-single-endpoint.md">GraphiQL for Single Endpoint</a></td><td>Make a public GraphiQL client available under <code>/graphiql/</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled</td></tr>
 <tr><td><a href="docs/en/modules/interactive-schema-for-single-endpoint.md">Interactive Schema for Single Endpoint</a></td><td>Make a public Interactive Schema client available under <code>/schema/</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled</td></tr>

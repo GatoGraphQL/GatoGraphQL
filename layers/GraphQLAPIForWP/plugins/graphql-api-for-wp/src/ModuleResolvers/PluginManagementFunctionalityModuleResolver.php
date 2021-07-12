@@ -16,13 +16,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 {
     use ModuleResolverTrait;
 
-    public const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\schema-editing-access';
     public const GENERAL = Plugin::NAMESPACE . '\general';
 
     /**
      * Setting options
      */
-    public const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
     public const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
 
@@ -44,7 +42,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         return [
             self::GENERAL,
-            self::SCHEMA_EDITING_ACCESS,
         ];
     }
 
@@ -86,7 +83,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         $names = [
-            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'graphql-api'),
             self::GENERAL => \__('General', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
@@ -95,8 +91,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::SCHEMA_EDITING_ACCESS:
-                return \__('Grant access to users other than admins to edit the GraphQL schema', 'graphql-api');
             case self::GENERAL:
                 return \__('General options for the plugin', 'graphql-api');
         }
@@ -110,9 +104,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
         $defaultValues = [
-            self::SCHEMA_EDITING_ACCESS => [
-                self::OPTION_EDITING_ACCESS_SCHEME => $defaultUserAuthorizationScheme->getName(),
-            ],
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
@@ -129,31 +120,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::SCHEMA_EDITING_ACCESS) {
-            $possibleValues = [];
-            foreach ($this->userAuthorizationSchemeRegistry->getUserAuthorizationSchemes() as $userAuthorizationScheme) {
-                $possibleValues[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getDescription();
-            }
-            /**
-             * Write Access Scheme
-             * If `"admin"`, only the admin can compose a GraphQL query and endpoint
-             * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
-             * but not publish the query, Editor role can publish it, etc)
-             */
-            $option = self::OPTION_EDITING_ACCESS_SCHEME;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Editing Access Scheme', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Scheme to decide which users can edit the schema (Persisted Queries, Custom Endpoints and related post types) and with what permissions', 'graphql-api'),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => $possibleValues,
-            ];
-        } elseif ($module == self::GENERAL) {
+        if ($module == self::GENERAL) {
             $option = self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
