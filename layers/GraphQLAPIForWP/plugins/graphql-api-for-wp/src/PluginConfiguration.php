@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
@@ -37,7 +36,6 @@ use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoP\Root\Environment as RootEnvironment;
 use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
 use PoPSchema\Categories\Environment as CategoriesEnvironment;
 use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
@@ -81,13 +79,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         return [
-            // Editing Access Scheme
-            [
-                'class' => ComponentConfiguration::class,
-                'envVariable' => Environment::EDITING_ACCESS_SCHEME,
-                'module' => PluginManagementFunctionalityModuleResolver::SCHEMA_EDITING_ACCESS,
-                'option' => PluginManagementFunctionalityModuleResolver::OPTION_EDITING_ACCESS_SCHEME,
-            ],
             // GraphQL single endpoint slug
             [
                 'class' => GraphQLEndpointForWPComponentConfiguration::class,

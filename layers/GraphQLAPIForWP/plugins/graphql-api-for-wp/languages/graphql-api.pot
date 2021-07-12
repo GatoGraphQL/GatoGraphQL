@@ -428,46 +428,6 @@ msgstr ""
 msgid "Default max-age value (in seconds) for the Cache-Control header, for all fields and directives in the schema"
 msgstr ""
 
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:75
-msgid "Schema Editing Access"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:76
-msgid "General"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:85
-msgid "Grant access to users other than admins to edit the GraphQL schema"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:87
-msgid "General options for the plugin"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:131
-msgid "Editing Access Scheme"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:132
-msgid "Scheme to decide which users can edit the schema (Persisted Queries, Custom Endpoints and related post types) and with what permissions"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:135
-msgid "Admin user(s) only"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:136
-msgid "Use same access workflow as for editing posts"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:147
-msgid "Display admin notice with release notes?"
-msgstr ""
-
-#: src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:148
-msgid "Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?"
-msgstr ""
-
 #: src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:98
 #: src/Services/Blocks/SchemaConfigurationBlock.php:117
 #: src/Services/CustomPostTypes/GraphQLSchemaConfigurationCustomPostType.php:52

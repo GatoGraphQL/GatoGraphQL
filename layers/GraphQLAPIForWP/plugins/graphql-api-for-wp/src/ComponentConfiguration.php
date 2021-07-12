@@ -17,7 +17,6 @@ class ComponentConfiguration
     private static string $getSettingsValueLabel = '';
     private static ?string $getCustomEndpointSlugBase = null;
     private static ?string $getPersistedQuerySlugBase = null;
-    private static ?string $getEditingAccessScheme = null;
 
     // /**
     //  * URL base for the module, pointing to graphql-api.com
@@ -124,27 +123,6 @@ class ComponentConfiguration
         $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
         $selfProperty = &self::$getPersistedQuerySlugBase;
         $defaultValue = 'graphql-query';
-
-        // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
-            $envVariable,
-            $selfProperty,
-            $defaultValue
-        );
-        return $selfProperty;
-    }
-
-    /**
-     * If `"admin"`, only the admin can compose a GraphQL query and endpoint
-     * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
-     * but not publish the query, Editor role can publish it, etc)
-     */
-    public static function getEditingAccessScheme(): ?string
-    {
-        // Define properties
-        $envVariable = Environment::EDITING_ACCESS_SCHEME;
-        $selfProperty = &self::$getEditingAccessScheme;
-        $defaultValue = null;
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(
