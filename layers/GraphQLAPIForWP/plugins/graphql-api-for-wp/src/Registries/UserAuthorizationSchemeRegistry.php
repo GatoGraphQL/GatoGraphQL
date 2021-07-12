@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\DefaultUserAuthorizationSchemeTagInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
 use InvalidArgumentException;
 
@@ -19,6 +20,9 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
         $this->schemaEditorAccessCapabilities[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getSchemaEditorAccessCapability();
+        if ($userAuthorizationScheme instanceof DefaultUserAuthorizationSchemeTagInterface) {
+            $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
+        }
     }
     /**
      * @throws InvalidArgumentException When the scheme is not registered

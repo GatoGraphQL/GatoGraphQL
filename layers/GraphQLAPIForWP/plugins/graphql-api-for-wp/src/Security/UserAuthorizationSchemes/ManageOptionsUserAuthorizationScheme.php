@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
 
-class ManageOptionsUserAuthorizationScheme extends AbstractUserAuthorizationScheme
+class ManageOptionsUserAuthorizationScheme extends AbstractUserAuthorizationScheme implements DefaultUserAuthorizationSchemeTagInterface
 {
     /**
      * Only the admin has capability "manage_options"
