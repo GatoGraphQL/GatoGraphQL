@@ -36,7 +36,7 @@ class AppLoader
     /**
      * [key]: Component class, [value]: Configuration
      *
-     * @var string[]
+     * @var array<string, array<string, mixed>>
      */
     protected static array $componentClassConfiguration = [];
     /**
@@ -63,7 +63,7 @@ class AppLoader
     /**
      * Add configuration for the Component classes
      *
-     * @param array<string, mixed> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
      */
     public static function addComponentClassConfiguration(
         array $componentClassConfiguration = []
