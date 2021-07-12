@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Environment;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\CacheFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
@@ -479,7 +478,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
     protected function getPredefinedComponentClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $isDev = RootEnvironment::isApplicationEnvironmentDev();
         $mainPluginURL = (string) MainPluginManager::getConfig('url');
 
         $componentClassConfiguration = [];
@@ -522,12 +520,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             // Disable processing ?query=...
             \GraphQLByPoP\GraphQLRequest\Environment::DISABLE_GRAPHQL_API_FOR_POP => true,
         ];
-        // Cache the container
-        if ($moduleRegistry->isModuleEnabled(CacheFunctionalityModuleResolver::CONFIGURATION_CACHE)) {
-            $componentClassConfiguration[\PoP\Root\Component::class] = [
-                RootEnvironment::THROW_EXCEPTION_IF_CACHE_SETUP_ERROR => $isDev,
-            ];
-        }
         $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [
             // Expose the "self" field when doing Low Level Query Editing
             GraphQLServerEnvironment::ADD_SELF_FIELD_FOR_ROOT_TYPE_TO_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
@@ -606,18 +598,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::USE_GRAPHIQL_EXPLORER,
-            ],
-            // Cache the component model configuration
-            [
-                'module' => CacheFunctionalityModuleResolver::CONFIGURATION_CACHE,
-                'class' => \PoP\ComponentModel\Component::class,
-                'envVariable' => ComponentModelEnvironment::USE_COMPONENT_MODEL_CACHE,
-            ],
-            // Cache the schema
-            [
-                'module' => CacheFunctionalityModuleResolver::SCHEMA_CACHE,
-                'class' => \PoP\API\Component::class,
-                'envVariable' => \PoP\API\Environment::USE_SCHEMA_DEFINITION_CACHE,
             ],
         ];
     }
