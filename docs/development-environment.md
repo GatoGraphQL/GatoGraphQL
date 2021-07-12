@@ -82,14 +82,6 @@ $ composer disable-caching
 $ composer enable-caching
 ```
 
-### Cached items
-
-The Cached elements include:
-
-1. The service containers (from Symfony's Dependency Injection)
-2. The generated configuration, which maps the component model to queries (when module [Configuration Cache](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/en/modules/configuration-cache.md) is enabled)
-3. The calculated GraphQL schema (when module [Schema Cache](../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/en/modules/schema-cache.md) is enabled)
-
 ## Debugging
 
 XDebug is disabled by default. To enable it, create Lando config file `.lando.local.yml` with this content:
