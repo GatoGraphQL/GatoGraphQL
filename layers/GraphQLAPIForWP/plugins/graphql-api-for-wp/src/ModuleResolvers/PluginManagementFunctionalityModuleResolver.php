@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\UserAuthorizationSchemeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\AccessSchemes;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
+use PoP\Translation\TranslationAPIInterface;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -24,6 +26,17 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
     public const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
+
+    public function __construct(
+        ModuleRegistryInterface $moduleRegistry,
+        TranslationAPIInterface $translationAPI,
+        protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry,
+    ) {
+        parent::__construct(
+            $moduleRegistry,
+            $translationAPI,
+        );
+    }
 
     /**
      * @return string[]
@@ -96,8 +109,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        $userAuthorizationSchemeRegistry = UserAuthorizationSchemeRegistryFacade::getInstance();
-        $defaultUserAuthorizationScheme = $userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
+        $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
         $defaultValues = [
             self::SCHEMA_EDITING_ACCESS => [
                 self::OPTION_EDITING_ACCESS_SCHEME => $defaultUserAuthorizationScheme->getName(),
@@ -120,6 +132,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_EDITING_ACCESS) {
+            $possibleValues = [];
+            foreach ($this->userAuthorizationSchemeRegistry->getUserAuthorizationSchemes() as $userAuthorizationScheme) {
+                $possibleValues[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getDescription();
+            }
             /**
              * Write Access Scheme
              * If `"admin"`, only the admin can compose a GraphQL query and endpoint
@@ -136,10 +152,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TITLE => \__('Editing Access Scheme', 'graphql-api'),
                 Properties::DESCRIPTION => \__('Scheme to decide which users can edit the schema (Persisted Queries, Custom Endpoints and related post types) and with what permissions', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    AccessSchemes::ADMIN_ONLY => \__('Admin user(s) only', 'graphql-api'),
-                    AccessSchemes::POST => \__('Use same access workflow as for editing posts', 'graphql-api'),
-                ],
+                Properties::POSSIBLE_VALUES => $possibleValues,
             ];
         } elseif ($module == self::GENERAL) {
             $option = self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE;
