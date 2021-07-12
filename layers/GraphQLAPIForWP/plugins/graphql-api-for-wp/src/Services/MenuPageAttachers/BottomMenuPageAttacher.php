@@ -123,16 +123,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 $aboutMenuPage->setHookName($hookName);
             }
         }
-
-        // $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
-        // if (\current_user_can($schemaEditorAccessCapability)) {
-        //     global $submenu;
-        //     $submenu[$this->getMenuName()][] = [
-        //         __('Documentation', 'graphql-api'),
-        //         $schemaEditorAccessCapability,
-        //         'https://graphql-api.com/documentation/',
-        //     ];
-        // }
     }
 
     /**
