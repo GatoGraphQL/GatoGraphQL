@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\AccessSchemes;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 
