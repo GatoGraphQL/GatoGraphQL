@@ -24,9 +24,13 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
         $this->schemaEditorAccessCapabilities[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getSchemaEditorAccessCapability();
-        $this->userAuthorizationSchemes[] = $userAuthorizationScheme;
         if ($userAuthorizationScheme instanceof DefaultUserAuthorizationSchemeTagInterface) {
             $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
+            // Place the default one at the top
+            array_unshift($this->userAuthorizationSchemes, $userAuthorizationScheme);
+        } else {
+            // Place at the end
+            $this->userAuthorizationSchemes[] = $userAuthorizationScheme;
         }
     }
 
