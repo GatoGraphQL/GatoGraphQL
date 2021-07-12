@@ -607,18 +607,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::USE_GRAPHIQL_EXPLORER,
             ],
-            // Cache the component model configuration
-            [
-                'module' => CacheFunctionalityModuleResolver::CONFIGURATION_CACHE,
-                'class' => \PoP\ComponentModel\Component::class,
-                'envVariable' => ComponentModelEnvironment::USE_COMPONENT_MODEL_CACHE,
-            ],
-            // Cache the schema
-            [
-                'module' => CacheFunctionalityModuleResolver::SCHEMA_CACHE,
-                'class' => \PoP\API\Component::class,
-                'envVariable' => \PoP\API\Environment::USE_SCHEMA_DEFINITION_CACHE,
-            ],
         ];
     }
 
