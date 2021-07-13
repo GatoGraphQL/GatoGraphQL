@@ -118,33 +118,3 @@ export function receiveCacheControlLists( query ) {
 		query,
 	};
 };
-
-/**
- * Returns an action object used in setting the fieldDeprecationLists in the state
- *
- * @param {Array} fieldDeprecationLists Array of fieldDeprecationLists received.
- * @param {string} errorMessage Error message if fetching the objects failed
- *
- * @return {Object} Action object.
- */
-export function setFieldDeprecationLists( fieldDeprecationLists, errorMessage ) {
-	return {
-		type: 'SET_FIELD_DEPRECATION_LISTS',
-		fieldDeprecationLists,
-		errorMessage,
-	};
-};
-
-/**
- * Returns an action object used in signalling that the fieldDeprecationLists must be received.
- *
- * @param {string} query GraphQL query to execute
- *
- * @return {Object} Action object.
- */
-export function receiveFieldDeprecationLists( query ) {
-	return {
-		type: 'RECEIVE_FIELD_DEPRECATION_LISTS',
-		query,
-	};
-};

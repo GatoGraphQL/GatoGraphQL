@@ -154,36 +154,3 @@ export function hasRetrievedCacheControlLists( state ) {
 export function getRetrievingCacheControlListsErrorMessage( state ) {
 	return state.retrievingCacheControlListsErrorMessage;
 };
-
-/**
- * Get the Field Deprecation Lists from the GraphQL schema
- *
- * @param {Object} state Store state
- *
- * @return {array} The list of Field Deprecation Lists
- */
-export function getFieldDeprecationLists( state ) {
-	return state.fieldDeprecationLists;
-};
-
-/**
- * Have the Field Deprecation Lists been retrieved from the GraphQL server?
- *
- * @param {Object} state Store state
- *
- * @return {bool} The list of Field Deprecation Lists
- */
-export function hasRetrievedFieldDeprecationLists( state ) {
-	return state.hasRetrievedFieldDeprecationLists;
-};
-
-/**
- * Get the error message from retrieving the Field Deprecation Lists from the GraphQL server, if any
- *
- * @param {Object} state Store state
- *
- * @return {string|null} The error message
- */
-export function getRetrievingFieldDeprecationListsErrorMessage( state ) {
-	return state.retrievingFieldDeprecationListsErrorMessage;
-};
