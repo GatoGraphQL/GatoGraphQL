@@ -93,8 +93,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><th colspan="2"><br/>Performance</th></tr>
 <tr><td><a href="docs/en/modules/cache-control.md">Cache Control</a></td><td>Provide HTTP Caching for Persisted Queries, sending the Cache-Control header with a max-age value calculated from all fields in the query</td></tr>
 <tr><th colspan="2"><br/>Operational</th></tr>
-<tr><td><a href="docs/en/modules/embeddable-fields.md">Embeddable Fields</a></td><td>Resolve a field within an argument for another field from the same type, using syntax <code>{{ fieldName }}</code></td></tr>
-<tr><td><a href="docs/en/modules/composable-directives.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
 <tr><td><a href="docs/en/modules/nested-mutations.md">Nested Mutations</a></td><td>Execute mutations from any type in the schema, not only from the root</td></tr>
 <tr><th colspan="2"><br/>Clients</th></tr>
 <tr><td><a href="docs/en/modules/graphiql-for-single-endpoint.md">GraphiQL for Single Endpoint</a></td><td>Make a public GraphiQL client available under <code>/graphiql/</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled</td></tr>

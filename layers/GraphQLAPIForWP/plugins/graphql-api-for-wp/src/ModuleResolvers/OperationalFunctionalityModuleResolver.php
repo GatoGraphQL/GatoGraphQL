@@ -14,8 +14,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
 {
     use ModuleResolverTrait;
 
-    public const EMBEDDABLE_FIELDS = Plugin::NAMESPACE . '\embeddable-fields';
-    public const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
     /**
@@ -29,8 +27,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getModulesToResolve(): array
     {
         return [
-            self::EMBEDDABLE_FIELDS,
-            self::COMPOSABLE_DIRECTIVES,
             self::NESTED_MUTATIONS,
         ];
     }
@@ -52,51 +48,21 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
         return ModuleTypeResolver::OPERATIONAL;
     }
 
-    /**
-     * @return array<array> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
-     */
-    public function getDependedModuleLists(string $module): array
-    {
-        switch ($module) {
-            case self::EMBEDDABLE_FIELDS:
-            case self::COMPOSABLE_DIRECTIVES:
-            case self::NESTED_MUTATIONS:
-                return [];
-        }
-        return parent::getDependedModuleLists($module);
-    }
-
     public function getName(string $module): string
     {
-        $names = [
-            self::EMBEDDABLE_FIELDS => \__('Embeddable Fields', 'graphql-api'),
-            self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api'),
+        return match ($module) {
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
-        ];
-        return $names[$module] ?? $module;
+            default => $module,
+        };
     }
 
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::EMBEDDABLE_FIELDS:
-                return \__('Embed the value of field into the argument of another field, via notation <code>{{ field }}</code>', 'graphql-api');
-            case self::COMPOSABLE_DIRECTIVES:
-                return \__('Have directives modify the behavior of other directives', 'graphql-api');
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
         }
         return parent::getDescription($module);
-    }
-
-    public function isEnabledByDefault(string $module): bool
-    {
-        switch ($module) {
-            case self::EMBEDDABLE_FIELDS:
-            case self::COMPOSABLE_DIRECTIVES:
-                return false;
-        }
-        return parent::isEnabledByDefault($module);
     }
 
     /**
