@@ -14,7 +14,7 @@ trait UserInterfaceFunctionalityModuleResolverTrait
      */
     public function getPriority(): int
     {
-        return 150;
+        return 160;
     }
 
     /**
