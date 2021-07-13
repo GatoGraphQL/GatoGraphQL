@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -24,7 +23,6 @@ class CPTFieldResolver extends AbstractCPTFieldResolver
         return [
             'accessControlLists',
             'cacheControlLists',
-            'fieldDeprecationLists',
             'schemaConfigurations',
         ];
     }
@@ -34,7 +32,6 @@ class CPTFieldResolver extends AbstractCPTFieldResolver
         return match ($fieldName) {
             'accessControlLists',
             'cacheControlLists',
-            'fieldDeprecationLists',
             'schemaConfigurations'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
@@ -47,7 +44,6 @@ class CPTFieldResolver extends AbstractCPTFieldResolver
         return match ($fieldName) {
             'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
             'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
-            'fieldDeprecationLists' => $this->translationAPI->__('Field Deprecation Lists', 'graphql-api'),
             'schemaConfigurations' => $this->translationAPI->__('Schema Configurations', 'graphql-api'),
             default => parent::getSchemaFieldDescription($typeResolver, $fieldName),
         };
@@ -58,7 +54,6 @@ class CPTFieldResolver extends AbstractCPTFieldResolver
         return match ($fieldName) {
             'accessControlLists' => GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
             'cacheControlLists' => GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
-            'fieldDeprecationLists' => GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
             'schemaConfigurations' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
             default => '', // It will never reach here
         };
