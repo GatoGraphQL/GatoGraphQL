@@ -110,15 +110,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return parent::getDescription($module);
     }
 
-    public function isEnabledByDefault(string $module): bool
-    {
-        switch ($module) {
-            case self::SCHEMA_NAMESPACING:
-                return false;
-        }
-        return parent::isEnabledByDefault($module);
-    }
-
     /**
      * Default value for an option set by the module
      */
