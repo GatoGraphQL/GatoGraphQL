@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\CPTFieldResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\AbstractCPTFieldResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
@@ -39,7 +39,7 @@ class QueryHookSet extends AbstractHookSet
         // and not when resolving IDs into object, since there we don't have `$options`
         if (
             isset($query['post_type'])
-            && (!isset($options[CPTFieldResolver::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS]) || !$options[CPTFieldResolver::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS])
+            && (!isset($options[AbstractCPTFieldResolver::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS]) || !$options[AbstractCPTFieldResolver::QUERY_OPTION_ALLOW_QUERYING_PRIVATE_CPTS])
             && isset($options['return-type']) && $options['return-type'] == ReturnTypes::IDS
         ) {
             // These CPTs must not be queried from outside, since they contain private configuration data
