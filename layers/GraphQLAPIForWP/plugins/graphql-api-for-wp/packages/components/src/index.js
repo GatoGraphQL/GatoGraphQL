@@ -25,3 +25,5 @@ export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
 export { maybeGetErrorMessage } from './store/resolvers';
 export { EMPTY_LABEL, SETTINGS_VALUE_LABEL } from './default-configuration';
+export { AddUndefinedSelectedItemIDs } from './components/multi-select-control';
+export { MaybeWithSpinnerPostListPrintout } from './components/post-list-multi-select-control';

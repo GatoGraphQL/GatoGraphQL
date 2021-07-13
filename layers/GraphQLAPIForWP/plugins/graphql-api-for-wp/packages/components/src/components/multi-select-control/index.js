@@ -106,3 +106,6 @@ export default compose( [
 	withSpinner(),
 	withErrorMessage(),
 ] )( MultiSelectControl );
+
+export { default as AddUndefinedSelectedItemIDs } from './add-undefined-selected-item-ids' ;
+
