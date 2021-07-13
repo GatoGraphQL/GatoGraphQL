@@ -39,10 +39,10 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getModulesToResolve(): array
     {
         return [
-            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
             self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS,
             self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS,
+            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
+            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
             self::GRAPHIQL_EXPLORER,
         ];
     }

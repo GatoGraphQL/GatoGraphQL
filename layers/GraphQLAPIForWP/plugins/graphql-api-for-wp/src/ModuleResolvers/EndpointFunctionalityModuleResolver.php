@@ -30,9 +30,9 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getModulesToResolve(): array
     {
         return [
+            self::CUSTOM_ENDPOINTS,
             self::SINGLE_ENDPOINT,
             self::PERSISTED_QUERIES,
-            self::CUSTOM_ENDPOINTS,
             self::API_HIERARCHY,
         ];
     }
