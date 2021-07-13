@@ -193,12 +193,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 }
             }
         }
-        // Remove all directives of types other than "Query" and "Schema"
-        // since GraphQL only supports these 2
+        // Remove all directives of types other than "Query", "Schema" and, maybe "Indexing"
         $supportedDirectiveTypes = [
             DirectiveTypes::SCHEMA,
             DirectiveTypes::QUERY,
         ];
+        if ($enableComposableDirectives) {
+            $supportedDirectiveTypes [] = DirectiveTypes::INDEXING;
+        }
         $directivesNamesToRemove = [];
         foreach (array_keys($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES]) as $directiveName) {
             if (!in_array($this->fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES][$directiveName][SchemaDefinition::ARGNAME_DIRECTIVE_TYPE], $supportedDirectiveTypes)) {
