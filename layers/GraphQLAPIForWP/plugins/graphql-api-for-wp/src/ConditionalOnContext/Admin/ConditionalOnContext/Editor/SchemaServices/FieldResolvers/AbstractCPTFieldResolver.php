@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 
 use PoP\ComponentModel\FieldResolvers\AbstractQueryableFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -38,6 +39,11 @@ abstract class AbstractCPTFieldResolver extends AbstractQueryableFieldResolver
         return SchemaDefinition::TYPE_ID;
     }
 
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -49,7 +55,7 @@ abstract class AbstractCPTFieldResolver extends AbstractQueryableFieldResolver
             $schemaFieldArgs,
             $this->getFieldArgumentsSchemaDefinitions($typeResolver, $fieldName)
         );
-        
+
         // Remove the "customPostTypes" field argument
         $schemaFieldArgs = array_filter(
             $schemaFieldArgs,
