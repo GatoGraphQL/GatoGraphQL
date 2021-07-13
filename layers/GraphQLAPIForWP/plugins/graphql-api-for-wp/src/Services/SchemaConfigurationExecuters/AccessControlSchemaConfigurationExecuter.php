@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
 
-class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter
+class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,

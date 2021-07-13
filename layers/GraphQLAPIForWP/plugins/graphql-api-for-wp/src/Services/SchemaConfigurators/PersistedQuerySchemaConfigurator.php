@@ -5,13 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AdminSchemaOptionSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\CacheControlSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\DefaultSchemaModeOptionSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\FieldDeprecationSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\MutationSchemeOptionSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\NamespacingOptionSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -20,37 +14,18 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
-        FieldDeprecationSchemaConfigurationExecuter $fieldDeprecationSchemaConfigurationExecuter,
-        AdminSchemaOptionSchemaConfigurationExecuter $adminSchemaOptionSchemaConfigurationExecuter,
-        DefaultSchemaModeOptionSchemaConfigurationExecuter $defaultSchemaModeOptionSchemaConfigurationExecuter,
-        MutationSchemeOptionSchemaConfigurationExecuter $mutationSchemeOptionSchemaConfigurationExecuter,
-        NamespacingOptionSchemaConfigurationExecuter $namespacingOptionSchemaConfigurationExecuter,
-        protected CacheControlSchemaConfigurationExecuter $cacheControlSchemaConfigurationExecuter
+        protected PersistedQuerySchemaConfigurationExecuterRegistryInterface $persistedQuerySchemaConfigurationExecuterRegistry
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
-            $accessControlSchemaConfigurationExecuter,
-            $fieldDeprecationSchemaConfigurationExecuter,
-            $adminSchemaOptionSchemaConfigurationExecuter,
-            $defaultSchemaModeOptionSchemaConfigurationExecuter,
-            $mutationSchemeOptionSchemaConfigurationExecuter,
-            $namespacingOptionSchemaConfigurationExecuter,
         );
     }
 
-    /**
-     * Apply all the settings defined in the Schema Configuration:
-     * - Access Control Lists
-     * - Cache Control Lists
-     * - Field Deprecation Lists
-     */
     protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
     {
-        parent::executeSchemaConfigurationItems($schemaConfigurationID);
-
-        // Execute the Cache Control
-        $this->cacheControlSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
+        foreach ($this->persistedQuerySchemaConfigurationExecuterRegistry->getSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
+            $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
+        }
     }
 }

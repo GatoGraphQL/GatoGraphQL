@@ -11,7 +11,10 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
 
-class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter
+/**
+ * It is applied only to PersistedQuery
+ */
+class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,

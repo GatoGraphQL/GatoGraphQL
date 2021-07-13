@@ -10,7 +10,7 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
-class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter
+class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {

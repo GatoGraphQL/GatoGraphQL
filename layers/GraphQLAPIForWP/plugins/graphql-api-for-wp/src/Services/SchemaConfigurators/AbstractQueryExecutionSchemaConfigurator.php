@@ -10,12 +10,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AdminSchemaOptionSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\DefaultSchemaModeOptionSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\FieldDeprecationSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\MutationSchemeOptionSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\NamespacingOptionSchemaConfigurationExecuter;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
@@ -24,12 +18,6 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
-        protected AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
-        protected FieldDeprecationSchemaConfigurationExecuter $fieldDeprecationSchemaConfigurationExecuter,
-        protected AdminSchemaOptionSchemaConfigurationExecuter $adminSchemaOptionSchemaConfigurationExecuter,
-        protected DefaultSchemaModeOptionSchemaConfigurationExecuter $defaultSchemaModeOptionSchemaConfigurationExecuter,
-        protected MutationSchemeOptionSchemaConfigurationExecuter $mutationSchemeOptionSchemaConfigurationExecuter,
-        protected NamespacingOptionSchemaConfigurationExecuter $namespacingOptionSchemaConfigurationExecuter,
     ) {
     }
 
@@ -115,25 +103,5 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         return $schemaConfiguration;
     }
 
-    protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
-    {
-        /**
-         * Apply all the settings defined in the Schema Configuration for:
-         * - Admin Schema
-         * - Namespacing
-         * - Mutation Scheme
-         * - Public/Private mode
-         */
-        $this->adminSchemaOptionSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        $this->defaultSchemaModeOptionSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        $this->mutationSchemeOptionSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        $this->namespacingOptionSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        /**
-         * Apply all the settings defined in the Schema Configuration:
-         * - Access Control Lists
-         * - Field Deprecation Lists
-         */
-        $this->accessControlSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        $this->fieldDeprecationSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-    }
+    abstract protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void;
 }

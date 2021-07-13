@@ -13,7 +13,7 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 
-class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter
+class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {

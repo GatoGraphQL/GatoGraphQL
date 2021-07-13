@@ -10,7 +10,7 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
-class NamespacingOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter
+class NamespacingOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
