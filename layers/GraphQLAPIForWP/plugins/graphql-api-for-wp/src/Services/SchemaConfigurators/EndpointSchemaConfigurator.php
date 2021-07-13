@@ -4,6 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+
 class EndpointSchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+        );
+    }
+
+    protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
+    {
+        foreach ($this->endpointSchemaConfigurationExecuterRegistry->getSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
+            $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
+        }
+    }
 }
