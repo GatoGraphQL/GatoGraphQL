@@ -48,5 +48,5 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractOptionS
                 PHP_INT_MAX
             );
         }
-    }   
+    }
 }

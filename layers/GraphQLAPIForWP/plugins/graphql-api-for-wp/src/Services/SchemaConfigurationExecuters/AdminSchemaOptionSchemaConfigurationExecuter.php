@@ -48,5 +48,5 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractOptionSchemaC
                 PHP_INT_MAX
             );
         }
-    }   
+    }
 }

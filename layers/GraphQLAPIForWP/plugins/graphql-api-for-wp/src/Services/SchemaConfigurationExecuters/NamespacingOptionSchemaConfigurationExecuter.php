@@ -48,5 +48,5 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractOptionSchemaC
                 PHP_INT_MAX
             );
         }
-    }   
+    }
 }

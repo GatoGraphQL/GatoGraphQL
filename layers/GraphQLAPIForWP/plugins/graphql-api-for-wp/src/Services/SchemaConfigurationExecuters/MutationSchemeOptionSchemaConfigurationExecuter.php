@@ -60,5 +60,5 @@ class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractOptionSche
                 PHP_INT_MAX
             );
         }
-    }   
+    }
 }

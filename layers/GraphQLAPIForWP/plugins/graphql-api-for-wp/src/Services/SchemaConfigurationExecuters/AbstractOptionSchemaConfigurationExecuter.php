@@ -24,5 +24,5 @@ abstract class AbstractOptionSchemaConfigurationExecuter extends AbstractSchemaC
             $schemaConfigurationID,
             $block
         );
-    }    
+    }
 }
