@@ -16,5 +16,11 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry'
 
+    GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistry'
+
+    GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistry'
+
     GraphQLAPI\GraphQLAPI\Services\:
         resource: '../src/Services/*'

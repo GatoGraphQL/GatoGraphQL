@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GraphQLAPI\GraphQLAPI\Registries;
+
+class PersistedQuerySchemaConfigurationExecuterRegistry extends AbstractSchemaConfigurationExecuterRegistry implements PersistedQuerySchemaConfigurationExecuterRegistryInterface
+{
+}
