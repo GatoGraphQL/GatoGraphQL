@@ -492,7 +492,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * By default, a directive can be executed only one time for "Schema" and "System"
      * type directives (eg: <translate(en,es),translate(es,en)>),
-     * and many times for the other types, "Query" and "Scripting"
+     * and many times for the other types, "Query", "Scripting" and "Indexing"
      */
     public function isRepeatable(): bool
     {

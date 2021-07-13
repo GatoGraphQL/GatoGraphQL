@@ -21,12 +21,9 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return 'forEach';
     }
 
-    /**
-     * This is a "Scripting" type directive
-     */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::SCRIPTING;
+        return DirectiveTypes::INDEXING;
     }
 
     public function getSchemaDirectiveDescription(TypeResolverInterface $typeResolver): ?string

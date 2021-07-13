@@ -10,4 +10,5 @@ class DirectiveTypes
     const QUERY = 'query';
     const SYSTEM = 'system';
     const SCRIPTING = 'scripting';
+    const INDEXING = 'indexing';
 }

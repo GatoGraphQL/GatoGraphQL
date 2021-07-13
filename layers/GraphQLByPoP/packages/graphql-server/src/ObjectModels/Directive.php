@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
-use PoP\ComponentModel\Directives\DirectiveTypes;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasArgsSchemaDefinitionReferenceTrait;
+use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\State\ApplicationState;
 
 class Directive extends AbstractSchemaDefinitionReferenceObject
 {
@@ -35,11 +36,16 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         $directiveType = $this->schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_TYPE];
         $vars = ApplicationState::getVars();
         /**
-         * There are 2 cases for adding the "Query" type locations:
+         * There are 3 cases for adding the "Query" type locations:
          * 1. When the type is "Query"
          * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
+         * 3. When the type is "Indexing" and composable directives are enabled
          */
-        if ($directiveType == DirectiveTypes::QUERY || ($directiveType == DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])) {
+        if (
+            $directiveType == DirectiveTypes::QUERY
+            || ($directiveType == DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
+            || ($directiveType == DirectiveTypes::INDEXING && ComponentConfiguration::enableComposableDirectives())
+        ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
             $directives = array_merge(
                 $directives,
