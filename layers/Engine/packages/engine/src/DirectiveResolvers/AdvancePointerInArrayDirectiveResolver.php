@@ -18,12 +18,9 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return 'advancePointerInArray';
     }
 
-    /**
-     * This is a "Scripting" type directive
-     */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::SCRIPTING;
+        return DirectiveTypes::INDEXING;
     }
 
     /**
