@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Enums;
 
+use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use PoP\ComponentModel\Enums\AbstractEnum;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 
@@ -22,9 +23,14 @@ class DirectiveTypeEnum extends AbstractEnum
     }
     public function getCoreValues(): ?array
     {
-        return [
-            DirectiveTypes::QUERY,
-            DirectiveTypes::SCHEMA,
-        ];
+        return array_merge(
+            [
+                DirectiveTypes::QUERY,
+                DirectiveTypes::SCHEMA,
+            ],
+            ComponentConfiguration::enableComposableDirectives() ? [
+                DirectiveTypes::INDEXING,
+            ] : [],
+        );
     }
 }
