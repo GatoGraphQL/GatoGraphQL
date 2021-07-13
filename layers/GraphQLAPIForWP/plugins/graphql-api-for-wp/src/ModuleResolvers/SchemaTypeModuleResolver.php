@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\Translation\TranslationAPIInterface;
@@ -76,6 +75,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * Hooks
      */
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
+    public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -708,13 +708,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $genericCustomPostTypes = \get_post_types();
             // Not all custom post types make sense or are allowed.
             // Remove the ones that do not
-            $genericCustomPostTypes = array_values(array_diff(
-                $genericCustomPostTypes,
+            $rejectedGenericCustomPostTypes = \apply_filters(
+                self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
                 [
                     // Post Types from GraphQL API that contain private data
                     GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
                     GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
-                    GraphQLFieldDeprecationListCustomPostType::CUSTOM_POST_TYPE,
                     GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
                     GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
                     GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
@@ -731,8 +730,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'wp_block',
                     'wp_area',
                 ]
+            );
+            $genericCustomPostTypes = array_values(array_diff(
+                $genericCustomPostTypes,
+                $rejectedGenericCustomPostTypes
             ));
-            // Allow plugins to remove their own unwanted custom post types
+            // Allow plugins to further remove unwanted custom post types
             $genericCustomPostTypes = \apply_filters(
                 self::HOOK_GENERIC_CUSTOMPOST_TYPES,
                 $genericCustomPostTypes
