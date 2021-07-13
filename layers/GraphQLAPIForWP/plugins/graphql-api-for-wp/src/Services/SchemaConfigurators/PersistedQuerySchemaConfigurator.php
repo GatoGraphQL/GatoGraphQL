@@ -7,8 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\CacheControlSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\FieldDeprecationSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
@@ -17,14 +17,14 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
-        FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator,
+        FieldDeprecationSchemaConfigurationExecuter $fieldDeprecationSchemaConfigurationExecuter,
         protected CacheControlSchemaConfigurationExecuter $cacheControlSchemaConfigurationExecuter
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
             $accessControlSchemaConfigurationExecuter,
-            $fieldDeprecationGraphQLQueryConfigurator,
+            $fieldDeprecationSchemaConfigurationExecuter,
         );
     }
 

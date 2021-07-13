@@ -9,14 +9,12 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\FieldDeprecationSchemaConfigurationExecuter;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
@@ -37,7 +35,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
-        protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
+        protected FieldDeprecationSchemaConfigurationExecuter $fieldDeprecationSchemaConfigurationExecuter,
     ) {
     }
 
@@ -133,7 +131,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     {
         $this->executeSchemaConfigurationOptions($schemaConfigurationID);
         $this->accessControlSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        $this->executeSchemaConfigurationFieldDeprecationLists($schemaConfigurationID);
+        $this->fieldDeprecationSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
     }
 
     /**
@@ -339,36 +337,6 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
                 fn () => $defaultSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE,
                 PHP_INT_MAX
             );
-        }
-    }
-
-    /**
-     * Apply all the settings defined in the Schema Configuration for:
-     * - Field Deprecation Lists
-     */
-    protected function executeSchemaConfigurationFieldDeprecationLists(int $schemaConfigurationID): void
-    {
-        // Check it is enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(VersioningFunctionalityModuleResolver::FIELD_DEPRECATION)) {
-            return;
-        }
-
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigFieldDeprecationListBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigFieldDeprecationListBlock::class);
-        $schemaConfigFDLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-        if (!is_null($schemaConfigFDLBlockDataItem)) {
-            if ($fieldDeprecationLists = $schemaConfigFDLBlockDataItem['attrs'][SchemaConfigFieldDeprecationListBlock::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS] ?? null) {
-                foreach ($fieldDeprecationLists as $fieldDeprecationListID) {
-                    $this->fieldDeprecationGraphQLQueryConfigurator->executeSchemaConfiguration($fieldDeprecationListID);
-                }
-            }
         }
     }
 }
