@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -22,10 +23,8 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
         );
     }
 
-    protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
+    protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface
     {
-        foreach ($this->persistedQuerySchemaConfigurationExecuterRegistry->getSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
-            $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
-        }
+        return $this->persistedQuerySchemaConfigurationExecuterRegistry;
     }
 }

@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -103,5 +104,14 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         return $schemaConfiguration;
     }
 
-    abstract protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void;
+
+
+    protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
+    {
+        foreach ($this->getSchemaConfigurationExecuterRegistry()->getSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
+            $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
+        }
+    }
+
+    abstract protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface;
 }
