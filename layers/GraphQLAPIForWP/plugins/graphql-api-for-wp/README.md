@@ -85,8 +85,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td>Access Control Rule: User State</td><td>Allow or reject access to the fields and directives based on the user being logged-in or not</td></tr>
 <tr><td>Access Control Rule: User Roles</td><td>Allow or reject access to the fields and directives based on the user having a certain role</td></tr>
 <tr><td>Access Control Rule: User Capabilities</td><td>Allow or reject access to the fields and directives based on the user having a certain capability</td></tr>
-<tr><th colspan="2"><br/>Versioning</th></tr>
-<tr><td><a href="docs/en/modules/field-deprecation.md">Field Deprecation</a></td><td>Deprecate fields, and explain how to replace them, through a user interface</td></tr>
 <tr><th colspan="2"><br/>User Interface</th></tr>
 <tr><td><a href="docs/en/modules/low-level-persisted-query-editing.md">Low-Level Persisted Query Editing</a></td><td>Have access to schema-configuration low-level directives when editing GraphQL queries in the admin</td></tr>
 <tr><td><a href="docs/en/modules/excerpt-as-description.md">Excerpt as Description</a></td><td>Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt</td></tr>
