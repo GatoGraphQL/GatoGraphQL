@@ -11,6 +11,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -24,7 +25,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
     public function getSchemaDirectiveArgs(TypeResolverInterface $typeResolver): array
     {
-        return [
+        return ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives() ? [
             [
                 SchemaDefinition::ARGNAME_NAME => 'addExpressions',
                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
@@ -43,7 +44,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
                 ),
             ],
-        ];
+        ] : [];
     }
 
     public function getSchemaDirectiveExpressions(TypeResolverInterface $typeResolver): array
