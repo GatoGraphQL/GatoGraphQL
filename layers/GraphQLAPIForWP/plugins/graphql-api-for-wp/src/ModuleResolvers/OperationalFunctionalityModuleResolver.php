@@ -94,7 +94,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
         switch ($module) {
             case self::EMBEDDABLE_FIELDS:
             case self::COMPOSABLE_DIRECTIVES:
-            case self::NESTED_MUTATIONS:
                 return false;
         }
         return parent::isEnabledByDefault($module);
