@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CacheControlGraphQLQueryConfigurator;
 
-class CacheControlListsSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter
+class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,

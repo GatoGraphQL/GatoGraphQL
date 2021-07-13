@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlListsSchemaConfigurationExecuter;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\CacheControlListsSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\CacheControlSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -17,14 +16,14 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        AccessControlListsSchemaConfigurationExecuter $accessControlListsSchemaConfigurationExecuter,
+        AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
         FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator,
-        protected CacheControlListsSchemaConfigurationExecuter $cacheControlListsSchemaConfigurationExecuter
+        protected CacheControlSchemaConfigurationExecuter $cacheControlSchemaConfigurationExecuter
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
-            $accessControlListsSchemaConfigurationExecuter,
+            $accessControlSchemaConfigurationExecuter,
             $fieldDeprecationGraphQLQueryConfigurator,
         );
     }
@@ -40,6 +39,6 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
         parent::executeSchemaConfigurationItems($schemaConfigurationID);
 
         // Execute the Cache Control
-        $this->cacheControlListsSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
+        $this->cacheControlSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
     }
 }

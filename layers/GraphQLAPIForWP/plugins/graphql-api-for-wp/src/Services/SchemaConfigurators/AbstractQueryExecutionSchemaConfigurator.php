@@ -15,7 +15,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlListsSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -36,7 +36,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
-        protected AccessControlListsSchemaConfigurationExecuter $accessControlListsSchemaConfigurationExecuter,
+        protected AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
         protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
     ) {
     }
@@ -132,7 +132,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
     {
         $this->executeSchemaConfigurationOptions($schemaConfigurationID);
-        $this->accessControlListsSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
+        $this->accessControlSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
         $this->executeSchemaConfigurationFieldDeprecationLists($schemaConfigurationID);
     }
 
