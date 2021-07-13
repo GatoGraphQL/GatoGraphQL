@@ -8,11 +8,11 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
+    use OperationalFunctionalityModuleResolverTrait;
 
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
@@ -29,23 +29,6 @@ class OperationalFunctionalityModuleResolver extends AbstractFunctionalityModule
         return [
             self::NESTED_MUTATIONS,
         ];
-    }
-
-    /**
-     * The priority to display the modules from this resolver in the Modules page.
-     * The higher the number, the earlier it shows
-     */
-    public function getPriority(): int
-    {
-        return 120;
-    }
-
-    /**
-     * Enable to customize a specific UI for the module
-     */
-    public function getModuleType(string $module): string
-    {
-        return ModuleTypeResolver::OPERATIONAL;
     }
 
     public function getName(string $module): string

@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
  * The cache modules have different behavior depending on the environment:
@@ -20,6 +19,7 @@ use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
+    use PerformanceFunctionalityModuleResolverTrait;
 
     public const CACHE_CONTROL = Plugin::NAMESPACE . '\cache-control';
 
@@ -36,23 +36,6 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
         return [
             self::CACHE_CONTROL,
         ];
-    }
-
-    /**
-     * The priority to display the modules from this resolver in the Modules page.
-     * The higher the number, the earlier it shows
-     */
-    public function getPriority(): int
-    {
-        return 140;
-    }
-
-    /**
-     * Enable to customize a specific UI for the module
-     */
-    public function getModuleType(string $module): string
-    {
-        return ModuleTypeResolver::PERFORMANCE;
     }
 
     /**

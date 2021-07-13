@@ -7,11 +7,11 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
+    use VersioningFunctionalityModuleResolverTrait;
 
     public const FIELD_DEPRECATION = Plugin::NAMESPACE . '\field-deprecation';
 
@@ -23,23 +23,6 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
         return [
             self::FIELD_DEPRECATION,
         ];
-    }
-
-    /**
-     * The priority to display the modules from this resolver in the Modules page.
-     * The higher the number, the earlier it shows
-     */
-    public function getPriority(): int
-    {
-        return 160;
-    }
-
-    /**
-     * Enable to customize a specific UI for the module
-     */
-    public function getModuleType(string $module): string
-    {
-        return ModuleTypeResolver::VERSIONING;
     }
 
     /**

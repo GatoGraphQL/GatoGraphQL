@@ -34,6 +34,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
     use ModuleResolverTrait {
         ModuleResolverTrait::hasDocumentation as upstreamHasDocumentation;
     }
+    use SchemaTypeModuleResolverTrait;
 
     public const SCHEMA_ADMIN_SCHEMA = Plugin::NAMESPACE . '\schema-admin-schema';
     public const SCHEMA_MUTATIONS = Plugin::NAMESPACE . '\schema-mutations';
@@ -135,15 +136,6 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
             self::SCHEMA_POST_CATEGORY_MUTATIONS,
             self::SCHEMA_COMMENT_MUTATIONS,
         ];
-    }
-
-    /**
-     * The priority to display the modules from this resolver in the Modules page.
-     * The higher the number, the earlier it shows
-     */
-    public function getPriority(): int
-    {
-        return 90;
     }
 
     /**
