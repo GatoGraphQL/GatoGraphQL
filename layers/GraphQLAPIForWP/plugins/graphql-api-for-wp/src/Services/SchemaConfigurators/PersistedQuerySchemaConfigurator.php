@@ -6,8 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AdminSchemaOptionSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\CacheControlSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\DefaultSchemaModeOptionSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\FieldDeprecationSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\MutationSchemeOptionSchemaConfigurationExecuter;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\NamespacingOptionSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -18,6 +22,10 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
         ModuleRegistryInterface $moduleRegistry,
         AccessControlSchemaConfigurationExecuter $accessControlSchemaConfigurationExecuter,
         FieldDeprecationSchemaConfigurationExecuter $fieldDeprecationSchemaConfigurationExecuter,
+        AdminSchemaOptionSchemaConfigurationExecuter $adminSchemaOptionSchemaConfigurationExecuter,
+        DefaultSchemaModeOptionSchemaConfigurationExecuter $defaultSchemaModeOptionSchemaConfigurationExecuter,
+        MutationSchemeOptionSchemaConfigurationExecuter $mutationSchemeOptionSchemaConfigurationExecuter,
+        NamespacingOptionSchemaConfigurationExecuter $namespacingOptionSchemaConfigurationExecuter,
         protected CacheControlSchemaConfigurationExecuter $cacheControlSchemaConfigurationExecuter
     ) {
         parent::__construct(
@@ -25,6 +33,10 @@ class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfi
             $moduleRegistry,
             $accessControlSchemaConfigurationExecuter,
             $fieldDeprecationSchemaConfigurationExecuter,
+            $adminSchemaOptionSchemaConfigurationExecuter,
+            $defaultSchemaModeOptionSchemaConfigurationExecuter,
+            $mutationSchemeOptionSchemaConfigurationExecuter,
+            $namespacingOptionSchemaConfigurationExecuter,
         );
     }
 
