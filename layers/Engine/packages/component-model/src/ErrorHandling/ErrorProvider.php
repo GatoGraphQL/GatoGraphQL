@@ -49,7 +49,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::NO_FIELD,
             sprintf(
-                $this->translationAPI->__('There is no resolver for field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+                $this->translationAPI->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
                 $fieldName,
                 $typeName,
                 $resultItemID
