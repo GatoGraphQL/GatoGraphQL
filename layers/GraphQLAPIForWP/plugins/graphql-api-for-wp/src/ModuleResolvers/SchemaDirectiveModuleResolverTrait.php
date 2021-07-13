@@ -6,8 +6,17 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
-abstract class AbstractSchemaDirectiveModuleResolver extends AbstractModuleResolver
+trait SchemaDirectiveModuleResolverTrait
 {
+    /**
+     * The priority to display the modules from this resolver in the Modules page.
+     * The higher the number, the earlier it shows
+     */
+    public function getPriority(): int
+    {
+        return 90;
+    }
+
     /**
      * The type of the module
      */
