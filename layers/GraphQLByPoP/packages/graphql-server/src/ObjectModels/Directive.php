@@ -41,7 +41,8 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
          * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
          * 3. When the type is "Indexing" and composable directives are enabled
          */
-        if ($directiveType == DirectiveTypes::QUERY
+        if (
+            $directiveType == DirectiveTypes::QUERY
             || ($directiveType == DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
             || ($directiveType == DirectiveTypes::INDEXING && ComponentConfiguration::enableComposableDirectives())
         ) {
