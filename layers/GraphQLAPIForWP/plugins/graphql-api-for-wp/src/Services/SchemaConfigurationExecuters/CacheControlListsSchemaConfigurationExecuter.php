@@ -24,10 +24,6 @@ class CacheControlListsSchemaConfigurationExecuter extends AbstractSchemaConfigu
         );
     }
 
-    /**
-     * Apply all the settings defined in the Schema Configuration for:
-     * - Cache Control Lists
-     */
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
         // Do not execute Cache Control when previewing the query
