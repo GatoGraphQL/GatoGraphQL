@@ -143,7 +143,7 @@ class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
      */
     public function getPriority(): int
     {
-        return 100;
+        return 90;
     }
 
     /**

@@ -30,6 +30,19 @@
     border-color: #00d251;
 }
 
+.plugins .active.module-schema-directive td,
+.plugins .active.module-schema-directive th,
+.subsubsub a.module-type-schema-directive {
+    background-color: #fcf7fe;
+}
+.plugin-update-tr.active.module-schema-directive td,
+.plugins .active.module-schema-directive th.check-column {
+    border-left-color: #9000d2;
+}
+.subsubsub a.module-type-schema-directive {
+    border-color: #a100d2;
+}
+
 .plugins .active.module-functionality td,
 .plugins .active.module-functionality th,
 .subsubsub a.module-type-functionality {

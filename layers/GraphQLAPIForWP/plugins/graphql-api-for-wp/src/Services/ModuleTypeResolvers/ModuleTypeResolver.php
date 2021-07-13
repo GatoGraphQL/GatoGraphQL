@@ -21,6 +21,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
     public const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public const SCHEMA_TYPE = Plugin::NAMESPACE . '\schema-type';
+    public const SCHEMA_DIRECTIVE = Plugin::NAMESPACE . '\schema-directive';
     public const USER_INTERFACE = Plugin::NAMESPACE . '\user-interface';
     public const VERSIONING = Plugin::NAMESPACE . '\versioning';
 
@@ -39,6 +40,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::PLUGIN_MANAGEMENT,
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_TYPE,
+            self::SCHEMA_DIRECTIVE,
             self::USER_INTERFACE,
             self::VERSIONING,
         ];
@@ -56,6 +58,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::PLUGIN_MANAGEMENT => \__('Plugin Management', 'graphql-api'),
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_TYPE => \__('Schema Type', 'graphql-api'),
+            self::SCHEMA_DIRECTIVE => \__('Schema Directive', 'graphql-api'),
             self::USER_INTERFACE => \__('User Interface', 'graphql-api'),
             self::VERSIONING => \__('Versioning', 'graphql-api'),
         ];
