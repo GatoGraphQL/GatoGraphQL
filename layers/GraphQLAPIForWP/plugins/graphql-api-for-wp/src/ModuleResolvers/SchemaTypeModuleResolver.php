@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -29,7 +29,7 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPSchema\UserRolesWP\TypeResolvers\UserRoleTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
-class SchemaTypeModuleResolver extends AbstractSchemaTypeModuleResolver
+class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
     use ModuleResolverTrait {
         ModuleResolverTrait::hasDocumentation as upstreamHasDocumentation;
