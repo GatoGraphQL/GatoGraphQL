@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 /**
  * FieldResolver for the Custom Post Types from this plugin
  */
-class CPTFieldResolver extends AbstractCPTFieldResolver
+class ListOfCPTEntitiesRootFieldResolver extends AbstractListOfCPTEntitiesRootFieldResolver
 {
     /**
      * @return string[]

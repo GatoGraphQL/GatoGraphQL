@@ -17,7 +17,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 /**
  * FieldResolver for the Custom Post Types from this plugin
  */
-abstract class AbstractCPTFieldResolver extends AbstractQueryableFieldResolver
+abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQueryableFieldResolver
 {
     /**
      * Option to tell the hook to not remove the private CPTs when querying
