@@ -4,41 +4,39 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use WP_Post;
-use PoP\AccessControl\Schema\SchemaModes;
-use PoP\Engine\Environment as EngineEnvironment;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PoP\AccessControl\Environment as AccessControlEnvironment;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
-use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AccessControlGraphQLQueryConfigurator;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AccessControlListsSchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\FieldDeprecationGraphQLQueryConfigurator;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
+use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\Environment as AccessControlEnvironment;
+use PoP\AccessControl\Schema\SchemaModes;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Engine\Environment as EngineEnvironment;
+use WP_Post;
 
 abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
-        protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
+        protected AccessControlListsSchemaConfigurationExecuter $accessControlListsSchemaConfigurationExecuter,
         protected FieldDeprecationGraphQLQueryConfigurator $fieldDeprecationGraphQLQueryConfigurator
     ) {
     }
@@ -134,7 +132,7 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
     {
         $this->executeSchemaConfigurationOptions($schemaConfigurationID);
-        $this->executeSchemaConfigurationAccessControlLists($schemaConfigurationID);
+        $this->accessControlListsSchemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
         $this->executeSchemaConfigurationFieldDeprecationLists($schemaConfigurationID);
     }
 
@@ -341,36 +339,6 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
                 fn () => $defaultSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE,
                 PHP_INT_MAX
             );
-        }
-    }
-
-    /**
-     * Apply all the settings defined in the Schema Configuration for:
-     * - Access Control Lists
-     */
-    protected function executeSchemaConfigurationAccessControlLists(int $schemaConfigurationID): void
-    {
-        // Check it is enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
-            return;
-        }
-
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigAccessControlListBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
-        $schemaConfigACLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-        if (!is_null($schemaConfigACLBlockDataItem)) {
-            if ($accessControlLists = $schemaConfigACLBlockDataItem['attrs'][SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS] ?? null) {
-                foreach ($accessControlLists as $accessControlListID) {
-                    $this->accessControlGraphQLQueryConfigurator->executeSchemaConfiguration($accessControlListID);
-                }
-            }
         }
     }
 
