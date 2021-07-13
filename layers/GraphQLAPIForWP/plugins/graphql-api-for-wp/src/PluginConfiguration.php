@@ -450,14 +450,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
         $componentClassConfiguration[\PoP\API\Component::class] = [
-            // Enable Embeddable Fields?
-            \PoP\API\Environment::ENABLE_EMBEDDABLE_FIELDS => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::EMBEDDABLE_FIELDS),
             // Enable Mutations?
             \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_MUTATIONS),
-        ];
-        $componentClassConfiguration[\GraphQLByPoP\GraphQLQuery\Component::class] = [
-            // Enable Composable Directives?
-            GraphQLQueryEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES),
         ];
 
         // If doing ?behavior=unrestricted, always enable certain features
