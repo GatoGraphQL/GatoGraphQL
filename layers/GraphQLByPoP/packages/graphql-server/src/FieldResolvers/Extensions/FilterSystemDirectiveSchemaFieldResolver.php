@@ -67,10 +67,6 @@ class FilterSystemDirectiveSchemaFieldResolver extends SchemaFieldResolver
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
                             SchemaDefinition::ARGNAME_IS_ARRAY => true,
                             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
-                            // SchemaDefinition::ARGNAME_MANDATORY => true,
-                            // SchemaDefinition::ARGNAME_DEFAULT_VALUE => [
-                            //     DirectiveTypes::QUERY,
-                            // ],
                             SchemaDefinition::ARGNAME_ENUM_NAME => $directiveTypeEnum->getName(),
                             SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 $directiveTypeEnum->getValues()
