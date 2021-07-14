@@ -27,7 +27,7 @@ const SchemaConfigSchemaModeCard = ( props ) => {
 				</CardHeader>
 				<CardBody>
 					<div className={ `${ className }__schema_mode` }>
-						<em>{ __('Public/Private Schema:', 'graphql-api') }</em>
+						<em>{ __('Visibility of the schema metadata:', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
 							text={ __('Default: use value from Settings. Public: fields/directives are always visible. Private: fields/directives are hidden unless rules are satisfied.', 'graphql-api') }

@@ -56,10 +56,10 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 				</CardHeader>
 				<CardBody>
 					<div className={ `${ className }__nestedmutations` }>
-						<em>{ __('Mutation Scheme', 'graphql-api') }</em>
+						<em>{ __('Support nested mutations?', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
-							text={ __('Support nested mutations? (Add mutation fields on entities other than the root type)', 'graphql-api') }
+							text={ __('Add mutation fields on entities other than the root type?', 'graphql-api') }
 						/>
 						{ !isSelected && (
 							<>
