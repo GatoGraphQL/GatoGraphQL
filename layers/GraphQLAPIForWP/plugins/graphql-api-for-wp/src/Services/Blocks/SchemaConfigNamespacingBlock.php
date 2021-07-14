@@ -20,7 +20,7 @@ class SchemaConfigNamespacingBlock extends AbstractSchemaConfigBlock implements 
         return 'schema-config-namespacing';
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 110;
     }

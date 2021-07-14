@@ -21,7 +21,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock implements S
         return 'schema-config-schema-mode';
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 130;
     }

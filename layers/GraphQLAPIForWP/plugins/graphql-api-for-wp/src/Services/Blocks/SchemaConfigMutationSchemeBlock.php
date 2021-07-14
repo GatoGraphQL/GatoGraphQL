@@ -21,7 +21,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock implemen
         return 'schema-config-mutation-scheme';
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 120;
     }

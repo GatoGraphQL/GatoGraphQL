@@ -21,7 +21,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
         return 'schema-config-access-control-lists';
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 200;
     }

@@ -106,7 +106,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         uasort(
             $blocks,
             function (SchemaConfigBlockServiceTagInterface $a, SchemaConfigBlockServiceTagInterface $b): int {
-                return $b->getSchemaConfigBlockPriority() <=> $a->getSchemaConfigBlockPriority();
+                return $b->getBlockPriority() <=> $a->getBlockPriority();
             }
         );
         // ...

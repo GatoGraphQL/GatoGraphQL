@@ -21,7 +21,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
         return 'schema-config-cache-control-lists';
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 190;
     }
