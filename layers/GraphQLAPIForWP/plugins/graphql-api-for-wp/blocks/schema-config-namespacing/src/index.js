@@ -18,7 +18,7 @@ import { __ } from '@wordpress/i18n';
 import EditBlock from './edit';
 import {
 	ATTRIBUTE_VALUE_DEFAULT,
-} from './enabled-disabled-values';
+} from '@graphqlapi/components';
 
 /**
  * Every block starts by registering a new block type definition.

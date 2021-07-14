@@ -11,12 +11,10 @@ import {
 	InfoTooltip,
 	getEditableOnFocusComponentClass,
 	SETTINGS_VALUE_LABEL,
-} from '@graphqlapi/components';
-import {
 	ATTRIBUTE_VALUE_DEFAULT,
 	ATTRIBUTE_VALUE_ENABLED,
 	ATTRIBUTE_VALUE_DISABLED,
-} from './enabled-disabled-values';
+} from '@graphqlapi/components';
 
 const SchemaConfigNamespacingCard = ( props ) => {
 	const {
