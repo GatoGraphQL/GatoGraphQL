@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
@@ -21,7 +20,7 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractSchemaC
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigSchemaModeBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
@@ -50,20 +49,9 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractSchemaC
             );
         }
     }
-    /**
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
-     */
-    protected function getSchemaConfigSchemaModeBlockDataItem(int $schemaConfigurationID): ?array
+
+    protected function getBlockClass(): string
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigSchemaModeBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
+        return SchemaConfigSchemaModeBlock::class;
     }
 }

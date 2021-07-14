@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminSchemaBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
@@ -20,7 +19,7 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigAdminSchemaBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * "Admin" schema
@@ -50,20 +49,9 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             );
         }
     }
-    /**
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
-     */
-    protected function getSchemaConfigAdminSchemaBlockDataItem(int $schemaConfigurationID): ?array
+
+    protected function getBlockClass(): string
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigAdminSchemaBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigAdminSchemaBlock::class);
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
+        return SchemaConfigAdminSchemaBlock::class;
     }
 }

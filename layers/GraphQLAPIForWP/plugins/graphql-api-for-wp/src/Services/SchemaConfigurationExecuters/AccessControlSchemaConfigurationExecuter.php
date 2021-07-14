@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
@@ -31,16 +30,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
             return;
         }
 
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigAccessControlListBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
-        $schemaConfigACLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
+        $schemaConfigACLBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if (!is_null($schemaConfigACLBlockDataItem)) {
             if ($accessControlLists = $schemaConfigACLBlockDataItem['attrs'][SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS] ?? null) {
                 foreach ($accessControlLists as $accessControlListID) {
@@ -48,5 +38,10 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
                 }
             }
         }
+    }
+
+    protected function getBlockClass(): string
+    {
+        return SchemaConfigAccessControlListBlock::class;
     }
 }

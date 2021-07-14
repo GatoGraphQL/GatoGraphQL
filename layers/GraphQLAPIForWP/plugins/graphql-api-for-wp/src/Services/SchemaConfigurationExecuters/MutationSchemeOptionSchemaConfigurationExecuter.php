@@ -23,7 +23,7 @@ class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractSchemaConf
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigMutationSchemeBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
@@ -62,20 +62,9 @@ class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractSchemaConf
             );
         }
     }
-    /**
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
-     */
-    protected function getSchemaConfigMutationSchemeBlockDataItem(int $schemaConfigurationID): ?array
+
+    protected function getBlockClass(): string
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigMutationSchemeBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
+        return SchemaConfigMutationSchemeBlock::class;
     }
 }

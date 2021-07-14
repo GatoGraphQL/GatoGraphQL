@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigNamespacingBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
@@ -20,7 +19,7 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigNamespacingBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Namespace Types and Interfaces
@@ -50,20 +49,9 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             );
         }
     }
-    /**
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
-     */
-    protected function getSchemaConfigNamespacingBlockDataItem(int $schemaConfigurationID): ?array
+
+    protected function getBlockClass(): string
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigNamespacingBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
+        return SchemaConfigNamespacingBlock::class;
     }
 }
