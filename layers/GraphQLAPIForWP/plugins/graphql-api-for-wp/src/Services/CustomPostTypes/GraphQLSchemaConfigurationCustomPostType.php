@@ -4,16 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
-use GraphQLAPI\GraphQLAPIPRO\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+        );
+    }
+
     /**
      * Custom Post Type name
      */
@@ -87,27 +99,12 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         $template = [];
-        // Add blocks depending on being enabled by module
-        $blockClassModules = [
-            SchemaConfigAccessControlListBlock::class,
-            SchemaConfigCacheControlListBlock::class,
-            SchemaConfigFieldDeprecationListBlock::class,
-        ];
-        foreach ($blockClassModules as $blockClass) {
-            /**
-             * @var AbstractBlock
-             */
-            $block = $this->instanceManager->getInstance($blockClass);
-            if ($block->isServiceEnabled()) {
-                $template[] = [$block->getBlockFullName()];
-            }
+        $blocks = $this->schemaConfigBlockRegistry->getSchemaConfigBlocks();
+        // Order them by priority
+        // ...
+        foreach ($blocks as $block) {
+            $template[] = [$block->getBlockFullName()];
         }
-        // Add the Configuration block always
-        /**
-         * @var SchemaConfigOptionsBlock
-         */
-        $schemaConfigOptionsBlock = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
-        $template[] = [$schemaConfigOptionsBlock->getBlockFullName()];
         return $template;
     }
 
