@@ -12,6 +12,8 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustom
  */
 class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostListBlock
 {
+    use MainPluginBlockTrait;
+
     public const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
 
     protected function getBlockName(): string

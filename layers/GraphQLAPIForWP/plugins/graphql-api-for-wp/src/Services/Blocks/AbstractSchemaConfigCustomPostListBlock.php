@@ -13,8 +13,6 @@ use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
-    use MainPluginBlockTrait;
-
     protected function isDynamicBlock(): bool
     {
         return true;

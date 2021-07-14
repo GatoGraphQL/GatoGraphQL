@@ -12,6 +12,8 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCusto
  */
 class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostListBlock
 {
+    use MainPluginBlockTrait;
+
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
 
     protected function getBlockName(): string
