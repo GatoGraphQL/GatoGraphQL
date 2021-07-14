@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
@@ -83,6 +84,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * so the properties will not be null in that situation.
      */
     public function __construct(
+        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TranslationAPIInterface $translationAPI,
         protected ?CommentTypeResolver $commentTypeResolver,
@@ -99,6 +101,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
         parent::__construct(
+            $instanceManager,
             $moduleRegistry,
             $translationAPI,
         );

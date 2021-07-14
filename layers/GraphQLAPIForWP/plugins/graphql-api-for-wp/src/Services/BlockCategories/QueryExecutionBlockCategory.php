@@ -21,9 +21,13 @@ class QueryExecutionBlockCategory extends AbstractBlockCategory
      */
     public function getPostTypes(): array
     {
+        /** @var GraphQLPersistedQueryCustomPostType */
+        $persistedQueryCustomPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryCustomPostType::class);
+        /** @var GraphQLEndpointCustomPostType */
+        $endpointCustomPostTypeService = $this->instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
         return [
-            GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
-            GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
+            $persistedQueryCustomPostTypeService->getCustomPostType(),
+            $endpointCustomPostTypeService->getCustomPostType(),
         ];
     }
 

@@ -6,13 +6,15 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 // use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
     public function __construct(
+        protected InstanceManagerInterface $instanceManager,
         protected ModuleRegistryInterface $moduleRegistry,
         protected TranslationAPIInterface $translationAPI,
     ) {

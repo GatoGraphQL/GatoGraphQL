@@ -67,10 +67,12 @@ class EndpointComponentEditorScript extends AbstractEditorScript
      */
     protected function getAllowedPostTypes(): array
     {
+        /** @var GraphQLEndpointCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
+                $customPostTypeService->getCustomPostType(),
             ]
         );
     }

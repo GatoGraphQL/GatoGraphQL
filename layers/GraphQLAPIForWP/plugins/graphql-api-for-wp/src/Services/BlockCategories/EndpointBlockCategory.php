@@ -17,8 +17,10 @@ class EndpointBlockCategory extends AbstractBlockCategory
      */
     public function getPostTypes(): array
     {
+        /** @var GraphQLEndpointCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
         return [
-            GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
+            $customPostTypeService->getCustomPostType(),
         ];
     }
 

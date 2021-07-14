@@ -67,10 +67,12 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
      */
     protected function getAllowedPostTypes(): array
     {
+        /** @var GraphQLPersistedQueryCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryCustomPostType::class);
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
+                $customPostTypeService->getCustomPostType(),
             ]
         );
     }

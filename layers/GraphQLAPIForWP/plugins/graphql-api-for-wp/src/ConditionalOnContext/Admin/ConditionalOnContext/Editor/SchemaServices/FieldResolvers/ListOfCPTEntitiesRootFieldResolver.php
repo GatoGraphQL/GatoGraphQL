@@ -38,10 +38,16 @@ class ListOfCPTEntitiesRootFieldResolver extends AbstractListOfCPTEntitiesRootFi
 
     protected function getFieldCustomPostType(string $fieldName): string
     {
+        /** @var GraphQLAccessControlListCustomPostType */
+        $accessControlListCustomPostTypeService = $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
+        /** @var GraphQLCacheControlListCustomPostType */
+        $cacheControlListCustomPostTypeService = $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        $schemaConfigurationCustomPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
         return match ($fieldName) {
-            'accessControlLists' => GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
-            'cacheControlLists' => GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
-            'schemaConfigurations' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
+            'accessControlLists' => $accessControlListCustomPostTypeService->getCustomPostType(),
+            'cacheControlLists' => $cacheControlListCustomPostTypeService->getCustomPostType(),
+            'schemaConfigurations' => $schemaConfigurationCustomPostTypeService->getCustomPostType(),
             default => '', // It will never reach here
         };
     }
