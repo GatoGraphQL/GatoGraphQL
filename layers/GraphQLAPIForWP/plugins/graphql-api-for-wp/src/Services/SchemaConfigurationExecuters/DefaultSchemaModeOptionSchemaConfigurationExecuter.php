@@ -47,22 +47,22 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractSchemaC
                 fn () => $defaultSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE,
                 PHP_INT_MAX
             );
-            /**
-             * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
-             */
-            protected function getSchemaConfigSchemaModeBlockDataItem(int $schemaConfigurationID): ?array
-            {
-                /** @var BlockHelpers */
-                $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-                /**
-                 * @var SchemaConfigSchemaModeBlock
-                 */
-                $block = $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
-                return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-                    $schemaConfigurationID,
-                    $block
-                );
-            }
         }
+    }
+    /**
+     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     */
+    protected function getSchemaConfigSchemaModeBlockDataItem(int $schemaConfigurationID): ?array
+    {
+        /** @var BlockHelpers */
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+        /**
+         * @var SchemaConfigSchemaModeBlock
+         */
+        $block = $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
+        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+            $schemaConfigurationID,
+            $block
+        );
     }
 }
