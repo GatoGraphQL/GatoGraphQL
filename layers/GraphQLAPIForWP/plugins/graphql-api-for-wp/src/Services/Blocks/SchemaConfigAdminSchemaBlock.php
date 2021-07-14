@@ -84,21 +84,6 @@ EOT;
     }
 
     /**
-     * Pass localized data to the block
-     *
-     * @return array<string, mixed>
-     */
-    protected function getLocalizedData(): array
-    {
-        return array_merge(
-            parent::getLocalizedData(),
-            [
-                'isAdminSchemaEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA),
-            ]
-        );
-    }
-
-    /**
      * Register index.css
      */
     protected function registerEditorCSS(): bool

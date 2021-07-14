@@ -80,21 +80,6 @@ EOT;
     }
 
     /**
-     * Pass localized data to the block
-     *
-     * @return array<string, mixed>
-     */
-    protected function getLocalizedData(): array
-    {
-        return array_merge(
-            parent::getLocalizedData(),
-            [
-                'isSchemaNamespacingEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING),
-            ]
-        );
-    }
-
-    /**
      * Register index.css
      */
     protected function registerEditorCSS(): bool

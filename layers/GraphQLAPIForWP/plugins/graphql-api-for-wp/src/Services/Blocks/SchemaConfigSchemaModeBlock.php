@@ -82,21 +82,6 @@ EOT;
     }
 
     /**
-     * Pass localized data to the block
-     *
-     * @return array<string, mixed>
-     */
-    protected function getLocalizedData(): array
-    {
-        return array_merge(
-            parent::getLocalizedData(),
-            [
-                'isPublicPrivateSchemaEnabled' => $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA),
-            ]
-        );
-    }
-
-    /**
      * Register index.css
      */
     protected function registerEditorCSS(): bool

@@ -83,21 +83,6 @@ EOT;
     }
 
     /**
-     * Pass localized data to the block
-     *
-     * @return array<string, mixed>
-     */
-    protected function getLocalizedData(): array
-    {
-        return array_merge(
-            parent::getLocalizedData(),
-            [
-                'isNestedMutationsEnabled' => $this->moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS),
-            ]
-        );
-    }
-
-    /**
      * Register index.css
      */
     protected function registerEditorCSS(): bool
