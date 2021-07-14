@@ -10,7 +10,7 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
-class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
@@ -48,5 +48,21 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractOptionSchemaC
                 PHP_INT_MAX
             );
         }
+    }
+    /**
+     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     */
+    protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
+    {
+        /** @var BlockHelpers */
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+        /**
+         * @var SchemaConfigOptionsBlock
+         */
+        $block = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+            $schemaConfigurationID,
+            $block
+        );
     }
 }

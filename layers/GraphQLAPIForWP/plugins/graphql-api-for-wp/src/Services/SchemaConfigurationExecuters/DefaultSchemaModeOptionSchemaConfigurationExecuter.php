@@ -11,7 +11,7 @@ use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 
-class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
@@ -47,6 +47,22 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractOptionS
                 fn () => $defaultSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE,
                 PHP_INT_MAX
             );
+            /**
+             * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+             */
+            protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
+            {
+                /** @var BlockHelpers */
+                $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+                /**
+                 * @var SchemaConfigOptionsBlock
+                 */
+                $block = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+                return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+                    $schemaConfigurationID,
+                    $block
+                );
+            }
         }
     }
 }
