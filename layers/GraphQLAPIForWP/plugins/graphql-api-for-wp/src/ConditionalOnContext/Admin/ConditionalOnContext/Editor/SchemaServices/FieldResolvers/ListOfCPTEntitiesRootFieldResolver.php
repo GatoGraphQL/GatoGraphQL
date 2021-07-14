@@ -36,7 +36,7 @@ class ListOfCPTEntitiesRootFieldResolver extends AbstractListOfCPTEntitiesRootFi
         };
     }
 
-    function getFieldCustomPostType(string $fieldName): string
+    protected function getFieldCustomPostType(string $fieldName): string
     {
         return match ($fieldName) {
             'accessControlLists' => GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
