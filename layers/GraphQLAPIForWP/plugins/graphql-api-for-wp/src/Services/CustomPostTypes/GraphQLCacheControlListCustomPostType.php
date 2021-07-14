@@ -18,7 +18,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     /**
      * Custom Post Type name
      */
-    protected function getCustomPostType(): string
+    public function getCustomPostType(): string
     {
         return self::CUSTOM_POST_TYPE;
     }
@@ -42,7 +42,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     /**
      * Custom post type name
      */
-    public function getPostTypeName(): string
+    public function getCustomPostTypeName(): string
     {
         return \__('Cache Control List', 'graphql-api');
     }
@@ -52,7 +52,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getPostTypePluralNames(bool $uppercase): string
+    protected function getCustomPostTypePluralNames(bool $uppercase): string
     {
         return \__('Cache Control Lists', 'graphql-api');
     }

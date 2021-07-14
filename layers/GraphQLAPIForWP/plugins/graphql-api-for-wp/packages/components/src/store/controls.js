@@ -31,12 +31,6 @@ const controls = {
 			action.query
 		);
 	},
-	RECEIVE_FIELD_DEPRECATION_LISTS( action ) {
-		return fetchGraphQLQuery(
-			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
-			action.query
-		);
-	},
 };
 
 export default controls;

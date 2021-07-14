@@ -287,25 +287,25 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Custom Post Type singular name
      */
-    abstract protected function getPostTypeName(): string;
+    abstract protected function getCustomPostTypeName(): string;
     /**
      * Custom Post Type under which it will be registered
      * From documentation: Max. 20 characters and may only contain lowercase alphanumeric characters,
      * dashes, and underscores.
      * @see https://codex.wordpress.org/Function_Reference/register_post_type#Parameters
      */
-    protected function getCustomPostType(): string
+    public function getCustomPostType(): string
     {
-        return strtolower(str_replace(' ', '-', $this->getPostTypeName()));
+        return strtolower(str_replace(' ', '-', $this->getCustomPostTypeName()));
     }
     /**
      * Custom Post Type plural name
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getPostTypePluralNames(bool $uppercase): string
+    protected function getCustomPostTypePluralNames(bool $uppercase): string
     {
-        $postTypeName = $this->getPostTypeName();
+        $postTypeName = $this->getCustomPostTypeName();
         if ($uppercase) {
             return $postTypeName;
         }
@@ -379,9 +379,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function getCustomPostTypeArgs(): array
     {
-        $name_uc = $this->getPostTypeName();
-        $names_uc = $this->getPostTypePluralNames(true);
-        $names_lc = $this->getPostTypePluralNames(false);
+        $name_uc = $this->getCustomPostTypeName();
+        $names_uc = $this->getCustomPostTypePluralNames(true);
+        $names_lc = $this->getCustomPostTypePluralNames(false);
         // Configuration CPTs are to configure data, and not to be directly accessible by themselves
         // Then, do not make them public, but still allow to access them
         // This way, executing query `{ posts(postTypes:["graphql-acl"]) }` will fail,
@@ -397,8 +397,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
             array(
-                'label' => $this->getPostTypeName(),
-                'labels' => $this->getPostTypeLabels($name_uc, $names_uc, $names_lc),
+                'label' => $this->getCustomPostTypeName(),
+                'labels' => $this->getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
                 'capability_type' => $canAccessSchemaEditor ? 'post' : '',
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
@@ -452,7 +452,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param string $names_lc Plural name lowercase
      * @return array<string, string>
      */
-    protected function getPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
+    protected function getCustomPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
     {
         return array(
             'name'               => $names_uc,

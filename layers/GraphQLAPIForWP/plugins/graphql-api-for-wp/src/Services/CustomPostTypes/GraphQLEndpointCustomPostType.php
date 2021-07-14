@@ -29,7 +29,7 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
     /**
      * Custom Post Type name
      */
-    protected function getCustomPostType(): string
+    public function getCustomPostType(): string
     {
         return self::CUSTOM_POST_TYPE;
     }
@@ -61,7 +61,7 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
     /**
      * Custom post type name
      */
-    public function getPostTypeName(): string
+    public function getCustomPostTypeName(): string
     {
         return \__('GraphQL endpoint', 'graphql-api');
     }
@@ -71,7 +71,7 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getPostTypePluralNames(bool $uppercase): string
+    protected function getCustomPostTypePluralNames(bool $uppercase): string
     {
         return \__('GraphQL endpoints', 'graphql-api');
     }
@@ -84,13 +84,13 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
      * @param string $names_lc Plural name lowercase
      * @return array<string, string>
      */
-    protected function getPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
+    protected function getCustomPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
     {
         /**
          * Because the name is too long, shorten it for the admin menu only
          */
         return array_merge(
-            parent::getPostTypeLabels($name_uc, $names_uc, $names_lc),
+            parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
                 'all_items' => \__('Custom Endpoints', 'graphql-api'),
             )

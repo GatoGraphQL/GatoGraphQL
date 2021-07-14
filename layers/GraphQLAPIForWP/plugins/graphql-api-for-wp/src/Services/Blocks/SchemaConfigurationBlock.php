@@ -15,7 +15,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\QueryExecutionBlockCategory;
  */
 class SchemaConfigurationBlock extends AbstractBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_SCHEMA_CONFIGURATION = 'schemaConfiguration';
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 
@@ -13,7 +13,7 @@ use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
  */
 class AccessControlUserStateBlock extends AbstractAccessControlRuleBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     protected function getBlockName(): string
     {

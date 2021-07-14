@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractItemListAccessControlRuleBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 
 /**
@@ -13,7 +13,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolv
  */
 class AccessControlUserRolesBlock extends AbstractItemListAccessControlRuleBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     protected function getBlockName(): string
     {

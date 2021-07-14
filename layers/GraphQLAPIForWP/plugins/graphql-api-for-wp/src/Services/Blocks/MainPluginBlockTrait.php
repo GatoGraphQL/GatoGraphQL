@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
 /**
  * Trait to set common functions for a Gutenberg block for this plugin (GraphQL API)
  */
-trait GraphQLByPoPBlockTrait
+trait MainPluginBlockTrait
 {
-    use GraphQLByPoPScriptTrait;
+    use MainPluginScriptTrait;
 
     protected function getBlockNamespace(): string
     {

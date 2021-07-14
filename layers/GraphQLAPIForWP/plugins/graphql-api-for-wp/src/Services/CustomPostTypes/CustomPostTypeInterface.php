@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 interface CustomPostTypeInterface
 {
+    public function getCustomPostType(): string;
     /**
      * Unregister the custom post type
      */

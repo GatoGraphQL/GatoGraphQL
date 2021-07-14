@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
  */
 class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
     public const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';

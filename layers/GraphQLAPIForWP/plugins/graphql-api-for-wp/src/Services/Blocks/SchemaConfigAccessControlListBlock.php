@@ -10,13 +10,20 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCusto
 /**
  * Cache Control block
  */
-class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPostListBlock
+class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostListBlock
 {
+    use MainPluginBlockTrait;
+
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
 
     protected function getBlockName(): string
     {
         return 'schema-config-access-control-lists';
+    }
+
+    public function getSchemaConfigBlockPriority(): int
+    {
+        return 100;
     }
 
     public function getEnablingModule(): ?string

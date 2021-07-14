@@ -15,8 +15,6 @@ import {
 	setAccessControlLists,
 	receiveCacheControlLists,
 	setCacheControlLists,
-	receiveFieldDeprecationLists,
-	setFieldDeprecationLists,
 } from './action-creators';
 
 import { DIRECTIVE_TYPE_QUERY } from '../constants/directive-types'
@@ -72,19 +70,6 @@ export const FETCH_ACCESS_CONTROL_LISTS_GRAPHQL_QUERY = `
 export const FETCH_CACHE_CONTROL_LISTS_GRAPHQL_QUERY = `
 	query GetCacheControlLists {
 		cacheControlLists {
-			id
-			title
-			excerpt
-		}
-	}
-`
-
-/**
- * GraphQL query to fetch the list of Field Deprecation Lists from the GraphQL schema
- */
-export const FETCH_FIELD_DEPRECATION_LISTS_GRAPHQL_QUERY = `
-	query GetFieldDeprecationLists {
-		fieldDeprecationLists {
 			id
 			title
 			excerpt
@@ -193,21 +178,5 @@ export default {
 			return setCacheControlLists( [], maybeErrorMessage );
 		}
 		return setCacheControlLists( response.data?.cacheControlLists );
-	},
-
-	/**
-	 * Fetch the Field Deprecation Lists from the GraphQL server
-	 */
-	* getFieldDeprecationLists() {
-
-		const response = yield receiveFieldDeprecationLists( FETCH_FIELD_DEPRECATION_LISTS_GRAPHQL_QUERY );
-		/**
-		 * If there were erros when executing the query, return an empty list, and keep the error in the state
-		 */
-		const maybeErrorMessage = maybeGetErrorMessage(response);
-		if (maybeErrorMessage) {
-			return setFieldDeprecationLists( [], maybeErrorMessage );
-		}
-		return setFieldDeprecationLists( response.data?.fieldDeprecationLists );
 	},
 };

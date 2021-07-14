@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
 
-abstract class AbstractSchemaConfigPostListBlock extends AbstractBlock
+abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
-    use GraphQLByPoPBlockTrait;
-
     protected function isDynamicBlock(): bool
     {
         return true;

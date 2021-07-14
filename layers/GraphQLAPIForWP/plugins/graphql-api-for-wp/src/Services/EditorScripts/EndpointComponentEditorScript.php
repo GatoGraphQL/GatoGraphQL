@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
 
 /**
@@ -13,7 +13,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType
  */
 class EndpointComponentEditorScript extends AbstractEditorScript
 {
-    use GraphQLByPoPScriptTrait;
+    use MainPluginScriptTrait;
 
     /**
      * Block name

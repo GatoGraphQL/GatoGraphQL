@@ -140,11 +140,6 @@ msgstr ""
 msgid "Cache Control Lists"
 msgstr ""
 
-#: src/ConditionalOnContext/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:82
-#: src/Services/CustomPostTypes/GraphQLFieldDeprecationListCustomPostType.php:58
-msgid "Field Deprecation Lists"
-msgstr ""
-
 #: src/ConditionalOnContext/Admin/SchemaServices/FieldResolvers/CPTFieldResolver.php:83
 #: src/Services/CustomPostTypes/GraphQLSchemaConfigurationCustomPostType.php:62
 msgid "Schema Configurations"
@@ -923,10 +918,6 @@ msgstr ""
 msgid "GraphQL endpoint"
 msgstr ""
 
-#: src/Services/BlockCategories/FieldDeprecationBlockCategory.php:38
-msgid "Field Deprecations for the GraphQL schema"
-msgstr ""
-
 #: src/Services/BlockCategories/PersistedQueryBlockCategory.php:38
 #: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:81
 msgid "GraphQL persisted query"
@@ -984,16 +975,15 @@ msgstr ""
 msgid "Enabled:"
 msgstr ""
 
-#: src/Services/Blocks/AbstractSchemaConfigPostListBlock.php:102
+#: src/Services/Blocks/AbstractSchemaConfigCustomPostListBlock.php:102
 #, php-format
 msgid "Undefined item with ID %s"
 msgstr ""
 
-#: src/Services/Blocks/AbstractSchemaConfigPostListBlock.php:121
+#: src/Services/Blocks/AbstractSchemaConfigCustomPostListBlock.php:121
 #: src/Services/Blocks/AccessControlBlock.php:109
 #: src/Services/Blocks/AccessControlRuleBlocks/AbstractItemListAccessControlRuleBlock.php:41
 #: src/Services/Blocks/CacheControlBlock.php:86
-#: src/Services/Blocks/FieldDeprecationBlock.php:74
 msgid "(not set)"
 msgstr ""
 
@@ -1061,14 +1051,6 @@ msgstr ""
 msgid "Expose the Interactive Schema client?"
 msgstr ""
 
-#: src/Services/Blocks/FieldDeprecationBlock.php:54
-msgid "Fields to deprecate:"
-msgstr ""
-
-#: src/Services/Blocks/FieldDeprecationBlock.php:58
-msgid "Deprecation reason:"
-msgstr ""
-
 #: src/Services/Blocks/PersistedQueryOptionsBlock.php:65
 msgid "Accept variables as URL params:"
 msgstr ""
@@ -1083,10 +1065,6 @@ msgstr ""
 
 #: src/Services/Blocks/SchemaConfigCacheControlListBlock.php:39
 msgid "Cache Control Lists:"
-msgstr ""
-
-#: src/Services/Blocks/SchemaConfigFieldDeprecationListBlock.php:39
-msgid "Field Deprecation Lists:"
 msgstr ""
 
 #: src/Services/Blocks/SchemaConfigOptionsBlock.php:90
@@ -1226,10 +1204,6 @@ msgstr ""
 
 #: src/Services/CustomPostTypes/GraphQLEndpointCustomPostType.php:364
 msgid "Interactive schema"
-msgstr ""
-
-#: src/Services/CustomPostTypes/GraphQLFieldDeprecationListCustomPostType.php:48
-msgid "Field Deprecation List"
 msgstr ""
 
 #: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:91

@@ -10,6 +10,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistry'
 
+    GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistry'
+
     GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistry'
 
