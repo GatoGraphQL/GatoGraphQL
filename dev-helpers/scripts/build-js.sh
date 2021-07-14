@@ -39,32 +39,33 @@ buildScripts(){
     done
 }
 
+# Function `maybeBuildScripts` will invoke `buildScripts`
+# if the target folder exists
+maybeBuildScripts(){
+    if [[ -d "$TARGET_DIR" ]]
+    then
+        cd "$TARGET_DIR"
+        buildScripts
+    else
+        echo "Directory '$TARGET_DIR' does not exist"
+    fi
+}
+
 # # First create the symlinks to node_modules/ everywhere
 # bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
 
 # Packages: used by Blocks/Editor Scripts
 # TARGET_DIR="$DIR/../../packages/"
 TARGET_DIR="$PLUGIN_DIR/packages/"
-if [[ -d "$TARGET_DIR" ]]
-then
-    cd "$TARGET_DIR"
-    buildScripts
-fi
+maybeBuildScripts
 
 # Blocks
 # TARGET_DIR="$DIR/../../blocks/"
 TARGET_DIR="$PLUGIN_DIR/blocks/"
-if [[ -d "$TARGET_DIR" ]]
-then
-    cd "$TARGET_DIR"
-    buildScripts
-fi
+maybeBuildScripts
 
 # Editor Scripts
 # TARGET_DIR="$DIR/../../editor-scripts/"
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
-if [[ -d "$TARGET_DIR" ]]
-then
-    cd "$TARGET_DIR"
-    buildScripts
-fi
+maybeBuildScripts
+
