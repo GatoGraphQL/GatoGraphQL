@@ -33,14 +33,14 @@ registerBlockType( 'graphql-api/schema-config-schema-mode', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Options for the Schema Configuration', 'graphql-api' ),
+	title: __( 'Public/Private Mode for the Schema Configuration', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Configure the Schema Configuration',
+		'Configure the visibility of the API in the Schema Configuration',
 		'graphql-api'
 	),
 
