@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-interface SchemaConfigBlockServiceTagInterface
+interface SchemaConfigBlockServiceTagInterface extends PriorityBlockInterface
 {
-    public function getSchemaConfigBlockPriority(): int;
 }
