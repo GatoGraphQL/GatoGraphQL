@@ -5,7 +5,7 @@ use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
 {
-    public function getPostTypes(array $module)
+    public function getCustomPostTypes(array $module)
     {
         return [];
     }
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
             $ret['load'] = false;
         }
 
-        $ret['custompost-types'] = $this->getPostTypes($module);
+        $ret['custompost-types'] = $this->getCustomPostTypes($module);
         // $ret['limit'] = 1;
         $ret['include'] = [$sticky];
 

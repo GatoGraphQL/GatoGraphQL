@@ -205,7 +205,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
     protected function getAllowedPostTypes(): array
     {
         if ($blockCategory = $this->getBlockCategory()) {
-            return $blockCategory->getPostTypes();
+            return $blockCategory->getCustomPostTypes();
         }
         return [];
     }

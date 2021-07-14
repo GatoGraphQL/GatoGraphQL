@@ -6,7 +6,7 @@ use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getPostTypes(array $module)
+    public function getCustomPostTypes(array $module)
     {
         return [];
     }
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         $cmsService = CMSServiceFacade::getInstance();
         if ($sticky = $cmsService->getOption('sticky_posts')) {
             $ret['include'] = [$sticky];
-            $ret['custompost-types'] = $this->getPostTypes($module);
+            $ret['custompost-types'] = $this->getCustomPostTypes($module);
         }
 
         return $ret;

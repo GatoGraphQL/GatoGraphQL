@@ -19,7 +19,7 @@ class QueryExecutionBlockCategory extends AbstractBlockCategory
      *
      * @return string[]
      */
-    public function getPostTypes(): array
+    public function getCustomPostTypes(): array
     {
         /** @var GraphQLPersistedQueryCustomPostType */
         $persistedQueryCustomPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryCustomPostType::class);
