@@ -11,7 +11,7 @@ parameters:
         # This error seems to be some bug from PHPStan, since param #1 is a string when run in context of WP
         -
             message: '#^Parameter \#1 \$str of function trim expects string, null given\.$#'
-            path: src/Scripts/GraphQLByPoPScriptTrait.php
+            path: src/Scripts/MainPluginScriptTrait.php
         -
             message: '#^Cannot access an offset on array<string>\|bool\|string\.$#'
             path: src/PostTypes/AbstractCustomPostType.php

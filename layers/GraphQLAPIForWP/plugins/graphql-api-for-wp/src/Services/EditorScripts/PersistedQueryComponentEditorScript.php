@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Scripts\GraphQLByPoPScriptTrait;
+use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
 
 /**
@@ -13,7 +13,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPo
  */
 class PersistedQueryComponentEditorScript extends AbstractEditorScript
 {
-    use GraphQLByPoPScriptTrait;
+    use MainPluginScriptTrait;
 
     /**
      * Block name

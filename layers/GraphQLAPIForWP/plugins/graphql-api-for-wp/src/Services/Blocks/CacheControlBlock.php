@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CacheControlBlockCategory;
 
@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CacheControlBlockCategory;
  */
 class CacheControlBlock extends AbstractControlBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE = 'cacheControlMaxAge';
 

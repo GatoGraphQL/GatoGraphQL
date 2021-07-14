@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 /**
  * Trait to set common functions for a Gutenberg block for this plugin (GraphQL API)
  */
-trait GraphQLByPoPScriptTrait
+trait MainPluginScriptTrait
 {
     protected function getPluginDir(): string
     {

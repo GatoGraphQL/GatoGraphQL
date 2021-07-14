@@ -9,7 +9,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
 
@@ -18,7 +18,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
  */
 abstract class AbstractGraphiQLBlock extends AbstractBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';

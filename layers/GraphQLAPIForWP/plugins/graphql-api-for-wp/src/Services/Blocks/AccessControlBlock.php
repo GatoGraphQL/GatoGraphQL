@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\AccessControl\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 
@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
  */
 class AccessControlBlock extends AbstractControlBlock
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
 

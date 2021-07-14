@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\GraphQLByPoPBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\AccessControl\Schema\SchemaModes;
 
@@ -19,7 +19,7 @@ use PoP\AccessControl\Schema\SchemaModes;
  */
 class SchemaConfigOptionsBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
 {
-    use GraphQLByPoPBlockTrait;
+    use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA = 'enableAdminSchema';
     public const ATTRIBUTE_NAME_USE_NAMESPACING = 'useNamespacing';
