@@ -35,13 +35,25 @@ buildScripts(){
 # bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
 
 # Packages: used by Blocks/Editor Scripts
-cd "$DIR/../../packages/"
-buildScripts
+TARGET_DIR="$DIR/../../packages/"
+if [[ -d "$TARGET_DIR" ]]
+then
+    cd "$TARGET_DIR"
+    buildScripts
+fi
 
 # Blocks
-cd "$DIR/../../blocks/"
-buildScripts
+TARGET_DIR="$DIR/../../blocks/"
+if [[ -d "$TARGET_DIR" ]]
+then
+    cd "$TARGET_DIR"
+    buildScripts
+fi
 
 # Editor Scripts
-cd "$DIR/../../editor-scripts/"
-buildScripts
+TARGET_DIR="$DIR/../../editor-scripts/"
+if [[ -d "$TARGET_DIR" ]]
+then
+    cd "$TARGET_DIR"
+    buildScripts
+fi
