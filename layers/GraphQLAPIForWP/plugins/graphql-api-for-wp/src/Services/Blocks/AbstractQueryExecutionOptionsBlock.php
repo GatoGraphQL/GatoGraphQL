@@ -10,7 +10,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 abstract class AbstractQueryExecutionOptionsBlock extends AbstractBlock
 {
     use OptionsBlockTrait;
-    
+
     public const ATTRIBUTE_NAME_IS_ENABLED = 'isEnabled';
 
     protected function isDynamicBlock(): bool
