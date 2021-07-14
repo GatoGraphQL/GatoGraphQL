@@ -489,7 +489,9 @@
         "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
         "release": "monorepo-builder release --config=config/monorepo-builder/release.php patch --ansi",
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
-        "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi"
+        "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi",
+        "build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+        "install-deps-build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp true"
     },
     "scripts-descriptions": {
         "test": "Execute PHPUnit tests",
@@ -515,7 +517,9 @@
         "propagate-monorepo": "Propagate versions from the monorepo's composer.json file to all packages",
         "release": "Release a new version (bump version, commit, push, tag, revert to 'dev-master', commit, push)",
         "merge-phpstan": "Generate a single PHPStan config for the monorepo, invoking the config for the PHPStan config for all packages",
-        "improve-code-quality": "Improve code quality (via Rector)"
+        "improve-code-quality": "Improve code quality (via Rector)",
+        "build-js": "Build all JS packages, blocks and editor scripts from the GraphQL API plugin",
+        "install-deps-build-js": "Build all JS packages, blocks and editor scripts from the GraphQL API plugin, installing all dependencies from npm"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
