@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAccessControlListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
+use GraphQLAPI\GraphQLAPIPRO\Services\Blocks\SchemaConfigFieldDeprecationListBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
