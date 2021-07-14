@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCacheControlListBlock;
@@ -37,16 +36,8 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         if (!$this->moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
             return;
         }
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /**
-         * @var SchemaConfigCacheControlListBlock
-         */
-        $block = $this->instanceManager->getInstance(SchemaConfigCacheControlListBlock::class);
-        $schemaConfigCCLBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
+
+        $schemaConfigCCLBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if (!is_null($schemaConfigCCLBlockDataItem)) {
             if ($cacheControlLists = $schemaConfigCCLBlockDataItem['attrs'][SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS] ?? null) {
                 foreach ($cacheControlLists as $cacheControlListID) {
@@ -54,5 +45,10 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
                 }
             }
         }
+    }
+
+    protected function getBlockClass(): string
+    {
+        return SchemaConfigCacheControlListBlock::class;
     }
 }

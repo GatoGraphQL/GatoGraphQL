@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\QueryExecutionBlockCategory;
 
 /**
@@ -30,13 +29,9 @@ class SchemaConfigurationBlock extends AbstractBlock
         return 'schema-configuration';
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
+    protected function getBlockCategoryClass(): ?string
     {
-        /**
-         * @var QueryExecutionBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(QueryExecutionBlockCategory::class);
-        return $blockCategory;
+        return QueryExecutionBlockCategory::class;
     }
 
     protected function isDynamicBlock(): bool

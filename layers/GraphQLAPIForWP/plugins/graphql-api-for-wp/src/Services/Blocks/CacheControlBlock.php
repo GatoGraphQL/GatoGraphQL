@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CacheControlBlockCategory;
 
 /**
@@ -23,13 +22,9 @@ class CacheControlBlock extends AbstractControlBlock
         return 'cache-control';
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
+    protected function getBlockCategoryClass(): ?string
     {
-        /**
-         * @var CacheControlBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(CacheControlBlockCategory::class);
-        return $blockCategory;
+        return CacheControlBlockCategory::class;
     }
 
     protected function registerCommonStyleCSS(): bool

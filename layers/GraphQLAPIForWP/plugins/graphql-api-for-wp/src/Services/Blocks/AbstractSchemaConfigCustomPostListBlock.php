@@ -5,27 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
 
-abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
+abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock implements SchemaConfigBlockServiceTagInterface
 {
-    protected function isDynamicBlock(): bool
-    {
-        return true;
-    }
-
-    protected function getBlockCategory(): ?AbstractBlockCategory
-    {
-        /**
-         * @var SchemaConfigurationBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
-        return $blockCategory;
-    }
-
     abstract protected function getAttributeName(): string;
 
     abstract protected function getCustomPostType(): string;

@@ -1,7 +1,7 @@
 {
-	"name": "schema-config-options",
+	"name": "schema-config-mutation-scheme",
 	"version": "0.1.0",
-	"description": "Configure the Schema Configuration",
+	"description": "Configure the mutation scheme in the the Schema Configuration",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

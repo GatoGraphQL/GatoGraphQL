@@ -194,6 +194,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService
 
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
+        if ($blockCategoryClass = $this->getBlockCategoryClass()) {
+            $blockCategory = $this->instanceManager->getInstance($blockCategoryClass);
+            return $blockCategory;
+        }
+        return null;
+    }
+
+    protected function getBlockCategoryClass(): ?string
+    {
         return null;
     }
 

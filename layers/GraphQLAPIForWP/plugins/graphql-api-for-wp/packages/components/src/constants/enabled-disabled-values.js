@@ -1,16 +1,16 @@
 /**
- * This value is not defined as GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DEFAULT,
+ * This value is not defined as GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues::DEFAULT,
  * because the default value is not saved in the entry (it's just null)
  * But it is defined here to keep this value DRY,
  * when declaring the state's default value in index.js
  */
 const ATTRIBUTE_VALUE_DEFAULT = 'default';
 /**
- * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED
+ * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues::ENABLED
  */
 const ATTRIBUTE_VALUE_ENABLED = 'enabled';
 /**
- * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DISABLED
+ * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues::DISABLED
  */
 const ATTRIBUTE_VALUE_DISABLED = 'disabled';
 

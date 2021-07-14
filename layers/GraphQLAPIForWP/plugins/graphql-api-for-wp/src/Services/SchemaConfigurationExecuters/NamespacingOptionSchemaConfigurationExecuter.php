@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigNamespacingBlock;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
-class NamespacingOptionSchemaConfigurationExecuter extends AbstractOptionSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class NamespacingOptionSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
@@ -19,20 +20,20 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractOptionSchemaC
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Namespace Types and Interfaces
              * Default value (if not defined in DB): `default`. Then do nothing
              */
-            $useNamespacing = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING] ?? null;
+            $useNamespacing = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigNamespacingBlock::ATTRIBUTE_NAME_USE_NAMESPACING] ?? null;
             // Only execute if it has value "enabled" or "disabled".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
             if (
                 !in_array($useNamespacing, [
-                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
-                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DISABLED,
+                    BlockAttributeValues::ENABLED,
+                    BlockAttributeValues::DISABLED,
                 ])
             ) {
                 return;
@@ -44,9 +45,14 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractOptionSchemaC
             );
             \add_filter(
                 $hookName,
-                fn () => $useNamespacing == SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
+                fn () => $useNamespacing == BlockAttributeValues::ENABLED,
                 PHP_INT_MAX
             );
         }
+    }
+
+    protected function getBlockClass(): string
+    {
+        return SchemaConfigNamespacingBlock::class;
     }
 }

@@ -16,31 +16,25 @@ import { __ } from '@wordpress/i18n';
  * Application imports
  */
 import EditBlock from './edit';
-import {
-	ATTRIBUTE_VALUE_DEFAULT,
-} from './enabled-disabled-values';
-import {
-	ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
-} from './mutation-scheme-values';
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/schema-config-options', {
+registerBlockType( 'graphql-api/schema-config-schema-mode', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Options for the Schema Configuration', 'graphql-api' ),
+	title: __( 'Public/Private Mode for the Schema Configuration', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Configure the Schema Configuration',
+		'Configure the visibility of the API in the Schema Configuration',
 		'graphql-api'
 	),
 
@@ -60,30 +54,6 @@ registerBlockType( 'graphql-api/schema-config-options', {
 	 * Block default attributes.
 	 */
 	attributes: {
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA
-		 */
-		 enableAdminSchema: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
-		},
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING
-		 */
-		useNamespacing: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
-		},
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
-		 */
-		mutationScheme: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
-		},
 		/**
 		 * Same attribute name as defined in
 		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE

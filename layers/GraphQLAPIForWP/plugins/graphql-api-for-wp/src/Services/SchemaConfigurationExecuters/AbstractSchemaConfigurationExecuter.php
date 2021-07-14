@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
 {
@@ -14,4 +16,23 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
         protected ModuleRegistryInterface $moduleRegistry,
     ) {
     }
+
+    /**
+     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     */
+    protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
+    {
+        /** @var BlockHelpers */
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+        /**
+         * @var AbstractBlock
+         */
+        $block = $this->instanceManager->getInstance($this->getBlockClass());
+        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+            $schemaConfigurationID,
+            $block
+        );
+    }
+
+    abstract protected function getBlockClass(): string;
 }
