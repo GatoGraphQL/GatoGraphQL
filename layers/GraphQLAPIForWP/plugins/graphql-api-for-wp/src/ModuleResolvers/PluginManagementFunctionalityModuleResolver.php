@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -25,11 +26,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
 
     public function __construct(
+        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         TranslationAPIInterface $translationAPI,
         protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry,
     ) {
         parent::__construct(
+            $instanceManager,
             $moduleRegistry,
             $translationAPI,
         );

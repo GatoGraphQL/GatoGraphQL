@@ -137,12 +137,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             $possibleValues = [
                 self::OPTION_VALUE_NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
+            /** @var GraphQLSchemaConfigurationCustomPostType */
+            $customPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
             /**
              * @var WP_Post[]
              */
             $customPosts = \get_posts([
                 'posts_per_page' => -1,
-                'post_type' => GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
+                'post_type' => $customPostTypeService->getCustomPostType(),
                 'post_status' => 'publish',
             ]);
             if (!empty($customPosts)) {

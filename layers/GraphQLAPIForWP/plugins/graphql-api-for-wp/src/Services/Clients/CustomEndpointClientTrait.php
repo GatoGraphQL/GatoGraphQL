@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 trait CustomEndpointClientTrait
 {
@@ -15,7 +16,10 @@ trait CustomEndpointClientTrait
      */
     protected function isClientDisabled(): bool
     {
-        if (!\is_singular(GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE)) {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLEndpointCustomPostType */
+        $customPostTypeService = $instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
+        if (!\is_singular($customPostTypeService->getCustomPostType())) {
             return true;
         }
         return parent::isClientDisabled();

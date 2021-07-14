@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use WP_Post;
 use WP_Block_Editor_Context;
+use WP_Post;
 
 abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService
 {
+    public function __construct(
+        protected InstanceManagerInterface $instanceManager,
+    ) {
+    }
+
     final public function initialize(): void
     {
         /**

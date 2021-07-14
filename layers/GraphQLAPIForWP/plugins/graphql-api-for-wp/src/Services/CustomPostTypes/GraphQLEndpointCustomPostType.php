@@ -24,14 +24,9 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
     /**
      * Custom Post Type name
      */
-    public const CUSTOM_POST_TYPE = 'graphql-endpoint';
-
-    /**
-     * Custom Post Type name
-     */
     public function getCustomPostType(): string
     {
-        return self::CUSTOM_POST_TYPE;
+        return 'graphql-endpoint';
     }
 
     /**

@@ -18,8 +18,10 @@ class AccessControlBlockCategory extends AbstractBlockCategory
      */
     public function getPostTypes(): array
     {
+        /** @var GraphQLAccessControlListCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
         return [
-            GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
+            $customPostTypeService->getCustomPostType(),
         ];
     }
 

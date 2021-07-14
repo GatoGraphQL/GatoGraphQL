@@ -31,14 +31,9 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     /**
      * Custom Post Type name
      */
-    public const CUSTOM_POST_TYPE = 'graphql-schemaconfig';
-
-    /**
-     * Custom Post Type name
-     */
     public function getCustomPostType(): string
     {
-        return self::CUSTOM_POST_TYPE;
+        return 'graphql-schemaconfig';
     }
 
     /**
