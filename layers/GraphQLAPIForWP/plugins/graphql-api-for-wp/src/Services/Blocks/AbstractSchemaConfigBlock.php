@@ -18,7 +18,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
         return SchemaConfigurationBlockCategory::class;
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 10;
     }

@@ -20,7 +20,7 @@ class SchemaConfigAdminSchemaBlock extends AbstractSchemaConfigBlock implements 
         return 'schema-config-admin-schema';
     }
 
-    public function getSchemaConfigBlockPriority(): int
+    public function getBlockPriority(): int
     {
         return 140;
     }

@@ -6,5 +6,5 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 interface PriorityBlockInterface
 {
-    public function getSchemaConfigBlockPriority(): int;
+    public function getBlockPriority(): int;
 }
