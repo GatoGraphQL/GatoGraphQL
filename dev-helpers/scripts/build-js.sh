@@ -8,11 +8,14 @@ set +x
 # Current directory
 # @see: https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself#comment16925670_59895
 # DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+PWD="$( pwd )"
 
 # Must pass the path to the plugin root as first arg to the script
-PLUGIN_DIR="$1"
+PLUGIN_DIR="$PWD/$1"
 if [ -z "$PLUGIN_DIR" ]; then
     echo "The path to the plugin directory is missing; pass it as first argument to the script"
+else
+    echo "Building all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
 fi
 # To install the dependencies, exec script with arg "true"
 INSTALL_DEPS="$2"
