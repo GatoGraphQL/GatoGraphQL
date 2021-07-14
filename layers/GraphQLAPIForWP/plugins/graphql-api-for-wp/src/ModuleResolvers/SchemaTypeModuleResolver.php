@@ -8,12 +8,9 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
@@ -98,7 +95,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         protected ?MenuTypeResolver $menuTypeResolver,
         protected ?PostTypeResolver $postTypeResolver,
         protected ?UserRoleTypeResolver $userRoleTypeResolver,
-        protected ?UserTypeResolver $userTypeResolver
+        protected ?UserTypeResolver $userTypeResolver,
+        protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry
     ) {
         parent::__construct(
             $moduleRegistry,
@@ -534,6 +532,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $pageTypeResolver = $this->pageTypeResolver;
         /** @var PostTypeResolver */
         $postTypeResolver = $this->postTypeResolver;
+        /** @var CustomPostTypeRegistryInterface */
+        $customPostTypeRegistry = $this->customPostTypeRegistry;
 
         $moduleSettings = parent::getSettings($module);
         // Common variables to set the limit on the schema types
@@ -706,30 +706,35 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         } elseif ($module == self::SCHEMA_GENERIC_CUSTOMPOSTS) {
             // Get the list of custom post types from the system
             $genericCustomPostTypes = \get_post_types();
-            // Not all custom post types make sense or are allowed.
-            // Remove the ones that do not
+            /**
+             * Not all custom post types make sense or are allowed.
+             * Remove the ones that do not
+             */
+            $pluginCustomPostTypes = array_map(
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                $customPostTypeRegistry->getCustomPostTypes()
+            );
             $rejectedGenericCustomPostTypes = \apply_filters(
                 self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
-                [
-                    // Post Types from GraphQL API that contain private data
-                    GraphQLAccessControlListCustomPostType::CUSTOM_POST_TYPE,
-                    GraphQLCacheControlListCustomPostType::CUSTOM_POST_TYPE,
-                    GraphQLSchemaConfigurationCustomPostType::CUSTOM_POST_TYPE,
-                    GraphQLEndpointCustomPostType::CUSTOM_POST_TYPE,
-                    GraphQLPersistedQueryCustomPostType::CUSTOM_POST_TYPE,
+                array_merge(
+                    // Post Types from GraphQL API are just for configuration
+                    // and contain private data
+                    $pluginCustomPostTypes,
                     // WordPress internal CPTs
                     // Attachment not allowed because its post_status="inherit",
                     // not "publish", and the API filters by "publish" entries
-                    'attachment',
-                    'revision',
-                    'nav_menu_item',
-                    'custom_css',
-                    'customize_changeset',
-                    'oembed_cache',
-                    'user_request',
-                    'wp_block',
-                    'wp_area',
-                ]
+                    [
+                        'attachment',
+                        'revision',
+                        'nav_menu_item',
+                        'custom_css',
+                        'customize_changeset',
+                        'oembed_cache',
+                        'user_request',
+                        'wp_block',
+                        'wp_area',
+                    ]
+                )
             );
             $genericCustomPostTypes = array_values(array_diff(
                 $genericCustomPostTypes,
