@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
@@ -17,13 +16,9 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractBlock imp
         return true;
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
+    protected function getBlockCategoryClass(): ?string
     {
-        /**
-         * @var SchemaConfigurationBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
-        return $blockCategory;
+        return SchemaConfigurationBlockCategory::class;
     }
 
     abstract protected function getAttributeName(): string;

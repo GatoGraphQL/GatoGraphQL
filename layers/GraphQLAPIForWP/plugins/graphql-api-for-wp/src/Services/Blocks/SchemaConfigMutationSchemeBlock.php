@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -27,13 +26,9 @@ class SchemaConfigMutationSchemeBlock extends AbstractOptionsBlock implements Sc
         return 20;
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
+    protected function getBlockCategoryClass(): ?string
     {
-        /**
-         * @var SchemaConfigurationBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
-        return $blockCategory;
+        return SchemaConfigurationBlockCategory::class;
     }
 
     protected function isDynamicBlock(): bool

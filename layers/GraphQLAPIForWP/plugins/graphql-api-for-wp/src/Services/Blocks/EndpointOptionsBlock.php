@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -25,13 +24,9 @@ class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock
         return 'endpoint-options';
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
+    protected function getBlockCategoryClass(): ?string
     {
-        /**
-         * @var EndpointBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(EndpointBlockCategory::class);
-        return $blockCategory;
+        return EndpointBlockCategory::class;
     }
 
     /**

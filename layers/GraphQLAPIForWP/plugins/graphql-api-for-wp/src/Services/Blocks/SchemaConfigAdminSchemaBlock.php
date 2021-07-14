@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
@@ -27,13 +26,9 @@ class SchemaConfigAdminSchemaBlock extends AbstractOptionsBlock implements Schem
         return 40;
     }
 
-    protected function getBlockCategory(): ?AbstractBlockCategory
+    protected function getBlockCategoryClass(): ?string
     {
-        /**
-         * @var SchemaConfigurationBlockCategory
-         */
-        $blockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
-        return $blockCategory;
+        return SchemaConfigurationBlockCategory::class;
     }
 
     protected function isDynamicBlock(): bool
