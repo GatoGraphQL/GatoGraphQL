@@ -1,5 +1,5 @@
 {
-	"name": "schema-config-options",
+	"name": "schema-config-namespacing",
 	"version": "0.1.0",
 	"description": "Configure the Schema Configuration",
 	"author": "Leonardo Losoviz",
