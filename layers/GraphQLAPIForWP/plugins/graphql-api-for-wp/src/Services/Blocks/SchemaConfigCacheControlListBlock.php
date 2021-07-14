@@ -19,6 +19,11 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
         return 'schema-config-cache-control-lists';
     }
 
+    public function getSchemaConfigBlockPriority(): int
+    {
+        return 90;
+    }
+
     public function getEnablingModule(): ?string
     {
         return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;

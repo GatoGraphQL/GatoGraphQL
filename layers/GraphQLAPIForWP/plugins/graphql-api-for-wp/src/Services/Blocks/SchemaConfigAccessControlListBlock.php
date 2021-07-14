@@ -19,6 +19,11 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
         return 'schema-config-access-control-lists';
     }
 
+    public function getSchemaConfigBlockPriority(): int
+    {
+        return 100;
+    }
+
     public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;

@@ -35,6 +35,11 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock implements SchemaCon
         return 'schema-config-options';
     }
 
+    public function getSchemaConfigBlockPriority(): int
+    {
+        return 10;
+    }
+
     protected function getBlockCategory(): ?AbstractBlockCategory
     {
         /**
