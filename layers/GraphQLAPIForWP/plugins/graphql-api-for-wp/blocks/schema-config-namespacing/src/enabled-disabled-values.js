@@ -6,11 +6,11 @@
  */
 const ATTRIBUTE_VALUE_DEFAULT = 'default';
 /**
- * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED
+ * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues::ENABLED
  */
 const ATTRIBUTE_VALUE_ENABLED = 'enabled';
 /**
- * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DISABLED
+ * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues::DISABLED
  */
 const ATTRIBUTE_VALUE_DISABLED = 'disabled';
 

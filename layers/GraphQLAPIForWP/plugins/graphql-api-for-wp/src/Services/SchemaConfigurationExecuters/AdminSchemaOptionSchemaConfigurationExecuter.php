@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminSchemaBlock;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
@@ -31,8 +32,8 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             // (And if any other unsupported value, also do nothing)
             if (
                 !in_array($enableAdminSchema, [
-                    SchemaConfigAdminSchemaBlock::ATTRIBUTE_VALUE_ENABLED,
-                    SchemaConfigAdminSchemaBlock::ATTRIBUTE_VALUE_DISABLED,
+                    BlockAttributeValues::ENABLED,
+                    BlockAttributeValues::DISABLED,
                 ])
             ) {
                 return;
@@ -44,7 +45,7 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             );
             \add_filter(
                 $hookName,
-                fn () => $enableAdminSchema == SchemaConfigAdminSchemaBlock::ATTRIBUTE_VALUE_ENABLED,
+                fn () => $enableAdminSchema == BlockAttributeValues::ENABLED,
                 PHP_INT_MAX
             );
         }

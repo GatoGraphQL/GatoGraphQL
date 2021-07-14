@@ -16,9 +16,6 @@ class SchemaConfigNamespacingBlock extends AbstractOptionsBlock implements Schem
 
     public const ATTRIBUTE_NAME_USE_NAMESPACING = 'useNamespacing';
 
-    public const ATTRIBUTE_VALUE_ENABLED = 'enabled';
-    public const ATTRIBUTE_VALUE_DISABLED = 'disabled';
-
     protected function getBlockName(): string
     {
         return 'schema-config-namespacing';

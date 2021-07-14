@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
@@ -15,9 +16,6 @@ class SchemaConfigAdminSchemaBlock extends AbstractOptionsBlock implements Schem
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA = 'enableAdminSchema';
-
-    public const ATTRIBUTE_VALUE_ENABLED = 'enabled';
-    public const ATTRIBUTE_VALUE_DISABLED = 'disabled';
 
     protected function getBlockName(): string
     {
@@ -59,8 +57,8 @@ class SchemaConfigAdminSchemaBlock extends AbstractOptionsBlock implements Schem
         $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
 
         $enabledDisabledLabels = [
-            self::ATTRIBUTE_VALUE_ENABLED => \__('✅ Yes', 'graphql-api'),
-            self::ATTRIBUTE_VALUE_DISABLED => \__('❌ No', 'graphql-api'),
+            BlockAttributeValues::ENABLED => \__('✅ Yes', 'graphql-api'),
+            BlockAttributeValues::DISABLED => \__('❌ No', 'graphql-api'),
         ];
         $blockContent = sprintf(
             $blockContentPlaceholder,

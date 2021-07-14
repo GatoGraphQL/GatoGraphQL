@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigNamespacingBlock;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
@@ -31,8 +32,8 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             // (And if any other unsupported value, also do nothing)
             if (
                 !in_array($useNamespacing, [
-                    SchemaConfigNamespacingBlock::ATTRIBUTE_VALUE_ENABLED,
-                    SchemaConfigNamespacingBlock::ATTRIBUTE_VALUE_DISABLED,
+                    BlockAttributeValues::ENABLED,
+                    BlockAttributeValues::DISABLED,
                 ])
             ) {
                 return;
@@ -44,7 +45,7 @@ class NamespacingOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             );
             \add_filter(
                 $hookName,
-                fn () => $useNamespacing == SchemaConfigNamespacingBlock::ATTRIBUTE_VALUE_ENABLED,
+                fn () => $useNamespacing == BlockAttributeValues::ENABLED,
                 PHP_INT_MAX
             );
         }
