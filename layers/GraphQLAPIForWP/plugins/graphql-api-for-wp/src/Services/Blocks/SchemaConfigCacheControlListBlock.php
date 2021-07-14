@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustom
 /**
  * Cache Control block
  */
-class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPostListBlock
+class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostListBlock
 {
     public const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
 

@@ -975,12 +975,12 @@ msgstr ""
 msgid "Enabled:"
 msgstr ""
 
-#: src/Services/Blocks/AbstractSchemaConfigPostListBlock.php:102
+#: src/Services/Blocks/AbstractSchemaConfigCustomPostListBlock.php:102
 #, php-format
 msgid "Undefined item with ID %s"
 msgstr ""
 
-#: src/Services/Blocks/AbstractSchemaConfigPostListBlock.php:121
+#: src/Services/Blocks/AbstractSchemaConfigCustomPostListBlock.php:121
 #: src/Services/Blocks/AccessControlBlock.php:109
 #: src/Services/Blocks/AccessControlRuleBlocks/AbstractItemListAccessControlRuleBlock.php:41
 #: src/Services/Blocks/CacheControlBlock.php:86
