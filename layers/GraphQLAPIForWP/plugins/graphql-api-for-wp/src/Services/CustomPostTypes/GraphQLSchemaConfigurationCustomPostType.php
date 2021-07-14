@@ -60,7 +60,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     /**
      * Custom post type name
      */
-    public function getPostTypeName(): string
+    public function getCustomPostTypeName(): string
     {
         return \__('Schema Configuration', 'graphql-api');
     }
@@ -70,7 +70,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      *
      * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getPostTypePluralNames(bool $uppercase): string
+    protected function getCustomPostTypePluralNames(bool $uppercase): string
     {
         return \__('Schema Configurations', 'graphql-api');
     }
