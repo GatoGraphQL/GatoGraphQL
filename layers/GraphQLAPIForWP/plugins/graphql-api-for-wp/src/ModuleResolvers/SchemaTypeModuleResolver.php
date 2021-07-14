@@ -778,7 +778,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ])
         ) {
             $entriesTitle = \__('Settings entries', 'graphql-api');
-            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying field <code>meta</code> on %s.', 'graphql-api');
             $headsUpDesc = sprintf(
                 \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).', 'graphql-api'),
                 'option',
