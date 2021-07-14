@@ -40,6 +40,7 @@ class SchemaConfigNamespacingBlock extends AbstractSchemaConfigBlock implements 
 
         $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
 
+        $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Use namespacing?', 'graphql-api'),

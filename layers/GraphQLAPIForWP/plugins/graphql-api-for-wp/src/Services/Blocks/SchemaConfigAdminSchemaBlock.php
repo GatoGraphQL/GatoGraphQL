@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
@@ -41,10 +40,7 @@ class SchemaConfigAdminSchemaBlock extends AbstractSchemaConfigBlock implements 
 
         $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
 
-        $enabledDisabledLabels = [
-            BlockAttributeValues::ENABLED => \__('✅ Yes', 'graphql-api'),
-            BlockAttributeValues::DISABLED => \__('❌ No', 'graphql-api'),
-        ];
+        $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Add admin fields to schema?', 'graphql-api'),
