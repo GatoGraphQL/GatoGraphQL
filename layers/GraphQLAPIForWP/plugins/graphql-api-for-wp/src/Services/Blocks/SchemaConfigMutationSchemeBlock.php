@@ -10,9 +10,10 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCateg
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
-class SchemaConfigMutationSchemeBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigMutationSchemeBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    use OptionsBlockTrait;
 
     public const ATTRIBUTE_NAME_MUTATION_SCHEME = 'mutationScheme';
 

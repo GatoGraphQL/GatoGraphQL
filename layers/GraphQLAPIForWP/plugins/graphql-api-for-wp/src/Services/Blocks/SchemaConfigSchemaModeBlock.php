@@ -10,9 +10,10 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCateg
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use PoP\AccessControl\Schema\SchemaModes;
 
-class SchemaConfigSchemaModeBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigSchemaModeBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    use OptionsBlockTrait;
 
     public const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
 

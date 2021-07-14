@@ -9,9 +9,10 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
-class SchemaConfigNamespacingBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigNamespacingBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    use OptionsBlockTrait;
 
     public const ATTRIBUTE_NAME_USE_NAMESPACING = 'useNamespacing';
 

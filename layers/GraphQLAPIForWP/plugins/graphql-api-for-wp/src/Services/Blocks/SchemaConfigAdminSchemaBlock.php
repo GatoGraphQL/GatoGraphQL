@@ -10,9 +10,10 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
-class SchemaConfigAdminSchemaBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigAdminSchemaBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    use OptionsBlockTrait;
 
     public const ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA = 'enableAdminSchema';
 

@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 /**
  * Query Execution (endpoint and persisted query) Options block
  */
-abstract class AbstractOptionsBlock extends AbstractBlock
+trait OptionsBlockTrait
 {
     /**
      * Given a bool, return its label for rendering
