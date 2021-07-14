@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
 use PoP\Hooks\HooksAPIInterface;
-use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;

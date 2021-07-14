@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use WP_Post;
 use WP_Query;
 use PoP\Hooks\HooksAPIInterface;
-use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
