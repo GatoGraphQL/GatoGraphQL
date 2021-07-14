@@ -7,10 +7,9 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
-class SchemaConfigAdminSchemaBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigAdminSchemaBlock extends AbstractSchemaConfigBlock implements SchemaConfigBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
@@ -25,16 +24,6 @@ class SchemaConfigAdminSchemaBlock extends AbstractBlock implements SchemaConfig
     public function getSchemaConfigBlockPriority(): int
     {
         return 40;
-    }
-
-    protected function getBlockCategoryClass(): ?string
-    {
-        return SchemaConfigurationBlockCategory::class;
-    }
-
-    protected function isDynamicBlock(): bool
-    {
-        return true;
     }
 
     public function getEnablingModule(): ?string
