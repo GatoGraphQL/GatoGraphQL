@@ -23,7 +23,7 @@ const SchemaConfigSchemaModeCard = ( props ) => {
 		<div className={ componentClassName }>
 			<Card { ...props }>
 				<CardHeader isShady>
-					{ __('Public/Private schema mode', 'graphql-api') }
+					{ __('Public/Private Schema Mode', 'graphql-api') }
 				</CardHeader>
 				<CardBody>
 					<div className={ `${ className }__schema_mode` }>
