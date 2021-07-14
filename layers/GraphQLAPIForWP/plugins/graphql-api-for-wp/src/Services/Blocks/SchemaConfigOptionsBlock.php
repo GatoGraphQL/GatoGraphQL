@@ -26,7 +26,6 @@ class SchemaConfigOptionsBlock extends AbstractOptionsBlock implements SchemaCon
     public const ATTRIBUTE_NAME_MUTATION_SCHEME = 'mutationScheme';
     public const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
 
-    // public const ATTRIBUTE_VALUE_DEFAULT = 'default';
     public const ATTRIBUTE_VALUE_ENABLED = 'enabled';
     public const ATTRIBUTE_VALUE_DISABLED = 'disabled';
 
