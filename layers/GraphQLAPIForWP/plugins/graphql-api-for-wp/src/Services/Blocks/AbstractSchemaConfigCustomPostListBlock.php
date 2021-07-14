@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCateg
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
 
-abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractBlock
+abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
 {
     use GraphQLByPoPBlockTrait;
 

@@ -17,7 +17,7 @@ use PoP\AccessControl\Schema\SchemaModes;
 /**
  * Schema Config Options block
  */
-class SchemaConfigOptionsBlock extends AbstractOptionsBlock
+class SchemaConfigOptionsBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
 {
     use GraphQLByPoPBlockTrait;
 
