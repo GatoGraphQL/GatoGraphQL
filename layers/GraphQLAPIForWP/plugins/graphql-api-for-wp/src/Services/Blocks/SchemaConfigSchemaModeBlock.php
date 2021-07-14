@@ -14,10 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\AccessControl\Schema\SchemaModes;
 
-/**
- * Schema Config Options block
- */
-class SchemaConfigOptionsBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigSchemaModeBlock extends AbstractOptionsBlock implements SchemaConfigBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
