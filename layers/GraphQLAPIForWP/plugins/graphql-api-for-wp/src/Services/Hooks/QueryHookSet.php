@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
+use GraphQLAPI\GraphQLAPIPRO\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class QueryHookSet extends AbstractHookSet
