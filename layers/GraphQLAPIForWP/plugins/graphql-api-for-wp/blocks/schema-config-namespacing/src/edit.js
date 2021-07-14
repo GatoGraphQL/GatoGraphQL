@@ -3,12 +3,11 @@
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-// import { __ } from '@wordpress/i18n';
 
 /**
  * Application imports
  */
-import SchemaConfigOptionsCard from './schema-config-options-card';
+import SchemaConfigNamespacingCard from './schema-config-namespacing-card';
 
 const isPublicPrivateSchemaEnabled = window.graphqlApiSchemaConfigOptions ? window.graphqlApiSchemaConfigOptions.isPublicPrivateSchemaEnabled : true;
 const isAdminSchemaEnabled = window.graphqlApiSchemaConfigOptions ? window.graphqlApiSchemaConfigOptions.isAdminSchemaEnabled : true;
@@ -19,7 +18,7 @@ const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<SchemaConfigOptionsCard
+			<SchemaConfigNamespacingCard
 				isPublicPrivateSchemaEnabled={ isPublicPrivateSchemaEnabled }
 				isAdminSchemaEnabled={ isAdminSchemaEnabled }
 				isSchemaNamespacingEnabled={ isSchemaNamespacingEnabled }

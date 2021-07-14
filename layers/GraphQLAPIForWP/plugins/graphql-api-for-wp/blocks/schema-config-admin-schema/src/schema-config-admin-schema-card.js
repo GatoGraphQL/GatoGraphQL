@@ -25,7 +25,7 @@ import {
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
 } from './mutation-scheme-values';
 
-const SchemaConfigOptionsCard = ( props ) => {
+const SchemaConfigAdminSchemaCard = ( props ) => {
 	const {
 		isSelected,
 		className,
@@ -238,4 +238,4 @@ const SchemaConfigOptionsCard = ( props ) => {
 	);
 }
 
-export default SchemaConfigOptionsCard;
+export default SchemaConfigAdminSchemaCard;
