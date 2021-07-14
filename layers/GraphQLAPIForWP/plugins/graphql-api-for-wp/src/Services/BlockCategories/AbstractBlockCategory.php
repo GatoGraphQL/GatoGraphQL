@@ -45,7 +45,7 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      *
      * @return string[]
      */
-    public function getPostTypes(): array
+    public function getCustomPostTypes(): array
     {
         return [];
     }
@@ -85,7 +85,7 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
         /**
          * If specified CPTs, register the category only for them
          */
-        if (empty($this->getPostTypes()) || in_array($post->post_type, $this->getPostTypes())) {
+        if (empty($this->getCustomPostTypes()) || in_array($post->post_type, $this->getCustomPostTypes())) {
             return [
                 ...$categories,
                 [

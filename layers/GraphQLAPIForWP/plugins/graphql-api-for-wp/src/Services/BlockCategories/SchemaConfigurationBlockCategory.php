@@ -15,7 +15,7 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
      *
      * @return string[]
      */
-    public function getPostTypes(): array
+    public function getCustomPostTypes(): array
     {
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $customPostTypeService = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
