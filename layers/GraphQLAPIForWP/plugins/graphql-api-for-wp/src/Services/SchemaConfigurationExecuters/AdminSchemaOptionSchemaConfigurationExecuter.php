@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminSchemaBlock;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
@@ -19,20 +19,20 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigAdminSchemaBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * "Admin" schema
              * Default value (if not defined in DB): `default`. Then do nothing
              */
-            $enableAdminSchema = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigOptionsBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA] ?? null;
+            $enableAdminSchema = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigAdminSchemaBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA] ?? null;
             // Only execute if it has value "enabled" or "disabled".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
             if (
                 !in_array($enableAdminSchema, [
-                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
-                    SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_DISABLED,
+                    SchemaConfigAdminSchemaBlock::ATTRIBUTE_VALUE_ENABLED,
+                    SchemaConfigAdminSchemaBlock::ATTRIBUTE_VALUE_DISABLED,
                 ])
             ) {
                 return;
@@ -44,7 +44,7 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
             );
             \add_filter(
                 $hookName,
-                fn () => $enableAdminSchema == SchemaConfigOptionsBlock::ATTRIBUTE_VALUE_ENABLED,
+                fn () => $enableAdminSchema == SchemaConfigAdminSchemaBlock::ATTRIBUTE_VALUE_ENABLED,
                 PHP_INT_MAX
             );
         }
@@ -52,14 +52,14 @@ class AdminSchemaOptionSchemaConfigurationExecuter extends AbstractSchemaConfigu
     /**
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
-    protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
+    protected function getSchemaConfigAdminSchemaBlockDataItem(int $schemaConfigurationID): ?array
     {
         /** @var BlockHelpers */
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
-         * @var SchemaConfigOptionsBlock
+         * @var SchemaConfigAdminSchemaBlock
          */
-        $block = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigAdminSchemaBlock::class);
         return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
@@ -22,12 +22,12 @@ class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractSchemaConf
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigMutationSchemeBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
              */
-            $mutationScheme = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigOptionsBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
+            $mutationScheme = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
             // Only execute if it has value "standard", "nested" or "lean_nested".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
@@ -64,14 +64,14 @@ class MutationSchemeOptionSchemaConfigurationExecuter extends AbstractSchemaConf
     /**
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
-    protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
+    protected function getSchemaConfigMutationSchemeBlockDataItem(int $schemaConfigurationID): ?array
     {
         /** @var BlockHelpers */
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
-         * @var SchemaConfigOptionsBlock
+         * @var SchemaConfigMutationSchemeBlock
          */
-        $block = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+        $block = $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
         return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
@@ -20,12 +20,12 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractSchemaC
             return;
         }
 
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigOptionsBlockDataItem($schemaConfigurationID);
+        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigSchemaModeBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
              */
-            $defaultSchemaMode = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigOptionsBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? null;
+            $defaultSchemaMode = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigSchemaModeBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? null;
             // Only execute if it has value "public" or "private".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
@@ -50,14 +50,14 @@ class DefaultSchemaModeOptionSchemaConfigurationExecuter extends AbstractSchemaC
             /**
              * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
              */
-            protected function getSchemaConfigOptionsBlockDataItem(int $schemaConfigurationID): ?array
+            protected function getSchemaConfigSchemaModeBlockDataItem(int $schemaConfigurationID): ?array
             {
                 /** @var BlockHelpers */
                 $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
                 /**
-                 * @var SchemaConfigOptionsBlock
+                 * @var SchemaConfigSchemaModeBlock
                  */
-                $block = $this->instanceManager->getInstance(SchemaConfigOptionsBlock::class);
+                $block = $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
                 return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
                     $schemaConfigurationID,
                     $block
