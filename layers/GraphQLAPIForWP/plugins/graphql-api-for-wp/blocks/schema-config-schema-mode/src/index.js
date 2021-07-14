@@ -62,30 +62,6 @@ registerBlockType( 'graphql-api/schema-config-schema-mode', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA
-		 */
-		 enableAdminSchema: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
-		},
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING
-		 */
-		useNamespacing: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
-		},
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
-		 */
-		mutationScheme: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
-		},
-		/**
-		 * Same attribute name as defined in
 		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE
 		 */
 		defaultSchemaMode: {
