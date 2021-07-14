@@ -23,7 +23,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
 
     public function getSchemaConfigBlockPriority(): int
     {
-        return 100;
+        return 200;
     }
 
     public function getEnablingModule(): ?string

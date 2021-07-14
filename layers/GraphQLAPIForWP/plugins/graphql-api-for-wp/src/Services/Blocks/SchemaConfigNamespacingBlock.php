@@ -22,7 +22,7 @@ class SchemaConfigNamespacingBlock extends AbstractSchemaConfigBlock implements 
 
     public function getSchemaConfigBlockPriority(): int
     {
-        return 10;
+        return 110;
     }
 
     public function getEnablingModule(): ?string

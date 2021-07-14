@@ -23,7 +23,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock implemen
 
     public function getSchemaConfigBlockPriority(): int
     {
-        return 20;
+        return 120;
     }
 
     public function getEnablingModule(): ?string

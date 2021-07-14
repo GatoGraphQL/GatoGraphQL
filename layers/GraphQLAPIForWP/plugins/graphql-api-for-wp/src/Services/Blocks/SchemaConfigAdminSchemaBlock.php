@@ -22,7 +22,7 @@ class SchemaConfigAdminSchemaBlock extends AbstractSchemaConfigBlock implements 
 
     public function getSchemaConfigBlockPriority(): int
     {
-        return 40;
+        return 140;
     }
 
     public function getEnablingModule(): ?string

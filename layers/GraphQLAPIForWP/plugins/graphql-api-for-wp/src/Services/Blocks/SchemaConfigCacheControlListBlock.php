@@ -23,7 +23,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
 
     public function getSchemaConfigBlockPriority(): int
     {
-        return 90;
+        return 190;
     }
 
     public function getEnablingModule(): ?string
