@@ -18,7 +18,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     /**
      * Custom Post Type name
      */
-    protected function getCustomPostType(): string
+    public function getCustomPostType(): string
     {
         return self::CUSTOM_POST_TYPE;
     }

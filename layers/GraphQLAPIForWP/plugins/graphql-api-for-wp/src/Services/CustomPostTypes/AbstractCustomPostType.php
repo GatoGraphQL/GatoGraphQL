@@ -294,7 +294,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * dashes, and underscores.
      * @see https://codex.wordpress.org/Function_Reference/register_post_type#Parameters
      */
-    protected function getCustomPostType(): string
+    public function getCustomPostType(): string
     {
         return strtolower(str_replace(' ', '-', $this->getPostTypeName()));
     }
