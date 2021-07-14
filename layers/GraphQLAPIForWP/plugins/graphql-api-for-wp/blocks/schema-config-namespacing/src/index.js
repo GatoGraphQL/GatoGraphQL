@@ -19,9 +19,6 @@ import EditBlock from './edit';
 import {
 	ATTRIBUTE_VALUE_DEFAULT,
 } from './enabled-disabled-values';
-import {
-	ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
-} from './mutation-scheme-values';
 
 /**
  * Every block starts by registering a new block type definition.
