@@ -61,7 +61,7 @@ abstract class AbstractListOfCPTEntitiesRootFieldResolver extends AbstractQuerya
             $schemaFieldArgs,
             fn ($schemaFieldArg) => $schemaFieldArg[SchemaDefinition::ARGNAME_NAME] != 'customPostTypes'
         );
-        
+
         return $schemaFieldArgs;
     }
 
