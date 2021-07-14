@@ -13,9 +13,9 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
-    ) {  
+    ) {
     }
-    
+
     final public function initialize(): void
     {
         /**
