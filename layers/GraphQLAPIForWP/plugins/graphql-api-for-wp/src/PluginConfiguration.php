@@ -329,7 +329,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
-                'option' => SchemaTypeModuleResolver::OPTION_ENABLE_ADMIN_SCHEMA,
+                'option' => SchemaTypeModuleResolver::OPTION_ENABLE,
             ],
         ];
     }
