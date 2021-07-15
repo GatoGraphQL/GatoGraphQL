@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigBlockServiceTagInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -95,11 +95,11 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         $template = [];
-        $blocks = $this->schemaConfigBlockRegistry->getSchemaConfigBlocks();
+        $blocks = $this->schemaConfigBlockRegistry->getBlocks();
         // Order them by priority
         uasort(
             $blocks,
-            function (SchemaConfigBlockServiceTagInterface $a, SchemaConfigBlockServiceTagInterface $b): int {
+            function (EditorBlockInterface $a, EditorBlockInterface $b): int {
                 return $b->getBlockPriority() <=> $a->getBlockPriority();
             }
         );

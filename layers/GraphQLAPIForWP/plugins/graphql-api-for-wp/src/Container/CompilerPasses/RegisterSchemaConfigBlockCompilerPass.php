@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigBlockServiceTagInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterSchemaConfigBlockCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
@@ -16,10 +16,10 @@ class RegisterSchemaConfigBlockCompilerPass extends AbstractInjectServiceIntoReg
     }
     protected function getServiceClass(): string
     {
-        return SchemaConfigBlockServiceTagInterface::class;
+        return SchemaConfigEditorBlockServiceTagInterface::class;
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'addSchemaConfigBlock';
+        return 'addBlock';
     }
 }

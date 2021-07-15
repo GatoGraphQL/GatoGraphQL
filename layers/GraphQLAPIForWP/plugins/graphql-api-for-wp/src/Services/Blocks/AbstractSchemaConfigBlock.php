@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 
-abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigBlockServiceTagInterface
+abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
     protected function isDynamicBlock(): bool
     {
