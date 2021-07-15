@@ -63,7 +63,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
-    public const OPTION_ENTRIES = 'entries';
     public const OPTION_BEHAVIOR = 'behavior';
 
     /**
@@ -502,7 +501,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleResolverSettingOptions::LIST_MAX_LIMIT => 200,
             ],
             self::SCHEMA_SETTINGS => [
-                self::OPTION_ENTRIES => [
+                ModuleResolverSettingOptions::ENTRIES => [
                     'home',
                     'blogname',
                     'blogdescription',
@@ -795,7 +794,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     )
                 ),
             ];
-            $option = self::OPTION_ENTRIES;
+            $option = ModuleResolverSettingOptions::ENTRIES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

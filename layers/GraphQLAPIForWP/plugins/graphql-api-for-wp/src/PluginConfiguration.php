@@ -314,7 +314,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => SettingsComponentConfiguration::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
-                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                'option' => ModuleResolverSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
                 'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
             ],
