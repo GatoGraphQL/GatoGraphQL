@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use WP_Post;
-use PoP\Hooks\HooksAPIInterface;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHooks;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryAPIHierarchyBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHooks;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Hooks\HooksAPIInterface;
+use WP_Post;
 
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
@@ -176,6 +177,14 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
          */
         $persistedQueryOptionsBlock = $this->instanceManager->getInstance(PersistedQueryOptionsBlock::class);
         $template[] = [$persistedQueryOptionsBlock->getBlockFullName()];
+
+        if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
+            /**
+             * @var PersistedQueryAPIHierarchyBlock
+             */
+            $persistedQueryAPIHierarchyBlock = $this->instanceManager->getInstance(PersistedQueryAPIHierarchyBlock::class);
+            $template[] = [$persistedQueryAPIHierarchyBlock->getBlockFullName()];
+        }
         return $template;
     }
 

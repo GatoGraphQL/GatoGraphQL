@@ -22,19 +22,19 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/persisted-query-options', {
+registerBlockType( 'graphql-api/persisted-query-api-hierarchy', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Options for the GraphQL persisted query', 'graphql-api' ),
+	title: __( 'API Hierarchy for the GraphQL Persisted Query', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Configure the GraphQL persisted query',
+		'Configure the API hierarchy in the GraphQL persisted query',
 		'graphql-api'
 	),
 
@@ -56,19 +56,11 @@ registerBlockType( 'graphql-api/persisted-query-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY
 		 */
-		isEnabled: {
+		inheritQuery: {
 			type: 'boolean',
-			default: true,
-		},
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS
-		 */
-		acceptVariablesAsURLParams: {
-			type: 'boolean',
-			default: true,
+			default: false,
 		},
 	},
 
