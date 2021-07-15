@@ -2,28 +2,18 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\FieldResolvers;
+namespace GraphQLByPoP\GraphQLServer\FieldResolvers\EmbeddableFields;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 
 /**
  * When Embeddable Fields is enabled, register the `echoStr` field
  */
 class EchoOperatorGlobalFieldResolver extends OperatorGlobalFieldResolver
 {
-    /**
-     * Only use it when "embeddable fields" is enabled.
-     *
-     * Check on runtime (not via container) since this option can be
-     * assigned to the Schema Configuration in the GraphQL API plugin.
-     */
-    public function isServiceEnabled(): bool
-    {
-        return APIComponentConfiguration::enableEmbeddableFields();
-    }
+    use EmbeddableFieldsFieldResolverTrait;
 
     /**
      * By making it not global, it gets registered on each single type.
