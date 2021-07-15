@@ -20,6 +20,6 @@ class RegisterSchemaConfigBlockCompilerPass extends AbstractInjectServiceIntoReg
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'addSchemaConfigBlock';
+        return 'addBlock';
     }
 }

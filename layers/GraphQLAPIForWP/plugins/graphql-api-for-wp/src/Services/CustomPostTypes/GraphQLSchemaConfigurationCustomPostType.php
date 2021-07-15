@@ -95,7 +95,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         $template = [];
-        $blocks = $this->schemaConfigBlockRegistry->getSchemaConfigBlocks();
+        $blocks = $this->schemaConfigBlockRegistry->getBlocks();
         // Order them by priority
         uasort(
             $blocks,
