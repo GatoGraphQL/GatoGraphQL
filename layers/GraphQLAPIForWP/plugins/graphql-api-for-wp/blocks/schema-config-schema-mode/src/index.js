@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/schema-config-schema-mode', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE
 		 */
 		defaultSchemaMode: {
 			type: 'string',

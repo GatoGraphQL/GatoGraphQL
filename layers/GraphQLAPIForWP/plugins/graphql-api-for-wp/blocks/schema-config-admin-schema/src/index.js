@@ -59,7 +59,7 @@ registerBlockType( 'graphql-api/schema-config-admin-schema', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminSchemaBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA
 		 */
 		 enableAdminSchema: {
 			type: 'string',
