@@ -10,11 +10,11 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     abstract public function getSchemaConfigBlockAttributeName(): string;
-    
+
     abstract public function getHookComponentConfigurationClass(): string;
-    
+
     abstract public function getHookEnvironmentClass(): string;
-    
+
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
         $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);

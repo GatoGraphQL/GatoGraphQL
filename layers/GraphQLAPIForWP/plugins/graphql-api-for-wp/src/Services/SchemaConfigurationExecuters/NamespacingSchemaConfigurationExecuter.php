@@ -25,12 +25,12 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
     {
         return SchemaConfigNamespacingBlock::ATTRIBUTE_NAME_USE_NAMESPACING;
     }
-    
+
     public function getHookComponentConfigurationClass(): string
     {
         return ComponentModelComponentConfiguration::class;
     }
-    
+
     public function getHookEnvironmentClass(): string
     {
         return ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES;

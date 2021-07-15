@@ -63,7 +63,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
-    
+
     /**
      * Hooks
      */

@@ -25,12 +25,12 @@ class AdminSchemaSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
     {
         return SchemaConfigAdminSchemaBlock::ATTRIBUTE_NAME_ENABLE_ADMIN_SCHEMA;
     }
-    
+
     public function getHookComponentConfigurationClass(): string
     {
         return ComponentModelComponentConfiguration::class;
     }
-    
+
     public function getHookEnvironmentClass(): string
     {
         return ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA;
