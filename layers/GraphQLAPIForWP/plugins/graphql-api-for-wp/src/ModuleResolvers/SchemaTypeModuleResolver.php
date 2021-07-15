@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverSettingOptions;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -445,8 +445,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ) && in_array(
                 $option,
                 [
-                    ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
-                    ModuleResolverSettingOptions::LIST_MAX_LIMIT,
+                    ModuleSettingOptions::LIST_DEFAULT_LIMIT,
+                    ModuleSettingOptions::LIST_MAX_LIMIT,
                 ]
             )
         ) {
@@ -465,47 +465,47 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
-                ModuleResolverSettingOptions::ENABLE => false,
+                ModuleSettingOptions::ENABLE => false,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
-                ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                // ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
-                ModuleResolverSettingOptions::CUSTOMPOST_TYPES => ['post'],
+                // ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                // ModuleSettingOptions::LIST_MAX_LIMIT => 100,
+                ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
             ],
             self::SCHEMA_POSTS => [
-                // ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
+                // ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                // ModuleSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
-                // ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
+                // ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                // ModuleSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
             ],
             self::SCHEMA_USERS => [
-                ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => 100,
             ],
             self::SCHEMA_TAGS => [
-                ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 200,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
+                ModuleSettingOptions::LIST_MAX_LIMIT => 200,
             ],
             self::SCHEMA_CATEGORIES => [
-                ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 200,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
+                ModuleSettingOptions::LIST_MAX_LIMIT => 200,
             ],
             self::SCHEMA_SETTINGS => [
-                ModuleResolverSettingOptions::ENTRIES => [
+                ModuleSettingOptions::ENTRIES => [
                     'home',
                     'blogname',
                     'blogdescription',
                 ],
-                ModuleResolverSettingOptions::BEHAVIOR => Behaviors::ALLOWLIST,
+                ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOWLIST,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -541,7 +541,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_ADMIN_SCHEMA) {
-            $option = ModuleResolverSettingOptions::ENABLE;
+            $option = ModuleSettingOptions::ENABLE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -590,8 +590,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             // If the options is not provided, use the default one
             $entities = $moduleEntry['entities'];
             $options = $moduleEntry['options'] ?? [
-                ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
-                ModuleResolverSettingOptions::LIST_MAX_LIMIT,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT,
+                ModuleSettingOptions::LIST_MAX_LIMIT,
             ];
             list(
                 $defaultLimitOption,
@@ -749,7 +749,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 $possibleValues[$genericCustomPostType] = $genericCustomPostType;
             }
             // Set the setting
-            $option = ModuleResolverSettingOptions::CUSTOMPOST_TYPES;
+            $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -793,7 +793,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     )
                 ),
             ];
-            $option = ModuleResolverSettingOptions::ENTRIES;
+            $option = ModuleSettingOptions::ENTRIES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -805,7 +805,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
 
-            $option = ModuleResolverSettingOptions::BEHAVIOR;
+            $option = ModuleSettingOptions::BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

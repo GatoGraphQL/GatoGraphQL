@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-class ModuleResolverSettingOptions
+class ModuleSettingOptions
 {
     public const ENABLE = 'enable';
     public const LIST_DEFAULT_LIMIT = 'list-default-limit';

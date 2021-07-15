@@ -103,13 +103,13 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         $defaultValues = [
             self::SINGLE_ENDPOINT => [
-                ModuleResolverSettingOptions::PATH => '/graphql/',
+                ModuleSettingOptions::PATH => '/graphql/',
             ],
             self::CUSTOM_ENDPOINTS => [
-                ModuleResolverSettingOptions::PATH => 'graphql',
+                ModuleSettingOptions::PATH => 'graphql',
             ],
             self::PERSISTED_QUERIES => [
-                ModuleResolverSettingOptions::PATH => 'graphql-query',
+                ModuleSettingOptions::PATH => 'graphql-query',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -125,7 +125,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SINGLE_ENDPOINT) {
-            $option = ModuleResolverSettingOptions::PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -137,7 +137,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::CUSTOM_ENDPOINTS) {
-            $option = ModuleResolverSettingOptions::PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -149,7 +149,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::PERSISTED_QUERIES) {
-            $option = ModuleResolverSettingOptions::PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

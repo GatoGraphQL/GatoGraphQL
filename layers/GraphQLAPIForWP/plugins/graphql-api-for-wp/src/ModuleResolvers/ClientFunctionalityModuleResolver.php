@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverSettingOptions;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -129,10 +129,10 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     {
         $defaultValues = [
             self::GRAPHIQL_FOR_SINGLE_ENDPOINT => [
-                ModuleResolverSettingOptions::PATH => '/graphiql/',
+                ModuleSettingOptions::PATH => '/graphiql/',
             ],
             self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => [
-                ModuleResolverSettingOptions::PATH => '/schema/',
+                ModuleSettingOptions::PATH => '/schema/',
             ],
             self::GRAPHIQL_EXPLORER => [
                 self::OPTION_USE_IN_ADMIN_CLIENT => true,
@@ -154,7 +154,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
-            $option = ModuleResolverSettingOptions::PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -166,7 +166,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT) {
-            $option = ModuleResolverSettingOptions::PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
