@@ -47,7 +47,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
         ];
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('Public/Private Schema:', 'graphql-api'),
+            \__('Public/Private Schema Mode:', 'graphql-api'),
             $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
         );
 
