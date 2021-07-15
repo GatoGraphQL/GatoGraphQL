@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 /**
  * Endpoint Options block
  */
-class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock
+class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
@@ -22,6 +22,11 @@ class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock
     protected function getBlockName(): string
     {
         return 'endpoint-options';
+    }
+
+    public function getBlockPriority(): int
+    {
+        return 160;
     }
 
     protected function getBlockCategoryClass(): ?string
