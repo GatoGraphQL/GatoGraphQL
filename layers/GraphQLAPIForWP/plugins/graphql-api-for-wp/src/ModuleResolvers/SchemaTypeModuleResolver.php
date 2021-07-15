@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -60,7 +61,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Setting options
      */
-    public const OPTION_ENABLE = 'enable';
     public const OPTION_LIST_DEFAULT_LIMIT = 'list-default-limit';
     public const OPTION_LIST_MAX_LIMIT = 'list-max-limit';
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
@@ -470,7 +470,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
-                self::OPTION_ENABLE => false,
+                ModuleResolverSettingOptions::ENABLE => false,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 self::OPTION_LIST_DEFAULT_LIMIT => 10,
@@ -546,7 +546,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_ADMIN_SCHEMA) {
-            $option = self::OPTION_ENABLE;
+            $option = ModuleResolverSettingOptions::ENABLE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
