@@ -77,11 +77,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLEndpointForWPComponentConfiguration::class,
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleResolverSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleResolverSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -90,11 +90,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentConfiguration::class,
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleResolverSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleResolverSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -103,11 +103,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentConfiguration::class,
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleResolverSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleResolverSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -116,11 +116,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLClientsForWPComponentConfiguration::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleResolverSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleResolverSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -129,11 +129,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLClientsForWPComponentConfiguration::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleResolverSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleResolverSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],

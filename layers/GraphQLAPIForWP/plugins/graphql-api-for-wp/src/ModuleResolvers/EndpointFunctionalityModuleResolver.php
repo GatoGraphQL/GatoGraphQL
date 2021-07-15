@@ -20,11 +20,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
 
     /**
-     * Setting options
-     */
-    public const OPTION_PATH = 'path';
-
-    /**
      * @return string[]
      */
     public function getModulesToResolve(): array
@@ -108,13 +103,13 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         $defaultValues = [
             self::SINGLE_ENDPOINT => [
-                self::OPTION_PATH => '/graphql/',
+                ModuleResolverSettingOptions::PATH => '/graphql/',
             ],
             self::CUSTOM_ENDPOINTS => [
-                self::OPTION_PATH => 'graphql',
+                ModuleResolverSettingOptions::PATH => 'graphql',
             ],
             self::PERSISTED_QUERIES => [
-                self::OPTION_PATH => 'graphql-query',
+                ModuleResolverSettingOptions::PATH => 'graphql-query',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -130,7 +125,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SINGLE_ENDPOINT) {
-            $option = self::OPTION_PATH;
+            $option = ModuleResolverSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -142,7 +137,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::CUSTOM_ENDPOINTS) {
-            $option = self::OPTION_PATH;
+            $option = ModuleResolverSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -154,7 +149,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::PERSISTED_QUERIES) {
-            $option = self::OPTION_PATH;
+            $option = ModuleResolverSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

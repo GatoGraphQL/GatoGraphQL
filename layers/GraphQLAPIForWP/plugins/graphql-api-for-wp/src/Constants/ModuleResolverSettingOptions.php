@@ -12,4 +12,5 @@ class ModuleResolverSettingOptions
     public const CUSTOMPOST_TYPES = 'custompost-types';
     public const ENTRIES = 'entries';
     public const BEHAVIOR = 'behavior';
+    public const PATH = 'path';
 }
