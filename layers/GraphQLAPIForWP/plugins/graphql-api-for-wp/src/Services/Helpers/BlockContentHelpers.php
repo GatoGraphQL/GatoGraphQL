@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryAPIHierarchyBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -47,24 +48,24 @@ class BlockContentHelpers
      */
     public function getSinglePersistedQueryOptionsBlockAttributesFromPost(WP_Post $post): ?array
     {
-        // There must be only one block of type PersistedQueryOptionsBlock. Fetch it
+        // There must be only one block of type PersistedQueryAPIHierarchyBlock. Fetch it
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
         $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
-         * @var PersistedQueryOptionsBlock
+         * @var PersistedQueryAPIHierarchyBlock
          */
-        $block = $instanceManager->getInstance(PersistedQueryOptionsBlock::class);
-        $persistedQueryOptionsBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $block = $instanceManager->getInstance(PersistedQueryAPIHierarchyBlock::class);
+        $persistedQueryAPIHierarchyBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
         );
         // If there is either 0 or more than 1, return nothing
-        if (is_null($persistedQueryOptionsBlock)) {
+        if (is_null($persistedQueryAPIHierarchyBlock)) {
             return null;
         }
         return [
-            $persistedQueryOptionsBlock['attrs'][PersistedQueryOptionsBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
+            $persistedQueryAPIHierarchyBlock['attrs'][PersistedQueryAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
         ];
     }
 }
