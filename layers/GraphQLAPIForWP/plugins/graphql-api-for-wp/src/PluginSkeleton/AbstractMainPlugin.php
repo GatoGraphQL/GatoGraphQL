@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use Exception;
-use GraphQLAPI\GraphQLAPI\Facades\CacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
+use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPlugin;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
@@ -115,37 +115,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin
     }
 
     /**
-     * Remove the cached folders:
-     *
-     * - Service Container
-     * - Config
-     *
-     * Because the parent cache folder (defined under 'cache-dir')
-     * can be set by the user, we can't directly remove that one.
-     * Otherwise, setting it to "wp-content" would remove this folder!
+     * Remove the cached folders
      */
     protected function removeCachedFolders(): void
     {
         $fileSystem = new Filesystem();
-
-        // Service Container
-        $containerCacheConfiguration = $this->pluginConfiguration->getContainerCacheConfiguration();
-        if ($containerCacheConfiguration->cacheContainerConfiguration()) {
-            try {
-                $fileSystem->remove($containerCacheConfiguration->getContainerConfigurationCacheDirectory());
-            } catch (IOExceptionInterface) {
-                // If the folder does not exist, do nothing
-            }
-        }
-
-        // Config
-        $cacheConfigurationManager = CacheConfigurationManagerFacade::getInstance();
-        if ($serviceContainerDir = $cacheConfigurationManager->getDirectory()) {
-            try {
-                $fileSystem->remove($serviceContainerDir);
-            } catch (IOExceptionInterface) {
-                // If the folder does not exist, do nothing
-            }
+        try {
+            $fileSystem->remove((string) MainPluginManager::getConfig('cache-dir'));
+        } catch (IOExceptionInterface) {
+            // If the folder does not exist, do nothing
         }
     }
 
