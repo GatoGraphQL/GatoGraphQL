@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
+    use WithBlockRegistryCustomPostTypeTrait;
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
@@ -87,33 +89,8 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         return true;
     }
 
-    /**
-     * Gutenberg templates to lock down the Custom Post Type to
-     *
-     * @return array<array> Every element is an array with template name in first pos, and attributes then
-     */
-    protected function getGutenbergTemplate(): array
+    protected function getBlockRegistry(): BlockRegistryInterface
     {
-        $template = [];
-        $blocks = $this->schemaConfigBlockRegistry->getBlocks();
-        // Order them by priority
-        uasort(
-            $blocks,
-            function (EditorBlockInterface $a, EditorBlockInterface $b): int {
-                return $b->getBlockPriority() <=> $a->getBlockPriority();
-            }
-        );
-        foreach ($blocks as $block) {
-            $template[] = [$block->getBlockFullName()];
-        }
-        return $template;
-    }
-
-    /**
-     * Indicates if to lock the Gutenberg templates
-     */
-    protected function lockGutenbergTemplate(): bool
-    {
-        return true;
+        return $this->schemaConfigBlockRegistry;
     }
 }
