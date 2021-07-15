@@ -12,7 +12,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
 {
     public function getSchemaConfigBlockAttributeName(): string
     {
-        return BlockAttributeNames::ENABLE;
+        return BlockAttributeNames::ENABLED_CONST;
     }
 
     abstract public function getHookComponentConfigurationClass(): string;

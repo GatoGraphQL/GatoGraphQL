@@ -59,9 +59,9 @@ registerBlockType( 'graphql-api/schema-config-admin-schema', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames::ENABLE
+		 * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames::ENABLED_CONST
 		 */
-		enable: {
+		enabledConst: {
 			type: 'string',
 			default: ATTRIBUTE_VALUE_DEFAULT,
 		},

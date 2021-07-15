@@ -22,7 +22,7 @@ const SchemaConfigNamespacingCard = ( props ) => {
 		className,
 		setAttributes,
 		attributes: {
-			enable,
+			enabledConst,
 		},
 	} = props;
 	const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
@@ -57,13 +57,13 @@ const SchemaConfigNamespacingCard = ( props ) => {
 						{ !isSelected && (
 							<>
 								<br />
-								{ ( enable == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enable) ) &&
+								{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
 									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
-								{ enable == ATTRIBUTE_VALUE_ENABLED &&
+								{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
 									<span>✅ { __('Use namespacing', 'graphql-api') }</span>
 								}
-								{ enable == ATTRIBUTE_VALUE_DISABLED &&
+								{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
 									<span>❌ { __('Do not use namespacing', 'graphql-api') }</span>
 								}
 							</>
@@ -72,10 +72,10 @@ const SchemaConfigNamespacingCard = ( props ) => {
 							<RadioControl
 								{ ...props }
 								options={ options }
-								selected={ enable }
+								selected={ enabledConst }
 								onChange={ newValue => (
 									setAttributes( {
-										enable: newValue
+										enabledConst: newValue
 									} )
 								)}
 							/>

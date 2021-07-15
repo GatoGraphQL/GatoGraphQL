@@ -28,7 +28,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
         $blockContent = sprintf(
             $blockContentPlaceholder,
             $this->getBlockLabel(),
-            $enabledDisabledLabels[$attributes[BlockAttributeNames::ENABLE] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
+            $enabledDisabledLabels[$attributes[BlockAttributeNames::ENABLED_CONST] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
         );
 
         $blockContentPlaceholder = <<<EOT
