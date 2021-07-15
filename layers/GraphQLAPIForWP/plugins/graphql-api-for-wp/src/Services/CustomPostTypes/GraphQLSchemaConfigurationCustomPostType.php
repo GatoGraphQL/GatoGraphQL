@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PriorityBlockInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -99,7 +99,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         // Order them by priority
         uasort(
             $blocks,
-            function (PriorityBlockInterface $a, PriorityBlockInterface $b): int {
+            function (EditorBlockInterface $a, EditorBlockInterface $b): int {
                 return $b->getBlockPriority() <=> $a->getBlockPriority();
             }
         );
