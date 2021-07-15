@@ -25,7 +25,7 @@ use WP_Post;
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
-    
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
