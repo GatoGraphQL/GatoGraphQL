@@ -22,21 +22,12 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     ) {
     }
 
-    final public function getEnablingModule(): ?string
-    {
-        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION;
-    }
-
     /**
      * Only enable the service, if the corresponding module is also enabled
      */
     public function isServiceEnabled(): bool
     {
-        $enablingModule = $this->getEnablingModule();
-        if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
-        }
-        return true;
+        return $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
     }
 
     /**
