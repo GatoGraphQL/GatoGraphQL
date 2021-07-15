@@ -11,8 +11,8 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
 {
     use OptionsBlockTrait;
 
-    protected abstract function getBlockLabel(): string;
-    protected abstract function getBlockTitle(): string;
+    abstract protected function getBlockLabel(): string;
+    abstract protected function getBlockTitle(): string;
 
     /**
      * @param array<string, mixed> $attributes
