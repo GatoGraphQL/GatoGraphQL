@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEditorBlockServiceTagInterface;
 
 /**
  * Persisted Query API Hierarchy block
  */
-class PersistedQueryAPIHierarchyBlock extends AbstractBlock
+class PersistedQueryAPIHierarchyBlock extends AbstractBlock implements PersistedQueryEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
@@ -21,6 +23,16 @@ class PersistedQueryAPIHierarchyBlock extends AbstractBlock
     protected function getBlockName(): string
     {
         return 'persisted-query-api-hierarchy';
+    }
+
+    public function getBlockPriority(): int
+    {
+        return 140;
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return EndpointFunctionalityModuleResolver::API_HIERARCHY;
     }
 
     protected function isDynamicBlock(): bool

@@ -7,9 +7,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryAPIHierarchyBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
@@ -29,7 +30,8 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
         UserAuthorizationInterface $userAuthorization,
         HooksAPIInterface $hooksAPI,
         protected BlockContentHelpers $blockContentHelpers,
-        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers
+        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
+        protected PersistedQueryBlockRegistryInterface $persistedQueryBlockRegistry
     ) {
         parent::__construct(
             $instanceManager,
@@ -161,29 +163,19 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
      */
     protected function getGutenbergTemplate(): array
     {
-        $template = parent::getGutenbergTemplate();
+        $template = [];
 
-        /**
-         * @var PersistedQueryGraphiQLBlock
-         */
-        $graphiQLBlock = $this->instanceManager->getInstance(PersistedQueryGraphiQLBlock::class);
-        /**
-         * Add before the SchemaConfiguration block
-         */
-        array_unshift($template, [$graphiQLBlock->getBlockFullName()]);
-
-        /**
-         * @var PersistedQueryOptionsBlock
-         */
-        $persistedQueryOptionsBlock = $this->instanceManager->getInstance(PersistedQueryOptionsBlock::class);
-        $template[] = [$persistedQueryOptionsBlock->getBlockFullName()];
-
-        if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
-            /**
-             * @var PersistedQueryAPIHierarchyBlock
-             */
-            $persistedQueryAPIHierarchyBlock = $this->instanceManager->getInstance(PersistedQueryAPIHierarchyBlock::class);
-            $template[] = [$persistedQueryAPIHierarchyBlock->getBlockFullName()];
+        // Get all blocks from the Registry
+        $blocks = $this->persistedQueryBlockRegistry->getBlocks();
+        // Order them by priority
+        uasort(
+            $blocks,
+            function (EditorBlockInterface $a, EditorBlockInterface $b): int {
+                return $b->getBlockPriority() <=> $a->getBlockPriority();
+            }
+        );
+        foreach ($blocks as $block) {
+            $template[] = [$block->getBlockFullName()];
         }
         return $template;
     }
