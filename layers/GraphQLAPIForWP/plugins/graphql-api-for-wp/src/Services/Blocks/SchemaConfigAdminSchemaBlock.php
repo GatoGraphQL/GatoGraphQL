@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
-class SchemaConfigAdminSchemaBlock extends AbstractSchemaConfigBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigAdminSchemaBlock extends AbstractSchemaConfigBlock
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;

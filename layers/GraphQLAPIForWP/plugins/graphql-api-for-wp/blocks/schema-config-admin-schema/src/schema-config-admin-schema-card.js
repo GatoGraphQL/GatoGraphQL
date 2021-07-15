@@ -26,7 +26,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 		},
 	} = props;
 	const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
-	const adminSchemaOptions = [
+	const options = [
 		{
 			label: SETTINGS_VALUE_LABEL,
 			value: ATTRIBUTE_VALUE_DEFAULT,
@@ -40,7 +40,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
-	const adminSchemaOptionValues = adminSchemaOptions.map( option => option.value );
+	const optionValues = options.map( option => option.value );
 	return (
 		<div className={ componentClassName }>
 			<Card { ...props }>
@@ -57,7 +57,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 						{ !isSelected && (
 							<>
 								<br />
-								{ ( enableAdminSchema == ATTRIBUTE_VALUE_DEFAULT || !adminSchemaOptionValues.includes(enableAdminSchema) ) &&
+								{ ( enableAdminSchema == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enableAdminSchema) ) &&
 									<span>⭕️ { __('Default', 'graphql-api') }</span>
 								}
 								{ enableAdminSchema == ATTRIBUTE_VALUE_ENABLED &&
@@ -71,7 +71,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 						{ isSelected &&
 							<RadioControl
 								{ ...props }
-								options={ adminSchemaOptions }
+								options={ options }
 								selected={ enableAdminSchema }
 								onChange={ newValue => (
 									setAttributes( {

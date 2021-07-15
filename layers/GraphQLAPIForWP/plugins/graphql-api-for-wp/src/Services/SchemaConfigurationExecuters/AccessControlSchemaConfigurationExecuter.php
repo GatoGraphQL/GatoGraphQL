@@ -23,13 +23,13 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
         );
     }
 
+    public function getEnablingModule(): ?string
+    {
+        return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
+    }
+
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        // Check it is enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
-            return;
-        }
-
         $schemaConfigACLBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if (!is_null($schemaConfigACLBlockDataItem)) {
             if ($accessControlLists = $schemaConfigACLBlockDataItem['attrs'][SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS] ?? null) {

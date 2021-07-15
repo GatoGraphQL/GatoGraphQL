@@ -59,7 +59,7 @@ registerBlockType( 'graphql-api/schema-config-mutation-scheme', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
 		 */
 		mutationScheme: {
 			type: 'string',

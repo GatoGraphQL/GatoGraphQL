@@ -59,7 +59,7 @@ registerBlockType( 'graphql-api/schema-config-namespacing', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigOptionsBlock::ATTRIBUTE_NAME_USE_NAMESPACING
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigNamespacingBlock::ATTRIBUTE_NAME_USE_NAMESPACING
 		 */
 		useNamespacing: {
 			type: 'string',

@@ -29,7 +29,7 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 		},
 	} = props;
 	const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
-	const mutationSchemeOptions = [
+	const options = [
 		{
 			label: SETTINGS_VALUE_LABEL,
 			value: ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
@@ -47,7 +47,7 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
 		},
 	];
-	const mutationSchemeOptionValues = mutationSchemeOptions.map( option => option.value );
+	const optionValues = options.map( option => option.value );
 	return (
 		<div className={ componentClassName }>
 			<Card { ...props }>
@@ -64,7 +64,7 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 						{ !isSelected && (
 							<>
 								<br />
-								{ ( mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT || !mutationSchemeOptionValues.includes(mutationScheme) ) &&
+								{ ( mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT || !optionValues.includes(mutationScheme) ) &&
 									<span>⭕️ { __('Default', 'graphql-api') }</span>
 								}
 								{ mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_STANDARD &&
@@ -81,7 +81,7 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 						{ isSelected &&
 							<RadioControl
 								{ ...props }
-								options={ mutationSchemeOptions }
+								options={ options }
 								selected={ mutationScheme }
 								onChange={ newValue => (
 									setAttributes( {

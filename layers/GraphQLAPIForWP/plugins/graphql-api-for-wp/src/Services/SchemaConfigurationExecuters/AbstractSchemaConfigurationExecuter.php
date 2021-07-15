@@ -35,4 +35,21 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     }
 
     abstract protected function getBlockClass(): string;
+
+    public function getEnablingModule(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        $enablingModule = $this->getEnablingModule();
+        if ($enablingModule !== null) {
+            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+        }
+        return true;
+    }
 }

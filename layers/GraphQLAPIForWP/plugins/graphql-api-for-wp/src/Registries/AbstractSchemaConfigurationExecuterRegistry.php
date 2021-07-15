@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\SchemaConfigurationExecuterInterface;
+use PoP\Root\Services\ServiceInterface;
 
 abstract class AbstractSchemaConfigurationExecuterRegistry implements SchemaConfigurationExecuterRegistryInterface
 {
@@ -22,6 +23,10 @@ abstract class AbstractSchemaConfigurationExecuterRegistry implements SchemaConf
      */
     public function getSchemaConfigurationExecuters(): array
     {
-        return $this->schemaConfigurationExecuters;
+        // Only enabled services
+        return array_filter(
+            $this->schemaConfigurationExecuters,
+            fn (ServiceInterface $service) => $service->isServiceEnabled()
+        );
     }
 }

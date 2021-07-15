@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -18,11 +19,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
     public const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
-
-    /**
-     * Setting options
-     */
-    public const OPTION_PATH = 'path';
 
     /**
      * @return string[]
@@ -108,13 +104,13 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         $defaultValues = [
             self::SINGLE_ENDPOINT => [
-                self::OPTION_PATH => '/graphql/',
+                ModuleSettingOptions::PATH => '/graphql/',
             ],
             self::CUSTOM_ENDPOINTS => [
-                self::OPTION_PATH => 'graphql',
+                ModuleSettingOptions::PATH => 'graphql',
             ],
             self::PERSISTED_QUERIES => [
-                self::OPTION_PATH => 'graphql-query',
+                ModuleSettingOptions::PATH => 'graphql-query',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -130,7 +126,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SINGLE_ENDPOINT) {
-            $option = self::OPTION_PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -142,7 +138,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::CUSTOM_ENDPOINTS) {
-            $option = self::OPTION_PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -154,7 +150,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module == self::PERSISTED_QUERIES) {
-            $option = self::OPTION_PATH;
+            $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

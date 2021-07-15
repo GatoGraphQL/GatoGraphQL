@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use WP_Post;
 
-abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock implements SchemaConfigBlockServiceTagInterface
+abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock
 {
     abstract protected function getAttributeName(): string;
 

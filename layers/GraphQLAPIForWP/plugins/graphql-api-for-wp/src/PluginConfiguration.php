@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Environment;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
@@ -76,11 +77,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLEndpointForWPComponentConfiguration::class,
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -89,11 +90,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentConfiguration::class,
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -102,11 +103,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentConfiguration::class,
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getCPTPermalinkBasePathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -115,11 +116,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLClientsForWPComponentConfiguration::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -128,11 +129,11 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => GraphQLClientsForWPComponentConfiguration::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-                'option' => EndpointFunctionalityModuleResolver::OPTION_PATH,
+                'option' => ModuleSettingOptions::PATH,
                 'callback' => fn ($value) => PluginConfigurationHelper::getURLPathSettingValue(
                     $value,
                     ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-                    EndpointFunctionalityModuleResolver::OPTION_PATH
+                    ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
             ],
@@ -192,20 +193,20 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             // [
             //     'class' => GenericCustomPostsComponentConfiguration::class,
             //     'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
             //     'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
             //     'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-            //     'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+            //     'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             // ],
             [
                 'class' => GenericCustomPostsComponentConfiguration::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_TYPES,
+                'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
             ],
             // Post default/max limits, add to CustomPostUnion
             [
@@ -213,14 +214,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => PostsEnvironment::POST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => PostsComponentConfiguration::class,
                 'envVariable' => PostsEnvironment::POST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
                 'class' => PostsComponentConfiguration::class,
@@ -233,39 +234,39 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => UsersComponentConfiguration::class,
                 'envVariable' => UsersEnvironment::USER_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => UsersComponentConfiguration::class,
                 'envVariable' => UsersEnvironment::USER_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Tag default/max limits
             [
                 'class' => TagsComponentConfiguration::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => TagsComponentConfiguration::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Categories default/max limits
             [
                 'class' => CategoriesComponentConfiguration::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => CategoriesComponentConfiguration::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Page default/max limits, add to CustomPostUnion
             [
@@ -273,14 +274,14 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => PagesEnvironment::PAGE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => PagesComponentConfiguration::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
                 'class' => PagesComponentConfiguration::class,
@@ -293,13 +294,13 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => CustomPostsComponentConfiguration::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => CustomPostsComponentConfiguration::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
@@ -313,7 +314,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => SettingsComponentConfiguration::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
-                'option' => SchemaTypeModuleResolver::OPTION_ENTRIES,
+                'option' => ModuleSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
                 'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
             ],
@@ -321,7 +322,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => SettingsComponentConfiguration::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_BEHAVIOR,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
-                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+                'option' => ModuleSettingOptions::BEHAVIOR,
             ],
             // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
@@ -329,7 +330,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA,
-                'option' => SchemaTypeModuleResolver::OPTION_ENABLE,
+                'option' => ModuleSettingOptions::ENABLE,
             ],
         ];
     }
