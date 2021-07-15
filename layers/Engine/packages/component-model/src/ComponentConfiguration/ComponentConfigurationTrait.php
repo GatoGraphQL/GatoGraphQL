@@ -31,8 +31,7 @@ trait ComponentConfigurationTrait
         string $envVariable,
         mixed &$selfProperty,
         mixed $defaultValue = null,
-        ?callable $callback = null,
-        bool $useHook = true
+        ?callable $callback = null
     ): void {
         if (!isset(self::$initialized[$envVariable])) {
             self::$initialized[$envVariable] = true;
@@ -53,27 +52,24 @@ trait ComponentConfigurationTrait
                     // Modify the type of the variable, from string to bool/int/array
                     $selfProperty = $callback ? $callback($envValue) : $envValue;
                 }
-                // Allow to override the value with a hook
-                if ($useHook) {
-                    /**
-                     * Important: it must use the Hooks service from the System Container,
-                     * and not the (Application) Container, because ComponentConfiguration::foo()
-                     * may be accessed when initializing (Application) container services
-                     * in `Component.initialize()`, so it must already be available by then
-                     */
-                    $hooksAPI = SystemHooksAPIFacade::getInstance();
-                    $class = \get_called_class();
-                    $hookName = ComponentConfigurationHelpers::getHookName(
-                        $class,
-                        $envVariable
-                    );
-                    $selfProperty = $hooksAPI->applyFilters(
-                        $hookName,
-                        $selfProperty,
-                        $class,
-                        $envVariable
-                    );
-                }
+                /**
+                 * Important: it must use the Hooks service from the System Container,
+                 * and not the (Application) Container, because ComponentConfiguration::foo()
+                 * may be accessed when initializing (Application) container services
+                 * in `Component.initialize()`, so it must already be available by then
+                 */
+                $hooksAPI = SystemHooksAPIFacade::getInstance();
+                $class = \get_called_class();
+                $hookName = ComponentConfigurationHelpers::getHookName(
+                    $class,
+                    $envVariable
+                );
+                $selfProperty = $hooksAPI->applyFilters(
+                    $hookName,
+                    $selfProperty,
+                    $class,
+                    $envVariable
+                );
             }
         }
     }
