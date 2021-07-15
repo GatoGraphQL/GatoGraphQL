@@ -184,4 +184,36 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         }
         return null;
     }
+
+    public function getEnablingModule(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        $enablingModule = $this->getEnablingModule();
+        if ($enablingModule !== null) {
+            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+        }
+        return true;
+    }
+
+    /**
+     * Execute the schema configuration contained in the custom post with certain ID
+     */
+    public function executeSchemaConfiguration(int $customPostID): void
+    {
+        // Only if the module is not disabled
+        if (!$this->isServiceEnabled()) {
+            return;
+        }
+
+        $this->doExecuteSchemaConfiguration($customPostID);
+    }
+
+    abstract protected function doExecuteSchemaConfiguration(int $customPostID): void;
 }

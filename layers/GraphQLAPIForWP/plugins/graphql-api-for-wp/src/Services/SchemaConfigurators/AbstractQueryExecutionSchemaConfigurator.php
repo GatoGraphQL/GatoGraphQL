@@ -23,13 +23,21 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
     }
 
     /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        return $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
+    }
+
+    /**
      * Extract the items defined in the Schema Configuration,
      * and inject them into the service as to take effect in the current GraphQL query
      */
     public function executeSchemaConfiguration(int $customPostID): void
     {
-        // Check if it enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
+        // Only if the module is not disabled
+        if (!$this->isServiceEnabled()) {
             return;
         }
 
