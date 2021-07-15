@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use PoP\Root\Services\ServiceInterface;
 
 class SchemaConfigBlockRegistry implements SchemaConfigBlockRegistryInterface
 {
@@ -22,6 +23,10 @@ class SchemaConfigBlockRegistry implements SchemaConfigBlockRegistryInterface
      */
     public function getSchemaConfigBlocks(): array
     {
-        return $this->schemaConfigBlocks;
+        // Only enabled services
+        return array_filter(
+            $this->schemaConfigBlocks,
+            fn (ServiceInterface $service) => $service->isServiceEnabled()
+        );
     }
 }

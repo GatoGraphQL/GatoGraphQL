@@ -23,6 +23,7 @@ abstract class AbstractSchemaConfigurationExecuterRegistry implements SchemaConf
      */
     public function getSchemaConfigurationExecuters(): array
     {
+        // Only enabled services
         return array_filter(
             $this->schemaConfigurationExecuters,
             fn (ServiceInterface $service) => $service->isServiceEnabled()
