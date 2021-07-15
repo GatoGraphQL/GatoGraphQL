@@ -4,23 +4,44 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
+use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
 class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        UserAuthorizationInterface $userAuthorization,
+        HooksAPIInterface $hooksAPI,
+        protected EndpointBlockRegistryInterface $endpointBlockRegistry
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $userAuthorization,
+            $hooksAPI,
+        );
+    }
+
     /**
      * Custom Post Type name
      */
@@ -127,13 +148,20 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
      */
     protected function getGutenbergTemplate(): array
     {
-        $template = parent::getGutenbergTemplate();
+        $template = [];
 
-        /**
-         * @var EndpointOptionsBlock
-         */
-        $endpointOptionsBlock = $this->instanceManager->getInstance(EndpointOptionsBlock::class);
-        $template[] = [$endpointOptionsBlock->getBlockFullName()];
+        // Get all blocks from the Registry
+        $blocks = $this->endpointBlockRegistry->getBlocks();
+        // Order them by priority
+        uasort(
+            $blocks,
+            function (EditorBlockInterface $a, EditorBlockInterface $b): int {
+                return $b->getBlockPriority() <=> $a->getBlockPriority();
+            }
+        );
+        foreach ($blocks as $block) {
+            $template[] = [$block->getBlockFullName()];
+        }
         return $template;
     }
 

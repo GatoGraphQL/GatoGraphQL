@@ -16,6 +16,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistry'
 
+    GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistry'
+
     GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistry'
 
