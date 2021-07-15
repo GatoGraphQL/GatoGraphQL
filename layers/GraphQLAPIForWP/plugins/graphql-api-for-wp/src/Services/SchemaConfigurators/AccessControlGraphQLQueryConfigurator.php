@@ -54,17 +54,17 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         return $aclRuleBlockNameEnabled[$blockName] ?? false;
     }
 
+    public function getEnablingModule(): ?string
+    {
+        return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
+    }
+
     /**
      * Extract the access control items defined in the CPT,
      * and inject them into the service as to take effect in the current GraphQL query
      */
-    public function executeSchemaConfiguration(int $aclPostID): void
+    protected function doExecuteSchemaConfiguration(int $aclPostID): void
     {
-        // Only if the module is not disabled
-        if (!$this->moduleRegistry->isModuleEnabled(AccessControlFunctionalityModuleResolver::ACCESS_CONTROL)) {
-            return;
-        }
-
         /** @var BlockHelpers */
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**

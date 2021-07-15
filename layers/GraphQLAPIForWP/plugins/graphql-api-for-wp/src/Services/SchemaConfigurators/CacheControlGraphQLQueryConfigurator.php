@@ -14,22 +14,27 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
+    public function isServiceEnabled(): bool
+    {
+        // Only execute for GET operations
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
+            return false;
+        }
+
+        return parent::isServiceEnabled();
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
+    }
+
     /**
      * Extract the configuration items defined in the CPT,
      * and inject them into the service as to take effect in the current GraphQL query
      */
-    public function executeSchemaConfiguration(int $cclPostID): void
+    protected function doExecuteSchemaConfiguration(int $cclPostID): void
     {
-        // Only execute for GET operations
-        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            return;
-        }
-
-        // Only if the module is not disabled
-        if (!$this->moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            return;
-        }
-
         /** @var BlockHelpers */
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
