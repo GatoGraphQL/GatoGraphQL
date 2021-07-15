@@ -16,7 +16,7 @@ class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
-    
+
     protected function getBlockName(): string
     {
         return 'persisted-query-options';
