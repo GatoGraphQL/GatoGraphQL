@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect } from '@wordpress/data';
 import { compose, withState } from '@wordpress/compose';
 import { ToggleControl } from '@wordpress/components';
 
@@ -29,11 +28,9 @@ const PersistedQueryOptions = ( props ) => {
 		{
 			isEnabled,
 			acceptVariablesAsURLParams,
-			inheritQuery,
 		}
 	} = props;
 	const variablesAsURLParamsTitle = __('Accept variables as URL params?', 'graphql-api')
-	const inheritQueryTitle = __('Inherit query from ancestor(s)?', 'graphql-api')
 	return (
 		<>
 			<div className={ `${ className }__enabled` }>
@@ -82,40 +79,6 @@ const PersistedQueryOptions = ( props ) => {
 					/>
 				}
 			</div>
-			{/* If this post has a parent, then allow to inherit query/variables */ }
-			{
-				!! queryPostParent && (
-					<>
-						<hr />
-						<div className={ `${ className }__inherit_query` }>
-							<em>{ inheritQueryTitle }</em>
-							{ isSelected && (
-								<MarkdownInfoModalButton
-									title={ inheritQueryTitle }
-									pageFilename="inherit-query"
-									getMarkdownContentCallback={ getMarkdownContentOrUseDefault }
-								/>
-							) }
-							{ !isSelected && (
-								<>
-									<br />
-									{ getViewBooleanLabel( inheritQuery ) }
-								</>
-							) }
-							{ isSelected &&
-								<ToggleControl
-									{ ...props }
-									label={ getEditBooleanLabel( inheritQuery ) }
-									checked={ inheritQuery }
-									onChange={ newValue => setAttributes( {
-										inheritQuery: newValue,
-									} ) }
-								/>
-							}
-						</div>
-					</>
-				)
-			}
 		</>
 	);
 }
@@ -123,14 +86,6 @@ const PersistedQueryOptions = ( props ) => {
 export default compose( [
 	withState( {
 		header: __('Options', 'graphql-api'),
-	} ),
-	withSelect( ( select ) => {
-		const { getEditedPostAttribute } = select(
-			'core/editor'
-		);
-		return {
-			queryPostParent: getEditedPostAttribute( 'parent' ),
-		};
 	} ),
 	withEditableOnFocus(),
 	withCard(),
