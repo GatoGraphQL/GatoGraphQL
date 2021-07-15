@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
 /**
  * Persisted Query Options block
  */
-class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
+class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock implements PersistedQueryEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
@@ -20,6 +20,11 @@ class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
     protected function getBlockName(): string
     {
         return 'persisted-query-options';
+    }
+
+    public function getBlockPriority(): int
+    {
+        return 160;
     }
 
     /**

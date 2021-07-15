@@ -6,9 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterSchemaConfigBlockCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
+class RegisterSchemaConfigBlockCompilerPass extends AbstractRegisterEditorBlockCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -17,9 +16,5 @@ class RegisterSchemaConfigBlockCompilerPass extends AbstractInjectServiceIntoReg
     protected function getServiceClass(): string
     {
         return SchemaConfigEditorBlockServiceTagInterface::class;
-    }
-    protected function getRegistryMethodCallName(): string
-    {
-        return 'addBlock';
     }
 }

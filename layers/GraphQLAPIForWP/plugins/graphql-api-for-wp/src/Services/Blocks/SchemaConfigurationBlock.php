@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\QueryExecutionBlockCategory;
 /**
  * SchemaConfiguration block
  */
-class SchemaConfigurationBlock extends AbstractBlock
+class SchemaConfigurationBlock extends AbstractBlock implements PersistedQueryEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
@@ -27,6 +27,11 @@ class SchemaConfigurationBlock extends AbstractBlock
     protected function getBlockName(): string
     {
         return 'schema-configuration';
+    }
+
+    public function getBlockPriority(): int
+    {
+        return 180;
     }
 
     protected function getBlockCategoryClass(): ?string
