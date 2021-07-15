@@ -177,11 +177,14 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
          */
         $persistedQueryOptionsBlock = $this->instanceManager->getInstance(PersistedQueryOptionsBlock::class);
         $template[] = [$persistedQueryOptionsBlock->getBlockFullName()];
-        /**
-         * @var PersistedQueryAPIHierarchyBlock
-         */
-        $persistedQueryAPIHierarchyBlock = $this->instanceManager->getInstance(PersistedQueryAPIHierarchyBlock::class);
-        $template[] = [$persistedQueryAPIHierarchyBlock->getBlockFullName()];
+
+        if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
+            /**
+             * @var PersistedQueryAPIHierarchyBlock
+             */
+            $persistedQueryAPIHierarchyBlock = $this->instanceManager->getInstance(PersistedQueryAPIHierarchyBlock::class);
+            $template[] = [$persistedQueryAPIHierarchyBlock->getBlockFullName()];
+        }
         return $template;
     }
 
