@@ -31,14 +31,13 @@ const PersistedQueryAPIHierarchy = ( props ) => {
 		}
 	} = props;
 	const inheritQueryTitle = __('Inherit query from ancestor(s)?', 'graphql-api')
-	const inheritQueryDisabled = __('This section is enabled only for persisted queries with an ancestor. To enable it, select an item from the "Parent GraphQL persisted query" dropdown in the Page Attributes box.', 'graphql-api')
 	return (
 		<>
 			{/* If this post has a parent, then allow to inherit query/variables */ }
 			{
 				! queryPostParent && (
 					<div className={ `${ className }__inherit_query` }>
-						<em>{ inheritQueryDisabled }</em>
+						<em>{ __('This section is enabled when selecting an item from the "Parent GraphQL persisted query" dropdown, in the Page Attributes box.', 'graphql-api') }</em>
 					</div>
 				)
 			}
