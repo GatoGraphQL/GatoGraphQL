@@ -63,8 +63,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
-    public const OPTION_BEHAVIOR = 'behavior';
-
+    
     /**
      * Hooks
      */
@@ -506,7 +505,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'blogname',
                     'blogdescription',
                 ],
-                self::OPTION_BEHAVIOR => Behaviors::ALLOWLIST,
+                ModuleResolverSettingOptions::BEHAVIOR => Behaviors::ALLOWLIST,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -806,7 +805,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_ARRAY,
             ];
 
-            $option = self::OPTION_BEHAVIOR;
+            $option = ModuleResolverSettingOptions::BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

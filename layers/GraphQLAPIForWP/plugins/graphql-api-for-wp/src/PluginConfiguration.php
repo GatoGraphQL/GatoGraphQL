@@ -322,7 +322,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => SettingsComponentConfiguration::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_BEHAVIOR,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
-                'option' => SchemaTypeModuleResolver::OPTION_BEHAVIOR,
+                'option' => ModuleResolverSettingOptions::BEHAVIOR,
             ],
             // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
