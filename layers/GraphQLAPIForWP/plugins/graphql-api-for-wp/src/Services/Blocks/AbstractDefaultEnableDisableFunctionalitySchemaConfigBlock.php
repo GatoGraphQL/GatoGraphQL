@@ -5,31 +5,14 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use PoP\AccessControl\Schema\SchemaModes;
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 
-class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
+abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extends AbstractSchemaConfigBlock
 {
-    use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
-
-    protected function getBlockName(): string
-    {
-        return 'schema-config-schema-mode';
-    }
-
-    public function getBlockPriority(): int
-    {
-        return 130;
-    }
-
-    public function getEnablingModule(): ?string
-    {
-        return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;
-    }
+    abstract protected function getBlockLabel(): string;
+    abstract protected function getBlockTitle(): string;
 
     /**
      * @param array<string, mixed> $attributes
@@ -41,14 +24,11 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
 
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
-        $schemaModeLabels = [
-            SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
-            SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
-        ];
+        $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('Public/Private Schema Mode:', 'graphql-api'),
-            $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
+            $this->getBlockLabel(),
+            $enabledDisabledLabels[$attributes[BlockAttributeNames::ENABLED_CONST] ?? ''] ?? ComponentConfiguration::getSettingsValueLabel()
         );
 
         $blockContentPlaceholder = <<<EOT
@@ -61,7 +41,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClass(),
             $className . '__title',
-            \__('Public/Private Schema', 'graphql-api'),
+            $this->getBlockTitle(),
             $blockContent
         );
     }

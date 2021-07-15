@@ -26,11 +26,11 @@ abstract class AbstractQueryExecutionOptionsBlock extends AbstractBlock
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
         $blockContentPlaceholder = <<<EOT
-        <div class="%s">
-            <h3 class="%s">%s</h3>
-            %s
-        </div>
-EOT;
+            <div class="%s">
+                <h3 class="%s">%s</h3>
+                %s
+            </div>
+        EOT;
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClass(),

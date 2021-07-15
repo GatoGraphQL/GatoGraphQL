@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 
 abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    abstract public function getSchemaConfigBlockAttributeName(): string;
+    public function getSchemaConfigBlockAttributeName(): string
+    {
+        return BlockAttributeNames::ENABLED_CONST;
+    }
 
     abstract public function getHookComponentConfigurationClass(): string;
 

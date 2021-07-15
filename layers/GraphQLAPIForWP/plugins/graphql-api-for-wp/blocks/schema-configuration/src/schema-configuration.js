@@ -59,7 +59,7 @@ const SchemaConfigurationSelectCard = ( props ) => {
 		: []
 	).concat([
 		{
-			label: `⭕️ ${ __('Default', 'graphql-api') }`,
+			label: `🟡 ${ __('Default', 'graphql-api') }`,
 			value: ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
 		},
 		{

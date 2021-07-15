@@ -21,11 +21,6 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
         return SchemaConfigNamespacingBlock::class;
     }
 
-    public function getSchemaConfigBlockAttributeName(): string
-    {
-        return SchemaConfigNamespacingBlock::ATTRIBUTE_NAME_USE_NAMESPACING;
-    }
-
     public function getHookComponentConfigurationClass(): string
     {
         return ComponentModelComponentConfiguration::class;

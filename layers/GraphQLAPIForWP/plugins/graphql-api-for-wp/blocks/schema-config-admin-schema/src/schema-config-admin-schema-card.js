@@ -22,7 +22,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 		className,
 		setAttributes,
 		attributes: {
-			enableAdminSchema,
+			enabledConst,
 		},
 	} = props;
 	const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
@@ -57,13 +57,13 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 						{ !isSelected && (
 							<>
 								<br />
-								{ ( enableAdminSchema == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enableAdminSchema) ) &&
-									<span>⭕️ { __('Default', 'graphql-api') }</span>
+								{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
+									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
-								{ enableAdminSchema == ATTRIBUTE_VALUE_ENABLED &&
+								{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
 									<span>✅ { __('Add "unrestricted" admin fields', 'graphql-api') }</span>
 								}
-								{ enableAdminSchema == ATTRIBUTE_VALUE_DISABLED &&
+								{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
 									<span>❌ { __('Do not add fields', 'graphql-api') }</span>
 								}
 							</>
@@ -72,10 +72,10 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 							<RadioControl
 								{ ...props }
 								options={ options }
-								selected={ enableAdminSchema }
+								selected={ enabledConst }
 								onChange={ newValue => (
 									setAttributes( {
-										enableAdminSchema: newValue
+										enabledConst: newValue
 									} )
 								)}
 							/>
