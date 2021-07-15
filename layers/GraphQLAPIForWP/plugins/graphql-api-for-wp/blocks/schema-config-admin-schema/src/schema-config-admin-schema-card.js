@@ -58,7 +58,7 @@ const SchemaConfigAdminSchemaCard = ( props ) => {
 							<>
 								<br />
 								{ ( enable == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enable) ) &&
-									<span>⭕️ { __('Default', 'graphql-api') }</span>
+									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
 								{ enable == ATTRIBUTE_VALUE_ENABLED &&
 									<span>✅ { __('Add "unrestricted" admin fields', 'graphql-api') }</span>

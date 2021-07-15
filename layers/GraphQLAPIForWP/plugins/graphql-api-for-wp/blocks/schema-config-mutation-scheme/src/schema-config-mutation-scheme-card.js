@@ -65,7 +65,7 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 							<>
 								<br />
 								{ ( mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT || !optionValues.includes(mutationScheme) ) &&
-									<span>⭕️ { __('Default', 'graphql-api') }</span>
+									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
 								{ mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_STANDARD &&
 									<span>❌ { __('Do not enable nested mutations', 'graphql-api') }</span>

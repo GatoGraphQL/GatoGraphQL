@@ -58,7 +58,7 @@ const SchemaConfigNamespacingCard = ( props ) => {
 							<>
 								<br />
 								{ ( enable == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enable) ) &&
-									<span>⭕️ { __('Default', 'graphql-api') }</span>
+									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
 								{ enable == ATTRIBUTE_VALUE_ENABLED &&
 									<span>✅ { __('Use namespacing', 'graphql-api') }</span>
