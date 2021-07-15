@@ -49,8 +49,7 @@ class ComponentConfiguration
             $envVariable,
             $selfProperty,
             $defaultValue,
-            $callback,
-            false
+            $callback
         );
         return $selfProperty;
     }
