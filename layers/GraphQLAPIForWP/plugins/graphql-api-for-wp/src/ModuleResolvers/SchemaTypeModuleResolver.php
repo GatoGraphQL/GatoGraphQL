@@ -60,7 +60,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Setting options
      */
-    public const OPTION_ENABLE_ADMIN_SCHEMA = 'enable-admin-schema';
+    public const OPTION_ENABLE = 'enable';
     public const OPTION_LIST_DEFAULT_LIMIT = 'list-default-limit';
     public const OPTION_LIST_MAX_LIMIT = 'list-max-limit';
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
@@ -470,7 +470,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultValues = [
             self::SCHEMA_ADMIN_SCHEMA => [
-                self::OPTION_ENABLE_ADMIN_SCHEMA => false,
+                self::OPTION_ENABLE => false,
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 self::OPTION_LIST_DEFAULT_LIMIT => 10,
@@ -546,7 +546,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_ADMIN_SCHEMA) {
-            $option = self::OPTION_ENABLE_ADMIN_SCHEMA;
+            $option = self::OPTION_ENABLE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -778,7 +778,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ])
         ) {
             $entriesTitle = \__('Settings entries', 'graphql-api');
-            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying field <code>meta</code> on %s.', 'graphql-api');
             $headsUpDesc = sprintf(
                 \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).', 'graphql-api'),
                 'option',

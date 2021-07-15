@@ -54,6 +54,8 @@ class Component extends AbstractComponent
 
     public static function beforeBoot(): void
     {
+        parent::beforeBoot();
+
         // Initialize the Component Configuration
         ComponentConfiguration::init();
 
@@ -61,8 +63,18 @@ class Component extends AbstractComponent
         $attachExtensionService->attachExtensions(ApplicationEvents::BEFORE_BOOT);
     }
 
+    public static function boot(): void
+    {
+        parent::boot();
+
+        $attachExtensionService = AttachExtensionServiceFacade::getInstance();
+        $attachExtensionService->attachExtensions(ApplicationEvents::BOOT);
+    }
+
     public static function afterBoot(): void
     {
+        parent::afterBoot();
+
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::AFTER_BOOT);
     }

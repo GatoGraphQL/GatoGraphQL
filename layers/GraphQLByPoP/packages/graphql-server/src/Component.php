@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Component\AbstractComponent;
@@ -92,10 +91,7 @@ class Component extends AbstractComponent
             self::initServices(dirname(__DIR__), '/Overrides');
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
-            // Boot conditional on having embeddable fields
-            if (APIComponentConfiguration::enableEmbeddableFields()) {
-                self::initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/EmbeddableFields');
-            }
+            // Boot conditionals
             if (
                 class_exists(CacheControlComponent::class)
                 && class_exists(AccessControlComponent::class)
