@@ -36,7 +36,7 @@ class EndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock
     {
         $blockContent = parent::getBlockContent($attributes, $content);
 
-        $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
+        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
             $blockContent .= sprintf(
                 $blockContentPlaceholder,

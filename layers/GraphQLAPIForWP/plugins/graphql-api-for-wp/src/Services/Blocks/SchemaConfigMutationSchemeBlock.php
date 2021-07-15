@@ -39,7 +39,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
 
-        $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
+        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
         $mutationSchemeLabels = [
             MutationSchemes::STANDARD => \__('❌ Do not enable nested mutations', 'graphql-api'),
@@ -53,11 +53,11 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
         );
 
         $blockContentPlaceholder = <<<EOT
-        <div class="%s">
-            <h3 class="%s">%s</h3>
-            %s
-        </div>
-EOT;
+            <div class="%s">
+                <h3 class="%s">%s</h3>
+                %s
+            </div>
+        EOT;
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClass(),

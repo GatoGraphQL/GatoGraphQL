@@ -39,7 +39,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
 
-        $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
+        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
         $schemaModeLabels = [
             SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
@@ -52,11 +52,11 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
         );
 
         $blockContentPlaceholder = <<<EOT
-        <div class="%s">
-            <h3 class="%s">%s</h3>
-            %s
-        </div>
-EOT;
+            <div class="%s">
+                <h3 class="%s">%s</h3>
+                %s
+            </div>
+        EOT;
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClass(),

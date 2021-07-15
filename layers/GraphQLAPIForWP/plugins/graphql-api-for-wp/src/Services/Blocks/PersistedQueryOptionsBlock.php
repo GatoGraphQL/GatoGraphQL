@@ -52,7 +52,7 @@ class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock
     {
         $blockContent = parent::getBlockContent($attributes, $content);
 
-        $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
+        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent .= sprintf(
             $blockContentPlaceholder,
             \__('Accept variables as URL params:', 'graphql-api'),
