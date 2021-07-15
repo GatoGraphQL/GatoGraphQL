@@ -22,7 +22,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
 
-        $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
+        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
         $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(
