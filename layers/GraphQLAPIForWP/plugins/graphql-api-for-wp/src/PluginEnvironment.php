@@ -33,18 +33,22 @@ class PluginEnvironment
     /**
      * If the cache dir is provided by either environment variable
      * or constant in wp-config.php, use it.
-     * Otherwise, set the default to wp-content/plugins/graphql-api/cache
+     * Otherwise, set the default to wp-content/graphql-api/cache
      */
     public static function getCacheDir(): string
     {
+        $baseCacheDir = null;
         if (getenv(self::CACHE_DIR) !== false) {
-            return rtrim(getenv(self::CACHE_DIR), '/');
+            $baseCacheDir = rtrim(getenv(self::CACHE_DIR), '/');
+        } elseif (PluginConfigurationHelper::isWPConfigConstantDefined(self::CACHE_DIR)) {
+            $baseCacheDir = rtrim(PluginConfigurationHelper::getWPConfigConstantValue(self::CACHE_DIR), '/');
+        } else {
+            $baseCacheDir = constant('WP_CONTENT_DIR');
         }
 
-        if (PluginConfigurationHelper::isWPConfigConstantDefined(self::CACHE_DIR)) {
-            return rtrim(PluginConfigurationHelper::getWPConfigConstantValue(self::CACHE_DIR), '/');
-        }
+        return $baseCacheDir . \DIRECTORY_SEPARATOR . 'graphql-api' . \DIRECTORY_SEPARATOR . 'cache';
 
-        return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
+        // This is under wp-content/plugins/graphql-api/cache
+        // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 }
