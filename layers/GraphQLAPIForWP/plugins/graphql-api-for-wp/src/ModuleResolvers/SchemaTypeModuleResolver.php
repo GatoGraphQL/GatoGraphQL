@@ -61,10 +61,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Setting options
      */
-    public const OPTION_LIST_MAX_LIMIT = 'list-max-limit';
     public const OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE = 'add-type-to-custompost-union-type';
     public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
-    public const OPTION_CUSTOMPOST_TYPES = 'custompost-types';
     public const OPTION_ENTRIES = 'entries';
     public const OPTION_BEHAVIOR = 'behavior';
 
@@ -450,7 +448,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 $option,
                 [
                     ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
-                    self::OPTION_LIST_MAX_LIMIT,
+                    ModuleResolverSettingOptions::LIST_MAX_LIMIT,
                 ]
             )
         ) {
@@ -473,35 +471,35 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                self::OPTION_LIST_MAX_LIMIT => 100,
+                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
                 // ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // self::OPTION_LIST_MAX_LIMIT => 100,
-                self::OPTION_CUSTOMPOST_TYPES => ['post'],
+                // ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
+                ModuleResolverSettingOptions::CUSTOMPOST_TYPES => ['post'],
             ],
             self::SCHEMA_POSTS => [
                 // ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // self::OPTION_LIST_MAX_LIMIT => 100,
+                // ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
                 // ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                // self::OPTION_LIST_MAX_LIMIT => 100,
+                // ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
                 self::OPTION_ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => false,
             ],
             self::SCHEMA_USERS => [
                 ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                self::OPTION_LIST_MAX_LIMIT => 100,
+                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 100,
             ],
             self::SCHEMA_TAGS => [
                 ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                self::OPTION_LIST_MAX_LIMIT => 200,
+                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 200,
             ],
             self::SCHEMA_CATEGORIES => [
                 ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                self::OPTION_LIST_MAX_LIMIT => 200,
+                ModuleResolverSettingOptions::LIST_MAX_LIMIT => 200,
             ],
             self::SCHEMA_SETTINGS => [
                 self::OPTION_ENTRIES => [
@@ -595,7 +593,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $entities = $moduleEntry['entities'];
             $options = $moduleEntry['options'] ?? [
                 ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
-                self::OPTION_LIST_MAX_LIMIT,
+                ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ];
             list(
                 $defaultLimitOption,
@@ -753,7 +751,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 $possibleValues[$genericCustomPostType] = $genericCustomPostType;
             }
             // Set the setting
-            $option = self::OPTION_CUSTOMPOST_TYPES;
+            $option = ModuleResolverSettingOptions::CUSTOMPOST_TYPES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

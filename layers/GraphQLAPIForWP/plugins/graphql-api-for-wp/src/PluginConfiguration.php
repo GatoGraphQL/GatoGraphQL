@@ -200,13 +200,13 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             //     'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
             //     'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
             //     'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-            //     'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+            //     'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             // ],
             [
                 'class' => GenericCustomPostsComponentConfiguration::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_TYPES,
+                'option' => ModuleResolverSettingOptions::CUSTOMPOST_TYPES,
             ],
             // Post default/max limits, add to CustomPostUnion
             [
@@ -221,7 +221,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => PostsEnvironment::POST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ],
             [
                 'class' => PostsComponentConfiguration::class,
@@ -240,7 +240,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => UsersComponentConfiguration::class,
                 'envVariable' => UsersEnvironment::USER_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ],
             // Tag default/max limits
             [
@@ -253,7 +253,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => TagsComponentConfiguration::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ],
             // Categories default/max limits
             [
@@ -266,7 +266,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => CategoriesComponentConfiguration::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ],
             // Page default/max limits, add to CustomPostUnion
             [
@@ -281,7 +281,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => PagesEnvironment::PAGE_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ],
             [
                 'class' => PagesComponentConfiguration::class,
@@ -300,7 +300,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => CustomPostsComponentConfiguration::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_MAX_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_MAX_LIMIT,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
