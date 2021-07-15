@@ -103,7 +103,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
                 return $b->getBlockPriority() <=> $a->getBlockPriority();
             }
         );
-        // ...
         foreach ($blocks as $block) {
             $template[] = [$block->getBlockFullName()];
         }
