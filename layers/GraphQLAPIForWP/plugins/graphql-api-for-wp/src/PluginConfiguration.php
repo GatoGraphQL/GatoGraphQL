@@ -193,7 +193,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             // [
             //     'class' => GenericCustomPostsComponentConfiguration::class,
@@ -214,7 +214,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => PostsEnvironment::POST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => PostsComponentConfiguration::class,
@@ -234,7 +234,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => UsersComponentConfiguration::class,
                 'envVariable' => UsersEnvironment::USER_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => UsersComponentConfiguration::class,
@@ -247,7 +247,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => TagsComponentConfiguration::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => TagsComponentConfiguration::class,
@@ -260,7 +260,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => CategoriesComponentConfiguration::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => CategoriesComponentConfiguration::class,
@@ -274,7 +274,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => PagesEnvironment::PAGE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => PagesComponentConfiguration::class,
@@ -294,7 +294,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => CustomPostsComponentConfiguration::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_LIST_DEFAULT_LIMIT,
+                'option' => ModuleResolverSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
                 'class' => CustomPostsComponentConfiguration::class,
