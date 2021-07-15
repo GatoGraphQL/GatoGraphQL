@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
-class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock implements SchemaConfigBlockServiceTagInterface
+class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
