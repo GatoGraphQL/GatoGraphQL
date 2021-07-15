@@ -20,12 +20,12 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
 
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigOptionsBlockDataItem !== null) {
+        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
+        if ($schemaConfigBlockDataItem !== null) {
             /**
              * Default value (if not defined in DB): `default`. Then do nothing
              */
-            $defaultSchemaMode = $schemaConfigOptionsBlockDataItem['attrs'][SchemaConfigSchemaModeBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? null;
+            $defaultSchemaMode = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaModeBlock::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? null;
             // Only execute if it has value "public" or "private".
             // If "default", then the general settings will already take effect, so do nothing
             // (And if any other unsupported value, also do nothing)
