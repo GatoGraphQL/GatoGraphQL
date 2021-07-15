@@ -11,7 +11,6 @@ class PluginHelpers
      */
     public static function getClassPSR4Namespace(string $class): string
     {
-        $class = get_called_class();
         $parts = explode('\\', $class);
         return $parts[0] . (isset($parts[1]) ? '\\' . $parts[1] : '');
     }
