@@ -13,10 +13,13 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
 use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
 use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
@@ -298,12 +301,24 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
             return false;
         }
 
-        // `true` is the default option in Gutenberg, so it's not saved to the DB!
-        return $this->isOptionsBlockValueOn(
+        /** @var BlockHelpers */
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+        /** @var EndpointGraphiQLBlock */
+        $endpointGraphiQLBlock = $this->instanceManager->getInstance(EndpointGraphiQLBlock::class);
+        $optionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
-            EndpointOptionsBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED,
-            true
+            $endpointGraphiQLBlock
         );
+
+        // If there was no options block, something went wrong in the post content
+        $default = true;
+        if (is_null($optionsBlockDataItem)) {
+            return $default;
+        }
+
+        // The default value is not saved in the DB in Gutenberg!
+        $attribute = EndpointGraphiQLBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED;
+        return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
     }
 
     /**
@@ -321,12 +336,24 @@ class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomP
             return false;
         }
 
-        // `true` is the default option in Gutenberg, so it's not saved to the DB!
-        return $this->isOptionsBlockValueOn(
+        /** @var BlockHelpers */
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+        /** @var EndpointVoyagerBlock */
+        $endpointVoyagerBlock = $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
+        $optionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
-            EndpointOptionsBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED,
-            true
+            $endpointVoyagerBlock
         );
+
+        // If there was no options block, something went wrong in the post content
+        $default = true;
+        if (is_null($optionsBlockDataItem)) {
+            return $default;
+        }
+
+        // The default value is not saved in the DB in Gutenberg!
+        $attribute = EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED;
+        return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
     }
 
     /**

@@ -11,34 +11,39 @@ import { ToggleControl } from '@wordpress/components';
 import {
 	withCard,
 	withEditableOnFocus,
+	InfoTooltip,
 } from '@graphqlapi/components';
 
-const EndpointOptions = ( props ) => {
+const EndpointGraphiQL = ( props ) => {
 	const {
 		isSelected,
 		className,
 		setAttributes,
 		attributes:
 		{
-			isEnabled,
+			isGraphiQLEnabled,
 		}
 	} = props;
 	return (
-		<div className={ `${ className }__enabled` }>
-			<em>{ __('Enabled?', 'graphql-api') }</em>
+		<div className={ `${ className }__graphiql_enabled` }>
+			<em>{ __('Expose GraphiQL client?', 'graphql-api') }</em>
+			<InfoTooltip
+				{ ...props }
+				text={ __('Publicly available under /{endpoint-slug}/?view=graphiql', 'graphql-api') }
+			/>
 			{ !isSelected && (
 				<>
 					<br />
-					{ isEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
+					{ isGraphiQLEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
-					checked={ isEnabled }
+					label={ isGraphiQLEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
+					checked={ isGraphiQLEnabled }
 					onChange={ newValue => setAttributes( {
-						isEnabled: newValue,
+						isGraphiQLEnabled: newValue,
 					} ) }
 				/>
 			}
@@ -48,8 +53,8 @@ const EndpointOptions = ( props ) => {
 
 export default compose( [
 	withState( {
-		header: __('Options', 'graphql-api'),
+		header: __('GraphiQL', 'graphql-api'),
 	} ),
 	withEditableOnFocus(),
 	withCard(),
-] )( EndpointOptions );
+] )( EndpointGraphiQL );

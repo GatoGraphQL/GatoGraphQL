@@ -22,19 +22,19 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/endpoint-options', {
+registerBlockType( 'graphql-api/endpoint-voyager', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Options for the GraphQL endpoint', 'graphql-api' ),
+	title: __( 'Voyager client for the GraphQL endpoint', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Configure the GraphQL endpoint',
+		'Provide access to the Voyager client for the GraphQL endpoint',
 		'graphql-api'
 	),
 
@@ -56,9 +56,9 @@ registerBlockType( 'graphql-api/endpoint-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED
 		 */
-		isEnabled: {
+		isVoyagerEnabled: {
 			type: 'boolean',
 			default: true,
 		},
