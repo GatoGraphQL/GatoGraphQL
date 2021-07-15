@@ -13,13 +13,13 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 
 class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    public function getEnablingModule(): ?string
+    {
+        return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;
+    }
+
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        // Check if it enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA)) {
-            return;
-        }
-
         $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**

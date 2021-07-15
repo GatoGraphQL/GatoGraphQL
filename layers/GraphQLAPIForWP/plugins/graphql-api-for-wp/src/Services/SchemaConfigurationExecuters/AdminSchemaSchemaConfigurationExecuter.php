@@ -13,13 +13,13 @@ use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 class AdminSchemaSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    public function getEnablingModule(): ?string
+    {
+        return SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA;
+    }
+
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        // Check if it enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_ADMIN_SCHEMA)) {
-            return;
-        }
-
         $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**

@@ -13,13 +13,13 @@ use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 class NamespacingSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    public function getEnablingModule(): ?string
+    {
+        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING;
+    }
+
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        // Check if it enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING)) {
-            return;
-        }
-
         $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**

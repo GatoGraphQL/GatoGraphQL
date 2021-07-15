@@ -15,13 +15,13 @@ use PoP\Engine\Environment as EngineEnvironment;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
+    public function getEnablingModule(): ?string
+    {
+        return OperationalFunctionalityModuleResolver::NESTED_MUTATIONS;
+    }
+
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        // Check if it enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS)) {
-            return;
-        }
-
         $schemaConfigOptionsBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigOptionsBlockDataItem !== null) {
             /**

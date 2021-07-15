@@ -26,17 +26,25 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         );
     }
 
-    public function executeSchemaConfiguration(int $schemaConfigurationID): void
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
     {
         // Do not execute Cache Control when previewing the query
         if (\is_preview()) {
-            return;
+            return false;
         }
-        // Check it is enabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            return;
-        }
+        return parent::isServiceEnabled();
+    }
 
+    public function getEnablingModule(): ?string
+    {
+        return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
+    }
+
+    public function executeSchemaConfiguration(int $schemaConfigurationID): void
+    {
         $schemaConfigCCLBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if (!is_null($schemaConfigCCLBlockDataItem)) {
             if ($cacheControlLists = $schemaConfigCCLBlockDataItem['attrs'][SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS] ?? null) {
