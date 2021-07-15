@@ -6,11 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
@@ -24,6 +24,8 @@ use WP_Post;
 
 class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
+    use WithBlockRegistryCustomPostTypeTrait;
+
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
@@ -156,36 +158,9 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
     //     return true;
     // }
 
-    /**
-     * Gutenberg templates to lock down the Custom Post Type to
-     *
-     * @return array<array> Every element is an array with template name in first pos, and attributes then
-     */
-    protected function getGutenbergTemplate(): array
+    protected function getBlockRegistry(): BlockRegistryInterface
     {
-        $template = [];
-
-        // Get all blocks from the Registry
-        $blocks = $this->persistedQueryBlockRegistry->getBlocks();
-        // Order them by priority
-        uasort(
-            $blocks,
-            function (EditorBlockInterface $a, EditorBlockInterface $b): int {
-                return $b->getBlockPriority() <=> $a->getBlockPriority();
-            }
-        );
-        foreach ($blocks as $block) {
-            $template[] = [$block->getBlockFullName()];
-        }
-        return $template;
-    }
-
-    /**
-     * Indicates if to lock the Gutenberg templates
-     */
-    protected function lockGutenbergTemplate(): bool
-    {
-        return true;
+        return $this->persistedQueryBlockRegistry;
     }
 
     /**
