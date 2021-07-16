@@ -57,7 +57,7 @@ registerBlockType( 'graphql-api/schema-configuration', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION
 		 */
 		schemaConfiguration: {
 			type: 'integer',

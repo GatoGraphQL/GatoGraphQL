@@ -13,7 +13,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
@@ -331,9 +331,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             /**
-             * @var SchemaConfigurationBlock
+             * @var EndpointSchemaConfigurationBlock
              */
-            $schemaConfigurationBlock = $this->instanceManager->getInstance(SchemaConfigurationBlock::class);
+            $schemaConfigurationBlock = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
             $template[] = [$schemaConfigurationBlock->getBlockFullName()];
         }
     }

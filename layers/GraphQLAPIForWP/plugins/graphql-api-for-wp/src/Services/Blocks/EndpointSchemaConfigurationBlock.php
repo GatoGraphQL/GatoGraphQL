@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\QueryExecutionBlockCategory;
 /**
  * SchemaConfiguration block
  */
-class SchemaConfigurationBlock extends AbstractBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface, EndpointEditorBlockServiceTagInterface
+class EndpointSchemaConfigurationBlock extends AbstractBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface, EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
