@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use WP_Post;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
 {
-    // use EndpointResolverTrait;
+    use EndpointResolverTrait;
     
     public function isServiceEnabled(): bool
     {
@@ -48,8 +47,6 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
 
     public function executeEndpoint(): void
     {
-        $customPostType = $this->getCustomPostType();
-        $customPostType->executeGraphQLQuery();
-        // $this->executeGraphQLQuery();
+        $this->executeGraphQLQuery();
     }
 }

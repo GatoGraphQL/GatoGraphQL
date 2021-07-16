@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
-use WP_Query;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
@@ -15,18 +14,12 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
 {
-    use EndpointResolverTrait {
-        EndpointResolverTrait::getNature as getUpstreamNature;
-        EndpointResolverTrait::addGraphQLVars as upstreamAddGraphQLVars;
-    }
-
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
@@ -258,18 +251,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         return $content;
     }
 
-    /**
-     * Assign the single endpoint by setting it as the Home nature
-     */
-    public function getNature(string $nature, WP_Query $query): string
-    {
-        if ($query->is_singular($this->getCustomPostType())) {
-            return $this->getUpstreamNature($nature, $query);
-        }
-
-        return $nature;
-    }
-
     abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
 
     /**
@@ -321,21 +302,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // If null, we are in the admin (eg: editing a Persisted Query),
         // and there's no need to override params
         return $customPost !== null;
-    }
-
-    /**
-     * Check if requesting the single post of this CPT,
-     * and that access to the API has not been forbidden.
-     * Then, set the request with the needed API params
-     *
-     * @param array<array> $vars_in_array
-     */
-    public function addGraphQLVars(array $vars_in_array): void
-    {
-        [&$vars] = $vars_in_array;
-        if (\is_singular($this->getCustomPostType()) && $this->isEndpointEnabled($vars['routing-state']['queried-object-id'])) {
-            $this->upstreamAddGraphQLVars($vars_in_array);
-        }
     }
 
     /**

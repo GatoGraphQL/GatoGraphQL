@@ -24,7 +24,6 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustom
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
@@ -168,19 +167,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected function getExecuteActionLabel(): string
     {
         return __('View endpoint', 'graphql-api');
-    }
-
-    /**
-     * Provide the query to execute and its variables
-     *
-     * @return mixed[] Array of 2 elements: [query, variables]
-     */
-    protected function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
-    {
-        /**
-         * Extract the query from the BODY through standard GraphQL endpoint execution
-         */
-        return QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
     }
 
     protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
