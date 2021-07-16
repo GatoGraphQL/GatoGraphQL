@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 /**
  * Query Execution (endpoint and persisted query) Options block
  */
-abstract class AbstractQueryExecutionOptionsBlock extends AbstractBlock
+abstract class AbstractEndpointOptionsBlock extends AbstractBlock
 {
     use OptionsBlockTrait;
 

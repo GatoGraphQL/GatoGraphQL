@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/persisted-query-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 		 */
 		isEnabled: {
 			type: 'boolean',

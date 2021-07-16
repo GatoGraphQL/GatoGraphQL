@@ -6,10 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 
-class EndpointGraphiQLBlock extends AbstractQueryExecutionOptionsBlock implements EndpointEditorBlockServiceTagInterface
+class EndpointGraphiQLBlock extends AbstractEndpointOptionsBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 

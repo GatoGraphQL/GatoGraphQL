@@ -966,12 +966,12 @@ msgstr ""
 msgid "❌ No"
 msgstr ""
 
-#: src/Services/Blocks/AbstractQueryExecutionOptionsBlock.php:36
+#: src/Services/Blocks/AbstractEndpointOptionsBlock.php:36
 #: src/Services/Blocks/SchemaConfigOptionsBlock.php:119
 msgid "Options"
 msgstr ""
 
-#: src/Services/Blocks/AbstractQueryExecutionOptionsBlock.php:49
+#: src/Services/Blocks/AbstractEndpointOptionsBlock.php:49
 msgid "Enabled:"
 msgstr ""
 
