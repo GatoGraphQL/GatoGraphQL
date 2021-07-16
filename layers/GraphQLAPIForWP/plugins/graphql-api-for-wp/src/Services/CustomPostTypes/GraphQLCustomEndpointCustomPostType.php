@@ -28,7 +28,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
-class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
+class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 

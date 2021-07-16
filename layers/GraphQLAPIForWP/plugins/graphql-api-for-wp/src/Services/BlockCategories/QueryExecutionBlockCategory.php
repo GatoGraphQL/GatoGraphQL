@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 
 /**
  * It comprises the endpoint and the persisted query CPTs
@@ -23,8 +23,8 @@ class QueryExecutionBlockCategory extends AbstractBlockCategory
     {
         /** @var GraphQLPersistedQueryEndpointCustomPostType */
         $persistedQueryEndpointCustomPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
-        /** @var GraphQLEndpointCustomPostType */
-        $endpointCustomPostTypeService = $this->instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $endpointCustomPostTypeService = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         return [
             $persistedQueryEndpointCustomPostTypeService->getCustomPostType(),
             $endpointCustomPostTypeService->getCustomPostType(),
