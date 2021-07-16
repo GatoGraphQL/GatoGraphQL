@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
  */
 class EndpointBlockCategory extends AbstractBlockCategory
 {
-    public const QUERY_EXECUTION_BLOCK_CATEGORY = 'graphql-api-query-exec';
+    public const ENDPOINT_BLOCK_CATEGORY = 'graphql-api-query-exec';
 
     /**
      * Custom Post Type for which to enable the block category
@@ -36,7 +36,7 @@ class EndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategorySlug(): string
     {
-        return self::QUERY_EXECUTION_BLOCK_CATEGORY;
+        return self::ENDPOINT_BLOCK_CATEGORY;
     }
 
     /**
