@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 
 class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
-    public const ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
+    public const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
 
     /**
      * Custom Post Type for which to enable the block category
@@ -29,7 +29,7 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategorySlug(): string
     {
-        return self::ENDPOINT_BLOCK_CATEGORY;
+        return self::CUSTOM_ENDPOINT_BLOCK_CATEGORY;
     }
 
     /**
