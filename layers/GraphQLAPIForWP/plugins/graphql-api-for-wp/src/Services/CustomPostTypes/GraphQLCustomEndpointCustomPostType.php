@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -36,6 +37,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         HooksAPIInterface $hooksAPI,
         protected EndpointBlockRegistryInterface $endpointBlockRegistry,
         protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
+        protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
     ) {
         parent::__construct(
             $instanceManager,
@@ -179,6 +181,11 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return $this->customEndpointExecuterRegistryInterface;
     }
 
+    protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
+    {
+        return $this->customEndpointAnnotatorRegistryInterface;
+    }
+
     /**
      * Read the options block and check the value of attribute "isGraphiQLEnabled"
      */
@@ -247,62 +254,5 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         // The default value is not saved in the DB in Gutenberg!
         $attribute = EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED;
         return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
-    }
-
-    /**
-     * Get actions to add for this CPT
-     *
-     * @param WP_Post $post
-     * @return array<string, string>
-     */
-    protected function getCustomPostTypeTableActions($post): array
-    {
-        $actions = parent::getCustomPostTypeTableActions($post);
-
-        /**
-         * If neither GraphiQL or Voyager are enabled, then already return
-         */
-        $isGraphiQLEnabled = $this->isGraphiQLEnabled($post);
-        $isVoyagerEnabled = $this->isVoyagerEnabled($post);
-        if (!$isGraphiQLEnabled && !$isVoyagerEnabled) {
-            return $actions;
-        }
-
-        $title = \_draft_or_post_title();
-        $permalink = \get_permalink($post->ID);
-        /**
-         * Attach the GraphiQL/Voyager clients
-         */
-        return array_merge(
-            $actions,
-            // If GraphiQL enabled, add the "GraphiQL" action
-            $isGraphiQLEnabled ? [
-                'graphiql' => sprintf(
-                    '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
-                    \add_query_arg(
-                        RequestParams::VIEW,
-                        RequestParams::VIEW_GRAPHIQL,
-                        $permalink
-                    ),
-                    /* translators: %s: Post title. */
-                    \esc_attr(\sprintf(\__('GraphiQL &#8220;%s&#8221;'), $title)),
-                    __('GraphiQL', 'graphql-api')
-                ),
-            ] : [],
-            // If Voyager enabled, add the "Schema" action
-            $isVoyagerEnabled ? [
-                'schema' => sprintf(
-                    '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
-                    \add_query_arg(
-                        RequestParams::VIEW,
-                        RequestParams::VIEW_SCHEMA,
-                        $permalink
-                    ),
-                    /* translators: %s: Post title. */
-                    \esc_attr(\sprintf(\__('Schema &#8220;%s&#8221;'), $title)),
-                    __('Interactive schema', 'graphql-api')
-                )
-            ] : []
-        );
     }
 }

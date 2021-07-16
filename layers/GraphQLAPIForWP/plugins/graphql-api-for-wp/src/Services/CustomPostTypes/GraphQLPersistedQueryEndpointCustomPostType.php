@@ -7,8 +7,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -36,6 +38,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
         protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
+        protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
     ) {
         parent::__construct(
             $instanceManager,
@@ -64,6 +67,11 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
         return $this->persistedQueryEndpointExecuterRegistryInterface;
+    }
+
+    protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
+    {
+        return $this->persistedQueryEndpointAnnotatorRegistryInterface;
     }
 
     /**

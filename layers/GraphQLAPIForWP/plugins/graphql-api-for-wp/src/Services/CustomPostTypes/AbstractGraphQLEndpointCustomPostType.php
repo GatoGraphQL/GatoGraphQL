@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use WP_Post;
-use PoP\Hooks\HooksAPIInterface;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Hooks\HooksAPIInterface;
+use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
 {
@@ -117,12 +118,20 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                         );
                     }
                 }
+
+                // Let the EndpointAnnotators add their own actions
+                foreach ($this->getEndpointAnnotatorRegistry()->getEndpointAnnotators() as $endpointAnnotator) {
+                    $endpointAnnotator->addCustomPostTypeTableActions($actions, $post);
+                }
             }
         }
+
         return $actions;
     }
 
     abstract protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface;
+    
+    abstract protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface;
 
     /**
      * Add the hook to initialize the different post types
