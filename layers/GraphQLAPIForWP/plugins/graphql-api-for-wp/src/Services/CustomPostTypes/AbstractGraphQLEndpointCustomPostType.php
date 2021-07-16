@@ -148,39 +148,53 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         parent::initialize();
 
-        // Execute at the beginning
+        // Execute at the beginning. If access is forbidden, the process will `wp_die`
         \add_action('init', function (): void {
             if ($this->isAccessForbidden()) {
                 $this->forbidAccess();
             }
-
-            /**
-             * Execute the EndpointExecuters from the Registry:
-             * 
-             * Only 1 executer should be executed, from among (or other injected ones):
-             * 
-             * - Query resolution
-             * - GraphiQL client
-             * - Voyager client
-             * - View query source
-             * 
-             * All others must have `isServiceEnabled` => false.
-             */
-            foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
-                $endpointExecuter->executeEndpoint();
-            }
-
-            /**
-             * Two outputs:
-             * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
-             * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
-             */
-            if ($this->isGraphQLQueryExecution()) {
-                $this->executeGraphQLQuery();
-            } else {
-                $this->doSomethingElse();
-            }
         }, 0);
+
+        /**
+         * Call it on "boot" after the WP_Query is parsed, so the single CPT
+         * is loaded, and asking for `is_singular(CPT)` works.
+         * 
+         * Important: load it before anything else, so it can load the hooks
+         * from `executeGraphQLQuery` before these are called, which is
+         * triggered also on "boot"
+         */
+        add_action(
+            'popcms:boot',
+            function(): void {
+                /**
+                 * Execute the EndpointExecuters from the Registry:
+                 * 
+                 * Only 1 executer should be executed, from among (or other injected ones):
+                 * 
+                 * - Query resolution
+                 * - GraphiQL client
+                 * - Voyager client
+                 * - View query source
+                 * 
+                 * All others must have `isServiceEnabled` => false.
+                 */
+                foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
+                    $endpointExecuter->executeEndpoint();
+                }
+        
+                /**
+                 * Two outputs:
+                 * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
+                 * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
+                 */
+                if ($this->isGraphQLQueryExecution()) {
+                    $this->executeGraphQLQuery();
+                } else {
+                    $this->doSomethingElse();
+                }
+            },
+            0
+        );
     }
 
     /**
