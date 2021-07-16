@@ -17,8 +17,6 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -33,8 +31,6 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         HooksAPIInterface $hooksAPI,
-        protected BlockContentHelpers $blockContentHelpers,
-        protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
         protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
         protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
