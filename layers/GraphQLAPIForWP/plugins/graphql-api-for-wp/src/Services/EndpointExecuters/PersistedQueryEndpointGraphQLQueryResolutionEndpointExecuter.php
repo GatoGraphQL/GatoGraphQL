@@ -26,9 +26,4 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     {
         return $this->graphQLPersistedQueryEndpointCustomPostType;
     }
-
-    public function executeEndpoint(): void
-    {
-        // @todo Do something
-    }
 }

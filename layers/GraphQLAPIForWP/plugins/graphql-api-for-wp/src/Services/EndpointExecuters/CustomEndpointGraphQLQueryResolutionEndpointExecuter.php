@@ -26,9 +26,4 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
     {
         return $this->graphQLCustomEndpointCustomPostType;
     }
-    
-    public function executeEndpoint(): void
-    {
-        // @todo Do something
-    }
 }

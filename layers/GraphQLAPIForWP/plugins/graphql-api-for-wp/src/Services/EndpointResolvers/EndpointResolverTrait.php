@@ -19,7 +19,7 @@ trait EndpointResolverTrait
     /**
      * Execute the GraphQL query
      */
-    protected function executeGraphQLQuery(): void
+    public function executeGraphQLQuery(): void
     {
         /**
          * Priority 1: Execute before VarsHookSet in the API package, to set-up the variables

@@ -187,9 +187,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                  * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
                  * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
                  */
-                if ($this->isGraphQLQueryExecution()) {
-                    $this->executeGraphQLQuery();
-                } else {
+                if (!$this->isGraphQLQueryExecution()) {
                     $this->doSomethingElse();
                 }
             },
@@ -292,7 +290,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     /**
      * Read the options block and check the value of attribute "isEnabled"
      */
-    protected function isEnabled(WP_Post|int $postOrID): bool
+    public function isEnabled(WP_Post|int $postOrID): bool
     {
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(

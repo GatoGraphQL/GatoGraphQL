@@ -4,22 +4,33 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use WP_Post;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
 {
+    // use EndpointResolverTrait;
+    
     public function isServiceEnabled(): bool
     {
-        // Check we're loading the corresponding CPT
-        if (!\is_singular($this->getCustomPostType()->getCustomPostType())) {
-            return false;
-        }
-
         // Check we're resolving the GraphQL query
         if (!$this->isGraphQLQueryExecution()) {
             return false;
         }
+        // Check we're loading the corresponding CPT
+        $customPostType = $this->getCustomPostType();
+        if (!\is_singular($customPostType->getCustomPostType())) {
+            return false;
+        }
+
+        // Check the CPT is not disabled
+        global $post;
+        if (!$customPostType->isEnabled($post)) {
+            return false;
+        }
+
         return parent::isServiceEnabled();
     }
 
@@ -33,5 +44,12 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
     protected function isGraphQLQueryExecution(): bool
     {
         return !isset($_REQUEST[RequestParams::VIEW]) || !$_REQUEST[RequestParams::VIEW];
+    }
+
+    public function executeEndpoint(): void
+    {
+        $customPostType = $this->getCustomPostType();
+        $customPostType->executeGraphQLQuery();
+        // $this->executeGraphQLQuery();
     }
 }
