@@ -1,13 +1,13 @@
 /**
  * Application imports
  */
-import PersistedQueryAPIHierarchy from './persisted-query-api-hierarchy';
+import PersistedQueryEndpointAPIHierarchy from './persisted-query-api-hierarchy';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<PersistedQueryAPIHierarchy
+			<PersistedQueryEndpointAPIHierarchy
 				{ ...props }
 			/>
 		</div>

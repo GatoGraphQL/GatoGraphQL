@@ -5,7 +5,7 @@ import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { ExternalLink, Button, Guide, GuidePage } from '@wordpress/components';
 
-const PersistedQueryGuide = ( props ) => {
+const PersistedQueryEndpointGuide = ( props ) => {
 	return (
 		<Guide { ...props } >
             <GuidePage>
@@ -52,7 +52,7 @@ const PersistedQueryGuide = ( props ) => {
         </Guide>
 	)
 }
-const PersistedQueryGuideButton = ( props ) => {
+const PersistedQueryEndpointGuideButton = ( props ) => {
 	const [ isOpen, setOpen ] = useState( false );
 
 	const openGuide = () => setOpen( true );
@@ -63,7 +63,7 @@ const PersistedQueryGuideButton = ( props ) => {
 				{ __('Open Guide: “Creating Persisted Queries”', 'graphql-api') }
 			</Button>
 			{ isOpen && (
-				<PersistedQueryGuide 
+				<PersistedQueryEndpointGuide 
 					{ ...props }
 					onFinish={ closeGuide }
 				/>
@@ -71,4 +71,4 @@ const PersistedQueryGuideButton = ( props ) => {
 		</>
 	);
 };
-export default PersistedQueryGuideButton;
+export default PersistedQueryEndpointGuideButton;

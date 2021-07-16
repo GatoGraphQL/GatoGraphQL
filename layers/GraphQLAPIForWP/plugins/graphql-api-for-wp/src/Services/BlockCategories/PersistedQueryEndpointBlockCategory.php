@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpoint
 
 class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
 {
-    public const PERSISTED_QUERY_BLOCK_CATEGORY = 'graphql-api-persisted-query';
+    public const PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-persisted-query';
 
     /**
      * Custom Post Type for which to enable the block category
@@ -29,7 +29,7 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategorySlug(): string
     {
-        return self::PERSISTED_QUERY_BLOCK_CATEGORY;
+        return self::PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY;
     }
 
     /**

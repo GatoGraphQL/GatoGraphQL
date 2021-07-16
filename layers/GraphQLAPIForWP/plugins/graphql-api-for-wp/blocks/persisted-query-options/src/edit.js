@@ -1,13 +1,13 @@
 /**
  * Application imports
  */
-import PersistedQueryOptions from './persisted-query-options';
+import PersistedQueryEndpointOptions from './persisted-query-options';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<PersistedQueryOptions
+			<PersistedQueryEndpointOptions
 				{ ...props }
 			/>
 		</div>

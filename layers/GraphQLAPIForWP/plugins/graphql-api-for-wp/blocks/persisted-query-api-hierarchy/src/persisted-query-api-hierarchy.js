@@ -19,7 +19,7 @@ import { getMarkdownContentOrUseDefault } from './markdown-loader';
 const getViewBooleanLabel = ( value ) => value ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }`
 const getEditBooleanLabel = ( value ) => value ? __('Yes', 'graphql-api') : __('No', 'graphql-api')
 
-const PersistedQueryAPIHierarchy = ( props ) => {
+const PersistedQueryEndpointAPIHierarchy = ( props ) => {
 	const {
 		isSelected,
 		className,
@@ -89,4 +89,4 @@ export default compose( [
 	} ),
 	withEditableOnFocus(),
 	withCard(),
-] )( PersistedQueryAPIHierarchy );
+] )( PersistedQueryEndpointAPIHierarchy );
