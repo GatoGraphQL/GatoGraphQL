@@ -33,15 +33,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     }
 
     /**
-     * Indicates if we executing the GraphQL query (`true`) or visualizing the query source (`false`)
-     * It returns always `true`, unless passing ?view=source in the single post URL
-     */
-    protected function isGraphQLQueryExecution(): bool
-    {
-        return ($_REQUEST[RequestParams::VIEW] ?? null) != RequestParams::VIEW_SOURCE;
-    }
-
-    /**
      * Whenever this CPT is saved/updated, the timestamp must be regenerated,
      * because it contains the SchemaConfiguration block, which contains
      * Field Deprecation Lists, which can change the schema

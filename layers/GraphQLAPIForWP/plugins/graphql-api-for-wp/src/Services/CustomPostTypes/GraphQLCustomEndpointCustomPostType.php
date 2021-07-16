@@ -174,22 +174,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return $block;
     }
 
-    /**
-     * Indicates if we executing the GraphQL query (`true`) or visualizing the query source (`false`)
-     * It returns always `true`, unless passing ?view=source in the single post URL
-     */
-    protected function isGraphQLQueryExecution(): bool
-    {
-        return !in_array(
-            $_REQUEST[RequestParams::VIEW] ?? null,
-            [
-                RequestParams::VIEW_GRAPHIQL,
-                RequestParams::VIEW_SCHEMA,
-                RequestParams::VIEW_SOURCE,
-            ]
-        );
-    }
-
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
         return $this->customEndpointExecuterRegistryInterface;
