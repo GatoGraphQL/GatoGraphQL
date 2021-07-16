@@ -70,7 +70,20 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
 
-        // If there are no attributes, it's because the post has no parent
+        /**
+         * If there are no attributes, it's because the post has no parent.
+         * Then show a message, that the API hierarchy is disabled.
+         * 
+         * This works at the beginning only. If the user has set a parent,
+         * and then removes it, this section will then show, even though it's not valid.
+         * 
+         * The issue is that we don't receive the postID here, so we can't check
+         * if the post has a parent or not! Alternatively, if we can update the state
+         * of the block when `queryPostParent` changes in persisted-query-api-hierarchy.js,
+         * then this data could be stored in the block and obtained as an attribute.
+         * 
+         * @todo Fix issue
+         */
         if (!$attributes) {
             $blockContentPlaceholder = '<p><em>%s</em></p>';
             $blockContent = sprintf(
