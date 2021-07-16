@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 /**
  * It comprises the endpoint and the persisted query CPTs
  */
-class QueryExecutionBlockCategory extends AbstractBlockCategory
+class EndpointBlockCategory extends AbstractBlockCategory
 {
     public const QUERY_EXECUTION_BLOCK_CATEGORY = 'graphql-api-query-exec';
 

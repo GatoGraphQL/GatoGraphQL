@@ -923,7 +923,7 @@ msgstr ""
 msgid "GraphQL persisted query"
 msgstr ""
 
-#: src/Services/BlockCategories/QueryExecutionBlockCategory.php:43
+#: src/Services/BlockCategories/EndpointBlockCategory.php:43
 msgid "Query execution (endpoint/persisted query)"
 msgstr ""
 
