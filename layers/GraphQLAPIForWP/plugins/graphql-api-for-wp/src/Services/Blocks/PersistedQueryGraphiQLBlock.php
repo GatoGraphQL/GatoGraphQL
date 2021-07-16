@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 /**
  * GraphiQL block for Persisted Queries
  */
-class PersistedQueryGraphiQLBlock extends AbstractGraphiQLBlock implements PersistedQueryEditorBlockServiceTagInterface
+class PersistedQueryEndpointGraphiQLBlock extends AbstractGraphiQLBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface
 {
     public function getBlockPriority(): int
     {

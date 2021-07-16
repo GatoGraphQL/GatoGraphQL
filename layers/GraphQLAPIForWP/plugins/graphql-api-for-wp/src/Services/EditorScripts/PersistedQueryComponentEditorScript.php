@@ -6,12 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 
 /**
  * Components required to edit a GraphQL Persisted Query CPT
  */
-class PersistedQueryComponentEditorScript extends AbstractEditorScript
+class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
@@ -67,8 +67,8 @@ class PersistedQueryComponentEditorScript extends AbstractEditorScript
      */
     protected function getAllowedPostTypes(): array
     {
-        /** @var GraphQLPersistedQueryCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryCustomPostType::class);
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         return array_merge(
             parent::getAllowedPostTypes(),
             [

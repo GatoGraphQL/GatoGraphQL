@@ -288,7 +288,7 @@ msgid "Single Endpoint"
 msgstr ""
 
 #: src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:82
-#: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:118
+#: src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php:118
 msgid "Persisted Queries"
 msgstr ""
 
@@ -918,8 +918,8 @@ msgstr ""
 msgid "GraphQL endpoint"
 msgstr ""
 
-#: src/Services/BlockCategories/PersistedQueryBlockCategory.php:38
-#: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:81
+#: src/Services/BlockCategories/PersistedQueryEndpointBlockCategory.php:38
+#: src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php:81
 msgid "GraphQL persisted query"
 msgstr ""
 
@@ -1051,11 +1051,11 @@ msgstr ""
 msgid "Expose the Interactive Schema client?"
 msgstr ""
 
-#: src/Services/Blocks/PersistedQueryOptionsBlock.php:65
+#: src/Services/Blocks/PersistedQueryEndpointOptionsBlock.php:65
 msgid "Accept variables as URL params:"
 msgstr ""
 
-#: src/Services/Blocks/PersistedQueryOptionsBlock.php:70
+#: src/Services/Blocks/PersistedQueryEndpointOptionsBlock.php:70
 msgid "Inherit query from ancestor(s):"
 msgstr ""
 
@@ -1206,19 +1206,19 @@ msgstr ""
 msgid "Interactive schema"
 msgstr ""
 
-#: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:91
+#: src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php:91
 msgid "GraphQL persisted queries"
 msgstr ""
 
-#: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:99
+#: src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php:99
 msgid "Execute query"
 msgstr ""
 
-#: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:256
+#: src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php:256
 msgid "<p><u>GraphQL query, inheriting properties from ancestor(s): </u></p>"
 msgstr ""
 
-#: src/Services/CustomPostTypes/GraphQLPersistedQueryCustomPostType.php:258
+#: src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php:258
 msgid "<p><u>GraphQL query, as defined in this level: </u></p>"
 msgstr ""
 

@@ -8,11 +8,11 @@ use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
@@ -22,7 +22,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
-class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
+class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
@@ -33,7 +33,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
         HooksAPIInterface $hooksAPI,
         protected BlockContentHelpers $blockContentHelpers,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        protected PersistedQueryBlockRegistryInterface $persistedQueryBlockRegistry
+        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryBlockRegistry
     ) {
         parent::__construct(
             $instanceManager,
@@ -187,9 +187,9 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
          */
         if ($graphQLQueryPost->post_parent) {
             /**
-             * @var PersistedQueryGraphiQLBlock
+             * @var PersistedQueryEndpointGraphiQLBlock
              */
-            $graphiQLBlock = $this->instanceManager->getInstance(PersistedQueryGraphiQLBlock::class);
+            $graphiQLBlock = $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
 
             // Check if the user is authorized to see the content
             $ancestorContent = null;
@@ -212,8 +212,8 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
                     }
                     // Render the block again, using the inherited attributes
                     $inheritedGraphQLBlockAttributes = [
-                        PersistedQueryGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $inheritedGraphQLQuery,
-                        PersistedQueryGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $inheritedGraphQLVariables,
+                        PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $inheritedGraphQLQuery,
+                        PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $inheritedGraphQLVariables,
                     ];
                     // Add the new rendering to the output, and a description for each
                     $ancestorContent = $graphiQLBlock->renderBlock($inheritedGraphQLBlockAttributes, '');
@@ -251,9 +251,9 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
     protected function getQueryExecutionOptionsBlock(): AbstractQueryExecutionOptionsBlock
     {
         /**
-         * @var PersistedQueryOptionsBlock
+         * @var PersistedQueryEndpointOptionsBlock
          */
-        $block = $this->instanceManager->getInstance(PersistedQueryOptionsBlock::class);
+        $block = $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         return $block;
     }
 
@@ -272,7 +272,7 @@ class GraphQLPersistedQueryCustomPostType extends AbstractGraphQLQueryExecutionC
         }
 
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
-        return $optionsBlockDataItem['attrs'][PersistedQueryOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? $default;
+        return $optionsBlockDataItem['attrs'][PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? $default;
     }
 
     /**

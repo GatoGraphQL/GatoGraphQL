@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks\PersistedQueryGraphiQLWithExplorerBlock'
+    GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'

@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractQueryExecutionSchemaConfigurator;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class PersistedQuerySchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
+class PersistedQueryEndpointSchemaConfigurator extends AbstractQueryExecutionSchemaConfigurator
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        protected PersistedQuerySchemaConfigurationExecuterRegistryInterface $persistedQuerySchemaConfigurationExecuterRegistry
+        protected PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQuerySchemaConfigurationExecuterRegistry
     ) {
         parent::__construct(
             $instanceManager,

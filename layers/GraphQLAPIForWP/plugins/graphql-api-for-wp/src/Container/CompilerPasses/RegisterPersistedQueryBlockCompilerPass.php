@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEditorBlockServiceTagInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointEditorBlockServiceTagInterface;
 
-class RegisterPersistedQueryBlockCompilerPass extends AbstractRegisterEditorBlockCompilerPass
+class RegisterPersistedQueryEndpointBlockCompilerPass extends AbstractRegisterEditorBlockCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return PersistedQueryBlockRegistryInterface::class;
+        return PersistedQueryEndpointBlockRegistryInterface::class;
     }
     protected function getServiceClass(): string
     {
-        return PersistedQueryEditorBlockServiceTagInterface::class;
+        return PersistedQueryEndpointEditorBlockServiceTagInterface::class;
     }
 }

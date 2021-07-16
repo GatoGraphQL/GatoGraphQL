@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryAPIHierarchyBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;
 
@@ -24,9 +24,9 @@ class BlockContentHelpers
         /** @var BlockHelpers */
         $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
-         * @var PersistedQueryGraphiQLBlock
+         * @var PersistedQueryEndpointGraphiQLBlock
          */
-        $block = $instanceManager->getInstance(PersistedQueryGraphiQLBlock::class);
+        $block = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         $graphiQLBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
@@ -36,8 +36,8 @@ class BlockContentHelpers
             return null;
         }
         return [
-            $graphiQLBlock['attrs'][PersistedQueryGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? null,
-            $graphiQLBlock['attrs'][PersistedQueryGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES] ?? null
+            $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? null,
+            $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES] ?? null
         ];
     }
 
@@ -48,14 +48,14 @@ class BlockContentHelpers
      */
     public function getSinglePersistedQueryOptionsBlockAttributesFromPost(WP_Post $post): ?array
     {
-        // There must be only one block of type PersistedQueryAPIHierarchyBlock. Fetch it
+        // There must be only one block of type PersistedQueryEndpointAPIHierarchyBlock. Fetch it
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var BlockHelpers */
         $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
-         * @var PersistedQueryAPIHierarchyBlock
+         * @var PersistedQueryEndpointAPIHierarchyBlock
          */
-        $block = $instanceManager->getInstance(PersistedQueryAPIHierarchyBlock::class);
+        $block = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
         $persistedQueryAPIHierarchyBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
@@ -65,7 +65,7 @@ class BlockContentHelpers
             return null;
         }
         return [
-            $persistedQueryAPIHierarchyBlock['attrs'][PersistedQueryAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
+            $persistedQueryAPIHierarchyBlock['attrs'][PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
         ];
     }
 }

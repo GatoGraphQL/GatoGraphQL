@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\PersistedQuerySchemaConfigurationExecuterServiceTagInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
 
-class RegisterPersistedQuerySchemaConfigurationExecuterCompilerPass extends AbstractRegisterSchemaConfigurationExecuterCompilerPass
+class RegisterPersistedQueryEndpointSchemaConfigurationExecuterCompilerPass extends AbstractRegisterSchemaConfigurationExecuterCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return PersistedQuerySchemaConfigurationExecuterRegistryInterface::class;
+        return PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class;
     }
     protected function getServiceClass(): string
     {
-        return PersistedQuerySchemaConfigurationExecuterServiceTagInterface::class;
+        return PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface::class;
     }
 }

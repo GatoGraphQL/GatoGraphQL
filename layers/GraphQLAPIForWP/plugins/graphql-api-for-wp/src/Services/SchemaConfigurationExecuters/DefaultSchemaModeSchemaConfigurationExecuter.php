@@ -11,7 +11,7 @@ use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 
-class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function getEnablingModule(): ?string
     {

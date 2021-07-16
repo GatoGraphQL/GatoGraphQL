@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-interface PersistedQueryEditorBlockServiceTagInterface extends EditorBlockInterface
+interface PersistedQueryEndpointEditorBlockServiceTagInterface extends EditorBlockInterface
 {
 }

@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
-interface PersistedQueryBlockRegistryInterface extends BlockRegistryInterface
+interface PersistedQueryEndpointBlockRegistryInterface extends BlockRegistryInterface
 {
 }

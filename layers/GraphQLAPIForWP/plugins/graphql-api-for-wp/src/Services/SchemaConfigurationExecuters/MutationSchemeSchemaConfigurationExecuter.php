@@ -13,7 +13,7 @@ use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 
-class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQuerySchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     public function getEnablingModule(): ?string
     {

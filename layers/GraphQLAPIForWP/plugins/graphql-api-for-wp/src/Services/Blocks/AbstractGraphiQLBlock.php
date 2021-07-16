@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 
 /**
  * GraphiQL block
@@ -42,7 +42,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getBlockCategoryClass(): ?string
     {
-        return PersistedQueryBlockCategory::class;
+        return PersistedQueryEndpointBlockCategory::class;
     }
 
     protected function isDynamicBlock(): bool
