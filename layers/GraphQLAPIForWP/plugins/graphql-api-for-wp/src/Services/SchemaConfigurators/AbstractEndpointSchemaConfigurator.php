@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
-abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
+abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
