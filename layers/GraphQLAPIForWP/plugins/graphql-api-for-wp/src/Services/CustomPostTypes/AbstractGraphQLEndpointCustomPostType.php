@@ -153,18 +153,18 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             if ($this->isAccessForbidden()) {
                 $this->forbidAccess();
             }
-        }, 0);
 
-        /**
-         * Two outputs:
-         * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
-         * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
-         */
-        if ($this->isGraphQLQueryExecution()) {
-            $this->executeGraphQLQuery();
-        } else {
-            $this->doSomethingElse();
-        }
+            /**
+             * Two outputs:
+             * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
+             * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
+             */
+            if ($this->isGraphQLQueryExecution()) {
+                $this->executeGraphQLQuery();
+            } else {
+                $this->doSomethingElse();
+            }
+        }, 0);
     }
 
     /**
