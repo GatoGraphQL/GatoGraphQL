@@ -141,10 +141,10 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         parent::initialize();
 
-        // Execute at the beginning. If access is forbidden, the process will `wp_die`
+        // Execute at the beginning. If access is forbidden, the process must end
         \add_action('init', function (): void {
             if ($this->isAccessForbidden()) {
-                $this->forbidAccess();
+                wp_die(\__('Access forbidden', 'graphql-api'));
             }
         }, 0);
 
@@ -197,14 +197,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             Hooks::FORBID_ACCESS,
             false
         );
-    }
-
-    /**
-     * Print an error message, and exit
-     */
-    protected function forbidAccess(): void
-    {
-        wp_die(\__('Access forbidden', 'graphql-api'));
     }
 
     /**
