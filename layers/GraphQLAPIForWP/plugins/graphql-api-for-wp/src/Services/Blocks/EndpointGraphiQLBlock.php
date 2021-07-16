@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 
@@ -32,7 +32,7 @@ class EndpointGraphiQLBlock extends AbstractQueryExecutionOptionsBlock implement
 
     protected function getBlockCategoryClass(): ?string
     {
-        return EndpointBlockCategory::class;
+        return CustomEndpointBlockCategory::class;
     }
 
     protected function isDynamicBlock(): bool

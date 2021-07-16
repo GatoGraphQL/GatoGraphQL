@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 
-class EndpointBlockCategory extends AbstractBlockCategory
+class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
     public const ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
 

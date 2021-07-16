@@ -913,7 +913,7 @@ msgstr ""
 msgid "Cache Control for GraphQL"
 msgstr ""
 
-#: src/Services/BlockCategories/EndpointBlockCategory.php:38
+#: src/Services/BlockCategories/CustomEndpointBlockCategory.php:38
 #: src/Services/CustomPostTypes/GraphQLCustomEndpointCustomPostType.php:67
 msgid "GraphQL endpoint"
 msgstr ""
