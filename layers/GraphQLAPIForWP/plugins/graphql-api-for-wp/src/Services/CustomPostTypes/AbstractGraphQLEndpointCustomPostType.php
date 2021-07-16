@@ -18,6 +18,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
 {
@@ -137,6 +138,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         }
         return $actions;
     }
+
+    abstract protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface;
 
     /**
      * Add the hook to initialize the different post types

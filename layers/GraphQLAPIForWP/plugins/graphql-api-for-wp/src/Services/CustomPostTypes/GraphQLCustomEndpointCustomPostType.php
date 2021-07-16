@@ -9,7 +9,9 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
@@ -37,7 +39,8 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         HooksAPIInterface $hooksAPI,
-        protected EndpointBlockRegistryInterface $endpointBlockRegistry
+        protected EndpointBlockRegistryInterface $endpointBlockRegistry,
+        protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
     ) {
         parent::__construct(
             $instanceManager,
@@ -259,6 +262,11 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
             echo $client->getClientHTML();
             die;
         }
+    }
+
+    protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
+    {
+        return $this->customEndpointExecuterRegistryInterface;
     }
 
     /**
