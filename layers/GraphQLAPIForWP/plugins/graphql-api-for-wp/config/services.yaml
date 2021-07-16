@@ -40,5 +40,8 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistry'
 
+    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistry'
+
     GraphQLAPI\GraphQLAPI\Services\:
         resource: '../src/Services/*'
