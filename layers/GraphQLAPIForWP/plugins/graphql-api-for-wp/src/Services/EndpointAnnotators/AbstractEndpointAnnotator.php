@@ -40,9 +40,9 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
         if ($enablingModule !== null && !$this->moduleRegistry->isModuleEnabled($enablingModule)) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     abstract protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType;
 }

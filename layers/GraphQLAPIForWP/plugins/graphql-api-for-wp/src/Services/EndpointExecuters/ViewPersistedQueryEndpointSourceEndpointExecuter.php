@@ -27,9 +27,9 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     {
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
-    
+
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
     {
         return $this->graphQLPersistedQueryEndpointCustomPostType;
-    } 
+    }
 }

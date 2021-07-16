@@ -22,14 +22,14 @@ class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpoin
             $moduleRegistry,
         );
     }
-    
+
     public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
     }
-    
+
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType;
-    }    
+    }
 }

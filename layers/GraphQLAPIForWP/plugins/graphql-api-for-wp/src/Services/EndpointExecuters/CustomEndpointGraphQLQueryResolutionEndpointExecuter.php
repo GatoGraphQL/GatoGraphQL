@@ -29,7 +29,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
     {
         return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
     }
-    
+
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType;

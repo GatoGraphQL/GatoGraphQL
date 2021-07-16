@@ -48,10 +48,10 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
         if (!$customPostType->isEndpointEnabled($post)) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     abstract protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType;
 
     /**

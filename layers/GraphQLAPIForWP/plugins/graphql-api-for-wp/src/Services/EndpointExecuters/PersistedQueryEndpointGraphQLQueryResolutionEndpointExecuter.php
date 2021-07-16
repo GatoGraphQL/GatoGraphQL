@@ -31,7 +31,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     {
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
-    
+
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
     {
         return $this->graphQLPersistedQueryEndpointCustomPostType;
@@ -58,7 +58,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     public function addGraphQLVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        
+
         /** @var GraphQLRequestVarsHooks */
         $graphQLAPIRequestHookSet = $this->instanceManager->getInstance(GraphQLRequestVarsHooks::class);
 

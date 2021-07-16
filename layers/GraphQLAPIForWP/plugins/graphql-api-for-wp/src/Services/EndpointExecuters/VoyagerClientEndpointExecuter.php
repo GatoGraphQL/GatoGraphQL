@@ -34,7 +34,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     {
         return ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS;
     }
-    
+
     protected function getView(): string
     {
         return RequestParams::VIEW_SCHEMA;

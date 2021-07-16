@@ -53,7 +53,7 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
         if (!$this->getClientEndpointAnnotator()->isClientEnabled($post)) {
             return false;
         }
-        
+
         return true;
     }
 
