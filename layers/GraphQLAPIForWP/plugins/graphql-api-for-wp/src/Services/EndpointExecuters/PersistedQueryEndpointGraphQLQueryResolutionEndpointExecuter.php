@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
@@ -24,6 +25,11 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
             $instanceManager,
             $moduleRegistry,
         );
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
     
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType

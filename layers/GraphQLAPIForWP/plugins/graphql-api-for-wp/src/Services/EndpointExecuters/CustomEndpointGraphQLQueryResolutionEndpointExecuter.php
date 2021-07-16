@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use WP_Post;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use WP_Post;
 
 class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
@@ -22,6 +23,11 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
             $instanceManager,
             $moduleRegistry,
         );
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
     }
     
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
