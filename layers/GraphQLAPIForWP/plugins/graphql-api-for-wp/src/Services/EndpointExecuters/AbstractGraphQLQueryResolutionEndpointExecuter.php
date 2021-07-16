@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 
-abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
+abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointEndpointExecuter
 {
     use EndpointResolverTrait;
     
@@ -23,22 +22,8 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
             return false;
         }
 
-        // Check we're loading the corresponding CPT
-        $customPostType = $this->getCustomPostType();
-        if (!\is_singular($customPostType->getCustomPostType())) {
-            return false;
-        }
-
-        // Check the endpoint is not disabled
-        global $post;
-        if (!$customPostType->isEndpointEnabled($post)) {
-            return false;
-        }
-
         return true;
     }
-
-    abstract protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType;
 
     /**
      * Indicates if we executing the GraphQL query.
