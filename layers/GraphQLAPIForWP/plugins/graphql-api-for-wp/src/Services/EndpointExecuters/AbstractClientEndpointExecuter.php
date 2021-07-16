@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
@@ -50,4 +51,13 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
     }
 
     abstract protected function getView(): string;
+
+    public function executeEndpoint(): void
+    {
+        // Print the HTML from the client, and that's it
+        echo $this->getClient()->getClientHTML();
+        die;
+    }
+
+    abstract protected function getClient(): AbstractClient;
 }

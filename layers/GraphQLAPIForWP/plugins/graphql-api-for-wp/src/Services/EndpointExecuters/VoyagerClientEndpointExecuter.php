@@ -6,9 +6,27 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        protected CustomEndpointVoyagerClient $customEndpointVoyagerClient,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $graphQLCustomEndpointCustomPostType,
+        );
+    }
+
     public function getEnablingModule(): ?string
     {
         return ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS;
@@ -19,8 +37,8 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
         return RequestParams::VIEW_SCHEMA;
     }
 
-    public function executeEndpoint(): void
+    protected function getClient(): AbstractClient
     {
-        // @todo implement
+        return $this->customEndpointVoyagerClient;
     }
 }
