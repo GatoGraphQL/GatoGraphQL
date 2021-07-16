@@ -168,7 +168,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                  * - Voyager client
                  * - View query source
                  * 
-                 * All others must have `isServiceEnabled` => false.
+                 * All others will have `isServiceEnabled` => false, by checking
+                 * their expected value of ?view=...
                  */
                 foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
                     $endpointExecuter->executeEndpoint();
