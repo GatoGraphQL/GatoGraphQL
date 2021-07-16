@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -241,36 +239,5 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // If null, we are in the admin (eg: editing a Persisted Query),
         // and there's no need to override params
         return $customPost !== null;
-    }
-
-    /**
-     * Gutenberg templates to lock down the Custom Post Type to
-     *
-     * @return array<array> Every element is an array with template name in first pos, and attributes then
-     */
-    protected function getGutenbergTemplate(): array
-    {
-        $template = parent::getGutenbergTemplate();
-
-        // If enabled by module, add the Schema Configuration block to the locked Gutenberg template
-        $this->maybeAddSchemaConfigurationBlock($template);
-
-        return $template;
-    }
-
-    /**
-     * If enabled by module, add the Schema Configuration block to the locked Gutenberg template
-     *
-     * @param array<array> $template Every element is an array with template name in first pos, and attributes then
-     */
-    protected function maybeAddSchemaConfigurationBlock(array &$template): void
-    {
-        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
-            /**
-             * @var EndpointSchemaConfigurationBlock
-             */
-            $schemaConfigurationBlock = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-            $template[] = [$schemaConfigurationBlock->getBlockFullName()];
-        }
     }
 }
