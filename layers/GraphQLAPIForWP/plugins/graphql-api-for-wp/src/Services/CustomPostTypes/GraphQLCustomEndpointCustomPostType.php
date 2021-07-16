@@ -190,16 +190,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         );
     }
 
-    /**
-     * Set the hook to expose the GraphiQL/Voyager clients
-     */
-    protected function doSomethingElse(): void
-    {
-        if (($_REQUEST[RequestParams::VIEW] ?? null) == RequestParams::VIEW_SOURCE) {
-            parent::doSomethingElse();
-        }
-    }
-
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
         return $this->customEndpointExecuterRegistryInterface;

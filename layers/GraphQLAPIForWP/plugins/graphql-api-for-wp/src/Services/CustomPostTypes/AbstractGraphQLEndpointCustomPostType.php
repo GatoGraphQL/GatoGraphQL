@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use WP_Post;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -174,15 +173,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
                     $endpointExecuter->executeEndpoint();
                 }
-        
-                /**
-                 * Two outputs:
-                 * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
-                 * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
-                 */
-                if (!$this->isGraphQLQueryExecution()) {
-                    $this->doSomethingElse();
-                }
             },
             0
         );
@@ -197,50 +187,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             Hooks::FORBID_ACCESS,
             false
         );
-    }
-
-    /**
-     * Do something else, not the execution of the GraphQL query.
-     * By default, print the Query source
-     */
-    protected function doSomethingElse(): void
-    {
-        /** Add the excerpt, which is the description of the GraphQL query */
-        \add_filter(
-            'the_content',
-            [$this, 'maybeGetGraphQLQuerySourceContent']
-        );
-    }
-
-    /**
-     * Render the GraphQL Query CPT
-     */
-    public function maybeGetGraphQLQuerySourceContent(string $content): string
-    {
-        /**
-         * Check if it is this CPT, and hasn't forbid access to executing the API
-         */
-        if (\is_singular($this->getCustomPostType())) {
-            $vars = ApplicationState::getVars();
-            $customPost = $vars['routing-state']['queried-object'];
-            // Make sure there is a post (eg: it has not been deleted)
-            if ($customPost !== null) {
-                return $this->getGraphQLQuerySourceContent($content, $customPost);
-            }
-        }
-        return $content;
-    }
-
-    /**
-     * Render the GraphQL Query CPT
-     */
-    protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
-    {
-        /**
-         * Prettyprint the code
-         */
-        $content .= '<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>';
-        return $content;
     }
 
     abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
