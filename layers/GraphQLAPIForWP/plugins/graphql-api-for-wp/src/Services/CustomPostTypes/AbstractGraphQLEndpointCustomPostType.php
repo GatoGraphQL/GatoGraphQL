@@ -19,7 +19,7 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-abstract class AbstractGraphQLQueryExecutionCustomPostType extends AbstractCustomPostType
+abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
 {
     use EndpointResolverTrait {
         EndpointResolverTrait::getNature as getUpstreamNature;

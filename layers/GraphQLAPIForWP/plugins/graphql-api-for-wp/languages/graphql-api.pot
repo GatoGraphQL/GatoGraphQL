@@ -1143,31 +1143,31 @@ msgstr ""
 msgid "Parent %s:"
 msgstr ""
 
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:50
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:50
 msgid "Execute"
 msgstr ""
 
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:86
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:86
 #, php-format
 msgid "Preview source &#8220;%s&#8221;"
 msgstr ""
 
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:87
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:87
 msgid "Preview source"
 msgstr ""
 
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:93
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:115
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:93
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:115
 #, php-format
 msgid "%s &#8220;%s&#8221;"
 msgstr ""
 
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:108
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:108
 #, php-format
 msgid "View source &#8220;%s&#8221;"
 msgstr ""
 
-#: src/Services/CustomPostTypes/AbstractGraphQLQueryExecutionCustomPostType.php:109
+#: src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:109
 msgid "View source"
 msgstr ""
 
