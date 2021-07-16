@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEditorBlockServiceTagInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointEditorBlockServiceTagInterface;
 
 /**
  * Persisted Query API Hierarchy block
  */
-class PersistedQueryAPIHierarchyBlock extends AbstractBlock implements PersistedQueryEditorBlockServiceTagInterface
+class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
@@ -59,7 +59,7 @@ class PersistedQueryAPIHierarchyBlock extends AbstractBlock implements Persisted
 
     protected function getBlockCategoryClass(): ?string
     {
-        return PersistedQueryBlockCategory::class;
+        return PersistedQueryEndpointBlockCategory::class;
     }
 
     /**

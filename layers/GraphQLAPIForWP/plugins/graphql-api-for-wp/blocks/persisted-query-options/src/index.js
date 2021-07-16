@@ -64,7 +64,7 @@ registerBlockType( 'graphql-api/persisted-query-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS
 		 */
 		acceptVariablesAsURLParams: {
 			type: 'boolean',

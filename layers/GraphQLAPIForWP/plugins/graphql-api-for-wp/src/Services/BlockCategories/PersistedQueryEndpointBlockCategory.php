@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 
-class PersistedQueryBlockCategory extends AbstractBlockCategory
+class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
 {
     public const PERSISTED_QUERY_BLOCK_CATEGORY = 'graphql-api-persisted-query';
 
@@ -17,8 +17,8 @@ class PersistedQueryBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        /** @var GraphQLPersistedQueryCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryCustomPostType::class);
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         return [
             $customPostTypeService->getCustomPostType(),
         ];

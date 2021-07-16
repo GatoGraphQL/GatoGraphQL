@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryGraphiQLBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 
 /**
  * GraphiQL with Explorer block
  */
-class PersistedQueryGraphiQLWithExplorerBlock extends PersistedQueryGraphiQLBlock
+class PersistedQueryEndpointGraphiQLWithExplorerBlock extends PersistedQueryEndpointGraphiQLBlock
 {
     use GraphiQLWithExplorerBlockTrait;
 }

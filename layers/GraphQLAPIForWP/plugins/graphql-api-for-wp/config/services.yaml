@@ -13,8 +13,8 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistry'
 
-    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistryInterface:
-        class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQueryBlockRegistry'
+    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistry'
 
     GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistry'
@@ -28,8 +28,8 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistry'
 
-    GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistryInterface:
-        class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQuerySchemaConfigurationExecuterRegistry'
+    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
+        class: '\GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistry'
 
     GraphQLAPI\GraphQLAPI\Services\:
         resource: '../src/Services/*'

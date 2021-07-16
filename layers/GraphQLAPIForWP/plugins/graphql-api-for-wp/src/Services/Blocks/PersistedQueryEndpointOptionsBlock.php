@@ -6,12 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 
 /**
  * Persisted Query Options block
  */
-class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock implements PersistedQueryEditorBlockServiceTagInterface
+class PersistedQueryEndpointOptionsBlock extends AbstractQueryExecutionOptionsBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
@@ -46,7 +46,7 @@ class PersistedQueryOptionsBlock extends AbstractQueryExecutionOptionsBlock impl
 
     protected function getBlockCategoryClass(): ?string
     {
-        return PersistedQueryBlockCategory::class;
+        return PersistedQueryEndpointBlockCategory::class;
     }
 
     /**

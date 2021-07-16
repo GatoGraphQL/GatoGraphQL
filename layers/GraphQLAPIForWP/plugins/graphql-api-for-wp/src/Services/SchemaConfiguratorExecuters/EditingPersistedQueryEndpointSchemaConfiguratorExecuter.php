@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQuerySchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-class EditingPersistedQuerySchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
+class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
         protected EndpointHelpers $endpointHelpers,
-        protected PersistedQuerySchemaConfigurator $persistedQuerySchemaConfigurator
+        protected PersistedQueryEndpointSchemaConfigurator $persistedQuerySchemaConfigurator
     ) {
         parent::__construct(
             $instanceManager,
