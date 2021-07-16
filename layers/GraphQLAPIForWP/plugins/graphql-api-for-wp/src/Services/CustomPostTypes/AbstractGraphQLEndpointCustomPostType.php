@@ -155,6 +155,22 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             }
 
             /**
+             * Execute the EndpointExecuters from the Registry:
+             * 
+             * Only 1 executer should be executed, from among (or other injected ones):
+             * 
+             * - Query resolution
+             * - GraphiQL client
+             * - Voyager client
+             * - View query source
+             * 
+             * All others must have `isServiceEnabled` => false.
+             */
+            foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
+                $endpointExecuter->executeEndpoint();
+            }
+
+            /**
              * Two outputs:
              * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
              * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
