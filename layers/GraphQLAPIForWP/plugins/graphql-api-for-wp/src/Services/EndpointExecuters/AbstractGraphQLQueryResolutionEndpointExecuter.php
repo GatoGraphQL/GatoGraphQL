@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 
-abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointEndpointExecuter
+abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
 {
     use EndpointResolverTrait;
     

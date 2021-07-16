@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustom
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-abstract class AbstractClientEndpointExecuter extends AbstractEndpointEndpointExecuter
+abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
