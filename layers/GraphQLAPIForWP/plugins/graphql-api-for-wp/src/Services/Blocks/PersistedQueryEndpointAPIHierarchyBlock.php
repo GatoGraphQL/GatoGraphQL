@@ -70,12 +70,21 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
 
-        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
-        $blockContent = sprintf(
-            $blockContentPlaceholder,
-            \__('Inherit query from ancestor(s):', 'graphql-api'),
-            $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false)
-        );
+        // If there are no attributes, it's because the post has no parent
+        if (!$attributes) {
+            $blockContentPlaceholder = '<p><em>%s</em></p>';
+            $blockContent = sprintf(
+                $blockContentPlaceholder,
+                \__('This section is not enabled, since the persisted query has no ancestor.', 'graphql-api')
+            );
+        } else {
+            $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
+            $blockContent = sprintf(
+                $blockContentPlaceholder,
+                \__('Inherit query from ancestor(s):', 'graphql-api'),
+                $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false)
+            );
+        }
 
         $blockContentPlaceholder = <<<EOT
             <div class="%s">
