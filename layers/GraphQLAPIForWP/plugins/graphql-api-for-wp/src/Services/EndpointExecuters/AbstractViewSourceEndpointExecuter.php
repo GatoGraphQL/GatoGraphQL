@@ -29,16 +29,11 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractEndpointExecut
      */
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
-        /**
-         * Check if it is this CPT, and hasn't forbid access to executing the API
-         */
-        if (\is_singular($this->getCustomPostType())) {
-            $vars = ApplicationState::getVars();
-            $customPost = $vars['routing-state']['queried-object'];
-            // Make sure there is a post (eg: it has not been deleted)
-            if ($customPost !== null) {
-                return $this->getGraphQLQuerySourceContent($content, $customPost);
-            }
+        $vars = ApplicationState::getVars();
+        $customPost = $vars['routing-state']['queried-object'];
+        // Make sure there is a post (eg: it has not been deleted)
+        if ($customPost !== null) {
+            return $this->getGraphQLQuerySourceContent($content, $customPost);
         }
         return $content;
     }
