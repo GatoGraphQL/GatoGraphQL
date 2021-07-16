@@ -293,7 +293,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         if (\is_singular($this->getCustomPostType())) {
             // Check if it is enabled, by configuration
             [&$vars] = $vars_in_array;
-            if (!$this->isEnabled($vars['routing-state']['queried-object-id'])) {
+            if (!$this->isEndpointEnabled($vars['routing-state']['queried-object-id'])) {
                 return;
             }
 

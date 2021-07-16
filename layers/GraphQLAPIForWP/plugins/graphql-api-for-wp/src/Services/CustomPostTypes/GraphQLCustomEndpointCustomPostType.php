@@ -280,7 +280,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         }
 
         // If the endpoint is disabled, then also disable this client
-        if (!$this->isEnabled($postOrID)) {
+        if (!$this->isEndpointEnabled($postOrID)) {
             return false;
         }
 
@@ -315,7 +315,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         }
 
         // If the endpoint is disabled, then also disable this client
-        if (!$this->isEnabled($postOrID)) {
+        if (!$this->isEndpointEnabled($postOrID)) {
             return false;
         }
 

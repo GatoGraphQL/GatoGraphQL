@@ -27,7 +27,7 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
 
         // Check the CPT is not disabled
         global $post;
-        if (!$customPostType->isEnabled($post)) {
+        if (!$customPostType->isEndpointEnabled($post)) {
             return false;
         }
 

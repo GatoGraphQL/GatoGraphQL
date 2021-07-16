@@ -85,7 +85,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
          */
         if (!is_null($post_type_object) && \is_post_type_viewable($post_type_object)) {
             $title = \_draft_or_post_title();
-            $isEnabled = $this->isEnabled($post);
+            $isEndpointEnabled = $this->isEndpointEnabled($post);
             $executeLabel = $this->getExecuteActionLabel();
             if (in_array($post->post_status, array('pending', 'draft', 'future'))) {
                 $can_edit_post = \current_user_can('edit_post', $post->ID);
@@ -103,7 +103,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                             esc_attr(sprintf(__('Preview source &#8220;%s&#8221;', 'graphql-api'), $title)),
                             __('Preview source', 'graphql-api')
                         );
-                        if ($isEnabled) {
+                        if ($isEndpointEnabled) {
                             $actions['execute'] = sprintf(
                                 '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                                 esc_url($preview_link),
@@ -125,7 +125,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                         esc_attr(sprintf(__('View source &#8220;%s&#8221;', 'graphql-api'), $title)),
                         __('View source', 'graphql-api')
                     );
-                    if ($isEnabled) {
+                    if ($isEndpointEnabled) {
                         $actions['execute'] = sprintf(
                             '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                             $permalink,
@@ -273,7 +273,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
 
     /**
-     * Read the options block and check the value of attribute "isEnabled"
+     * Read the options block and check the value of attribute "isEndpointEnabled"
      */
     protected function isOptionsBlockValueOn(WP_Post|int $postOrID, string $attribute, bool $default): bool
     {
@@ -288,9 +288,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     }
 
     /**
-     * Read the options block and check the value of attribute "isEnabled"
+     * Read the options block and check the value of attribute "isEndpointEnabled"
      */
-    public function isEnabled(WP_Post|int $postOrID): bool
+    public function isEndpointEnabled(WP_Post|int $postOrID): bool
     {
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(
@@ -333,7 +333,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     public function addGraphQLVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        if (\is_singular($this->getCustomPostType()) && $this->isEnabled($vars['routing-state']['queried-object-id'])) {
+        if (\is_singular($this->getCustomPostType()) && $this->isEndpointEnabled($vars['routing-state']['queried-object-id'])) {
             $this->upstreamAddGraphQLVars($vars_in_array);
         }
     }
