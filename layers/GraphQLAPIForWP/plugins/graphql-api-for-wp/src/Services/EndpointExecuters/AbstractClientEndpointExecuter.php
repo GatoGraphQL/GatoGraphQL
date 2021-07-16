@@ -29,9 +29,7 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
             return false;
         }
 
-        // Check the expected ?view=... is requested
-        $view = $_REQUEST[RequestParams::VIEW] ?? null;
-        if ($view !== $this->getView()) {
+        if (!$this->isClientRequested()) {
             return false;
         }
 
@@ -41,6 +39,14 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
     protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType;
+    }
+
+    /**
+     * Check the expected ?view=... is requested
+     */
+    protected function isClientRequested(): bool
+    {
+        return ($_REQUEST[RequestParams::VIEW] ?? null) === $this->getView();
     }
 
     abstract protected function getView(): string;
