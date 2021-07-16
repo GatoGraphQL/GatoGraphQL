@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 
 class EndpointBlockCategory extends AbstractBlockCategory
 {
@@ -17,8 +17,8 @@ class EndpointBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        /** @var GraphQLEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         return [
             $customPostTypeService->getCustomPostType(),
         ];

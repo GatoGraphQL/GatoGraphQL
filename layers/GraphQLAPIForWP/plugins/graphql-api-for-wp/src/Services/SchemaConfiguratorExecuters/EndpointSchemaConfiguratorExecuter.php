@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\EndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -22,8 +22,8 @@ class EndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfigu
 
     protected function getCustomPostType(): string
     {
-        /** @var GraphQLEndpointCustomPostType */
-        $customPostTypeService = $this->instanceManager->getInstance(GraphQLEndpointCustomPostType::class);
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $customPostTypeService = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         return $customPostTypeService->getCustomPostType();
     }
 

@@ -18,7 +18,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
 use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
 use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLQueryExecutionCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
@@ -28,7 +28,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
-class GraphQLEndpointCustomPostType extends AbstractGraphQLQueryExecutionCustomPostType
+class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
