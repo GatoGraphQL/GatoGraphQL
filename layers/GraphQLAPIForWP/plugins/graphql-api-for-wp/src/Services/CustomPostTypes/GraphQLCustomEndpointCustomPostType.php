@@ -18,14 +18,10 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
@@ -201,52 +197,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     {
         if (($_REQUEST[RequestParams::VIEW] ?? null) == RequestParams::VIEW_SOURCE) {
             parent::doSomethingElse();
-        } else {
-            /**
-             * Execute at the very last, because Component::boot is executed also on hook "wp",
-             * and there is useNamespacing set
-             */
-            \add_action(
-                'wp',
-                [$this, 'maybePrintClient'],
-                PHP_INT_MAX
-            );
-        }
-    }
-    /**
-     * Expose the GraphiQL/Voyager clients
-     */
-    public function maybePrintClient(): void
-    {
-        $vars = ApplicationState::getVars();
-        $customPost = $vars['routing-state']['queried-object'];
-        // Make sure there is a post (eg: it has not been deleted)
-        if ($customPost === null) {
-            return;
-        }
-        $view = $_REQUEST[RequestParams::VIEW] ?? '';
-        // Read from the configuration if to expose the GraphiQL/Voyager client
-        if (
-            (
-                $view == RequestParams::VIEW_GRAPHIQL
-                && $this->isGraphiQLEnabled($customPost)
-            )
-            || (
-                $view == RequestParams::VIEW_SCHEMA
-                && $this->isVoyagerEnabled($customPost)
-            )
-        ) {
-            // Print the HTML directly from the client
-            $clientClasses = [
-                RequestParams::VIEW_GRAPHIQL => CustomEndpointGraphiQLClient::class,
-                RequestParams::VIEW_SCHEMA => CustomEndpointVoyagerClient::class,
-            ];
-            /**
-             * @var AbstractClient
-             */
-            $client = $this->instanceManager->getInstance($clientClasses[$view]);
-            echo $client->getClientHTML();
-            die;
         }
     }
 
