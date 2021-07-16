@@ -14,23 +14,28 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEn
     
     public function isServiceEnabled(): bool
     {
+        if (!parent::isServiceEnabled()) {
+            return false;
+        }
+
         // Check we're resolving the GraphQL query
         if (!$this->isGraphQLQueryExecution()) {
             return false;
         }
+
         // Check we're loading the corresponding CPT
         $customPostType = $this->getCustomPostType();
         if (!\is_singular($customPostType->getCustomPostType())) {
             return false;
         }
 
-        // Check the CPT is not disabled
+        // Check the endpoint is not disabled
         global $post;
         if (!$customPostType->isEndpointEnabled($post)) {
             return false;
         }
 
-        return parent::isServiceEnabled();
+        return true;
     }
 
     abstract protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType;
