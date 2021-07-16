@@ -180,7 +180,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
     }
 
-    protected function getQueryExecutionOptionsBlock(): AbstractEndpointOptionsBlock
+    protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
     {
         /**
          * @var EndpointOptionsBlock

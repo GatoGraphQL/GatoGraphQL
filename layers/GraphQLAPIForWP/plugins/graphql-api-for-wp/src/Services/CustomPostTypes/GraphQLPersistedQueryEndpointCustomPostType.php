@@ -248,7 +248,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return $this->graphQLQueryPostTypeHelpers->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
     }
 
-    protected function getQueryExecutionOptionsBlock(): AbstractEndpointOptionsBlock
+    protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
     {
         /**
          * @var PersistedQueryEndpointOptionsBlock

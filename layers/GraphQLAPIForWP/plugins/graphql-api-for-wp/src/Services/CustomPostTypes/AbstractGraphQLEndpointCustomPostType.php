@@ -239,7 +239,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         return $nature;
     }
 
-    abstract protected function getQueryExecutionOptionsBlock(): AbstractEndpointOptionsBlock;
+    abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
 
     /**
      * Read the options block and check the value of attribute "isEnabled"
@@ -278,7 +278,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
-            $this->getQueryExecutionOptionsBlock()
+            $this->getEndpointOptionsBlock()
         );
     }
 
