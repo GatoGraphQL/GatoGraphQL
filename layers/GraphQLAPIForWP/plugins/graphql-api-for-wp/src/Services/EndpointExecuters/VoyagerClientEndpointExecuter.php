@@ -9,6 +9,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\VoyagerClientEndpointAnnotator;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -19,32 +21,13 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
         ModuleRegistryInterface $moduleRegistry,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         protected CustomEndpointVoyagerClient $customEndpointVoyagerClient,
+        protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
             $graphQLCustomEndpointCustomPostType,
         );
-    }
-
-    /**
-     * Only enable the service, if the corresponding module is also enabled
-     */
-    public function isServiceEnabled(): bool
-    {
-        if (!parent::isServiceEnabled()) {
-            return false;
-        }
-
-        // Check the client has not been disabled in the CPT
-        global $post;
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostType = $this->getCustomPostType();
-        if (!$customPostType->isVoyagerEnabled($post)) {
-            return false;
-        }
-        
-        return true;
     }
 
     public function getEnablingModule(): ?string
@@ -60,5 +43,10 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     protected function getClient(): AbstractClient
     {
         return $this->customEndpointVoyagerClient;
+    }
+
+    protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface
+    {
+        return $this->voyagerClientEndpointExecuter;
     }
 }

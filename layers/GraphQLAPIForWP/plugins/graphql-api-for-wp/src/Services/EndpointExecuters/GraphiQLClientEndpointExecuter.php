@@ -9,6 +9,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
+use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\GraphiQLClientEndpointAnnotator;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -19,32 +21,13 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
         ModuleRegistryInterface $moduleRegistry,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
+        protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
     ) {
         parent::__construct(
             $instanceManager,
             $moduleRegistry,
             $graphQLCustomEndpointCustomPostType,
         );
-    }
-
-    /**
-     * Only enable the service, if the corresponding module is also enabled
-     */
-    public function isServiceEnabled(): bool
-    {
-        if (!parent::isServiceEnabled()) {
-            return false;
-        }
-
-        // Check the client has not been disabled in the CPT
-        global $post;
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostType = $this->getCustomPostType();
-        if (!$customPostType->isGraphiQLEnabled($post)) {
-            return false;
-        }
-        
-        return true;
     }
 
     public function getEnablingModule(): ?string
@@ -60,5 +43,10 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
     protected function getClient(): AbstractClient
     {
         return $this->customEndpointGraphiQLClient;
+    }
+
+    protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface
+    {
+        return $this->graphiQLClientEndpointAnnotator;
     }
 }

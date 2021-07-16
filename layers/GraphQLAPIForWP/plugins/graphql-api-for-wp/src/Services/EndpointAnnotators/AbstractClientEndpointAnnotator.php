@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustom
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
-abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
+abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator implements ClientEndpointAnnotatorInterface
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,

@@ -7,6 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\AbstractClientEndpointAnnotator;
+use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
@@ -36,4 +38,24 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
     }
 
     abstract protected function getClient(): AbstractClient;
+
+    /**
+     * Only enable the service, if the corresponding module is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        if (!parent::isServiceEnabled()) {
+            return false;
+        }
+
+        // Check the client has not been disabled in the CPT
+        global $post;
+        if (!$this->getClientEndpointAnnotator()->isClientEnabled($post)) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    abstract protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface;
 }

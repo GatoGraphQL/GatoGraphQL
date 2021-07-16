@@ -6,7 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
@@ -22,15 +24,8 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
      */
     public function addCustomPostTypeTableActions(array &$actions, WP_Post $post): void
     {
-        // Check the endpoint in the post is not disabled
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostType = $this->getCustomPostType();
-        if (!$customPostType->isEndpointEnabled($post)) {
-            return;
-        }
-
         // Check the client has not been disabled in the CPT
-        if (!$customPostType->isVoyagerEnabled($post)) {
+        if (!$this->isClientEnabled($post)) {
             return;
         }
 
@@ -48,5 +43,37 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
                 __('Interactive schema', 'graphql-api')
             );
         }
+    }
+
+    /**
+     * Read the options block and check the value of attribute "isGraphiQLEnabled"
+     */
+    public function isClientEnabled(WP_Post|int $postOrID): bool
+    {
+        // Check the endpoint in the post is not disabled
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $customPostType = $this->getCustomPostType();
+        if (!$customPostType->isEndpointEnabled($postOrID)) {
+            return false;
+        }
+
+        /** @var BlockHelpers */
+        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+        /** @var EndpointVoyagerBlock */
+        $endpointVoyagerBlock = $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
+        $optionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+            $postOrID,
+            $endpointVoyagerBlock
+        );
+
+        // If there was no options block, something went wrong in the post content
+        $default = true;
+        if (is_null($optionsBlockDataItem)) {
+            return $default;
+        }
+
+        // The default value is not saved in the DB in Gutenberg!
+        $attribute = EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED;
+        return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
     }
 }
