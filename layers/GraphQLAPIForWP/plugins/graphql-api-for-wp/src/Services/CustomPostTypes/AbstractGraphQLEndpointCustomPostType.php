@@ -13,10 +13,10 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractQueryExecutionOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
@@ -239,7 +239,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         return $nature;
     }
 
-    abstract protected function getQueryExecutionOptionsBlock(): AbstractQueryExecutionOptionsBlock;
+    abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
 
     /**
      * Read the options block and check the value of attribute "isEnabled"
@@ -264,7 +264,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(
             $postOrID,
-            AbstractQueryExecutionOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED,
+            AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED,
             true
         );
     }
@@ -278,7 +278,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
-            $this->getQueryExecutionOptionsBlock()
+            $this->getEndpointOptionsBlock()
         );
     }
 
@@ -331,9 +331,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             /**
-             * @var SchemaConfigurationBlock
+             * @var EndpointSchemaConfigurationBlock
              */
-            $schemaConfigurationBlock = $this->instanceManager->getInstance(SchemaConfigurationBlock::class);
+            $schemaConfigurationBlock = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
             $template[] = [$schemaConfigurationBlock->getBlockFullName()];
         }
     }

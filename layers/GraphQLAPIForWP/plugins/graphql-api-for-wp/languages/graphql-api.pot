@@ -126,7 +126,7 @@ msgstr ""
 
 #: src/ComponentConfiguration.php:89
 #: src/Services/Blocks/AccessControlBlock.php:99
-#: src/Services/Blocks/SchemaConfigurationBlock.php:81
+#: src/Services/Blocks/EndpointSchemaConfigurationBlock.php:81
 msgid "Default"
 msgstr ""
 
@@ -424,7 +424,7 @@ msgid "Default max-age value (in seconds) for the Cache-Control header, for all 
 msgstr ""
 
 #: src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:98
-#: src/Services/Blocks/SchemaConfigurationBlock.php:117
+#: src/Services/Blocks/EndpointSchemaConfigurationBlock.php:117
 #: src/Services/CustomPostTypes/GraphQLSchemaConfigurationCustomPostType.php:52
 #: src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:57
 msgid "Schema Configuration"
@@ -451,7 +451,7 @@ msgid "Enable to communicate the existence of some field from the schema to cert
 msgstr ""
 
 #: src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:169
-#: src/Services/Blocks/SchemaConfigurationBlock.php:83
+#: src/Services/Blocks/EndpointSchemaConfigurationBlock.php:83
 msgid "None"
 msgstr ""
 
@@ -913,7 +913,7 @@ msgstr ""
 msgid "Cache Control for GraphQL"
 msgstr ""
 
-#: src/Services/BlockCategories/EndpointBlockCategory.php:38
+#: src/Services/BlockCategories/CustomEndpointBlockCategory.php:38
 #: src/Services/CustomPostTypes/GraphQLCustomEndpointCustomPostType.php:67
 msgid "GraphQL endpoint"
 msgstr ""
@@ -923,7 +923,7 @@ msgstr ""
 msgid "GraphQL persisted query"
 msgstr ""
 
-#: src/Services/BlockCategories/QueryExecutionBlockCategory.php:43
+#: src/Services/BlockCategories/EndpointBlockCategory.php:43
 msgid "Query execution (endpoint/persisted query)"
 msgstr ""
 
@@ -966,12 +966,12 @@ msgstr ""
 msgid "❌ No"
 msgstr ""
 
-#: src/Services/Blocks/AbstractQueryExecutionOptionsBlock.php:36
+#: src/Services/Blocks/AbstractEndpointOptionsBlock.php:36
 #: src/Services/Blocks/SchemaConfigOptionsBlock.php:119
 msgid "Options"
 msgstr ""
 
-#: src/Services/Blocks/AbstractQueryExecutionOptionsBlock.php:49
+#: src/Services/Blocks/AbstractEndpointOptionsBlock.php:49
 msgid "Enabled:"
 msgstr ""
 
@@ -1087,7 +1087,7 @@ msgstr ""
 msgid "(Nothing here: All Schema Configuration options are disabled)"
 msgstr ""
 
-#: src/Services/Blocks/SchemaConfigurationBlock.php:85
+#: src/Services/Blocks/EndpointSchemaConfigurationBlock.php:85
 msgid "Inherit from parent"
 msgstr ""
 

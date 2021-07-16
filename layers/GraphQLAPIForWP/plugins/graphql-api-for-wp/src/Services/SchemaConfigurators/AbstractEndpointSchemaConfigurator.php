@@ -9,12 +9,12 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigurationBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
-abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfiguratorInterface
+abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
 {
     public function __construct(
         protected InstanceManagerInterface $instanceManager,
@@ -72,9 +72,9 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
         /** @var BlockHelpers */
         $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
         /**
-         * @var SchemaConfigurationBlock
+         * @var EndpointSchemaConfigurationBlock
          */
-        $block = $this->instanceManager->getInstance(SchemaConfigurationBlock::class);
+        $block = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
         $schemaConfigurationBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
             $block
@@ -86,13 +86,13 @@ abstract class AbstractQueryExecutionSchemaConfigurator implements SchemaConfigu
             return $this->getUserSettingSchemaConfigurationID();
         }
 
-        $schemaConfiguration = $schemaConfigurationBlockDataItem['attrs'][SchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
+        $schemaConfiguration = $schemaConfigurationBlockDataItem['attrs'][EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
         // Check if $schemaConfiguration is one of the meta options (default, none, inherit)
-        if ($schemaConfiguration == SchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+        if ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
             return null;
-        } elseif ($schemaConfiguration == SchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
+        } elseif ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
             return $this->getUserSettingSchemaConfigurationID();
-        } elseif ($schemaConfiguration == SchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
+        } elseif ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
             // If disabled by module, then return nothing
             if (!$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
                 return null;

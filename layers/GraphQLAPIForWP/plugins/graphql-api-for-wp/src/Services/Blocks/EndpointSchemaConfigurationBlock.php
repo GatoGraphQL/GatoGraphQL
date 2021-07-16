@@ -7,12 +7,12 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\QueryExecutionBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
 
 /**
  * SchemaConfiguration block
  */
-class SchemaConfigurationBlock extends AbstractBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface, EndpointEditorBlockServiceTagInterface
+class EndpointSchemaConfigurationBlock extends AbstractBlock implements PersistedQueryEndpointEditorBlockServiceTagInterface, EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
 
@@ -36,7 +36,7 @@ class SchemaConfigurationBlock extends AbstractBlock implements PersistedQueryEn
 
     protected function getBlockCategoryClass(): ?string
     {
-        return QueryExecutionBlockCategory::class;
+        return EndpointBlockCategory::class;
     }
 
     protected function isDynamicBlock(): bool
