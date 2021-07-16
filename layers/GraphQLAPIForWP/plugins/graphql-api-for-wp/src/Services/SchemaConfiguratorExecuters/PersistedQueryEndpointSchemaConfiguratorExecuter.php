@@ -13,7 +13,7 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
-        protected PersistedQueryEndpointSchemaConfigurator $persistedQuerySchemaConfigurator
+        protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
     ) {
         parent::__construct(
             $instanceManager,
@@ -29,6 +29,6 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->persistedQuerySchemaConfigurator;
+        return $this->persistedQueryEndpointSchemaConfigurator;
     }
 }

@@ -14,7 +14,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     public function __construct(
         InstanceManagerInterface $instanceManager,
         protected EndpointHelpers $endpointHelpers,
-        protected PersistedQueryEndpointSchemaConfigurator $persistedQuerySchemaConfigurator
+        protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
     ) {
         parent::__construct(
             $instanceManager,
@@ -34,6 +34,6 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->persistedQuerySchemaConfigurator;
+        return $this->persistedQueryEndpointSchemaConfigurator;
     }
 }

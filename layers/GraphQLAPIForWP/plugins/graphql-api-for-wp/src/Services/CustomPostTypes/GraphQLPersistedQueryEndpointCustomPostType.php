@@ -33,7 +33,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLQueryEx
         HooksAPIInterface $hooksAPI,
         protected BlockContentHelpers $blockContentHelpers,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryBlockRegistry
+        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry
     ) {
         parent::__construct(
             $instanceManager,
@@ -160,7 +160,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLQueryEx
 
     protected function getBlockRegistry(): BlockRegistryInterface
     {
-        return $this->persistedQueryBlockRegistry;
+        return $this->persistedQueryEndpointBlockRegistry;
     }
 
     /**

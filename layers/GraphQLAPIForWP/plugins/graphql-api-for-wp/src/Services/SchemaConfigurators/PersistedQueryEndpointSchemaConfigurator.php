@@ -15,7 +15,7 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractQueryExecutionSch
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
-        protected PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQuerySchemaConfigurationExecuterRegistry
+        protected PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry
     ) {
         parent::__construct(
             $instanceManager,
@@ -25,6 +25,6 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractQueryExecutionSch
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface
     {
-        return $this->persistedQuerySchemaConfigurationExecuterRegistry;
+        return $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry;
     }
 }

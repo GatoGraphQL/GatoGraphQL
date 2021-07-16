@@ -97,11 +97,11 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminPersistedQueryGraphQLEndpoint(string | int $persistedQueryCustomPostID, bool $enableLowLevelQueryEditing = false): string
+    public function getAdminPersistedQueryGraphQLEndpoint(string | int $persistedQueryEndpointCustomPostID, bool $enableLowLevelQueryEditing = false): string
     {
         return \add_query_arg(
             RequestParams::PERSISTED_QUERY_ID,
-            $persistedQueryCustomPostID,
+            $persistedQueryEndpointCustomPostID,
             $this->getAdminConfigurableSchemaGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }

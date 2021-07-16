@@ -56,16 +56,16 @@ class BlockContentHelpers
          * @var PersistedQueryEndpointAPIHierarchyBlock
          */
         $block = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
-        $persistedQueryAPIHierarchyBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $persistedQueryEndpointAPIHierarchyBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
         );
         // If there is either 0 or more than 1, return nothing
-        if (is_null($persistedQueryAPIHierarchyBlock)) {
+        if (is_null($persistedQueryEndpointAPIHierarchyBlock)) {
             return null;
         }
         return [
-            $persistedQueryAPIHierarchyBlock['attrs'][PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
+            $persistedQueryEndpointAPIHierarchyBlock['attrs'][PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
         ];
     }
 }
