@@ -5,26 +5,20 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointVoyagerClient;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
@@ -37,7 +31,9 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         HooksAPIInterface $hooksAPI,
-        protected EndpointBlockRegistryInterface $endpointBlockRegistry
+        protected EndpointBlockRegistryInterface $endpointBlockRegistry,
+        protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
+        protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
     ) {
         parent::__construct(
             $instanceManager,
@@ -167,19 +163,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return __('View endpoint', 'graphql-api');
     }
 
-    /**
-     * Provide the query to execute and its variables
-     *
-     * @return mixed[] Array of 2 elements: [query, variables]
-     */
-    protected function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
-    {
-        /**
-         * Extract the query from the BODY through standard GraphQL endpoint execution
-         */
-        return QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
-    }
-
     protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
     {
         /**
@@ -189,202 +172,13 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return $block;
     }
 
-    /**
-     * Indicates if we executing the GraphQL query (`true`) or visualizing the query source (`false`)
-     * It returns always `true`, unless passing ?view=source in the single post URL
-     */
-    protected function isGraphQLQueryExecution(): bool
+    protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
-        return !in_array(
-            $_REQUEST[RequestParams::VIEW] ?? null,
-            [
-                RequestParams::VIEW_GRAPHIQL,
-                RequestParams::VIEW_SCHEMA,
-                RequestParams::VIEW_SOURCE,
-            ]
-        );
+        return $this->customEndpointExecuterRegistryInterface;
     }
 
-    /**
-     * Set the hook to expose the GraphiQL/Voyager clients
-     */
-    protected function doSomethingElse(): void
+    protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
     {
-        if (($_REQUEST[RequestParams::VIEW] ?? null) == RequestParams::VIEW_SOURCE) {
-            parent::doSomethingElse();
-        } else {
-            /**
-             * Execute at the very last, because Component::boot is executed also on hook "wp",
-             * and there is useNamespacing set
-             */
-            \add_action(
-                'wp',
-                [$this, 'maybePrintClient'],
-                PHP_INT_MAX
-            );
-        }
-    }
-    /**
-     * Expose the GraphiQL/Voyager clients
-     */
-    public function maybePrintClient(): void
-    {
-        $vars = ApplicationState::getVars();
-        $customPost = $vars['routing-state']['queried-object'];
-        // Make sure there is a post (eg: it has not been deleted)
-        if ($customPost === null) {
-            return;
-        }
-        $view = $_REQUEST[RequestParams::VIEW] ?? '';
-        // Read from the configuration if to expose the GraphiQL/Voyager client
-        if (
-            (
-                $view == RequestParams::VIEW_GRAPHIQL
-                && $this->isGraphiQLEnabled($customPost)
-            )
-            || (
-                $view == RequestParams::VIEW_SCHEMA
-                && $this->isVoyagerEnabled($customPost)
-            )
-        ) {
-            // Print the HTML directly from the client
-            $clientClasses = [
-                RequestParams::VIEW_GRAPHIQL => CustomEndpointGraphiQLClient::class,
-                RequestParams::VIEW_SCHEMA => CustomEndpointVoyagerClient::class,
-            ];
-            /**
-             * @var AbstractClient
-             */
-            $client = $this->instanceManager->getInstance($clientClasses[$view]);
-            echo $client->getClientHTML();
-            die;
-        }
-    }
-
-    /**
-     * Read the options block and check the value of attribute "isGraphiQLEnabled"
-     */
-    protected function isGraphiQLEnabled(WP_Post|int $postOrID): bool
-    {
-        // Check if disabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
-            return false;
-        }
-
-        // If the endpoint is disabled, then also disable this client
-        if (!$this->isEnabled($postOrID)) {
-            return false;
-        }
-
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /** @var EndpointGraphiQLBlock */
-        $endpointGraphiQLBlock = $this->instanceManager->getInstance(EndpointGraphiQLBlock::class);
-        $optionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $postOrID,
-            $endpointGraphiQLBlock
-        );
-
-        // If there was no options block, something went wrong in the post content
-        $default = true;
-        if (is_null($optionsBlockDataItem)) {
-            return $default;
-        }
-
-        // The default value is not saved in the DB in Gutenberg!
-        $attribute = EndpointGraphiQLBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED;
-        return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
-    }
-
-    /**
-     * Read the options block and check the value of attribute "isVoyagerEnabled"
-     */
-    protected function isVoyagerEnabled(WP_Post|int $postOrID): bool
-    {
-        // Check if disabled by module
-        if (!$this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS)) {
-            return false;
-        }
-
-        // If the endpoint is disabled, then also disable this client
-        if (!$this->isEnabled($postOrID)) {
-            return false;
-        }
-
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /** @var EndpointVoyagerBlock */
-        $endpointVoyagerBlock = $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
-        $optionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $postOrID,
-            $endpointVoyagerBlock
-        );
-
-        // If there was no options block, something went wrong in the post content
-        $default = true;
-        if (is_null($optionsBlockDataItem)) {
-            return $default;
-        }
-
-        // The default value is not saved in the DB in Gutenberg!
-        $attribute = EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED;
-        return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
-    }
-
-    /**
-     * Get actions to add for this CPT
-     *
-     * @param WP_Post $post
-     * @return array<string, string>
-     */
-    protected function getCustomPostTypeTableActions($post): array
-    {
-        $actions = parent::getCustomPostTypeTableActions($post);
-
-        /**
-         * If neither GraphiQL or Voyager are enabled, then already return
-         */
-        $isGraphiQLEnabled = $this->isGraphiQLEnabled($post);
-        $isVoyagerEnabled = $this->isVoyagerEnabled($post);
-        if (!$isGraphiQLEnabled && !$isVoyagerEnabled) {
-            return $actions;
-        }
-
-        $title = \_draft_or_post_title();
-        $permalink = \get_permalink($post->ID);
-        /**
-         * Attach the GraphiQL/Voyager clients
-         */
-        return array_merge(
-            $actions,
-            // If GraphiQL enabled, add the "GraphiQL" action
-            $isGraphiQLEnabled ? [
-                'graphiql' => sprintf(
-                    '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
-                    \add_query_arg(
-                        RequestParams::VIEW,
-                        RequestParams::VIEW_GRAPHIQL,
-                        $permalink
-                    ),
-                    /* translators: %s: Post title. */
-                    \esc_attr(\sprintf(\__('GraphiQL &#8220;%s&#8221;'), $title)),
-                    __('GraphiQL', 'graphql-api')
-                ),
-            ] : [],
-            // If Voyager enabled, add the "Schema" action
-            $isVoyagerEnabled ? [
-                'schema' => sprintf(
-                    '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
-                    \add_query_arg(
-                        RequestParams::VIEW,
-                        RequestParams::VIEW_SCHEMA,
-                        $permalink
-                    ),
-                    /* translators: %s: Post title. */
-                    \esc_attr(\sprintf(\__('Schema &#8220;%s&#8221;'), $title)),
-                    __('Interactive schema', 'graphql-api')
-                )
-            ] : []
-        );
+        return $this->customEndpointAnnotatorRegistryInterface;
     }
 }

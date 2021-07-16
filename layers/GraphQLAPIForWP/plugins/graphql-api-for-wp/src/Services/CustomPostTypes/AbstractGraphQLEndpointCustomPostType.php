@@ -4,28 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use WP_Post;
-use WP_Query;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\State\ApplicationState;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Hooks\HooksAPIInterface;
+use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
 {
-    use EndpointResolverTrait {
-        EndpointResolverTrait::getNature as getUpstreamNature;
-        EndpointResolverTrait::addGraphQLVars as upstreamAddGraphQLVars;
-    }
-
     public function __construct(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
@@ -37,15 +29,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             $moduleRegistry,
             $userAuthorization,
         );
-    }
-
-    /**
-     * Indicates if we executing the GraphQL query (`true`) or visualizing the query source (`false`)
-     * It returns always `true`, unless passing ?view=source in the single post URL
-     */
-    protected function isGraphQLQueryExecution(): bool
-    {
-        return ($_REQUEST[RequestParams::VIEW] ?? null) != RequestParams::VIEW_SOURCE;
     }
 
     /**
@@ -84,7 +67,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
          */
         if (!is_null($post_type_object) && \is_post_type_viewable($post_type_object)) {
             $title = \_draft_or_post_title();
-            $isEnabled = $this->isEnabled($post);
+            $isEndpointEnabled = $this->isEndpointEnabled($post);
             $executeLabel = $this->getExecuteActionLabel();
             if (in_array($post->post_status, array('pending', 'draft', 'future'))) {
                 $can_edit_post = \current_user_can('edit_post', $post->ID);
@@ -102,7 +85,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                             esc_attr(sprintf(__('Preview source &#8220;%s&#8221;', 'graphql-api'), $title)),
                             __('Preview source', 'graphql-api')
                         );
-                        if ($isEnabled) {
+                        if ($isEndpointEnabled) {
                             $actions['execute'] = sprintf(
                                 '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                                 esc_url($preview_link),
@@ -124,7 +107,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                         esc_attr(sprintf(__('View source &#8220;%s&#8221;', 'graphql-api'), $title)),
                         __('View source', 'graphql-api')
                     );
-                    if ($isEnabled) {
+                    if ($isEndpointEnabled) {
                         $actions['execute'] = sprintf(
                             '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                             $permalink,
@@ -133,10 +116,20 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                         );
                     }
                 }
+
+                // Let the EndpointAnnotators add their own actions
+                foreach ($this->getEndpointAnnotatorRegistry()->getEndpointAnnotators() as $endpointAnnotator) {
+                    $endpointAnnotator->addCustomPostTypeTableActions($actions, $post);
+                }
             }
         }
+
         return $actions;
     }
+
+    abstract protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface;
+    
+    abstract protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface;
 
     /**
      * Add the hook to initialize the different post types
@@ -145,23 +138,43 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         parent::initialize();
 
-        // Execute at the beginning
+        // Execute at the beginning. If access is forbidden, the process must end
         \add_action('init', function (): void {
             if ($this->isAccessForbidden()) {
-                $this->forbidAccess();
+                wp_die(\__('Access forbidden', 'graphql-api'));
             }
         }, 0);
 
         /**
-         * Two outputs:
-         * 1.`isGraphQLQueryExecution` = true, then resolve the GraphQL query
-         * 2.`isGraphQLQueryExecution` = false, then do something else (eg: view the source for the GraphQL query)
+         * Call it on "boot" after the WP_Query is parsed, so the single CPT
+         * is loaded, and asking for `is_singular(CPT)` works.
+         * 
+         * Important: load it before anything else, so it can load the hooks
+         * from `executeGraphQLQuery` before these are called, which is
+         * triggered also on "boot"
          */
-        if ($this->isGraphQLQueryExecution()) {
-            $this->executeGraphQLQuery();
-        } else {
-            $this->doSomethingElse();
-        }
+        add_action(
+            'popcms:boot',
+            function(): void {
+                /**
+                 * Execute the EndpointExecuters from the Registry:
+                 * 
+                 * Only 1 executer should be executed, from among (or other injected ones):
+                 * 
+                 * - Query resolution
+                 * - GraphiQL client
+                 * - Voyager client
+                 * - View query source
+                 * 
+                 * All others will have `isServiceEnabled` => false, by checking
+                 * their expected value of ?view=...
+                 */
+                foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
+                    $endpointExecuter->executeEndpoint();
+                }
+            },
+            0
+        );
     }
 
     /**
@@ -175,74 +188,10 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         );
     }
 
-    /**
-     * Print an error message, and exit
-     */
-    protected function forbidAccess(): void
-    {
-        wp_die(\__('Access forbidden', 'graphql-api'));
-    }
-
-    /**
-     * Do something else, not the execution of the GraphQL query.
-     * By default, print the Query source
-     */
-    protected function doSomethingElse(): void
-    {
-        /** Add the excerpt, which is the description of the GraphQL query */
-        \add_filter(
-            'the_content',
-            [$this, 'maybeGetGraphQLQuerySourceContent']
-        );
-    }
-
-    /**
-     * Render the GraphQL Query CPT
-     */
-    public function maybeGetGraphQLQuerySourceContent(string $content): string
-    {
-        /**
-         * Check if it is this CPT, and hasn't forbid access to executing the API
-         */
-        if (\is_singular($this->getCustomPostType())) {
-            $vars = ApplicationState::getVars();
-            $customPost = $vars['routing-state']['queried-object'];
-            // Make sure there is a post (eg: it has not been deleted)
-            if ($customPost !== null) {
-                return $this->getGraphQLQuerySourceContent($content, $customPost);
-            }
-        }
-        return $content;
-    }
-
-    /**
-     * Render the GraphQL Query CPT
-     */
-    protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
-    {
-        /**
-         * Prettyprint the code
-         */
-        $content .= '<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>';
-        return $content;
-    }
-
-    /**
-     * Assign the single endpoint by setting it as the Home nature
-     */
-    public function getNature(string $nature, WP_Query $query): string
-    {
-        if ($query->is_singular($this->getCustomPostType())) {
-            return $this->getUpstreamNature($nature, $query);
-        }
-
-        return $nature;
-    }
-
     abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
 
     /**
-     * Read the options block and check the value of attribute "isEnabled"
+     * Read the options block and check the value of attribute "isEndpointEnabled"
      */
     protected function isOptionsBlockValueOn(WP_Post|int $postOrID, string $attribute, bool $default): bool
     {
@@ -257,9 +206,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     }
 
     /**
-     * Read the options block and check the value of attribute "isEnabled"
+     * Read the options block and check the value of attribute "isEndpointEnabled"
      */
-    protected function isEnabled(WP_Post|int $postOrID): bool
+    public function isEndpointEnabled(WP_Post|int $postOrID): bool
     {
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(
@@ -290,51 +239,5 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // If null, we are in the admin (eg: editing a Persisted Query),
         // and there's no need to override params
         return $customPost !== null;
-    }
-
-    /**
-     * Check if requesting the single post of this CPT,
-     * and that access to the API has not been forbidden.
-     * Then, set the request with the needed API params
-     *
-     * @param array<array> $vars_in_array
-     */
-    public function addGraphQLVars(array $vars_in_array): void
-    {
-        [&$vars] = $vars_in_array;
-        if (\is_singular($this->getCustomPostType()) && $this->isEnabled($vars['routing-state']['queried-object-id'])) {
-            $this->upstreamAddGraphQLVars($vars_in_array);
-        }
-    }
-
-    /**
-     * Gutenberg templates to lock down the Custom Post Type to
-     *
-     * @return array<array> Every element is an array with template name in first pos, and attributes then
-     */
-    protected function getGutenbergTemplate(): array
-    {
-        $template = parent::getGutenbergTemplate();
-
-        // If enabled by module, add the Schema Configuration block to the locked Gutenberg template
-        $this->maybeAddSchemaConfigurationBlock($template);
-
-        return $template;
-    }
-
-    /**
-     * If enabled by module, add the Schema Configuration block to the locked Gutenberg template
-     *
-     * @param array<array> $template Every element is an array with template name in first pos, and attributes then
-     */
-    protected function maybeAddSchemaConfigurationBlock(array &$template): void
-    {
-        if ($this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
-            /**
-             * @var EndpointSchemaConfigurationBlock
-             */
-            $schemaConfigurationBlock = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-            $template[] = [$schemaConfigurationBlock->getBlockFullName()];
-        }
     }
 }

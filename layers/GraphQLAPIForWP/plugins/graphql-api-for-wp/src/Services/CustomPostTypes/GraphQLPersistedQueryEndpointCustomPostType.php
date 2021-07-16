@@ -7,8 +7,12 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
@@ -17,7 +21,6 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustom
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHooks;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
@@ -33,7 +36,9 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         HooksAPIInterface $hooksAPI,
         protected BlockContentHelpers $blockContentHelpers,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry
+        protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
+        protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
+        protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
     ) {
         parent::__construct(
             $instanceManager,
@@ -57,6 +62,16 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
+    }
+
+    protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
+    {
+        return $this->persistedQueryEndpointExecuterRegistryInterface;
+    }
+
+    protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
+    {
+        return $this->persistedQueryEndpointAnnotatorRegistryInterface;
     }
 
     /**
@@ -235,19 +250,6 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return $content;
     }
 
-    /**
-     * Provide the query to execute and its variables
-     *
-     * @return mixed[] Array with 2 elements: [$graphQLQuery, $graphQLVariables]
-     */
-    protected function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
-    {
-        /**
-         * Extract the query from the post (or from its parents), and set it in $vars
-         */
-        return $this->graphQLQueryPostTypeHelpers->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
-    }
-
     protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
     {
         /**
@@ -273,42 +275,5 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $optionsBlockDataItem['attrs'][PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? $default;
-    }
-
-    /**
-     * Check if requesting the single post of this CPT and, in this case, set the request with the needed API params
-     *
-     * @param array<array> $vars_in_array
-     */
-    public function addGraphQLVars(array $vars_in_array): void
-    {
-        if (\is_singular($this->getCustomPostType())) {
-            // Check if it is enabled, by configuration
-            [&$vars] = $vars_in_array;
-            if (!$this->isEnabled($vars['routing-state']['queried-object-id'])) {
-                return;
-            }
-
-            /** @var GraphQLRequestVarsHooks */
-            $graphQLAPIRequestHookSet = $this->instanceManager->getInstance(GraphQLRequestVarsHooks::class);
-
-            // The Persisted Query is also standard GraphQL
-            $graphQLAPIRequestHookSet->setStandardGraphQLVars($vars);
-
-            // Remove the VarsHookSet from the GraphQLRequest, so it doesn't process the GraphQL query
-            // Otherwise it will add error "The query in the body is empty"
-            /**
-             * @var callable
-             */
-            $action = [$graphQLAPIRequestHookSet, 'addVars'];
-            \remove_action(
-                'ApplicationState:addVars',
-                $action,
-                20
-            );
-
-            // Execute the original logic
-            parent::addGraphQLVars($vars_in_array);
-        }
     }
 }
