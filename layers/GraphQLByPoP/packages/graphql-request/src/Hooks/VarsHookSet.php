@@ -7,19 +7,35 @@ namespace GraphQLByPoP\GraphQLRequest\Hooks;
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
+use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\Facades\GraphQLPersistedQueryManagerFacade;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
 use PoP\ComponentModel\CheckpointProcessors\MutationCheckpointProcessor;
 use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\Translation\TranslationAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
+    public function __construct(
+        HooksAPIInterface $hooksAPI,
+        TranslationAPIInterface $translationAPI,
+        InstanceManagerInterface $instanceManager,
+        protected QueryRetrieverInterface $queryRetrieverInterface,
+    ) {
+        parent::__construct(
+            $hooksAPI,
+            $translationAPI,
+            $instanceManager,
+        );
+    }
+
     protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
@@ -115,7 +131,7 @@ class VarsHookSet extends AbstractHookSet
                     $graphQLQuery,
                     $variables,
                     $operationName
-                ) = QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
+                ) = $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
             }
             // Process the query, or show an error if empty
             if ($graphQLQuery) {

@@ -10,7 +10,7 @@ use PoP\Routing\RouteNatures;
 use PoP\API\Schema\QueryInputs;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
+use GraphQLByPoP\GraphQLRequest\Facades\Execution\QueryRetrieverFacade;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\API\Response\Schemes as APISchemes;
 
@@ -141,11 +141,12 @@ trait EndpointResolverTrait
                 );
         }
         // Extract the operationName from the payload, it's not saved on the post!
+        $queryRetriever = QueryRetrieverFacade::getInstance();
         list(
             $unneededGraphQLQuery,
             $unneededVariables,
             $operationName
-        ) = QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
+        ) = $queryRetriever->extractRequestedGraphQLQueryPayload();
         // Add the query into $vars
         $instanceManager = InstanceManagerFacade::getInstance();
         /**

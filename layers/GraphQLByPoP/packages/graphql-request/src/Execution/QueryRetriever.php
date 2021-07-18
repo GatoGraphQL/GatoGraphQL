@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Execution;
 
-class QueryExecutionHelpers
+class QueryRetriever implements QueryRetrieverInterface
 {
-    public static function extractRequestedGraphQLQueryPayload()
+    /**
+     * @return array<?string> 3 items: [query, variables, operationName]
+     */
+    public function extractRequestedGraphQLQueryPayload(): array
     {
         // Attempt to get the query from the body, following the GraphQL syntax
         if (isset($_SERVER['CONTENT_TYPE']) && $_SERVER['CONTENT_TYPE'] === 'application/json') {

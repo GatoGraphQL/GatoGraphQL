@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
+use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
@@ -18,6 +18,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        protected QueryRetrieverInterface $queryRetrieverInterface,
     ) {
         parent::__construct(
             $instanceManager,
@@ -45,6 +46,6 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
+        return $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
     }
 }
