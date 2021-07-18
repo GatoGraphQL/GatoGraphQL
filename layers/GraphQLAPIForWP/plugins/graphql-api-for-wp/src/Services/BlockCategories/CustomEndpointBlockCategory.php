@@ -37,6 +37,6 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategoryTitle(): string
     {
-        return __('GraphQL endpoint', 'graphql-api');
+        return __('GraphQL custom endpoint', 'graphql-api');
     }
 }
