@@ -13,4 +13,8 @@ interface BlockRegistryInterface
      * @return AbstractBlock[]
      */
     public function getBlocks(): array;
+    /**
+     * @return AbstractBlock[]
+     */
+    public function getEnabledBlocks(): array;
 }
