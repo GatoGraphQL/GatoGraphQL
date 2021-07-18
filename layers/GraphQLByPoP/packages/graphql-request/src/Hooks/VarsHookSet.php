@@ -35,7 +35,7 @@ class VarsHookSet extends AbstractHookSet
             $instanceManager,
         );
     }
-    
+
     protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
