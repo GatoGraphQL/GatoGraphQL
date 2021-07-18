@@ -1,5 +1,5 @@
 {
-    "name": "graphql-by-pop/graphql-voyager-client",
+    "name": "graphql-by-pop/graphql-voyager",
     "type": "graphql-voyager",
     "description": "GraphQL Voyager client for GraphQL by PoP",
     "keywords": [
