@@ -7,11 +7,11 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\PersistedQueryEndpointAPIHierarchyBlockContentHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
@@ -23,7 +23,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         protected UserAuthorizationInterface $userAuthorization,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        protected PersistedQueryEndpointAPIHierarchyBlockContentHelpers $persistedQueryEndpointAPIHierarchyBlockContentHelpers,
+        protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
     ) {
         parent::__construct(
             $instanceManager,
@@ -69,7 +69,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                  */
                 list(
                     $inheritQuery
-                ) = $this->persistedQueryEndpointAPIHierarchyBlockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                ) = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
                 if ($inheritQuery) {
                     // Fetch the attributes using inheritance
                     list(

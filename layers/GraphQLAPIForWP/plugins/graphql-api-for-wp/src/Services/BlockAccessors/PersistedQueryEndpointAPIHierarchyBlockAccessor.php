@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use WP_Post;
 
-class PersistedQueryEndpointAPIHierarchyBlockContentHelpers
+class PersistedQueryEndpointAPIHierarchyBlockAccessor
 {
     public function __construct(
         protected BlockHelpers $blockHelpers,
