@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 
-use GraphQLAPI\GraphQLAPI\GetterSetterObjects\Blocks\PersistedQueryEndpointAPIHierarchyBlockDataObject;
+use GraphQLAPI\GraphQLAPI\GetterSetterObjects\Blocks\PersistedQueryEndpointAPIHierarchyBlockAttributes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use WP_Post;
@@ -20,7 +20,7 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
     /**
      * Extract the Persisted Query Options block attributes from the post
      */
-    public function getDataObject(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockDataObject
+    public function getAttributes(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockAttributes
     {
         $persistedQueryEndpointAPIHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
@@ -30,7 +30,7 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
         if ($persistedQueryEndpointAPIHierarchyBlock === null) {
             return null;
         }
-        return new PersistedQueryEndpointAPIHierarchyBlockDataObject(
+        return new PersistedQueryEndpointAPIHierarchyBlockAttributes(
             $persistedQueryEndpointAPIHierarchyBlock['attrs'][PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
         );
     }
