@@ -123,7 +123,7 @@ services:
         - >-
           ../../layers/Schema/packages/custompostmeta-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta-wp
         - >-
-          ../../layers/Schema/packages/custompostmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta-wp
+          ../../layers/Schema/packages/custompostmeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/custompostmeta
         - >-
           ../../layers/Schema/packages/customposts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/customposts-wp
         - >-
