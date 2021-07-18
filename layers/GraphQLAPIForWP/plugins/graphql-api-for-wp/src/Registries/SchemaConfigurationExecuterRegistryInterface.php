@@ -13,4 +13,8 @@ interface SchemaConfigurationExecuterRegistryInterface
      * @return SchemaConfigurationExecuterInterface[]
      */
     public function getSchemaConfigurationExecuters(): array;
+    /**
+     * @return SchemaConfigurationExecuterInterface[]
+     */
+    public function getEnabledSchemaConfigurationExecuters(): array;
 }

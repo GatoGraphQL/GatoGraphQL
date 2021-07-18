@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
-class EndpointGraphiQLBlock extends AbstractEndpointOptionsBlock implements EndpointEditorBlockServiceTagInterface
+class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
-
-    public const ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED = 'isGraphiQLEnabled';
+    use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {
@@ -52,7 +51,7 @@ class EndpointGraphiQLBlock extends AbstractEndpointOptionsBlock implements Endp
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Expose GraphiQL client?', 'graphql-api'),
-            $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED] ?? true)
+            $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
 
         $blockContentPlaceholder = <<<EOT

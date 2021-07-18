@@ -19,7 +19,7 @@ trait WithBlockRegistryCustomPostTypeTrait
     protected function getGutenbergTemplate(): array
     {
         $template = [];
-        $blocks = $this->getBlockRegistry()->getBlocks();
+        $blocks = $this->getBlockRegistry()->getEnabledBlocks();
         // Order them by priority
         uasort(
             $blocks,

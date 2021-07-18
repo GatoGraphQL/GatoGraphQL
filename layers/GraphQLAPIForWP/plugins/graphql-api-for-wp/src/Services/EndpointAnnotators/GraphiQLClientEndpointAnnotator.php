@@ -6,13 +6,31 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
+    public function __construct(
+        InstanceManagerInterface $instanceManager,
+        ModuleRegistryInterface $moduleRegistry,
+        BlockHelpers $blockHelpers,
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        protected EndpointGraphiQLBlock $endpointGraphiQLBlock,
+    ) {
+        parent::__construct(
+            $instanceManager,
+            $moduleRegistry,
+            $blockHelpers,
+            $graphQLCustomEndpointCustomPostType
+        );
+    }
+
     public function getEnablingModule(): ?string
     {
         return ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS;
@@ -45,35 +63,8 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
         }
     }
 
-    /**
-     * Read the options block and check the value of attribute "isGraphiQLEnabled"
-     */
-    public function isClientEnabled(WP_Post|int $postOrID): bool
+    protected function getBlock(): AbstractBlock
     {
-        // Check the endpoint in the post is not disabled
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostType = $this->getCustomPostType();
-        if (!$customPostType->isEndpointEnabled($postOrID)) {
-            return false;
-        }
-
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        /** @var EndpointGraphiQLBlock */
-        $endpointGraphiQLBlock = $this->instanceManager->getInstance(EndpointGraphiQLBlock::class);
-        $optionsBlockDataItem = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
-            $postOrID,
-            $endpointGraphiQLBlock
-        );
-
-        // If there was no options block, something went wrong in the post content
-        $default = true;
-        if (is_null($optionsBlockDataItem)) {
-            return $default;
-        }
-
-        // The default value is not saved in the DB in Gutenberg!
-        $attribute = EndpointGraphiQLBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED;
-        return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
+        return $this->endpointGraphiQLBlock;
     }
 }

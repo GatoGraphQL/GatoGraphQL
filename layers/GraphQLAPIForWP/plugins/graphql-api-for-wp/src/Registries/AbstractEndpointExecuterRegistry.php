@@ -18,14 +18,22 @@ abstract class AbstractEndpointExecuterRegistry implements EndpointExecuterRegis
     {
         $this->endpointExecuters[] = $endpointExecuter;
     }
+
     /**
      * @return EndpointExecuterInterface[]
      */
     public function getEndpointExecuters(): array
     {
-        // Only enabled services
+        return $this->endpointExecuters;
+    }
+
+    /**
+     * @return EndpointExecuterInterface[]
+     */
+    public function getEnabledEndpointExecuters(): array
+    {
         return array_filter(
-            $this->endpointExecuters,
+            $this->getEndpointExecuters(),
             fn (ServiceInterface $service) => $service->isServiceEnabled()
         );
     }

@@ -41,6 +41,15 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
             return;
         }
 
+        $this->doExecuteSchemaConfiguration($customPostID);
+    }
+
+    /**
+     * Extract the items defined in the Schema Configuration,
+     * and inject them into the service as to take effect in the current GraphQL query
+     */
+    protected function doExecuteSchemaConfiguration(int $customPostID): void
+    {
         if ($schemaConfigurationID = $this->getSchemaConfigurationID($customPostID)) {
             // Get that Schema Configuration, and load its settings
             $this->executeSchemaConfigurationItems($schemaConfigurationID);
@@ -116,7 +125,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
 
     protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
     {
-        foreach ($this->getSchemaConfigurationExecuterRegistry()->getSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
+        foreach ($this->getSchemaConfigurationExecuterRegistry()->getEnabledSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
             $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
         }
     }

@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
+use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
+use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
 use WP_Post;
 
 class GraphQLQueryPostTypeHelpers
 {
-    public function __construct(protected BlockContentHelpers $blockContentHelpers)
-    {
+    public function __construct(
+        protected PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor,
+        protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
+    ) {
     }
     /**
      * A GraphQL Query Custom Post Type is hierarchical: each query post can have a parent,
@@ -36,7 +40,7 @@ class GraphQLQueryPostTypeHelpers
          * - Empty query: get it from the first ancestor that defines a query
          * - Variables: combine them all, with descendant's having more priority
          */
-        $graphQLQuery = null;
+        $graphQLQuery = '';
         $graphQLVariables = [];
         while (!is_null($graphQLQueryPost)) {
             /**
@@ -44,33 +48,23 @@ class GraphQLQueryPostTypeHelpers
              */
             $inheritQuery = false;
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
-                list(
-                    $inheritQuery,
-                ) = $this->blockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getAttributes($graphQLQueryPost);
+                if ($persistedQueryEndpointAPIHierarchyBlockAttributes !== null) {
+                    $inheritQuery = $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery();
+                }
             }
-            list(
-                $postGraphQLQuery,
-                $postGraphQLVariables
-            ) = $this->blockContentHelpers->getSingleGraphiQLBlockAttributesFromPost($graphQLQueryPost);
+            $graphiQLBlockAttributes = $this->persistedQueryEndpointGraphiQLBlockAccessor->getAttributes($graphQLQueryPost);
             // Set the query unless it must be inherited from the parent
-            if (is_null($graphQLQuery) && !$inheritQuery) {
-                $graphQLQuery = $postGraphQLQuery;
+            if (empty($graphQLQuery) && !$inheritQuery) {
+                $graphQLQuery = $graphiQLBlockAttributes->getQuery();
             }
             /**
-             * Combine all variables. Variables is saved as a string, convert to array
-             * Watch out! If the variables have a wrong format, eg: with an additional trailing comma, such as this:
-             * {
-             *   "limit": 3,
-             * }
-             * Then doing `json_decode` will return NULL
+             * Combine all variables.
              */
-            if ($postGraphQLVariables) {
-                $postGraphQLVariables = json_decode($postGraphQLVariables, true) ?? [];
-                $graphQLVariables = array_merge(
-                    $postGraphQLVariables,
-                    $graphQLVariables
-                );
-            }
+            $graphQLVariables = array_merge(
+                $graphiQLBlockAttributes->getVariables(),
+                $graphQLVariables
+            );
 
             // Keep iterating with this posts' ancestors
             if ($inheritQuery) {

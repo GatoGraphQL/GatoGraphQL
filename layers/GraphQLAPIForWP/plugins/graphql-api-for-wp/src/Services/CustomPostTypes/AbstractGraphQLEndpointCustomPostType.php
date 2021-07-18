@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -22,7 +23,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
-        protected HooksAPIInterface $hooksAPI
+        protected HooksAPIInterface $hooksAPI,
+        protected BlockHelpers $blockHelpers,
     ) {
         parent::__construct(
             $instanceManager,
@@ -118,7 +120,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 }
 
                 // Let the EndpointAnnotators add their own actions
-                foreach ($this->getEndpointAnnotatorRegistry()->getEndpointAnnotators() as $endpointAnnotator) {
+                foreach ($this->getEndpointAnnotatorRegistry()->getEnabledEndpointAnnotators() as $endpointAnnotator) {
                     $endpointAnnotator->addCustomPostTypeTableActions($actions, $post);
                 }
             }
@@ -169,7 +171,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                  * All others will have `isServiceEnabled` => false, by checking
                  * their expected value of ?view=...
                  */
-                foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
+                foreach ($this->getEndpointExecuterRegistry()->getEnabledEndpointExecuters() as $endpointExecuter) {
                     $endpointExecuter->executeEndpoint();
                 }
             },
@@ -188,7 +190,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         );
     }
 
-    abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
+    abstract protected function getEndpointOptionsBlock(): AbstractBlock;
 
     /**
      * Read the options block and check the value of attribute "isEndpointEnabled"
@@ -197,7 +199,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         $optionsBlockDataItem = $this->getOptionsBlockDataItem($postOrID);
         // If there was no options block, something went wrong in the post content
-        if (is_null($optionsBlockDataItem)) {
+        if ($optionsBlockDataItem === null) {
             return $default;
         }
 
@@ -213,7 +215,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(
             $postOrID,
-            AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED,
+            BlockAttributeNames::IS_ENABLED,
             true
         );
     }
@@ -223,9 +225,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getEndpointOptionsBlock()
         );

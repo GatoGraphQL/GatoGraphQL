@@ -23,9 +23,15 @@ class AbstractBlockRegistry implements BlockRegistryInterface
      */
     public function getBlocks(): array
     {
-        // Only enabled services
+        return $this->blocks;
+    }
+    /**
+     * @return AbstractBlock[]
+     */
+    public function getEnabledBlocks(): array
+    {
         return array_filter(
-            $this->blocks,
+            $this->getBlocks(),
             fn (ServiceInterface $service) => $service->isServiceEnabled()
         );
     }
