@@ -22,16 +22,16 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
      */
     public function getAttributes(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockAttributes
     {
-        $persistedQueryEndpointAPIHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $apiHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $this->persistedQueryEndpointAPIHierarchyBlock
         );
         // If there is either 0 or more than 1, return nothing
-        if ($persistedQueryEndpointAPIHierarchyBlock === null) {
+        if ($apiHierarchyBlock === null) {
             return null;
         }
         return new PersistedQueryEndpointAPIHierarchyBlockAttributes(
-            $persistedQueryEndpointAPIHierarchyBlock['attrs'][PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
+            $apiHierarchyBlock['attrs'][PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false,
         );
     }
 }
