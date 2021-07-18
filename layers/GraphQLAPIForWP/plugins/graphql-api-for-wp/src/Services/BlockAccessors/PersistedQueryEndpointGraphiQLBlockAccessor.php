@@ -31,6 +31,7 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
             return null;
         }
 
+        $query = $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? '';
         /**
          * Variables is saved as a string, convert to array.
          * 
@@ -50,7 +51,10 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
             $variables = [];
         }
         return new PersistedQueryEndpointGraphiQLBlockAttributes(
-            $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? '',
+            // Remove whitespaces so it counts as an empty query,
+            // so it keeps iterating upwards to get the ancestor query
+            // in `getGraphQLQueryPostAttributes`
+            trim($query),
             $variables,
         );
     }
