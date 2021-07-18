@@ -10,8 +10,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Further completed the WordPress schema
   - Categories
-  - Menus
   - Meta values
+  - Menus
   - Settings
   - Logged-in user's posts
 - "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
