@@ -1,5 +1,5 @@
 {
-	"name": "persisted-query-api-hierarchy",
+	"name": "persisted-query-endpoint-api-hierarchy",
 	"version": "0.1.0",
 	"description": "Configure the API Hierarchy in the GraphQL persisted query",
 	"author": "Leonardo Losoviz",

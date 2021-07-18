@@ -22,7 +22,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
     protected function getBlockName(): string
     {
-        return 'persisted-query-api-hierarchy';
+        return 'persisted-query-endpoint-api-hierarchy';
     }
 
     public function getBlockPriority(): int
@@ -79,7 +79,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
          *
          * The issue is that we don't receive the postID here, so we can't check
          * if the post has a parent or not! Alternatively, if we can update the state
-         * of the block when `queryPostParent` changes in persisted-query-api-hierarchy.js,
+         * of the block when `queryPostParent` changes in persisted-query-endpoint-api-hierarchy.js,
          * then this data could be stored in the block and obtained as an attribute.
          *
          * @todo Fix issue
