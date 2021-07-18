@@ -13,4 +13,8 @@ interface EndpointAnnotatorRegistryInterface
      * @return EndpointAnnotatorInterface[]
      */
     public function getEndpointAnnotators(): array;
+    /**
+     * @return EndpointAnnotatorInterface[]
+     */
+    public function getEnabledEndpointAnnotators(): array;
 }
