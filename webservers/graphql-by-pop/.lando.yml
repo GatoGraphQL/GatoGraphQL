@@ -113,6 +113,8 @@ services:
         - '../../layers/Schema/packages/media:/app/vendor/pop-schema/media'
         - '../../layers/Schema/packages/menus-wp:/app/vendor/pop-schema/menus-wp'
         - '../../layers/Schema/packages/menus:/app/vendor/pop-schema/menus'
+        - '../../layers/Schema/packages/meta:/app/vendor/pop-schema/meta'
+        - '../../layers/Schema/packages/metaquery-wp:/app/vendor/pop-schema/metaquery-wp'
         - '../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp'
         - '../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages'
         - >-
