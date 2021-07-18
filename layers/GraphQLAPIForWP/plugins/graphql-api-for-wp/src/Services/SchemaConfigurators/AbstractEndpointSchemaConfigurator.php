@@ -116,7 +116,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
 
     protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
     {
-        foreach ($this->getSchemaConfigurationExecuterRegistry()->getSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
+        foreach ($this->getSchemaConfigurationExecuterRegistry()->getEnabledSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
             $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
         }
     }
