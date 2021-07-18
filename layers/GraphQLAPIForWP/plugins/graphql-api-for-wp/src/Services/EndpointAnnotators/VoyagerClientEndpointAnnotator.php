@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
@@ -63,7 +63,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
         }
     }
 
-    protected function getBlock(): AbstractEndpointOptionsBlock
+    protected function getBlock(): AbstractBlock
     {
         return $this->endpointVoyagerBlock;
     }

@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -189,7 +189,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         );
     }
 
-    abstract protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock;
+    abstract protected function getEndpointOptionsBlock(): AbstractBlock;
 
     /**
      * Read the options block and check the value of attribute "isEndpointEnabled"

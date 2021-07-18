@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
@@ -163,7 +163,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return __('View endpoint', 'graphql-api');
     }
 
-    protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
+    protected function getEndpointOptionsBlock(): AbstractBlock
     {
         /**
          * @var CustomEndpointOptionsBlock

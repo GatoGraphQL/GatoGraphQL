@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInte
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
@@ -181,7 +181,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return true;
     }
 
-    protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
+    protected function getEndpointOptionsBlock(): AbstractBlock
     {
         /**
          * @var PersistedQueryEndpointOptionsBlock
