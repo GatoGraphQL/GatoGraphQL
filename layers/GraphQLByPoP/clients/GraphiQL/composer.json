@@ -1,0 +1,29 @@
+{
+    "name": "graphql-by-pop/graphiql-client",
+    "type": "graphiql-client",
+    "description": "GraphiQL client for GraphQL by PoP",
+    "keywords": [
+        "PoP",
+        "GraphQL",
+        "GraphiQL"
+    ],
+    "homepage": "https://github.com/GraphQLByPoP/GraphiQL",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
