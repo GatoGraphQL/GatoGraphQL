@@ -1,7 +1,7 @@
 {
     "name": "graphql-by-pop/graphiql-client",
     "type": "graphiql-client",
-    "description": "GraphiQL client",
+    "description": "GraphiQL client for GraphQL by PoP",
     "keywords": [
         "PoP",
         "GraphQL",
