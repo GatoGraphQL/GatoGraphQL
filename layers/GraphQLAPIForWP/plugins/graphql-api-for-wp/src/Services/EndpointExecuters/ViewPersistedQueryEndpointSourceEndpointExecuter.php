@@ -67,10 +67,10 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                 /**
                  * If the query has a parent, also render the inherited output
                  */
-                list(
-                    $inheritQuery
-                ) = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
-                if ($inheritQuery) {
+                $persistedQueryEndpointAPIHierarchyBlockDataObject = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                if ($persistedQueryEndpointAPIHierarchyBlockDataObject !== null
+                    && $persistedQueryEndpointAPIHierarchyBlockDataObject->isInheritQuery()
+                ) {
                     // Fetch the attributes using inheritance
                     list(
                         $inheritedGraphQLQuery,

@@ -47,9 +47,10 @@ class GraphQLQueryPostTypeHelpers
              */
             $inheritQuery = false;
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
-                list(
-                    $inheritQuery,
-                ) = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockDataObject = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                if ($persistedQueryEndpointAPIHierarchyBlockDataObject !== null) {
+                    $inheritQuery = $persistedQueryEndpointAPIHierarchyBlockDataObject->isInheritQuery();
+                }
             }
             list(
                 $postGraphQLQuery,
