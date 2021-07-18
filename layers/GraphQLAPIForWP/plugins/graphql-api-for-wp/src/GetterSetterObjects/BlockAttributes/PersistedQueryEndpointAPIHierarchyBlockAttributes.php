@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects\Blocks;
+namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes;
 
 class PersistedQueryEndpointAPIHierarchyBlockAttributes
 {
