@@ -198,7 +198,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         $optionsBlockDataItem = $this->getOptionsBlockDataItem($postOrID);
         // If there was no options block, something went wrong in the post content
-        if (is_null($optionsBlockDataItem)) {
+        if ($optionsBlockDataItem === null) {
             return $default;
         }
 
