@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
+
 /**
  * Endpoint (custom endpoint and persisted query) Options block
  */
 abstract class AbstractEndpointOptionsBlock extends AbstractBlock
 {
     use OptionsBlockTrait;
-
-    public const ATTRIBUTE_NAME_IS_ENABLED = 'isEnabled';
 
     protected function isDynamicBlock(): bool
     {
@@ -49,7 +49,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
         return sprintf(
             $blockContentPlaceholder,
             \__('Enabled:', 'graphql-api'),
-            $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_IS_ENABLED] ?? true)
+            $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
     }
 }

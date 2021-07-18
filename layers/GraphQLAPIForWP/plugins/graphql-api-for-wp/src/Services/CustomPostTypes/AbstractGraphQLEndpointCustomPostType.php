@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
@@ -213,7 +214,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
         return $this->isOptionsBlockValueOn(
             $postOrID,
-            AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED,
+            BlockAttributeNames::IS_ENABLED,
             true
         );
     }
