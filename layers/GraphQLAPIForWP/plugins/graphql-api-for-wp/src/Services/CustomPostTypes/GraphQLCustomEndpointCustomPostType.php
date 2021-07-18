@@ -15,7 +15,7 @@ use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointOptionsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -166,9 +166,9 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected function getEndpointOptionsBlock(): AbstractEndpointOptionsBlock
     {
         /**
-         * @var EndpointOptionsBlock
+         * @var CustomEndpointOptionsBlock
          */
-        $block = $this->instanceManager->getInstance(EndpointOptionsBlock::class);
+        $block = $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
         return $block;
     }
 
