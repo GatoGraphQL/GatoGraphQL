@@ -18,6 +18,7 @@ class PersistedQueryEndpointGraphiQLBlockAttributes
         return $this->query;
     }
 
+    /** @return array<string, mixed> */
     public function getVariables(): array
     {
         return $this->variables;
