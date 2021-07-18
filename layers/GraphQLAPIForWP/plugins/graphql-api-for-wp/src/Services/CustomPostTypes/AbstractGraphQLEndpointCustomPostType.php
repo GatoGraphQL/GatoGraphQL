@@ -171,7 +171,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                  * All others will have `isServiceEnabled` => false, by checking
                  * their expected value of ?view=...
                  */
-                foreach ($this->getEndpointExecuterRegistry()->getEndpointExecuters() as $endpointExecuter) {
+                foreach ($this->getEndpointExecuterRegistry()->getEnabledEndpointExecuters() as $endpointExecuter) {
                     $endpointExecuter->executeEndpoint();
                 }
             },

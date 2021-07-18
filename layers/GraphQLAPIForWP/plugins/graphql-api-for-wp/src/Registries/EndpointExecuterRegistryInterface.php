@@ -13,4 +13,8 @@ interface EndpointExecuterRegistryInterface
      * @return EndpointExecuterInterface[]
      */
     public function getEndpointExecuters(): array;
+    /**
+     * @return EndpointExecuterInterface[]
+     */
+    public function getEnabledEndpointExecuters(): array;
 }
