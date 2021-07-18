@@ -19,6 +19,7 @@ class PackageOrganizationDataSource
             'layers/Engine/packages' => 'getpop',
             'layers/API/packages' => 'getpop',
             'layers/Schema/packages' => 'PoPSchema',
+            'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
             'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
             'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
