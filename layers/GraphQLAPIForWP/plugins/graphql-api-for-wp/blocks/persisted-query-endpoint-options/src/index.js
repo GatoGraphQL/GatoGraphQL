@@ -27,14 +27,14 @@ registerBlockType( 'graphql-api/persisted-query-endpoint-options', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Options for the GraphQL persisted query', 'graphql-api' ),
+	title: __( 'Options for the GraphQL persisted query endpoint', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Configure the GraphQL persisted query',
+		'Configure the GraphQL persisted query endpoint',
 		'graphql-api'
 	),
 

@@ -37,6 +37,6 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategoryTitle(): string
     {
-        return __('GraphQL persisted query', 'graphql-api');
+        return __('GraphQL persisted query endpoint', 'graphql-api');
     }
 }
