@@ -17,10 +17,10 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
-use WP_Post;
 
 class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
@@ -31,6 +31,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         HooksAPIInterface $hooksAPI,
+        BlockHelpers $blockHelpers,
         protected EndpointBlockRegistryInterface $endpointBlockRegistry,
         protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
         protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
@@ -40,6 +41,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
             $moduleRegistry,
             $userAuthorization,
             $hooksAPI,
+            $blockHelpers,
         );
     }
 

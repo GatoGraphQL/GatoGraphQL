@@ -23,7 +23,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
-        protected HooksAPIInterface $hooksAPI
+        protected HooksAPIInterface $hooksAPI,
+        protected BlockHelpers $blockHelpers,
     ) {
         parent::__construct(
             $instanceManager,
@@ -224,9 +225,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
-        /** @var BlockHelpers */
-        $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
-        return $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getEndpointOptionsBlock()
         );
