@@ -8,8 +8,8 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLByPoP\GraphQLRequest\Execution\QueryExecutionHelpers;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
+use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use WP_Post;
 
@@ -21,7 +21,8 @@ class AdminEndpointResolver extends AbstractEndpointResolver
 
     public function __construct(
         EndpointHelpers $endpointHelpers,
-        protected UserAuthorizationInterface $userAuthorization
+        protected UserAuthorizationInterface $userAuthorization,
+        protected QueryRetrieverInterface $queryRetrieverInterface,
     ) {
         parent::__construct($endpointHelpers);
     }
@@ -45,7 +46,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return QueryExecutionHelpers::extractRequestedGraphQLQueryPayload();
+        return $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
     }
 
     /**
