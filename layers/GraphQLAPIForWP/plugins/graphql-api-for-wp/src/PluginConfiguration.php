@@ -63,7 +63,6 @@ use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 
-
 /**
  * Sets the configuration in all the PoP components from the main plugin.
  */
