@@ -13,7 +13,7 @@ import {
 	withEditableOnFocus,
 } from '@graphqlapi/components';
 
-const EndpointOptions = ( props ) => {
+const CustomEndpointOptions = ( props ) => {
 	const {
 		isSelected,
 		className,
@@ -52,4 +52,4 @@ export default compose( [
 	} ),
 	withEditableOnFocus(),
 	withCard(),
-] )( EndpointOptions );
+] )( CustomEndpointOptions );

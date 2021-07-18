@@ -1,13 +1,13 @@
 /**
  * Application imports
  */
-import EndpointOptions from './custom-endpoint-options';
+import CustomEndpointOptions from './custom-endpoint-options';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<EndpointOptions
+			<CustomEndpointOptions
 				{ ...props }
 			/>
 		</div>
