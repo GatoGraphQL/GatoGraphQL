@@ -1,7 +1,7 @@
 {
-	"name": "persisted-query-options",
+	"name": "persisted-query-endpoint-options",
 	"version": "0.1.0",
-	"description": "Configure the GraphQL persisted query",
+	"description": "Configure the GraphQL persisted query endpoint",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

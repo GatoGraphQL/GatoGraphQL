@@ -97,7 +97,7 @@
 
 <!-- wp:graphql-api/schema-configuration /-->
 
-<!-- wp:graphql-api/persisted-query-options /-->]]></content:encoded>
+<!-- wp:graphql-api/persisted-query-endpoint-options /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>5</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-05 02:10:47]]></wp:post_date>
@@ -167,7 +167,7 @@
 
 <!-- wp:graphql-api/schema-configuration /-->
 
-<!-- wp:graphql-api/persisted-query-options /-->]]></content:encoded>
+<!-- wp:graphql-api/persisted-query-endpoint-options /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>12</wp:post_id>
 		<wp:post_date><![CDATA[2020-07-28 11:05:44]]></wp:post_date>
@@ -571,7 +571,7 @@
 
 <!-- wp:graphql-api/schema-configuration /-->
 
-<!-- wp:graphql-api/persisted-query-options /-->]]></content:encoded>
+<!-- wp:graphql-api/persisted-query-endpoint-options /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Data for the "tags" widget for the homepage]]></excerpt:encoded>
 		<wp:post_id>44</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:27:17]]></wp:post_date>
@@ -601,7 +601,7 @@
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:graphql-api/persisted-query-options /-->]]></content:encoded>
+<!-- wp:graphql-api/persisted-query-endpoint-options /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>65</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
@@ -881,7 +881,7 @@
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:graphql-api/persisted-query-options {"isEnabled":false} /-->]]></content:encoded>
+<!-- wp:graphql-api/persisted-query-endpoint-options {"isEnabled":false} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>200</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:06:20]]></wp:post_date>

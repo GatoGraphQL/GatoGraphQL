@@ -19,7 +19,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
 
     protected function getBlockName(): string
     {
-        return 'persisted-query-options';
+        return 'persisted-query-endpoint-options';
     }
 
     public function getBlockPriority(): int
