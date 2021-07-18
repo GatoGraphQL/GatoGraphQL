@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
+use GraphQLAPI\GraphQLAPI\Services\Helpers\PersistedQueryEndpointAPIHierarchyBlockContentHelpers;
 use WP_Post;
 
 class GraphQLQueryPostTypeHelpers
 {
-    public function __construct(protected BlockContentHelpers $blockContentHelpers)
-    {
+    public function __construct(
+        protected BlockContentHelpers $blockContentHelpers,
+        protected PersistedQueryEndpointAPIHierarchyBlockContentHelpers $persistedQueryEndpointAPIHierarchyBlockContentHelpers,
+    ) {
     }
     /**
      * A GraphQL Query Custom Post Type is hierarchical: each query post can have a parent,
@@ -46,7 +49,7 @@ class GraphQLQueryPostTypeHelpers
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
                 list(
                     $inheritQuery,
-                ) = $this->blockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                ) = $this->persistedQueryEndpointAPIHierarchyBlockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
             }
             list(
                 $postGraphQLQuery,

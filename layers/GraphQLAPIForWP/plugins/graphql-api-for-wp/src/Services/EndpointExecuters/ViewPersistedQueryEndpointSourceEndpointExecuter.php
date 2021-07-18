@@ -10,8 +10,8 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockContentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\PersistedQueryEndpointAPIHierarchyBlockContentHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
@@ -22,8 +22,8 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         ModuleRegistryInterface $moduleRegistry,
         protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         protected UserAuthorizationInterface $userAuthorization,
-        protected BlockContentHelpers $blockContentHelpers,
         protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
+        protected PersistedQueryEndpointAPIHierarchyBlockContentHelpers $persistedQueryEndpointAPIHierarchyBlockContentHelpers,
     ) {
         parent::__construct(
             $instanceManager,
@@ -69,7 +69,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                  */
                 list(
                     $inheritQuery
-                ) = $this->blockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                ) = $this->persistedQueryEndpointAPIHierarchyBlockContentHelpers->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
                 if ($inheritQuery) {
                     // Fetch the attributes using inheritance
                     list(
