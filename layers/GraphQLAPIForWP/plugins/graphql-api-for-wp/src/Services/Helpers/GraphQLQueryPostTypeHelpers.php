@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
+use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
 use WP_Post;
 
 class GraphQLQueryPostTypeHelpers
 {
     public function __construct(
-        protected BlockContentHelpers $blockContentHelpers,
+        protected PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor,
         protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
     ) {
     }
@@ -52,29 +53,18 @@ class GraphQLQueryPostTypeHelpers
                     $inheritQuery = $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery();
                 }
             }
-            list(
-                $postGraphQLQuery,
-                $postGraphQLVariables
-            ) = $this->blockContentHelpers->getSingleGraphiQLBlockAttributesFromPost($graphQLQueryPost);
+            $graphiQLBlockAttributes = $this->persistedQueryEndpointGraphiQLBlockAccessor->getAttributes($graphQLQueryPost);
             // Set the query unless it must be inherited from the parent
             if (is_null($graphQLQuery) && !$inheritQuery) {
-                $graphQLQuery = $postGraphQLQuery;
+                $graphQLQuery = $graphiQLBlockAttributes->getQuery();
             }
             /**
-             * Combine all variables. Variables is saved as a string, convert to array
-             * Watch out! If the variables have a wrong format, eg: with an additional trailing comma, such as this:
-             * {
-             *   "limit": 3,
-             * }
-             * Then doing `json_decode` will return NULL
+             * Combine all variables.
              */
-            if ($postGraphQLVariables) {
-                $postGraphQLVariables = json_decode($postGraphQLVariables, true) ?? [];
-                $graphQLVariables = array_merge(
-                    $postGraphQLVariables,
-                    $graphQLVariables
-                );
-            }
+            $graphQLVariables = array_merge(
+                $graphiQLBlockAttributes->getVariables(),
+                $graphQLVariables
+            );
 
             // Keep iterating with this posts' ancestors
             if ($inheritQuery) {
