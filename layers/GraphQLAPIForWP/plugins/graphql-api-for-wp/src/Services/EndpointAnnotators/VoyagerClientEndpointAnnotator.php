@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
@@ -73,7 +74,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
         }
 
         // The default value is not saved in the DB in Gutenberg!
-        $attribute = EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED;
+        $attribute = BlockAttributeNames::IS_ENABLED;
         return $optionsBlockDataItem['attrs'][$attribute] ?? $default;
     }
 }

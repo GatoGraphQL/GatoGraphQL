@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -12,8 +13,6 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
-
-    public const ATTRIBUTE_NAME_IS_VOYAGER_ENABLED = 'isVoyagerEnabled';
 
     protected function getBlockName(): string
     {
@@ -52,7 +51,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Expose the Interactive Schema client?', 'graphql-api'),
-            $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED] ?? true)
+            $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
 
         $blockContentPlaceholder = <<<EOT
