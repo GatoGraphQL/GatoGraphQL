@@ -1,7 +1,7 @@
 {
-	"name": "endpoint-options",
+	"name": "custom-endpoint-options",
 	"version": "0.1.0",
-	"description": "Configure the GraphQL endpoint",
+	"description": "Configure the GraphQL custom endpoint",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

@@ -1,7 +1,7 @@
 /**
  * Application imports
  */
-import EndpointOptions from './endpoint-options';
+import EndpointOptions from './custom-endpoint-options';
 
 const EditBlock = ( props ) => {
 	const { className } = props;

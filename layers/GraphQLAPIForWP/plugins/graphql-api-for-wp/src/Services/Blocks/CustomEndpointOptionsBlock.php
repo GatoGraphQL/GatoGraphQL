@@ -17,7 +17,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 
     protected function getBlockName(): string
     {
-        return 'endpoint-options';
+        return 'custom-endpoint-options';
     }
 
     public function getBlockPriority(): int
