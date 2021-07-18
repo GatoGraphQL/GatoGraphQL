@@ -18,8 +18,8 @@
         "getpop/engine-wp-bootloader": "dev-master",
         "getpop/function-fields": "dev-master",
         "getpop/trace-tools": "dev-master",
-        "graphql-by-pop/graphiql-client": "^1.0",
-        "graphql-by-pop/graphql-voyager-client": "^1.0",
+        "graphql-by-pop/graphiql": "^1.0",
+        "graphql-by-pop/graphql-voyager": "^1.0",
         "graphql-by-pop/graphql-server": "dev-master",
         "oomphinc/composer-installers-extender": "^2.0",
         "pop-schema/block-metadata-for-wp": "dev-master",
@@ -65,10 +65,10 @@
                 "type:wordpress-theme"
             ],
             "wordpress/graphiql/": [
-                "graphql-by-pop/graphiql-client"
+                "graphql-by-pop/graphiql"
             ],
             "wordpress/graphql-interactive/": [
-                "graphql-by-pop/graphql-voyager-client"
+                "graphql-by-pop/graphql-voyager"
             ]
         }
     },

@@ -16,7 +16,7 @@
 Via Composer
 
 ``` bash
-$ composer require graphql-by-pop/graphql-voyager-client
+$ composer require graphql-by-pop/graphql-voyager
 ```
 
 In order to copy the GraphQL Voyager client under a specific path, install package [Composer Installers Extender](https://github.com/oomphinc/composer-installers-extender):
@@ -34,7 +34,7 @@ Then, add package type `"graphql-voyager"` in section `"extra.installer-types"`,
         "installer-types": ["graphql-voyager"],
         "installer-paths": {
             "graphql-interactive/": [
-                "graphql-by-pop/graphql-voyager-client"
+                "graphql-by-pop/graphql-voyager"
             ]
         }
     }

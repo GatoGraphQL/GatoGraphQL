@@ -16,7 +16,7 @@
 Via Composer
 
 ``` bash
-$ composer require graphql-by-pop/graphiql-client
+$ composer require graphql-by-pop/graphiql
 ```
 
 In order to copy the GraphiQL under a specific path, install package [Composer Installers Extender](https://github.com/oomphinc/composer-installers-extender):
@@ -34,7 +34,7 @@ Then, add package type `"graphiql-client"` in section `"extra.installer-types"`,
         "installer-types": ["graphiql-client"],
         "installer-paths": {
             "graphiql/": [
-                "graphql-by-pop/graphiql-client"
+                "graphql-by-pop/graphiql"
             ]
         }
     }
