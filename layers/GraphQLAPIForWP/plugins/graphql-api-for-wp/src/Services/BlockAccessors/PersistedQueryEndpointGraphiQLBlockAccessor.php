@@ -34,14 +34,14 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
         $query = $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? '';
         /**
          * Variables is saved as a string, convert to array.
-         * 
+         *
          * Watch out! If the variables have a wrong format,
          * eg: with an additional trailing comma, such as this:
-         * 
+         *
          *   {
          *     "limit": 3,
          *   }
-         * 
+         *
          * Then doing `json_decode` will return NULL
          */
         $variables = $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES] ?? null;
