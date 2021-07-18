@@ -20,7 +20,7 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
     /**
      * Extract the Persisted Query Options block attributes from the post
      */
-    public function getSinglePersistedQueryOptionsBlockAttributesFromPost(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockDataObject
+    public function getDataObject(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockDataObject
     {
         $persistedQueryEndpointAPIHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,

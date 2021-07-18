@@ -47,7 +47,7 @@ class GraphQLQueryPostTypeHelpers
              */
             $inheritQuery = false;
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
-                $persistedQueryEndpointAPIHierarchyBlockDataObject = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getSinglePersistedQueryOptionsBlockAttributesFromPost($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockDataObject = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getDataObject($graphQLQueryPost);
                 if ($persistedQueryEndpointAPIHierarchyBlockDataObject !== null) {
                     $inheritQuery = $persistedQueryEndpointAPIHierarchyBlockDataObject->isInheritQuery();
                 }
