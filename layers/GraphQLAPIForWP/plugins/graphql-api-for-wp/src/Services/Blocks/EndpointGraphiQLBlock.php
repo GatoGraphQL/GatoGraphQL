@@ -7,12 +7,12 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
-class EndpointGraphiQLBlock extends AbstractEndpointOptionsBlock implements EndpointEditorBlockServiceTagInterface
+class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {

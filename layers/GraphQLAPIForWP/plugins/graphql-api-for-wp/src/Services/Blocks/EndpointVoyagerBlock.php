@@ -9,9 +9,10 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 
-class EndpointVoyagerBlock extends AbstractEndpointOptionsBlock implements EndpointEditorBlockServiceTagInterface
+class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockServiceTagInterface
 {
     use MainPluginBlockTrait;
+    use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {
