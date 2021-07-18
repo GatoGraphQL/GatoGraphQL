@@ -50,7 +50,7 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
             $variables = [];
         }
         return new PersistedQueryEndpointGraphiQLBlockAttributes(
-            $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? null,
+            $graphiQLBlock['attrs'][PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY] ?? '',
             $variables,
         );
     }

@@ -40,7 +40,7 @@ class GraphQLQueryPostTypeHelpers
          * - Empty query: get it from the first ancestor that defines a query
          * - Variables: combine them all, with descendant's having more priority
          */
-        $graphQLQuery = null;
+        $graphQLQuery = '';
         $graphQLVariables = [];
         while (!is_null($graphQLQueryPost)) {
             /**
@@ -55,7 +55,7 @@ class GraphQLQueryPostTypeHelpers
             }
             $graphiQLBlockAttributes = $this->persistedQueryEndpointGraphiQLBlockAccessor->getAttributes($graphQLQueryPost);
             // Set the query unless it must be inherited from the parent
-            if (is_null($graphQLQuery) && !$inheritQuery) {
+            if (empty($graphQLQuery) && !$inheritQuery) {
                 $graphQLQuery = $graphiQLBlockAttributes->getQuery();
             }
             /**
