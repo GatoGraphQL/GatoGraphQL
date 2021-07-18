@@ -24,7 +24,9 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 {
     use ModuleResolverTrait;
-    use SchemaTypeModuleResolverTrait;
+    use SchemaTypeModuleResolverTrait {
+        getPriority as getUpstreamPriority;
+    }
 
     public const SCHEMA_CUSTOMPOST_META = Plugin::NAMESPACE . '\schema-custompost-meta';
     public const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
@@ -67,6 +69,11 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_COMMENT_META,
             self::SCHEMA_TAXONOMY_META,
         ];
+    }
+
+    public function getPriority(): int
+    {
+        return $this->getUpstreamPriority() - 1;
     }
 
     /**
