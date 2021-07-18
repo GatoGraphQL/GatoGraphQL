@@ -6,12 +6,15 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use WP_Post;
 
 class BlockContentHelpers
 {
+    public function __construct(
+        protected BlockHelpers $blockHelpers,
+    ) {
+    }
     /**
      * Extract the GraphiQL block attributes from the post
      *
@@ -21,13 +24,11 @@ class BlockContentHelpers
     {
         // There must be only one block of type GraphiQL. Fetch it
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var PersistedQueryEndpointGraphiQLBlock
          */
         $block = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
-        $graphiQLBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $graphiQLBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
         );
@@ -50,13 +51,11 @@ class BlockContentHelpers
     {
         // There must be only one block of type PersistedQueryEndpointAPIHierarchyBlock. Fetch it
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var BlockHelpers */
-        $blockHelpers = $instanceManager->getInstance(BlockHelpers::class);
         /**
          * @var PersistedQueryEndpointAPIHierarchyBlock
          */
         $block = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
-        $persistedQueryEndpointAPIHierarchyBlock = $blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $persistedQueryEndpointAPIHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
             $post,
             $block
         );
