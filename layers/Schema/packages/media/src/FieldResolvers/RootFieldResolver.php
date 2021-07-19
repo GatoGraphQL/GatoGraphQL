@@ -121,12 +121,10 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
         switch ($fieldName) {
             case 'mediaItems':
             case 'mediaItem':
-                $query = [
-                    'include' => [$fieldArgs['id']],
-                    // 'status' => [
-                    //     Status::PUBLISHED,
-                    // ],
-                ];
+                $query = [];
+                if ($fieldName == 'mediaItem') {
+                    $query['include'] = [$fieldArgs['id']];
+                }
                 $options = [
                     'return-type' => ReturnTypes::IDS,
                 ];
