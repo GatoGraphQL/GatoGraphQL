@@ -8,9 +8,8 @@ The schema can be configured with the following elements (more items can also pr
 
 - Access Control Lists: to define who can access the schema
 - Cache Control Lists: to set-up HTTP caching
-- Field Deprecation Lists: to version the schema
 
-Modules can define their own configuration to be applied in the schema through the `Options` box, including:
+Modules can define their own configuration to be applied in the schema through their own option blocks, including:
 
 - Setting the schema as public or private
 - Enabling "unrestricted" fields for the admin
@@ -60,10 +59,6 @@ These are the inputs in the body of the editor:
 <tr>
     <td>**Cache Control Lists**</td>
     <td>(If module `Cache Control` is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
-</tr>
-<tr>
-    <td>**Field Deprecation Lists**</td>
-    <td>(If module `Field Deprecation` is enabled) Manage deprecation of fields in the schema, by selecting the Field Deprecation Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
     <td>**Options**</td>
