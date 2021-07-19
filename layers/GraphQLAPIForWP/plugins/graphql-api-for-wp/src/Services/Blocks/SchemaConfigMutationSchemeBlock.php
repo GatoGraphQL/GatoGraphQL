@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
@@ -28,7 +28,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
 
     public function getEnablingModule(): ?string
     {
-        return OperationalFunctionalityModuleResolver::NESTED_MUTATIONS;
+        return SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS;
     }
 
     /**

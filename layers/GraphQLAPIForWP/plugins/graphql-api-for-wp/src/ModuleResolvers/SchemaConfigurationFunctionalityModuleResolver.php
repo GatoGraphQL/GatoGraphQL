@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use PoP\AccessControl\Schema\SchemaModes;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
+use PoP\AccessControl\Schema\SchemaModes;
 use WP_Post;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -20,6 +21,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
+    public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
     /**
      * Setting options
@@ -28,6 +30,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const OPTION_USE_NAMESPACING = 'use-namespacing';
     public const OPTION_MODE = 'mode';
     public const OPTION_ENABLE_GRANULAR = 'granular';
+    public const OPTION_SCHEME = 'scheme';
 
     /**
      * Setting option values
@@ -42,6 +45,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return [
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
+            self::NESTED_MUTATIONS,
             self::PUBLIC_PRIVATE_SCHEMA,
         ];
     }
@@ -55,6 +59,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             case self::SCHEMA_CONFIGURATION:
                 return [];
             case self::SCHEMA_NAMESPACING:
+            case self::NESTED_MUTATIONS:
                 return [
                     [
                         self::SCHEMA_CONFIGURATION,
@@ -76,6 +81,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
             self::PUBLIC_PRIVATE_SCHEMA => \__('Public/Private Schema', 'graphql-api'),
+            self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
     }
@@ -89,6 +95,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 return \__('Automatically namespace types and interfaces with a vendor/project name, to avoid naming collisions', 'graphql-api');
             case self::PUBLIC_PRIVATE_SCHEMA:
                 return \__('Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)', 'graphql-api');
+            case self::NESTED_MUTATIONS:
+                return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
         }
         return parent::getDescription($module);
     }
@@ -108,6 +116,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::PUBLIC_PRIVATE_SCHEMA => [
                 self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
                 self::OPTION_ENABLE_GRANULAR => true,
+            ],
+            self::NESTED_MUTATIONS => [
+                self::OPTION_SCHEME => MutationSchemes::STANDARD,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -224,6 +235,23 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TITLE => \__('Enable granular control?', 'graphql-api'),
                 Properties::DESCRIPTION => \__('Enable to select the visibility for a set of fields/directives when editing the Access Control List', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module == self::NESTED_MUTATIONS) {
+            $option = self::OPTION_SCHEME;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Default Mutation Scheme', 'graphql-api'),
+                Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => [
+                    MutationSchemes::STANDARD => \__('Do not enable nested mutations', 'graphql-api'),
+                    MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
+                    MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
+                ],
             ];
         }
         return $moduleSettings;

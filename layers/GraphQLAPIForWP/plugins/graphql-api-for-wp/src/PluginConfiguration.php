@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
@@ -177,17 +176,17 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             [
                 'class' => GraphQLServerComponentConfiguration::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
-                'module' => OperationalFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => OperationalFunctionalityModuleResolver::OPTION_SCHEME,
-                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS) && $value != MutationSchemes::STANDARD,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEME,
+                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value != MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
             [
                 'class' => EngineComponentConfiguration::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
-                'module' => OperationalFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => OperationalFunctionalityModuleResolver::OPTION_SCHEME,
-                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(OperationalFunctionalityModuleResolver::NESTED_MUTATIONS) && $value == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_SCHEME,
+                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Cache-Control default max-age
             [
