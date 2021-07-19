@@ -55,6 +55,10 @@ services:
         - >-
           ../../layers/Engine/packages/translation:/app/vendor/getpop/translation
         - >-
+          ../../layers/GraphQLByPoP/clients/graphiql:/app/vendor/graphql-by-pop/graphiql
+        - >-
+          ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/vendor/graphql-by-pop/graphql-voyager
+        - >-
           ../../layers/GraphQLByPoP/packages/graphql-parser:/app/vendor/graphql-by-pop/graphql-parser
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
