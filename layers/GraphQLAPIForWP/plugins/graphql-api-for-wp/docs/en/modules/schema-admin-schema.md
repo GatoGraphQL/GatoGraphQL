@@ -12,8 +12,6 @@ With this module, we can also access post data via field:
 
 - `Root.unrestrictedPosts`: exposes public and private data, by fetching posts with any status (`"publish"`, `"draft"`, `"pending"`, `"trash"`).
 
-Due to security reasons, this module is disabled by default.
-
 ## List of admin fields
 
 The following fields will be added to the GraphQL schema:
