@@ -14,11 +14,12 @@ use Symfony\Component\Filesystem\Filesystem;
 class FilesystemWrapper
 {
     private Filesystem $fileSystem;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->fileSystem = new Filesystem();
     }
-    
+
     /**
      * Removes files or directories.
      *
