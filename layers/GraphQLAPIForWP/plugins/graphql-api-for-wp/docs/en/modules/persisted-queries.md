@@ -101,7 +101,7 @@ By default, the persisted query's endpoint has path `/graphql-query/`, and this 
 
 ## Editor Inputs
 
-These are the inputs in the body of the editor:
+These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
 <table markdown="1">
 <thead>
@@ -125,7 +125,11 @@ These are the inputs in the body of the editor:
 </tr>
 <tr>
   <td>**Options**</td>
-  <td>Customize the behavior of the persisted query: <ul markdown="1"><li>**Enabled?:** If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li>**Accept variables as URL params?:** Allow URL params to override the values for variables defined in the GraphiQL client</li><li>**Inherit query from ancestor(s)?:** Use the same query as the parent persisted query.<br/>This option is available when module `API Hierarchy` is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul></td>
+  <td>Customize the behavior of the persisted query: <ul markdown="1"><li>**Enabled?:** If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li>**Accept variables as URL params?:** Allow URL params to override the values for variables defined in the GraphiQL client</li></ul></td>
+</tr>
+<tr>
+  <td>**API Hierarchy:**</td>
+  <td>Use the same query as the parent persisted query.<br/>This option is available when the persisted query has a parent query (selected on the Document settings)</td>
 </tr>
 </tbody>
 </table>

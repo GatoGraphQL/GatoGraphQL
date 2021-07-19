@@ -8,9 +8,8 @@ The schema can be configured with the following elements (more items can also pr
 
 - Access Control Lists: to define who can access the schema
 - Cache Control Lists: to set-up HTTP caching
-- Field Deprecation Lists: to version the schema
 
-Modules can define their own configuration to be applied in the schema through the `Options` box, including:
+Modules can define their own configuration to be applied in the schema through their own option blocks, including:
 
 - Setting the schema as public or private
 - Enabling "unrestricted" fields for the admin
@@ -43,7 +42,7 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 ## Editor Inputs
 
-These are the inputs in the body of the editor:
+These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
 <table markdown="1">
 <thead>
@@ -62,12 +61,18 @@ These are the inputs in the body of the editor:
     <td>(If module `Cache Control` is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
-    <td>**Field Deprecation Lists**</td>
-    <td>(If module `Field Deprecation` is enabled) Manage deprecation of fields in the schema, by selecting the Field Deprecation Lists that must be applied to the custom endpoint or persisted query</td>
+    <td>**Schema for the Admin**</td>
+    <td>Add "unrestricted" fields to the GraphQL schema (such as `Root.unrestrictedPosts`, `User.roles`, and others), to be used by the admin only. If `"Default"` is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td>**Options**</td>
-    <td>Customize the behavior of the schema configuration:<br/><br/>**Public/Private Schema:** (If module `Public/Private Schema` is enabled)<br/>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul markdown="1"><li>`"Public"`: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li>`"Private"`: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Add admin fields to the schema?:** (If module `Schema for the Admin` is enabled)<br/>Add "unrestricted" fields to the GraphQL schema (such as `Root.unrestrictedPosts`, `User.roles`, and others), to be used by the admin only. If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Namespace Types and Interfaces?:** (If module `Schema Namespacing` is enabled)<br/>Define if to have all types and interfaces in the schema automatically namespaced. If `"Default"` is selected, the value selected in the Settings is used.<br/><br/>**Mutation Scheme:** (If module `Nested Mutations` is enabled)<br/>Define if to enable mutations, and if the redundant fields from the root must be removed. If `"Default"` is selected, the value selected in the Settings is used.</td>
+    <td>**Public/Private Schema**</td>
+    <td>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul markdown="1"><li>`"Public"`: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li>`"Private"`: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If `"Default"` is selected, the value selected in the Settings is used.</td>
+</tr>
+<tr>
+    <td>**Mutation Scheme**</td><td>Define if to enable mutations, and if the redundant fields from the root must be removed. If `"Default"` is selected, the value selected in the Settings is used.</td>
+</tr>
+<tr>
+    <td>**Namespace Types and Interfaces?**</td><td>Define if to have all types and interfaces in the schema automatically namespaced. If `"Default"` is selected, the value selected in the Settings is used.</td>
 </tr>
 </tbody>
 </table>
