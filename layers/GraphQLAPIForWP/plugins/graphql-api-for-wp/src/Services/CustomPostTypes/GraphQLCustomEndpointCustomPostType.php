@@ -35,6 +35,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         protected EndpointBlockRegistryInterface $endpointBlockRegistry,
         protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
         protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,
+        protected CustomEndpointOptionsBlock $customEndpointOptionsBlock,
     ) {
         parent::__construct(
             $instanceManager,
@@ -167,11 +168,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
 
     public function getEndpointOptionsBlock(): AbstractBlock
     {
-        /**
-         * @var CustomEndpointOptionsBlock
-         */
-        $block = $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
-        return $block;
+        return $this->customEndpointOptionsBlock;
     }
 
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
