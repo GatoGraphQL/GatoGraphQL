@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Support for WordPress 5.8 (switched to newly-introduced hooks)
 - Simplified the codebase, using container services everywhere
 - Further completed the WordPress schema
   - Categories
