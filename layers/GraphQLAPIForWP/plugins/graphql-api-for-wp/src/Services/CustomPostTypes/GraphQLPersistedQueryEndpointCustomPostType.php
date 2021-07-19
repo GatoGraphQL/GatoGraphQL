@@ -183,7 +183,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return true;
     }
 
-    protected function getEndpointOptionsBlock(): AbstractBlock
+    public function getEndpointOptionsBlock(): AbstractBlock
     {
         /**
          * @var PersistedQueryEndpointOptionsBlock

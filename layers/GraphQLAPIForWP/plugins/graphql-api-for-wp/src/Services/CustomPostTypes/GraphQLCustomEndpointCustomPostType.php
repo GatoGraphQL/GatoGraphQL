@@ -165,7 +165,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return __('View endpoint', 'graphql-api');
     }
 
-    protected function getEndpointOptionsBlock(): AbstractBlock
+    public function getEndpointOptionsBlock(): AbstractBlock
     {
         /**
          * @var CustomEndpointOptionsBlock
