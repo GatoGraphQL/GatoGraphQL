@@ -8,16 +8,17 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Support for WordPress 5.8 (switched to newly-introduced hooks)
+- Simplified the codebase, using container services everywhere
 - Further completed the WordPress schema
   - Categories
   - Meta values
   - Menus
   - Settings
   - Logged-in user's posts
-- "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema (disabled by default)
+- "Schema for the Admin" module, exposing "unrestricted" admin fields to the GraphQL schema
 - Introduced scalar type `AnyScalar`, representing any of the built-in scalars (`String`, `Int`, `Boolean`, `Float` and `ID`)
-- Composable directives
-- Cache is saved under the plugin folder
+- Cache is saved under the `wp-content`
 - Split the GraphQL endpoint for accessing data for the WordPress editor into two:
   1. `GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
   2. `GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT`
@@ -32,8 +33,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Backwards-breaking changes:
 
-- Simplified the codebase, using container services everywhere
 - Use bitwise operations and flags to augment a field's type (eg: `[String]!` => `SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY`)
+- Schema Configurations, Custom Endpoints and Persisted Queries have their Option blocks rebuilt, and they must be filled again.
 
 ### Fixed:
 
