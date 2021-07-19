@@ -100,7 +100,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/graphiql-explorer.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/en/modules/schema-admin-schema.md">Admin for the Schema</a></td><td>Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>Root.roles</code>, and others), to be used by the admin only</td></tr>
-<tr><td><a href="docs/en/modules/schema-mutations.md">Schema Mutations</a></td><td>Modify data by executing mutations</td></tr>
 <tr><td><a href="docs/en/modules/schema-customposts.md">Schema Custom Posts</a></td><td>Base functionality for all custom posts</td></tr>
 <tr><td><a href="docs/en/modules/schema-generic-customposts.md">Schema Generic Custom Posts</a></td><td>Query any custom post type (added to the schema or not), through a generic type <code>GenericCustomPost</code></td></tr>
 <tr><td>Schema Posts</td><td>Query posts, through type <code>Post</code> added to the schema</td></tr>
@@ -119,6 +118,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/schema-taxonomy-meta.md">Schema Taxonomy Meta</a></td><td>Add the <code>option</code> field to taxonomies, such as types <code>PostTag</code> and <code>PostCategory</code></td></tr>
 <tr><td>Schema Menus</td><td>Query menus, through type <code>Menu</code> added to the schema</td></tr>
 <tr><td><a href="docs/en/modules/schema-settings.md">Schema Settings</a></td><td>Fetch settings from the site</td></tr>
+<tr><td><a href="docs/en/modules/schema-mutations.md">Schema Mutations</a></td><td>Modify data by executing mutations</td></tr>
 <tr><td><a href="docs/en/modules/schema-user-state-mutations.md">Schema User State Mutations</a></td><td>Have the user log-in, and be able to perform mutations</td></tr>
 <tr><td>Schema Custom Post Mutations</td><td>Base functionality to mutate custom posts</td></tr>
 <tr><td>Schema Post Mutations</td><td>Execute mutations on podyd</td></tr>
