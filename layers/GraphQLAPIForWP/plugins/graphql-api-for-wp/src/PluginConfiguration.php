@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Environment;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
@@ -38,6 +40,10 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;
 use PoPSchema\Categories\Environment as CategoriesEnvironment;
+use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
+use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
+use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
+use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
 use PoPSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsComponentConfiguration;
@@ -51,17 +57,12 @@ use PoPSchema\Settings\ComponentConfiguration as SettingsComponentConfiguration;
 use PoPSchema\Settings\Environment as SettingsEnvironment;
 use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
+use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
+use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
+use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
+use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
-use PoPSchema\CommentMeta\ComponentConfiguration as CommentMetaComponentConfiguration;
-use PoPSchema\CustomPostMeta\ComponentConfiguration as CustomPostMetaComponentConfiguration;
-use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
-use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
-use PoPSchema\CommentMeta\Environment as CommentMetaEnvironment;
-use PoPSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
-use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -520,7 +521,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         ];
         $componentClassConfiguration[\PoP\API\Component::class] = [
             // Enable Mutations?
-            \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(SchemaTypeModuleResolver::SCHEMA_MUTATIONS),
+            \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
 
         // If doing ?behavior=unrestricted, always enable certain features
@@ -641,22 +642,22 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
                 \PoPSchema\Settings\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
+            MutationSchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
                 \PoPSchema\UserStateMutations\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
+            MutationSchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
                 \PoPSchema\PostMutations\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
+            MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
                 \PoPSchema\CustomPostMediaMutations\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
+            MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
                 \PoPSchema\PostTagMutations\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
+            MutationSchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
                 \PoPSchema\PostCategoryMutations\Component::class,
             ],
-            SchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
+            MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPSchema\CommentMutations\Component::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
