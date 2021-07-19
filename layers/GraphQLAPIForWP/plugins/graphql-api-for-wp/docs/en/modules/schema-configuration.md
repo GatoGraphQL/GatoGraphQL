@@ -42,7 +42,7 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 ## Editor Inputs
 
-These are the inputs in the body of the editor shipped with the plugin (more inputs can be added by extensions):
+These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
 <table markdown="1">
 <thead>

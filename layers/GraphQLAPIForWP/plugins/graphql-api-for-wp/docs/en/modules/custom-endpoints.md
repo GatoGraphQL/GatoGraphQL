@@ -58,7 +58,7 @@ By default, the custom endpoint has path `/graphql/`, and this value is configur
 
 ## Editor Inputs
 
-These are the inputs in the body of the editor:
+These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
 <table markdown="1">
 <thead>
@@ -78,7 +78,19 @@ These are the inputs in the body of the editor:
 </tr>
 <tr>
   <td>**Options**</td>
-  <td>Customize the behavior of the custom endpoint: <ul markdown="1"><li>**Enabled?:** If the custom endpoint is enabled.<br/>It's useful to disable a custom endpoint it's a parent query in an API hierarchy</li><li>**Expose GraphiQL client?:** Enable/disable attaching a GraphiQL client to the endpoint, accessible under `?view=graphiql`</li><li>**Expose the Interactive Schema client?:** Enable/disable attaching an Interactive schema client to the endpoint, accessible under `?view=schema`</li><li>**Inherit query from ancestor(s)?:** Use the same query as the parent custom endpoint.<br/>This option is available when module `"API Hierarchy"` is enabled, and the custom endpoint has a parent query (selected on the Document settings)</li></ul></td>
+  <td>Select if the custom endpoint is enabled.<br/>It's useful to disable a custom endpoint it's a parent query in an API hierarchy</td>
+</tr>
+<tr>
+  <td>**GraphiQL**</td>
+  <td>Enable/disable attaching a GraphiQL client to the endpoint, accessible under `?view=graphiql`</td>
+</tr>
+<tr>
+  <td>**Interactive Schema**</td>
+  <td>Enable/disable attaching an Interactive schema client to the endpoint, accessible under `?view=schema`</td>
+</tr>
+<tr>
+  <td>**API Hierarchy**</td>
+  <td>Use the same query as the parent custom endpoint.<br/>This section is enabled when the custom endpoint has a parent query (selected on the Document settings)</td>
 </tr>
 </tbody>
 </table>
