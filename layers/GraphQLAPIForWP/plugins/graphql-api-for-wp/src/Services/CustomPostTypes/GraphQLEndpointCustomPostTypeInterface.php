@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use WP_Post;
 
-interface GraphQLEndpointCustomPostTypeInterface
+interface GraphQLEndpointCustomPostTypeInterface extends CustomPostTypeInterface
 {
     public function getEndpointOptionsBlock(): AbstractBlock;
 
