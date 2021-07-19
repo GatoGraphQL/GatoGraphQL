@@ -357,21 +357,20 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function embedVideos(string $htmlContent): string
     {
-        // Identify videos from Vimeo/Youtube
+        // Identify videos from Vimeo
         return (string)preg_replace_callback(
-            '/<p>(.*?)<a href="https:\/\/(vimeo.com|youtube.com|youtu.be)\/(.*?)">(.*?)<\/a>\.?<\/p>/',
+            '/<p>(.*?)<a href="https:\/\/(vimeo.com)\/(.*?)">(.*?)<\/a>\.?<\/p>/',
             function ($matches) {
-                global $wp_embed;
+                // $videoURL = sprintf('https://%s/%s', $matches[2], $matches[3]);
+                $playerURL = sprintf('https://player.vimeo.com/video/%s', $matches[3]);
+                $videoHTML = sprintf(
+                    '<iframe src="%s" width="640" height="480" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>',
+                    $playerURL
+                );
                 // Keep the link, and append the embed immediately after
                 return
                     $matches[0]
-                    . '<div class="video-responsive-container">' .
-                        $wp_embed->autoembed(sprintf(
-                            'https://%s/%s',
-                            $matches[2],
-                            $matches[3]
-                        ))
-                    . '</div>';
+                    . '<div class="video-responsive-container">' . $videoHTML . '</div>';
             },
             $htmlContent
         );
