@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
@@ -79,5 +80,23 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
 
         // Execute the original logic
         parent::addGraphQLVars($vars_in_array);
+    }
+
+    /**
+     * Indicate if the GraphQL variables must override the URL params
+     */
+    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
+    {
+        if ($customPost === null) {
+            return parent::doURLParamsOverrideGraphQLVariables($customPost);
+        }
+        $default = true;
+        $optionsBlockDataItem = $this->getCustomPostType()->getOptionsBlockDataItem($customPost);
+        if ($optionsBlockDataItem === null) {
+            return $default;
+        }
+
+        // `true` is the default option in Gutenberg, so it's not saved to the DB!
+        return $optionsBlockDataItem['attrs'][PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? $default;
     }
 }

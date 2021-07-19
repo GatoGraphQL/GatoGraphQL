@@ -21,7 +21,6 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
-use WP_Post;
 
 class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
@@ -191,23 +190,5 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
          */
         $block = $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         return $block;
-    }
-
-    /**
-     * Indicate if the GraphQL variables must override the URL params
-     */
-    protected function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool
-    {
-        if ($customPost === null) {
-            return parent::doURLParamsOverrideGraphQLVariables($customPost);
-        }
-        $default = true;
-        $optionsBlockDataItem = $this->getOptionsBlockDataItem($customPost);
-        if ($optionsBlockDataItem === null) {
-            return $default;
-        }
-
-        // `true` is the default option in Gutenberg, so it's not saved to the DB!
-        return $optionsBlockDataItem['attrs'][PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? $default;
     }
 }
