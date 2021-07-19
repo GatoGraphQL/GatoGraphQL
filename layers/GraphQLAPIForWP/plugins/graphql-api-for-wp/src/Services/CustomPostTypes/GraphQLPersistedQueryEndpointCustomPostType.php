@@ -35,6 +35,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
         protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
         protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
+        protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
     ) {
         parent::__construct(
             $instanceManager,
@@ -183,12 +184,8 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return true;
     }
 
-    protected function getEndpointOptionsBlock(): AbstractBlock
+    public function getEndpointOptionsBlock(): AbstractBlock
     {
-        /**
-         * @var PersistedQueryEndpointOptionsBlock
-         */
-        $block = $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
-        return $block;
+        return $this->persistedQueryEndpointOptionsBlock;
     }
 }
