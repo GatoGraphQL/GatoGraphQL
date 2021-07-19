@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "getpop/hooks": "^0.8.1",
-        "getpop/translation-wp": "^0.8.1"
+        "getpop/hooks": "^0.9",
+        "getpop/translation-wp": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",
