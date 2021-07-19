@@ -17,7 +17,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
 use WP_Post;
 
-abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType
+abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
     public function __construct(
         InstanceManagerInterface $instanceManager,
@@ -189,8 +189,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             false
         );
     }
-
-    abstract protected function getEndpointOptionsBlock(): AbstractBlock;
 
     /**
      * Read the options block and check the value of attribute "isEndpointEnabled"
