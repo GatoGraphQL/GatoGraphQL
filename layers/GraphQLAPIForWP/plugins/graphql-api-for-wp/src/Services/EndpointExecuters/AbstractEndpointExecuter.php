@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
@@ -52,7 +52,7 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
         return true;
     }
 
-    abstract protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType;
+    abstract protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface;
 
     /**
      * Check the expected ?view=... is requested.

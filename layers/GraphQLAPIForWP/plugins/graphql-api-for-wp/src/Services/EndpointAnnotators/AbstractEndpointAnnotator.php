@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
-use WP_Post;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use WP_Post;
 
 abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
@@ -44,5 +44,5 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
         return true;
     }
 
-    abstract protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType;
+    abstract protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface;
 }

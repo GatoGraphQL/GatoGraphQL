@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHooks;
@@ -33,7 +33,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 
-    protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
+    protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
         return $this->graphQLPersistedQueryEndpointCustomPostType;
     }

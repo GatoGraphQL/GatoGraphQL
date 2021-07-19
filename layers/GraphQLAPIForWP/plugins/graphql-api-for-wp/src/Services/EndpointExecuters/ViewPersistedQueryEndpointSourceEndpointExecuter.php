@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -36,7 +36,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 
-    protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
+    protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
         return $this->graphQLPersistedQueryEndpointCustomPostType;
     }

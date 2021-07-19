@@ -6,8 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractGraphQLEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
@@ -28,7 +28,7 @@ class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpoin
         return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
     }
 
-    protected function getCustomPostType(): AbstractGraphQLEndpointCustomPostType
+    protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
         return $this->graphQLCustomEndpointCustomPostType;
     }
