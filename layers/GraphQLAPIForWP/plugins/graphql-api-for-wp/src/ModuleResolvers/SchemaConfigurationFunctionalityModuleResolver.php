@@ -44,9 +44,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         return [
             self::SCHEMA_CONFIGURATION,
-            self::PUBLIC_PRIVATE_SCHEMA,
             self::SCHEMA_NAMESPACING,
             self::NESTED_MUTATIONS,
+            self::PUBLIC_PRIVATE_SCHEMA,
         ];
     }
 
@@ -59,6 +59,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             case self::SCHEMA_CONFIGURATION:
                 return [];
             case self::SCHEMA_NAMESPACING:
+            case self::NESTED_MUTATIONS:
                 return [
                     [
                         self::SCHEMA_CONFIGURATION,
