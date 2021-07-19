@@ -7,10 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -24,19 +20,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
-
-    public function __construct(
-        InstanceManagerInterface $instanceManager,
-        ModuleRegistryInterface $moduleRegistry,
-        TranslationAPIInterface $translationAPI,
-        protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry,
-    ) {
-        parent::__construct(
-            $instanceManager,
-            $moduleRegistry,
-            $translationAPI,
-        );
-    }
 
     /**
      * @return string[]
@@ -88,7 +71,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
         $defaultValues = [
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
