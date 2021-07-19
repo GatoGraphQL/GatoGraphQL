@@ -22,7 +22,6 @@ const PersistedQueryEndpointOptions = ( props ) => {
 	const {
 		isSelected,
 		className,
-		queryPostParent,
 		setAttributes,
 		attributes:
 		{
