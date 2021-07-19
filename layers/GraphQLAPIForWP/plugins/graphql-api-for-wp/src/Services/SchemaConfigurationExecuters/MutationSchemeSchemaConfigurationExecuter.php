@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\OperationalFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration as GraphQLServerComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -17,7 +17,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
 {
     public function getEnablingModule(): ?string
     {
-        return OperationalFunctionalityModuleResolver::NESTED_MUTATIONS;
+        return SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS;
     }
 
     public function executeSchemaConfiguration(int $schemaConfigurationID): void
