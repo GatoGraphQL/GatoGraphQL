@@ -199,8 +199,8 @@ composer fix-style
 ## Release notes
 
 <!-- - [0.9](docs/en/release-notes/0.9.md) -->
-- [0.8](docs/en/release-notes/0.8.md)
-- **[0.7](docs/en/release-notes/0.7.md)** (current)
+- **[0.8](docs/en/release-notes/0.8.md)** (current)
+- [0.7](docs/en/release-notes/0.7.md)
 - [0.6](docs/en/release-notes/0.6.md)
 
 ## Change log
