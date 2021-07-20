@@ -3,7 +3,7 @@
 Plugin Name: GraphQL API - Extension Demo
 Plugin URI: https://github.com/GraphQLAPI/extension-demo
 Description: Demonstration of extending the GraphQL schema, for the GraphQL API for WordPress
-Version: 0.8.0
+Version: 0.8.1
 Requires at least: 5.4
 Requires PHP: 8.0
 Author: Leonardo Losoviz
@@ -37,7 +37,7 @@ add_action('plugins_loaded', function (): void {
     /**
      * Extension's name and version
      */
-    $extensionVersion = '0.8.0';
+    $extensionVersion = '0.8.1';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
     $mainPluginVersionConstraint = '^0.8';
     
