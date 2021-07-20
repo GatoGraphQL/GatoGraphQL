@@ -44,7 +44,7 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
-<table markdown="1">
+<table>
 <thead>
 <tr>
     <th>Input</th>
@@ -53,26 +53,26 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 </thead>
 <tbody>
 <tr>
-    <td>**Access Control Lists**</td>
-    <td>(If module `Access Control` is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query</td>
+    <td><strong>Access Control Lists</strong></td>
+    <td>(If module <code>Access Control</code> is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
-    <td>**Cache Control Lists**</td>
-    <td>(If module `Cache Control` is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
+    <td><strong>Cache Control Lists</strong></td>
+    <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
-    <td>**Schema for the Admin**</td>
-    <td>Add "unrestricted" fields to the GraphQL schema (such as `Root.unrestrictedPosts`, `User.roles`, and others), to be used by the admin only. If `"Default"` is selected, the value selected in the Settings is used.</td>
+    <td><strong>Schema for the Admin</strong></td>
+    <td>Add "unrestricted" fields to the GraphQL schema (such as <code>Root.unrestrictedPosts</code>, <code>User.roles</code>, and others), to be used by the admin only. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td>**Public/Private Schema**</td>
-    <td>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul markdown="1"><li>`"Public"`: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li>`"Private"`: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If `"Default"` is selected, the value selected in the Settings is used.</td>
+    <td><strong>Public/Private Schema</strong></td>
+    <td>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul><li><code>"Public"</code>: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li><code>"Private"</code>: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td>**Mutation Scheme**</td><td>Define if to enable mutations, and if the redundant fields from the root must be removed. If `"Default"` is selected, the value selected in the Settings is used.</td>
+    <td><strong>Mutation Scheme</strong></td><td>Define if to enable mutations, and if the redundant fields from the root must be removed. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td>**Namespace Types and Interfaces?**</td><td>Define if to have all types and interfaces in the schema automatically namespaced. If `"Default"` is selected, the value selected in the Settings is used.</td>
+    <td><strong>Namespace Types and Interfaces?</strong></td><td>Define if to have all types and interfaces in the schema automatically namespaced. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 </tbody>
 </table>
