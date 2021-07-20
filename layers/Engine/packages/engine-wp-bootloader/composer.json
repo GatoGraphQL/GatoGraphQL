@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.0",
         "composer/installers": "~1.0",
-        "getpop/routing-wp": "^0.8.1",
+        "getpop/routing-wp": "^0.9",
         "boxuk/wp-muplugin-loader": "^1.5"
     },
     "require-dev": {

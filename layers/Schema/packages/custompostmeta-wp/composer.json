@@ -16,9 +16,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/custompostmeta": "^0.8.1",
-        "pop-schema/customposts-wp": "^0.8.1",
-        "pop-schema/metaquery-wp": "^0.8.1"
+        "pop-schema/custompostmeta": "^0.9",
+        "pop-schema/customposts-wp": "^0.9",
+        "pop-schema/metaquery-wp": "^0.9"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

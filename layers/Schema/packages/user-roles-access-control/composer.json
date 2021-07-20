@@ -16,11 +16,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/user-roles": "^0.8.1",
-        "pop-schema/user-state-access-control": "^0.8.1"
+        "pop-schema/user-roles": "^0.9",
+        "pop-schema/user-state-access-control": "^0.9"
     },
     "require-dev": {
-        "getpop/cache-control": "^0.8.1",
+        "getpop/cache-control": "^0.9",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
