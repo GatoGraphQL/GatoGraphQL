@@ -16,8 +16,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "getpop/engine-wp": "^0.9",
-        "pop-schema/taxonomyquery": "^0.9"
+        "getpop/engine-wp": "^0.8.1",
+        "pop-schema/taxonomyquery": "^0.8.1"
     },
     "require-dev": {
         "phpunit/phpunit": ">=9.3",

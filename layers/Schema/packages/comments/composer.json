@@ -16,10 +16,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.0",
-        "pop-schema/customposts": "^0.9"
+        "pop-schema/customposts": "^0.8.1"
     },
     "require-dev": {
-        "pop-schema/users": "^0.9",
+        "pop-schema/users": "^0.8.1",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
         "rector/rector": "^0.11",
