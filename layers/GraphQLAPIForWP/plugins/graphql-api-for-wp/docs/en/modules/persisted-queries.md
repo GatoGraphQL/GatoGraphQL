@@ -30,7 +30,7 @@ With **GraphQL**, you provide any query to a single endpoint, which returns exac
 
 Hence, we obtain multiple endpoints with predefined data, as in REST, but these are created using GraphQL, obtaining the advantages from each and avoiding their disadvantages:
 
-<table markdown="1">
+<table>
 <thead>
 <tr>
     <th>Advantages</th>
@@ -39,7 +39,7 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 </thead>
 <tbody>
 <tr>
-    <td>✅ Accessed via `GET` or `POST`</td>
+    <td>✅ Accessed via <code>GET</code> or <code>POST</code></td>
     <td><s>❌ It's tedious to create all the endpoints</s></td>
 </tr>
 <tr>
@@ -56,7 +56,7 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 </tr>
 <tr>
     <td>✅ It can be fast, since all data is retrieved in a single request</td>
-    <td><s>❌ Accessed only via `POST`</s></td>
+    <td><s>❌ Accessed only via <code>POST</code></s></td>
 </tr>
 <tr>
     <td>✅ It enables rapid iteration of the project</td>
@@ -103,7 +103,7 @@ By default, the persisted query's endpoint has path `/graphql-query/`, and this 
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
-<table markdown="1">
+<table>
 <thead>
 <tr>
     <th>Input</th>
@@ -112,23 +112,23 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 </thead>
 <tbody>
 <tr>
-  <td>**Title**</td>
+  <td><strong>Title</strong></td>
   <td>Persisted query's title</td>
 </tr>
 <tr>
-  <td>**GraphiQL client**</td>
-  <td>Editor to write and execute the GraphQL query: <ul markdown="1"><li>Write the query on the textarea</li><li>Declare variables inside the query, and declare their values on the variables input at the bottom</li><li>Click on the "Run" button to execute the query</li><li>Obtain the results on the input on the right side</li><li>Click on "Docs" to inspect the schema information</li></ul>The Explorer (shown only if module `GraphiQL Explorer` is enabled) allows to click on the fields, and these are automatically added to the query</td>
+  <td><strong>GraphiQL client</strong></td>
+  <td>Editor to write and execute the GraphQL query: <ul><li>Write the query on the textarea</li><li>Declare variables inside the query, and declare their values on the variables input at the bottom</li><li>Click on the "Run" button to execute the query</li><li>Obtain the results on the input on the right side</li><li>Click on "Docs" to inspect the schema information</li></ul>The Explorer (shown only if module <code>GraphiQL Explorer</code> is enabled) allows to click on the fields, and these are automatically added to the query</td>
 </tr>
 <tr>
-  <td>**Schema configuration**</td>
-  <td>From the dropdown, select the schema configuration that applies to the persisted query, or one of these options: <ul markdown="1"><li>`"Default"`: the schema configuration is the one selected on the plugin's Settings</li><li>`"None"`: the persisted query will be unconstrained</li><li>`"Inherit from parent"`: Use the same schema configuration as the parent persisted query.<br/>This option is available when module `API Hierarchy` is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul></td>
+  <td><strong>Schema configuration</strong></td>
+  <td>From the dropdown, select the schema configuration that applies to the persisted query, or one of these options: <ul><li><code>"Default"</code>: the schema configuration is the one selected on the plugin's Settings</li><li><code>"None"</code>: the persisted query will be unconstrained</li><li><code>"Inherit from parent"</code>: Use the same schema configuration as the parent persisted query.<br/>This option is available when module <code>API Hierarchy</code> is enabled, and the persisted query has a parent query (selected on the Document settings)</li></ul></td>
 </tr>
 <tr>
-  <td>**Options**</td>
-  <td>Customize the behavior of the persisted query: <ul markdown="1"><li>**Enabled?:** If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li>**Accept variables as URL params?:** Allow URL params to override the values for variables defined in the GraphiQL client</li></ul></td>
+  <td><strong>Options</strong></td>
+  <td>Customize the behavior of the persisted query: <ul><li><strong>Enabled?:</strong> If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li><strong>Accept variables as URL params?:</strong> Allow URL params to override the values for variables defined in the GraphiQL client</li></ul></td>
 </tr>
 <tr>
-  <td>**API Hierarchy:**</td>
+  <td><strong>API Hierarchy:</strong></td>
   <td>Use the same query as the parent persisted query.<br/>This option is available when the persisted query has a parent query (selected on the Document settings)</td>
 </tr>
 </tbody>

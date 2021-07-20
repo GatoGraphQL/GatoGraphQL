@@ -60,7 +60,7 @@ By default, the custom endpoint has path `/graphql/`, and this value is configur
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
-<table markdown="1">
+<table>
 <thead>
 <tr>
     <th>Input</th>
@@ -69,27 +69,27 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 </thead>
 <tbody>
 <tr>
-  <td>**Title**</td>
+  <td><strong>Title</strong></td>
   <td>Custom endpoint's title</td>
 </tr>
 <tr>
-  <td>**Schema configuration**</td>
-  <td>From the dropdown, select the schema configuration that applies to the custom endpoint, or one of these options: <ul markdown="1"><li>`"Default"`: the schema configuration is the one selected on the plugin's Settings</li><li>`"None"`: the custom endpoint will be unconstrained</li><li>`"Inherit from parent"`: Use the same schema configuration as the parent custom endpoint.<br/>This option is available when module `"API Hierarchy"` is enabled, and the custom endpoint has a parent query (selected on the Document settings)</li></ul></td>
+  <td><strong>Schema configuration</strong></td>
+  <td>From the dropdown, select the schema configuration that applies to the custom endpoint, or one of these options: <ul><li><code>"Default"</code>: the schema configuration is the one selected on the plugin's Settings</li><li><code>"None"</code>: the custom endpoint will be unconstrained</li><li><code>"Inherit from parent"</code>: Use the same schema configuration as the parent custom endpoint.<br/>This option is available when module <code>"API Hierarchy"</code> is enabled, and the custom endpoint has a parent query (selected on the Document settings)</li></ul></td>
 </tr>
 <tr>
-  <td>**Options**</td>
+  <td><strong>Options</strong></td>
   <td>Select if the custom endpoint is enabled.<br/>It's useful to disable a custom endpoint it's a parent query in an API hierarchy</td>
 </tr>
 <tr>
-  <td>**GraphiQL**</td>
-  <td>Enable/disable attaching a GraphiQL client to the endpoint, accessible under `?view=graphiql`</td>
+  <td><strong>GraphiQL</strong></td>
+  <td>Enable/disable attaching a GraphiQL client to the endpoint, accessible under <code>?view=graphiql</code></td>
 </tr>
 <tr>
-  <td>**Interactive Schema**</td>
-  <td>Enable/disable attaching an Interactive schema client to the endpoint, accessible under `?view=schema`</td>
+  <td><strong>Interactive Schema</strong></td>
+  <td>Enable/disable attaching an Interactive schema client to the endpoint, accessible under <code>?view=schema</code></td>
 </tr>
 <tr>
-  <td>**API Hierarchy**</td>
+  <td><strong>API Hierarchy</strong></td>
   <td>Use the same query as the parent custom endpoint.<br/>This section is enabled when the custom endpoint has a parent query (selected on the Document settings)</td>
 </tr>
 </tbody>
