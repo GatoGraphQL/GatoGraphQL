@@ -135,7 +135,7 @@ class RootQueryableFieldResolver extends AbstractQueryableFieldResolver
                 Status::PENDING,
                 Status::DRAFT,
             ],
-            'authors' => [$vars['global-userstate']['is-user-logged-in']],
+            'authors' => [$vars['global-userstate']['current-user-id']],
         ];
         switch ($fieldName) {
             case 'myPosts':
