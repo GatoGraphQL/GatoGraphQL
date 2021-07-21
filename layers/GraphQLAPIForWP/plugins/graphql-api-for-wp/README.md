@@ -141,7 +141,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 
 ### PHP Architecture
 
-Articles explaining how the plugin is coded using PHP 8.0 but can run on PHP 7.1:
+Articles explaining how the plugin is "downgraded", using PHP 8.0 for development but deployable to PHP 7.1 for production:
 
 1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
 2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)
@@ -150,17 +150,28 @@ Articles explaining how the plugin is coded using PHP 8.0 but can run on PHP 7.1
 
 Service container implementation:
 
-1. [Building extensible PHP apps with Symfony DI](https://blog.logrocket.com/building-extensible-php-apps-with-symfony-di/)
+- [Building extensible PHP apps with Symfony DI](https://blog.logrocket.com/building-extensible-php-apps-with-symfony-di/)
+
+Explanation of how the codebase is split into granular packages, to enable CMS-agnosticism:
+
+1. [Abstracting WordPress Code To Reuse With Other CMSs: Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/)
+2. [Abstracting WordPress Code To Reuse With Other CMSs: Implementation (Part 2)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-reuse-with-other-cms-implementation/)
+
+Description of how the plugin is scoped:
+
+- [GraphQL API for WordPress is now scoped, thanks to PHP-Scoper!](https://graphql-api.com/blog/graphql-api-for-wp-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 
 GraphQL API for WordPress is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
 
-For technical information on how it works, check out [its documentation](https://graphql-by-pop.com/docs/getting-started/intro.html).
+Technical information on how the GraphQL server works:
+
+- [GraphQL by PoP documentation](https://graphql-by-pop.com/docs/getting-started/intro.html).
 
 Description of how a GraphQL server using server-side components works:
 
-1. [Implementing a GraphQL server with components in PHP](https://www.wpkube.com/implementing-graphql-server/)
+- [Implementing a GraphQL server with components in PHP](https://www.wpkube.com/implementing-graphql-server/)
 
 These articles explain the concepts, design and implementation of GraphQL by PoP:
 
