@@ -9,6 +9,7 @@ services:
 
     GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry'
+        
     GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\:
         resource: '../src/Security/UserAuthorizationSchemes/*'
 
