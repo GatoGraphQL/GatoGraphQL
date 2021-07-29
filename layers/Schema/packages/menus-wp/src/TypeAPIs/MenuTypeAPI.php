@@ -42,4 +42,15 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         $menuID = $locations[$menuName];
         return $this->getMenu($menuID);
     }
+
+    /**
+     * @return array<string|int>
+     */
+    public function getMenuIDs(): array
+    {
+        // @see https://developer.wordpress.org/reference/classes/wp_term_query/get_terms/#description
+        return \wp_get_nav_menus([
+            'fields' => 'ids',
+        ]);
+    }
 }
