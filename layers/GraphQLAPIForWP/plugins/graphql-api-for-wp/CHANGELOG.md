@@ -4,6 +4,12 @@ All notable changes to `graphql-api` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 0.9.0 - DATE
+
+### Added
+
+- Field `Root.menus`
+
 ## 0.8.1 - 21/07/2021
 
 ### Fixed
