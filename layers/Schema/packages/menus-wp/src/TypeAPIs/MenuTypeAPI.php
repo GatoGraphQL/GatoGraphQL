@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\MenusWP\TypeAPIs;
 
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
@@ -44,13 +45,17 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     }
 
     /**
-     * @return array<string|int>
+     * @param array<string, mixed> $options
+     * @return array<string|int|object>
      */
-    public function getMenuIDs(): array
+     public function getMenus(array $options = []): array
     {
-        // @see https://developer.wordpress.org/reference/classes/wp_term_query/get_terms/#description
-        return \wp_get_nav_menus([
-            'fields' => 'ids',
-        ]);
+        $args = [];
+        $return_type = $options['return-type'] ?? null;
+        if ($return_type == ReturnTypes::IDS) {
+            // @see https://developer.wordpress.org/reference/classes/wp_term_query/get_terms/#description
+            $args['fields'] = 'ids';
+        }
+        return \wp_get_nav_menus($args);
     }
 }

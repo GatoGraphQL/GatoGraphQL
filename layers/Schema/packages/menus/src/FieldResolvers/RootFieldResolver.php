@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\TypeResolvers\RootTypeResolver;
 use PoPSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class RootFieldResolver extends AbstractQueryableFieldResolver
 {
@@ -94,7 +95,9 @@ class RootFieldResolver extends AbstractQueryableFieldResolver
                 }
                 return null;
             case 'menus':
-                return $menuTypeAPI->getMenuIDs();
+                return $menuTypeAPI->getMenus([
+                    'return-type' => ReturnTypes::IDS,
+                ]);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
