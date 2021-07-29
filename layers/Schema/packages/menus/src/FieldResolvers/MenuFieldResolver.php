@@ -143,6 +143,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                 }
                 return $arrangedEntries;
             case 'items':
+                // Fetch the data for the items, and from it build the objects respecting their position in the menu
                 $itemDataEntries = $typeResolver->resolveValue(
                     $resultItem,
                     $this->fieldQueryInterpreter->getField(
