@@ -23,6 +23,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'items',
             'itemDataEntries',
         ];
     }
@@ -30,7 +31,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            // 'items' => SchemaDefinition::TYPE_ID,
+            'items' => SchemaDefinition::TYPE_ID,
             'itemDataEntries' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -39,7 +40,9 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'itemDataEntries' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'items',
+            'itemDataEntries'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
     }
@@ -62,7 +65,8 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
-            'itemDataEntries' => $this->translationAPI->__('The menu items', 'menus'),
+            'items' => $this->translationAPI->__('The menu items', 'menus'),
+            'itemDataEntries' => $this->translationAPI->__('The data for the menu items', 'menus'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -138,6 +142,21 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     $arrangedEntriesPointer[] = $menuItemData;
                 }
                 return $arrangedEntries;
+            case 'items':
+                $itemDataEntries = $typeResolver->resolveValue(
+                    $resultItem,
+                    $this->fieldQueryInterpreter->getField(
+                        'itemDataEntries',
+                        $fieldArgs
+                    ),
+                    $variables,
+                    $expressions,
+                    $options
+                );
+                if (GeneralUtils::isError($itemDataEntries)) {
+                    return $itemDataEntries;
+                }
+                return [];
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -159,13 +178,13 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
         return 0;
     }
 
-    // public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
-    // {
-    //     switch ($fieldName) {
-    //         case 'items':
-    //             return MenuItemTypeResolver::class;
-    //     }
+    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        switch ($fieldName) {
+            case 'items':
+                return MenuItemTypeResolver::class;
+        }
 
-    //     return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
-    // }
+        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName);
+    }
 }
