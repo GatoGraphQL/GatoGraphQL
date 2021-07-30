@@ -124,6 +124,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                     'src' => $avatarSrc,
                     'size' => $avatarSize,
                 ];
+                // Generate a hash to represent the ID of the avatar given its properties
                 $avatarID = hash('md5', json_encode($avatarIDComponents));
                 $this->userAvatarRuntimeRegistry->storeUserAvatar(new UserAvatar($avatarID, $avatarSrc, $avatarSize));
                 return $avatarID;
