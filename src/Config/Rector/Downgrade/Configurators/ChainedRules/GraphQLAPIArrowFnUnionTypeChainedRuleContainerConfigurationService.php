@@ -17,6 +17,7 @@ class GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService extends
             $this->pluginDir . '/vendor/getpop/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionDirectiveResolverTrait.php',
             $this->pluginDir . '/vendor/pop-schema/menus/src/TypeDataLoaders/MenuItemTypeDataLoader.php',
             $this->pluginDir . '/vendor/pop-schema/menus/src/TypeDataLoaders/MenuTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-schema/user-avatars/src/TypeDataLoaders/UserAvatarTypeDataLoader.php',
         ];
     }
 }
