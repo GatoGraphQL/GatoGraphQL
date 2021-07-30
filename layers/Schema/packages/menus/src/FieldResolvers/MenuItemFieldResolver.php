@@ -54,7 +54,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'children',
             // All other fields are properties in the object
             'title',
-            'alt',
             'url',
             'classes',
             'target',
@@ -69,7 +68,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         $types = [
             'children' => SchemaDefinition::TYPE_ID,
             'title' => SchemaDefinition::TYPE_STRING,
-            'alt' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'classes' => SchemaDefinition::TYPE_STRING,
             'target' => SchemaDefinition::TYPE_STRING,
@@ -95,7 +93,6 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         $descriptions = [
             'children' => $this->translationAPI->__('Menu item children items', 'menus'),
             'title' => $this->translationAPI->__('Menu item title', 'menus'),
-            'alt' => $this->translationAPI->__('Menu item alt', 'menus'),
             'url' => $this->translationAPI->__('Menu item URL', 'menus'),
             'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
             'target' => $this->translationAPI->__('Menu item target', 'menus'),
