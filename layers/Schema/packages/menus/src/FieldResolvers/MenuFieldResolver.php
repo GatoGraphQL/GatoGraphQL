@@ -190,12 +190,16 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     return $itemDataEntries;
                 }
                 // Build the MenuItem objects from the data, and save them on the dynamic registry
+                $topLevelMenuItemIDs = [];
                 foreach ($itemDataEntries as $menuItemData) {
+                    // Top-level items are those with no parent
+                    if ($menuItemData['parentID'] === null) {
+                        $topLevelMenuItemIDs[] = $menuItemData['id'];
+                    }
                     $this->menuItemRuntimeRegistry->storeMenuItem(new MenuItem(
                         $menuItemData['id'],
                         $menuItemData['objectID'],
-                        // ID = 0 => Top level (no parent)
-                        $menuItemData['parentID'] ?? 0,
+                        $menuItemData['parentID'],
                         $menuItemData['title'],
                         $menuItemData['url'],
                         $menuItemData['description'],
@@ -204,8 +208,8 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     ));
                 }
 
-                // Return the IDs for the top-level items (those with parent `0`)
-                return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren(0));
+                // Return the IDs for the top-level items
+                return $topLevelMenuItemIDs;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
