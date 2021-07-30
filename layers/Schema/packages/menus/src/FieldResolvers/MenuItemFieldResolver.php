@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Menus\FieldResolvers;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
+use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 
 class MenuItemFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -44,6 +45,14 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'parentID' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
+    {
+        return match ($fieldName) {
+            'classes' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -99,7 +108,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
                     $classes[] = 'menu-item-object-id-' . $objectID;
                 }
-                return join(' ', $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array()));
+                return $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
 
             case 'target':
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);
