@@ -165,6 +165,10 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomymeta:/app/vendor/pop-schema/taxonomymeta
         - >-
+          ../../layers/Schema/packages/user-avatars-wp:/app/vendor/pop-schema/user-avatars-wp
+        - >-
+          ../../layers/Schema/packages/user-avatars:/app/vendor/pop-schema/user-avatars
+        - >-
           ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
         - >-
           ../../layers/Schema/packages/user-roles-acl:/app/vendor/pop-schema/user-roles-acl
