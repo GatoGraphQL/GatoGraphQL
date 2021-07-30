@@ -44,7 +44,7 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
             $semverHelperService,
         );
     }
-    
+
     public function getClassesToAttachTo(): array
     {
         return array(MenuTypeResolver::class);

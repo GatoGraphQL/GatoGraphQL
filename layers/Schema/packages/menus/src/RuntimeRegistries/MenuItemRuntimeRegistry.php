@@ -22,7 +22,7 @@ class MenuItemRuntimeRegistry implements MenuItemRuntimeRegistryInterface
             $this->menuItemsByParent[$menuItem->menu_item_parent][$menuItem->ID] = $menuItem;
         }
     }
-    
+
     public function getMenuItem(string | int $id): ?MenuItem
     {
         return $this->menuItems[$id] ?? null;

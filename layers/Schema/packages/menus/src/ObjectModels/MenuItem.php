@@ -20,6 +20,6 @@ class MenuItem
         /** @var string[] */
         public array $classes,
         public string $target,
-    ) {        
+    ) {
     }
 }

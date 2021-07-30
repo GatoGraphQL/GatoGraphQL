@@ -24,7 +24,7 @@ class MenuItemTypeDataLoader extends AbstractTypeDataLoader
             $nameResolver,
         );
     }
-    
+
     public function getObjects(array $ids): array
     {
         // Retrieve each item from the dynamic registry

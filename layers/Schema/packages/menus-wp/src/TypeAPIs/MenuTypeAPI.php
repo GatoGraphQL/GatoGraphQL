@@ -48,7 +48,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      * @param array<string, mixed> $options
      * @return array<string|int|object>
      */
-     public function getMenus(array $options = []): array
+    public function getMenus(array $options = []): array
     {
         $args = [];
         $return_type = $options['return-type'] ?? null;
