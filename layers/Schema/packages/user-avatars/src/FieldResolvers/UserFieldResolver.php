@@ -62,6 +62,27 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        switch ($fieldName) {
+            case 'avatar':
+                return array_merge(
+                    $schemaFieldArgs,
+                    [
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'size',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Avatar size', 'user-avatars'),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => 96,
+                        ],
+                    ]
+                );
+        }
+
+        return $schemaFieldArgs;
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -81,7 +102,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'avatar':
                 // Create the ID from the user
-                return $typeResolver->getID($user);
+                return $typeResolver->getID($user, $fieldArgs['size'] ?? 96);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
