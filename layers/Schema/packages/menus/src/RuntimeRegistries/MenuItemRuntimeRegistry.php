@@ -10,7 +10,7 @@ class MenuItemRuntimeRegistry implements MenuItemRuntimeRegistryInterface
 {
     /** @var array<string|int,MenuItem> */
     protected array $menuItems = [];
-    
+
     /** @var array<string|int,array<string|int,MenuItem>> */
     protected array $menuItemsByParent = [];
 

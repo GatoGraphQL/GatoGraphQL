@@ -33,7 +33,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
          * Convert from the object returned by `wp_get_nav_menu_items` to ObjectModels\MenuItem
          */
         return array_map(
-            function(object $menuItem): MenuItem {
+            function (object $menuItem): MenuItem {
                 return new MenuItem(
                     $menuItem->ID,
                     $menuItem->object_id,
