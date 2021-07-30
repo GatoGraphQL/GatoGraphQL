@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\TypeResolvers;
 
-use PoPSchema\UserAvatars\TypeDataLoaders\UserAvatarTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
+use PoPSchema\UserAvatars\TypeDataLoaders\UserAvatarTypeDataLoader;
 
 class UserAvatarTypeResolver extends AbstractTypeResolver
 {
@@ -21,8 +22,9 @@ class UserAvatarTypeResolver extends AbstractTypeResolver
 
     public function getID(object $resultItem): string | int | null
     {
-        $avatar = $resultItem;
-        return $avatar->src;
+        /** @var UserAvatar */
+        $userAvatar = $resultItem;
+        return $userAvatar->id;
     }
 
     public function getTypeDataLoaderClass(): string
