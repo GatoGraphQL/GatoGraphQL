@@ -5,14 +5,46 @@ declare(strict_types=1);
 namespace PoPSchema\UserAvatars\FieldResolvers;
 
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Hooks\HooksAPIInterface;
+use PoP\LooseContracts\NameResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
+use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
+use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
+use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class UserFieldResolver extends AbstractDBDataFieldResolver
 {
+    public function __construct(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+        InstanceManagerInterface $instanceManager,
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+        NameResolverInterface $nameResolver,
+        CMSServiceInterface $cmsService,
+        SemverHelperServiceInterface $semverHelperService,
+        protected UserAvatarTypeAPIInterface $userAvatarTypeAPI,
+        protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
+    ) {
+        parent::__construct(
+            $translationAPI,
+            $hooksAPI,
+            $instanceManager,
+            $fieldQueryInterpreter,
+            $nameResolver,
+            $cmsService,
+            $semverHelperService,
+        );
+    }
+
     public function getClassesToAttachTo(): array
     {
         return array(
@@ -94,8 +126,16 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         $user = $resultItem;
         switch ($fieldName) {
             case 'avatar':
-                // Create the ID from the user
-                return $typeResolver->getID($user, $fieldArgs['size'] ?? 96);
+                // Create the avatar, and store it in the dynamic registry
+                $avatarSize = $fieldArgs['size'] ?? 96;
+                $avatarSrc = $this->userAvatarTypeAPI->getUserAvatarSrc($avatarSize);
+                $avatarIDComponents = [
+                    'src' => $avatarSrc,
+                    'size' => $avatarSize,
+                ];
+                $avatarID = hash('md5', json_encode($avatarIDComponents));
+                $this->userAvatarRuntimeRegistry->storeUserAvatar(new UserAvatar($avatarID, $avatarSrc, $avatarSize));
+                return $avatarID;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

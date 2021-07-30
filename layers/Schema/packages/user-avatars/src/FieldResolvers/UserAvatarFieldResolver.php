@@ -16,32 +16,10 @@ use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
 
 class UserAvatarFieldResolver extends AbstractDBDataFieldResolver
 {
-    public function __construct(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        protected UserAvatarTypeAPIInterface $userAvatarTypeAPI,
-    ) {
-        parent::__construct(
-            $translationAPI,
-            $hooksAPI,
-            $instanceManager,
-            $fieldQueryInterpreter,
-            $nameResolver,
-            $cmsService,
-            $semverHelperService,
-        );
-    }
-
     public function getClassesToAttachTo(): array
     {
         return array(
