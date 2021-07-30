@@ -33,6 +33,7 @@
         "pop-schema/post-categories-wp": "^0.9",
         "pop-schema/user-roles-access-control": "^0.9",
         "pop-schema/user-roles-wp": "^0.9",
+        "pop-schema/user-avatars-wp": "^0.9",
         "pop-schema/user-state-wp": "^0.9",
         "pop-schema/users-wp": "^0.9",
         "pop-schema/custompost-mutations-wp": "^0.9",
