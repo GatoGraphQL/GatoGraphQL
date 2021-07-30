@@ -134,19 +134,11 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 return $menuItemTypeAPI->getMenuItemURL($menuItem);
 
             case 'classes':
-                // Copied from nav-menu-template.php function start_el
-                $classes = $menuItemTypeAPI->getMenuItemClasses($menuItem);
-                $classes = empty($classes) ? array() : (array) $classes;
-                $classes[] = 'menu-item';
-                $classes[] = 'menu-item-' . $menuItemTypeAPI->getMenuItemID($menuItem);
-                if ($parentID = $menuItemTypeAPI->getMenuItemParentID($menuItem)) {
-                    $classes[] = 'menu-item-parent';
-                    $classes[] = 'menu-item-parent-' . $parentID;
-                }
-                if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
-                    $classes[] = 'menu-item-object-id-' . $objectID;
-                }
-                return $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
+                return $this->hooksAPI->applyFilters(
+                    'menuitem:classes',
+                    $menuItemTypeAPI->getMenuItemClasses($menuItem),
+                    $menuItem
+                );
 
             case 'target':
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);
