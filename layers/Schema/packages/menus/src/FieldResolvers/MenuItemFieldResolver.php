@@ -134,11 +134,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
                 return $menuItemTypeAPI->getMenuItemURL($menuItem);
 
             case 'classes':
-                return $this->hooksAPI->applyFilters(
-                    'menuitem:classes',
-                    $menuItemTypeAPI->getMenuItemClasses($menuItem),
-                    $menuItem
-                );
+                return $menuItemTypeAPI->getMenuItemClasses($menuItem);
 
             case 'target':
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);
