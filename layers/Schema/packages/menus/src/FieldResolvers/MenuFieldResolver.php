@@ -190,34 +190,22 @@ class MenuFieldResolver extends AbstractDBDataFieldResolver
                     return $itemDataEntries;
                 }
                 // Build the MenuItem objects from the data, and save them on the dynamic registry
-                $topLevelMenuItemIDs = [];
                 foreach ($itemDataEntries as $menuItemData) {
-                    // ID = 0 => Top level (no parent)
-                    $menuItemParentID = $menuItemData['parentID'] ?? 0;
-                    if ($menuItemParentID === 0) {
-                        $topLevelMenuItemIDs[] = $menuItemParentID;
-                    }
-                    // Build the menuItem's ID as a combination of its parent and its ID
-                    $menuItemID = sprintf(
-                        '%s-%s',
-                        $menuItemParentID,
-                        $menuItemData['id']
-                    );
-                    $menuItem = new MenuItem(
+                    $this->menuItemRuntimeRegistry->storeMenuItem(new MenuItem(
                         $menuItemData['id'],
                         $menuItemData['objectID'],
-                        $menuItemData['parentID'],
+                        // ID = 0 => Top level (no parent)
+                        $menuItemData['parentID'] ?? 0,
                         $menuItemData['title'],
                         $menuItemData['url'],
                         $menuItemData['description'],
                         $menuItemData['classes'],
                         $menuItemData['target'],
-                    );
-                    $this->menuItemRuntimeRegistry->storeMenuItem($menuItemID, $menuItem);
+                    ));
                 }
 
-                // Return the IDs for the top-level items
-                return $topLevelMenuItemIDs;
+                // Return the IDs for the top-level items (those with parent `0`)
+                return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren(0));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
