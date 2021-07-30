@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserAvatarsWP\TypeAPIs;
 
 use PoPSchema\UserAvatars\TypeAPIs\AbstractUserAvatarTypeAPI;
+use WP_User;
 
 class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
 {
