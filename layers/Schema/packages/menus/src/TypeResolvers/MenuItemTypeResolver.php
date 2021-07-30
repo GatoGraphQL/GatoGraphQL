@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Menus\TypeResolvers;
 
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
+use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeDataLoaders\MenuItemTypeDataLoader;
 
 class MenuItemTypeResolver extends AbstractTypeResolver
@@ -22,9 +22,9 @@ class MenuItemTypeResolver extends AbstractTypeResolver
 
     public function getID(object $resultItem): string | int | null
     {
-        $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
+        /** @var MenuItem */
         $menuItem = $resultItem;
-        return $menuItemTypeAPI->getMenuItemID($menuItem);
+        return $menuItem->id;
     }
 
     public function getTypeDataLoaderClass(): string

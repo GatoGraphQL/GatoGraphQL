@@ -15,7 +15,7 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\Menus\Facades\MenuItemTypeAPIFacade;
+use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeResolvers\MenuItemTypeResolver;
 
@@ -121,32 +121,19 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
+        /** @var MenuItem */
         $menuItem = $resultItem;
         switch ($fieldName) {
             case 'children':
                 return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($typeResolver->getID($menuItem)));
             case 'title':
-            case 'alt':
-                return $menuItemTypeAPI->getMenuItemTitle($menuItem);
-
             case 'url':
-                return $menuItemTypeAPI->getMenuItemURL($menuItem);
-
             case 'classes':
-                return $menuItemTypeAPI->getMenuItemClasses($menuItem);
-
             case 'target':
-                return $menuItemTypeAPI->getMenuItemTarget($menuItem);
-
             case 'description':
-                return $menuItemTypeAPI->getMenuItemDescription($menuItem);
-
             case 'objectID':
-                return $menuItemTypeAPI->getMenuItemObjectID($menuItem);
-
             case 'parentID':
-                return $menuItemTypeAPI->getMenuItemParentID($menuItem);
+                return $menuItem->$fieldName;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

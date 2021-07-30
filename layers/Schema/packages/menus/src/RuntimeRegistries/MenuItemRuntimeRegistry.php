@@ -15,11 +15,11 @@ class MenuItemRuntimeRegistry implements MenuItemRuntimeRegistryInterface
 
     public function storeMenuItem(MenuItem $menuItem): void
     {
-        $this->menuItems[$menuItem->ID] = $menuItem;
+        $this->menuItems[$menuItem->id] = $menuItem;
         // Only store MenuItems which have a parent
         // Those who do not have already been accessed in the Menu's "items" field
-        if ($menuItem->menu_item_parent !== null) {
-            $this->menuItemsByParent[$menuItem->menu_item_parent][$menuItem->ID] = $menuItem;
+        if ($menuItem->parentID !== null) {
+            $this->menuItemsByParent[$menuItem->parentID][$menuItem->id] = $menuItem;
         }
     }
 
