@@ -195,6 +195,10 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomymeta:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/taxonomymeta
         - >-
+          ../../layers/Schema/packages/user-avatars-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/user-avatars-wp
+        - >-
+          ../../layers/Schema/packages/user-avatars:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/user-avatars
+        - >-
           ../../layers/Schema/packages/user-roles-access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/user-roles-access-control
         - >-
           ../../layers/Schema/packages/user-roles-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/user-roles-wp

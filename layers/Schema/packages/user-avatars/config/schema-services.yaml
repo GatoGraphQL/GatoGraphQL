@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\UserAvatars\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPSchema\UserAvatars\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPSchema\UserAvatars\TypeDataLoaders\:
+        resource: '../src/TypeDataLoaders/*'

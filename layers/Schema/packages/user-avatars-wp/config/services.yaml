@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface:
+        class: \PoPSchema\UserAvatarsWP\TypeAPIs\UserAvatarTypeAPI
+

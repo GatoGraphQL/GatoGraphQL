@@ -41,27 +41,27 @@
     },
     "extra": {
         "branch-alias": {
-            "^0.8": "0.8-dev"
+            "dev-master": "0.9-dev"
         }
     },
     "config": {
         "sort-packages": true
     },
     "replace": {
-        "getpop/root": "^0.8",
-        "getpop/translation": "^0.8",
-        "getpop/query-parsing": "^0.8",
-        "getpop/field-query": "^0.8",
-        "getpop/definitions": "^0.8",
-        "getpop/component-model": "^0.8",
-        "getpop/mandatory-directives-by-configuration": "^0.8",
-        "getpop/cache-control": "^0.8",
-        "getpop/guzzle-helpers": "^0.8",
-        "getpop/hooks": "^0.8",
-        "getpop/loosecontracts": "^0.8",
-        "getpop/routing": "^0.8",
-        "getpop/modulerouting": "^0.8",
-        "getpop/engine": "^0.8",
-        "pop-schema/schema-commons": "^0.8"
+        "getpop/root": "^0.9",
+        "getpop/translation": "^0.9",
+        "getpop/query-parsing": "^0.9",
+        "getpop/field-query": "^0.9",
+        "getpop/definitions": "^0.9",
+        "getpop/component-model": "^0.9",
+        "getpop/mandatory-directives-by-configuration": "^0.9",
+        "getpop/cache-control": "^0.9",
+        "getpop/guzzle-helpers": "^0.9",
+        "getpop/hooks": "^0.9",
+        "getpop/loosecontracts": "^0.9",
+        "getpop/routing": "^0.9",
+        "getpop/modulerouting": "^0.9",
+        "getpop/engine": "^0.9",
+        "pop-schema/schema-commons": "^0.9"
     }
 }

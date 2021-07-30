@@ -178,13 +178,17 @@ services:
         - >-
           ../../layers/Schema/packages/taxonomyquery-wp:/app/vendor/pop-schema/taxonomyquery-wp
         - >-
-          ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
+          ../../layers/Schema/packages/user-avatars-wp:/app/vendor/pop-schema/user-avatars-wp
+        - >-
+          ../../layers/Schema/packages/user-avatars:/app/vendor/pop-schema/user-avatars
         - >-
           ../../layers/Schema/packages/user-roles-access-control:/app/vendor/pop-schema/user-roles-access-control
         - >-
           ../../layers/Schema/packages/user-roles-acl:/app/vendor/pop-schema/user-roles-acl
         - >-
           ../../layers/Schema/packages/user-roles-wp:/app/vendor/pop-schema/user-roles-wp
+        - >-
+          ../../layers/Schema/packages/user-roles:/app/vendor/pop-schema/user-roles
         - >-
           ../../layers/Schema/packages/user-state:/app/vendor/pop-schema/user-state
         - >-

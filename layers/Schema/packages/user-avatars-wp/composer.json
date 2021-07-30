@@ -1,0 +1,58 @@
+{
+    "name": "pop-schema/user-avatars-wp",
+    "type": "library",
+    "description": "Implementation for WordPress of contracts from package \"User Avatars\"",
+    "keywords": ["PoP", "user-avatars-wp"],
+    "homepage": "https://github.com/PoPSchema/user-avatars-wp",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.0",
+        "pop-schema/user-avatars": "^0.9",
+        "pop-schema/users-wp": "^0.9"
+    },
+    "require-dev": {
+        "pop-schema/user-state-wp": "^0.9",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.11",
+        "squizlabs/php_codesniffer": "^3.0",
+        "szepeviktor/phpstan-wordpress": "^0.7",
+        "johnpbloch/wordpress": ">=5.5"
+    },
+    "suggest": {
+        "pop-schema/user-state-wp": "Integration with User State"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPSchema\\UserAvatarsWP\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPSchema\\UserAvatarsWP\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
+        "branch-alias": {
+            "dev-master": "0.9-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
