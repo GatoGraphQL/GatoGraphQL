@@ -25,7 +25,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'url',
             'classes',
             'target',
-            'additionalAttrs',
+            'description',
             'objectID',
             'parentID',
         ];
@@ -39,7 +39,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'url' => SchemaDefinition::TYPE_URL,
             'classes' => SchemaDefinition::TYPE_STRING,
             'target' => SchemaDefinition::TYPE_STRING,
-            'additionalAttrs' => SchemaDefinition::TYPE_STRING,
+            'description' => SchemaDefinition::TYPE_STRING,
             'objectID' => SchemaDefinition::TYPE_ID,
             'parentID' => SchemaDefinition::TYPE_ID,
         ];
@@ -54,7 +54,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             'url' => $this->translationAPI->__('Menu item URL', 'menus'),
             'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
             'target' => $this->translationAPI->__('Menu item target', 'menus'),
-            'additionalAttrs' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
+            'description' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
             'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
         ];
@@ -104,7 +104,7 @@ class MenuItemFieldResolver extends AbstractDBDataFieldResolver
             case 'target':
                 return $menuItemTypeAPI->getMenuItemTarget($menuItem);
 
-            case 'additionalAttrs':
+            case 'description':
                 // Using the description, because WP does not give a field for extra attributes when creating a menu,
                 // and this is needed to add target="addons" for the Add ContentPost link
                 return $menuItemTypeAPI->getMenuItemDescription($menuItem);
