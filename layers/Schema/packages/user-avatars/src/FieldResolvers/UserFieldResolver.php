@@ -62,21 +62,9 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'avatar' => SchemaDefinition::TYPE_STRING,
+            'avatar' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
-    }
-
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
-    {
-        return match ($fieldName) {
-            'avatar'
-                => SchemaTypeModifiers::NON_NULLABLE
-                | SchemaTypeModifiers::IS_ARRAY
-                | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default
-                => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
-        };
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -129,6 +117,9 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
                 // Create the avatar, and store it in the dynamic registry
                 $avatarSize = $fieldArgs['size'] ?? 96;
                 $avatarSrc = $this->userAvatarTypeAPI->getUserAvatarSrc($avatarSize);
+                if ($avatarSrc === null) {
+                    return null;
+                }
                 $avatarIDComponents = [
                     'src' => $avatarSrc,
                     'size' => $avatarSize,
