@@ -8,7 +8,6 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\UserAvatars\Facades\UserAvatarTypeAPIFacade;
 use PoPSchema\UserAvatars\TypeResolvers\UserAvatarTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
@@ -78,12 +77,11 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $userAvatarTypeAPI = UserAvatarTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'avatar':
-                $id = $userAvatarTypeAPI->getUserAvatarData($user);
-                return $id;
+                // Create the ID from the user
+                return $typeResolver->getID($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

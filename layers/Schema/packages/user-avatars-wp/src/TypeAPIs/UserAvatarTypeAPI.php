@@ -8,13 +8,15 @@ use PoPSchema\UserAvatars\TypeAPIs\AbstractUserAvatarTypeAPI;
 
 class UserAvatarTypeAPI extends AbstractUserAvatarTypeAPI
 {
-    /**
-     * @return array<string,mixed>
-     */
-    public function getUserAvatarData(string | int | object $userObjectOrID): array
+    public function getUserAvatarSrc(string | int | object $userObjectOrID, int $size = 96): ?string
     {
-        return [
-            'src' => '',
-        ];
+        $avatarHTML = \get_avatar($userObjectOrID, $size);
+        if ($avatarHTML === false) {
+            return null;
+        }
+        // Extract the source from HTML <img> tag
+        $matches = array();
+        preg_match('/src="([^"]*)"/i', $avatarHTML , $matches);
+        return $matches[1] ?? null;
     }
 }

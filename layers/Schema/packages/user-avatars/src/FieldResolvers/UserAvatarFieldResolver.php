@@ -70,14 +70,6 @@ class UserAvatarFieldResolver extends AbstractDBDataFieldResolver
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
-    public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
-    {
-        return match ($fieldName) {
-            'src' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
-        };
-    }
-
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
@@ -104,8 +96,7 @@ class UserAvatarFieldResolver extends AbstractDBDataFieldResolver
         $user = $resultItem;
         switch ($fieldName) {
             case 'src':
-                $data = $this->userAvatarTypeAPI->getUserAvatarData($user);
-                return $data['src'];
+                return $this->userAvatarTypeAPI->getUserAvatarSrc($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

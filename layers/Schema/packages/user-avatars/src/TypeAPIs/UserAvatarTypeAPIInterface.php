@@ -6,8 +6,5 @@ namespace PoPSchema\UserAvatars\TypeAPIs;
 
 interface UserAvatarTypeAPIInterface
 {
-    /**
-     * @return array<string,mixed>
-     */
-    public function getUserAvatarData(string | int | object $userObjectOrID): array;
+    public function getUserAvatarSrc(string | int | object $userObjectOrID, int $size = 96): ?string;
 }
