@@ -16,7 +16,7 @@ class UserAvatarTypeResolver extends AbstractTypeResolver
 
     public function getSchemaTypeDescription(): ?string
     {
-        return $this->translationAPI->__('User roles', 'user-avatars');
+        return $this->translationAPI->__('User avatar', 'user-avatars');
     }
 
     public function getID(object $resultItem): string | int | null

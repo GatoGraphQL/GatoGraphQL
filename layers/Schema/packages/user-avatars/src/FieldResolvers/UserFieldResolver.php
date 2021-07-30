@@ -23,24 +23,21 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            'roles',
-            'capabilities',
+            'avatar',
         ];
     }
 
     public function getAdminFieldNames(): array
     {
         return [
-            'roles',
-            'capabilities',
+            'avatar',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): string
     {
         $types = [
-            'roles' => SchemaDefinition::TYPE_STRING,
-            'capabilities' => SchemaDefinition::TYPE_STRING,
+            'avatar' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -48,13 +45,10 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldTypeModifiers(TypeResolverInterface $typeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
-            'roles'
+            'avatar'
                 => SchemaTypeModifiers::NON_NULLABLE
                 | SchemaTypeModifiers::IS_ARRAY
                 | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            'capabilities'
-                => SchemaTypeModifiers::NON_NULLABLE
-                | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getSchemaFieldTypeModifiers($typeResolver, $fieldName),
         };
@@ -63,8 +57,7 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $descriptions = [
-            'roles' => $this->translationAPI->__('User roles', 'user-avatars'),
-            'capabilities' => $this->translationAPI->__('User capabilities', 'user-avatars'),
+            'avatar' => $this->translationAPI->__('User avatar', 'user-avatars'),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -87,10 +80,8 @@ class UserFieldResolver extends AbstractDBDataFieldResolver
         $userAvatarTypeAPI = UserAvatarTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
-            case 'roles':
-                return $userAvatarTypeAPI->getUserAvatars($user);
-            case 'capabilities':
-                return $userAvatarTypeAPI->getUserCapabilities($user);
+            case 'avatar':
+                return $userAvatarTypeAPI->getUserAvatarData($user);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
